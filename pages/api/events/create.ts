@@ -21,6 +21,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'POST') {
 		try {
+			console.log(req.body);
+
 			let bodyParsed = CreateEventSchema.parse(req.body);
 
 			let createdEvent = await prisma.event.create({
@@ -30,6 +32,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					startDate: bodyParsed.startDate,
 					endDate: bodyParsed.endDate,
 					description: bodyParsed.description
+				}
+			});
+
+			await prisma.eventMember.create({
+				data: {
+					eventId: createdEvent.id,
+					role: 'FOUNDER',
+					userId: session.user.id
 				}
 			});
 
