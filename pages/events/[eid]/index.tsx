@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import Column from '../../../components/Column';
+import { Navigation } from '../../../components/Navigation';
 
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
@@ -21,29 +22,32 @@ const ViewEventPage: NextPage = () => {
 	);
 
 	return (
-		<Column className="py-10">
+		<>
 			<Head>
 				<title>{data?.location}</title>
 			</Head>
 
-			{isLoading ? (
-				<p>Loading</p>
-			) : (
-				<div>
-					<p>{data?.id}</p>
-					<h1 className="text-3xl">{data?.name}</h1>
-					<p>{data?.location}</p>
-					<p>{data?.description}</p>
+			<Navigation />
 
-					<Link href={`/events/${eid}/attendees`}>
-						<a className="text-blue-900 p-3">View attendees</a>
-					</Link>
-					<Link href={`/events/${eid}/activities`}>
-						<a className="text-blue-900 p-3">View activities</a>
-					</Link>
-				</div>
-			)}
-		</Column>
+			<Column className="py-10">
+				{isLoading ? (
+					<p>Loading</p>
+				) : (
+					<div>
+						<p>{data?.id}</p>
+						<h1 className="text-3xl">{data?.name}</h1>
+						<p>{data?.location}</p>
+						<p>{data?.description}</p>
+						<Link href={`/events/${eid}/attendees`}>
+							<a className="text-blue-900 p-3">View attendees</a>
+						</Link>
+						<Link href={`/events/${eid}/activities`}>
+							<a className="text-blue-900 p-3">View activities</a>
+						</Link>
+					</div>
+				)}
+			</Column>
+		</>
 	);
 };
 
