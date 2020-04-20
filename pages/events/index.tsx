@@ -21,6 +21,9 @@ const EventsPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
+				<Link href="/events/create">
+					<a className="text-blue-900 p-3">Create Event</a>
+				</Link>
 				<h1 className="text-3xl">Event Page</h1>
 				{isLoading ? (
 					<p>Loading...</p>

@@ -12,8 +12,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	try {
 		let eventFound = await prisma.event.findFirst({ where: { id: String(eid) } });
+		let isOrganizer = await prisma.eventMember.findFirst({
+			where: {
+				userId: String(session.user.id),
+				eventId: String(eid),
+				OR: [
+					{
+						role: 'FOUNDER'
+					},
+					{
+						role: 'ORGANIZER'
+					}
+				]
+			}
+		});
 
-		return res.status(200).send(eventFound);
+		return res.status(200).send({ event: eventFound, isOrganizer: Boolean(isOrganizer) });
 	} catch (error) {
 		if (error instanceof Error) {
 			return res.status(500).send(error.message);
