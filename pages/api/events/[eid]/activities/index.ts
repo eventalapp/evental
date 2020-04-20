@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
+import prisma from '../../../../../prisma/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
@@ -10,7 +11,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	try {
-		return res.status(200).send('activities for event id: ' + eid);
+		let activityList = await prisma.eventActivity.findMany({
+			where: { eventId: String(eid) }
+		});
+
+		if (activityList.length === 0) {
+			return res.status(404).send({ message: 'No attendees found.' });
+		}
+
+		return res.status(200).send(activityList);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);
