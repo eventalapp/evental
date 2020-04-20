@@ -9,7 +9,7 @@ import { Navigation } from '../../components/Navigation';
 const CreateEventPage: NextPage = () => {
 	const router = useRouter();
 
-	const registerUser = async (
+	const createEvent = async (
 		event: FormEvent<HTMLFormElement> & {
 			target: {
 				name: { value: string };
@@ -47,7 +47,7 @@ const CreateEventPage: NextPage = () => {
 
 			<Column className="py-10">
 				<h1 className="text-3xl">Create Event Page</h1>
-				<form onSubmit={registerUser}>
+				<form onSubmit={createEvent}>
 					<label htmlFor="name">Name</label>
 					<input
 						defaultValue="Event Name"
