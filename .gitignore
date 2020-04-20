@@ -1,0 +1,39 @@
+# dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# testing
+/coverage/
+
+# next.js
+/.next/
+/out/
+
+# production
+/build/
+
+# spam
+.DS_Store
+*.pem
+*.tsbuildinfo
+.eslintcache
+
+# output
+*.log
+
+# local env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# deploy
+.vercel/
+
+# npm
+package-lock.json
+
+# IntelliJ
+.idea

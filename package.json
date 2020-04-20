@@ -1,0 +1,56 @@
+{
+	"name": "next-template",
+	"private": true,
+	"scripts": {
+		"prepare": "prisma generate",
+		"docker": "docker-compose up -d",
+		"quickstart": "yarn && yarn docker && yarn migrate:dev && yarn dev",
+		"build": "next build",
+		"start": "next start",
+		"dev": "next dev -p 5555",
+		"lint": "tsc && next lint --fix",
+		"format": "tsc && prettier --write ./{server,pages,utils,components}/**/*.{js,jsx,json,md,ts,tsx} && prisma format",
+		"migrate:dev": "prisma migrate dev",
+		"migrate:reset": "prisma migrate reset",
+		"migrate:prod": "prisma migrate deploy"
+	},
+	"dependencies": {
+		"@next-auth/prisma-adapter": "^1.0.3",
+		"@prisma/client": "^3.12.0",
+		"classnames": "^2.3.1",
+		"next": "^12.1.0",
+		"next-auth": "^4.3.2",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"react-query": "^3.35.0"
+	},
+	"devDependencies": {
+		"@types/node": "16.11.7",
+		"@types/react": "17.0.35",
+		"autoprefixer": "^10.4.0",
+		"eslint": "^7.32.0",
+		"eslint-config-next": "^12.0.4",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-react": "^7.27.1",
+		"eslint-plugin-react-app": "^6.2.2",
+		"eslint-plugin-react-hooks": "^4.3.0",
+		"postcss": "^8.3.11",
+		"prettier": "^2.5.0",
+		"prisma": "^3.12.0",
+		"tailwindcss": "^2.2.19",
+		"ts-node": "^10.5.0",
+		"typescript": "4.5.2"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": [
+			"eslint --fix",
+			"npx prettier --write"
+		],
+		"*.{json,md,yaml,yml,scss,css}": [
+			"npx prettier --write"
+		],
+		"*.js": "eslint --cache --fix"
+	}
+}
