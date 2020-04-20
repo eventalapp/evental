@@ -8,10 +8,17 @@ import { useQuery } from 'react-query';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 
+type EventMemberUser = Prisma.EventMember & {
+	user: {
+		name: string | null;
+		image: string | null;
+	};
+};
+
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
-	const { data, isLoading } = useQuery<Prisma.Event, Error>(
+	const { data, isLoading } = useQuery<EventMemberUser, Error>(
 		['attendee', eid, aid],
 		async () => {
 			return axios.get(`/api/events/${eid}/attendees/${aid}`).then((res) => res.data);
@@ -33,8 +40,17 @@ const ViewAttendeePage: NextPage = () => {
 				<Link href={`/events/${eid}/attendees`}>
 					<a className="text-blue-900">Back to attendees</a>
 				</Link>
-				<h1 className="text-3xl">View Attendee Page id: {aid}</h1>
-				<p>With TypeScript, Next-Auth, Prisma, Postgres, Docker</p>
+
+				{isLoading ? (
+					<p>Loading</p>
+				) : (
+					<div>
+						<p>{data?.id}</p>
+						<img alt={String(data?.user.name)} src={String(data?.user.image)} />
+						<h1 className="text-3xl">{data?.user.name}</h1>
+						<p>{data?.role}</p>
+					</div>
+				)}
 			</Column>
 		</>
 	);
