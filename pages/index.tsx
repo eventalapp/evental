@@ -14,8 +14,16 @@ const HomePage: NextPage = () => {
 
 			<p>With TypeScript, Next-Auth, Prisma, Postgres, Docker</p>
 
-			<Link href="auth/signin">
-				<a className="text-blue-600">Sign in</a>
+			<Link href="/events/create">
+				<a className="text-blue-600 p-3">Create Event</a>
+			</Link>
+
+			<Link href="/events">
+				<a className="text-blue-600 p-3">View Events</a>
+			</Link>
+
+			<Link href="/auth/signin">
+				<a className="text-blue-600 p-3">Sign in</a>
 			</Link>
 		</Column>
 	);
