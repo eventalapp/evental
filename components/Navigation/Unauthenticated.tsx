@@ -24,7 +24,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 			<Link href="/">
 				<a>
 					<span className="flex flex-row items-center">
-						<img src="/logo.svg" className="w-12 h-12" alt="" aria-hidden="true" />
+						{/* <img src="/logo.svg" className="w-12 h-12" alt="" aria-hidden="true" /> */}
 						<strong
 							className="text-2xl tracking-tight font-bold font-display"
 							aria-label="evental homepage"
