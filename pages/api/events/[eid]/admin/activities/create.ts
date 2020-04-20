@@ -40,8 +40,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 			let bodyParsed = CreateEventSchema.parse(req.body);
 
-			let createdEvent = await prisma.event.create({
+			let createdActivity = await prisma.eventActivity.create({
 				data: {
+					eventId: String(eid),
 					name: bodyParsed.name,
 					location: bodyParsed.location,
 					startDate: bodyParsed.startDate,
@@ -50,9 +51,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}
 			});
 
-			return res.status(200).send(createdEvent);
+			return res.status(200).send(createdActivity);
 		} catch (error) {
 			if (error instanceof Error) {
+				console.error(error);
 				console.error(error.message);
 				return res.status(500).send(error.message);
 			}

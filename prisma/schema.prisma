@@ -107,6 +107,7 @@ model EventActivity {
   eventId     String
   startDate   DateTime
   endDate     DateTime
+  location    String
   name        String
   description String?
   updatedAt   DateTime @updatedAt

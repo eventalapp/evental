@@ -30,6 +30,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		return res.status(200).send(attendeeList);
 	} catch (error) {
 		if (error instanceof Error) {
+			console.error(error);
 			return res.status(500).send(error.message);
 		}
 
