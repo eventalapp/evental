@@ -11,7 +11,8 @@ const CreateEventPage: NextPage = () => {
 			name: event.target.name.value,
 			location: event.target.location.value,
 			startDate: event.target.startDate.value,
-			endDate: event.target.endDate.value
+			endDate: event.target.endDate.value,
+			description: event.target.description.value
 		});
 
 		console.log(createResponse);
@@ -31,6 +32,9 @@ const CreateEventPage: NextPage = () => {
 
 				<label htmlFor="name">Location</label>
 				<input id="location" name="location" type="text" required className="border-2" />
+
+				<label htmlFor="name">Description</label>
+				<input id="description" name="description" type="text" required className="border-2" />
 
 				<label htmlFor="name">Start Date</label>
 				<input id="startDate" name="startDate" type="text" required className="border-2" />
