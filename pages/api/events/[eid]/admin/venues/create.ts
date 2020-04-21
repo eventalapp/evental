@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	if (!isOrganizer(String(session?.user?.id), String(eid))) {
-		return res.status(401).send({ message: 'You must be an organizer to do this.' });
+		return res.status(403).send({ message: 'You must be an organizer to do this.' });
 	}
 
 	if (req.method === 'POST') {

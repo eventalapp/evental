@@ -21,10 +21,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		});
 
-		if (attendee.length === 0) {
-			return res.status(204).end();
-		}
-
 		return res.status(200).send(attendee);
 	} catch (error) {
 		if (error instanceof Error) {
