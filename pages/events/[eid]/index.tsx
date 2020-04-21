@@ -49,7 +49,7 @@ const ViewEventPage: NextPage = () => {
 						<p>{data?.event.description}</p>
 						{dayjs(data?.event.startDate).format('MMM DD')} -{' '}
 						{dayjs(data?.event.endDate).format('MMM DD')}
-						<div>
+						<div className="mt-3">
 							<Link href={`/events/${eid}/attendees`} passHref>
 								<LinkButton className="mr-3">View attendees</LinkButton>
 							</Link>

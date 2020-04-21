@@ -39,17 +39,18 @@ const ActivitiesPage: NextPage = () => {
 					<p>Loading...</p>
 				) : (
 					<ul>
-						{data?.map((activity) => (
-							<li key={activity.id}>
-								<Link href={`/events/${eid}/activities/${activity.id}`}>
-									<a>
-										<span>
-											{activity.name} - {activity.description}
-										</span>
-									</a>
-								</Link>
-							</li>
-						))}
+						{data &&
+							data.map((activity) => (
+								<li key={activity.id}>
+									<Link href={`/events/${eid}/activities/${activity.id}`}>
+										<a>
+											<span>
+												{activity.name} - {activity.description}
+											</span>
+										</a>
+									</Link>
+								</li>
+							))}
 					</ul>
 				)}
 			</Column>

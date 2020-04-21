@@ -8,6 +8,7 @@ import Column from '../../components/Column';
 import { Button } from '../../components/Form/Button';
 import { Input } from '../../components/Form/Input';
 import { Label } from '../../components/Form/Label';
+import { Textarea } from '../../components/Form/Textarea';
 import { Navigation } from '../../components/Navigation';
 import Unauthorized from '../../components/Unauthorized';
 
@@ -76,11 +77,10 @@ const CreateEventPage: NextPage = () => {
 								/>
 							</div>
 						</div>
-						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-							{' '}
+						<div className="grid grid-cols-1 mb-5 gap-5">
 							<div>
 								<Label htmlFor="name">Description</Label>
-								<Input
+								<Textarea
 									defaultValue="Event Description"
 									id="description"
 									name="description"
