@@ -67,13 +67,13 @@ const CreateActivityPage: NextPage = () => {
 						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>
 								<Label htmlFor="name">Name</Label>
-								<Input defaultValue="Event Name" id="name" name="name" type="text" required />
+								<Input defaultValue="Activity Name" id="name" name="name" type="text" required />
 							</div>
 
 							<div>
 								<Label htmlFor="location">Location</Label>
 								<Input
-									defaultValue="Event Location"
+									defaultValue="Activity Location"
 									id="location"
 									name="location"
 									type="text"
@@ -85,7 +85,7 @@ const CreateActivityPage: NextPage = () => {
 							<div>
 								<Label htmlFor="description">Description</Label>
 								<Textarea
-									defaultValue="Event Description"
+									defaultValue="Activity Description"
 									id="description"
 									name="description"
 									type="text"
