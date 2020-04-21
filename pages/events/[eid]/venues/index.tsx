@@ -6,7 +6,6 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
-import NoAccess from '../../../../components/NoAccess';
 import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../hooks/useVenuesQuery';
 
@@ -15,10 +14,6 @@ const ActivitiesPage: NextPage = () => {
 	const { eid } = router.query;
 	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-
-	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
-	}
 
 	return (
 		<>
@@ -43,7 +38,16 @@ const ActivitiesPage: NextPage = () => {
 				{isVenuesLoading ? (
 					<p>Venues loading...</p>
 				) : (
-					<div>{venues && venues.map((venue) => <div key={venue.id}>{venue.name}</div>)}</div>
+					<div>
+						{venues &&
+							venues.map((venue) => (
+								<div key={venue.id}>
+									<Link href={`/events/${eid}/venues/${venue.id}`}>
+										<a>{venue.name}</a>
+									</Link>
+								</div>
+							))}
+					</div>
 				)}
 			</Column>
 		</>

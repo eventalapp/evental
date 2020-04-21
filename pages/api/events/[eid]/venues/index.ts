@@ -6,10 +6,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
 	const { eid } = req.query;
 
-	if (!session?.user?.id) {
-		return res.status(401).send({ message: 'You must be logged in to do this.' });
-	}
-
 	try {
 		let venueList = await prisma.eventVenue.findMany({
 			where: { eventId: String(eid) }
