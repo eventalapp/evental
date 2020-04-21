@@ -24,10 +24,10 @@ const ActivitiesPage: NextPage = () => {
 			enabled: eid !== undefined
 		}
 	);
-	const { data: organizer } = useQuery<{ isOrganizer: boolean }, Error>(
+	const { data: isOrganizer } = useQuery<boolean, Error>(
 		['isOrganizer', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}/admin/organizer`).then((res) => res.data);
+			return axios.get(`/api/events/${eid}/admin/organizer`).then((res) => res.data.isOrganizer);
 		},
 		{
 			enabled: eid !== undefined
@@ -51,7 +51,7 @@ const ActivitiesPage: NextPage = () => {
 
 				<div className="flex flex-row justify-between">
 					<h1 className="text-3xl">Activities Page</h1>
-					{organizer?.isOrganizer && (
+					{isOrganizer && (
 						<Link href={`/events/${eid}/admin/activities/create`} passHref>
 							<LinkButton>Create Activity</LinkButton>
 						</Link>

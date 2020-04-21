@@ -24,6 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}
 			}
 		});
+
 		let organizers = await prisma.eventMember.findMany({
 			where: {
 				eventId: String(eid),
@@ -42,7 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 
 		if (attendees.length === 0 && organizers.length === 0) {
-			return res.status(404).send({ message: 'No attendees found.' });
+			return res.status(204).end();
 		}
 
 		return res.status(200).send({ attendees, organizers });

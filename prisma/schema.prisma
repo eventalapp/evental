@@ -58,7 +58,6 @@ model User {
   sessions    Session[]
   eventMember EventMember[]
 
-  EventRole EventRole[]
   @@map("user")
 }
 
@@ -93,31 +92,34 @@ model Event {
 
   eventMember   EventMember[]
   eventActivity EventActivity[]
+  eventVenue    EventVenue[]
+  eventRole     EventRole[]
 
-  EventVenue EventVenue[]
-  EventRole  EventRole[]
   @@map("event")
 }
 
 model EventMember {
-  id             String              @id @default(cuid())
-  userId         String
-  eventId        String
-  permissionRole EventPermissionRole @default(ATTENDEE)
+  id          String @id @default(cuid())
+  userId      String
+  eventId     String
+  eventRoleId String
 
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  permissionRole EventPermissionRole
+
+  role  EventRole @relation(fields: [eventRoleId], references: [id])
+  user  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@map("event_member")
 }
 
 model EventRole {
   id      String @id @default(cuid())
-  userId  String
   eventId String
   role    String @unique
 
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  EventMember EventMember[]
+
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@map("event_role")
