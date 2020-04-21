@@ -130,13 +130,14 @@ model EventActivity {
   eventId     String
   startDate   DateTime
   endDate     DateTime
-  location    String
+  venueId     String
   name        String
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
-  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  event Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  venue EventVenue @relation(fields: [venueId], references: [id], onDelete: Cascade)
 
   @@map("event_activity")
 }
@@ -152,4 +153,5 @@ model EventVenue {
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@map("event_venue")
+  EventActivity EventActivity[]
 }

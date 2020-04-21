@@ -26,7 +26,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				data: {
 					eventId: String(eid),
 					name: bodyParsed.name,
-					location: bodyParsed.location,
+					venueId: bodyParsed.venueId,
 					startDate: bodyParsed.startDate,
 					endDate: bodyParsed.endDate,
 					description: bodyParsed.description

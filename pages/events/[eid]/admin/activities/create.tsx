@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
+import { ZodError } from 'zod';
 import { BackButton } from '../../../../../components/BackButton';
 import Column from '../../../../../components/Column';
 import { Button } from '../../../../../components/Form/Button';
@@ -17,6 +18,7 @@ import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../../hooks/useVenuesQuery';
+import { CreateActivitySchema } from '../../../../../utils/schemas';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -27,27 +29,38 @@ const CreateActivityPage: NextPage = () => {
 
 	const registerActivity = async (
 		event: FormEvent<HTMLFormElement> & {
-			target: {
-				name: { value: string };
-				location: { value: string };
-				startDate: { value: string };
-				endDate: { value: string };
-				description: { value: string };
-			};
+			target: unknown;
 		}
 	) => {
 		event.preventDefault();
 
-		let createActivityResponse = await axios.post(`/api/events/${eid}/admin/activities/create`, {
-			name: event.target.name.value,
-			location: event.target.location.value,
-			startDate: new Date(event.target.startDate.value).toISOString(),
-			endDate: new Date(event.target.endDate.value).toISOString(),
-			description: event.target.description.value
+		let formattedObject: { [key: string]: string } = {};
+
+		Object.entries(event.target).forEach(([, value]) => {
+			if (value.tagName === 'INPUT' || value.tagName === 'TEXTAREA' || value.tagName === 'SELECT') {
+				formattedObject[value.name] = value.value;
+			}
 		});
 
-		if (createActivityResponse.status === 200) {
-			router.push(`/events/${eid}/activities/${createActivityResponse.data.id}`);
+		try {
+			let eventParsed = CreateActivitySchema.parse(formattedObject);
+
+			let createActivityResponse = await axios.post(`/api/events/${eid}/admin/activities/create`, {
+				name: eventParsed.name,
+				venueId: eventParsed.venueId,
+				startDate: new Date(eventParsed.startDate).toISOString(),
+				endDate: new Date(eventParsed.endDate).toISOString(),
+				description: eventParsed.description
+			});
+
+			if (createActivityResponse.status === 200) {
+				router.push(`/events/${eid}/activities/${createActivityResponse.data.id}`);
+			}
+		} catch (error) {
+			if (error instanceof ZodError) {
+				alert('error');
+				console.error(error);
+			}
 		}
 	};
 
@@ -84,12 +97,12 @@ const CreateActivityPage: NextPage = () => {
 							<div>
 								{venues && venues.length <= 0 ? (
 									<Link href={`/events/${eid}/admin/venues/create`}>
-										<a className="text-blue-600">No Venues exist, please create a Venue</a>
+										<a className="text-red-600">No Venues exist, please create a Venue</a>
 									</Link>
 								) : (
 									<>
-										<Label htmlFor="venue">Venue</Label>
-										<Select name="venue" id="venue" required>
+										<Label htmlFor="venueId">Venue</Label>
+										<Select name="venueId" id="venueId" required>
 											{venues &&
 												venues.map((venue) => (
 													<option key={venue.id} value={venue.id}>
@@ -121,20 +134,20 @@ const CreateActivityPage: NextPage = () => {
 							<div>
 								<Label htmlFor="startDate">Start Date</Label>
 								<Input
-									defaultValue={new Date().toISOString().slice(0, 10)}
+									defaultValue={new Date().toISOString()}
 									id="startDate"
 									name="startDate"
-									type="date"
+									type="text"
 									required
 								/>
 							</div>
 							<div>
 								<Label htmlFor="endDate">End Date</Label>
 								<Input
-									defaultValue={new Date().toISOString().slice(0, 10)}
+									defaultValue={new Date().toISOString()}
 									id="endDate"
 									name="endDate"
-									type="date"
+									type="text"
 									required
 								/>
 							</div>

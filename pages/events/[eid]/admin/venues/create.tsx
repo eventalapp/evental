@@ -25,22 +25,14 @@ const CreateActivityPage: NextPage = () => {
 
 	const createVenue = async (
 		event: FormEvent<HTMLFormElement> & {
-			target: {
-				name: { value: string };
-				location: { value: string };
-				startDate: { value: string };
-				endDate: { value: string };
-				description: { value: string };
-			};
+			target: unknown;
 		}
 	) => {
 		event.preventDefault();
 
-		const { target } = event;
-
 		let formattedObject: { [key: string]: string } = {};
 
-		Object.entries(target).forEach(([, value]) => {
+		Object.entries(event.target).forEach(([, value]) => {
 			if (value.tagName === 'INPUT' || value.tagName === 'TEXTAREA') {
 				formattedObject[value.name] = value.value;
 			}
