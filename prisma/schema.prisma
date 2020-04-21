@@ -48,6 +48,8 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  company       String?
+  position      String?
   updatedAt     DateTime  @updatedAt
   createdAt     DateTime  @default(now())
   role          Role      @default(USER)
@@ -78,6 +80,7 @@ model Event {
   id          String   @id @default(cuid())
   name        String
   location    String
+  address     String?
   startDate   DateTime
   endDate     DateTime
   type        String   @default("Event")
@@ -90,6 +93,7 @@ model Event {
   eventMember   EventMember[]
   eventActivity EventActivity[]
 
+  EventVenue EventVenue[]
   @@map("event")
 }
 
@@ -119,4 +123,18 @@ model EventActivity {
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@map("event_activity")
+}
+
+model EventVenue {
+  id          String   @id @default(cuid())
+  eventId     String
+  name        String
+  address     String?
+  description String?
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("event_venue")
 }

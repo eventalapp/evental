@@ -4,7 +4,12 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
+import { BackButton } from '../../../../../components/BackButton';
 import Column from '../../../../../components/Column';
+import { Button } from '../../../../../components/Form/Button';
+import { Input } from '../../../../../components/Form/Input';
+import { Label } from '../../../../../components/Form/Label';
+import { Textarea } from '../../../../../components/Form/Textarea';
 import { Navigation } from '../../../../../components/Navigation';
 import Unauthorized from '../../../../../components/Unauthorized';
 
@@ -54,53 +59,64 @@ const CreateActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
+				<BackButton />
+
 				<h1 className="text-3xl">Create Activity Page</h1>
 				<form onSubmit={registerActivity}>
-					<label htmlFor="name">Name</label>
-					<input
-						defaultValue="Activity Name"
-						id="name"
-						name="name"
-						type="text"
-						required
-						className="border-2"
-					/>
-					<label htmlFor="name">Location</label>
-					<input
-						defaultValue="Activity Location"
-						id="location"
-						name="location"
-						type="text"
-						required
-						className="border-2"
-					/>
-					<label htmlFor="name">Description</label>
-					<input
-						defaultValue="Activity Description"
-						id="description"
-						name="description"
-						type="text"
-						className="border-2"
-					/>
-					<label htmlFor="name">Start Date</label>
-					<input
-						defaultValue={new Date().toISOString().slice(0, 10)}
-						id="startDate"
-						name="startDate"
-						type="date"
-						required
-						className="border-2"
-					/>
-					<label htmlFor="name">End Date</label>
-					<input
-						defaultValue={new Date().toISOString().slice(0, 10)}
-						id="endDate"
-						name="endDate"
-						type="date"
-						required
-						className="border-2"
-					/>
-					<button type="submit">Register Activity</button>
+					<div className="flex flex-col w-full mt-5">
+						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+							<div>
+								<Label htmlFor="name">Name</Label>
+								<Input defaultValue="Event Name" id="name" name="name" type="text" required />
+							</div>
+
+							<div>
+								<Label htmlFor="location">Location</Label>
+								<Input
+									defaultValue="Event Location"
+									id="location"
+									name="location"
+									type="text"
+									required
+								/>
+							</div>
+						</div>
+						<div className="grid grid-cols-1 mb-5 gap-5">
+							<div>
+								<Label htmlFor="description">Description</Label>
+								<Textarea
+									defaultValue="Event Description"
+									id="description"
+									name="description"
+									type="text"
+								/>
+							</div>
+						</div>
+						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+							<div>
+								<Label htmlFor="startDate">Start Date</Label>
+								<Input
+									defaultValue={new Date().toISOString().slice(0, 10)}
+									id="startDate"
+									name="startDate"
+									type="date"
+									required
+								/>
+							</div>
+							<div>
+								<Label htmlFor="endDate">End Date</Label>
+								<Input
+									defaultValue={new Date().toISOString().slice(0, 10)}
+									id="endDate"
+									name="endDate"
+									type="date"
+									required
+								/>
+							</div>
+						</div>
+					</div>
+
+					<Button type="submit">Register Activity</Button>
 				</form>
 			</Column>
 		</>

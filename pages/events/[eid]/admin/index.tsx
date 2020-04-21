@@ -3,7 +3,9 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
+import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
 import Unauthorized from '../../../../components/Unauthorized';
 
@@ -25,13 +27,15 @@ const AdminPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
-				<Link href={`/events/${eid}`}>
-					<a className="text-blue-900">Back to event page</a>
-				</Link>
+				<BackButton />
+
 				<h1 className="text-3xl">Admin Page</h1>
 
-				<Link href={`/events/${eid}/admin/activities/create`}>
-					<a className="text-blue-900 p-5">Create activity</a>
+				<Link href={`/events/${eid}/admin/activities/create`} passHref>
+					<LinkButton className="mr-3">Create activity</LinkButton>
+				</Link>
+				<Link href={`/events/${eid}/admin/edit`} passHref>
+					<LinkButton>Edit event</LinkButton>
 				</Link>
 			</Column>
 		</>

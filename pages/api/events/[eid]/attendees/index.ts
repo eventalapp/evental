@@ -11,23 +11,38 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	try {
-		let attendeeList = await prisma.eventMember.findMany({
-			where: { eventId: String(eid) },
+		let attendees = await prisma.eventMember.findMany({
+			where: { eventId: String(eid), role: 'ATTENDEE' },
 			include: {
 				user: {
 					select: {
 						name: true,
-						image: true
+						image: true,
+						company: true,
+						position: true
+					}
+				}
+			}
+		});
+		let organizers = await prisma.eventMember.findMany({
+			where: { eventId: String(eid), OR: [{ role: 'FOUNDER' }, { role: 'ORGANIZER' }] },
+			include: {
+				user: {
+					select: {
+						name: true,
+						image: true,
+						company: true,
+						position: true
 					}
 				}
 			}
 		});
 
-		if (attendeeList.length === 0) {
+		if (attendees.length === 0 && organizers.length === 0) {
 			return res.status(404).send({ message: 'No attendees found.' });
 		}
 
-		return res.status(200).send(attendeeList);
+		return res.status(200).send({ attendees, organizers });
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);
