@@ -1,6 +1,12 @@
 module.exports = {
 	images: {
-		domains: []
+		domains: [
+			'i.imgur.com',
+			'avatars.githubusercontent.com',
+			'cdn.discordapp.com',
+			'www.gravatar.com',
+			'cloudflare-ipfs.com'
+		]
 	},
 	eslint: {
 		dirs: ['pages', 'utils', 'components']

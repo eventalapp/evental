@@ -1,11 +1,14 @@
 import type Prisma from '@prisma/client';
 import axios from 'axios';
+import classNames from 'classnames';
 import dayjs from 'dayjs';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useQuery } from 'react-query';
 import Column from '../../components/Column';
+import { LinkButton } from '../../components/Form/LinkButton';
 import { Navigation } from '../../components/Navigation';
 
 const EventsPage: NextPage = () => {
@@ -25,8 +28,8 @@ const EventsPage: NextPage = () => {
 				<div className="flex flex-row justify-between w-full mb-3">
 					<h1 className="text-3xl font-bold">Event Page</h1>
 
-					<Link href="/events/create">
-						<a className="bg-blue-900 px-3 py-2 text-white rounded-lg">Create Event</a>
+					<Link href="/events/create" passHref>
+						<LinkButton>Create Event</LinkButton>
 					</Link>
 				</div>
 
@@ -34,11 +37,17 @@ const EventsPage: NextPage = () => {
 					<p>Loading...</p>
 				) : (
 					<ul>
-						{data?.map((event) => (
-							<li key={event.id} className="bg-gray-200 rounded-lg mb-3 px-3 py-3">
+						{data?.map((event, i) => (
+							<li
+								key={event.id}
+								className={classNames(
+									'hover:bg-gray-100 border-gray-200',
+									i + 1 !== data.length ? 'border-b-2' : null
+								)}
+							>
 								<Link href={`/events/${event.id}`}>
-									<a>
-										<div className="flex flex-row ">
+									<a className="px-3 py-3 block">
+										<div className="flex flex-row items-center">
 											<div className="flex flex-col align-center justify-center mr-5">
 												<span className="text-gray-800 text-center inline">
 													{dayjs(event.startDate).format('MMM DD')}
@@ -47,12 +56,22 @@ const EventsPage: NextPage = () => {
 												</span>
 											</div>
 
-											<div className="bg-yellow-500  mr-5">fs</div>
+											<div className="mr-5 relative w-14 h-14 rounded-md">
+												{event.image ? (
+													<Image
+														alt={event.name}
+														src={String(event.image)}
+														layout="fill"
+														className="rounded-md"
+													/>
+												) : (
+													<div className="bg-yellow-400 rounded-md h-full"></div>
+												)}
+											</div>
 
 											<div className="flex flex-col justify-between">
 												<span className="text-gray-600 text-sm block">{event.type}</span>
 												<span className="text-xl mr-3">{event.name}</span>
-												<span className="block">{event.description}</span>
 											</div>
 										</div>
 									</a>

@@ -5,6 +5,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
 import Column from '../../components/Column';
+import { Button } from '../../components/Form/Button';
+import { Input } from '../../components/Form/Input';
+import { Label } from '../../components/Form/Label';
 import { Navigation } from '../../components/Navigation';
 import Unauthorized from '../../components/Unauthorized';
 
@@ -55,51 +58,61 @@ const CreateEventPage: NextPage = () => {
 			<Column className="py-10">
 				<h1 className="text-3xl">Create Event Page</h1>
 				<form onSubmit={createEvent}>
-					<label htmlFor="name">Name</label>
-					<input
-						defaultValue="Event Name"
-						id="name"
-						name="name"
-						type="text"
-						required
-						className="border-2"
-					/>
-					<label htmlFor="name">Location</label>
-					<input
-						defaultValue="Event Location"
-						id="location"
-						name="location"
-						type="text"
-						required
-						className="border-2"
-					/>
-					<label htmlFor="name">Description</label>
-					<input
-						defaultValue="Event Description"
-						id="description"
-						name="description"
-						type="text"
-						className="border-2"
-					/>
-					<label htmlFor="name">Start Date</label>
-					<input
-						defaultValue={new Date().toISOString().slice(0, 10)}
-						id="startDate"
-						name="startDate"
-						type="date"
-						required
-						className="border-2"
-					/>
-					<label htmlFor="name">End Date</label>
-					<input
-						defaultValue={new Date().toISOString().slice(0, 10)}
-						id="endDate"
-						name="endDate"
-						type="date"
-						required
-						className="border-2"
-					/>
-					<button type="submit">Register Event</button>
+					<div className="flex flex-col w-full mt-5">
+						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+							<div>
+								<Label htmlFor="name">Name</Label>
+								<Input defaultValue="Event Name" id="name" name="name" type="text" required />
+							</div>
+
+							<div>
+								<Label htmlFor="name">Location</Label>
+								<Input
+									defaultValue="Event Location"
+									id="location"
+									name="location"
+									type="text"
+									required
+								/>
+							</div>
+						</div>
+						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+							{' '}
+							<div>
+								<Label htmlFor="name">Description</Label>
+								<Input
+									defaultValue="Event Description"
+									id="description"
+									name="description"
+									type="text"
+								/>
+							</div>
+						</div>
+						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+							<div>
+								<Label htmlFor="name">Start Date</Label>
+								<Input
+									defaultValue={new Date().toISOString().slice(0, 10)}
+									id="startDate"
+									name="startDate"
+									type="date"
+									required
+								/>
+							</div>
+							<div>
+								<Label htmlFor="name">End Date</Label>
+								<Input
+									defaultValue={new Date().toISOString().slice(0, 10)}
+									id="endDate"
+									name="endDate"
+									type="date"
+									required
+								/>
+							</div>
+						</div>
+					</div>
+
+					<Button type="submit">Register Event</Button>
 				</form>
 			</Column>
 		</>
