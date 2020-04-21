@@ -1,5 +1,6 @@
 import type Prisma from '@prisma/client';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -41,11 +42,12 @@ const ViewEventPage: NextPage = () => {
 								</a>
 							</Link>
 						) : null}
-
 						<p>{data?.event.id}</p>
 						<h1 className="text-3xl">{data?.event.name}</h1>
 						<p>{data?.event.location}</p>
 						<p>{data?.event.description}</p>
+						{dayjs(data?.event.startDate).format('MMM DD')} -{' '}
+						{dayjs(data?.event.endDate).format('MMM DD')}
 						<Link href={`/events/${eid}/attendees`}>
 							<a className="text-blue-900 p-3">View attendees</a>
 						</Link>
