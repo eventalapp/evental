@@ -12,7 +12,7 @@ export const useActivitiesQuery = (eid: string) => {
 			return axios.get(`/api/events/${eid}/activities`).then((res) => res.data);
 		},
 		{
-			enabled: eid !== undefined
+			enabled: eid !== undefined && eid !== 'undefined'
 		}
 	);
 

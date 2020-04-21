@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import { isOrganizer } from '../../../../../utils/isOrganizer';
+import { isOrganizer } from '../../../../utils/isOrganizer';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
 	const { eid } = req.query;
 
 	if (!session?.user?.id) {
-		return res.status(401).send({ message: 'You must be logged in to do this.' });
+		return res.status(200).send({ isOrganizer: false });
 	}
 
 	try {

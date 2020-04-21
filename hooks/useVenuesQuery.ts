@@ -9,7 +9,7 @@ export const useVenuesQuery = (eid: string) => {
 			return axios.get(`/api/events/${eid}/venues`).then((res) => res.data);
 		},
 		{
-			enabled: eid !== undefined
+			enabled: eid !== undefined && eid !== 'undefined'
 		}
 	);
 

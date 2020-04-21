@@ -12,7 +12,7 @@ export const useAttendeesQuery = (eid: string) => {
 			return axios.get(`/api/events/${eid}/attendees`).then((res) => res.data);
 		},
 		{
-			enabled: eid !== undefined
+			enabled: eid !== undefined && eid !== 'undefined'
 		}
 	);
 
