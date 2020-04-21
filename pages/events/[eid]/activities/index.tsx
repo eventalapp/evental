@@ -66,26 +66,30 @@ const ActivitiesPage: NextPage = () => {
 							Object.entries(groupByDate(activities)).map(([key, activityDate]) => {
 								return (
 									<div key={key}>
-										<h2 className="text-2xl">{dayjs(key).format('dddd, MMMM D')}</h2>
+										<h2 className="text-2xl border-b-2 border-gray-200 mt-4 pb-2">
+											{dayjs(key).format('dddd, MMMM D')}
+										</h2>
 										{Object.entries(activityDate).map(([key, activitiesByDate]) => {
 											return (
-												<li key={key}>
-													<h2 className="font-bold text-1xl">{dayjs(key).format('h:mma')}</h2>
-													<ul>
+												<div key={key} className="flex flex-row">
+													<h2 className="font-bold text-1xl w-24 py-2 border-b-2">
+														{dayjs(key).format('h:mma')}
+													</h2>
+													<div className="border-l-2 border-gray-200 inline-block pl-3">
 														{activitiesByDate.map((activity) => (
-															<li key={activity.id}>
+															<div key={activity.id}>
 																<Link href={`/events/${eid}/activities/${activity.id}`}>
-																	<a>
+																	<a className="py-2 block">
 																		<span>
 																			{dayjs(activity.startDate).format('h:mma')} {activity.name} -{' '}
 																			{activity.description}
 																		</span>
 																	</a>
 																</Link>
-															</li>
+															</div>
 														))}
-													</ul>
-												</li>
+													</div>
+												</div>
 											);
 										})}
 									</div>
