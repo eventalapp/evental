@@ -15,6 +15,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			where: { eventId: String(eid), id: String(aid) }
 		});
 
+		if (!activity) {
+			return res.status(404).send({ message: 'Activity not found.' });
+		}
+
 		return res.status(200).send(activity);
 	} catch (error) {
 		if (error instanceof Error) {

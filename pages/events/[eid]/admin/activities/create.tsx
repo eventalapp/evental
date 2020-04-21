@@ -11,12 +11,15 @@ import { Input } from '../../../../../components/Form/Input';
 import { Label } from '../../../../../components/Form/Label';
 import { Textarea } from '../../../../../components/Form/Textarea';
 import { Navigation } from '../../../../../components/Navigation';
+import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
+import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid } = router.query;
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	const registerActivity = async (
 		event: FormEvent<HTMLFormElement> & {
@@ -48,6 +51,10 @@ const CreateActivityPage: NextPage = () => {
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
+	}
+
+	if (!isOrganizerLoading && !isOrganizer) {
+		return <NoAccess />;
 	}
 
 	return (
@@ -119,7 +126,7 @@ const CreateActivityPage: NextPage = () => {
 						</div>
 					</div>
 
-					<Button type="submit">Register Activity</Button>
+					<Button type="submit">Create Activity</Button>
 				</form>
 			</Column>
 		</>

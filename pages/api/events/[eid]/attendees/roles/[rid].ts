@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	// Get all members of a role
 
 	try {
-		let attendee = await prisma.eventMember.findFirst({
+		let attendee = await prisma.eventMember.findMany({
 			where: { eventRoleId: String(rid), eventId: String(eid) },
 			include: {
 				user: {
@@ -20,6 +20,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}
 			}
 		});
+
+		if (attendee.length === 0) {
+			return res.status(204).end();
+		}
 
 		return res.status(200).send(attendee);
 	} catch (error) {

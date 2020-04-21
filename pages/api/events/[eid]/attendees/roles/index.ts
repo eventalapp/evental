@@ -9,6 +9,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		let roles = await prisma.eventRole.findMany();
 
+		// If no roles exist, crate a default role
+
 		if (roles.length === 0) {
 			let role = prisma.eventRole.create({
 				data: {
