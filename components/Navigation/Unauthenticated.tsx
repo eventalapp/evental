@@ -17,7 +17,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 		<nav
 			{...restProps}
 			className={classNames(
-				'flex flex-row items-center justify-between w-full max-w-7xl m-auto',
+				'flex flex-row items-center justify-between w-full max-w-7xl m-auto h-14',
 				className
 			)}
 		>
