@@ -46,9 +46,11 @@ const EventsPage: NextPage = () => {
 													{dayjs(event.endDate).format('MMM DD')}
 												</span>
 											</div>
+
 											<div className="bg-yellow-500  mr-5">fs</div>
+
 											<div className="flex flex-col justify-between">
-												<span className="text-gray-600 text-sm block">Festival</span>
+												<span className="text-gray-600 text-sm block">{event.type}</span>
 												<span className="text-xl mr-3">{event.name}</span>
 												<span className="block">{event.description}</span>
 											</div>
