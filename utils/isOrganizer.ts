@@ -6,7 +6,7 @@ export const isOrganizer = async (userId: string, eventId: string) => {
 			where: {
 				userId: userId,
 				eventId: eventId,
-				OR: [{ role: 'FOUNDER' }, { role: 'ORGANIZER' }]
+				OR: [{ permissionRole: 'FOUNDER' }, { permissionRole: 'ORGANIZER' }]
 			}
 		})
 	);

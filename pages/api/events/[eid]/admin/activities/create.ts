@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { z } from 'zod';
 import prisma from '../../../../../../prisma/client';
+import { isOrganizer } from '../../../../../../utils/isOrganizer';
 
 const CreateEventSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
@@ -20,17 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		return res.status(401).send({ message: 'You must be logged in to do this.' });
 	}
 
-	const isOrganizer = Boolean(
-		await prisma.eventMember.findFirst({
-			where: {
-				userId: session.user.id,
-				eventId: String(eid),
-				OR: [{ role: 'FOUNDER' }, { role: 'ORGANIZER' }]
-			}
-		})
-	);
-
-	if (!isOrganizer) {
+	if (!isOrganizer(String(session?.user?.id), String(eid))) {
 		return res.status(401).send({ message: 'You must be an organizer to do this.' });
 	}
 

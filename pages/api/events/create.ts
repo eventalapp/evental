@@ -21,8 +21,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'POST') {
 		try {
-			console.log(req.body);
-
 			let bodyParsed = CreateEventSchema.parse(req.body);
 
 			let createdEvent = await prisma.event.create({
@@ -38,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			await prisma.eventMember.create({
 				data: {
 					eventId: createdEvent.id,
-					role: 'FOUNDER',
+					permissionRole: 'FOUNDER',
 					userId: session.user.id
 				}
 			});
@@ -47,7 +45,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error);
-				console.error(error.message);
 				return res.status(500).send(error.message);
 			}
 
