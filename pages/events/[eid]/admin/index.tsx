@@ -40,16 +40,16 @@ const AdminPage: NextPage = () => {
 					<h1 className="text-3xl">Admin Page</h1>
 
 					<div>
-						<Link href={`/events/${eid}/admin/activities/`} passHref>
+						<Link href={`/events/${eid}/activities/`} passHref>
 							<LinkButton className="mr-3">Manage activities</LinkButton>
 						</Link>
-						<Link href={`/events/${eid}/admin/venues/`} passHref>
+						<Link href={`/events/${eid}/venues/`} passHref>
 							<LinkButton className="mr-3">Manage venues</LinkButton>
 						</Link>
-						<Link href={`/events/${eid}/admin/roles/`} passHref>
+						<Link href={`/events/${eid}/roles/`} passHref>
 							<LinkButton className="mr-3">Manage roles</LinkButton>
 						</Link>
-						<Link href={`/events/${eid}/admin/attendees/`} passHref>
+						<Link href={`/events/${eid}/attendees/`} passHref>
 							<LinkButton className="mr-3">Manage attendees</LinkButton>
 						</Link>
 						<Link href={`/events/${eid}/admin/edit`} passHref>
