@@ -34,7 +34,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			let createdRole = await prisma.eventRole.create({
 				data: {
 					eventId: event.id,
-					role: bodyParsed.role
+					name: bodyParsed.name,
+					slug: bodyParsed.slug
 				}
 			});
 

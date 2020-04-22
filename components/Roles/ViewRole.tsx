@@ -26,7 +26,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 			) : (
 				role && (
 					<div>
-						<h1 className="text-3xl">{role.role}</h1>
+						<h1 className="text-3xl">{role.name}</h1>
 						<Link href={`/events/${eid}/attendees/${role.id}`} passHref>
 							<LinkButton>View Role Members</LinkButton>
 						</Link>

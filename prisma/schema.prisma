@@ -117,13 +117,14 @@ model EventMember {
 model EventRole {
   id      String @id @default(cuid())
   eventId String
-  role    String
+  slug    String
+  name    String
 
   EventMember EventMember[]
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  @@unique([eventId, role])
+  @@unique([eventId, slug])
   @@map("event_role")
 }
 

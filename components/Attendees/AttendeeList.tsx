@@ -1,15 +1,18 @@
+import type Prisma from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { EventMemberUser } from '../../pages/api/events/[eid]/attendees';
+import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
+import { capitalizeFirstLetter } from '../../utils/string';
 
 interface Props {
 	loading: boolean;
 	attendees: EventMemberUser[] | undefined;
 	eid: string;
+	role: Prisma.EventRole | undefined;
 }
 
 export const AttendeeList: React.FC<Props> = (props) => {
-	const { eid, loading, attendees } = props;
+	const { eid, loading, attendees, role } = props;
 
 	if (loading) {
 		return (
@@ -22,6 +25,12 @@ export const AttendeeList: React.FC<Props> = (props) => {
 	if (attendees?.length === 0) {
 		return (
 			<div>
+				{role && (
+					<h2 className="text-2xl my-3">
+						{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
+					</h2>
+				)}
+
 				<p>No attendees found.</p>
 			</div>
 		);
@@ -29,13 +38,15 @@ export const AttendeeList: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			{attendees && (
+			{attendees && role && (
 				<div>
-					<h2 className="text-2xl my-3">Attendees ({attendees.length})</h2>
+					<h2 className="text-2xl my-3">
+						{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
+					</h2>
 					<ul>
 						{attendees.map((attendee) => (
 							<li key={attendee.id}>
-								<Link href={`/events/${eid}/attendees/user/${attendee.userId}`}>
+								<Link href={`/events/${eid}/attendees/${attendee.userId}`}>
 									<a>
 										<div className="h-16 w-16 relative">
 											<Image

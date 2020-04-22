@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { EventMemberUser } from '../pages/api/events/[eid]/attendees';
+import { EventMemberUser } from '../pages/api/events/[eid]/attendees/[aid]';
 
 export const useAttendeesQuery = (eid: string) => {
 	const { data: attendees, isLoading: isAttendeesLoading } = useQuery<

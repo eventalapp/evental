@@ -27,13 +27,14 @@ export const CreateRoleForm: React.FC<CreateRoleFormProps> = (props) => {
 			const eventParsed = CreateRoleSchema.parse(formEntries);
 
 			const body: CreateRolePayload = {
-				role: eventParsed.role
+				name: eventParsed.name,
+				slug: eventParsed.slug
 			};
 
 			const createVenueResponse = await axios.post(`/api/events/${eid}/admin/roles/create`, body);
 
 			if (createVenueResponse.status === 200) {
-				router.push(`/events/${eid}/roles/${createVenueResponse.data.id}`);
+				router.push(`/events/${eid}/roles/${createVenueResponse.data.slug}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {
@@ -48,8 +49,12 @@ export const CreateRoleForm: React.FC<CreateRoleFormProps> = (props) => {
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="role">Role</Label>
-						<Input defaultValue="Role Name" id="role" name="role" type="text" required />
+						<Label htmlFor="name">Role</Label>
+						<Input defaultValue="Role Name" id="name" name="name" type="text" required />
+					</div>
+					<div>
+						<Label htmlFor="slug">Slug</Label>
+						<Input defaultValue="role-slug" id="slug" name="slug" type="text" required />
 					</div>
 				</div>
 			</div>
