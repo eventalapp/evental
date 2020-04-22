@@ -78,6 +78,7 @@ enum EventPermissionRole {
 
 model Event {
   id          String   @id @default(cuid())
+  slug        String   @unique
   name        String
   location    String
   address     String?
