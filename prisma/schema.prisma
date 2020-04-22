@@ -116,12 +116,13 @@ model EventMember {
 model EventRole {
   id      String @id @default(cuid())
   eventId String
-  role    String @unique
+  role    String
 
   EventMember EventMember[]
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
+  @@unique([eventId, role])
   @@map("event_role")
 }
 
@@ -152,6 +153,6 @@ model EventVenue {
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  @@map("event_venue")
   EventActivity EventActivity[]
+  @@map("event_venue")
 }

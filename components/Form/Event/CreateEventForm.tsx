@@ -44,20 +44,20 @@ export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 					<div>
 						<Label htmlFor="startDate">Start Date</Label>
 						<Input
-							defaultValue={new Date().toISOString().slice(0, 10)}
+							defaultValue={new Date().toISOString()}
 							id="startDate"
 							name="startDate"
-							type="date"
+							type="text"
 							required
 						/>
 					</div>
 					<div>
 						<Label htmlFor="endDate">End Date</Label>
 						<Input
-							defaultValue={new Date().toISOString().slice(0, 10)}
+							defaultValue={new Date().toISOString()}
 							id="endDate"
 							name="endDate"
-							type="date"
+							type="text"
 							required
 						/>
 					</div>
