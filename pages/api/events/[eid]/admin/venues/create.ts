@@ -20,9 +20,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		try {
 			let bodyParsed = CreateVenueSchema.parse(req.body);
 
+			let event = await prisma.event.findFirst({
+				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
+				select: {
+					id: true
+				}
+			});
+
+			if (!event) {
+				return res.status(404).send('Event not found.');
+			}
+
 			let createdActivity = await prisma.eventVenue.create({
 				data: {
-					eventId: String(eid),
+					eventId: event.id,
 					name: bodyParsed.name,
 					description: bodyParsed.description
 				}

@@ -20,6 +20,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		try {
 			let bodyParsed = UpdateEventSchema.parse(req.body);
 
+			let event = await prisma.event.findFirst({
+				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
+				select: {
+					id: true
+				}
+			});
+
+			if (!event) {
+				return res.status(404).send('Event not found.');
+			}
+
 			let updatedEvent = await prisma.event.update({
 				data: {
 					name: bodyParsed.name,
@@ -29,7 +40,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					endDate: bodyParsed.endDate
 				},
 				where: {
-					id: String(eid)
+					id: event.id
 				}
 			});
 
