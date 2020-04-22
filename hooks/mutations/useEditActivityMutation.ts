@@ -21,29 +21,26 @@ export const useEditActivityMutation = (eid: string, aid: string) => {
 
 			const formEntries = getFormEntries(event);
 
-			let eventParsed = EditActivitySchema.parse(formEntries);
+			const parsed = EditActivitySchema.parse(formEntries);
 
 			const body: EditActivityPayload = {
-				slug: eventParsed.slug,
-				name: eventParsed.name,
-				venueId: eventParsed.venueId,
-				startDate: new Date(eventParsed.startDate).toISOString(),
-				endDate: new Date(eventParsed.endDate).toISOString(),
-				description: eventParsed.description
+				slug: parsed.slug,
+				name: parsed.name,
+				venueId: parsed.venueId,
+				startDate: new Date(parsed.startDate).toISOString(),
+				endDate: new Date(parsed.endDate).toISOString(),
+				description: parsed.description
 			};
 
-			return await axios.put<Prisma.EventActivity>(
-				`/api/events/${eid}/admin/activities/${aid}/edit`,
-				body
-			);
+			return await axios.put(`/api/events/${eid}/admin/activities/${aid}/edit`, body);
 		},
 		{
 			onSuccess: (response) => {
 				setError(null);
 
-				queryClient.invalidateQueries(['activity', eid, aid]);
+				void queryClient.invalidateQueries(['venue', eid, aid]);
 
-				router.push(`/events/${eid}/activities/${response.data.slug}`);
+				void router.push(`/events/${eid}/activities/${response.data.slug}`);
 			},
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);

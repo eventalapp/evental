@@ -7,6 +7,7 @@ import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 import { ServerError } from '../../../../components/ServerError';
 import { useRoleQuery } from '../../../../hooks/queries/useRoleQuery';
+import React from 'react';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -29,6 +30,7 @@ const ViewAttendeePage: NextPage = () => {
 				) : (
 					<AttendeeList
 						eid={String(eid)}
+						rid={String(rid)}
 						role={role}
 						attendees={attendees}
 						loading={isRoleLoading}

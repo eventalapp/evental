@@ -4,14 +4,14 @@ import router from 'next/router';
 import React, { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
 
-import { getFormEntries } from '../../../utils/getFormEntries';
-import { CreateActivityPayload, CreateActivitySchema } from '../../../utils/schemas';
-import { Button } from '../Button';
-import { Input } from '../Input';
-import { Label } from '../Label';
-import { Select } from '../Select';
-import { Textarea } from '../Textarea';
-import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
+import { getFormEntries } from '../../utils/getFormEntries';
+import { CreateActivityPayload, CreateActivitySchema } from '../../utils/schemas';
+import { Button } from '../Form/Button';
+import { Input } from '../Form/Input';
+import { Label } from '../Form/Label';
+import { Select } from '../Form/Select';
+import { Textarea } from '../Form/Textarea';
+import { useVenuesQuery } from '../../hooks/queries/useVenuesQuery';
 
 interface Props {
 	eid: string;

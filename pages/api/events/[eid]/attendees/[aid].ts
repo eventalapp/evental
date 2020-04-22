@@ -1,6 +1,5 @@
 import type Prisma from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
 import prisma from '../../../../../prisma/client';
 
 export type EventMemberUser = Prisma.EventMember & {
@@ -13,7 +12,6 @@ export type EventMemberUser = Prisma.EventMember & {
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const session = await getSession({ req });
 	const { eid, aid } = req.query;
 
 	try {

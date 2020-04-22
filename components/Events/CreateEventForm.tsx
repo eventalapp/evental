@@ -1,10 +1,10 @@
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { Button } from '../Button';
-import { Input } from '../Input';
-import { Label } from '../Label';
-import { Textarea } from '../Textarea';
-import { useCreateEventMutation } from '../../../hooks/mutations/useCreateEventMutation';
-import { ServerError } from '../../ServerError';
+import { Button } from '../Form/Button';
+import { Input } from '../Form/Input';
+import { Label } from '../Form/Label';
+import { Textarea } from '../Form/Textarea';
+import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
+import { ServerError } from '../ServerError';
 
 type CreateEventFormProps = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 

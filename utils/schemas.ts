@@ -25,6 +25,19 @@ export const CreateRoleSchema = z.object({
 
 export type CreateRolePayload = z.infer<typeof CreateRoleSchema>;
 
+export const EditRoleSchema = z.object({
+	name: z
+		.string()
+		.min(4, 'Role must be at least 4 characters')
+		.max(50, 'Role must be less than 50 characters'),
+	slug: z
+		.string()
+		.min(4, 'Slug must be at least 4 characters')
+		.max(40, 'Slug must be less than 40 characters')
+});
+
+export type EditRolePayload = z.infer<typeof EditRoleSchema>;
+
 export const CreateActivitySchema = z.object({
 	slug: z
 		.string()
