@@ -1,5 +1,10 @@
-import { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import axios from 'axios';
+import router from 'next/router';
+import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
+import { ZodError } from 'zod';
 import { useEventQuery } from '../../../hooks/useEventQuery';
+import { getFormEntries } from '../../../utils/getFormEntries';
+import { UpdateEventSchema } from '../../../utils/schemas';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
@@ -15,6 +20,35 @@ type UpdateEventFormProps = Props &
 export const UpdateEventForm: React.FC<UpdateEventFormProps> = (props) => {
 	const { eid, ...rest } = props;
 	const { event, isEventLoading } = useEventQuery(eid);
+
+	const updateEvent = async (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
+		try {
+			const formEntries = getFormEntries(event);
+
+			const eventParsed = UpdateEventSchema.parse(formEntries);
+
+			//TODO: Use react query mutation
+
+			const updateEventResponse = await axios.put(`/api/events/${eid}/admin/edit`, {
+				name: eventParsed.name,
+				location: eventParsed.location,
+				startDate: new Date(eventParsed.startDate).toISOString(),
+				endDate: new Date(eventParsed.endDate).toISOString(),
+				description: eventParsed.description
+			});
+
+			if (updateEventResponse.status === 200) {
+				router.push(`/events/${updateEventResponse.data.id}`);
+			}
+		} catch (error) {
+			if (error instanceof ZodError) {
+				alert('error');
+				console.error(error);
+			}
+		}
+	};
 
 	if (isEventLoading) {
 		return (
@@ -33,7 +67,7 @@ export const UpdateEventForm: React.FC<UpdateEventFormProps> = (props) => {
 	}
 
 	return (
-		<form {...rest}>
+		<form onSubmit={updateEvent} {...rest}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>

@@ -15,8 +15,18 @@ export const CreateActivitySchema = z.object({
 });
 
 export const CreateEventSchema = z.object({
-	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
-	location: z.string().min(1, 'Location must be specified').max(100, 'Location is too long'),
+	slug: z
+		.string()
+		.min(4, 'Slug must be at least 4 characters')
+		.max(40, 'Slug must be less than 40 characters'),
+	name: z
+		.string()
+		.min(4, 'Name must be at least 4 characters')
+		.max(100, 'Name must be less than 100 characters'),
+	location: z
+		.string()
+		.min(4, 'Location must be at least 4 characters')
+		.max(100, 'Location must be less than 40 characters'),
 	startDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
 	endDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
 	description: z.string().max(1000, 'Description is too long')
