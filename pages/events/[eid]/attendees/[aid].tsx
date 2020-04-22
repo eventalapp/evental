@@ -9,7 +9,7 @@ import { useAttendeeQuery } from '../../../../hooks/useAttendeeQuery';
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
-	const { attendee, isAttendeeLoading } = useAttendeeQuery(String(eid), String(eid));
+	const { attendee, isAttendeeLoading } = useAttendeeQuery(String(eid), String(aid));
 
 	return (
 		<>
@@ -26,11 +26,11 @@ const ViewAttendeePage: NextPage = () => {
 					<p>Loading</p>
 				) : (
 					<div>
-						<img alt={String(attendee?.user.name)} src={String(attendee?.user.image)} />
-						<h1 className="text-3xl">{attendee?.user.name}</h1>
+						<img alt={String(attendee?.user?.name)} src={String(attendee?.user?.image)} />
+						<h1 className="text-3xl">{attendee?.user?.name}</h1>
 						<p>{attendee?.permissionRole}</p>
-						<span className="text-md text-gray-700 block">{attendee?.user.company}</span>
-						<span className="text-md text-gray-700 block">{attendee?.user.position}</span>
+						<span className="text-md text-gray-700 block">{attendee?.user?.company}</span>
+						<span className="text-md text-gray-700 block">{attendee?.user?.position}</span>
 					</div>
 				)}
 			</Column>
