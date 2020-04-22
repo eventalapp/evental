@@ -28,6 +28,7 @@ export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
 			const eventParsed = CreateVenueSchema.parse(formEntries);
 
 			const body: CreateVenuePayload = {
+				slug: eventParsed.slug,
 				name: eventParsed.name,
 				description: eventParsed.description
 			};
@@ -35,7 +36,7 @@ export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
 			const createVenueResponse = await axios.post(`/api/events/${eid}/admin/venues/create`, body);
 
 			if (createVenueResponse.status === 200) {
-				router.push(`/events/${eid}/venues/${createVenueResponse.data.id}`);
+				router.push(`/events/${eid}/venues/${createVenueResponse.data.slug}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {
@@ -52,6 +53,11 @@ export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
 					<div>
 						<Label htmlFor="name">Name</Label>
 						<Input defaultValue="Venue Name" id="name" name="name" type="text" required />
+					</div>
+
+					<div>
+						<Label htmlFor="slug">Slug</Label>
+						<Input defaultValue="venue-slug" id="slug" name="slug" type="text" required />
 					</div>
 				</div>
 

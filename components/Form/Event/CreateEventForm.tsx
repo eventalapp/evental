@@ -66,12 +66,14 @@ export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 						/>
 					</div>
 				</div>
+
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="slug">Slug</Label>
 						<Input defaultValue="event-slug" id="slug" name="slug" type="text" required />
 					</div>
 				</div>
+
 				<div className="grid grid-cols-1 mb-5 gap-5">
 					<div>
 						<Label htmlFor="description">Description</Label>

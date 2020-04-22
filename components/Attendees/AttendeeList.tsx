@@ -47,7 +47,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 					<ul>
 						{attendees.map((attendee) => (
 							<li key={attendee.id}>
-								<Link href={`/events/${eid}/attendees/${attendee.userId}`}>
+								<Link href={`/events/${eid}/attendees/${attendee.slug}`}>
 									<a>
 										<div className="h-16 w-16 relative">
 											<Image

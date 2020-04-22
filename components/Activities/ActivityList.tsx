@@ -46,7 +46,7 @@ export const ActivityList: React.FC<Props> = (props) => {
 										<div className="border-l-2 border-gray-200 inline-block pl-3">
 											{activitiesByDate.map((activity) => (
 												<div key={activity.id}>
-													<Link href={`/events/${eid}/activities/${activity.id}`}>
+													<Link href={`/events/${eid}/activities/${activity.slug}`}>
 														<a className="py-2 flex flex-row items-center">
 															<div className="rounded-full mr-3 w-3 h-3 bg-red-300" />
 															<div>

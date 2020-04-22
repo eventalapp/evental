@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
 		let attendee = await prisma.eventMember.findFirst({
 			where: {
-				userId: String(aid),
+				OR: [{ userId: String(aid) }, { slug: String(aid) }],
 				event: {
 					OR: [{ id: String(eid) }, { slug: String(eid) }]
 				}
