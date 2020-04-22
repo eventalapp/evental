@@ -3,7 +3,7 @@ import router from 'next/router';
 import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
 import { getFormEntries } from '../../../utils/getFormEntries';
-import { CreateVenueSchema } from '../../../utils/schemas';
+import { CreateVenuePayload, CreateVenueSchema } from '../../../utils/schemas';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
@@ -27,10 +27,12 @@ export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
 
 			const eventParsed = CreateVenueSchema.parse(formEntries);
 
-			const createVenueResponse = await axios.post(`/api/events/${eid}/admin/venues/create`, {
+			const body: CreateVenuePayload = {
 				name: eventParsed.name,
 				description: eventParsed.description
-			});
+			};
+
+			const createVenueResponse = await axios.post(`/api/events/${eid}/admin/venues/create`, body);
 
 			if (createVenueResponse.status === 200) {
 				router.push(`/events/${eid}/venues/${createVenueResponse.data.id}`);

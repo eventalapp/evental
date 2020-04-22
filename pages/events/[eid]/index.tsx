@@ -3,9 +3,11 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { ActivityList } from '../../../components/Activities/ActivityList';
 import Column from '../../../components/Column';
 import { LinkButton } from '../../../components/Form/LinkButton';
 import { Navigation } from '../../../components/Navigation';
+import { useActivitiesQuery } from '../../../hooks/useActivitiesQuery';
 import { useEventQuery } from '../../../hooks/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/useOrganizerQuery';
 
@@ -14,6 +16,7 @@ const ViewEventPage: NextPage = () => {
 	const { eid } = router.query;
 	const { event, isEventLoading } = useEventQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { activities, isActivitiesLoading } = useActivitiesQuery(String(eid));
 
 	return (
 		<>
@@ -51,6 +54,7 @@ const ViewEventPage: NextPage = () => {
 								<LinkButton>View venues</LinkButton>
 							</Link>
 						</div>
+						<ActivityList activities={activities} eid={String(eid)} loading={isActivitiesLoading} />
 					</div>
 				)}
 			</Column>
