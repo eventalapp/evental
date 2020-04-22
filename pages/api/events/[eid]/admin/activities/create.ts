@@ -34,6 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			let createdActivity = await prisma.eventActivity.create({
 				data: {
 					eventId: event.id,
+					slug: bodyParsed.slug,
 					name: bodyParsed.name,
 					venueId: bodyParsed.venueId,
 					startDate: bodyParsed.startDate,

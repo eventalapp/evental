@@ -4,7 +4,7 @@ import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
 import { useEventQuery } from '../../../hooks/useEventQuery';
 import { getFormEntries } from '../../../utils/getFormEntries';
-import { UpdateEventPayload, UpdateEventSchema } from '../../../utils/schemas';
+import { EditEventPayload, EditEventSchema } from '../../../utils/schemas';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
@@ -14,24 +14,24 @@ interface Props {
 	eid: string;
 }
 
-type UpdateEventFormProps = Props &
+type EditEventFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
-export const UpdateEventForm: React.FC<UpdateEventFormProps> = (props) => {
+export const EditEventForm: React.FC<EditEventFormProps> = (props) => {
 	const { eid, ...rest } = props;
 	const { event, isEventLoading } = useEventQuery(eid);
 
-	const updateEvent = async (event: FormEvent<HTMLFormElement>) => {
+	const editEvent = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		try {
 			const formEntries = getFormEntries(event);
 
-			const eventParsed = UpdateEventSchema.parse(formEntries);
+			const eventParsed = EditEventSchema.parse(formEntries);
 
 			//TODO: Use react query mutation
 
-			const body: UpdateEventPayload = {
+			const body: EditEventPayload = {
 				name: eventParsed.name,
 				location: eventParsed.location,
 				startDate: new Date(eventParsed.startDate).toISOString(),
@@ -39,10 +39,10 @@ export const UpdateEventForm: React.FC<UpdateEventFormProps> = (props) => {
 				description: eventParsed.description
 			};
 
-			const updateEventResponse = await axios.put(`/api/events/${eid}/admin/edit`, body);
+			const editEventResponse = await axios.put(`/api/events/${eid}/admin/edit`, body);
 
-			if (updateEventResponse.status === 200) {
-				router.push(`/events/${updateEventResponse.data.id}`);
+			if (editEventResponse.status === 200) {
+				router.push(`/events/${editEventResponse.data.id}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {
@@ -69,7 +69,7 @@ export const UpdateEventForm: React.FC<UpdateEventFormProps> = (props) => {
 	}
 
 	return (
-		<form onSubmit={updateEvent} {...rest}>
+		<form onSubmit={editEvent} {...rest}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
@@ -123,7 +123,7 @@ export const UpdateEventForm: React.FC<UpdateEventFormProps> = (props) => {
 				</div>
 			</div>
 
-			<Button type="submit">Update Event</Button>
+			<Button type="submit">Edit Event</Button>
 		</form>
 	);
 };

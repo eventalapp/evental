@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import prisma from '../../../../../prisma/client';
 import { isOrganizer } from '../../../../../utils/isOrganizer';
-import { UpdateEventSchema } from '../../../../../utils/schemas';
+import { EditEventSchema } from '../../../../../utils/schemas';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
@@ -18,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'PUT') {
 		try {
-			let bodyParsed = UpdateEventSchema.parse(req.body);
+			let bodyParsed = EditEventSchema.parse(req.body);
 
 			let event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },

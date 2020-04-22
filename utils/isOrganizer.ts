@@ -5,7 +5,9 @@ export const isOrganizer = async (userId: string, eventId: string) => {
 		await prisma.eventMember.findFirst({
 			where: {
 				userId: userId,
-				eventId: eventId,
+				event: {
+					OR: [{ id: eventId }, { slug: eventId }]
+				},
 				OR: [{ permissionRole: 'FOUNDER' }, { permissionRole: 'ORGANIZER' }]
 			}
 		})

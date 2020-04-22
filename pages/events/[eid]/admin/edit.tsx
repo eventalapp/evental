@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
-import { UpdateEventForm } from '../../../../components/Form/Event/UpdateEventForm';
+import { EditEventForm } from '../../../../components/Form/Event/EditEventForm';
 import { Navigation } from '../../../../components/Navigation';
 import Unauthorized from '../../../../components/Unauthorized';
 
@@ -30,7 +30,7 @@ const CreateEventPage: NextPage = () => {
 
 				<h1 className="text-3xl">Update Event Page</h1>
 
-				<UpdateEventForm eid={String(eid)} />
+				<EditEventForm eid={String(eid)} />
 			</Column>
 		</>
 	);

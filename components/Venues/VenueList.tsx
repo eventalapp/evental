@@ -30,7 +30,7 @@ export const VenueList: React.FC<Props> = (props) => {
 		<div>
 			{venues &&
 				venues.map((venue) => (
-					<div key={venue.id} className="py-3 border-b-2 border-gray-200">
+					<div key={venue.id} className="py-3 mt-3 border-t-2 border-gray-200">
 						<Link href={`/events/${eid}/venues/${venue.id}`}>
 							<a>
 								<span className="text-lg block">{venue.name}</span>

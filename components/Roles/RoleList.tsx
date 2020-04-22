@@ -30,7 +30,7 @@ export const RoleList: React.FC<Props> = (props) => {
 		<div>
 			{roles &&
 				roles.map((role) => (
-					<div key={role.id} className="py-3 border-b-2 border-gray-200">
+					<div key={role.id} className="py-3 mt-3 border-t-2 border-gray-200">
 						<Link href={`/events/${eid}/roles/${role.id}`}>
 							<a>
 								<span className="text-lg block">{role.name}</span>

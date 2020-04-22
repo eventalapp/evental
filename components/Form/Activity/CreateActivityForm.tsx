@@ -34,6 +34,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 			//TODO: Use react query mutation
 
 			const body: CreateActivityPayload = {
+				slug: eventParsed.slug,
 				name: eventParsed.name,
 				venueId: eventParsed.venueId,
 				startDate: new Date(eventParsed.startDate).toISOString(),
@@ -47,7 +48,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 			);
 
 			if (createActivityResponse.status === 200) {
-				router.push(`/events/${eid}/activities/${createActivityResponse.data.id}`);
+				router.push(`/events/${eid}/activities/${createActivityResponse.data.slug}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {
@@ -93,6 +94,12 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 							)}
 						</div>
 					)}
+				</div>
+				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+					<div>
+						<Label htmlFor="slug">Slug</Label>
+						<Input defaultValue="activity-slug" id="slug" name="slug" type="text" required />
+					</div>
 				</div>
 
 				<div className="grid grid-cols-1 mb-5 gap-5">
