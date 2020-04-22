@@ -1,4 +1,5 @@
 import { ServerErrorPayload } from '../typings/error';
+import React from 'react';
 
 interface Props {
 	error: ServerErrorPayload;

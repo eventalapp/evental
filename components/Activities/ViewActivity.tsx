@@ -1,7 +1,8 @@
 import type Prisma from '@prisma/client';
 import Link from 'next/link';
-import { useOrganizerQuery } from '../../hooks/useOrganizerQuery';
 import { LinkButton } from '../Form/LinkButton';
+import { useOrganizerQuery } from '../../hooks/queries/useOrganizerQuery';
+import React from 'react';
 
 interface Props {
 	loading: boolean;

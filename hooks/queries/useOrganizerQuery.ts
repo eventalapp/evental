@@ -1,19 +1,18 @@
-import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../typings/error';
+import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useVenuesQuery = (eid: string) => {
+export const useOrganizerQuery = (eid: string) => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
-	const { data: venues, isLoading: isVenuesLoading } = useQuery<
-		Prisma.EventVenue[],
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useQuery<
+		boolean,
 		AxiosError<ServerError>
 	>(
-		['venues', eid],
+		['isOrganizer', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}/venues`).then((res) => res.data);
+			return axios.get(`/api/events/${eid}/organizer`).then((res) => res.data.isOrganizer);
 		},
 		{
 			retry: 0,
@@ -27,5 +26,5 @@ export const useVenuesQuery = (eid: string) => {
 		}
 	);
 
-	return { venues, isVenuesLoading, venuesError: error };
+	return { isOrganizer, isOrganizerLoading, isOrganizerError: error };
 };

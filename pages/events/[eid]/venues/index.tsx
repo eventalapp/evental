@@ -8,8 +8,8 @@ import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
 import { ServerError } from '../../../../components/ServerError';
 import { VenueList } from '../../../../components/Venues/VenueList';
-import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
-import { useVenuesQuery } from '../../../../hooks/useVenuesQuery';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();

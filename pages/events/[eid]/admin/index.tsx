@@ -9,7 +9,7 @@ import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
 import NoAccess from '../../../../components/NoAccess';
 import Unauthorized from '../../../../components/Unauthorized';
-import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();

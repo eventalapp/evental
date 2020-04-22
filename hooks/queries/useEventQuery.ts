@@ -1,19 +1,19 @@
+import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ServerError } from '../typings/error';
-import { ServerErrorPayload } from './../typings/error';
+import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useOrganizerQuery = (eid: string) => {
+export const useEventQuery = (eid: string) => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
-	const { data: isOrganizer, isLoading: isOrganizerLoading } = useQuery<
-		boolean,
+	const { data: event, isLoading: isEventLoading } = useQuery<
+		Prisma.Event,
 		AxiosError<ServerError>
 	>(
-		['isOrganizer', eid],
+		['event', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}/organizer`).then((res) => res.data.isOrganizer);
+			return axios.get(`/api/events/${eid}`).then((res) => res.data);
 		},
 		{
 			retry: 0,
@@ -27,5 +27,5 @@ export const useOrganizerQuery = (eid: string) => {
 		}
 	);
 
-	return { isOrganizer, isOrganizerLoading, isOrganizerError: error };
+	return { event, isEventLoading, eventError: error };
 };

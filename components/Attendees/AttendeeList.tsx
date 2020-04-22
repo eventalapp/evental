@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 import { capitalizeFirstLetter } from '../../utils/string';
+import React from 'react';
 
 interface Props {
 	loading: boolean;

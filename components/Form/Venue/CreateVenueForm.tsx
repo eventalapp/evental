@@ -1,6 +1,6 @@
 import axios from 'axios';
 import router from 'next/router';
-import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
 import { getFormEntries } from '../../../utils/getFormEntries';
 import { CreateVenuePayload, CreateVenueSchema } from '../../../utils/schemas';

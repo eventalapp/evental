@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { useActivityQuery } from '../../../hooks/useActivityQuery';
-import { useEditActivityMutation } from '../../../hooks/useEditActivityMutation';
-import { useVenuesQuery } from '../../../hooks/useVenuesQuery';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
 import { Select } from '../Select';
 import { Textarea } from '../Textarea';
+import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
+import { useActivityQuery } from '../../../hooks/queries/useActivityQuery';
+import { useEditActivityMutation } from '../../../hooks/mutations/useEditActivityMutation';
 
 interface Props {
 	eid: string;

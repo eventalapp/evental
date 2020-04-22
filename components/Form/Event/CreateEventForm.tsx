@@ -1,43 +1,20 @@
-import axios from 'axios';
-import router from 'next/router';
-import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
-import { useMutation } from 'react-query';
-import { getFormEntries } from '../../../utils/getFormEntries';
-import { CreateEventPayload, CreateEventSchema } from '../../../utils/schemas';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
 import { Textarea } from '../Textarea';
+import { useCreateEventMutation } from '../../../hooks/mutations/useCreateEventMutation';
+import { ServerError } from '../../ServerError';
 
 type CreateEventFormProps = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 	const { ...rest } = props;
-	const createEventMutation = useMutation(
-		async (event: FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
+	const { createEventMutation, createEventError } = useCreateEventMutation();
 
-			const formEntries = getFormEntries(event);
-
-			const eventParsed = CreateEventSchema.parse(formEntries);
-
-			const body: CreateEventPayload = {
-				name: eventParsed.name,
-				slug: eventParsed.slug,
-				location: eventParsed.location,
-				startDate: new Date(eventParsed.startDate).toISOString(),
-				endDate: new Date(eventParsed.endDate).toISOString(),
-				description: eventParsed.description
-			};
-
-			return await axios.post('/api/events/create', body);
-		},
-		{
-			onSuccess: (response) => {
-				router.push(`/events/${response.data.slug}`);
-			}
-		}
-	);
+	if (createEventError) {
+		return <ServerError error={createEventError} />;
+	}
 
 	return (
 		<form onSubmit={createEventMutation.mutate} {...rest}>

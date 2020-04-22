@@ -2,6 +2,7 @@ import type Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { groupByDate } from '../../utils/groupByDate';
+import React from 'react';
 
 interface Props {
 	loading: boolean;

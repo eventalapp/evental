@@ -1,7 +1,7 @@
 import prisma from '../prisma/client';
 
 export const isOrganizer = async (userId: string, eventId: string) => {
-	const isOrganizer = Boolean(
+	return Boolean(
 		await prisma.eventMember.findFirst({
 			where: {
 				userId: userId,
@@ -12,6 +12,4 @@ export const isOrganizer = async (userId: string, eventId: string) => {
 			}
 		})
 	);
-
-	return isOrganizer;
 };
