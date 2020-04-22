@@ -19,7 +19,7 @@ import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../../hooks/useVenuesQuery';
 import { getFormEntries } from '../../../../../utils/getFormEntries';
-import { CreateActivitySchema } from '../../../../../utils/schemas';
+import { CreateActivityPayload, CreateActivitySchema } from '../../../../../utils/schemas';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -36,13 +36,20 @@ const CreateActivityPage: NextPage = () => {
 
 			let eventParsed = CreateActivitySchema.parse(formEntries);
 
-			let createActivityResponse = await axios.post(`/api/events/${eid}/admin/activities/create`, {
+			//TODO: Use react query mutation
+
+			const body: CreateActivityPayload = {
 				name: eventParsed.name,
 				venueId: eventParsed.venueId,
 				startDate: new Date(eventParsed.startDate).toISOString(),
 				endDate: new Date(eventParsed.endDate).toISOString(),
 				description: eventParsed.description
-			});
+			};
+
+			let createActivityResponse = await axios.post(
+				`/api/events/${eid}/admin/activities/create`,
+				body
+			);
 
 			if (createActivityResponse.status === 200) {
 				router.push(`/events/${eid}/activities/${createActivityResponse.data.id}`);
@@ -54,8 +61,6 @@ const CreateActivityPage: NextPage = () => {
 			}
 		}
 	};
-
-	//TODO: Use react query mutation
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
@@ -85,29 +90,33 @@ const CreateActivityPage: NextPage = () => {
 								<Input defaultValue="Activity Name" id="name" name="name" type="text" required />
 							</div>
 
-							<div>
-								{venues && venues.length <= 0 ? (
-									<Link href={`/events/${eid}/admin/venues/create`}>
-										<a className="text-red-600">No Venues exist, please create a Venue</a>
-									</Link>
-								) : (
-									<>
-										<Label htmlFor="venueId">Venue</Label>
-										<Select name="venueId" id="venueId" required>
-											{venues &&
-												venues.map((venue) => (
-													<option key={venue.id} value={venue.id}>
-														{venue.name}
-													</option>
-												))}
-										</Select>
-
+							{isVenuesLoading ? (
+								<div>Venues Loading...</div>
+							) : (
+								<div>
+									{venues && venues.length <= 0 ? (
 										<Link href={`/events/${eid}/admin/venues/create`}>
-											<a className="text-blue-600">Dont see your venue? Create a Venue</a>
+											<a className="text-red-600">No Venues exist, please create a Venue</a>
 										</Link>
-									</>
-								)}
-							</div>
+									) : (
+										<>
+											<Label htmlFor="venueId">Venue</Label>
+											<Select name="venueId" id="venueId" required>
+												{venues &&
+													venues.map((venue) => (
+														<option key={venue.id} value={venue.id}>
+															{venue.name}
+														</option>
+													))}
+											</Select>
+
+											<Link href={`/events/${eid}/admin/venues/create`}>
+												<a className="text-blue-600">Dont see your venue? Create a Venue</a>
+											</Link>
+										</>
+									)}
+								</div>
+							)}
 						</div>
 
 						<div className="grid grid-cols-1 mb-5 gap-5">

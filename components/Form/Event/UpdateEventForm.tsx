@@ -4,7 +4,7 @@ import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
 import { useEventQuery } from '../../../hooks/useEventQuery';
 import { getFormEntries } from '../../../utils/getFormEntries';
-import { UpdateEventSchema } from '../../../utils/schemas';
+import { UpdateEventPayload, UpdateEventSchema } from '../../../utils/schemas';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
@@ -31,13 +31,15 @@ export const UpdateEventForm: React.FC<UpdateEventFormProps> = (props) => {
 
 			//TODO: Use react query mutation
 
-			const updateEventResponse = await axios.put(`/api/events/${eid}/admin/edit`, {
+			const body: UpdateEventPayload = {
 				name: eventParsed.name,
 				location: eventParsed.location,
 				startDate: new Date(eventParsed.startDate).toISOString(),
 				endDate: new Date(eventParsed.endDate).toISOString(),
 				description: eventParsed.description
-			});
+			};
+
+			const updateEventResponse = await axios.put(`/api/events/${eid}/admin/edit`, body);
 
 			if (updateEventResponse.status === 200) {
 				router.push(`/events/${updateEventResponse.data.id}`);
