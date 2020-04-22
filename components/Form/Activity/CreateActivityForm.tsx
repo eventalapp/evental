@@ -21,7 +21,7 @@ type CreateActivityFormProps = Props &
 
 export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => {
 	const { eid, ...rest } = props;
-	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
+	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
 
 	const registerActivity = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -58,6 +58,12 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 		}
 	};
 
+	if (venuesError) {
+		<div>
+			<p className="text-red-500">Venues: {venuesError}</p>
+		</div>;
+	}
+
 	return (
 		<form onSubmit={registerActivity} {...rest}>
 			<div className="flex flex-col w-full mt-5">
@@ -78,7 +84,12 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 							) : (
 								<>
 									<Label htmlFor="venueId">Venue</Label>
-									<Select name="venueId" id="venueId" required>
+									<Select
+										name="venueId"
+										defaultValue={venues && venues[0].id}
+										id="venueId"
+										required
+									>
 										{venues &&
 											venues.map((venue) => (
 												<option key={venue.id} value={venue.id}>

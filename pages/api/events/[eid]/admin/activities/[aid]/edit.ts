@@ -42,7 +42,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			});
 
 			if (!activity) {
-				return res.status(404).send('Activity not found.');
+				return res.status(404).send({ error: 'Activity not found.' });
 			}
 
 			let editedActivity = await prisma.eventActivity.update({
@@ -51,6 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 				data: {
 					eventId: event.id,
+					slug: bodyParsed.slug,
 					name: bodyParsed.name,
 					venueId: bodyParsed.venueId,
 					startDate: bodyParsed.startDate,

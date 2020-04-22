@@ -1,12 +1,18 @@
 import type Prisma from '@prisma/client';
+import Link from 'next/link';
+import { useOrganizerQuery } from '../../hooks/useOrganizerQuery';
+import { LinkButton } from '../Form/LinkButton';
 
 interface Props {
 	loading: boolean;
 	activity: Prisma.EventActivity | undefined;
+	eid: string;
+	aid: string;
 }
 
 export const ViewActivity: React.FC<Props> = (props) => {
-	const { loading, activity } = props;
+	const { loading, activity, aid, eid } = props;
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	if (loading) {
 		return (
@@ -20,7 +26,15 @@ export const ViewActivity: React.FC<Props> = (props) => {
 		<div>
 			{activity && (
 				<div>
-					<h1 className="text-3xl">{activity.name}</h1>
+					<div className="flex flex-row justify-between">
+						<h1 className="text-3xl">{activity.name}</h1>
+
+						{!isOrganizerLoading && isOrganizer && (
+							<Link href={`/events/${eid}/admin/activities/${aid}/edit`} passHref>
+								<LinkButton className="mr-3">Edit activity</LinkButton>
+							</Link>
+						)}
+					</div>
 					<p>{activity.description}</p>
 					<p>{activity.startDate}</p>
 					<p>{activity.endDate}</p>

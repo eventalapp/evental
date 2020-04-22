@@ -1,7 +1,7 @@
 import axios from 'axios';
 import router from 'next/router';
 import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
-import { ZodError } from 'zod';
+import { useMutation } from 'react-query';
 import { getFormEntries } from '../../../utils/getFormEntries';
 import { CreateEventPayload, CreateEventSchema } from '../../../utils/schemas';
 import { Button } from '../Button';
@@ -13,16 +13,13 @@ type CreateEventFormProps = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement
 
 export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 	const { ...rest } = props;
+	const createEventMutation = useMutation(
+		async (event: FormEvent<HTMLFormElement>) => {
+			event.preventDefault();
 
-	const createEvent = async (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-
-		try {
 			const formEntries = getFormEntries(event);
 
 			const eventParsed = CreateEventSchema.parse(formEntries);
-
-			//TODO: Use react query mutation
 
 			const body: CreateEventPayload = {
 				name: eventParsed.name,
@@ -33,21 +30,17 @@ export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 				description: eventParsed.description
 			};
 
-			const createEventResponse = await axios.post('/api/events/create', body);
-
-			if (createEventResponse.status === 200) {
-				router.push(`/events/${createEventResponse.data.slug}`);
-			}
-		} catch (error) {
-			if (error instanceof ZodError) {
-				alert('error');
-				console.error(error);
+			return await axios.post('/api/events/create', body);
+		},
+		{
+			onSuccess: (response) => {
+				router.push(`/events/${response.data.slug}`);
 			}
 		}
-	};
+	);
 
 	return (
-		<form onSubmit={createEvent} {...rest}>
+		<form onSubmit={createEventMutation.mutate} {...rest}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>

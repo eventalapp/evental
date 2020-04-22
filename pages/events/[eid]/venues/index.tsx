@@ -14,7 +14,7 @@ const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
 		<>
@@ -29,7 +29,7 @@ const ActivitiesPage: NextPage = () => {
 
 				<div className="flex flex-row justify-between">
 					<h1 className="text-3xl">Venues Page</h1>
-					{!isOrganizerLoading && isOrganizer && (
+					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/venues/create`} passHref>
 							<LinkButton className="mr-3">Create venue</LinkButton>
 						</Link>

@@ -101,7 +101,7 @@ model Event {
 
 model EventMember {
   id          String @id @default(cuid())
-  slug        String @unique
+  slug        String
   userId      String
   eventId     String
   eventRoleId String

@@ -15,7 +15,7 @@ const AdminPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
