@@ -31,7 +31,7 @@ const RolesPage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>All Venues</title>
+				<title>Admin Roles Page</title>
 			</Head>
 
 			<Navigation />

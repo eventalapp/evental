@@ -26,12 +26,13 @@ export const AttendeeList: React.FC<Props> = (props) => {
 		return (
 			<div>
 				{role && (
-					<h2 className="text-2xl my-3">
-						{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
-					</h2>
+					<>
+						<h2 className="text-2xl my-3">
+							{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
+						</h2>
+						<p>No {role.name.toLowerCase()}s found.</p>
+					</>
 				)}
-
-				<p>No attendees found.</p>
 			</div>
 		);
 	}
