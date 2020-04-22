@@ -5,7 +5,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid } = req.query;
 
 	try {
-		let roleList = await prisma.eventRole.findMany({
+		let roles = await prisma.eventRole.findMany({
 			where: {
 				event: {
 					OR: [{ id: String(eid) }, { slug: String(eid) }]
@@ -13,11 +13,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		});
 
-		if (roleList.length === 0) {
-			return res.status(204).end();
+		// If no roles exist, crate a default role
+
+		if (roles.length === 0) {
+			let role = prisma.eventRole.create({
+				data: {
+					role: 'ATTENDEE',
+					eventId: String(eid)
+				}
+			});
+
+			return res.status(200).send({ roles: [role] });
 		}
 
-		return res.status(200).send(roleList);
+		return res.status(200).send({ roles });
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

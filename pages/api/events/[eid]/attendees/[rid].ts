@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../../../../prisma/client';
+import prisma from '../../../../../prisma/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid, rid } = req.query;

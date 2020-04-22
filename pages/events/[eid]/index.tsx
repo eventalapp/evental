@@ -10,6 +10,7 @@ import { Navigation } from '../../../components/Navigation';
 import { useActivitiesQuery } from '../../../hooks/useActivitiesQuery';
 import { useEventQuery } from '../../../hooks/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/useOrganizerQuery';
+import { useRolesQuery } from '../../../hooks/useRolesQuery';
 
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
@@ -17,6 +18,7 @@ const ViewEventPage: NextPage = () => {
 	const { event, isEventLoading } = useEventQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { activities, isActivitiesLoading } = useActivitiesQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
 	return (
 		<>
@@ -44,9 +46,13 @@ const ViewEventPage: NextPage = () => {
 						<p>{event?.description}</p>
 						{dayjs(event?.startDate).format('MMM DD')} - {dayjs(event?.endDate).format('MMM DD')}
 						<div className="mt-3">
-							<Link href={`/events/${eid}/attendees`} passHref>
-								<LinkButton className="mr-3">View attendees</LinkButton>
-							</Link>
+							{roles &&
+								roles.map((role) => (
+									<Link href={`/events/${eid}/attendees/${role.id}`} passHref key={role.id}>
+										<LinkButton className="mr-3">View {role.role.toLowerCase()}s</LinkButton>
+									</Link>
+								))}
+
 							<Link href={`/events/${eid}/activities`} passHref>
 								<LinkButton className="mr-3">View activities</LinkButton>
 							</Link>

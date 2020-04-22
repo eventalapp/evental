@@ -15,7 +15,7 @@ const ViewAttendeePage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Viewing Venue: {rid}</title>
+				<title>Viewing Role: {rid}</title>
 			</Head>
 
 			<Navigation />
@@ -23,7 +23,7 @@ const ViewAttendeePage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<ViewRole role={role} loading={isRoleLoading} />
+				<ViewRole role={role} loading={isRoleLoading} eid={String(eid)} />
 			</Column>
 		</>
 	);
