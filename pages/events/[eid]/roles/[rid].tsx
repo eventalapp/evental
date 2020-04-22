@@ -5,6 +5,7 @@ import { AttendeeList } from '../../../../components/Attendees/AttendeeList';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
+import { ServerError } from '../../../../components/ServerError';
 import { useRoleQuery } from '../../../../hooks/useRoleQuery';
 
 const ViewAttendeePage: NextPage = () => {
@@ -24,9 +25,7 @@ const ViewAttendeePage: NextPage = () => {
 				<BackButton />
 
 				{roleError ? (
-					<div>
-						<p className="text-red-500">{roleError}</p>
-					</div>
+					<ServerError error={roleError} />
 				) : (
 					<AttendeeList
 						eid={String(eid)}

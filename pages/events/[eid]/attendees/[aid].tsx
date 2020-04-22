@@ -5,6 +5,7 @@ import { ViewAttendee } from '../../../../components/Attendees/ViewAttendee';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
+import { ServerError } from '../../../../components/ServerError';
 import { useAttendeeQuery } from '../../../../hooks/useAttendeeQuery';
 
 const ViewAttendeePage: NextPage = () => {
@@ -24,9 +25,7 @@ const ViewAttendeePage: NextPage = () => {
 				<BackButton />
 
 				{attendeeError ? (
-					<div>
-						<p className="text-red-500">{attendeeError}</p>
-					</div>
+					<ServerError error={attendeeError} />
 				) : (
 					<ViewAttendee attendee={attendee} loading={isAttendeeLoading} />
 				)}

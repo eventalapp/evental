@@ -7,6 +7,7 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
+import { ServerError } from '../../../../components/ServerError';
 import { useActivitiesQuery } from '../../../../hooks/useActivitiesQuery';
 import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
 import { groupByDate } from '../../../../utils/groupByDate';
@@ -14,7 +15,7 @@ import { groupByDate } from '../../../../utils/groupByDate';
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { activities, isActivitiesLoading } = useActivitiesQuery(String(eid));
+	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	if (activities) {
@@ -41,7 +42,11 @@ const ActivitiesPage: NextPage = () => {
 					)}
 				</div>
 
-				<ActivityList activities={activities} eid={String(eid)} loading={isActivitiesLoading} />
+				{activitiesError ? (
+					<ServerError error={activitiesError} />
+				) : (
+					<ActivityList activities={activities} eid={String(eid)} loading={isActivitiesLoading} />
+				)}
 			</Column>
 		</>
 	);

@@ -28,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			});
 
 			if (!event) {
-				return res.status(404).send('Event not found.');
+				return res.status(404).send({ error: { message: 'Event not found.' } });
 			}
 
 			let updatedEvent = await prisma.event.update({

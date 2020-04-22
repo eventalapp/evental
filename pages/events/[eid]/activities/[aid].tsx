@@ -5,12 +5,13 @@ import { ViewActivity } from '../../../../components/Activities/ViewActivity';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
+import { ServerError } from '../../../../components/ServerError';
 import { useActivityQuery } from '../../../../hooks/useActivityQuery';
 
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
-	const { activity, isActivityLoading, error } = useActivityQuery(String(eid), String(aid));
+	const { activity, isActivityLoading, activityError } = useActivityQuery(String(eid), String(aid));
 
 	if (!activity) {
 		<div>
@@ -29,11 +30,8 @@ const ViewActivityPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				{error ? (
-					<div>
-						<h1 className="text-3xl mb-2">Error</h1>
-						<p>{error.message}</p>
-					</div>
+				{activityError ? (
+					<ServerError error={activityError} />
 				) : (
 					<ViewActivity
 						activity={activity}

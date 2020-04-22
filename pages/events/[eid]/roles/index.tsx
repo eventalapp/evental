@@ -7,6 +7,7 @@ import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
 import { RoleList } from '../../../../components/Roles/RoleList';
+import { ServerError } from '../../../../components/ServerError';
 import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
 import { useRolesQuery } from '../../../../hooks/useRolesQuery';
 
@@ -38,9 +39,7 @@ const RolesPage: NextPage = () => {
 				</div>
 
 				{rolesError ? (
-					<div>
-						<p className="text-red-500">{rolesError}</p>
-					</div>
+					<ServerError error={rolesError} />
 				) : (
 					<RoleList eid={String(eid)} roles={roles} loading={isRolesLoading} />
 				)}

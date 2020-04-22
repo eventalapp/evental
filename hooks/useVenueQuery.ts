@@ -16,7 +16,7 @@ export const useVenueQuery = (eid: string, vid: string) => {
 			return axios.get(`/api/events/${eid}/venues/${vid}`).then((res) => res.data);
 		},
 		{
-			retry: 1,
+			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined' && vid !== undefined && vid !== 'undefined',
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);
