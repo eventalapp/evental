@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 import React from 'react';
+import { capitalizeFirstLetter } from '../../utils/string';
 
 interface Props {
 	loading: boolean;
@@ -49,6 +50,9 @@ export const AttendeeList: React.FC<Props> = (props) => {
 													/>
 												</div>
 												<span>{attendee.user.name}</span>
+												<span className="block text-gray-700">
+													{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
+												</span>
 											</a>
 										</Link>
 									</li>

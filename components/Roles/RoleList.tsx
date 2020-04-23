@@ -36,25 +36,23 @@ export const RoleList: React.FC<Props> = (props) => {
 			{roles &&
 				roles.map((role) => (
 					<div key={role.id} className="py-2 border-t-2 border-gray-200">
-						<Link href={`/events/${eid}/roles/${role.slug}`}>
-							<a className="flex flex-row justify-between items-center">
-								<span className="text-lg block">
-									{capitalizeFirstLetter(role.name.toLowerCase())}
-								</span>
+						<div className="flex flex-row justify-between items-center">
+							<span className="text-lg block">
+								{capitalizeFirstLetter(role.name.toLowerCase())}
+							</span>
+							<div>
+								<Link href={`/events/${eid}/roles/${role.slug}`} passHref>
+									<LinkButton variant={'secondary'} className="mr-3">
+										View
+									</LinkButton>
+								</Link>
 								{!isOrganizerLoading && isOrganizer && (
-									<div>
-										<Link href={`/events/${eid}/roles/${role.slug}`} passHref>
-											<LinkButton variant={'secondary'} className="mr-3">
-												View
-											</LinkButton>
-										</Link>
-										<Link href={`/events/${eid}/admin/roles/${role.slug}/edit`} passHref>
-											<LinkButton variant={'secondary'}>Edit</LinkButton>
-										</Link>
-									</div>
+									<Link href={`/events/${eid}/admin/roles/${role.slug}/edit`} passHref>
+										<LinkButton variant={'secondary'}>Edit</LinkButton>
+									</Link>
 								)}
-							</a>
-						</Link>
+							</div>
+						</div>
 					</div>
 				))}
 		</div>

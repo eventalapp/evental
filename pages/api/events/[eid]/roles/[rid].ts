@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
+import { eventMemberInclude } from '../attendees/[aid]';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid, rid } = req.query;
@@ -33,14 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				eventId: event.id
 			},
 			include: {
-				user: {
-					select: {
-						name: true,
-						image: true,
-						company: true,
-						position: true
-					}
-				}
+				...eventMemberInclude
 			}
 		});
 
