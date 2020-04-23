@@ -8,7 +8,7 @@ export const useAttendeesQuery = (eid: string) => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: attendees, isLoading: isAttendeesLoading } = useQuery<
-		{ organizers: EventMemberUser[]; attendees: EventMemberUser[] },
+		EventMemberUser[],
 		AxiosError<ServerError>
 	>(
 		['attendees', eid],

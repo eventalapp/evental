@@ -17,6 +17,8 @@ import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { RoleList } from '../../../../components/Roles/RoleList';
 import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery';
 import { ActivityList } from '../../../../components/Activities/ActivityList';
+import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
+import { AttendeeList } from '../../../../components/Attendees/AttendeeList';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();
@@ -24,6 +26,8 @@ const AdminPage: NextPage = () => {
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
+	const { attendees, isAttendeesLoading, attendeesError } = useAttendeesQuery(String(eid));
+
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
 
@@ -94,17 +98,23 @@ const AdminPage: NextPage = () => {
 						)}
 					</div>
 				</div>
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-5">
+				<div className="my-5">
 					<div>
-						<div className="flex flex-row justify-between">
-							<span className="text-3xl">Attendees</span>
+						<div className="flex flex-row justify-between mb-3">
+							<h1 className="text-3xl">Attendees</h1>
 
 							<div>
-								<Link href={`/events/${eid}/venues/`} passHref>
+								<Link href={`/events/${eid}/attendees/`} passHref>
 									<LinkButton>View all attendees</LinkButton>
 								</Link>
 							</div>
 						</div>
+
+						{attendeesError ? (
+							<ServerError error={attendeesError} />
+						) : (
+							<AttendeeList eid={String(eid)} attendees={attendees} loading={isAttendeesLoading} />
+						)}
 					</div>
 				</div>
 				<div className="my-5">
