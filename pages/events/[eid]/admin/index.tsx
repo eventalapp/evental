@@ -10,12 +10,22 @@ import { Navigation } from '../../../../components/Navigation';
 import NoAccess from '../../../../components/NoAccess';
 import Unauthorized from '../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
+import { ServerError } from '../../../../components/ServerError';
+import { VenueList } from '../../../../components/Venues/VenueList';
+import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
+import { RoleList } from '../../../../components/Roles/RoleList';
+import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery';
+import { ActivityList } from '../../../../components/Activities/ActivityList';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
+	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
+	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
@@ -35,20 +45,10 @@ const AdminPage: NextPage = () => {
 
 			<Column className="py-10">
 				<BackButton />
-
 				<div className="flex flex-row justify-between">
 					<h1 className="text-3xl">Admin Page</h1>
 
 					<div>
-						<Link href={`/events/${eid}/activities/`} passHref>
-							<LinkButton className="mr-3">Manage activities</LinkButton>
-						</Link>
-						<Link href={`/events/${eid}/venues/`} passHref>
-							<LinkButton className="mr-3">Manage venues</LinkButton>
-						</Link>
-						<Link href={`/events/${eid}/roles/`} passHref>
-							<LinkButton className="mr-3">Manage roles</LinkButton>
-						</Link>
 						<Link href={`/events/${eid}/attendees/`} passHref>
 							<LinkButton className="mr-3">Manage attendees</LinkButton>
 						</Link>
@@ -58,6 +58,77 @@ const AdminPage: NextPage = () => {
 					</div>
 				</div>
 				<span>Manage your event</span>
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-5">
+					<div>
+						<div className="flex flex-row justify-between mb-3">
+							<span className="text-3xl">Venues</span>
+
+							<div>
+								<Link href={`/events/${eid}/venues/`} passHref>
+									<LinkButton>View all venues</LinkButton>
+								</Link>
+							</div>
+						</div>
+
+						{venuesError ? (
+							<ServerError error={venuesError} />
+						) : (
+							<VenueList eid={String(eid)} venues={venues} loading={isVenuesLoading} />
+						)}
+					</div>
+					<div>
+						<div className="flex flex-row justify-between mb-3">
+							<h1 className="text-3xl">Roles</h1>
+
+							<div>
+								<Link href={`/events/${eid}/roles/`} passHref>
+									<LinkButton>View all roles</LinkButton>
+								</Link>
+							</div>
+						</div>
+
+						{rolesError ? (
+							<ServerError error={rolesError} />
+						) : (
+							<RoleList eid={String(eid)} roles={roles} loading={isRolesLoading} />
+						)}
+					</div>
+				</div>
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-5">
+					<div>
+						<div className="flex flex-row justify-between">
+							<span className="text-3xl">Attendees</span>
+
+							<div>
+								<Link href={`/events/${eid}/venues/`} passHref>
+									<LinkButton>View all attendees</LinkButton>
+								</Link>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="my-5">
+					<div>
+						<div className="flex flex-row justify-between">
+							<span className="text-3xl">Activities</span>
+
+							<div>
+								<Link href={`/events/${eid}/activities/`} passHref>
+									<LinkButton>View all activities</LinkButton>
+								</Link>
+							</div>
+						</div>
+						{activitiesError ? (
+							<ServerError error={activitiesError} />
+						) : (
+							<ActivityList
+								activities={activities}
+								eid={String(eid)}
+								loading={isActivitiesLoading}
+							/>
+						)}
+					</div>
+				</div>
 			</Column>
 		</>
 	);

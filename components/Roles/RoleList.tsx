@@ -1,6 +1,9 @@
 import type Prisma from '@prisma/client';
 import Link from 'next/link';
 import React from 'react';
+import { capitalizeFirstLetter } from '../../utils/string';
+import { LinkButton } from '../Form/LinkButton';
+import { useOrganizerQuery } from '../../hooks/queries/useOrganizerQuery';
 
 interface Props {
 	loading: boolean;
@@ -10,6 +13,7 @@ interface Props {
 
 export const RoleList: React.FC<Props> = (props) => {
 	const { eid, loading, roles } = props;
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	if (loading) {
 		return (
@@ -31,10 +35,24 @@ export const RoleList: React.FC<Props> = (props) => {
 		<div>
 			{roles &&
 				roles.map((role) => (
-					<div key={role.id} className="py-3 mt-3 border-t-2 border-gray-200">
+					<div key={role.id} className="py-2 border-t-2 border-gray-200">
 						<Link href={`/events/${eid}/roles/${role.slug}`}>
-							<a>
-								<span className="text-lg block">{role.name}</span>
+							<a className="flex flex-row justify-between items-center">
+								<span className="text-lg block">
+									{capitalizeFirstLetter(role.name.toLowerCase())}
+								</span>
+								{!isOrganizerLoading && isOrganizer && (
+									<div>
+										<Link href={`/events/${eid}/roles/${role.slug}`} passHref>
+											<LinkButton variant={'secondary'} className="mr-3">
+												View
+											</LinkButton>
+										</Link>
+										<Link href={`/events/${eid}/admin/roles/${role.slug}/edit`} passHref>
+											<LinkButton variant={'secondary'}>Edit</LinkButton>
+										</Link>
+									</div>
+								)}
 							</a>
 						</Link>
 					</div>
