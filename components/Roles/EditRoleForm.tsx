@@ -26,7 +26,7 @@ export const EditRoleForm: React.FC<EditRoleFormProps> = (props) => {
 	if (isRoleLoading) {
 		return (
 			<div>
-				<p>Events loading...</p>
+				<p>Role loading...</p>
 			</div>
 		);
 	}
@@ -34,7 +34,7 @@ export const EditRoleForm: React.FC<EditRoleFormProps> = (props) => {
 	if (!role) {
 		return (
 			<div>
-				<p>Event not found.</p>
+				<p>Role not found.</p>
 			</div>
 		);
 	}

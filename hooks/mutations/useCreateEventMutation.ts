@@ -38,9 +38,9 @@ export const useCreateEventMutation = () => {
 			onSuccess: (response) => {
 				setError(null);
 
-				void queryClient.invalidateQueries(['events']);
-
-				void router.push(`/events/${response.data.slug}`);
+				router.push(`/events/${response.data.slug}`).then(() => {
+					void queryClient.invalidateQueries('events');
+				});
 			},
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);

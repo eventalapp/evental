@@ -1,15 +1,11 @@
-import axios from 'axios';
-import router from 'next/router';
-import React, { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
-import { ZodError } from 'zod';
-import { getFormEntries } from '../../utils/getFormEntries';
-import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
 import { Textarea } from '../Form/Textarea';
 import { useEventQuery } from '../../hooks/queries/useEventQuery';
 import { ServerError } from '../ServerError';
+import { useEditEventMutation } from '../../hooks/mutations/useEditEventMutation';
 
 interface Props {
 	eid: string;
@@ -21,37 +17,7 @@ type EditEventFormProps = Props &
 export const EditEventForm: React.FC<EditEventFormProps> = (props) => {
 	const { eid, ...rest } = props;
 	const { event, isEventLoading, eventError } = useEventQuery(eid);
-
-	const editEvent = async (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-
-		try {
-			const formEntries = getFormEntries(event);
-
-			const eventParsed = EditEventSchema.parse(formEntries);
-
-			//TODO: Use react query mutation
-
-			const body: EditEventPayload = {
-				name: eventParsed.name,
-				location: eventParsed.location,
-				startDate: new Date(eventParsed.startDate).toISOString(),
-				endDate: new Date(eventParsed.endDate).toISOString(),
-				description: eventParsed.description
-			};
-
-			const editEventResponse = await axios.put(`/api/events/${eid}/admin/edit`, body);
-
-			if (editEventResponse.status === 200) {
-				void router.push(`/events/${editEventResponse.data.id}`);
-			}
-		} catch (error) {
-			if (error instanceof ZodError) {
-				alert('error');
-				console.error(error);
-			}
-		}
-	};
+	const { editEventMutation, editEventError } = useEditEventMutation(eid);
 
 	if (isEventLoading) {
 		return (
@@ -73,8 +39,12 @@ export const EditEventForm: React.FC<EditEventFormProps> = (props) => {
 		return <ServerError error={eventError} />;
 	}
 
+	if (editEventError) {
+		return <ServerError error={editEventError} />;
+	}
+
 	return (
-		<form onSubmit={editEvent} {...rest}>
+		<form onSubmit={editEventMutation.mutate} {...rest}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>

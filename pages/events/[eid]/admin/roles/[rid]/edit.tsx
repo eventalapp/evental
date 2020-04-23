@@ -10,7 +10,7 @@ import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { EditRoleForm } from '../../../../../../components/Roles/EditRoleForm';
 
-const EditActivityPage: NextPage = () => {
+const EditRolePage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid, rid } = router.query;
@@ -43,4 +43,4 @@ const EditActivityPage: NextPage = () => {
 	);
 };
 
-export default EditActivityPage;
+export default EditRolePage;

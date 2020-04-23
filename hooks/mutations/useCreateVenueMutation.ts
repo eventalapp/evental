@@ -5,7 +5,7 @@ import { FormEvent, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
-import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
+import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 
 export const useCreateVenueMutation = (eid: string) => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
@@ -21,22 +21,23 @@ export const useCreateVenueMutation = (eid: string) => {
 
 			const formEntries = getFormEntries(event);
 
-			const eventParsed = CreateRoleSchema.parse(formEntries);
+			const eventParsed = CreateVenueSchema.parse(formEntries);
 
-			const body: CreateRolePayload = {
+			const body: CreateVenuePayload = {
 				name: eventParsed.name,
-				slug: eventParsed.slug
+				slug: eventParsed.slug,
+				description: eventParsed.description
 			};
 
-			return await axios.post(`/api/events/${eid}/admin/roles/create`, body);
+			return await axios.post(`/api/events/${eid}/admin/venues/create`, body);
 		},
 		{
 			onSuccess: (response) => {
 				setError(null);
 
-				void queryClient.invalidateQueries(['venues', eid]);
-
-				void router.push(`/events/${eid}/roles/${response.data.slug}`);
+				router.push(`/events/${eid}/venues/${response.data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['venues', eid]);
+				});
 			},
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);

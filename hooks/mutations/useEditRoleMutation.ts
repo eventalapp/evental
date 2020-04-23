@@ -34,9 +34,9 @@ export const useEditRoleMutation = (eid: string, rid: string) => {
 			onSuccess: (response) => {
 				setError(null);
 
-				void queryClient.invalidateQueries(['role', eid, rid]);
-
-				void router.push(`/events/${eid}/roles/${response.data.slug}`);
+				router.push(`/events/${eid}/roles/${response.data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['role', eid, rid]);
+				});
 			},
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);
