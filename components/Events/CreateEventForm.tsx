@@ -3,14 +3,14 @@ import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
 import { Textarea } from '../Form/Textarea';
-import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
+import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
 import { ServerError } from '../ServerError';
 
-type CreateEventFormProps = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+	UseCreateEventMutationData;
 
-export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
-	const { ...rest } = props;
-	const { createEventMutation, createEventError } = useCreateEventMutation();
+export const CreateEventForm: React.FC<Props> = (props) => {
+	const { createEventMutation, createEventError, ...rest } = props;
 
 	if (createEventError) {
 		return <ServerError errors={[createEventError]} />;

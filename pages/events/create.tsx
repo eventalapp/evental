@@ -6,9 +6,11 @@ import Column from '../../components/Column';
 import { CreateEventForm } from '../../components/Events/CreateEventForm';
 import { Navigation } from '../../components/Navigation';
 import Unauthorized from '../../components/Unauthorized';
+import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 
 const CreateEventPage: NextPage = () => {
 	const session = useSession();
+	const { createEventMutation, createEventError } = useCreateEventMutation();
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
@@ -27,7 +29,10 @@ const CreateEventPage: NextPage = () => {
 
 				<h1 className="text-3xl">Create Event Page</h1>
 
-				<CreateEventForm />
+				<CreateEventForm
+					createEventError={createEventError}
+					createEventMutation={createEventMutation}
+				/>
 			</Column>
 		</>
 	);

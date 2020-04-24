@@ -3,19 +3,16 @@ import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
 import { Textarea } from '../Form/Textarea';
-import { useCreateVenueMutation } from '../../hooks/mutations/useCreateVenueMutation';
+import { UseCreateVenueMutationData } from '../../hooks/mutations/useCreateVenueMutation';
 import { ServerError } from '../ServerError';
 
 type Props = {
 	eid: string;
-};
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+	UseCreateVenueMutationData;
 
-type CreateActivityFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
-
-export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
-	const { eid, ...rest } = props;
-	const { createVenueMutation, createVenueError } = useCreateVenueMutation(eid);
+export const CreateVenueForm: React.FC<Props> = (props) => {
+	const { eid, createVenueMutation, createVenueError, ...rest } = props;
 
 	if (createVenueError) {
 		return <ServerError errors={[createVenueError]} />;

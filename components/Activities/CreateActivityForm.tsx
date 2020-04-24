@@ -1,72 +1,58 @@
-import axios from 'axios';
 import Link from 'next/link';
-import router from 'next/router';
-import React, { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
-import { ZodError } from 'zod';
-
-import { getFormEntries } from '../../utils/getFormEntries';
-import { CreateActivityPayload, CreateActivitySchema } from '../../utils/schemas';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
 import { Select } from '../Form/Select';
 import { Textarea } from '../Form/Textarea';
-import { useVenuesQuery } from '../../hooks/queries/useVenuesQuery';
+import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
+import { UseCreateActivityMutationData } from '../../hooks/mutations/useCreateActivityMutation';
+import { Loading } from '../Loading';
+import { ServerError } from '../ServerError';
+import { NotFound } from '../NotFound';
 
 type Props = {
 	eid: string;
 };
 
 type CreateActivityFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
+	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+	UseVenuesQueryData &
+	UseCreateActivityMutationData;
 
 export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => {
-	const { eid, ...rest } = props;
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
-
-	const registerActivity = async (event: FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
-
-		try {
-			const formEntries = getFormEntries(event);
-
-			let eventParsed = CreateActivitySchema.parse(formEntries);
-
-			//TODO: Use react query mutation
-
-			const body: CreateActivityPayload = {
-				slug: eventParsed.slug,
-				name: eventParsed.name,
-				venueId: eventParsed.venueId,
-				startDate: new Date(eventParsed.startDate).toISOString(),
-				endDate: new Date(eventParsed.endDate).toISOString(),
-				description: eventParsed.description
-			};
-
-			let createActivityResponse = await axios.post(
-				`/api/events/${eid}/admin/activities/create`,
-				body
-			);
-
-			if (createActivityResponse.status === 200) {
-				await router.push(`/events/${eid}/activities/${createActivityResponse.data.slug}`);
-			}
-		} catch (error) {
-			if (error instanceof ZodError) {
-				alert('error');
-				console.error(error);
-			}
-		}
-	};
+	const {
+		eid,
+		isVenuesLoading,
+		venuesError,
+		venues,
+		createActivityError,
+		createActivityMutation,
+		...rest
+	} = props;
 
 	if (venuesError) {
-		<div>
-			<p className="text-red-500">Venues: {venuesError}</p>
-		</div>;
+		return (
+			<div>
+				<p className="text-red-500">Venues: {venuesError}</p>
+			</div>
+		);
+	}
+
+	if (isVenuesLoading) {
+		return <Loading />;
+	}
+
+	if (venuesError || createActivityError) {
+		return <ServerError errors={[venuesError, createActivityError]} />;
+	}
+
+	if (!venues) {
+		return <NotFound />;
 	}
 
 	return (
-		<form onSubmit={registerActivity} {...rest}>
+		<form onSubmit={createActivityMutation.mutate} {...rest}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
