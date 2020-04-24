@@ -5,17 +5,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid } = req.query;
 
 	try {
-		let activityList = await prisma.eventActivity.findMany({
-			where: {
-				event: {
-					OR: [{ id: String(eid) }, { slug: String(eid) }]
-				}
+		const event = await prisma.event.findFirst({
+			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
+			select: {
+				id: true
 			}
 		});
 
-		if (activityList.length === 0) {
-			return res.status(204).end();
+		if (!event) {
+			return res.status(404).send({ error: { message: 'Event not found.' } });
 		}
+
+		const activityList = await prisma.eventActivity.findMany({
+			where: {
+				eventId: event.id
+			}
+		});
 
 		return res.status(200).send(activityList);
 	} catch (error) {

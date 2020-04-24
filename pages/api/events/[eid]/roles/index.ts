@@ -5,18 +5,29 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid } = req.query;
 
 	try {
-		let roles = await prisma.eventRole.findMany({
+		const event = await prisma.event.findFirst({
 			where: {
-				event: {
-					OR: [{ id: String(eid) }, { slug: String(eid) }]
-				}
+				OR: [{ id: String(eid) }, { slug: String(eid) }]
+			},
+			select: {
+				id: true
+			}
+		});
+
+		if (!event) {
+			return res.status(404).send({ error: { message: 'Event not found.' } });
+		}
+
+		const roles = await prisma.eventRole.findMany({
+			where: {
+				eventId: event.id
 			}
 		});
 
 		// If no roles exist, crate a default role
 
 		if (roles.length === 0) {
-			let role = prisma.eventRole.create({
+			const role = prisma.eventRole.create({
 				data: {
 					name: 'ATTENDEE',
 					slug: 'attendee',

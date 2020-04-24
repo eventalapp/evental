@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid } = req.query;
 
 	try {
-		let event = await prisma.event.findFirst({
+		const event = await prisma.event.findFirst({
 			where: {
 				OR: [{ id: String(eid) }, { slug: String(eid) }]
 			}
@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.status(404).send({ error: { message: 'Event not found.' } });
 		}
 
-		let attendees = await prisma.eventMember.findMany({
+		const attendees = await prisma.eventMember.findMany({
 			where: {
 				eventId: event.id
 			},

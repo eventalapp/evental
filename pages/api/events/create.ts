@@ -12,38 +12,38 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'POST') {
 		try {
-			let bodyParsed = CreateEventSchema.parse(req.body);
+			const parsed = CreateEventSchema.parse(req.body);
 
-			let createdEvent = await prisma.event.create({
+			const event = await prisma.event.create({
 				data: {
-					slug: bodyParsed.slug,
-					name: bodyParsed.name,
-					location: bodyParsed.location,
-					startDate: bodyParsed.startDate,
-					endDate: bodyParsed.endDate,
-					description: bodyParsed.description
+					slug: parsed.slug,
+					name: parsed.name,
+					location: parsed.location,
+					startDate: parsed.startDate,
+					endDate: parsed.endDate,
+					description: parsed.description
 				}
 			});
 
-			let attendeeRole = await prisma.eventRole.create({
+			const attendeeRole = await prisma.eventRole.create({
 				data: {
 					name: 'ATTENDEE',
 					slug: 'attendee',
-					eventId: String(createdEvent.id)
+					eventId: String(event.id)
 				}
 			});
 
 			await prisma.eventMember.create({
 				data: {
 					slug: String('founder-slug'),
-					eventId: createdEvent.id,
+					eventId: event.id,
 					permissionRole: 'FOUNDER',
 					userId: session.user.id,
 					eventRoleId: String(attendeeRole.id)
 				}
 			});
 
-			return res.status(200).send(createdEvent);
+			return res.status(200).send(event);
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error);

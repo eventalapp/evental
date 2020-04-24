@@ -18,9 +18,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'PUT') {
 		try {
-			let bodyParsed = EditRoleSchema.parse(req.body);
+			const parsed = EditRoleSchema.parse(req.body);
 
-			let event = await prisma.event.findFirst({
+			const event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
 				select: {
 					id: true
@@ -31,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Event not found.' } });
 			}
 
-			let role = await prisma.eventRole.findFirst({
+			const role = await prisma.eventRole.findFirst({
 				where: {
 					eventId: event.id,
 					OR: [{ id: String(rid) }, { slug: String(rid) }]
@@ -50,8 +50,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					id: role.id
 				},
 				data: {
-					slug: bodyParsed.slug,
-					name: bodyParsed.name
+					slug: parsed.slug,
+					name: parsed.name
 				}
 			});
 
