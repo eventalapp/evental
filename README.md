@@ -1,6 +1,6 @@
-# Next Template
+# Evental
 
-A [Next.js](https://nextjs.org/) template with [Next-Auth](https://next-auth.js.org/), [Prisma](https://www.prisma.io/), [Postgres](https://www.postgresql.org/), [TypeScript](https://www.typescriptlang.org/), [Tailwind](https://tailwindcss.com/), and [React Query](https://react-query.tanstack.com/)
+Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/), [Prisma](https://www.prisma.io/), [Postgres](https://www.postgresql.org/), [TypeScript](https://www.typescriptlang.org/), [Tailwind](https://tailwindcss.com/), and [React Query](https://react-query.tanstack.com/)
 
 ## Installation 💾
 
@@ -12,7 +12,7 @@ Prerequisites:
 Clone the repository:
 
 ```bash
-git clone https://github.com/JackRKelly/next-template
+git clone https://github.com/JackRKelly/evental
 ```
 
 Duplicate `.env.local.example` and rename it to `.env`
