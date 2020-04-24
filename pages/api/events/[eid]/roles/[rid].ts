@@ -44,8 +44,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		});
 
-		console.log(eid, rid, event, role, attendees);
-
 		const payload: RoleAttendeePayload = { attendees, role };
 
 		return res.status(200).send(payload);
