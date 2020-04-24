@@ -18,10 +18,12 @@ import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery
 import { ActivityList } from '../../../../components/Activities/ActivityList';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { AttendeeList } from '../../../../components/Attendees/AttendeeList';
+import { buildTitle } from '../../../../utils/buildTitle';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
+
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
@@ -38,9 +40,9 @@ const AdminPage: NextPage = () => {
 	}
 
 	return (
-		<>
+		<div>
 			<Head>
-				<title>Admin panel {eid}</title>
+				<title>{buildTitle('Edit Event')}</title>
 			</Head>
 
 			<Navigation />
@@ -142,7 +144,7 @@ const AdminPage: NextPage = () => {
 					</div>
 				</div>
 			</Column>
-		</>
+		</div>
 	);
 };
 
