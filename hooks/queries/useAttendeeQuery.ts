@@ -4,7 +4,13 @@ import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 
-export const useAttendeeQuery = (eid: string, aid: string) => {
+export interface UseAttendeeQueryData {
+	attendee: EventMemberUser | undefined;
+	isAttendeeLoading: boolean;
+	attendeeError: ServerErrorPayload | null;
+}
+
+export const useAttendeeQuery = (eid: string, aid: string): UseAttendeeQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: attendee, isLoading: isAttendeeLoading } = useQuery<
@@ -13,7 +19,9 @@ export const useAttendeeQuery = (eid: string, aid: string) => {
 	>(
 		['attendee', eid, aid],
 		async () => {
-			return axios.get(`/api/events/${eid}/attendees/${aid}`).then((res) => res.data);
+			return axios
+				.get<EventMemberUser>(`/api/events/${eid}/attendees/${aid}`)
+				.then((res) => res.data);
 		},
 		{
 			retry: 0,

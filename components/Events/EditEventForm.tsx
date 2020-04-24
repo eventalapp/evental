@@ -3,44 +3,32 @@ import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
 import { Textarea } from '../Form/Textarea';
-import { useEventQuery } from '../../hooks/queries/useEventQuery';
+import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { ServerError } from '../ServerError';
-import { useEditEventMutation } from '../../hooks/mutations/useEditEventMutation';
+import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
+import { Loading } from '../Loading';
+import { NotFound } from '../NotFound';
 
-interface Props {
+type Props = {
 	eid: string;
-}
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+	UseEventQueryData &
+	UseEditEventMutationData;
 
-type EditEventFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
-
-export const EditEventForm: React.FC<EditEventFormProps> = (props) => {
-	const { eid, ...rest } = props;
-	const { event, isEventLoading, eventError } = useEventQuery(eid);
-	const { editEventMutation, editEventError } = useEditEventMutation(eid);
+export const EditEventForm: React.FC<Props> = (props) => {
+	const { eid, editEventMutation, editEventError, event, eventError, isEventLoading, ...rest } =
+		props;
 
 	if (isEventLoading) {
-		return (
-			<div>
-				<p>Events loading...</p>
-			</div>
-		);
+		return <Loading />;
+	}
+
+	if (editEventError || eventError) {
+		return <ServerError errors={[editEventError, eventError]} />;
 	}
 
 	if (!event) {
-		return (
-			<div>
-				<p>Event not found.</p>
-			</div>
-		);
-	}
-
-	if (eventError) {
-		return <ServerError error={eventError} />;
-	}
-
-	if (editEventError) {
-		return <ServerError error={editEventError} />;
+		return <NotFound />;
 	}
 
 	return (

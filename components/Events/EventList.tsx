@@ -5,10 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-interface Props {
+type Props = {
 	loading: boolean;
 	events: Prisma.Event[] | undefined;
-}
+};
 
 export const EventList: React.FC<Props> = (props) => {
 	const { loading, events } = props;
@@ -60,7 +60,7 @@ export const EventList: React.FC<Props> = (props) => {
 												className="rounded-md"
 											/>
 										) : (
-											<div className="bg-yellow-400 rounded-md h-full"></div>
+											<div className="bg-yellow-400 rounded-md h-full" />
 										)}
 									</div>
 

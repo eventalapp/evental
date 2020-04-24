@@ -5,7 +5,6 @@ import { ViewAttendee } from '../../../../components/Attendees/ViewAttendee';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
-import { ServerError } from '../../../../components/ServerError';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 
 const ViewAttendeePage: NextPage = () => {
@@ -14,7 +13,7 @@ const ViewAttendeePage: NextPage = () => {
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(aid));
 
 	return (
-		<>
+		<div>
 			<Head>
 				<title>Viewing Attendee: {aid}</title>
 			</Head>
@@ -24,13 +23,13 @@ const ViewAttendeePage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				{attendeeError ? (
-					<ServerError error={attendeeError} />
-				) : (
-					<ViewAttendee attendee={attendee} loading={isAttendeeLoading} />
-				)}
+				<ViewAttendee
+					attendee={attendee}
+					attendeeError={attendeeError}
+					isAttendeeLoading={isAttendeeLoading}
+				/>
 			</Column>
-		</>
+		</div>
 	);
 };
 

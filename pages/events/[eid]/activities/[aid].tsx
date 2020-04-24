@@ -5,24 +5,18 @@ import { ViewActivity } from '../../../../components/Activities/ViewActivity';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
-import { ServerError } from '../../../../components/ServerError';
 import { useActivityQuery } from '../../../../hooks/queries/useActivityQuery';
+import React from 'react';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
 	const { activity, isActivityLoading, activityError } = useActivityQuery(String(eid), String(aid));
-
-	if (!activity) {
-		return (
-			<div>
-				<p>Activity not found</p>
-			</div>
-		);
-	}
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
-		<>
+		<div>
 			<Head>
 				<title>Viewing Activity: {aid}</title>
 			</Head>
@@ -32,18 +26,18 @@ const ViewActivityPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				{activityError ? (
-					<ServerError error={activityError} />
-				) : (
-					<ViewActivity
-						activity={activity}
-						loading={isActivityLoading}
-						eid={String(eid)}
-						aid={String(aid)}
-					/>
-				)}
+				<ViewActivity
+					activity={activity}
+					isActivityLoading={isActivityLoading}
+					activityError={activityError}
+					isOrganizerError={isOrganizerError}
+					isOrganizer={isOrganizer}
+					isOrganizerLoading={isOrganizerLoading}
+					eid={String(eid)}
+					aid={String(aid)}
+				/>
 			</Column>
-		</>
+		</div>
 	);
 };
 

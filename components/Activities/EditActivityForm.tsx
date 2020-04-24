@@ -9,11 +9,13 @@ import { useVenuesQuery } from '../../hooks/queries/useVenuesQuery';
 import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
 import { useEditActivityMutation } from '../../hooks/mutations/useEditActivityMutation';
 import { ServerError } from '../ServerError';
+import { NotFound } from '../NotFound';
+import { Loading } from '../Loading';
 
-interface Props {
+type Props = {
 	eid: string;
 	aid: string;
-}
+};
 
 type EditActivityFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
@@ -25,27 +27,15 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 	const { editActivityError, editActivityMutation } = useEditActivityMutation(eid, aid);
 
 	if (isActivityLoading) {
-		return <div>Activity Loading...</div>;
+		return <Loading />;
 	}
 
 	if (!activity) {
-		return (
-			<div>
-				<p>Activity not found</p>
-			</div>
-		);
+		return <NotFound />;
 	}
 
-	if (activityError) {
-		return <ServerError error={activityError} />;
-	}
-
-	if (venuesError) {
-		return <ServerError error={venuesError} />;
-	}
-
-	if (editActivityError) {
-		return <ServerError error={editActivityError} />;
+	if (activityError || venuesError || editActivityError) {
+		return <ServerError errors={[activityError, venuesError, editActivityError]} />;
 	}
 
 	return (

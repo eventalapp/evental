@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 
-interface Props {
+type Props = {
 	className?: string;
 	[x: string]: unknown;
-}
+};
 
 type LayoutProps = Props &
 	React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;

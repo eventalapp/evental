@@ -11,7 +11,6 @@ import NoAccess from '../../../../components/NoAccess';
 import Unauthorized from '../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
-import { ServerError } from '../../../../components/ServerError';
 import { VenueList } from '../../../../components/Venues/VenueList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { RoleList } from '../../../../components/Roles/RoleList';
@@ -24,10 +23,9 @@ const AdminPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
 	const { attendees, isAttendeesLoading, attendeesError } = useAttendeesQuery(String(eid));
-
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
 
@@ -74,11 +72,15 @@ const AdminPage: NextPage = () => {
 							</div>
 						</div>
 
-						{venuesError ? (
-							<ServerError error={venuesError} />
-						) : (
-							<VenueList eid={String(eid)} venues={venues} loading={isVenuesLoading} />
-						)}
+						<VenueList
+							eid={String(eid)}
+							venues={venues}
+							venuesError={venuesError}
+							isVenuesLoading={isVenuesLoading}
+							isOrganizerError={isOrganizerError}
+							isOrganizer={isOrganizer}
+							isOrganizerLoading={isOrganizerLoading}
+						/>
 					</div>
 					<div>
 						<div className="flex flex-row justify-between mb-3">
@@ -91,11 +93,15 @@ const AdminPage: NextPage = () => {
 							</div>
 						</div>
 
-						{rolesError ? (
-							<ServerError error={rolesError} />
-						) : (
-							<RoleList eid={String(eid)} roles={roles} loading={isRolesLoading} />
-						)}
+						<RoleList
+							eid={String(eid)}
+							roles={roles}
+							isRolesLoading={isRolesLoading}
+							rolesError={rolesError}
+							isOrganizerError={isOrganizerError}
+							isOrganizer={isOrganizer}
+							isOrganizerLoading={isOrganizerLoading}
+						/>
 					</div>
 				</div>
 				<div className="my-5">
@@ -110,11 +116,12 @@ const AdminPage: NextPage = () => {
 							</div>
 						</div>
 
-						{attendeesError ? (
-							<ServerError error={attendeesError} />
-						) : (
-							<AttendeeList eid={String(eid)} attendees={attendees} loading={isAttendeesLoading} />
-						)}
+						<AttendeeList
+							eid={String(eid)}
+							attendees={attendees}
+							isAttendeesLoading={isAttendeesLoading}
+							attendeesError={attendeesError}
+						/>
 					</div>
 				</div>
 				<div className="my-5">
@@ -128,15 +135,13 @@ const AdminPage: NextPage = () => {
 								</Link>
 							</div>
 						</div>
-						{activitiesError ? (
-							<ServerError error={activitiesError} />
-						) : (
-							<ActivityList
-								activities={activities}
-								eid={String(eid)}
-								loading={isActivitiesLoading}
-							/>
-						)}
+
+						<ActivityList
+							activities={activities}
+							eid={String(eid)}
+							activitiesError={activitiesError}
+							isActivitiesLoading={isActivitiesLoading}
+						/>
 					</div>
 				</div>
 			</Column>

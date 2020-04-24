@@ -4,7 +4,13 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useRolesQuery = (eid: string) => {
+export interface UseRolesQueryData {
+	roles: Prisma.EventRole[] | undefined;
+	isRolesLoading: boolean;
+	rolesError: ServerErrorPayload | null;
+}
+
+export const useRolesQuery = (eid: string): UseRolesQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: roles, isLoading: isRolesLoading } = useQuery<
@@ -13,7 +19,7 @@ export const useRolesQuery = (eid: string) => {
 	>(
 		['roles', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}/roles`).then((res) => res.data);
+			return axios.get<Prisma.EventRole[]>(`/api/events/${eid}/roles`).then((res) => res.data);
 		},
 		{
 			retry: 0,

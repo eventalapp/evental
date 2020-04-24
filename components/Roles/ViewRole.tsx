@@ -4,12 +4,12 @@ import { LinkButton } from '../Form/LinkButton';
 import React from 'react';
 import { useOrganizerQuery } from '../../hooks/queries/useOrganizerQuery';
 
-interface Props {
+type Props = {
 	eid: string;
 	rid: string;
 	loading: boolean;
 	role: Prisma.EventRole | undefined;
-}
+};
 
 export const ViewRole: React.FC<Props> = (props) => {
 	const { eid, rid, loading, role } = props;

@@ -9,12 +9,16 @@ import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { EditVenueForm } from '../../../../../../components/Venues/EditVenueForm';
+import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditVenueMutation';
+import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 
 const EditVenuePage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid, vid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { editVenueMutation, editVenueError } = useEditVenueMutation(String(eid), String(vid));
+	const { venue, venueError, isVenueLoading } = useVenueQuery(String(eid), String(vid));
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
@@ -37,7 +41,15 @@ const EditVenuePage: NextPage = () => {
 
 				<h1 className="text-3xl">Edit Venue Page</h1>
 
-				<EditVenueForm eid={String(eid)} vid={String(vid)} />
+				<EditVenueForm
+					eid={String(eid)}
+					vid={String(vid)}
+					venue={venue}
+					venueError={venueError}
+					editVenueMutation={editVenueMutation}
+					editVenueError={editVenueError}
+					isVenueLoading={isVenueLoading}
+				/>
 			</Column>
 		</>
 	);

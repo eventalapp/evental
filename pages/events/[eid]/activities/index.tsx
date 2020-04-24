@@ -7,7 +7,6 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
-import { ServerError } from '../../../../components/ServerError';
 import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { groupByDate } from '../../../../utils/groupByDate';
@@ -42,11 +41,12 @@ const ActivitiesPage: NextPage = () => {
 					)}
 				</div>
 
-				{activitiesError ? (
-					<ServerError error={activitiesError} />
-				) : (
-					<ActivityList activities={activities} eid={String(eid)} loading={isActivitiesLoading} />
-				)}
+				<ActivityList
+					activities={activities}
+					eid={String(eid)}
+					activitiesError={activitiesError}
+					isActivitiesLoading={isActivitiesLoading}
+				/>
 			</Column>
 		</>
 	);

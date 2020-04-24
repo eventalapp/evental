@@ -2,18 +2,27 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { FormEvent, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { CreateEventPayload, CreateEventSchema } from '../../utils/schemas';
 
-export const useCreateEventMutation = () => {
+export interface UseCreateEventMutationData {
+	createEventMutation: UseMutationResult<
+		AxiosResponse<Prisma.Event, unknown>,
+		AxiosError<ServerError, unknown>,
+		FormEvent<HTMLFormElement>
+	>;
+	createEventError: ServerErrorPayload | null;
+}
+
+export const useCreateEventMutation = (): UseCreateEventMutationData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 	const queryClient = useQueryClient();
 
 	const createEventMutation = useMutation<
 		AxiosResponse<Prisma.Event, unknown>,
-		AxiosError<ServerError>,
+		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>(
 		async (event: FormEvent<HTMLFormElement>) => {
@@ -32,7 +41,7 @@ export const useCreateEventMutation = () => {
 				description: eventParsed.description
 			};
 
-			return await axios.post('/api/events/create', body);
+			return await axios.post<Prisma.Event>('/api/events/create', body);
 		},
 		{
 			onSuccess: (response) => {

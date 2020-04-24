@@ -2,22 +2,22 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
-import { useCreateRoleMutation } from '../../hooks/mutations/useCreateRoleMutation';
+import { UseCreateRoleMutationData } from '../../hooks/mutations/useCreateRoleMutation';
 import { ServerError } from '../ServerError';
 
-interface Props {
+type Props = {
 	eid: string;
-}
+};
 
 type CreateRoleFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
+	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+	UseCreateRoleMutationData;
 
 export const CreateRoleForm: React.FC<CreateRoleFormProps> = (props) => {
-	const { eid, ...rest } = props;
-	const { createRoleMutation, createRoleError } = useCreateRoleMutation(eid);
+	const { eid, createRoleMutation, createRoleError, ...rest } = props;
 
 	if (createRoleError) {
-		return <ServerError error={createRoleError} />;
+		return <ServerError errors={[createRoleError]} />;
 	}
 
 	return (

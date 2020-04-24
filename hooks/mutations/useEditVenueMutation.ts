@@ -2,18 +2,27 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { FormEvent, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useEditVenueMutation = (eid: string, vid: string) => {
+export interface UseEditVenueMutationData {
+	editVenueMutation: UseMutationResult<
+		AxiosResponse<Prisma.EventVenue, unknown>,
+		AxiosError<ServerError, unknown>,
+		FormEvent<HTMLFormElement>
+	>;
+	editVenueError: ServerErrorPayload | null;
+}
+
+export const useEditVenueMutation = (eid: string, vid: string): UseEditVenueMutationData => {
 	const queryClient = useQueryClient();
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const editVenueMutation = useMutation<
 		AxiosResponse<Prisma.EventVenue, unknown>,
-		AxiosError<ServerError>,
+		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>(
 		async (event: FormEvent<HTMLFormElement>) => {
@@ -29,7 +38,10 @@ export const useEditVenueMutation = (eid: string, vid: string) => {
 				description: parsed.description
 			};
 
-			return await axios.put(`/api/events/${eid}/admin/venues/${vid}/edit`, body);
+			return await axios.put<Prisma.EventVenue>(
+				`/api/events/${eid}/admin/venues/${vid}/edit`,
+				body
+			);
 		},
 		{
 			onSuccess: (response) => {

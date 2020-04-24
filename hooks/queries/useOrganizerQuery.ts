@@ -3,7 +3,13 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useOrganizerQuery = (eid: string) => {
+export interface UseOrganizerQueryData {
+	isOrganizer: boolean | undefined;
+	isOrganizerLoading: boolean;
+	isOrganizerError: ServerErrorPayload | null;
+}
+
+export const useOrganizerQuery = (eid: string): UseOrganizerQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: isOrganizer, isLoading: isOrganizerLoading } = useQuery<
@@ -12,7 +18,9 @@ export const useOrganizerQuery = (eid: string) => {
 	>(
 		['isOrganizer', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}/organizer`).then((res) => res.data.isOrganizer);
+			return axios
+				.get<{ isOrganizer: boolean }>(`/api/events/${eid}/organizer`)
+				.then((res) => res.data.isOrganizer);
 		},
 		{
 			retry: 0,
