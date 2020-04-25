@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
 import { BackButton } from '../../../../components/BackButton';
-import Column from '../../../../components/Column';
+import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';

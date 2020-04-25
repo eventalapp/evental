@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../../components/BackButton';
-import Column from '../../../../../components/Column';
+import Column from '../../../../../components/layout/Column';
 import { CreateVenueForm } from '../../../../../components/venues/CreateVenueForm';
 import { Navigation } from '../../../../../components/navigation';
 import NoAccess from '../../../../../components/NoAccess';

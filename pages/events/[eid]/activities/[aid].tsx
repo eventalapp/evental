@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ViewActivity } from '../../../../components/activities/ViewActivity';
 import { BackButton } from '../../../../components/BackButton';
-import Column from '../../../../components/Column';
+import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import { useActivityQuery } from '../../../../hooks/queries/useActivityQuery';
 import React from 'react';

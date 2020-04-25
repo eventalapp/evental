@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { BackButton } from '../../components/BackButton';
-import Column from '../../components/Column';
+import Column from '../../components/layout/Column';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { Navigation } from '../../components/navigation';
 import Unauthorized from '../../components/Unauthorized';
