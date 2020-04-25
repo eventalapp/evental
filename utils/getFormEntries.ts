@@ -13,7 +13,6 @@ export const getFormEntries = (event: FormEvent<HTMLFormElement>) => {
 		) {
 			formEntries[value.name] = value.value;
 		}
-		console.log(value);
 	});
 
 	return formEntries;

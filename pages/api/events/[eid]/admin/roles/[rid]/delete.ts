@@ -34,7 +34,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					OR: [{ id: String(rid) }, { slug: String(rid) }]
 				},
 				select: {
-					id: true
+					id: true,
+					defaultRole: true
 				}
 			});
 
@@ -48,8 +49,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}
 			});
 
+			if (role.defaultRole) {
+				return res.status(500).send({
+					error: {
+						message:
+							'Cannot delete the default role. Please make another role the default to remove this role.'
+					}
+				});
+			}
+
 			if (roleMembers) {
-				return res.status(404).send({
+				return res.status(500).send({
 					error: {
 						message:
 							'Cannot delete role with members. First remove all members from a role to delete it.'

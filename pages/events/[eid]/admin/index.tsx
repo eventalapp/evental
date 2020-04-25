@@ -19,6 +19,9 @@ import { ActivityList } from '../../../../components/Activities/ActivityList';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { AttendeeList } from '../../../../components/Attendees/AttendeeList';
 import { buildTitle } from '../../../../utils/buildTitle';
+import { faChevronRight, faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();
@@ -53,12 +56,18 @@ const AdminPage: NextPage = () => {
 					<h1 className="text-3xl mb-3">Admin Page</h1>
 
 					<div>
-						<Link href={`/events/${eid}/admin/edit`} passHref>
-							<LinkButton className="mr-3">Edit event</LinkButton>
+						<Link href={`/events/${eid}/admin/edit/`} passHref>
+							<LinkButton className="mr-3">
+								<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faCog} />
+								<span className="ml-2">Edit</span>
+							</LinkButton>
 						</Link>
 
-						<Link href={`/events/${eid}/admin/delete`} passHref>
-							<LinkButton>Delete event</LinkButton>
+						<Link href={`/events/${eid}/admin/delete/`} passHref>
+							<LinkButton>
+								<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faTrash} />
+								<span className="ml-2">Delete</span>
+							</LinkButton>
 						</Link>
 					</div>
 				</div>
@@ -69,8 +78,15 @@ const AdminPage: NextPage = () => {
 							<span className="text-3xl">Venues</span>
 
 							<div>
+								<Link href={`/events/${eid}/admin/venues/create`} passHref>
+									<LinkButton className="mr-3">
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
+									</LinkButton>
+								</Link>
 								<Link href={`/events/${eid}/venues/`} passHref>
-									<LinkButton>View all venues</LinkButton>
+									<LinkButton>
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
+									</LinkButton>
 								</Link>
 							</div>
 						</div>
@@ -90,8 +106,15 @@ const AdminPage: NextPage = () => {
 							<h1 className="text-3xl">Roles</h1>
 
 							<div>
+								<Link href={`/events/${eid}/admin/roles/create`} passHref>
+									<LinkButton className="mr-3">
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
+									</LinkButton>
+								</Link>
 								<Link href={`/events/${eid}/roles/`} passHref>
-									<LinkButton>View all roles</LinkButton>
+									<LinkButton>
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
+									</LinkButton>
 								</Link>
 							</div>
 						</div>
@@ -114,12 +137,17 @@ const AdminPage: NextPage = () => {
 
 							<div>
 								<Link href={`/events/${eid}/attendees/`} passHref>
-									<LinkButton>View all attendees</LinkButton>
+									<LinkButton>
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
+									</LinkButton>
 								</Link>
 							</div>
 						</div>
 
 						<AttendeeList
+							isOrganizer={isOrganizer}
+							isOrganizerLoading={isOrganizerLoading}
+							isOrganizerError={isOrganizerError}
 							eid={String(eid)}
 							attendees={attendees}
 							isAttendeesLoading={isAttendeesLoading}
@@ -133,8 +161,15 @@ const AdminPage: NextPage = () => {
 							<span className="text-3xl">Activities</span>
 
 							<div>
+								<Link href={`/events/${eid}/admin/activities/create`} passHref>
+									<LinkButton className="mr-3">
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
+									</LinkButton>
+								</Link>
 								<Link href={`/events/${eid}/activities/`} passHref>
-									<LinkButton>View all activities</LinkButton>
+									<LinkButton>
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
+									</LinkButton>
 								</Link>
 							</div>
 						</div>

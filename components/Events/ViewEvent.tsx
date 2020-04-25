@@ -58,7 +58,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 				</Link>
 			)}
 			<span className="text-gray-600 text-sm block">{event?.type}</span>
-			<h1 className="text-3xl">{event?.name}</h1>
+			<h1 className="text-3xl font-bold">{event?.name}</h1>
 			<p>{event?.location}</p>
 			<p>{event?.description}</p>
 			{dayjs(event?.startDate).format('MMM DD')} - {dayjs(event?.endDate).format('MMM DD')}
