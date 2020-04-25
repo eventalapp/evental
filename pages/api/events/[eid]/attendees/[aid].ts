@@ -2,25 +2,21 @@ import type Prisma from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
 
-export type EventMemberUser = Prisma.EventMember & {
+export type EventAttendeeUser = Prisma.EventAttendee & {
 	user: {
 		name: string | null;
 		image: string | null;
-		company: string | null;
-		position: string | null;
 	};
 	role: {
 		name: string | null;
 	};
 };
 
-export const eventMemberInclude = {
+export const eventAttendeeInclude = {
 	user: {
 		select: {
 			name: true,
-			image: true,
-			company: true,
-			position: true
+			image: true
 		}
 	},
 	role: {
@@ -44,21 +40,31 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			return res.status(404).send({ error: { message: 'Event not found.' } });
 		}
 
-		const eventMember = await prisma.eventMember.findFirst({
+		const eventAttendee = await prisma.eventAttendee.findFirst({
 			where: {
 				OR: [{ id: String(aid) }, { slug: String(aid) }],
 				eventId: event.id
 			},
 			include: {
-				...eventMemberInclude
+				user: {
+					select: {
+						name: true,
+						image: true
+					}
+				},
+				role: {
+					select: {
+						name: true
+					}
+				}
 			}
 		});
 
-		if (!eventMember) {
+		if (!eventAttendee) {
 			return res.status(404).send({ error: { message: 'Attendee not found.' } });
 		}
 
-		return res.status(200).send(eventMember);
+		return res.status(200).send(eventAttendee);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

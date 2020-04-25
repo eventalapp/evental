@@ -57,7 +57,7 @@ export const ActivityList: React.FC<Props> = (props) => {
 											key={activity.id}
 											className="py-2 flex flex-row justify-between flex-grow border-l-2 border-gray-200 pl-3"
 										>
-											<div className="py-2 flex flex-row items-center justify-between">
+											<div className="flex flex-row items-center justify-between">
 												<div className="rounded-full mr-3 w-3 h-3 bg-red-300" />
 												<div>
 													<span className="text-xl">{activity.name}</span>

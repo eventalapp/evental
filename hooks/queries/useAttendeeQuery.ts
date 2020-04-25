@@ -2,10 +2,10 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
-import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
+import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 
 export interface UseAttendeeQueryData {
-	attendee: EventMemberUser | undefined;
+	attendee: EventAttendeeUser | undefined;
 	isAttendeeLoading: boolean;
 	attendeeError: ServerErrorPayload | null;
 }
@@ -14,13 +14,13 @@ export const useAttendeeQuery = (eid: string, aid: string): UseAttendeeQueryData
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: attendee, isLoading: isAttendeeLoading } = useQuery<
-		EventMemberUser,
+		EventAttendeeUser,
 		AxiosError<ServerError>
 	>(
 		['attendee', eid, aid],
 		async () => {
 			return axios
-				.get<EventMemberUser>(`/api/events/${eid}/attendees/${aid}`)
+				.get<EventAttendeeUser>(`/api/events/${eid}/attendees/${aid}`)
 				.then((res) => res.data);
 		},
 		{

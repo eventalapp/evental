@@ -1,6 +1,8 @@
 import isISODate from 'is-iso-date';
 import { z } from 'zod';
 
+// Venues
+
 export const CreateVenueSchema = z.object({
 	slug: z
 		.string()
@@ -22,6 +24,8 @@ export const EditVenueSchema = z.object({
 });
 
 export type EditVenuePayload = z.infer<typeof EditVenueSchema>;
+
+// Role
 
 export const CreateRoleSchema = z.object({
 	name: z
@@ -48,6 +52,8 @@ export const EditRoleSchema = z.object({
 });
 
 export type EditRolePayload = z.infer<typeof EditRoleSchema>;
+
+// Activity
 
 export const CreateActivitySchema = z.object({
 	slug: z
@@ -76,6 +82,8 @@ export const EditActivitySchema = z.object({
 });
 
 export type EditActivityPayload = z.infer<typeof EditActivitySchema>;
+
+// Event
 
 export const CreateEventSchema = z.object({
 	slug: z
@@ -106,3 +114,21 @@ export const EditEventSchema = z.object({
 });
 
 export type EditEventPayload = z.infer<typeof EditEventSchema>;
+
+// Event Member
+
+export const EditAttendeeSchema = z.object({
+	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	slug: z
+		.string()
+		.min(4, 'Slug must be at least 4 characters')
+		.max(40, 'Slug must be less than 40 characters'),
+	company: z.string().max(40, 'Company must be less than 40 characters'),
+	position: z
+		.string()
+
+		.max(40, 'Position must be less than 40 characters'),
+	eventRoleId: z.string().min(1, 'Role is required').max(100, 'Role is too long')
+});
+
+export type EditAttendeePayload = z.infer<typeof EditAttendeeSchema>;
