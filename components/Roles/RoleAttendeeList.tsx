@@ -49,11 +49,18 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 							<h2 className="text-2xl mb-3">
 								{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
 							</h2>
-							{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
-									<LinkButton className="mr-3">Edit role</LinkButton>
-								</Link>
-							)}
+							<div>
+								{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+									<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
+										<LinkButton className="mr-3">Edit role</LinkButton>
+									</Link>
+								)}
+								{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+									<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
+										<LinkButton className="mr-3">Delete role</LinkButton>
+									</Link>
+								)}
+							</div>
 						</div>
 
 						<p>No {role.name.toLowerCase()}s found.</p>

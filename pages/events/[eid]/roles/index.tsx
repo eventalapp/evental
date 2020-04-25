@@ -33,7 +33,7 @@ const RolesPage: NextPage = () => {
 
 					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/roles/create`} passHref>
-							<LinkButton className="mr-3">Create role</LinkButton>
+							<LinkButton>Create role</LinkButton>
 						</Link>
 					)}
 				</div>

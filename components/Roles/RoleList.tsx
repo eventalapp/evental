@@ -44,13 +44,20 @@ export const RoleList: React.FC<Props> = (props) => {
 						<span className="text-lg block">{capitalizeFirstLetter(role.name.toLowerCase())}</span>
 						<div>
 							<Link href={`/events/${eid}/roles/${role.slug}`} passHref>
-								<LinkButton variant={'secondary'} className="mr-3">
-									View
-								</LinkButton>
+								<LinkButton variant="secondary">View</LinkButton>
 							</Link>
 							{!isOrganizerLoading && isOrganizer && (
 								<Link href={`/events/${eid}/admin/roles/${role.slug}/edit`} passHref>
-									<LinkButton variant={'secondary'}>Edit</LinkButton>
+									<LinkButton variant="secondary" className="ml-3">
+										Edit
+									</LinkButton>
+								</Link>
+							)}
+							{!isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/roles/${role.slug}/delete`} passHref>
+									<LinkButton variant="secondary" className="ml-3">
+										Delete
+									</LinkButton>
 								</Link>
 							)}
 						</div>
