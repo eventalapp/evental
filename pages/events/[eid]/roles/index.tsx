@@ -7,6 +7,9 @@ import { Navigation } from '../../../../components/Navigation';
 import { RoleList } from '../../../../components/Roles/RoleList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import Link from 'next/link';
+import { LinkButton } from '../../../../components/Form/LinkButton';
+import React from 'react';
 
 const RolesPage: NextPage = () => {
 	const router = useRouter();
@@ -25,8 +28,14 @@ const RolesPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<div className="flex flex-row justify-between">
+				<div className="flex flex-row justify-between mb-3">
 					<h1 className="text-3xl">Roles Page</h1>
+
+					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+						<Link href={`/events/${eid}/admin/roles/create`} passHref>
+							<LinkButton className="mr-3">Create role</LinkButton>
+						</Link>
+					)}
 				</div>
 
 				<RoleList

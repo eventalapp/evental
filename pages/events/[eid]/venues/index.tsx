@@ -37,7 +37,7 @@ const ActivitiesPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<div className="flex flex-row justify-between">
+				<div className="flex flex-row justify-between mb-3">
 					<h1 className="text-3xl">Venues Page</h1>
 
 					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
