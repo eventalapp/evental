@@ -39,14 +39,12 @@ const DeleteRolePage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Delete Role Page</h1>
 
 				<DeleteRoleForm
-					eid={String(eid)}
-					rid={String(rid)}
 					role={role}
 					deleteRoleError={deleteRoleError}
 					roleAttendeesError={roleAttendeesError}

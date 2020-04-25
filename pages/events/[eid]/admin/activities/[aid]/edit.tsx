@@ -32,7 +32,7 @@ const EditActivityPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Edit Activity Page</h1>

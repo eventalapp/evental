@@ -14,7 +14,7 @@ const HomePage: NextPage = () => {
 
 			<Navigation />
 
-			<section className="bg-yellow-300 py-10">
+			<section className="bg-yellow-300">
 				<Column>
 					<h1 className="text-3xl">Execute Excellent Events</h1>
 					<span className="inline-block">
@@ -23,7 +23,7 @@ const HomePage: NextPage = () => {
 					</span>
 				</Column>
 			</section>
-			<Column className="py-10">
+			<Column>
 				<Link href="/events/create" passHref>
 					<LinkButton className="mr-3">Create Event</LinkButton>
 				</Link>

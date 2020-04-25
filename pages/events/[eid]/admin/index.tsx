@@ -47,10 +47,10 @@ const AdminPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
-				<div className="flex flex-row justify-between">
-					<h1 className="text-3xl">Admin Page</h1>
+				<div className="flex flex-row justify-between flex-wrap">
+					<h1 className="text-3xl mb-3">Admin Page</h1>
 
 					<div>
 						<Link href={`/events/${eid}/admin/edit`} passHref>

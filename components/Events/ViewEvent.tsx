@@ -62,18 +62,18 @@ export const ViewEvent: React.FC<Props> = (props) => {
 			<p>{event?.location}</p>
 			<p>{event?.description}</p>
 			{dayjs(event?.startDate).format('MMM DD')} - {dayjs(event?.endDate).format('MMM DD')}
-			<div className="mt-3">
+			<div>
 				{roles &&
 					roles.map((role) => (
 						<Link href={`/events/${eid}/roles/${role.slug}`} passHref key={role.id}>
-							<LinkButton className="mr-3">
+							<LinkButton className="mr-3 mt-3">
 								{capitalizeFirstLetter(role.name.toLowerCase())}s
 							</LinkButton>
 						</Link>
 					))}
 
 				<Link href={`/events/${eid}/venues`} passHref>
-					<LinkButton>Venues</LinkButton>
+					<LinkButton className="mt-3">Venues</LinkButton>
 				</Link>
 			</div>
 			<ActivityList

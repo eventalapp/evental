@@ -41,14 +41,13 @@ const EditAttendeePage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Edit Attendee Page</h1>
 
 				<EditAttendeeForm
 					eid={String(eid)}
-					aid={String(aid)}
 					attendee={attendee}
 					isAttendeeLoading={isAttendeeLoading}
 					attendeeError={attendeeError}

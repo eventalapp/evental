@@ -34,7 +34,7 @@ const CreateRolePage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Create Role Page</h1>

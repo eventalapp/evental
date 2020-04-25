@@ -40,8 +40,8 @@ export const ViewVenue: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<div>
-				<div className="flex flex-row justify-between">
-					<h1 className="text-3xl">{venue.name}</h1>
+				<div className="flex flex-row justify-between flex-wrap">
+					<h1 className="text-3xl mb-3">{venue.name}</h1>
 
 					<div>
 						{!isOrganizerLoading && isOrganizer && (

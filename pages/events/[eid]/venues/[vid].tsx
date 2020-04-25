@@ -22,7 +22,7 @@ const ViewAttendeePage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<ViewVenue

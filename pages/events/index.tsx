@@ -18,7 +18,7 @@ const EventsPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<div className="flex flex-row justify-between w-full mb-3">
 					<h1 className="text-3xl font-bold">Event Page</h1>
 

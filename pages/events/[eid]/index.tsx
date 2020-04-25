@@ -25,7 +25,7 @@ const ViewEventPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<ViewEvent
 					eid={String(eid)}
 					event={event}

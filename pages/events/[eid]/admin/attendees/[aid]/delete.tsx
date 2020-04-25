@@ -40,14 +40,12 @@ const DeleteAttendeePage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Delete Attendee Page</h1>
 
 				<DeleteAttendeeForm
-					eid={String(eid)}
-					aid={String(aid)}
 					attendee={attendee}
 					attendeeError={attendeeError}
 					isAttendeeLoading={isAttendeeLoading}

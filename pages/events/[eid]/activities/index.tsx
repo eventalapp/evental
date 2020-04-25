@@ -29,7 +29,7 @@ const ActivitiesPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<div className="flex flex-row justify-between">
