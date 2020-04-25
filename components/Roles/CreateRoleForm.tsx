@@ -25,11 +25,11 @@ export const CreateRoleForm: React.FC<CreateRoleFormProps> = (props) => {
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="name">Role</Label>
+						<Label htmlFor="name">Role Name</Label>
 						<Input defaultValue="Role Name" id="name" name="name" type="text" required />
 					</div>
 					<div>
-						<Label htmlFor="slug">Slug</Label>
+						<Label htmlFor="slug">Role Slug</Label>
 						<Input defaultValue="role-slug" id="slug" name="slug" type="text" required />
 					</div>
 				</div>

@@ -52,7 +52,7 @@ export const DeleteRoleForm: React.FC<DeleteRoleFormProps> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<p className="font-bold mb-3">Please retype the role name below ({role.name}).</p>
-						<Label htmlFor="name">Role</Label>
+						<Label htmlFor="name">Role Name</Label>
 						<Input
 							id="name"
 							name="name"

@@ -49,6 +49,7 @@ export const useEditVenueMutation = (eid: string, vid: string): UseEditVenueMuta
 
 				router.push(`/events/${eid}/venues/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['venue', eid, vid]);
+					void queryClient.invalidateQueries(['venues', eid]);
 				});
 			},
 			onError: (err) => {
