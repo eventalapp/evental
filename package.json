@@ -5,7 +5,7 @@
 		"prepare": "prisma generate",
 		"docker": "docker-compose up -d",
 		"quickstart": "yarn && yarn docker && yarn migrate:dev && yarn dev",
-		"build": "next build",
+		"build": "prisma generate && prisma migrate deploy && next build",
 		"start": "next start",
 		"dev": "next dev -p 5555",
 		"lint": "tsc && next lint --fix",
