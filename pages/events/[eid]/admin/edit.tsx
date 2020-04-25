@@ -10,7 +10,7 @@ import Unauthorized from '../../../../components/Unauthorized';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
 
-const CreateEventPage: NextPage = () => {
+const EditEventPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid } = router.query;
@@ -24,7 +24,7 @@ const CreateEventPage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Create event</title>
+				<title>Edit event</title>
 			</Head>
 
 			<Navigation />
@@ -47,4 +47,4 @@ const CreateEventPage: NextPage = () => {
 	);
 };
 
-export default CreateEventPage;
+export default EditEventPage;
