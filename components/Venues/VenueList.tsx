@@ -38,13 +38,13 @@ export const VenueList: React.FC<Props> = (props) => {
 	return (
 		<div>
 			{venues.map((venue) => (
-				<div key={venue.id} className="py-2 border-t-2 border-gray-200">
-					<div className="flex flex-row justify-between items-center">
-						<div>
+				<div key={venue.id} className="border-t-2 border-gray-200">
+					<div className="flex flex-row justify-between items-center flex-wrap pt-3">
+						<div className="pb-3">
 							<span className="text-lg block">{venue.name}</span>
 							<span className="text-md block">{venue.description}</span>
 						</div>
-						<div>
+						<div className="pb-3">
 							<Link href={`/events/${eid}/venues/${venue.slug}`} passHref>
 								<LinkButton variant={'secondary'}>View</LinkButton>
 							</Link>
