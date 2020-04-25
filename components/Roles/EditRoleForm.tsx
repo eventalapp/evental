@@ -25,7 +25,6 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 		role,
 		roleAttendeesError,
 		isRoleAttendeesLoading,
-
 		...rest
 	} = props;
 
@@ -37,13 +36,14 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 		return <NotFound />;
 	}
 
-	if (roleAttendeesError || editRoleError) {
-		return <ServerError errors={[roleAttendeesError, editRoleError]} />;
+	if (roleAttendeesError) {
+		return <ServerError errors={[roleAttendeesError]} />;
 	}
 
 	return (
 		<form onSubmit={editRoleMutation.mutate} {...rest}>
 			<div className="flex flex-col w-full mt-5">
+				{editRoleError && <ServerError errors={[editRoleError]} />}
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Role Name</Label>
@@ -54,9 +54,18 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 						<Input defaultValue={role.slug} id="slug" name="slug" type="text" required />
 					</div>
 				</div>
+				<div>
+					<Label htmlFor="defaultRole">Default Role</Label>
+					<Input
+						type="checkbox"
+						defaultChecked={role.defaultRole}
+						id="defaultRole"
+						name="defaultRole"
+					/>
+				</div>
 			</div>
 
-			<Button type="submit">Create Role</Button>
+			<Button type="submit">Edit Role</Button>
 		</form>
 	);
 };

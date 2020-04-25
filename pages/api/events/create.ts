@@ -29,7 +29,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				data: {
 					name: 'ATTENDEE',
 					slug: 'attendee',
-					eventId: String(event.id)
+					eventId: String(event.id),
+					defaultRole: true
 				}
 			});
 

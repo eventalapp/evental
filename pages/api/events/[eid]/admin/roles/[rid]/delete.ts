@@ -42,6 +42,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Role not found.' } });
 			}
 
+			const roleMembers = await prisma.eventAttendee.findFirst({
+				where: {
+					eventRoleId: role.id
+				}
+			});
+
+			if (roleMembers) {
+				return res.status(404).send({
+					error: {
+						message:
+							'Cannot delete role with members. First remove all members from a role to delete it.'
+					}
+				});
+			}
+
 			await prisma.eventRole.delete({
 				where: {
 					id: role.id

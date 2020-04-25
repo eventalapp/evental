@@ -48,7 +48,8 @@ export const EditRoleSchema = z.object({
 	slug: z
 		.string()
 		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters')
+		.max(40, 'Slug must be less than 40 characters'),
+	defaultRole: z.boolean()
 });
 
 export type EditRolePayload = z.infer<typeof EditRoleSchema>;

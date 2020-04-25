@@ -122,6 +122,7 @@ model EventRole {
   eventId String
   slug    String
   name    String
+  defaultRole Boolean @default(false)
 
   EventAttendee EventAttendee[]
 
