@@ -34,7 +34,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				where: { id: event.id }
 			});
 
-			return res.status(200);
+			return res.status(200).send({ message: 'Event deleted.' });
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error);

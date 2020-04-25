@@ -48,7 +48,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}
 			});
 
-			return res.status(200);
+			return res.status(200).send({ success: { message: 'Activity deleted.' } });
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error);
