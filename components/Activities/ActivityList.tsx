@@ -6,20 +6,31 @@ import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
 import { Loading } from '../Loading';
 import { ServerError } from '../ServerError';
 import { NotFound } from '../NotFound';
+import { LinkButton } from '../Form/LinkButton';
+import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 
 type Props = {
 	eid: string;
-} & UseActivitiesQueryData;
+} & UseActivitiesQueryData &
+	UseOrganizerQueryData;
 
 export const ActivityList: React.FC<Props> = (props) => {
-	const { eid, isActivitiesLoading, activitiesError, activities } = props;
+	const {
+		eid,
+		isActivitiesLoading,
+		activitiesError,
+		activities,
+		isOrganizerError,
+		isOrganizerLoading,
+		isOrganizer
+	} = props;
 
-	if (isActivitiesLoading) {
+	if (isActivitiesLoading || isOrganizerLoading) {
 		return <Loading />;
 	}
 
-	if (activitiesError) {
-		return <ServerError errors={[activitiesError]} />;
+	if (activitiesError || isOrganizerError) {
+		return <ServerError errors={[activitiesError, isOrganizerError]} />;
 	}
 
 	if (!activities || activities?.length === 0) {
@@ -40,21 +51,47 @@ export const ActivityList: React.FC<Props> = (props) => {
 									<h2 className="font-bold text-1xl w-24 py-2 border-b-2 text-center">
 										{dayjs(key).format('h:mma')}
 									</h2>
-									<div className="border-l-2 border-gray-200 inline-block pl-3">
-										{activitiesByDate.map((activity) => (
-											<div key={activity.id}>
-												<Link href={`/events/${eid}/activities/${activity.slug}`}>
-													<a className="py-2 flex flex-row items-center">
-														<div className="rounded-full mr-3 w-3 h-3 bg-red-300" />
-														<div>
-															<span className="text-xl">{activity.name}</span>
-															<span className="block text-md">{activity.description}</span>
-														</div>
-													</a>
-												</Link>
+
+									{activitiesByDate.map((activity) => (
+										<div
+											key={activity.id}
+											className="py-2 flex flex-row justify-between flex-grow border-l-2 border-gray-200 pl-3"
+										>
+											<div className="py-2 flex flex-row items-center justify-between">
+												<div className="rounded-full mr-3 w-3 h-3 bg-red-300" />
+												<div>
+													<span className="text-xl">{activity.name}</span>
+													<span className="block text-md">{activity.description}</span>
+												</div>
 											</div>
-										))}
-									</div>
+
+											<div className="flex flex-row items-center">
+												<Link href={`/events/${eid}/activities/${activity.slug}`} passHref>
+													<LinkButton variant="secondary">View</LinkButton>
+												</Link>
+												{!isOrganizerLoading && isOrganizer && (
+													<Link
+														href={`/events/${eid}/admin/activities/${activity.slug}/edit`}
+														passHref
+													>
+														<LinkButton variant="secondary" className="ml-3">
+															Edit
+														</LinkButton>
+													</Link>
+												)}
+												{!isOrganizerLoading && isOrganizer && (
+													<Link
+														href={`/events/${eid}/admin/activities/${activity.slug}/delete`}
+														passHref
+													>
+														<LinkButton variant="secondary" className="ml-3">
+															Delete
+														</LinkButton>
+													</Link>
+												)}
+											</div>
+										</div>
+									))}
 								</div>
 							);
 						})}

@@ -136,6 +136,9 @@ const AdminPage: NextPage = () => {
 						</div>
 
 						<ActivityList
+							isOrganizer={isOrganizer}
+							isOrganizerLoading={isOrganizerLoading}
+							isOrganizerError={isOrganizerError}
 							activities={activities}
 							eid={String(eid)}
 							activitiesError={activitiesError}

@@ -26,7 +26,7 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 	const { activity, isActivityLoading, activityError } = useActivityQuery(eid, aid);
 	const { editActivityError, editActivityMutation } = useEditActivityMutation(eid, aid);
 
-	if (isActivityLoading) {
+	if (isActivityLoading || isVenuesLoading) {
 		return <Loading />;
 	}
 
@@ -48,32 +48,29 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 								<Label htmlFor="name">Name</Label>
 								<Input defaultValue={activity.name} id="name" name="name" type="text" required />
 							</div>
-							{isVenuesLoading ? (
-								<div>Venues Loading...</div>
-							) : (
-								<div>
-									{venues && venues.length <= 0 ? (
+
+							<div>
+								{venues && venues.length <= 0 ? (
+									<Link href={`/events/${eid}/admin/venues/create`}>
+										<a className="text-red-600">No Venues exist, please create a Venue</a>
+									</Link>
+								) : (
+									<>
+										<Label htmlFor="venueId">Venue</Label>
+										<Select name="venueId" defaultValue={activity.venueId} id="venueId" required>
+											{venues &&
+												venues.map((venue) => (
+													<option key={venue.id} value={venue.id}>
+														{venue.name}
+													</option>
+												))}
+										</Select>
 										<Link href={`/events/${eid}/admin/venues/create`}>
-											<a className="text-red-600">No Venues exist, please create a Venue</a>
+											<a className="text-blue-600">Dont see your venue? Create a Venue</a>
 										</Link>
-									) : (
-										<>
-											<Label htmlFor="venueId">Venue</Label>
-											<Select name="venueId" defaultValue={activity.venueId} id="venueId" required>
-												{venues &&
-													venues.map((venue) => (
-														<option key={venue.id} value={venue.id}>
-															{venue.name}
-														</option>
-													))}
-											</Select>
-											<Link href={`/events/${eid}/admin/venues/create`}>
-												<a className="text-blue-600">Dont see your venue? Create a Venue</a>
-											</Link>
-										</>
-									)}
-								</div>
-							)}
+									</>
+								)}
+							</div>
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>
