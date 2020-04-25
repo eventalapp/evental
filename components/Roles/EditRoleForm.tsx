@@ -9,24 +9,13 @@ import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 
-type Props = {
-	eid: string;
-	rid: string;
-} & UseRoleAttendeesQueryData &
+type Props = UseRoleAttendeesQueryData &
 	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
 	UseEditRoleMutationData;
 
 export const EditRoleForm: React.FC<Props> = (props) => {
-	const {
-		eid,
-		rid,
-		editRoleMutation,
-		editRoleError,
-		role,
-		roleAttendeesError,
-		isRoleAttendeesLoading,
-		...rest
-	} = props;
+	const { editRoleMutation, editRoleError, role, roleAttendeesError, isRoleAttendeesLoading } =
+		props;
 
 	if (isRoleAttendeesLoading) {
 		return <Loading />;
@@ -41,7 +30,7 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 	}
 
 	return (
-		<form onSubmit={editRoleMutation.mutate} {...rest}>
+		<form onSubmit={editRoleMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
 				{editRoleError && <ServerError errors={[editRoleError]} />}
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">

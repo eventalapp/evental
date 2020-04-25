@@ -8,15 +8,12 @@ import { UseDeleteEventMutationData } from '../../hooks/mutations/useDeleteEvent
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 
-type Props = {
-	eid: string;
-} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
 	UseDeleteEventMutationData;
 
 export const DeleteEventForm: React.FC<Props> = (props) => {
-	const { eid, deleteEventMutation, deleteEventError, event, eventError, isEventLoading, ...rest } =
-		props;
+	const { deleteEventMutation, deleteEventError, event, eventError, isEventLoading } = props;
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (isEventLoading) {
@@ -32,7 +29,7 @@ export const DeleteEventForm: React.FC<Props> = (props) => {
 	}
 
 	return (
-		<form onSubmit={deleteEventMutation.mutate} {...rest}>
+		<form onSubmit={deleteEventMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
 				<h1 className="text-2xl mb-3">Are you sure you would like to delete: {event.name}?</h1>
 

@@ -8,24 +8,12 @@ import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutatation';
 
-type Props = { eid: string; vid: string } & DetailedHTMLProps<
-	FormHTMLAttributes<HTMLFormElement>,
-	HTMLFormElement
-> &
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenueQueryData &
 	UseDeleteVenueMutationData;
 
 export const DeleteVenueForm: React.FC<Props> = (props) => {
-	const {
-		eid,
-		vid,
-		venue,
-		venueError,
-		isVenueLoading,
-		deleteVenueError,
-		deleteVenueMutation,
-		...rest
-	} = props;
+	const { venue, venueError, isVenueLoading, deleteVenueError, deleteVenueMutation } = props;
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (isVenueLoading) {
@@ -40,7 +28,7 @@ export const DeleteVenueForm: React.FC<Props> = (props) => {
 		return <NotFound />;
 	}
 	return (
-		<form onSubmit={deleteVenueMutation.mutate} {...rest}>
+		<form onSubmit={deleteVenueMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
 				<h1 className="text-2xl mb-3">
 					Are you sure you would like to delete venue: {venue.name}?

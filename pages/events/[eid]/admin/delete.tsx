@@ -35,7 +35,6 @@ const DeleteEventPage: NextPage = () => {
 				<h1 className="text-3xl">Delete Event</h1>
 
 				<DeleteEventForm
-					eid={String(eid)}
 					deleteEventError={deleteEventError}
 					eventError={eventError}
 					deleteEventMutation={deleteEventMutation}

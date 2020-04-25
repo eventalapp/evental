@@ -9,24 +9,12 @@ import { Textarea } from '../Form/Textarea';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 
-type Props = { eid: string; vid: string } & DetailedHTMLProps<
-	FormHTMLAttributes<HTMLFormElement>,
-	HTMLFormElement
-> &
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenueQueryData &
 	UseEditVenueMutationData;
 
 export const EditVenueForm: React.FC<Props> = (props) => {
-	const {
-		eid,
-		vid,
-		venue,
-		venueError,
-		isVenueLoading,
-		editVenueError,
-		editVenueMutation,
-		...rest
-	} = props;
+	const { venue, venueError, isVenueLoading, editVenueError, editVenueMutation } = props;
 
 	if (isVenueLoading) {
 		return <Loading />;
@@ -40,7 +28,7 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 		return <NotFound />;
 	}
 	return (
-		<form onSubmit={editVenueMutation.mutate} {...rest}>
+		<form onSubmit={editVenueMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>

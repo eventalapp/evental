@@ -46,9 +46,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 
 			if (parsed.defaultRole) {
-				//Make previous default roll non-default
-
-				const previousDefaultRole = await prisma.eventRole.findFirst({
+				//Find all roles that already have defaultRole set to true
+				const existingDefaultRoles = await prisma.eventRole.findMany({
 					where: {
 						eventId: event.id,
 						defaultRole: true
@@ -58,43 +57,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 					}
 				});
 
-				if (!previousDefaultRole) {
-					let editedRole = prisma.eventRole.update({
-						where: {
-							id: role.id
-						},
-						data: {
-							slug: parsed.slug,
-							name: parsed.name,
-							defaultRole: parsed.defaultRole
-						}
-					});
-
-					return res.status(200).send(editedRole);
+				if (existingDefaultRoles) {
+					//Set all existing default roles to false
+					await prisma.$transaction(
+						existingDefaultRoles.map((existingDefaultRole) =>
+							prisma.eventRole.update({
+								where: {
+									id: existingDefaultRole.id
+								},
+								data: {
+									defaultRole: false
+								}
+							})
+						)
+					);
 				}
-
-				await prisma.eventRole.update({
-					where: {
-						id: previousDefaultRole.id
-					},
-					data: {
-						defaultRole: false
-					}
-				});
-
-				//Make new default roll default
-				let editedRole = await prisma.eventRole.update({
-					where: {
-						id: role.id
-					},
-					data: {
-						slug: parsed.slug,
-						name: parsed.name,
-						defaultRole: parsed.defaultRole
-					}
-				});
-
-				return res.status(200).send(editedRole);
 			} else if (!parsed.defaultRole) {
 				return res.status(500).send({
 					error: {

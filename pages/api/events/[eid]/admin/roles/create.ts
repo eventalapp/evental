@@ -18,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'POST') {
 		try {
-			let bodyParsed = CreateRoleSchema.parse(req.body);
+			let parsed = CreateRoleSchema.parse(req.body);
 
 			const event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -31,12 +31,41 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Event not found.' } });
 			}
 
+			if (parsed.defaultRole) {
+				//Find all roles that already have defaultRole set to true
+				const existingDefaultRoles = await prisma.eventRole.findMany({
+					where: {
+						eventId: event.id,
+						defaultRole: true
+					},
+					select: {
+						id: true
+					}
+				});
+
+				if (existingDefaultRoles) {
+					//Set all existing default roles to false
+					await prisma.$transaction(
+						existingDefaultRoles.map((existingDefaultRole) =>
+							prisma.eventRole.update({
+								where: {
+									id: existingDefaultRole.id
+								},
+								data: {
+									defaultRole: false
+								}
+							})
+						)
+					);
+				}
+			}
+
 			const createdRole = await prisma.eventRole.create({
 				data: {
 					eventId: event.id,
-					name: bodyParsed.name,
-					slug: bodyParsed.slug,
-					defaultRole: false
+					name: parsed.name,
+					slug: parsed.slug,
+					defaultRole: parsed.defaultRole
 				}
 			});
 

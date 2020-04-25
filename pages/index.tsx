@@ -30,9 +30,6 @@ const HomePage: NextPage = () => {
 				<Link href="/events" passHref>
 					<LinkButton className="mr-3">View Events</LinkButton>
 				</Link>
-				<Link href="/auth/signin" passHref>
-					<LinkButton>Sign in</LinkButton>
-				</Link>
 			</Column>
 		</>
 	);

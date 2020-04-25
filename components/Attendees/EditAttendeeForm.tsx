@@ -13,19 +13,14 @@ import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 
 type Props = {
 	eid: string;
-	aid: string;
-};
-
-type EditAttendeeFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseAttendeeQueryData &
 	UseEditAttendeeMutationData &
 	UseRolesQueryData;
 
-export const EditAttendeeForm: React.FC<EditAttendeeFormProps> = (props) => {
+export const EditAttendeeForm: React.FC<Props> = (props) => {
 	const {
 		eid,
-		aid,
 		attendee,
 		isAttendeeLoading,
 		attendeeError,
@@ -33,8 +28,7 @@ export const EditAttendeeForm: React.FC<EditAttendeeFormProps> = (props) => {
 		editAttendeeMutation,
 		rolesError,
 		roles,
-		isRolesLoading,
-		...rest
+		isRolesLoading
 	} = props;
 
 	if (isAttendeeLoading || isRolesLoading) {
@@ -52,7 +46,7 @@ export const EditAttendeeForm: React.FC<EditAttendeeFormProps> = (props) => {
 	return (
 		<div>
 			{attendee && (
-				<form onSubmit={editAttendeeMutation.mutate} {...rest}>
+				<form onSubmit={editAttendeeMutation.mutate}>
 					<div className="flex flex-col w-full mt-5">
 						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>
