@@ -8,6 +8,7 @@ import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import Link from 'next/link';
 import { LinkButton } from '../Form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
+import { FlexRowBetween } from '../FlexRowBetween';
 
 type Props = { eid: string; aid: string } & UseAttendeeQueryData & UseOrganizerQueryData;
 
@@ -47,7 +48,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 					/>
 				</div>
 
-				<div className="flex flex-row justify-between flex-wrap">
+				<FlexRowBetween>
 					<h1 className="text-3xl mb-3">{attendee.name}</h1>
 
 					<div>
@@ -62,7 +63,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 							</Link>
 						)}
 					</div>
-				</div>
+				</FlexRowBetween>
 
 				<p>{capitalizeFirstLetter(String(attendee.permissionRole).toLowerCase())}</p>
 				<p>{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}</p>

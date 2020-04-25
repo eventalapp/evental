@@ -8,6 +8,7 @@ import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQ
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { ServerError } from '../ServerError';
+import { FlexRowBetween } from '../FlexRowBetween';
 
 type Props = {
 	eid: string;
@@ -45,7 +46,7 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 			<div>
 				{role && (
 					<>
-						<div className="flex flex-row justify-between flex-wrap items-center mb-3">
+						<FlexRowBetween>
 							<h2 className="text-2xl mb-3">
 								{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
 							</h2>
@@ -63,7 +64,7 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 									)}
 								</div>
 							</div>
-						</div>
+						</FlexRowBetween>
 
 						<p>No {role.name.toLowerCase()}s found.</p>
 					</>
@@ -75,8 +76,8 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 	return (
 		<div>
 			{attendees && role && (
-				<div>
-					<div className="flex flex-row justify-between flex-wrap items-center mb-3">
+				<>
+					<FlexRowBetween>
 						<h2 className="text-2xl my-3">
 							{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
 						</h2>
@@ -92,15 +93,18 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 								</Link>
 							)}
 						</div>
-					</div>
+					</FlexRowBetween>
 
 					<AttendeeList
+						isOrganizerError={isOrganizerError}
+						isOrganizerLoading={isOrganizerLoading}
+						isOrganizer={isOrganizer}
 						attendees={attendees}
 						attendeesError={roleAttendeesError}
 						isAttendeesLoading={isRoleAttendeesLoading}
 						eid={eid}
 					/>
-				</div>
+				</>
 			)}
 		</div>
 	);

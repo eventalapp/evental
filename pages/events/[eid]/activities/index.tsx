@@ -10,6 +10,7 @@ import { Navigation } from '../../../../components/Navigation';
 import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { groupByDate } from '../../../../utils/groupByDate';
+import { FlexRowBetween } from '../../../../components/FlexRowBetween';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
@@ -32,14 +33,15 @@ const ActivitiesPage: NextPage = () => {
 			<Column>
 				<BackButton />
 
-				<div className="flex flex-row justify-between">
+				<FlexRowBetween>
 					<h1 className="text-3xl">Activities Page</h1>
+
 					{!isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/activities/create`} passHref>
 							<LinkButton>Create Activity</LinkButton>
 						</Link>
 					)}
-				</div>
+				</FlexRowBetween>
 
 				<ActivityList
 					isOrganizer={isOrganizer}

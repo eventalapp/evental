@@ -6,6 +6,7 @@ import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { ServerError } from '../ServerError';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
+import { FlexRowBetween } from '../FlexRowBetween';
 
 type Props = {
 	eid: string;
@@ -40,7 +41,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<div>
-				<div className="flex flex-row justify-between flex-wrap">
+				<FlexRowBetween>
 					<h1 className="text-3xl mb-3">{venue.name}</h1>
 
 					<div>
@@ -55,7 +56,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 							</Link>
 						)}
 					</div>
-				</div>
+				</FlexRowBetween>
 
 				<p>{venue.description}</p>
 			</div>
