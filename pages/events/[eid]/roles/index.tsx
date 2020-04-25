@@ -3,14 +3,14 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
-import { Navigation } from '../../../../components/Navigation';
-import { RoleList } from '../../../../components/Roles/RoleList';
+import { Navigation } from '../../../../components/navigation';
+import { RoleList } from '../../../../components/roles/RoleList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import Link from 'next/link';
-import { LinkButton } from '../../../../components/Form/LinkButton';
+import { LinkButton } from '../../../../components/form/LinkButton';
 import React from 'react';
-import { FlexRowBetween } from '../../../../components/FlexRowBetween';
+import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 
 const RolesPage: NextPage = () => {
 	const router = useRouter();

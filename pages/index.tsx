@@ -2,8 +2,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Column from '../components/Column';
-import { LinkButton } from '../components/Form/LinkButton';
-import { Navigation } from '../components/Navigation';
+import { LinkButton } from '../components/form/LinkButton';
+import { Navigation } from '../components/navigation';
 
 const HomePage: NextPage = () => {
 	return (

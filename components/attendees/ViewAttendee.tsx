@@ -6,9 +6,9 @@ import { ServerError } from '../ServerError';
 import { NotFound } from '../NotFound';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import Link from 'next/link';
-import { LinkButton } from '../Form/LinkButton';
+import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
-import { FlexRowBetween } from '../FlexRowBetween';
+import { FlexRowBetween } from '../layout/FlexRowBetween';
 
 type Props = { eid: string; aid: string } & UseAttendeeQueryData & UseOrganizerQueryData;
 

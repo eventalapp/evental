@@ -3,8 +3,8 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { BackButton } from '../../components/BackButton';
 import Column from '../../components/Column';
-import { CreateEventForm } from '../../components/Events/CreateEventForm';
-import { Navigation } from '../../components/Navigation';
+import { CreateEventForm } from '../../components/events/CreateEventForm';
+import { Navigation } from '../../components/navigation';
 import Unauthorized from '../../components/Unauthorized';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 

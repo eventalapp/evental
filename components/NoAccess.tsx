@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import { BackButton } from './BackButton';
 import Column from './Column';
-import { Navigation } from './Navigation';
+import { Navigation } from './navigation';
 
 const NoAccess: React.FC = () => {
 	return (

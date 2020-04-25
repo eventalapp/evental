@@ -3,7 +3,7 @@ import { BuiltInProviderType } from 'next-auth/providers';
 import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
 import React from 'react';
 import Column from '../../components/Column';
-import { Navigation } from '../../components/Navigation';
+import { Navigation } from '../../components/navigation';
 
 const Providers: React.FC<SignInPageProps> = (props) => {
 	const { providers } = props;

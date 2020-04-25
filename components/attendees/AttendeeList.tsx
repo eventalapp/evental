@@ -7,7 +7,7 @@ import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 import { ServerError } from '../ServerError';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
-import { LinkButton } from '../Form/LinkButton';
+import { LinkButton } from '../form/LinkButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 

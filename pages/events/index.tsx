@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Column from '../../components/Column';
-import { EventList } from '../../components/Events/EventList';
-import { LinkButton } from '../../components/Form/LinkButton';
-import { Navigation } from '../../components/Navigation';
+import { EventList } from '../../components/events/EventList';
+import { LinkButton } from '../../components/form/LinkButton';
+import { Navigation } from '../../components/navigation';
 import { useEventsQuery } from '../../hooks/queries/useEventsQuery';
-import { FlexRowBetween } from '../../components/FlexRowBetween';
+import { FlexRowBetween } from '../../components/layout/FlexRowBetween';
 
 const EventsPage: NextPage = () => {
 	const { events, isEventsLoading } = useEventsQuery();

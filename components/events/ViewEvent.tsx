@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { LinkButton } from '../Form/LinkButton';
+import { LinkButton } from '../form/LinkButton';
 import React from 'react';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import dayjs from 'dayjs';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { ActivityList } from '../Activities/ActivityList';
+import { ActivityList } from '../activities/ActivityList';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';

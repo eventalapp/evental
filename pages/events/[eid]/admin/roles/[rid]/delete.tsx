@@ -4,11 +4,11 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../../../components/BackButton';
 import Column from '../../../../../../components/Column';
-import { Navigation } from '../../../../../../components/Navigation';
+import { Navigation } from '../../../../../../components/navigation';
 import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { DeleteRoleForm } from '../../../../../../components/Roles/DeleteRoleForm';
+import { DeleteRoleForm } from '../../../../../../components/roles/DeleteRoleForm';
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useDeleteRoleMutation } from '../../../../../../hooks/mutations/useDeleteRoleMutation';
 

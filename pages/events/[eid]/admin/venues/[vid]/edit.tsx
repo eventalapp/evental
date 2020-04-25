@@ -4,11 +4,11 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../../../components/BackButton';
 import Column from '../../../../../../components/Column';
-import { Navigation } from '../../../../../../components/Navigation';
+import { Navigation } from '../../../../../../components/navigation';
 import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { EditVenueForm } from '../../../../../../components/Venues/EditVenueForm';
+import { EditVenueForm } from '../../../../../../components/venues/EditVenueForm';
 import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditVenueMutation';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 

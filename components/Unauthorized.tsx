@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import Column from './Column';
-import { Navigation } from './Navigation';
+import { Navigation } from './navigation';
 
 const Unauthorized: React.FC = () => {
 	return (

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { LinkButton } from '../Form/LinkButton';
+import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { Loading } from '../Loading';

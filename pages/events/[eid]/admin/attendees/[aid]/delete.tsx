@@ -5,11 +5,11 @@ import { useRouter } from 'next/router';
 import { BackButton } from '../../../../../../components/BackButton';
 import Column from '../../../../../../components/Column';
 
-import { Navigation } from '../../../../../../components/Navigation';
+import { Navigation } from '../../../../../../components/navigation';
 import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { DeleteAttendeeForm } from '../../../../../../components/Attendees/DeleteAttendeeForm';
+import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutatation';
 
