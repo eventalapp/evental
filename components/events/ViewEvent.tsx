@@ -52,7 +52,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		<div>
 			{isOrganizer && (
 				<Link href={`/events/${eid}/admin`}>
-					<a className="block bg-yellow-400 px-5 py-3 rounded-md mb-4">
+					<a className="block text-white bg-primary px-5 py-3 rounded-md mb-4">
 						You are an organizer for this event, click here to manage this event
 					</a>
 				</Link>
