@@ -36,7 +36,7 @@ const ActivitiesPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}`}>Event</BackButton>
 
 				<FlexRowBetween>
 					<h1 className="text-3xl">Venues Page</h1>

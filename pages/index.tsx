@@ -25,7 +25,9 @@ const HomePage: NextPage = () => {
 
 				<div>
 					<Link href="/events/create" passHref>
-						<LinkButton variant="gradient">Host An Event</LinkButton>
+						<LinkButton variant="gradient" padding="large">
+							Host An Event
+						</LinkButton>
 					</Link>
 				</div>
 			</Column>

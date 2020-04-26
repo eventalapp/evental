@@ -52,7 +52,8 @@ const AdminPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}`}>Event</BackButton>
+
 				<FlexRowBetween>
 					<h1 className="text-3xl mb-3 font-bold">Admin Page</h1>
 

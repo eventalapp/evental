@@ -1,22 +1,21 @@
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useRouter } from 'next/router';
-import { Button } from './form/Button';
 import React from 'react';
+import { LinkButton } from './form/LinkButton';
+import Link from 'next/link';
+import { LinkProps } from 'next/dist/client/link';
 
-export const BackButton: React.FC = () => {
-	const router = useRouter();
+type Props = LinkProps;
+
+export const BackButton: React.FC<Props> = (props) => {
+	const { children, href } = props;
 
 	return (
-		<Button
-			variant="link"
-			className="mb-1"
-			onClick={() => {
-				router.back();
-			}}
-		>
-			<FontAwesomeIcon fill="currentColor" className="mr-2" size="1x" icon={faChevronLeft} />
-			Back
-		</Button>
+		<Link href={href} passHref>
+			<LinkButton variant="no-bg" padding="none" className="mb-1">
+				<FontAwesomeIcon fill="currentColor" className="mr-2" size="1x" icon={faChevronLeft} />
+				{children}
+			</LinkButton>
+		</Link>
 	);
 };

@@ -7,6 +7,7 @@ import { Navigation } from '../../../../components/navigation';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import React from 'react';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -23,7 +24,7 @@ const ViewAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}`}>Event</BackButton>
 
 				<div className="flex flex-row justify-between mb-3">
 					<h1 className="text-3xl">Attendees</h1>

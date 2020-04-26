@@ -12,6 +12,7 @@ import { EditAttendeeForm } from '../../../../../../components/attendees/EditAtt
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useEditAttendeeMutation } from '../../../../../../hooks/mutations/useEditAttendeeMutation';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import React from 'react';
 
 const EditAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -42,7 +43,7 @@ const EditAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Edit Attendee Page</h1>
 

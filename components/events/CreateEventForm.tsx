@@ -22,13 +22,13 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name</Label>
-						<Input placeholder="Event Name" id="name" name="name" type="text" required />
+						<Input placeholder="Event name" id="name" name="name" type="text" required />
 					</div>
 
 					<div>
 						<Label htmlFor="location">Location</Label>
 						<Input
-							placeholder="Event Location"
+							placeholder="Event location"
 							id="location"
 							name="location"
 							type="text"
@@ -48,7 +48,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="description">Description</Label>
 						<Textarea
-							placeholder="Event Description"
+							placeholder="Event description"
 							id="description"
 							name="description"
 							type="text"

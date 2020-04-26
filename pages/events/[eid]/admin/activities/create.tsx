@@ -11,6 +11,7 @@ import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 import { useCreateActivityMutation } from '../../../../../hooks/mutations/useCreateActivityMutation';
+import React from 'react';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -37,7 +38,7 @@ const CreateActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Create Activity Page</h1>
 

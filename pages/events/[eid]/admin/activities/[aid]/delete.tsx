@@ -9,6 +9,7 @@ import { Navigation } from '../../../../../../components/navigation';
 import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import React from 'react';
 
 const DeleteActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -33,7 +34,7 @@ const DeleteActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Delete Activity Page</h1>
 

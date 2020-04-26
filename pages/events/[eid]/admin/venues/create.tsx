@@ -10,6 +10,7 @@ import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useCreateVenueMutation } from '../../../../../hooks/mutations/useCreateVenueMutation';
+import React from 'react';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -35,7 +36,7 @@ const CreateActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Create Venue Page</h1>
 

@@ -7,6 +7,7 @@ import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { Navigation } from '../../components/navigation';
 import Unauthorized from '../../components/Unauthorized';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
+import React from 'react';
 
 const CreateEventPage: NextPage = () => {
 	const session = useSession();
@@ -25,9 +26,9 @@ const CreateEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events`}>Events</BackButton>
 
-				<h1 className="text-3xl font-bold">Create Event Page</h1>
+				<h1 className="text-3xl font-bold">Create an Event</h1>
 
 				<CreateEventForm
 					createEventError={createEventError}

@@ -7,6 +7,7 @@ import { Navigation } from '../../../../components/navigation';
 import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
 import { ViewVenue } from '../../../../components/venues/ViewVenue';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import React from 'react';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -23,7 +24,7 @@ const ViewAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/venues`}>Venues</BackButton>
 
 				<ViewVenue
 					eid={String(eid)}

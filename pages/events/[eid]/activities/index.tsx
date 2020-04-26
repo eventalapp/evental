@@ -11,6 +11,7 @@ import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { groupByDate } from '../../../../utils/groupByDate';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
+import React from 'react';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
@@ -31,7 +32,7 @@ const ActivitiesPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}`}>Event</BackButton>
 
 				<FlexRowBetween>
 					<h1 className="text-3xl">Activities Page</h1>

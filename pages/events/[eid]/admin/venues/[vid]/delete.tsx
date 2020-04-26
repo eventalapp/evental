@@ -11,6 +11,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenueForm';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutatation';
+import React from 'react';
 
 const DeleteVenuePage: NextPage = () => {
 	const router = useRouter();
@@ -40,7 +41,7 @@ const DeleteVenuePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Delete Venue Page</h1>
 
