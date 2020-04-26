@@ -10,9 +10,11 @@ type Props = {
 
 const variants = {
 	primary:
-		'bg-gray-800 px-4 py-1.5 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base',
+		'bg-secondary-600 px-4 py-1.5 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base',
 	secondary:
-		'bg-gray-200 px-3 py-1.5 text-black disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base'
+		'bg-gray-200 px-3 py-1.5 text-black disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base',
+	gradient:
+		'px-4 py-1.5 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base font-bold bg-gradient-to-r from-primary-500 to-secondary-500'
 };
 
 type LinkButtonProps = Props &
