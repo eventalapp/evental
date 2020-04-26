@@ -26,7 +26,7 @@ export const Authenticated: React.FC<AuthenticatedProps> = (props) => {
 			<Link href="/events">
 				<a>
 					<span className="flex flex-row items-center">
-						{/* <img src="/logo.svg" className="w-12 h-12" alt="" aria-hidden="true" /> */}
+						<img src="/logo.svg" className="w-12 h-12 pr-3" alt="logo" />
 						<strong
 							className="text-2xl tracking-tight font-bold font-display"
 							aria-label="evental homepage"
