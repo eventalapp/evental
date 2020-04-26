@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	try {
-		return res.status(200).send({ isOrganizer: isOrganizer(session.user.id, String(eid)) });
+		return res.status(200).send({ isOrganizer: await isOrganizer(session.user.id, String(eid)) });
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);
