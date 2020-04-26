@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { BackButton } from '../../../../../components/BackButton';
 import Column from '../../../../../components/layout/Column';
 import { CreateVenueForm } from '../../../../../components/venues/CreateVenueForm';
 import { Navigation } from '../../../../../components/navigation';
@@ -36,8 +35,6 @@ const CreateActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
-
 				<h1 className="text-3xl">Create Venue Page</h1>
 
 				<CreateVenueForm

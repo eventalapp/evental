@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
@@ -24,8 +23,6 @@ const ViewAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}`}>Event</BackButton>
-
 				<div className="flex flex-row justify-between mb-3">
 					<h1 className="text-3xl">Attendees</h1>
 				</div>

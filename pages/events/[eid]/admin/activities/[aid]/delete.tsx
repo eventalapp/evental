@@ -34,7 +34,6 @@ const DeleteActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Delete Activity Page</h1>
 

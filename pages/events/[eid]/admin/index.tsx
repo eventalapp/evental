@@ -3,7 +3,6 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/layout/Column';
 import { LinkButton } from '../../../../components/form/LinkButton';
 import { Navigation } from '../../../../components/navigation';
@@ -52,8 +51,6 @@ const AdminPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}`}>Event</BackButton>
-
 				<FlexRowBetween>
 					<h1 className="text-3xl mb-3 font-bold">Admin Page</h1>
 

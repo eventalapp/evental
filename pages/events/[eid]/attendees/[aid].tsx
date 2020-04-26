@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
-import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
@@ -23,8 +22,6 @@ const ViewAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}/attendees`} />
-
 				<ViewAttendee
 					attendee={attendee}
 					attendeeError={attendeeError}

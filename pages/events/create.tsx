@@ -26,7 +26,6 @@ const CreateEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events`}>Events</BackButton>
 
 				<h1 className="text-3xl font-bold">Create an Event</h1>
 
