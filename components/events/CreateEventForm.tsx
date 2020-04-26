@@ -80,7 +80,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
-				<Button type="submit" variant="gradient">
+				<Button type="submit" variant="gradient" padding="medium">
 					Register Event
 				</Button>
 			</div>
