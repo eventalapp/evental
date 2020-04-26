@@ -16,21 +16,23 @@ const HomePage: NextPage = () => {
 			<Navigation />
 
 			<Column className="flex flex-col items-center">
-				<Image src="/logo.svg" alt="logo" width="80" height="80" />
+				<Image src="/images/logo.svg" alt="logo" width="80" height="80" />
 				<h1 className="px-2 mb-3 text-4xl font-black leading-tight text-center md:text-6xl tracking-tight">
-					Execute Excellent Events
+					Host Outstanding Events
 				</h1>
 				<p className="max-w-4xl mt-1 mb-8 text-center text-md lg:text-lg leading-2 lg:leading-8 text-gray-800">
-					Event management software that's quick to learn and easy to set up. Your attendees will
-					love using Evental for your in-person, hybrid, and virtual events.
+					Event management software that's highly intuitive. Your attendees and organizers will love
+					using Evental for your in-person, hybrid, and virtual events.
 				</p>
 
-				<Link href="/events/create" passHref>
-					<LinkButton className="mr-3">Create Event</LinkButton>
-				</Link>
-				<Link href="/events" passHref>
-					<LinkButton className="mr-3">View Events</LinkButton>
-				</Link>
+				<div>
+					<Link href="/events/create" passHref>
+						<LinkButton className="mr-3">Host Event</LinkButton>
+					</Link>
+					<Link href="/events" passHref>
+						<LinkButton>View Events</LinkButton>
+					</Link>
+				</div>
 			</Column>
 		</>
 	);
