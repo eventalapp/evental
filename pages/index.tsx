@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Column from '../components/layout/Column';
 import { LinkButton } from '../components/form/LinkButton';
 import { Navigation } from '../components/navigation';
+import Image from 'next/image';
 
 const HomePage: NextPage = () => {
 	return (
@@ -15,7 +16,8 @@ const HomePage: NextPage = () => {
 			<Navigation />
 
 			<Column className="flex flex-col items-center">
-				<h1 className="px-2 mb-3 text-4xl font-black leading-tight text-center md:text-6xl">
+				<Image src="/logo.svg" alt="logo" width="80" height="80" />
+				<h1 className="px-2 mb-3 text-4xl font-black leading-tight text-center md:text-6xl tracking-tight">
 					Execute Excellent Events
 				</h1>
 				<p className="max-w-4xl mt-1 mb-8 text-center text-md lg:text-lg leading-2 lg:leading-8 text-gray-800">

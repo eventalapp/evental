@@ -76,7 +76,7 @@ export const EditAttendeeForm: React.FC<Props> = (props) => {
 												))}
 										</Select>
 										<Link href={`/events/${eid}/admin/roles/create`}>
-											<a className="text-blue-600">Dont see your role? Create a role</a>
+											<a className="text-gray-600">Dont see your role? Create a role</a>
 										</Link>
 									</>
 								)}

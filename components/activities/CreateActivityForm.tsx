@@ -79,7 +79,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 									</Select>
 
 									<Link href={`/events/${eid}/admin/venues/create`}>
-										<a className="text-blue-600">Dont see your venue? Create a Venue</a>
+										<a className="text-gray-600">Dont see your venue? Create a Venue</a>
 									</Link>
 								</>
 							)}

@@ -18,7 +18,7 @@ export const ProfileDropdown: React.FC = () => {
 			</Trigger>
 			<Content
 				align="end"
-				className="bg-gray-700 border border-gray-500 rounded-lg py-2 px-2 text-white text-left"
+				className="bg-gray-700 border border-gray-500 rounded-md py-2 px-2 text-white text-left"
 				sideOffset={10}
 			>
 				<Item className="outline-none">
