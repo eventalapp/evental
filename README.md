@@ -2,6 +2,14 @@
 
 Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/), [Prisma](https://www.prisma.io/), [Postgres](https://www.postgresql.org/), [TypeScript](https://www.typescriptlang.org/), [Tailwind](https://tailwindcss.com/), and [React Query](https://react-query.tanstack.com/)
 
+## Todo:
+
+- Handle file upload and upload to cdn
+- React hook form
+- slug validation (on edit)
+- event settings page
+- user settings page
+
 ## Installation 💾
 
 Prerequisites:
