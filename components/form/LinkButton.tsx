@@ -7,7 +7,7 @@ const variants = {
 	'secondary':
 		'bg-gray-200 text-black disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base',
 	'gradient':
-		'bg-gradient-to-r from-primary-500 to-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base',
+		'bg-gradient-to-r from-primary-500 to-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base font-bold',
 	'no-bg':
 		'text-gray-900 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base'
 };

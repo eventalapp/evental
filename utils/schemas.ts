@@ -100,8 +100,9 @@ export const CreateEventSchema = z.object({
 		.string()
 		.min(4, 'Location must be at least 4 characters')
 		.max(100, 'Location must be less than 40 characters'),
-	startDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
-	endDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
+	image: typeof window === 'undefined' ? z.any() : z.instanceof(FileList),
+	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
+	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
 	description: z.string().max(1000, 'Description is too long')
 });
 

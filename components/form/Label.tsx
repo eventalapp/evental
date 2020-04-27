@@ -8,7 +8,7 @@ type Props = {
 };
 
 const variants = {
-	primary: 'text-sm text-gray-500 text-left block font-bold uppercase'
+	primary: 'text-sm text-gray-700 text-left block mb-1'
 };
 
 type LabelProps = Props &
