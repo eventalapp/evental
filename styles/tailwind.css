@@ -97,3 +97,7 @@
 .react-datepicker__day--range-end {
 	@apply bg-secondary-500 text-white hover:text-gray-700 hover:bg-white;
 }
+
+.Toastify__toast-container--top-right {
+	@apply top-14;
+}

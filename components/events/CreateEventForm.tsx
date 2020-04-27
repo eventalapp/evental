@@ -1,4 +1,4 @@
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarPlus, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames';
@@ -78,7 +78,10 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				.replace(/\s+/g, '-')
 				.toLowerCase()
 		);
-		trigger('slug');
+
+		if (errors.name) {
+			trigger('slug');
+		}
 	}, [nameWatcher]);
 
 	useEffect(() => {
@@ -301,6 +304,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			<div className="flex flex-row justify-end">
 				<Button type="submit" variant="gradient" padding="medium">
 					Register Event
+					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faCalendarPlus} />
 				</Button>
 			</div>
 		</form>
