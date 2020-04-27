@@ -1,18 +1,20 @@
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { zodResolver } from '@hookform/resolvers/zod';
+import classNames from 'classnames';
+import { format } from 'date-fns';
 import React, { DetailedHTMLProps, FormHTMLAttributes, forwardRef, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
+import { CreateEventSchema } from '../../utils/schemas';
+import { Button } from '../form/Button';
+import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
-import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
 import { ServerError } from '../ServerError';
-import { Controller, useForm } from 'react-hook-form';
-import { Button } from '../form/Button';
-import { CreateEventSchema } from '../../utils/schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
-import DatePicker from 'react-datepicker';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { format } from 'date-fns';
-import classNames from 'classnames';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateEventMutationData;
@@ -35,6 +37,9 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		handleSubmit,
 		watch,
 		setValue,
+		trigger,
+
+		clearErrors,
 		control,
 		formState: { errors }
 	} = useForm<CreateEventFormValues>({
@@ -46,22 +51,45 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	});
 
 	const nameWatcher = watch('name');
+	const slugWatcher = watch('slug');
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
 
 	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime())
+		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
 			setValue('startDate', endDateWatcher);
+			toast.warn('The start date cannot be later than the end date.');
+		}
 	}, [startDateWatcher]);
 
 	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime())
+		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
 			setValue('endDate', startDateWatcher);
+			toast.warn('The end date cannot be earlier than the start date.');
+		}
 	}, [endDateWatcher]);
 
 	useEffect(() => {
-		setValue('slug', nameWatcher?.replace(/\s+/g, '-').toLowerCase());
+		setValue(
+			'slug',
+			nameWatcher
+				?.trim()
+				.replace(/[\])}[{(]/g, '')
+				.replace(/\s+/g, '-')
+				.toLowerCase()
+		);
+		trigger('slug');
 	}, [nameWatcher]);
+
+	useEffect(() => {
+		setValue(
+			'slug',
+			slugWatcher
+				?.replace(/[\])}[{(]/g, '')
+				.replace(/\s+/g, '-')
+				.toLowerCase()
+		);
+	}, [slugWatcher]);
 
 	if (createEventError) {
 		return <ServerError errors={[createEventError]} />;
@@ -78,44 +106,16 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="name">Name</Label>
 						<Input placeholder="Event name" {...register('name', { required: true })} />
-						{errors.name?.message && <span className="text-red-500">{errors.name?.message}</span>}
+						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
 					<div>
 						<Label htmlFor="location">Location</Label>
 						<Input placeholder="Event location" {...register('location', { required: true })} />
-						{errors.location?.message && (
-							<span className="text-red-500">{errors.location?.message}</span>
-						)}
+						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-					<div>
-						<Label htmlFor="slug">Slug</Label>
-						<Input placeholder="event-slug" {...register('slug', { required: true })} />
-						{errors.slug?.message && <span className="text-red-500">{errors.slug?.message}</span>}
-					</div>
-
-					<div>
-						<Label htmlFor="image">Image</Label>
-						<Input type="file" {...register('image', { required: true })} />
-						{errors.image?.message && <span className="text-red-500">{errors.image?.message}</span>}
-					</div>
-				</div>
-
-				<div className="grid grid-cols-1 mb-5 gap-5">
-					<div>
-						<Label htmlFor="description">Description</Label>
-						<Textarea
-							placeholder="Event description"
-							{...register('description', { required: true })}
-						/>
-						{errors.description?.message && (
-							<span className="text-red-500">{errors.description?.message}</span>
-						)}
-					</div>
-				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="startDate">Start Date</Label>
@@ -189,9 +189,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 								)}
 							/>
 						</div>
-						{errors.startDate?.message && (
-							<span className="text-red-500">{errors.startDate?.message}</span>
-						)}
+						{errors.startDate?.message && <ErrorMessage>{errors.startDate?.message}</ErrorMessage>}
 					</div>
 
 					<div>
@@ -267,9 +265,36 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 							/>
 						</div>
 						{errors.endDate?.message && (
-							<span className="text-red-500">{errors.endDate?.message}</span>
+							<span className="text-red-500 mt-2">{errors.endDate?.message}</span>
 						)}
 					</div>
+				</div>
+			</div>
+
+			<div className="grid grid-cols-1 mb-5 gap-5">
+				<div>
+					<Label htmlFor="description">Description</Label>
+					<Textarea
+						placeholder="Event description"
+						{...register('description', { required: true })}
+					/>
+					{errors.description?.message && (
+						<ErrorMessage>{errors.description?.message}</ErrorMessage>
+					)}
+				</div>
+			</div>
+
+			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+				<div>
+					<Label htmlFor="slug">Slug</Label>
+					<Input placeholder="event-slug" {...register('slug', { required: true })} />
+					{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
+				</div>
+
+				<div>
+					<Label htmlFor="image">Image</Label>
+					<Input type="file" {...register('image', { required: true })} />
+					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 				</div>
 			</div>
 

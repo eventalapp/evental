@@ -1,9 +1,10 @@
+import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import React, { useState } from 'react';
-import { SessionProvider } from 'next-auth/react';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
-
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/tailwind.css';
 
 const App: React.FC<AppProps & { err?: Error }> = (props) => {
@@ -17,6 +18,7 @@ const App: React.FC<AppProps & { err?: Error }> = (props) => {
 					<Component {...pageProps} err={err} />
 				</Hydrate>
 
+				<ToastContainer />
 				<ReactQueryDevtools />
 			</QueryClientProvider>
 		</SessionProvider>
