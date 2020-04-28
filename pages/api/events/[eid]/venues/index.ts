@@ -7,16 +7,10 @@ export default async (
 	req: NextApiRequest,
 	res: NextApiResponse<ServerErrorResponse | Prisma.EventVenue[]>
 ) => {
-	const { eid } = req.query;
-
 	try {
-		const venueList = await prisma.eventVenue.findMany({
-			where: {
-				event: {
-					OR: [{ id: String(eid) }, { slug: String(eid) }]
-				}
-			}
-		});
+		const { eid } = req.query;
+
+		const venueList = await getVenues(String(eid));
 
 		return res.status(200).send(venueList);
 	} catch (error) {
@@ -27,4 +21,14 @@ export default async (
 
 		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
 	}
+};
+
+export const getVenues = async (eid: string): Promise<Prisma.EventVenue[]> => {
+	return await prisma.eventVenue.findMany({
+		where: {
+			event: {
+				OR: [{ id: eid }, { slug: eid }]
+			}
+		}
+	});
 };

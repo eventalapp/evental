@@ -3,6 +3,7 @@ import prisma from '../../../../../prisma/client';
 import { EventAttendeeUser } from '../attendees/[aid]';
 import type Prisma from '@prisma/client';
 import { ServerErrorResponse } from '../../../../../utils/ServerError';
+import { getEvent } from '../index';
 
 export type RoleAttendeePayload = {
 	attendees: EventAttendeeUser[] | undefined;
@@ -13,50 +14,22 @@ export default async (
 	req: NextApiRequest,
 	res: NextApiResponse<ServerErrorResponse | RoleAttendeePayload>
 ) => {
-	const { eid, rid } = req.query;
-
-	// Get all members of a role
-
 	try {
-		const event = await prisma.event.findFirst({
-			where: {
-				OR: [{ id: String(eid) }, { slug: String(eid) }]
-			}
-		});
+		const { eid, rid } = req.query;
+
+		const event = await getEvent(String(eid));
 
 		if (!event) {
 			return res.status(404).send({ error: { message: 'Event not found.' } });
 		}
 
-		const role = await prisma.eventRole.findFirst({
-			where: {
-				eventId: event.id,
-				OR: [{ id: String(rid) }, { slug: String(rid) }]
-			}
-		});
+		const role = await getRole(event.id, String(rid));
 
 		if (!role) {
 			return res.status(404).send({ error: { message: 'Role not found.' } });
 		}
-		const attendees = await prisma.eventAttendee.findMany({
-			where: {
-				eventRoleId: role.id,
-				eventId: event.id
-			},
-			include: {
-				user: {
-					select: {
-						name: true,
-						image: true
-					}
-				},
-				role: {
-					select: {
-						name: true
-					}
-				}
-			}
-		});
+
+		const attendees = await getAttendees(event.id, role.id);
 
 		const payload: RoleAttendeePayload = { attendees, role };
 
@@ -69,4 +42,38 @@ export default async (
 
 		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
 	}
+};
+
+export const getRole = async (eventId: string, rid: string): Promise<Prisma.EventRole | null> => {
+	return await prisma.eventRole.findFirst({
+		where: {
+			eventId: eventId,
+			OR: [{ id: String(rid) }, { slug: String(rid) }]
+		}
+	});
+};
+
+export const getAttendees = async (
+	eventId: string,
+	roleId: string
+): Promise<EventAttendeeUser[]> => {
+	return await prisma.eventAttendee.findMany({
+		where: {
+			eventRoleId: roleId,
+			eventId: eventId
+		},
+		include: {
+			user: {
+				select: {
+					name: true,
+					image: true
+				}
+			},
+			role: {
+				select: {
+					name: true
+				}
+			}
+		}
+	});
 };

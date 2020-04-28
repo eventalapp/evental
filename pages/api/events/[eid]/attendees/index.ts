@@ -2,42 +2,22 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
 import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import { EventAttendeeUser } from './[aid]';
+import { getEvent } from '../index';
 
 export default async (
 	req: NextApiRequest,
 	res: NextApiResponse<ServerErrorResponse | EventAttendeeUser[]>
 ) => {
-	const { eid } = req.query;
-
 	try {
-		const event = await prisma.event.findFirst({
-			where: {
-				OR: [{ id: String(eid) }, { slug: String(eid) }]
-			}
-		});
+		const { eid } = req.query;
+
+		const event = await getEvent(String(eid));
 
 		if (!event) {
 			return res.status(404).send({ error: { message: 'Event not found.' } });
 		}
 
-		const attendees = await prisma.eventAttendee.findMany({
-			where: {
-				eventId: event.id
-			},
-			include: {
-				user: {
-					select: {
-						name: true,
-						image: true
-					}
-				},
-				role: {
-					select: {
-						name: true
-					}
-				}
-			}
-		});
+		const attendees = await getAttendees(event.id);
 
 		return res.status(200).send(attendees);
 	} catch (error) {
@@ -48,4 +28,25 @@ export default async (
 
 		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
 	}
+};
+
+export const getAttendees = async (eventId: string): Promise<EventAttendeeUser[]> => {
+	return await prisma.eventAttendee.findMany({
+		where: {
+			eventId: eventId
+		},
+		include: {
+			user: {
+				select: {
+					name: true,
+					image: true
+				}
+			},
+			role: {
+				select: {
+					name: true
+				}
+			}
+		}
+	});
 };
