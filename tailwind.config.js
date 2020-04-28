@@ -8,9 +8,9 @@ module.exports = {
 			sans: ['Inter', 'sans']
 		},
 		fontSize: {
-			'tiny': '.65rem',
-			'xs': '.75rem',
-			'sm': '.84rem',
+			'tiny': '.70rem',
+			'xs': '.80rem',
+			'sm': '.90rem',
 			'base': '1rem',
 			'lg': '1.125rem',
 			'xl': '1.25rem',
@@ -22,6 +22,10 @@ module.exports = {
 			'7xl': '5rem'
 		},
 		extend: {
+			gridTemplateColumns: {
+				eventList: '60px 60px 1fr',
+				eventDesktopList: '80px 80px 1fr'
+			},
 			transitionTimingFunction: {
 				'css': 'ease',
 				'css-in': 'ease-in',

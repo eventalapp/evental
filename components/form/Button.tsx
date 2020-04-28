@@ -10,13 +10,13 @@ type Props = {
 
 const variants = {
 	'primary':
-		'bg-primary text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-md',
+		'bg-primary text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-sm font-semibold',
 	'secondary':
-		'bg-secondary text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-md',
+		'bg-secondary text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-sm font-semibold',
 	'gradient':
-		'bg-gradient-to-r from-primary-500 to-secondary-500 text-white inline-block rounded-md text-base font-bold disabled:cursor-not-allowed disabled:opacity-20 pointer',
+		'bg-gradient-to-r from-primary-500 to-secondary-500 text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-sm font-semibold',
 	'no-bg':
-		'text-gray-900 font-semibold inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer'
+		'text-gray-900 font-semibold inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-sm font-semibold'
 };
 
 const paddings = {

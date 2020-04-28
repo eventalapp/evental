@@ -6,16 +6,20 @@ import React from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { DatePickerButton } from './DatePickerButton';
 
-export const DatePicker: React.FC<ReactDatePickerProps> = (props) => {
+type Props = { formatTime?: string } & ReactDatePickerProps;
+
+export const DatePicker: React.FC<Props> = (props) => {
 	const {
 		startDate,
 		endDate,
 		selected,
 		onChange,
+		dateFormat = 'MM/dd/yyyy',
 		selectsStart,
 		selectsEnd,
 		showTimeSelect,
-		timeIntervals
+		timeIntervals,
+		formatTime
 	} = props;
 
 	return (
@@ -27,11 +31,11 @@ export const DatePicker: React.FC<ReactDatePickerProps> = (props) => {
 			selected={selected}
 			selectsStart={selectsStart}
 			selectsEnd={selectsEnd}
-			dateFormat={"yyyy-MM-dd'T'HH:mm"}
+			dateFormat={dateFormat}
 			nextMonthButtonLabel=">"
 			previousMonthButtonLabel="<"
 			popperClassName="react-datepicker-right"
-			customInput={<DatePickerButton value={selected} />}
+			customInput={<DatePickerButton value={selected} formatTime={formatTime} />}
 			startDate={startDate}
 			endDate={endDate}
 			showTimeSelect={showTimeSelect}

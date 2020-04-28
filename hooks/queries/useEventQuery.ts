@@ -23,7 +23,7 @@ export const useEventQuery = (eid: string): UseEventQueryData => {
 		},
 		{
 			retry: 0,
-			enabled: eid !== undefined && eid !== 'undefined',
+			enabled: eid !== undefined && eid !== 'undefined' && eid !== '',
 			onError: (error) => {
 				setError(error.response?.data.error ?? null);
 			},
