@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { UseEventsQueryData } from '../../hooks/queries/useEventsQuery';
 import { Loading } from '../Loading';
 import { ViewServerError } from '../ViewServerError';
+import { format } from 'date-fns';
 
 type Props = UseEventsQueryData;
 
@@ -35,9 +35,9 @@ export const EventList: React.FC<Props> = (props) => {
 								<div className="flex flex-row items-center">
 									<div className="flex flex-col align-center justify-center w-12 md:ml-5">
 										<span className="text-gray-600 text-center block text-tiny">
-											{dayjs(event.startDate).format('MMM DD')}
+											{format(event.startDate, 'MMM dd')}
 											<br />
-											{dayjs(event.endDate).format('MMM DD')}
+											{format(event.endDate, 'MMM dd')}
 										</span>
 									</div>
 

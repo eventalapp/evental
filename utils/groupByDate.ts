@@ -1,5 +1,5 @@
 import type Prisma from '@prisma/client';
-import dayjs from 'dayjs';
+import { format } from 'date-fns';
 
 export const groupByDate = (arr: Prisma.EventActivity[]) => {
 	let dateHashmap: { [key: string]: { [key: string]: Prisma.EventActivity[] } } = {};
@@ -9,9 +9,9 @@ export const groupByDate = (arr: Prisma.EventActivity[]) => {
 			return a.startDate < b.startDate ? -1 : 1;
 		})
 		.forEach((item) => {
-			let startDateFormatted = String(dayjs(item.startDate).format('YYYY-MM-DD'));
+			let startDateFormatted = String(format(new Date(item.startDate), 'yyyy-MM-dd'));
 
-			let startHourFormatted = String(dayjs(item.startDate).format('YYYY-MM-DD HH:mm'));
+			let startHourFormatted = String(format(new Date(item.startDate), 'yyyy-MM-dd HH:mm'));
 
 			if (!dateHashmap[startDateFormatted]) {
 				dateHashmap[startDateFormatted] = {};

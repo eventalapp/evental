@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
 import React from 'react';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
-import dayjs from 'dayjs';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { ActivityList } from '../activities/ActivityList';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
@@ -15,6 +14,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { UseAttendeeByUserIdQueryData } from '../../hooks/queries/useAttendeeByUserIdQuery';
+import { format } from 'date-fns';
 
 type Props = {
 	eid: string;
@@ -120,7 +120,9 @@ export const ViewEvent: React.FC<Props> = (props) => {
 							icon={faCalendarDay}
 						/>
 						<p>
-							{dayjs(event?.startDate).format('MMM DD')} - {dayjs(event?.endDate).format('MMM DD')}
+							{format(new Date(event.startDate), 'MMM dd')}
+							<br />
+							{format(new Date(event.endDate), 'MMM dd')}
 						</p>
 					</div>
 				</div>
