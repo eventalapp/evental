@@ -51,8 +51,8 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 					void queryClient.invalidateQueries(['events', eid]);
 				});
 			},
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			}
 		}
 	);

@@ -3,7 +3,6 @@ import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
-
 import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';

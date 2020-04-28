@@ -24,8 +24,8 @@ export const useVenuesQuery = (eid: string): UseVenuesQueryData => {
 		{
 			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined',
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			},
 			onSuccess: () => {
 				setError(null);

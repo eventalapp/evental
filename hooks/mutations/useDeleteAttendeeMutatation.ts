@@ -39,8 +39,8 @@ export const useDeleteAttendeeMutation = (
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			}
 		}
 	);

@@ -51,8 +51,8 @@ export const useCreateActivityMutation = (eid: string): UseCreateActivityMutatio
 					void queryClient.invalidateQueries('activities');
 				});
 			},
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			}
 		}
 	);

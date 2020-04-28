@@ -26,8 +26,8 @@ export const useActivityQuery = (eid: string, aid: string): UseActivityQueryData
 		{
 			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined' && aid !== undefined && aid !== 'undefined',
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			},
 			onSuccess: () => {
 				setError(null);

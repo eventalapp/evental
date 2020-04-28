@@ -48,8 +48,8 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 					void queryClient.invalidateQueries(['roles', eid]);
 				});
 			},
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			}
 		}
 	);

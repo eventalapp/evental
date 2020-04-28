@@ -29,8 +29,8 @@ export const useRoleAttendeesQuery = (eid: string, rid: string): UseRoleAttendee
 		{
 			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined' && rid !== undefined && rid !== 'undefined',
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			},
 			onSuccess: () => {
 				setError(null);

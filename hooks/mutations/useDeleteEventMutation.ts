@@ -36,8 +36,8 @@ export const useDeleteEventMutation = (eid: string): UseDeleteEventMutationData 
 					void queryClient.invalidateQueries(['events', eid]);
 				});
 			},
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			}
 		}
 	);

@@ -23,8 +23,8 @@ export const useEventsQuery = (): UseEventsQueryData => {
 		},
 		{
 			retry: 0,
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			},
 			onSuccess: () => {
 				setError(null);
