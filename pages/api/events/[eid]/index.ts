@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../prisma/client';
 import { ServerErrorResponse } from '../../../../utils/ServerError';
 import type Prisma from '@prisma/client';
+import { handleServerError } from '../../../../utils/handleServerError';
 
 export default async (
 	req: NextApiRequest,
@@ -18,12 +19,7 @@ export default async (
 
 		return res.status(200).send(event);
 	} catch (error) {
-		if (error instanceof Error) {
-			console.error(error);
-			return res.status(500).send({ error: { message: error.message } });
-		}
-
-		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
+		return handleServerError(error, res);
 	}
 };
 

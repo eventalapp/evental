@@ -13,7 +13,11 @@ export interface UseRoleAttendeesQueryData {
 	roleAttendeesError: ServerErrorPayload | null;
 }
 
-export const useRoleAttendeesQuery = (eid: string, rid: string): UseRoleAttendeesQueryData => {
+export const useRoleAttendeesQuery = (
+	eid: string,
+	rid: string,
+	initialData?: { attendees: EventAttendeeUser[]; role: Prisma.EventRole | undefined }
+): UseRoleAttendeesQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data, isLoading: isRoleAttendeesLoading } = useQuery<
@@ -34,7 +38,8 @@ export const useRoleAttendeesQuery = (eid: string, rid: string): UseRoleAttendee
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 

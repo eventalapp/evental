@@ -10,7 +10,11 @@ export interface UseAttendeeQueryData {
 	attendeeError: ServerErrorPayload | null;
 }
 
-export const useAttendeeQuery = (eid: string, aid: string): UseAttendeeQueryData => {
+export const useAttendeeQuery = (
+	eid: string,
+	aid: string,
+	initialData?: EventAttendeeUser | undefined
+): UseAttendeeQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: attendee, isLoading: isAttendeeLoading } = useQuery<
@@ -31,7 +35,8 @@ export const useAttendeeQuery = (eid: string, aid: string): UseAttendeeQueryData
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 

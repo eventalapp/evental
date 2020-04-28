@@ -9,7 +9,7 @@ export interface UseOrganizerQueryData {
 	isOrganizerError: ServerErrorPayload | null;
 }
 
-export const useOrganizerQuery = (eid: string): UseOrganizerQueryData => {
+export const useOrganizerQuery = (eid: string, initialData?: boolean): UseOrganizerQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: isOrganizer, isLoading: isOrganizerLoading } = useQuery<
@@ -30,7 +30,8 @@ export const useOrganizerQuery = (eid: string): UseOrganizerQueryData => {
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 

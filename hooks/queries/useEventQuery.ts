@@ -5,12 +5,15 @@ import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 
 export interface UseEventQueryData {
-	event: Prisma.Event | undefined;
+	event: Prisma.Event | null;
 	isEventLoading: boolean;
 	eventError: ServerErrorPayload | null;
 }
 
-export const useEventQuery = (eid: string): UseEventQueryData => {
+export const useEventQuery = (
+	eid: string,
+	initialData?: Prisma.Event | undefined
+): UseEventQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: event, isLoading: isEventLoading } = useQuery<
@@ -29,9 +32,10 @@ export const useEventQuery = (eid: string): UseEventQueryData => {
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 
-	return { event, isEventLoading, eventError: error };
+	return { event: event ?? null, isEventLoading, eventError: error };
 };

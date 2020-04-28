@@ -3,6 +3,7 @@ import { getSession } from 'next-auth/react';
 import prisma from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { ServerErrorResponse } from '../../../../../../../utils/ServerError';
+import { handleServerError } from '../../../../../../../utils/handleServerError';
 
 export default async (req: NextApiRequest, res: NextApiResponse<ServerErrorResponse | string>) => {
 	const session = await getSession({ req });
@@ -51,13 +52,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<ServerErrorRespo
 
 			return res.status(200).send('Venue deleted.');
 		} catch (error) {
-			if (error instanceof Error) {
-				console.error(error);
-
-				return res.status(500).send({ error: { message: error.message } });
-			}
-
-			return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
+			return handleServerError(error, res);
 		}
 	}
 

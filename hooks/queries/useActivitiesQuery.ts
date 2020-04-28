@@ -10,7 +10,10 @@ export interface UseActivitiesQueryData {
 	activitiesError: ServerErrorPayload | null;
 }
 
-export const useActivitiesQuery = (eid: string): UseActivitiesQueryData => {
+export const useActivitiesQuery = (
+	eid: string,
+	initialData?: Prisma.EventActivity[] | undefined
+): UseActivitiesQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: activities, isLoading: isActivitiesLoading } = useQuery<
@@ -31,7 +34,8 @@ export const useActivitiesQuery = (eid: string): UseActivitiesQueryData => {
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 
