@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
@@ -12,16 +13,30 @@ import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditV
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
+import { getVenue } from '../../../../../api/events/[eid]/venues/[vid]';
+import Prisma from '@prisma/client';
+import { Session } from 'next-auth';
 
-const EditVenuePage: NextPage = () => {
+type Props = {
+	initialOrganizer: boolean;
+	initialVenue: Prisma.EventVenue;
+	session: Session | null;
+};
+
+const EditVenuePage: NextPage<Props> = (props) => {
+	const { initialOrganizer, initialVenue, session } = props;
 	const router = useRouter();
-	const session = useSession();
 	const { eid, vid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { venue, venueError, isVenueLoading } = useVenueQuery(
+		String(eid),
+		String(vid),
+		initialVenue
+	);
 	const { editVenueMutation, editVenueError } = useEditVenueMutation(String(eid), String(vid));
-	const { venue, venueError, isVenueLoading } = useVenueQuery(String(eid), String(vid));
 
-	if (!session.data?.user?.id) {
+	if (!session?.user?.id) {
 		return (
 			<PageWrapper variant="gray">
 				<Unauthorized />
@@ -58,6 +73,22 @@ const EditVenuePage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid, vid } = context.query;
+
+	const session = await getSession(context);
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialVenue = await getVenue(String(eid), String(vid));
+
+	return {
+		props: {
+			session,
+			initialOrganizer,
+			initialVenue
+		}
+	};
 };
 
 export default EditVenuePage;

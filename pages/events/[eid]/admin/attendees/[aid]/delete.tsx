@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
@@ -13,19 +14,32 @@ import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQue
 import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutatation';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
+import { Session } from 'next-auth';
+import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
 
-const DeleteAttendeePage: NextPage = () => {
+type Props = {
+	initialOrganizer: boolean;
+	initialAttendee: EventAttendeeUser;
+	session: Session | null;
+};
+
+const DeleteAttendeePage: NextPage<Props> = (props) => {
+	const { initialOrganizer, initialAttendee, session } = props;
 	const router = useRouter();
-	const session = useSession();
 	const { eid, aid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(aid));
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(
+		String(eid),
+		String(aid),
+		initialAttendee
+	);
 	const { deleteAttendeeError, deleteAttendeeMutation } = useDeleteAttendeeMutation(
 		String(eid),
 		String(aid)
 	);
 
-	if (!session.data?.user?.id) {
+	if (!session?.user?.id) {
 		return (
 			<PageWrapper variant="gray">
 				<Unauthorized />
@@ -62,6 +76,22 @@ const DeleteAttendeePage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid, aid } = context.query;
+
+	const session = await getSession(context);
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialAttendee = await getAttendee(String(eid), String(aid));
+
+	return {
+		props: {
+			session,
+			initialOrganizer,
+			initialAttendee
+		}
+	};
 };
 
 export default DeleteAttendeePage;

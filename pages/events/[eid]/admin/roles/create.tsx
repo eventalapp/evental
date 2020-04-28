@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../components/layout/Column';
@@ -11,15 +12,23 @@ import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuer
 import { useCreateRoleMutation } from '../../../../../hooks/mutations/useCreateRoleMutation';
 import React from 'react';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
+import { Session } from 'next-auth';
 
-const CreateRolePage: NextPage = () => {
+type Props = {
+	initialOrganizer: boolean;
+	session: Session | null;
+};
+
+const CreateRolePage: NextPage<Props> = (props) => {
+	const { initialOrganizer, session } = props;
 	const router = useRouter();
-	const session = useSession();
+
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { createRoleMutation, createRoleError } = useCreateRoleMutation(String(eid));
 
-	if (!session.data?.user?.id) {
+	if (!session?.user?.id) {
 		return (
 			<PageWrapper variant="gray">
 				<Unauthorized />
@@ -50,6 +59,20 @@ const CreateRolePage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid } = context.query;
+
+	const session = await getSession(context);
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+
+	return {
+		props: {
+			session,
+			initialOrganizer
+		}
+	};
 };
 
 export default CreateRolePage;

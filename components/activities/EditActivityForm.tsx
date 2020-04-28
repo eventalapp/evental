@@ -5,26 +5,35 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Select } from '../form/Select';
 import { Textarea } from '../form/Textarea';
-import { useVenuesQuery } from '../../hooks/queries/useVenuesQuery';
-import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
-import { useEditActivityMutation } from '../../hooks/mutations/useEditActivityMutation';
+import { UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
+import { UseEditActivityMutationData } from '../../hooks/mutations/useEditActivityMutation';
 import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
+import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 
 type Props = {
 	eid: string;
-	aid: string;
 };
 
 type EditActivityFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
+	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+	UseActivityQueryData &
+	UseEditActivityMutationData &
+	UseVenuesQueryData;
 
 export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
-	const { eid, aid } = props;
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(eid);
-	const { activity, isActivityLoading, activityError } = useActivityQuery(eid, aid);
-	const { editActivityError, editActivityMutation } = useEditActivityMutation(eid, aid);
+	const {
+		eid,
+		isActivityLoading,
+		activity,
+		activityError,
+		venuesError,
+		editActivityError,
+		editActivityMutation,
+		venues,
+		isVenuesLoading
+	} = props;
 
 	if (isActivityLoading || isVenuesLoading) {
 		return <Loading />;
