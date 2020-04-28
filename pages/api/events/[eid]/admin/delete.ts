@@ -2,8 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import prisma from '../../../../../prisma/client';
 import { isFounder } from '../../../../../utils/isFounder';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse<ServerErrorResponse | string>) => {
 	const session = await getSession({ req });
 	const { eid } = req.query;
 
@@ -34,7 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				where: { id: event.id }
 			});
 
-			return res.status(200).send({ message: 'Event deleted.' });
+			return res.status(200).send('Event deleted.');
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error);

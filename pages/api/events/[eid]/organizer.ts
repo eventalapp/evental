@@ -1,8 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { isOrganizer } from '../../../../utils/isOrganizer';
+import { ServerErrorResponse } from '../../../../utils/ServerError';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+	req: NextApiRequest,
+	res: NextApiResponse<ServerErrorResponse | { isOrganizer: boolean }>
+) => {
 	const session = await getSession({ req });
 	const { eid } = req.query;
 

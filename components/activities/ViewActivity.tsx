@@ -58,8 +58,8 @@ export const ViewActivity: React.FC<Props> = (props) => {
 					</div>
 				</FlexRowBetween>
 				<p>{activity.description}</p>
-				<p>{activity.startDate}</p>
-				<p>{activity.endDate}</p>
+				<p>{activity.startDate.toString()}</p>
+				<p>{activity.endDate.toString()}</p>
 			</div>
 		</div>
 	);

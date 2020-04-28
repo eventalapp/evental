@@ -1,14 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
 import { EventAttendeeUser } from '../attendees/[aid]';
-import Prisma from '@prisma/client';
+import type Prisma from '@prisma/client';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 
 export type RoleAttendeePayload = {
 	attendees: EventAttendeeUser[] | undefined;
 	role: Prisma.EventRole | undefined;
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+	req: NextApiRequest,
+	res: NextApiResponse<ServerErrorResponse | RoleAttendeePayload>
+) => {
 	const { eid, rid } = req.query;
 
 	// Get all members of a role

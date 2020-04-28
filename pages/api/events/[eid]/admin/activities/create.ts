@@ -3,8 +3,13 @@ import { getSession } from 'next-auth/react';
 import prisma from '../../../../../../prisma/client';
 import { CreateActivitySchema } from '../../../../../../utils/schemas';
 import { isOrganizer } from '../../../../../../utils/isOrganizer';
+import { ServerErrorResponse } from '../../../../../../utils/ServerError';
+import type Prisma from '@prisma/client';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+	req: NextApiRequest,
+	res: NextApiResponse<ServerErrorResponse | Prisma.EventActivity>
+) => {
 	const session = await getSession({ req });
 	const { eid } = req.query;
 

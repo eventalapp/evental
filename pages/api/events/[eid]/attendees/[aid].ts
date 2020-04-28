@@ -1,6 +1,7 @@
 import type Prisma from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 
 export type EventAttendeeUser = Prisma.EventAttendee & {
 	user: {
@@ -12,7 +13,10 @@ export type EventAttendeeUser = Prisma.EventAttendee & {
 	};
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+	req: NextApiRequest,
+	res: NextApiResponse<ServerErrorResponse | Prisma.EventAttendee>
+) => {
 	const { eid, aid } = req.query;
 
 	try {

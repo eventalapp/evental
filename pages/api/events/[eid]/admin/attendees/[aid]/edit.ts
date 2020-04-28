@@ -3,8 +3,13 @@ import { getSession } from 'next-auth/react';
 import prisma from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EditAttendeeSchema } from '../../../../../../../utils/schemas';
+import { ServerErrorResponse } from '../../../../../../../utils/ServerError';
+import Prisma from '@prisma/client';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+	req: NextApiRequest,
+	res: NextApiResponse<ServerErrorResponse | Prisma.EventAttendee>
+) => {
 	const session = await getSession({ req });
 	const { eid, aid } = req.query;
 
