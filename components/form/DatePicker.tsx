@@ -1,10 +1,10 @@
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
-import { DatePickerButton } from './DatePickerButton';
+import ReactDatePicker, {ReactDatePickerProps} from 'react-datepicker';
+import {DatePickerButton} from './DatePickerButton';
 
 type Props = { formatTime?: string } & ReactDatePickerProps;
 
@@ -57,7 +57,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 							type="button"
 							className={classNames(
 								prevMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex p-1 text-md font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-secondary-500'
+								'inline-flex p-1 text-md font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500'
 							)}
 						>
 							<FontAwesomeIcon
@@ -74,7 +74,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 							type="button"
 							className={classNames(
 								nextMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex p-1 text-md font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-secondary-500'
+								'inline-flex p-1 text-md font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500'
 							)}
 						>
 							<FontAwesomeIcon

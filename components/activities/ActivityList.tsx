@@ -67,14 +67,14 @@ export const ActivityList: React.FC<Props> = (props) => {
 
 											<div className="flex flex-row items-center">
 												<Link href={`/events/${eid}/activities/${activity.slug}`} passHref>
-													<LinkButton variant="secondary">View</LinkButton>
+													<LinkButton variant="primary">View</LinkButton>
 												</Link>
 												{!isOrganizerLoading && isOrganizer && (
 													<Link
 														href={`/events/${eid}/admin/activities/${activity.slug}/edit`}
 														passHref
 													>
-														<LinkButton variant="secondary" className="ml-3">
+														<LinkButton variant="primary" className="ml-3">
 															Edit
 														</LinkButton>
 													</Link>
@@ -84,7 +84,7 @@ export const ActivityList: React.FC<Props> = (props) => {
 														href={`/events/${eid}/admin/activities/${activity.slug}/delete`}
 														passHref
 													>
-														<LinkButton variant="secondary" className="ml-3">
+														<LinkButton variant="primary" className="ml-3">
 															Delete
 														</LinkButton>
 													</Link>
