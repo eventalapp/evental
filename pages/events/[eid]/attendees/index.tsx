@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
@@ -8,12 +9,30 @@ import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { getSession } from 'next-auth/react';
+import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
+import { Session } from 'next-auth';
+import { getAttendees } from '../../../api/events/[eid]/attendees';
+import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 
-const ViewAttendeePage: NextPage = () => {
+type Props = {
+	initialAttendees: EventAttendeeUser[] | undefined;
+	initialOrganizer: boolean;
+	session: Session | null;
+};
+
+const ViewAttendeePage: NextPage<Props> = (props) => {
+	const { initialAttendees, initialOrganizer } = props;
 	const router = useRouter();
 	const { aid, eid } = router.query;
-	const { attendees, attendeesError, isAttendeesLoading } = useAttendeesQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
+	const { attendees, attendeesError, isAttendeesLoading } = useAttendeesQuery(
+		String(eid),
+		initialAttendees
+	);
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
+		String(eid),
+		initialOrganizer
+	);
 
 	return (
 		<PageWrapper variant="gray">
@@ -40,6 +59,22 @@ const ViewAttendeePage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid } = context.query;
+
+	const session = await getSession(context);
+	const initialAttendees = (await getAttendees(String(eid))) ?? undefined;
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+
+	return {
+		props: {
+			session,
+			initialAttendees,
+			initialOrganizer
+		}
+	};
 };
 
 export default ViewAttendeePage;

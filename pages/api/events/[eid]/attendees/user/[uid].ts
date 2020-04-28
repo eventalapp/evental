@@ -4,16 +4,7 @@ import prisma from '../../../../../../prisma/client';
 import { ServerError, ServerErrorResponse } from '../../../../../../utils/ServerError';
 import { getEvent } from '../../index';
 import { handleServerError } from '../../../../../../utils/handleServerError';
-
-export type EventAttendeeUser = Prisma.EventAttendee & {
-	user: {
-		name: string | null;
-		image: string | null;
-	};
-	role: {
-		name: string | null;
-	};
-};
+import { EventAttendeeUser } from '../[aid]';
 
 export default async (
 	req: NextApiRequest,

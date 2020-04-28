@@ -18,10 +18,8 @@ import { getEvent } from '../../api/events/[eid]';
 import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 import { getActivities } from '../../api/events/[eid]/activities';
 import { getRoles } from '../../api/events/[eid]/roles';
-import {
-	EventAttendeeUser,
-	getAttendeeByUserId
-} from '../../api/events/[eid]/attendees/user/[uid]';
+import { getAttendeeByUserId } from '../../api/events/[eid]/attendees/user/[uid]';
+import { EventAttendeeUser } from '../../api/events/[eid]/attendees/[aid]';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -97,7 +95,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialActivities = (await getActivities(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(session, String(eid));
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
 	const initialIsAttendeeByUserId =
 		(await getAttendeeByUserId(String(eid), String(session?.user?.id))) ?? undefined;
 
