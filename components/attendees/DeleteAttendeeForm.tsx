@@ -61,7 +61,7 @@ export const DeleteAttendeeForm: React.FC<Props> = (props) => {
 									id="name"
 									name="name"
 									type="text"
-									onChange={(event) => {
+									onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 										setCanSubmit(event.target.value === attendee.name);
 									}}
 									required

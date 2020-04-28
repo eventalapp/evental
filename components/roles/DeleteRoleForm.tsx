@@ -48,7 +48,7 @@ export const DeleteRoleForm: React.FC<Props> = (props) => {
 							id="name"
 							name="name"
 							type="text"
-							onChange={(event) => {
+							onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
 								setCanSubmit(event.target.value === role.name);
 							}}
 							required
