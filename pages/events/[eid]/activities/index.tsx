@@ -11,6 +11,7 @@ import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { groupByDate } from '../../../../utils/groupByDate';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import React from 'react';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
@@ -23,7 +24,7 @@ const ActivitiesPage: NextPage = () => {
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>All Activities</title>
 			</Head>
@@ -51,7 +52,7 @@ const ActivitiesPage: NextPage = () => {
 					isActivitiesLoading={isActivitiesLoading}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

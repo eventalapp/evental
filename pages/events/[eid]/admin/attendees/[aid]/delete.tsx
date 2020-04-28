@@ -12,6 +12,7 @@ import { DeleteAttendeeForm } from '../../../../../../components/attendees/Delet
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutatation';
 import React from 'react';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
 
 const DeleteAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -25,15 +26,23 @@ const DeleteAttendeePage: NextPage = () => {
 	);
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Delete Attendee</title>
 			</Head>
@@ -51,7 +60,7 @@ const DeleteAttendeePage: NextPage = () => {
 					deleteAttendeeMutation={deleteAttendeeMutation}
 				/>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 

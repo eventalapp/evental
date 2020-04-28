@@ -20,6 +20,12 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 
 				<ToastContainer />
 				<ReactQueryDevtools />
+
+				<style jsx global>{`
+					#__next {
+						height: 100%;
+					}
+				`}</style>
 			</QueryClientProvider>
 		</SessionProvider>
 	);

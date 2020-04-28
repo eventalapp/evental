@@ -12,6 +12,7 @@ import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQue
 import { useEditAttendeeMutation } from '../../../../../../hooks/mutations/useEditAttendeeMutation';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import React from 'react';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
 
 const EditAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -26,15 +27,23 @@ const EditAttendeePage: NextPage = () => {
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Attendee</title>
 			</Head>
@@ -56,7 +65,7 @@ const EditAttendeePage: NextPage = () => {
 					rolesError={rolesError}
 				/>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 

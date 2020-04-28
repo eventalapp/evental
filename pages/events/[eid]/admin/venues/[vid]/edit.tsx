@@ -11,6 +11,7 @@ import { EditVenueForm } from '../../../../../../components/venues/EditVenueForm
 import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditVenueMutation';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 import React from 'react';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
 
 const EditVenuePage: NextPage = () => {
 	const router = useRouter();
@@ -21,15 +22,23 @@ const EditVenuePage: NextPage = () => {
 	const { venue, venueError, isVenueLoading } = useVenueQuery(String(eid), String(vid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Venue</title>
 			</Head>
@@ -47,7 +56,7 @@ const EditVenuePage: NextPage = () => {
 					isVenueLoading={isVenueLoading}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

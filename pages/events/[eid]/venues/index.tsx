@@ -11,6 +11,7 @@ import { ViewServerError } from '../../../../components/ViewServerError';
 import React from 'react';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
@@ -20,14 +21,14 @@ const ActivitiesPage: NextPage = () => {
 
 	if (isOrganizerError) {
 		return (
-			<div>
+			<PageWrapper variant="gray">
 				<ViewServerError errors={[isOrganizerError]} />
-			</div>
+			</PageWrapper>
 		);
 	}
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>All Venues</title>
 			</Head>
@@ -55,7 +56,7 @@ const ActivitiesPage: NextPage = () => {
 					venuesError={venuesError}
 				/>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 

@@ -11,6 +11,7 @@ import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenue
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutatation';
 import React from 'react';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
 
 const DeleteVenuePage: NextPage = () => {
 	const router = useRouter();
@@ -24,15 +25,23 @@ const DeleteVenuePage: NextPage = () => {
 	const { venue, venueError, isVenueLoading } = useVenueQuery(String(eid), String(vid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Delete Venue</title>
 			</Head>
@@ -50,7 +59,7 @@ const DeleteVenuePage: NextPage = () => {
 					isVenueLoading={isVenueLoading}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

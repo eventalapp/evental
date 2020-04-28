@@ -6,6 +6,7 @@ import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -14,7 +15,7 @@ const ViewAttendeePage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Viewing Attendee: {aid}</title>
 			</Head>
@@ -33,7 +34,7 @@ const ViewAttendeePage: NextPage = () => {
 					aid={String(aid)}
 				/>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 

@@ -10,6 +10,7 @@ import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useCreateRoleMutation } from '../../../../../hooks/mutations/useCreateRoleMutation';
 import React from 'react';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
 
 const CreateRolePage: NextPage = () => {
 	const router = useRouter();
@@ -19,15 +20,23 @@ const CreateRolePage: NextPage = () => {
 	const { createRoleMutation, createRoleError } = useCreateRoleMutation(String(eid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Create Role</title>
 			</Head>
@@ -39,7 +48,7 @@ const CreateRolePage: NextPage = () => {
 
 				<CreateRoleForm createRoleError={createRoleError} createRoleMutation={createRoleMutation} />
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

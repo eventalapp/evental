@@ -9,6 +9,7 @@ import Unauthorized from '../../../../components/Unauthorized';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
 import React from 'react';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const EditEventPage: NextPage = () => {
 	const router = useRouter();
@@ -18,11 +19,15 @@ const EditEventPage: NextPage = () => {
 	const { editEventMutation, editEventError } = useEditEventMutation(String(eid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit event</title>
 			</Head>
@@ -41,7 +46,7 @@ const EditEventPage: NextPage = () => {
 					isEventLoading={isEventLoading}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

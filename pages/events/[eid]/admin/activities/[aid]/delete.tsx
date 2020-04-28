@@ -9,6 +9,7 @@ import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
 
 const DeleteActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -17,15 +18,23 @@ const DeleteActivityPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Delete Activity</title>
 			</Head>
@@ -37,7 +46,7 @@ const DeleteActivityPage: NextPage = () => {
 
 				<DeleteActivityForm eid={String(eid)} aid={String(aid)} />
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

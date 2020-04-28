@@ -14,13 +14,15 @@ import { NotFound } from '../NotFound';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { UseAttendeeByUserIdQueryData } from '../../hooks/queries/useAttendeeByUserIdQuery';
 
 type Props = {
 	eid: string;
 } & UseOrganizerQueryData &
 	UseEventQueryData &
 	UseActivitiesQueryData &
-	UseRolesQueryData;
+	UseRolesQueryData &
+	UseAttendeeByUserIdQueryData;
 
 export const ViewEvent: React.FC<Props> = (props) => {
 	const {
@@ -36,15 +38,29 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		activitiesError,
 		isOrganizerError,
 		rolesError,
-		isRolesLoading
+		isRolesLoading,
+		attendeeByUserId,
+		isAttendeeByUserIdLoading,
+		attendeeByUserIdError
 	} = props;
 
-	if (rolesError || isEventLoading || isOrganizerLoading || isActivitiesLoading || isRolesLoading) {
+	if (
+		rolesError ||
+		isEventLoading ||
+		isOrganizerLoading ||
+		isActivitiesLoading ||
+		isRolesLoading ||
+		isAttendeeByUserIdLoading
+	) {
 		return <Loading />;
 	}
 
-	if (isOrganizerError || rolesError || eventError || activitiesError) {
-		return <ViewServerError errors={[isOrganizerError, rolesError, eventError, activitiesError]} />;
+	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {
+		return (
+			<ViewServerError
+				errors={[isOrganizerError, rolesError, eventError, activitiesError, attendeeByUserIdError]}
+			/>
+		);
 	}
 
 	if (!event) {
@@ -57,6 +73,14 @@ export const ViewEvent: React.FC<Props> = (props) => {
 				<Link href={`/events/${eid}/admin`}>
 					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-semibold">
 						You are an organizer for this event, click here to manage this event
+					</a>
+				</Link>
+			)}
+
+			{!Boolean(attendeeByUserId) && (
+				<Link href={`/events/${eid}/signup`}>
+					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-semibold">
+						Are you attending this event? Sign up here.
 					</a>
 				</Link>
 			)}
@@ -102,18 +126,19 @@ export const ViewEvent: React.FC<Props> = (props) => {
 				</div>
 			</div>
 			<p>{event?.description}</p>
-			<div>
+
+			<div className="overflow-auto whitespace-nowrap relative py-2 mt-6">
 				{roles &&
 					roles.map((role) => (
 						<Link href={`/events/${eid}/roles/${role.slug}`} passHref key={role.id}>
-							<LinkButton className="mr-3 mt-3">
+							<LinkButton className="mr-3" variant="inversePrimary">
 								{capitalizeFirstLetter(role.name.toLowerCase())}s
 							</LinkButton>
 						</Link>
 					))}
 
 				<Link href={`/events/${eid}/venues`} passHref>
-					<LinkButton className="mt-3">Venues</LinkButton>
+					<LinkButton variant="inversePrimary">Venues</LinkButton>
 				</Link>
 			</div>
 			<ActivityList

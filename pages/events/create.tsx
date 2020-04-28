@@ -7,6 +7,7 @@ import { Navigation } from '../../components/navigation';
 import Unauthorized from '../../components/Unauthorized';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import React from 'react';
+import PageWrapper from '../../components/layout/PageWrapper';
 
 const CreateEventPage: NextPage = () => {
 	const session = useSession();
@@ -17,7 +18,7 @@ const CreateEventPage: NextPage = () => {
 	}
 
 	return (
-		<>
+		<PageWrapper>
 			<Head>
 				<title>Create event</title>
 			</Head>
@@ -32,7 +33,7 @@ const CreateEventPage: NextPage = () => {
 					createEventMutation={createEventMutation}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

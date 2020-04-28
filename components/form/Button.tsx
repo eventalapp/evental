@@ -10,15 +10,15 @@ type Props = {
 
 export const variants = {
 	'primary':
-		'bg-primary-500 hover:bg-white hover:text-primary border-2 border-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center',
+		'bg-primary-500 hover:bg-primary-400 border-2 border-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex-inline items-center justify-center',
 	'secondary':
-		'bg-secondary-500 hover:bg-white hover:text-secondary border-2 border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center',
+		'bg-secondary-500 hover:bg-secondary-400 border-2 border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex-inline items-center justify-center',
 	'gradient':
-		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center',
+		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex-inline items-center justify-center',
 	'no-bg':
-		'text-gray-900 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center',
+		'text-gray-900 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex-inline items-center justify-center',
 	'inversePrimary':
-		'bg-white-500 hover:bg-primary hover:text-white border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center'
+		'bg-white hover:bg-gray-100 border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex-inline items-center justify-center'
 };
 
 export const paddings = {

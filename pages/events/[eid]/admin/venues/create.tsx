@@ -10,6 +10,7 @@ import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useCreateVenueMutation } from '../../../../../hooks/mutations/useCreateVenueMutation';
 import React from 'react';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -19,15 +20,23 @@ const CreateActivityPage: NextPage = () => {
 	const { createVenueMutation, createVenueError } = useCreateVenueMutation(String(eid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper>
 			<Head>
 				<title>Create event</title>
 			</Head>
@@ -42,7 +51,7 @@ const CreateActivityPage: NextPage = () => {
 					createVenueMutation={createVenueMutation}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

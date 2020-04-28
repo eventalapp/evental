@@ -11,6 +11,7 @@ import { DeleteRoleForm } from '../../../../../../components/roles/DeleteRoleFor
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useDeleteRoleMutation } from '../../../../../../hooks/mutations/useDeleteRoleMutation';
 import React from 'react';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
 
 const DeleteRolePage: NextPage = () => {
 	const router = useRouter();
@@ -24,15 +25,23 @@ const DeleteRolePage: NextPage = () => {
 	const { deleteRoleError, deleteRoleMutation } = useDeleteRoleMutation(String(eid), String(rid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Delete Rid</title>
 			</Head>
@@ -51,7 +60,7 @@ const DeleteRolePage: NextPage = () => {
 					attendees={attendees}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

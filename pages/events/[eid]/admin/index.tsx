@@ -22,6 +22,7 @@ import { faChevronRight, faCog, faPlus, faTrash } from '@fortawesome/free-solid-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();
@@ -35,15 +36,23 @@ const AdminPage: NextPage = () => {
 	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>{buildTitle('Edit Event')}</title>
 			</Head>
@@ -185,7 +194,7 @@ const AdminPage: NextPage = () => {
 					</div>
 				</div>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 
