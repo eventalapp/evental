@@ -37,11 +37,7 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 				}
 			});
 
-			return await axios.post<Prisma.Event>('/api/events/create', formData, {
-				onUploadProgress: (progressEvent) => {
-					console.log(progressEvent);
-				}
-			});
+			return await axios.post<Prisma.Event>('/api/events/create', formData);
 		},
 		{
 			onSuccess: (response) => {
