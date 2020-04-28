@@ -8,7 +8,7 @@ import { Textarea } from '../form/Textarea';
 import { useVenuesQuery } from '../../hooks/queries/useVenuesQuery';
 import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
 import { useEditActivityMutation } from '../../hooks/mutations/useEditActivityMutation';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 
@@ -35,7 +35,7 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 	}
 
 	if (activityError || venuesError || editActivityError) {
-		return <ServerError errors={[activityError, venuesError, editActivityError]} />;
+		return <ViewServerError errors={[activityError, venuesError, editActivityError]} />;
 	}
 
 	return (

@@ -2,7 +2,7 @@ import { capitalizeFirstLetter } from '../../utils/string';
 import Image from 'next/image';
 import React from 'react';
 import { Loading } from '../Loading';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import Link from 'next/link';
@@ -29,7 +29,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 	}
 
 	if (attendeeError || isOrganizerError) {
-		return <ServerError errors={[attendeeError, isOrganizerError]} />;
+		return <ViewServerError errors={[attendeeError, isOrganizerError]} />;
 	}
 
 	if (!attendee || !attendee.user || !attendee.role) {

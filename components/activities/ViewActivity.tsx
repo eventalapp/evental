@@ -4,7 +4,7 @@ import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import { UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
 import { Loading } from '../Loading';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 
@@ -31,7 +31,7 @@ export const ViewActivity: React.FC<Props> = (props) => {
 	}
 
 	if (isOrganizerError || activityError) {
-		return <ServerError errors={[isOrganizerError, activityError]} />;
+		return <ViewServerError errors={[isOrganizerError, activityError]} />;
 	}
 
 	if (!activity) {

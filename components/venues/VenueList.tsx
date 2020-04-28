@@ -3,7 +3,7 @@ import React from 'react';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 
@@ -28,7 +28,7 @@ export const VenueList: React.FC<Props> = (props) => {
 	}
 
 	if (isOrganizerError || venuesError) {
-		return <ServerError errors={[isOrganizerError, venuesError]} />;
+		return <ViewServerError errors={[isOrganizerError, venuesError]} />;
 	}
 
 	if (!venues || (venues && venues.length === 0)) {

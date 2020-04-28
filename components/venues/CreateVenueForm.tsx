@@ -4,7 +4,7 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { UseCreateVenueMutationData } from '../../hooks/mutations/useCreateVenueMutation';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateVenueMutationData;
@@ -13,7 +13,7 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 	const { createVenueMutation, createVenueError } = props;
 
 	if (createVenueError) {
-		return <ServerError errors={[createVenueError]} />;
+		return <ViewServerError errors={[createVenueError]} />;
 	}
 
 	return (

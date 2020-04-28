@@ -3,7 +3,7 @@ import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
@@ -31,7 +31,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 	}
 
 	if (isOrganizerError || venueError) {
-		return <ServerError errors={[isOrganizerError, venueError]} />;
+		return <ViewServerError errors={[isOrganizerError, venueError]} />;
 	}
 
 	if (!venue) {

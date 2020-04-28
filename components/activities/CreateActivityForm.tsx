@@ -8,7 +8,7 @@ import { Textarea } from '../form/Textarea';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { UseCreateActivityMutationData } from '../../hooks/mutations/useCreateActivityMutation';
 import { Loading } from '../Loading';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 
 type Props = {
@@ -27,7 +27,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	if (venuesError) {
 		return (
 			<div>
-				<p className="text-red-500">Venues: {venuesError}</p>
+				<ViewServerError errors={[venuesError]} />
 			</div>
 		);
 	}
@@ -37,7 +37,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	}
 
 	if (venuesError || createActivityError) {
-		return <ServerError errors={[venuesError, createActivityError]} />;
+		return <ViewServerError errors={[venuesError, createActivityError]} />;
 	}
 
 	if (!venues) {

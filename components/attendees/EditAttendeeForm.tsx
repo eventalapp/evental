@@ -6,7 +6,7 @@ import { Label } from '../form/Label';
 import { Select } from '../form/Select';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import { UseEditAttendeeMutationData } from '../../hooks/mutations/useEditAttendeeMutation';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
@@ -40,7 +40,7 @@ export const EditAttendeeForm: React.FC<Props> = (props) => {
 	}
 
 	if (attendeeError || editAttendeeError || rolesError) {
-		return <ServerError errors={[attendeeError, editAttendeeError, rolesError]} />;
+		return <ViewServerError errors={[attendeeError, editAttendeeError, rolesError]} />;
 	}
 
 	return (

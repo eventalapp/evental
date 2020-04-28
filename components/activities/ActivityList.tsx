@@ -4,7 +4,7 @@ import { groupByDate } from '../../utils/groupByDate';
 import React from 'react';
 import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
 import { Loading } from '../Loading';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
@@ -30,7 +30,7 @@ export const ActivityList: React.FC<Props> = (props) => {
 	}
 
 	if (activitiesError || isOrganizerError) {
-		return <ServerError errors={[activitiesError, isOrganizerError]} />;
+		return <ViewServerError errors={[activitiesError, isOrganizerError]} />;
 	}
 
 	if (!activities || activities?.length === 0) {

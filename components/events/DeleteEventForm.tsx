@@ -3,7 +3,7 @@ import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { UseDeleteEventMutationData } from '../../hooks/mutations/useDeleteEventMutation';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
@@ -21,7 +21,7 @@ export const DeleteEventForm: React.FC<Props> = (props) => {
 	}
 
 	if (deleteEventError || eventError) {
-		return <ServerError errors={[deleteEventError, eventError]} />;
+		return <ViewServerError errors={[deleteEventError, eventError]} />;
 	}
 
 	if (!event) {

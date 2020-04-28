@@ -4,7 +4,7 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
 import { useDeleteActivityMutation } from '../../hooks/mutations/useDeleteActivityMutation';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 
@@ -31,7 +31,7 @@ export const DeleteActivityForm: React.FC<DeleteActivityFormProps> = (props) => 
 	}
 
 	if (activityError || deleteActivityError) {
-		return <ServerError errors={[activityError, deleteActivityError]} />;
+		return <ViewServerError errors={[activityError, deleteActivityError]} />;
 	}
 
 	return (

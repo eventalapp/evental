@@ -5,7 +5,7 @@ import { capitalizeFirstLetter } from '../../utils/string';
 import { UseAttendeesQueryData } from '../../hooks/queries/useAttendeesQuery';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { LinkButton } from '../form/LinkButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,7 +36,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 	}
 
 	if (attendeesError || isOrganizerError) {
-		return <ServerError errors={[attendeesError, isOrganizerError]} />;
+		return <ViewServerError errors={[attendeesError, isOrganizerError]} />;
 	}
 
 	return (
