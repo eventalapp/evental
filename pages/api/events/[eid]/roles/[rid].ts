@@ -20,7 +20,7 @@ export default async (
 
 		const role = await getRole(String(eid), String(rid));
 
-		const attendees = await getAttendees(String(eid), String(rid));
+		const attendees = await getAttendeesByRole(String(eid), String(rid));
 
 		const payload: RoleAttendeePayload = { attendees, role };
 
@@ -51,7 +51,10 @@ export const getRole = async (eid: string, rid: string): Promise<Prisma.EventRol
 	return role;
 };
 
-export const getAttendees = async (eid: string, rid: string): Promise<EventAttendeeUser[]> => {
+export const getAttendeesByRole = async (
+	eid: string,
+	rid: string
+): Promise<EventAttendeeUser[]> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
