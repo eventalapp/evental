@@ -27,6 +27,7 @@
 		"@types/multiparty": "^0.0.33",
 		"aws-sdk": "^2.1121.0",
 		"axios": "^0.26.1",
+		"babel-plugin-superjson-next": "^0.4.3",
 		"busboy": "^1.6.0",
 		"classnames": "^2.3.1",
 		"date-fns": "^2.28.0",
@@ -44,6 +45,7 @@
 		"react-query": "^3.35.0",
 		"react-toastify": "^8.2.0",
 		"sharp": "^0.30.4",
+		"superjson": "^1.9.0",
 		"zod": "^3.14.4"
 	},
 	"devDependencies": {

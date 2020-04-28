@@ -10,7 +10,7 @@ export interface UseEventsQueryData {
 	eventsError: ServerErrorPayload | null;
 }
 
-export const useEventsQuery = (): UseEventsQueryData => {
+export const useEventsQuery = (initialData?: Prisma.Event[]): UseEventsQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: events, isLoading: isEventsLoading } = useQuery<
@@ -28,7 +28,8 @@ export const useEventsQuery = (): UseEventsQueryData => {
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 
