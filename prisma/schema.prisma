@@ -83,7 +83,7 @@ model Event {
   startDate   DateTime
   endDate     DateTime
   type        String   @default("Event")
-  image       String?  @default("https://www.gravatar.com/avatar/?d=identicon")
+  image       String?  @default("/images/default-event.jpg")
   banner      String?
   description String?
   updatedAt   DateTime @updatedAt

@@ -7,22 +7,35 @@ import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { DatePickerButton } from './DatePickerButton';
 
 export const DatePicker: React.FC<ReactDatePickerProps> = (props) => {
-	const { startDate, endDate, selected, onChange, selectsStart, selectsEnd } = props;
+	const {
+		startDate,
+		endDate,
+		selected,
+		onChange,
+		selectsStart,
+		selectsEnd,
+		showTimeSelect,
+		timeIntervals
+	} = props;
 
 	return (
 		<ReactDatePicker
+			popperPlacement={'bottom'}
 			className="input"
 			placeholderText="Select date"
 			onChange={onChange}
 			selected={selected}
 			selectsStart={selectsStart}
 			selectsEnd={selectsEnd}
+			dateFormat={"yyyy-MM-dd'T'HH:mm"}
 			nextMonthButtonLabel=">"
 			previousMonthButtonLabel="<"
 			popperClassName="react-datepicker-right"
-			customInput={<DatePickerButton />}
+			customInput={<DatePickerButton value={selected} />}
 			startDate={startDate}
 			endDate={endDate}
+			showTimeSelect={showTimeSelect}
+			timeIntervals={timeIntervals}
 			renderCustomHeader={({
 				date,
 				decreaseMonth,

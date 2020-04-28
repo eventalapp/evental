@@ -35,11 +35,9 @@ export default async (
 			if (buffer.length >= 1) {
 				const sharpImage = await processImage(buffer);
 
-				const fileExtension = filename?.split('.').pop();
-
 				const params: S3.Types.PutObjectRequest = {
 					Bucket: 'evental/images',
-					Key: `${crypto.randomBytes(20).toString('hex')}.${fileExtension}`,
+					Key: `${crypto.randomBytes(20).toString('hex')}.jpg`,
 					Body: sharpImage,
 					ContentType: mimeType
 				};

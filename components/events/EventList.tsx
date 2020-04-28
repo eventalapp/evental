@@ -55,7 +55,11 @@ export const EventList: React.FC<Props> = (props) => {
 										{event.image ? (
 											<Image
 												alt={event.name}
-												src={String(event.image)}
+												src={
+													event.image
+														? `https://cdn.evental.app${event.image}`
+														: `https://cdn.evental.app/images/default-event.jpg`
+												}
 												layout="fill"
 												className="rounded-md"
 											/>
