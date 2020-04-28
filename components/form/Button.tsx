@@ -10,22 +10,22 @@ type Props = {
 
 export const variants = {
 	'primary':
-		'bg-primary-500 hover:bg-white hover:text-primary border-2 border-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all',
+		'bg-primary-500 hover:bg-white hover:text-primary border-2 border-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center',
 	'secondary':
-		'bg-secondary-500 hover:bg-white hover:text-secondary border-2 border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all',
+		'bg-secondary-500 hover:bg-white hover:text-secondary border-2 border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center',
 	'gradient':
-		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all',
+		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center',
 	'no-bg':
-		'text-gray-900 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all',
+		'text-gray-900 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center',
 	'inversePrimary':
-		'bg-white-500 hover:bg-primary hover:text-white border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all'
+		'bg-white-500 hover:bg-primary hover:text-white border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition flex items-center justify-center'
 };
 
 export const paddings = {
-	tiny: 'px-1.5 py-1 hover:px-2',
-	small: 'px-3 py-2 hover:px-4',
-	medium: 'px-6 py-2 hover:px-8',
-	large: 'px-8 py-2 hover:px-10',
+	tiny: 'px-1.5 py-1',
+	small: 'px-3 py-2',
+	medium: 'px-6 py-2',
+	large: 'px-8 py-2',
 	none: 'p-0'
 };
 
