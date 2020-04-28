@@ -199,7 +199,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			<div className="flex flex-row justify-end">
 				<Button
 					type="submit"
-					variant="secondary"
+					variant="primary"
 					padding="medium"
 					disabled={isEventLoading || Boolean(event)}
 				>
