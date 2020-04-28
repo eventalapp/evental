@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import { RoleList } from '../../../../components/roles/RoleList';
@@ -27,7 +26,6 @@ const RolesPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-
 				<FlexRowBetween>
 					<h1 className="text-3xl">Roles Page</h1>
 

@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import React from 'react';
@@ -27,7 +26,6 @@ const ViewAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-
 				<RoleAttendeeList
 					eid={String(eid)}
 					rid={String(rid)}
