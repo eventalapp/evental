@@ -28,11 +28,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isVenueLoading || isOrganizerLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (isOrganizerError || venueError) {

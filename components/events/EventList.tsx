@@ -15,11 +15,7 @@ export const EventList: React.FC<Props> = (props) => {
 	const { events, isEventsLoading, eventsError } = props;
 
 	if (isEventsLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (eventsError) {

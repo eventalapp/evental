@@ -25,11 +25,7 @@ export const VenueList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isVenuesLoading || isOrganizerLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (isOrganizerError || venuesError) {

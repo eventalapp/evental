@@ -19,11 +19,7 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 		props;
 
 	if (isRoleAttendeesLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (!role) {

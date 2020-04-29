@@ -29,11 +29,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isAttendeesLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (!attendees || attendees?.length === 0) {

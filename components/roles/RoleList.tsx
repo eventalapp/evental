@@ -26,11 +26,7 @@ export const RoleList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isOrganizerLoading || isRolesLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (isOrganizerError || rolesError) {

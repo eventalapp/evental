@@ -26,11 +26,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isAttendeeLoading || isOrganizerLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (attendeeError || isOrganizerError) {
@@ -73,7 +69,6 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 					)}
 				</FlexRowBetween>
 
-				<p>{capitalizeFirstLetter(String(attendee.permissionRole).toLowerCase())}</p>
 				<p>{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}</p>
 				<span className="text-md text-gray-700 block">{attendee.company}</span>
 				<span className="text-md text-gray-700 block">{attendee.position}</span>

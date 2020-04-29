@@ -53,11 +53,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		isRolesLoading ||
 		isAttendeeByUserIdLoading
 	) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {

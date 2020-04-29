@@ -33,11 +33,7 @@ export const EditAttendeeForm: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isAttendeeLoading || isRolesLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (!attendee) {

@@ -31,11 +31,7 @@ export const ViewActivity: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isOrganizerLoading || isActivityLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (isOrganizerError || activityError) {

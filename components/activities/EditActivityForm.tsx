@@ -37,11 +37,7 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 	} = props;
 
 	if (isActivityLoading || isVenuesLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (!activity) {
