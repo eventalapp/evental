@@ -1,5 +1,5 @@
-import React, {forwardRef} from 'react';
-import {format} from 'date-fns';
+import React, { forwardRef } from 'react';
+import { format } from 'date-fns';
 
 export const DatePickerButton = forwardRef<
 	HTMLButtonElement,

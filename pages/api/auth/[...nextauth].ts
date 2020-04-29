@@ -2,10 +2,10 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import Prisma from '@prisma/client';
 import NextAuth from 'next-auth';
 import prisma from '../../../prisma/client';
-import { providers } from '../../../utils/providers';
+import { providers } from '../../../utils/providers/';
 
 export default NextAuth({
-	providers,
+	providers: providers,
 	pages: {
 		signIn: '/auth/signin',
 		newUser: '/'

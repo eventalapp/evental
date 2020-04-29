@@ -1,5 +1,5 @@
 import { Provider } from 'next-auth/providers';
-import GoogleProvider from 'next-auth/providers/google';
+import GoogleProvider from './google';
 
 export const providers: Provider[] = [];
 

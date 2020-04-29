@@ -8,7 +8,8 @@ type Props = {
 };
 
 const variants = {
-	secondary: 'bg-white border-b-2 border-gray-200 placeholder-gray-400 text-sm my-2 py-1 px-2 w-full'
+	secondary:
+		'bg-white border-b-2 border-gray-200 placeholder-gray-400 text-sm my-2 py-1 px-2 w-full'
 };
 
 type InputProps = Props &

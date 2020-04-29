@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import {LinkButton} from '../form/LinkButton';
-import {UseOrganizerQueryData} from '../../hooks/queries/useOrganizerQuery';
-import {UseVenuesQueryData} from '../../hooks/queries/useVenuesQuery';
-import {ViewServerError} from '../ViewServerError';
-import {Loading} from '../Loading';
-import {NotFound} from '../NotFound';
+import { LinkButton } from '../form/LinkButton';
+import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
+import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
+import { ViewServerError } from '../ViewServerError';
+import { Loading } from '../Loading';
+import { NotFound } from '../NotFound';
 
 type Props = {
 	eid: string;

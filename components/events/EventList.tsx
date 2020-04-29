@@ -6,6 +6,7 @@ import { UseEventsQueryData } from '../../hooks/queries/useEventsQuery';
 import { Loading } from '../Loading';
 import { ViewServerError } from '../ViewServerError';
 import { format } from 'date-fns';
+import { NotFound } from '../NotFound';
 
 type Props = UseEventsQueryData;
 
@@ -19,6 +20,11 @@ export const EventList: React.FC<Props> = (props) => {
 	if (eventsError) {
 		return <ViewServerError errors={[eventsError]} />;
 	}
+
+	if (!events || !events.length) {
+		return <NotFound />;
+	}
+
 	return (
 		<div>
 			{events &&

@@ -119,7 +119,7 @@ export const EditEventSchema = z.object({
 
 export type EditEventPayload = z.infer<typeof EditEventSchema>;
 
-// Event Member
+// Event Attendee
 
 export const EditAttendeeSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
@@ -128,11 +128,11 @@ export const EditAttendeeSchema = z.object({
 		.min(4, 'Slug must be at least 4 characters')
 		.max(40, 'Slug must be less than 40 characters'),
 	company: z.string().max(40, 'Company must be less than 40 characters'),
-	position: z
-		.string()
-
-		.max(40, 'Position must be less than 40 characters'),
-	eventRoleId: z.string().min(1, 'Role is required').max(100, 'Role is too long')
+	position: z.string().max(40, 'Position must be less than 40 characters'),
+	description: z.string().max(40, 'Position must be less than 300 characters'),
+	location: z.string().max(40, 'Position must be less than 40 characters'),
+	eventRoleId: z.string().min(1, 'Role is required').max(100, 'Role is too long'),
+	image: isBrowser ? z.instanceof(FileList) : z.any()
 });
 
 export type EditAttendeePayload = z.infer<typeof EditAttendeeSchema>;
