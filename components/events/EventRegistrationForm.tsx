@@ -3,57 +3,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
-import { CreateEventPayload, CreateEventSchema } from '../../utils/schemas';
+import { CreateAttendeePayload, CreateAttendeeSchema } from '../../utils/schemas';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
-import { DatePicker } from '../form/DatePicker';
-import { useEventQuery } from '../../hooks/queries/useEventQuery';
+import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { useAttendeeQuery } from '../../hooks/queries/useAttendeeQuery';
+import { UseRegisterAttendeeMutationData } from '../../hooks/mutations/useRegisterAttendeeMutation';
+import PageWrapper from '../layout/PageWrapper';
+import { Loading } from '../Loading';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseCreateEventMutationData;
+	UseEventQueryData &
+	UseRegisterAttendeeMutationData;
 
-export const EventRegisterForm: React.FC<Props> = (props) => {
-	const { createEventMutation, createEventError } = props;
+export const EventRegistrationForm: React.FC<Props> = (props) => {
+	const { registerAttendeeError, registerAttendeeMutation, event, isEventLoading } = props;
 	const {
 		register,
 		handleSubmit,
 		watch,
 		setValue,
 		trigger,
-		control,
 		formState: { errors }
-	} = useForm<CreateEventPayload>({
-		resolver: zodResolver(CreateEventSchema)
+	} = useForm<CreateAttendeePayload>({
+		resolver: zodResolver(CreateAttendeeSchema)
 	});
 
 	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
-	const startDateWatcher = watch('startDate');
-	const endDateWatcher = watch('endDate');
 
-	const { event, isEventLoading } = useEventQuery(slugWatcher);
-
-	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('startDate', startDateWatcher);
-			setValue('endDate', startDateWatcher);
-			toast.warn('The start date cannot be later than the end date.');
-		}
-	}, [startDateWatcher]);
-
-	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('startDate', endDateWatcher);
-			setValue('endDate', endDateWatcher);
-			toast.warn('The end date cannot be earlier than the start date.');
-		}
-	}, [endDateWatcher]);
+	const { attendee, isAttendeeLoading } = useAttendeeQuery(String(event?.id), slugWatcher);
 
 	useEffect(() => {
 		setValue(
@@ -81,73 +65,50 @@ export const EventRegisterForm: React.FC<Props> = (props) => {
 	}, [slugWatcher]);
 
 	useEffect(() => {
-		createEventError && toast.error(createEventError.message);
-	}, [createEventError]);
+		registerAttendeeError && toast.error(registerAttendeeError.message);
+	}, [registerAttendeeError]);
+
+	if (isEventLoading) {
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
+	}
 
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				createEventMutation.mutate(data);
+				registerAttendeeMutation.mutate(data);
 			})}
 		>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name</Label>
-						<Input placeholder="Event name" {...register('name', { required: true })} />
+						<Input placeholder="Full Name" {...register('name', { required: true })} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
 					<div>
 						<Label htmlFor="location">Location</Label>
-						<Input placeholder="Event location" {...register('location', { required: true })} />
+						<Input placeholder="Location" {...register('location', { required: true })} />
 						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 					</div>
 				</div>
-
+			</div>
+			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="startDate">Start Date</Label>
-						<div className="relative">
-							<Controller
-								control={control}
-								name="startDate"
-								render={({ field }) => (
-									<DatePicker
-										onChange={(e) => field.onChange(e)}
-										selected={field.value}
-										startDate={field.value}
-										endDate={endDateWatcher}
-										selectsStart
-										dateFormat="MM/dd/yyyy"
-									/>
-								)}
-							/>
-						</div>
-						{errors.startDate?.message && <ErrorMessage>{errors.startDate?.message}</ErrorMessage>}
+						<Label htmlFor="position">Position</Label>
+						<Input placeholder="Position" {...register('position', { required: true })} />
+						{errors.position?.message && <ErrorMessage>{errors.position?.message}</ErrorMessage>}
 					</div>
 
 					<div>
-						<Label htmlFor="endDate">End Date</Label>
-						<div className="relative">
-							<Controller
-								control={control}
-								name="endDate"
-								render={({ field }) => (
-									<DatePicker
-										onChange={(e) => field.onChange(e)}
-										selected={field.value}
-										selectsEnd
-										startDate={startDateWatcher}
-										endDate={field.value}
-										dateFormat="MM/dd/yyyy"
-									/>
-								)}
-							/>
-						</div>
-						{errors.endDate?.message && (
-							<span className="text-red-500 mt-2">{errors.endDate?.message}</span>
-						)}
+						<Label htmlFor="company">Company</Label>
+						<Input placeholder="Company" {...register('company', { required: true })} />
+						{errors.company?.message && <ErrorMessage>{errors.company?.message}</ErrorMessage>}
 					</div>
 				</div>
 			</div>
@@ -171,11 +132,11 @@ export const EventRegisterForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="slug">Slug</Label>
 						<div className="flex items-center">
-							<span className="mr-1 text-md">evental.app/events/</span>
-							<Input placeholder="event-slug" {...register('slug', { required: true })} />
+							<span className="mr-1 text-md">/attendees/</span>
+							<Input placeholder="attendee-slug" {...register('slug', { required: true })} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{event && (
+						{attendee && (
 							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
 						)}
 					</div>
@@ -197,9 +158,9 @@ export const EventRegisterForm: React.FC<Props> = (props) => {
 					type="submit"
 					variant="primary"
 					padding="medium"
-					disabled={isEventLoading || Boolean(event)}
+					disabled={isAttendeeLoading || Boolean(attendee)}
 				>
-					Register Event
+					Register
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>
 			</div>

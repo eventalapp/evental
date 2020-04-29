@@ -7,6 +7,7 @@ import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQ
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
 	UseDeleteRoleMutationData &
@@ -28,7 +29,11 @@ export const DeleteRoleForm: React.FC<Props> = (props) => {
 	}
 
 	if (isRoleAttendeesLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (!role || !attendees) {

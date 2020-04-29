@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { CreateEventPayload } from '../../utils/schemas';
+import { populateFormData } from '../../utils/populateFormData';
 
 export interface UseCreateEventMutationData {
 	createEventMutation: UseMutationResult<
@@ -25,17 +26,7 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 		CreateEventPayload
 	>(
 		async (data) => {
-			const formData = new FormData();
-
-			Object.entries(data).forEach(([key, value]) => {
-				if (value.length >= 1 && value instanceof FileList) {
-					formData.append(key, value[0], value[0]?.name);
-				} else if (value instanceof Date) {
-					formData.append(key, value.toISOString());
-				} else {
-					formData.append(key, value);
-				}
-			});
+			const formData = populateFormData(data);
 
 			return await axios.post<Prisma.Event>('/api/events/create', formData);
 		},

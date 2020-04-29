@@ -29,7 +29,13 @@ export const useAttendeeQuery = (
 		},
 		{
 			retry: 0,
-			enabled: eid !== undefined && eid !== 'undefined' && aid !== undefined && aid !== 'undefined',
+			enabled:
+				eid !== undefined &&
+				eid !== 'undefined' &&
+				aid !== undefined &&
+				aid !== 'undefined' &&
+				eid !== '' &&
+				aid !== '',
 			onError: (error) => {
 				setError(error.response?.data.error ?? null);
 			},

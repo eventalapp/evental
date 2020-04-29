@@ -6,6 +6,7 @@ import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { ViewServerError } from '../ViewServerError';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -24,7 +25,11 @@ export const VenueList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isVenuesLoading || isOrganizerLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (isOrganizerError || venuesError) {

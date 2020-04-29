@@ -10,6 +10,7 @@ import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { LinkButton } from '../form/LinkButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -28,7 +29,11 @@ export const AttendeeList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isAttendeesLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (!attendees || attendees?.length === 0) {
@@ -54,8 +59,8 @@ export const AttendeeList: React.FC<Props> = (props) => {
 											<Image
 												alt={String(attendee.name)}
 												src={String(
-													attendee?.user?.image
-														? `https://cdn.evental.app${attendee?.user?.image}`
+													attendee?.image
+														? `https://cdn.evental.app${attendee?.image}`
 														: `https://cdn.evental.app/images/default-avatar.jpg`
 												)}
 												className="rounded-full"

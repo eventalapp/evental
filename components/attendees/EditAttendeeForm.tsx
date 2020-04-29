@@ -10,6 +10,7 @@ import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -32,7 +33,11 @@ export const EditAttendeeForm: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isAttendeeLoading || isRolesLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (!attendee) {

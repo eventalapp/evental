@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { UseAttendeeByUserIdQueryData } from '../../hooks/queries/useAttendeeByUserIdQuery';
 import { format } from 'date-fns';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -52,7 +53,11 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		isRolesLoading ||
 		isAttendeeByUserIdLoading
 	) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {
@@ -78,7 +83,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 			)}
 
 			{!Boolean(attendeeByUserId) && (
-				<Link href={`/events/${eid}/signup`}>
+				<Link href={`/events/${eid}/register`}>
 					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-semibold">
 						Are you attending this event? Register here.
 					</a>

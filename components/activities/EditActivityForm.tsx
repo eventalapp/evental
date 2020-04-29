@@ -11,6 +11,7 @@ import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -36,7 +37,11 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 	} = props;
 
 	if (isActivityLoading || isVenuesLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (!activity) {

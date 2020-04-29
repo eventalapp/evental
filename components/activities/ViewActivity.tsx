@@ -10,6 +10,7 @@ import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -30,7 +31,11 @@ export const ViewActivity: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isOrganizerLoading || isActivityLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (isOrganizerError || activityError) {

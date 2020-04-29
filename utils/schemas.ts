@@ -121,6 +121,21 @@ export type EditEventPayload = z.infer<typeof EditEventSchema>;
 
 // Event Attendee
 
+export const CreateAttendeeSchema = z.object({
+	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	slug: z
+		.string()
+		.min(4, 'Slug must be at least 4 characters')
+		.max(40, 'Slug must be less than 40 characters'),
+	company: z.string().max(40, 'Company must be less than 40 characters'),
+	position: z.string().max(40, 'Position must be less than 40 characters'),
+	description: z.string().max(40, 'Position must be less than 300 characters'),
+	location: z.string().max(40, 'Position must be less than 40 characters'),
+	image: isBrowser ? z.instanceof(FileList) : z.any()
+});
+
+export type CreateAttendeePayload = z.infer<typeof CreateAttendeeSchema>;
+
 export const EditAttendeeSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	slug: z

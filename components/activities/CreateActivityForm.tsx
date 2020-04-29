@@ -10,6 +10,7 @@ import { UseCreateActivityMutationData } from '../../hooks/mutations/useCreateAc
 import { Loading } from '../Loading';
 import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -33,7 +34,11 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	}
 
 	if (isVenuesLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (venuesError || createActivityError) {

@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = { eid: string; aid: string } & UseAttendeeQueryData & UseOrganizerQueryData;
 
@@ -25,7 +26,11 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isAttendeeLoading || isOrganizerLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (attendeeError || isOrganizerError) {
@@ -43,8 +48,8 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 					<Image
 						alt={String(attendee.name)}
 						src={String(
-							attendee?.user?.image
-								? `https://cdn.evental.app${attendee?.user?.image}`
+							attendee?.image
+								? `https://cdn.evental.app${attendee?.image}`
 								: `https://cdn.evental.app/images/default-avatar.jpg`
 						)}
 						className="rounded-full"

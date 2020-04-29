@@ -7,6 +7,7 @@ import { UseDeleteActivityMutationData } from '../../hooks/mutations/useDeleteAc
 import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseDeleteActivityMutationData &
@@ -24,7 +25,11 @@ export const DeleteActivityForm: React.FC<Props> = (props) => {
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (isActivityLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (!activity) {

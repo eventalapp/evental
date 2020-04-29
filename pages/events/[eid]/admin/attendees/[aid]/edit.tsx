@@ -20,7 +20,7 @@ import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/
 
 type Props = {
 	initialOrganizer: boolean;
-	initialAttendee: EventAttendeeUser;
+	initialAttendee: EventAttendeeUser | undefined;
 	session: Session | null;
 };
 
@@ -87,8 +87,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const { eid, aid } = context.query;
 
 	const session = await getSession(context);
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
-	const initialAttendee = await getAttendee(String(eid), String(aid));
+	const initialOrganizer = (await getIsOrganizer(session?.user.id, String(eid))) ?? undefined;
+	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
 
 	return {
 		props: {

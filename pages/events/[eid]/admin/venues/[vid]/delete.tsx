@@ -20,7 +20,7 @@ import { getVenue } from '../../../../../api/events/[eid]/venues/[vid]';
 
 type Props = {
 	initialOrganizer: boolean;
-	initialVenue: Prisma.EventVenue;
+	initialVenue: Prisma.EventVenue | undefined;
 	session: Session | null;
 };
 
@@ -82,8 +82,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const { eid, vid } = context.query;
 
 	const session = await getSession(context);
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
-	const initialVenue = await getVenue(String(eid), String(vid));
+	const initialOrganizer = (await getIsOrganizer(session?.user.id, String(eid))) ?? undefined;
+	const initialVenue = (await getVenue(String(eid), String(vid))) ?? undefined;
 
 	return {
 		props: {

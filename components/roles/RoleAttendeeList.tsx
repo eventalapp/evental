@@ -9,6 +9,7 @@ import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { ViewServerError } from '../ViewServerError';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -30,7 +31,11 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isOrganizerLoading || isRoleAttendeesLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (isOrganizerError || roleAttendeesError) {

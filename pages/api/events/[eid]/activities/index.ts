@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
-import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import Prisma from '@prisma/client';
 import { getEvent } from '../index';
 import { handleServerError } from '../../../../../utils/handleServerError';
@@ -14,17 +14,21 @@ export default async (
 
 		const activityList = await getActivities(String(eid));
 
+		if (!activityList) {
+			return res.status(404).send({ error: { message: 'Activities not found' } });
+		}
+
 		return res.status(200).send(activityList);
 	} catch (error) {
 		return handleServerError(error, res);
 	}
 };
 
-export const getActivities = async (eid: string): Promise<Prisma.EventActivity[]> => {
+export const getActivities = async (eid: string): Promise<Prisma.EventActivity[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
-		throw new ServerError('Event not found.', 404);
+		return null;
 	}
 
 	return await prisma.eventActivity.findMany({
