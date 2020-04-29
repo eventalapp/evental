@@ -11,10 +11,11 @@ import { Session } from 'next-auth';
 import { EventRegistrationForm } from '../../../components/events/EventRegistrationForm';
 import { useRegisterAttendeeMutation } from '../../../hooks/mutations/useRegisterAttendeeMutation';
 import React from 'react';
-import { UnauthorizedPage } from '../../../components/UnauthorizedPage';
+import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
 import { getEvent } from '../../api/events/[eid]';
 import Prisma from '@prisma/client';
-import { NotFoundPage } from '../../../components/NotFoundPage';
+import { NotFoundPage } from '../../../components/error/NotFoundPage';
+import { Loading } from '../../../components/error/Loading';
 
 type Props = {
 	session: Session | null;
@@ -36,6 +37,10 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 
 	if (!initialEvent) {
 		return <NotFoundPage />;
+	}
+
+	if (isEventLoading) {
+		return <Loading />;
 	}
 
 	return (

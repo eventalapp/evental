@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
-import Column from './layout/Column';
-import { Navigation } from './navigation';
-import { LinkButton } from './form/LinkButton';
+import Column from '../layout/Column';
+import { Navigation } from '../navigation';
+import { LinkButton } from '../form/LinkButton';
 
 const NoAccess: React.FC = () => {
 	return (

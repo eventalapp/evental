@@ -2,12 +2,8 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { ViewServerError } from '../ViewServerError';
 import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
-import { Loading } from '../Loading';
-import { NotFound } from '../NotFound';
 import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
 	UseDeleteRoleMutationData &
@@ -16,25 +12,12 @@ type Props = Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFor
 export const DeleteRoleForm: React.FC<Props> = (props) => {
 	const {
 		deleteRoleMutation,
-		deleteRoleError,
-		role,
-		attendees,
-		roleAttendeesError,
-		isRoleAttendeesLoading
+
+		role
 	} = props;
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
-	if (deleteRoleError || roleAttendeesError) {
-		return <ViewServerError errors={[deleteRoleError, roleAttendeesError]} />;
-	}
-
-	if (isRoleAttendeesLoading) {
-		return <Loading />;
-	}
-
-	if (!role || !attendees) {
-		return <NotFound />;
-	}
+	if (!role) return null;
 
 	return (
 		<form onSubmit={deleteRoleMutation.mutate}>

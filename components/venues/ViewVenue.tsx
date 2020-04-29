@@ -3,11 +3,7 @@ import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
-import { ViewServerError } from '../ViewServerError';
-import { Loading } from '../Loading';
-import { NotFound } from '../NotFound';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -20,24 +16,13 @@ export const ViewVenue: React.FC<Props> = (props) => {
 		eid,
 		vid,
 		venue,
-		venueError,
-		isOrganizerError,
+
 		isOrganizer,
-		isVenueLoading,
+
 		isOrganizerLoading
 	} = props;
 
-	if (isVenueLoading || isOrganizerLoading) {
-		return <Loading />;
-	}
-
-	if (isOrganizerError || venueError) {
-		return <ViewServerError errors={[isOrganizerError, venueError]} />;
-	}
-
-	if (!venue) {
-		return <NotFound />;
-	}
+	if (!venue) return null;
 
 	return (
 		<div>

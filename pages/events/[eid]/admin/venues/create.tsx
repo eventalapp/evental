@@ -8,12 +8,13 @@ import { CreateVenueForm } from '../../../../../components/venues/CreateVenueFor
 import { Navigation } from '../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useCreateVenueMutation } from '../../../../../hooks/mutations/useCreateVenueMutation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
-import { UnauthorizedPage } from '../../../../../components/UnauthorizedPage';
-import { NoAccessPage } from '../../../../../components/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
+import { toast } from 'react-toastify';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -26,6 +27,10 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { createVenueMutation, createVenueError } = useCreateVenueMutation(String(eid));
+
+	useEffect(() => {
+		toast.error(createVenueError?.message);
+	}, [createVenueError]);
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;

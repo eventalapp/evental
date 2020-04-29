@@ -4,10 +4,7 @@ import { capitalizeFirstLetter } from '../../utils/string';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
-import { Loading } from '../Loading';
-import { ViewServerError } from '../ViewServerError';
-import { NotFound } from '../NotFound';
-import PageWrapper from '../layout/PageWrapper';
+import { NotFound } from '../error/NotFound';
 
 type Props = {
 	eid: string;
@@ -15,27 +12,13 @@ type Props = {
 	UseOrganizerQueryData;
 
 export const RoleList: React.FC<Props> = (props) => {
-	const {
-		eid,
-		roles,
-		isRolesLoading,
-		rolesError,
-		isOrganizerLoading,
-		isOrganizerError,
-		isOrganizer
-	} = props;
+	const { eid, roles, isOrganizerLoading, isOrganizer } = props;
 
-	if (isOrganizerLoading || isRolesLoading) {
-		return <Loading />;
+	if (roles && roles.length === 0) {
+		return <NotFound message="No roles found." />;
 	}
 
-	if (isOrganizerError || rolesError) {
-		return <ViewServerError errors={[isOrganizerError, rolesError]} />;
-	}
-
-	if (!roles || roles?.length === 0) {
-		return <NotFound />;
-	}
+	if (!roles) return null;
 
 	return (
 		<div>

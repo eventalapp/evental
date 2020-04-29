@@ -14,7 +14,9 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
-import { NotFoundPage } from '../../../../components/NotFoundPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../../components/error/LoadingPage';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
@@ -36,8 +38,16 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		initialOrganizer
 	);
 
-	if (!initialVenue) {
+	if (!initialVenue || !venue) {
 		return <NotFoundPage />;
+	}
+
+	if (isVenueLoading || isOrganizerLoading) {
+		return <LoadingPage />;
+	}
+
+	if (isOrganizerError || venueError) {
+		return <ViewServerErrorPage errors={[isOrganizerError, venueError]} />;
 	}
 
 	return (

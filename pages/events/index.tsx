@@ -8,6 +8,9 @@ import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import type Prisma from '@prisma/client';
 import { getEvents } from '../api/events';
+import { NotFoundPage } from '../../components/error/NotFoundPage';
+import { ViewServerErrorPage } from '../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../components/error/LoadingPage';
 
 type Props = {
 	initialEvents: Prisma.Event[];
@@ -16,6 +19,18 @@ type Props = {
 const EventsPage: NextPage<Props> = (props) => {
 	const { initialEvents } = props;
 	const { events, isEventsLoading, eventsError } = useEventsQuery(initialEvents);
+
+	if (isEventsLoading) {
+		return <LoadingPage />;
+	}
+
+	if (eventsError) {
+		return <ViewServerErrorPage errors={[eventsError]} />;
+	}
+
+	if (!events || !events.length) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<PageWrapper variant="white">

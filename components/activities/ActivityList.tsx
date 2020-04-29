@@ -2,12 +2,10 @@ import Link from 'next/link';
 import { groupByDate } from '../../utils/groupByDate';
 import React from 'react';
 import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
-import { Loading } from '../Loading';
-import { ViewServerError } from '../ViewServerError';
-import { NotFound } from '../NotFound';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { format } from 'date-fns';
+import { NotFound } from '../error/NotFound';
 
 type Props = {
 	eid: string;
@@ -15,27 +13,13 @@ type Props = {
 	UseOrganizerQueryData;
 
 export const ActivityList: React.FC<Props> = (props) => {
-	const {
-		eid,
-		isActivitiesLoading,
-		activitiesError,
-		activities,
-		isOrganizerError,
-		isOrganizerLoading,
-		isOrganizer
-	} = props;
+	const { eid, activities, isOrganizerLoading, isOrganizer } = props;
 
-	if (isActivitiesLoading || isOrganizerLoading) {
-		return <Loading />;
+	if (activities && activities?.length === 0) {
+		return <NotFound message="No activities found." />;
 	}
 
-	if (activitiesError || isOrganizerError) {
-		return <ViewServerError errors={[activitiesError, isOrganizerError]} />;
-	}
-
-	if (!activities || activities?.length === 0) {
-		return <NotFound />;
-	}
+	if (!activities) return null;
 
 	return (
 		<div>

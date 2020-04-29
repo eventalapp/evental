@@ -6,11 +6,7 @@ import { Label } from '../form/Label';
 import { Select } from '../form/Select';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import { UseEditAttendeeMutationData } from '../../hooks/mutations/useEditAttendeeMutation';
-import { ViewServerError } from '../ViewServerError';
-import { NotFound } from '../NotFound';
-import { Loading } from '../Loading';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -20,33 +16,11 @@ type Props = {
 	UseRolesQueryData;
 
 export const EditAttendeeForm: React.FC<Props> = (props) => {
-	const {
-		eid,
-		attendee,
-		isAttendeeLoading,
-		attendeeError,
-		editAttendeeError,
-		editAttendeeMutation,
-		rolesError,
-		roles,
-		isRolesLoading
-	} = props;
-
-	if (isAttendeeLoading || isRolesLoading) {
-		return <Loading />;
-	}
-
-	if (!attendee) {
-		return <NotFound />;
-	}
-
-	if (attendeeError || editAttendeeError || rolesError) {
-		return <ViewServerError errors={[attendeeError, editAttendeeError, rolesError]} />;
-	}
+	const { eid, attendee, editAttendeeMutation, roles } = props;
 
 	return (
 		<div>
-			{attendee && (
+			{attendee && roles && (
 				<form onSubmit={editAttendeeMutation.mutate}>
 					<div className="flex flex-col w-full mt-5">
 						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
@@ -69,12 +43,11 @@ export const EditAttendeeForm: React.FC<Props> = (props) => {
 											id="eventRoleId"
 											required
 										>
-											{roles &&
-												roles.map((role) => (
-													<option key={role.id} value={role.id}>
-														{role.name}
-													</option>
-												))}
+											{roles.map((role) => (
+												<option key={role.id} value={role.id}>
+													{role.name}
+												</option>
+											))}
 										</Select>
 										<Link href={`/events/${eid}/admin/roles/create`}>
 											<a className="text-gray-600">Dont see your role? Create a role</a>

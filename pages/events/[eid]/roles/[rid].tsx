@@ -15,7 +15,9 @@ import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getAttendeesByRole, getRole } from '../../../api/events/[eid]/roles/[rid]';
 import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
-import { NotFoundPage } from '../../../../components/NotFoundPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../../components/error/LoadingPage';
 
 type Props = {
 	initialRole: Prisma.EventRole | undefined;
@@ -38,8 +40,16 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		initialOrganizer
 	);
 
-	if (!initialAttendees || !initialRole) {
+	if (!initialAttendees || !initialRole || !role || !attendees) {
 		return <NotFoundPage />;
+	}
+
+	if (isOrganizerLoading || isRoleAttendeesLoading) {
+		return <LoadingPage />;
+	}
+
+	if (isOrganizerError || roleAttendeesError) {
+		return <ViewServerErrorPage errors={[isOrganizerError, roleAttendeesError]} />;
 	}
 
 	return (

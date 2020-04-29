@@ -3,27 +3,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { UseEventsQueryData } from '../../hooks/queries/useEventsQuery';
-import { Loading } from '../Loading';
-import { ViewServerError } from '../ViewServerError';
 import { format } from 'date-fns';
-import { NotFound } from '../NotFound';
-import PageWrapper from '../layout/PageWrapper';
+import { NotFound } from '../error/NotFound';
 
 type Props = UseEventsQueryData;
 
 export const EventList: React.FC<Props> = (props) => {
-	const { events, isEventsLoading, eventsError } = props;
+	const { events } = props;
 
-	if (isEventsLoading) {
-		return <Loading />;
-	}
-
-	if (eventsError) {
-		return <ViewServerError errors={[eventsError]} />;
-	}
-
-	if (!events || !events.length) {
-		return <NotFound />;
+	if (events && events.length === 0) {
+		return <NotFound message="No events found." />;
 	}
 
 	return (

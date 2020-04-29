@@ -4,11 +4,7 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
-import { ViewServerError } from '../ViewServerError';
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
-import { Loading } from '../Loading';
-import { NotFound } from '../NotFound';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -20,17 +16,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 	const { eid, editEventMutation, editEventError, event, eventError, isEventLoading, ...rest } =
 		props;
 
-	if (isEventLoading) {
-		return <Loading />;
-	}
-
-	if (editEventError || eventError) {
-		return <ViewServerError errors={[editEventError, eventError]} />;
-	}
-
-	if (!event) {
-		return <NotFound />;
-	}
+	if (!event) return null;
 
 	return (
 		<form onSubmit={editEventMutation.mutate} {...rest}>

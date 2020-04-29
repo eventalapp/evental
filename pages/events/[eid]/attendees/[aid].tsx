@@ -12,8 +12,10 @@ import { getSession } from 'next-auth/react';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import { EventAttendeeUser, getAttendee } from '../../../api/events/[eid]/attendees/[aid]';
-import { NotFoundPage } from '../../../../components/NotFoundPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import React from 'react';
+import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../../components/error/LoadingPage';
 
 type Props = {
 	initialAttendee: EventAttendeeUser | undefined;
@@ -36,6 +38,18 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	);
 
 	if (!initialAttendee) {
+		return <NotFoundPage />;
+	}
+
+	if (isAttendeeLoading || isOrganizerLoading) {
+		return <LoadingPage />;
+	}
+
+	if (attendeeError || isOrganizerError) {
+		return <ViewServerErrorPage errors={[attendeeError, isOrganizerError]} />;
+	}
+
+	if (!attendee || !attendee.user || !attendee.role) {
 		return <NotFoundPage />;
 	}
 

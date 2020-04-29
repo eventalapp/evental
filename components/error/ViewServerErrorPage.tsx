@@ -1,11 +1,12 @@
-import { ServerErrorPayload } from '../typings/error';
+import { ServerErrorPayload } from '../../typings/error';
 import React from 'react';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	errors: Array<ServerErrorPayload | null>;
 };
 
-export const ViewServerError: React.FC<Props> = (props) => {
+export const ViewServerErrorPage: React.FC<Props> = (props) => {
 	const { errors } = props;
 
 	if (!errors) {
@@ -13,7 +14,7 @@ export const ViewServerError: React.FC<Props> = (props) => {
 	}
 
 	return (
-		<div>
+		<PageWrapper>
 			<h1 className="text-3xl mb-2">Error</h1>
 			<ul>
 				{errors
@@ -24,6 +25,6 @@ export const ViewServerError: React.FC<Props> = (props) => {
 						</li>
 					))}
 			</ul>
-		</div>
+		</PageWrapper>
 	);
 };

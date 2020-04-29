@@ -7,7 +7,7 @@ import Column from '../../../../../../components/layout/Column';
 import { DeleteActivityForm } from '../../../../../../components/activities/DeleteActivityForm';
 import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
@@ -15,9 +15,12 @@ import { useActivityQuery } from '../../../../../../hooks/queries/useActivityQue
 import { useDeleteActivityMutation } from '../../../../../../hooks/mutations/useDeleteActivityMutation';
 import { getActivity } from '../../../../../api/events/[eid]/activities/[aid]';
 import type Prisma from '@prisma/client';
-import { NoAccessPage } from '../../../../../../components/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
-import { NotFoundPage } from '../../../../../../components/NotFoundPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { toast } from 'react-toastify';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -40,6 +43,10 @@ const DeleteActivityPage: NextPage<Props> = (props) => {
 		String(aid)
 	);
 
+	useEffect(() => {
+		deleteActivityError && toast.error(deleteActivityError.message);
+	}, [deleteActivityError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -48,8 +55,16 @@ const DeleteActivityPage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (!initialActivity) {
+	if (!initialActivity || !activity) {
 		return <NotFoundPage />;
+	}
+
+	if (isActivityLoading) {
+		return <LoadingPage />;
+	}
+
+	if (activityError) {
+		return <ViewServerErrorPage errors={[activityError]} />;
 	}
 
 	return (

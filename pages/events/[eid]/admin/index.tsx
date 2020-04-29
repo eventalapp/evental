@@ -31,9 +31,10 @@ import { Session } from 'next-auth';
 import { getVenues } from '../../../api/events/[eid]/venues';
 import { getAttendees } from '../../../api/events/[eid]/attendees';
 import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
-import { NoAccessPage } from '../../../../components/NoAccessPage';
-import { UnauthorizedPage } from '../../../../components/UnauthorizedPage';
-import { NotFoundPage } from '../../../../components/NotFoundPage';
+import { NoAccessPage } from '../../../../components/error/NoAccessPage';
+import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { LoadingPage } from '../../../../components/error/LoadingPage';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -80,7 +81,11 @@ const AdminPage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (!initialVenues || !initialActivities || !initialRoles) {
+	if (isActivitiesLoading || isRolesLoading || isVenuesLoading || isAttendeesLoading) {
+		return <LoadingPage />;
+	}
+
+	if (!initialVenues || !initialActivities || !initialRoles || !venues || !activities || !roles) {
 		return <NotFoundPage />;
 	}
 

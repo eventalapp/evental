@@ -8,13 +8,16 @@ import { DeleteEventForm } from '../../../../components/events/DeleteEventForm';
 import { Navigation } from '../../../../components/navigation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getEvent } from '../../../api/events/[eid]';
 import type Prisma from '@prisma/client';
 import { Session } from 'next-auth';
-import { UnauthorizedPage } from '../../../../components/UnauthorizedPage';
-import { NotFoundPage } from '../../../../components/NotFoundPage';
+import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { Loading } from '../../../../components/error/Loading';
+import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { toast } from 'react-toastify';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -28,12 +31,24 @@ const DeleteEventPage: NextPage<Props> = (props) => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { deleteEventMutation, deleteEventError } = useDeleteEventMutation(String(eid));
 
+	useEffect(() => {
+		toast.error(deleteEventError?.message);
+	}, [deleteEventError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!initialEvent) {
+	if (!initialEvent || !event) {
 		return <NotFoundPage />;
+	}
+
+	if (isEventLoading) {
+		return <Loading />;
+	}
+
+	if (deleteEventError || eventError) {
+		return <ViewServerErrorPage errors={[deleteEventError, eventError]} />;
 	}
 
 	return (
