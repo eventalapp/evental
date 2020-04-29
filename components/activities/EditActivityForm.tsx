@@ -18,6 +18,7 @@ import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useActivityQuery, UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
 import { NotFound } from '../error/NotFound';
+import { NEAREST_MINUTE } from '../../config';
 
 type Props = {
 	eid: string;
@@ -137,7 +138,10 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 										startDate={field.value}
 										endDate={endDateWatcher}
 										selectsStart
-										dateFormat="MM/dd/yyyy"
+										timeIntervals={NEAREST_MINUTE}
+										dateFormat="MM/dd/yyyy h:mm a"
+										formatTime="MM/dd/yyyy h:mm a"
+										showTimeSelect
 									/>
 								)}
 							/>
@@ -158,7 +162,10 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 										selectsEnd
 										startDate={startDateWatcher}
 										endDate={field.value}
-										dateFormat="MM/dd/yyyy"
+										timeIntervals={NEAREST_MINUTE}
+										dateFormat="MM/dd/yyyy h:mm a"
+										formatTime="MM/dd/yyyy h:mm a"
+										showTimeSelect
 									/>
 								)}
 							/>

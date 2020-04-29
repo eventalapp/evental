@@ -57,8 +57,8 @@ export const ViewActivity: React.FC<Props> = (props) => {
 					icon={faCalendarDay}
 				/>
 				<p>
-					{format(new Date(activity.startDate), 'MMMM dd')} -{' '}
-					{format(new Date(activity.endDate), 'MMMM dd')}
+					{format(new Date(activity.startDate), 'MMMM dd h:mm a')} -{' '}
+					{format(new Date(activity.endDate), 'MMMM dd h:mm a')}
 				</p>
 			</div>
 		</div>
