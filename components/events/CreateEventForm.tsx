@@ -14,6 +14,7 @@ import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { DatePicker } from '../form/DatePicker';
 import { useEventQuery } from '../../hooks/queries/useEventQuery';
+import { slugify } from '../../utils/slugify';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateEventMutationData;
@@ -45,7 +46,6 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('startDate', startDateWatcher);
 			setValue('endDate', startDateWatcher);
 			toast.warn('The start date cannot be later than the end date.');
 		}
@@ -54,20 +54,12 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
 			setValue('startDate', endDateWatcher);
-			setValue('endDate', endDateWatcher);
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
 
 	useEffect(() => {
-		setValue(
-			'slug',
-			nameWatcher
-				?.trim()
-				.replace(/[\])}[{(]/g, '')
-				.replace(/\s+/g, '-')
-				.toLowerCase()
-		);
+		setValue('slug', slugify(nameWatcher));
 
 		if (errors.name) {
 			void trigger('slug');
@@ -75,13 +67,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	}, [nameWatcher]);
 
 	useEffect(() => {
-		setValue(
-			'slug',
-			slugWatcher
-				?.replace(/[\])}[{(]/g, '')
-				.replace(/\s+/g, '-')
-				.toLowerCase()
-		);
+		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
 
 	useEffect(() => {
@@ -149,9 +135,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 								)}
 							/>
 						</div>
-						{errors.endDate?.message && (
-							<span className="text-red-500 mt-2">{errors.endDate?.message}</span>
-						)}
+						{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
 					</div>
 				</div>
 			</div>

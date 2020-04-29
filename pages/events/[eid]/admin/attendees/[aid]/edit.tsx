@@ -5,8 +5,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { Navigation } from '../../../../../../components/navigation';
-import NoAccess from '../../../../../../components/NoAccess';
-import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { EditAttendeeForm } from '../../../../../../components/attendees/EditAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
@@ -17,15 +15,21 @@ import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
+import { NoAccessPage } from '../../../../../../components/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../../components/NotFoundPage';
+import Prisma from '@prisma/client';
+import { getRoles } from '../../../../../api/events/[eid]/roles';
 
 type Props = {
 	initialOrganizer: boolean;
 	initialAttendee: EventAttendeeUser | undefined;
+	initialRoles: Prisma.EventRole[] | undefined;
 	session: Session | null;
 };
 
 const EditAttendeePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialAttendee, session } = props;
+	const { initialOrganizer, initialAttendee, initialRoles, session } = props;
 	const router = useRouter();
 	const { eid, aid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
@@ -34,26 +38,21 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 		String(aid),
 		initialAttendee
 	);
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
+	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { editAttendeeError, editAttendeeMutation } = useEditAttendeeMutation(
 		String(eid),
 		String(aid)
 	);
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return (
-			<PageWrapper variant="gray">
-				<NoAccess />
-			</PageWrapper>
-		);
+		return <NoAccessPage />;
+	}
+	if (!initialAttendee || !initialRoles) {
+		return <NotFoundPage />;
 	}
 
 	return (
@@ -89,12 +88,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const session = await getSession(context);
 	const initialOrganizer = (await getIsOrganizer(session?.user.id, String(eid))) ?? undefined;
 	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
+	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 
 	return {
 		props: {
 			session,
 			initialOrganizer,
-			initialAttendee
+			initialAttendee,
+			initialRoles
 		}
 	};
 };

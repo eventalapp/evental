@@ -17,6 +17,7 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getRoles } from '../../../api/events/[eid]/roles';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
 
 type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -33,6 +34,10 @@ const RolesPage: NextPage<Props> = (props) => {
 		String(eid),
 		initialOrganizer
 	);
+
+	if (!initialRoles) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<PageWrapper variant="gray">

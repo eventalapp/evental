@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { DeleteActivityForm } from '../../../../../../components/activities/DeleteActivityForm';
 import { Navigation } from '../../../../../../components/navigation';
-import NoAccess from '../../../../../../components/NoAccess';
-import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -17,6 +15,9 @@ import { useActivityQuery } from '../../../../../../hooks/queries/useActivityQue
 import { useDeleteActivityMutation } from '../../../../../../hooks/mutations/useDeleteActivityMutation';
 import { getActivity } from '../../../../../api/events/[eid]/activities/[aid]';
 import type Prisma from '@prisma/client';
+import { NoAccessPage } from '../../../../../../components/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../../components/NotFoundPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -25,30 +26,30 @@ type Props = {
 };
 
 const DeleteActivityPage: NextPage<Props> = (props) => {
-	const { initialOrganizer, session } = props;
+	const { initialOrganizer, initialActivity, session } = props;
 	const router = useRouter();
 	const { eid, aid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { activity, isActivityLoading, activityError } = useActivityQuery(String(eid), String(aid));
+	const { activity, isActivityLoading, activityError } = useActivityQuery(
+		String(eid),
+		String(aid),
+		initialActivity
+	);
 	const { deleteActivityError, deleteActivityMutation } = useDeleteActivityMutation(
 		String(eid),
 		String(aid)
 	);
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return (
-			<PageWrapper variant="gray">
-				<NoAccess />
-			</PageWrapper>
-		);
+		return <NoAccessPage />;
+	}
+
+	if (!initialActivity) {
+		return <NotFoundPage />;
 	}
 
 	return (

@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import Column from '../../../../../components/layout/Column';
 import { CreateActivityForm } from '../../../../../components/activities/CreateActivityForm';
 import { Navigation } from '../../../../../components/navigation';
-import NoAccess from '../../../../../components/NoAccess';
-import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 import { useCreateActivityMutation } from '../../../../../hooks/mutations/useCreateActivityMutation';
@@ -17,6 +15,9 @@ import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { getVenues } from '../../../../api/events/[eid]/venues';
 import { Session } from 'next-auth';
 import type Prisma from '@prisma/client';
+import { UnauthorizedPage } from '../../../../../components/UnauthorizedPage';
+import { NoAccessPage } from '../../../../../components/NoAccessPage';
+import { NotFoundPage } from '../../../../../components/NotFoundPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -33,19 +34,15 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 	const { createActivityError, createActivityMutation } = useCreateActivityMutation(String(eid));
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return (
-			<PageWrapper variant="gray">
-				<NoAccess />
-			</PageWrapper>
-		);
+		return <NoAccessPage />;
+	}
+
+	if (!initialVenues) {
+		return <NotFoundPage />;
 	}
 
 	return (

@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { EditActivityForm } from '../../../../../../components/activities/EditActivityForm';
 import { Navigation } from '../../../../../../components/navigation';
-import NoAccess from '../../../../../../components/NoAccess';
-import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -19,6 +17,9 @@ import { useEditActivityMutation } from '../../../../../../hooks/mutations/useEd
 import { getActivity } from '../../../../../api/events/[eid]/activities/[aid]';
 import { getVenues } from '../../../../../api/events/[eid]/venues';
 import type Prisma from '@prisma/client';
+import { NotFoundPage } from '../../../../../../components/NotFoundPage';
+import { NoAccessPage } from '../../../../../../components/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -44,19 +45,15 @@ const EditActivityPage: NextPage<Props> = (props) => {
 	);
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return (
-			<PageWrapper variant="gray">
-				<NoAccess />
-			</PageWrapper>
-		);
+		return <NoAccessPage />;
+	}
+
+	if (!initialActivity || !initialVenues) {
+		return <NotFoundPage />;
 	}
 
 	return (
@@ -72,6 +69,7 @@ const EditActivityPage: NextPage<Props> = (props) => {
 
 				<EditActivityForm
 					eid={String(eid)}
+					aid={String(aid)}
 					venues={venues}
 					activity={activity}
 					editActivityMutation={editActivityMutation}

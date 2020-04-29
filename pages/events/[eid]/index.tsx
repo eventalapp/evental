@@ -19,6 +19,8 @@ import { getActivities } from '../../api/events/[eid]/activities';
 import { EventAttendeeUser } from '../../api/events/[eid]/attendees/[aid]';
 import { getRoles } from '../../api/events/[eid]/roles';
 import { Session } from 'next-auth';
+import { NotFoundPage } from '../../../components/NotFoundPage';
+import React from 'react';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -53,6 +55,10 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { attendeeByUserId, attendeeByUserIdError, isAttendeeByUserIdLoading } =
 		useAttendeeByUserIdQuery(String(eid), String(session?.user?.id), initialIsAttendeeByUserId);
+
+	if (!initialIsAttendeeByUserId || !initialRoles || !initialActivities || !initialEvent) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<PageWrapper variant="gray">

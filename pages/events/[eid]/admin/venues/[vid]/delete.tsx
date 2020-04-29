@@ -5,8 +5,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { Navigation } from '../../../../../../components/navigation';
-import NoAccess from '../../../../../../components/NoAccess';
-import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenueForm';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
@@ -17,6 +15,9 @@ import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getVenue } from '../../../../../api/events/[eid]/venues/[vid]';
+import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
+import { NoAccessPage } from '../../../../../../components/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/NotFoundPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -40,19 +41,15 @@ const DeleteVenuePage: NextPage<Props> = (props) => {
 	);
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return (
-			<PageWrapper variant="gray">
-				<NoAccess />
-			</PageWrapper>
-		);
+		return <NoAccessPage />;
+	}
+
+	if (!initialVenue) {
+		return <NotFoundPage />;
 	}
 
 	return (

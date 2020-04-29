@@ -14,6 +14,7 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
@@ -34,6 +35,10 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		String(eid),
 		initialOrganizer
 	);
+
+	if (!initialVenue) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<PageWrapper variant="gray">

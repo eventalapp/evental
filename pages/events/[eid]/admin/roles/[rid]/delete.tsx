@@ -5,8 +5,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { Navigation } from '../../../../../../components/navigation';
-import NoAccess from '../../../../../../components/NoAccess';
-import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { DeleteRoleForm } from '../../../../../../components/roles/DeleteRoleForm';
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
@@ -18,6 +16,9 @@ import { getAttendeesByRole, getRole } from '../../../../../api/events/[eid]/rol
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { EventAttendeeUser } from '../../../../../api/events/[eid]/attendees/[aid]';
+import { NoAccessPage } from '../../../../../../components/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../../components/NotFoundPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -40,19 +41,15 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 	const { deleteRoleError, deleteRoleMutation } = useDeleteRoleMutation(String(eid), String(rid));
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return (
-			<PageWrapper variant="gray">
-				<NoAccess />
-			</PageWrapper>
-		);
+		return <NoAccessPage />;
+	}
+
+	if (!initialRole || !initialAttendees) {
+		return <NotFoundPage />;
 	}
 
 	return (

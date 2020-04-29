@@ -10,18 +10,33 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Session } from 'next-auth';
 import { EventRegistrationForm } from '../../../components/events/EventRegistrationForm';
 import { useRegisterAttendeeMutation } from '../../../hooks/mutations/useRegisterAttendeeMutation';
+import React from 'react';
+import { UnauthorizedPage } from '../../../components/UnauthorizedPage';
+import { getEvent } from '../../api/events/[eid]';
+import Prisma from '@prisma/client';
+import { NotFoundPage } from '../../../components/NotFoundPage';
 
 type Props = {
 	session: Session | null;
+	initialEvent: Prisma.Event | undefined;
 };
 
 const EventRegisterPage: NextPage<Props> = (props) => {
+	const { session, initialEvent } = props;
 	const router = useRouter();
 	const { eid } = router.query;
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { registerAttendeeError, registerAttendeeMutation } = useRegisterAttendeeMutation(
 		String(eid)
 	);
+
+	if (!session?.user?.id) {
+		return <UnauthorizedPage />;
+	}
+
+	if (!initialEvent) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<PageWrapper variant="gray">
@@ -47,11 +62,15 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid } = context.query;
+
 	const session = await getSession(context);
+	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 
 	return {
 		props: {
-			session
+			session,
+			initialEvent
 		}
 	};
 };

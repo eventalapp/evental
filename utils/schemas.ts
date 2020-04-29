@@ -65,8 +65,8 @@ export const CreateActivitySchema = z.object({
 		.max(40, 'Slug must be less than 40 characters'),
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
-	startDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
-	endDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
+	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
+	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
 	description: z.string().max(1000, 'Description is too long')
 });
 
@@ -79,8 +79,8 @@ export const EditActivitySchema = z.object({
 		.max(40, 'Slug must be less than 40 characters'),
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
-	startDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
-	endDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
+	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
+	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
 	description: z.string().max(1000, 'Description is too long')
 });
 

@@ -18,6 +18,7 @@ import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getVenues } from '../../../api/events/[eid]/venues';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
 
 type Props = {
 	initialVenues: Prisma.EventVenue[] | undefined;
@@ -34,6 +35,10 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 		initialOrganizer
 	);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
+
+	if (!initialVenues) {
+		return <NotFoundPage />;
+	}
 
 	if (isOrganizerError) {
 		return (

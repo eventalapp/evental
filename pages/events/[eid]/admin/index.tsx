@@ -7,8 +7,6 @@ import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { LinkButton } from '../../../../components/form/LinkButton';
 import { Navigation } from '../../../../components/navigation';
-import NoAccess from '../../../../components/NoAccess';
-import Unauthorized from '../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { VenueList } from '../../../../components/venues/VenueList';
@@ -33,6 +31,9 @@ import { Session } from 'next-auth';
 import { getVenues } from '../../../api/events/[eid]/venues';
 import { getAttendees } from '../../../api/events/[eid]/attendees';
 import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
+import { NoAccessPage } from '../../../../components/NoAccessPage';
+import { UnauthorizedPage } from '../../../../components/UnauthorizedPage';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -72,19 +73,15 @@ const AdminPage: NextPage<Props> = (props) => {
 	);
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return (
-			<PageWrapper variant="gray">
-				<NoAccess />
-			</PageWrapper>
-		);
+		return <NoAccessPage />;
+	}
+
+	if (!initialVenues || !initialActivities || !initialRoles) {
+		return <NotFoundPage />;
 	}
 
 	return (
