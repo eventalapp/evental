@@ -61,9 +61,17 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 	if (venues && venues.length === 0) {
 		return (
 			<PageWrapper>
-				<Link href={`/events/${eid}/admin/venues/create`}>
-					<a className="text-red-600">Before creating an activity, you must create a venue.</a>
-				</Link>
+				<Head>
+					<title>Not Found</title>
+				</Head>
+
+				<Navigation />
+
+				<Column>
+					<Link href={`/events/${eid}/admin/venues/create`}>
+						<a className="text-red-600">Before creating an activity, you must create a venue.</a>
+					</Link>
+				</Column>
 			</PageWrapper>
 		);
 	}
