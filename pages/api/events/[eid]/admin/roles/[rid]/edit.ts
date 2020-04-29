@@ -79,13 +79,6 @@ export default async (
 						)
 					);
 				}
-			} else if (!parsed.defaultRole) {
-				return res.status(500).send({
-					error: {
-						message:
-							'There must be one default role. If you would like to make another role the default, set that role to default.'
-					}
-				});
 			}
 
 			let editedRole = await prisma.eventRole.update({
