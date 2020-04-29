@@ -67,7 +67,11 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 
 			<Navigation />
 
-			<Column>
+			<Column variant="halfWidth">
+				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-semibold">
+					You are about to delete an attendee ("{attendee.name}")
+				</p>
+
 				<h1 className="text-3xl font-bold">Delete Attendee</h1>
 
 				<DeleteAttendeeForm
