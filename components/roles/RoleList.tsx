@@ -27,7 +27,7 @@ export const RoleList: React.FC<Props> = (props) => {
 					<div className="flex flex-row justify-between items-center flex-wrap">
 						<span className="text-lg block">
 							{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
-							<span className="font-bold">{role.defaultRole && '(Default)'}</span>
+							<span className="text-gray-500">{role.defaultRole && '(Default)'}</span>
 						</span>
 						<div>
 							<Link href={`/events/${eid}/roles/${role.slug}`} passHref>
