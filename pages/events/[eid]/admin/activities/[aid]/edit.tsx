@@ -23,6 +23,7 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import Link from 'next/link';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -37,6 +38,8 @@ const EditActivityPage: NextPage<Props> = (props) => {
 	const { eid, aid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+
 	const { activity, isActivityLoading, activityError } = useActivityQuery(
 		String(eid),
 		String(aid),
@@ -56,12 +59,12 @@ const EditActivityPage: NextPage<Props> = (props) => {
 		return <NotFoundPage />;
 	}
 
-	if (isVenuesLoading) {
+	if (isVenuesLoading || isEventLoading) {
 		return <LoadingPage />;
 	}
 
-	if (venuesError) {
-		return <ViewServerErrorPage errors={[venuesError]} />;
+	if (venuesError || eventError) {
+		return <ViewServerErrorPage errors={[venuesError, eventError]} />;
 	}
 
 	if (venues && venues.length === 0) {
@@ -95,6 +98,9 @@ const EditActivityPage: NextPage<Props> = (props) => {
 					isVenuesLoading={isVenuesLoading}
 					venuesError={venuesError}
 					activityError={activityError}
+					event={event}
+					eventError={eventError}
+					isEventLoading={isEventLoading}
 				/>
 			</Column>
 		</PageWrapper>

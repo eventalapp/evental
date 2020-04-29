@@ -20,7 +20,9 @@ export const DatePicker: React.FC<Props> = (props) => {
 		selectsEnd,
 		showTimeSelect,
 		timeIntervals = NEAREST_MINUTE,
-		formatTime = 'MM/dd/yyyy'
+		formatTime = 'MM/dd/yyyy',
+		minDate,
+		maxDate
 	} = props;
 
 	return (
@@ -31,6 +33,8 @@ export const DatePicker: React.FC<Props> = (props) => {
 			onChange={onChange}
 			selected={selected}
 			selectsStart={selectsStart}
+			minDate={minDate}
+			maxDate={maxDate}
 			selectsEnd={selectsEnd}
 			dateFormat={dateFormat}
 			nextMonthButtonLabel=">"

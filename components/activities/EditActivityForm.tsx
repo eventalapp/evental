@@ -19,6 +19,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useActivityQuery, UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
 import { NotFound } from '../error/NotFound';
 import { NEAREST_MINUTE } from '../../config';
+import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 
 type Props = {
 	eid: string;
@@ -26,10 +27,11 @@ type Props = {
 } & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenuesQueryData &
 	UseEditActivityMutationData &
-	UseActivityQueryData;
+	UseActivityQueryData &
+	UseEventQueryData;
 
 export const EditActivityForm: React.FC<Props> = (props) => {
-	const { eid, venues, editActivityMutation, activity } = props;
+	const { eid, venues, editActivityMutation, activity, event } = props;
 
 	const {
 		register,
@@ -89,7 +91,7 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 		return <NotFound />;
 	}
 
-	if (!venues) return null;
+	if (!venues || !event) return null;
 
 	return (
 		<form
@@ -142,6 +144,8 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 										dateFormat="MM/dd/yyyy h:mm a"
 										formatTime="MM/dd/yyyy h:mm a"
 										showTimeSelect
+										maxDate={new Date(String(event.endDate))}
+										minDate={new Date(String(event.startDate))}
 									/>
 								)}
 							/>
@@ -166,6 +170,8 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 										dateFormat="MM/dd/yyyy h:mm a"
 										formatTime="MM/dd/yyyy h:mm a"
 										showTimeSelect
+										maxDate={new Date(String(event.endDate))}
+										minDate={new Date(String(event.startDate))}
 									/>
 								)}
 							/>

@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { isBrowser } from './isBrowser';
 
+// Reusables
+
 const slugValidator = z
 	.string()
 	.min(4, 'Slug must be at least 4 characters')

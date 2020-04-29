@@ -20,6 +20,7 @@ import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
 import { NotFound } from '../error/NotFound';
 import { roundToNearestMinutes } from 'date-fns';
 import { NEAREST_MINUTE } from '../../config';
+import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 
 type Props = {
 	eid: string;
@@ -28,10 +29,11 @@ type Props = {
 type CreateActivityFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenuesQueryData &
-	UseCreateActivityMutationData;
+	UseCreateActivityMutationData &
+	UseEventQueryData;
 
 export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => {
-	const { eid, venues, createActivityMutation } = props;
+	const { eid, venues, createActivityMutation, event } = props;
 	const {
 		register,
 		handleSubmit,
@@ -88,7 +90,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 		return <NotFound />;
 	}
 
-	if (!venues) return null;
+	if (!venues || !event) return null;
 
 	return (
 		<form
@@ -141,6 +143,8 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 										dateFormat="MM/dd/yyyy h:mm a"
 										formatTime="MM/dd/yyyy h:mm a"
 										showTimeSelect
+										maxDate={new Date(String(event.endDate))}
+										minDate={new Date(String(event.startDate))}
 									/>
 								)}
 							/>
@@ -165,6 +169,8 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 										dateFormat="MM/dd/yyyy h:mm a"
 										formatTime="MM/dd/yyyy h:mm a"
 										showTimeSelect
+										maxDate={new Date(String(event.endDate))}
+										minDate={new Date(String(event.startDate))}
 									/>
 								)}
 							/>
