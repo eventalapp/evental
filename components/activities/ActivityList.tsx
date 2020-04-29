@@ -46,7 +46,6 @@ export const ActivityList: React.FC<Props> = (props) => {
 													<div className="rounded-full mr-3 w-3 h-3 bg-gradient-to-r from-secondary-500 to-primary-500" />
 													<div>
 														<span className="text-xl">{activity.name}</span>
-														<span className="block text-md">{activity.description}</span>
 													</div>
 												</div>
 
