@@ -47,8 +47,6 @@ export const EditEventForm: React.FC<Props> = (props) => {
 		resolver: zodResolver(EditEventSchema)
 	});
 
-	if (!event) return null;
-
 	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
 	const imageWatcher = watch('image');
@@ -89,6 +87,8 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			setValue('image', imageUploadResponse.pathName);
 		}
 	}, [imageUploadResponse]);
+
+	if (!event) return null;
 
 	return (
 		<form
