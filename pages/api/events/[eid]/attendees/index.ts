@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../../../prisma/client';
+import { prisma } from '../../../../../prisma/client';
 import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
 import { EventAttendeeUser } from './[aid]';
 import { getEvent } from '../index';

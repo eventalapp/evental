@@ -1,6 +1,6 @@
 import type Prisma from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../../../prisma/client';
+import { prisma } from '../../../../../prisma/client';
 import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
 import { getEvent } from '../index';
 import { handleServerError } from '../../../../../utils/handleServerError';

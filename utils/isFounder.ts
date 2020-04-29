@@ -1,4 +1,4 @@
-import prisma from '../prisma/client';
+import { prisma } from '../prisma/client';
 
 export const isFounder = async (userId: string, eventId: string) => {
 	return Boolean(

@@ -1,4 +1,4 @@
-import prisma from '../prisma/client';
+import { prisma } from '../prisma/client';
 
 export const isOrganizer = async (userId: string, eventId: string) => {
 	const event = await prisma.event.findFirst({
