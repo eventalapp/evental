@@ -35,7 +35,7 @@ export const DeleteActivityForm: React.FC<Props> = (props) => {
 				<div className="mb-5">
 					<div>
 						<p className="mb-3">
-							All of the data regarding this activity will be permanantly deleted.
+							All of the data regarding this activity will be permanently deleted.
 						</p>
 
 						<Label htmlFor="confirmDelete">
@@ -47,7 +47,7 @@ export const DeleteActivityForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
-				<Button variant="no-bg" onClick={router.back}>
+				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
 				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>

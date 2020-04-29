@@ -75,7 +75,7 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl">Create Activity Page</h1>
+				<h1 className="text-3xl font-bold">Create Activity</h1>
 
 				<CreateActivityForm
 					eid={String(eid)}

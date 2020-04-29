@@ -1,45 +1,59 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseDeleteEventMutationData } from '../../hooks/mutations/useDeleteEventMutation';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
 	UseDeleteEventMutationData;
 
 export const DeleteEventForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const { deleteEventMutation, event } = props;
+	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
+
+	const confirmDeleteWatcher = watch('confirmDelete');
+
+	useEffect(() => {
+		setCanSubmit(confirmDeleteWatcher === 'DELETE');
+	}, [confirmDeleteWatcher]);
 
 	if (!event) return null;
 
 	return (
-		<form onSubmit={deleteEventMutation.mutate}>
-			<div className="flex flex-col w-full mt-5">
-				<h1 className="text-2xl mb-3">Are you sure you would like to delete: {event.name}?</h1>
-
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+		<form
+			onSubmit={handleSubmit(() => {
+				deleteEventMutation.mutate();
+			})}
+		>
+			<div className="flex flex-col w-full mt-3">
+				<div className="mb-5">
 					<div>
-						<p className="font-bold mb-3">Please retype the event name below ({event.name}).</p>
-						<Label htmlFor="name">Event Name</Label>
-						<Input
-							id="name"
-							name="name"
-							type="text"
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-								setCanSubmit(e.target.value === event.name);
-							}}
-							required
-						/>
+						<p className="mb-3">
+							All of the data regarding this event will be permanently deleted.
+						</p>
+
+						<Label htmlFor="confirmDelete">
+							Type <span className="font-bold">DELETE</span> to confirm
+						</Label>
+						<Input {...register('confirmDelete', { required: true })} />
 					</div>
 				</div>
 			</div>
 
-			<Button type="submit" disabled={!canSubmit}>
-				Delete Event
-			</Button>
+			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
+				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+					Delete Event
+				</Button>
+			</div>
 		</form>
 	);
 };

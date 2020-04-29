@@ -5,6 +5,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import React from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { DatePickerButton } from './DatePickerButton';
+import { NEAREST_MINUTE } from '../../config';
 
 type Props = { formatTime?: string } & ReactDatePickerProps;
 
@@ -18,8 +19,8 @@ export const DatePicker: React.FC<Props> = (props) => {
 		selectsStart,
 		selectsEnd,
 		showTimeSelect,
-		timeIntervals,
-		formatTime
+		timeIntervals = NEAREST_MINUTE,
+		formatTime = 'MM/dd/yyyy'
 	} = props;
 
 	return (

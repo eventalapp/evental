@@ -71,7 +71,7 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl">Delete Role Page</h1>
+				<h1 className="text-3xl font-bold">Delete Role</h1>
 
 				<DeleteRoleForm
 					role={role}

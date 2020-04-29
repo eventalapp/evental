@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
@@ -9,7 +8,7 @@ export interface UseDeleteEventMutationData {
 	deleteEventMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		void
 	>;
 }
 
@@ -19,11 +18,9 @@ export const useDeleteEventMutation = (eid: string): UseDeleteEventMutationData 
 	const deleteEventMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		void
 	>(
-		async (event: FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
-
+		async () => {
 			return await axios.delete(`/api/events/${eid}/admin/delete`);
 		},
 		{

@@ -64,7 +64,7 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<FlexRowBetween>
-					<h1 className="text-3xl">Venues Page</h1>
+					<h1 className="text-3xl font-bold">Venues</h1>
 
 					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/venues/create`} passHref>
