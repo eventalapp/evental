@@ -43,7 +43,9 @@ export default async (
 					description: parsed.description,
 					location: parsed.location,
 					startDate: parsed.startDate,
-					endDate: parsed.endDate
+					endDate: parsed.endDate,
+					image: parsed.image,
+					slug: parsed.slug
 				},
 				where: {
 					id: event.id

@@ -17,6 +17,7 @@ import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage'
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
+import { useImageUploadMutation } from '../../../../hooks/mutations/useImageUploadMutation';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -29,6 +30,7 @@ const EditEventPage: NextPage<Props> = (props) => {
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { editEventMutation } = useEditEventMutation(String(eid));
+	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -58,6 +60,8 @@ const EditEventPage: NextPage<Props> = (props) => {
 				<h1 className="text-3xl font-bold">Edit Event</h1>
 
 				<EditEventForm
+					imageUploadMutation={imageUploadMutation}
+					imageUploadResponse={imageUploadResponse}
 					eid={String(eid)}
 					eventError={eventError}
 					editEventMutation={editEventMutation}
