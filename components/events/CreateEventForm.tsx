@@ -213,7 +213,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					type="submit"
 					variant="primary"
 					padding="medium"
-					disabled={isEventLoading || Boolean(event)}
+					disabled={imageUploadMutation.isLoading || isEventLoading || Boolean(event)}
 				>
 					Create Event
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />

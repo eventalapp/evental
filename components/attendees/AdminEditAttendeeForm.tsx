@@ -222,6 +222,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 					variant="primary"
 					padding="medium"
 					disabled={
+						imageUploadMutation.isLoading ||
 						isAttendeeSlugCheckLoading ||
 						Boolean(slugWatcher !== attendee?.slug && attendeeSlugCheck)
 					}

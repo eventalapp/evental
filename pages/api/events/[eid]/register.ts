@@ -8,12 +8,6 @@ import { prisma } from '../../../../prisma/client';
 import { getEvent } from './index';
 import { processSlug } from '../../../../utils/slugify';
 
-export const config = {
-	api: {
-		bodyParser: false
-	}
-};
-
 export default async (
 	req: NextApiRequest,
 	res: NextApiResponse<ServerErrorResponse | Prisma.EventAttendee>
