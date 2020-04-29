@@ -7,18 +7,18 @@ import { CreateAttendeePayload } from '../../utils/schemas';
 import { populateFormData } from '../../utils/populateFormData';
 import { toast } from 'react-toastify';
 
-export interface UseRegisterAttendeeMutationData {
-	registerAttendeeMutation: UseMutationResult<
+export interface UseCreateAttendeeMutationData {
+	createAttendeeMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
 		AxiosError<ServerError, unknown>,
 		CreateAttendeePayload
 	>;
 }
 
-export const useRegisterAttendeeMutation = (eid: string): UseRegisterAttendeeMutationData => {
+export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutationData => {
 	const queryClient = useQueryClient();
 
-	const registerAttendeeMutation = useMutation<
+	const createAttendeeMutation = useMutation<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
 		AxiosError<ServerError, unknown>,
 		CreateAttendeePayload
@@ -42,5 +42,5 @@ export const useRegisterAttendeeMutation = (eid: string): UseRegisterAttendeeMut
 		}
 	);
 
-	return { registerAttendeeMutation };
+	return { createAttendeeMutation };
 };

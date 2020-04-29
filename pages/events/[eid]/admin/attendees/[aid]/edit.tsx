@@ -6,9 +6,9 @@ import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { EditAttendeeForm } from '../../../../../../components/attendees/EditAttendeeForm';
+import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
-import { useEditAttendeeMutation } from '../../../../../../hooks/mutations/useEditAttendeeMutation';
+import { useAdminEditAttendeeMutation } from '../../../../../../hooks/mutations/useAdminEditAttendeeMutation';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -41,7 +41,7 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 		initialAttendee
 	);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { editAttendeeMutation } = useEditAttendeeMutation(String(eid), String(aid));
+	const { adminEditAttendeeMutation } = useAdminEditAttendeeMutation(String(eid), String(aid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -73,12 +73,12 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Edit Attendee Page</h1>
 
-				<EditAttendeeForm
+				<AdminEditAttendeeForm
 					eid={String(eid)}
 					attendee={attendee}
 					isAttendeeLoading={isAttendeeLoading}
 					attendeeError={attendeeError}
-					editAttendeeMutation={editAttendeeMutation}
+					adminEditAttendeeMutation={adminEditAttendeeMutation}
 					roles={roles}
 					isRolesLoading={isRolesLoading}
 					rolesError={rolesError}
