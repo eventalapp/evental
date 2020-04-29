@@ -32,7 +32,7 @@ export const ActivityList: React.FC<Props> = (props) => {
 						{Object.entries(activityDate).map(([key, activitiesByDate]) => {
 							return (
 								<div key={key} className="flex flex-row flex-wrap">
-									<span className="text-gray-700 text-sm w-20 p-2 pr-3 text-right">
+									<span className="text-gray-700 text-sm w-20 py-2 pr-3 text-right">
 										{format(new Date(key), 'h:mm a OOO')}
 									</span>
 

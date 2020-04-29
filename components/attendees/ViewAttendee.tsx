@@ -30,7 +30,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 			</div>
 
 			<FlexRowBetween>
-				<h1 className="text-3xl">{attendee.name}</h1>
+				<h1 className="text-3xl font-bold">{attendee.name}</h1>
 
 				{!isOrganizerLoading && isOrganizer && (
 					<div>

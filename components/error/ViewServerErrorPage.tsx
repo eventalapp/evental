@@ -15,7 +15,7 @@ export const ViewServerErrorPage: React.FC<Props> = (props) => {
 
 	return (
 		<PageWrapper>
-			<h1 className="text-3xl mb-2">Error</h1>
+			<h1 className="text-3xl font-bold mb-2">Error</h1>
 			<ul>
 				{errors
 					.filter((error) => error)
