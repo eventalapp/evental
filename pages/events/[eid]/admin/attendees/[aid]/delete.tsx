@@ -10,7 +10,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutatation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
@@ -19,7 +19,6 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
-import { toast } from 'react-toastify';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 
 type Props = {
@@ -38,14 +37,7 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 		String(aid),
 		initialAttendee
 	);
-	const { deleteAttendeeError, deleteAttendeeMutation } = useDeleteAttendeeMutation(
-		String(eid),
-		String(aid)
-	);
-
-	useEffect(() => {
-		toast.error(deleteAttendeeError?.message);
-	}, [deleteAttendeeError]);
+	const { deleteAttendeeMutation } = useDeleteAttendeeMutation(String(eid), String(aid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -82,7 +74,6 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 					attendee={attendee}
 					attendeeError={attendeeError}
 					isAttendeeLoading={isAttendeeLoading}
-					deleteAttendeeError={deleteAttendeeError}
 					deleteAttendeeMutation={deleteAttendeeMutation}
 				/>
 			</Column>

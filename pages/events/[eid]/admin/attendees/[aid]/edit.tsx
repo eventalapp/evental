@@ -10,7 +10,7 @@ import { EditAttendeeForm } from '../../../../../../components/attendees/EditAtt
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useEditAttendeeMutation } from '../../../../../../hooks/mutations/useEditAttendeeMutation';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
@@ -20,7 +20,6 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import Prisma from '@prisma/client';
 import { getRoles } from '../../../../../api/events/[eid]/roles';
-import { toast } from 'react-toastify';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 
@@ -42,14 +41,7 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 		initialAttendee
 	);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { editAttendeeError, editAttendeeMutation } = useEditAttendeeMutation(
-		String(eid),
-		String(aid)
-	);
-
-	useEffect(() => {
-		toast.error(editAttendeeError?.message);
-	}, [editAttendeeError]);
+	const { editAttendeeMutation } = useEditAttendeeMutation(String(eid), String(aid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -86,7 +78,6 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 					attendee={attendee}
 					isAttendeeLoading={isAttendeeLoading}
 					attendeeError={attendeeError}
-					editAttendeeError={editAttendeeError}
 					editAttendeeMutation={editAttendeeMutation}
 					roles={roles}
 					isRolesLoading={isRolesLoading}

@@ -20,7 +20,7 @@ type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElem
 	UseCreateEventMutationData;
 
 export const CreateEventForm: React.FC<Props> = (props) => {
-	const { createEventMutation, createEventError } = props;
+	const { createEventMutation } = props;
 	const {
 		register,
 		handleSubmit,
@@ -69,10 +69,6 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
-
-	useEffect(() => {
-		createEventError && toast.error(createEventError.message);
-	}, [createEventError]);
 
 	return (
 		<form

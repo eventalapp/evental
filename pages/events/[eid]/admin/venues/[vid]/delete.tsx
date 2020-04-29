@@ -9,7 +9,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenueForm';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutatation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
@@ -20,7 +20,6 @@ import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
-import { toast } from 'react-toastify';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -38,14 +37,7 @@ const DeleteVenuePage: NextPage<Props> = (props) => {
 		String(vid),
 		initialVenue
 	);
-	const { deleteVenueMutation, deleteVenueError } = useDeleteVenueMutation(
-		String(eid),
-		String(vid)
-	);
-
-	useEffect(() => {
-		toast.error(deleteVenueError?.message);
-	}, [deleteVenueError]);
+	const { deleteVenueMutation } = useDeleteVenueMutation(String(eid), String(vid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -82,7 +74,6 @@ const DeleteVenuePage: NextPage<Props> = (props) => {
 					venue={venue}
 					venueError={venueError}
 					deleteVenueMutation={deleteVenueMutation}
-					deleteVenueError={deleteVenueError}
 					isVenueLoading={isVenueLoading}
 				/>
 			</Column>

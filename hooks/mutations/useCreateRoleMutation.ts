@@ -1,10 +1,10 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { processSlug } from '../../utils/slugify';
@@ -15,11 +15,9 @@ export interface UseCreateRoleMutationData {
 		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>;
-	createRoleError: ServerErrorPayload | null;
 }
 
 export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 	const queryClient = useQueryClient();
 
 	const createRoleMutation = useMutation<
@@ -44,8 +42,6 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 		},
 		{
 			onSuccess: (response) => {
-				setError(null);
-
 				toast.success('Role created successfully');
 
 				router.push(`/events/${eid}/roles/${response.data.slug}`).then(() => {
@@ -53,10 +49,10 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { createRoleMutation, createRoleError: error };
+	return { createRoleMutation };
 };

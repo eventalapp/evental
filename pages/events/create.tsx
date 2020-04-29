@@ -7,10 +7,9 @@ import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { Navigation } from '../../components/navigation';
 import Unauthorized from '../../components/error/Unauthorized';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Session } from 'next-auth';
-import { toast } from 'react-toastify';
 
 type Props = {
 	session: Session | null;
@@ -18,11 +17,7 @@ type Props = {
 
 const CreateEventPage: NextPage<Props> = (props) => {
 	const { session } = props;
-	const { createEventMutation, createEventError } = useCreateEventMutation();
-
-	useEffect(() => {
-		toast.error(createEventError?.message);
-	}, [createEventError]);
+	const { createEventMutation } = useCreateEventMutation();
 
 	if (!session?.user?.id) {
 		return <Unauthorized />;
@@ -39,10 +34,7 @@ const CreateEventPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Create an Event</h1>
 
-				<CreateEventForm
-					createEventError={createEventError}
-					createEventMutation={createEventMutation}
-				/>
+				<CreateEventForm createEventMutation={createEventMutation} />
 			</Column>
 		</PageWrapper>
 	);

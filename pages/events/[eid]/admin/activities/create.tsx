@@ -9,7 +9,7 @@ import { Navigation } from '../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 import { useCreateActivityMutation } from '../../../../../hooks/mutations/useCreateActivityMutation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { getVenues } from '../../../../api/events/[eid]/venues';
@@ -18,7 +18,6 @@ import type Prisma from '@prisma/client';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
-import { toast } from 'react-toastify';
 import Link from 'next/link';
 import { ViewServerErrorPage } from '../../../../../components/error/ViewServerErrorPage';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
@@ -35,11 +34,7 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
-	const { createActivityError, createActivityMutation } = useCreateActivityMutation(String(eid));
-
-	useEffect(() => {
-		createActivityError && toast.error(createActivityError.message);
-	}, [createActivityError]);
+	const { createActivityMutation } = useCreateActivityMutation(String(eid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -87,7 +82,6 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 					venues={venues}
 					venuesError={venuesError}
 					isVenuesLoading={isVenuesLoading}
-					createActivityError={createActivityError}
 					createActivityMutation={createActivityMutation}
 				/>
 			</Column>

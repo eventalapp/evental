@@ -1,8 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
 
 export interface UseDeleteActivityMutationData {
@@ -11,7 +10,6 @@ export interface UseDeleteActivityMutationData {
 		AxiosError<ServerError, unknown>,
 		void
 	>;
-	deleteActivityError: ServerErrorPayload | null;
 }
 
 export const useDeleteActivityMutation = (
@@ -19,7 +17,6 @@ export const useDeleteActivityMutation = (
 	aid: string
 ): UseDeleteActivityMutationData => {
 	const queryClient = useQueryClient();
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const deleteActivityMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
@@ -31,8 +28,6 @@ export const useDeleteActivityMutation = (
 		},
 		{
 			onSuccess: () => {
-				setError(null);
-
 				toast.success('Activity deleted successfully');
 
 				router.push(`/events/${eid}/activities/`).then(() => {
@@ -41,10 +36,10 @@ export const useDeleteActivityMutation = (
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { deleteActivityMutation, deleteActivityError: error };
+	return { deleteActivityMutation };
 };

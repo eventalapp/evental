@@ -9,7 +9,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useEditRoleMutation } from '../../../../../../hooks/mutations/useEditRoleMutation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { getAttendeesByRole, getRole } from '../../../../../api/events/[eid]/roles/[rid]';
@@ -21,7 +21,6 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { toast } from 'react-toastify';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -41,11 +40,7 @@ const EditRolePage: NextPage<Props> = (props) => {
 		String(rid),
 		{ role: initialRole, attendees: initialAttendees }
 	);
-	const { editRoleError, editRoleMutation } = useEditRoleMutation(String(eid), String(rid));
-
-	useEffect(() => {
-		toast.error(editRoleError?.message);
-	}, [editRoleError]);
+	const { editRoleMutation } = useEditRoleMutation(String(eid), String(rid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -80,7 +75,6 @@ const EditRolePage: NextPage<Props> = (props) => {
 
 				<EditRoleForm
 					role={role}
-					editRoleError={editRoleError}
 					roleAttendeesError={roleAttendeesError}
 					editRoleMutation={editRoleMutation}
 					isRoleAttendeesLoading={isRoleAttendeesLoading}

@@ -13,8 +13,7 @@ type Props = {
 	UseEditEventMutationData;
 
 export const EditEventForm: React.FC<Props> = (props) => {
-	const { eid, editEventMutation, editEventError, event, eventError, isEventLoading, ...rest } =
-		props;
+	const { eid, editEventMutation, event, eventError, isEventLoading, ...rest } = props;
 
 	if (!event) return null;
 
