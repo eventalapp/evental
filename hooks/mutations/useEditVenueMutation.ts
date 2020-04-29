@@ -1,19 +1,16 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { getFormEntries } from '../../utils/getFormEntries';
-import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
+import { EditVenuePayload } from '../../utils/schemas';
 import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
-import { processSlug } from '../../utils/slugify';
 
 export interface UseEditVenueMutationData {
 	editVenueMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventVenue, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		EditVenuePayload
 	>;
 }
 
@@ -23,24 +20,12 @@ export const useEditVenueMutation = (eid: string, vid: string): UseEditVenueMuta
 	const editVenueMutation = useMutation<
 		AxiosResponse<Prisma.EventVenue, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		EditVenuePayload
 	>(
-		async (event: FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
-
-			const formEntries = getFormEntries(event);
-
-			const parsed = EditVenueSchema.parse(formEntries);
-
-			const body: EditVenuePayload = {
-				slug: processSlug(parsed.slug),
-				name: parsed.name,
-				description: parsed.description
-			};
-
+		async (data) => {
 			return await axios.put<Prisma.EventVenue>(
 				`/api/events/${eid}/admin/venues/${vid}/edit`,
-				body
+				data
 			);
 		},
 		{

@@ -69,9 +69,10 @@ const EditVenuePage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl font-bold">Edit Venue Page</h1>
+				<h1 className="text-3xl font-bold">Edit Venue</h1>
 
 				<EditVenueForm
+					eid={String(eid)}
 					venue={venue}
 					venueError={venueError}
 					editVenueMutation={editVenueMutation}
