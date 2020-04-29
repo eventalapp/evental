@@ -1,12 +1,12 @@
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
-import { CreateEventPayload, CreateEventSchema } from '../../utils/schemas';
+import { CreateEventPayload, CreateEventSchema, ImageUploadSchema } from '../../utils/schemas';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
@@ -15,12 +15,15 @@ import { Textarea } from '../form/Textarea';
 import { DatePicker } from '../form/DatePicker';
 import { useEventQuery } from '../../hooks/queries/useEventQuery';
 import { slugify } from '../../utils/slugify';
+import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
+import Image from 'next/image';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseCreateEventMutationData;
+	UseCreateEventMutationData &
+	UseImageUploadMutationData;
 
 export const CreateEventForm: React.FC<Props> = (props) => {
-	const { createEventMutation } = props;
+	const { createEventMutation, imageUploadMutation, imageUploadResponse } = props;
 	const {
 		register,
 		handleSubmit,
@@ -39,6 +42,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 
 	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
+	const imageWatcher = watch('image');
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
 
@@ -69,6 +73,13 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
+
+	useEffect(() => {
+		console.log(imageUploadResponse);
+		if (imageUploadResponse) {
+			setValue('image', imageUploadResponse.pathName);
+		}
+	}, [imageUploadResponse]);
 
 	return (
 		<form
@@ -166,11 +177,32 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div>
+					<p>Current image:</p>
+
+					<div className="h-16 w-16 relative">
+						<Image
+							alt={'Event image'}
+							src={String(
+								imageWatcher
+									? `https://cdn.evental.app${imageWatcher}`
+									: `https://cdn.evental.app/images/default-avatar.jpg`
+							)}
+							className="rounded-full"
+							layout="fill"
+						/>
+					</div>
+
 					<Label htmlFor="image">Image</Label>
 					<Input
 						type="file"
 						accept="image/png, image/jpeg"
-						{...register('image', { required: true })}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => {
+							const files = e?.target?.files;
+
+							const filesParsed = ImageUploadSchema.parse({ image: files });
+
+							imageUploadMutation.mutate(filesParsed);
+						}}
 					/>
 					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 				</div>

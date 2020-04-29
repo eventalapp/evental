@@ -10,6 +10,7 @@ import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMuta
 import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Session } from 'next-auth';
+import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 
 type Props = {
 	session: Session | null;
@@ -18,6 +19,7 @@ type Props = {
 const CreateEventPage: NextPage<Props> = (props) => {
 	const { session } = props;
 	const { createEventMutation } = useCreateEventMutation();
+	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 
 	if (!session?.user?.id) {
 		return <Unauthorized />;
@@ -34,7 +36,11 @@ const CreateEventPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Create an Event</h1>
 
-				<CreateEventForm createEventMutation={createEventMutation} />
+				<CreateEventForm
+					createEventMutation={createEventMutation}
+					imageUploadMutation={imageUploadMutation}
+					imageUploadResponse={imageUploadResponse}
+				/>
 			</Column>
 		</PageWrapper>
 	);

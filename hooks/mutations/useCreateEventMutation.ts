@@ -4,7 +4,6 @@ import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError } from '../../typings/error';
 import { CreateEventPayload } from '../../utils/schemas';
-import { populateFormData } from '../../utils/populateFormData';
 import { toast } from 'react-toastify';
 
 export interface UseCreateEventMutationData {
@@ -24,9 +23,7 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 		CreateEventPayload
 	>(
 		async (data) => {
-			const formData = populateFormData(data);
-
-			return await axios.post<Prisma.Event>('/api/events/create', formData);
+			return await axios.post<Prisma.Event>('/api/events/create', data);
 		},
 		{
 			onSuccess: (response) => {
