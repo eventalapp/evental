@@ -6,6 +6,7 @@ import { isOrganizer } from '../../../../../../utils/isOrganizer';
 import { ServerErrorResponse } from '../../../../../../utils/ServerError';
 import type Prisma from '@prisma/client';
 import { handleServerError } from '../../../../../../utils/handleServerError';
+import { processSlug } from '../../../../../../utils/slugify';
 
 export default async (
 	req: NextApiRequest,
@@ -40,7 +41,7 @@ export default async (
 			let createdActivity = await prisma.eventActivity.create({
 				data: {
 					eventId: event.id,
-					slug: parsed.slug,
+					slug: processSlug(parsed.slug),
 					name: parsed.name,
 					venueId: parsed.venueId,
 					startDate: parsed.startDate,

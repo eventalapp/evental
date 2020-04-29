@@ -10,13 +10,15 @@ type Props = {
 
 export const variants = {
 	'primary':
-		'bg-primary-500 hover:bg-primary-400 border-2 border-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center',
+		'bg-primary-500 hover:bg-primary-400 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center',
+	'danger':
+		'bg-red-500 hover:bg-red-400 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center',
 	'secondary':
 		'bg-secondary-500 hover:bg-secondary-400 border-2 border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center',
 	'gradient':
-		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-centerr',
+		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center',
 	'no-bg':
-		'text-gray-900 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center',
+		'text-gray-600 hover:text-gray-500 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center',
 	'inversePrimary':
 		'bg-white hover:bg-gray-100 border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center'
 };
@@ -30,7 +32,7 @@ export const paddings = {
 };
 
 export const Button: React.FC<Props> = (props) => {
-	const { className, children, variant = 'secondary', padding = 'small', ...rest } = props;
+	const { className, children, variant = 'primary', padding = 'small', ...rest } = props;
 
 	return (
 		<button className={classNames(paddings[padding], variants[variant], className)} {...rest}>

@@ -6,6 +6,8 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
+import { toast } from 'react-toastify';
+import { processSlug } from '../../utils/slugify';
 
 export interface UseCreateVenueMutationData {
 	createVenueMutation: UseMutationResult<
@@ -30,12 +32,12 @@ export const useCreateVenueMutation = (eid: string): UseCreateVenueMutationData 
 
 			const formEntries = getFormEntries(event);
 
-			const eventParsed = CreateVenueSchema.parse(formEntries);
+			const parsed = CreateVenueSchema.parse(formEntries);
 
 			const body: CreateVenuePayload = {
-				name: eventParsed.name,
-				slug: eventParsed.slug,
-				description: eventParsed.description
+				name: parsed.name,
+				slug: processSlug(parsed.slug),
+				description: parsed.description
 			};
 
 			return await axios.post<Prisma.EventActivity>(`/api/events/${eid}/admin/venues/create`, body);
@@ -43,6 +45,8 @@ export const useCreateVenueMutation = (eid: string): UseCreateVenueMutationData 
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Venue created successfully');
 
 				router.push(`/events/${eid}/venues/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['venues', eid]);

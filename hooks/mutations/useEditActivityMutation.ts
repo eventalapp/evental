@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { EditActivityPayload } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { toast } from 'react-toastify';
 
 export interface UseEditActivityMutationData {
 	editActivityMutation: UseMutationResult<
@@ -33,6 +34,8 @@ export const useEditActivityMutation = (eid: string, aid: string): UseEditActivi
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Activity edited successfully');
 
 				router.push(`/events/${eid}/activities/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['activity', eid, aid]);

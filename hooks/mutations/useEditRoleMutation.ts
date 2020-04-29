@@ -6,6 +6,8 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { toast } from 'react-toastify';
+import { processSlug } from '../../utils/slugify';
 
 export interface UseEditRoleMutationData {
 	editRoleMutation: UseMutationResult<
@@ -33,7 +35,7 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 			const parsed = EditRoleSchema.parse(formEntries);
 
 			const body: EditRolePayload = {
-				slug: parsed.slug,
+				slug: processSlug(parsed.slug),
 				name: parsed.name,
 				defaultRole: parsed.defaultRole
 			};
@@ -43,6 +45,8 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Role edited successfully');
 
 				router.push(`/events/${eid}/roles/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['role', eid, rid]);

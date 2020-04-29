@@ -6,6 +6,7 @@ import { EditActivitySchema } from '../../../../../../../utils/schemas';
 import { ServerErrorResponse } from '../../../../../../../utils/ServerError';
 import Prisma from '@prisma/client';
 import { handleServerError } from '../../../../../../../utils/handleServerError';
+import { processSlug } from '../../../../../../../utils/slugify';
 
 export default async (
 	req: NextApiRequest,
@@ -24,7 +25,7 @@ export default async (
 
 	if (req.method === 'PUT') {
 		try {
-			let bodyParsed = EditActivitySchema.parse(req.body);
+			let parsed = EditActivitySchema.parse(req.body);
 
 			const event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -57,12 +58,12 @@ export default async (
 				},
 				data: {
 					eventId: event.id,
-					slug: bodyParsed.slug,
-					name: bodyParsed.name,
-					venueId: bodyParsed.venueId,
-					startDate: bodyParsed.startDate,
-					endDate: bodyParsed.endDate,
-					description: bodyParsed.description
+					slug: processSlug(parsed.slug),
+					name: parsed.name,
+					venueId: parsed.venueId,
+					startDate: parsed.startDate,
+					endDate: parsed.endDate,
+					description: parsed.description
 				}
 			});
 

@@ -6,6 +6,8 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { EditAttendeePayload, EditAttendeeSchema } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { toast } from 'react-toastify';
+import { processSlug } from '../../utils/slugify';
 
 export interface UseEditAttendeeMutationData {
 	editAttendeeMutation: UseMutationResult<
@@ -33,7 +35,7 @@ export const useEditAttendeeMutation = (eid: string, aid: string): UseEditAttend
 			const parsed = EditAttendeeSchema.parse(formEntries);
 
 			const body: EditAttendeePayload = {
-				slug: parsed.slug,
+				slug: processSlug(parsed.slug),
 				name: parsed.name,
 				company: parsed.company,
 				position: parsed.position,
@@ -51,6 +53,8 @@ export const useEditAttendeeMutation = (eid: string, aid: string): UseEditAttend
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Attendee edited successfully');
 
 				router.push(`/events/${eid}/attendees/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['attendee', eid, aid]);

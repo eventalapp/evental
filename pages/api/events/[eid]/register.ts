@@ -11,6 +11,7 @@ import { CreateAttendeeSchema } from '../../../../utils/schemas';
 import { handleServerError } from '../../../../utils/handleServerError';
 import { prisma } from '../../../../prisma/client';
 import { getEvent } from './index';
+import { processSlug } from '../../../../utils/slugify';
 
 export const config = {
 	api: {
@@ -80,7 +81,7 @@ export default async (
 
 			const eventAttendee = await prisma.eventAttendee.create({
 				data: {
-					slug: parsed.slug,
+					slug: processSlug(parsed.slug),
 					name: parsed.name,
 					image: fileLocation,
 					company: parsed.company,

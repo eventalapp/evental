@@ -6,6 +6,8 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { toast } from 'react-toastify';
+import { processSlug } from '../../utils/slugify';
 
 export interface UseEditVenueMutationData {
 	editVenueMutation: UseMutationResult<
@@ -33,7 +35,7 @@ export const useEditVenueMutation = (eid: string, vid: string): UseEditVenueMuta
 			const parsed = EditVenueSchema.parse(formEntries);
 
 			const body: EditVenuePayload = {
-				slug: parsed.slug,
+				slug: processSlug(parsed.slug),
 				name: parsed.name,
 				description: parsed.description
 			};
@@ -46,6 +48,8 @@ export const useEditVenueMutation = (eid: string, vid: string): UseEditVenueMuta
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Venue edited successfully');
 
 				router.push(`/events/${eid}/venues/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['venue', eid, vid]);
