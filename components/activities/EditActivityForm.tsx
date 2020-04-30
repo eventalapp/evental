@@ -103,13 +103,13 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="name">Name</Label>
+						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Activity name" {...register('name', { required: true })} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
 					<div>
-						<Label htmlFor="venueId">Venue</Label>
+						<Label htmlFor="venueId">Venue *</Label>
 						<Select
 							defaultValue={venues && venues[0].id}
 							{...register('venueId', { required: true })}
@@ -129,7 +129,7 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="startDate">Start Date</Label>
+						<Label htmlFor="startDate">Start Date *</Label>
 						<div className="relative">
 							<Controller
 								control={control}
@@ -141,6 +141,7 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 										startDate={field.value}
 										endDate={endDateWatcher}
 										selectsStart
+										required
 										timeIntervals={NEAREST_MINUTE}
 										dateFormat="MM/dd/yyyy h:mm a"
 										formatTime="MM/dd/yyyy h:mm a"
@@ -155,7 +156,7 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 					</div>
 
 					<div>
-						<Label htmlFor="endDate">End Date</Label>
+						<Label htmlFor="endDate">End Date *</Label>
 						<div className="relative">
 							<Controller
 								control={control}
@@ -165,6 +166,7 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 										onChange={(e) => field.onChange(e)}
 										selected={field.value}
 										selectsEnd
+										required
 										startDate={startDateWatcher}
 										endDate={field.value}
 										timeIntervals={NEAREST_MINUTE}
@@ -185,11 +187,7 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 mb-5 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
-					<Textarea
-						rows={5}
-						placeholder="Activity description"
-						{...register('description', { required: true })}
-					/>
+					<Textarea rows={5} placeholder="Activity description" {...register('description')} />
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
@@ -199,7 +197,7 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
 					<div>
-						<Label htmlFor="slug">Slug</Label>
+						<Label htmlFor="slug">Slug *</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-md">/activities/</span>
 							<Input placeholder="activity-slug" {...register('slug', { required: true })} />

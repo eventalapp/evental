@@ -74,14 +74,14 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="name">Name</Label>
+						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Full Name" {...register('name', { required: true })} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
 					<div>
 						<Label htmlFor="location">Location</Label>
-						<Input placeholder="Location" {...register('location', { required: true })} />
+						<Input placeholder="Location" {...register('location')} />
 						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 					</div>
 				</div>
@@ -90,13 +90,13 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="position">Position</Label>
-						<Input placeholder="Position" {...register('position', { required: true })} />
+						<Input placeholder="Position" {...register('position')} />
 						{errors.position?.message && <ErrorMessage>{errors.position?.message}</ErrorMessage>}
 					</div>
 
 					<div>
 						<Label htmlFor="company">Company</Label>
-						<Input placeholder="Company" {...register('company', { required: true })} />
+						<Input placeholder="Company" {...register('company')} />
 						{errors.company?.message && <ErrorMessage>{errors.company?.message}</ErrorMessage>}
 					</div>
 				</div>
@@ -105,11 +105,7 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 mb-5 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
-					<Textarea
-						rows={5}
-						placeholder="Event description"
-						{...register('description', { required: true })}
-					/>
+					<Textarea rows={5} placeholder="Event description" {...register('description')} />
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
@@ -119,7 +115,7 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
 					<div>
-						<Label htmlFor="slug">Slug</Label>
+						<Label htmlFor="slug">Slug *</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-md">/attendees/</span>
 							<Input placeholder="attendee-slug" {...register('slug', { required: true })} />
