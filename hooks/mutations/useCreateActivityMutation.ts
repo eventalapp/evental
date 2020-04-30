@@ -4,12 +4,12 @@ import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { CreateActivityPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseCreateActivityMutationData {
 	createActivityMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventActivity, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		CreateActivityPayload
 	>;
 }
@@ -19,7 +19,7 @@ export const useCreateActivityMutation = (eid: string): UseCreateActivityMutatio
 
 	const createActivityMutation = useMutation<
 		AxiosResponse<Prisma.EventActivity, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		CreateActivityPayload
 	>(
 		async (data) => {

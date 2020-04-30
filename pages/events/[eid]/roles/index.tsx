@@ -18,7 +18,7 @@ import Prisma from '@prisma/client';
 
 import { getRoles } from '../../../api/events/[eid]/roles';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import user from '../../../api/auth/user';
 import { PasswordlessUser } from '../../../../utils/api';
@@ -48,7 +48,7 @@ const RolesPage: NextPage<Props> = (props) => {
 	}
 
 	if (isOrganizerError || rolesError) {
-		return <ViewNextkitErrorPage errors={[isOrganizerError, rolesError]} />;
+		return <ViewErrorPage errors={[isOrganizerError, rolesError]} />;
 	}
 
 	return (

@@ -16,7 +16,7 @@ import type Prisma from '@prisma/client';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { Loading } from '../../../../components/error/Loading';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
@@ -44,7 +44,7 @@ const DeleteEventPage: NextPage<Props> = (props) => {
 	}
 
 	if (eventError) {
-		return <ViewNextkitErrorPage errors={[eventError]} />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	return (

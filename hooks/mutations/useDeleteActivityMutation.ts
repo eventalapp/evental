@@ -2,12 +2,12 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseDeleteActivityMutationData {
 	deleteActivityMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		void
 	>;
 }
@@ -20,7 +20,7 @@ export const useDeleteActivityMutation = (
 
 	const deleteActivityMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		void
 	>(
 		async () => {

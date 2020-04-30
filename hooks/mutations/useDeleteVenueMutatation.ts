@@ -2,12 +2,12 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseDeleteVenueMutationData {
 	deleteVenueMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		void
 	>;
 }
@@ -17,7 +17,7 @@ export const useDeleteVenueMutation = (eid: string, vid: string): UseDeleteVenue
 
 	const deleteVenueMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		void
 	>(
 		async () => {

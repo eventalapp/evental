@@ -18,7 +18,7 @@ import type Prisma from '@prisma/client';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import user from '../../../../../api/auth/user';
 import { PasswordlessUser } from '../../../../../../utils/api';
@@ -58,7 +58,7 @@ const DeleteActivityPage: NextPage<Props> = (props) => {
 	}
 
 	if (activityError) {
-		return <ViewNextkitErrorPage errors={[activityError]} />;
+		return <ViewErrorPage errors={[activityError]} />;
 	}
 
 	return (

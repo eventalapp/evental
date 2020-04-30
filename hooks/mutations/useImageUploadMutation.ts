@@ -5,12 +5,12 @@ import { populateFormData } from '../../utils/populateFormData';
 import { toast } from 'react-toastify';
 import { ImageUploadResponse } from '../../pages/api/upload/image';
 import { useState } from 'react';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseImageUploadMutationData {
 	imageUploadMutation: UseMutationResult<
 		ImageUploadResponse,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		ImageUploadPayload
 	>;
 	imageUploadResponse: ImageUploadResponse | undefined;
@@ -21,7 +21,7 @@ export const useImageUploadMutation = (): UseImageUploadMutationData => {
 
 	const imageUploadMutation = useMutation<
 		ImageUploadResponse,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		ImageUploadPayload
 	>(
 		async (data) => {

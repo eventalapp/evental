@@ -15,7 +15,7 @@ import Prisma from '@prisma/client';
 
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { useImageUploadMutation } from '../../../../hooks/mutations/useImageUploadMutation';
 import { PasswordlessUser } from '../../../../utils/api';
@@ -46,7 +46,7 @@ const EditEventPage: NextPage<Props> = (props) => {
 	}
 
 	if (eventError) {
-		return <ViewNextkitErrorPage errors={[eventError]} />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	return (

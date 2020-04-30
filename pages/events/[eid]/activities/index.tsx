@@ -19,7 +19,7 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import type Prisma from '@prisma/client';
 import { getActivities } from '../../../api/events/[eid]/activities';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import user from '../../../api/auth/user';
 import { PasswordlessUser } from '../../../../utils/api';
@@ -52,7 +52,7 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 	}
 
 	if (activitiesError || isOrganizerError) {
-		return <ViewNextkitErrorPage errors={[activitiesError, isOrganizerError]} />;
+		return <ViewErrorPage errors={[activitiesError, isOrganizerError]} />;
 	}
 
 	if (activities) {

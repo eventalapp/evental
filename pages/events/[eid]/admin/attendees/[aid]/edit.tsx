@@ -20,7 +20,7 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import Prisma from '@prisma/client';
 import { getRoles } from '../../../../../api/events/[eid]/roles';
-import { ViewNextkitErrorPage } from '../../../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { useImageUploadMutation } from '../../../../../../hooks/mutations/useImageUploadMutation';
 import user from '../../../../../api/auth/user';
@@ -68,7 +68,7 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (attendeeError || rolesError) {
-		return <ViewNextkitErrorPage errors={[attendeeError, rolesError]} />;
+		return <ViewErrorPage errors={[attendeeError, rolesError]} />;
 	}
 
 	return (

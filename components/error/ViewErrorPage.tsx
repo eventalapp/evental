@@ -3,13 +3,13 @@ import PageWrapper from '../layout/PageWrapper';
 import Head from 'next/head';
 import { Navigation } from '../navigation';
 import Column from '../layout/Column';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 type Props = {
-	errors: Array<NextkitError | null>;
+	errors: Array<ErroredAPIResponse | null>;
 };
 
-export const ViewNextkitErrorPage: React.FC<Props> = (props) => {
+export const ViewErrorPage: React.FC<Props> = (props) => {
 	const { errors } = props;
 
 	if (!errors) {

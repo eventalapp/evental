@@ -4,12 +4,12 @@ import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { CreateRolePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseCreateRoleMutationData {
 	createRoleMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventRole, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		CreateRolePayload
 	>;
 }
@@ -19,7 +19,7 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 
 	const createRoleMutation = useMutation<
 		AxiosResponse<Prisma.EventRole, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		CreateRolePayload
 	>(
 		async (data) => {

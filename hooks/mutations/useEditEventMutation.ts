@@ -4,12 +4,12 @@ import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { EditEventPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseEditEventMutationData {
 	editEventMutation: UseMutationResult<
 		AxiosResponse<Prisma.Event, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		EditEventPayload
 	>;
 }
@@ -19,7 +19,7 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 
 	const editEventMutation = useMutation<
 		AxiosResponse<Prisma.Event, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		EditEventPayload
 	>(
 		async (data) => {

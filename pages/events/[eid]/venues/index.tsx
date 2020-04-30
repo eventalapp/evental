@@ -20,7 +20,7 @@ import { getVenues } from '../../../api/events/[eid]/venues';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import user from '../../../api/auth/user';
 import { PasswordlessUser } from '../../../../utils/api';
 
@@ -45,7 +45,7 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 	}
 
 	if (isOrganizerError || venuesError) {
-		return <ViewNextkitErrorPage errors={[isOrganizerError]} />;
+		return <ViewErrorPage errors={[isOrganizerError]} />;
 	}
 
 	if (isVenuesLoading || isOrganizerLoading) {

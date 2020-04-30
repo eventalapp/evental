@@ -19,7 +19,7 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { ViewNextkitErrorPage } from '../../../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import user from '../../../../../api/auth/user';
 import { PasswordlessUser } from '../../../../../../utils/api';
 
@@ -58,7 +58,7 @@ const DeleteVenuePage: NextPage<Props> = (props) => {
 	}
 
 	if (venueError) {
-		return <ViewNextkitErrorPage errors={[venueError]} />;
+		return <ViewErrorPage errors={[venueError]} />;
 	}
 
 	return (

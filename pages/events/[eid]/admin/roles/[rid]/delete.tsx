@@ -19,7 +19,7 @@ import { EventAttendeeUser } from '../../../../../api/events/[eid]/attendees/[ai
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import user from '../../../../../api/auth/user';
 import { PasswordlessUser } from '../../../../../../utils/api';
@@ -57,7 +57,7 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 	}
 
 	if (roleAttendeesError) {
-		return <ViewNextkitErrorPage errors={[roleAttendeesError]} />;
+		return <ViewErrorPage errors={[roleAttendeesError]} />;
 	}
 
 	if (isRoleAttendeesLoading) {

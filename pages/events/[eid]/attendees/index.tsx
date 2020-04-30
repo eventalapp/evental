@@ -13,7 +13,7 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { getAttendees } from '../../../api/events/[eid]/attendees';
 import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import user from '../../../api/auth/user';
 import { PasswordlessUser } from '../../../../utils/api';
@@ -46,7 +46,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (attendeesError || isOrganizerError) {
-		return <ViewNextkitErrorPage errors={[attendeesError, isOrganizerError]} />;
+		return <ViewErrorPage errors={[attendeesError, isOrganizerError]} />;
 	}
 
 	return (
