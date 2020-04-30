@@ -51,7 +51,7 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 	}
 
 	if (!initialRole || !initialAttendees || !role || !attendees) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="Role not found." />;
 	}
 
 	if (roleAttendeesError) {

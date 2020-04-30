@@ -38,7 +38,7 @@ const RolesPage: NextPage<Props> = (props) => {
 	);
 
 	if (!initialRoles || !roles) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="No roles found." />;
 	}
 
 	if (isOrganizerLoading || isRolesLoading) {

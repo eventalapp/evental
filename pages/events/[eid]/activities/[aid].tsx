@@ -38,8 +38,8 @@ const ViewActivityPage: NextPage<Props> = (props) => {
 		initialOrganizer
 	);
 
-	if (!initialActivity) {
-		return <NotFoundPage />;
+	if (!initialActivity || !activity) {
+		return <NotFoundPage message="Activity not found." />;
 	}
 
 	if (isOrganizerLoading || isActivityLoading) {
@@ -48,10 +48,6 @@ const ViewActivityPage: NextPage<Props> = (props) => {
 
 	if (isOrganizerError || activityError) {
 		return <ViewServerErrorPage errors={[isOrganizerError, activityError]} />;
-	}
-
-	if (!activity) {
-		return <NotFoundPage />;
 	}
 
 	return (

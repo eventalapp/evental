@@ -36,8 +36,8 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 		return <UnauthorizedPage />;
 	}
 
-	if (!initialEvent) {
-		return <NotFoundPage />;
+	if (!initialEvent || !event) {
+		return <NotFoundPage message="Event not found." />;
 	}
 
 	if (isEventLoading) {

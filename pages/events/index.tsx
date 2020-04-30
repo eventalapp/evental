@@ -29,7 +29,7 @@ const EventsPage: NextPage<Props> = (props) => {
 	}
 
 	if (!events || !events.length) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="No events found." />;
 	}
 
 	return (

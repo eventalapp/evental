@@ -37,7 +37,7 @@ const EditEventPage: NextPage<Props> = (props) => {
 	}
 
 	if (!initialEvent || !event) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="Event not found." />;
 	}
 
 	if (isEventLoading) {

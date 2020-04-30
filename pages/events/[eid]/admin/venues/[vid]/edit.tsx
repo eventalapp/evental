@@ -49,7 +49,7 @@ const EditVenuePage: NextPage<Props> = (props) => {
 	}
 
 	if (!initialVenue || !venue) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="Venue not found." />;
 	}
 
 	if (isVenueLoading) {

@@ -41,7 +41,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	);
 
 	if (!initialAttendees || !initialRole || !role || !attendees) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="Role not found." />;
 	}
 
 	if (isOrganizerLoading || isRoleAttendeesLoading) {
