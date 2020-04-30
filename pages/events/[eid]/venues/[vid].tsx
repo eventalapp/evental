@@ -20,7 +20,7 @@ import { PasswordlessUser } from '../../../../utils/api';
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
 	initialOrganizer: boolean;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const ViewAttendeePage: NextPage<Props> = (props) => {

@@ -28,7 +28,7 @@ export const useSignOutMutation = (): UseSignOutMutationData => {
 				toast.success('Successfully signed out');
 			},
 			onError: (error) => {
-				toast.error(error.message ?? 'Failed to sign out.');
+				toast.error(error?.response?.data.message ?? 'Failed to sign out.');
 			}
 		}
 	);

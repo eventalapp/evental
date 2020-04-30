@@ -11,7 +11,7 @@ type Props = {
 	className?: string;
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	user: PasswordlessUser;
+	user: PasswordlessUser | undefined;
 } & UseSignOutMutationData;
 
 export const Authenticated: React.FC<Props> = (props) => {

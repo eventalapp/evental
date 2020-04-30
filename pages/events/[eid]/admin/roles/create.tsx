@@ -19,7 +19,7 @@ import { PasswordlessUser } from '../../../../../utils/api';
 
 type Props = {
 	initialOrganizer: boolean;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const CreateRolePage: NextPage<Props> = (props) => {

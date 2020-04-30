@@ -37,7 +37,7 @@ export const useImageUploadMutation = (): UseImageUploadMutationData => {
 				toast.success('Image successfully uploaded');
 			},
 			onError: (error) => {
-				toast.error(error.message ?? 'An error has occurred.');
+				toast.error(error?.response?.data.message ?? 'An error has occurred.');
 			}
 		}
 	);

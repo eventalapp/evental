@@ -4,32 +4,28 @@ import { PasswordlessUser } from '../../utils/api';
 import { toast } from 'react-toastify';
 import { NextkitError } from 'nextkit';
 
-export interface UseActivitiesQueryData {
+export interface UseUserData {
 	user: PasswordlessUser | undefined;
-	isUseSessionLoading: boolean;
+	isUserLoading: boolean;
 }
 
-export const useSession = (
-	eid: string,
-	initialData?: PasswordlessUser | undefined
-): UseActivitiesQueryData => {
-	const { data: user, isLoading: isUseSessionLoading } = useQuery<
+export const useUser = (initialData?: PasswordlessUser | undefined): UseUserData => {
+	const { data: user, isLoading: isUserLoading } = useQuery<
 		PasswordlessUser,
 		AxiosError<NextkitError>
 	>(
-		['activities', eid],
+		['user'],
 		async () => {
 			return await axios.get<PasswordlessUser>(`/api/auth/user`).then((res) => res.data);
 		},
 		{
 			retry: 0,
-			enabled: eid !== undefined && eid !== 'undefined',
 			onError: (error) => {
-				toast.error(error.message);
+				toast.error(error?.response?.data.message ?? 'An error has occurred.');
 			},
 			initialData
 		}
 	);
 
-	return { user, isUseSessionLoading };
+	return { user, isUserLoading };
 };

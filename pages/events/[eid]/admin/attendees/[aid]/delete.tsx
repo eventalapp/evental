@@ -26,7 +26,7 @@ import { PasswordlessUser } from '../../../../../../utils/api';
 type Props = {
 	initialOrganizer: boolean;
 	initialAttendee: EventAttendeeUser | undefined;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const DeleteAttendeePage: NextPage<Props> = (props) => {

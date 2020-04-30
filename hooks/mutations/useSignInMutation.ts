@@ -27,7 +27,7 @@ export const useSignInMutation = (): UseSignInMutationData => {
 				toast.success('Successfully signed in');
 			},
 			onError: (error) => {
-				toast.error(error.message ?? 'Failed to sign in.');
+				toast.error(error?.response?.data.message ?? 'Failed to sign in.');
 			}
 		}
 	);

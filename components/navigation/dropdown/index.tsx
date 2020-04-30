@@ -7,7 +7,7 @@ import { PasswordlessUser } from '../../../utils/api';
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 
 type Props = {
-	user: PasswordlessUser;
+	user: PasswordlessUser | undefined;
 } & UseSignOutMutationData;
 
 export const ProfileDropdown: React.FC<Props> = (props) => {

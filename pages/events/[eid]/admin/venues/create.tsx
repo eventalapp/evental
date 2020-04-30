@@ -17,7 +17,7 @@ import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 
 type Props = {
 	initialOrganizer: boolean;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const CreateActivityPage: NextPage<Props> = (props) => {

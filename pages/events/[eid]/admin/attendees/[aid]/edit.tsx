@@ -30,7 +30,7 @@ type Props = {
 	initialOrganizer: boolean;
 	initialAttendee: EventAttendeeUser | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const EditAttendeePage: NextPage<Props> = (props) => {

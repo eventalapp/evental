@@ -45,7 +45,7 @@ type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialVenues: Prisma.EventVenue[] | undefined;
 	initialOrganizer: boolean;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const AdminPage: NextPage<Props> = (props) => {
