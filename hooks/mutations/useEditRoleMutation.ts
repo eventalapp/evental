@@ -1,19 +1,16 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { getFormEntries } from '../../utils/getFormEntries';
-import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
-import { ServerError } from '../../typings/error';
+import { EditRolePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { processSlug } from '../../utils/slugify';
+import { NextkitError } from 'nextkit';
 
 export interface UseEditRoleMutationData {
 	editRoleMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventRole, unknown>,
-		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		AxiosError<NextkitError, unknown>,
+		EditRolePayload
 	>;
 }
 
@@ -22,23 +19,11 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 
 	const editRoleMutation = useMutation<
 		AxiosResponse<Prisma.EventRole, unknown>,
-		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		AxiosError<NextkitError, unknown>,
+		EditRolePayload
 	>(
-		async (event: FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
-
-			const formEntries = getFormEntries(event);
-
-			const parsed = EditRoleSchema.parse(formEntries);
-
-			const body: EditRolePayload = {
-				slug: processSlug(parsed.slug),
-				name: parsed.name,
-				defaultRole: parsed.defaultRole
-			};
-
-			return await axios.put<Prisma.EventRole>(`/api/events/${eid}/admin/roles/${rid}/edit`, body);
+		async (data) => {
+			return await axios.put<Prisma.EventRole>(`/api/events/${eid}/admin/roles/${rid}/edit`, data);
 		},
 		{
 			onSuccess: (response) => {
@@ -51,7 +36,7 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 				});
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);

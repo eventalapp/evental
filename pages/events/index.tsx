@@ -9,7 +9,7 @@ import PageWrapper from '../../components/layout/PageWrapper';
 import type Prisma from '@prisma/client';
 import { getEvents } from '../api/events';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
-import { ViewServerErrorPage } from '../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../components/error/ViewNextkitErrorPage';
 import { LoadingPage } from '../../components/error/LoadingPage';
 
 type Props = {
@@ -25,7 +25,7 @@ const EventsPage: NextPage<Props> = (props) => {
 	}
 
 	if (eventsError) {
-		return <ViewServerErrorPage errors={[eventsError]} />;
+		return <ViewNextkitErrorPage errors={[eventsError]} />;
 	}
 
 	if (!events || !events.length) {

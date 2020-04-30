@@ -3,14 +3,13 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { AdminEditAttendeePayload } from '../../utils/schemas';
-import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
-import { populateFormData } from '../../utils/populateFormData';
+import { NextkitError } from 'nextkit';
 
 export interface UseEditAttendeeMutationData {
 	adminEditAttendeeMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		AdminEditAttendeePayload
 	>;
 }
@@ -23,15 +22,13 @@ export const useAdminEditAttendeeMutation = (
 
 	const adminEditAttendeeMutation = useMutation<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		AdminEditAttendeePayload
 	>(
 		async (data) => {
-			const formData = populateFormData(data);
-
 			return await axios.put<Prisma.EventAttendee>(
 				`/api/events/${eid}/admin/attendees/${aid}/edit`,
-				formData
+				data
 			);
 		},
 		{
@@ -44,7 +41,7 @@ export const useAdminEditAttendeeMutation = (
 				});
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);

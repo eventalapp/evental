@@ -1,4 +1,3 @@
-import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import React, { useState } from 'react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
@@ -23,20 +22,18 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 	const [queryClient] = useState(() => new QueryClient());
 
 	return (
-		<SessionProvider session={pageProps.session}>
-			<QueryClientProvider client={queryClient}>
-				<Hydrate state={pageProps.dehydratedState}>
-					<Component {...pageProps} error={error} />
-				</Hydrate>
-				<ToastContainer />
-				<ReactQueryDevtools />
-				<style jsx global>{`
-					#__next {
-						height: 100%;
-					}
-				`}</style>
-			</QueryClientProvider>
-		</SessionProvider>
+		<QueryClientProvider client={queryClient}>
+			<Hydrate state={pageProps.dehydratedState}>
+				<Component {...pageProps} error={error} />
+			</Hydrate>
+			<ToastContainer />
+			<ReactQueryDevtools />
+			<style jsx global>{`
+				#__next {
+					height: 100%;
+				}
+			`}</style>
+		</QueryClientProvider>
 	);
 };
 

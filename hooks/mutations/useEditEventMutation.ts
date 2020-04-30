@@ -3,13 +3,13 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { EditEventPayload } from '../../utils/schemas';
-import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
+import { NextkitError } from 'nextkit';
 
 export interface UseEditEventMutationData {
 	editEventMutation: UseMutationResult<
 		AxiosResponse<Prisma.Event, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		EditEventPayload
 	>;
 }
@@ -19,7 +19,7 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 
 	const editEventMutation = useMutation<
 		AxiosResponse<Prisma.Event, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		EditEventPayload
 	>(
 		async (data) => {
@@ -35,7 +35,7 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 				});
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);

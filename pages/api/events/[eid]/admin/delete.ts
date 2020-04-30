@@ -1,46 +1,36 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
 import { prisma } from '../../../../../prisma/client';
 import { isFounder } from '../../../../../utils/isFounder';
-import { ServerErrorResponse } from '../../../../../utils/ServerError';
-import { handleServerError } from '../../../../../utils/handleServerError';
+import { api } from '../../../../../utils/api';
+import { NextkitError } from 'nextkit';
 
-export default async (req: NextApiRequest, res: NextApiResponse<ServerErrorResponse | string>) => {
-	const session = await getSession({ req });
-	const { eid } = req.query;
+export default api({
+	async DELETE({ ctx, req }) {
+		const user = await ctx.getUser();
+		const { eid } = req.query;
 
-	if (!session?.user?.id) {
-		return res.status(401).send({ error: { message: 'You must be logged in to do this.' } });
-	}
-
-	if (!(await isFounder(String(session?.user?.id), String(eid)))) {
-		return res
-			.status(403)
-			.send({ error: { message: 'You must be founder for this event to do this.' } });
-	}
-
-	if (req.method === 'DELETE') {
-		try {
-			const event = await prisma.event.findFirst({
-				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
-				select: {
-					id: true
-				}
-			});
-
-			if (!event) {
-				return res.status(404).send({ error: { message: 'Event not found.' } });
-			}
-
-			await prisma.event.delete({
-				where: { id: event.id }
-			});
-
-			return res.status(200).send('Event deleted.');
-		} catch (error) {
-			return handleServerError(error, res);
+		if (!user?.id) {
+			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
-	}
 
-	return res.status(204).end();
-};
+		if (!(await isFounder(String(user?.id), String(eid)))) {
+			throw new NextkitError(403, 'You must be founder for this event to do this.');
+		}
+
+		const event = await prisma.event.findFirst({
+			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
+			select: {
+				id: true
+			}
+		});
+
+		if (!event) {
+			throw new NextkitError(404, 'Event not found.');
+		}
+
+		await prisma.event.delete({
+			where: { id: event.id }
+		});
+
+		return 'Event deleted.';
+	}
+});

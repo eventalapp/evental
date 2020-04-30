@@ -1,6 +1,6 @@
 import Busboy from 'busboy';
 import { NextApiRequest } from 'next';
-import { ServerError } from './ServerError';
+import { NextkitError } from 'nextkit';
 
 export const busboyParseForm = (
 	req: NextApiRequest
@@ -11,7 +11,7 @@ export const busboyParseForm = (
 	mimeType?: string;
 	fileLocation?: string;
 }> => {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 		const busboy = Busboy({ headers: req.headers });
 		let chunks: Uint8Array[] = [];
 		let formData: Record<string, string> = {};
@@ -30,7 +30,7 @@ export const busboyParseForm = (
 			});
 
 			file.on('error', (error) => {
-				reject(new ServerError(error.message));
+				throw new NextkitError(500, error.message);
 			});
 		});
 
@@ -49,10 +49,10 @@ export const busboyParseForm = (
 
 		busboy.on('error', (error) => {
 			if (error instanceof Error) {
-				reject(new ServerError(error.message));
+				throw new NextkitError(500, error.message);
 			}
 
-			reject(new ServerError('An error has occurred while parsing the form.'));
+			throw new NextkitError(500, 'An error has occurred while parsing the form.');
 		});
 
 		req.pipe(busboy);

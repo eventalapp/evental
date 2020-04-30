@@ -8,19 +8,18 @@ import { Navigation } from '../../../../components/navigation';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getSession } from 'next-auth/react';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { Session } from 'next-auth';
 import { EventAttendeeUser, getAttendee } from '../../../api/events/[eid]/attendees/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import React from 'react';
-import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
+import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
 	initialAttendee: EventAttendeeUser | undefined;
 	initialOrganizer: boolean;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const ViewAttendeePage: NextPage<Props> = (props) => {
@@ -46,7 +45,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (attendeeError || isOrganizerError) {
-		return <ViewServerErrorPage errors={[attendeeError, isOrganizerError]} />;
+		return <ViewNextkitErrorPage errors={[attendeeError, isOrganizerError]} />;
 	}
 
 	if (!attendee || !attendee.user || !attendee.role) {
@@ -82,7 +81,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const session = await getSession(context);
 	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
 
 	return {
 		props: {

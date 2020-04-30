@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { NextkitError } from 'nextkit';
 import { RoleAttendeePayload } from '../../pages/api/events/[eid]/roles/[rid]';
 import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 import Prisma from '@prisma/client';
@@ -10,7 +10,7 @@ export interface UseRoleAttendeesQueryData {
 	attendees: EventAttendeeUser[] | undefined;
 	role: Prisma.EventRole | undefined;
 	isRoleAttendeesLoading: boolean;
-	roleAttendeesError: ServerErrorPayload | null;
+	roleAttendeesError: NextkitError | null;
 }
 
 export const useRoleAttendeesQuery = (
@@ -18,11 +18,11 @@ export const useRoleAttendeesQuery = (
 	rid: string,
 	initialData?: { attendees: EventAttendeeUser[] | undefined; role: Prisma.EventRole | undefined }
 ): UseRoleAttendeesQueryData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
+	const [error, setError] = useState<NextkitError | null>(null);
 
 	const { data, isLoading: isRoleAttendeesLoading } = useQuery<
 		RoleAttendeePayload,
-		AxiosError<ServerError>
+		AxiosError<NextkitError>
 	>(
 		['role', eid, rid],
 		async () => {
@@ -34,7 +34,7 @@ export const useRoleAttendeesQuery = (
 			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined' && rid !== undefined && rid !== 'undefined',
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				setError(error?.response?.data ?? null);
 			},
 			onSuccess: () => {
 				setError(null);

@@ -1,19 +1,16 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { getFormEntries } from '../../utils/getFormEntries';
-import { ServerError } from '../../typings/error';
-import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
+import { CreateRolePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { processSlug } from '../../utils/slugify';
+import { NextkitError } from 'nextkit';
 
 export interface UseCreateRoleMutationData {
 	createRoleMutation: UseMutationResult<
-		AxiosResponse<Prisma.EventActivity, unknown>,
-		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		AxiosResponse<Prisma.EventRole, unknown>,
+		AxiosError<NextkitError, unknown>,
+		CreateRolePayload
 	>;
 }
 
@@ -21,24 +18,12 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 	const queryClient = useQueryClient();
 
 	const createRoleMutation = useMutation<
-		AxiosResponse<Prisma.EventActivity, unknown>,
-		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		AxiosResponse<Prisma.EventRole, unknown>,
+		AxiosError<NextkitError, unknown>,
+		CreateRolePayload
 	>(
-		async (event: FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
-
-			const formEntries = getFormEntries(event);
-
-			const parsed = CreateRoleSchema.parse(formEntries);
-
-			const body: CreateRolePayload = {
-				name: parsed.name,
-				slug: processSlug(parsed.slug),
-				defaultRole: parsed.defaultRole
-			};
-
-			return await axios.post<Prisma.EventActivity>(`/api/events/${eid}/admin/roles/create`, body);
+		async (data) => {
+			return await axios.post<Prisma.EventRole>(`/api/events/${eid}/admin/roles/create`, data);
 		},
 		{
 			onSuccess: (response) => {
@@ -49,7 +34,7 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 				});
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);

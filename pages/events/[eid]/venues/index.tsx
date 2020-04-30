@@ -13,19 +13,21 @@ import React from 'react';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getSession } from 'next-auth/react';
+
 import Prisma from '@prisma/client';
-import { Session } from 'next-auth';
+
 import { getVenues } from '../../../api/events/[eid]/venues';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import user from '../../../api/auth/user';
+import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
 	initialVenues: Prisma.EventVenue[] | undefined;
 	initialOrganizer: boolean;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const ActivitiesPage: NextPage<Props> = (props) => {
@@ -43,7 +45,7 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 	}
 
 	if (isOrganizerError || venuesError) {
-		return <ViewServerErrorPage errors={[isOrganizerError]} />;
+		return <ViewNextkitErrorPage errors={[isOrganizerError]} />;
 	}
 
 	if (isVenuesLoading || isOrganizerLoading) {
@@ -92,7 +94,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const session = await getSession(context);
 	const initialVenues = (await getVenues(String(eid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
 
 	return {
 		props: {

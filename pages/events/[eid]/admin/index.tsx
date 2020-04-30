@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
+
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -27,7 +27,7 @@ import { getActivities } from '../../../api/events/[eid]/activities';
 import { getRoles } from '../../../api/events/[eid]/roles';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import type Prisma from '@prisma/client';
-import { Session } from 'next-auth';
+
 import { getVenues } from '../../../api/events/[eid]/venues';
 import { getAttendees } from '../../../api/events/[eid]/attendees';
 import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
@@ -35,6 +35,8 @@ import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
+import user from '../../../api/auth/user';
+import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -43,13 +45,13 @@ type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialVenues: Prisma.EventVenue[] | undefined;
 	initialOrganizer: boolean;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const AdminPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const {
-		session,
+		user,
 		initialActivities,
 		initialAttendees,
 		initialVenues,
@@ -73,7 +75,7 @@ const AdminPage: NextPage<Props> = (props) => {
 		initialActivities
 	);
 
-	if (!session?.user?.id) {
+	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
@@ -252,7 +254,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialActivities = (await getActivities(String(eid))) ?? undefined;
 	const initialAttendees = (await getAttendees(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
 	const initialVenues = (await getVenues(String(eid))) ?? undefined;
 
 	return {

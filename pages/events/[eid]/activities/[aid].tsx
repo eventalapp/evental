@@ -9,19 +9,18 @@ import { useActivityQuery } from '../../../../hooks/queries/useActivityQuery';
 import React from 'react';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getSession } from 'next-auth/react';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { Session } from 'next-auth';
 import type Prisma from '@prisma/client';
 import { getActivity } from '../../../api/events/[eid]/activities/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
+import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
 	initialActivity: Prisma.EventActivity | undefined;
 	initialOrganizer: boolean;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const ViewActivityPage: NextPage<Props> = (props) => {
@@ -47,7 +46,7 @@ const ViewActivityPage: NextPage<Props> = (props) => {
 	}
 
 	if (isOrganizerError || activityError) {
-		return <ViewServerErrorPage errors={[isOrganizerError, activityError]} />;
+		return <ViewNextkitErrorPage errors={[isOrganizerError, activityError]} />;
 	}
 
 	return (
@@ -79,7 +78,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const session = await getSession(context);
 	const initialActivity = (await getActivity(String(eid), String(aid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
 
 	return {
 		props: {

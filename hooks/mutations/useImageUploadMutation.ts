@@ -1,16 +1,16 @@
 import axios, { AxiosError } from 'axios';
 import { useMutation, UseMutationResult } from 'react-query';
-import { ServerError } from '../../typings/error';
 import { ImageUploadPayload } from '../../utils/schemas';
 import { populateFormData } from '../../utils/populateFormData';
 import { toast } from 'react-toastify';
 import { ImageUploadResponse } from '../../pages/api/upload/image';
 import { useState } from 'react';
+import { NextkitError } from 'nextkit';
 
 export interface UseImageUploadMutationData {
 	imageUploadMutation: UseMutationResult<
 		ImageUploadResponse,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		ImageUploadPayload
 	>;
 	imageUploadResponse: ImageUploadResponse | undefined;
@@ -21,7 +21,7 @@ export const useImageUploadMutation = (): UseImageUploadMutationData => {
 
 	const imageUploadMutation = useMutation<
 		ImageUploadResponse,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		ImageUploadPayload
 	>(
 		async (data) => {
@@ -37,7 +37,7 @@ export const useImageUploadMutation = (): UseImageUploadMutationData => {
 				toast.success('Image successfully uploaded');
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);

@@ -2,20 +2,20 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { NextkitError } from 'nextkit';
 
 export interface UseEventsQueryData {
 	events: Prisma.Event[] | undefined;
 	isEventsLoading: boolean;
-	eventsError: ServerErrorPayload | null;
+	eventsError: NextkitError | null;
 }
 
 export const useEventsQuery = (initialData?: Prisma.Event[]): UseEventsQueryData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
+	const [error, setError] = useState<NextkitError | null>(null);
 
 	const { data: events, isLoading: isEventsLoading } = useQuery<
 		Prisma.Event[],
-		AxiosError<ServerError>
+		AxiosError<NextkitError>
 	>(
 		['events'],
 		async () => {
@@ -24,7 +24,7 @@ export const useEventsQuery = (initialData?: Prisma.Event[]): UseEventsQueryData
 		{
 			retry: 0,
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				setError(error?.response?.data ?? null);
 			},
 			onSuccess: () => {
 				setError(null);

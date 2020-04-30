@@ -1,13 +1,13 @@
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { NextkitError } from 'nextkit';
 import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 
 export interface UseAttendeeByUserIdQueryData {
 	attendeeByUserId: EventAttendeeUser | undefined;
 	isAttendeeByUserIdLoading: boolean;
-	attendeeByUserIdError: ServerErrorPayload | null;
+	attendeeByUserIdError: NextkitError | null;
 }
 
 export const useAttendeeByUserIdQuery = (
@@ -15,11 +15,11 @@ export const useAttendeeByUserIdQuery = (
 	uid: string,
 	initialData?: EventAttendeeUser | undefined
 ): UseAttendeeByUserIdQueryData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
+	const [error, setError] = useState<NextkitError | null>(null);
 
 	const { data: attendeeByUserId, isLoading: isAttendeeByUserIdLoading } = useQuery<
 		EventAttendeeUser,
-		AxiosError<ServerError>
+		AxiosError<NextkitError>
 	>(
 		['attendeeByUserId', eid, uid],
 		async () => {
@@ -34,7 +34,7 @@ export const useAttendeeByUserIdQuery = (
 			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined' && uid !== undefined && uid !== 'undefined',
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				setError(error?.response?.data ?? null);
 			},
 			onSuccess: () => {
 				setError(null);

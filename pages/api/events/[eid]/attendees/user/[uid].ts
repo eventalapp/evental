@@ -1,16 +1,10 @@
-import type Prisma from '@prisma/client';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../../prisma/client';
-import { ServerErrorResponse } from '../../../../../../utils/ServerError';
 import { getEvent } from '../../index';
-import { handleServerError } from '../../../../../../utils/handleServerError';
 import { EventAttendeeUser } from '../[aid]';
+import { api } from '../../../../../../utils/api';
 
-export default async (
-	req: NextApiRequest,
-	res: NextApiResponse<ServerErrorResponse | Prisma.EventAttendee>
-) => {
-	try {
+export default api({
+	async GET({ req, res }) {
 		const { eid, uid } = req.query;
 
 		const eventAttendee = await getAttendeeByUserId(String(eid), String(uid));
@@ -19,11 +13,9 @@ export default async (
 			return res.status(200).end();
 		}
 
-		return res.status(200).send(eventAttendee);
-	} catch (error) {
-		return handleServerError(error, res);
+		return eventAttendee;
 	}
-};
+});
 
 export const getAttendeeByUserId = async (
 	eid: string,
@@ -32,6 +24,10 @@ export const getAttendeeByUserId = async (
 	const event = await getEvent(String(eid));
 
 	if (!event) {
+		return null;
+	}
+
+	if (!uid) {
 		return null;
 	}
 

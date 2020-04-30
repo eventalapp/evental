@@ -12,61 +12,23 @@ enum Role {
   ADMIN
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@map("account")
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  @@map("session")
-}
 
 model User {
   id            String    @id @default(cuid())
   name          String?
+  password    String
   email         String?   @unique
   emailVerified DateTime?
-  image         String @default("/images/default-avatar.jpg")
+  image         String    @default("/images/default-avatar.jpg")
   updatedAt     DateTime  @updatedAt
   createdAt     DateTime  @default(now())
   role          Role      @default(USER)
 
-  accounts      Account[]
-  sessions      Session[]
   eventAttendee EventAttendee[]
 
   @@map("user")
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-  @@map("verification_tokens")
-}
 
 enum EventPermissionRole {
   FOUNDER

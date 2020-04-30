@@ -1,28 +1,22 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
-import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import Prisma from '@prisma/client';
 import { getEvent } from '../index';
-import { handleServerError } from '../../../../../utils/handleServerError';
+import { api } from '../../../../../utils/api';
+import { NextkitError } from 'nextkit';
 
-export default async (
-	req: NextApiRequest,
-	res: NextApiResponse<ServerErrorResponse | Prisma.EventActivity>
-) => {
-	try {
+export default api({
+	async GET({ req }) {
 		const { eid, aid } = req.query;
 
 		const activity = await getActivity(String(eid), String(aid));
 
 		if (!activity) {
-			return res.status(404).send({ error: { message: 'Activity not found.' } });
+			throw new NextkitError(404, 'Activity not found.');
 		}
 
-		return res.status(200).send(activity);
-	} catch (error) {
-		return handleServerError(error, res);
+		return activity;
 	}
-};
+});
 
 export const getActivity = async (
 	eid: string,

@@ -1,15 +1,11 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
-import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import type Prisma from '@prisma/client';
 import { getEvent } from '../index';
-import { handleServerError } from '../../../../../utils/handleServerError';
+import { api } from '../../../../../utils/api';
+import { NextkitError } from 'nextkit';
 
-export default async (
-	req: NextApiRequest,
-	res: NextApiResponse<ServerErrorResponse | Prisma.EventRole[]>
-) => {
-	try {
+export default api({
+	async GET({ req }) {
 		const { eid } = req.query;
 
 		const roles = await getRoles(String(eid));
@@ -24,18 +20,16 @@ export default async (
 				}
 			});
 
-			return res.status(200).send([role]);
+			return [role];
 		}
 
 		if (!roles) {
-			return res.status(404).send({ error: { message: 'Roles not found' } });
+			throw new NextkitError(404, 'Roles not found');
 		}
 
-		return res.status(200).send(roles);
-	} catch (error) {
-		return handleServerError(error, res);
+		return roles;
 	}
-};
+});
 
 export const getRoles = async (eid: string): Promise<Prisma.EventRole[] | null> => {
 	const event = await getEvent(String(eid));

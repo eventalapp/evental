@@ -1,13 +1,13 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
+import { NextkitError } from 'nextkit';
 
 export interface UseDeleteAttendeeMutationData {
 	deleteAttendeeMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		void
 	>;
 }
@@ -20,7 +20,7 @@ export const useDeleteAttendeeMutation = (
 
 	const deleteAttendeeMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		void
 	>(
 		async () => {
@@ -36,7 +36,7 @@ export const useDeleteAttendeeMutation = (
 				});
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);

@@ -12,19 +12,21 @@ import { LinkButton } from '../../../../components/form/LinkButton';
 import React from 'react';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getSession } from 'next-auth/react';
+
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
-import { Session } from 'next-auth';
+
 import { getRoles } from '../../../api/events/[eid]/roles';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
+import user from '../../../api/auth/user';
+import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialOrganizer: boolean;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const RolesPage: NextPage<Props> = (props) => {
@@ -46,7 +48,7 @@ const RolesPage: NextPage<Props> = (props) => {
 	}
 
 	if (isOrganizerError || rolesError) {
-		return <ViewServerErrorPage errors={[isOrganizerError, rolesError]} />;
+		return <ViewNextkitErrorPage errors={[isOrganizerError, rolesError]} />;
 	}
 
 	return (
@@ -87,7 +89,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const session = await getSession(context);
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
 
 	return {
 		props: {

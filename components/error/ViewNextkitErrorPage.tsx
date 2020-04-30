@@ -1,15 +1,15 @@
-import { ServerErrorPayload } from '../../typings/error';
 import React from 'react';
 import PageWrapper from '../layout/PageWrapper';
 import Head from 'next/head';
 import { Navigation } from '../navigation';
 import Column from '../layout/Column';
+import { NextkitError } from 'nextkit';
 
 type Props = {
-	errors: Array<ServerErrorPayload | null>;
+	errors: Array<NextkitError | null>;
 };
 
-export const ViewServerErrorPage: React.FC<Props> = (props) => {
+export const ViewNextkitErrorPage: React.FC<Props> = (props) => {
 	const { errors } = props;
 
 	if (!errors) {

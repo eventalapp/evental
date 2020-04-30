@@ -1,12 +1,17 @@
 import { Arrow, Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu';
-import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 import { DropdownLink } from './Link';
 import Image from 'next/image';
+import { PasswordlessUser } from '../../../utils/api';
+import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 
-export const ProfileDropdown: React.FC = () => {
-	const { data: session } = useSession();
+type Props = {
+	user: PasswordlessUser;
+} & UseSignOutMutationData;
+
+export const ProfileDropdown: React.FC<Props> = (props) => {
+	const { user, signOutMutation } = props;
 
 	return (
 		<Root>
@@ -16,11 +21,11 @@ export const ProfileDropdown: React.FC = () => {
 						className="rounded-full"
 						layout="fill"
 						src={
-							session?.user?.image
-								? `https://cdn.evental.app${session?.user?.image}`
+							user?.image
+								? `https://cdn.evental.app${user?.image}`
 								: `https://cdn.evental.app/images/default-avatar.jpg`
 						}
-						alt={session?.user?.name || ''}
+						alt={user?.name || ''}
 					/>
 				</div>
 			</Trigger>
@@ -44,7 +49,7 @@ export const ProfileDropdown: React.FC = () => {
 					<DropdownLink
 						className="text-red-600"
 						onClick={() => {
-							signOut({ callbackUrl: '/auth/signin' }).catch((error) => console.error(error));
+							signOutMutation.mutate();
 						}}
 					>
 						Sign out
