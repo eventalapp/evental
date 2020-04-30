@@ -16,6 +16,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
+import { useRouter } from 'next/router';
 
 type Props = {
 	eid: string;
@@ -25,6 +26,7 @@ type Props = {
 	UseImageUploadMutationData;
 
 export const EditEventForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const { editEventMutation, event, imageUploadMutation, imageUploadResponse } = props;
 	const {
 		register,
@@ -218,9 +220,13 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
 					variant="primary"
+					className="ml-4"
 					padding="medium"
 					disabled={
 						imageUploadMutation.isLoading ||

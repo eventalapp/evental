@@ -10,6 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { slugify } from '../../utils/slugify';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { useVenueQuery } from '../../hooks/queries/useVenueQuery';
+import { useRouter } from 'next/router';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -18,6 +19,8 @@ type Props = { eid: string } & DetailedHTMLProps<
 	UseCreateVenueMutationData;
 
 export const CreateVenueForm: React.FC<Props> = (props) => {
+	const router = useRouter();
+
 	const { createVenueMutation, eid } = props;
 
 	const {
@@ -91,8 +94,12 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
+					className="ml-4"
 					variant="primary"
 					padding="medium"
 					disabled={isVenueSlugCheckLoading || Boolean(venueSlugCheck)}

@@ -10,6 +10,7 @@ import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { slugify } from '../../utils/slugify';
+import { useRouter } from 'next/router';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -19,6 +20,7 @@ type Props = { eid: string } & DetailedHTMLProps<
 	UseEditVenueMutationData;
 
 export const EditVenueForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const { venue, editVenueMutation, eid } = props;
 
 	const {
@@ -99,7 +101,11 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
+					className="ml-4"
 					type="submit"
 					variant="primary"
 					padding="medium"

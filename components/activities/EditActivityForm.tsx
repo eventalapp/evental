@@ -20,6 +20,7 @@ import { useActivityQuery, UseActivityQueryData } from '../../hooks/queries/useA
 import { NotFound } from '../error/NotFound';
 import { NEAREST_MINUTE } from '../../config';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { useRouter } from 'next/router';
 
 type Props = {
 	eid: string;
@@ -31,8 +32,8 @@ type Props = {
 	UseEventQueryData;
 
 export const EditActivityForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const { eid, venues, editActivityMutation, activity, event } = props;
-
 	const {
 		register,
 		handleSubmit,
@@ -212,9 +213,13 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
 					variant="primary"
+					className="ml-4"
 					padding="medium"
 					disabled={
 						isActivitySlugCheckLoading ||

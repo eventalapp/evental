@@ -1,5 +1,3 @@
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -22,6 +20,7 @@ import Link from 'next/link';
 import { EventPermissionRole } from '@prisma/client';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -33,6 +32,7 @@ type Props = { eid: string } & DetailedHTMLProps<
 	UseImageUploadMutationData;
 
 export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const {
 		adminEditAttendeeMutation,
 		attendee,
@@ -41,7 +41,6 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 		imageUploadMutation,
 		imageUploadResponse
 	} = props;
-
 	const {
 		register,
 		handleSubmit,
@@ -217,10 +216,14 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
 					variant="primary"
 					padding="medium"
+					className="ml-4"
 					disabled={
 						imageUploadMutation.isLoading ||
 						isAttendeeSlugCheckLoading ||
@@ -228,7 +231,6 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 					}
 				>
 					Edit
-					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>
 			</div>
 		</form>
