@@ -5,8 +5,7 @@ import { isBrowser } from './isBrowser';
 
 const slugValidator = z
 	.string()
-	.regex(new RegExp(/(?<!-+)$/), 'Slug cannot end with a hyphen.')
-	.regex(new RegExp(/^(?!-+)/), 'Slug cannot start with a hyphen.')
+	.regex(new RegExp(/^(?!-)(?!.*-$).+$/), 'Slug cannot start or end with a hyphen.')
 	.min(4, 'Slug must be at least 4 characters')
 	.max(40, 'Slug must be less than 40 characters');
 

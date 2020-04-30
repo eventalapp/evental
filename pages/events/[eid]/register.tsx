@@ -15,9 +15,9 @@ import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
 import { getEvent } from '../../api/events/[eid]';
 import Prisma from '@prisma/client';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
-import { Loading } from '../../../components/error/Loading';
 import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
 import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
+import { LoadingPage } from '../../../components/error/LoadingPage';
 
 type Props = {
 	session: Session | null;
@@ -41,7 +41,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	}
 
 	if (isEventLoading) {
-		return <Loading />;
+		return <LoadingPage />;
 	}
 
 	return (
