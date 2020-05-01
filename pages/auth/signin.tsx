@@ -8,6 +8,8 @@ import { useSignInMutation } from '../../hooks/mutations/useSignInMutation';
 import { PasswordlessUser, ssrGetUser } from '../../utils/api';
 import { useUser } from '../../hooks/queries/useUser';
 import { LoadingPage } from '../../components/error/LoadingPage';
+import Link from 'next/link';
+import { LinkButton } from '../../components/form/LinkButton';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -33,6 +35,10 @@ const SignInPage: NextPage<Props> = (props) => {
 					</div>
 
 					<p>You are already signed in.</p>
+
+					<Link href="/" passHref>
+						<LinkButton className="mt-3">Return home</LinkButton>
+					</Link>
 				</Column>
 			</PageWrapper>
 		);

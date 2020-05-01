@@ -8,6 +8,8 @@ import { SignUpForm } from '../../components/authentication/SignUpForm';
 import { PasswordlessUser, ssrGetUser } from '../../utils/api';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import { useUser } from '../../hooks/queries/useUser';
+import Link from 'next/link';
+import { LinkButton } from '../../components/form/LinkButton';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -29,10 +31,14 @@ const SignInPage: NextPage<Props> = (props) => {
 
 				<Column variant="halfWidth">
 					<div className="flex flex-row justify-between mb-3">
-						<h1 className="text-3xl font-bold">Sign in</h1>
+						<h1 className="text-3xl font-bold">Sign up</h1>
 					</div>
 
 					<p>You are already signed in.</p>
+
+					<Link href="/" passHref>
+						<LinkButton className="mt-3">Return home</LinkButton>
+					</Link>
 				</Column>
 			</PageWrapper>
 		);
