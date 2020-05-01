@@ -44,7 +44,11 @@ const resetPasswordMjml = (resetPasswordLink: string) => `
 
 export const sendPasswordResetEmail = async (sendToAddress: string, resetPasswordLink: string) => {
 	const htmlOutput = mjml2html(
-		resetPasswordMjml(`https://evental.app/auth/password/reset?code=${resetPasswordLink}`)
+		resetPasswordMjml(
+			`${
+				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+			}/auth/password/reset?code=${resetPasswordLink}`
+		)
 	);
 
 	const text = convert(htmlOutput.html, {
