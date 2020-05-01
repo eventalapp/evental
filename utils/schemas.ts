@@ -12,9 +12,9 @@ const slugValidator = z
 
 const nameValidator = z
 	.string()
-	.min(1, 'Slug is required.')
-	.min(4, 'Slug must be at least 4 characters')
-	.max(100, 'Slug must be less than 100 characters');
+	.min(1, 'Name is required.')
+	.min(4, 'Name must be at least 4 characters')
+	.max(100, 'Name must be less than 100 characters');
 
 const dateValidator = z.preprocess((val) => new Date(val as string | Date), z.date());
 
