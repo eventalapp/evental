@@ -17,7 +17,8 @@ import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage'
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { Loading } from '../../../../components/error/Loading';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
-import { PasswordlessUser } from '../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { useUser } from '../../../../hooks/queries/useUser';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -25,11 +26,12 @@ type Props = {
 };
 
 const DeleteEventPage: NextPage<Props> = (props) => {
-	const { initialEvent, user } = props;
+	const { initialEvent, initialUser } = props;
 	const router = useRouter();
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { deleteEventMutation } = useDeleteEventMutation(String(eid));
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -76,12 +78,12 @@ const DeleteEventPage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid } = context.query;
 
-	const session = await getSession(context);
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialEvent
 		}
 	};

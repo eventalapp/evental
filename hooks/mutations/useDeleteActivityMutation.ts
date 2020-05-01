@@ -1,15 +1,11 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseDeleteActivityMutationData {
-	deleteActivityMutation: UseMutationResult<
-		AxiosResponse<unknown, unknown>,
-		AxiosError<ErroredAPIResponse, unknown>,
-		void
-	>;
+	deleteActivityMutation: UseMutationResult<void, AxiosError<ErroredAPIResponse, unknown>, void>;
 }
 
 export const useDeleteActivityMutation = (
@@ -18,13 +14,11 @@ export const useDeleteActivityMutation = (
 ): UseDeleteActivityMutationData => {
 	const queryClient = useQueryClient();
 
-	const deleteActivityMutation = useMutation<
-		AxiosResponse<unknown, unknown>,
-		AxiosError<ErroredAPIResponse, unknown>,
-		void
-	>(
+	const deleteActivityMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
-			return await axios.delete(`/api/events/${eid}/admin/activities/${aid}/delete`);
+			return await axios
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/activities/${aid}/delete`)
+				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: () => {

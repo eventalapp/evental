@@ -19,8 +19,8 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import user from '../../../../../api/auth/user';
-import { PasswordlessUser } from '../../../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -29,7 +29,7 @@ type Props = {
 };
 
 const EditVenuePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialVenue, user } = props;
+	const { initialOrganizer, initialVenue, initialUser } = props;
 	const router = useRouter();
 	const { eid, vid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
@@ -39,6 +39,7 @@ const EditVenuePage: NextPage<Props> = (props) => {
 		initialVenue
 	);
 	const { editVenueMutation } = useEditVenueMutation(String(eid), String(vid));
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -86,13 +87,13 @@ const EditVenuePage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid, vid } = context.query;
 
-	const session = await getSession(context);
-	const initialOrganizer = (await getIsOrganizer(user.id, String(eid))) ?? undefined;
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialVenue = (await getVenue(String(eid), String(vid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialOrganizer,
 			initialVenue
 		}

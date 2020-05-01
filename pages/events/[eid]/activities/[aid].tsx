@@ -15,7 +15,7 @@ import { getActivity } from '../../../api/events/[eid]/activities/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser } from '../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
 
 type Props = {
 	initialActivity: Prisma.EventActivity | undefined;
@@ -76,13 +76,13 @@ const ViewActivityPage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { aid, eid } = context.query;
 
-	const session = await getSession(context);
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialActivity = (await getActivity(String(eid), String(aid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialActivity,
 			initialOrganizer
 		}

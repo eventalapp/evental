@@ -2,7 +2,7 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseVenueQueryData {
 	venue: Prisma.EventVenue | undefined;
@@ -24,8 +24,8 @@ export const useVenueQuery = (
 		['venue', eid, vid],
 		async () => {
 			return axios
-				.get<Prisma.EventVenue>(`/api/events/${eid}/venues/${vid}`)
-				.then((res) => res.data);
+				.get<SuccessAPIResponse<Prisma.EventVenue>>(`/api/events/${eid}/venues/${vid}`)
+				.then((res) => res.data.data);
 		},
 		{
 			retry: 0,

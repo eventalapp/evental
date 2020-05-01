@@ -2,7 +2,7 @@ import { isOrganizer } from '../../../../utils/isOrganizer';
 import { api } from '../../../../utils/api';
 
 export default api({
-	async POST({ ctx, req }) {
+	async GET({ ctx, req }) {
 		const user = await ctx.getUser();
 		const { eid } = req.query;
 
@@ -10,7 +10,7 @@ export default api({
 			return false;
 		}
 
-		return await getIsOrganizer(user.id, String(eid));
+		return await getIsOrganizer(user?.id, String(eid));
 	}
 });
 

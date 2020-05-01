@@ -4,7 +4,7 @@ import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 
 export default api({
-	async DELETE({ req }) {
+	async DELETE({ req, ctx }) {
 		const user = await ctx.getUser();
 		const { eid, rid } = req.query;
 
@@ -66,7 +66,5 @@ export default api({
 				id: role.id
 			}
 		});
-
-		return 'Role deleted.';
 	}
 });

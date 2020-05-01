@@ -23,8 +23,8 @@ import { getRoles } from '../../../../../api/events/[eid]/roles';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { useImageUploadMutation } from '../../../../../../hooks/mutations/useImageUploadMutation';
-import user from '../../../../../api/auth/user';
-import { PasswordlessUser } from '../../../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -34,7 +34,7 @@ type Props = {
 };
 
 const EditAttendeePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialAttendee, initialRoles, user } = props;
+	const { initialOrganizer, initialAttendee, initialRoles, initialUser } = props;
 	const router = useRouter();
 	const { eid, aid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
@@ -46,6 +46,7 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { adminEditAttendeeMutation } = useAdminEditAttendeeMutation(String(eid), String(aid));
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -102,14 +103,14 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid, aid } = context.query;
 
-	const session = await getSession(context);
-	const initialOrganizer = (await getIsOrganizer(user.id, String(eid))) ?? undefined;
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialOrganizer,
 			initialAttendee,
 			initialRoles

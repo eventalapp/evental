@@ -30,7 +30,5 @@ export default api({
 		await prisma.event.delete({
 			where: { id: event.id }
 		});
-
-		return 'Event deleted.';
 	}
 });

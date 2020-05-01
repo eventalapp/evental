@@ -5,7 +5,7 @@ import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 
 export default api({
-	async PUT({ req }) {
+	async PUT({ req, ctx }) {
 		const user = await ctx.getUser();
 		const { eid } = req.query;
 

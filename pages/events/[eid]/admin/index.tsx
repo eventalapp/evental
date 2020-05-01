@@ -35,8 +35,8 @@ import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import user from '../../../api/auth/user';
-import { PasswordlessUser } from '../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { useUser } from '../../../../hooks/queries/useUser';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -51,14 +51,13 @@ type Props = {
 const AdminPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const {
-		user,
+		initialUser,
 		initialActivities,
 		initialAttendees,
 		initialVenues,
 		initialRoles,
 		initialOrganizer
 	} = props;
-
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
 		String(eid),
@@ -74,6 +73,7 @@ const AdminPage: NextPage<Props> = (props) => {
 		String(eid),
 		initialActivities
 	);
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -249,18 +249,18 @@ const AdminPage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid } = context.query;
 
-	const session = await getSession(context);
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialActivities = (await getActivities(String(eid))) ?? undefined;
 	const initialAttendees = (await getAttendees(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialVenues = (await getVenues(String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialEvent,
-			session,
+			initialUser,
 			initialOrganizer,
 			initialAttendees,
 			initialVenues,

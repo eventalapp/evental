@@ -16,7 +16,7 @@ import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser } from '../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
 
 type Props = {
 	initialRole: Prisma.EventRole | undefined;
@@ -79,14 +79,14 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid, rid } = context.query;
 
-	const session = await getSession(context);
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialRole = (await getRole(String(eid), String(rid))) ?? undefined;
 	const initialAttendees = (await getAttendeesByRole(String(eid), String(rid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(user.id, String(eid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialRole,
 			initialAttendees,
 			initialOrganizer

@@ -1,14 +1,14 @@
 import type Prisma from '@prisma/client';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { EditActivityPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseEditActivityMutationData {
 	editActivityMutation: UseMutationResult<
-		AxiosResponse<Prisma.EventActivity, unknown>,
+		Prisma.EventActivity,
 		AxiosError<ErroredAPIResponse, unknown>,
 		EditActivityPayload
 	>;
@@ -18,21 +18,23 @@ export const useEditActivityMutation = (eid: string, aid: string): UseEditActivi
 	const queryClient = useQueryClient();
 
 	const editActivityMutation = useMutation<
-		AxiosResponse<Prisma.EventActivity, unknown>,
+		Prisma.EventActivity,
 		AxiosError<ErroredAPIResponse, unknown>,
 		EditActivityPayload
 	>(
 		async (data) => {
-			return await axios.put<Prisma.EventActivity>(
-				`/api/events/${eid}/admin/activities/${aid}/edit`,
-				data
-			);
+			return await axios
+				.put<SuccessAPIResponse<Prisma.EventActivity>>(
+					`/api/events/${eid}/admin/activities/${aid}/edit`,
+					data
+				)
+				.then((res) => res.data.data);
 		},
 		{
-			onSuccess: (response) => {
+			onSuccess: (data) => {
 				toast.success('Activity edited successfully');
 
-				router.push(`/events/${eid}/activities/${response.data.slug}`).then(() => {
+				router.push(`/events/${eid}/activities/${data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['activity', eid, aid]);
 					void queryClient.invalidateQueries(['activities', eid]);
 				});

@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 
 export interface UseAttendeeByUserIdQueryData {
@@ -24,8 +24,8 @@ export const useAttendeeByUserIdQuery = (
 		['attendeeByUserId', eid, uid],
 		async () => {
 			return axios
-				.get<EventAttendeeUser>(`/api/events/${eid}/attendees/user/${uid}`)
-				.then((res) => res.data)
+				.get<SuccessAPIResponse<EventAttendeeUser>>(`/api/events/${eid}/attendees/user/${uid}`)
+				.then((res) => res.data.data)
 				.catch((err) => {
 					return err.response.data;
 				});

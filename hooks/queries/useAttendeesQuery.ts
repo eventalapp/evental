@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseAttendeesQueryData {
 	attendees: EventAttendeeUser[] | undefined;
@@ -22,7 +22,9 @@ export const useAttendeesQuery = (
 	>(
 		['attendees', eid],
 		async () => {
-			return axios.get<EventAttendeeUser[]>(`/api/events/${eid}/attendees`).then((res) => res.data);
+			return axios
+				.get<SuccessAPIResponse<EventAttendeeUser[]>>(`/api/events/${eid}/attendees`)
+				.then((res) => res.data.data);
 		},
 		{
 			retry: 0,

@@ -21,7 +21,8 @@ import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import React from 'react';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
-import { getUser, PasswordlessUser } from '../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../utils/api';
+import { useUser } from '../../../hooks/queries/useUser';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -36,13 +37,12 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	const {
 		initialEvent,
 		initialOrganizer,
-		user,
+		initialUser,
 		initialRoles,
 		initialActivities,
 		initialIsAttendeeByUserId
 	} = props;
 	const router = useRouter();
-
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
 		String(eid),
@@ -54,6 +54,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialActivities
 	);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
+	const { user } = useUser(initialUser);
 	const { attendeeByUserId, attendeeByUserIdError, isAttendeeByUserIdLoading } =
 		useAttendeeByUserIdQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 
@@ -115,18 +116,18 @@ const ViewEventPage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid } = context.query;
 
-	const user = await getUser(context.req);
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialActivities = (await getActivities(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(String(user?.id), String(eid));
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialIsAttendeeByUserId =
-		(await getAttendeeByUserId(String(eid), String(user?.id))) ?? undefined;
+		(await getAttendeeByUserId(String(eid), String(initialUser?.id))) ?? undefined;
 
 	return {
 		props: {
 			initialEvent,
-			user,
+			initialUser,
 			initialOrganizer,
 			initialIsAttendeeByUserId,
 			initialRoles,

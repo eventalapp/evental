@@ -3,7 +3,6 @@ import { randomBytes } from 'crypto';
 import { Redis } from '@upstash/redis';
 import { prisma } from '../prisma/client';
 import type Prisma from '@prisma/client';
-import { NextApiRequest } from 'next';
 import { IncomingMessage } from 'http';
 import { NextApiRequestCookies } from 'next/dist/server/api-utils';
 
@@ -15,7 +14,7 @@ const redis = new Redis({
 });
 
 const getToken = async (): Promise<string> => {
-	const token = randomBytes(128).toString('hex');
+	const token = randomBytes(10).toString('hex');
 
 	const count = await redis.exists(`session:${token}`);
 
@@ -26,13 +25,13 @@ const getToken = async (): Promise<string> => {
 	return token;
 };
 
-export const getUser = async (
-	req: NextApiRequest | (IncomingMessage & { cookies: NextApiRequestCookies })
+export const ssrGetUser = async (
+	req: IncomingMessage & { cookies: NextApiRequestCookies }
 ): Promise<PasswordlessUser | null> => {
 	const token = await redis.get<string>(`session:${req.cookies.token}`);
 
 	if (!token) {
-		throw new NextkitError(401, "You're not logged in");
+		return null;
 	}
 
 	const user = await prisma.user.findFirst({

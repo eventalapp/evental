@@ -1,27 +1,21 @@
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseDeleteRoleMutationData {
-	deleteRoleMutation: UseMutationResult<
-		AxiosResponse<unknown, unknown>,
-		AxiosError<ErroredAPIResponse, unknown>,
-		void
-	>;
+	deleteRoleMutation: UseMutationResult<void, AxiosError<ErroredAPIResponse, unknown>, void>;
 }
 
 export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMutationData => {
 	const queryClient = useQueryClient();
 
-	const deleteRoleMutation = useMutation<
-		AxiosResponse<unknown, unknown>,
-		AxiosError<ErroredAPIResponse, unknown>,
-		void
-	>(
+	const deleteRoleMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
-			return await axios.delete(`/api/events/${eid}/admin/roles/${rid}/delete`);
+			return await axios
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/roles/${rid}/delete`)
+				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: () => {

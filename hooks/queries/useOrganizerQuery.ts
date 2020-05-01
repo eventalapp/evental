@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseOrganizerQueryData {
 	isOrganizer: boolean | undefined;
@@ -18,7 +18,9 @@ export const useOrganizerQuery = (eid: string, initialData?: boolean): UseOrgani
 	>(
 		['isOrganizer', eid],
 		async () => {
-			return axios.get<boolean>(`/api/events/${eid}/organizer`).then((res) => res.data);
+			return axios
+				.get<SuccessAPIResponse<boolean>>(`/api/events/${eid}/organizer`)
+				.then((res) => res.data.data);
 		},
 		{
 			retry: 0,

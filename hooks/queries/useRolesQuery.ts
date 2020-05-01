@@ -2,7 +2,7 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseRolesQueryData {
 	roles: Prisma.EventRole[] | undefined;
@@ -19,7 +19,9 @@ export const useRolesQuery = (eid: string, initialData?: Prisma.EventRole[]): Us
 	>(
 		['roles', eid],
 		async () => {
-			return axios.get<Prisma.EventRole[]>(`/api/events/${eid}/roles`).then((res) => res.data);
+			return axios
+				.get<SuccessAPIResponse<Prisma.EventRole[]>>(`/api/events/${eid}/roles`)
+				.then((res) => res.data.data);
 		},
 		{
 			retry: 0,

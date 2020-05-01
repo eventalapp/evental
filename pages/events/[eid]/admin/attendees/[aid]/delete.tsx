@@ -20,8 +20,8 @@ import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import user from '../../../../../api/auth/user';
-import { PasswordlessUser } from '../../../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -30,7 +30,7 @@ type Props = {
 };
 
 const DeleteAttendeePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialAttendee, user } = props;
+	const { initialOrganizer, initialAttendee, initialUser } = props;
 	const router = useRouter();
 	const { eid, aid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
@@ -40,6 +40,7 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 		initialAttendee
 	);
 	const { deleteAttendeeMutation } = useDeleteAttendeeMutation(String(eid), String(aid));
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -90,13 +91,13 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid, aid } = context.query;
 
-	const session = await getSession(context);
-	const initialOrganizer = (await getIsOrganizer(user.id, String(eid))) ?? undefined;
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialOrganizer,
 			initialAttendee
 		}
