@@ -2,71 +2,71 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ViewActivity } from '../../../../components/activities/ViewActivity';
+import { ViewSession } from '../../../../components/sessions/ViewSession';
 import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
-import { useActivityQuery } from '../../../../hooks/queries/useActivityQuery';
+import { useSessionQuery } from '../../../../hooks/queries/useSessionQuery';
 import React from 'react';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import type Prisma from '@prisma/client';
-import { getActivity } from '../../../api/events/[eid]/activities/[aid]';
+import { getSession } from '../../../api/events/[eid]/sessions/[sid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
 
 type Props = {
-	initialActivity: Prisma.EventActivity | undefined;
+	initialSession: Prisma.EventSession | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 };
 
-const ViewActivityPage: NextPage<Props> = (props) => {
-	const { initialActivity, initialOrganizer } = props;
+const ViewSessionPage: NextPage<Props> = (props) => {
+	const { initialSession, initialOrganizer } = props;
 	const router = useRouter();
-	const { aid, eid } = router.query;
-	const { activity, isActivityLoading, activityError } = useActivityQuery(
+	const { sid, eid } = router.query;
+	const { session, isSessionLoading, sessionError } = useSessionQuery(
 		String(eid),
-		String(aid),
-		initialActivity
+		String(sid),
+		initialSession
 	);
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
 		String(eid),
 		initialOrganizer
 	);
 
-	if (!initialActivity || !activity) {
-		return <NotFoundPage message="Activity not found." />;
+	if (!initialSession || !session) {
+		return <NotFoundPage message="Session not found." />;
 	}
 
-	if (isOrganizerLoading || isActivityLoading) {
+	if (isOrganizerLoading || isSessionLoading) {
 		return <LoadingPage />;
 	}
 
-	if (isOrganizerError || activityError) {
-		return <ViewErrorPage errors={[isOrganizerError, activityError]} />;
+	if (isOrganizerError || sessionError) {
+		return <ViewErrorPage errors={[isOrganizerError, sessionError]} />;
 	}
 
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Viewing Activity: {aid}</title>
+				<title>Viewing Session: {sid}</title>
 			</Head>
 
 			<Navigation />
 
 			<Column>
-				<ViewActivity
-					activity={activity}
-					isActivityLoading={isActivityLoading}
-					activityError={activityError}
+				<ViewSession
+					session={session}
+					isSessionLoading={isSessionLoading}
+					sessionError={sessionError}
 					isOrganizerError={isOrganizerError}
 					isOrganizer={isOrganizer}
 					isOrganizerLoading={isOrganizerLoading}
 					eid={String(eid)}
-					aid={String(aid)}
+					sid={String(sid)}
 				/>
 			</Column>
 		</PageWrapper>
@@ -74,19 +74,19 @@ const ViewActivityPage: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { aid, eid } = context.query;
+	const { sid, eid } = context.query;
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialActivity = (await getActivity(String(eid), String(aid))) ?? undefined;
+	const initialSession = (await getSession(String(eid), String(sid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
-			initialActivity,
+			initialSession,
 			initialOrganizer
 		}
 	};
 };
 
-export default ViewActivityPage;
+export default ViewSessionPage;

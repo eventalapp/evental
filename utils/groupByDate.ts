@@ -1,8 +1,8 @@
 import type Prisma from '@prisma/client';
 import { format } from 'date-fns';
 
-export const groupByDate = (arr: Prisma.EventActivity[]) => {
-	let dateHashmap: { [key: string]: { [key: string]: Prisma.EventActivity[] } } = {};
+export const groupByDate = (arr: Prisma.EventSession[]) => {
+	let dateHashmap: { [key: string]: { [key: string]: Prisma.EventSession[] } } = {};
 
 	arr
 		.sort((a, b) => {

@@ -31,7 +31,7 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const createdActivity = await prisma.eventVenue.create({
+		const createdSession = await prisma.eventVenue.create({
 			data: {
 				eventId: event.id,
 				slug: processSlug(parsed.slug),
@@ -40,10 +40,10 @@ export default api({
 			}
 		});
 
-		if (!createdActivity) {
-			throw new NextkitError(500, 'Activity failed to create.');
+		if (!createdSession) {
+			throw new NextkitError(500, 'Session failed to create.');
 		}
 
-		return createdActivity;
+		return createdSession;
 	}
 });

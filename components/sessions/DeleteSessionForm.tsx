@@ -2,18 +2,18 @@ import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
-import { UseDeleteActivityMutationData } from '../../hooks/mutations/useDeleteActivityMutation';
+import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
+import { UseDeleteSessionMutationData } from '../../hooks/mutations/useDeleteSessionMutation';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseDeleteActivityMutationData &
-	UseActivityQueryData;
+	UseDeleteSessionMutationData &
+	UseSessionQueryData;
 
-export const DeleteActivityForm: React.FC<Props> = (props) => {
+export const DeleteSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { activity, deleteActivityMutation } = props;
+	const { session, deleteSessionMutation } = props;
 	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
@@ -23,19 +23,19 @@ export const DeleteActivityForm: React.FC<Props> = (props) => {
 		setCanSubmit(confirmDeleteWatcher === 'DELETE');
 	}, [confirmDeleteWatcher]);
 
-	if (!activity) return null;
+	if (!session) return null;
 
 	return (
 		<form
 			onSubmit={handleSubmit(() => {
-				deleteActivityMutation.mutate();
+				deleteSessionMutation.mutate();
 			})}
 		>
 			<div className="flex flex-col w-full mt-3">
 				<div className="mb-5">
 					<div>
 						<p className="mb-3">
-							All of the data regarding this activity will be permanently deleted.
+							All of the data regarding this session will be permanently deleted.
 						</p>
 
 						<Label htmlFor="confirmDelete">
@@ -51,7 +51,7 @@ export const DeleteActivityForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
-					Delete Activity
+					Delete Session
 				</Button>
 			</div>
 		</form>

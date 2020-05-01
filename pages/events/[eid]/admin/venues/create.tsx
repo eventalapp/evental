@@ -20,7 +20,7 @@ type Props = {
 	initialUser: PasswordlessUser | undefined;
 };
 
-const CreateActivityPage: NextPage<Props> = (props) => {
+const CreateSessionPage: NextPage<Props> = (props) => {
 	const { initialOrganizer, initialUser } = props;
 	const router = useRouter();
 	const { eid } = router.query;
@@ -66,4 +66,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 		}
 	};
 };
-export default CreateActivityPage;
+export default CreateSessionPage;

@@ -68,9 +68,9 @@ export const EditRoleSchema = z.object({
 
 export type EditRolePayload = z.infer<typeof EditRoleSchema>;
 
-// Activity
+// Session
 
-export const CreateActivitySchema = z.object({
+export const CreateSessionSchema = z.object({
 	slug: slugValidator,
 	name: nameValidator,
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
@@ -79,9 +79,9 @@ export const CreateActivitySchema = z.object({
 	description: descriptionValidator
 });
 
-export type CreateActivityPayload = z.infer<typeof CreateActivitySchema>;
+export type CreateSessionPayload = z.infer<typeof CreateSessionSchema>;
 
-export const EditActivitySchema = z.object({
+export const EditSessionSchema = z.object({
 	slug: slugValidator,
 	name: nameValidator,
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
@@ -90,7 +90,7 @@ export const EditActivitySchema = z.object({
 	description: descriptionValidator
 });
 
-export type EditActivityPayload = z.infer<typeof EditActivitySchema>;
+export type EditSessionPayload = z.infer<typeof EditSessionSchema>;
 
 // Event
 

@@ -4,19 +4,19 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { UseCreateActivityMutationData } from '../../hooks/mutations/useCreateActivityMutation';
+import { UseCreateSessionMutationData } from '../../hooks/mutations/useCreateSessionMutation';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Controller, useForm } from 'react-hook-form';
 import { DatePicker } from '../form/DatePicker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { CreateActivityPayload, CreateActivitySchema } from '../../utils/schemas';
+import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { slugify } from '../../utils/slugify';
 import Link from 'next/link';
 import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
+import { useSessionQuery } from '../../hooks/queries/useSessionQuery';
 import { NotFound } from '../error/NotFound';
 import { roundToNearestMinutes } from 'date-fns';
 import { NEAREST_MINUTE } from '../../config';
@@ -27,15 +27,15 @@ type Props = {
 	eid: string;
 };
 
-type CreateActivityFormProps = Props &
+type CreateSessionFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenuesQueryData &
-	UseCreateActivityMutationData &
+	UseCreateSessionMutationData &
 	UseEventQueryData;
 
-export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => {
+export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 	const router = useRouter();
-	const { eid, venues, createActivityMutation, event } = props;
+	const { eid, venues, createSessionMutation, event } = props;
 	const {
 		register,
 		handleSubmit,
@@ -44,7 +44,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 		trigger,
 		control,
 		formState: { errors }
-	} = useForm<CreateActivityPayload>({
+	} = useForm<CreateSessionPayload>({
 		defaultValues: {
 			venueId: venues && venues[0]?.id,
 			startDate: roundToNearestMinutes(new Date(), { nearestTo: NEAREST_MINUTE }),
@@ -52,7 +52,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 				nearestTo: NEAREST_MINUTE
 			})
 		},
-		resolver: zodResolver(CreateActivitySchema)
+		resolver: zodResolver(CreateSessionSchema)
 	});
 
 	const nameWatcher = watch('name');
@@ -60,7 +60,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
 
-	const { activity, isActivityLoading } = useActivityQuery(String(eid), slugWatcher);
+	const { session, isSessionLoading } = useSessionQuery(String(eid), slugWatcher);
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
@@ -97,14 +97,14 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				createActivityMutation.mutate(data);
+				createSessionMutation.mutate(data);
 			})}
 		>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="Activity name" {...register('name', { required: true })} />
+						<Input placeholder="Session name" {...register('name', { required: true })} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
@@ -187,7 +187,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 			<div className="grid grid-cols-1 mb-5 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
-					<Textarea rows={5} placeholder="Activity description" {...register('description')} />
+					<Textarea rows={5} placeholder="Session description" {...register('description')} />
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
@@ -199,11 +199,11 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 					<div>
 						<Label htmlFor="slug">Slug *</Label>
 						<div className="flex items-center">
-							<span className="mr-1 text-md">/activities/</span>
-							<Input placeholder="activity-slug" {...register('slug', { required: true })} />
+							<span className="mr-1 text-md">/sessions/</span>
+							<Input placeholder="session-slug" {...register('slug', { required: true })} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{activity && (
+						{session && (
 							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
 						)}
 					</div>
@@ -219,9 +219,9 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 					variant="primary"
 					className="ml-4"
 					padding="medium"
-					disabled={isActivityLoading || Boolean(activity)}
+					disabled={isSessionLoading || Boolean(session)}
 				>
-					Create Activity
+					Create Session
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>
 			</div>

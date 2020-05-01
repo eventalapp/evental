@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Column from '../../../components/layout/Column';
 import { ViewEvent } from '../../../components/events/ViewEvent';
 import { Navigation } from '../../../components/navigation';
-import { useActivitiesQuery } from '../../../hooks/queries/useActivitiesQuery';
+import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
 import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
@@ -14,7 +14,7 @@ import Prisma from '@prisma/client';
 import { getEvent } from '../../api/events/[eid]';
 import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 import { getAttendeeByUserId } from '../../api/events/[eid]/attendees/user/[uid]';
-import { getActivities } from '../../api/events/[eid]/activities';
+import { getSessions } from '../../api/events/[eid]/sessions';
 import { EventAttendeeUser } from '../../api/events/[eid]/attendees/[aid]';
 import { getRoles } from '../../api/events/[eid]/roles';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
@@ -26,7 +26,7 @@ import { useUser } from '../../../hooks/queries/useUser';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
-	initialActivities: Prisma.EventActivity[] | undefined;
+	initialSessions: Prisma.EventSession[] | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialIsAttendeeByUserId: EventAttendeeUser | undefined;
 	initialOrganizer: boolean;
@@ -39,7 +39,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialOrganizer,
 		initialUser,
 		initialRoles,
-		initialActivities,
+		initialSessions,
 		initialIsAttendeeByUserId
 	} = props;
 	const router = useRouter();
@@ -49,24 +49,24 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialOrganizer
 	);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
-	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(
+	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(
 		String(eid),
-		initialActivities
+		initialSessions
 	);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
 	const { attendeeByUserId, attendeeByUserIdError, isAttendeeByUserIdLoading } =
 		useAttendeeByUserIdQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 
-	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {
+	if (isOrganizerError || rolesError || eventError || sessionsError || attendeeByUserIdError) {
 		return (
 			<ViewErrorPage
-				errors={[isOrganizerError, rolesError, eventError, activitiesError, attendeeByUserIdError]}
+				errors={[isOrganizerError, rolesError, eventError, sessionsError, attendeeByUserIdError]}
 			/>
 		);
 	}
 
-	if (!initialRoles || !initialActivities || !initialEvent || !event || !activities || !roles) {
+	if (!initialRoles || !initialSessions || !initialEvent || !event || !sessions || !roles) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -74,7 +74,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		rolesError ||
 		isEventLoading ||
 		isOrganizerLoading ||
-		isActivitiesLoading ||
+		isSessionsLoading ||
 		isRolesLoading ||
 		isAttendeeByUserIdLoading
 	) {
@@ -98,9 +98,9 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					isOrganizer={isOrganizer}
 					isOrganizerLoading={isOrganizerLoading}
 					isOrganizerError={isOrganizerError}
-					activities={activities}
-					isActivitiesLoading={isActivitiesLoading}
-					activitiesError={activitiesError}
+					sessions={sessions}
+					isSessionsLoading={isSessionsLoading}
+					sessionsError={sessionsError}
 					roles={roles}
 					isRolesLoading={isRolesLoading}
 					rolesError={rolesError}
@@ -118,7 +118,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
-	const initialActivities = (await getActivities(String(eid))) ?? undefined;
+	const initialSessions = (await getSessions(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialIsAttendeeByUserId =
@@ -131,7 +131,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialOrganizer,
 			initialIsAttendeeByUserId,
 			initialRoles,
-			initialActivities
+			initialSessions
 		}
 	};
 };

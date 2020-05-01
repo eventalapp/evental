@@ -1,5 +1,5 @@
 import { prisma } from '../../../../../../prisma/client';
-import { CreateActivitySchema } from '../../../../../../utils/schemas';
+import { CreateSessionSchema } from '../../../../../../utils/schemas';
 import { isOrganizer } from '../../../../../../utils/isOrganizer';
 import { processSlug } from '../../../../../../utils/slugify';
 import { api } from '../../../../../../utils/api';
@@ -17,7 +17,7 @@ export default api({
 		if (!(await isOrganizer(String(user?.id), String(eid)))) {
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
-		const parsed = CreateActivitySchema.parse(req.body);
+		const parsed = CreateSessionSchema.parse(req.body);
 
 		const event = await prisma.event.findFirst({
 			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -30,7 +30,7 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		let createdActivity = await prisma.eventActivity.create({
+		let createdSession = await prisma.eventSession.create({
 			data: {
 				eventId: event.id,
 				slug: processSlug(parsed.slug),
@@ -42,10 +42,10 @@ export default api({
 			}
 		});
 
-		if (!createdActivity) {
-			throw new NextkitError(500, 'Error creating activity.');
+		if (!createdSession) {
+			throw new NextkitError(500, 'Error creating session.');
 		}
 
-		return createdActivity;
+		return createdSession;
 	}
 });

@@ -3,9 +3,9 @@ import { LinkButton } from '../form/LinkButton';
 import React from 'react';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { ActivityList } from '../activities/ActivityList';
+import { SessionList } from '../sessions/SessionList';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
-import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
+import { UseSessionsQueryData } from '../../hooks/queries/useSessionsQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +17,7 @@ type Props = {
 	eid: string;
 } & UseOrganizerQueryData &
 	UseEventQueryData &
-	UseActivitiesQueryData &
+	UseSessionsQueryData &
 	UseRolesQueryData &
 	UseAttendeeByUserIdQueryData;
 
@@ -25,12 +25,12 @@ export const ViewEvent: React.FC<Props> = (props) => {
 	const {
 		eid,
 		event,
-		activities,
+		sessions,
 		roles,
 		isOrganizer,
 		isOrganizerLoading,
-		isActivitiesLoading,
-		activitiesError,
+		isSessionsLoading,
+		sessionsError,
 		isOrganizerError,
 		attendeeByUserId
 	} = props;
@@ -112,14 +112,14 @@ export const ViewEvent: React.FC<Props> = (props) => {
 					))}
 			</div>
 
-			<ActivityList
+			<SessionList
 				isOrganizer={isOrganizer}
 				isOrganizerLoading={isOrganizerLoading}
 				isOrganizerError={isOrganizerError}
-				activities={activities}
+				sessions={sessions}
 				eid={String(eid)}
-				activitiesError={activitiesError}
-				isActivitiesLoading={isActivitiesLoading}
+				sessionsError={sessionsError}
+				isSessionsLoading={isSessionsLoading}
 			/>
 		</div>
 	);

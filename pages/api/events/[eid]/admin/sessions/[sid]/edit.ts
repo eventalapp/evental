@@ -1,6 +1,6 @@
 import { prisma } from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
-import { EditActivitySchema } from '../../../../../../../utils/schemas';
+import { EditSessionSchema } from '../../../../../../../utils/schemas';
 import { processSlug } from '../../../../../../../utils/slugify';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
@@ -8,7 +8,7 @@ import { NextkitError } from 'nextkit';
 export default api({
 	async PUT({ ctx, req }) {
 		const user = await ctx.getUser();
-		const { eid, aid } = req.query;
+		const { eid, sid } = req.query;
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
@@ -17,7 +17,7 @@ export default api({
 		if (!(await isOrganizer(String(user?.id), String(eid)))) {
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
-		let parsed = EditActivitySchema.parse(req.body);
+		let parsed = EditSessionSchema.parse(req.body);
 
 		const event = await prisma.event.findFirst({
 			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -30,23 +30,23 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const activity = await prisma.eventActivity.findFirst({
+		const session = await prisma.eventSession.findFirst({
 			where: {
 				eventId: event.id,
-				OR: [{ id: String(aid) }, { slug: String(aid) }]
+				OR: [{ id: String(sid) }, { slug: String(sid) }]
 			},
 			select: {
 				id: true
 			}
 		});
 
-		if (!activity) {
-			throw new NextkitError(404, 'Activity not found.');
+		if (!session) {
+			throw new NextkitError(404, 'Session not found.');
 		}
 
-		const editedActivity = await prisma.eventActivity.update({
+		const editedSession = await prisma.eventSession.update({
 			where: {
-				id: activity.id
+				id: session.id
 			},
 			data: {
 				eventId: event.id,
@@ -59,10 +59,10 @@ export default api({
 			}
 		});
 
-		if (!editedActivity) {
-			throw new NextkitError(500, 'Error editing activity.');
+		if (!editedSession) {
+			throw new NextkitError(500, 'Error editing session.');
 		}
 
-		return editedActivity;
+		return editedSession;
 	}
 });

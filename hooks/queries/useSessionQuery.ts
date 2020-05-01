@@ -4,27 +4,27 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
-export interface UseActivityQueryData {
-	activity: Prisma.EventActivity | undefined;
-	isActivityLoading: boolean;
-	activityError: ErroredAPIResponse | null;
+export interface UseSessionQueryData {
+	session: Prisma.EventSession | undefined;
+	isSessionLoading: boolean;
+	sessionError: ErroredAPIResponse | null;
 }
 
-export const useActivityQuery = (
+export const useSessionQuery = (
 	eid: string,
-	aid: string,
-	initialData?: Prisma.EventActivity | undefined
-): UseActivityQueryData => {
+	sid: string,
+	initialData?: Prisma.EventSession | undefined
+): UseSessionQueryData => {
 	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
-	const { data: activity, isLoading: isActivityLoading } = useQuery<
-		Prisma.EventActivity,
+	const { data: session, isLoading: isSessionLoading } = useQuery<
+		Prisma.EventSession,
 		AxiosError<ErroredAPIResponse>
 	>(
-		['activity', eid, aid],
+		['session', eid, sid],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<Prisma.EventActivity>>(`/api/events/${eid}/activities/${aid}`)
+				.get<SuccessAPIResponse<Prisma.EventSession>>(`/api/events/${eid}/sessions/${sid}`)
 				.then((res) => res.data.data);
 		},
 		{
@@ -32,10 +32,10 @@ export const useActivityQuery = (
 			enabled:
 				eid !== undefined &&
 				eid !== 'undefined' &&
-				aid !== undefined &&
-				aid !== 'undefined' &&
+				sid !== undefined &&
+				sid !== 'undefined' &&
 				eid !== '' &&
-				aid !== '',
+				sid !== '',
 			onError: (error) => {
 				setError(error?.response?.data ?? null);
 			},
@@ -47,8 +47,8 @@ export const useActivityQuery = (
 	);
 
 	return {
-		activity,
-		isActivityLoading,
-		activityError: error
+		session,
+		isSessionLoading,
+		sessionError: error
 	};
 };
