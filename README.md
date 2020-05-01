@@ -3,7 +3,6 @@
 TODO:
 
 - Better image uploading (component)
-- Forgot password
 - user settings
 - multi stage event creation
 - marketing pages
