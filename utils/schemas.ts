@@ -14,11 +14,23 @@ const nameValidator = z
 	.string()
 	.min(1, 'Slug is required.')
 	.min(4, 'Slug must be at least 4 characters')
-	.max(40, 'Slug must be less than 100 characters');
+	.max(100, 'Slug must be less than 100 characters');
 
 const dateValidator = z.preprocess((val) => new Date(val as string | Date), z.date());
 
 const descriptionValidator = z.string().max(400, 'Description must be less than 400 characters');
+
+const emailValidator = z
+	.string()
+	.min(1, 'Email is required')
+	.email('Invalid email address')
+	.max(80, 'Email must be less than 80 characters');
+
+const passwordValidator = z
+	.string()
+	.min(1, 'Password is required')
+	.min(8, 'Password must be at least 8 characters')
+	.max(80, 'Password must be less than 80 characters');
 
 // Venues
 
@@ -154,15 +166,15 @@ export type ImageUploadPayload = z.infer<typeof ImageUploadSchema>;
 // Authentication
 
 export const SignInSchema = z.object({
-	email: z.string().email('Invalid email address').min(1, 'Email is required'),
-	password: z.string().min(8, 'Password must be at least 8 characters')
+	email: emailValidator,
+	password: passwordValidator
 });
 
 export type SignInPayload = z.infer<typeof SignInSchema>;
 
 export const SignUpSchema = z.object({
-	email: z.string().email('Invalid email address').min(1, 'Email is required'),
-	password: z.string().min(8, 'Password must be at least 8 characters'),
+	email: emailValidator,
+	password: passwordValidator,
 	name: nameValidator
 });
 

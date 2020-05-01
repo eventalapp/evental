@@ -4,6 +4,7 @@ import { SignInPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { PasswordlessUser } from '../../utils/api';
+import router from 'next/router';
 
 export interface UseSignInMutationData {
 	signInMutation: UseMutationResult<
@@ -28,6 +29,8 @@ export const useSignInMutation = (): UseSignInMutationData => {
 		},
 		{
 			onSuccess: () => {
+				void router.push('/events');
+
 				toast.success('Successfully signed in');
 
 				void queryClient.refetchQueries('user');

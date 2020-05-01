@@ -58,7 +58,6 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 
 	if (!role) return null;
 
-	console.log(roleSlugCheck);
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
