@@ -81,6 +81,11 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Edit Attendee</h1>
 
+				<p className="text-gray-700 mt-1">
+					This attendee profile will be visible on the event page. This profile is separate from
+					your user profile.
+				</p>
+
 				<AdminEditAttendeeForm
 					imageUploadMutation={imageUploadMutation}
 					imageUploadResponse={imageUploadResponse}
