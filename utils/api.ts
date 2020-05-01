@@ -14,7 +14,7 @@ const redis = new Redis({
 });
 
 const getToken = async (): Promise<string> => {
-	const token = randomBytes(10).toString('hex');
+	const token = randomBytes(128).toString('hex');
 
 	const count = await redis.exists(`session:${token}`);
 
