@@ -11,6 +11,8 @@ import { useRouter } from 'next/router';
 import { PASSWORD_RESET_EXPIRY } from '../../../config';
 import { PasswordResetForm } from '../../../components/password/PasswordResetForm';
 import { usePasswordReset } from '../../../hooks/mutations/usePasswordReset';
+import Head from 'next/head';
+import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
 
 const ResetPasswordPage: NextPage = () => {
 	const router = useRouter();
@@ -23,28 +25,16 @@ const ResetPasswordPage: NextPage = () => {
 	}
 
 	if (user) {
-		return (
-			<PageWrapper variant="gray">
-				<Navigation />
-
-				<Column variant="halfWidth">
-					<div className="flex flex-row justify-between mb-3">
-						<h1 className="text-3xl font-bold">Reset Password</h1>
-					</div>
-
-					<p>You are already signed in.</p>
-
-					<Link href="/" passHref>
-						<LinkButton className="mt-3">Return home</LinkButton>
-					</Link>
-				</Column>
-			</PageWrapper>
-		);
+		return <AlreadySignedInPage />;
 	}
 
 	if (!code) {
 		return (
 			<PageWrapper variant="gray">
+				<Head>
+					<title>Reset Password</title>
+				</Head>
+
 				<Navigation />
 
 				<Column variant="halfWidth">
@@ -53,8 +43,8 @@ const ResetPasswordPage: NextPage = () => {
 					</div>
 
 					<p>
-						Invalid password reset code supplied. Reset codes expire after {PASSWORD_RESET_EXPIRY}{' '}
-						minutes.
+						Invalid password reset code supplied. Reset codes expire after{' '}
+						{PASSWORD_RESET_EXPIRY / 60} minutes.
 					</p>
 
 					<Link href="/auth/password/request" passHref>
@@ -67,6 +57,10 @@ const ResetPasswordPage: NextPage = () => {
 
 	return (
 		<PageWrapper variant="gray">
+			<Head>
+				<title>Reset Password</title>
+			</Head>
+
 			<Navigation />
 
 			<Column variant="halfWidth">

@@ -7,6 +7,8 @@ import { useUser } from '../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { RequestPasswordResetForm } from '../../../components/password/RequestPasswordResetForm';
 import { useRequestPasswordReset } from '../../../hooks/mutations/useRequestPasswordReset';
+import Head from 'next/head';
+import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
 
 const RequestPasswordResetPage: NextPage = () => {
 	const { user, isUserLoading } = useUser();
@@ -17,23 +19,15 @@ const RequestPasswordResetPage: NextPage = () => {
 	}
 
 	if (user) {
-		return (
-			<PageWrapper variant="gray">
-				<Navigation />
-
-				<Column variant="halfWidth">
-					<div className="flex flex-row justify-between mb-3">
-						<h1 className="text-3xl font-bold">Sign in</h1>
-					</div>
-
-					<p>You are already signed in.</p>
-				</Column>
-			</PageWrapper>
-		);
+		return <AlreadySignedInPage />;
 	}
 
 	return (
 		<PageWrapper variant="gray">
+			<Head>
+				<title>Request Password Reset</title>
+			</Head>
+
 			<Navigation />
 
 			<Column variant="halfWidth">
