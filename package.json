@@ -12,7 +12,8 @@
 		"format": "tsc && prettier --write ./{server,pages,utils,components}/**/*.{js,jsx,json,md,ts,tsx} && prisma format",
 		"migrate:dev": "prisma migrate dev",
 		"migrate:reset": "prisma migrate reset",
-		"migrate:prod": "prisma migrate deploy"
+		"migrate:prod": "prisma migrate deploy",
+		"email:forgotPassword": "ts-node --project tsconfig.json  --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/forgotPassword.ts"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -35,6 +36,7 @@
 		"cookie": "^0.5.0",
 		"date-fns": "^2.28.0",
 		"is-iso-date": "^0.0.1",
+		"mjml": "^4.12.0",
 		"multiparty": "^4.2.3",
 		"next": "^12.1.5",
 		"nextkit": "^3.2.4",
@@ -52,6 +54,7 @@
 	},
 	"devDependencies": {
 		"@types/busboy": "^1.5.0",
+		"@types/mjml": "^4.7.0",
 		"@types/node": "16.11.7",
 		"@types/nprogress": "^0.2.0",
 		"@types/react": "^18.0.8",
