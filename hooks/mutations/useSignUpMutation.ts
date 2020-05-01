@@ -29,11 +29,10 @@ export const useSignUpMutation = (): UseSignUpMutationData => {
 		},
 		{
 			onSuccess: () => {
-				void router.push('/events');
-
-				void queryClient.invalidateQueries('user');
-
-				toast.success('Successfully signed up!');
+				router.push('/events').then(() => {
+					toast.success('You have successfully signed up');
+					void queryClient.invalidateQueries('user');
+				});
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'Failed to sign up.');
