@@ -87,7 +87,7 @@ const EditSessionPage: NextPage<Props> = (props) => {
 
 					<p>Before creating a session, you must create a venue.</p>
 
-					<Link href={`/events/${eid}/admin/venues/create`}>
+					<Link href={`/events/${eid}/admin/venues/create`} passHref>
 						<LinkButton>Create Venue</LinkButton>
 					</Link>
 				</Column>
