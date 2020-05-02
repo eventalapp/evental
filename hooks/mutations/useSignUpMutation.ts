@@ -31,7 +31,7 @@ export const useSignUpMutation = (): UseSignUpMutationData => {
 			onSuccess: () => {
 				router.push('/events').then(() => {
 					toast.success('You have successfully signed up');
-					void queryClient.invalidateQueries('user');
+					void queryClient.refetchQueries('user');
 				});
 			},
 			onError: (error) => {

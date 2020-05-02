@@ -29,7 +29,7 @@ export const useSignOutMutation = (): UseSignOutMutationData => {
 			onSuccess: (data, variables) => {
 				router.push(variables?.callbackUrl || '/').then(() => {
 					toast.success('You have been signed out');
-					void queryClient.invalidateQueries('user');
+					void queryClient.refetchQueries('user');
 				});
 			},
 			onError: (error) => {
