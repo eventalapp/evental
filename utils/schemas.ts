@@ -14,8 +14,8 @@ const nameValidator = z
 	.min(1, 'Name is required.')
 	.min(4, 'Name must be at least 4 characters')
 	.max(100, 'Name must be less than 100 characters');
+const addressValidator = z.string().max(100, 'Address must be less than 100 characters');
 const dateValidator = z.preprocess((val) => new Date(val as string | Date), z.date());
-
 const descriptionValidator = z.string().max(400, 'Description must be less than 400 characters');
 const emailValidator = z
 	.string()
@@ -42,6 +42,7 @@ const urlValidator = z.string().url().max(200, 'URL must be less than 200 charac
 
 export const CreateVenueSchema = z.object({
 	name: nameValidator,
+	address: addressValidator,
 	description: descriptionValidator.optional()
 });
 
@@ -49,6 +50,7 @@ export type CreateVenuePayload = z.infer<typeof CreateVenueSchema>;
 
 export const EditVenueSchema = z.object({
 	name: nameValidator,
+	address: addressValidator,
 	description: descriptionValidator.optional()
 });
 

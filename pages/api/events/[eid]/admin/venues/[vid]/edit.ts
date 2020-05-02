@@ -3,6 +3,7 @@ import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EditVenueSchema } from '../../../../../../../utils/schemas';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { generateSlug } from '../../../../../../../utils/generateSlug';
 
 export default api({
 	async PUT({ ctx, req }) {
@@ -44,13 +45,26 @@ export default api({
 			throw new NextkitError(404, 'Venue not found.');
 		}
 
+		const slug = await generateSlug(parsed.name, async (val) => {
+			return !Boolean(
+				await prisma.eventVenue.findFirst({
+					where: {
+						eventId: event.id,
+						slug: val
+					}
+				})
+			);
+		});
+
 		const editedVenue = await prisma.eventVenue.update({
 			where: {
 				id: venue.id
 			},
 			data: {
 				name: parsed.name,
-				description: parsed.description
+				description: parsed.description,
+				address: parsed.address,
+				slug: slug
 			}
 		});
 

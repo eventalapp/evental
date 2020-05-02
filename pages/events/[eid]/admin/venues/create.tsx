@@ -45,7 +45,7 @@ const CreateSessionPage: NextPage<Props> = (props) => {
 
 			<Navigation />
 
-			<Column>
+			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Create Venue</h1>
 
 				<CreateVenueForm createVenueMutation={createVenueMutation} eid={String(eid)} />

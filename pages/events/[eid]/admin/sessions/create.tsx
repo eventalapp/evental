@@ -23,7 +23,6 @@ import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { ssrGetUser } from '../../../../../utils/api';
 import { useUser } from '../../../../../hooks/queries/useUser';
 import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
-import { LinkButton } from '../../../../../components/form/LinkButton';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -73,11 +72,13 @@ const CreateSessionPage: NextPage<Props> = (props) => {
 				<Column>
 					<h1 className="text-3xl font-bold">Error</h1>
 
-					<p>Before creating a session, you must create a venue.</p>
-
-					<Link href={`/events/${eid}/admin/venues/create`} passHref>
-						<LinkButton>Create Venue</LinkButton>
-					</Link>
+					<p className="mt-2">
+						Before creating a session, you must{' '}
+						<Link href={`/events/${eid}/admin/venues/create`} passHref>
+							<a className="text-primary font-bold">create a venue</a>
+						</Link>
+						.
+					</p>
 				</Column>
 			</PageWrapper>
 		);

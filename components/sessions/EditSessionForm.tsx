@@ -44,7 +44,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 		defaultValues: {
 			name: String(session?.name),
 			description: String(session?.description),
-			venueId: session?.venueId,
+			venueId: session?.venueId ?? undefined,
 			startDate: session?.startDate ? new Date(String(session?.startDate)) : new Date(),
 			endDate: session?.endDate ? new Date(String(session?.endDate)) : new Date()
 		},
