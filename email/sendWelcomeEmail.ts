@@ -42,6 +42,7 @@ export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {
 		Destination: {
 			ToAddresses: [sendToAddress]
 		},
+		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
 		FromEmailAddress: '"Evental" <no-reply@evental.app>'
 	};
 
