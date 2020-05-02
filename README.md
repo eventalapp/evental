@@ -17,6 +17,11 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - slug validation (on edit)
 - event settings page
 - user settings page
+- allow attendees to attend sessions
+- add speakers to sessions
+- wysiwyg editor for sessions etc
+- excel export for data
+
 
 ## Installation 💾
 
