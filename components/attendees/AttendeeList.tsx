@@ -3,19 +3,14 @@ import Link from 'next/link';
 import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { UseAttendeesQueryData } from '../../hooks/queries/useAttendeesQuery';
-import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
-import { LinkButton } from '../form/LinkButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { NotFound } from '../error/NotFound';
 
 type Props = {
 	eid: string;
-} & UseAttendeesQueryData &
-	UseOrganizerQueryData;
+} & UseAttendeesQueryData;
 
 export const AttendeeList: React.FC<Props> = (props) => {
-	const { eid, attendees, isOrganizerLoading, isOrganizer } = props;
+	const { eid, attendees } = props;
 
 	if (attendees && attendees?.length === 0) {
 		return <NotFound message="No attendees found." />;
@@ -51,26 +46,6 @@ export const AttendeeList: React.FC<Props> = (props) => {
 											</span>
 										</a>
 									</Link>
-									{!isOrganizerLoading && isOrganizer && (
-										<Link
-											href={`/events/${eid}/admin/attendees/${attendee.user.slug}/edit`}
-											passHref
-										>
-											<LinkButton className="mr-3">
-												<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faCog} />
-											</LinkButton>
-										</Link>
-									)}
-									{!isOrganizerLoading && isOrganizer && (
-										<Link
-											href={`/events/${eid}/admin/attendees/${attendee.user.slug}/delete`}
-											passHref
-										>
-											<LinkButton className="mr-3">
-												<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faTrash} />
-											</LinkButton>
-										</Link>
-									)}
 								</li>
 							)
 					)}

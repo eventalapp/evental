@@ -58,10 +58,7 @@ const AdminPage: NextPage<Props> = (props) => {
 		initialOrganizer
 	} = props;
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
-		String(eid),
-		initialOrganizer
-	);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
 	const { attendees, isAttendeesLoading, attendeesError } = useAttendeesQuery(
 		String(eid),
@@ -151,7 +148,6 @@ const AdminPage: NextPage<Props> = (props) => {
 							venues={venues}
 							venuesError={venuesError}
 							isVenuesLoading={isVenuesLoading}
-							isOrganizerError={isOrganizerError}
 							isOrganizer={isOrganizer}
 							isOrganizerLoading={isOrganizerLoading}
 						/>
@@ -179,7 +175,6 @@ const AdminPage: NextPage<Props> = (props) => {
 							roles={roles}
 							isRolesLoading={isRolesLoading}
 							rolesError={rolesError}
-							isOrganizerError={isOrganizerError}
 							isOrganizer={isOrganizer}
 							isOrganizerLoading={isOrganizerLoading}
 						/>
@@ -202,7 +197,6 @@ const AdminPage: NextPage<Props> = (props) => {
 						<AttendeeList
 							isOrganizer={isOrganizer}
 							isOrganizerLoading={isOrganizerLoading}
-							isOrganizerError={isOrganizerError}
 							eid={String(eid)}
 							attendees={attendees}
 							isAttendeesLoading={isAttendeesLoading}
@@ -232,7 +226,6 @@ const AdminPage: NextPage<Props> = (props) => {
 						<SessionList
 							isOrganizer={isOrganizer}
 							isOrganizerLoading={isOrganizerLoading}
-							isOrganizerError={isOrganizerError}
 							sessions={sessions}
 							eid={String(eid)}
 							sessionsError={sessionsError}

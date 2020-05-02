@@ -102,13 +102,13 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="Event name" {...register('name', { required: true })} />
+						<Input placeholder="Event name" {...register('name')} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
 					<div>
-						<Label htmlFor="location">Location *</Label>
-						<Input placeholder="Event location" {...register('location', { required: true })} />
+						<Label htmlFor="location">Location</Label>
+						<Input placeholder="Event location" {...register('location')} />
 						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 					</div>
 				</div>
@@ -176,7 +176,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						<Label htmlFor="slug">Slug *</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-md">evental.app/events/</span>
-							<Input placeholder="event-slug" {...register('slug', { required: true })} />
+							<Input placeholder="event-slug" {...register('slug')} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
 						{slugWatcher !== event?.slug && eventSlugCheck && (
@@ -201,7 +201,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						/>
 					</div>
 
-					<Label htmlFor="image">Image</Label>
+					<Label htmlFor="image">Image *</Label>
 					<Input
 						type="file"
 						accept="image/png, image/jpeg"

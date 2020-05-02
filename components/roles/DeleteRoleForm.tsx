@@ -39,7 +39,7 @@ export const DeleteRoleForm: React.FC<Props> = (props) => {
 						<Label htmlFor="confirmDelete">
 							Type <span className="font-bold">DELETE</span> to confirm
 						</Label>
-						<Input {...register('confirmDelete', { required: true })} />
+						<Input {...register('confirmDelete')} />
 					</div>
 				</div>
 			</div>

@@ -43,17 +43,13 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Role Name *</Label>
-						<Input placeholder="Role name" {...register('name', { required: true })} />
+						<Input placeholder="Role name" {...register('name')} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 				</div>
 				<div>
 					<Label htmlFor="defaultRole">Default Role</Label>
-					<Input
-						type="checkbox"
-						placeholder="event-slug"
-						{...register('defaultRole', { required: true })}
-					/>
+					<Input type="checkbox" placeholder="event-slug" {...register('defaultRole')} />
 					{errors.defaultRole?.message && (
 						<ErrorMessage>{errors.defaultRole?.message}</ErrorMessage>
 					)}

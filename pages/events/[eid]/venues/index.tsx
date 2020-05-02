@@ -34,18 +34,15 @@ const SessionsPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { initialVenues, initialOrganizer } = props;
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
-		String(eid),
-		initialOrganizer
-	);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
 
 	if (!initialVenues || !venues) {
 		return <NotFoundPage message="No venues found." />;
 	}
 
-	if (isOrganizerError || venuesError) {
-		return <ViewErrorPage errors={[isOrganizerError]} />;
+	if (venuesError) {
+		return <ViewErrorPage errors={[]} />;
 	}
 
 	if (isVenuesLoading || isOrganizerLoading) {
@@ -68,7 +65,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 				<FlexRowBetween>
 					<h1 className="text-3xl font-bold">Venues</h1>
 
-					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+					{!isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/venues/create`} passHref>
 							<LinkButton>Create venue</LinkButton>
 						</Link>
@@ -78,7 +75,6 @@ const SessionsPage: NextPage<Props> = (props) => {
 				<VenueList
 					eid={String(eid)}
 					venues={venues}
-					isOrganizerError={isOrganizerError}
 					isOrganizer={isOrganizer}
 					isOrganizerLoading={isOrganizerLoading}
 					isVenuesLoading={isVenuesLoading}

@@ -4,11 +4,11 @@ import { api } from '../../../utils/api';
 
 export default api({
 	async GET() {
-		return await getEvents();
+		return await getUpcomingEvents();
 	}
 });
 
-export const getEvents = async (): Promise<Prisma.Event[]> => {
+export const getUpcomingEvents = async (): Promise<Prisma.Event[]> => {
 	return await prisma.event.findMany({
 		orderBy: [
 			{

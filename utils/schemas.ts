@@ -95,13 +95,9 @@ export type EditSessionPayload = z.infer<typeof EditSessionSchema>;
 // Event
 
 export const CreateEventSchema = z.object({
-	slug: slugValidator,
 	name: nameValidator,
-	location: locationValidator,
-	image: imageValidator,
 	startDate: dateValidator,
-	endDate: dateValidator,
-	description: descriptionValidator.optional()
+	endDate: dateValidator
 });
 
 export type CreateEventPayload = z.infer<typeof CreateEventSchema>;

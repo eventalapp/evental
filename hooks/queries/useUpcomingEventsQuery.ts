@@ -4,23 +4,25 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
-export interface UseEventsQueryData {
-	events: Prisma.Event[] | undefined;
-	isEventsLoading: boolean;
-	eventsError: ErroredAPIResponse | null;
+export interface UseUpcomingEventsQueryData {
+	upcomingEvents: Prisma.Event[] | undefined;
+	isUpcomingEventsLoading: boolean;
+	upcomingEventsError: ErroredAPIResponse | null;
 }
 
-export const useEventsQuery = (initialData?: Prisma.Event[]): UseEventsQueryData => {
+export const useUpcomingEventsQuery = (
+	initialData?: Prisma.Event[]
+): UseUpcomingEventsQueryData => {
 	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
-	const { data: events, isLoading: isEventsLoading } = useQuery<
+	const { data: upcomingEvents, isLoading: isUpcomingEventsLoading } = useQuery<
 		Prisma.Event[],
 		AxiosError<ErroredAPIResponse>
 	>(
-		['events'],
+		['upcoming-events'],
 		async () => {
 			return axios
-				.get<SuccessAPIResponse<Prisma.Event[]>>(`/api/events`)
+				.get<SuccessAPIResponse<Prisma.Event[]>>(`/api/events/`)
 				.then((res) => res.data.data);
 		},
 		{
@@ -35,5 +37,5 @@ export const useEventsQuery = (initialData?: Prisma.Event[]): UseEventsQueryData
 		}
 	);
 
-	return { events, isEventsLoading, eventsError: error };
+	return { upcomingEvents, isUpcomingEventsLoading, upcomingEventsError: error };
 };

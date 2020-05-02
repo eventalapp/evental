@@ -33,10 +33,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 		String(sid),
 		initialSession
 	);
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
-		String(eid),
-		initialOrganizer
-	);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 
 	if (!initialSession || !session) {
 		return <NotFoundPage message="Session not found." />;
@@ -46,8 +43,8 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (isOrganizerError || sessionError) {
-		return <ViewErrorPage errors={[isOrganizerError, sessionError]} />;
+	if (sessionError) {
+		return <ViewErrorPage errors={[sessionError]} />;
 	}
 
 	return (
@@ -63,7 +60,6 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 					session={session}
 					isSessionLoading={isSessionLoading}
 					sessionError={sessionError}
-					isOrganizerError={isOrganizerError}
 					isOrganizer={isOrganizer}
 					isOrganizerLoading={isOrganizerLoading}
 					eid={String(eid)}

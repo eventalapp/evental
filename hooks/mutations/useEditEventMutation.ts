@@ -33,7 +33,7 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 
 				router.push(`/events/${data.slug}`).then(() => {
 					void queryClient.removeQueries(['event', eid]);
-					void queryClient.invalidateQueries(['events']);
+					void queryClient.invalidateQueries(['upcoming-events']);
 				});
 			},
 			onError: (error) => {

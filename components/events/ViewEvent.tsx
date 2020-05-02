@@ -31,7 +31,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		isOrganizerLoading,
 		isSessionsLoading,
 		sessionsError,
-		isOrganizerError,
+
 		attendee
 	} = props;
 
@@ -72,15 +72,18 @@ export const ViewEvent: React.FC<Props> = (props) => {
 				<div>
 					<span className="text-gray-600 text-sm block">{event?.type}</span>
 					<h1 className="text-3xl font-bold">{event?.name}</h1>
-					<div className="flex flex-row items-center mb-1">
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="w-5 h-5 mr-1.5"
-							size="1x"
-							icon={faLocationDot}
-						/>
-						<p>{event?.location}</p>
-					</div>
+
+					{event?.location && (
+						<div className="flex flex-row items-center mb-1">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mr-1.5"
+								size="1x"
+								icon={faLocationDot}
+							/>
+							<p>{event?.location}</p>
+						</div>
+					)}
 
 					<div className="flex flex-row items-center">
 						<FontAwesomeIcon
@@ -115,7 +118,6 @@ export const ViewEvent: React.FC<Props> = (props) => {
 			<SessionList
 				isOrganizer={isOrganizer}
 				isOrganizerLoading={isOrganizerLoading}
-				isOrganizerError={isOrganizerError}
 				sessions={sessions}
 				eid={String(eid)}
 				sessionsError={sessionsError}

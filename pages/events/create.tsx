@@ -7,7 +7,6 @@ import { Navigation } from '../../components/navigation';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
-import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { ssrGetUser } from '../../utils/api';
 import { useUser } from '../../hooks/queries/useUser';
@@ -20,7 +19,6 @@ type Props = {
 const CreateEventPage: NextPage<Props> = (props) => {
 	const { initialUser } = props;
 	const { createEventMutation } = useCreateEventMutation();
-	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
@@ -38,11 +36,7 @@ const CreateEventPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Create an Event</h1>
 
-				<CreateEventForm
-					createEventMutation={createEventMutation}
-					imageUploadMutation={imageUploadMutation}
-					imageUploadResponse={imageUploadResponse}
-				/>
+				<CreateEventForm createEventMutation={createEventMutation} canCancel />
 			</Column>
 		</PageWrapper>
 	);

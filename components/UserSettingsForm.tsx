@@ -78,7 +78,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="User name" {...register('name', { required: true })} />
+						<Input placeholder="User name" {...register('name')} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
@@ -119,7 +119,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 						<Label htmlFor="slug">Username *</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-md">evental.app/users/</span>
-							<Input placeholder="user-slug" {...register('slug', { required: true })} />
+							<Input placeholder="user-slug" {...register('slug')} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
 						{slugWatcher !== user?.slug && userSlugCheck && (

@@ -3,24 +3,24 @@ import { GetServerSideProps } from 'next';
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../components/layout/Column';
-import { EditEventForm } from '../../../../components/events/EditEventForm';
-import { Navigation } from '../../../../components/navigation';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
+import Column from '../../../../../components/layout/Column';
+import { EditEventForm } from '../../../../../components/events/EditEventForm';
+import { Navigation } from '../../../../../components/navigation';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { useEditEventMutation } from '../../../../../hooks/mutations/useEditEventMutation';
 import React from 'react';
-import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getEvent } from '../../../api/events/[eid]';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { getEvent } from '../../../../api/events/[eid]';
 import Prisma from '@prisma/client';
 
-import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
-import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { useImageUploadMutation } from '../../../../hooks/mutations/useImageUploadMutation';
-import { ssrGetUser } from '../../../../utils/api';
-import { useUser } from '../../../../hooks/queries/useUser';
-import { PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
+import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
+import { LoadingPage } from '../../../../../components/error/LoadingPage';
+import { useImageUploadMutation } from '../../../../../hooks/mutations/useImageUploadMutation';
+import { ssrGetUser } from '../../../../../utils/api';
+import { useUser } from '../../../../../hooks/queries/useUser';
+import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -55,13 +55,13 @@ const EditEventPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Edit event</title>
+				<title>Event Settings</title>
 			</Head>
 
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl font-bold">Edit Event</h1>
+				<h1 className="text-3xl font-bold">Event Settings</h1>
 
 				<EditEventForm
 					imageUploadMutation={imageUploadMutation}

@@ -34,10 +34,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		String(rid),
 		{ attendees: initialAttendees, role: initialRole }
 	);
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
-		String(eid),
-		initialOrganizer
-	);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 
 	if (!initialAttendees || !initialRole || !role || !attendees) {
 		return <NotFoundPage message="Role not found." />;
@@ -47,8 +44,8 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (isOrganizerError || roleAttendeesError) {
-		return <ViewErrorPage errors={[isOrganizerError, roleAttendeesError]} />;
+	if (roleAttendeesError) {
+		return <ViewErrorPage errors={[roleAttendeesError]} />;
 	}
 
 	return (
@@ -67,7 +64,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					attendees={attendees}
 					roleAttendeesError={roleAttendeesError}
 					isOrganizer={isOrganizer}
-					isOrganizerError={isOrganizerError}
 					isOrganizerLoading={isOrganizerLoading}
 					isRoleAttendeesLoading={isRoleAttendeesLoading}
 				/>

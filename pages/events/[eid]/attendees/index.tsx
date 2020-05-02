@@ -31,10 +31,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		String(eid),
 		initialAttendees
 	);
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
-		String(eid),
-		initialOrganizer
-	);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 
 	if (!initialAttendees || !attendees) {
 		return <NotFoundPage message="No attendees not found." />;
@@ -44,8 +41,8 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (attendeesError || isOrganizerError) {
-		return <ViewErrorPage errors={[attendeesError, isOrganizerError]} />;
+	if (attendeesError) {
+		return <ViewErrorPage errors={[attendeesError]} />;
 	}
 
 	return (
@@ -62,7 +59,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				</div>
 
 				<AttendeeList
-					isOrganizerError={isOrganizerError}
 					isOrganizerLoading={isOrganizerLoading}
 					isOrganizer={isOrganizer}
 					attendees={attendees}

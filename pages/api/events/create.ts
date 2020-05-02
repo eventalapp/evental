@@ -1,8 +1,8 @@
 import { CreateEventSchema } from '../../../utils/schemas';
 import { prisma } from '../../../prisma/client';
-import { processSlug } from '../../../utils/slugify';
 import { api } from '../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { generateSlug } from '../../../utils/generateSlug';
 
 export default api({
 	async POST({ ctx, req }) {
@@ -14,15 +14,22 @@ export default api({
 
 		const parsed = CreateEventSchema.parse(req.body);
 
+		const slug = await generateSlug(parsed.name, async (val) => {
+			return !Boolean(
+				await prisma.event.findFirst({
+					where: {
+						slug: val
+					}
+				})
+			);
+		});
+
 		const event = await prisma.event.create({
 			data: {
-				slug: processSlug(parsed.slug),
+				slug: slug,
 				name: parsed.name,
-				location: parsed.location,
 				startDate: parsed.startDate,
-				endDate: parsed.endDate,
-				description: parsed.description,
-				image: parsed.image
+				endDate: parsed.endDate
 			}
 		});
 
@@ -30,7 +37,7 @@ export default api({
 			throw new NextkitError(500, 'Could not create event.');
 		}
 
-		const eventRole = await prisma.eventRole.create({
+		const defaultRole = await prisma.eventRole.create({
 			data: {
 				name: 'Attendee',
 				slug: 'attendee',
@@ -39,8 +46,25 @@ export default api({
 			}
 		});
 
-		if (!eventRole) {
-			throw new NextkitError(500, 'Could not create role.');
+		const eventRoles = await prisma.eventRole.createMany({
+			data: [
+				{
+					name: 'Speaker',
+					slug: 'speaker',
+					eventId: String(event.id),
+					defaultRole: false
+				},
+				{
+					name: 'Sponsor',
+					slug: 'sponsor',
+					eventId: String(event.id),
+					defaultRole: false
+				}
+			]
+		});
+
+		if (!eventRoles || !defaultRole) {
+			throw new NextkitError(500, 'Could not create roles.');
 		}
 
 		let eventAttendee = await prisma.eventAttendee.create({
@@ -48,7 +72,7 @@ export default api({
 				eventId: event.id,
 				permissionRole: 'FOUNDER',
 				userId: user.id,
-				eventRoleId: String(eventRole.id)
+				eventRoleId: String(defaultRole.id)
 			}
 		});
 
