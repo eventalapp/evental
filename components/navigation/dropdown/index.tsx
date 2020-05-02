@@ -17,7 +17,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 	return (
 		<Root>
 			<Trigger>
-				<div className="rounded-full w-8 h-8 relative border-2 border-gray-100">
+				<div className="rounded-full w-10 h-10 relative border-2 border-gray-100">
 					<Image
 						className="rounded-full"
 						layout="fill"
@@ -56,7 +56,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 						Sign out
 					</DropdownLink>
 				</Item>
-				<Arrow className="text-gray-200" fill="currentColor" offset={10} />
+				<Arrow className="text-gray-200" fill="currentColor" offset={14} />
 			</Content>
 		</Root>
 	);
