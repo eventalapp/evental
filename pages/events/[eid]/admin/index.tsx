@@ -195,8 +195,6 @@ const AdminPage: NextPage<Props> = (props) => {
 						</FlexRowBetween>
 
 						<AttendeeList
-							isOrganizer={isOrganizer}
-							isOrganizerLoading={isOrganizerLoading}
 							eid={String(eid)}
 							attendees={attendees}
 							isAttendeesLoading={isAttendeesLoading}

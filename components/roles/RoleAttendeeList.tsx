@@ -76,8 +76,6 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 			</FlexRowBetween>
 
 			<AttendeeList
-				isOrganizerLoading={isOrganizerLoading}
-				isOrganizer={isOrganizer}
 				attendees={attendees}
 				attendeesError={roleAttendeesError}
 				isAttendeesLoading={isRoleAttendeesLoading}
