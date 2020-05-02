@@ -6,7 +6,14 @@ import { welcomeTemplate } from './templates/welcome';
 
 export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {
 	const htmlOutput = mjml2html(
-		welcomeTemplate(`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events`, name)
+		welcomeTemplate({
+			name: name,
+			viewEventPageLink: `${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events`,
+			updateProfileLink: `${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/settings`,
+			createEventLink: `${
+				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+			}/events/create`
+		})
 	);
 
 	const text = convert(htmlOutput.html, {
