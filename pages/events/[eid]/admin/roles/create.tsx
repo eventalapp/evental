@@ -14,8 +14,9 @@ import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../../utils/api';
+import { ssrGetUser } from '../../../../../utils/api';
 import { useUser } from '../../../../../hooks/queries/useUser';
+import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 
 type Props = {
 	initialOrganizer: boolean;

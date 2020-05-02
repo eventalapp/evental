@@ -1,7 +1,6 @@
 import { prisma } from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EditRoleSchema } from '../../../../../../../utils/schemas';
-import { processSlug } from '../../../../../../../utils/slugify';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 
@@ -78,7 +77,6 @@ export default api({
 				id: role.id
 			},
 			data: {
-				slug: processSlug(parsed.slug),
 				name: parsed.name,
 				defaultRole: parsed.defaultRole
 			}

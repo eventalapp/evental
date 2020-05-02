@@ -12,11 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { slugify } from '../../utils/slugify';
 import Link from 'next/link';
 import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSessionQuery } from '../../hooks/queries/useSessionQuery';
 import { NotFound } from '../error/NotFound';
 import { roundToNearestMinutes } from 'date-fns';
 import { NEAREST_MINUTE } from '../../config';
@@ -41,7 +39,6 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		handleSubmit,
 		watch,
 		setValue,
-		trigger,
 		control,
 		formState: { errors }
 	} = useForm<CreateSessionPayload>({
@@ -55,12 +52,8 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		resolver: zodResolver(CreateSessionSchema)
 	});
 
-	const nameWatcher = watch('name');
-	const slugWatcher = watch('slug');
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
-
-	const { session, isSessionLoading } = useSessionQuery(String(eid), slugWatcher);
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
@@ -75,18 +68,6 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
-
-	useEffect(() => {
-		setValue('slug', slugify(nameWatcher));
-
-		if (errors.name) {
-			void trigger('slug');
-		}
-	}, [nameWatcher]);
-
-	useEffect(() => {
-		setValue('slug', slugify(slugWatcher));
-	}, [slugWatcher]);
 
 	if (venues && venues.length === 0) {
 		return <NotFound message="No venues found" />;
@@ -194,33 +175,11 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 				</div>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-				<div>
-					<div>
-						<Label htmlFor="slug">Slug *</Label>
-						<div className="flex items-center">
-							<span className="mr-1 text-md">/sessions/</span>
-							<Input placeholder="session-slug" {...register('slug', { required: true })} />
-						</div>
-						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{session && (
-							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
-						)}
-					</div>
-				</div>
-			</div>
-
 			<div className="flex flex-row justify-end">
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button
-					type="submit"
-					variant="primary"
-					className="ml-4"
-					padding="medium"
-					disabled={isSessionLoading || Boolean(session)}
-				>
+				<Button type="submit" variant="primary" className="ml-4" padding="medium">
 					Create Session
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>

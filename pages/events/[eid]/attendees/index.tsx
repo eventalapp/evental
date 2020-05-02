@@ -11,14 +11,14 @@ import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { getAttendees } from '../../../api/events/[eid]/attendees';
-import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { ssrGetUser } from '../../../../utils/api';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 
 type Props = {
-	initialAttendees: EventAttendeeUser[] | undefined;
+	initialAttendees: AttendeeWithUser[] | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 };
@@ -26,7 +26,7 @@ type Props = {
 const ViewAttendeePage: NextPage<Props> = (props) => {
 	const { initialAttendees, initialOrganizer } = props;
 	const router = useRouter();
-	const { aid, eid } = router.query;
+	const { uid, eid } = router.query;
 	const { attendees, attendeesError, isAttendeesLoading } = useAttendeesQuery(
 		String(eid),
 		initialAttendees
@@ -51,7 +51,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Viewing Attendee: {aid}</title>
+				<title>Viewing Attendee: {uid}</title>
 			</Head>
 
 			<Navigation />

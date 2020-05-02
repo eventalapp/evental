@@ -1,24 +1,17 @@
-import type Prisma from '@prisma/client';
 import { prisma } from '../../../../../prisma/client';
 import { getEvent } from '../index';
 import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
-
-export type EventAttendeeUser = Prisma.EventAttendee & {
-	user: {
-		name: string | null;
-		image: string | null;
-	};
-	role: {
-		name: string | null;
-	};
-};
+import {
+	AttendeeWithUser,
+	stripAttendeeWithUserPassword
+} from '../../../../../utils/stripUserPassword';
 
 export default api({
 	async GET({ req }) {
-		const { eid, aid } = req.query;
+		const { eid, uid } = req.query;
 
-		const eventAttendee = await getAttendee(String(eid), String(aid));
+		const eventAttendee = await getAttendee(String(eid), String(uid));
 
 		if (!eventAttendee) {
 			throw new NextkitError(404, 'Attendee not found');
@@ -28,7 +21,7 @@ export default api({
 	}
 });
 
-export const getAttendee = async (eid: string, aid: string): Promise<EventAttendeeUser | null> => {
+export const getAttendee = async (eid: string, uid: string): Promise<AttendeeWithUser | null> => {
 	const event = await getEvent(String(eid));
 
 	if (!event) {
@@ -37,21 +30,14 @@ export const getAttendee = async (eid: string, aid: string): Promise<EventAttend
 
 	const eventAttendee = await prisma.eventAttendee.findFirst({
 		where: {
-			OR: [{ id: aid }, { slug: aid }],
+			user: {
+				OR: [{ id: uid }, { slug: uid }]
+			},
 			eventId: event.id
 		},
 		include: {
-			user: {
-				select: {
-					name: true,
-					image: true
-				}
-			},
-			role: {
-				select: {
-					name: true
-				}
-			}
+			user: true,
+			role: true
 		}
 	});
 
@@ -59,5 +45,5 @@ export const getAttendee = async (eid: string, aid: string): Promise<EventAttend
 		return null;
 	}
 
-	return eventAttendee;
+	return stripAttendeeWithUserPassword(eventAttendee);
 };

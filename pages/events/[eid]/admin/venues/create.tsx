@@ -11,9 +11,10 @@ import { Navigation } from '../../../../../components/navigation';
 import { CreateVenueForm } from '../../../../../components/venues/CreateVenueForm';
 import { useCreateVenueMutation } from '../../../../../hooks/mutations/useCreateVenueMutation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
-import { PasswordlessUser, ssrGetUser } from '../../../../../utils/api';
+import { ssrGetUser } from '../../../../../utils/api';
 import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { useUser } from '../../../../../hooks/queries/useUser';
+import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 
 type Props = {
 	initialOrganizer: boolean;

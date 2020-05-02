@@ -45,12 +45,10 @@ export default api({
 
 		let eventAttendee = await prisma.eventAttendee.create({
 			data: {
-				slug: String('founder-slug'),
 				eventId: event.id,
 				permissionRole: 'FOUNDER',
 				userId: user.id,
-				eventRoleId: String(eventRole.id),
-				name: String(user.name)
+				eventRoleId: String(eventRole.id)
 			}
 		});
 

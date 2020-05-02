@@ -2,7 +2,6 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { CreateAttendeePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
@@ -10,7 +9,7 @@ export interface UseCreateAttendeeMutationData {
 	createAttendeeMutation: UseMutationResult<
 		Prisma.EventAttendee,
 		AxiosError<ErroredAPIResponse, unknown>,
-		CreateAttendeePayload
+		void
 	>;
 }
 
@@ -20,7 +19,7 @@ export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutatio
 	const createAttendeeMutation = useMutation<
 		Prisma.EventAttendee,
 		AxiosError<ErroredAPIResponse, unknown>,
-		CreateAttendeePayload
+		void
 	>(
 		async (data) => {
 			return await axios

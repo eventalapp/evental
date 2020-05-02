@@ -18,8 +18,9 @@ import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { PasswordlessUser } from '../../../../../../utils/stripUserPassword';
 
 type Props = {
 	initialOrganizer: boolean;

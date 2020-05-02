@@ -21,7 +21,8 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { ssrGetUser } from '../../../../utils/api';
+import { PasswordlessUser } from '../../../../utils/stripUserPassword';
 
 type Props = {
 	initialVenues: Prisma.EventVenue[] | undefined;

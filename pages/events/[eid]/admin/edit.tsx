@@ -18,8 +18,9 @@ import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { useImageUploadMutation } from '../../../../hooks/mutations/useImageUploadMutation';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { ssrGetUser } from '../../../../utils/api';
 import { useUser } from '../../../../hooks/queries/useUser';
+import { PasswordlessUser } from '../../../../utils/stripUserPassword';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;

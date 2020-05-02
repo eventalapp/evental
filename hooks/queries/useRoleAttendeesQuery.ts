@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { RoleAttendeePayload } from '../../pages/api/events/[eid]/roles/[rid]';
-import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 import Prisma from '@prisma/client';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
 export interface UseRoleAttendeesQueryData {
-	attendees: EventAttendeeUser[] | undefined;
+	attendees: AttendeeWithUser[] | undefined;
 	role: Prisma.EventRole | undefined;
 	isRoleAttendeesLoading: boolean;
 	roleAttendeesError: ErroredAPIResponse | null;
@@ -16,7 +16,7 @@ export interface UseRoleAttendeesQueryData {
 export const useRoleAttendeesQuery = (
 	eid: string,
 	rid: string,
-	initialData?: { attendees: EventAttendeeUser[] | undefined; role: Prisma.EventRole | undefined }
+	initialData?: { attendees: AttendeeWithUser[] | undefined; role: Prisma.EventRole | undefined }
 ): UseRoleAttendeesQueryData => {
 	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 

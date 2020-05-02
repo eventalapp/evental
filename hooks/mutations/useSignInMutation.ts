@@ -3,8 +3,8 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { SignInPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { PasswordlessUser } from '../../utils/api';
 import router from 'next/router';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 
 export interface UseSignInMutationData {
 	signInMutation: UseMutationResult<

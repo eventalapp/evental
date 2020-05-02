@@ -1,17 +1,13 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutation';
-import {
-	useRoleAttendeesQuery,
-	UseRoleAttendeesQueryData
-} from '../../hooks/queries/useRoleAttendeesQuery';
+import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 import { useRouter } from 'next/router';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { useForm } from 'react-hook-form';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
-import { slugify } from '../../utils/slugify';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 type Props = { eid: string } & UseRoleAttendeesQueryData &
@@ -21,40 +17,19 @@ type Props = { eid: string } & UseRoleAttendeesQueryData &
 export const EditRoleForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 
-	const { editRoleMutation, role, eid } = props;
+	const { editRoleMutation, role } = props;
 	const {
 		register,
 		handleSubmit,
-		watch,
-		setValue,
-		trigger,
+
 		formState: { errors }
 	} = useForm<EditRolePayload>({
 		defaultValues: {
-			slug: role?.slug ?? undefined,
 			name: role?.name ?? undefined,
 			defaultRole: role?.defaultRole ?? false
 		},
 		resolver: zodResolver(EditRoleSchema)
 	});
-
-	const nameWatcher = watch('name');
-	const slugWatcher = watch('slug');
-
-	const { role: roleSlugCheck, isRoleAttendeesLoading: isRoleSlugCheckLoading } =
-		useRoleAttendeesQuery(String(eid), slugWatcher);
-
-	useEffect(() => {
-		setValue('slug', slugify(nameWatcher));
-
-		if (errors.name) {
-			void trigger('slug');
-		}
-	}, [nameWatcher]);
-
-	useEffect(() => {
-		setValue('slug', slugify(slugWatcher));
-	}, [slugWatcher]);
 
 	if (!role) return null;
 
@@ -70,14 +45,6 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 						<Label htmlFor="name">Role Name *</Label>
 						<Input placeholder="Role name" {...register('name', { required: true })} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
-					</div>
-					<div>
-						<Label htmlFor="slug">Role Slug *</Label>
-						<Input placeholder="role-slug" {...register('slug', { required: true })} />
-						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{slugWatcher !== role?.slug && roleSlugCheck && (
-							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
-						)}
 					</div>
 				</div>
 				<div>
@@ -97,13 +64,7 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button
-					type="submit"
-					className="ml-4"
-					variant="primary"
-					padding="medium"
-					disabled={isRoleSlugCheckLoading || Boolean(slugWatcher !== role?.slug && roleSlugCheck)}
-				>
+				<Button type="submit" className="ml-4" variant="primary" padding="medium">
 					Create Role
 				</Button>
 			</div>

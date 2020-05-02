@@ -15,7 +15,8 @@ import { getSession } from '../../../api/events/[eid]/sessions/[sid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { ssrGetUser } from '../../../../utils/api';
+import { PasswordlessUser } from '../../../../utils/stripUserPassword';
 
 type Props = {
 	initialSession: Prisma.EventSession | undefined;

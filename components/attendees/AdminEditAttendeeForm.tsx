@@ -1,26 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-	AdminEditAttendeePayload,
-	AdminEditAttendeeSchema,
-	ImageUploadSchema
-} from '../../utils/schemas';
+import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
 import { Button } from '../form/Button';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { Textarea } from '../form/Textarea';
-import { useAttendeeQuery, UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
-import { slugify } from '../../utils/slugify';
+import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import { UseEditAttendeeMutationData } from '../../hooks/mutations/useAdminEditAttendeeMutation';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { Select } from '../form/Select';
 import Link from 'next/link';
 import { EventPermissionRole } from '@prisma/client';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { ErrorMessage } from '../form/ErrorMessage';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -33,60 +25,18 @@ type Props = { eid: string } & DetailedHTMLProps<
 
 export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const {
-		adminEditAttendeeMutation,
-		attendee,
-		roles,
-		eid,
-		imageUploadMutation,
-		imageUploadResponse
-	} = props;
+	const { adminEditAttendeeMutation, attendee, roles, eid, imageUploadMutation } = props;
 	const {
 		register,
 		handleSubmit,
-		watch,
-		setValue,
-		trigger,
 		formState: { errors }
 	} = useForm<AdminEditAttendeePayload>({
 		defaultValues: {
-			name: attendee?.name ?? undefined,
-			description: attendee?.description ?? undefined,
-			company: attendee?.company ?? undefined,
-			image: attendee?.image ?? '/images/default-avatar.jpg',
-			position: attendee?.position ?? undefined,
-			location: attendee?.location ?? undefined,
-			slug: attendee?.slug ?? undefined,
 			eventRoleId: attendee?.eventRoleId ?? undefined,
 			permissionRole: attendee?.permissionRole ?? undefined
 		},
 		resolver: zodResolver(AdminEditAttendeeSchema)
 	});
-
-	const nameWatcher = watch('name');
-	const slugWatcher = watch('slug');
-	const imageWatcher = watch('image');
-
-	const { attendee: attendeeSlugCheck, isAttendeeLoading: isAttendeeSlugCheckLoading } =
-		useAttendeeQuery(String(eid), slugWatcher);
-
-	useEffect(() => {
-		setValue('slug', slugify(nameWatcher));
-
-		if (errors.name) {
-			void trigger('slug');
-		}
-	}, [nameWatcher]);
-
-	useEffect(() => {
-		setValue('slug', slugify(slugWatcher));
-	}, [slugWatcher]);
-
-	useEffect(() => {
-		if (imageUploadResponse) {
-			setValue('image', imageUploadResponse.pathName);
-		}
-	}, [imageUploadResponse]);
 
 	return (
 		<form
@@ -94,62 +44,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 				adminEditAttendeeMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full mt-5">
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-					<div>
-						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="Full Name" {...register('name', { required: true })} />
-						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
-					</div>
-
-					<div>
-						<Label htmlFor="location">Location</Label>
-						<Input placeholder="Location" {...register('location')} />
-						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
-					</div>
-				</div>
-			</div>
-			<div className="flex flex-col w-full mt-5">
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-					<div>
-						<Label htmlFor="position">Position</Label>
-						<Input placeholder="Position" {...register('position')} />
-						{errors.position?.message && <ErrorMessage>{errors.position?.message}</ErrorMessage>}
-					</div>
-
-					<div>
-						<Label htmlFor="company">Company</Label>
-						<Input placeholder="Company" {...register('company')} />
-						{errors.company?.message && <ErrorMessage>{errors.company?.message}</ErrorMessage>}
-					</div>
-				</div>
-			</div>
-
-			<div className="grid grid-cols-1 mb-5 gap-5">
-				<div>
-					<Label htmlFor="description">Description</Label>
-					<Textarea rows={5} placeholder="Event description" {...register('description')} />
-					{errors.description?.message && (
-						<ErrorMessage>{errors.description?.message}</ErrorMessage>
-					)}
-				</div>
-			</div>
-
-			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-				<div>
-					<div>
-						<Label htmlFor="slug">Slug *</Label>
-						<div className="flex items-center">
-							<span className="mr-1 text-md">/attendees/</span>
-							<Input placeholder="attendee-slug" {...register('slug', { required: true })} />
-						</div>
-						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{slugWatcher !== attendee?.slug && attendeeSlugCheck && (
-							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
-						)}
-					</div>
-				</div>
-
+			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5 mt-3">
 				<div>
 					<Label htmlFor="eventRoleId">Role *</Label>
 					<Select {...register('eventRoleId', { required: true })}>
@@ -160,13 +55,13 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 								</option>
 							))}
 					</Select>
+					{errors.eventRoleId?.message && (
+						<ErrorMessage>{errors.eventRoleId?.message}</ErrorMessage>
+					)}
 					<Link href={`/events/${eid}/admin/roles/create`}>
 						<a className="text-gray-600 block mt-1 text-sm">Dont see your role? Create a role</a>
 					</Link>
 				</div>
-			</div>
-
-			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
 					<Label htmlFor="permissionRole">Permission Role *</Label>
 					<Select {...register('permissionRole', { required: true })}>
@@ -177,37 +72,9 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 								</option>
 							))}
 					</Select>
-				</div>
-
-				<div>
-					<p>Current image:</p>
-
-					<div className="h-16 w-16 relative">
-						<Image
-							alt={'Event image'}
-							src={String(
-								imageWatcher
-									? `https://cdn.evental.app${imageWatcher}`
-									: `https://cdn.evental.app/images/default-avatar.jpg`
-							)}
-							className="rounded-md"
-							layout="fill"
-						/>
-					</div>
-
-					<Label htmlFor="image">Image</Label>
-					<Input
-						type="file"
-						accept="image/png, image/jpeg"
-						onChange={(e: ChangeEvent<HTMLInputElement>) => {
-							const files = e?.target?.files;
-
-							const filesParsed = ImageUploadSchema.parse({ image: files });
-
-							imageUploadMutation.mutate(filesParsed);
-						}}
-					/>
-					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
+					{errors.permissionRole?.message && (
+						<ErrorMessage>{errors.permissionRole?.message}</ErrorMessage>
+					)}
 				</div>
 			</div>
 
@@ -220,11 +87,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 					variant="primary"
 					padding="medium"
 					className="ml-4"
-					disabled={
-						imageUploadMutation.isLoading ||
-						isAttendeeSlugCheckLoading ||
-						Boolean(slugWatcher !== attendee?.slug && attendeeSlugCheck)
-					}
+					disabled={imageUploadMutation.isLoading}
 				>
 					Edit
 				</Button>

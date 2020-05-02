@@ -1,7 +1,6 @@
 import { prisma } from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EditVenueSchema } from '../../../../../../../utils/schemas';
-import { processSlug } from '../../../../../../../utils/slugify';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 
@@ -50,7 +49,6 @@ export default api({
 				id: venue.id
 			},
 			data: {
-				slug: processSlug(parsed.slug),
 				name: parsed.name,
 				description: parsed.description
 			}

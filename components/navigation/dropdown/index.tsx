@@ -3,8 +3,9 @@ import Link from 'next/link';
 import React from 'react';
 import { DropdownLink } from './Link';
 import Image from 'next/image';
-import { PasswordlessUser } from '../../../utils/api';
+
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
 
 type Props = {
 	user: PasswordlessUser | undefined;

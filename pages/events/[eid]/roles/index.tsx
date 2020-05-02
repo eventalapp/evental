@@ -12,15 +12,14 @@ import { LinkButton } from '../../../../components/form/LinkButton';
 import React from 'react';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
-
 import { getRoles } from '../../../api/events/[eid]/roles';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { ssrGetUser } from '../../../../utils/api';
+import { PasswordlessUser } from '../../../../utils/stripUserPassword';
 
 type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;

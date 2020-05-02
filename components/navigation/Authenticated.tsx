@@ -4,8 +4,8 @@ import Link from 'next/link';
 import React from 'react';
 import { ProfileDropdown } from './dropdown';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { PasswordlessUser } from '../../utils/api';
 import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 
 type Props = {
 	className?: string;

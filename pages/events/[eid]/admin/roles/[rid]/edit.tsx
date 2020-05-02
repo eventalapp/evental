@@ -13,19 +13,20 @@ import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { getAttendeesByRole, getRole } from '../../../../../api/events/[eid]/roles/[rid]';
 import Prisma from '@prisma/client';
-import { EventAttendeeUser } from '../../../../../api/events/[eid]/attendees/[aid]';
+
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../../../utils/stripUserPassword';
 
 type Props = {
 	initialOrganizer: boolean;
 	initialRole: Prisma.EventRole | undefined;
-	initialAttendees: EventAttendeeUser[] | undefined;
+	initialAttendees: AttendeeWithUser[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 };
 

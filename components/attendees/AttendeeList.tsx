@@ -31,35 +31,41 @@ export const AttendeeList: React.FC<Props> = (props) => {
 							attendee.user &&
 							attendee.role && (
 								<li key={attendee.id} className="w-32">
-									<Link href={`/events/${eid}/attendees/${attendee.slug}`}>
+									<Link href={`/events/${eid}/attendees/${attendee.user.slug}`}>
 										<a className="flex items-center justify-center flex-col">
 											<div className="h-16 w-16 relative">
 												<Image
-													alt={String(attendee.name)}
+													alt={String(attendee.user.name)}
 													src={String(
-														attendee?.image
-															? `https://cdn.evental.app${attendee?.image}`
+														attendee?.user.image
+															? `https://cdn.evental.app${attendee?.user.image}`
 															: `https://cdn.evental.app/images/default-avatar.jpg`
 													)}
 													className="rounded-full"
 													layout="fill"
 												/>
 											</div>
-											<span>{attendee.name}</span>
+											<span>{attendee.user.name}</span>
 											<span className="block text-gray-700">
 												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
 											</span>
 										</a>
 									</Link>
 									{!isOrganizerLoading && isOrganizer && (
-										<Link href={`/events/${eid}/admin/attendees/${attendee.slug}/edit`} passHref>
+										<Link
+											href={`/events/${eid}/admin/attendees/${attendee.user.slug}/edit`}
+											passHref
+										>
 											<LinkButton className="mr-3">
 												<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faCog} />
 											</LinkButton>
 										</Link>
 									)}
 									{!isOrganizerLoading && isOrganizer && (
-										<Link href={`/events/${eid}/admin/attendees/${attendee.slug}/delete`} passHref>
+										<Link
+											href={`/events/${eid}/admin/attendees/${attendee.user.slug}/delete`}
+											passHref
+										>
 											<LinkButton className="mr-3">
 												<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faTrash} />
 											</LinkButton>
