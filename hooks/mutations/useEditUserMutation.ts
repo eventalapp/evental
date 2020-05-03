@@ -5,6 +5,7 @@ import { EditUserPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { populateFormData } from '../../utils/populateFormData';
 
 export interface UseEditUserMutationData {
 	editUserMutation: UseMutationResult<
@@ -23,8 +24,10 @@ export const useEditUserMutation = (uid: string): UseEditUserMutationData => {
 		EditUserPayload
 	>(
 		async (data) => {
+			const formData = populateFormData(data);
+
 			return await axios
-				.put<SuccessAPIResponse<Prisma.User>>(`/api/users/`, data)
+				.put<SuccessAPIResponse<Prisma.User>>(`/api/users/`, formData)
 				.then((res) => res.data.data);
 		},
 		{

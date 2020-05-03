@@ -33,10 +33,11 @@ const codeValidator = z
 	.min(10, 'Code must be at least 10 characters')
 	.max(300, 'Code must be less than 300 characters');
 const imageValidator = z.string().min(1, 'Image must be specified').max(200, 'Image is too long');
+const imageFileValidator = isBrowser ? z.instanceof(File) : z.any();
 const locationValidator = z.string().max(100, 'Location must be less than 70 characters');
 const companyValidator = z.string().max(100, 'Company must be less than 100 characters');
 const positionValidator = z.string().max(100, 'Position must be less than 70 characters');
-const urlValidator = z.string().url().max(200, 'URL must be less than 200 characters');
+const urlValidator = z.string().max(200, 'URL must be less than 200 characters');
 
 // Venues
 
@@ -173,7 +174,7 @@ export type ChangePasswordPayload = z.infer<typeof ChangePasswordSchema>;
 export const EditUserSchema = z.object({
 	slug: slugValidator,
 	name: nameValidator,
-	image: imageValidator,
+	image: imageFileValidator.optional(),
 	location: locationValidator.optional(),
 	description: descriptionValidator.optional(),
 	company: companyValidator.optional(),

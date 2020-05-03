@@ -1,9 +1,8 @@
-import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Image from 'next/image';
 import { slugify } from '../../utils/slugify';
-import { EditUserPayload, EditUserSchema, ImageUploadSchema } from '../../utils/schemas';
+import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
 import { Textarea } from '../form/Textarea';
 import { UseUserData } from '../../hooks/queries/useUser';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -13,6 +12,7 @@ import { Label } from '../form/Label';
 import { Input } from '../form/Input';
 import { Button } from '../form/Button';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
+import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEditUserMutationData &
@@ -21,6 +21,8 @@ type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElem
 
 export const UserSettingsForm: React.FC<Props> = (props) => {
 	const { imageUploadMutation, user, editUserMutation, imageUploadResponse } = props;
+	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
+
 	const {
 		register,
 		handleSubmit,
@@ -31,7 +33,6 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 	} = useForm<EditUserPayload>({
 		defaultValues: {
 			name: user?.name ?? undefined,
-			image: user?.image ?? undefined,
 			slug: user?.slug ?? undefined,
 			description: user?.description ?? undefined,
 			location: user?.location ?? undefined,
@@ -44,7 +45,6 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 
 	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
-	const imageWatcher = watch('image');
 
 	const { user: userSlugCheck, isUserLoading: isUserSlugCheckLoading } = useUserQuery(slugWatcher);
 
@@ -66,6 +66,10 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 		}
 	}, [imageUploadResponse]);
 
+	useEffect(() => {
+		setValue('image', files[0]);
+	}, [files]);
+
 	if (!user) return null;
 
 	return (
@@ -74,6 +78,19 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 				editUserMutation.mutate(data);
 			})}
 		>
+			<div className="flex flex-col w-full mt-5 items-center justify-center">
+				<Label htmlFor="image" className="hidden">
+					Image
+				</Label>
+
+				<ImageUpload
+					files={files}
+					setFiles={setFiles}
+					placeholderImageUrl={`https://cdn.evental.app${user.image}`}
+				/>
+
+				{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
+			</div>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
@@ -88,7 +105,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 					</div>
 				</div>
-			</div>{' '}
+			</div>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
@@ -127,36 +144,10 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 						)}
 					</div>
 				</div>
-
 				<div>
-					<p>Current image:</p>
-
-					<div className="h-16 w-16 relative">
-						<Image
-							alt={'User image'}
-							src={String(
-								imageWatcher
-									? `https://cdn.evental.app${imageWatcher}`
-									: `https://cdn.evental.app/images/default-avatar.jpg`
-							)}
-							className="rounded-md"
-							layout="fill"
-						/>
-					</div>
-
-					<Label htmlFor="image">Image</Label>
-					<Input
-						type="file"
-						accept="image/png, image/jpeg"
-						onChange={(e: ChangeEvent<HTMLInputElement>) => {
-							const files = e?.target?.files;
-
-							const filesParsed = ImageUploadSchema.parse({ image: files });
-
-							imageUploadMutation.mutate(filesParsed);
-						}}
-					/>
-					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
+					<Label htmlFor="website">Website</Label>
+					<Input placeholder="Website" {...register('website')} />
+					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 				</div>
 			</div>
 			<div className="flex flex-row justify-end">
