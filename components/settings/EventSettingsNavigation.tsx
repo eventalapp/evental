@@ -37,6 +37,42 @@ export const EventSettingsNavigation: React.FC<Props> = (props) => {
 					Roles
 				</a>
 			</Link>
+			<Link href={`/events/${eid}/admin/venues`} passHref>
+				<a
+					className={classNames(
+						'px-3 py-2 inline-block font-medium',
+						router.asPath == `/events/${eid}/admin/venues`
+							? 'text-primary border-b-2 border-primary'
+							: 'text-gray-500'
+					)}
+				>
+					Venues
+				</a>
+			</Link>
+			<Link href={`/events/${eid}/admin/sessions`} passHref>
+				<a
+					className={classNames(
+						'px-3 py-2 inline-block font-medium',
+						router.asPath == `/events/${eid}/admin/sessions`
+							? 'text-primary border-b-2 border-primary'
+							: 'text-gray-500'
+					)}
+				>
+					Session
+				</a>
+			</Link>
+			<Link href={`/events/${eid}/admin/attendees`} passHref>
+				<a
+					className={classNames(
+						'px-3 py-2 inline-block font-medium',
+						router.asPath == `/events/${eid}/admin/attendees`
+							? 'text-primary border-b-2 border-primary'
+							: 'text-gray-500'
+					)}
+				>
+					Attendees
+				</a>
+			</Link>
 		</div>
 	);
 };

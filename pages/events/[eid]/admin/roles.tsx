@@ -32,7 +32,7 @@ type Props = {
 	initialOrganizer: boolean;
 };
 
-const AdminPage: NextPage<Props> = (props) => {
+const RolesAdminPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { initialUser, initialRoles, initialOrganizer } = props;
 	const { eid } = router.query;
@@ -55,7 +55,7 @@ const AdminPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Edit Event</title>
+				<title>Edit Roles</title>
 			</Head>
 
 			<Navigation />
@@ -65,7 +65,7 @@ const AdminPage: NextPage<Props> = (props) => {
 
 				<div>
 					<FlexRowBetween>
-						<span className="text-3xl">Roles</span>
+						<span className="text-3xl font-bold">Roles</span>
 
 						<div>
 							<Link href={`/events/${eid}/admin/roles/create`} passHref>
@@ -111,4 +111,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	};
 };
 
-export default AdminPage;
+export default RolesAdminPage;
