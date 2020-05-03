@@ -2,14 +2,20 @@ import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
 import React from 'react';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
-import { capitalizeFirstLetter } from '../../utils/string';
+import { capitalizeFirstLetter, capitalizeOnlyFirstLetter } from '../../utils/string';
 import { SessionList } from '../sessions/SessionList';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseSessionsQueryData } from '../../hooks/queries/useSessionsQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import {
+	faCalendarDay,
+	faHeadset,
+	faLocationDot,
+	faPerson,
+	faStreetView
+} from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 
@@ -69,7 +75,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 				</div>
 
 				<div>
-					<span className="text-gray-600 text-sm block">{event?.type}</span>
+					<span className="text-gray-500 text-xs block">{event?.category}</span>
 					<h1 className="text-3xl font-bold">{event?.name}</h1>
 
 					{event?.location && (
@@ -81,6 +87,42 @@ export const ViewEvent: React.FC<Props> = (props) => {
 								icon={faLocationDot}
 							/>
 							<p>{event?.location}</p>
+						</div>
+					)}
+
+					{event?.type && event.type === 'IN_PERSON' && (
+						<div className="flex flex-row items-center mb-1">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mr-1.5"
+								size="1x"
+								icon={faPerson}
+							/>
+							<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
+						</div>
+					)}
+
+					{event?.type && event.type === 'HYBRID' && (
+						<div className="flex flex-row items-center mb-1">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mr-1.5"
+								size="1x"
+								icon={faStreetView}
+							/>
+							<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
+						</div>
+					)}
+
+					{event?.type && event.type === 'VIRTUAL' && (
+						<div className="flex flex-row items-center mb-1">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mr-1.5"
+								size="1x"
+								icon={faHeadset}
+							/>
+							<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
 						</div>
 					)}
 
