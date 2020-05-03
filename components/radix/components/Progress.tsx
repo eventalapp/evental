@@ -1,6 +1,5 @@
 import * as ProgressPrimitive from '@radix-ui/react-progress';
 import React, { useEffect } from 'react';
-import { getRandomArbitrary } from '../../../../tailwindcss-radix/demo/utils/math';
 
 interface Props {}
 
@@ -11,7 +10,7 @@ const Progress = (props: Props) => {
 		let timerId: null | NodeJS.Timer = null;
 
 		timerId = setInterval(() => {
-			const p = Math.ceil(getRandomArbitrary(0, 100) / 10) * 10;
+			const p = Math.ceil(100 / 10) * 10;
 			setProgress(p);
 		}, 5000);
 
