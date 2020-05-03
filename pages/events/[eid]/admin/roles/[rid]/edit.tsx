@@ -71,7 +71,7 @@ const EditRolePage: NextPage<Props> = (props) => {
 
 			<Navigation />
 
-			<Column>
+			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Edit Role</h1>
 
 				<EditRoleForm

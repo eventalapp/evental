@@ -3,8 +3,6 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { LinkButton } from '../../../../components/form/LinkButton';
@@ -70,14 +68,7 @@ const AttendeesAdminPage: NextPage<Props> = (props) => {
 
 						<div>
 							<Link href={`/events/${eid}/admin/attendees/create`} passHref>
-								<LinkButton className="mr-3">
-									<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
-								</LinkButton>
-							</Link>
-							<Link href={`/events/${eid}/attendees/`} passHref>
-								<LinkButton>
-									<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
-								</LinkButton>
+								<LinkButton padding="medium">Create</LinkButton>
 							</Link>
 						</div>
 					</FlexRowBetween>

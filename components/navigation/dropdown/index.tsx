@@ -36,7 +36,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 				sideOffset={10}
 			>
 				<Item className="outline-none">
-					<Link href="/events" passHref>
+					<Link href="/events/attending" passHref>
 						<DropdownLink>Events</DropdownLink>
 					</Link>
 				</Item>

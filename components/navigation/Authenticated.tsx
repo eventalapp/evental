@@ -44,7 +44,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 				</Link>
 
 				<div className="flex-row hidden space-x-8 font-medium sm:flex items-center">
-					<Link href="/events">
+					<Link href="/events/attending">
 						<a>Events</a>
 					</Link>
 					{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
