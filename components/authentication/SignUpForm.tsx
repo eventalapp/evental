@@ -53,7 +53,13 @@ export const SignUpForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="mt-8">
-				<Button type="submit" className="w-full" variant="primary" padding="medium">
+				<Button
+					type="submit"
+					className="w-full"
+					variant="primary"
+					padding="medium"
+					disabled={signUpMutation.isLoading}
+				>
 					{signUpMutation.isLoading ? <LoadingInner /> : 'Sign Up'}
 				</Button>
 			</div>

@@ -20,7 +20,7 @@ const Select = (props: Props) => {
 	return (
 		<SelectPrimitive.Root {...rest}>
 			<SelectPrimitive.Trigger asChild aria-label="Food">
-				<Button>
+				<Button className="w-full">
 					<SelectPrimitive.Value />
 					<SelectPrimitive.Icon className="ml-2">
 						<ChevronDownIcon />

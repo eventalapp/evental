@@ -69,7 +69,13 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button className="ml-4" type="submit" variant="primary" padding="medium">
+				<Button
+					className="ml-4"
+					type="submit"
+					variant="primary"
+					padding="medium"
+					disabled={editVenueMutation.isLoading}
+				>
 					{editVenueMutation.isLoading ? <LoadingInner /> : 'Edit Venue'}
 				</Button>
 			</div>

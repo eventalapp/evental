@@ -26,7 +26,13 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" className="ml-4" variant="primary" padding="medium">
+				<Button
+					type="submit"
+					className="ml-4"
+					variant="primary"
+					padding="medium"
+					disabled={createAttendeeMutation.isLoading}
+				>
 					{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
 				</Button>
 			</div>

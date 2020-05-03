@@ -42,7 +42,13 @@ export const RequestPasswordResetForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" className="ml-4" variant="primary" padding="medium">
+				<Button
+					type="submit"
+					className="ml-4"
+					variant="primary"
+					padding="medium"
+					disabled={requestPasswordResetMutation.isLoading}
+				>
 					{requestPasswordResetMutation.isLoading ? <LoadingInner /> : 'Request Password Reset'}
 				</Button>
 			</div>

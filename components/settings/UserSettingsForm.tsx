@@ -149,7 +149,11 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					variant="primary"
 					className="ml-4"
 					padding="medium"
-					disabled={isUserSlugCheckLoading || Boolean(slugWatcher !== user?.slug && userSlugCheck)}
+					disabled={
+						editUserMutation.isLoading ||
+						isUserSlugCheckLoading ||
+						Boolean(slugWatcher !== user?.slug && userSlugCheck)
+					}
 				>
 					{editUserMutation.isLoading ? <LoadingInner /> : 'Edit User'}
 				</Button>

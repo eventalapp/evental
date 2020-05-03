@@ -122,7 +122,13 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 						Cancel
 					</Button>
 				)}
-				<Button type="submit" className="ml-4" variant="primary" padding="large">
+				<Button
+					type="submit"
+					className="ml-4"
+					variant="primary"
+					padding="large"
+					disabled={createEventMutation.isLoading}
+				>
 					{createEventMutation.isLoading ? <LoadingInner /> : 'Create Event'}
 				</Button>
 			</div>

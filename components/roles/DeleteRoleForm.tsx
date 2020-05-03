@@ -49,7 +49,12 @@ export const DeleteRoleForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+				<Button
+					type="submit"
+					variant="danger"
+					className="ml-4"
+					disabled={!canSubmit || deleteRoleMutation.isLoading}
+				>
 					{deleteRoleMutation.isLoading ? <LoadingInner /> : 'Delete Role'}
 				</Button>
 			</div>

@@ -42,29 +42,31 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 			})}
 		>
 			<div className="flex flex-col w-full mt-5">
-				<div className="mb-5">
-					<Label htmlFor="name">Role Name *</Label>
-					<Input placeholder="Role name" {...register('name')} />
-					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
-				</div>
+				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5 mt-3">
+					<div className="mb-5">
+						<Label htmlFor="name">Role Name *</Label>
+						<Input placeholder="Role name" {...register('name')} />
+						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
+					</div>
 
-				<div>
-					<Label htmlFor="defaultRole">Default Role</Label>
-					<Controller
-						control={control}
-						name="defaultRole"
-						render={({ field }) => (
-							<Switch
-								checked={field.value}
-								onCheckedChange={(checked) => {
-									field.onChange(checked);
-								}}
-							/>
+					<div>
+						<Label htmlFor="defaultRole">Default Role</Label>
+						<Controller
+							control={control}
+							name="defaultRole"
+							render={({ field }) => (
+								<Switch
+									checked={field.value}
+									onCheckedChange={(checked) => {
+										field.onChange(checked);
+									}}
+								/>
+							)}
+						/>
+						{errors.defaultRole?.message && (
+							<ErrorMessage>{errors.defaultRole?.message}</ErrorMessage>
 						)}
-					/>
-					{errors.defaultRole?.message && (
-						<ErrorMessage>{errors.defaultRole?.message}</ErrorMessage>
-					)}
+					</div>
 				</div>
 			</div>
 
@@ -72,7 +74,13 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" className="ml-4" variant="primary" padding="medium">
+				<Button
+					type="submit"
+					className="ml-4"
+					variant="primary"
+					padding="medium"
+					disabled={editRoleMutation.isLoading}
+				>
 					{editRoleMutation.isLoading ? <LoadingInner /> : 'Edit Role'}
 				</Button>
 			</div>

@@ -51,7 +51,12 @@ export const DeleteEventForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+				<Button
+					type="submit"
+					variant="danger"
+					className="ml-4"
+					disabled={!canSubmit || deleteEventMutation.isLoading}
+				>
 					{deleteEventMutation.isLoading ? <LoadingInner /> : 'Delete Event'}
 				</Button>
 			</div>

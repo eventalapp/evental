@@ -207,7 +207,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					padding="medium"
 					disabled={
-						isEventSlugCheckLoading || Boolean(slugWatcher !== event?.slug && eventSlugCheck)
+						editEventMutation.isLoading ||
+						isEventSlugCheckLoading ||
+						Boolean(slugWatcher !== event?.slug && eventSlugCheck)
 					}
 				>
 					{editEventMutation.isLoading ? <LoadingInner /> : 'Edit Event'}

@@ -174,7 +174,13 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" variant="primary" className="ml-4" padding="medium">
+				<Button
+					type="submit"
+					variant="primary"
+					className="ml-4"
+					padding="medium"
+					disabled={editSessionMutation.isLoading}
+				>
 					{editSessionMutation.isLoading ? <LoadingInner /> : 'Edit Session'}
 				</Button>
 			</div>

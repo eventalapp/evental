@@ -62,7 +62,13 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" className="ml-4" variant="primary" padding="medium">
+				<Button
+					type="submit"
+					className="ml-4"
+					variant="primary"
+					padding="medium"
+					disabled={createVenueMutation.isLoading}
+				>
 					{createVenueMutation.isLoading ? <LoadingInner /> : 'Create Venue'}
 				</Button>
 			</div>
