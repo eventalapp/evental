@@ -72,7 +72,7 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-semibold">
+				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-medium">
 					You are about to delete a role ("{role.name}")
 				</p>
 

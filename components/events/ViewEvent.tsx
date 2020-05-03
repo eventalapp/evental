@@ -41,7 +41,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		<div>
 			{isOrganizer && (
 				<Link href={`/events/${eid}/admin`}>
-					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-semibold">
+					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-medium">
 						You are an organizer for this event, click here to manage this event
 					</a>
 				</Link>
@@ -49,7 +49,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 
 			{!Boolean(attendee) && (
 				<Link href={`/events/${eid}/register`}>
-					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-semibold">
+					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-medium">
 						Are you attending this event? Register here.
 					</a>
 				</Link>
