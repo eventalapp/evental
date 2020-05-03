@@ -59,7 +59,7 @@ const EventNavigationMenu = (props: Props) => {
 
 							<NavigationMenuPrimitive.Content
 								className={cx(
-									'absolute w-auto top-0 left-0 rounded-lg bg-gray-75',
+									'absolute w-auto top-0 left-0 rounded-lg bg-white border border-gray-200',
 									'radix-motion-from-start:animate-enter-from-left',
 									'radix-motion-from-end:animate-enter-from-right',
 									'radix-motion-to-start:animate-exit-to-left',
@@ -97,7 +97,7 @@ const EventNavigationMenu = (props: Props) => {
 								'transition-[width_transform] duration-[250ms] ease-[ease]'
 							)}
 						>
-							<div className="top-1 relative bg-gray-75 dark:bg-gray-800 w-2 h-2 rotate-45" />
+							<div className="top-1 relative bg-gray-200 dark:bg-gray-800 w-2 h-2 rotate-45" />
 						</NavigationMenuPrimitive.Indicator>
 					</NavigationMenuPrimitive.List>
 
