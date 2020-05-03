@@ -20,7 +20,7 @@ export const variants = {
 	'no-bg':
 		'text-gray-600 hover:text-gray-500 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center',
 	'inversePrimary':
-		'bg-white hover:bg-gray-100 border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center cursor-pointer'
+		'bg-white hover:bg-gray-75 border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center cursor-pointer'
 };
 
 export const paddings = {

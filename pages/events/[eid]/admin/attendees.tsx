@@ -19,8 +19,8 @@ import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { EventSettingsNavigation } from '../../../../components/settings/EventSettingsNavigation';
 import { AttendeeList } from '../../../../components/attendees/AttendeeList';
+import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
 
 type Props = {
 	initialAttendees: AttendeeWithUser[] | undefined;
@@ -57,7 +57,7 @@ const AttendeesAdminPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<EventSettingsNavigation eid={String(eid)} />
+				<EventNavigationMenu eid={String(eid)} />
 
 				<div>
 					<FlexRowBetween>

@@ -11,7 +11,7 @@ const NavigationMenu = (props: Props) => {
 				<NavigationMenuPrimitive.Item>
 					<NavigationMenuPrimitive.Trigger
 						className={cx(
-							'px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900',
+							'px-3 py-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
 							'text-sm font-medium',
 							'text-gray-700 dark:text-gray-100',
 							'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
@@ -31,9 +31,9 @@ const NavigationMenu = (props: Props) => {
 					>
 						<div className="w-[21rem] lg:w-[23rem] p-3">
 							<div className="grid grid-cols-6 gap-4">
-								<div className="col-span-2 w-full bg-gray-100 dark:bg-gray-900 p-4 rounded-md"></div>
+								<div className="col-span-2 w-full bg-gray-75 dark:bg-gray-900 p-4 rounded-md"></div>
 
-								<div className="col-span-4 w-full flex flex-col space-y-3 bg-gray-100 dark:bg-gray-900 p-4 rounded-md">
+								<div className="col-span-4 w-full flex flex-col space-y-3 bg-gray-75 dark:bg-gray-900 p-4 rounded-md">
 									<div className="w-full bg-white dark:bg-gray-700 h-12 rounded-md"></div>
 									<div className="w-full bg-white dark:bg-gray-700 h-12 rounded-md"></div>
 									<div className="w-full bg-white dark:bg-gray-700 h-12 rounded-md"></div>
@@ -47,8 +47,8 @@ const NavigationMenu = (props: Props) => {
 				<NavigationMenuPrimitive.Item>
 					<NavigationMenuPrimitive.Trigger
 						className={cx(
-							'px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900',
-							'text-sm font-medium text-gray-700 dark:text-gray-100',
+							'px-3 py-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
+							'text-sm font-medium text-gray-700 dark:text-gray-100 font-medium',
 							'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 						)}
 					>
@@ -68,7 +68,7 @@ const NavigationMenu = (props: Props) => {
 							<div className="w-full flex flex-col space-y-2">
 								<NavigationMenuPrimitive.Link
 									className={cx(
-										'w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md',
+										'w-full px-4 py-3 hover:bg-gray-75 dark:hover:bg-gray-900 rounded-md',
 										'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 									)}
 									href="https://tailwindcss.com"
@@ -84,7 +84,7 @@ const NavigationMenu = (props: Props) => {
 
 								<NavigationMenuPrimitive.Link
 									className={cx(
-										'w-full px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-900 rounded-md',
+										'w-full px-4 py-3 hover:bg-gray-75 dark:hover:bg-gray-900 rounded-md',
 										'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 									)}
 									href="https://www.radix-ui.com"
@@ -105,8 +105,8 @@ const NavigationMenu = (props: Props) => {
 
 				<NavigationMenuPrimitive.Item
 					className={cx(
-						'px-3 py-2 text-sm rounded-md hover:bg-gray-100 dark:hover:bg-gray-900',
-						'text-sm font-medium text-gray-700 dark:text-gray-100'
+						'px-3 py-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
+						'text-sm font-medium text-gray-700 dark:text-gray-100 font-medium'
 					)}
 				>
 					<NavigationMenuPrimitive.Link href="https://github.com/ecklf/tailwindcss-radix">

@@ -14,7 +14,7 @@ const Checkbox = (props: Props) => {
 				defaultChecked
 				className={cx(
 					'flex h-5 w-5 items-center justify-center rounded',
-					'radix-state-checked:bg-primary-600 radix-state-unchecked:bg-gray-100 dark:radix-state-unchecked:bg-gray-900',
+					'radix-state-checked:bg-primary-600 radix-state-unchecked:bg-gray-75 dark:radix-state-unchecked:bg-gray-900',
 					'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 				)}
 			>

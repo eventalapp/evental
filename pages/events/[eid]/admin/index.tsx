@@ -20,7 +20,7 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { EventSettingsNavigation } from '../../../../components/settings/EventSettingsNavigation';
+import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -60,7 +60,7 @@ const EditEventPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<EventSettingsNavigation eid={String(eid)} />
+				<EventNavigationMenu eid={String(eid)} />
 
 				<h1 className="text-3xl font-bold">Event Settings</h1>
 

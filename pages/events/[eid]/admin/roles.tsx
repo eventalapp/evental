@@ -21,7 +21,7 @@ import { RoleList } from '../../../../components/roles/RoleList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { EventSettingsNavigation } from '../../../../components/settings/EventSettingsNavigation';
+import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
 
 type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -58,7 +58,7 @@ const RolesAdminPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<EventSettingsNavigation eid={String(eid)} />
+				<EventNavigationMenu eid={String(eid)} />
 
 				<div>
 					<FlexRowBetween>
