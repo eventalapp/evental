@@ -8,6 +8,7 @@ import { ChangePasswordPayload, ChangePasswordSchema } from '../../utils/schemas
 import { ErrorMessage } from '../form/ErrorMessage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UsePasswordResetData } from '../../hooks/mutations/usePasswordReset';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = { code: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -48,7 +49,7 @@ export const PasswordResetForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" className="ml-4" variant="primary" padding="medium">
-					Change Password
+					{passwordResetMutation.isLoading ? <LoadingInner /> : 'Change Password'}
 				</Button>
 			</div>
 		</form>

@@ -10,6 +10,7 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { DatePicker } from '../form/DatePicker';
 import { useRouter } from 'next/router';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = { canCancel?: boolean } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -122,7 +123,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					</Button>
 				)}
 				<Button type="submit" className="ml-4" variant="primary" padding="large">
-					Create Event
+					{createEventMutation.isLoading ? <LoadingInner /> : 'Create Event'}
 				</Button>
 			</div>
 		</form>

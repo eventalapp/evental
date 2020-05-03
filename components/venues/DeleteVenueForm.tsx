@@ -6,6 +6,7 @@ import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutatation';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenueQueryData &
@@ -51,7 +52,7 @@ export const DeleteVenueForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
-					Delete Venue
+					{deleteVenueMutation.isLoading ? <LoadingInner /> : 'Delete Venue'}
 				</Button>
 			</div>
 		</form>

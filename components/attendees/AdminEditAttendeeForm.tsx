@@ -13,6 +13,7 @@ import { EventPermissionRole } from '@prisma/client';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import { useRouter } from 'next/router';
 import { ErrorMessage } from '../form/ErrorMessage';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -89,7 +90,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					disabled={imageUploadMutation.isLoading}
 				>
-					Edit
+					{adminEditAttendeeMutation.isLoading ? <LoadingInner /> : 'Edit'}
 				</Button>
 			</div>
 		</form>

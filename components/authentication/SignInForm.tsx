@@ -8,6 +8,7 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseSignInMutationData } from '../../hooks/mutations/useSignInMutation';
 import Link from 'next/link';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseSignInMutationData;
@@ -55,7 +56,7 @@ export const SignInForm: React.FC<Props> = (props) => {
 
 			<div className="flex flex-row justify-center mt-5">
 				<Button type="submit" className="w-full" variant="primary" padding="medium">
-					Sign In
+					{signInMutation.isLoading ? <LoadingInner /> : 'Sign In'}
 				</Button>
 			</div>
 			<span className="mt-3 block">

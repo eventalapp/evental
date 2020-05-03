@@ -6,6 +6,7 @@ import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseDeleteEventMutationData } from '../../hooks/mutations/useDeleteEventMutation';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
@@ -51,7 +52,7 @@ export const DeleteEventForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
-					Delete Event
+					{deleteEventMutation.isLoading ? <LoadingInner /> : 'Delete Event'}
 				</Button>
 			</div>
 		</form>

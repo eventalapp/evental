@@ -1,7 +1,10 @@
+import { LoadingSpinner } from './LoadingSpinner';
+
 export const Loading = () => {
 	return (
-		<>
-			<p>Loading...</p>
-		</>
+		<p>
+			<LoadingSpinner />
+			Loading...
+		</p>
 	);
 };

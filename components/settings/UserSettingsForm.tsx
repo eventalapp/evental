@@ -7,20 +7,19 @@ import { Textarea } from '../form/Textarea';
 import { UseUserData } from '../../hooks/queries/useUser';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { UseEditUserMutationData } from '../../hooks/mutations/useEditUserMutation';
-import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import { Label } from '../form/Label';
 import { Input } from '../form/Input';
 import { Button } from '../form/Button';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEditUserMutationData &
-	UseImageUploadMutationData &
 	UseUserData;
 
 export const UserSettingsForm: React.FC<Props> = (props) => {
-	const { imageUploadMutation, user, editUserMutation, imageUploadResponse } = props;
+	const { user, editUserMutation } = props;
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
 
 	const {
@@ -59,12 +58,6 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
-
-	useEffect(() => {
-		if (imageUploadResponse) {
-			setValue('image', imageUploadResponse.pathName);
-		}
-	}, [imageUploadResponse]);
 
 	useEffect(() => {
 		setValue('image', files[0]);
@@ -156,13 +149,9 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					variant="primary"
 					className="ml-4"
 					padding="medium"
-					disabled={
-						imageUploadMutation.isLoading ||
-						isUserSlugCheckLoading ||
-						Boolean(slugWatcher !== user?.slug && userSlugCheck)
-					}
+					disabled={isUserSlugCheckLoading || Boolean(slugWatcher !== user?.slug && userSlugCheck)}
 				>
-					Edit User
+					{editUserMutation.isLoading ? <LoadingInner /> : 'Edit User'}
 				</Button>
 			</div>
 		</form>
