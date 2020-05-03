@@ -1,8 +1,8 @@
-import { prisma } from '../../../../../prisma/client';
-import Prisma from '@prisma/client';
-import { getEvent } from '../index';
-import { api } from '../../../../../utils/api';
+import { prisma } from '../../../../../../prisma/client';
+import { getEvent } from '../../index';
+import { api } from '../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { SessionWithVenue } from '../index';
 
 export default api({
 	async GET({ req }) {
@@ -18,7 +18,7 @@ export default api({
 	}
 });
 
-export const getSession = async (eid: string, sid: string): Promise<Prisma.EventSession | null> => {
+export const getSession = async (eid: string, sid: string): Promise<SessionWithVenue | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
@@ -29,6 +29,9 @@ export const getSession = async (eid: string, sid: string): Promise<Prisma.Event
 		where: {
 			eventId: event.id,
 			OR: [{ id: sid }, { slug: sid }]
+		},
+		include: {
+			venue: true
 		}
 	});
 

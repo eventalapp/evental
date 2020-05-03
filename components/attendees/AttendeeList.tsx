@@ -2,12 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { UseAttendeesQueryData } from '../../hooks/queries/useAttendeesQuery';
 import { NotFound } from '../error/NotFound';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
 type Props = {
 	eid: string;
-} & UseAttendeesQueryData;
+	attendees: AttendeeWithUser[];
+};
 
 export const AttendeeList: React.FC<Props> = (props) => {
 	const { eid, attendees } = props;

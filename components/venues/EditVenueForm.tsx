@@ -30,7 +30,8 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 	} = useForm<EditVenuePayload>({
 		defaultValues: {
 			name: venue?.name ?? undefined,
-			description: venue?.description ?? undefined
+			description: venue?.description ?? undefined,
+			address: venue?.address ?? undefined
 		},
 		resolver: zodResolver(EditVenueSchema)
 	});
@@ -56,7 +57,7 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 					{errors.address?.message && <ErrorMessage>{errors.address?.message}</ErrorMessage>}
 				</div>
 
-				<div className="grid grid-cols-1 mb-5 gap-5">
+				<div className="mb-5">
 					<Label htmlFor="description">Description</Label>
 					<Textarea rows={5} placeholder="Venue description" {...register('description')} />
 					{errors.description?.message && (

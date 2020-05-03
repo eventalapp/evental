@@ -10,21 +10,20 @@ import { ssrGetUser } from '../../../../utils/api';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import Prisma from '@prisma/client';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { getSessions } from '../../../api/events/[eid]/sessions';
+import { getSessions, SessionWithVenue } from '../../../api/events/[eid]/sessions';
 import { Navigation } from '../../../../components/navigation';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { EventSettingsNavigation } from '../../../../components/settings/EventSettingsNavigation';
-import { SessionList } from '../../../../components/sessions/SessionList';
+import { AdminSessionList } from '../../../../components/sessions/AdminSessionList';
 
 type Props = {
-	initialSessions: Prisma.EventSession[] | undefined;
+	initialSessions: SessionWithVenue[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialOrganizer: boolean;
 };
@@ -74,7 +73,7 @@ const SessionsAdminPage: NextPage<Props> = (props) => {
 						</div>
 					</FlexRowBetween>
 
-					<SessionList
+					<AdminSessionList
 						eid={String(eid)}
 						sessions={sessions}
 						isSessionsLoading={isSessionsLoading}

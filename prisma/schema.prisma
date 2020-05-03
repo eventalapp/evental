@@ -141,7 +141,7 @@ model EventSession {
   event Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
   venue EventVenue? @relation(fields: [venueId], references: [id], onDelete: Cascade)
 
-  sessionAttendee EventSessionAttendee[]
+  attendee EventSessionAttendee[]
 
   @@unique([eventId, slug])
   @@map("event_session")

@@ -31,7 +31,6 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		isOrganizerLoading,
 		isSessionsLoading,
 		sessionsError,
-
 		attendee
 	} = props;
 
