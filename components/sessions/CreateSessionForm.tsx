@@ -42,7 +42,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		formState: { errors }
 	} = useForm<CreateSessionPayload>({
 		defaultValues: {
-			venueId: venues && venues[0]?.id,
+			venueId: venues?.[0].id ?? 'none',
 			startDate: roundToNearestMinutes(new Date(), { nearestTo: NEAREST_MINUTE }),
 			endDate: roundToNearestMinutes(new Date(new Date().getTime() + 1000 * 60 * 60 * 4), {
 				nearestTo: NEAREST_MINUTE
@@ -87,37 +87,30 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					<div>
 						<Label htmlFor="venueId">Venue *</Label>
 
-						{venues && venues.length === 0 ? (
-							<p className="mt-2">
-								No venues found,{' '}
-								<Link href={`/events/${eid}/admin/venues/create`} passHref>
-									<a className="text-primary font-bold">create a venue</a>
-								</Link>
-								.
-							</p>
-						) : (
-							<>
-								<Controller
-									control={control}
-									name="venueId"
-									render={({ field }) => (
-										<Select
-											options={Object.values(venues).map((venue) => ({
-												label: venue.name,
-												value: venue.id
-											}))}
-											value={field.value}
-											onValueChange={(value) => {
-												setValue('venueId', value);
-											}}
-										/>
-									)}
+						<Controller
+							control={control}
+							name="venueId"
+							render={({ field }) => (
+								<Select
+									options={[
+										{ label: 'No Venue', value: 'none' },
+										...Object.values(venues).map((venue) => ({
+											label: venue.name,
+											value: venue.id
+										}))
+									]}
+									value={field.value as string}
+									onValueChange={(value) => {
+										setValue('venueId', value);
+									}}
 								/>
-								<Link href={`/events/${eid}/admin/venues/create`}>
-									<a className="text-gray-600 text-sm mt-1">Dont see your venue? Create a Venue</a>
-								</Link>
-							</>
-						)}
+							)}
+						/>
+						<Link href={`/events/${eid}/admin/venues/create`}>
+							<a className="text-gray-600 text-sm mt-1">Dont see your venue? Create a Venue</a>
+						</Link>
+
+						{errors.venueId?.message && <ErrorMessage>{errors.venueId?.message}</ErrorMessage>}
 					</div>
 				</div>
 

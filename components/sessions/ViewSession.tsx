@@ -40,7 +40,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				<div>
 					{!sessionAttendeeQuery.data && (
 						<Link href={`/events/${eid}/sessions/${sid}/register`}>
-							<LinkButton>Attend This Event</LinkButton>
+							<LinkButton>Attend This Session</LinkButton>
 						</Link>
 					)}
 					{!isOrganizerLoading && isOrganizer && (
