@@ -1,19 +1,20 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
 import { Button } from '../form/Button';
 import { Label } from '../form/Label';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import { UseEditAttendeeMutationData } from '../../hooks/mutations/useAdminEditAttendeeMutation';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
-import { Select } from '../form/Select';
 import Link from 'next/link';
 import { EventPermissionRole } from '@prisma/client';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import { useRouter } from 'next/router';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { LoadingInner } from '../error/LoadingInner';
+import Select from '../radix/components/Select';
+import { capitalizeFirstLetter } from '../../utils/string';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -30,6 +31,8 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 	const {
 		register,
 		handleSubmit,
+		control,
+		setValue,
 		formState: { errors }
 	} = useForm<AdminEditAttendeePayload>({
 		defaultValues: {
@@ -48,14 +51,22 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5 mt-3">
 				<div>
 					<Label htmlFor="eventRoleId">Role *</Label>
-					<Select {...register('eventRoleId')}>
-						{roles &&
-							roles.map((role) => (
-								<option key={role.id} value={role.id}>
-									{role.name}
-								</option>
-							))}
-					</Select>
+					{roles && (
+						<Controller
+							control={control}
+							name="eventRoleId"
+							render={({ field }) => (
+								<Select
+									options={roles.map((role) => ({ label: role.name, value: role.id }))}
+									value={field.value}
+									onValueChange={(value) => {
+										setValue('eventRoleId', value);
+									}}
+								/>
+							)}
+						/>
+					)}
+
 					{errors.eventRoleId?.message && (
 						<ErrorMessage>{errors.eventRoleId?.message}</ErrorMessage>
 					)}
@@ -65,14 +76,26 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 				</div>
 				<div>
 					<Label htmlFor="permissionRole">Permission Role *</Label>
-					<Select {...register('permissionRole')}>
-						{EventPermissionRole &&
-							Object.values(EventPermissionRole).map((role) => (
-								<option key={role} value={role}>
-									{role}
-								</option>
-							))}
-					</Select>
+
+					{EventPermissionRole && (
+						<Controller
+							control={control}
+							name="permissionRole"
+							render={({ field }) => (
+								<Select
+									options={Object.values(EventPermissionRole).map((role) => ({
+										label: capitalizeFirstLetter(role.toLowerCase()),
+										value: role
+									}))}
+									value={field.value}
+									onValueChange={(value) => {
+										setValue('permissionRole', value);
+									}}
+								/>
+							)}
+						/>
+					)}
+
 					{errors.permissionRole?.message && (
 						<ErrorMessage>{errors.permissionRole?.message}</ErrorMessage>
 					)}

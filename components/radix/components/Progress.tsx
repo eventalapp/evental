@@ -29,7 +29,7 @@ const Progress = (props: Props) => {
 		>
 			<ProgressPrimitive.Indicator
 				style={{ width: `${progress}%` }}
-				className="h-full bg-purple-500 duration-300 ease-in-out dark:bg-white"
+				className="h-full bg-primary-500 duration-300 ease-in-out dark:bg-white"
 			/>
 		</ProgressPrimitive.Root>
 	);
