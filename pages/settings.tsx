@@ -34,13 +34,13 @@ const SettingsPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper>
 			<Head>
-				<title>Settings</title>
+				<title>User Settings</title>
 			</Head>
 
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<h1 className="text-3xl font-bold">Settings Page</h1>
+				<h1 className="text-3xl font-bold">User Settings</h1>
 
 				<UserSettingsForm
 					user={user}
