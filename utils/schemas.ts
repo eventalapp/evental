@@ -109,7 +109,7 @@ export const EditEventSchema = z.object({
 	slug: slugValidator,
 	name: nameValidator,
 	location: locationValidator,
-	image: imageValidator,
+	image: imageFileValidator.optional(),
 	startDate: dateValidator,
 	endDate: dateValidator,
 	description: descriptionValidator.optional()

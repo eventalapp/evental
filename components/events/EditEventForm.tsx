@@ -1,4 +1,4 @@
-import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
@@ -6,27 +6,27 @@ import { Textarea } from '../form/Textarea';
 import { useEventQuery, UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { Controller, useForm } from 'react-hook-form';
-import { EditEventPayload, EditEventSchema, ImageUploadSchema } from '../../utils/schemas';
+import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { slugify } from '../../utils/slugify';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { DatePicker } from '../form/DatePicker';
-import Image from 'next/image';
-import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
+import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
 
 type Props = {
 	eid: string;
+	canCancel?: boolean;
 } & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
-	UseEditEventMutationData &
-	UseImageUploadMutationData;
+	UseEditEventMutationData;
 
 export const EditEventForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { editEventMutation, event, imageUploadMutation, imageUploadResponse } = props;
+	const { editEventMutation, event, canCancel = false } = props;
+	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
 	const {
 		register,
 		handleSubmit,
@@ -39,7 +39,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 		defaultValues: {
 			name: event?.name ?? undefined,
 			description: event?.description ?? undefined,
-			image: event?.image ?? '/images/default-event.jpg',
+			image: event?.image,
 			location: event?.location ?? undefined,
 			slug: event?.slug ?? undefined,
 			endDate: new Date(String(event?.endDate)) ?? undefined,
@@ -50,7 +50,6 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
-	const imageWatcher = watch('image');
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
 
@@ -84,10 +83,8 @@ export const EditEventForm: React.FC<Props> = (props) => {
 	}, [slugWatcher]);
 
 	useEffect(() => {
-		if (imageUploadResponse) {
-			setValue('image', imageUploadResponse.pathName);
-		}
-	}, [imageUploadResponse]);
+		setValue('image', files[0]);
+	}, [files]);
 
 	if (!event) return null;
 
@@ -97,6 +94,19 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				editEventMutation.mutate(data);
 			})}
 		>
+			<div className="flex flex-col w-full mt-5 items-center justify-center">
+				<Label htmlFor="image" className="hidden">
+					Image
+				</Label>
+
+				<ImageUpload
+					files={files}
+					setFiles={setFiles}
+					placeholderImageUrl={`https://cdn.evental.app${event.image}`}
+				/>
+
+				{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
+			</div>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
@@ -174,7 +184,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="slug">Slug *</Label>
 						<div className="flex items-center">
-							<span className="mr-1 text-base">evental.app/events/</span>
+							<span className="mr-1 text-sm md:text-base">evental.app/events/</span>
 							<Input placeholder="event-slug" {...register('slug')} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
@@ -183,52 +193,21 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						)}
 					</div>
 				</div>
-
-				<div>
-					<p>Current image:</p>
-
-					<div className="h-16 w-16 relative">
-						<Image
-							alt={'Event image'}
-							src={String(
-								imageWatcher
-									? `https://cdn.evental.app${imageWatcher}`
-									: `https://cdn.evental.app/images/default-avatar.jpg`
-							)}
-							className="rounded-md"
-							layout="fill"
-						/>
-					</div>
-
-					<Label htmlFor="image">Image *</Label>
-					<Input
-						type="file"
-						accept="image/png, image/jpeg"
-						onChange={(e: ChangeEvent<HTMLInputElement>) => {
-							const files = e?.target?.files;
-
-							const filesParsed = ImageUploadSchema.parse({ image: files });
-
-							imageUploadMutation.mutate(filesParsed);
-						}}
-					/>
-					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
-				</div>
 			</div>
 
 			<div className="flex flex-row justify-end">
-				<Button type="button" variant="no-bg" onClick={router.back}>
-					Cancel
-				</Button>
+				{canCancel && (
+					<Button type="button" variant="no-bg" onClick={router.back}>
+						Cancel
+					</Button>
+				)}
 				<Button
 					type="submit"
 					variant="primary"
 					className="ml-4"
 					padding="medium"
 					disabled={
-						imageUploadMutation.isLoading ||
-						isEventSlugCheckLoading ||
-						Boolean(slugWatcher !== event?.slug && eventSlugCheck)
+						isEventSlugCheckLoading || Boolean(slugWatcher !== event?.slug && eventSlugCheck)
 					}
 				>
 					{editEventMutation.isLoading ? <LoadingInner /> : 'Edit Event'}

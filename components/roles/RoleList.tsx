@@ -23,13 +23,13 @@ export const RoleList: React.FC<Props> = (props) => {
 	return (
 		<div>
 			{roles.map((role) => (
-				<div key={role.id} className="py-2 border-t-2 border-gray-200">
+				<div key={role.id} className="py-2 border-t-2 border-gray-200 group">
 					<div className="flex flex-row justify-between items-center flex-wrap">
-						<span className="text-lg block">
+						<span className="text-lg block font-medium">
 							{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
-							<span className="text-gray-500">{role.defaultRole && '(Default)'}</span>
+							<span className="text-gray-500 font-normal">{role.defaultRole && '(Default)'}</span>
 						</span>
-						<div>
+						<div className="opacity-0 group-hover:opacity-100 transition-all">
 							<Link href={`/events/${eid}/roles/${role.slug}`} passHref>
 								<LinkButton variant="primary">View</LinkButton>
 							</Link>
