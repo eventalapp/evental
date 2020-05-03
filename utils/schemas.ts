@@ -48,10 +48,14 @@ const venueIdValidator = z.preprocess((val) => {
 	}
 	return val;
 }, z.string().max(100, 'Venue is too long').nullable());
-const eventTypes = [...Object.values(EventType)] as const;
-const eventTypeValidator = z.enum(eventTypes as [string, ...string[]]);
-const eventCategory = [...Object.values(EventCategory)] as const;
-const eventCategoryValidator = z.enum(eventCategory as [string, ...string[]]);
+
+const eventTypes = Object.values(EventType);
+const [firstEventTypes, ...restEventTypes] = eventTypes;
+const eventTypeValidator = z.enum([firstEventTypes, ...restEventTypes]);
+
+const eventCategory = Object.values(EventCategory);
+const [firstEventCategory, ...restEventCategory] = eventCategory;
+const eventCategoryValidator = z.enum([firstEventCategory, ...restEventCategory]);
 
 // Venues
 
