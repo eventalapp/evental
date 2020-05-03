@@ -38,6 +38,12 @@ const locationValidator = z.string().max(100, 'Location must be less than 70 cha
 const companyValidator = z.string().max(100, 'Company must be less than 100 characters');
 const positionValidator = z.string().max(100, 'Position must be less than 70 characters');
 const urlValidator = z.string().max(200, 'URL must be less than 200 characters');
+const venueIdValidator = z.preprocess((val) => {
+	if (val === 'none') {
+		return null;
+	}
+	return val;
+}, z.string().max(100, 'Venue is too long').nullable());
 
 // Venues
 
@@ -77,13 +83,7 @@ export type EditRolePayload = z.infer<typeof EditRoleSchema>;
 
 export const CreateSessionSchema = z.object({
 	name: nameValidator,
-	venueId: z.preprocess((val) => {
-		if (val === 'none') {
-			return null;
-		}
-		return val;
-	}, z.string().max(100, 'Venue is too long').nullable()),
-
+	venueId: venueIdValidator,
 	startDate: dateValidator,
 	endDate: dateValidator,
 	description: descriptionValidator.optional()
@@ -93,12 +93,7 @@ export type CreateSessionPayload = z.infer<typeof CreateSessionSchema>;
 
 export const EditSessionSchema = z.object({
 	name: nameValidator,
-	venueId: z.preprocess((val) => {
-		if (val === 'none') {
-			return null;
-		}
-		return val;
-	}, z.string().max(100, 'Venue is too long').nullable()),
+	venueId: venueIdValidator,
 	startDate: dateValidator,
 	endDate: dateValidator,
 	description: descriptionValidator.optional()
