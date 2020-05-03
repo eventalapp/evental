@@ -66,7 +66,7 @@ const EditRolePage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Edit Rid</title>
+				<title>Edit Role</title>
 			</Head>
 
 			<Navigation />

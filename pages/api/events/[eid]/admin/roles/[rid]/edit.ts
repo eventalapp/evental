@@ -3,6 +3,7 @@ import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EditRoleSchema } from '../../../../../../../utils/schemas';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { generateSlug } from '../../../../../../../utils/generateSlug';
 
 export default api({
 	async PUT({ ctx, req }) {
@@ -74,15 +75,27 @@ export default api({
 		} else if (!parsed.defaultRole) {
 			throw new NextkitError(
 				400,
-				'If you with to make another role the default. Please edit that role.'
+				'If you want to make another role the default. Please edit that role first.'
 			);
 		}
+
+		const slug = await generateSlug(parsed.name, async (val) => {
+			return !Boolean(
+				await prisma.eventRole.findFirst({
+					where: {
+						eventId: event.id,
+						slug: val
+					}
+				})
+			);
+		});
 
 		let editedRole = await prisma.eventRole.update({
 			where: {
 				id: role.id
 			},
 			data: {
+				slug: slug,
 				name: parsed.name,
 				defaultRole: parsed.defaultRole
 			}
