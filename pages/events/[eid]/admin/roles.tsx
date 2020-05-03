@@ -76,8 +76,6 @@ const RolesAdminPage: NextPage<Props> = (props) => {
 						roles={roles}
 						isRolesLoading={isRolesLoading}
 						rolesError={rolesError}
-						isOrganizer={isOrganizer}
-						isOrganizerLoading={isOrganizerLoading}
 					/>
 				</div>
 			</Column>

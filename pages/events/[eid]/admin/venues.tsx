@@ -76,8 +76,6 @@ const VenuesAdminPage: NextPage<Props> = (props) => {
 						venues={venues}
 						isVenuesLoading={isVenuesLoading}
 						venuesError={venuesError}
-						isOrganizer={isOrganizer}
-						isOrganizerLoading={isOrganizerLoading}
 					/>
 				</div>
 			</Column>

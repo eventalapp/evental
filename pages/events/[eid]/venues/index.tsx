@@ -75,8 +75,6 @@ const SessionsPage: NextPage<Props> = (props) => {
 				<VenueList
 					eid={String(eid)}
 					venues={venues}
-					isOrganizer={isOrganizer}
-					isOrganizerLoading={isOrganizerLoading}
 					isVenuesLoading={isVenuesLoading}
 					venuesError={venuesError}
 				/>

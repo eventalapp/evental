@@ -12,7 +12,7 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import Prisma from '@prisma/client';
 import { getEvent } from '../../api/events/[eid]';
 import { getIsOrganizer } from '../../api/events/[eid]/organizer';
-import { getSessions } from '../../api/events/[eid]/sessions';
+import { getSessions, SessionWithVenue } from '../../api/events/[eid]/sessions';
 import { getRoles } from '../../api/events/[eid]/roles';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import React from 'react';
@@ -26,7 +26,7 @@ import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
-	initialSessions: Prisma.EventSession[] | undefined;
+	initialSessions: SessionWithVenue[] | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
 	initialOrganizer: boolean;

@@ -68,8 +68,6 @@ const RolesPage: NextPage<Props> = (props) => {
 				<RoleList
 					eid={String(eid)}
 					roles={roles}
-					isOrganizerLoading={isOrganizerLoading}
-					isOrganizer={isOrganizer}
 					isRolesLoading={isRolesLoading}
 					rolesError={rolesError}
 				/>
