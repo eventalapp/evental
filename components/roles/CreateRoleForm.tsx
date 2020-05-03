@@ -9,7 +9,7 @@ import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingInner } from '../error/LoadingInner';
-import Switch from '../form/Switch';
+import Switch from '../radix/components/Switch';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

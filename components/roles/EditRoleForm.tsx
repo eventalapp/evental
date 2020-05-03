@@ -10,7 +10,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingInner } from '../error/LoadingInner';
-import Switch from '../form/Switch';
+import Switch from '../radix/components/Switch';
 
 type Props = { eid: string } & UseRoleAttendeesQueryData &
 	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
@@ -24,7 +24,6 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 		register,
 		handleSubmit,
 		control,
-		watch,
 		formState: { errors }
 	} = useForm<EditRolePayload>({
 		defaultValues: {
