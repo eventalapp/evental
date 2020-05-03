@@ -29,18 +29,14 @@ export default api({
 			throw new NextkitError(500, 'Image failed to upload.');
 		}
 
-		if (fileLocation) {
-			await prisma.user.update({
-				where: {
-					id: user.id
-				},
-				data: {
-					...body,
-					image: fileLocation
-				}
-			});
-		} else if (!fileLocation && buffer.length >= 1) {
-			throw new NextkitError(500, 'Image failed to upload.');
-		}
+		await prisma.user.update({
+			where: {
+				id: user.id
+			},
+			data: {
+				...body,
+				image: fileLocation
+			}
+		});
 	}
 });

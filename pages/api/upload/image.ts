@@ -10,7 +10,7 @@ export const config = {
 };
 
 export type ImageUploadResponse = {
-	pathName: string;
+	pathName?: string;
 };
 
 export default api({
@@ -25,14 +25,14 @@ export default api({
 
 		let fileLocation = await uploadAndProcessImage(buffer, mimeType);
 
-		if (fileLocation) {
-			const body: ImageUploadResponse = {
-				pathName: fileLocation
-			};
-
-			return body;
-		} else if (!fileLocation && buffer.length >= 1) {
+		if (!fileLocation && buffer.length >= 1) {
 			throw new NextkitError(500, 'Image failed to upload.');
 		}
+
+		const body: ImageUploadResponse = {
+			pathName: fileLocation
+		};
+
+		return body;
 	}
 });

@@ -5,7 +5,7 @@ import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { busboyParseForm } from '../../../../../utils/busboyParseForm';
 import { uploadAndProcessImage } from '../../../../../utils/uploadAndProcessImage';
-import { EventType } from '@prisma/client';
+import { EventCategory, EventType } from '@prisma/client';
 
 export const config = {
 	api: {
@@ -55,6 +55,7 @@ export default api({
 				startDate: body.startDate,
 				endDate: body.endDate,
 				image: fileLocation,
+				category: EventCategory[body.category as keyof typeof EventCategory] ?? EventCategory.EVENT,
 				slug: body.slug,
 				type: EventType[body.type as keyof typeof EventType] ?? EventType.HYBRID
 			},
