@@ -13,7 +13,7 @@ export const NoAccessPage = () => (
 
 		<Navigation />
 
-		<Column>
+		<Column variant="halfWidth" className="flex flex-col items-center justify-center">
 			<NoAccess />
 		</Column>
 	</PageWrapper>

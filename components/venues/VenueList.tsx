@@ -26,7 +26,7 @@ export const VenueList: React.FC<Props> = (props) => {
 					<div className="flex flex-row justify-between items-center flex-wrap pt-3">
 						<div className="pb-3">
 							<span className="text-lg block">{venue.name}</span>
-							<span className="text-md block">{venue.description}</span>
+							<span className="text-base block">{venue.description}</span>
 						</div>
 						<div className="pb-3">
 							<Link href={`/events/${eid}/venues/${venue.slug}`} passHref>

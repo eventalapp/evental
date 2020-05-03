@@ -1,236 +1,80 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Column from '../../../../components/layout/Column';
-import { LinkButton } from '../../../../components/form/LinkButton';
-import { Navigation } from '../../../../components/navigation';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
-import { VenueList } from '../../../../components/venues/VenueList';
-import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
-import { RoleList } from '../../../../components/roles/RoleList';
-import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
-import { SessionList } from '../../../../components/sessions/SessionList';
-import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
-import { AttendeeList } from '../../../../components/attendees/AttendeeList';
-import { buildTitle } from '../../../../utils/buildTitle';
-import { faChevronRight, faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import React from 'react';
-import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
-import PageWrapper from '../../../../components/layout/PageWrapper';
+
+import Prisma from '@prisma/client';
 import { getEvent } from '../../../api/events/[eid]';
-import { getSessions } from '../../../api/events/[eid]/sessions';
-import { getRoles } from '../../../api/events/[eid]/roles';
-import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import type Prisma from '@prisma/client';
-import { getVenues } from '../../../api/events/[eid]/venues';
-import { getAttendees } from '../../../api/events/[eid]/attendees';
-import { NoAccessPage } from '../../../../components/error/NoAccessPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
+import { EditEventForm } from '../../../../components/events/EditEventForm';
+import { Navigation } from '../../../../components/navigation';
+import { useImageUploadMutation } from '../../../../hooks/mutations/useImageUploadMutation';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { LoadingPage } from '../../../../components/error/LoadingPage';
+import { PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { ssrGetUser } from '../../../../utils/api';
+import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
+import Column from '../../../../components/layout/Column';
+import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 import { useUser } from '../../../../hooks/queries/useUser';
-import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { LoadingPage } from '../../../../components/error/LoadingPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { EventSettingsNavigation } from '../../../../components/settings/EventSettingsNavigation';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
-	initialSessions: Prisma.EventSession[] | undefined;
-	initialAttendees: AttendeeWithUser[] | undefined;
-	initialRoles: Prisma.EventRole[] | undefined;
-	initialVenues: Prisma.EventVenue[] | undefined;
-	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 };
 
-const AdminPage: NextPage<Props> = (props) => {
+const EditEventPage: NextPage<Props> = (props) => {
+	const { initialEvent, initialUser } = props;
 	const router = useRouter();
-	const {
-		initialUser,
-		initialSessions,
-		initialAttendees,
-		initialVenues,
-		initialRoles,
-		initialOrganizer
-	} = props;
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
-	const { attendees, isAttendeesLoading, attendeesError } = useAttendeesQuery(
-		String(eid),
-		initialAttendees
-	);
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(
-		String(eid),
-		initialSessions
-	);
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
+	const { editEventMutation } = useEditEventMutation(String(eid));
+	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccessPage />;
+	if (!initialEvent || !event) {
+		return <NotFoundPage message="Event not found." />;
 	}
 
-	if (isSessionsLoading || isRolesLoading || isVenuesLoading || isAttendeesLoading) {
+	if (isEventLoading) {
 		return <LoadingPage />;
 	}
 
-	if (!initialSessions || !sessions) {
-		return <NotFoundPage message="No sessions not found." />;
-	}
-
-	if (!initialVenues || !venues) {
-		return <NotFoundPage message="No venues not found." />;
-	}
-
-	if (!initialRoles || !roles) {
-		return <NotFoundPage message="No roles not found." />;
+	if (eventError) {
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>{buildTitle('Edit Event')}</title>
+				<title>Event Settings</title>
 			</Head>
 
 			<Navigation />
 
 			<Column>
-				<FlexRowBetween>
-					<h1 className="text-3xl font-bold">Admin Page</h1>
+				<EventSettingsNavigation eid={String(eid)} />
 
-					<div>
-						<Link href={`/events/${eid}/admin/settings/`} passHref>
-							<LinkButton className="mr-3">
-								<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faCog} />
-								<span className="ml-2">Settings</span>
-							</LinkButton>
-						</Link>
+				<h1 className="text-3xl font-bold">Event Settings</h1>
 
-						<Link href={`/events/${eid}/admin/delete/`} passHref>
-							<LinkButton>
-								<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faTrash} />
-								<span className="ml-2">Delete</span>
-							</LinkButton>
-						</Link>
-					</div>
-				</FlexRowBetween>
-				<span>Manage your event</span>
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-10">
-					<div>
-						<FlexRowBetween>
-							<span className="text-3xl">Venues</span>
-
-							<div>
-								<Link href={`/events/${eid}/admin/venues/create`} passHref>
-									<LinkButton className="mr-3">
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
-									</LinkButton>
-								</Link>
-								<Link href={`/events/${eid}/venues/`} passHref>
-									<LinkButton>
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
-									</LinkButton>
-								</Link>
-							</div>
-						</FlexRowBetween>
-
-						<VenueList
-							eid={String(eid)}
-							venues={venues}
-							venuesError={venuesError}
-							isVenuesLoading={isVenuesLoading}
-							isOrganizer={isOrganizer}
-							isOrganizerLoading={isOrganizerLoading}
-						/>
-					</div>
-					<div>
-						<FlexRowBetween>
-							<span className="text-3xl">Roles</span>
-
-							<div>
-								<Link href={`/events/${eid}/admin/roles/create`} passHref>
-									<LinkButton className="mr-3">
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
-									</LinkButton>
-								</Link>
-								<Link href={`/events/${eid}/roles/`} passHref>
-									<LinkButton>
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
-									</LinkButton>
-								</Link>
-							</div>
-						</FlexRowBetween>
-
-						<RoleList
-							eid={String(eid)}
-							roles={roles}
-							isRolesLoading={isRolesLoading}
-							rolesError={rolesError}
-							isOrganizer={isOrganizer}
-							isOrganizerLoading={isOrganizerLoading}
-						/>
-					</div>
-				</div>
-				<div className="my-10">
-					<div>
-						<FlexRowBetween>
-							<span className="text-3xl">Attendees</span>
-
-							<div>
-								<Link href={`/events/${eid}/attendees/`} passHref>
-									<LinkButton>
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
-									</LinkButton>
-								</Link>
-							</div>
-						</FlexRowBetween>
-
-						<AttendeeList
-							eid={String(eid)}
-							attendees={attendees}
-							isAttendeesLoading={isAttendeesLoading}
-							attendeesError={attendeesError}
-						/>
-					</div>
-				</div>
-				<div className="my-10">
-					<div>
-						<FlexRowBetween>
-							<span className="text-3xl">Sessions</span>
-
-							<div>
-								<Link href={`/events/${eid}/admin/sessions/create`} passHref>
-									<LinkButton className="mr-3">
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
-									</LinkButton>
-								</Link>
-								<Link href={`/events/${eid}/sessions/`} passHref>
-									<LinkButton>
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
-									</LinkButton>
-								</Link>
-							</div>
-						</FlexRowBetween>
-
-						<SessionList
-							isOrganizer={isOrganizer}
-							isOrganizerLoading={isOrganizerLoading}
-							sessions={sessions}
-							eid={String(eid)}
-							sessionsError={sessionsError}
-							isSessionsLoading={isSessionsLoading}
-						/>
-					</div>
-				</div>
+				<EditEventForm
+					imageUploadMutation={imageUploadMutation}
+					imageUploadResponse={imageUploadResponse}
+					eid={String(eid)}
+					eventError={eventError}
+					editEventMutation={editEventMutation}
+					event={event}
+					isEventLoading={isEventLoading}
+				/>
 			</Column>
 		</PageWrapper>
 	);
@@ -241,23 +85,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
-	const initialSessions = (await getSessions(String(eid))) ?? undefined;
-	const initialAttendees = (await getAttendees(String(eid))) ?? undefined;
-	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialVenues = (await getVenues(String(eid))) ?? undefined;
 
 	return {
 		props: {
-			initialEvent,
 			initialUser,
-			initialOrganizer,
-			initialAttendees,
-			initialVenues,
-			initialRoles,
-			initialSessions
+			initialEvent
 		}
 	};
 };
 
-export default AdminPage;
+export default EditEventPage;

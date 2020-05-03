@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Column from '../components/layout/Column';
 import { Navigation } from '../components/navigation';
 import PageWrapper from '../components/layout/PageWrapper';
-import { UserSettingsForm } from '../components/UserSettingsForm';
+import { UserSettingsForm } from '../components/settings/UserSettingsForm';
 import { useUser } from '../hooks/queries/useUser';
 import { useImageUploadMutation } from '../hooks/mutations/useImageUploadMutation';
 import { useEditUserMutation } from '../hooks/mutations/useEditUserMutation';

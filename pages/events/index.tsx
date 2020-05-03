@@ -54,7 +54,7 @@ const EventsPage: NextPage<Props> = (props) => {
 
 					{user && <EventsNavigation />}
 
-					<span className="block text-md mt-5">
+					<span className="block text-base mt-5">
 						No events found.{' '}
 						<Link href="/events/create" passHref>
 							<a className="mt-3 text-primary font-bold">Create an Event</a>

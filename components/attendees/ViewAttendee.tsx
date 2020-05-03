@@ -88,7 +88,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				/>
 				<p>{attendee.user.position}</p>
 			</div>
-			<span className="text-md text-gray-700 block mt-3">{attendee.user.description}</span>
+			<span className="text-base text-gray-700 block mt-3">{attendee.user.description}</span>
 		</div>
 	);
 };

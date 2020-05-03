@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../components/layout/Column';
@@ -12,7 +11,6 @@ import React from 'react';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { getEvent } from '../../../../api/events/[eid]';
 import Prisma from '@prisma/client';
-
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';

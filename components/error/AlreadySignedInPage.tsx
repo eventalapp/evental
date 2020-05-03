@@ -14,13 +14,11 @@ export const AlreadySignedInPage = () => (
 
 		<Navigation />
 
-		<Column variant="halfWidth">
+		<Column variant="halfWidth" className="flex flex-col items-center justify-center">
 			<div className="flex flex-row justify-between mb-3">
 				<h1 className="text-3xl font-bold">Sign in</h1>
 			</div>
-
 			<p>You are already signed in.</p>
-
 			<Link href="/" passHref>
 				<LinkButton className="mt-3">Return home</LinkButton>
 			</Link>

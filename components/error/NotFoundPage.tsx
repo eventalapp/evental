@@ -18,7 +18,7 @@ export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> 
 
 			<Navigation />
 
-			<Column>
+			<Column variant="halfWidth" className="flex flex-col items-center justify-center">
 				<h1 className="text-3xl font-bold">Not Found</h1>
 				<NotFound message={message} />
 				{renderLink && (
