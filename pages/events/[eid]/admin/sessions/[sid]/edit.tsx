@@ -18,14 +18,12 @@ import type Prisma from '@prisma/client';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import Link from 'next/link';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 import { PasswordlessUser } from '../../../../../../utils/stripUserPassword';
-import { LinkButton } from '../../../../../../components/form/LinkButton';
 import { getSession } from '../../../../../api/events/[eid]/sessions/[sid]';
 import { SessionWithVenue } from '../../../../../api/events/[eid]/sessions';
 
@@ -73,28 +71,6 @@ const EditSessionPage: NextPage<Props> = (props) => {
 
 	if (venuesError || eventError) {
 		return <ViewErrorPage errors={[venuesError, eventError]} />;
-	}
-
-	if (venues && venues.length === 0) {
-		return (
-			<PageWrapper>
-				<Head>
-					<title>Not Found</title>
-				</Head>
-
-				<Navigation />
-
-				<Column>
-					<h1 className="text-3xl font-bold">Error</h1>
-
-					<p>Before creating a session, you must create a venue.</p>
-
-					<Link href={`/events/${eid}/admin/venues/create`} passHref>
-						<LinkButton>Create Venue</LinkButton>
-					</Link>
-				</Column>
-			</PageWrapper>
-		);
 	}
 
 	return (

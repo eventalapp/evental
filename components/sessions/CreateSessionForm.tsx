@@ -11,14 +11,14 @@ import { DatePicker } from '../form/DatePicker';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
-import { Select } from '../form/Select';
+
 import { zodResolver } from '@hookform/resolvers/zod';
-import { NotFound } from '../error/NotFound';
 import { roundToNearestMinutes } from 'date-fns';
 import { NEAREST_MINUTE } from '../../config';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
+import Select from '../radix/components/Select';
 
 type Props = {
 	eid: string;
@@ -68,10 +68,6 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		}
 	}, [endDateWatcher]);
 
-	if (venues && venues.length === 0) {
-		return <NotFound message="No venues found" />;
-	}
-
 	if (!venues || !event) return null;
 
 	return (
@@ -90,17 +86,38 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 
 					<div>
 						<Label htmlFor="venueId">Venue *</Label>
-						<Select defaultValue={venues && venues[0].id} {...register('venueId')}>
-							{venues.map((venue) => (
-								<option key={venue.id} value={venue.id}>
-									{venue.name}
-								</option>
-							))}
-						</Select>
 
-						<Link href={`/events/${eid}/admin/venues/create`}>
-							<a className="text-gray-600 text-sm mt-1">Dont see your venue? Create a Venue</a>
-						</Link>
+						{venues && venues.length === 0 ? (
+							<p className="mt-2">
+								No venues found,{' '}
+								<Link href={`/events/${eid}/admin/venues/create`} passHref>
+									<a className="text-primary font-bold">create a venue</a>
+								</Link>
+								.
+							</p>
+						) : (
+							<>
+								<Controller
+									control={control}
+									name="venueId"
+									render={({ field }) => (
+										<Select
+											options={Object.values(venues).map((venue) => ({
+												label: venue.name,
+												value: venue.id
+											}))}
+											value={field.value}
+											onValueChange={(value) => {
+												setValue('venueId', value);
+											}}
+										/>
+									)}
+								/>
+								<Link href={`/events/${eid}/admin/venues/create`}>
+									<a className="text-gray-600 text-sm mt-1">Dont see your venue? Create a Venue</a>
+								</Link>
+							</>
+						)}
 					</div>
 				</div>
 
