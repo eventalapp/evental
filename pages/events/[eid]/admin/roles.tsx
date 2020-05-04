@@ -16,8 +16,8 @@ import { RoleList } from '../../../../components/roles/RoleList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
-import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
 
 const RolesAdminPage: NextPage = () => {
 	const router = useRouter();
