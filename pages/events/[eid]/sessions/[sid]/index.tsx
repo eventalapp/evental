@@ -12,7 +12,7 @@ import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { ssrGetUser } from '../../../../../utils/api';
-import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../../utils/stripUserPassword';
 import { getSession } from '../../../../api/events/[eid]/sessions/[sid]';
 import { useSessionAttendeeQuery } from '../../../../../hooks/queries/useSessionAttendeeQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
@@ -24,16 +24,27 @@ import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { getEvent } from '../../../../api/events/[eid]';
 import { getRoles } from '../../../../api/events/[eid]/roles';
 import Prisma from '@prisma/client';
+import { getSessionAttendees } from '../../../../api/events/[eid]/sessions/[sid]/attendees';
+import { getSessionAttendee } from '../../../../api/events/[eid]/sessions/[sid]/attendees/[uid]';
 
 type Props = {
 	initialSession: SessionWithVenue | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
+	initialSessionAttendees: AttendeeWithUser[] | undefined;
+	initialSessionAttendee: AttendeeWithUser | undefined;
 };
 
 const ViewSessionPage: NextPage<Props> = (props) => {
-	const { initialSession, initialUser, initialRoles, initialEvent } = props;
+	const {
+		initialSession,
+		initialUser,
+		initialRoles,
+		initialEvent,
+		initialSessionAttendees,
+		initialSessionAttendee
+	} = props;
 	const router = useRouter();
 	const { sid, eid } = router.query;
 	const { user } = useUser(initialUser);
@@ -42,12 +53,17 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 		String(sid),
 		initialSession
 	);
-	const { sessionAttendeeQuery } = useSessionAttendeeQuery(
+	const { sessionAttendeeQuery: isAttendingSessionQuery } = useSessionAttendeeQuery(
 		String(eid),
 		String(sid),
-		String(user?.id)
+		String(user?.id),
+		initialSessionAttendee
 	);
-	const { sessionAttendeesQuery } = useSessionAttendeesQuery(String(eid), String(sid));
+	const { sessionAttendeesQuery } = useSessionAttendeesQuery(
+		String(eid),
+		String(sid),
+		initialSessionAttendees
+	);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 
@@ -78,7 +94,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 			<Column>
 				<ViewSession
 					attendees={sessionAttendeesQuery.data}
-					isAttending={Boolean(sessionAttendeeQuery.data)}
+					isAttending={Boolean(isAttendingSessionQuery.data)}
 					session={session}
 					eid={String(eid)}
 					sid={String(sid)}
@@ -95,13 +111,19 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialSession = (await getSession(String(eid), String(sid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
+	const initialSessionAttendees =
+		(await getSessionAttendees(String(eid), String(sid))) ?? undefined;
+	const initialSessionAttendee =
+		(await getSessionAttendee(String(eid), String(sid), String(initialUser?.id))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
 			initialSession,
 			initialEvent,
-			initialRoles
+			initialRoles,
+			initialSessionAttendees,
+			initialSessionAttendee
 		}
 	};
 };
