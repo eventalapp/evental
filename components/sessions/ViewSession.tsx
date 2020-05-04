@@ -74,9 +74,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 			<p>{session.description}</p>
 
-			<h3 className="text-2xl font-bold mt-3">Attendees</h3>
+			<h3 className="text-2xl font-medium my-3">Attendees ({attendees?.length || 0})</h3>
 
-			{attendees && <AttendeeList admin eid={eid} attendees={attendees} />}
+			{attendees && <AttendeeList admin={admin} eid={eid} attendees={attendees} />}
 		</div>
 	);
 };
