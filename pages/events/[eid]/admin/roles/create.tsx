@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../components/layout/Column';
 import { CreateRoleForm } from '../../../../../components/roles/CreateRoleForm';
-import { Navigation } from '../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useCreateRoleMutation } from '../../../../../hooks/mutations/useCreateRoleMutation';
 import React from 'react';
@@ -12,6 +11,10 @@ import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPa
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { useUser } from '../../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
+import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 
 const CreateRolePage: NextPage = () => {
 	const router = useRouter();
@@ -19,8 +22,10 @@ const CreateRolePage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { createRoleMutation } = useCreateRoleMutation(String(eid));
 	const { user, isUserLoading } = useUser();
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isOrganizerLoading || isUserLoading) {
+	if (isOrganizerLoading || isUserLoading || isEventLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -32,13 +37,17 @@ const CreateRolePage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Create Role</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Create Role Page</h1>

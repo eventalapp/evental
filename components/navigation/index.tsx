@@ -4,8 +4,15 @@ import { Unauthenticated } from './Unauthenticated';
 import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
 import { useUser } from '../../hooks/queries/useUser';
 
+type NavigationLink = {
+	link: string;
+	label: string;
+};
+
 type Props = {
 	className?: string;
+	links?: NavigationLink[];
+	logo?: string;
 };
 
 export const Navigation: React.FC<Props> = (props) => {

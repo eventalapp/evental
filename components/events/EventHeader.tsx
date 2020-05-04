@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import Prisma from '@prisma/client';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,6 +12,7 @@ import {
 import { format } from 'date-fns';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import Prisma from '@prisma/client';
 
 export const EventHeader: React.FC<{
 	event: Prisma.Event;
@@ -23,7 +23,7 @@ export const EventHeader: React.FC<{
 	const { event, isOrganizer, eid, isAttendee } = props;
 
 	return (
-		<div>
+		<div className="mb-5">
 			{isOrganizer && (
 				<Link href={`/events/${eid}/admin`}>
 					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-medium">

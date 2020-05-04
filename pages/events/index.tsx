@@ -14,8 +14,8 @@ import { useUpcomingEventsQuery } from '../../hooks/queries/useUpcomingEventsQue
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { useUser } from '../../hooks/queries/useUser';
-import { EventsNavigation } from '../../components/events/EventsNavigation';
 import Link from 'next/link';
+import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -52,7 +52,7 @@ const EventsPage: NextPage<Props> = (props) => {
 				<Column>
 					<h1 className="text-3xl font-bold mb-3">Upcoming Events</h1>
 
-					{user && <EventsNavigation />}
+					{user && <EventsPageNavigation />}
 
 					<span className="block text-base mt-5">
 						No events found.{' '}
@@ -76,7 +76,7 @@ const EventsPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold mb-3">Upcoming Events</h1>
 
-				{user && <EventsNavigation />}
+				{user && <EventsPageNavigation />}
 
 				<EventList events={upcomingEvents} />
 			</Column>

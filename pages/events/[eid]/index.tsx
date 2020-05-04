@@ -2,8 +2,6 @@ import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../components/layout/Column';
-import { ViewEvent } from '../../../components/events/ViewEvent';
-import { Navigation } from '../../../components/navigation';
 import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
@@ -23,6 +21,9 @@ import { useUser } from '../../../hooks/queries/useUser';
 import { AttendeeWithUser, PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getAttendee } from '../../api/events/[eid]/attendees/[uid]';
 import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
+import { EventNavigation } from '../../../components/events/navigation';
+import { EventHeader } from '../../../components/events/EventHeader';
+import { SessionList } from '../../../components/sessions/SessionList';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -45,29 +46,20 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(
 		String(eid),
 		initialSessions
 	);
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
-	const { attendee, attendeeError, isAttendeeLoading } = useAttendeeQuery(
-		String(eid),
-		String(user?.id),
-		initialIsAttendeeByUserId
-	);
-
-	if (rolesError || eventError || sessionsError) {
-		return <ViewErrorPage errors={[rolesError, eventError, sessionsError]} />;
-	}
-
-	if (!initialRoles || !initialSessions || !initialEvent || !event || !sessions || !roles) {
-		return <NotFoundPage message="Event not found." />;
-	}
+	const {
+		attendee: isAttendee,
+		attendeeError,
+		isAttendeeLoading
+	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 
 	if (
-		rolesError ||
 		isEventLoading ||
 		isOrganizerLoading ||
 		isSessionsLoading ||
@@ -77,31 +69,39 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
+	if (rolesError || eventError || sessionsError || attendeeError) {
+		return <ViewErrorPage errors={[rolesError, eventError, sessionsError, attendeeError]} />;
+	}
+
+	if (!event || !sessions || !roles) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>{event && event.name}</title>
 			</Head>
 
-			<Navigation />
+			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<ViewEvent
-					eid={String(eid)}
-					event={event}
-					eventError={eventError}
-					isEventLoading={isEventLoading}
-					isOrganizer={isOrganizer}
-					isOrganizerLoading={isOrganizerLoading}
+				{event && (
+					<EventHeader
+						eid={String(eid)}
+						event={event}
+						isOrganizer={isOrganizer}
+						isAttendee={isAttendee}
+					/>
+				)}
+
+				<h1 className="text-3xl font-bold leading-tight">Sessions</h1>
+
+				<SessionList
 					sessions={sessions}
-					isSessionsLoading={isSessionsLoading}
+					eid={String(eid)}
 					sessionsError={sessionsError}
-					roles={roles}
-					isRolesLoading={isRolesLoading}
-					rolesError={rolesError}
-					attendee={attendee}
-					isAttendeeLoading={isAttendeeLoading}
-					attendeeError={attendeeError}
+					isSessionsLoading={isSessionsLoading}
 				/>
 			</Column>
 		</PageWrapper>

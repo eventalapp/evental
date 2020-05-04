@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
-import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
@@ -16,6 +15,9 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 
 const EditRolePage: NextPage = () => {
 	const router = useRouter();
@@ -27,8 +29,16 @@ const EditRolePage: NextPage = () => {
 	);
 	const { editRoleMutation } = useEditRoleMutation(String(eid), String(rid));
 	const { user, isUserLoading } = useUser();
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isOrganizerLoading || isRoleAttendeesLoading || isUserLoading) {
+	if (
+		isOrganizerLoading ||
+		isRoleAttendeesLoading ||
+		isUserLoading ||
+		isEventLoading ||
+		isRolesLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -48,13 +58,17 @@ const EditRolePage: NextPage = () => {
 		return <ViewErrorPage errors={[roleAttendeesError]} />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Role</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Edit Role</h1>

@@ -34,7 +34,7 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 			onSuccess: (data) => {
 				toast.success('Event edited successfully');
 
-				void router.push(`/events/${data.slug}`).then(() => {
+				void router.push(`/events/${data.slug}/admin`).then(() => {
 					void queryClient.removeQueries(['event', eid]);
 					void queryClient.invalidateQueries(['upcoming-events']);
 				});

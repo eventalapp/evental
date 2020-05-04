@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
-import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { EditVenueForm } from '../../../../../../components/venues/EditVenueForm';
 import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditVenueMutation';
@@ -16,6 +15,9 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 
 const EditVenuePage: NextPage = () => {
 	const router = useRouter();
@@ -24,8 +26,10 @@ const EditVenuePage: NextPage = () => {
 	const { venue, venueError, isVenueLoading } = useVenueQuery(String(eid), String(vid));
 	const { editVenueMutation } = useEditVenueMutation(String(eid), String(vid));
 	const { user, isUserLoading } = useUser();
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isVenueLoading || isUserLoading || isOrganizerLoading) {
+	if (isVenueLoading || isUserLoading || isOrganizerLoading || isEventLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -45,13 +49,17 @@ const EditVenuePage: NextPage = () => {
 		return <ViewErrorPage errors={[venueError]} />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Venue</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
 				<h1 className="text-3xl font-bold">Edit Venue</h1>

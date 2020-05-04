@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useSessionQuery } from '../../../../../hooks/queries/useSessionQuery';
-import { Navigation } from '../../../../../components/navigation';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 import { ssrGetUser } from '../../../../../utils/api';
@@ -17,14 +16,23 @@ import { CreateSessionAttendeeForm } from '../../../../../components/sessions/Cr
 import { useCreateSessionAttendeeMutation } from '../../../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { getSession } from '../../../../api/events/[eid]/sessions/[sid]';
 import { SessionWithVenue } from '../../../../api/events/[eid]/sessions';
+import { EventNavigation } from '../../../../../components/events/navigation';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import Prisma from '@prisma/client';
+import { getEvent } from '../../../../api/events/[eid]';
+import { getRoles } from '../../../../api/events/[eid]/roles';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
 	initialSession: SessionWithVenue | undefined;
+	initialEvent: Prisma.Event | undefined;
+	initialRoles: Prisma.EventRole[] | undefined;
 };
 
 const SessionRegisterPage: NextPage<Props> = (props) => {
-	const { initialUser, initialSession } = props;
+	const { initialUser, initialSession, initialEvent, initialRoles } = props;
 	const router = useRouter();
 	const { eid, sid } = router.query;
 	const { session, isSessionLoading, sessionError } = useSessionQuery(
@@ -37,17 +45,27 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 		String(sid)
 	);
 	const { user } = useUser(initialUser);
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
+	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!initialSession || !session) {
+	if (!session) {
 		return <NotFoundPage message="Session not found." />;
 	}
 
-	if (isSessionLoading) {
+	if (isSessionLoading || isEventLoading || isRolesLoading) {
 		return <LoadingPage />;
+	}
+
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
+	if (sessionError || rolesError || eventError) {
+		return <ViewErrorPage errors={[sessionError, rolesError, eventError]} />;
 	}
 
 	return (
@@ -56,7 +74,7 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 				<title>Session signup</title>
 			</Head>
 
-			<Navigation />
+			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Register for {session.name}</h1>
@@ -81,11 +99,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialSession = (await getSession(String(eid), String(sid))) ?? undefined;
+	const initialEvent = (await getEvent(String(eid))) ?? undefined;
+	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
-			initialSession
+			initialSession,
+			initialEvent,
+			initialRoles
 		}
 	};
 };

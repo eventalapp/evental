@@ -10,14 +10,13 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { Navigation } from '../../../../components/navigation';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { RoleList } from '../../../../components/roles/RoleList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
 
 const RolesAdminPage: NextPage = () => {
 	const router = useRouter();
@@ -39,19 +38,19 @@ const RolesAdminPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Roles</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				{event && <EventSettingsHeader event={event} />}
-
-				<EventNavigationMenu eid={String(eid)} />
-
 				<div>
 					<FlexRowBetween>
 						<span className="text-3xl font-bold">Roles</span>

@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
-import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
@@ -17,6 +16,8 @@ import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage'
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { useImageUploadMutation } from '../../../../../../hooks/mutations/useImageUploadMutation';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 
 const EditAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -27,8 +28,15 @@ const EditAttendeePage: NextPage = () => {
 	const { adminEditAttendeeMutation } = useAdminEditAttendeeMutation(String(eid), String(uid));
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user, isUserLoading } = useUser();
+	const { event, isEventLoading } = useEventQuery(String(eid));
 
-	if (isOrganizerLoading || isAttendeeLoading || isRolesLoading || isUserLoading) {
+	if (
+		isOrganizerLoading ||
+		isEventLoading ||
+		isAttendeeLoading ||
+		isRolesLoading ||
+		isUserLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -52,13 +60,17 @@ const EditAttendeePage: NextPage = () => {
 		return <ViewErrorPage errors={[attendeeError, rolesError]} />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Attendee</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Edit Attendee</h1>

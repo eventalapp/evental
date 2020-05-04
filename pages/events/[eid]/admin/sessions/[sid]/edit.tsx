@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { EditSessionForm } from '../../../../../../components/sessions/EditSessionForm';
-import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -17,6 +16,8 @@ import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -27,8 +28,9 @@ const EditSessionPage: NextPage = () => {
 	const { session, isSessionLoading, sessionError } = useSessionQuery(String(eid), String(sid));
 	const { editSessionMutation } = useEditSessionMutation(String(eid), String(sid));
 	const { user, isUserLoading } = useUser();
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isVenuesLoading || isEventLoading || isUserLoading || isOrganizerLoading) {
+	if (isRolesLoading || isVenuesLoading || isEventLoading || isUserLoading || isOrganizerLoading) {
 		return <LoadingPage />;
 	}
 
@@ -52,13 +54,17 @@ const EditSessionPage: NextPage = () => {
 		return <ViewErrorPage errors={[venuesError, eventError]} />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Session</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
 				<h1 className="text-3xl font-bold">Edit Session</h1>
