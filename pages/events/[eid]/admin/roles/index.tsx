@@ -3,20 +3,20 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { LinkButton } from '../../../../components/form/LinkButton';
-import { NoAccessPage } from '../../../../components/error/NoAccessPage';
-import Column from '../../../../components/layout/Column';
-import PageWrapper from '../../../../components/layout/PageWrapper';
-import { useUser } from '../../../../hooks/queries/useUser';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
-import { RoleList } from '../../../../components/roles/RoleList';
-import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
-import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
+import { LinkButton } from '../../../../../components/form/LinkButton';
+import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
+import Column from '../../../../../components/layout/Column';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { useUser } from '../../../../../hooks/queries/useUser';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { LoadingPage } from '../../../../../components/error/LoadingPage';
+import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
+import { RoleList } from '../../../../../components/roles/RoleList';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
+import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 
 const RolesAdminPage: NextPage = () => {
 	const router = useRouter();
@@ -63,6 +63,7 @@ const RolesAdminPage: NextPage = () => {
 					</FlexRowBetween>
 
 					<RoleList
+						admin
 						eid={String(eid)}
 						roles={roles}
 						isRolesLoading={isRolesLoading}

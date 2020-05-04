@@ -1,10 +1,8 @@
 import { capitalizeFirstLetter } from '../../utils/string';
 import Image from 'next/image';
 import React from 'react';
-import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
-import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,11 +11,12 @@ import {
 	faBuilding,
 	faLocationDot
 } from '@fortawesome/free-solid-svg-icons';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
-type Props = { eid: string; uid: string } & UseAttendeeQueryData & UseOrganizerQueryData;
+type Props = { eid: string; uid: string; admin?: boolean; attendee: AttendeeWithUser };
 
 export const ViewAttendee: React.FC<Props> = (props) => {
-	const { eid, uid, attendee, isOrganizerLoading, isOrganizer } = props;
+	const { eid, uid, attendee, admin = false } = props;
 
 	if (!attendee) return null;
 
@@ -37,7 +36,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 					/>
 				</div>
 
-				{!isOrganizerLoading && isOrganizer && (
+				{admin && (
 					<div>
 						<Link href={`/events/${eid}/admin/attendees/${uid}/edit`} passHref>
 							<LinkButton className="mr-3">Edit Attendee</LinkButton>
@@ -49,6 +48,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 					</div>
 				)}
 			</FlexRowBetween>
+
 			<h1 className="text-3xl font-bold">{attendee.user.name}</h1>
 
 			{attendee.role.name && (

@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import PageWrapper from '../components/layout/PageWrapper';
 
-const NotFoundPage: NextPage = () => {
+const ErrorNotFoundPage: NextPage = () => {
 	return (
 		<PageWrapper>
 			<Head>
@@ -32,4 +32,4 @@ const NotFoundPage: NextPage = () => {
 	);
 };
 
-export default NotFoundPage;
+export default ErrorNotFoundPage;

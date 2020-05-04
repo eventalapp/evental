@@ -7,10 +7,11 @@ import classNames from 'classnames';
 
 type Props = {
 	eid: string;
+	admin?: boolean;
 } & UseRolesQueryData;
 
 export const RoleList: React.FC<Props> = (props) => {
-	const { eid, roles } = props;
+	const { eid, roles, admin = false } = props;
 
 	if (roles && roles.length === 0) {
 		return <NotFound message="No roles found." />;
@@ -21,7 +22,11 @@ export const RoleList: React.FC<Props> = (props) => {
 	return (
 		<div>
 			{roles.map((role, i) => (
-				<Link href={`/events/${eid}/roles/${role.slug}`} key={role.id} passHref>
+				<Link
+					href={`/events/${eid}${admin ? '/admin' : ''}/roles/${role.slug}`}
+					key={role.id}
+					passHref
+				>
 					<a>
 						<div
 							className={classNames(
