@@ -1,27 +1,15 @@
 # Evental
 
-TODO:
-
-- Better image uploading (component)
-- user settings
-- multi stage event creation
-- marketing pages
-
-
 Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/), [Prisma](https://www.prisma.io/), [Postgres](https://www.postgresql.org/), [TypeScript](https://www.typescriptlang.org/), [Tailwind](https://tailwindcss.com/), and [React Query](https://react-query.tanstack.com/)
 
 ## Todo:
 
-- Handle file upload and upload to cdn
-- React hook form
-- slug validation (on edit)
-- event settings page
-- user settings page
-- allow attendees to attend sessions
 - add speakers to sessions
 - wysiwyg editor for sessions etc
 - excel export for data
-
+- add event to calendar
+- make event navigation in the hamburger menu
+- marketing pages
 
 ## Installation 💾
 
