@@ -27,7 +27,6 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 		handleSubmit,
 		watch,
 		setValue,
-		trigger,
 		formState: { errors }
 	} = useForm<EditUserPayload>({
 		defaultValues: {
@@ -42,18 +41,9 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 		resolver: zodResolver(EditUserSchema)
 	});
 
-	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
 
 	const { user: userSlugCheck, isUserLoading: isUserSlugCheckLoading } = useUserQuery(slugWatcher);
-
-	useEffect(() => {
-		setValue('slug', slugify(nameWatcher));
-
-		if (errors.name) {
-			void trigger('slug');
-		}
-	}, [nameWatcher]);
 
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));
