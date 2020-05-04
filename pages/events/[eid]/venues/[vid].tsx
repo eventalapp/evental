@@ -94,8 +94,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					eid={String(eid)}
 					vid={String(vid)}
 					venue={venue}
-					isOrganizerLoading={isOrganizerLoading}
-					isOrganizer={isOrganizer}
 					isVenueLoading={isVenueLoading}
 					venueError={venueError}
 				/>
