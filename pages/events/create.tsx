@@ -34,7 +34,7 @@ const CreateEventPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl font-bold">Create an Event</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">Create an Event</h1>
 
 				<CreateEventForm createEventMutation={createEventMutation} canCancel />
 			</Column>

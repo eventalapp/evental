@@ -72,7 +72,7 @@ const DeleteAttendeePage: NextPage = () => {
 					You are about to delete an attendee ("{attendee.user.name}")
 				</p>
 
-				<h1 className="text-3xl font-bold">Delete Attendee</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">Delete Attendee</h1>
 
 				<DeleteAttendeeForm
 					attendee={attendee}

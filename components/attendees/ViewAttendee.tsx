@@ -49,7 +49,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				)}
 			</FlexRowBetween>
 
-			<h1 className="text-3xl font-bold">{attendee.user.name}</h1>
+			<h1 className="text-2xl md:text-3xl font-bold">{attendee.user.name}</h1>
 
 			{attendee.role.name && (
 				<div className="flex flex-row items-center mb-1">

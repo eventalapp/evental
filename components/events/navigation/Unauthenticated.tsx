@@ -44,7 +44,7 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 };
 
 export const Unauthenticated: React.FC<Props> = (props) => {
-	const { signOutMutation, setIsOpen, roles, event } = props;
+	const { setIsOpen, roles, event } = props;
 
 	return (
 		<div>

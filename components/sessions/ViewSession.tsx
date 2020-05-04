@@ -26,7 +26,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween>
-				<h1 className="text-3xl font-bold">{session.name}</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">{session.name}</h1>
 
 				<div>
 					{!isAttending && (

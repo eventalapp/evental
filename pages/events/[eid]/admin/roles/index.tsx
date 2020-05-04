@@ -53,7 +53,7 @@ const RolesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<span className="text-3xl font-bold">Roles</span>
+						<span className="text-2xl md:text-3xl font-bold">Roles</span>
 
 						<div>
 							<Link href={`/events/${eid}/admin/roles/create`} passHref>

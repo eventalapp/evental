@@ -62,7 +62,7 @@ const AttendeesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<span className="text-3xl font-bold">Attendees</span>
+						<span className="text-2xl md:text-3xl font-bold">Attendees</span>
 
 						<div>
 							<Link href={`/events/${eid}/admin/attendees/create`} passHref>

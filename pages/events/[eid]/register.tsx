@@ -52,7 +52,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<h1 className="text-3xl font-bold">Register for {event.name}</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">Register for {event.name}</h1>
 
 				<p className="text-gray-700 mt-2">
 					To attend this event, please click the register button below.

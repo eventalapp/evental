@@ -55,7 +55,7 @@ const VenuesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<span className="text-3xl font-bold">Venues</span>
+						<span className="text-2xl md:text-3xl font-bold">Venues</span>
 
 						<div>
 							<Link href={`/events/${eid}/admin/venues/create`} passHref>

@@ -68,7 +68,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 
 			<Column>
 				<FlexRowBetween>
-					<h1 className="text-3xl font-bold">{venue.name}</h1>
+					<h1 className="text-2xl md:text-3xl font-bold">{venue.name}</h1>
 				</FlexRowBetween>
 
 				<ViewVenue

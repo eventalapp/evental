@@ -38,7 +38,7 @@ const SettingsPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<h1 className="text-3xl font-bold">User Settings</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">User Settings</h1>
 
 				<UserSettingsForm
 					user={user}
