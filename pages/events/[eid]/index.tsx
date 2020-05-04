@@ -24,6 +24,8 @@ import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
 import { EventNavigation } from '../../../components/events/navigation';
 import { EventHeader } from '../../../components/events/EventHeader';
 import { SessionList } from '../../../components/sessions/SessionList';
+import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
+import { getVenues } from '../../api/events/[eid]/venues';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -32,6 +34,7 @@ type Props = {
 	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
+	initialVenues: Prisma.EventVenue[] | undefined;
 };
 
 const ViewEventPage: NextPage<Props> = (props) => {
@@ -41,7 +44,8 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialUser,
 		initialRoles,
 		initialSessions,
-		initialIsAttendeeByUserId
+		initialIsAttendeeByUserId,
+		initialVenues
 	} = props;
 	const router = useRouter();
 	const { eid } = router.query;
@@ -58,19 +62,23 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		attendeeError,
 		isAttendeeLoading
 	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
+	const { venues, venuesError, isVenuesLoading } = useVenuesQuery(String(eid), initialVenues);
 
 	if (
 		isEventLoading ||
 		isOrganizerLoading ||
 		isSessionsLoading ||
 		isRolesLoading ||
-		isAttendeeLoading
+		isAttendeeLoading ||
+		isVenuesLoading
 	) {
 		return <LoadingPage />;
 	}
 
-	if (rolesError || eventError || sessionsError || attendeeError) {
-		return <ViewErrorPage errors={[rolesError, eventError, sessionsError, attendeeError]} />;
+	if (rolesError || eventError || sessionsError || attendeeError || venuesError) {
+		return (
+			<ViewErrorPage errors={[rolesError, eventError, sessionsError, attendeeError, venuesError]} />
+		);
 	}
 
 	if (!event || !sessions || !roles) {
@@ -95,14 +103,24 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<h1 className="text-2xl md:text-3xl font-bold leading-tight">Sessions</h1>
-
-				<SessionList
-					sessions={sessions}
-					eid={String(eid)}
-					sessionsError={sessionsError}
-					isSessionsLoading={isSessionsLoading}
-				/>
+				<div className="grid grid-cols-12">
+					<div className="md:col-span-9 col-span-12">
+						<h1 className="text-2xl md:text-3xl font-bold leading-tight">Sessions</h1>
+						<SessionList
+							sessions={sessions}
+							eid={String(eid)}
+							sessionsError={sessionsError}
+							isSessionsLoading={isSessionsLoading}
+						/>
+					</div>
+					<div className="md:col-span-3 col-span-12">
+						<span className="block font-medium border-b border-gray-200">Timezone</span>
+						<span className="block font-medium border-b border-gray-200">Filter by Venue</span>
+						<ul>{venues && venues.map((venue) => <p>{venue.name}</p>)}</ul>
+						<span className="block font-medium border-b border-gray-200">Filter by Date</span>
+						<span className="block font-medium border-b border-gray-200">Filter by Type</span>
+					</div>
+				</div>
 			</Column>
 		</PageWrapper>
 	);
@@ -115,6 +133,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialSessions = (await getSessions(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
+	const initialVenues = (await getVenues(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialIsAttendeeByUserId =
 		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
@@ -126,7 +145,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialOrganizer,
 			initialIsAttendeeByUserId,
 			initialRoles,
-			initialSessions
+			initialSessions,
+			initialVenues
 		}
 	};
 };
