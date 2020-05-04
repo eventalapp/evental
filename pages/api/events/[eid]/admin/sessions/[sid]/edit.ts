@@ -36,7 +36,8 @@ export default api({
 				OR: [{ id: String(sid) }, { slug: String(sid) }]
 			},
 			select: {
-				id: true
+				id: true,
+				name: true
 			}
 		});
 
@@ -44,16 +45,19 @@ export default api({
 			throw new NextkitError(404, 'Session not found.');
 		}
 
-		const slug = await generateSlug(parsed.name, async (val) => {
-			return !Boolean(
-				await prisma.eventSession.findFirst({
-					where: {
-						eventId: event.id,
-						slug: val
-					}
-				})
-			);
-		});
+		const slug: string | undefined =
+			parsed.name !== session.name
+				? await generateSlug(parsed.name, async (val) => {
+						return !Boolean(
+							await prisma.eventSession.findFirst({
+								where: {
+									eventId: event.id,
+									slug: val
+								}
+							})
+						);
+				  })
+				: undefined;
 
 		const editedSession = await prisma.eventSession.update({
 			where: {

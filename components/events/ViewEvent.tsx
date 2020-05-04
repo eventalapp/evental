@@ -61,7 +61,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 			)}
 
 			<div className="flex flex-row items-center mb-3">
-				<div className="relative w-12 h-12 md:w-20 md:h-20 rounded-md mr-3 md:mr-5 border-2 border-gray-100">
+				<div className="flex-shrink-0 relative w-12 h-12 md:w-20 md:h-20 rounded-md mr-3 md:mr-5 border-2 border-gray-100">
 					<Image
 						alt={event.name}
 						src={
@@ -140,6 +140,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 					</div>
 				</div>
 			</div>
+
 			<p>{event?.description}</p>
 
 			<div className="overflow-auto whitespace-nowrap relative py-2 mt-6">

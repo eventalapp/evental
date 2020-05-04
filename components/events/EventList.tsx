@@ -52,7 +52,7 @@ export const EventList: React.FC<Props> = (props) => {
 
 									<div className="flex flex-col justify-between">
 										<span className="text-gray-600 text-tiny block">{event.category}</span>
-										<span className="text-lg">{event.name}</span>
+										<span className="text-lg font-medium">{event.name}</span>
 									</div>
 								</div>
 							</a>

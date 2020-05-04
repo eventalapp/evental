@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -11,29 +10,25 @@ import { Navigation } from '../../../../../components/navigation';
 import { CreateVenueForm } from '../../../../../components/venues/CreateVenueForm';
 import { useCreateVenueMutation } from '../../../../../hooks/mutations/useCreateVenueMutation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
-import { ssrGetUser } from '../../../../../utils/api';
-import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { useUser } from '../../../../../hooks/queries/useUser';
-import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
+import { LoadingPage } from '../../../../../components/error/LoadingPage';
 
-type Props = {
-	initialOrganizer: boolean;
-	initialUser: PasswordlessUser | undefined;
-};
-
-const CreateSessionPage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialUser } = props;
+const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { createVenueMutation } = useCreateVenueMutation(String(eid));
-	const { user } = useUser(initialUser);
+	const { user, isUserLoading } = useUser();
+
+	if (isOrganizerLoading || isUserLoading) {
+		return <LoadingPage />;
+	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!isOrganizerLoading && !isOrganizer) {
+	if (!isOrganizer) {
 		return <NoAccessPage />;
 	}
 
@@ -54,17 +49,4 @@ const CreateSessionPage: NextPage<Props> = (props) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-
-	return {
-		props: {
-			initialUser,
-			initialOrganizer
-		}
-	};
-};
 export default CreateSessionPage;

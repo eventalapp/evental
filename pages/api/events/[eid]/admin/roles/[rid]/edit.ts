@@ -37,7 +37,8 @@ export default api({
 				OR: [{ id: String(rid) }, { slug: String(rid) }]
 			},
 			select: {
-				id: true
+				id: true,
+				name: true
 			}
 		});
 
@@ -79,16 +80,19 @@ export default api({
 			);
 		}
 
-		const slug = await generateSlug(parsed.name, async (val) => {
-			return !Boolean(
-				await prisma.eventRole.findFirst({
-					where: {
-						eventId: event.id,
-						slug: val
-					}
-				})
-			);
-		});
+		const slug: string | undefined =
+			parsed.name !== role.name
+				? await generateSlug(parsed.name, async (val) => {
+						return !Boolean(
+							await prisma.eventRole.findFirst({
+								where: {
+									eventId: event.id,
+									slug: val
+								}
+							})
+						);
+				  })
+				: undefined;
 
 		let editedRole = await prisma.eventRole.update({
 			where: {

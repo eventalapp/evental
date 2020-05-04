@@ -1,18 +1,12 @@
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import React from 'react';
-
-import Prisma from '@prisma/client';
-import { getEvent } from '../../../api/events/[eid]';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
 import { Navigation } from '../../../../components/navigation';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { PasswordlessUser } from '../../../../utils/stripUserPassword';
-import { ssrGetUser } from '../../../../utils/api';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
 import Column from '../../../../components/layout/Column';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
@@ -21,34 +15,36 @@ import { useUser } from '../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
+import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
+import { NoAccessPage } from '../../../../components/error/NoAccessPage';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
-type Props = {
-	initialEvent: Prisma.Event | undefined;
-	initialUser: PasswordlessUser | undefined;
-};
-
-const EditEventPage: NextPage<Props> = (props) => {
-	const { initialEvent, initialUser } = props;
+const EditEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { editEventMutation } = useEditEventMutation(String(eid));
-	const { user } = useUser(initialUser);
+	const { user, isUserLoading } = useUser();
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+
+	if (isEventLoading || isUserLoading || isOrganizerLoading) {
+		return <LoadingPage />;
+	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!initialEvent || !event) {
+	if (!event) {
 		return <NotFoundPage message="Event not found." />;
-	}
-
-	if (isEventLoading) {
-		return <LoadingPage />;
 	}
 
 	if (eventError) {
 		return <ViewErrorPage errors={[eventError]} />;
+	}
+
+	if (!isOrganizer) {
+		return <NoAccessPage />;
 	}
 
 	return (
@@ -60,6 +56,8 @@ const EditEventPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
+				{event && <EventSettingsHeader event={event} />}
+
 				<EventNavigationMenu eid={String(eid)} />
 
 				<h1 className="text-3xl font-bold">Event Settings</h1>
@@ -74,20 +72,6 @@ const EditEventPage: NextPage<Props> = (props) => {
 			</Column>
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialEvent = (await getEvent(String(eid))) ?? undefined;
-
-	return {
-		props: {
-			initialUser,
-			initialEvent
-		}
-	};
 };
 
 export default EditEventPage;

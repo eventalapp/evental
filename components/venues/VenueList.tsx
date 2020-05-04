@@ -2,6 +2,9 @@ import Link from 'next/link';
 import React from 'react';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { NotFound } from '../error/NotFound';
+import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	eid: string;
@@ -18,17 +21,26 @@ export const VenueList: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			{venues.map((venue) => (
+			{venues.map((venue, i) => (
 				<Link href={`/events/${eid}/venues/${venue.slug}`} key={venue.id} passHref>
 					<a>
-						<div className="p-3 mb-3 bg-gray-75 rounded-md">
+						<div
+							className={classNames(
+								'p-3 py-4 border-gray-200',
+								i !== venues.length - 1 && 'border-b '
+							)}
+						>
 							<div className="flex flex-row justify-between items-center flex-wrap">
-								<span className="text-lg block font-medium">
-									{venue.name}
-									{venue.address && (
-										<span className="text-base font-normal text-gray-500"> - {venue.address}</span>
+								<div>
+									<span className="text-lg block font-medium">{venue.name}</span>{' '}
+									{venue.address ? (
+										<span className="text-base font-normal text-gray-500">{venue.address}</span>
+									) : (
+										<em className="text-base font-normal text-gray-500">{'No Address'}</em>
 									)}
-								</span>
+								</div>
+
+								<FontAwesomeIcon fill="currentColor" size="lg" icon={faChevronRight} />
 							</div>
 						</div>
 					</a>
