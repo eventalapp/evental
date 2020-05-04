@@ -4,12 +4,13 @@ import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutat
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import cx from 'classnames';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { ProfileDropdown } from '../../navigation/dropdown';
 import { capitalizeFirstLetter } from '../../../utils/string';
 import Prisma from '@prisma/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	className?: string;
@@ -46,8 +47,29 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 	);
 };
 
+const FullscreenLinkItem: React.FC<{ link: string; label: string }> = (props) => {
+	const { link, label } = props;
+	const router = useRouter();
+
+	return (
+		<Link href={link} passHref>
+			<a className={cx('cursor-pointer', router.asPath == link && 'border-b-2 border-primary')}>
+				<li
+					className={cx(
+						'px-3 my-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
+						'text-sm font-medium dark:text-gray-75 font-medium',
+						router.asPath == link ? 'text-primary' : 'text-gray-900'
+					)}
+				>
+					{label}
+				</li>
+			</a>
+		</Link>
+	);
+};
+
 export const Authenticated: React.FC<Props> = (props) => {
-	const { signOutMutation, setIsOpen, user, roles, event } = props;
+	const { signOutMutation, setIsOpen, isOpen, user, roles, event } = props;
 
 	return (
 		<div>
@@ -65,7 +87,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 												alt="logo"
 											/>
 											<strong
-												className="text-2xl tracking-tight font-bold font-display"
+												className="text-2xl tracking-tight leading-none font-bold font-display"
 												aria-label="evental homepage"
 											>
 												{event.name}
@@ -182,6 +204,39 @@ export const Authenticated: React.FC<Props> = (props) => {
 					</div>
 				</NavigationMenuPrimitive.Root>
 			</div>
+			<ul
+				className={classNames(
+					'fixed top-0 bottom-0 bg-white w-full z-50 transition-all duration-100',
+					isOpen ? 'right-0' : '-right-full'
+				)}
+			>
+				<div className="relative w-full h-full">
+					<div className="absolute top-4 right-4">
+						{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
+					</div>
+					<div className="w-full h-full flex flex-col items-center justify-center">
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="w-5 h-5 mb-3 cursor-pointer"
+							size="2x"
+							icon={faXmark}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem link={`/events/${event.slug}`} label={'Sessions'} />
+						<FullscreenLinkItem link={`/events/${event.slug}/venues`} label={'Venues'} />
+
+						{roles.map((role) => (
+							<FullscreenLinkItem
+								key={role.id}
+								link={`/events/${event.slug}/roles/${role.slug}`}
+								label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
+							/>
+						))}
+					</div>
+				</div>
+			</ul>
 		</div>
 	);
 };
