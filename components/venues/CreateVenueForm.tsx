@@ -51,7 +51,11 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 
 				<div className="mb-5">
 					<Label htmlFor="description">Description</Label>
-					<Textarea rows={5} placeholder="Venue description" {...register('description')} />
+					<Textarea
+						rows={5}
+						placeholder="Located on the second floor of the building"
+						{...register('description')}
+					/>
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
