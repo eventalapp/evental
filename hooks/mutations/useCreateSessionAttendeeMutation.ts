@@ -36,7 +36,7 @@ export const useCreateSessionAttendeeMutation = (
 			onSuccess: () => {
 				toast.success('You have successfully registered for this event.');
 
-				router.push(`/events/${eid}/admin/sessions/${sid}`).then(() => {
+				router.push(`/events/${eid}/sessions/${sid}`).then(() => {
 					void queryClient.invalidateQueries(['attendees', eid, sid]);
 				});
 			},

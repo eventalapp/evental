@@ -30,7 +30,7 @@ export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutatio
 			onSuccess: () => {
 				toast.success('You have successfully registered for this event.');
 
-				router.push(`/events/${eid}/admin`).then(() => {
+				router.push(`/events/${eid}`).then(() => {
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
