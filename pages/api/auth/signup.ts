@@ -52,8 +52,6 @@ export default api({
 			throw new NextkitError(500, 'Failed to create user');
 		}
 
-		await sendWelcomeEmail(user.email, user.name);
-
 		const token = await ctx.getToken();
 
 		await ctx.redis.set(`session:${token}`, user.id, { ex: SESSION_EXPIRY });
@@ -67,6 +65,8 @@ export default api({
 		});
 
 		res.setHeader('Set-Cookie', cookie);
+
+		await sendWelcomeEmail(user.email, user.name);
 
 		const { password, ...rest } = user;
 

@@ -34,7 +34,7 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 			onSuccess: (data) => {
 				toast.success('Role edited successfully');
 
-				router.push(`/events/${eid}/roles/${data.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/roles/${data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['role', eid, rid]);
 					void queryClient.invalidateQueries(['roles']);
 					void queryClient.invalidateQueries(['attendees', eid]);

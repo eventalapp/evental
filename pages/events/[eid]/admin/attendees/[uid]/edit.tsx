@@ -5,7 +5,7 @@ import Column from '../../../../../../components/layout/Column';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
-import { useAdminEditAttendeeMutation } from '../../../../../../hooks/mutations/useAdminEditAttendeeMutation';
+import { useEditAttendeeMutation } from '../../../../../../hooks/mutations/useEditAttendeeMutation';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -25,7 +25,7 @@ const EditAttendeePage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
-	const { adminEditAttendeeMutation } = useAdminEditAttendeeMutation(String(eid), String(uid));
+	const { adminEditAttendeeMutation } = useEditAttendeeMutation(String(eid), String(uid));
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user, isUserLoading } = useUser();
 	const { event, isEventLoading } = useEventQuery(String(eid));

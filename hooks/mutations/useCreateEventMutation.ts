@@ -31,7 +31,7 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 			onSuccess: (data) => {
 				toast.success('Event created successfully');
 
-				router.push(`/events/${data.slug}`).then(() => {
+				router.push(`/events/${data.slug}/`).then(() => {
 					void queryClient.invalidateQueries('events');
 				});
 			},

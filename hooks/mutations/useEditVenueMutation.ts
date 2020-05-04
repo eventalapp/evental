@@ -34,7 +34,7 @@ export const useEditVenueMutation = (eid: string, vid: string): UseEditVenueMuta
 			onSuccess: (data) => {
 				toast.success('Venue edited successfully');
 
-				router.push(`/events/${eid}/venues/${data.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/venues/${data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['venue', eid, vid]);
 					void queryClient.invalidateQueries(['venues', eid]);
 				});

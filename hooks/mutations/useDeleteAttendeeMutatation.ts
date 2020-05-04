@@ -24,7 +24,7 @@ export const useDeleteAttendeeMutation = (
 			onSuccess: () => {
 				toast.success('Attendee deleted successfully');
 
-				router.push(`/events/${eid}/attendees/`).then(() => {
+				router.push(`/events/${eid}/admin/attendees/`).then(() => {
 					void queryClient.invalidateQueries(['attendee', eid, uid]);
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});

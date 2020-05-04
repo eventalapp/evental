@@ -15,10 +15,7 @@ export interface UseEditAttendeeMutationData {
 	>;
 }
 
-export const useAdminEditAttendeeMutation = (
-	eid: string,
-	uid: string
-): UseEditAttendeeMutationData => {
+export const useEditAttendeeMutation = (eid: string, uid: string): UseEditAttendeeMutationData => {
 	const queryClient = useQueryClient();
 
 	const adminEditAttendeeMutation = useMutation<
@@ -38,7 +35,7 @@ export const useAdminEditAttendeeMutation = (
 			onSuccess: (data) => {
 				toast.success('Attendee edited successfully');
 
-				router.push(`/events/${eid}/attendees/${data.user.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/attendees/${data.user.slug}`).then(() => {
 					void queryClient.invalidateQueries(['attendee', eid, uid]);
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});

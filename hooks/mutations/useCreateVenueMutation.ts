@@ -31,7 +31,7 @@ export const useCreateVenueMutation = (eid: string): UseCreateVenueMutationData 
 			onSuccess: (data) => {
 				toast.success('Venue created successfully');
 
-				router.push(`/events/${eid}/venues/${data.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/venues/${data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['venues', eid]);
 				});
 			},

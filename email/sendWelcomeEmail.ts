@@ -3,6 +3,7 @@ import { convert } from 'html-to-text';
 import { sendEmail } from '../utils/sendEmail';
 import { SESV2 } from 'aws-sdk';
 import { welcomeTemplate } from './templates/welcome';
+import { NextkitError } from 'nextkit';
 
 export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {
 	const htmlOutput = mjml2html(
@@ -46,5 +47,7 @@ export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {
 		FromEmailAddress: '"Evental" <no-reply@evental.app>'
 	};
 
-	await sendEmail(params);
+	await sendEmail(params).catch((err) => {
+		throw new NextkitError(500, err);
+	});
 };

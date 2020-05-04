@@ -24,7 +24,7 @@ export const useDeleteSessionMutation = (
 			onSuccess: () => {
 				toast.success('Session deleted successfully');
 
-				router.push(`/events/${eid}/sessions/`).then(() => {
+				router.push(`/events/${eid}/admin/sessions/`).then(() => {
 					void queryClient.invalidateQueries(['session', eid, sid]);
 					void queryClient.invalidateQueries(['sessions', eid]);
 				});

@@ -34,7 +34,7 @@ export const useEditSessionMutation = (eid: string, sid: string): UseEditSession
 			onSuccess: (data) => {
 				toast.success('Session edited successfully');
 
-				router.push(`/events/${eid}/sessions/${data.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/sessions/${data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['session', eid, sid]);
 					void queryClient.invalidateQueries(['sessions', eid]);
 				});
