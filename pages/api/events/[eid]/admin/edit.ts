@@ -6,6 +6,7 @@ import { NextkitError } from 'nextkit';
 import { busboyParseForm } from '../../../../../utils/busboyParseForm';
 import { uploadAndProcessImage } from '../../../../../utils/uploadAndProcessImage';
 import { EventCategory, EventType } from '@prisma/client';
+import { endOfDay, startOfDay } from 'date-fns';
 
 export const config = {
 	api: {
@@ -52,8 +53,8 @@ export default api({
 				name: body.name,
 				description: body.description,
 				location: body.location,
-				startDate: body.startDate,
-				endDate: body.endDate,
+				startDate: startOfDay(body.startDate),
+				endDate: endOfDay(body.endDate),
 				image: fileLocation,
 				category: EventCategory[body.category as keyof typeof EventCategory] ?? EventCategory.EVENT,
 				slug: body.slug,

@@ -3,6 +3,7 @@ import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { generateSlug } from '../../../utils/generateSlug';
+import { endOfDay, startOfDay } from 'date-fns';
 
 export default api({
 	async POST({ ctx, req }) {
@@ -28,8 +29,8 @@ export default api({
 			data: {
 				slug: slug,
 				name: parsed.name,
-				startDate: parsed.startDate,
-				endDate: parsed.endDate
+				startDate: startOfDay(parsed.startDate),
+				endDate: endOfDay(parsed.endDate)
 			}
 		});
 
