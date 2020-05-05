@@ -114,12 +114,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 					)}
 				</FlexRowBetween>
 
-				<SessionList
-					sessions={sessions}
-					eid={String(eid)}
-					sessionsError={sessionsError}
-					isSessionsLoading={isSessionsLoading}
-				/>
+				<SessionList sessions={sessions} eid={String(eid)} />
 			</Column>
 		</PageWrapper>
 	);

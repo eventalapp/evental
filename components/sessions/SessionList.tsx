@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import React from 'react';
-import { UseSessionsQueryData } from '../../hooks/queries/useSessionsQuery';
 import { NotFound } from '../error/NotFound';
 import { format } from 'date-fns';
 import classNames from 'classnames';
+import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 
 type Props = {
 	eid: string;
 	admin?: boolean;
-} & UseSessionsQueryData;
+	sessions: SessionWithVenue[];
+};
 
 export const SessionList: React.FC<Props> = (props) => {
 	const { eid, sessions, admin = false } = props;

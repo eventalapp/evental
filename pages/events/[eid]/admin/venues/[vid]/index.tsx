@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import React from 'react';
 import Link from 'next/link';
-import { ViewVenue } from '../../../../../../components/venues/ViewVenue';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
@@ -19,8 +18,12 @@ import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { SessionList } from '../../../../../../components/sessions/SessionList';
+import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
 
-const ViewAttendeePage: NextPage = () => {
+const ViewVenuePage: NextPage = () => {
 	const router = useRouter();
 	const { vid, eid } = router.query;
 	const { venue, isVenueLoading, venueError } = useVenueQuery(String(eid), String(vid));
@@ -28,8 +31,15 @@ const ViewAttendeePage: NextPage = () => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { user } = useUser();
+	const sessionsByVenueQuery = useSessionsByVenueQuery(String(eid), String(vid));
 
-	if (isVenueLoading || isOrganizerLoading || isEventLoading || isRolesLoading) {
+	if (
+		isVenueLoading ||
+		isOrganizerLoading ||
+		isEventLoading ||
+		isRolesLoading ||
+		sessionsByVenueQuery.isLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -37,8 +47,12 @@ const ViewAttendeePage: NextPage = () => {
 		return <NotFoundPage message="Venue not found." />;
 	}
 
-	if (venueError || eventError || rolesError) {
-		return <ViewErrorPage errors={[venueError, eventError, rolesError]} />;
+	if (venueError || eventError || rolesError || sessionsByVenueQuery.error?.response?.data) {
+		return (
+			<ViewErrorPage
+				errors={[venueError, eventError, rolesError, sessionsByVenueQuery.error?.response?.data]}
+			/>
+		);
 	}
 
 	if (!event) {
@@ -75,16 +89,26 @@ const ViewAttendeePage: NextPage = () => {
 					</div>
 				</FlexRowBetween>
 
-				<ViewVenue
-					eid={String(eid)}
-					vid={String(vid)}
-					venue={venue}
-					isVenueLoading={isVenueLoading}
-					venueError={venueError}
-				/>
+				{venue.address && (
+					<div className="flex flex-row items-center mb-1">
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="w-5 h-5 mr-1.5"
+							size="1x"
+							icon={faLocationDot}
+						/>
+						<p>{venue.address}</p>
+					</div>
+				)}
+
+				<p>{venue.description}</p>
+
+				{sessionsByVenueQuery.data && (
+					<SessionList eid={String(eid)} sessions={sessionsByVenueQuery.data} />
+				)}
 			</Column>
 		</PageWrapper>
 	);
 };
 
-export default ViewAttendeePage;
+export default ViewVenuePage;

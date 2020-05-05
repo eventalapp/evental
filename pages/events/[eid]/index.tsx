@@ -26,6 +26,7 @@ import { EventHeader } from '../../../components/events/EventHeader';
 import { SessionList } from '../../../components/sessions/SessionList';
 import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
 import { getVenues } from '../../api/events/[eid]/venues';
+import Link from 'next/link';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -106,17 +107,19 @@ const ViewEventPage: NextPage<Props> = (props) => {
 				<div className="grid grid-cols-12 gap-4">
 					<div className="md:col-span-9 col-span-12">
 						<h1 className="text-2xl md:text-3xl font-bold leading-tight">Sessions</h1>
-						<SessionList
-							sessions={sessions}
-							eid={String(eid)}
-							sessionsError={sessionsError}
-							isSessionsLoading={isSessionsLoading}
-						/>
+						<SessionList sessions={sessions} eid={String(eid)} />
 					</div>
 					<div className="md:col-span-3 col-span-12">
 						<span className="block font-medium border-b border-gray-200">Timezone</span>
 						<span className="block font-medium border-b border-gray-200">Filter by Venue</span>
-						<ul>{venues && venues.map((venue) => <p key={venue.id}>{venue.name}</p>)}</ul>
+						<ul>
+							{venues &&
+								venues.map((venue) => (
+									<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
+										<a className="block">{venue.name}</a>
+									</Link>
+								))}
+						</ul>
 						<span className="block font-medium border-b border-gray-200">Filter by Date</span>
 						<span className="block font-medium border-b border-gray-200">Filter by Type</span>
 					</div>
