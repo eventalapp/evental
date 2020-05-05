@@ -62,7 +62,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 												alt="logo"
 											/>
 											<strong
-												className="text-2xl leading-none tracking-tight font-bold font-display"
+												className="text-xl max-w-xs tracking-tight leading-none font-bold font-display"
 												aria-label="evental homepage"
 											>
 												{event.name}

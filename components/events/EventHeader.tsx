@@ -56,7 +56,9 @@ export const EventHeader: React.FC<{
 
 				<div>
 					<span className="text-gray-500 text-xs block">{event?.category}</span>
-					<h1 className="text-2xl md:text-3xl font-bold leading-tight">{event?.name}</h1>
+					<h1 className="text-2xl md:text-3xl font-bold leading-tight max-w-lg tracking-tight leading-[1.1] mb-1.5">
+						{event?.name}
+					</h1>
 
 					<div className="flex-row flex mb-1 items-center text-gray-600 flex-wrap">
 						{event?.location && (
