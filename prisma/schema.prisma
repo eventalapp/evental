@@ -92,6 +92,7 @@ model Event {
   sessionAttendee EventSessionAttendee[]
 
   @@map("event")
+  EventSessionType EventSessionType[]
 }
 
 model EventAttendee {
@@ -101,7 +102,7 @@ model EventAttendee {
   eventRoleId    String
   permissionRole EventPermissionRole
 
-  role  EventRole @relation(fields: [eventRoleId], references: [id])
+  role  EventRole @relation(fields: [eventRoleId], references: [id], onDelete: Cascade)
   user  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
@@ -133,18 +134,35 @@ model EventSession {
   startDate   DateTime
   endDate     DateTime
   venueId     String?
+  typeId      String?
   name        String
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
-  event Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  venue EventVenue? @relation(fields: [venueId], references: [id], onDelete: Cascade)
+
+  event Event             @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  venue EventVenue?       @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  type  EventSessionType? @relation(fields: [typeId], references: [id], onDelete: Cascade)
 
   attendee EventSessionAttendee[]
 
   @@unique([eventId, slug])
   @@map("event_session")
+}
+
+model EventSessionType {
+  id      String @id @default(cuid())
+  eventId String
+  slug    String
+  name    String
+  color   String
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, slug])
+  @@map("event_session_type")
+  EventSession EventSession[]
 }
 
 model EventSessionAttendee {

@@ -113,6 +113,22 @@ export const EditSessionSchema = z.object({
 
 export type EditSessionPayload = z.infer<typeof EditSessionSchema>;
 
+// Session Types
+
+export const CreateSessionTypeSchema = z.object({
+	name: nameValidator,
+	color: z.string()
+});
+
+export type CreateSessionTypePayload = z.infer<typeof CreateSessionTypeSchema>;
+
+export const EditSessionTypeSchema = z.object({
+	name: nameValidator,
+	color: z.string()
+});
+
+export type EditSessionTypePayload = z.infer<typeof EditSessionTypeSchema>;
+
 // Event
 
 export const CreateEventSchema = z.object({
