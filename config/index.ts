@@ -1,4 +1,4 @@
-export const NEAREST_MINUTE = 5;
+export const NEAREST_MINUTE = 15;
 
 export const PASSWORD_RESET_EXPIRY = 60 * 30;
 
