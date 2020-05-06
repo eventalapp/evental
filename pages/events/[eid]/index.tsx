@@ -1,32 +1,32 @@
+import Prisma from '@prisma/client';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
+import { LoadingPage } from '../../../components/error/LoadingPage';
+import { NotFoundPage } from '../../../components/error/NotFoundPage';
+import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
+import { EventHeader } from '../../../components/events/EventHeader';
+import { EventNavigation } from '../../../components/events/navigation';
 import Column from '../../../components/layout/Column';
-import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
+import PageWrapper from '../../../components/layout/PageWrapper';
+import { SessionList } from '../../../components/sessions/SessionList';
+import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
 import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
-import PageWrapper from '../../../components/layout/PageWrapper';
-import Prisma from '@prisma/client';
-import { getEvent } from '../../api/events/[eid]';
-import { getIsOrganizer } from '../../api/events/[eid]/organizer';
-import { getSessions, SessionWithVenue } from '../../api/events/[eid]/sessions';
-import { getRoles } from '../../api/events/[eid]/roles';
-import { NotFoundPage } from '../../../components/error/NotFoundPage';
-import React from 'react';
-import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
-import { LoadingPage } from '../../../components/error/LoadingPage';
-import { ssrGetUser } from '../../../utils/api';
+import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
 import { useUser } from '../../../hooks/queries/useUser';
-import { AttendeeWithUser, PasswordlessUser } from '../../../utils/stripUserPassword';
-import { getAttendee } from '../../api/events/[eid]/attendees/[uid]';
-import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
-import { EventNavigation } from '../../../components/events/navigation';
-import { EventHeader } from '../../../components/events/EventHeader';
-import { SessionList } from '../../../components/sessions/SessionList';
 import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
+import { ssrGetUser } from '../../../utils/api';
+import { AttendeeWithUser, PasswordlessUser } from '../../../utils/stripUserPassword';
+import { getEvent } from '../../api/events/[eid]';
+import { getAttendee } from '../../api/events/[eid]/attendees/[uid]';
+import { getIsOrganizer } from '../../api/events/[eid]/organizer';
+import { getRoles } from '../../api/events/[eid]/roles';
+import { getSessions, SessionWithVenue } from '../../api/events/[eid]/sessions';
 import { getVenues } from '../../api/events/[eid]/venues';
-import Link from 'next/link';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -111,15 +111,20 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					</div>
 					<div className="md:col-span-3 col-span-12">
 						<span className="block font-medium border-b border-gray-200">Timezone</span>
-						<span className="block font-medium border-b border-gray-200">Filter by Venue</span>
-						<ul>
-							{venues &&
-								venues.map((venue) => (
-									<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
-										<a className="block">{venue.name}</a>
-									</Link>
-								))}
-						</ul>
+						{venues && venues.length > 0 && (
+							<>
+								<span className="block font-medium border-b border-gray-200">Filter by Venue</span>
+								<ul>
+									{venues &&
+										venues.map((venue) => (
+											<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
+												<a className="block">{venue.name}</a>
+											</Link>
+										))}
+								</ul>
+							</>
+						)}
+
 						<span className="block font-medium border-b border-gray-200">Filter by Date</span>
 						<span className="block font-medium border-b border-gray-200">Filter by Type</span>
 					</div>
