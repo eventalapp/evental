@@ -90,9 +90,9 @@ model Event {
   venue           EventVenue[]
   role            EventRole[]
   sessionAttendee EventSessionAttendee[]
+  sessionType     EventSessionType[]
 
   @@map("event")
-  EventSessionType EventSessionType[]
 }
 
 model EventAttendee {
@@ -140,7 +140,6 @@ model EventSession {
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
-
   event Event             @relation(fields: [eventId], references: [id], onDelete: Cascade)
   venue EventVenue?       @relation(fields: [venueId], references: [id], onDelete: Cascade)
   type  EventSessionType? @relation(fields: [typeId], references: [id], onDelete: Cascade)
@@ -160,9 +159,10 @@ model EventSessionType {
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
+  session EventSession[]
+
   @@unique([eventId, slug])
   @@map("event_session_type")
-  EventSession EventSession[]
 }
 
 model EventSessionAttendee {
