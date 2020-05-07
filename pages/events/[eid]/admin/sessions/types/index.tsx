@@ -61,7 +61,7 @@ const SessionTypesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<span className="text-2xl md:text-3xl font-bold">Session Types</span>
+						<h3 className="text-xl md:text-2xl font-medium">Session Types</h3>
 
 						<div>
 							<Link href={`/events/${eid}/admin/sessions/types/create`} passHref>

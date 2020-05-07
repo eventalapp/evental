@@ -71,7 +71,7 @@ const EditSessionPage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h1 className="text-2xl md:text-3xl font-bold">Edit Session Type</h1>
+				<h3 className="text-xl md:text-2xl font-medium">Edit Session Type</h3>
 
 				<EditSessionTypeForm
 					sessionType={sessionType}

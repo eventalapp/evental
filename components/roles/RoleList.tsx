@@ -4,6 +4,8 @@ import { capitalizeFirstLetter } from '../../utils/string';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { NotFound } from '../error/NotFound';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	eid: string;
@@ -35,12 +37,12 @@ export const RoleList: React.FC<Props> = (props) => {
 							)}
 						>
 							<div className="flex flex-row justify-between items-center flex-wrap">
-								<span className="text-lg block font-medium">
+								<span className="text-lg block">
 									{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
-									<span className="text-gray-500 font-normal">
-										{role.defaultRole && '(Default)'}
-									</span>
+									<span className="text-gray-500 text-md">{role.defaultRole && '(Default)'}</span>
 								</span>
+
+								<FontAwesomeIcon fill="currentColor" size="lg" icon={faChevronRight} />
 							</div>
 						</div>
 					</a>

@@ -28,7 +28,7 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 						style={{ backgroundColor: sessionType.color }}
 					/>
 					<div>
-						<h1 className="text-2xl md:text-3xl font-bold">{sessionType.name}</h1>
+						<h3 className="text-xl md:text-2xl font-medium">{sessionType.name}</h3>
 					</div>
 				</div>
 

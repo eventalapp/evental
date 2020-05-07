@@ -65,7 +65,7 @@ const CreateSessionPage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h1 className="text-2xl md:text-3xl font-bold">Create Session</h1>
+				<h3 className="text-xl md:text-2xl font-medium">Create Session</h3>
 
 				<CreateSessionForm
 					sessionTypes={sessionTypes}

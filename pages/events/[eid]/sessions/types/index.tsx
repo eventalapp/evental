@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useSessionTypesQuery } from '../../../../../hooks/queries/useSessionTypesQuery';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
-import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { SessionTypeList } from '../../../../../components/sessions/SessionTypeList';
 import Column from '../../../../../components/layout/Column';
@@ -60,9 +59,7 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<div>
-					<FlexRowBetween>
-						<span className="text-2xl md:text-3xl font-bold">Session Types</span>
-					</FlexRowBetween>
+					<h3 className="text-xl md:text-2xl font-medium">Session Types</h3>
 
 					{sessionTypes && <SessionTypeList eid={String(eid)} sessionTypes={sessionTypes} />}
 				</div>

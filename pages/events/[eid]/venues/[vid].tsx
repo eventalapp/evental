@@ -19,7 +19,6 @@ import { getRoles } from '../../../api/events/[eid]/roles';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
-import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useSessionsByVenueQuery } from '../../../../hooks/queries/useSessionsByVenueQuery';
 import { getSessionsByVenue, SessionWithVenue } from '../../../api/events/[eid]/sessions';
 import { ViewVenue } from '../../../../components/venues/ViewVenue';
@@ -79,9 +78,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<FlexRowBetween>
-					<h1 className="text-2xl md:text-3xl font-bold">{venue.name}</h1>
-				</FlexRowBetween>
+				<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
 
 				<ViewVenue venue={venue} sessionsByVenueQuery={sessionsByVenueQuery} eid={String(eid)} />
 			</Column>

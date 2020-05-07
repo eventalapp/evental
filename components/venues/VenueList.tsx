@@ -37,11 +37,11 @@ export const VenueList: React.FC<Props> = (props) => {
 						>
 							<div className="flex flex-row justify-between items-center flex-wrap">
 								<div>
-									<span className="text-lg block font-medium">{venue.name}</span>{' '}
+									<span className="text-lg block">{venue.name}</span>{' '}
 									{venue.address ? (
-										<span className="text-base font-normal text-gray-500">{venue.address}</span>
+										<span className="text-sm font-normal text-gray-500">{venue.address}</span>
 									) : (
-										<em className="text-base font-normal text-gray-500">{'No Address'}</em>
+										<em className="text-sm font-normal text-gray-500">{'No Address'}</em>
 									)}
 								</div>
 

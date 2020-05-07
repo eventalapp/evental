@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
@@ -62,7 +61,7 @@ const EditVenuePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h1 className="text-2xl md:text-3xl font-bold">Edit Venue</h1>
+				<h3 className="text-xl md:text-2xl font-medium">Edit Venue</h3>
 
 				<EditVenueForm
 					eid={String(eid)}
