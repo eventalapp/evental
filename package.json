@@ -9,6 +9,7 @@
 		"start": "next start",
 		"dev": "next dev -p 5555",
 		"lint": "tsc && next lint --fix",
+		"seed": "ts-node --project tsconfig.json  --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
 		"format": "tsc && prettier --write ./{server,pages,utils,components}/**/*.{js,jsx,json,md,ts,tsx} && prisma format",
 		"migrate:dev": "prisma migrate dev",
 		"migrate:reset": "prisma migrate reset",
@@ -86,6 +87,7 @@
 		"zod": "^3.14.4"
 	},
 	"devDependencies": {
+		"@faker-js/faker": "^6.3.1",
 		"@types/busboy": "^1.5.0",
 		"@types/html-to-text": "^8.1.0",
 		"@types/mjml": "^4.7.0",
@@ -109,7 +111,7 @@
 		"prettier": "^2.5.0",
 		"prisma": "3.13.0",
 		"tailwindcss": "^2.2.19",
-		"ts-node": "^10.5.0",
+		"ts-node": "^10.7.0",
 		"typescript": "^4.6.3"
 	},
 	"resolutions": {

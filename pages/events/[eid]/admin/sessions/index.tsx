@@ -23,7 +23,7 @@ const SessionsAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { sessions, isSessionsLoading } = useSessionsQuery(String(eid));
+	const { sessionsData, isSessionsLoading } = useSessionsQuery(String(eid), { page: 1 });
 	const { user, isUserLoading } = useUser();
 	const { event } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
@@ -70,7 +70,9 @@ const SessionsAdminPage: NextPage = () => {
 						</div>
 					</FlexRowBetween>
 
-					{sessions && <SessionList admin eid={String(eid)} sessions={sessions} />}
+					{sessionsData?.sessions && (
+						<SessionList admin eid={String(eid)} sessions={sessionsData?.sessions} />
+					)}
 				</div>
 			</Column>
 		</PageWrapper>
