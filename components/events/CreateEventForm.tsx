@@ -41,7 +41,6 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	const endDateWatcher = watch('endDate');
 
 	useEffect(() => {
-		console.log(endDateWatcher, startDateWatcher);
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
 			setValue('endDate', startDateWatcher);
 			toast.warn('The start date cannot be later than the end date.');

@@ -29,8 +29,8 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 		<Link href={link} passHref>
 			<NavigationMenuPrimitive.Link
 				className={cx(
-					'cursor-pointer pb-1.5',
-					router.asPath == link && 'border-b-2 border-primary'
+					'cursor-pointer pb-1.5 border-b-2',
+					router.asPath == link ? 'border-primary' : 'border-transparent'
 				)}
 			>
 				<NavigationMenuPrimitive.Item
@@ -59,7 +59,10 @@ const FullscreenLinkItem: React.FC<{
 	return (
 		<Link href={link} passHref>
 			<a
-				className={cx('cursor-pointer', router.asPath == link && 'border-b-2 border-primary')}
+				className={cx(
+					'cursor-pointer pb-1.5 border-b-2',
+					router.asPath == link ? 'border-primary' : 'border-transparent'
+				)}
 				onClick={onClick}
 				onKeyDown={onClick}
 				role="button"

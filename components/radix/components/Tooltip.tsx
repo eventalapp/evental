@@ -4,10 +4,11 @@ import React from 'react';
 
 interface Props {
 	message: string;
+	side?: 'bottom' | 'top' | 'right' | 'left' | undefined;
 }
 
 const Tooltip: React.FC<Props> = (props) => {
-	const { children, message } = props;
+	const { children, message, side } = props;
 
 	return (
 		<TooltipPrimitive.Provider delayDuration={100}>
@@ -15,6 +16,7 @@ const Tooltip: React.FC<Props> = (props) => {
 				<TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 				<TooltipPrimitive.Content
 					sideOffset={4}
+					side={side}
 					className={cx(
 						'radix-side-top:animate-slide-down-fade',
 						'radix-side-right:animate-slide-left-fade',

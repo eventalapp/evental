@@ -5,6 +5,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { NotFound } from '../error/NotFound';
 import Prisma from '@prisma/client';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = { events: Prisma.Event[]; className?: string };
 
@@ -22,7 +23,7 @@ export const EventList: React.FC<Props> = (props) => {
 					<div
 						key={event.id}
 						className={classNames(
-							'hover:bg-gray-75 border-gray-200',
+							'hover:bg-gray-75 border-gray-200 rounded-md',
 							i + 1 !== events.length ? 'border-b-2' : null
 						)}
 					>
@@ -30,11 +31,19 @@ export const EventList: React.FC<Props> = (props) => {
 							<a className="py-3 block">
 								<div className="flex flex-row items-center">
 									<div className="flex flex-col align-center justify-center w-12 md:ml-5">
-										<span className="text-gray-600 text-center block text-tiny">
-											{format(new Date(event.startDate), 'MMM dd')}
-											<br />
-											{format(new Date(event.endDate), 'MMM dd')}
-										</span>
+										<Tooltip
+											side={'top'}
+											message={`This is event is taking place from ${format(
+												new Date(event.startDate),
+												'MMMM do'
+											)} to ${format(new Date(event.endDate), 'MMMM do')}.`}
+										>
+											<span className="text-gray-600 text-center block text-tiny">
+												{format(new Date(event.startDate), 'MMM dd')}
+												<br />
+												{format(new Date(event.endDate), 'MMM dd')}
+											</span>
+										</Tooltip>
 									</div>
 
 									<div className="relative w-12 h-12 md:w-16 md:h-16 rounded-md mx-3 md:mx-5 border-2 border-gray-100">
@@ -50,9 +59,19 @@ export const EventList: React.FC<Props> = (props) => {
 										/>
 									</div>
 
-									<div className="flex flex-col justify-between">
-										<span className="text-gray-600 text-tiny block">{event.category}</span>
-										<span className="text-lg md:text-xl font-bold leading-tight">{event.name}</span>
+									<div>
+										<Tooltip
+											side={'top'}
+											message={`This is a ${event?.category?.toLowerCase()} event.`}
+										>
+											<span className="text-gray-500 text-tiny font-medium inline-block flex-shrink">
+												{event.category}
+											</span>
+										</Tooltip>
+
+										<span className="text-lg md:text-xl font-medium block leading-none">
+											{event.name}
+										</span>
 									</div>
 								</div>
 							</a>
