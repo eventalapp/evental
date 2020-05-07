@@ -11,25 +11,25 @@ import { LinkButton } from '../../../../../../components/form/LinkButton';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import Column from '../../../../../../components/layout/Column';
-import { useSessionsQuery } from '../../../../../../hooks/queries/useSessionsQuery';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SessionList } from '../../../../../../components/sessions/SessionList';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { useSessionTypesQuery } from '../../../../../../hooks/queries/useSessionTypesQuery';
+import { SessionTypeList } from '../../../../../../components/sessions/SessionTypeList';
 
 const SessionTypesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { sessions, isSessionsLoading } = useSessionsQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { event } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { isSessionTypesLoading, sessionTypes } = useSessionTypesQuery(String(eid));
 
 	if (
-		isSessionsLoading ||
+		isSessionTypesLoading ||
 		isUserLoading ||
 		isOrganizerLoading ||
 		isOrganizerLoading ||
@@ -53,7 +53,7 @@ const SessionTypesAdminPage: NextPage = () => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Edit Sessions</title>
+				<title>Session Types</title>
 			</Head>
 
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
@@ -61,16 +61,16 @@ const SessionTypesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<span className="text-2xl md:text-3xl font-bold">Sessions</span>
+						<span className="text-2xl md:text-3xl font-bold">Session Types</span>
 
 						<div>
-							<Link href={`/events/${eid}/admin/sessions/create`} passHref>
+							<Link href={`/events/${eid}/admin/sessions/types/create`} passHref>
 								<LinkButton padding="medium">Create</LinkButton>
 							</Link>
 						</div>
 					</FlexRowBetween>
 
-					{sessions && <SessionList admin eid={String(eid)} sessions={sessions} />}
+					{sessionTypes && <SessionTypeList eid={String(eid)} sessionTypes={sessionTypes} admin />}
 				</div>
 			</Column>
 		</PageWrapper>

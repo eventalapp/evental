@@ -17,6 +17,7 @@ import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
+import { useSessionTypesQuery } from '../../../../../hooks/queries/useSessionTypesQuery';
 
 const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -27,6 +28,9 @@ const CreateSessionPage: NextPage = () => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { sessionTypes, isSessionTypesLoading, sessionTypesError } = useSessionTypesQuery(
+		String(eid)
+	);
 
 	if (isVenuesLoading || isEventLoading || isUserLoading || isOrganizerLoading || isRolesLoading) {
 		return <LoadingPage />;
@@ -64,6 +68,9 @@ const CreateSessionPage: NextPage = () => {
 				<h1 className="text-2xl md:text-3xl font-bold">Create Session</h1>
 
 				<CreateSessionForm
+					sessionTypes={sessionTypes}
+					isSessionTypesLoading={isSessionTypesLoading}
+					sessionTypesError={sessionTypesError}
 					eid={String(eid)}
 					venues={venues}
 					venuesError={venuesError}

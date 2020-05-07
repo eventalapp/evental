@@ -48,6 +48,12 @@ const venueIdValidator = z.preprocess((val) => {
 	}
 	return val;
 }, z.string().max(100, 'Venue is too long').nullable());
+const typeIdValidator = z.preprocess((val) => {
+	if (val === 'none') {
+		return null;
+	}
+	return val;
+}, z.string().max(100, 'Type is too long').nullable());
 
 const eventTypes = Object.values(EventType);
 const [firstEventTypes, ...restEventTypes] = eventTypes;
@@ -98,6 +104,7 @@ export const CreateSessionSchema = z.object({
 	venueId: venueIdValidator,
 	startDate: dateValidator,
 	endDate: dateValidator,
+	typeId: typeIdValidator,
 	description: descriptionValidator.optional()
 });
 
@@ -108,6 +115,7 @@ export const EditSessionSchema = z.object({
 	venueId: venueIdValidator,
 	startDate: dateValidator,
 	endDate: dateValidator,
+	typeId: typeIdValidator,
 	description: descriptionValidator.optional()
 });
 

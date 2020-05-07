@@ -49,7 +49,8 @@ export default api({
 				venueId: parsed.venueId,
 				startDate: parsed.startDate,
 				endDate: parsed.endDate,
-				description: parsed.description
+				description: parsed.description,
+				typeId: parsed.typeId
 			}
 		});
 

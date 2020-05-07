@@ -33,7 +33,7 @@ export const SessionList: React.FC<Props> = (props) => {
 										i !== sessions.length - 1 && 'border-b '
 									)}
 								>
-									<span className="text-gray-700 text-sm w-20 pr-3 text-right">
+									<span className="text-gray-700 text-sm w-20 pr-3 text-right ">
 										{format(new Date(session.startDate), 'h:mm a OOO')}
 									</span>
 									<div
@@ -41,9 +41,19 @@ export const SessionList: React.FC<Props> = (props) => {
 										className="flex flex-row justify-between flex-grow border-l-2 border-gray-200 pl-3 flex-wrap"
 									>
 										<div className="flex flex-row items-center justify-between">
-											<div className="rounded-full mr-3 w-3 h-3 bg-gradient-to-r from-secondary-500 to-primary-500" />
+											<div
+												className="rounded-full mr-3 w-3 h-3"
+												style={{ backgroundColor: session?.type?.color }}
+											/>
 											<div>
-												<span className="text-xl">{session.name}</span>
+												<span className="text-xl block font-medium">{session.name}</span>{' '}
+												{session.type?.name ? (
+													<span className="text-base font-normal text-gray-500">
+														{session.type?.name}
+													</span>
+												) : (
+													<em className="text-base font-normal text-gray-500">{'No Type'}</em>
+												)}
 											</div>
 										</div>
 									</div>
@@ -70,11 +80,11 @@ export const SessionList: React.FC<Props> = (props) => {
 									key={session.id}
 									className="py-2 flex flex-row justify-between flex-grow border-l-2 border-gray-200 pl-3 flex-wrap"
 								>
-									<div className="flex flex-row items-center justify-between">
-										<div className="rounded-full mr-3 w-3 h-3 bg-gradient-to-r from-secondary-500 to-primary-500" />
-										<div>
-											<span className="text-xl">{session.name}</span>
-										</div>
+									<div
+										className="flex flex-row items-center justify-between rounded-md px-3"
+										style={{ backgroundColor: session?.type?.color ?? '#777777' }}
+									>
+										<span className="text-lg">{session.name}</span>
 									</div>
 								</div>
 							</div>

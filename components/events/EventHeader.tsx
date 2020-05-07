@@ -13,6 +13,7 @@ import { format } from 'date-fns';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import Prisma from '@prisma/client';
+import Tooltip from '../radix/components/Tooltip';
 
 export const EventHeader: React.FC<{
 	event: Prisma.Event;
@@ -55,71 +56,91 @@ export const EventHeader: React.FC<{
 				</div>
 
 				<div>
-					<span className="text-gray-500 text-xs block">{event?.category}</span>
+					<Tooltip message={`This is a ${event?.category?.toLowerCase()} event.`}>
+						<span className="text-gray-500 text-xs inline-block cursor-help">
+							{event?.category}
+						</span>
+					</Tooltip>
+
 					<h1 className="text-2xl md:text-3xl font-bold leading-tight max-w-lg tracking-tight leading-[1.1] mb-1.5">
 						{event?.name}
 					</h1>
 
 					<div className="flex-row flex mb-1 items-center text-gray-600 flex-wrap">
 						{event?.location && (
-							<div className="flex flex-row items-center mr-3">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
-									size="1x"
-									icon={faLocationDot}
-								/>
-								<p>{event?.location}</p>
-							</div>
+							<Tooltip message={`This is event is taking place at ${event?.location}.`}>
+								<div className="flex flex-row items-center mr-3 cursor-help">
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="w-5 h-5 mr-1.5"
+										size="1x"
+										icon={faLocationDot}
+									/>
+									<p>{event?.location}</p>
+								</div>
+							</Tooltip>
 						)}
 
-						<div className="flex flex-row items-center mr-3">
-							<FontAwesomeIcon
-								fill="currentColor"
-								className="w-5 h-5 mr-1.5"
-								size="1x"
-								icon={faCalendarDay}
-							/>
-							<p>
-								{format(new Date(event.startDate), 'MMMM dd')} -{' '}
-								{format(new Date(event.endDate), 'MMMM dd')}
-							</p>
-						</div>
-
-						{event?.type && event.type === 'IN_PERSON' && (
-							<div className="flex flex-row items-center">
+						<Tooltip
+							message={`This is event is taking place from ${format(
+								new Date(event.startDate),
+								'MMMM d'
+							)} to ${format(new Date(event.endDate), 'MMMM d')}.`}
+						>
+							<div className="flex flex-row items-center mr-3 cursor-help">
 								<FontAwesomeIcon
 									fill="currentColor"
 									className="w-5 h-5 mr-1.5"
 									size="1x"
-									icon={faPerson}
+									icon={faCalendarDay}
 								/>
-								<p>{capitalizeOnlyFirstLetter(event?.type.replace('_', ' '))}</p>
+								<p>
+									{format(new Date(event.startDate), 'MMMM dd')} -{' '}
+									{format(new Date(event.endDate), 'MMMM dd')}
+								</p>
 							</div>
+						</Tooltip>
+
+						{event?.type && event.type === 'IN_PERSON' && (
+							<Tooltip message={`This is event is taking place in person.`}>
+								<div className="flex flex-row items-center cursor-help">
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="w-5 h-5 mr-1.5"
+										size="1x"
+										icon={faPerson}
+									/>
+									<p>{capitalizeOnlyFirstLetter(event?.type.replace('_', ' '))}</p>
+								</div>
+							</Tooltip>
 						)}
 
 						{event?.type && event.type === 'HYBRID' && (
-							<div className="flex flex-row items-center">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
-									size="1x"
-									icon={faStreetView}
-								/>
-								<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
-							</div>
+							<Tooltip message={`This is event is taking place virtually & in person.`}>
+								<div className="flex flex-row items-center cursor-help">
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="w-5 h-5 mr-1.5"
+										size="1x"
+										icon={faStreetView}
+									/>
+									<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
+								</div>
+							</Tooltip>
 						)}
 
 						{event?.type && event.type === 'VIRTUAL' && (
-							<div className="flex flex-row items-center">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
-									size="1x"
-									icon={faHeadset}
-								/>
-								<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
-							</div>
+							<Tooltip message={`This is event is taking place virtually.`}>
+								<div className="flex flex-row items-center cursor-help">
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="w-5 h-5 mr-1.5"
+										size="1x"
+										icon={faHeadset}
+									/>
+									<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
+								</div>
+							</Tooltip>
 						)}
 					</div>
 				</div>

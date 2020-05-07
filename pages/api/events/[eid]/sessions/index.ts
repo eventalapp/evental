@@ -8,6 +8,7 @@ import { endOfDay, isAfter, isBefore, parseISO, startOfDay } from 'date-fns';
 
 export type SessionWithVenue = {
 	venue: Prisma.EventVenue | null;
+	type: Prisma.EventSessionType | null;
 } & Prisma.EventSession;
 
 export default api({
@@ -56,7 +57,8 @@ export const getSessions = async (eid: string): Promise<SessionWithVenue[] | nul
 			eventId: event.id
 		},
 		include: {
-			venue: true
+			venue: true,
+			type: true
 		},
 		orderBy: {
 			startDate: 'asc'
@@ -86,7 +88,8 @@ export const getSessionsByVenue = async (
 			venueId: venue.id
 		},
 		include: {
-			venue: true
+			venue: true,
+			type: true
 		},
 		orderBy: {
 			startDate: 'asc'
@@ -122,7 +125,8 @@ export const getSessionsByDate = async (
 			}
 		},
 		include: {
-			venue: true
+			venue: true,
+			type: true
 		},
 		orderBy: {
 			startDate: 'asc'

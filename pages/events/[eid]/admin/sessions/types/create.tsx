@@ -6,29 +6,27 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { useVenuesQuery } from '../../../../../../hooks/queries/useVenuesQuery';
-import { useCreateSessionMutation } from '../../../../../../hooks/mutations/useCreateSessionMutation';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import Column from '../../../../../../components/layout/Column';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { CreateSessionForm } from '../../../../../../components/sessions/CreateSessionForm';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { CreateSessionTypeForm } from '../../../../../../components/sessions/CreateSessionTypeForm';
+import { useCreateSessionTypeMutation } from '../../../../../../hooks/mutations/useCreateSessionTypeMutation';
 
 const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
-	const { createSessionMutation } = useCreateSessionMutation(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { createSessionTypeMutation } = useCreateSessionTypeMutation(String(eid));
 
-	if (isVenuesLoading || isEventLoading || isUserLoading || isOrganizerLoading || isRolesLoading) {
+	if (isEventLoading || isUserLoading || isOrganizerLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -40,12 +38,8 @@ const CreateSessionPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!venues) {
-		return <NotFoundPage message="No venues found." />;
-	}
-
-	if (venuesError || eventError) {
-		return <ViewErrorPage errors={[venuesError, eventError]} />;
+	if (eventError) {
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (!event) {
@@ -55,24 +49,15 @@ const CreateSessionPage: NextPage = () => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Create Session</title>
+				<title>Create Session Type</title>
 			</Head>
 
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h1 className="text-2xl md:text-3xl font-bold">Create Session</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">Create Session Type</h1>
 
-				<CreateSessionForm
-					eid={String(eid)}
-					venues={venues}
-					venuesError={venuesError}
-					isVenuesLoading={isVenuesLoading}
-					createSessionMutation={createSessionMutation}
-					event={event}
-					eventError={eventError}
-					isEventLoading={isEventLoading}
-				/>
+				<CreateSessionTypeForm createSessionTypeMutation={createSessionTypeMutation} />
 			</Column>
 		</PageWrapper>
 	);

@@ -3,11 +3,12 @@ import { LinkButton } from '../form/LinkButton';
 import React from 'react';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDay, faClipboardList, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -26,8 +27,16 @@ export const ViewSession: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween>
-				<h1 className="text-2xl md:text-3xl font-bold">{session.name}</h1>
+				<div className="flex items-center">
+					{session?.type && (
+						<div
+							className="rounded-full mr-3 w-4 h-4"
+							style={{ backgroundColor: session?.type?.color }}
+						/>
+					)}
 
+					<h1 className="text-2xl md:text-3xl font-bold">{session.name}</h1>
+				</div>
 				<div>
 					{!isAttending && (
 						<Link href={`/events/${eid}/sessions/${sid}/register`} passHref>
@@ -47,15 +56,45 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			</FlexRowBetween>
 
+			{session?.type?.name && (
+				<div className="block">
+					<Link href={`/events/${eid}/sessions/types/${session?.type?.slug}`}>
+						<a>
+							<Tooltip message={`This session is a ${session?.type?.name} session.`}>
+								<div className="inline-flex flex-row items-center mb-1 cursor-help">
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="w-5 h-5 mr-1.5"
+										size="1x"
+										icon={faClipboardList}
+									/>
+									<p>{session?.type?.name}</p>
+								</div>
+							</Tooltip>
+						</a>
+					</Link>
+				</div>
+			)}
+
 			{session?.venue?.name && (
-				<div className="flex flex-row items-center mb-1">
-					<FontAwesomeIcon
-						fill="currentColor"
-						className="w-5 h-5 mr-1.5"
-						size="1x"
-						icon={faLocationDot}
-					/>
-					<p>{session?.venue?.name}</p>
+				<div className="block">
+					<Link href={`/events/${eid}/venues/${session?.venue?.slug}`}>
+						<a>
+							<Tooltip
+								message={`This session is taking place at the ${session?.venue?.name} venue.`}
+							>
+								<div className="inline-flex flex-row items-center mb-1 cursor-help">
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="w-5 h-5 mr-1.5"
+										size="1x"
+										icon={faLocationDot}
+									/>
+									<p>{session?.venue?.name}</p>
+								</div>
+							</Tooltip>
+						</a>
+					</Link>
 				</div>
 			)}
 
