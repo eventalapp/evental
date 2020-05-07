@@ -1,9 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { LinkButton } from '../../../../../components/form/LinkButton';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
@@ -63,12 +61,6 @@ const AttendeesAdminPage: NextPage = () => {
 				<div>
 					<FlexRowBetween>
 						<h3 className="text-xl md:text-2xl font-medium">Attendees</h3>
-
-						<div>
-							<Link href={`/events/${eid}/admin/attendees/create`} passHref>
-								<LinkButton padding="medium">Create</LinkButton>
-							</Link>
-						</div>
 					</FlexRowBetween>
 
 					{attendees && <AttendeeList admin eid={String(eid)} attendees={attendees} />}

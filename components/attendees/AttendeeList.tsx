@@ -44,7 +44,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 													layout="fill"
 												/>
 											</div>
-											<span className="font-medium text-lg">{attendee.user.name}</span>
+											<span className="text-lg">{attendee.user.name}</span>
 											<span className="block text-gray-700 text-sm leading-none">
 												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
 											</span>
