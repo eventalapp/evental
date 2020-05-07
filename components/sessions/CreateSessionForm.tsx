@@ -46,10 +46,18 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		defaultValues: {
 			venueId: 'none',
 			typeId: 'none',
-			startDate: roundToNearestMinutes(new Date(), { nearestTo: NEAREST_MINUTE }),
-			endDate: roundToNearestMinutes(new Date(new Date().getTime() + 1000 * 60 * 60 * 4), {
-				nearestTo: NEAREST_MINUTE
-			})
+			startDate: roundToNearestMinutes(
+				new Date(event?.startDate ?? '').getTime() + 1000 * 60 * 60 * 12,
+				{
+					nearestTo: NEAREST_MINUTE
+				}
+			),
+			endDate: roundToNearestMinutes(
+				new Date(new Date(event?.startDate ?? '').getTime() + 1000 * 60 * 60 * 16),
+				{
+					nearestTo: NEAREST_MINUTE
+				}
+			)
 		},
 		resolver: zodResolver(CreateSessionSchema)
 	});
@@ -88,7 +96,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					</div>
 
 					<div>
-						<Label htmlFor="venueId">Venue *</Label>
+						<Label htmlFor="venueId">Venue</Label>
 
 						<Controller
 							control={control}
@@ -119,7 +127,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="venueId">Type *</Label>
+						<Label htmlFor="venueId">Type</Label>
 
 						<Controller
 							control={control}
