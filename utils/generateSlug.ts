@@ -12,5 +12,5 @@ export const generateSlug = async (
 		return currentSlug;
 	}
 
-	return processSlug(name + Math.ceil(Math.random() * 10));
+	return generateSlug(name + Math.ceil(Math.random() * 10), validate);
 };
