@@ -31,9 +31,7 @@ import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuer
 import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
 import { getDateRange } from '../../../utils/date';
 import { format } from 'date-fns';
-import { scrollTo } from '../../../utils/scroll';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { Pagination } from '../../../components/Pagination';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -149,36 +147,12 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						<SessionList sessions={sessionsData.sessions} eid={String(eid)} />
 
-						{sessionsData.pagination.pageCount > 0 && (
-							<div className="flex flex-row justify-end items-center">
-								<button
-									onClick={() => {
-										if (page > 1) {
-											scrollTo(0);
-											setPage((oldPage) => oldPage - 1);
-										}
-									}}
-								>
-									<FontAwesomeIcon className="mr-1.5" fill="currentColor" icon={faChevronLeft} />
-									Prev
-								</button>
-								<span className="mx-4 text-lg font-medium">
-									Page {page}/{sessionsData.pagination.pageCount}
-								</span>
-								<button
-									disabled={!(page < sessionsData.pagination.pageCount)}
-									className="disabled:text-gray-300 disabled:cursor-not-allowed"
-									onClick={() => {
-										if (page < sessionsData.pagination.pageCount) {
-											scrollTo(0);
-											setPage((oldPage) => oldPage + 1);
-										}
-									}}
-								>
-									Next
-									<FontAwesomeIcon className="ml-1.5" fill="currentColor" icon={faChevronRight} />
-								</button>
-							</div>
+						{sessionsData.pagination.pageCount > 1 && (
+							<Pagination
+								page={page}
+								pageCount={sessionsData.pagination.pageCount}
+								setPage={setPage}
+							/>
 						)}
 					</div>
 					<div className="md:col-span-3 col-span-12">
