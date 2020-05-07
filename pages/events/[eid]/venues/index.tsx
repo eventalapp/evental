@@ -5,14 +5,10 @@ import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-
 import React from 'react';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
-import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-
 import Prisma from '@prisma/client';
-
 import { getVenues } from '../../../api/events/[eid]/venues';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
@@ -95,9 +91,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<FlexRowBetween>
-					<h1 className="text-2xl md:text-3xl font-bold leading-tight">Venues</h1>
-				</FlexRowBetween>
+				<h3 className="text-xl md:text-2xl font-medium">Venues</h3>
 
 				<VenueList
 					eid={String(eid)}

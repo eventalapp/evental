@@ -38,7 +38,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 					<h1 className="text-2xl md:text-3xl font-bold">{session.name}</h1>
 				</div>
 				<div>
-					{!isAttending && (
+					{!isAttending && !admin && (
 						<Link href={`/events/${eid}/sessions/${sid}/register`} passHref>
 							<LinkButton>Attend This Session</LinkButton>
 						</Link>
@@ -58,7 +58,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 			{session?.type?.name && (
 				<div className="block">
-					<Link href={`/events/${eid}/sessions/types/${session?.type?.slug}`}>
+					<Link
+						href={`/events/${eid}${admin ? '/admin' : ''}/sessions/types/${session?.type?.slug}`}
+					>
 						<a>
 							<Tooltip message={`This session is a ${session?.type?.name} session.`}>
 								<div className="inline-flex flex-row items-center mb-1">

@@ -15,6 +15,7 @@ import { useOrganizerQuery } from '../../../../../../../hooks/queries/useOrganiz
 import { LoadingPage } from '../../../../../../../components/error/LoadingPage';
 import { useSessionTypeQuery } from '../../../../../../../hooks/queries/useSessionTypeQuery';
 import { ViewSessionType } from '../../../../../../../components/sessions/ViewSessionType';
+import { useSessionsByTypeQuery } from '../../../../../../../hooks/queries/useSessionsByTypeQuery';
 
 const ViewSessionTypePage: NextPage = () => {
 	const router = useRouter();
@@ -27,6 +28,7 @@ const ViewSessionTypePage: NextPage = () => {
 		String(eid),
 		String(tid)
 	);
+	const sessionsByTypeQuery = useSessionsByTypeQuery(String(eid), String(tid));
 
 	if (isOrganizerLoading || isSessionTypeLoading || isRolesLoading || isEventLoading) {
 		return <LoadingPage />;
@@ -38,6 +40,10 @@ const ViewSessionTypePage: NextPage = () => {
 
 	if (!sessionType) {
 		return <NotFoundPage message="Session Type not found." />;
+	}
+
+	if (!sessionsByTypeQuery.data) {
+		return <NotFoundPage message="Sessions not found." />;
 	}
 
 	if (sessionTypeError || rolesError || eventError) {
@@ -57,7 +63,13 @@ const ViewSessionTypePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<ViewSessionType sessionType={sessionType} eid={String(eid)} tid={String(tid)} admin />
+				<ViewSessionType
+					sessionType={sessionType}
+					eid={String(eid)}
+					tid={String(tid)}
+					sessions={sessionsByTypeQuery.data}
+					admin
+				/>
 			</Column>
 		</PageWrapper>
 	);

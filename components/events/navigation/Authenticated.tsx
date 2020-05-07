@@ -88,20 +88,20 @@ export const Authenticated: React.FC<Props> = (props) => {
 				<NavigationMenuPrimitive.Root className="w-full relative">
 					<NavigationMenuPrimitive.List className="flex items-center justify-between w-full max-w-7xl m-auto h-14 px-3">
 						<div>
-							<Link href={`/events/${event.slug}`} passHref>
+							<Link href={`/`} passHref>
 								<NavigationMenuPrimitive.Link>
 									<NavigationMenuPrimitive.Item>
-										<span className="flex flex-row items-center cursor-pointer">
+										<span className="flex flex-row items-center">
 											<img
-												src={`https://cdn.evental.app${event.image}`}
-												className="w-11 h-11 mr-3 rounded-md"
+												src="https://cdn.evental.app/images/logo.svg"
+												className="w-12 h-12 pr-3"
 												alt="logo"
 											/>
 											<strong
-												className="text-xl max-w-xs tracking-tight leading-none font-bold font-display"
+												className="text-xl max-w-2xl tracking-tight font-bold font-display"
 												aria-label="evental homepage"
 											>
-												{event.name}
+												Evental
 											</strong>
 										</span>
 									</NavigationMenuPrimitive.Item>
@@ -197,7 +197,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 					</NavigationMenuPrimitive.List>
 
 					<div
-						className={cx('absolute flex justify-center z-30', 'w-[30%] left-[50%] top-[100%]')}
+						className={cx('absolute flex justify-center z-30', 'w-[30%] left-[45%] top-[100%]')}
 						style={{
 							perspective: '1000px'
 						}}

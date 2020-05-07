@@ -106,10 +106,10 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				)}
 
 				<FlexRowBetween>
-					<h2 className="text-2xl md:text-3xl font-bold leading-tight">
+					<h3 className="text-xl md:text-2xl font-medium">
 						{capitalizeFirstLetter(role.name.toLowerCase())}s{' '}
-						<span className="font-normal text-gray-500">({attendees.length})</span>
-					</h2>
+						<span className="font-normal text-gray-500">({attendees.length || 0})</span>
+					</h3>
 				</FlexRowBetween>
 
 				{attendees?.length === 0 ? (

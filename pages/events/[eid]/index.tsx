@@ -27,6 +27,8 @@ import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 import { getRoles } from '../../api/events/[eid]/roles';
 import { getSessions, SessionWithVenue } from '../../api/events/[eid]/sessions';
 import { getVenues } from '../../api/events/[eid]/venues';
+import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
+import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -36,6 +38,7 @@ type Props = {
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialVenues: Prisma.EventVenue[] | undefined;
+	initialSessionTypes: Prisma.EventSessionType[] | undefined;
 };
 
 const ViewEventPage: NextPage<Props> = (props) => {
@@ -46,7 +49,8 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialRoles,
 		initialSessions,
 		initialIsAttendeeByUserId,
-		initialVenues
+		initialVenues,
+		initialSessionTypes
 	} = props;
 	const router = useRouter();
 	const { eid } = router.query;
@@ -64,6 +68,10 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		isAttendeeLoading
 	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 	const { venues, venuesError, isVenuesLoading } = useVenuesQuery(String(eid), initialVenues);
+	const { sessionTypesError, isSessionTypesLoading, sessionTypes } = useSessionTypesQuery(
+		String(eid),
+		initialSessionTypes
+	);
 
 	if (
 		isEventLoading ||
@@ -71,14 +79,31 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		isSessionsLoading ||
 		isRolesLoading ||
 		isAttendeeLoading ||
-		isVenuesLoading
+		isVenuesLoading ||
+		isSessionTypesLoading
 	) {
 		return <LoadingPage />;
 	}
 
-	if (rolesError || eventError || sessionsError || attendeeError || venuesError) {
+	if (
+		rolesError ||
+		eventError ||
+		sessionsError ||
+		attendeeError ||
+		venuesError ||
+		sessionTypesError
+	) {
 		return (
-			<ViewErrorPage errors={[rolesError, eventError, sessionsError, attendeeError, venuesError]} />
+			<ViewErrorPage
+				errors={[
+					rolesError,
+					eventError,
+					sessionsError,
+					attendeeError,
+					venuesError,
+					sessionTypesError
+				]}
+			/>
 		);
 	}
 
@@ -106,27 +131,48 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 				<div className="grid grid-cols-12 gap-4">
 					<div className="md:col-span-9 col-span-12">
-						<h1 className="text-xl md:text-2xl font-bold leading-tight">Sessions</h1>
+						<h3 className="text-xl md:text-2xl font-medium">
+							Sessions <span className="font-normal text-gray-500">({sessions?.length || 0})</span>
+						</h3>
 						<SessionList sessions={sessions} eid={String(eid)} />
 					</div>
 					<div className="md:col-span-3 col-span-12">
-						<span className="block font-medium border-b border-gray-200">Timezone</span>
+						<div className="mb-3">
+							<span className="block font-medium border-b border-gray-200">Timezone</span>
+						</div>
+
 						{venues && venues.length > 0 && (
-							<>
+							<div className="mb-3">
 								<span className="block font-medium border-b border-gray-200">Filter by Venue</span>
 								<ul>
-									{venues &&
-										venues.map((venue) => (
-											<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
-												<a className="block">{venue.name}</a>
-											</Link>
-										))}
+									{venues.map((venue) => (
+										<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
+											<a className="block">{venue.name}</a>
+										</Link>
+									))}
 								</ul>
-							</>
+							</div>
 						)}
 
-						<span className="block font-medium border-b border-gray-200">Filter by Date</span>
-						<span className="block font-medium border-b border-gray-200">Filter by Type</span>
+						{sessionTypes && sessionTypes.length > 0 && (
+							<div className="mb-3">
+								<span className="block font-medium border-b border-gray-200">Filter by Type</span>
+								<ul>
+									{sessionTypes.map((sessionType) => (
+										<Link
+											key={sessionType.id}
+											href={`/events/${eid}/sessions/types/${sessionType.slug}`}
+										>
+											<a className="block">{sessionType.name}</a>
+										</Link>
+									))}
+								</ul>
+							</div>
+						)}
+
+						<div className="mb-3">
+							<span className="block font-medium border-b border-gray-200">Filter by Date</span>
+						</div>
 					</div>
 				</div>
 			</Column>
@@ -140,6 +186,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialSessions = (await getSessions(String(eid))) ?? undefined;
+	const initialSessionTypes = (await getSessionTypes(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialVenues = (await getVenues(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
@@ -154,7 +201,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialIsAttendeeByUserId,
 			initialRoles,
 			initialSessions,
-			initialVenues
+			initialVenues,
+			initialSessionTypes
 		}
 	};
 };

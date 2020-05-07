@@ -31,7 +31,7 @@ export const RoleList: React.FC<Props> = (props) => {
 						<div
 							className={classNames(
 								'p-3 py-4 border-gray-200',
-								i !== roles.length - 1 && 'border-b '
+								i !== roles.length - 1 && 'border-b-2'
 							)}
 						>
 							<div className="flex flex-row justify-between items-center flex-wrap">

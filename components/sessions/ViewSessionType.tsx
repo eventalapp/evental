@@ -3,23 +3,34 @@ import { LinkButton } from '../form/LinkButton';
 import React from 'react';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import Prisma from '@prisma/client';
+import { SessionList } from './SessionList';
+import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 
 type Props = {
 	eid: string;
 	tid: string;
 	sessionType: Prisma.EventSessionType;
+	sessions: SessionWithVenue[];
 	admin?: boolean;
 };
 
 export const ViewSessionType: React.FC<Props> = (props) => {
-	const { sessionType, tid, eid, admin = false } = props;
+	const { sessionType, tid, eid, admin = false, sessions } = props;
 
 	if (!sessionType) return null;
 
 	return (
 		<div>
 			<FlexRowBetween>
-				<h1 className="text-2xl md:text-3xl font-bold">{sessionType.name}</h1>
+				<div className="flex flex-row items-center justify-between">
+					<div
+						className="rounded-full mr-3 w-4 h-4"
+						style={{ backgroundColor: sessionType.color }}
+					/>
+					<div>
+						<h1 className="text-2xl md:text-3xl font-bold">{sessionType.name}</h1>
+					</div>
+				</div>
 
 				<div>
 					{admin && (
@@ -35,7 +46,11 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 				</div>
 			</FlexRowBetween>
 
-			<p>{sessionType.color}</p>
+			<h3 className="text-xl md:text-2xl font-medium mt-5">
+				Sessions <span className="font-normal text-gray-500">({sessions?.length || 0})</span>
+			</h3>
+
+			{sessions && <SessionList eid={String(eid)} sessions={sessions} admin={admin} />}
 		</div>
 	);
 };
