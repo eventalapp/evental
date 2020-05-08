@@ -53,7 +53,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 					<h1 className="text-2xl md:text-3xl font-medium">{session.name}</h1>
 				</div>
-				<div>
+				<div className="space-x-4">
 					<AddToCalendar event={SESSION_CALENDAR_EVENT} />
 
 					{!isAttending && !admin && (
