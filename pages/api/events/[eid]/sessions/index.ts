@@ -20,7 +20,7 @@ export type PaginationData = {
 	to: number;
 };
 
-export const SESSIONS_PER_PAGE = 20;
+export const SESSIONS_PER_PAGE = 24;
 
 export type PaginatedSessionsWithVenue = {
 	sessions: SessionWithVenue[];
