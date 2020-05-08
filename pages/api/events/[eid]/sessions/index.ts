@@ -139,7 +139,7 @@ export const getSessionsByVenue = async (
 	eid: string,
 	vid: string,
 	args: PageOptions = {}
-): Promise<SessionWithVenue[] | null> => {
+): Promise<PaginatedSessionsWithVenue | null> => {
 	const { page = 1 } = args || {};
 
 	const event = await getEvent(eid);
@@ -154,9 +154,19 @@ export const getSessionsByVenue = async (
 		return null;
 	}
 
-	return await prisma.eventSession.findMany({
-		take: 50,
-		skip: (page - 1) * 50,
+	const count = await prisma.eventSession.count({
+		where: {
+			eventId: event.id,
+			venueId: venue.id
+		},
+		orderBy: {
+			startDate: 'asc'
+		}
+	});
+
+	const sessions = await prisma.eventSession.findMany({
+		take: SESSIONS_PER_PAGE,
+		skip: (page - 1) * SESSIONS_PER_PAGE,
 		where: {
 			eventId: event.id,
 			venueId: venue.id
@@ -169,13 +179,25 @@ export const getSessionsByVenue = async (
 			startDate: 'asc'
 		}
 	});
+
+	return {
+		sessions,
+		pagination: {
+			total: count,
+			pageCount: Math.ceil(count / SESSIONS_PER_PAGE),
+			currentPage: page,
+			perPage: SESSIONS_PER_PAGE,
+			from: (page - 1) * SESSIONS_PER_PAGE + 1,
+			to: (page - 1) * SESSIONS_PER_PAGE + sessions.length
+		}
+	};
 };
 
 export const getSessionsByDate = async (
 	eid: string,
 	date: string,
 	args: PageOptions = {}
-): Promise<SessionWithVenue[] | null> => {
+): Promise<PaginatedSessionsWithVenue | null> => {
 	const { page = 1 } = args || {};
 
 	const event = await getEvent(eid);
@@ -193,9 +215,22 @@ export const getSessionsByDate = async (
 		return null;
 	}
 
-	return await prisma.eventSession.findMany({
-		take: 50,
-		skip: (page - 1) * 50,
+	const count = await prisma.eventSession.count({
+		where: {
+			eventId: event.id,
+			startDate: {
+				gte: startOfDay(dateParsed),
+				lte: endOfDay(dateParsed)
+			}
+		},
+		orderBy: {
+			startDate: 'asc'
+		}
+	});
+
+	const sessions = await prisma.eventSession.findMany({
+		take: SESSIONS_PER_PAGE,
+		skip: (page - 1) * SESSIONS_PER_PAGE,
 		where: {
 			eventId: event.id,
 			startDate: {
@@ -211,13 +246,25 @@ export const getSessionsByDate = async (
 			startDate: 'asc'
 		}
 	});
+
+	return {
+		sessions,
+		pagination: {
+			total: count,
+			pageCount: Math.ceil(count / SESSIONS_PER_PAGE),
+			currentPage: page,
+			perPage: SESSIONS_PER_PAGE,
+			from: (page - 1) * SESSIONS_PER_PAGE + 1,
+			to: (page - 1) * SESSIONS_PER_PAGE + sessions.length
+		}
+	};
 };
 
 export const getSessionsByType = async (
 	eid: string,
 	tid: string,
 	args: PageOptions = {}
-): Promise<SessionWithVenue[] | null> => {
+): Promise<PaginatedSessionsWithVenue | null> => {
 	const { page = 1 } = args || {};
 
 	const event = await getEvent(eid);
@@ -232,9 +279,19 @@ export const getSessionsByType = async (
 		return null;
 	}
 
-	return await prisma.eventSession.findMany({
-		take: 50,
-		skip: (page - 1) * 50,
+	const count = await prisma.eventSession.count({
+		where: {
+			eventId: event.id,
+			typeId: type.id
+		},
+		orderBy: {
+			startDate: 'asc'
+		}
+	});
+
+	const sessions = await prisma.eventSession.findMany({
+		take: SESSIONS_PER_PAGE,
+		skip: (page - 1) * SESSIONS_PER_PAGE,
 		where: {
 			eventId: event.id,
 			typeId: type.id
@@ -247,4 +304,16 @@ export const getSessionsByType = async (
 			startDate: 'asc'
 		}
 	});
+
+	return {
+		sessions,
+		pagination: {
+			total: count,
+			pageCount: Math.ceil(count / SESSIONS_PER_PAGE),
+			currentPage: page,
+			perPage: SESSIONS_PER_PAGE,
+			from: (page - 1) * SESSIONS_PER_PAGE + 1,
+			to: (page - 1) * SESSIONS_PER_PAGE + sessions.length
+		}
+	};
 };

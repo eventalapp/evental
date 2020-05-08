@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
-import React from 'react';
+import React, { useState } from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import Prisma from '@prisma/client';
 import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
@@ -20,12 +20,16 @@ import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useSessionsByVenueQuery } from '../../../../hooks/queries/useSessionsByVenueQuery';
-import { getSessionsByVenue, SessionWithVenue } from '../../../api/events/[eid]/sessions';
-import { ViewVenue } from '../../../../components/venues/ViewVenue';
+import { getSessionsByVenue, PaginatedSessionsWithVenue } from '../../../api/events/[eid]/sessions';
+import { Pagination } from '../../../../components/Pagination';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { SessionList } from '../../../../components/sessions/SessionList';
+import Tooltip from '../../../../components/radix/components/Tooltip';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
-	initialSessionsByVenue: SessionWithVenue[] | undefined;
+	initialSessionsByVenue: PaginatedSessionsWithVenue | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -35,6 +39,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { initialVenue, initialRoles, initialUser, initialEvent, initialSessionsByVenue } = props;
 	const { vid, eid } = router.query;
+	const [page, setPage] = useState(1);
 	const { venue, isVenueLoading, venueError } = useVenueQuery(
 		String(eid),
 		String(vid),
@@ -43,26 +48,25 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
-	const sessionsByVenueQuery = useSessionsByVenueQuery(
+	const { sessionsByVenueData, isSessionsByVenueLoading } = useSessionsByVenueQuery(
 		String(eid),
 		String(vid),
-		initialSessionsByVenue
+		{
+			initialData: initialSessionsByVenue,
+			page
+		}
 	);
 
-	if (isVenueLoading || isEventLoading || isRolesLoading) {
+	if (isVenueLoading || isEventLoading || isRolesLoading || isSessionsByVenueLoading) {
 		return <LoadingPage />;
 	}
 
-	if (!venue) {
+	if (!venue || !sessionsByVenueData?.sessions) {
 		return <NotFoundPage message="Venue not found." />;
 	}
 
-	if (venueError || eventError || rolesError || sessionsByVenueQuery.error) {
-		return (
-			<ViewErrorPage
-				errors={[venueError, eventError, rolesError, sessionsByVenueQuery.error?.response?.data]}
-			/>
-		);
+	if (venueError || eventError || rolesError) {
+		return <ViewErrorPage errors={[venueError, eventError, rolesError]} />;
 	}
 
 	if (!event) {
@@ -78,9 +82,51 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
+				<div className="mb-3">
+					<h3 className="text-xl md:text-2xl font-medium mb-1">{venue.name}</h3>
 
-				<ViewVenue venue={venue} sessionsByVenueQuery={sessionsByVenueQuery} eid={String(eid)} />
+					<Tooltip
+						message={
+							venue.address
+								? `This is venue is located at ${venue?.address}.`
+								: 'This venue has not specified an address'
+						}
+					>
+						<div className="inline-flex flex-row items-center mb-1 cursor-help">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mr-1.5"
+								size="1x"
+								icon={faLocationDot}
+							/>
+							{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
+						</div>
+					</Tooltip>
+
+					<p>{venue.description}</p>
+				</div>
+
+				<h3 className="text-xl md:text-2xl font-medium">
+					Sessions{' '}
+					{sessionsByVenueData?.pagination?.total > 0 && (
+						<span className="font-normal text-gray-500">
+							({sessionsByVenueData?.pagination?.from || 0}/
+							{sessionsByVenueData?.pagination?.total || 0})
+						</span>
+					)}
+				</h3>
+
+				{sessionsByVenueData.sessions && (
+					<SessionList eid={String(eid)} sessions={sessionsByVenueData.sessions} />
+				)}
+
+				{sessionsByVenueData.pagination.pageCount > 1 && (
+					<Pagination
+						page={page}
+						pageCount={sessionsByVenueData.pagination.pageCount}
+						setPage={setPage}
+					/>
+				)}
 			</Column>
 		</PageWrapper>
 	);
