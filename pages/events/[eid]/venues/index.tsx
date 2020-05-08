@@ -37,8 +37,14 @@ type Props = {
 
 const SessionsPage: NextPage<Props> = (props) => {
 	const router = useRouter();
-	const { initialVenues, initialOrganizer, initialEvent, initialIsAttendeeByUserId, initialUser } =
-		props;
+	const {
+		initialVenues,
+		initialOrganizer,
+		initialEvent,
+		initialIsAttendeeByUserId,
+		initialUser,
+		initialRoles
+	} = props;
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
@@ -49,7 +55,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 		String(user?.id),
 		initialIsAttendeeByUserId
 	);
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid), initialRoles);
 
 	if (
 		isVenuesLoading ||
