@@ -6,6 +6,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { NavigationWrapper } from './NavigationWrapper';
+import { LinkButton } from '../form/LinkButton';
 
 type Props = {
 	className?: string;
@@ -37,9 +38,13 @@ export const Authenticated: React.FC<Props> = (props) => {
 				</a>
 			</Link>
 
-			<div className="flex-row hidden space-x-8 font-medium sm:flex items-center">
+			<div className="flex-row hidden space-x-6 font-medium sm:flex items-center">
 				<Link href="/events/attending">
-					<a>Events</a>
+					<a>My Events</a>
+				</Link>
+
+				<Link href="/events/create">
+					<LinkButton>Create Event</LinkButton>
 				</Link>
 				{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
 			</div>
