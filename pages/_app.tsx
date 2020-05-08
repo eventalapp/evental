@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/global.css';
+import 'draft-js/dist/Draft.css';
 import 'nprogress/nprogress.css';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
