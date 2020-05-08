@@ -3,7 +3,7 @@ import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutation';
-import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 import { useRouter } from 'next/router';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Controller, useForm } from 'react-hook-form';
@@ -11,8 +11,9 @@ import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoadingInner } from '../error/LoadingInner';
 import Switch from '../radix/components/Switch';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
-type Props = { eid: string } & UseRoleAttendeesQueryData &
+type Props = { eid: string; attendees: AttendeeWithUser[] } & UseRoleQueryData &
 	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
 	UseEditRoleMutationData;
 

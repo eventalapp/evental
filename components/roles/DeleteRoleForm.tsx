@@ -2,15 +2,19 @@ import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { LoadingInner } from '../error/LoadingInner';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
-type Props = Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
+type Props = { attendees: AttendeeWithUser[] } & Omit<
+	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>,
+	'role'
+> &
 	UseDeleteRoleMutationData &
-	UseRoleAttendeesQueryData;
+	UseRoleQueryData;
 
 export const DeleteRoleForm: React.FC<Props> = (props) => {
 	const router = useRouter();

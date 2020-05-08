@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { DeleteRoleForm } from '../../../../../../components/roles/DeleteRoleForm';
-import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
+import { useRoleQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useDeleteRoleMutation } from '../../../../../../hooks/mutations/useDeleteRoleMutation';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -18,12 +18,13 @@ import { useUser } from '../../../../../../hooks/queries/useUser';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import { useAttendeesByRoleQuery } from '../../../../../../hooks/queries/useAttendeesByRoleQuery';
 
 const DeleteRolePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, rid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { roleAttendeesError, role, isRoleAttendeesLoading, attendees } = useRoleAttendeesQuery(
+	const { roleAttendeesError, role, isRoleAttendeesLoading } = useRoleQuery(
 		String(eid),
 		String(rid)
 	);
@@ -31,13 +32,15 @@ const DeleteRolePage: NextPage = () => {
 	const { user, isUserLoading } = useUser();
 	const { event, isEventLoading } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { attendeesData, isAttendeesLoading } = useAttendeesByRoleQuery(String(eid), String(rid));
 
 	if (
 		isOrganizerLoading ||
 		isRoleAttendeesLoading ||
 		isUserLoading ||
 		isEventLoading ||
-		isRolesLoading
+		isRolesLoading ||
+		isAttendeesLoading
 	) {
 		return <LoadingPage />;
 	}
@@ -50,7 +53,7 @@ const DeleteRolePage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!role || !attendees) {
+	if (!role || !attendeesData?.attendees) {
 		return <NotFoundPage message="Role not found." />;
 	}
 
@@ -82,7 +85,7 @@ const DeleteRolePage: NextPage = () => {
 					roleAttendeesError={roleAttendeesError}
 					deleteRoleMutation={deleteRoleMutation}
 					isRoleAttendeesLoading={isRoleAttendeesLoading}
-					attendees={attendees}
+					attendees={attendeesData?.attendees}
 				/>
 			</Column>
 		</PageWrapper>

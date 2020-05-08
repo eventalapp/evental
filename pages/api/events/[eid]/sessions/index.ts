@@ -7,18 +7,18 @@ import { getVenue } from '../venues/[vid]';
 import { endOfDay, isAfter, isBefore, parseISO, startOfDay } from 'date-fns';
 import { getSessionType } from './types/[tid]';
 
-interface PageOptions {
+export type PageOptions = {
 	page?: number;
-}
+};
 
-interface PaginationData {
+export type PaginationData = {
 	total: number;
 	pageCount: number;
 	currentPage: number;
 	perPage: number;
 	from: number;
 	to: number;
-}
+};
 
 export const SESSIONS_PER_PAGE = 20;
 
