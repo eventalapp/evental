@@ -30,7 +30,7 @@ const OrganizerInvitePage: NextPage = () => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Reset Password</title>
+				<title>Accept Organizer Invite</title>
 			</Head>
 
 			<Navigation />
@@ -40,15 +40,24 @@ const OrganizerInvitePage: NextPage = () => {
 					<h1 className="text-2xl md:text-3xl font-bold">Accept Organizer Invite</h1>
 				</div>
 
-				<Button
-					onClick={() => {
-						const data = AcceptOrganizerInviteSchema.parse({ code: String(code) });
+				<p className="text-md text-gray-700 mb-2">
+					As an organizer you will be able to create, edit, and delete sessions, venues, and roles.
+				</p>
 
-						acceptOrganizerInviteMutation.mutate(data);
-					}}
-				>
-					Accept Invite
-				</Button>
+				<div className="flex flex-row justify-end">
+					<Button type="button" variant="no-bg" onClick={router.back}>
+						Cancel
+					</Button>
+					<Button
+						onClick={() => {
+							const data = AcceptOrganizerInviteSchema.parse({ code: String(code) });
+
+							acceptOrganizerInviteMutation.mutate(data);
+						}}
+					>
+						Accept Invite
+					</Button>
+				</div>
 			</Column>
 		</PageWrapper>
 	);

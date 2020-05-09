@@ -11,7 +11,7 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - billing (stripe or similar?)
 - Sort sessions by date
 - view/print your schedule
-- invite organizers/roles to event
+- invite roles to event
 - sign in/signup redirect link
 - next SEO
 - custom pages for map etc
