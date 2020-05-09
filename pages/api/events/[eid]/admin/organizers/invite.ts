@@ -1,4 +1,4 @@
-import { ChangePasswordRequestSchema } from '../../../../../../utils/schemas';
+import { InviteOrganizerSchema } from '../../../../../../utils/schemas';
 import { api } from '../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { ORGANIZER_INVITE_EXPIRY } from '../../../../../../config';
@@ -23,7 +23,7 @@ export default api({
 			throw new NextkitError(403, 'You must be a founder to invite organizers');
 		}
 
-		const body = ChangePasswordRequestSchema.parse(req.body);
+		const body = InviteOrganizerSchema.parse(req.body);
 
 		const event = await getEvent(String(eid));
 

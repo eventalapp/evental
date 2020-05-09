@@ -259,3 +259,17 @@ export const EditPageSchema = z.object({
 });
 
 export type EditPagePayload = z.infer<typeof EditPageSchema>;
+
+// Invites
+
+export const InviteRoleSchema = z.object({
+	email: emailValidator
+});
+
+export type InviteRolePayload = z.infer<typeof InviteRoleSchema>;
+
+export const AcceptRoleInviteSchema = z.object({
+	code: codeValidator
+});
+
+export type AcceptRoleInvitePayload = z.infer<typeof AcceptRoleInviteSchema>;
