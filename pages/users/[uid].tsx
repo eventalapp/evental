@@ -11,6 +11,7 @@ import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import React from 'react';
+import parse from 'html-react-parser';
 
 type Props = {
 	initialViewingUser: PasswordlessUser | undefined;
@@ -39,7 +40,11 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<p>{user.name}</p>
+				<h3 className="text-xl md:text-2xl font-medium mb-3">{user.name}</h3>
+
+				<div className="prose focus:outline-none prose-a:text-primary">
+					{parse(String(user.description))}
+				</div>
 			</Column>
 		</PageWrapper>
 	);

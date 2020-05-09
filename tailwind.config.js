@@ -1,7 +1,7 @@
 module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-	darkMode: false,
+	darkMode: 'class',
 	mode: 'jit',
 	theme: {
 		fontFamily: {
@@ -192,5 +192,9 @@ module.exports = {
 			cursor: ['hover', 'focus', 'disabled']
 		}
 	},
-	plugins: [require('@tailwindcss/forms'), require('tailwindcss-radix')()]
+	plugins: [
+		require('@tailwindcss/forms'),
+		require('tailwindcss-radix')(),
+		require('@tailwindcss/typography')
+	]
 };

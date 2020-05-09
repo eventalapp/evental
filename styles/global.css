@@ -159,3 +159,15 @@
 * {
 	@apply font-display;
 }
+
+.prose li > p {
+	@apply my-0;
+}
+
+.prose li {
+	@apply my-0;
+}
+
+.ProseMirror.ProseMirror-focused {
+	@apply focus:outline-none;
+}
