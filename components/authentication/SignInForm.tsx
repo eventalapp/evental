@@ -10,11 +10,14 @@ import { UseSignInMutationData } from '../../hooks/mutations/useSignInMutation';
 import Link from 'next/link';
 import { LoadingInner } from '../error/LoadingInner';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+type Props = { params?: string } & DetailedHTMLProps<
+	FormHTMLAttributes<HTMLFormElement>,
+	HTMLFormElement
+> &
 	UseSignInMutationData;
 
 export const SignInForm: React.FC<Props> = (props) => {
-	const { signInMutation } = props;
+	const { signInMutation, params } = props;
 	const {
 		register,
 		handleSubmit,
@@ -67,7 +70,7 @@ export const SignInForm: React.FC<Props> = (props) => {
 			</div>
 			<span className="mt-3 block">
 				Dont have an account?{' '}
-				<Link href="/auth/signup">
+				<Link href={`/auth/signup?${params}`}>
 					<a className="text-primary text-sm">Sign up</a>
 				</Link>
 			</span>

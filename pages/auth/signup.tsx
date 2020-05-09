@@ -10,16 +10,19 @@ import { LoadingPage } from '../../components/error/LoadingPage';
 import { useUser } from '../../hooks/queries/useUser';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { useRouter } from 'next/router';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
 };
 
 const SignInPage: NextPage<Props> = (props) => {
-	const { signUpMutation } = useSignUpMutation();
 	const { initialUser } = props;
 	const { user, isUserLoading } = useUser(initialUser);
-
+	const router = useRouter();
+	const { signUpMutation } = useSignUpMutation({
+		redirectUrl: router.query.redirectUrl ? String(router.query.redirectUrl) : undefined
+	});
 	if (isUserLoading) {
 		return <LoadingPage />;
 	}

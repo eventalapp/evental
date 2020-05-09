@@ -143,9 +143,11 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				)}
 			</div>
 
-			<div className="prose focus:outline-none prose-a:text-primary">
-				{parse(String(attendee.user.description))}
-			</div>
+			{attendee.user.description && (
+				<div className="prose focus:outline-none prose-a:text-primary">
+					{parse(String(attendee.user.description))}
+				</div>
+			)}
 		</div>
 	);
 };

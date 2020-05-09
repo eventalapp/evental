@@ -11,12 +11,14 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - billing (stripe or similar?)
 - Sort sessions by date
 - view/print your schedule
-- customize react toast
 - invite organizers/roles to event
-- custom icons
 - sign in/signup redirect link
-- 
+- next SEO
 - custom pages for map etc
+
+## low importance
+- custom icons
+- customize react toast
 
 ## todo post mvp
 - clean up queries/mutations(export whole mut/query)

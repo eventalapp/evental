@@ -55,7 +55,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 					<h1 className="text-2xl md:text-3xl font-medium">{session.name}</h1>
 				</div>
 				<div className="space-x-4">
-					<AddToCalendar event={SESSION_CALENDAR_EVENT} />
+					{isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
 
 					{!isAttending && !admin && (
 						<Link href={`/events/${eid}/sessions/${sid}/register`} passHref>
@@ -141,9 +141,11 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			</Tooltip>
 
-			<div className="prose focus:outline-none prose-a:text-primary mt-1">
-				{parse(String(session.description))}
-			</div>
+			{session.description && (
+				<div className="prose focus:outline-none prose-a:text-primary mt-1">
+					{parse(String(session.description))}
+				</div>
+			)}
 
 			<h3 className="text-2xl font-medium my-3">
 				Attendees <span className="text-gray-500 font-normal">({attendees?.length || 0})</span>

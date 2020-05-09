@@ -66,7 +66,11 @@ export default api({
 
 		res.setHeader('Set-Cookie', cookie);
 
-		await sendWelcomeEmail(user.email, user.name);
+		try {
+			await sendWelcomeEmail(user.email, user.name);
+		} catch {
+			// silent fail
+		}
 
 		const { password, ...rest } = user;
 

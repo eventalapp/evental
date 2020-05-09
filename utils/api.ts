@@ -35,6 +35,18 @@ const getPasswordResetCode = async (): Promise<string> => {
 	return token;
 };
 
+const getOrganizerInviteCode = async (): Promise<string> => {
+	const token = randomBytes(128).toString('hex');
+
+	const count = await redis.exists(`organizer:${token}`);
+
+	if (count > 0) {
+		return getOrganizerInviteCode();
+	}
+
+	return token;
+};
+
 export const ssrGetUser = async (
 	req: IncomingMessage & { cookies: NextApiRequestCookies }
 ): Promise<PasswordlessUser | null> => {
@@ -61,6 +73,7 @@ export const api = createAPI({
 			redis,
 			getToken,
 			getPasswordResetCode,
+			getOrganizerInviteCode,
 			getUser: async () => {
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 

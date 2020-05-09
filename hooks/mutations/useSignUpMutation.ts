@@ -14,7 +14,12 @@ export interface UseSignUpMutationData {
 	>;
 }
 
-export const useSignUpMutation = (): UseSignUpMutationData => {
+interface UseSignUpMutationOptions {
+	redirectUrl?: string;
+}
+
+export const useSignUpMutation = (args: UseSignUpMutationOptions = {}): UseSignUpMutationData => {
+	const { redirectUrl } = args;
 	const queryClient = useQueryClient();
 
 	const signUpMutation = useMutation<
@@ -29,10 +34,17 @@ export const useSignUpMutation = (): UseSignUpMutationData => {
 		},
 		{
 			onSuccess: () => {
-				router.push('/events').then(() => {
-					toast.success('You have successfully signed up');
-					void queryClient.refetchQueries('user');
-				});
+				if (!redirectUrl) {
+					router.push('/events').then(() => {
+						toast.success('You have successfully signed up');
+						void queryClient.refetchQueries('user');
+					});
+				} else {
+					router.push(redirectUrl).then(() => {
+						toast.success('You have successfully signed up');
+						void queryClient.refetchQueries('user');
+					});
+				}
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'Failed to sign up.');
