@@ -1,37 +1,73 @@
-import { ChangePasswordRequestSchema } from '../../../../../utils/schemas';
-import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
-import { ORGANIZER_INVITE_EXPIRY } from '../../../../../config';
+import { api } from '../../../../../utils/api';
+import { AcceptOrganizerInviteSchema } from '../../../../../utils/schemas';
 import { prisma } from '../../../../../prisma/client';
-import { isFounder } from '../../../../../utils/isFounder';
-import { sendOrganizerInvite } from '../../../../../email/sendOrganizerInvite';
 
 export default api({
 	async POST({ ctx, req }) {
-		const { eid } = req.query;
+		const body = AcceptOrganizerInviteSchema.parse(req.body);
 
-		const body = ChangePasswordRequestSchema.parse(req.body);
+		const eventAndEmail = await ctx.redis.get<string>(`organizer:${body.code}`);
+
+		if (!eventAndEmail) {
+			throw new NextkitError(400, `Invalid invite code.`);
+		}
+
+		const userEmail = eventAndEmail.split(':')[1];
+		const eventId = eventAndEmail.split(':')[0];
 
 		const user = await prisma.user.findFirst({
 			where: {
-				email: body.email
+				email: userEmail
 			}
 		});
 
 		if (!user) {
-			throw new NextkitError(404, 'User not found');
+			throw new NextkitError(400, `You must sign up before accepting this invite.`);
 		}
 
-		const isFounderResponse = await isFounder(String(eid), user.id);
+		const attendee = await prisma.eventAttendee.findFirst({
+			where: {
+				eventId,
+				userId: user.id
+			}
+		});
 
-		if (!isFounderResponse) {
-			throw new NextkitError(403, 'You must be a founder to invite organizers');
+		await ctx.redis.del(`organizer:${body.code}`);
+
+		if (attendee) {
+			if (attendee.permissionRole === 'ORGANIZER' || attendee.permissionRole === 'FOUNDER') {
+				throw new NextkitError(400, `You are already an organizer of this event.`);
+			}
+
+			await prisma.eventAttendee.update({
+				where: {
+					eventId_userId: {
+						eventId,
+						userId: user.id
+					}
+				},
+				data: {
+					permissionRole: 'ORGANIZER'
+				}
+			});
+		} else {
+			const defaultRole = await prisma.eventRole.findFirst({
+				where: { defaultRole: true, eventId: eventId }
+			});
+
+			if (!defaultRole) {
+				throw new NextkitError(500, `Default event role not found.`);
+			}
+
+			await prisma.eventAttendee.create({
+				data: {
+					eventId: eventId,
+					userId: user.id,
+					eventRoleId: defaultRole.id,
+					permissionRole: 'ORGANIZER'
+				}
+			});
 		}
-
-		const inviteCode = await ctx.getOrganizerInviteCode();
-
-		await ctx.redis.set(`organizer:${inviteCode}`, body.email, { ex: ORGANIZER_INVITE_EXPIRY });
-
-		await sendOrganizerInvite(user.email, inviteCode);
 	}
 });

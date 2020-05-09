@@ -10,10 +10,10 @@ export default api({
 			return false;
 		}
 
-		return await getIsFounder(user?.id, String(eid));
+		return await getIsFounder(String(eid), user?.id);
 	}
 });
 
 export const getIsFounder = async (userId: string | undefined, eid: string): Promise<boolean> => {
-	return userId ? await isFounder(userId, String(eid)) : false;
+	return userId ? await isFounder(String(eid), userId) : false;
 };

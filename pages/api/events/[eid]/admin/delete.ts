@@ -12,7 +12,7 @@ export default api({
 			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
 
-		if (!(await isFounder(String(user?.id), String(eid)))) {
+		if (!(await isFounder(String(eid), String(user?.id)))) {
 			throw new NextkitError(403, 'You must be founder for this event to do this.');
 		}
 

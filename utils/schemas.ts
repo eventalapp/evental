@@ -230,9 +230,14 @@ export type EditUserPayload = z.infer<typeof EditUserSchema>;
 
 // Invites
 
-export const InvitePermissionRoleSchema = z.object({
-	email: emailValidator,
-	permissionRole: z.string()
+export const InviteOrganizerSchema = z.object({
+	email: emailValidator
 });
 
-export type InvitePermissionRolePaylod = z.infer<typeof InvitePermissionRoleSchema>;
+export type InviteOrganizerPayload = z.infer<typeof InviteOrganizerSchema>;
+
+export const AcceptOrganizerInviteSchema = z.object({
+	code: codeValidator
+});
+
+export type AcceptOrganizerInvitePayload = z.infer<typeof AcceptOrganizerInviteSchema>;
