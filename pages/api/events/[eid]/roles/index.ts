@@ -44,3 +44,18 @@ export const getRoles = async (eid: string): Promise<Prisma.EventRole[] | null> 
 		}
 	});
 };
+
+export const getDefaultRole = async (eid: string): Promise<Prisma.EventRole | null> => {
+	const event = await getEvent(String(eid));
+
+	if (!event) {
+		return null;
+	}
+
+	return await prisma.eventRole.findFirst({
+		where: {
+			eventId: event.id,
+			defaultRole: true
+		}
+	});
+};

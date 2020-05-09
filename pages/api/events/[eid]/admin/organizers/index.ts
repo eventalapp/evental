@@ -19,7 +19,7 @@ export default api({
 		const organizers = await getOrganizers(String(eid));
 
 		if (!organizers) {
-			throw new NextkitError(404, 'Organizers not found');
+			throw new NextkitError(404, 'No organizers found');
 		}
 
 		return organizers;

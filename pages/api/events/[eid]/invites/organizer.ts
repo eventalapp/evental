@@ -2,6 +2,7 @@ import { NextkitError } from 'nextkit';
 import { api } from '../../../../../utils/api';
 import { AcceptOrganizerInviteSchema } from '../../../../../utils/schemas';
 import { prisma } from '../../../../../prisma/client';
+import { getDefaultRole } from '../roles';
 
 export default api({
 	async POST({ ctx, req }) {
@@ -52,9 +53,7 @@ export default api({
 				}
 			});
 		} else {
-			const defaultRole = await prisma.eventRole.findFirst({
-				where: { defaultRole: true, eventId: eventId }
-			});
+			const defaultRole = await getDefaultRole(String(eventId));
 
 			if (!defaultRole) {
 				throw new NextkitError(500, `Default event role not found.`);
