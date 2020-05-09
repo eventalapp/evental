@@ -33,7 +33,7 @@ export const SessionList: React.FC<Props> = (props) => {
 										i !== sessions.length - 1 && 'border-b-2'
 									)}
 								>
-									<span className="text-gray-700 text-sm w-20 pr-3 text-right ">
+									<span className="text-gray-700 text-sm w-20 pr-3 text-right">
 										{format(new Date(session.startDate), 'h:mm a OOO')}
 									</span>
 									<div

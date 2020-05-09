@@ -11,9 +11,9 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - billing (stripe or similar?)
 - Sort sessions by date
 - view/print your schedule
-- invite roles to event
 - next SEO
 - image upload for top level page wysiwyg
+- timeZones
 
 ## low importance
 - custom icons

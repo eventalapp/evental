@@ -40,6 +40,7 @@ export const fake = (count: number) => {
 		location: faker.address.city(),
 		image: '/images/default-event.jpg',
 		startDate: new Date(),
+		timeZone: 'America/New_York',
 		endDate: new Date(),
 		category: 'EVENT',
 		type: 'HYBRID',

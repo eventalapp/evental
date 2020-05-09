@@ -38,10 +38,10 @@ export const CreatePageForm: React.FC<Props> = (props) => {
 				createPageMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full mt-5">
-				<div className="mb-5">
+			<div className="flex flex-row w-full mt-5">
+				<div className="mb-5 flex-1">
 					<Label htmlFor="name">Name *</Label>
-					<Input placeholder="Room 415" {...register('name')} />
+					<Input placeholder="Event Map" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
@@ -61,23 +61,23 @@ export const CreatePageForm: React.FC<Props> = (props) => {
 					/>
 					{errors.topLevel?.message && <ErrorMessage>{errors.topLevel?.message}</ErrorMessage>}
 				</div>
+			</div>
 
-				<div className="mb-5">
-					<Label htmlFor="body">Body</Label>
-					<Controller
-						control={control}
-						name="body"
-						render={({ field }) => (
-							<StyledEditor
-								onChange={(value) => {
-									field.onChange(value);
-								}}
-								content={field.value || ''}
-							/>
-						)}
-					/>
-					{errors.body?.message && <ErrorMessage>{errors.body?.message}</ErrorMessage>}
-				</div>
+			<div className="mb-5">
+				<Label htmlFor="body">Body</Label>
+				<Controller
+					control={control}
+					name="body"
+					render={({ field }) => (
+						<StyledEditor
+							onChange={(value) => {
+								field.onChange(value);
+							}}
+							content={field.value || ''}
+						/>
+					)}
+				/>
+				{errors.body?.message && <ErrorMessage>{errors.body?.message}</ErrorMessage>}
 			</div>
 
 			<div className="flex flex-row justify-end">

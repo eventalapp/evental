@@ -31,6 +31,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		formState: { errors }
 	} = useForm<CreateEventPayload>({
 		defaultValues: {
+			timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 			startDate: startOfDay(new Date()),
 			endDate: endOfDay(new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3))
 		},

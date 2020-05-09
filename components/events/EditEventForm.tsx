@@ -16,9 +16,11 @@ import { LoadingInner } from '../error/LoadingInner';
 import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
 import Button from '../radix/components/shared/Button';
 import { EventCategory, EventType } from '@prisma/client';
-import Select from '../radix/components/Select';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { endOfDay, startOfDay } from 'date-fns';
+import Select from '../radix/components/Select';
+import ReactSelect from 'react-select';
+import { timeZoneOptions } from '../../utils/const';
 
 type Props = {
 	eid: string;
@@ -46,6 +48,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			location: event?.location ?? undefined,
 			type: event?.type ?? undefined,
 			category: event?.category ?? undefined,
+			timeZone: event?.timeZone ?? 'America/New_York',
 			slug: event?.slug ?? undefined,
 			endDate: endOfDay(new Date(String(event?.endDate))) ?? undefined,
 			startDate: startOfDay(new Date(String(event?.startDate))) ?? undefined
@@ -162,6 +165,29 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						</div>
 						{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
 					</div>
+				</div>
+			</div>
+
+			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+				<div>
+					<Label htmlFor="slug">Time Zone *</Label>
+
+					<Controller
+						control={control}
+						name="timeZone"
+						render={({ field }) => (
+							<ReactSelect
+								options={timeZoneOptions}
+								className="w-full block"
+								value={timeZoneOptions.find((val) => val.value === field.value)}
+								onChange={(val) => {
+									field.onChange(val?.value);
+								}}
+							/>
+						)}
+					/>
+
+					{errors.timeZone?.message && <ErrorMessage>{errors.timeZone?.message}</ErrorMessage>}
 				</div>
 			</div>
 
