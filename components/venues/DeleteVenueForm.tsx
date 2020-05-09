@@ -3,7 +3,7 @@ import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
-import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutatation';
+import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutation';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { LoadingInner } from '../error/LoadingInner';

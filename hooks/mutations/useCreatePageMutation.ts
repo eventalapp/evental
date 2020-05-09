@@ -1,0 +1,45 @@
+import type Prisma from '@prisma/client';
+import axios, { AxiosError } from 'axios';
+import router from 'next/router';
+import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
+import { CreatePagePayload } from '../../utils/schemas';
+import { toast } from 'react-toastify';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+
+export interface UseCreatePageMutationData {
+	createPageMutation: UseMutationResult<
+		Prisma.EventPage,
+		AxiosError<ErroredAPIResponse, unknown>,
+		CreatePagePayload
+	>;
+}
+
+export const useCreatePageMutation = (eid: string): UseCreatePageMutationData => {
+	const queryClient = useQueryClient();
+
+	const createPageMutation = useMutation<
+		Prisma.EventPage,
+		AxiosError<ErroredAPIResponse, unknown>,
+		CreatePagePayload
+	>(
+		async (data) => {
+			return await axios
+				.post<SuccessAPIResponse<Prisma.EventPage>>(`/api/events/${eid}/admin/pages/create`, data)
+				.then((res) => res.data.data);
+		},
+		{
+			onSuccess: (data) => {
+				toast.success('Page created successfully');
+
+				router.push(`/events/${eid}/admin/pages/${data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['pages', eid]);
+				});
+			},
+			onError: (error) => {
+				toast.error(error?.response?.data.message ?? 'An error has occurred.');
+			}
+		}
+	);
+
+	return { createPageMutation };
+};

@@ -5,7 +5,7 @@ import Column from '../../../../../../components/layout/Column';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenueForm';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
-import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutatation';
+import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutation';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';

@@ -100,6 +100,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 								<LinkItem link={`/events/${event.slug}/admin/attendees`} label={'Attendees'} />
 								<LinkItem link={`/events/${event.slug}/admin/roles`} label={'Roles'} />
 								<LinkItem link={`/events/${event.slug}/admin/organizers`} label={'Organizers'} />
+								<LinkItem link={`/events/${event.slug}/admin/pages`} label={'Pages'} />
 								<LinkItem link={`/events/${event.slug}/admin`} label={'Settings'} />
 							</div>
 						</div>

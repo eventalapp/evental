@@ -7,13 +7,13 @@ import { EventCategory, EventType } from '@prisma/client';
 const slugValidator = z
 	.string()
 	.min(1, 'Slug is required.')
-	.min(4, 'Slug must be at least 4 characters')
+	.min(3, 'Slug must be at least 3 characters')
 	.max(40, 'Slug must be less than 40 characters')
 	.regex(new RegExp(/^(?!-)(?!.*-$).+$/), 'Slug cannot start or end with a hyphen.');
 const nameValidator = z
 	.string()
 	.min(1, 'Name is required.')
-	.min(4, 'Name must be at least 4 characters')
+	.min(3, 'Name must be at least 3 characters')
 	.max(100, 'Name must be less than 100 characters');
 const addressValidator = z.string().max(100, 'Address must be less than 100 characters');
 const dateValidator = z.preprocess((val) => new Date(val as string | Date), z.date());
@@ -241,3 +241,21 @@ export const AcceptOrganizerInviteSchema = z.object({
 });
 
 export type AcceptOrganizerInvitePayload = z.infer<typeof AcceptOrganizerInviteSchema>;
+
+// Pages
+
+export const CreatePageSchema = z.object({
+	name: nameValidator,
+	topLevel: z.boolean(),
+	body: descriptionValidator.optional()
+});
+
+export type CreatePagePayload = z.infer<typeof CreatePageSchema>;
+
+export const EditPageSchema = z.object({
+	name: nameValidator,
+	topLevel: z.boolean(),
+	body: descriptionValidator.optional()
+});
+
+export type EditPagePayload = z.infer<typeof EditPageSchema>;
