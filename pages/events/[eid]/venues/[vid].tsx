@@ -26,6 +26,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { SessionList } from '../../../../components/sessions/SessionList';
 import Tooltip from '../../../../components/radix/components/Tooltip';
+import parse from 'html-react-parser';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
@@ -82,7 +83,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<div className="mb-3">
+				<div className="mb-5">
 					<h3 className="text-xl md:text-2xl font-medium mb-1">{venue.name}</h3>
 
 					<Tooltip
@@ -103,7 +104,9 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 						</div>
 					</Tooltip>
 
-					<p>{venue.description}</p>
+					<div className="prose focus:outline-none prose-a:text-primary mt-1">
+						{parse(String(venue.description))}
+					</div>
 				</div>
 
 				<h3 className="text-xl md:text-2xl font-medium">

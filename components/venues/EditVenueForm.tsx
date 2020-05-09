@@ -4,13 +4,13 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseEditVenueMutationData } from '../../hooks/mutations/useEditVenueMutation';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
-import { Textarea } from '../form/Textarea';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
+import { StyledEditor } from '../form/Editor';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -26,6 +26,7 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 	const {
 		register,
 		handleSubmit,
+		control,
 		formState: { errors }
 	} = useForm<EditVenuePayload>({
 		defaultValues: {
@@ -59,7 +60,18 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 
 				<div className="mb-5">
 					<Label htmlFor="description">Description</Label>
-					<Textarea rows={5} placeholder="Venue description" {...register('description')} />
+					<Controller
+						control={control}
+						name="description"
+						render={({ field }) => (
+							<StyledEditor
+								onChange={(value) => {
+									field.onChange(value);
+								}}
+								content={field.value || ''}
+							/>
+						)}
+					/>
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
