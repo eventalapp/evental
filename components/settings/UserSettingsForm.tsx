@@ -43,8 +43,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 	});
 
 	const slugWatcher = watch('slug');
-	const descriptionWatcher = watch('description');
-	console.log(descriptionWatcher);
+
 	const { user: userSlugCheck, isUserLoading: isUserSlugCheckLoading } = useUserQuery(slugWatcher);
 
 	useEffect(() => {
@@ -109,7 +108,6 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 mb-5 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
-
 					<Controller
 						control={control}
 						name="description"

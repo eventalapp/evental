@@ -2,7 +2,6 @@ import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { Textarea } from '../form/Textarea';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { UseEditSessionMutationData } from '../../hooks/mutations/useEditSessionMutation';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -19,6 +18,7 @@ import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
 import Select from '../radix/components/Select';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
+import { StyledEditor } from '../form/Editor';
 
 type Props = {
 	eid: string;
@@ -206,7 +206,18 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 mb-5 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
-					<Textarea rows={5} placeholder="Session description" {...register('description')} />
+					<Controller
+						control={control}
+						name="description"
+						render={({ field }) => (
+							<StyledEditor
+								onChange={(value) => {
+									field.onChange(value);
+								}}
+								content={field.value || ''}
+							/>
+						)}
+					/>
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}

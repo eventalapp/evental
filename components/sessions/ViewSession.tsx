@@ -12,6 +12,7 @@ import Tooltip from '../radix/components/Tooltip';
 import { AddToCalendar } from '../AddToCalendar';
 import { CalendarEvent } from 'calendar-link';
 import Prisma from '@prisma/client';
+import parse from 'html-react-parser';
 
 type Props = {
 	eid: string;
@@ -140,7 +141,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			</Tooltip>
 
-			<p>{session.description}</p>
+			<div className="prose focus:outline-none prose-a:text-primary mt-1">
+				{parse(String(session.description))}
+			</div>
 
 			<h3 className="text-2xl font-medium my-3">
 				Attendees <span className="text-gray-500 font-normal">({attendees?.length || 0})</span>
