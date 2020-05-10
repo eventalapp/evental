@@ -156,14 +156,11 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						)}
 					</div>
 					<div className="md:col-span-3 col-span-12">
-						<div className="mb-3">
-							<span className="block font-medium border-b border-gray-200">Time Zone</span>
-							<div>{event.timeZone}</div>
-						</div>
-
 						{venues && venues.length > 0 && (
 							<div className="mb-3">
-								<span className="block font-medium border-b border-gray-200">Filter by Venue</span>
+								<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
+									Filter by Venue
+								</span>
 								<ul>
 									{venues.map((venue) => (
 										<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
@@ -176,14 +173,22 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						{sessionTypes && sessionTypes.length > 0 && (
 							<div className="mb-3">
-								<span className="block font-medium border-b border-gray-200">Filter by Type</span>
+								<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
+									Filter by Type
+								</span>
 								<ul>
 									{sessionTypes.map((sessionType) => (
 										<Link
 											key={sessionType.id}
 											href={`/events/${eid}/sessions/types/${sessionType.slug}`}
 										>
-											<a className="block">{sessionType.name}</a>
+											<a className="block flex flex-row items-center">
+												<div
+													className="rounded-full mr-2 w-3 h-3"
+													style={{ backgroundColor: sessionType.color ?? '#888888' }}
+												/>
+												{sessionType.name}
+											</a>
 										</Link>
 									))}
 								</ul>
@@ -191,7 +196,9 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						)}
 
 						<div className="mb-3">
-							<span className="block font-medium border-b border-gray-200">Filter by Date</span>
+							<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
+								Filter by Date
+							</span>
 							{getDateRange(new Date(event.startDate), new Date(event.endDate)).map((date, i) => (
 								<Link
 									key={`${date.toISOString()}-${i}`}
