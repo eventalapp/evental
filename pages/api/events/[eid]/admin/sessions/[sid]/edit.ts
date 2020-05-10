@@ -4,6 +4,7 @@ import { EditSessionSchema } from '../../../../../../../utils/schemas';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { generateSlug } from '../../../../../../../utils/generateSlug';
+import dayjs from 'dayjs';
 
 export default api({
 	async PUT({ ctx, req }) {
@@ -22,7 +23,8 @@ export default api({
 		const event = await prisma.event.findFirst({
 			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
 			select: {
-				id: true
+				id: true,
+				timeZone: true
 			}
 		});
 
@@ -68,8 +70,8 @@ export default api({
 				slug,
 				name: parsed.name,
 				venueId: parsed.venueId,
-				startDate: parsed.startDate,
-				endDate: parsed.endDate,
+				startDate: dayjs(parsed.startDate).tz(event.timeZone).toDate(),
+				endDate: dayjs(parsed.endDate).tz(event.timeZone).toDate(),
 				description: parsed.description,
 				typeId: parsed.typeId
 			}

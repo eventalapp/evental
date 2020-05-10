@@ -12,6 +12,7 @@ import { DatePicker } from '../form/DatePicker';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
 import { endOfDay, startOfDay } from 'date-fns';
+import dayjs from 'dayjs';
 
 type Props = { canCancel?: boolean } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -77,9 +78,11 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 									name="startDate"
 									render={({ field }) => (
 										<DatePicker
-											onChange={(e) => field.onChange(e)}
-											selected={field.value}
-											startDate={field.value}
+											onChange={(date) => {
+												field.onChange(dayjs(date).hour(0).toDate());
+											}}
+											selected={dayjs(field.value).hour(0).toDate()}
+											startDate={dayjs(field.value).hour(0).toDate()}
 											endDate={endDateWatcher}
 											required
 											selectsStart
@@ -101,12 +104,14 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 									name="endDate"
 									render={({ field }) => (
 										<DatePicker
-											onChange={(e) => field.onChange(e)}
-											selected={field.value}
+											onChange={(date) => {
+												field.onChange(dayjs(date).hour(23).minute(59).second(59).toDate());
+											}}
+											selected={dayjs(field.value).hour(23).minute(59).second(59).toDate()}
+											endDate={dayjs(field.value).hour(23).minute(59).second(59).toDate()}
 											selectsEnd
 											required
 											startDate={startDateWatcher}
-											endDate={field.value}
 											dateFormat="MM/dd/yyyy"
 										/>
 									)}

@@ -6,7 +6,7 @@ import { NextkitError } from 'nextkit';
 import { busboyParseForm } from '../../../../../utils/busboyParseForm';
 import { uploadAndProcessImage } from '../../../../../utils/uploadAndProcessImage';
 import { EventCategory, EventType } from '@prisma/client';
-import { endOfDay, startOfDay } from 'date-fns';
+import dayjs from 'dayjs';
 
 export const config = {
 	api: {
@@ -48,16 +48,14 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		console.log(body.timeZone);
-
 		const updatedEvent = await prisma.event.update({
 			data: {
 				name: body.name,
 				description: body.description,
 				location: body.location,
 				timeZone: body.timeZone,
-				startDate: startOfDay(body.startDate),
-				endDate: endOfDay(body.endDate),
+				startDate: dayjs(body.startDate).tz(body.timeZone).startOf('day').toDate(),
+				endDate: dayjs(body.endDate).tz(body.timeZone).endOf('day').toDate(),
 				image: fileLocation,
 				category: EventCategory[body.category as keyof typeof EventCategory] ?? EventCategory.EVENT,
 				slug: body.slug,
