@@ -11,6 +11,7 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - view/print your schedule
 - next SEO
 - image upload for top level page wysiwyg
+- event privacy
 
 ## low importance
 - custom icons
