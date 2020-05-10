@@ -39,7 +39,7 @@ export const useSessionsByVenueQuery = (
 		},
 		{
 			retry: 0,
-			enabled: eid !== undefined && eid !== 'undefined',
+			enabled: eid !== undefined && eid !== 'undefined' && vid !== undefined && vid !== 'undefined',
 			initialData,
 			keepPreviousData: true
 		}

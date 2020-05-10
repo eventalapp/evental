@@ -157,7 +157,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					</div>
 					<div className="md:col-span-3 col-span-12">
 						<div className="mb-3">
-							<span className="block font-medium border-b border-gray-200">TimeZone</span>
+							<span className="block font-medium border-b border-gray-200">Time Zone</span>
 							<div>{event.timeZone}</div>
 						</div>
 

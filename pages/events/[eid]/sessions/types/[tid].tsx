@@ -29,14 +29,14 @@ import { Pagination } from '../../../../../components/Pagination';
 
 type Props = {
 	initialSessionType: Prisma.EventSessionType | undefined;
-	initialSessionByType: PaginatedSessionsWithVenue | undefined;
+	initialSessionsByType: PaginatedSessionsWithVenue | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 };
 
 const ViewSessionTypePage: NextPage<Props> = (props) => {
-	const { initialSessionType, initialEvent, initialRoles, initialUser, initialSessionByType } =
+	const { initialSessionType, initialEvent, initialRoles, initialUser, initialSessionsByType } =
 		props;
 	const router = useRouter();
 	const [page, setPage] = useState(1);
@@ -52,7 +52,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 	const { sessionsByTypeData, isSessionsByTypeLoading } = useSessionsByTypeQuery(
 		String(eid),
 		String(tid),
-		{ initialData: initialSessionByType, page }
+		{ initialData: initialSessionsByType, page }
 	);
 
 	if (
@@ -116,12 +116,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialSessionType = (await getSessionType(String(eid), String(tid))) ?? undefined;
-	const initialSessionByType = (await getSessionsByType(String(eid), String(tid))) ?? undefined;
+	const initialSessionsByType = (await getSessionsByType(String(eid), String(tid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
-			initialSessionByType,
+			initialSessionsByType,
 			initialEvent,
 			initialRoles,
 			initialSessionType

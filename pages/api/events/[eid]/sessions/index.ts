@@ -4,8 +4,9 @@ import { getEvent } from '../index';
 import { NextkitError } from 'nextkit';
 import { api } from '../../../../../utils/api';
 import { getVenue } from '../venues/[vid]';
-import { endOfDay, isAfter, isBefore, parseISO, startOfDay } from 'date-fns';
+import { endOfDay, parseISO, startOfDay } from 'date-fns';
 import { getSessionType } from './types/[tid]';
+import { zonedTimeToUtc } from 'date-fns-tz';
 
 export type PageOptions = {
 	page?: number;
@@ -206,21 +207,16 @@ export const getSessionsByDate = async (
 		return null;
 	}
 
-	const dateParsed = startOfDay(parseISO(String(date)));
-
-	if (
-		isBefore(dateParsed, new Date(event.startDate)) ||
-		isAfter(dateParsed, new Date(event.endDate))
-	) {
-		return null;
-	}
+	const dateParsed = parseISO(String(date));
+	const dateParsedStart = zonedTimeToUtc(startOfDay(dateParsed), event.timeZone);
+	const dateParsedEnd = zonedTimeToUtc(endOfDay(dateParsed), event.timeZone);
 
 	const count = await prisma.eventSession.count({
 		where: {
 			eventId: event.id,
 			startDate: {
-				gte: startOfDay(dateParsed),
-				lte: endOfDay(dateParsed)
+				gte: dateParsedStart,
+				lte: dateParsedEnd
 			}
 		},
 		orderBy: {
@@ -234,8 +230,8 @@ export const getSessionsByDate = async (
 		where: {
 			eventId: event.id,
 			startDate: {
-				gte: startOfDay(dateParsed),
-				lte: endOfDay(dateParsed)
+				gte: dateParsedStart,
+				lte: dateParsedEnd
 			}
 		},
 		include: {

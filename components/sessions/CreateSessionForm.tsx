@@ -21,6 +21,7 @@ import Select from '../radix/components/Select';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { StyledEditor } from '../form/Editor';
 import { TimeZoneNotice } from '../TimeZoneNotice';
+import { FIFTEEN_MINUTES } from '../../utils/const';
 
 type Props = {
 	eid: string;
@@ -67,15 +68,15 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 	const endDateWatcher = watch('endDate');
 
 	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('endDate', startDateWatcher);
+		if (startDateWatcher.getTime() + FIFTEEN_MINUTES > endDateWatcher.getTime()) {
+			setValue('endDate', new Date(startDateWatcher.getTime() + FIFTEEN_MINUTES));
 			toast.warn('The start date cannot be later than the end date.');
 		}
 	}, [startDateWatcher]);
 
 	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('startDate', endDateWatcher);
+		if (startDateWatcher.getTime() + FIFTEEN_MINUTES > endDateWatcher.getTime()) {
+			setValue('startDate', new Date(endDateWatcher.getTime() - FIFTEEN_MINUTES));
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
