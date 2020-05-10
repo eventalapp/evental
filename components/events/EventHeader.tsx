@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faCalendarDay,
+	faClock,
 	faHeadset,
 	faLocationDot,
 	faPerson,
@@ -100,6 +101,23 @@ export const EventHeader: React.FC<{
 									{formatInTimeZone(new Date(event.startDate), event.timeZone, 'MMMM dd')} -{' '}
 									{formatInTimeZone(new Date(event.endDate), event.timeZone, 'MMMM dd')}
 								</p>
+							</div>
+						</Tooltip>
+
+						<Tooltip
+							message={`This is event is taking in the ${event.timeZone.replace(
+								/_/g,
+								' '
+							)} timezone.`}
+						>
+							<div className="flex flex-row items-center mr-3 cursor-help">
+								<FontAwesomeIcon
+									fill="currentColor"
+									className="w-5 h-5 mr-1.5"
+									size="1x"
+									icon={faClock}
+								/>
+								<p>{event.timeZone.replace(/_/g, ' ')}</p>
 							</div>
 						</Tooltip>
 
