@@ -18,25 +18,35 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 	return (
 		<div>
 			<NavigationWrapper>
-				<Link href="/">
-					<a>
-						<span className="flex flex-row items-center">
-							<img
-								src="https://cdn.evental.app/images/logo.svg"
-								className="w-12 h-12 pr-3"
-								alt="logo"
-							/>
-							<strong
-								className="text-2xl tracking-tight font-bold font-display"
-								aria-label="evental homepage"
-							>
-								Evental
-							</strong>
-						</span>
-					</a>
-				</Link>
+				<div className="flex-row flex items-center space-x-7">
+					<Link href="/">
+						<a>
+							<span className="flex flex-row items-center">
+								<img
+									src="https://cdn.evental.app/images/logo.svg"
+									className="w-12 h-12 pr-3"
+									alt="logo"
+								/>
+								<strong
+									className="text-2xl tracking-tight font-bold font-display"
+									aria-label="evental homepage"
+								>
+									Evental
+								</strong>
+							</span>
+						</a>
+					</Link>
+					<div className="hidden sm:block ml-7 space-x-7">
+						<Link href={`/pricing`}>
+							<a>Pricing</a>
+						</Link>
+						<Link href={`/contact`}>
+							<a>Contact</a>
+						</Link>
+					</div>
+				</div>
 
-				<div className="flex-row hidden space-x-8 font-medium sm:flex pr-7">
+				<div className="flex-row hidden sm:flex space-x-8 font-medium pr-7">
 					<Link href="/events">
 						<a>Events</a>
 					</Link>
@@ -85,7 +95,23 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 							}}
 						/>
 						<FullscreenLinkItem
-							index={0}
+							index={1}
+							link={`/pricing`}
+							label={'Pricing'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={2}
+							link={`/contact`}
+							label={'Contact'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={3}
 							link={`/`}
 							label={'Home'}
 							onClick={() => {

@@ -15,8 +15,9 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 ## low importance
 - custom icons
 - customize react toast
-
-## todo post mvp
+- refactor navigations
+- refactor buttons
+- remove unused radix
 - clean up queries/mutations(export whole mut/query)
 
 ## Installation 💾
