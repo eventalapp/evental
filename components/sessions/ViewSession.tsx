@@ -13,6 +13,7 @@ import { AddToCalendar } from '../AddToCalendar';
 import { CalendarEvent } from 'calendar-link';
 import Prisma from '@prisma/client';
 import parse from 'html-react-parser';
+import { formatInTimeZone } from 'date-fns-tz';
 
 type Props = {
 	eid: string;
@@ -125,7 +126,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				message={`This is event is taking place from ${format(
 					new Date(session.startDate),
 					'MMMM do h:mm a'
-				)} to ${format(new Date(session.endDate), 'MMMM do h:mm a')}.`}
+				)} to ${formatInTimeZone(new Date(session.endDate), event.timeZone, 'MMMM do h:mm a')}.`}
 			>
 				<div className="inline-flex flex-row items-center mb-2 cursor-help">
 					<FontAwesomeIcon
@@ -135,8 +136,8 @@ export const ViewSession: React.FC<Props> = (props) => {
 						icon={faCalendarDay}
 					/>
 					<p>
-						{format(new Date(session.startDate), 'MMMM dd h:mm a')} -{' '}
-						{format(new Date(session.endDate), 'MMMM dd h:mm a')}
+						{formatInTimeZone(new Date(session.startDate), event.timeZone, 'MMMM dd h:mm a')} -{' '}
+						{formatInTimeZone(new Date(session.endDate), event.timeZone, 'MMMM dd h:mm a')}
 					</p>
 				</div>
 			</Tooltip>

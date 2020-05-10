@@ -20,6 +20,7 @@ import { LoadingInner } from '../error/LoadingInner';
 import Select from '../radix/components/Select';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { StyledEditor } from '../form/Editor';
+import { TimeZoneNotice } from '../TimeZoneNotice';
 
 type Props = {
 	eid: string;
@@ -182,6 +183,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 							/>
 						</div>
 						{errors.startDate?.message && <ErrorMessage>{errors.startDate?.message}</ErrorMessage>}
+						<TimeZoneNotice timeZone={event.timeZone} date={startDateWatcher} />
 					</div>
 
 					<div>
@@ -209,6 +211,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 							/>
 						</div>
 						{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
+						<TimeZoneNotice timeZone={event.timeZone} date={endDateWatcher} />
 					</div>
 				</div>
 			</div>

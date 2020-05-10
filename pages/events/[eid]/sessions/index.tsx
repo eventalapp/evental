@@ -112,7 +112,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 					)}
 				</h3>
 
-				<SessionList sessions={sessionsData?.sessions} eid={String(eid)} />
+				<SessionList sessions={sessionsData?.sessions} eid={String(eid)} event={event} />
 
 				{sessionsData.pagination.pageCount > 1 && (
 					<Pagination page={page} pageCount={sessionsData.pagination.pageCount} setPage={setPage} />

@@ -19,6 +19,8 @@ import { LoadingInner } from '../error/LoadingInner';
 import Select from '../radix/components/Select';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { StyledEditor } from '../form/Editor';
+import { FIFTEEN_MINUTES } from '../../utils/const';
+import { TimeZoneNotice } from '../TimeZoneNotice';
 
 type Props = {
 	eid: string;
@@ -56,15 +58,15 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 	const endDateWatcher = watch('endDate');
 
 	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('endDate', startDateWatcher);
+		if (startDateWatcher.getTime() + FIFTEEN_MINUTES > endDateWatcher.getTime()) {
+			setValue('endDate', new Date(startDateWatcher.getTime() + FIFTEEN_MINUTES));
 			toast.warn('The start date cannot be later than the end date.');
 		}
 	}, [startDateWatcher]);
 
 	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('startDate', endDateWatcher);
+		if (startDateWatcher.getTime() + FIFTEEN_MINUTES > endDateWatcher.getTime()) {
+			setValue('startDate', new Date(endDateWatcher.getTime() - FIFTEEN_MINUTES));
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
@@ -155,7 +157,9 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 								name="startDate"
 								render={({ field }) => (
 									<DatePicker
-										onChange={(e) => field.onChange(e)}
+										onChange={(e) => {
+											field.onChange(e);
+										}}
 										selected={field.value}
 										startDate={field.value}
 										endDate={endDateWatcher}
@@ -172,6 +176,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 							/>
 						</div>
 						{errors.startDate?.message && <ErrorMessage>{errors.startDate?.message}</ErrorMessage>}
+						<TimeZoneNotice timeZone={event.timeZone} date={startDateWatcher} />
 					</div>
 
 					<div>
@@ -199,6 +204,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 							/>
 						</div>
 						{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
+						<TimeZoneNotice timeZone={event.timeZone} date={endDateWatcher} />
 					</div>
 				</div>
 			</div>

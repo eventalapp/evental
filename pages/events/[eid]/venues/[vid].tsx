@@ -122,7 +122,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				</h3>
 
 				{sessionsByVenueData.sessions && (
-					<SessionList eid={String(eid)} sessions={sessionsByVenueData.sessions} />
+					<SessionList eid={String(eid)} sessions={sessionsByVenueData.sessions} event={event} />
 				)}
 
 				{sessionsByVenueData.pagination.pageCount > 1 && (

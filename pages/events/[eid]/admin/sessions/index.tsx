@@ -82,7 +82,7 @@ const SessionsAdminPage: NextPage = () => {
 					</FlexRowBetween>
 
 					{sessionsData?.sessions && (
-						<SessionList admin eid={String(eid)} sessions={sessionsData?.sessions} />
+						<SessionList admin eid={String(eid)} sessions={sessionsData?.sessions} event={event} />
 					)}
 
 					{sessionsData.pagination.pageCount > 1 && (

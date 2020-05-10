@@ -9,13 +9,14 @@ import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 type Props = {
 	eid: string;
 	tid: string;
+	event: Prisma.Event;
 	sessionType: Prisma.EventSessionType;
 	sessions: SessionWithVenue[];
 	admin?: boolean;
 };
 
 export const ViewSessionType: React.FC<Props> = (props) => {
-	const { sessionType, tid, eid, admin = false, sessions } = props;
+	const { sessionType, tid, eid, admin = false, sessions, event } = props;
 
 	if (!sessionType) return null;
 
@@ -50,7 +51,9 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 				Sessions <span className="font-normal text-gray-500">({sessions?.length || 0})</span>
 			</h3>
 
-			{sessions && <SessionList eid={String(eid)} sessions={sessions} admin={admin} />}
+			{sessions && (
+				<SessionList eid={String(eid)} sessions={sessions} admin={admin} event={event} />
+			)}
 		</div>
 	);
 };

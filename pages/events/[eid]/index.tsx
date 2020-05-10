@@ -145,7 +145,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 							)}
 						</h3>
 
-						<SessionList sessions={sessionsData.sessions} eid={String(eid)} />
+						<SessionList sessions={sessionsData.sessions} eid={String(eid)} event={event} />
 
 						{sessionsData.pagination.pageCount > 1 && (
 							<Pagination
@@ -157,7 +157,8 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					</div>
 					<div className="md:col-span-3 col-span-12">
 						<div className="mb-3">
-							<span className="block font-medium border-b border-gray-200">timeZone</span>
+							<span className="block font-medium border-b border-gray-200">TimeZone</span>
+							<div>{event.timeZone}</div>
 						</div>
 
 						{venues && venues.length > 0 && (

@@ -368,3 +368,5 @@ export const timeZoneOptions = timeZoneList.map((timeZone) => ({
 	value: timeZone,
 	label: timeZone.replace(/_/g, ' ')
 }));
+
+export const FIFTEEN_MINUTES = 15 * 60 * 1000;
