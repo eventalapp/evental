@@ -6,7 +6,6 @@
 - excel export for data
 - marketing pages
 - view/print your schedule
-- next SEO
 - image upload for top level page wysiwyg
 - event privacy (password protected)
 - my schedule
