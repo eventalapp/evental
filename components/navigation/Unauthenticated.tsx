@@ -46,7 +46,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 					</div>
 				</div>
 
-				<div className="flex-row hidden sm:flex space-x-8 font-medium pr-7">
+				<div className="flex-row hidden sm:flex space-x-8 pr-7">
 					<Link href="/events">
 						<a>Events</a>
 					</Link>
