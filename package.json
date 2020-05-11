@@ -97,7 +97,7 @@
 		"stripe": "^9.0.0",
 		"superjson": "^1.9.0",
 		"tailwindcss-radix": "^2.2.0",
-		"use-shopping-cart": "2.1.0",
+np,		"use-shopping-cart": "^3.1.1",
 		"zod": "^3.14.4"
 	},
 	"devDependencies": {

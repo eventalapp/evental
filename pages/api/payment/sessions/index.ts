@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import { api } from '../../../../../../../utils/api';
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../../../../config';
-import { formatAmountForStripe } from '../../../../../../../utils/stripeHelpers';
+import { api } from '../../../../utils/api';
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
+import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	// https://github.com/stripe/stripe-node#configuration
@@ -11,7 +11,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export default api({
 	async POST({ ctx, req }) {
 		const user = await ctx.getUser();
-		const { eid } = req.query;
 		const amount: number = req.body.amount;
 
 		// Validate the amount that was passed from the client.

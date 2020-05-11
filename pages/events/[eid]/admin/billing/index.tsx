@@ -117,7 +117,7 @@ const EventBillingPage: NextPage = () => {
 							<p className="text-gray-600 text-sm text-center">Includes {attendees} attendees</p>
 						</div>
 
-						<Link href={`/events/${eid}/admin/billing/checkout`}>
+						<Link href={`/payment/checkout`}>
 							<LinkButton>Purchase</LinkButton>
 						</Link>
 						<Link href="/contact">
