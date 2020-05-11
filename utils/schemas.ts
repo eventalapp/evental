@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { isBrowser } from './isBrowser';
-import { EventCategory, EventType } from '@prisma/client';
+import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
 import { timeZoneList } from './const';
 
 // Reusable
@@ -66,6 +66,10 @@ const eventTypeValidator = z.enum([firstEventTypes, ...restEventTypes]);
 const eventCategory = Object.values(EventCategory);
 const [firstEventCategory, ...restEventCategory] = eventCategory;
 const eventCategoryValidator = z.enum([firstEventCategory, ...restEventCategory]);
+
+const eventPrivacy = Object.values(PrivacyLevel);
+const [firstPrivacyLevel, ...restPrivacyLevel] = eventPrivacy;
+const privacyLevelValidator = z.enum([firstPrivacyLevel, ...restPrivacyLevel]);
 
 // Venues
 
@@ -159,6 +163,7 @@ export const EditEventSchema = z.object({
 	timeZone: timeZoneValidator,
 	location: locationValidator,
 	type: eventTypeValidator,
+	privacy: privacyLevelValidator,
 	image: imageFileValidator.optional(),
 	startDate: dateValidator,
 	endDate: dateValidator,
