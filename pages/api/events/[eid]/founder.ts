@@ -14,6 +14,6 @@ export default api({
 	}
 });
 
-export const getIsFounder = async (userId: string | undefined, eid: string): Promise<boolean> => {
+export const getIsFounder = async (eid: string, userId: string | undefined): Promise<boolean> => {
 	return userId ? await isFounder(String(eid), userId) : false;
 };
