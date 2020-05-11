@@ -7,11 +7,10 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - add speakers to sessions
 - excel export for data
 - marketing pages
-- billing (stripe or similar?)
 - view/print your schedule
 - next SEO
 - image upload for top level page wysiwyg
-- event privacy
+- event privacy (password protected)
 - my schedule
 
 ## low importance
