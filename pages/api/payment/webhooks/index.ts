@@ -37,18 +37,18 @@ const handler = api({
 		}
 
 		// Successfully constructed event.
-		console.log('✅ Success:', event.id);
+		console.log('Success:', event.id);
 
 		// Cast event data to Stripe object.
 		if (event.type === 'payment_intent.succeeded') {
 			const paymentIntent = event.data.object as Stripe.PaymentIntent;
-			console.log(`💰 PaymentIntent status: ${paymentIntent.status}`);
+			console.log(`PaymentIntent status: ${paymentIntent.status}`);
 		} else if (event.type === 'payment_intent.payment_failed') {
 			const paymentIntent = event.data.object as Stripe.PaymentIntent;
-			console.log(`❌ Payment failed: ${paymentIntent.last_payment_error?.message}`);
+			console.log(`Payment failed: ${paymentIntent.last_payment_error?.message}`);
 		} else if (event.type === 'charge.succeeded') {
 			const charge = event.data.object as Stripe.Charge;
-			console.log(`💵 Charge id: ${charge.id}`);
+			console.log(`Charge id: ${charge.id}`);
 
 			const { metadata } = event.data.object as Record<string, unknown>;
 			const { eventId } = metadata as Record<string, string>;
@@ -66,7 +66,7 @@ const handler = api({
 				}
 			});
 		} else {
-			console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
+			console.warn(`Unhandled event type: ${event.type}`);
 		}
 
 		// Return a response to acknowledge receipt of the event.
