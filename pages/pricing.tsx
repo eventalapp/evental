@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import Column from '../components/layout/Column';
 import { Navigation } from '../components/navigation';
 import React from 'react';
@@ -9,6 +8,7 @@ import Slider from '../components/radix/components/Slider';
 import Link from 'next/link';
 import { LinkButton } from '../components/form/LinkButton';
 import { attendeesToPrice } from '../utils/price';
+import { NextSeo } from 'next-seo';
 
 const PricingPage: NextPage = () => {
 	const { control, watch } = useForm({ defaultValues: { attendees: 250 } });
@@ -17,10 +17,24 @@ const PricingPage: NextPage = () => {
 
 	return (
 		<PageWrapper variant="white">
-			<Head>
-				<title>Pricing</title>
-			</Head>
-
+			<NextSeo
+				title="Pricing"
+				description="Single Event Plans & Pricing. Starting at $430 USD."
+				openGraph={{
+					url: 'https://evental.app/pricing',
+					title: 'Pricing',
+					description: 'Single Event Plans & Pricing. Starting at $430 USD.',
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 			<Navigation />
 
 			<Column className="flex flex-col items-center">

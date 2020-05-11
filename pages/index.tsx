@@ -1,18 +1,34 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
 import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
 import { Navigation } from '../components/navigation';
 import React from 'react';
 import PageWrapper from '../components/layout/PageWrapper';
+import { NextSeo } from 'next-seo';
 
 const HomePage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
-			<Head>
-				<title>Evental</title>
-			</Head>
+			<NextSeo
+				title="Evental"
+				description="Event management software that's highly intuitive. Your attendees and organizers will love using Evental for your in-person, hybrid, and virtual events."
+				openGraph={{
+					url: 'https://evental.app',
+					title: 'Evental',
+					description:
+						"Event management software that's highly intuitive. Your attendees and organizers will love using Evental for your in-person, hybrid, and virtual events.",
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<Navigation />
 

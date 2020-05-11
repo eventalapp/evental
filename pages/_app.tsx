@@ -13,6 +13,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import { DefaultSeo } from 'next-seo';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -30,6 +31,28 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={pageProps.dehydratedState}>
+				<DefaultSeo
+					openGraph={{
+						type: 'website',
+						locale: 'en_IE',
+						url: 'https://evental.app',
+						site_name: 'Evental',
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
+					twitter={{
+						handle: '@jrkcodes',
+						site: '@eventaldotapp',
+						cardType: 'summary_large_image'
+					}}
+				/>
 				<Component {...pageProps} error={error} />
 			</Hydrate>
 
