@@ -41,7 +41,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 							</span>
 						</a>
 					</Link>
-					<div className="hidden sm:block ml-7 space-x-7">
+					<div className="hidden sm:block ml-7 space-x-7 text-md">
 						<Link href={`/pricing`}>
 							<a>Pricing</a>
 						</Link>
@@ -51,7 +51,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 					</div>
 				</div>
 
-				<div className="flex-row hidden space-x-6 font-medium sm:flex items-center">
+				<div className="flex-row hidden space-x-7 text-md sm:flex items-center">
 					<Link href="/events/attending">
 						<a>My Events</a>
 					</Link>

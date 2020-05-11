@@ -123,10 +123,14 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 			<Tooltip
 				side={'top'}
-				message={`This is event is taking place from ${format(
+				message={`This is session is taking place from ${format(
 					new Date(session.startDate),
 					'MMMM do h:mm a'
-				)} to ${formatInTimeZone(new Date(session.endDate), event.timeZone, 'MMMM do h:mm a')}.`}
+				)} to ${formatInTimeZone(
+					new Date(session.endDate),
+					Intl.DateTimeFormat().resolvedOptions().timeZone,
+					'MMMM do h:mm a zzz'
+				)}.`}
 			>
 				<div className="inline-flex flex-row items-center mb-2 cursor-help">
 					<FontAwesomeIcon
@@ -136,8 +140,17 @@ export const ViewSession: React.FC<Props> = (props) => {
 						icon={faCalendarDay}
 					/>
 					<p>
-						{formatInTimeZone(new Date(session.startDate), event.timeZone, 'MMMM dd h:mm a')} -{' '}
-						{formatInTimeZone(new Date(session.endDate), event.timeZone, 'MMMM dd h:mm a')}
+						{formatInTimeZone(
+							new Date(session.startDate),
+							Intl.DateTimeFormat().resolvedOptions().timeZone,
+							'MMMM dd h:mm a'
+						)}{' '}
+						-{' '}
+						{formatInTimeZone(
+							new Date(session.endDate),
+							Intl.DateTimeFormat().resolvedOptions().timeZone,
+							'MMMM dd h:mm a'
+						)}
 					</p>
 				</div>
 			</Tooltip>
