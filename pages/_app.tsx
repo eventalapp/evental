@@ -13,7 +13,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
-import { CartProvider } from 'use-shopping-cart';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -31,14 +30,7 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Hydrate state={pageProps.dehydratedState}>
-				<CartProvider
-					cartMode="checkout-session"
-					stripe=""
-					currency="USD"
-					loading={<p aria-live="polite">Loading redux-persist...</p>}
-				>
-					<Component {...pageProps} error={error} />
-				</CartProvider>
+				<Component {...pageProps} error={error} />
 			</Hydrate>
 
 			<ToastContainer />

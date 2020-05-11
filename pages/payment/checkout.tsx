@@ -7,56 +7,9 @@ import PageWrapper from '../../components/layout/PageWrapper';
 import { useUser } from '../../hooks/queries/useUser';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { Navigation } from '../../components/navigation';
-import { formatCurrencyString, useShoppingCart } from 'use-shopping-cart';
-import { CartActions, CartEntry as ICartEntry } from 'use-shopping-cart/core';
 import ElementsForm from '../../components/stripe/ElementsForm';
 import { Elements } from '@stripe/react-stripe-js';
 import { getStripe } from '../../utils/stripe';
-import { attendeesToPrice, priceToAttendees } from '../../utils/price';
-
-function CartEntry({
-	entry,
-	removeItem
-}: {
-	entry: ICartEntry;
-	removeItem: CartActions['removeItem'];
-}) {
-	return (
-		<div>
-			<h3>{entry.name}</h3>
-			{entry.image ? <img width={100} src={entry.image} alt={entry.description} /> : null}
-			<p>
-				{entry.quantity} x {formatCurrencyString({ value: entry.price, currency: 'USD' })} ={' '}
-				{entry.formattedValue}
-			</p>
-			<button onClick={() => removeItem(entry.id)}>Remove</button>
-		</div>
-	);
-}
-
-function Cart() {
-	const cart = useShoppingCart();
-	const { removeItem, cartDetails, clearCart, formattedTotalPrice } = cart;
-
-	const cartEntries = Object.values(cartDetails ?? {}).map((entry) => (
-		// @ts-ignore
-		<CartEntry key={entry.id} entry={entry} removeItem={removeItem} />
-	));
-
-	return (
-		<div>
-			<h2>Cart</h2>
-			<p>Total: {formattedTotalPrice}</p>
-			{cartEntries.length === 0 ? <p>Cart is empty.</p> : null}
-			{cartEntries.length > 0 ? (
-				<>
-					<button onClick={() => clearCart()}>Clear cart</button>
-					{cartEntries}
-				</>
-			) : null}
-		</div>
-	);
-}
 
 const EventBillingPage: NextPage = () => {
 	const router = useRouter();
@@ -65,8 +18,6 @@ const EventBillingPage: NextPage = () => {
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
-	console.log(attendeesToPrice(5023));
-	console.log(priceToAttendees(attendeesToPrice(100)));
 
 	return (
 		<PageWrapper variant="gray">
@@ -76,7 +27,7 @@ const EventBillingPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column>
+			<Column variant="halfWidth">
 				<div className="flex flex-col items-center">
 					<h1 className="text-2xl md:text-3xl font-bold">Checkout</h1>
 					<div className="flex flex-row items-center">
@@ -89,8 +40,6 @@ const EventBillingPage: NextPage = () => {
 						<span className="bg-primary text-white px-2 py-1 font-medium text-xs rounded">PRO</span>
 					</div>
 				</div>
-
-				<Cart />
 
 				<Elements stripe={getStripe()}>
 					<ElementsForm />

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import CustomDonationInput from './CustomDonationInput';
-import StripeTestCards from './StripeTestCards';
-import PrintObject from './PrintObject';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { AMOUNT_STEP, CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../config';
@@ -131,7 +129,7 @@ const ElementsForm = () => {
 					currency={CURRENCY}
 					onChange={handleInputChange}
 				/>
-				<StripeTestCards />
+
 				<fieldset className="elements-style">
 					<legend>Your payment details:</legend>
 					<input
@@ -163,7 +161,6 @@ const ElementsForm = () => {
 				</button>
 			</form>
 			<PaymentStatus status={payment.status} />
-			<PrintObject content={payment} />
 		</>
 	);
 };
