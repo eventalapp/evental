@@ -50,7 +50,7 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 					twitter={{
 						handle: '@jrkcodes',
 						site: '@eventaldotapp',
-						cardType: 'summary_large_image'
+						cardType: 'summary'
 					}}
 				/>
 				<Component {...pageProps} error={error} />
