@@ -1,14 +1,19 @@
 import React from 'react';
 import { formatCurrencyString, useShoppingCart } from 'use-shopping-cart';
 import { products } from '../../utils/const';
+import Stripe from 'stripe';
 
-const Products = () => {
+type Props = {
+	products: Stripe.Product[];
+};
+
+const Products: React.FC = () => {
 	const { addItem, removeItem } = useShoppingCart();
 
 	return (
 		<section className="products">
-			{products.map((product) => (
-				<div key={product.sku} className="product">
+			{products.map((product, i) => (
+				<div key={`${i}-${product.sku}`} className="product">
 					<img src={product.image} alt={product.name} />
 					<h2>{product.name}</h2>
 					<p className="price">

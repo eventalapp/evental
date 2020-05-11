@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import CustomDonationInput from './CustomDonationInput';
 import StripeTestCards from './StripeTestCards';
 import PrintObject from './PrintObject';
-
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { AMOUNT_STEP, CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../config';
@@ -81,14 +80,17 @@ const ElementsForm = () => {
 		setPayment({ status: 'processing' });
 
 		// Create a PaymentIntent with the specified amount.
-		const response = await axios.post('/api/payment_intents', {
-			amount: input.customDonation
+		const response = await axios.post('/api/payment/intents', {
+			amount: input.customDonation,
+			metadata: {
+				eventId: 'test'
+			}
 		});
-		setPayment(response.data);
+		setPayment(response.data.data);
 
 		if (response.status === 500) {
 			setPayment({ status: 'error' });
-			setErrorMessage(response.data);
+			setErrorMessage(response.data.data);
 			return;
 		}
 
@@ -98,12 +100,15 @@ const ElementsForm = () => {
 		const cardElement = elements!.getElement(CardElement);
 
 		// Use your card Element with other Stripe.js APIs
-		const { error, paymentIntent } = await stripe!.confirmCardPayment(response.data.client_secret, {
-			payment_method: {
-				card: cardElement!,
-				billing_details: { name: input.cardholderName }
+		const { error, paymentIntent } = await stripe!.confirmCardPayment(
+			response.data.data.client_secret,
+			{
+				payment_method: {
+					card: cardElement!,
+					billing_details: { name: input.cardholderName }
+				}
 			}
-		});
+		);
 
 		if (error) {
 			setPayment({ status: 'error' });
