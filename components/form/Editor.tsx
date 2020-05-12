@@ -28,7 +28,7 @@ const MenuBar: React.FC<{ editor: Editor | null; setLink: (link: string) => void
 	}
 
 	return (
-		<div className="space-x-3 mb-2 pb-1 border-b border-gray-300">
+		<div className="space-x-2 md:space-x-3.5 px-2 mb-2 pb-1 border-b border-gray-300 text-gray-700">
 			<button
 				type="button"
 				onClick={() => editor.chain().focus().toggleBold().run()}
