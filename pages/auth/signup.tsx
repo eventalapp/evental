@@ -11,12 +11,13 @@ import { useUser } from '../../hooks/queries/useUser';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
 };
 
-const SignInPage: NextPage<Props> = (props) => {
+const SignUpPage: NextPage<Props> = (props) => {
 	const { initialUser } = props;
 	const { user, isUserLoading } = useUser(initialUser);
 	const router = useRouter();
@@ -33,6 +34,26 @@ const SignInPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
+			<NextSeo
+				title="Sign Up — EventalEvent"
+				description="Create an account for Evental. Create, organize, or attend events with ease."
+				openGraph={{
+					url: 'https://evental.app/auth/signup',
+					title: 'Sign Up — EventalEvent',
+					description:
+						'Create an account for Evental. Create, organize, or attend events with ease.',
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
+
 			<Navigation />
 
 			<Column variant="halfWidth">
@@ -58,4 +79,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	};
 };
 
-export default SignInPage;
+export default SignUpPage;

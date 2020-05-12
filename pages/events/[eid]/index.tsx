@@ -1,6 +1,5 @@
 import Prisma from '@prisma/client';
 import type { GetServerSideProps, NextPage } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -34,6 +33,8 @@ import { format } from 'date-fns';
 import { Pagination } from '../../../components/Pagination';
 import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
+import { htmlToText } from 'html-to-text';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -125,9 +126,24 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>{event && event.name}</title>
-			</Head>
+			<NextSeo
+				title={`${event.name} — Evental`}
+				description={htmlToText(event.description || '')}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}`,
+					title: `${event.name} — Evental`,
+					description: htmlToText(event.description || ''),
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 

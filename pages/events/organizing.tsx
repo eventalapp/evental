@@ -51,7 +51,7 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 		return (
 			<PageWrapper variant="white">
 				<NextSeo
-					title="Organizing Events"
+					title="Organizing Events — Evental"
 					description="View all of the events you are organizing."
 					openGraph={{
 						url: 'https://evental.app/events/organizing',
@@ -87,7 +87,7 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
-				title="Organizing Events"
+				title="Organizing Events — Evental"
 				description="View all of the events you are organizing."
 				openGraph={{
 					url: 'https://evental.app/events/organizing',

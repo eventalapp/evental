@@ -36,7 +36,9 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 						type: 'website',
 						locale: 'en_IE',
 						url: 'https://evental.app',
-						site_name: 'Evental',
+						site_name: 'Evental — Event management software from the future',
+						description:
+							"Event management software that's highly intuitive. Your attendees and organizers will love using Evental for your in-person, hybrid, and virtual events.",
 						images: [
 							{
 								url: 'https://cdn.evental.app/images/logo.jpg',

@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { getUser } from '../api/users/[uid]';
@@ -12,6 +11,7 @@ import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import React from 'react';
 import parse from 'html-react-parser';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialViewingUser: PasswordlessUser | undefined;
@@ -33,9 +33,24 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Viewing User</title>
-			</Head>
+			<NextSeo
+				title={`${user.name} — Evental`}
+				description={`View ${user.name} at Evental.`}
+				openGraph={{
+					url: `https://evental.app/users/${user.id}`,
+					title: `${user.name} — Evental`,
+					description: `View ${user.name} at Evental.`,
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<Navigation />
 

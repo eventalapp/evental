@@ -28,7 +28,7 @@ const CreateEventPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper>
 			<NextSeo
-				title="Create Event"
+				title="Create Event — Evental"
 				description="Fill out the form to create an event."
 				openGraph={{
 					url: 'https://evental.app/events/create',

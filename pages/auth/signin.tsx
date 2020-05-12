@@ -8,10 +8,10 @@ import { useSignInMutation } from '../../hooks/mutations/useSignInMutation';
 import { ssrGetUser } from '../../utils/api';
 import { useUser } from '../../hooks/queries/useUser';
 import { LoadingPage } from '../../components/error/LoadingPage';
-import Head from 'next/head';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { useRouter } from 'next/router';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -41,9 +41,25 @@ const SignInPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Sign In</title>
-			</Head>
+			<NextSeo
+				title="Sign In — EventalEvent"
+				description="Sign into your Evental account. Create, organize, or attend events with ease."
+				openGraph={{
+					url: 'https://evental.app/auth/signin',
+					title: 'Sign In — EventalEvent',
+					description:
+						'Sign into your Evental account. Create, organize, or attend events with ease.',
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<Navigation />
 

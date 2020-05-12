@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { usePageQuery } from '../../../../hooks/queries/usePageQuery';
@@ -22,6 +21,7 @@ import { useUser } from '../../../../hooks/queries/useUser';
 import { ViewPage } from '../../../../components/pages/ViewPage';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialPage: Prisma.EventPage | undefined;
@@ -62,14 +62,29 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Viewing Page: {page && page.name}</title>
-			</Head>
+			<NextSeo
+				title={`${page.name} — ${event.name}`}
+				description={`View the ${page.name} page for ${event.name}.`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/pages/${page.slug}`,
+					title: `${page.name} — ${event.name}`,
+					description: `View the ${page.name} page for ${event.name}.`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
-				<ViewPage admin page={page} eid={String(eid)} pid={String(pid)} />
+				<ViewPage page={page} eid={String(eid)} pid={String(pid)} />
 			</Column>
 		</PageWrapper>
 	);

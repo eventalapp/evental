@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
@@ -29,6 +28,7 @@ import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { Pagination } from '../../../../components/Pagination';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialAttendees: PaginatedAttendeesWithUser | undefined;
@@ -95,9 +95,24 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Viewing Attendee: {uid}</title>
-			</Head>
+			<NextSeo
+				title={`Attendees — ${event.name}`}
+				description={`View all of the attendees for ${event.name}.`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/attendees`,
+					title: `Attendees — ${event.name}`,
+					description: `View all of the attendees for ${event.name}.`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 

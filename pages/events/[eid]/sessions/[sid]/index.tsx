@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ViewSession } from '../../../../../components/sessions/ViewSession';
 import Column from '../../../../../components/layout/Column';
@@ -27,6 +26,7 @@ import { getSessionAttendees } from '../../../../api/events/[eid]/sessions/[sid]
 import { getSessionAttendee } from '../../../../api/events/[eid]/sessions/[sid]/attendees/[uid]';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialSession: SessionWithVenue | undefined;
@@ -91,9 +91,24 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Viewing Session</title>
-			</Head>
+			<NextSeo
+				title={`${session.name} — ${event.name}`}
+				description={`View the attendees, speakers, and details of ${session.name} at ${event.name}`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/sessions/${session.slug}`,
+					title: `${session.name} — ${event.name}`,
+					description: `View the attendees, speakers, and details of ${session.name} at ${event.name}`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 

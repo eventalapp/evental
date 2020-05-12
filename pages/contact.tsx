@@ -9,7 +9,7 @@ const PricingPage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
-				title="Contact"
+				title="Contact — Evental"
 				description="Contact our team for support. We are here to help you with any questions you may have."
 				openGraph={{
 					url: 'https://evental.app/contact',

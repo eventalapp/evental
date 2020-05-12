@@ -4,6 +4,7 @@ import React from 'react';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import Prisma from '@prisma/client';
 import parse from 'html-react-parser';
+import { formatDistance } from 'date-fns';
 
 type Props = {
 	eid: string;
@@ -20,8 +21,11 @@ export const ViewPage: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween>
-				<div className="flex items-center">
+				<div>
 					<h1 className="text-2xl md:text-3xl font-medium">{page.name}</h1>
+					<span className="text-sm block text-gray-600">
+						Updated {formatDistance(new Date(page.updatedAt), new Date(), { addSuffix: true })}
+					</span>
 				</div>
 				<div className="space-x-4">
 					{admin && (

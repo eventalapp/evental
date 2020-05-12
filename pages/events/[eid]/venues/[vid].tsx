@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
@@ -29,6 +28,7 @@ import Tooltip from '../../../../components/radix/components/Tooltip';
 import parse from 'html-react-parser';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
@@ -96,9 +96,24 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Viewing Venue: {venue && venue.name}</title>
-			</Head>
+			<NextSeo
+				title={`${venue.name} — ${event.name}`}
+				description={`View all of the sessions occurring at ${venue.name}.`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/venues/${venue.slug}`,
+					title: `${venue.name} — ${event.name}`,
+					description: `View all of the sessions occurring at ${venue.name}.`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 

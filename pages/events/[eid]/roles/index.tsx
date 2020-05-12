@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { RoleList } from '../../../../components/roles/RoleList';
@@ -25,6 +24,7 @@ import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -82,9 +82,24 @@ const RolesPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Roles Page</title>
-			</Head>
+			<NextSeo
+				title={`Roles — ${event.name}`}
+				description={`View all of the roles at ${event.name}.`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/roles`,
+					title: `Roles — ${event.name}`,
+					description: `View all of the roles at ${event.name}.`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
