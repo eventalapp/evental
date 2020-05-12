@@ -4,6 +4,7 @@ import StarterKit from '@tiptap/starter-kit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faBold,
+	faCamera,
 	faCode,
 	faEraser,
 	faItalic,
@@ -19,9 +20,14 @@ import {
 import { faBar, faCodeBlock } from '../../icons';
 import { Link } from '@tiptap/extension-link';
 import { LinkDialog } from '../radix/components/LinkDialog';
+import Image from '@tiptap/extension-image';
 
-const MenuBar: React.FC<{ editor: Editor | null; setLink: (link: string) => void }> = (props) => {
-	const { editor, setLink } = props;
+const MenuBar: React.FC<{
+	editor: Editor | null;
+	setLink: (link: string) => void;
+	addImage: () => void;
+}> = (props) => {
+	const { editor, setLink, addImage } = props;
 
 	if (!editor) {
 		return null;
@@ -97,6 +103,9 @@ const MenuBar: React.FC<{ editor: Editor | null; setLink: (link: string) => void
 			<button type="button" onClick={() => editor.chain().focus().redo().run()}>
 				<FontAwesomeIcon size="lg" icon={faRotateRight} />
 			</button>
+			<button type="button" onClick={() => addImage()}>
+				<FontAwesomeIcon size="lg" icon={faCamera} />
+			</button>
 			<button
 				type="button"
 				onClick={() => editor.chain().focus().unsetLink().run()}
@@ -122,6 +131,7 @@ export const StyledEditor: React.FC<{ onChange: (val: string) => void; content: 
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
+			Image,
 			Link.configure({
 				openOnClick: false
 			})
@@ -131,6 +141,14 @@ export const StyledEditor: React.FC<{ onChange: (val: string) => void; content: 
 			onChange(editor.getHTML());
 		}
 	});
+
+	const addImage = useCallback(() => {
+		const url = window.prompt('URL');
+
+		if (url) {
+			editor?.chain().focus().setImage({ src: url }).run();
+		}
+	}, [editor]);
 
 	const setLink = useCallback(
 		(link: string) => {
@@ -155,7 +173,7 @@ export const StyledEditor: React.FC<{ onChange: (val: string) => void; content: 
 
 	return (
 		<div className="px-3 py-2 rounded border border-gray-300 shadow-sm focus:outline-none min-h-[300px]">
-			<MenuBar editor={editor} setLink={setLink} />
+			<MenuBar editor={editor} setLink={setLink} addImage={addImage} />
 			<article className="prose focus:outline-none prose-a:text-primary">
 				<EditorContent editor={editor} />
 			</article>
