@@ -77,6 +77,16 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 					</div>
 				)}
 
+				<h3 className="text-xl md:text-2xl font-medium mt-3">
+					Schedule{' '}
+					{sessionsByUserData?.pagination?.total > 0 && (
+						<span className="font-normal text-gray-500">
+							({sessionsByUserData?.pagination?.from || 0}/
+							{sessionsByUserData?.pagination?.total || 0})
+						</span>
+					)}
+				</h3>
+
 				<SessionWithEventList sessions={sessionsByUserData?.sessions} />
 
 				{sessionsByUserData.pagination.pageCount > 1 && (
