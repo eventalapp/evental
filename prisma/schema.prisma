@@ -95,14 +95,14 @@ model Event {
   maxAttendees Int           @default(5)
   password     String?
 
-  attendee        EventAttendee[]
-  session         EventSession[]
-  venue           EventVenue[]
-  role            EventRole[]
-  sessionAttendee EventSessionAttendee[]
-  sessionType     EventSessionType[]
+  attendees        EventAttendee[]
+  sessions         EventSession[]
+  venues           EventVenue[]
+  roles            EventRole[]
+  sessionAttendees EventSessionAttendee[]
+  sessionTypes     EventSessionType[]
+  pages            EventPage[]
 
-  EventPage EventPage[]
   @@map("event")
 }
 
@@ -117,7 +117,7 @@ model EventAttendee {
   user  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  sessionAttendee EventSessionAttendee[]
+  sessionAttendees EventSessionAttendee[]
 
   @@unique([eventId, userId])
   @@map("event_attendee")
@@ -132,7 +132,7 @@ model EventRole {
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  attendee EventAttendee[]
+  attendees EventAttendee[]
 
   @@unique([eventId, slug])
   @@map("event_role")
@@ -155,7 +155,7 @@ model EventSession {
   venue EventVenue?       @relation(fields: [venueId], references: [id], onDelete: Cascade)
   type  EventSessionType? @relation(fields: [typeId], references: [id], onDelete: Cascade)
 
-  attendee EventSessionAttendee[]
+  attendees EventSessionAttendee[]
 
   @@unique([eventId, slug])
   @@map("event_session")
@@ -170,7 +170,7 @@ model EventSessionType {
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  session EventSession[]
+  sessions EventSession[]
 
   @@unique([eventId, slug])
   @@map("event_session_type")
@@ -202,7 +202,7 @@ model EventVenue {
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  session EventSession[]
+  sessions EventSession[]
 
   @@unique([eventId, slug])
   @@map("event_venue")
