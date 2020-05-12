@@ -40,6 +40,7 @@ export const fake = (count: number) => {
 		name: `${faker.name.firstName()} ${faker.name.lastName()}'s Event`,
 		description: faker.lorem.sentence(),
 		location: faker.address.city(),
+		password: faker.internet.password(),
 		image: '/images/default-event.jpg',
 		startDate: new Date(),
 		timeZone: 'America/New_York',
