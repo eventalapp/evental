@@ -74,26 +74,26 @@ enum PrivacyLevel {
 }
 
 model Event {
-  id          String        @id @default(cuid())
-  slug        String        @unique
-  name        String
-  location    String?
-  address     String?
-  level       EventLevel    @default(TRIAL)
-  timeFormat  TimeFormat    @default(TWELVE_HOURS)
-  startDate   DateTime
-  endDate     DateTime
-  type        EventType     @default(HYBRID)
-  category    EventCategory @default(EVENT)
-  privacy    PrivacyLevel @default(PRIVATE)
-  image       String        @default("/images/default-event.jpg")
-  banner      String?
-  description String?
-  updatedAt   DateTime      @updatedAt
-  createdAt   DateTime      @default(now())
-  timeZone    String        @default("America/New_York")
-  maxAttendees Int          @default(5)
-  password   String?
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  name         String
+  location     String?
+  address      String?
+  level        EventLevel    @default(TRIAL)
+  timeFormat   TimeFormat    @default(TWELVE_HOURS)
+  startDate    DateTime
+  endDate      DateTime
+  type         EventType     @default(HYBRID)
+  category     EventCategory @default(EVENT)
+  privacy      PrivacyLevel  @default(PRIVATE)
+  image        String        @default("/images/default-event.jpg")
+  banner       String?
+  description  String?
+  updatedAt    DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+  timeZone     String        @default("America/New_York")
+  maxAttendees Int           @default(5)
+  password     String?
 
   attendee        EventAttendee[]
   session         EventSession[]
@@ -102,8 +102,8 @@ model Event {
   sessionAttendee EventSessionAttendee[]
   sessionType     EventSessionType[]
 
-  @@map("event")
   EventPage EventPage[]
+  @@map("event")
 }
 
 model EventAttendee {
