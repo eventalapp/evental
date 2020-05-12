@@ -23,7 +23,7 @@ export const getOrganizingEvents = async (uid: string): Promise<Prisma.Event[]> 
 			}
 		],
 		where: {
-			attendee: {
+			attendees: {
 				some: {
 					userId: uid,
 					OR: [{ permissionRole: 'FOUNDER' }, { permissionRole: 'ORGANIZER' }]
