@@ -3,6 +3,7 @@ import { getEvent } from '../../index';
 import { api } from '../../../../../../utils/api';
 import { prisma } from '../../../../../../prisma/client';
 import { getSession } from './index';
+import { getDefaultRole } from '../../roles';
 
 export default api({
 	async POST({ ctx, req }) {
@@ -32,6 +33,23 @@ export default api({
 				userId: String(user.id)
 			}
 		});
+
+		if (!attendee) {
+			const defaultRole = await getDefaultRole(String(event.id));
+
+			if (!defaultRole) {
+				throw new NextkitError(404, 'Default role not found.');
+			}
+
+			await prisma.eventAttendee.create({
+				data: {
+					eventId: event.id,
+					userId: String(user.id),
+					permissionRole: 'ATTENDEE',
+					eventRoleId: defaultRole.id
+				}
+			});
+		}
 
 		if (!attendee) {
 			throw new NextkitError(404, 'You must be attending this event to attend this session.');
