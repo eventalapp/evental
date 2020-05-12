@@ -33,7 +33,7 @@ export const EditPageForm: React.FC<Props> = (props) => {
 		defaultValues: {
 			name: page?.name ?? undefined,
 			body: page?.body ?? undefined,
-			topLevel: page?.topLevel ?? undefined
+			topLevel: page?.topLevel ?? false
 		},
 		resolver: zodResolver(EditPageSchema)
 	});

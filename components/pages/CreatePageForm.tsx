@@ -29,6 +29,7 @@ export const CreatePageForm: React.FC<Props> = (props) => {
 		control,
 		formState: { errors }
 	} = useForm<CreatePagePayload>({
+		defaultValues: { topLevel: false },
 		resolver: zodResolver(CreatePageSchema)
 	});
 
