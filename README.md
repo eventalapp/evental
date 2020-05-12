@@ -9,6 +9,7 @@
 - image upload for top level page wysiwyg
 - event privacy (password protected)
 - my schedule
+- create serverside products (dynamic pricing & implement schema validation there)
 
 ## low importance
 - session card on hover
