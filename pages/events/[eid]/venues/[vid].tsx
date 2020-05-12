@@ -27,6 +27,8 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { SessionList } from '../../../../components/sessions/SessionList';
 import Tooltip from '../../../../components/radix/components/Tooltip';
 import parse from 'html-react-parser';
+import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
+import { getPages } from '../../../api/events/[eid]/pages';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
@@ -34,11 +36,19 @@ type Props = {
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
+	initialPages: Prisma.EventPage[] | undefined;
 };
 
 const ViewAttendeePage: NextPage<Props> = (props) => {
 	const router = useRouter();
-	const { initialVenue, initialRoles, initialUser, initialEvent, initialSessionsByVenue } = props;
+	const {
+		initialVenue,
+		initialRoles,
+		initialUser,
+		initialEvent,
+		initialSessionsByVenue,
+		initialPages
+	} = props;
 	const { vid, eid } = router.query;
 	const [page, setPage] = useState(1);
 	const { venue, isVenueLoading, venueError } = useVenueQuery(
@@ -58,7 +68,17 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		}
 	);
 
-	if (isVenueLoading || isEventLoading || isRolesLoading || isSessionsByVenueLoading) {
+	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
+		initialData: initialPages
+	});
+
+	if (
+		isVenueLoading ||
+		isEventLoading ||
+		isRolesLoading ||
+		isSessionsByVenueLoading ||
+		isPagesLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -80,7 +100,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				<title>Viewing Venue: {venue && venue.name}</title>
 			</Head>
 
-			<EventNavigation event={event} roles={roles} user={user} />
+			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
 				<div className="mb-5">
@@ -145,6 +165,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialSessionsByVenue = (await getSessionsByVenue(String(eid), String(vid))) ?? undefined;
+	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
 		props: {
@@ -152,7 +173,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialVenue,
 			initialRoles,
 			initialEvent,
-			initialSessionsByVenue
+			initialSessionsByVenue,
+			initialPages
 		}
 	};
 };

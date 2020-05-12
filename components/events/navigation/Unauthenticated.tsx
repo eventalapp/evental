@@ -16,6 +16,7 @@ type Props = {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	event: Prisma.Event;
 	roles: Prisma.EventRole[];
+	pages: Prisma.EventPage[];
 } & UseSignOutMutationData;
 
 export const FullscreenLinkItem: React.FC<{
@@ -80,7 +81,7 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 };
 
 export const Unauthenticated: React.FC<Props> = (props) => {
-	const { setIsOpen, roles, event, isOpen, signOutMutation } = props;
+	const { setIsOpen, roles, event, isOpen, pages } = props;
 
 	return (
 		<div>
@@ -132,6 +133,12 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 										label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
 									/>
 								))}
+
+								{pages
+									.filter((page) => page.topLevel)
+									.map((page) => (
+										<LinkItem link={`/events/${event.slug}/pages/${page.slug}`} label={page.name} />
+									))}
 							</div>
 						</div>
 

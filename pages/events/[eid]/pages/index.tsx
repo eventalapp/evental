@@ -87,7 +87,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 				<title>All Pages</title>
 			</Head>
 
-			<EventNavigation event={event} roles={roles} user={user} />
+			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
 				{event && (

@@ -26,6 +26,8 @@ import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { Pagination } from '../../../../components/Pagination';
+import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
+import { getPages } from '../../../api/events/[eid]/pages';
 
 type Props = {
 	initialSessions: PaginatedSessionsWithVenue | undefined;
@@ -33,6 +35,8 @@ type Props = {
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
+	initialPages: Prisma.EventPage[] | undefined;
+
 	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
 };
 
@@ -43,7 +47,8 @@ const SessionsPage: NextPage<Props> = (props) => {
 		initialEvent,
 		initialRoles,
 		initialIsAttendeeByUserId,
-		initialUser
+		initialUser,
+		initialPages
 	} = props;
 	const router = useRouter();
 	const [page, setPage] = useState(1);
@@ -62,12 +67,17 @@ const SessionsPage: NextPage<Props> = (props) => {
 		isAttendeeLoading
 	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 
+	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
+		initialData: initialPages
+	});
+
 	if (
 		isSessionsLoading ||
 		isOrganizerLoading ||
 		isAttendeeLoading ||
 		isRolesLoading ||
-		isEventLoading
+		isEventLoading ||
+		isPagesLoading
 	) {
 		return <LoadingPage />;
 	}
@@ -90,7 +100,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 				<title>All Sessions</title>
 			</Head>
 
-			<EventNavigation event={event} roles={roles} user={user} />
+			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
 				{event && (
@@ -133,6 +143,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialIsAttendeeByUserId =
 		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
 
+	const initialPages = (await getPages(String(eid))) ?? undefined;
+
 	return {
 		props: {
 			initialUser,
@@ -140,7 +152,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialOrganizer,
 			initialEvent,
 			initialRoles,
-			initialIsAttendeeByUserId
+			initialIsAttendeeByUserId,
+			initialPages
 		}
 	};
 };

@@ -26,6 +26,8 @@ import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 import { getSessionType } from '../../../../api/events/[eid]/sessions/types/[tid]';
 import { useSessionsByTypeQuery } from '../../../../../hooks/queries/useSessionsByTypeQuery';
 import { Pagination } from '../../../../../components/Pagination';
+import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
+import { getPages } from '../../../../api/events/[eid]/pages';
 
 type Props = {
 	initialSessionType: Prisma.EventSessionType | undefined;
@@ -33,11 +35,18 @@ type Props = {
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
+	initialPages: Prisma.EventPage[] | undefined;
 };
 
 const ViewSessionTypePage: NextPage<Props> = (props) => {
-	const { initialSessionType, initialEvent, initialRoles, initialUser, initialSessionsByType } =
-		props;
+	const {
+		initialSessionType,
+		initialEvent,
+		initialRoles,
+		initialUser,
+		initialSessionsByType,
+		initialPages
+	} = props;
 	const router = useRouter();
 	const [page, setPage] = useState(1);
 	const { tid, eid } = router.query;
@@ -54,13 +63,17 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 		String(tid),
 		{ initialData: initialSessionsByType, page }
 	);
+	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
+		initialData: initialPages
+	});
 
 	if (
 		isSessionTypeLoading ||
 		isRolesLoading ||
 		isEventLoading ||
 		isUserLoading ||
-		isSessionsByTypeLoading
+		isSessionsByTypeLoading ||
+		isPagesLoading
 	) {
 		return <LoadingPage />;
 	}
@@ -87,7 +100,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 				<title>{sessionType.name}</title>
 			</Head>
 
-			<EventNavigation event={event} roles={roles} user={user} />
+			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
 				<ViewSessionType
@@ -117,6 +130,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialSessionType = (await getSessionType(String(eid), String(tid))) ?? undefined;
 	const initialSessionsByType = (await getSessionsByType(String(eid), String(tid))) ?? undefined;
+	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
 		props: {
@@ -124,7 +138,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialSessionsByType,
 			initialEvent,
 			initialRoles,
-			initialSessionType
+			initialSessionType,
+			initialPages
 		}
 	};
 };
