@@ -14,7 +14,7 @@ export type FileWithPreview = {
 	preview: string;
 } & File;
 
-export const ImageUpload: React.FC<Props> = (props) => {
+export const AvatarUpload: React.FC<Props> = (props) => {
 	const {
 		placeholderImageUrl = 'https://cdn.evental.app/images/default-avatar.jpg',
 		files,
@@ -83,4 +83,4 @@ export const ImageUpload: React.FC<Props> = (props) => {
 	);
 };
 
-export default ImageUpload;
+export default AvatarUpload;
