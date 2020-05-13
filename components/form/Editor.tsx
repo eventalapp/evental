@@ -21,11 +21,12 @@ import { faBar, faCodeBlock } from '../../icons';
 import { Link } from '@tiptap/extension-link';
 import { LinkDialog } from '../radix/components/LinkDialog';
 import Image from '@tiptap/extension-image';
+import { ImageUploadDialog } from '../radix/components/ImageUploadDialog';
 
 const MenuBar: React.FC<{
 	editor: Editor | null;
 	setLink: (link: string) => void;
-	addImage: () => void;
+	addImage: (image?: string) => void;
 }> = (props) => {
 	const { editor, setLink, addImage } = props;
 
@@ -103,9 +104,11 @@ const MenuBar: React.FC<{
 			<button type="button" onClick={() => editor.chain().focus().redo().run()}>
 				<FontAwesomeIcon size="lg" icon={faRotateRight} />
 			</button>
-			<button type="button" onClick={() => addImage()}>
-				<FontAwesomeIcon size="lg" icon={faCamera} />
-			</button>
+			<ImageUploadDialog onSubmit={addImage} editor={editor}>
+				<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
+					<FontAwesomeIcon size="lg" icon={faCamera} />
+				</button>
+			</ImageUploadDialog>
 			<button
 				type="button"
 				onClick={() => editor.chain().focus().unsetLink().run()}
@@ -142,13 +145,14 @@ export const StyledEditor: React.FC<{ onChange: (val: string) => void; content: 
 		}
 	});
 
-	const addImage = useCallback(() => {
-		const url = window.prompt('URL');
-
-		if (url) {
-			editor?.chain().focus().setImage({ src: url }).run();
-		}
-	}, [editor]);
+	const addImage = useCallback(
+		(url) => {
+			if (url) {
+				editor?.chain().focus().setImage({ src: url }).run();
+			}
+		},
+		[editor]
+	);
 
 	const setLink = useCallback(
 		(link: string) => {
