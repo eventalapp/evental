@@ -5,12 +5,12 @@
 - add speakers to sessions
 - excel export for data
 - marketing pages
-- view/print your schedule
 - image upload for top level page wysiwyg
 - event privacy (password protected)
 - create serverside products (dynamic pricing & implement schema validation there)
 
 ## low importance
+- print your schedule
 - session card on hover
 - custom icons
 - customize react toast
