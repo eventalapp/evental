@@ -33,7 +33,7 @@ export default api.raw({
 			{ header: 'Session Venue Address', key: 'session_venue_address', width: 30 }
 		];
 
-		const sessionsResponse = await getSessionsByUser(user.id);
+		const sessionsResponse = await getSessionsByUser(user.id, { take: 1000 });
 
 		if (!sessionsResponse) {
 			throw new NextkitError(404, 'Sessions not found.');

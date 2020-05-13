@@ -35,9 +35,9 @@ export default api({
 
 export const getSessionsByUser = async (
 	uid: string,
-	args: PageOptions = {}
+	args: PageOptions & { take?: number } = {}
 ): Promise<PaginatedSessionsWithVenueEvent | null> => {
-	const { page = 1 } = args || {};
+	const { page = 1, take = SESSIONS_PER_PAGE } = args || {};
 
 	const user = await getUser(uid);
 
@@ -60,7 +60,7 @@ export const getSessionsByUser = async (
 	});
 
 	const sessions = await prisma.eventSession.findMany({
-		take: SESSIONS_PER_PAGE,
+		take: take,
 		skip: (page - 1) * SESSIONS_PER_PAGE,
 		where: {
 			attendees: {
