@@ -2,6 +2,7 @@ import sharp, { FormatEnum } from 'sharp';
 import { NextkitError } from 'nextkit';
 
 interface ProcessImageOptions {
+	height: number;
 	background: string;
 	toFormat: keyof FormatEnum;
 }
@@ -20,14 +21,16 @@ export const processImage = async (
 		| Float64Array
 		| string,
 	options: ProcessImageOptions = {
+		height: 800,
 		background: '#e8e8e8',
 		toFormat: 'jpg'
 	}
 ) => {
-	const { background, toFormat } = options;
+	const { background, toFormat, height } = options;
 
 	return await sharp(input)
 		.flatten({ background })
+		.resize({ height })
 		.rotate()
 		.toFormat(toFormat)
 		.toBuffer()
