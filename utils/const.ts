@@ -379,6 +379,7 @@ export let proAttendeePricing: Record<
 	string,
 	{
 		id: string;
+		level: string;
 		price: number;
 		description: string;
 		attendees: number;
@@ -394,6 +395,7 @@ for (let i = 250; i <= MAX_ATTENDEES; i += 250) {
 	proAttendeePricing[String(i)] = {
 		id: `evental-pro-${i}`,
 		price: priceForAttendees,
+		level: 'PRO',
 		description: `Evental Pro (${i} Attendees)`,
 		name: `Evental Pro (${i} Attendees)`,
 		image: `https://cdn.evental.app/images/logo.jpg`,
