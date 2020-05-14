@@ -4,7 +4,8 @@ import Stripe from 'stripe';
 import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { prisma } from '../../../../prisma/client';
-import { priceToAttendees } from '../../../../utils/price';
+import { EventLevel } from '@prisma/client';
+import { getEvent } from '../../events/[eid]';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	apiVersion: '2020-08-27'
@@ -49,28 +50,32 @@ const handler = api({
 		} else if (event.type === 'charge.succeeded') {
 			const charge = event.data.object as Stripe.Charge;
 			console.log(`Charge id: ${charge.id}`);
+		} else if (event.type === 'checkout.session.completed') {
 			const { metadata } = event.data.object as Record<string, unknown>;
-			const { eventId } = metadata as Record<string, string>;
+			const { eventId, attendees, level } = metadata as Record<string, unknown>;
 
-			if (eventId) {
+			const eventFound = await getEvent(String(eventId));
+
+			if (!eventFound) {
+				throw new NextkitError(500, 'An error has occurred. Please email support@evental.app');
+			}
+
+			if (eventFound && eventId && attendees && level) {
 				await prisma.event.update({
 					where: {
-						id: eventId
+						id: eventFound.id
 					},
 					data: {
-						level: 'PRO',
-						maxAttendees: priceToAttendees(charge.amount / 100)
+						level: EventLevel[level as keyof typeof EventLevel] ?? EventLevel.PRO,
+						maxAttendees: Number(attendees) ?? 250
 					}
 				});
 			} else {
-				throw new NextkitError(400, 'Event id not found');
+				throw new NextkitError(500, 'An error has occurred. Please email support@evental.app');
 			}
 		} else {
 			console.warn(`Unhandled event type: ${event.type}`);
 		}
-
-		// Return a response to acknowledge receipt of the event.
-		return { received: true };
 	}
 });
 
