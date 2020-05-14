@@ -125,9 +125,9 @@ const PricingPage: NextPage = () => {
 					<span className="bg-primary text-white px-2 py-1 font-medium text-xs rounded">PRO</span>
 				</div>
 
-				<div className="space-y-4 mt-3">
+				<div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div>
-						<h3 className="text-xl font-medium mb-1">Publish Features</h3>
+						<h3 className="text-xl font-medium mb-1 border-b border-gray-300">Publish Features</h3>
 						<ul>
 							<li>Event website</li>
 							<li>Customizable event branding</li>
@@ -136,7 +136,9 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-1">Virtual & Hybrid Events</h3>
+						<h3 className="text-xl font-medium mb-1 border-b border-gray-300">
+							Virtual & Hybrid Events
+						</h3>
 						<ul>
 							<li>Use Evental with any webinar or video platform</li>
 							<li>Control access to webinar or video content</li>
@@ -145,7 +147,9 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-1">Speaker, Sponsor & Exhibitor Management</h3>
+						<h3 className="text-xl font-medium mb-1 border-b border-gray-300">
+							Speaker, Sponsor & Exhibitor Management
+						</h3>
 						<ul>
 							<li>Speaker profiles</li>
 							<li>Speaker tools</li>
