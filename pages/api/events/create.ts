@@ -3,7 +3,7 @@ import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { generateSlug } from '../../../utils/generateSlug';
-import { endOfDay, startOfDay } from 'date-fns';
+import dayjs from 'dayjs';
 
 export default api({
 	async POST({ ctx, req }) {
@@ -29,8 +29,8 @@ export default api({
 			data: {
 				slug: slug,
 				name: parsed.name,
-				startDate: startOfDay(parsed.startDate),
-				endDate: endOfDay(parsed.endDate),
+				startDate: dayjs(parsed.startDate).tz(parsed.timeZone).startOf('day').toDate(),
+				endDate: dayjs(parsed.endDate).tz(parsed.timeZone).endOf('day').toDate(),
 				timeZone: parsed.timeZone
 			}
 		});
