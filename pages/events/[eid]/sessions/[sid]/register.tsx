@@ -101,6 +101,12 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 			<NextSeo
 				title={`Register for ${session.name} — ${event.name}`}
 				description={`Register for the ${session.name} session at ${event.name}`}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
 				openGraph={{
 					url: `https://evental.app/events/${event.slug}/sessions/${session.slug}/register`,
 					title: `Register for ${session.name} — ${event.name}`,

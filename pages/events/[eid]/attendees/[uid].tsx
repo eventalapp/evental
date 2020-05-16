@@ -90,6 +90,12 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<NextSeo
 				title={`${attendee.user.name} — ${event.name}`}
 				description={`View ${attendee.user.name} at ${event.name}.`}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
 				openGraph={{
 					url: `https://evental.app/events/${event.slug}/attendees/${attendee.user.id}`,
 					title: `${attendee.user.name} — ${event.name}`,

@@ -64,6 +64,12 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 					event.timeZone,
 					'MMMM do'
 				)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
 				openGraph={{
 					url: `https://evental.app/events/${event.slug}/regsister`,
 					title: `Register for ${event.name} — Evental`,

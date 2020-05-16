@@ -1,8 +1,6 @@
 import { NextPage } from 'next';
 import React from 'react';
 import { useRouter } from 'next/router';
-
-import Head from 'next/head';
 import { Navigation } from '../../../../components/navigation';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
@@ -12,26 +10,39 @@ import { Button } from '../../../../components/form/Button';
 import { useAcceptOrganizerInviteMutation } from '../../../../hooks/mutations/useAcceptOrganizerInviteMutation';
 import { AcceptOrganizerInviteSchema } from '../../../../utils/schemas';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
+import { NextSeo } from 'next-seo';
+import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 
 const OrganizerInvitePage: NextPage = () => {
 	const router = useRouter();
 	const { user, isUserLoading } = useUser();
 	const { eid, code } = router.query;
 	const { acceptOrganizerInviteMutation } = useAcceptOrganizerInviteMutation(String(eid));
+	const { event, isEventLoading } = useEventQuery(String(eid));
 
-	if (isUserLoading) {
+	if (isUserLoading || isEventLoading) {
 		return <LoadingPage />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message={'Event not found.'} />;
+	}
 	if (!user) {
 		return <UnauthorizedPage />;
 	}
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Accept Organizer Invite</title>
-			</Head>
+			<NextSeo
+				title={`Accept Organizer Invite`}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
+			/>
 
 			<Navigation />
 

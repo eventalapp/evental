@@ -1,7 +1,6 @@
 import { NextPage } from 'next';
 import React from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import { Navigation } from '../../../../../components/navigation';
 import Column from '../../../../../components/layout/Column';
 import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
@@ -16,6 +15,7 @@ import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useA
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { NextSeo } from 'next-seo';
 
 const RoleInvitePage: NextPage = () => {
 	const router = useRouter();
@@ -48,9 +48,15 @@ const RoleInvitePage: NextPage = () => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Accept {role.name} Invite</title>
-			</Head>
+			<NextSeo
+				title={`Accept ${role.name} Invite`}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
+			/>
 
 			<Navigation />
 
