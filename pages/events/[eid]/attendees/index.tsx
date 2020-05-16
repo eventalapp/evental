@@ -53,7 +53,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	} = props;
 	const router = useRouter();
 	const [page, setPage] = useState(1);
-	const { uid, eid } = router.query;
+	const { eid } = router.query;
 	const { attendeesData, attendeesError, isAttendeesLoading } = useAttendeesQuery(String(eid), {
 		initialData: initialAttendees,
 		page
