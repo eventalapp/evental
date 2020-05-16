@@ -27,8 +27,9 @@ const MenuBar: React.FC<{
 	editor: Editor | null;
 	setLink: (link: string) => void;
 	addImage: (image?: string) => void;
+	imageUpload: boolean;
 }> = (props) => {
-	const { editor, setLink, addImage } = props;
+	const { editor, setLink, addImage, imageUpload } = props;
 
 	if (!editor) {
 		return null;
@@ -104,11 +105,14 @@ const MenuBar: React.FC<{
 			<button type="button" onClick={() => editor.chain().focus().redo().run()}>
 				<FontAwesomeIcon size="lg" icon={faRotateRight} />
 			</button>
-			<ImageUploadDialog onSubmit={addImage} editor={editor}>
-				<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
-					<FontAwesomeIcon size="lg" icon={faCamera} />
-				</button>
-			</ImageUploadDialog>
+			{imageUpload && (
+				<ImageUploadDialog onSubmit={addImage} editor={editor}>
+					<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
+						<FontAwesomeIcon size="lg" icon={faCamera} />
+					</button>
+				</ImageUploadDialog>
+			)}
+
 			<button
 				type="button"
 				onClick={() => editor.chain().focus().unsetLink().run()}
@@ -126,15 +130,17 @@ const MenuBar: React.FC<{
 	);
 };
 
-export const StyledEditor: React.FC<{ onChange: (val: string) => void; content: string }> = (
-	props
-) => {
-	const { onChange, content } = props;
+export const StyledEditor: React.FC<{
+	onChange: (val: string) => void;
+	content: string;
+	imageUpload?: boolean;
+}> = (props) => {
+	const { onChange, content, imageUpload = false } = props;
 
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
-			Image,
+			...(imageUpload ? [Image] : []),
 			Link.configure({
 				openOnClick: false
 			})
@@ -177,7 +183,7 @@ export const StyledEditor: React.FC<{ onChange: (val: string) => void; content: 
 
 	return (
 		<div className="px-3 py-2 rounded border border-gray-300 shadow-sm focus:outline-none min-h-[300px]">
-			<MenuBar editor={editor} setLink={setLink} addImage={addImage} />
+			<MenuBar editor={editor} setLink={setLink} addImage={addImage} imageUpload={imageUpload} />
 			<article className="prose focus:outline-none prose-a:text-primary">
 				<EditorContent editor={editor} />
 			</article>

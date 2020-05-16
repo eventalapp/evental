@@ -57,6 +57,7 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 						name="description"
 						render={({ field }) => (
 							<StyledEditor
+								imageUpload
 								onChange={(value) => {
 									field.onChange(value);
 								}}

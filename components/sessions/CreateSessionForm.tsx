@@ -225,6 +225,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 						name="description"
 						render={({ field }) => (
 							<StyledEditor
+								imageUpload
 								onChange={(value) => {
 									field.onChange(value);
 								}}

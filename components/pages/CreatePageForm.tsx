@@ -71,6 +71,7 @@ export const CreatePageForm: React.FC<Props> = (props) => {
 					name="body"
 					render={({ field }) => (
 						<StyledEditor
+							imageUpload
 							onChange={(value) => {
 								field.onChange(value);
 							}}
