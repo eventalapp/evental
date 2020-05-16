@@ -7,7 +7,6 @@
 - hide & show earlier sessions
 
 ## low importance
-- show earlier events
 - share to twitter
 - event favicon
 - featured role members
@@ -22,6 +21,10 @@
 - remove unused radix
 - clean up queries/mutations (export whole mut/query?)
 - filter by date formatting
+- verify email before joining/creating event
+
+## post mvp
+- make events truly private
 
 ## Installation 💾
 
