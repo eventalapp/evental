@@ -49,6 +49,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			location: event?.location ?? undefined,
 			type: event?.type ?? undefined,
 			category: event?.category ?? undefined,
+			website: event?.website ?? undefined,
 			privacy: event?.privacy ?? undefined,
 			timeZone: event?.timeZone ?? 'America/New_York',
 			slug: event?.slug ?? undefined,
@@ -120,6 +121,13 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						<Label htmlFor="location">Location</Label>
 						<Input placeholder="Event location" {...register('location')} />
 						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
+					</div>
+				</div>
+				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+					<div>
+						<Label htmlFor="website">Website *</Label>
+						<Input placeholder="https://website.com" {...register('website')} />
+						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 					</div>
 				</div>
 
