@@ -37,7 +37,6 @@ type Props = {
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialPages: Prisma.EventPage[] | undefined;
-
 	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
 };
 
@@ -157,7 +156,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialSessions = (await getSessions(String(eid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? false;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialIsAttendeeByUserId =
