@@ -35,7 +35,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 					<a href={ics(event)} target="_blank" rel="noopener noreferrer" download="cal.ics">
 						<DropdownMenuPrimitive.Item
 							className={cx(
-								'flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none',
+								'flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-xs outline-none',
 								'text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900'
 							)}
 						>
@@ -51,7 +51,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 					<a href={google(event)} target="_blank" rel="noopener noreferrer">
 						<DropdownMenuPrimitive.Item
 							className={cx(
-								'flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none',
+								'flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-xs outline-none',
 								'text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900'
 							)}
 						>
@@ -68,7 +68,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 					<a href={outlook(event)} target="_blank" rel="noopener noreferrer">
 						<DropdownMenuPrimitive.Item
 							className={cx(
-								'flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none',
+								'flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-xs outline-none',
 								'text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900'
 							)}
 						>
@@ -84,7 +84,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 					<a href={office365(event)} target="_blank" rel="noopener noreferrer">
 						<DropdownMenuPrimitive.Item
 							className={cx(
-								'flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none',
+								'flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-xs outline-none',
 								'text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900'
 							)}
 						>
@@ -100,7 +100,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 					<a href={yahoo(event)} target="_blank" rel="noopener noreferrer">
 						<DropdownMenuPrimitive.Item
 							className={cx(
-								'flex cursor-default select-none items-center rounded-md px-2 py-2 text-xs outline-none',
+								'flex cursor-pointer select-none items-center rounded-md px-2 py-2 text-xs outline-none',
 								'text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900'
 							)}
 						>
