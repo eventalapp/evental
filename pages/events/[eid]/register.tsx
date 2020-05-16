@@ -18,21 +18,26 @@ import { useUser } from '../../../hooks/queries/useUser';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { NextSeo } from 'next-seo';
 import { formatInTimeZone } from 'date-fns-tz';
+import { PrivatePage } from '../../../components/error/PrivatePage';
+import { getIsOrganizer } from '../../api/events/[eid]/organizer';
+import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
+	initialOrganizer: boolean;
 };
 
 const EventRegisterPage: NextPage<Props> = (props) => {
-	const { initialUser, initialEvent } = props;
+	const { initialUser, initialEvent, initialOrganizer } = props;
 	const router = useRouter();
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { user } = useUser(initialUser);
 
-	if (isEventLoading) {
+	if (isEventLoading || isOrganizerLoading) {
 		return <LoadingPage />;
 	}
 
@@ -42,6 +47,10 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 
 	if (!initialEvent || !event) {
 		return <NotFoundPage message="Event not found." />;
+	}
+
+	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+		return <PrivatePage />;
 	}
 
 	return (
@@ -102,11 +111,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
-			initialEvent
+			initialEvent,
+			initialOrganizer
 		}
 	};
 };

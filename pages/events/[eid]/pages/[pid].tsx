@@ -22,6 +22,9 @@ import { ViewPage } from '../../../../components/pages/ViewPage';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
+import { PrivatePage } from '../../../../components/error/PrivatePage';
+import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
 type Props = {
 	initialPage: Prisma.EventPage | undefined;
@@ -29,22 +32,26 @@ type Props = {
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialPages: Prisma.EventPage[] | undefined;
+	initialOrganizer: boolean;
 };
 
 const ViewAttendeePage: NextPage<Props> = (props) => {
 	const router = useRouter();
-	const { initialPage, initialRoles, initialUser, initialEvent, initialPages } = props;
+	const { initialPage, initialRoles, initialUser, initialEvent, initialPages, initialOrganizer } =
+		props;
 	const { pid, eid } = router.query;
 	const { page, isPageLoading, pageError } = usePageQuery(String(eid), String(pid), initialPage);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
 
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
 
-	if (isPageLoading || isEventLoading || isRolesLoading || isPagesLoading) {
+	if (isPageLoading || isEventLoading || isRolesLoading || isPagesLoading || isOrganizerLoading) {
 		return <LoadingPage />;
 	}
 
@@ -58,6 +65,10 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 
 	if (!event) {
 		return <NotFoundPage message="Event not found." />;
+	}
+
+	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+		return <PrivatePage />;
 	}
 
 	return (
@@ -98,6 +109,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
@@ -105,7 +117,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialPage,
 			initialRoles,
 			initialEvent,
-			initialPages
+			initialPages,
+			initialOrganizer
 		}
 	};
 };

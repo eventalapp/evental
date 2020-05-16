@@ -25,6 +25,7 @@ import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
+import { PrivatePage } from '../../../../components/error/PrivatePage';
 
 type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -78,6 +79,10 @@ const RolesPage: NextPage<Props> = (props) => {
 	}
 	if (!event) {
 		return <NotFoundPage message="Event not found." />;
+	}
+
+	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+		return <PrivatePage />;
 	}
 
 	return (

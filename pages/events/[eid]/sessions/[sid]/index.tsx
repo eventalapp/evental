@@ -27,6 +27,7 @@ import { getSessionAttendee } from '../../../../api/events/[eid]/sessions/[sid]/
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
+import { PrivatePage } from '../../../../../components/error/PrivatePage';
 
 type Props = {
 	initialSession: SessionWithVenue | undefined;
@@ -87,6 +88,10 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 
 	if (!event) {
 		return <NotFoundPage message="Event not found." />;
+	}
+
+	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+		return <PrivatePage />;
 	}
 
 	return (

@@ -13,6 +13,9 @@ import { useRoleQuery } from '../../../../../hooks/queries/useRoleAttendeesQuery
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { Button } from '../../../../../components/form/Button';
 import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useAcceptRoleInviteMutation';
+import { PrivatePage } from '../../../../../components/error/PrivatePage';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 
 const RoleInvitePage: NextPage = () => {
 	const router = useRouter();
@@ -20,8 +23,10 @@ const RoleInvitePage: NextPage = () => {
 	const { eid, rid, code } = router.query;
 	const { acceptRoleInviteMutation } = useAcceptRoleInviteMutation(String(eid), String(rid));
 	const { role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
-	if (isUserLoading || isRoleLoading) {
+	if (isUserLoading || isRoleLoading || isOrganizerLoading || isEventLoading) {
 		return <LoadingPage />;
 	}
 
@@ -31,6 +36,14 @@ const RoleInvitePage: NextPage = () => {
 
 	if (!role) {
 		return <NotFoundPage message="Role not found" />;
+	}
+
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
+	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+		return <PrivatePage />;
 	}
 
 	return (

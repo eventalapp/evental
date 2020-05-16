@@ -22,6 +22,9 @@ import { getSessionTypes } from '../../../../api/events/[eid]/sessions/types';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
+import { PrivatePage } from '../../../../../components/error/PrivatePage';
+import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 
 type Props = {
 	initialSessionTypes: Prisma.EventSessionType[] | undefined;
@@ -29,10 +32,18 @@ type Props = {
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialPages: Prisma.EventPage[] | undefined;
+	initialOrganizer: boolean;
 };
 
 const SessionTypesPage: NextPage<Props> = (props) => {
-	const { initialSessionTypes, initialEvent, initialRoles, initialUser, initialPages } = props;
+	const {
+		initialSessionTypes,
+		initialEvent,
+		initialRoles,
+		initialUser,
+		initialPages,
+		initialOrganizer
+	} = props;
 
 	const router = useRouter();
 	const { eid } = router.query;
@@ -43,16 +54,29 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 		String(eid),
 		initialSessionTypes
 	);
+
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
 
-	if (isSessionTypesLoading || isUserLoading || isRolesLoading || isPagesLoading) {
+	if (
+		isSessionTypesLoading ||
+		isUserLoading ||
+		isRolesLoading ||
+		isPagesLoading ||
+		isOrganizerLoading
+	) {
 		return <LoadingPage />;
 	}
 
 	if (!event) {
 		return <NotFoundPage message="Event not found." />;
+	}
+
+	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+		return <PrivatePage />;
 	}
 
 	return (
@@ -98,12 +122,14 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialSessionTypes = (await getSessionTypes(String(eid))) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
 			initialSessions,
 			initialPages,
+			initialOrganizer,
 			initialEvent,
 			initialRoles,
 			initialSessionTypes
