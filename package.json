@@ -14,7 +14,8 @@
     "migrate:dev": "prisma migrate dev",
     "migrate:reset": "prisma migrate reset",
     "migrate:prod": "prisma migrate deploy",
-    "email:forgotPassword": "ts-node --project tsconfig.json  --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/forgotPassword.ts"
+    "email:forgotPassword": "ts-node --project tsconfig.json  --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/forgotPassword.ts",
+    "stripe:listen": "stripe listen --forward-to localhost:5555/api/payment/webhooks"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
