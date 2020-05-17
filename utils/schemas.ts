@@ -299,3 +299,11 @@ export const PurchaseProSchema = z.object({
 });
 
 export type PurchaseProPayload = z.infer<typeof PurchaseProSchema>;
+
+// Verification
+
+export const VerifyEmailSchema = z.object({
+	code: z.string()
+});
+
+export type VerifyEmailPayload = z.infer<typeof VerifyEmailSchema>;
