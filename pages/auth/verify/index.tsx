@@ -29,7 +29,7 @@ const VerifyEmailPage: NextPage<Props> = (props) => {
 		if (code && user && !user.emailVerified) {
 			verifyEmailMutation.mutate({ code: String(code) });
 		}
-	}, []);
+	}, [user, code]);
 
 	if (!user) {
 		return <UnauthorizedPage />;

@@ -12,6 +12,13 @@ export default api({
 			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
 
+		if (!user.emailVerified) {
+			throw new NextkitError(
+				401,
+				'You must verify your account to do this. Request a verification email in your user settings by clicking on your profile in the top right.'
+			);
+		}
+
 		if (!(await isFounder(String(eid), String(user?.id)))) {
 			throw new NextkitError(403, 'You must be founder for this event to do this.');
 		}

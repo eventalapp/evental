@@ -11,6 +11,10 @@ export default api({
 			throw new NextkitError(404, 'User not found');
 		}
 
+		if (user.emailVerified) {
+			throw new NextkitError(400, 'Email already verified');
+		}
+
 		const verifyCode = await ctx.getVerifyEmailCode();
 
 		await ctx.redis.set(`verify:${verifyCode}`, user.id, { ex: VERIFY_EMAIL_EXPIRY });
