@@ -32,6 +32,7 @@ const SuggestPage: NextPage = () => {
 			<Column className="flex flex-col items-center">
 				<h1 className="text-2xl md:text-3xl font-bold mb-2">Suggest a feature</h1>
 				<iframe
+					title="Suggest a feature"
 					src="https://docs.google.com/forms/d/e/1FAIpQLSeXAr_Ij5eiYzGPl9v_rKVJgkoZq6m6jvLDStGoiq4SQGnSLQ/viewform?embedded=true"
 					className="w-full outline-none block h-full min-h-[800px]"
 					frameBorder="0"
