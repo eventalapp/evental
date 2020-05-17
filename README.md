@@ -7,8 +7,6 @@
 - hide & show earlier sessions
 
 ## low importance
-- share to twitter
-- event favicon
 - featured role members
 - Excel export for event data
 - remove image upload on user profile
@@ -22,6 +20,7 @@
 - clean up queries/mutations (export whole mut/query?)
 - filter by date formatting
 - verify email before joining/creating event
+- rate limit request password reset & verify email request etc
 
 ## post mvp
 - make events truly private
