@@ -89,6 +89,7 @@ model Event {
   image        String        @default("/images/default-event.jpg")
   banner       String?
   website      String?
+  color      String        @default("#0066FF")
   description  String?
   updatedAt    DateTime      @updatedAt
   createdAt    DateTime      @default(now())

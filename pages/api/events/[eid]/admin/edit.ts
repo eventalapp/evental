@@ -67,6 +67,7 @@ export default api({
 				location: body.location,
 				timeZone: body.timeZone,
 				privacy: body.privacy,
+				color: body.color,
 				website: body.website,
 				startDate: dayjs(body.startDate).tz(body.timeZone).startOf('day').toDate(),
 				endDate: dayjs(body.endDate).tz(body.timeZone).endOf('day').toDate(),

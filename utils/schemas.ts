@@ -165,6 +165,7 @@ export const EditEventSchema = z.object({
 	name: nameValidator,
 	timeZone: timeZoneValidator,
 	location: locationValidator,
+	color: z.string(),
 	website: urlValidator.optional(),
 	type: eventTypeValidator,
 	privacy: privacyLevelValidator,
