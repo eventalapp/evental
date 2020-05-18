@@ -308,3 +308,31 @@ export const VerifyEmailSchema = z.object({
 });
 
 export type VerifyEmailPayload = z.infer<typeof VerifyEmailSchema>;
+
+// Admin Create Attendee
+
+export const AdminCreateAttendeeSchema = z.object({
+	slug: slugValidator.optional(),
+	name: nameValidator,
+	image: imageFileValidator.optional(),
+	location: locationValidator.optional(),
+	description: descriptionValidator
+		.refine((val) => !val.includes('<img'), 'Your description cannot include an image.')
+		.optional(),
+	company: companyValidator.optional(),
+	position: positionValidator.optional(),
+	website: urlValidator.optional(),
+	email: emailValidator,
+	eventRoleId: z.string().min(1, 'Event Role ID is required').max(200, 'Event Role ID is too long')
+});
+
+export type AdminCreateAttendeePayload = z.infer<typeof AdminCreateAttendeeSchema>;
+
+// Claim profile
+
+export const ClaimProfileSchema = z.object({
+	password: passwordValidator,
+	code: codeValidator
+});
+
+export type ClaimProfilePayload = z.infer<typeof ClaimProfileSchema>;
