@@ -23,6 +23,18 @@ const getToken = async (): Promise<string> => {
 	return token;
 };
 
+const getClaimProfileCode = async (): Promise<string> => {
+	const token = randomBytes(128).toString('hex');
+
+	const count = await redis.exists(`claim:${token}`);
+
+	if (count > 0) {
+		return getClaimProfileCode();
+	}
+
+	return token;
+};
+
 const getVerifyEmailCode = async (): Promise<string> => {
 	const token = randomBytes(128).toString('hex');
 
@@ -100,6 +112,7 @@ export const api = createAPI({
 			getOrganizerInviteCode,
 			getVerifyEmailCode,
 			getRoleInviteCode,
+			getClaimProfileCode,
 			getUser: async () => {
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 
