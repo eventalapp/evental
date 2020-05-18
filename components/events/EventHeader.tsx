@@ -30,7 +30,7 @@ export const EventHeader: React.FC<{
 		<div className="mb-7">
 			{isOrganizer && (
 				<Link href={`/events/${eid}/admin${adminLink}`}>
-					<a className="bg-gradient-to-r from-primary-500 to-secondary-500 block text-white px-5 py-3 rounded-md mb-4 font-medium">
+					<a className="bg-primary block text-white px-5 py-3 rounded-md mb-4 font-medium">
 						You are an organizer for this event, click here to manage this event
 					</a>
 				</Link>
@@ -38,7 +38,7 @@ export const EventHeader: React.FC<{
 
 			{!Boolean(isAttendee) && (
 				<Link href={`/events/${eid}/register`}>
-					<a className="bg-gradient-to-r from-primary-500 to-secondary-500 block text-white px-5 py-3 rounded-md mb-4 font-medium">
+					<a className="bg-primary block text-white px-5 py-3 rounded-md mb-4 font-medium">
 						Are you attending this event? Register here.
 					</a>
 				</Link>
