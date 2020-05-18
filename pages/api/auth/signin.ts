@@ -20,6 +20,10 @@ export default api({
 			throw new NextkitError(400, 'Invalid email or password');
 		}
 
+		if (!user.password) {
+			throw new NextkitError(500, 'Please reset your password');
+		}
+
 		const passwordHashed = await verify(user.password, body.password);
 
 		if (!passwordHashed) {
