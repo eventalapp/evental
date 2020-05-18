@@ -1,7 +1,6 @@
 # Evental
 
 ## Todo for MVP:
-
 - add speakers to sessions
 - marketing pages
 - hide & show earlier sessions
@@ -9,6 +8,7 @@
 
 ## low importance
 - featured role members
+- send email to all event attendees
 - Excel export for event data
 - print your schedule
 - session card on hover
@@ -19,6 +19,7 @@
 - remove unused radix
 - clean up queries/mutations (export whole mut/query?)
 - rate limit request password reset & verify email request etc
+- tooltip wysiwyg editor menubar
 
 ## post mvp
 - make events truly private
