@@ -45,7 +45,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 	} = useForm<EditSessionPayload>({
 		defaultValues: {
 			name: String(session?.name),
-			description: String(session?.description),
+			description: session?.description ?? undefined,
 			venueId: session?.venueId ?? 'none',
 			typeId: session?.typeId ?? 'none',
 			startDate: session?.startDate ? new Date(String(session?.startDate)) : new Date(),
