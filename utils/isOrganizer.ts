@@ -1,11 +1,8 @@
 import { prisma } from '../prisma/client';
+import { getEvent } from '../pages/api/events/[eid]';
 
 export const isOrganizer = async (userId: string, eventId: string) => {
-	const event = await prisma.event.findFirst({
-		where: {
-			OR: [{ id: String(eventId) }, { slug: String(eventId) }]
-		}
-	});
+	const event = await getEvent(String(eventId));
 
 	if (!event) {
 		return false;
