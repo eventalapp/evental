@@ -81,17 +81,21 @@ const ViewAttendeePage: NextPage = () => {
 					</h3>
 
 					<div>
-						<div className="flex items-center flex-row">
+						<div className="flex items-center flex-row space-x-3">
+							<Link href={`/events/${eid}/admin/attendees/create`} passHref>
+								<LinkButton>Create {role.name}</LinkButton>
+							</Link>
+
 							<Link href={`/events/${eid}/admin/roles/${rid}/invite`} passHref>
 								<LinkButton>Invite {role.name}</LinkButton>
 							</Link>
 
 							<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
-								<LinkButton className="ml-3">Edit role</LinkButton>
+								<LinkButton>Edit role</LinkButton>
 							</Link>
 
 							<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
-								<LinkButton className="ml-3">Delete role</LinkButton>
+								<LinkButton>Delete role</LinkButton>
 							</Link>
 						</div>
 					</div>
