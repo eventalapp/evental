@@ -10,11 +10,17 @@ export interface UseSessionRoleAttendeesQueryData {
 	>;
 }
 
+export interface UseSessionRoleAttendeesOptions {
+	initialData?: AttendeeWithUser[] | undefined;
+}
+
 export const useSessionRoleAttendeesQuery = (
 	eid: string,
 	sid: string,
-	initialData?: AttendeeWithUser[] | undefined
+	args: UseSessionRoleAttendeesOptions = {}
 ): UseSessionRoleAttendeesQueryData => {
+	const { initialData } = args;
+
 	const sessionRoleAttendeesQuery = useQuery<
 		AttendeeWithUser[] | undefined,
 		AxiosError<ErroredAPIResponse>
