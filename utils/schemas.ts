@@ -336,3 +336,19 @@ export const ClaimProfileSchema = z.object({
 });
 
 export type ClaimProfilePayload = z.infer<typeof ClaimProfileSchema>;
+
+// Add role attendee to session
+
+export const AddAttendeeToSessionSchema = z.object({
+	userId: z.string().min(1, 'User ID is required').max(200, 'User ID is too long')
+});
+
+export type AddAttendeeToSessionPayload = z.infer<typeof AddAttendeeToSessionSchema>;
+
+// Add role attendee to session
+
+export const RemoveAttendeeFromSessionSchema = z.object({
+	userId: z.string().min(1, 'User ID is required').max(200, 'User ID is too long')
+});
+
+export type RemoveAttendeeFromSessionPayload = z.infer<typeof RemoveAttendeeFromSessionSchema>;
