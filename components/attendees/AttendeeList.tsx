@@ -31,7 +31,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 									<Link
 										href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${attendee.user.slug}`}
 									>
-										<a className="flex items-center justify-between flex-col h-full">
+										<a className="flex items-center justify-start flex-col h-full">
 											<div className="h-16 w-16 relative mb-1 border-2 border-gray-100 rounded-full">
 												<Image
 													alt={String(attendee.user.name)}
