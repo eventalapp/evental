@@ -17,6 +17,7 @@ import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { useSessionRoleAttendeesQuery } from '../../../../../../hooks/queries/useSessionRoleAttendeesQuery';
 
 const ViewSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -32,6 +33,7 @@ const ViewSessionPage: NextPage = () => {
 	const { sessionAttendeesQuery } = useSessionAttendeesQuery(String(eid), String(sid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
+	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
 
 	if (isOrganizerLoading || isSessionLoading || isRolesLoading || isEventLoading) {
 		return <LoadingPage />;
@@ -64,6 +66,7 @@ const ViewSessionPage: NextPage = () => {
 			<Column>
 				<ViewSession
 					admin
+					roleAttendees={sessionRoleAttendeesQuery.data}
 					attendees={sessionAttendeesQuery.data}
 					isAttending={Boolean(sessionAttendeeQuery.data)}
 					session={session}

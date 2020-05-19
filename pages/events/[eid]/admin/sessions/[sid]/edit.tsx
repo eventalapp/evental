@@ -19,6 +19,7 @@ import { useUser } from '../../../../../../hooks/queries/useUser';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { useSessionTypesQuery } from '../../../../../../hooks/queries/useSessionTypesQuery';
+import { useSessionRoleAttendeesQuery } from '../../../../../../hooks/queries/useSessionRoleAttendeesQuery';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -33,6 +34,8 @@ const EditSessionPage: NextPage = () => {
 	const { sessionTypes, isSessionTypesLoading, sessionTypesError } = useSessionTypesQuery(
 		String(eid)
 	);
+	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
+
 	if (
 		isRolesLoading ||
 		isVenuesLoading ||
@@ -80,6 +83,7 @@ const EditSessionPage: NextPage = () => {
 				<h3 className="text-xl md:text-2xl font-medium">Edit Session</h3>
 
 				<EditSessionForm
+					sessionRoleAttendeesQuery={sessionRoleAttendeesQuery}
 					eid={String(eid)}
 					sid={String(sid)}
 					venues={venues}

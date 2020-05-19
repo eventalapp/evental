@@ -30,6 +30,7 @@ import { NextSeo } from 'next-seo';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
+import { useSessionRoleAttendeesQuery } from '../../../../../hooks/queries/useSessionRoleAttendeesQuery';
 
 type Props = {
 	initialSession: SessionWithVenue | undefined;
@@ -78,6 +79,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
+	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
 
 	if (
 		isSessionLoading ||
@@ -136,6 +138,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<ViewSession
+					roleAttendees={sessionRoleAttendeesQuery.data}
 					attendees={sessionAttendeesQuery.data}
 					isAttending={Boolean(isAttendingSessionQuery.data)}
 					session={session}
