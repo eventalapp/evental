@@ -4,7 +4,6 @@
 - add speakers to sessions
 - marketing pages
 - hide & show earlier sessions
-- enforce max attendee limit
 
 ## low importance
 - featured role members
