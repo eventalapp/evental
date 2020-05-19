@@ -38,6 +38,7 @@ type Props = {
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialSessionAttendees: AttendeeWithUser[] | undefined;
+	initialRoleSessionAttendees: AttendeeWithUser[] | undefined;
 	initialSessionAttendee: AttendeeWithUser | undefined;
 	initialPages: Prisma.EventPage[] | undefined;
 	initialOrganizer: boolean;
@@ -51,6 +52,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 		initialEvent,
 		initialSessionAttendees,
 		initialSessionAttendee,
+		initialRoleSessionAttendees,
 		initialPages,
 		initialOrganizer
 	} = props;
@@ -79,7 +81,9 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
-	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
+	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid), {
+		initialData: initialRoleSessionAttendees
+	});
 
 	if (
 		isSessionLoading ||
@@ -160,7 +164,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? false;
 	const initialSessionAttendees =
-		(await getSessionAttendees(String(eid), String(sid))) ?? undefined;
+		(await getSessionAttendees(String(eid), String(sid), { type: 'ATTENDEE' })) ?? undefined;
+	const initialRoleSessionAttendees =
+		(await getSessionAttendees(String(eid), String(sid), { type: 'ROLE' })) ?? undefined;
 	const initialSessionAttendee =
 		(await getSessionAttendee(String(eid), String(sid), String(initialUser?.id))) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
@@ -174,7 +180,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialSessionAttendees,
 			initialSessionAttendee,
 			initialPages,
-			initialOrganizer
+			initialOrganizer,
+			initialRoleSessionAttendees
 		}
 	};
 };
