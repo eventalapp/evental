@@ -9,27 +9,25 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
-import React, { useState } from 'react';
+import React from 'react';
 import parse from 'html-react-parser';
 import { NextSeo } from 'next-seo';
 import { useSessionsByUserQuery } from '../../../hooks/queries/useSessionsByUserQuery';
-import { Pagination } from '../../../components/Pagination';
 import { SessionWithEventList } from '../../../components/sessions/SessionWithEventList';
-import { getSessionsByUser, PaginatedSessionsWithVenueEvent } from '../../api/users/[uid]/sessions';
+import { getSessionsByUser, SessionWithVenueEvent } from '../../api/users/[uid]/sessions';
 
 type Props = {
 	initialViewingUser: PasswordlessUser | undefined;
-	initialSessionsByUserData: PaginatedSessionsWithVenueEvent | undefined;
+	initialSessionsByUserData: SessionWithVenueEvent[] | undefined;
 };
 
 const ViewSessionPage: NextPage<Props> = (props) => {
 	const { initialViewingUser, initialSessionsByUserData } = props;
 	const router = useRouter();
-	const [page, setPage] = useState(1);
+
 	const { uid } = router.query;
 	const { user, isUserLoading } = useUserQuery(String(uid), initialViewingUser);
 	const { isSessionsByUserLoading, sessionsByUserData } = useSessionsByUserQuery(String(uid), {
-		page,
 		initialData: initialSessionsByUserData
 	});
 
@@ -41,7 +39,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 		return <NotFoundPage />;
 	}
 
-	if (!sessionsByUserData?.sessions) {
+	if (!sessionsByUserData) {
 		return <NotFoundPage message="No sessions not found." />;
 	}
 
@@ -79,23 +77,10 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 
 				<h3 className="text-xl md:text-2xl font-medium mt-3">
 					Schedule{' '}
-					{sessionsByUserData?.pagination?.total > 0 && (
-						<span className="font-normal text-gray-500">
-							({sessionsByUserData?.pagination?.from || 0}/
-							{sessionsByUserData?.pagination?.total || 0})
-						</span>
-					)}
+					<span className="font-normal text-gray-500">({sessionsByUserData.length || 0})</span>
 				</h3>
 
-				<SessionWithEventList sessions={sessionsByUserData?.sessions} />
-
-				{sessionsByUserData.pagination.pageCount > 1 && (
-					<Pagination
-						page={page}
-						pageCount={sessionsByUserData.pagination.pageCount}
-						setPage={setPage}
-					/>
-				)}
+				<SessionWithEventList sessions={sessionsByUserData} />
 			</Column>
 		</PageWrapper>
 	);

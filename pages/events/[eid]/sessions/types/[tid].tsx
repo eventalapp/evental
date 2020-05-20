@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { useSessionTypeQuery } from '../../../../../hooks/queries/useSessionTypeQuery';
@@ -14,17 +14,13 @@ import { useUser } from '../../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { EventNavigation } from '../../../../../components/events/navigation';
 import { ssrGetUser } from '../../../../../utils/api';
-import {
-	getSessionsByType,
-	PaginatedSessionsWithVenue
-} from '../../../../api/events/[eid]/sessions';
+import { getSessionsByType, SessionWithVenue } from '../../../../api/events/[eid]/sessions';
 import { getEvent } from '../../../../api/events/[eid]';
 import { getRoles } from '../../../../api/events/[eid]/roles';
 import Prisma from '@prisma/client';
 import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 import { getSessionType } from '../../../../api/events/[eid]/sessions/types/[tid]';
 import { useSessionsByTypeQuery } from '../../../../../hooks/queries/useSessionsByTypeQuery';
-import { Pagination } from '../../../../../components/Pagination';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
@@ -34,7 +30,7 @@ import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuer
 
 type Props = {
 	initialSessionType: Prisma.EventSessionType | undefined;
-	initialSessionsByType: PaginatedSessionsWithVenue | undefined;
+	initialSessionsByType: SessionWithVenue[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -53,7 +49,6 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 		initialOrganizer
 	} = props;
 	const router = useRouter();
-	const [page, setPage] = useState(1);
 	const { tid, eid } = router.query;
 	const { user, isUserLoading } = useUser(initialUser);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
@@ -66,7 +61,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 	const { sessionsByTypeData, isSessionsByTypeLoading } = useSessionsByTypeQuery(
 		String(eid),
 		String(tid),
-		{ initialData: initialSessionsByType, page }
+		{ initialData: initialSessionsByType }
 	);
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
@@ -93,7 +88,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 		return <NotFoundPage message="Session Type not found." />;
 	}
 
-	if (!sessionsByTypeData?.sessions) {
+	if (!sessionsByTypeData) {
 		return <NotFoundPage message="Sessions not found." />;
 	}
 
@@ -139,16 +134,9 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 					sessionType={sessionType}
 					eid={String(eid)}
 					tid={String(tid)}
-					sessions={sessionsByTypeData.sessions}
+					sessions={sessionsByTypeData}
 					event={event}
 				/>
-				{sessionsByTypeData.pagination.pageCount > 1 && (
-					<Pagination
-						page={page}
-						pageCount={sessionsByTypeData.pagination.pageCount}
-						setPage={setPage}
-					/>
-				)}
 			</Column>
 		</PageWrapper>
 	);

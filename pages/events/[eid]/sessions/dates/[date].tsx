@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
@@ -12,15 +12,11 @@ import { useUser } from '../../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { EventNavigation } from '../../../../../components/events/navigation';
 import { ssrGetUser } from '../../../../../utils/api';
-import {
-	getSessionsByDate,
-	PaginatedSessionsWithVenue
-} from '../../../../api/events/[eid]/sessions';
+import { getSessionsByDate, SessionWithVenue } from '../../../../api/events/[eid]/sessions';
 import { getEvent } from '../../../../api/events/[eid]';
 import { getRoles } from '../../../../api/events/[eid]/roles';
 import Prisma from '@prisma/client';
 import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
-import { Pagination } from '../../../../../components/Pagination';
 import { useSessionsByDateQuery } from '../../../../../hooks/queries/useSessionsByDateQuery';
 import { SessionList } from '../../../../../components/sessions/SessionList';
 import dayjs from 'dayjs';
@@ -32,7 +28,7 @@ import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 
 type Props = {
-	initialSessionsByDate: PaginatedSessionsWithVenue | undefined;
+	initialSessionsByDate: SessionWithVenue[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -50,7 +46,6 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 		initialOrganizer
 	} = props;
 	const router = useRouter();
-	const [page, setPage] = useState(1);
 	const { date, eid } = router.query;
 	const { user, isUserLoading } = useUser(initialUser);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
@@ -58,7 +53,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 	const { isSessionsByDateLoading, sessionsByDateData } = useSessionsByDateQuery(
 		String(eid),
 		String(date),
-		{ initialData: initialSessionsByDate, page }
+		{ initialData: initialSessionsByDate }
 	);
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
@@ -134,25 +129,10 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 			<Column>
 				<h3 className="text-xl md:text-2xl font-medium mt-5">
 					Sessions for {dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')}{' '}
-					<span className="font-normal text-gray-500">
-						{sessionsByDateData?.pagination?.total > 0 && (
-							<span className="font-normal text-gray-500">
-								({sessionsByDateData?.pagination?.from || 0}/
-								{sessionsByDateData?.pagination?.total || 0})
-							</span>
-						)}
-					</span>
+					<span className="font-normal text-gray-500">({sessionsByDateData.length || 0})</span>
 				</h3>
 
-				<SessionList sessions={sessionsByDateData.sessions} eid={String(eid)} event={event} />
-
-				{sessionsByDateData.pagination.pageCount > 1 && (
-					<Pagination
-						page={page}
-						pageCount={sessionsByDateData.pagination.pageCount}
-						setPage={setPage}
-					/>
-				)}
+				<SessionList sessions={sessionsByDateData} eid={String(eid)} event={event} />
 			</Column>
 		</PageWrapper>
 	);

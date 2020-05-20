@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import { LinkButton } from '../../../../../components/form/LinkButton';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import Column from '../../../../../components/layout/Column';
@@ -18,16 +18,12 @@ import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import { SessionList } from '../../../../../components/sessions/SessionList';
-import { Pagination } from '../../../../../components/Pagination';
 
 const SessionsAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const [page, setPage] = useState(1);
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { sessionsData, isSessionsLoading } = useSessionsQuery(String(eid), {
-		page
-	});
+	const { sessionsData, isSessionsLoading } = useSessionsQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { event } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
@@ -67,11 +63,7 @@ const SessionsAdminPage: NextPage = () => {
 					<FlexRowBetween>
 						<h3 className="text-xl md:text-2xl font-medium">
 							Sessions{' '}
-							{sessionsData?.pagination?.total > 0 && (
-								<span className="font-normal text-gray-500">
-									({sessionsData?.pagination?.from || 0}/{sessionsData?.pagination?.total || 0})
-								</span>
-							)}
+							<span className="font-normal text-gray-500">({sessionsData.length || 0})</span>
 						</h3>
 
 						<div>
@@ -81,17 +73,7 @@ const SessionsAdminPage: NextPage = () => {
 						</div>
 					</FlexRowBetween>
 
-					{sessionsData?.sessions && (
-						<SessionList admin eid={String(eid)} sessions={sessionsData?.sessions} event={event} />
-					)}
-
-					{sessionsData.pagination.pageCount > 1 && (
-						<Pagination
-							page={page}
-							pageCount={sessionsData.pagination.pageCount}
-							setPage={setPage}
-						/>
-					)}
+					<SessionList admin eid={String(eid)} sessions={sessionsData} event={event} />
 				</div>
 			</Column>
 		</PageWrapper>

@@ -5,10 +5,10 @@ import { SessionList } from '../../../../components/sessions/SessionList';
 import Column from '../../../../components/layout/Column';
 import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-import React, { useState } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { getSessions, PaginatedSessionsWithVenue } from '../../../api/events/[eid]/sessions';
+import { getSessions, SessionWithVenue } from '../../../api/events/[eid]/sessions';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
@@ -24,14 +24,13 @@ import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
-import { Pagination } from '../../../../components/Pagination';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 
 type Props = {
-	initialSessions: PaginatedSessionsWithVenue | undefined;
+	initialSessions: SessionWithVenue[] | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
@@ -51,11 +50,9 @@ const SessionsPage: NextPage<Props> = (props) => {
 		initialPages
 	} = props;
 	const router = useRouter();
-	const [page, setPage] = useState(1);
 	const { eid } = router.query;
 	const { sessionsData, isSessionsLoading, sessionsError } = useSessionsQuery(String(eid), {
-		initialData: initialSessions,
-		page
+		initialData: initialSessions
 	});
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
@@ -82,7 +79,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (!sessionsData?.sessions) {
+	if (!sessionsData) {
 		return <NotFoundPage message="No sessions not found." />;
 	}
 
@@ -139,19 +136,10 @@ const SessionsPage: NextPage<Props> = (props) => {
 				)}
 
 				<h3 className="text-xl md:text-2xl font-medium">
-					Sessions{' '}
-					{sessionsData?.pagination?.total > 0 && (
-						<span className="font-normal text-gray-500">
-							({sessionsData?.pagination?.from || 0}/{sessionsData?.pagination?.total || 0})
-						</span>
-					)}
+					Sessions <span className="font-normal text-gray-500">({sessionsData.length || 0})</span>
 				</h3>
 
-				<SessionList sessions={sessionsData?.sessions} eid={String(eid)} event={event} />
-
-				{sessionsData.pagination.pageCount > 1 && (
-					<Pagination page={page} pageCount={sessionsData.pagination.pageCount} setPage={setPage} />
-				)}
+				<SessionList sessions={sessionsData} eid={String(eid)} event={event} />
 			</Column>
 		</PageWrapper>
 	);

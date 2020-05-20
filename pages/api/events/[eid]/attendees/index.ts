@@ -7,19 +7,11 @@ import {
 	AttendeeWithUser,
 	stripAttendeesWithUserPassword
 } from '../../../../../utils/stripUserPassword';
-import { PageOptions, PaginationData, SESSIONS_PER_PAGE } from '../sessions';
 import { getRole } from '../roles/[rid]';
-
-export type PaginatedAttendeesWithUser = {
-	attendees: AttendeeWithUser[];
-	pagination: PaginationData;
-};
 
 export default api({
 	async GET({ req }) {
-		const { eid, page, role, name } = req.query;
-
-		const pageParsed = page ? parseInt(String(page)) : 1;
+		const { eid, role, name } = req.query;
 
 		if (name) {
 			const attendeesByName = await getAttendeesByName(String(eid), String(name));
@@ -32,9 +24,7 @@ export default api({
 		}
 
 		if (role) {
-			const attendeesByRole = await getAttendeesByRole(String(eid), String(role), {
-				page: pageParsed
-			});
+			const attendeesByRole = await getAttendeesByRole(String(eid), String(role));
 
 			if (!attendeesByRole) {
 				throw new NextkitError(404, 'Attendees not found');
@@ -43,7 +33,7 @@ export default api({
 			return attendeesByRole;
 		}
 
-		const attendees = await getAttendees(String(eid), { page: pageParsed });
+		const attendees = await getAttendees(String(eid));
 
 		if (!attendees) {
 			throw new NextkitError(404, 'Attendees not found');
@@ -53,27 +43,14 @@ export default api({
 	}
 });
 
-export const getAttendees = async (
-	eid: string,
-	args: PageOptions = {}
-): Promise<PaginatedAttendeesWithUser | null> => {
-	const { page = 1 } = args;
-
+export const getAttendees = async (eid: string): Promise<AttendeeWithUser[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
 		return null;
 	}
 
-	const count = await prisma.eventAttendee.count({
-		where: {
-			eventId: event.id
-		}
-	});
-
 	const attendees = await prisma.eventAttendee.findMany({
-		take: SESSIONS_PER_PAGE,
-		skip: (page - 1) * SESSIONS_PER_PAGE,
 		where: {
 			eventId: event.id
 		},
@@ -83,26 +60,13 @@ export const getAttendees = async (
 		}
 	});
 
-	return {
-		attendees: stripAttendeesWithUserPassword(attendees),
-		pagination: {
-			total: count,
-			pageCount: Math.ceil(count / SESSIONS_PER_PAGE),
-			currentPage: page,
-			perPage: SESSIONS_PER_PAGE,
-			from: (page - 1) * SESSIONS_PER_PAGE + 1,
-			to: (page - 1) * SESSIONS_PER_PAGE + attendees.length
-		}
-	};
+	return stripAttendeesWithUserPassword(attendees);
 };
 
 export const getAttendeesByRole = async (
 	eid: string,
-	rid: string,
-	args: PageOptions = {}
-): Promise<PaginatedAttendeesWithUser | null> => {
-	const { page = 1 } = args;
-
+	rid: string
+): Promise<AttendeeWithUser[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
@@ -115,16 +79,7 @@ export const getAttendeesByRole = async (
 		return null;
 	}
 
-	const count = await prisma.eventAttendee.count({
-		where: {
-			eventRoleId: role.id,
-			eventId: event.id
-		}
-	});
-
 	const attendees = await prisma.eventAttendee.findMany({
-		take: SESSIONS_PER_PAGE,
-		skip: (page - 1) * SESSIONS_PER_PAGE,
 		where: {
 			eventRoleId: role.id,
 			eventId: event.id
@@ -139,17 +94,7 @@ export const getAttendeesByRole = async (
 		return null;
 	}
 
-	return {
-		attendees: stripAttendeesWithUserPassword(attendees),
-		pagination: {
-			total: count,
-			pageCount: Math.ceil(count / SESSIONS_PER_PAGE),
-			currentPage: page,
-			perPage: SESSIONS_PER_PAGE,
-			from: (page - 1) * SESSIONS_PER_PAGE + 1,
-			to: (page - 1) * SESSIONS_PER_PAGE + attendees.length
-		}
-	};
+	return stripAttendeesWithUserPassword(attendees);
 };
 
 export const getAttendeesByName = async (

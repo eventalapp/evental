@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
-import React, { useState } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import Prisma from '@prisma/client';
 import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
@@ -19,8 +19,7 @@ import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useSessionsByVenueQuery } from '../../../../hooks/queries/useSessionsByVenueQuery';
-import { getSessionsByVenue, PaginatedSessionsWithVenue } from '../../../api/events/[eid]/sessions';
-import { Pagination } from '../../../../components/Pagination';
+import { getSessionsByVenue, SessionWithVenue } from '../../../api/events/[eid]/sessions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { SessionList } from '../../../../components/sessions/SessionList';
@@ -35,7 +34,7 @@ import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
-	initialSessionsByVenue: PaginatedSessionsWithVenue | undefined;
+	initialSessionsByVenue: SessionWithVenue[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -55,7 +54,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		initialOrganizer
 	} = props;
 	const { vid, eid } = router.query;
-	const [page, setPage] = useState(1);
 	const { venue, isVenueLoading, venueError } = useVenueQuery(
 		String(eid),
 		String(vid),
@@ -68,8 +66,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		String(eid),
 		String(vid),
 		{
-			initialData: initialSessionsByVenue,
-			page
+			initialData: initialSessionsByVenue
 		}
 	);
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
@@ -89,7 +86,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (!venue || !sessionsByVenueData?.sessions) {
+	if (!venue || !sessionsByVenueData) {
 		return <NotFoundPage message="Venue not found." />;
 	}
 
@@ -165,24 +162,11 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 
 				<h3 className="text-xl md:text-2xl font-medium">
 					Sessions{' '}
-					{sessionsByVenueData?.pagination?.total > 0 && (
-						<span className="font-normal text-gray-500">
-							({sessionsByVenueData?.pagination?.from || 0}/
-							{sessionsByVenueData?.pagination?.total || 0})
-						</span>
-					)}
+					<span className="font-normal text-gray-500">({sessionsByVenueData.length || 0})</span>
 				</h3>
 
-				{sessionsByVenueData.sessions && (
-					<SessionList eid={String(eid)} sessions={sessionsByVenueData.sessions} event={event} />
-				)}
-
-				{sessionsByVenueData.pagination.pageCount > 1 && (
-					<Pagination
-						page={page}
-						pageCount={sessionsByVenueData.pagination.pageCount}
-						setPage={setPage}
-					/>
+				{sessionsByVenueData && (
+					<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} />
 				)}
 			</Column>
 		</PageWrapper>

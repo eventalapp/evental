@@ -8,6 +8,12 @@ export default api({
 	async GET({ req }) {
 		const { eid } = req.query;
 
+		const event = await getEvent(String(eid));
+
+		if (!event) {
+			throw new NextkitError(404, 'Event not found');
+		}
+
 		const roles = await getRoles(String(eid));
 
 		if (roles && roles.length === 0) {
@@ -15,7 +21,7 @@ export default api({
 				data: {
 					name: 'Attendee',
 					slug: 'attendee',
-					eventId: String(eid),
+					eventId: event.id,
 					defaultRole: true
 				}
 			});

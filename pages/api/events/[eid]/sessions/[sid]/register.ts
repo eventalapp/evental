@@ -34,7 +34,7 @@ export default api({
 			throw new NextkitError(404, 'Session not found.');
 		}
 
-		const attendee = await prisma.eventAttendee.findFirst({
+		let attendee = await prisma.eventAttendee.findFirst({
 			where: {
 				eventId: event.id,
 				userId: String(user.id)
@@ -48,7 +48,7 @@ export default api({
 				throw new NextkitError(404, 'Default role not found.');
 			}
 
-			await prisma.eventAttendee.create({
+			attendee = await prisma.eventAttendee.create({
 				data: {
 					eventId: event.id,
 					userId: String(user.id),
