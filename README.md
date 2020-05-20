@@ -6,6 +6,7 @@
 
 ## low importance
 - featured role members
+- leave session, event, etc
 - send email to all event attendees
 - Excel export for event data
 - print your schedule
