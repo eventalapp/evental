@@ -10,6 +10,7 @@ export type UseAttendeesByNameQueryData = UseQueryResult<
 
 export interface UseAttendeesByNameQueryOptions {
 	initialData?: AttendeeWithUser[] | undefined;
+	limit?: number;
 }
 
 export const useAttendeesByNameQuery = (
@@ -17,10 +18,12 @@ export const useAttendeesByNameQuery = (
 	name: string,
 	args: UseAttendeesByNameQueryOptions = {}
 ): UseAttendeesByNameQueryData => {
-	const { initialData } = args;
+	const { initialData, limit } = args;
 	let params = new URLSearchParams();
 
 	params.append('name', String(name));
+	params.append('limit', String(limit));
+	params.append('type', 'name');
 
 	return useQuery<AttendeeWithUser[], AxiosError<ErroredAPIResponse>>(
 		['attendee-name', eid, name],
