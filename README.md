@@ -2,10 +2,10 @@
 
 ## Todo for MVP:
 - marketing pages
-- hide & show earlier sessions
 
 ## low importance
 - featured role members
+- session hover card
 - leave session, event, etc
 - send email to all event attendees
 - Excel export for event data
