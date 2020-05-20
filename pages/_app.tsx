@@ -14,7 +14,9 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import { DefaultSeo } from 'next-seo';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
 
+dayjs.extend(advancedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
