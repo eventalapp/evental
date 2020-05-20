@@ -126,10 +126,26 @@ export const getSessionsByDate = async (
 	return await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id,
-			startDate: {
-				gte: dateParsedStart,
-				lte: dateParsedEnd
-			}
+			OR: [
+				{
+					startDate: {
+						gte: dateParsedStart,
+						lte: dateParsedEnd
+					}
+				},
+				{
+					endDate: {
+						gte: dateParsedStart,
+						lte: dateParsedEnd
+					}
+				},
+				{
+					AND: {
+						startDate: { lte: dateParsedStart },
+						endDate: { gte: dateParsedEnd }
+					}
+				}
+			]
 		},
 		include: {
 			venue: true,
