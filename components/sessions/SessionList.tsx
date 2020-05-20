@@ -29,10 +29,11 @@ export const SessionList: React.FC<Props> = (props) => {
 	const previousSessions = sessions.filter((session) =>
 		dayjs(session.endDate).isBefore(new Date())
 	);
+	const upcomingSessions = sessions.filter((session) => dayjs(session.endDate).isAfter(new Date()));
 
 	return (
 		<div className="mt-3">
-			{previousSessions && (
+			{previousSessions && previousSessions.length >= 1 && (
 				<>
 					<Button
 						className="cursor-pointer"
@@ -57,9 +58,8 @@ export const SessionList: React.FC<Props> = (props) => {
 						)}
 					>
 						{Object.entries(
-							sessions
-								.filter((session) => dayjs(session.endDate).isBefore(new Date()))
-								.reduce((acc: Record<string, Record<string, SessionWithVenue[]>>, session) => {
+							previousSessions.reduce(
+								(acc: Record<string, Record<string, SessionWithVenue[]>>, session) => {
 									const day = dayjs(session.startDate).format('YYYY/MM/DD');
 									const hour = dayjs(session.startDate).format('YYYY/MM/DD HH:mm');
 
@@ -74,7 +74,9 @@ export const SessionList: React.FC<Props> = (props) => {
 									acc[day][hour].push(session);
 
 									return acc;
-								}, {})
+								},
+								{}
+							)
 						).map(([date, hourObject]) => {
 							return (
 								<div key={date}>
@@ -133,9 +135,8 @@ export const SessionList: React.FC<Props> = (props) => {
 			)}
 
 			{Object.entries(
-				sessions
-					.filter((session) => dayjs(session.endDate).isAfter(new Date()))
-					.reduce((acc: Record<string, Record<string, SessionWithVenue[]>>, session) => {
+				upcomingSessions.reduce(
+					(acc: Record<string, Record<string, SessionWithVenue[]>>, session) => {
 						const day = dayjs(session.startDate).format('YYYY/MM/DD');
 						const hour = dayjs(session.startDate).format('YYYY/MM/DD HH:mm');
 
@@ -150,7 +151,9 @@ export const SessionList: React.FC<Props> = (props) => {
 						acc[day][hour].push(session);
 
 						return acc;
-					}, {})
+					},
+					{}
+				)
 			).map(([date, hourObject]) => {
 				return (
 					<div key={date}>
