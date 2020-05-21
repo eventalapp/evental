@@ -56,7 +56,8 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 	);
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
 		String(eid),
-		String(sid)
+		String(sid),
+		{ redirectUrl: `/events/${eid}/sessions/${sid}` }
 	);
 	const { user } = useUser(initialUser);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
