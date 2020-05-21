@@ -21,7 +21,6 @@
 - remove unused radix
 - clean up queries/mutations (export whole mut/query?)
 - rate limit request password reset & verify email request etc
-- tooltip wysiwyg editor menubar
 
 ## post mvp
 - make events truly private
