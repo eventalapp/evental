@@ -4,6 +4,7 @@ import { getUser } from '../index';
 import ExcelJS from 'exceljs';
 import { getSessionsByUser } from '../sessions';
 import { htmlToText } from 'html-to-text';
+import dayjs from 'dayjs';
 
 export default api.raw({
 	async GET({ req, res }) {
@@ -26,7 +27,6 @@ export default api.raw({
 			{ header: 'Event Name', key: 'name', width: 30 },
 			{ header: 'Session Time', key: 'session_time', width: 30 },
 			{ header: 'Session Name', key: 'session_name', width: 30 },
-			{ header: 'Session Type', key: 'session_type', width: 30 },
 			{ header: 'Session Description', key: 'session_description', width: 30 },
 			{ header: 'Session Category', key: 'session_category', width: 30 },
 			{ header: 'Session Venue', key: 'session_venue', width: 30 },
@@ -42,9 +42,10 @@ export default api.raw({
 		sessionsResponse.forEach((session) => {
 			worksheet.addRow({
 				name: session.name,
-				session_time: session.startDate,
+				session_time: `${dayjs(session.startDate).format('dddd, MMM D h:mm A z')} - ${dayjs(
+					session.endDate
+				).format('dddd, MMM D h:mm A z')}`,
 				session_name: session.name,
-				session_type: session.type,
 				session_description: htmlToText(session.description ?? ''),
 				session_category: session?.type?.name,
 				session_venue: session?.venue?.name,
