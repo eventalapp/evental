@@ -13,10 +13,17 @@ export interface UseCreateSessionAttendeeMutationData {
 	>;
 }
 
+interface UseCreateSessionAttendeeOptions {
+	redirectUrl?: string;
+}
+
 export const useCreateSessionAttendeeMutation = (
 	eid: string,
-	sid: string
+	sid: string,
+	args: UseCreateSessionAttendeeOptions = {}
 ): UseCreateSessionAttendeeMutationData => {
+	const { redirectUrl } = args;
+
 	const queryClient = useQueryClient();
 
 	const createSessionAttendeeMutation = useMutation<
@@ -36,9 +43,13 @@ export const useCreateSessionAttendeeMutation = (
 			onSuccess: () => {
 				toast.success('You have successfully registered for this event.');
 
-				router.push(`/events/${eid}/sessions/${sid}`).then(() => {
+				if (redirectUrl) {
+					router.push(`/events/${eid}/sessions/${sid}`).then(() => {
+						void queryClient.invalidateQueries(['attendees', eid, sid]);
+					});
+				} else {
 					void queryClient.invalidateQueries(['attendees', eid, sid]);
-				});
+				}
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'An error has occurred.');
