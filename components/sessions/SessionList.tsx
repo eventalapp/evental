@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../radix/components/shared/Button';
+import { SessionHoverCard } from '../radix/components/SessionHoverCard';
 
 type Props = {
 	eid: string;
@@ -89,41 +90,44 @@ export const SessionList: React.FC<Props> = (props) => {
 												<span className="text-gray-700 text-sm w-24 py-2 pr-3 text-right border-r-2 border-gray-200">
 													{dayjs(hour).format('h:mm A z')}
 												</span>
-												<div>
+												<div className="w-full">
 													{sessions.map((session) => (
-														<Link
-															href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${
-																session.slug
-															}`}
-															key={session.id}
-														>
-															<a className="mr-2 mb-2 inline-block">
-																<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
-																	<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
-																		<div className="flex flex-row items-center justify-between">
-																			<div
-																				className="rounded-full mr-3 w-4 h-4"
-																				style={{
-																					backgroundColor: session?.type?.color ?? '#888888'
-																				}}
-																			/>
-																			<div>
-																				<span className="text-lg block leading-tight">
-																					{session.name}
-																				</span>{' '}
-																				{session.type?.name ? (
-																					<span className="text-sm text-gray-500">
-																						{session.type?.name}
-																					</span>
-																				) : (
-																					<em className="text-sm text-gray-500">{'No Type'}</em>
-																				)}
+														<SessionHoverCard session={session} event={event} key={session.id}>
+															<div className="mr-2 mb-2 inline-block">
+																<Link
+																	href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${
+																		session.slug
+																	}`}
+																>
+																	<a className="inline-block">
+																		<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
+																			<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
+																				<div className="flex flex-row items-center justify-between">
+																					<div
+																						className="rounded-full mr-3 w-4 h-4"
+																						style={{
+																							backgroundColor: session?.type?.color ?? '#888888'
+																						}}
+																					/>
+																					<div>
+																						<span className="text-lg block leading-tight">
+																							{session.name}
+																						</span>{' '}
+																						{session.type?.name ? (
+																							<span className="text-sm text-gray-500">
+																								{session.type?.name}
+																							</span>
+																						) : (
+																							<em className="text-sm text-gray-500">{'No Type'}</em>
+																						)}
+																					</div>
+																				</div>
 																			</div>
 																		</div>
-																	</div>
-																</div>
-															</a>
-														</Link>
+																	</a>
+																</Link>
+															</div>
+														</SessionHoverCard>
 													))}
 												</div>
 											</div>
@@ -170,35 +174,38 @@ export const SessionList: React.FC<Props> = (props) => {
 									</span>
 									<div className="w-full">
 										{sessions.map((session) => (
-											<Link
-												href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${session.slug}`}
-												key={session.id}
-											>
-												<a className="mr-2 mb-2 inline-block">
-													<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
-														<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
-															<div className="flex flex-row items-center justify-between">
-																<div
-																	className="rounded-full mr-3 w-4 h-4"
-																	style={{ backgroundColor: session?.type?.color ?? '#888888' }}
-																/>
-																<div>
-																	<span className="text-lg block leading-tight">
-																		{session.name}
-																	</span>{' '}
-																	{session.type?.name ? (
-																		<span className="text-sm text-gray-500">
-																			{session.type?.name}
-																		</span>
-																	) : (
-																		<em className="text-sm text-gray-500">{'No Type'}</em>
-																	)}
+											<SessionHoverCard session={session} event={event} key={session.id}>
+												<div className="inline-block mr-2 mb-2">
+													<Link
+														href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${session.slug}`}
+													>
+														<a className="inline-block">
+															<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
+																<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
+																	<div className="flex flex-row items-center justify-between">
+																		<div
+																			className="rounded-full mr-3 w-4 h-4"
+																			style={{ backgroundColor: session?.type?.color ?? '#888888' }}
+																		/>
+																		<div>
+																			<span className="text-lg block leading-tight">
+																				{session.name}
+																			</span>{' '}
+																			{session.type?.name ? (
+																				<span className="text-sm text-gray-500">
+																					{session.type?.name}
+																				</span>
+																			) : (
+																				<em className="text-sm text-gray-500">{'No Type'}</em>
+																			)}
+																		</div>
+																	</div>
 																</div>
 															</div>
-														</div>
-													</div>
-												</a>
-											</Link>
+														</a>
+													</Link>
+												</div>
+											</SessionHoverCard>
 										))}
 									</div>
 								</div>
