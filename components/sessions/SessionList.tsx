@@ -45,9 +45,9 @@ export const SessionList: React.FC<Props> = (props) => {
 						{showPastEvents ? 'Hide' : 'Show'} previous sessions{' '}
 						<FontAwesomeIcon
 							fill="currentColor"
-							className="ml-1 w-5 h-5 text-gray-600 transition-all duration-200"
+							className="ml-1 w-5 h-5 text-gray-600"
 							size="1x"
-							style={{ transform: showPastEvents ? 'rotate(180deg)' : '' }}
+							style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
 							icon={faChevronUp}
 						/>
 					</Button>
