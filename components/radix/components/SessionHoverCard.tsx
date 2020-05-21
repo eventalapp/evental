@@ -41,29 +41,33 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 						<h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">{session.name}</h3>
 
 						{session.venue && (
-							<Tooltip
-								side={'top'}
-								message={`This session is taking place at the ${session.venue.name} venue`}
-							>
-								<div className="cursor-help inline-block">{session.venue.name}</div>
-							</Tooltip>
+							<div>
+								<Tooltip
+									side={'top'}
+									message={`This session is taking place at the ${session.venue.name} venue`}
+								>
+									<div className="cursor-help inline-block">{session.venue.name}</div>
+								</Tooltip>
+							</div>
 						)}
 
 						{session.type && (
-							<Tooltip
-								side={'top'}
-								message={`This session is in the ${session.type.name} category`}
-							>
-								<div className="inline-flex flex-row items-center cursor-help">
-									<div
-										className="rounded-full mr-2 w-4 h-4"
-										style={{
-											backgroundColor: session?.type?.color ?? '#888888'
-										}}
-									/>
-									{session.type.name}
-								</div>
-							</Tooltip>
+							<div>
+								<Tooltip
+									side={'top'}
+									message={`This session is in the ${session.type.name} category`}
+								>
+									<div className="inline-flex flex-row items-center cursor-help">
+										<div
+											className="rounded-full mr-2 w-4 h-4"
+											style={{
+												backgroundColor: session?.type?.color ?? '#888888'
+											}}
+										/>
+										{session.type.name}
+									</div>
+								</Tooltip>
+							</div>
 						)}
 
 						{session.description && (
