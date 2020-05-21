@@ -86,13 +86,15 @@ export const SessionList: React.FC<Props> = (props) => {
 									{Object.entries(hourObject).map(([hour, sessions]) => {
 										return (
 											<div className="flex flex-row" key={hour}>
-												<span className="text-gray-700 text-sm w-20 py-2 pr-3 text-right border-r-2 border-gray-200">
+												<span className="text-gray-700 text-sm w-24 py-2 pr-3 text-right border-r-2 border-gray-200">
 													{dayjs(hour).format('h:mm A z')}
 												</span>
 												<div>
 													{sessions.map((session) => (
 														<Link
-															href={`/events/${eid}${admin && '/admin'}/sessions/${session.slug}`}
+															href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${
+																session.slug
+															}`}
 															key={session.id}
 														>
 															<a className="mr-2 mb-2 inline-block">
@@ -163,7 +165,7 @@ export const SessionList: React.FC<Props> = (props) => {
 						{Object.entries(hourObject).map(([hour, sessions]) => {
 							return (
 								<div className="flex flex-row" key={hour}>
-									<span className="text-gray-700 text-sm w-20 py-2 pr-3 text-right border-r-2 border-gray-200">
+									<span className="text-gray-700 text-sm w-24 py-2 pr-3 text-right border-r-2 border-gray-200">
 										{dayjs(hour).format('h:mm A z')}
 									</span>
 									<div className="w-full">
