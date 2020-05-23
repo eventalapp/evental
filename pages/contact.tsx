@@ -43,7 +43,7 @@ const ContactPage: NextPage = () => {
 				</p>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-12 my-10 md:my-16">
-					<div>
+					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">
 							Questions/Support
 						</span>
@@ -77,7 +77,7 @@ const ContactPage: NextPage = () => {
 							</p>
 						</div>
 					</div>
-					<div>
+					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">
 							Contact Sales
 						</span>
