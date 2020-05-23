@@ -1,15 +1,16 @@
 import { Transition } from '@headlessui/react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
+import * as Portal from '@radix-ui/react-portal';
+import { Editor } from '@tiptap/react';
 import cx from 'classnames';
 import React, { Fragment, useEffect, useState } from 'react';
-import { Editor } from '@tiptap/react';
+
 import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
-import * as Portal from '@radix-ui/react-portal';
-import { Label } from '../../form/Label';
+import { LoadingInner } from '../../error/LoadingInner';
 import { FileWithPreview } from '../../form/AvatarUpload';
 import ImageUpload from '../../form/ImageUpload';
-import { LoadingInner } from '../../error/LoadingInner';
+import { Label } from '../../form/Label';
 
 interface Props {
 	onSubmit: (link?: string) => void;

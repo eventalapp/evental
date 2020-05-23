@@ -1,21 +1,22 @@
-import type { GetServerSideProps, NextPage } from 'next';
-import { EventList } from '../../components/events/EventList';
-import Column from '../../components/layout/Column';
-import { Navigation } from '../../components/navigation';
-import React from 'react';
-import PageWrapper from '../../components/layout/PageWrapper';
 import type Prisma from '@prisma/client';
-import { getUpcomingEvents } from '../api/events';
-import { ViewErrorPage } from '../../components/error/ViewErrorPage';
-import { LoadingPage } from '../../components/error/LoadingPage';
-import { ssrGetUser } from '../../utils/api';
-import { useUpcomingEventsQuery } from '../../hooks/queries/useUpcomingEventsQuery';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { NotFoundPage } from '../../components/error/NotFoundPage';
-import { useUser } from '../../hooks/queries/useUser';
-import Link from 'next/link';
-import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
+import type { GetServerSideProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
+import React from 'react';
+
+import { LoadingPage } from '../../components/error/LoadingPage';
+import { NotFoundPage } from '../../components/error/NotFoundPage';
+import { ViewErrorPage } from '../../components/error/ViewErrorPage';
+import { EventList } from '../../components/events/EventList';
+import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
+import Column from '../../components/layout/Column';
+import PageWrapper from '../../components/layout/PageWrapper';
+import { Navigation } from '../../components/navigation';
+import { useUpcomingEventsQuery } from '../../hooks/queries/useUpcomingEventsQuery';
+import { useUser } from '../../hooks/queries/useUser';
+import { ssrGetUser } from '../../utils/api';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { getUpcomingEvents } from '../api/events';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

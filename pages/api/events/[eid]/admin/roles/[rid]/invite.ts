@@ -1,11 +1,12 @@
-import { getEvent } from '../../../index';
-import { InviteRoleSchema } from '../../../../../../../utils/schemas';
+import { NextkitError } from 'nextkit';
+
 import { ORGANIZER_INVITE_EXPIRY } from '../../../../../../../config';
+import { sendRoleInvite } from '../../../../../../../email/sendRoleInvite';
 import { api } from '../../../../../../../utils/api';
 import { isFounder } from '../../../../../../../utils/isFounder';
-import { NextkitError } from 'nextkit';
+import { InviteRoleSchema } from '../../../../../../../utils/schemas';
+import { getEvent } from '../../../index';
 import { getRole } from '../../../roles/[rid]';
-import { sendRoleInvite } from '../../../../../../../email/sendRoleInvite';
 
 export default api({
 	async POST({ ctx, req }) {

@@ -1,10 +1,11 @@
-import { InviteOrganizerSchema } from '../../../../../../utils/schemas';
-import { api } from '../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+
 import { ORGANIZER_INVITE_EXPIRY } from '../../../../../../config';
-import { isFounder } from '../../../../../../utils/isFounder';
 import { sendOrganizerInvite } from '../../../../../../email/sendOrganizerInvite';
 import { prisma } from '../../../../../../prisma/client';
+import { api } from '../../../../../../utils/api';
+import { isFounder } from '../../../../../../utils/isFounder';
+import { InviteOrganizerSchema } from '../../../../../../utils/schemas';
 import { getEvent } from '../../index';
 
 export default api({

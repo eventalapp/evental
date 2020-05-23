@@ -1,18 +1,19 @@
 import { NextPage } from 'next';
-import React from 'react';
-import Column from '../../../components/layout/Column';
-import { Navigation } from '../../../components/navigation';
-import PageWrapper from '../../../components/layout/PageWrapper';
-import { useUser } from '../../../hooks/queries/useUser';
-import { LoadingPage } from '../../../components/error/LoadingPage';
-import { LinkButton } from '../../../components/form/LinkButton';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { PASSWORD_RESET_EXPIRY } from '../../../config';
-import { PasswordResetForm } from '../../../components/password/PasswordResetForm';
-import { usePasswordReset } from '../../../hooks/mutations/usePasswordReset';
-import Head from 'next/head';
+import React from 'react';
+
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
+import { LoadingPage } from '../../../components/error/LoadingPage';
+import { LinkButton } from '../../../components/form/LinkButton';
+import Column from '../../../components/layout/Column';
+import PageWrapper from '../../../components/layout/PageWrapper';
+import { Navigation } from '../../../components/navigation';
+import { PasswordResetForm } from '../../../components/password/PasswordResetForm';
+import { PASSWORD_RESET_EXPIRY } from '../../../config';
+import { usePasswordReset } from '../../../hooks/mutations/usePasswordReset';
+import { useUser } from '../../../hooks/queries/useUser';
 
 const ResetPasswordPage: NextPage = () => {
 	const router = useRouter();

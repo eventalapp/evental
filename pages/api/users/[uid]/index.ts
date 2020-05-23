@@ -1,6 +1,7 @@
 import { NextkitError } from 'nextkit';
-import { api } from '../../../../utils/api';
+
 import { prisma } from '../../../../prisma/client';
+import { api } from '../../../../utils/api';
 import { PasswordlessUser, stripUserPassword } from '../../../../utils/stripUserPassword';
 
 export default api({

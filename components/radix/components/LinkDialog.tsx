@@ -1,9 +1,9 @@
 import { Transition } from '@headlessui/react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
+import { Editor } from '@tiptap/react';
 import cx from 'classnames';
 import React, { Fragment, useEffect, useState } from 'react';
-import { Editor } from '@tiptap/react';
 
 interface Props {
 	onSubmit: (link: string) => void;

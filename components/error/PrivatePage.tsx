@@ -1,10 +1,11 @@
 import Head from 'next/head';
-import { Navigation } from '../navigation';
+import Link from 'next/link';
+import React from 'react';
+
+import { LinkButton } from '../form/LinkButton';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
-import React from 'react';
-import Link from 'next/link';
-import { LinkButton } from '../form/LinkButton';
+import { Navigation } from '../navigation';
 
 export const PrivatePage = () => (
 	<PageWrapper variant="gray">

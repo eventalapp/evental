@@ -1,6 +1,7 @@
-import { processAvatar, processImage } from './processImage';
 import { S3 } from 'aws-sdk';
 import crypto from 'crypto';
+
+import { processAvatar, processImage } from './processImage';
 import { uploadToBucket } from './uploadToBucket';
 
 export const uploadAndProcessAvatar = async (buffer: Buffer, mimeType: string | undefined) => {

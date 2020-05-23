@@ -1,5 +1,5 @@
-import sharp, { FormatEnum } from 'sharp';
 import { NextkitError } from 'nextkit';
+import sharp, { FormatEnum } from 'sharp';
 
 interface ProcessImageOptions {
 	height: number;

@@ -1,16 +1,17 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { Button } from '../form/Button';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Controller, useForm } from 'react-hook-form';
+
 import { UseEditVenueMutationData } from '../../hooks/mutations/useEditVenueMutation';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
-import { Controller, useForm } from 'react-hook-form';
 import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
 import { StyledEditor } from '../form/Editor';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

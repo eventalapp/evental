@@ -1,5 +1,6 @@
-import React from 'react';
 import { CalendarEvent } from 'calendar-link';
+import React from 'react';
+
 import { AddToCalendarDropdown } from './radix/components/AddToCalendarDropdown';
 
 type Props = {

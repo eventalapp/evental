@@ -1,10 +1,11 @@
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
-import { NavigationWrapper } from './NavigationWrapper';
-import classNames from 'classnames';
+
 import { FullscreenLinkItem } from '../events/navigation/Unauthenticated';
+import { NavigationWrapper } from './NavigationWrapper';
 
 interface UnauthenticatedProps {
 	className?: string;

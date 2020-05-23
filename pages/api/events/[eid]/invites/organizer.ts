@@ -1,7 +1,8 @@
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
 import { AcceptOrganizerInviteSchema } from '../../../../../utils/schemas';
-import { prisma } from '../../../../../prisma/client';
 import { getDefaultRole } from '../roles';
 
 export default api({

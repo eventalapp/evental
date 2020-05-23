@@ -1,21 +1,22 @@
 import { NextPage } from 'next';
-import React from 'react';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { Navigation } from '../../../../../components/navigation';
-import Column from '../../../../../components/layout/Column';
-import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
-import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { useUser } from '../../../../../hooks/queries/useUser';
-import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import React from 'react';
+
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
-import { useRoleQuery } from '../../../../../hooks/queries/useRoleAttendeesQuery';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
-import { Button } from '../../../../../components/form/Button';
-import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useAcceptRoleInviteMutation';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { Button } from '../../../../../components/form/Button';
+import Column from '../../../../../components/layout/Column';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Navigation } from '../../../../../components/navigation';
+import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useAcceptRoleInviteMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
-import { NextSeo } from 'next-seo';
+import { useRoleQuery } from '../../../../../hooks/queries/useRoleAttendeesQuery';
+import { useUser } from '../../../../../hooks/queries/useUser';
+import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
 
 const RoleInvitePage: NextPage = () => {
 	const router = useRouter();

@@ -1,14 +1,15 @@
-import Link from 'next/link';
-import React from 'react';
-import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Prisma from '@prisma/client';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import cx from 'classnames';
 import classNames from 'classnames';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
+
+import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 import { capitalizeFirstLetter } from '../../../utils/string';
-import Prisma from '@prisma/client';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	className?: string;

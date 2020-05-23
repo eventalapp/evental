@@ -1,14 +1,15 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import React from 'react';
-import Column from '../../../components/layout/Column';
-import { Navigation } from '../../../components/navigation';
-import PageWrapper from '../../../components/layout/PageWrapper';
-import { useUser } from '../../../hooks/queries/useUser';
+
+import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
+import Column from '../../../components/layout/Column';
+import PageWrapper from '../../../components/layout/PageWrapper';
+import { Navigation } from '../../../components/navigation';
 import { RequestPasswordResetForm } from '../../../components/password/RequestPasswordResetForm';
 import { useRequestPasswordReset } from '../../../hooks/mutations/useRequestPasswordReset';
-import Head from 'next/head';
-import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
+import { useUser } from '../../../hooks/queries/useUser';
 
 const RequestPasswordResetPage: NextPage = () => {
 	const { user, isUserLoading } = useUser();

@@ -1,8 +1,9 @@
-import { AcceptRoleInviteSchema } from '../../../../../../utils/schemas';
-import { api } from '../../../../../../utils/api';
-import { getDefaultRole } from '../../roles';
 import { NextkitError } from 'nextkit';
+
 import { prisma } from '../../../../../../prisma/client';
+import { api } from '../../../../../../utils/api';
+import { AcceptRoleInviteSchema } from '../../../../../../utils/schemas';
+import { getDefaultRole } from '../../roles';
 import { getRole } from '../../roles/[rid]';
 
 export default api({

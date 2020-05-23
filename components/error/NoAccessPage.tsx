@@ -1,10 +1,11 @@
 import Head from 'next/head';
-import { Navigation } from '../navigation';
+import React from 'react';
+
+import { Footer } from '../Footer';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
-import React from 'react';
+import { Navigation } from '../navigation';
 import NoAccess from './NoAccess';
-import { Footer } from '../Footer';
 
 export const NoAccessPage = () => (
 	<PageWrapper variant="gray">

@@ -1,22 +1,23 @@
-import type { GetServerSideProps, NextPage } from 'next';
-import { EventList } from '../../components/events/EventList';
-import Column from '../../components/layout/Column';
-import { Navigation } from '../../components/navigation';
-import React from 'react';
-import PageWrapper from '../../components/layout/PageWrapper';
 import type Prisma from '@prisma/client';
-import { ViewErrorPage } from '../../components/error/ViewErrorPage';
-import { LoadingPage } from '../../components/error/LoadingPage';
-import { ssrGetUser } from '../../utils/api';
-import { useAttendingEventsQuery } from '../../hooks/queries/useAttendingEventsQuery';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { NotFoundPage } from '../../components/error/NotFoundPage';
-import { getAttendingEvents } from '../api/events/attending';
-import { useUser } from '../../hooks/queries/useUser';
-import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
-import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
-import Link from 'next/link';
+import type { GetServerSideProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
+import React from 'react';
+
+import { LoadingPage } from '../../components/error/LoadingPage';
+import { NotFoundPage } from '../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../components/error/ViewErrorPage';
+import { EventList } from '../../components/events/EventList';
+import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
+import Column from '../../components/layout/Column';
+import PageWrapper from '../../components/layout/PageWrapper';
+import { Navigation } from '../../components/navigation';
+import { useAttendingEventsQuery } from '../../hooks/queries/useAttendingEventsQuery';
+import { useUser } from '../../hooks/queries/useUser';
+import { ssrGetUser } from '../../utils/api';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { getAttendingEvents } from '../api/events/attending';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

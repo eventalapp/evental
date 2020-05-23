@@ -1,8 +1,9 @@
 import { NextkitError } from 'nextkit';
-import { isOrganizer } from '../../../../../../../../utils/isOrganizer';
-import { api } from '../../../../../../../../utils/api';
-import { getEvent } from '../../../../index';
+
 import { prisma } from '../../../../../../../../prisma/client';
+import { api } from '../../../../../../../../utils/api';
+import { isOrganizer } from '../../../../../../../../utils/isOrganizer';
+import { getEvent } from '../../../../index';
 
 export default api({
 	async DELETE({ ctx, req }) {

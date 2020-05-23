@@ -1,21 +1,22 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
+import { NextSeo } from 'next-seo';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
+
+import { LoadingPage } from '../../../components/error/LoadingPage';
+import { NotFoundPage } from '../../../components/error/NotFoundPage';
+import Column from '../../../components/layout/Column';
+import { FlexRowBetween } from '../../../components/layout/FlexRowBetween';
+import PageWrapper from '../../../components/layout/PageWrapper';
+import { Navigation } from '../../../components/navigation';
+import { SessionWithEventList } from '../../../components/sessions/SessionWithEventList';
+import { useSessionsByUserQuery } from '../../../hooks/queries/useSessionsByUserQuery';
+import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getUser } from '../../api/users/[uid]';
-import { Navigation } from '../../../components/navigation';
-import Column from '../../../components/layout/Column';
-import PageWrapper from '../../../components/layout/PageWrapper';
-import { useUserQuery } from '../../../hooks/queries/useUserQuery';
-import { NotFoundPage } from '../../../components/error/NotFoundPage';
-import { LoadingPage } from '../../../components/error/LoadingPage';
-import React from 'react';
-import { NextSeo } from 'next-seo';
-import { useSessionsByUserQuery } from '../../../hooks/queries/useSessionsByUserQuery';
-import { SessionWithEventList } from '../../../components/sessions/SessionWithEventList';
-import { getSessionsByUser, SessionWithVenueEvent } from '../../api/users/[uid]/sessions';
-import { FlexRowBetween } from '../../../components/layout/FlexRowBetween';
-import Link from 'next/link';
+import { SessionWithVenueEvent, getSessionsByUser } from '../../api/users/[uid]/sessions';
 
 type Props = {
 	initialViewingUser: PasswordlessUser | undefined;

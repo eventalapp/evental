@@ -1,8 +1,9 @@
-import Stripe from 'stripe';
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
-import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
-import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import Stripe from 'stripe';
+
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
+import { api } from '../../../../utils/api';
+import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	apiVersion: '2020-08-27'

@@ -1,20 +1,21 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { EventPermissionRole } from '@prisma/client';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
-import { Button } from '../form/Button';
-import { Label } from '../form/Label';
-import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
+
 import { UseEditAttendeeMutationData } from '../../hooks/mutations/useEditAttendeeMutation';
-import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
-import Link from 'next/link';
-import { EventPermissionRole } from '@prisma/client';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
-import { useRouter } from 'next/router';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { LoadingInner } from '../error/LoadingInner';
-import Select from '../radix/components/Select';
+import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
+import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
+import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Label } from '../form/Label';
+import Select from '../radix/components/Select';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

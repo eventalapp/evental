@@ -1,13 +1,14 @@
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { NotFound } from '../error/NotFound';
+
 import { SessionWithVenueEvent } from '../../pages/api/users/[uid]/sessions';
-import dayjs from 'dayjs';
-import Button from '../radix/components/shared/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames';
+import { NotFound } from '../error/NotFound';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
+import Button from '../radix/components/shared/Button';
 
 type Props = {
 	admin?: boolean;

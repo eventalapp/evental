@@ -1,23 +1,24 @@
-import type { GetServerSideProps, NextPage } from 'next';
-import { EventList } from '../../components/events/EventList';
-import Column from '../../components/layout/Column';
-import { Navigation } from '../../components/navigation';
-import React from 'react';
-import PageWrapper from '../../components/layout/PageWrapper';
 import type Prisma from '@prisma/client';
-import { ViewErrorPage } from '../../components/error/ViewErrorPage';
+import type { GetServerSideProps, NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import React from 'react';
+
 import { LoadingPage } from '../../components/error/LoadingPage';
-import { ssrGetUser } from '../../utils/api';
+import { NotFoundPage } from '../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../components/error/ViewErrorPage';
+import { CreateEventForm } from '../../components/events/CreateEventForm';
+import { EventList } from '../../components/events/EventList';
+import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
+import Column from '../../components/layout/Column';
+import PageWrapper from '../../components/layout/PageWrapper';
+import { Navigation } from '../../components/navigation';
+import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import { useOrganizingEventsQuery } from '../../hooks/queries/useOrganizingEventsQuery';
+import { useUser } from '../../hooks/queries/useUser';
+import { ssrGetUser } from '../../utils/api';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { getOrganizingEvents } from '../api/events/organizing';
-import { useUser } from '../../hooks/queries/useUser';
-import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
-import { NotFoundPage } from '../../components/error/NotFoundPage';
-import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
-import { CreateEventForm } from '../../components/events/CreateEventForm';
-import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
-import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

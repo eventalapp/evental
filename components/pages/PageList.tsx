@@ -1,11 +1,12 @@
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import { formatDistance } from 'date-fns';
 import Link from 'next/link';
 import React from 'react';
+
 import { UsePagesQueryData } from '../../hooks/queries/usePagesQuery';
 import { NotFound } from '../error/NotFound';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { formatDistance } from 'date-fns';
 
 type Props = {
 	eid: string;

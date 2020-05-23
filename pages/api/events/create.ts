@@ -1,9 +1,10 @@
-import { CreateEventSchema } from '../../../utils/schemas';
+import dayjs from 'dayjs';
+import { NextkitError } from 'nextkit';
+
 import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
-import { NextkitError } from 'nextkit';
 import { generateSlug } from '../../../utils/generateSlug';
-import dayjs from 'dayjs';
+import { CreateEventSchema } from '../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req }) {

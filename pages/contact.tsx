@@ -1,12 +1,13 @@
 import type { NextPage } from 'next';
-import Column from '../components/layout/Column';
-import { Navigation } from '../components/navigation';
-import React from 'react';
-import PageWrapper from '../components/layout/PageWrapper';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
+import React from 'react';
+
 import { Footer } from '../components/Footer';
 import { LinkButton } from '../components/form/LinkButton';
-import Link from 'next/link';
+import Column from '../components/layout/Column';
+import PageWrapper from '../components/layout/PageWrapper';
+import { Navigation } from '../components/navigation';
 
 const ContactPage: NextPage = () => {
 	return (

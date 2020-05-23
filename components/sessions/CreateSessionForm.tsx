@@ -1,27 +1,27 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
-import { Button } from '../form/Button';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
-import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { UseCreateSessionMutationData } from '../../hooks/mutations/useCreateSessionMutation';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { Controller, useForm } from 'react-hook-form';
-import { DatePicker } from '../form/DatePicker';
-import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
-import { toast } from 'react-toastify';
-import Link from 'next/link';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { roundToNearestMinutes } from 'date-fns';
-import { NEAREST_MINUTE } from '../../config';
-import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { LoadingInner } from '../error/LoadingInner';
-import Select from '../radix/components/Select';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+
+import { NEAREST_MINUTE } from '../../config';
+import { UseCreateSessionMutationData } from '../../hooks/mutations/useCreateSessionMutation';
+import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
-import { StyledEditor } from '../form/Editor';
-import { TimeZoneNotice } from '../TimeZoneNotice';
+import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { FIFTEEN_MINUTES } from '../../utils/const';
+import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
+import { TimeZoneNotice } from '../TimeZoneNotice';
+import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
+import { DatePicker } from '../form/DatePicker';
+import { StyledEditor } from '../form/Editor';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
+import Select from '../radix/components/Select';
 
 type Props = {
 	eid: string;

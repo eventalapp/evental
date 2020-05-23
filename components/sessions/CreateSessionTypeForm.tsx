@@ -1,16 +1,17 @@
-import React from 'react';
-import { Button } from '../form/Button';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { Controller, useForm } from 'react-hook-form';
-import { CreateSessionTypePayload, CreateSessionTypeSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
-import { LoadingInner } from '../error/LoadingInner';
-import { UseCreateSessionTypeMutationData } from '../../hooks/mutations/useCreateSessionTypeMutation';
+import React from 'react';
 import { CirclePicker } from 'react-color';
+import { Controller, useForm } from 'react-hook-form';
+
+import { UseCreateSessionTypeMutationData } from '../../hooks/mutations/useCreateSessionTypeMutation';
 import { colors } from '../../utils/const';
+import { CreateSessionTypePayload, CreateSessionTypeSchema } from '../../utils/schemas';
+import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
 
 type Props = UseCreateSessionTypeMutationData;
 

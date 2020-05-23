@@ -1,6 +1,7 @@
-import { api } from '../../../utils/api';
-import { NextkitError } from 'nextkit';
 import { serialize } from 'cookie';
+import { NextkitError } from 'nextkit';
+
+import { api } from '../../../utils/api';
 
 export default api({
 	async DELETE({ ctx, req, res }) {

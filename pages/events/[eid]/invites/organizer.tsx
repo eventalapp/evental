@@ -1,18 +1,19 @@
 import { NextPage } from 'next';
-import React from 'react';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { Navigation } from '../../../../components/navigation';
+import React from 'react';
+
+import { LoadingPage } from '../../../../components/error/LoadingPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
+import { Button } from '../../../../components/form/Button';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { useUser } from '../../../../hooks/queries/useUser';
-import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { Button } from '../../../../components/form/Button';
+import { Navigation } from '../../../../components/navigation';
 import { useAcceptOrganizerInviteMutation } from '../../../../hooks/mutations/useAcceptOrganizerInviteMutation';
-import { AcceptOrganizerInviteSchema } from '../../../../utils/schemas';
-import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { NextSeo } from 'next-seo';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { useUser } from '../../../../hooks/queries/useUser';
+import { AcceptOrganizerInviteSchema } from '../../../../utils/schemas';
 
 const OrganizerInvitePage: NextPage = () => {
 	const router = useRouter();

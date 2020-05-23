@@ -1,9 +1,10 @@
-import createAPI, { NextkitError } from 'nextkit';
-import { randomBytes } from 'crypto';
 import { Redis } from '@upstash/redis';
-import { prisma } from '../prisma/client';
+import { randomBytes } from 'crypto';
 import { IncomingMessage } from 'http';
 import { NextApiRequestCookies } from 'next/dist/server/api-utils';
+import createAPI, { NextkitError } from 'nextkit';
+
+import { prisma } from '../prisma/client';
 import { PasswordlessUser, stripUserPassword } from './stripUserPassword';
 
 const redis = new Redis({

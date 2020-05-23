@@ -1,22 +1,23 @@
+import { Elements } from '@stripe/react-stripe-js';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
-import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
-import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
+
+import { PurchaseProPlan } from '../../../../../components/billing/PurchaseProForm';
+import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
+import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import Column from '../../../../../components/layout/Column';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { useFounderQuery } from '../../../../../hooks/queries/useFounderQuery';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
-import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
-import { LoadingPage } from '../../../../../components/error/LoadingPage';
-import { useFounderQuery } from '../../../../../hooks/queries/useFounderQuery';
-import { Elements } from '@stripe/react-stripe-js';
 import { getStripe } from '../../../../../utils/stripe';
-import { PurchaseProPlan } from '../../../../../components/billing/PurchaseProForm';
 
 const EventBillingPage: NextPage = () => {
 	const router = useRouter();

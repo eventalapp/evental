@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Authenticated } from './Authenticated';
-import { Unauthenticated } from './Unauthenticated';
+
 import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
 import { useUser } from '../../hooks/queries/useUser';
+import { Authenticated } from './Authenticated';
+import { Unauthenticated } from './Unauthenticated';
 
 type NavigationLink = {
 	link: string;

@@ -1,11 +1,11 @@
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button } from '../form/Button';
-import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 
 import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
-import { useRouter } from 'next/router';
+import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &

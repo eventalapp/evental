@@ -1,18 +1,19 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { slugify } from '../../utils/slugify';
-import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
-import { UseUserData } from '../../hooks/queries/useUser';
-import { ErrorMessage } from '../form/ErrorMessage';
+
 import { UseEditUserMutationData } from '../../hooks/mutations/useEditUserMutation';
-import { Label } from '../form/Label';
-import { Input } from '../form/Input';
-import { Button } from '../form/Button';
+import { UseUserData } from '../../hooks/queries/useUser';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
-import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
+import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
+import { slugify } from '../../utils/slugify';
 import { LoadingInner } from '../error/LoadingInner';
+import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
+import { Button } from '../form/Button';
 import { StyledEditor } from '../form/Editor';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEditUserMutationData &

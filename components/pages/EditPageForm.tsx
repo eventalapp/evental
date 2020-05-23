@@ -1,16 +1,17 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { Button } from '../form/Button';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Controller, useForm } from 'react-hook-form';
+
 import { UseEditPageMutationData } from '../../hooks/mutations/useEditPageMutation';
 import { UsePageQueryData } from '../../hooks/queries/usePageQuery';
-import { Controller, useForm } from 'react-hook-form';
 import { EditPagePayload, EditPageSchema } from '../../utils/schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
 import { StyledEditor } from '../form/Editor';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
 import Switch from '../radix/components/Switch';
 
 type Props = { eid: string } & DetailedHTMLProps<

@@ -1,10 +1,11 @@
-import Link from 'next/link';
-import { LinkButton } from '../form/LinkButton';
-import React from 'react';
-import { FlexRowBetween } from '../layout/FlexRowBetween';
 import Prisma from '@prisma/client';
-import parse from 'html-react-parser';
 import { formatDistance } from 'date-fns';
+import parse from 'html-react-parser';
+import Link from 'next/link';
+import React from 'react';
+
+import { LinkButton } from '../form/LinkButton';
+import { FlexRowBetween } from '../layout/FlexRowBetween';
 
 type Props = {
 	eid: string;

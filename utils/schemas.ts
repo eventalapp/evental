@@ -1,7 +1,8 @@
-import { z } from 'zod';
-import { isBrowser } from './isBrowser';
 import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
+import { z } from 'zod';
+
 import { timeZoneList } from './const';
+import { isBrowser } from './isBrowser';
 
 // Reusable
 

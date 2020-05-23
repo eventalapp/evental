@@ -1,7 +1,8 @@
-import { prisma } from '../../../../../../../prisma/client';
-import { isOrganizer } from '../../../../../../../utils/isOrganizer';
-import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../../../../../prisma/client';
+import { api } from '../../../../../../../utils/api';
+import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { getAttendee } from '../../../attendees/[uid]';
 
 export default api({

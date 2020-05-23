@@ -1,13 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { UseSignUpMutationData } from '../../hooks/mutations/useSignUpMutation';
 import { SignUpPayload, SignUpSchema } from '../../utils/schemas';
+import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { UseSignUpMutationData } from '../../hooks/mutations/useSignUpMutation';
-import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseSignUpMutationData;

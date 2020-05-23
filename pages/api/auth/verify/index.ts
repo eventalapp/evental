@@ -1,9 +1,10 @@
-import { VerifyEmailSchema } from '../../../../utils/schemas';
-import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
-import { prisma } from '../../../../prisma/client';
+
 import { VERIFY_EMAIL_EXPIRY } from '../../../../config';
 import { sendWelcomeEmail } from '../../../../email/sendWelcomeEmail';
+import { prisma } from '../../../../prisma/client';
+import { api } from '../../../../utils/api';
+import { VerifyEmailSchema } from '../../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req, res }) {

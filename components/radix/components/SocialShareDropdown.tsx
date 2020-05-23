@@ -1,15 +1,16 @@
+import { faFacebook, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Prisma from '@prisma/client';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import cx from 'classnames';
 import React from 'react';
-import Button from './shared/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { twitterLink } from '../../../utils/sharing/twitter';
-import Prisma from '@prisma/client';
-import { faFacebook, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { facebookLink } from '../../../utils/sharing/facebook';
+
 import { emailLink } from '../../../utils/sharing/email';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { facebookLink } from '../../../utils/sharing/facebook';
 import { linkedinLink } from '../../../utils/sharing/linkedin';
+import { twitterLink } from '../../../utils/sharing/twitter';
+import Button from './shared/Button';
 
 interface Props {
 	event: Prisma.Event;

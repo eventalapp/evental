@@ -1,19 +1,20 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Column from '../components/layout/Column';
-import { Navigation } from '../components/navigation';
-import PageWrapper from '../components/layout/PageWrapper';
-import { UserSettingsForm } from '../components/settings/UserSettingsForm';
-import { useUser } from '../hooks/queries/useUser';
-import { useEditUserMutation } from '../hooks/mutations/useEditUserMutation';
-import { ssrGetUser } from '../utils/api';
-import { PasswordlessUser } from '../utils/stripUserPassword';
+import React, { useEffect, useState } from 'react';
+
+import { LoadingInner } from '../components/error/LoadingInner';
 import { LoadingPage } from '../components/error/LoadingPage';
 import { NotFoundPage } from '../components/error/NotFoundPage';
-import React, { useEffect, useState } from 'react';
+import Column from '../components/layout/Column';
+import PageWrapper from '../components/layout/PageWrapper';
+import { Navigation } from '../components/navigation';
+import { UserSettingsForm } from '../components/settings/UserSettingsForm';
+import { useEditUserMutation } from '../hooks/mutations/useEditUserMutation';
 import { useRequestVerificationEmail } from '../hooks/mutations/useRequestVerificationEmail';
-import { LoadingInner } from '../components/error/LoadingInner';
+import { useUser } from '../hooks/queries/useUser';
+import { ssrGetUser } from '../utils/api';
+import { PasswordlessUser } from '../utils/stripUserPassword';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

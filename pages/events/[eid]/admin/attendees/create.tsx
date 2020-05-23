@@ -1,21 +1,22 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../../components/layout/Column';
-import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
-import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
-import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { useUser } from '../../../../../hooks/queries/useUser';
-import { LoadingPage } from '../../../../../components/error/LoadingPage';
-import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useAttendeesQuery } from '../../../../../hooks/queries/useAttendeesQuery';
-import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+
 import { AdminCreateAttendeeForm } from '../../../../../components/attendees/AdminCreateAttendeeForm';
+import { LoadingPage } from '../../../../../components/error/LoadingPage';
+import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
+import Column from '../../../../../components/layout/Column';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { useAdminCreateAttendeeMutation } from '../../../../../hooks/mutations/useAdminCreateAttendeeMutation';
+import { useAttendeesQuery } from '../../../../../hooks/queries/useAttendeesQuery';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../../hooks/queries/useUser';
 
 const CreateAttendeePage: NextPage = () => {
 	const router = useRouter();

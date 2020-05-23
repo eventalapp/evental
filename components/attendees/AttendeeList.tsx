@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
 import { capitalizeFirstLetter } from '../../utils/string';
-import { NotFound } from '../error/NotFound';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { NotFound } from '../error/NotFound';
 
 type Props = {
 	eid: string;

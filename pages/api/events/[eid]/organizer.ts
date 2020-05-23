@@ -1,5 +1,5 @@
-import { isOrganizer } from '../../../../utils/isOrganizer';
 import { api } from '../../../../utils/api';
+import { isOrganizer } from '../../../../utils/isOrganizer';
 
 export default api({
 	async GET({ ctx, req }) {

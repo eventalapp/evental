@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { LinkButton } from '../form/LinkButton';
-import React from 'react';
 import { useRouter } from 'next/router';
+import React from 'react';
+
+import { LinkButton } from '../form/LinkButton';
 
 export const EventsPageNavigation: React.FC = () => {
 	const router = useRouter();

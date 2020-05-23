@@ -1,10 +1,11 @@
 import { NextkitError } from 'nextkit';
-import { isOrganizer } from '../../../../../../../../utils/isOrganizer';
-import { api } from '../../../../../../../../utils/api';
-import { AddAttendeeToSessionSchema } from '../../../../../../../../utils/schemas';
+
 import { prisma } from '../../../../../../../../prisma/client';
-import { getSession } from '../../../../sessions/[sid]';
+import { api } from '../../../../../../../../utils/api';
+import { isOrganizer } from '../../../../../../../../utils/isOrganizer';
+import { AddAttendeeToSessionSchema } from '../../../../../../../../utils/schemas';
 import { getAttendee } from '../../../../attendees/[uid]';
+import { getSession } from '../../../../sessions/[sid]';
 
 export default api({
 	async POST({ ctx, req }) {

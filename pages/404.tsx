@@ -1,14 +1,15 @@
-import { NextPage } from 'next';
-import Link from 'next/link';
-import Column from '../components/layout/Column';
-import { LinkButton } from '../components/form/LinkButton';
-import { Navigation } from '../components/navigation';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import PageWrapper from '../components/layout/PageWrapper';
+import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
+import React from 'react';
+
 import { Footer } from '../components/Footer';
+import { LinkButton } from '../components/form/LinkButton';
+import Column from '../components/layout/Column';
+import PageWrapper from '../components/layout/PageWrapper';
+import { Navigation } from '../components/navigation';
 
 const ErrorNotFoundPage: NextPage = () => {
 	return (

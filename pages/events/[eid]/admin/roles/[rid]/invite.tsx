@@ -3,22 +3,22 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
-import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
-import { InviteRoleForm } from '../../../../../../components/roles/InviteRoleForm';
-import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
-import Column from '../../../../../../components/layout/Column';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { useInviteRoleMutation } from '../../../../../../hooks/mutations/useInviteRoleMutation';
-import { useUser } from '../../../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import Column from '../../../../../../components/layout/Column';
+import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { InviteRoleForm } from '../../../../../../components/roles/InviteRoleForm';
+import { useInviteRoleMutation } from '../../../../../../hooks/mutations/useInviteRoleMutation';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { useRoleQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const InviteRolePage: NextPage = () => {
 	const router = useRouter();

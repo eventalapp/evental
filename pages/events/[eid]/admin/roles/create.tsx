@@ -1,20 +1,21 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../../components/layout/Column';
-import { CreateRoleForm } from '../../../../../components/roles/CreateRoleForm';
-import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
-import { useCreateRoleMutation } from '../../../../../hooks/mutations/useCreateRoleMutation';
 import React from 'react';
-import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
-import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { useUser } from '../../../../../hooks/queries/useUser';
+
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
+import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
+import Column from '../../../../../components/layout/Column';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { CreateRoleForm } from '../../../../../components/roles/CreateRoleForm';
+import { useCreateRoleMutation } from '../../../../../hooks/mutations/useCreateRoleMutation';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../../hooks/queries/useUser';
 
 const CreateRolePage: NextPage = () => {
 	const router = useRouter();

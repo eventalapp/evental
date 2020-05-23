@@ -1,17 +1,18 @@
 import { GetServerSideProps, NextPage } from 'next';
-import React from 'react';
-import Column from '../../components/layout/Column';
-import { Navigation } from '../../components/navigation';
-import PageWrapper from '../../components/layout/PageWrapper';
-import { useSignUpMutation } from '../../hooks/mutations/useSignUpMutation';
-import { SignUpForm } from '../../components/authentication/SignUpForm';
-import { ssrGetUser } from '../../utils/api';
-import { LoadingPage } from '../../components/error/LoadingPage';
-import { useUser } from '../../hooks/queries/useUser';
-import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import React from 'react';
+
+import { SignUpForm } from '../../components/authentication/SignUpForm';
+import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
+import { LoadingPage } from '../../components/error/LoadingPage';
+import Column from '../../components/layout/Column';
+import PageWrapper from '../../components/layout/PageWrapper';
+import { Navigation } from '../../components/navigation';
+import { useSignUpMutation } from '../../hooks/mutations/useSignUpMutation';
+import { useUser } from '../../hooks/queries/useUser';
+import { ssrGetUser } from '../../utils/api';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

@@ -1,10 +1,3 @@
-import { capitalizeFirstLetter } from '../../utils/string';
-import Image from 'next/image';
-import React from 'react';
-import Link from 'next/link';
-import { LinkButton } from '../form/LinkButton';
-import { FlexRowBetween } from '../layout/FlexRowBetween';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faAddressBook,
 	faAddressCard,
@@ -12,9 +5,17 @@ import {
 	faBuilding,
 	faLocationDot
 } from '@fortawesome/free-solid-svg-icons';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
-import Tooltip from '../radix/components/Tooltip';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import parse from 'html-react-parser';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+
+import { capitalizeFirstLetter } from '../../utils/string';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { LinkButton } from '../form/LinkButton';
+import { FlexRowBetween } from '../layout/FlexRowBetween';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = { eid: string; uid: string; admin?: boolean; attendee: AttendeeWithUser };
 

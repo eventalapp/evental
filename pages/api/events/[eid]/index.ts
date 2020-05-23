@@ -1,7 +1,8 @@
-import { prisma } from '../../../../prisma/client';
 import type Prisma from '@prisma/client';
-import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../../prisma/client';
+import { api } from '../../../../utils/api';
 
 export default api({
 	async GET({ req }) {

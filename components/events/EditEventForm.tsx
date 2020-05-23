@@ -1,27 +1,28 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
+import dayjs from 'dayjs';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import ReactSelect from 'react-select';
+import { toast } from 'react-toastify';
+
+import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
+import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
+import { timeZoneOptions } from '../../utils/const';
+import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
+import { slugify } from '../../utils/slugify';
+import { capitalizeFirstLetter } from '../../utils/string';
+import { LoadingInner } from '../error/LoadingInner';
+import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
+import { DatePicker } from '../form/DatePicker';
+import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
-import { useEventQuery, UseEventQueryData } from '../../hooks/queries/useEventQuery';
-import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
-import { Controller, useForm } from 'react-hook-form';
-import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
-import { slugify } from '../../utils/slugify';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { DatePicker } from '../form/DatePicker';
-import { useRouter } from 'next/router';
-import { LoadingInner } from '../error/LoadingInner';
-import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
-import Button from '../radix/components/shared/Button';
-import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
-import { capitalizeFirstLetter } from '../../utils/string';
 import Select from '../radix/components/Select';
-import ReactSelect from 'react-select';
-import { timeZoneOptions } from '../../utils/const';
-import dayjs from 'dayjs';
-import Link from 'next/link';
+import Button from '../radix/components/shared/Button';
 
 type Props = {
 	eid: string;

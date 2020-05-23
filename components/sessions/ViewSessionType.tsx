@@ -1,10 +1,11 @@
-import Link from 'next/link';
-import { LinkButton } from '../form/LinkButton';
-import React from 'react';
-import { FlexRowBetween } from '../layout/FlexRowBetween';
 import Prisma from '@prisma/client';
-import { SessionList } from './SessionList';
+import Link from 'next/link';
+import React from 'react';
+
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { LinkButton } from '../form/LinkButton';
+import { FlexRowBetween } from '../layout/FlexRowBetween';
+import { SessionList } from './SessionList';
 
 type Props = {
 	eid: string;

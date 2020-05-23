@@ -1,7 +1,3 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Editor, EditorContent, useEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faBold,
 	faCamera,
@@ -17,11 +13,16 @@ import {
 	faRotateRight,
 	faStrikethrough
 } from '@fortawesome/free-solid-svg-icons';
-import { faBar, faCodeBlock } from '../../icons';
-import { Link } from '@tiptap/extension-link';
-import { LinkDialog } from '../radix/components/LinkDialog';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from '@tiptap/extension-image';
+import { Link } from '@tiptap/extension-link';
+import { Editor, EditorContent, useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import React, { useCallback, useEffect, useState } from 'react';
+
+import { faBar, faCodeBlock } from '../../icons';
 import { ImageUploadDialog } from '../radix/components/ImageUploadDialog';
+import { LinkDialog } from '../radix/components/LinkDialog';
 import Tooltip from '../radix/components/Tooltip';
 
 const MenuBar: React.FC<{

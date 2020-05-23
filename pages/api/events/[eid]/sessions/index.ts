@@ -1,12 +1,13 @@
-import { prisma } from '../../../../../prisma/client';
 import Prisma from '@prisma/client';
-import { getEvent } from '../index';
-import { NextkitError } from 'nextkit';
-import { api } from '../../../../../utils/api';
-import { getVenue } from '../venues/[vid]';
 import { endOfDay, parseISO, startOfDay } from 'date-fns';
-import { getSessionType } from './types/[tid]';
 import { zonedTimeToUtc } from 'date-fns-tz';
+import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../../../prisma/client';
+import { api } from '../../../../../utils/api';
+import { getEvent } from '../index';
+import { getVenue } from '../venues/[vid]';
+import { getSessionType } from './types/[tid]';
 
 export type SessionWithVenue = {
 	venue: Prisma.EventVenue | null;

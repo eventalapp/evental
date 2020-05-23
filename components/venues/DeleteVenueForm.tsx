@@ -1,12 +1,13 @@
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutation';
+import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
+import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
-import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutation';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenueQueryData &

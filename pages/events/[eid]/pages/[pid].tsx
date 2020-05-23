@@ -1,30 +1,31 @@
+import Prisma from '@prisma/client';
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import Column from '../../../../components/layout/Column';
-import { usePageQuery } from '../../../../hooks/queries/usePageQuery';
 import React from 'react';
-import PageWrapper from '../../../../components/layout/PageWrapper';
-import Prisma from '@prisma/client';
-import { getPage } from '../../../api/events/[eid]/pages/[pid]';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
+
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser } from '../../../../utils/stripUserPassword';
-import { ssrGetUser } from '../../../../utils/api';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { PrivatePage } from '../../../../components/error/PrivatePage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../components/events/navigation';
-import { getEvent } from '../../../api/events/[eid]';
-import { getRoles } from '../../../api/events/[eid]/roles';
+import Column from '../../../../components/layout/Column';
+import PageWrapper from '../../../../components/layout/PageWrapper';
+import { ViewPage } from '../../../../components/pages/ViewPage';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { usePageQuery } from '../../../../hooks/queries/usePageQuery';
+import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
-import { ViewPage } from '../../../../components/pages/ViewPage';
-import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
-import { getPages } from '../../../api/events/[eid]/pages';
-import { NextSeo } from 'next-seo';
-import { PrivatePage } from '../../../../components/error/PrivatePage';
+import { ssrGetUser } from '../../../../utils/api';
+import { PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { getEvent } from '../../../api/events/[eid]';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { getPages } from '../../../api/events/[eid]/pages';
+import { getPage } from '../../../api/events/[eid]/pages/[pid]';
+import { getRoles } from '../../../api/events/[eid]/roles';
 
 type Props = {
 	initialPage: Prisma.EventPage | undefined;

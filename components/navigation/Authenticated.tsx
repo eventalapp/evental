@@ -1,14 +1,15 @@
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
-import { ProfileDropdown } from './dropdown';
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+
 import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { NavigationWrapper } from './NavigationWrapper';
-import { LinkButton } from '../form/LinkButton';
-import classNames from 'classnames';
 import { FullscreenLinkItem } from '../events/navigation/Unauthenticated';
+import { LinkButton } from '../form/LinkButton';
+import { NavigationWrapper } from './NavigationWrapper';
+import { ProfileDropdown } from './dropdown';
 
 type Props = {
 	className?: string;

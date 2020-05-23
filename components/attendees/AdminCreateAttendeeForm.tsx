@@ -1,18 +1,19 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import Prisma from '@prisma/client';
+import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { AdminCreateAttendeePayload, AdminCreateAttendeeSchema } from '../../utils/schemas';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { Label } from '../form/Label';
-import { Input } from '../form/Input';
-import { Button } from '../form/Button';
-import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
-import { LoadingInner } from '../error/LoadingInner';
-import { StyledEditor } from '../form/Editor';
+
 import { UseAdminCreateAttendeeMutationData } from '../../hooks/mutations/useAdminCreateAttendeeMutation';
+import { AdminCreateAttendeePayload, AdminCreateAttendeeSchema } from '../../utils/schemas';
+import { LoadingInner } from '../error/LoadingInner';
+import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
+import { Button } from '../form/Button';
+import { StyledEditor } from '../form/Editor';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
 import Select from '../radix/components/Select';
-import Link from 'next/link';
-import Prisma from '@prisma/client';
 
 type Props = { eid: string; roles: Prisma.EventRole[] | undefined } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

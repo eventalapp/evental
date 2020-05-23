@@ -1,17 +1,18 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { Button } from '../form/Button';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { Controller, useForm } from 'react-hook-form';
-import { EditSessionTypePayload, EditSessionTypeSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
-import { LoadingInner } from '../error/LoadingInner';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import { CirclePicker } from 'react-color';
+import { Controller, useForm } from 'react-hook-form';
+
 import { UseEditSessionTypeMutationData } from '../../hooks/mutations/useEditSessionTypeMutation';
 import { UseSessionTypeQueryData } from '../../hooks/queries/useSessionTypeQuery';
-import { CirclePicker } from 'react-color';
 import { colors } from '../../utils/const';
+import { EditSessionTypePayload, EditSessionTypeSchema } from '../../utils/schemas';
+import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEditSessionTypeMutationData &

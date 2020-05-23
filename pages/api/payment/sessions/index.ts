@@ -1,10 +1,11 @@
-import Stripe from 'stripe';
-import { api } from '../../../../utils/api';
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
-import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
 import { NextkitError } from 'nextkit';
+import Stripe from 'stripe';
+
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
+import { api } from '../../../../utils/api';
 import { proAttendeePricing } from '../../../../utils/const';
 import { PurchaseProSchema } from '../../../../utils/schemas';
+import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	// https://github.com/stripe/stripe-node#configuration
