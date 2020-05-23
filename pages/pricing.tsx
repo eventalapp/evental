@@ -121,7 +121,7 @@ const PricingPage: NextPage = () => {
 							from $1000/year.
 						</p>
 						<Link href="/contact">
-							<LinkButton variant="default" className="my-1.5 text-primary border-0">
+							<LinkButton variant="default" className="my-1.5 text-primary-500 border-0">
 								Contact Us
 							</LinkButton>
 						</Link>
@@ -243,7 +243,7 @@ const PricingPage: NextPage = () => {
 							now!
 						</p>
 						<Link href="/events/create">
-							<LinkButton variant="default" className="my-1.5 text-primary border-0">
+							<LinkButton variant="default" className="my-1.5 text-primary-500 border-0">
 								Start Trial
 							</LinkButton>
 						</Link>
