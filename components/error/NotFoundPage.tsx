@@ -6,6 +6,7 @@ import PageWrapper from '../layout/PageWrapper';
 import React from 'react';
 import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
+import { Footer } from '../Footer';
 
 export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> = (props) => {
 	const { message = 'Not found.', renderLink = true } = props;
@@ -27,6 +28,8 @@ export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> 
 					</Link>
 				)}
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

@@ -4,6 +4,7 @@ import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
 import React from 'react';
 import NoAccess from './NoAccess';
+import { Footer } from '../Footer';
 
 export const NoAccessPage = () => (
 	<PageWrapper variant="gray">
@@ -16,5 +17,7 @@ export const NoAccessPage = () => (
 		<Column variant="halfWidth" className="flex flex-col items-center justify-center">
 			<NoAccess />
 		</Column>
+
+		<Footer />
 	</PageWrapper>
 );
