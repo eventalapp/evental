@@ -10,7 +10,7 @@
     "dev": "next dev -p 5555",
     "lint": "next lint --fix",
     "seed": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
-    "format": "tsc && prettier --write ./{server,pages,utils,components}/**/*.{js,jsx,json,md,ts,tsx} && prisma format",
+    "format": "prettier --write ./{server,pages,utils,components}/**/*.{js,jsx,json,md,ts,tsx} && prisma format",
     "migrate:dev": "prisma migrate dev",
     "migrate:reset": "prisma migrate reset",
     "migrate:prod": "prisma migrate deploy",
@@ -106,6 +106,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^6.3.1",
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/busboy": "^1.5.0",
     "@types/html-to-text": "^8.1.0",
     "@types/micro": "^7.3.7",
