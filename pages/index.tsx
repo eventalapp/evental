@@ -49,7 +49,7 @@ const HomePage: NextPage = () => {
 						</LinkButton>
 					</Link>
 					<Link href="/events" passHref>
-						<LinkButton variant="inversePrimary" padding="large">
+						<LinkButton variant="default" padding="large">
 							View All Events
 						</LinkButton>
 					</Link>

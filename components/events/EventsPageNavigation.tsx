@@ -11,7 +11,7 @@ export const EventsPageNavigation: React.FC = () => {
 			<Link href="/events/organizing" passHref>
 				<LinkButton
 					className="mr-3"
-					variant={router.pathname == '/events/organizing' ? 'primary' : 'inversePrimary'}
+					variant={router.pathname == '/events/organizing' ? 'primary' : 'default'}
 				>
 					Organizing
 				</LinkButton>
@@ -19,16 +19,13 @@ export const EventsPageNavigation: React.FC = () => {
 			<Link href="/events/attending" passHref>
 				<LinkButton
 					className="mr-3"
-					variant={router.pathname == '/events/attending' ? 'primary' : 'inversePrimary'}
+					variant={router.pathname == '/events/attending' ? 'primary' : 'default'}
 				>
 					Attending
 				</LinkButton>
 			</Link>
 			<Link href="/events" passHref>
-				<LinkButton
-					className="mr-3"
-					variant={router.pathname == '/events' ? 'primary' : 'inversePrimary'}
-				>
+				<LinkButton className="mr-3" variant={router.pathname == '/events' ? 'primary' : 'default'}>
 					Upcoming
 				</LinkButton>
 			</Link>

@@ -119,7 +119,7 @@ const PricingPage: NextPage = () => {
 							from $1000/year.
 						</p>
 						<Link href="/contact">
-							<LinkButton variant="inversePrimary" className="my-1.5">
+							<LinkButton variant="default" className="my-1.5">
 								Contact Us
 							</LinkButton>
 						</Link>
@@ -237,10 +237,11 @@ const PricingPage: NextPage = () => {
 				<Column className="flex items-center justify-center">
 					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
 						<p className="text-sm md:text-lg text-center my-1.5 font-medium">
-							Get started building your event now!
+							<span className="font-bold">Ready to start?</span> Get started building your event
+							now!
 						</p>
 						<Link href="/events/create">
-							<LinkButton variant="inversePrimary" className="my-1.5">
+							<LinkButton variant="white" className="my-1.5">
 								Start Trial
 							</LinkButton>
 						</Link>
@@ -268,17 +269,29 @@ const PricingPage: NextPage = () => {
 								</p>
 							)
 						},
+
 						{
-							header: 'Is there any training/support offered?',
+							header: 'Is event setup assistance offered?',
 							content: (
 								<p>
-									Yes, we offer several training and learning opportunities to allow you to easily
-									setup and publish your event. Which includes administration, attendee, and speaker
-									guides at the{' '}
+									Yes, we offer event setup assistance. You can first review our{' '}
 									<Link href="/guides">
 										<a className="underline">Support Guides</a>
-									</Link>{' '}
-									page.
+									</Link>
+									, if you still need help, please{' '}
+									<Link href="/contact">
+										<a className="underline">Contact Us</a>
+									</Link>
+									.
+								</p>
+							)
+						},
+						{
+							header: 'Do you offer any subscriptions plans?',
+							content: (
+								<p>
+									Yes, we offer several subscription plans for and organizations/individuals who
+									plan to hold several events in a year.
 								</p>
 							)
 						},
@@ -295,12 +308,14 @@ const PricingPage: NextPage = () => {
 								</p>
 							)
 						},
+
 						{
-							header: 'Do you offer any subscriptions plans?',
+							header: 'How long of events can I host?',
 							content: (
 								<p>
-									Yes, we offer several subscription plans for and organizations/individuals who
-									plan to hold several events in a year.
+									Currently we have a 1 month length limit on events. The event will still be
+									viewable after the event end date for attendees, speakers, and organizers to view
+									after the event.
 								</p>
 							)
 						},
@@ -329,29 +344,18 @@ const PricingPage: NextPage = () => {
 								</p>
 							)
 						},
+
 						{
-							header: 'How long of events can I host?',
+							header: 'Is there any training/support offered?',
 							content: (
 								<p>
-									Currently we have a 1 month length limit on events. The event will still be
-									viewable after the event end date for attendees, speakers, and organizers to view
-									after the event.
-								</p>
-							)
-						},
-						{
-							header: 'Is event setup assistance offered?',
-							content: (
-								<p>
-									Yes, we offer event setup assistance. You can first review our{' '}
+									Yes, we offer several training and learning opportunities to allow you to easily
+									setup and publish your event. Which includes administration, attendee, and speaker
+									guides at the{' '}
 									<Link href="/guides">
 										<a className="underline">Support Guides</a>
-									</Link>
-									, if you still need help, please{' '}
-									<Link href="/contact">
-										<a className="underline">Contact Us</a>
-									</Link>
-									.
+									</Link>{' '}
+									page.
 								</p>
 							)
 						},
