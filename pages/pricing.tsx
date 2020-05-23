@@ -22,12 +22,12 @@ const PricingPage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
-				title="Pricing"
-				description="Single Event Plans & Pricing. Starting at $430 USD."
+				title="Pricing — Evental"
+				description={`Single Event Plans & Pricing. Starting at ${proAttendeePricing[250].price} USD.`}
 				openGraph={{
 					url: 'https://evental.app/pricing',
-					title: 'Pricing',
-					description: 'Single Event Plans & Pricing. Starting at $430 USD.',
+					title: 'Pricing — Evental',
+					description: `Single Event Plans & Pricing. Starting at ${proAttendeePricing[250].price} USD.`,
 					images: [
 						{
 							url: 'https://cdn.evental.app/images/logo.jpg',
@@ -97,6 +97,7 @@ const PricingPage: NextPage = () => {
 							/>
 						)}
 					/>
+
 					{attendees >= 5000 && (
 						<p className="text-gray-600">
 							Expecting more than 5,000 people?{' '}
