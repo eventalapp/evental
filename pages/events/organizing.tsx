@@ -72,11 +72,13 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 				<Navigation />
 
 				<Column>
-					<h1 className="text-2xl md:text-3xl font-bold mb-3">Organizing Events</h1>
+					<h1 className="text-2xl md:text-3xl font-bold mb-3 text-center">Organizing Events</h1>
 
 					<EventsPageNavigation />
 
-					<span className="block font-bold text-center text-lg mt-5">Organizing an event?</span>
+					<span className="block font-bold text-center text-lg mt-5 text-center">
+						Organizing an event?
+					</span>
 
 					<CreateEventForm createEventMutation={createEventMutation} />
 				</Column>
@@ -108,11 +110,11 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-2xl md:text-3xl font-bold mb-3">Organizing Events</h1>
+				<h1 className="text-2xl md:text-3xl font-bold mb-3 text-center">Organizing Events</h1>
 
 				{user && <EventsPageNavigation />}
 
-				<span className="block font-bold text-center text-lg mt-5">Organizing an event?</span>
+				<span className="block font-medium text-center text-lg mt-5">Organizing an event?</span>
 
 				<CreateEventForm createEventMutation={createEventMutation} />
 
