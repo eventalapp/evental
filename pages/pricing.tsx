@@ -150,7 +150,7 @@ const PricingPage: NextPage = () => {
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
 							Publish Features
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Responsive event website</li>
 							<li>Customizable event branding</li>
 							<li>Control event privacy & access</li>
@@ -162,7 +162,7 @@ const PricingPage: NextPage = () => {
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
 							Virtual & Hybrid Events
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Use Evental with any webinar or video platform</li>
 							<li>Control access to webinar or video content</li>
 							<li>Automatically display times in users timezone</li>
@@ -173,7 +173,7 @@ const PricingPage: NextPage = () => {
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
 							Role Management
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Create custom roles for speakers, artists, and exhibitors</li>
 							<li>Attach role members to sessions</li>
 							<li>Top level pages for role members</li>
@@ -183,7 +183,7 @@ const PricingPage: NextPage = () => {
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
 							Communication
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Custom email builder to develop responsive emails</li>
 							<li>Create a welcome email to automatically send to attendees</li>
 							<li>Notify attendees when they have an upcoming session</li>
@@ -193,7 +193,7 @@ const PricingPage: NextPage = () => {
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
 							Attendee Experience
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Generate and export personal schedule</li>
 							<li>View event from any device</li>
 							<li>Sync personal schedule to calendar</li>
@@ -205,7 +205,7 @@ const PricingPage: NextPage = () => {
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
 							Session Registration
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Attendees can register for sessions</li>
 							<li>Filter sessions by date, type, venue, etc.</li>
 							<li>Attach role members/speakers to sessions</li>
@@ -216,7 +216,7 @@ const PricingPage: NextPage = () => {
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
 							Administration
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Remove attendees from your event</li>
 							<li>Create organizers to assist you in running your event</li>
 							<li>Export event and session data</li>
@@ -225,7 +225,7 @@ const PricingPage: NextPage = () => {
 					</div>
 					<div>
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">Support</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Organizer and attendee support guides</li>
 							<li>24/7 Email support</li>
 							<li>Dedicated account manager</li>
