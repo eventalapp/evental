@@ -74,7 +74,9 @@ const AttendeesAdminPage: NextPage = () => {
 
 						<div>
 							<Link href={`/events/${eid}/admin/attendees/create`} passHref>
-								<LinkButton className="mr-3">Create</LinkButton>
+								<LinkButton className="mr-3" padding="medium">
+									Create
+								</LinkButton>
 							</Link>
 						</div>
 					</FlexRowBetween>
