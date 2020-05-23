@@ -116,7 +116,7 @@ const ContactPage: NextPage = () => {
 					<h3 className="text-xl md:text-2xl mb-1 font-bold text-center">
 						Not sure where to start?
 					</h3>
-					<p>
+					<p className="text-gray-700">
 						Start by saying hello! For general inquiries, reach out to us at{' '}
 						<a
 							href="mailto:hello@evental.app"
