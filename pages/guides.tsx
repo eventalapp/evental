@@ -1,0 +1,45 @@
+import type { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import React from 'react';
+
+import { Footer } from '../components/Footer';
+import Column from '../components/layout/Column';
+import PageWrapper from '../components/layout/PageWrapper';
+import { Navigation } from '../components/navigation';
+
+const PricingPage: NextPage = () => {
+	return (
+		<PageWrapper variant="white">
+			<NextSeo
+				title="Guides — Evental"
+				description={`Need help getting started as an organizer or an attendee? Check out our guides.`}
+				openGraph={{
+					url: 'https://evental.app/pricing',
+					title: 'Guides — Evental',
+					description: `Need help getting started as an organizer or an attendee? Check out our guides.`,
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
+			<Navigation />
+
+			<Column className="flex flex-col items-center">
+				<h1 className="text-2xl md:text-3xl font-bold">Support Guides</h1>
+				<p className="text-gray-600 text-md mt-4">
+					Need help getting started as an organizer or an attendee? Check out our guides.
+				</p>
+			</Column>
+
+			<Footer />
+		</PageWrapper>
+	);
+};
+
+export default PricingPage;
