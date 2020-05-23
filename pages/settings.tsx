@@ -44,7 +44,7 @@ const SettingsPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper>
 			<Head>
-				<title>User Settings</title>
+				<title>Settings — Evental</title>
 			</Head>
 
 			<Navigation />
