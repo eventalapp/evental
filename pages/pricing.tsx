@@ -81,7 +81,7 @@ const PricingPage: NextPage = () => {
 				</div>
 
 				<div className="flex flex-col items-center space-y-3 mt-4">
-					<p className="text-lg font-medium text-gray-700">How many attendees are you expecting?</p>
+					<p className="text-lg font-medium">How many attendees are you expecting?</p>
 					<Controller
 						control={control}
 						name="attendees"
