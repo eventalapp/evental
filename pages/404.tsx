@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import PageWrapper from '../components/layout/PageWrapper';
 import { NextSeo } from 'next-seo';
+import { Footer } from '../components/Footer';
 
 const ErrorNotFoundPage: NextPage = () => {
 	return (
@@ -29,6 +30,8 @@ const ErrorNotFoundPage: NextPage = () => {
 					</LinkButton>
 				</Link>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };
