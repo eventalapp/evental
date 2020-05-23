@@ -83,9 +83,7 @@ export const EventList: React.FC<Props> = (props) => {
 											</span>
 										</Tooltip>
 
-										<span className="text-lg md:text-xl font-medium block leading-none">
-											{event.name}
-										</span>
+										<span className="text-lg md:text-xl font-medium block">{event.name}</span>
 									</div>
 								</div>
 							</a>
