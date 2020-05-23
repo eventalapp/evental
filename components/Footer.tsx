@@ -19,8 +19,8 @@ export const Footer = () => {
 					</div>
 
 					<div className="px-5 py-2">
-						<Link href="/press">
-							<a className="text-base text-gray-500 hover:text-gray-900">Press</a>
+						<Link href="/contact">
+							<a className="text-base text-gray-500 hover:text-gray-900">Contact</a>
 						</Link>
 					</div>
 
