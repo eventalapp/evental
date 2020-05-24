@@ -47,10 +47,10 @@ export default api({
 			throw new NextkitError(404, 'Attendee not found.');
 		}
 
-		const parsed = AdminEditAttendeeSchema.parse(req.body);
+		const body = AdminEditAttendeeSchema.parse(req.body);
 
 		const requestedPermissionRole =
-			EventPermissionRole[parsed.permissionRole as keyof typeof EventPermissionRole] ??
+			EventPermissionRole[body.permissionRole as keyof typeof EventPermissionRole] ??
 			EventPermissionRole.ATTENDEE;
 
 		if (!requestedPermissionRole) {
@@ -90,7 +90,7 @@ export default api({
 				id: attendee.id
 			},
 			data: {
-				eventRoleId: parsed.eventRoleId,
+				eventRoleId: body.eventRoleId,
 				userId: attendee.userId,
 				eventId: attendee.eventId,
 				permissionRole: requestedPermissionRole

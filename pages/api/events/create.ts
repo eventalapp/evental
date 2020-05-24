@@ -21,9 +21,9 @@ export default api({
 			);
 		}
 
-		const parsed = CreateEventSchema.parse(req.body);
+		const body = CreateEventSchema.parse(req.body);
 
-		const slug = await generateSlug(parsed.name, async (val) => {
+		const slug = await generateSlug(body.name, async (val) => {
 			return !Boolean(
 				await prisma.event.findFirst({
 					where: {
@@ -36,10 +36,10 @@ export default api({
 		const event = await prisma.event.create({
 			data: {
 				slug: slug,
-				name: parsed.name,
-				startDate: dayjs(parsed.startDate).tz(parsed.timeZone).startOf('day').toDate(),
-				endDate: dayjs(parsed.endDate).tz(parsed.timeZone).endOf('day').toDate(),
-				timeZone: parsed.timeZone
+				name: body.name,
+				startDate: dayjs(body.startDate).tz(body.timeZone).startOf('day').toDate(),
+				endDate: dayjs(body.endDate).tz(body.timeZone).endOf('day').toDate(),
+				timeZone: body.timeZone
 			}
 		});
 

@@ -28,7 +28,7 @@ export default api({
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
-		let parsed = EditSessionTypeSchema.parse(req.body);
+		const body = EditSessionTypeSchema.parse(req.body);
 
 		const event = await getEvent(String(eid));
 
@@ -43,8 +43,8 @@ export default api({
 		}
 
 		const slug: string | undefined =
-			parsed.name !== sessionType.name
-				? await generateSlug(parsed.name, async (val) => {
+			body.name !== sessionType.name
+				? await generateSlug(body.name, async (val) => {
 						return !Boolean(
 							await prisma.eventSession.findFirst({
 								where: {
@@ -63,8 +63,8 @@ export default api({
 			data: {
 				eventId: event.id,
 				slug,
-				name: parsed.name,
-				color: parsed.color
+				name: body.name,
+				color: body.color
 			}
 		});
 

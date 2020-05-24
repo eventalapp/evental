@@ -27,7 +27,7 @@ export default api({
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
-		let parsed = EditSessionSchema.parse(req.body);
+		let body = EditSessionSchema.parse(req.body);
 
 		const event = await prisma.event.findFirst({
 			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -57,8 +57,8 @@ export default api({
 		}
 
 		const slug: string | undefined =
-			parsed.name !== session.name
-				? await generateSlug(parsed.name, async (val) => {
+			body.name !== session.name
+				? await generateSlug(body.name, async (val) => {
 						return !Boolean(
 							await prisma.eventSession.findFirst({
 								where: {
@@ -77,12 +77,13 @@ export default api({
 			data: {
 				eventId: event.id,
 				slug,
-				name: parsed.name,
-				venueId: parsed.venueId,
-				startDate: dayjs(parsed.startDate).tz(event.timeZone).toDate(),
-				endDate: dayjs(parsed.endDate).tz(event.timeZone).toDate(),
-				description: parsed.description,
-				typeId: parsed.typeId
+				name: body.name,
+				venueId: body.venueId,
+				maxAttendees: body.maxAttendees,
+				startDate: dayjs(body.startDate).tz(event.timeZone).toDate(),
+				endDate: dayjs(body.endDate).tz(event.timeZone).toDate(),
+				description: body.description,
+				typeId: body.typeId
 			}
 		});
 
