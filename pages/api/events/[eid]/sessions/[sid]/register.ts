@@ -42,7 +42,7 @@ export default api({
 			}
 		});
 
-		if (session.maxAttendees !== null && attendeeCount + 1 >= session.maxAttendees) {
+		if (session.maxAttendees !== null && attendeeCount >= session.maxAttendees) {
 			throw new NextkitError(403, 'This session is full. Please select another session.');
 		}
 
