@@ -56,9 +56,6 @@ const typeIdValidator = z.preprocess((val) => {
 	}
 	return val;
 }, z.string().max(100, 'Type is too long').nullable());
-const noImageValidator = z
-	.string()
-	.refine((val) => !val.includes('<img'), 'Your description cannot include an image.');
 
 const [firsttimeZone, ...resttimeZones] = timeZoneList;
 const timeZoneValidator = z.enum([firsttimeZone, ...resttimeZones]);
@@ -115,6 +112,7 @@ export const CreateSessionSchema = z.object({
 	name: nameValidator,
 	venueId: venueIdValidator,
 	startDate: dateValidator,
+	maxAttendees: z.number().optional(),
 	endDate: dateValidator,
 	typeId: typeIdValidator,
 	description: descriptionValidator.optional()
@@ -126,6 +124,7 @@ export const EditSessionSchema = z.object({
 	name: nameValidator,
 	venueId: venueIdValidator,
 	startDate: dateValidator,
+	maxAttendees: z.number().optional(),
 	endDate: dateValidator,
 	typeId: typeIdValidator,
 	description: descriptionValidator.optional()
