@@ -2,6 +2,7 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
+import { stripAttendeeWithUserPassword } from '../../../../../../utils/stripUserPassword';
 import { getEvent } from '../../index';
 import { SessionWithVenue } from '../index';
 
@@ -36,6 +37,19 @@ export const getSession = async (eid: string, sid: string): Promise<SessionWithV
 			type: true,
 			_count: {
 				select: { attendees: true }
+			},
+			attendees: {
+				include: {
+					attendee: {
+						include: {
+							user: true,
+							role: true
+						}
+					}
+				},
+				where: {
+					type: 'ROLE'
+				}
 			}
 		}
 	});
@@ -44,5 +58,16 @@ export const getSession = async (eid: string, sid: string): Promise<SessionWithV
 		return null;
 	}
 
-	return { attendeeCount: session._count.attendees, ...session };
+	return {
+		attendeeCount: session._count.attendees,
+		roleMembers: session.attendees.map((sessionAttendee) => {
+			const { attendee } = sessionAttendee;
+
+			return {
+				...sessionAttendee,
+				attendee: stripAttendeeWithUserPassword(attendee)
+			};
+		}),
+		...session
+	};
 };

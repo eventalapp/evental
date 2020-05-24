@@ -92,44 +92,50 @@ export const SessionList: React.FC<Props> = (props) => {
 													{dayjs(hour).format('h:mm A z')}
 												</span>
 												<div className="w-full">
-													{sessions.map((session) => (
-														<SessionHoverCard session={session} event={event} key={session.id}>
-															<div className="mr-2 mb-2 inline-block">
-																<Link
-																	href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${
-																		session.slug
-																	}`}
-																>
-																	<a className="inline-block">
-																		<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
-																			<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
-																				<div className="flex flex-row items-center justify-between">
-																					<div
-																						className="rounded-full mr-3 w-4 h-4"
-																						style={{
-																							backgroundColor: session?.type?.color ?? '#888888'
-																						}}
-																					/>
-																					<div>
-																						<span className="text-lg block leading-tight">
-																							{session.name}
-																						</span>
-																						{session.type?.name ? (
-																							<span className="text-sm text-gray-500">
-																								{session.type?.name}
+													{sessions.map((session) => {
+														console.log(session);
+
+														return (
+															<SessionHoverCard session={session} event={event} key={session.id}>
+																<div className="mr-2 mb-2 inline-block">
+																	<Link
+																		href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${
+																			session.slug
+																		}`}
+																	>
+																		<a className="inline-block">
+																			<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
+																				<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
+																					<div className="flex flex-row items-center justify-between">
+																						<div
+																							className="rounded-full mr-3 w-4 h-4"
+																							style={{
+																								backgroundColor: session?.type?.color ?? '#888888'
+																							}}
+																						/>
+																						<div>
+																							<span className="text-lg block leading-tight">
+																								{session.name}
 																							</span>
-																						) : (
-																							<em className="text-sm text-gray-500">{'No Type'}</em>
-																						)}
+
+																							{session.roleMembers.length >= 1 && (
+																								<span className="text-sm text-gray-500">
+																									{session.roleMembers
+																										.map((member) => member.attendee.user.name)
+																										.splice(0, 3)
+																										.join(', ')}
+																								</span>
+																							)}
+																						</div>
 																					</div>
 																				</div>
 																			</div>
-																		</div>
-																	</a>
-																</Link>
-															</div>
-														</SessionHoverCard>
-													))}
+																		</a>
+																	</Link>
+																</div>
+															</SessionHoverCard>
+														);
+													})}
 												</div>
 											</div>
 										);
@@ -192,12 +198,14 @@ export const SessionList: React.FC<Props> = (props) => {
 																			<span className="text-lg block leading-tight">
 																				{session.name}
 																			</span>
-																			{session.type?.name ? (
+
+																			{session.roleMembers.length >= 1 && (
 																				<span className="text-sm text-gray-500">
-																					{session.type?.name}
+																					{session.roleMembers
+																						.map((member) => member.attendee.user.name)
+																						.splice(0, 3)
+																						.join(', ')}
 																				</span>
-																			) : (
-																				<em className="text-sm text-gray-500">{'No Type'}</em>
 																			)}
 																		</div>
 																	</div>
