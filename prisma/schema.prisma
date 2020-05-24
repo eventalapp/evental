@@ -141,17 +141,18 @@ model EventRole {
 }
 
 model EventSession {
-  id          String   @id @default(cuid())
-  slug        String
-  eventId     String
-  startDate   DateTime
-  endDate     DateTime
-  venueId     String?
-  typeId      String?
-  name        String
-  description String?
-  updatedAt   DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  id           String   @id @default(cuid())
+  slug         String
+  eventId      String
+  startDate    DateTime
+  endDate      DateTime
+  venueId      String?
+  typeId       String?
+  name         String
+  maxAttendees Int?
+  description  String?
+  updatedAt    DateTime @updatedAt
+  createdAt    DateTime @default(now())
 
   event Event             @relation(fields: [eventId], references: [id], onDelete: Cascade)
   venue EventVenue?       @relation(fields: [venueId], references: [id], onDelete: Cascade)
