@@ -112,7 +112,7 @@ export const CreateSessionSchema = z.object({
 	name: nameValidator,
 	venueId: venueIdValidator,
 	startDate: dateValidator,
-	maxAttendees: z.number().optional(),
+	maxAttendees: z.number().nullable().optional(),
 	endDate: dateValidator,
 	typeId: typeIdValidator,
 	description: descriptionValidator.optional()
@@ -124,7 +124,7 @@ export const EditSessionSchema = z.object({
 	name: nameValidator,
 	venueId: venueIdValidator,
 	startDate: dateValidator,
-	maxAttendees: z.number().optional(),
+	maxAttendees: z.number().nullable().optional(),
 	endDate: dateValidator,
 	typeId: typeIdValidator,
 	description: descriptionValidator.optional()
