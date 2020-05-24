@@ -156,6 +156,18 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 
 						{errors.typeId?.message && <ErrorMessage>{errors.typeId?.message}</ErrorMessage>}
 					</div>
+
+					<div>
+						<Label htmlFor="name">Max Attendees *</Label>
+						<Input
+							placeholder="No Limit"
+							type="number"
+							{...register('maxAttendees', { valueAsNumber: true })}
+						/>
+						{errors.maxAttendees?.message && (
+							<ErrorMessage>{errors.maxAttendees?.message}</ErrorMessage>
+						)}
+					</div>
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
