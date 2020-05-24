@@ -162,7 +162,9 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 						<Input
 							placeholder="No Limit"
 							type="number"
-							{...register('maxAttendees', { valueAsNumber: true })}
+							{...register('maxAttendees', {
+								setValueAs: (v) => (v === '' ? null : parseInt(v, 10))
+							})}
 						/>
 						{errors.maxAttendees?.message && (
 							<ErrorMessage>{errors.maxAttendees?.message}</ErrorMessage>

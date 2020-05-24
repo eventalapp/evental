@@ -232,7 +232,9 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 						<Input
 							placeholder="No Limit"
 							type="number"
-							{...register('maxAttendees', { valueAsNumber: true })}
+							{...register('maxAttendees', {
+								setValueAs: (v) => (v === '' ? null : parseInt(v, 10))
+							})}
 						/>
 						{errors.maxAttendees?.message && (
 							<ErrorMessage>{errors.maxAttendees?.message}</ErrorMessage>
