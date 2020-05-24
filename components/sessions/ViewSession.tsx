@@ -149,6 +149,27 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			)}
 
+			{session?.maxAttendees !== null && (
+				<div className="block">
+					<Tooltip
+						side={'top'}
+						message={`This sessions is currently ${
+							Math.ceil(session?.attendeeCount / session?.maxAttendees) * 100
+						}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+					>
+						<div className="inline-flex flex-row items-center mb-1 cursor-help">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mr-1.5"
+								size="1x"
+								icon={faLocationDot}
+							/>
+							<p>{Math.ceil(session?.attendeeCount / session?.maxAttendees) * 100}% Full</p>
+						</div>
+					</Tooltip>
+				</div>
+			)}
+
 			<Tooltip
 				side={'top'}
 				message={`This is session is taking place from ${format(
