@@ -4,6 +4,7 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 
+import { Footer } from '../../components/Footer';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
@@ -82,6 +83,8 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 						</Link>
 					</span>
 				</Column>
+
+				<Footer />
 			</PageWrapper>
 		);
 	}
@@ -116,6 +119,8 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 
 				<EventList events={attendingEvents} />
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

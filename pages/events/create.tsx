@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
+import { Footer } from '../../components/Footer';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import Column from '../../components/layout/Column';
@@ -59,6 +60,8 @@ const CreateEventPage: NextPage<Props> = (props) => {
 
 				<CreateEventForm createEventMutation={createEventMutation} canCancel />
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

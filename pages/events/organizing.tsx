@@ -3,6 +3,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
+import { Footer } from '../../components/Footer';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
@@ -83,6 +84,8 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 
 					<CreateEventForm createEventMutation={createEventMutation} />
 				</Column>
+
+				<Footer />
 			</PageWrapper>
 		);
 	}
@@ -121,6 +124,8 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 
 				<EventList events={organizingEvents} className="mt-5" />
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };
