@@ -34,13 +34,13 @@ const SupportPage: NextPage = () => {
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
 					<h1 className="text-2xl md:text-3xl font-bold">Create a Support Ticket</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<p className="text-gray-100 text-md mt-4 max-w-2xl text-center">
 						Fill out the form below to submit a support ticket.
 					</p>
 				</Column>
 			</div>
 
-			<Column className="flex flex-col items-center">
+			<Column variant="halfWidth">
 				<SubmitSupportTicketForm />
 			</Column>
 
