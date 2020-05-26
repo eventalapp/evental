@@ -50,50 +50,53 @@ export const SubmitSupportTicketForm = () => {
 			onSubmit={handleSubmit((data) => {
 				submitSupportTicketMutation.mutate(data);
 			})}
+			className="w-full"
 		>
-			<div className="space-y-5">
-				<div>
-					<Label htmlFor="attendanceType">Are you organizing or attending an event? *</Label>
+			<div className="space-y-6">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div>
+						<Label htmlFor="attendanceType">Are you organizing or attending an event? *</Label>
 
-					<Controller
-						control={control}
-						name="attendanceType"
-						render={({ field }) => (
-							<Select
-								options={attendanceTypes}
-								value={field.value}
-								onValueChange={(value) => {
-									setValue('attendanceType', value);
-								}}
-							/>
+						<Controller
+							control={control}
+							name="attendanceType"
+							render={({ field }) => (
+								<Select
+									options={attendanceTypes}
+									value={field.value}
+									onValueChange={(value) => {
+										setValue('attendanceType', value);
+									}}
+								/>
+							)}
+						/>
+
+						{errors.attendanceType?.message && (
+							<ErrorMessage>{errors.attendanceType?.message}</ErrorMessage>
 						)}
-					/>
+					</div>
 
-					{errors.attendanceType?.message && (
-						<ErrorMessage>{errors.attendanceType?.message}</ErrorMessage>
-					)}
-				</div>
+					<div>
+						<Label htmlFor="helpType">What do you need help with? *</Label>
 
-				<div>
-					<Label htmlFor="helpType">What do you need help with? *</Label>
+						<Controller
+							control={control}
+							name="helpType"
+							render={({ field }) => (
+								<Select
+									options={helpTypes}
+									value={field.value}
+									onValueChange={(value) => {
+										setValue('helpType', value);
+									}}
+								/>
+							)}
+						/>
 
-					<Controller
-						control={control}
-						name="helpType"
-						render={({ field }) => (
-							<Select
-								options={helpTypes}
-								value={field.value}
-								onValueChange={(value) => {
-									setValue('helpType', value);
-								}}
-							/>
+						{errors.attendanceType?.message && (
+							<ErrorMessage>{errors.attendanceType?.message}</ErrorMessage>
 						)}
-					/>
-
-					{errors.attendanceType?.message && (
-						<ErrorMessage>{errors.attendanceType?.message}</ErrorMessage>
-					)}
+					</div>
 				</div>
 
 				<div>
@@ -113,30 +116,34 @@ export const SubmitSupportTicketForm = () => {
 					{errors.body?.message && <ErrorMessage>{errors.body?.message}</ErrorMessage>}
 				</div>
 
-				<div>
-					<Label htmlFor="name">Name *</Label>
-					<Input placeholder="John Doe" {...register('name')} />
-					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div>
+						<Label htmlFor="name">Name *</Label>
+						<Input placeholder="John Doe" {...register('name')} />
+						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
+					</div>
+
+					<div>
+						<Label htmlFor="email">Email *</Label>
+						<Input placeholder="johndoe@email.com" {...register('email')} />
+						{errors.email?.message && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
+					</div>
 				</div>
 
-				<div>
-					<Label htmlFor="email">Email *</Label>
-					<Input placeholder="johndoe@email.com" {...register('email')} />
-					{errors.email?.message && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
-				</div>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div>
+						<Label htmlFor="website">Website</Label>
+						<Input placeholder="evental.app/events/your-event" {...register('website')} />
+						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
+					</div>
 
-				<div>
-					<Label htmlFor="website">Website</Label>
-					<Input placeholder="evental.app/events/your-event" {...register('website')} />
-					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
-				</div>
-
-				<div>
-					<Label htmlFor="phoneNumber">Phone Number</Label>
-					<Input placeholder="(123)-123-1234" {...register('phoneNumber')} />
-					{errors.phoneNumber?.message && (
-						<ErrorMessage>{errors.phoneNumber?.message}</ErrorMessage>
-					)}
+					<div>
+						<Label htmlFor="phoneNumber">Phone Number</Label>
+						<Input placeholder="(123)-123-1234" {...register('phoneNumber')} />
+						{errors.phoneNumber?.message && (
+							<ErrorMessage>{errors.phoneNumber?.message}</ErrorMessage>
+						)}
+					</div>
 				</div>
 
 				<div className="flex flex-row justify-end">
