@@ -373,3 +373,21 @@ export const SubmitSupportTicketSchema = z.object({
 });
 
 export type SubmitSupportTicketPayload = z.infer<typeof SubmitSupportTicketSchema>;
+
+// Demo Request ticket
+
+export const SubmitDemoRequestSchema = z.object({
+	body: z.preprocess(
+		(val) => htmlToText(String(val)),
+		z.string().min(1, 'Body is required').max(5000, 'Body is too long')
+	),
+	organizationName: z
+		.string()
+		.min(1, 'Organization Name is required')
+		.max(100, 'Organization Name is too long'),
+	name: nameValidator,
+	email: emailValidator,
+	phoneNumber: z.string().max(100, 'Phone Number is too long')
+});
+
+export type SubmitDemoRequestPayload = z.infer<typeof SubmitDemoRequestSchema>;
