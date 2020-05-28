@@ -179,7 +179,7 @@ const PricingPage: NextPage = () => {
 							Evental
 						</strong>
 						<span className="bg-primary text-white px-2 py-1 font-medium text-xs lg:text-md rounded">
-							PRO
+							{isEducation ? 'EDU' : 'PRO'}
 						</span>
 					</div>
 					<p className="text-gray-600">Perks and features</p>
