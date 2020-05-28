@@ -1,4 +1,4 @@
-import { attendeesToPrice } from './price';
+import { eduAttendeesToPrice, proAttendeesToPrice } from './price';
 
 export const colors = [
 	'#ff3b91',
@@ -390,7 +390,7 @@ export let proAttendeePricing: Record<
 > = {};
 
 for (let i = 250; i <= MAX_ATTENDEES; i += 250) {
-	const priceForAttendees = attendeesToPrice(i);
+	const priceForAttendees = proAttendeesToPrice(i);
 
 	proAttendeePricing[String(i)] = {
 		id: `evental-pro-${i}`,
@@ -400,6 +400,35 @@ for (let i = 250; i <= MAX_ATTENDEES; i += 250) {
 		name: `Evental Pro (${i} Attendees)`,
 		image: `https://cdn.evental.app/images/logo.jpg`,
 		attendees: i,
-		perAttendeePrice: Number((i / priceForAttendees).toFixed(2))
+		perAttendeePrice: Number((priceForAttendees / i).toFixed(2))
+	};
+}
+
+export let eduAttendeePricing: Record<
+	string,
+	{
+		id: string;
+		level: string;
+		price: number;
+		description: string;
+		attendees: number;
+		perAttendeePrice: number;
+		name: string;
+		image: string;
+	}
+> = {};
+
+for (let i = 250; i <= MAX_ATTENDEES; i += 250) {
+	const priceForAttendees = eduAttendeesToPrice(i);
+
+	eduAttendeePricing[String(i)] = {
+		id: `evental-edu-${i}`,
+		price: priceForAttendees,
+		level: 'PRO',
+		description: `Evental Education/Non-profit (${i} Attendees)`,
+		name: `Evental Education/Non-profit (${i} Attendees)`,
+		image: `https://cdn.evental.app/images/logo.jpg`,
+		attendees: i,
+		perAttendeePrice: Number((priceForAttendees / i).toFixed(2))
 	};
 }
