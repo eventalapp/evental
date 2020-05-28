@@ -364,7 +364,10 @@ export const SubmitSupportTicketSchema = z.object({
 	helpType: z.string().min(1, 'Help Type is required').max(100, 'Help Type is too long'),
 	body: z.preprocess(
 		(val) => htmlToText(String(val)),
-		z.string().min(1, 'Body is required').max(5000, 'Body is too long')
+		z
+			.string()
+			.min(10, 'You must write a question, comment or problem.')
+			.max(5000, 'Body is too long')
 	),
 	name: nameValidator,
 	email: emailValidator,
