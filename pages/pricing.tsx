@@ -74,7 +74,7 @@ const PricingPage: NextPage = () => {
 
 					<div>
 						<p className="font-bold text-2xl md:text-3xl text-center">
-							<span className="text-lg text-gray-700"> $</span>
+							<span className="align-text-top text-lg text-gray-700 mr-0.5">$</span>
 							{proAttendeePricing[attendees].price}
 						</p>
 						<p className="text-gray-600 text-sm text-center">Includes {attendees} attendees</p>
