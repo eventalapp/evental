@@ -33,7 +33,7 @@ const PricingPage: NextPage = () => {
 			<Column className="flex flex-col items-center">
 				<h1 className="text-2xl md:text-3xl font-bold">Support Guides</h1>
 				<p className="text-gray-600 text-md mt-4">
-					Need help getting started as an organizer or an attendee? Check out our guides.
+					Need help getting started as an organizer, speaker or an attendee? Check out our guides.
 				</p>
 			</Column>
 
