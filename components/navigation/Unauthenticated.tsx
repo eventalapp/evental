@@ -44,6 +44,9 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 						<Link href={`/contact`}>
 							<a>Contact</a>
 						</Link>
+						<Link href={`/guides`}>
+							<a>Guides</a>
+						</Link>
 					</div>
 				</div>
 
@@ -113,6 +116,14 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 						/>
 						<FullscreenLinkItem
 							index={3}
+							link={`/guides`}
+							label={'guides'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={4}
 							link={`/`}
 							label={'Home'}
 							onClick={() => {

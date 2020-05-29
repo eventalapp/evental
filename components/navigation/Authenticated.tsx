@@ -49,6 +49,9 @@ export const Authenticated: React.FC<Props> = (props) => {
 						<Link href={`/contact`}>
 							<a>Contact</a>
 						</Link>
+						<Link href={`/guides`}>
+							<a>Guides</a>
+						</Link>
 					</div>
 				</div>
 
@@ -123,6 +126,14 @@ export const Authenticated: React.FC<Props> = (props) => {
 						/>
 						<FullscreenLinkItem
 							index={3}
+							link={`/guides`}
+							label={'Guides'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={4}
 							link={`/`}
 							label={'Home'}
 							onClick={() => {
