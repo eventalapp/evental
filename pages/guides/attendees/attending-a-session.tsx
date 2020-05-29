@@ -98,6 +98,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
 						<AspectRatio.Root ratio={1580 / 502}>
 							<Image
+								alt="Upcoming events page"
 								src={'https://cdn.evental.app/images/upcoming-events.png'}
 								className="rounded-md"
 								layout="fill"
@@ -138,6 +139,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
 						<AspectRatio.Root ratio={1602 / 753}>
 							<Image
+								alt="Find a session"
 								src={'https://cdn.evental.app/images/find-a-session.png'}
 								className="rounded-md"
 								layout="fill"
@@ -179,6 +181,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
 						<AspectRatio.Root ratio={1613 / 651}>
 							<Image
+								alt="Attend this event"
 								src={'https://cdn.evental.app/images/attend-this-event.png'}
 								className="rounded-md"
 								layout="fill"
