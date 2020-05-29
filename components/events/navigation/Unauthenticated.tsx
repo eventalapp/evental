@@ -147,6 +147,12 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
+						<div className="h-full flex-row justify-end hidden lg:flex">
+							<div className="flex flex-row items-end">
+								<LinkItem link={`/auth/signin`} label={'Sign in'} />
+							</div>
+						</div>
+
 						<NavigationMenuPrimitive.Indicator
 							className={cx(
 								'z-10',
