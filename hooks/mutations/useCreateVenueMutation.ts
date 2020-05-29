@@ -1,10 +1,11 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import router from 'next/router';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { CreateVenuePayload } from '../../utils/schemas';
-import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
+
+import { CreateVenuePayload } from '../../utils/schemas';
 
 export interface UseCreateVenueMutationData {
 	createVenueMutation: UseMutationResult<
@@ -14,7 +15,16 @@ export interface UseCreateVenueMutationData {
 	>;
 }
 
-export const useCreateVenueMutation = (eid: string): UseCreateVenueMutationData => {
+interface UseCreateSessionOptions {
+	redirect?: boolean;
+}
+
+export const useCreateVenueMutation = (
+	eid: string,
+	args: UseCreateSessionOptions = {}
+): UseCreateVenueMutationData => {
+	const { redirect = true } = args;
+
 	const queryClient = useQueryClient();
 
 	const createVenueMutation = useMutation<
@@ -31,9 +41,13 @@ export const useCreateVenueMutation = (eid: string): UseCreateVenueMutationData 
 			onSuccess: (data) => {
 				toast.success('Venue created successfully');
 
-				router.push(`/events/${eid}/admin/venues/${data.slug}`).then(() => {
+				if (redirect) {
+					router.push(`/events/${eid}/admin/venues/${data.slug}`).then(() => {
+						void queryClient.invalidateQueries(['venues', eid]);
+					});
+				} else {
 					void queryClient.invalidateQueries(['venues', eid]);
-				});
+				}
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'An error has occurred.');
