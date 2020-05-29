@@ -65,7 +65,7 @@ const GuidesPage: NextPage = () => {
 							.
 						</p>
 
-						<ul className="py-4 space-y-0.5">
+						<ul className="pt-4 space-y-0.5">
 							<li>
 								<Link href="/guides/attendee/attending-an-event">
 									<a>
@@ -139,6 +139,28 @@ const GuidesPage: NextPage = () => {
 				</div>
 
 				<h2 className="text-2xl md:text-3xl font-bold mb-3">Guides for Organizers</h2>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Sessions</span>
+						<p className="text-gray-600 text-sm">
+							Checkout the following guides for organizing sessions below, if you are still in need
+							help, reach out to us at{' '}
+							<a
+								href="mailto:support@evental.app"
+								className="underline text-gray-900"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								support@evental.app
+							</a>{' '}
+							or by fill out a{' '}
+							<Link href="/support">
+								<a className="underline text-gray-900">support ticket</a>
+							</Link>
+							.
+						</p>
+					</div>
+				</div>
 			</Column>
 
 			<Footer />
