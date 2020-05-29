@@ -166,15 +166,17 @@ const MenuBar: React.FC<{
 			</Tooltip>
 
 			{imageUpload && (
-				<Tooltip side={'top'} message={`Image`}>
-					<div>
-						<ImageUploadDialog onSubmit={addImage} editor={editor}>
-							<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
-								<FontAwesomeIcon size="lg" icon={faCamera} />
-							</button>
-						</ImageUploadDialog>
-					</div>
-				</Tooltip>
+				<div className="inline-block">
+					<ImageUploadDialog onSubmit={addImage} editor={editor}>
+						<div>
+							<Tooltip side={'top'} message={`Image`}>
+								<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
+									<FontAwesomeIcon size="lg" icon={faCamera} />
+								</button>
+							</Tooltip>
+						</div>
+					</ImageUploadDialog>
+				</div>
 			)}
 
 			<Tooltip side={'top'} message={`Unlink`}>
