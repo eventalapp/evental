@@ -32,7 +32,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 			</Trigger>
 			<Content
 				align="end"
-				className="bg-white border border-gray-200 rounded-md py-2 px-2 text-gray-900 text-left"
+				className="bg-white border border-gray-200 rounded-md py-2 px-2 text-gray-900 text-left shadow-sm"
 				sideOffset={10}
 			>
 				<Item className="outline-none">
