@@ -91,7 +91,7 @@ const GuidesPage: NextPage = () => {
 								</Link>
 							</li>
 							<li>
-								<Link href="/guides/attendee/attending-a-session">
+								<Link href="/guides/attendee/downloading-your-schedule">
 									<a>
 										<FontAwesomeIcon
 											className="cursor-pointer pr-2 text-primary-400"
@@ -115,11 +115,6 @@ const GuidesPage: NextPage = () => {
 								</Link>
 							</li>
 						</ul>
-						<div className="flex flex-col items-end">
-							<Link href="/guides/attendee">
-								<LinkButton>View All</LinkButton>
-							</Link>
-						</div>
 					</div>
 					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Speakers</span>
@@ -142,6 +137,8 @@ const GuidesPage: NextPage = () => {
 						</div>
 					</div>
 				</div>
+
+				<h2 className="text-2xl md:text-3xl font-bold mb-3">Guides for Organizers</h2>
 			</Column>
 
 			<Footer />
