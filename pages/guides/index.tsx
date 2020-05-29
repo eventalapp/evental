@@ -67,8 +67,8 @@ const GuidesPage: NextPage = () => {
 
 						<ul className="py-4 space-y-0.5">
 							<li>
-								<Link href="/guides/attendees/attending-an-event">
-									<a className="underline">
+								<Link href="/guides/attendee/attending-an-event">
+									<a>
 										<FontAwesomeIcon
 											className="cursor-pointer pr-2 text-primary-400"
 											size="1x"
@@ -79,8 +79,8 @@ const GuidesPage: NextPage = () => {
 								</Link>
 							</li>
 							<li>
-								<Link href="/guides/attendees/attending-a-session">
-									<a className="underline">
+								<Link href="/guides/attendee/attending-a-session">
+									<a>
 										<FontAwesomeIcon
 											className="cursor-pointer pr-2 text-primary-400"
 											size="1x"
@@ -91,8 +91,8 @@ const GuidesPage: NextPage = () => {
 								</Link>
 							</li>
 							<li>
-								<Link href="/guides/attendees/attending-a-session">
-									<a className="underline">
+								<Link href="/guides/attendee/attending-a-session">
+									<a>
 										<FontAwesomeIcon
 											className="cursor-pointer pr-2 text-primary-400"
 											size="1x"
@@ -103,8 +103,8 @@ const GuidesPage: NextPage = () => {
 								</Link>
 							</li>
 							<li>
-								<Link href="/guides/attendees/editing-your-profile">
-									<a className="underline">
+								<Link href="/guides/attendee/editing-your-profile">
+									<a>
 										<FontAwesomeIcon
 											className="cursor-pointer pr-2 text-primary-400"
 											size="1x"
@@ -116,7 +116,7 @@ const GuidesPage: NextPage = () => {
 							</li>
 						</ul>
 						<div className="flex flex-col items-end">
-							<Link href="/support">
+							<Link href="/guides/attendee">
 								<LinkButton>View All</LinkButton>
 							</Link>
 						</div>
