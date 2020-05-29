@@ -93,8 +93,6 @@ export const SessionList: React.FC<Props> = (props) => {
 												</span>
 												<div className="w-full">
 													{sessions.map((session) => {
-														console.log(session);
-
 														return (
 															<SessionHoverCard session={session} event={event} key={session.id}>
 																<div className="mr-2 mb-2 inline-block">
