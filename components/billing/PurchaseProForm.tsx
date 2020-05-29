@@ -6,7 +6,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { CURRENCY } from '../../config';
-import { attendeesToPrice } from '../../utils/price';
+import { proAttendeesToPrice } from '../../utils/price';
 import { formatAmountForDisplay } from '../../utils/stripeHelpers';
 import { Button } from '../form/Button';
 import Slider from '../radix/components/Slider';
@@ -91,13 +91,13 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 					</p>
 
 					<div>
-						<p className="font-bold text-xl text-center">${attendeesToPrice(attendees)}</p>
+						<p className="font-bold text-xl text-center">${proAttendeesToPrice(attendees)}</p>
 						<p className="text-gray-600 text-sm text-center">Includes {attendees} attendees</p>
 					</div>
 
 					<div className="flex flex-row justify-end">
 						<Button className="elements-style-background" type="submit">
-							Purchase ({formatAmountForDisplay(attendeesToPrice(attendees), CURRENCY)})
+							Purchase ({formatAmountForDisplay(proAttendeesToPrice(attendees), CURRENCY)})
 						</Button>
 					</div>
 
