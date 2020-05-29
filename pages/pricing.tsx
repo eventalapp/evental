@@ -158,7 +158,7 @@ const PricingPage: NextPage = () => {
 					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
 						<p className="text-sm md:text-lg text-center my-1.5 font-medium">
 							<span className="font-bold">Organizing several events?</span> We offer subscriptions
-							from $1000/year.
+							from ${isEducation ? '800' : '1000'}/year.
 						</p>
 						<Link href="/contact">
 							<LinkButton variant="default" className="my-1.5 text-primary-600 border-0">
