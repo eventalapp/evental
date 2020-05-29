@@ -23,7 +23,7 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 
 	let [isOpen, setIsOpen] = useState(false);
 
-	const { createVenueMutation } = useCreateVenueMutation(String(eid));
+	const { createVenueMutation } = useCreateVenueMutation(String(eid), { redirect: false });
 
 	const {
 		register,
