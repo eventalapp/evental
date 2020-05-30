@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { toast } from 'react-toastify';
+
 import { Footer } from '../../../components/Footer';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
@@ -97,10 +98,10 @@ const CreatingASessionGuidePage: NextPage = () => {
 					</p>
 
 					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1610 / 548}>
+						<AspectRatio.Root ratio={1603 / 798}>
 							<Image
 								alt="Upcoming events page"
-								src={'https://cdn.evental.app/images/my-schedule.png'}
+								src={'https://cdn.evental.app/images/manage-this-event.png'}
 								className="rounded-md"
 								layout="fill"
 							/>
@@ -139,10 +140,10 @@ const CreatingASessionGuidePage: NextPage = () => {
 					</p>
 
 					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1613 / 606}>
+						<AspectRatio.Root ratio={1615 / 622}>
 							<Image
 								alt="Find a session"
-								src={'https://cdn.evental.app/images/download-your-schedule.png'}
+								src={'https://cdn.evental.app/images/session-dashboard.png'}
 								className="rounded-md"
 								layout="fill"
 							/>
@@ -183,10 +184,10 @@ const CreatingASessionGuidePage: NextPage = () => {
 					</p>
 
 					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1613 / 606}>
+						<AspectRatio.Root ratio={1600 / 617}>
 							<Image
 								alt="Find a session"
-								src={'https://cdn.evental.app/images/download-your-schedule.png'}
+								src={'https://cdn.evental.app/images/create-a-session.png'}
 								className="rounded-md"
 								layout="fill"
 							/>
