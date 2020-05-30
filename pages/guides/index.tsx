@@ -1,10 +1,13 @@
-import { faFile } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
+
+import { BlankLink } from '../../components/BlankLink';
 import { Footer } from '../../components/Footer';
+import { GuideCategoryCard } from '../../components/guides/GuideCategoryCard';
+import { GuideCategoryCardWrapper } from '../../components/guides/GuideCategoryCardWrapper';
+import { UnorderedIconList } from '../../components/guides/UnorderedIconList';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
@@ -43,19 +46,14 @@ const GuidesPage: NextPage = () => {
 
 			<Column>
 				<h2 className="text-2xl md:text-3xl font-bold mb-3">Guides for Attendees & Speakers</h2>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10 md:mb-16">
-					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
+				<GuideCategoryCardWrapper className="mb-7 md:mb-14">
+					<GuideCategoryCard>
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Attendees</span>
 						<p className="text-gray-600 text-sm">
 							Checkout the following guides below, if you are still in need help, reach out to us at{' '}
-							<a
-								href="mailto:support@evental.app"
-								className="underline text-gray-900"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
+							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
 								support@evental.app
-							</a>{' '}
+							</BlankLink>{' '}
 							or by fill out a{' '}
 							<Link href="/support">
 								<a className="underline text-gray-900">support ticket</a>
@@ -63,169 +61,98 @@ const GuidesPage: NextPage = () => {
 							.
 						</p>
 
-						<ul className="pt-4 space-y-0.5">
-							<li>
-								<Link href="/guides/attendee/attending-an-event">
-									<a>
-										<FontAwesomeIcon
-											className="cursor-pointer pr-2 text-primary-400"
-											size="1x"
-											icon={faFile}
-										/>
-										Attending an event
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/guides/attendee/attending-a-session">
-									<a>
-										<FontAwesomeIcon
-											className="cursor-pointer pr-2 text-primary-400"
-											size="1x"
-											icon={faFile}
-										/>
-										Attending a session
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/guides/attendee/downloading-your-schedule">
-									<a>
-										<FontAwesomeIcon
-											className="cursor-pointer pr-2 text-primary-400"
-											size="1x"
-											icon={faFile}
-										/>
-										Viewing & Downloading your schedule
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/guides/user/creating-an-account">
-									<a>
-										<FontAwesomeIcon
-											className="cursor-pointer pr-2 text-primary-400"
-											size="1x"
-											icon={faFile}
-										/>
-										Creating & Customizing your profile
-									</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
+						<UnorderedIconList
+							items={[
+								{
+									text: 'Attending an event',
+									relativeLink: '/guides/attendee/attending-an-event'
+								},
+								{
+									text: 'Attending a session',
+									relativeLink: '/guides/attendee/attending-a-session'
+								},
+								{
+									text: 'Viewing & Downloading your schedule',
+									relativeLink: '/guides/attendee/downloading-your-schedule'
+								},
+								{
+									text: 'Creating & Customizing your profile',
+									relativeLink: '/guides/user/creating-an-account'
+								}
+							]}
+						/>
+					</GuideCategoryCard>
+					<GuideCategoryCard className="border border-gray-200 p-5 rounded-md shadow-sm">
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Speakers</span>
 						<p className="text-gray-600 text-sm">
 							Considering using Evental? Not sure if Evental will meet your needs? Reach out to our
 							team by booking a call or demo below, or email us at{' '}
-							<a
-								href="mailto:sales@evental.app"
-								className="underline text-gray-900"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
+							<BlankLink href="mailto:sales@evental.app" className="underline text-gray-900">
 								sales@evental.app
-							</a>
+							</BlankLink>
 						</p>
-					</div>
-				</div>
+					</GuideCategoryCard>
+				</GuideCategoryCardWrapper>
 
 				<h2 className="text-2xl md:text-3xl font-bold mb-3">Guides for Organizers</h2>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
+				<GuideCategoryCardWrapper>
+					<GuideCategoryCard>
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Sessions</span>
 						<p className="text-gray-600 text-sm">
 							Checkout the following guides for organizing sessions below, if you are still in need
 							help, reach out to us at{' '}
-							<a
-								href="mailto:support@evental.app"
-								className="underline text-gray-900"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
+							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
 								support@evental.app
-							</a>{' '}
+							</BlankLink>{' '}
 							or by fill out a{' '}
 							<Link href="/support">
 								<a className="underline text-gray-900">support ticket</a>
 							</Link>
 							.
 						</p>
-						<ul className="pt-4 space-y-0.5">
-							<li>
-								<Link href="/guides/session/creating-a-session">
-									<a>
-										<FontAwesomeIcon
-											className="cursor-pointer pr-2 text-primary-400"
-											size="1x"
-											icon={faFile}
-										/>
-										Creating a session
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/guides/session/creating-a-session-type">
-									<a>
-										<FontAwesomeIcon
-											className="cursor-pointer pr-2 text-primary-400"
-											size="1x"
-											icon={faFile}
-										/>
-										Creating a session type
-									</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
+
+						<UnorderedIconList
+							items={[
+								{
+									text: 'Creating a session',
+									relativeLink: '/guides/session/creating-a-session'
+								},
+								{
+									text: 'Creating a session type',
+									relativeLink: '/guides/session/creating-a-session-type'
+								}
+							]}
+						/>
+					</GuideCategoryCard>
+					<GuideCategoryCard className="border border-gray-200 p-5 rounded-md shadow-sm">
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Organizers</span>
 						<p className="text-gray-600 text-sm">
 							Checkout the following guides for inviting organizers below, if you are still in need
 							help, reach out to us at{' '}
-							<a
-								href="mailto:support@evental.app"
-								className="underline text-gray-900"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
+							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
 								support@evental.app
-							</a>{' '}
+							</BlankLink>{' '}
 							or by fill out a{' '}
 							<Link href="/support">
 								<a className="underline text-gray-900">support ticket</a>
 							</Link>
 							.
 						</p>
-						<ul className="pt-4 space-y-0.5">
-							<li>
-								<Link href="/guides/session/creating-a-session">
-									<a>
-										<FontAwesomeIcon
-											className="cursor-pointer pr-2 text-primary-400"
-											size="1x"
-											icon={faFile}
-										/>
-										Creating a session
-									</a>
-								</Link>
-							</li>
-							<li>
-								<Link href="/guides/session/creating-a-session-type">
-									<a>
-										<FontAwesomeIcon
-											className="cursor-pointer pr-2 text-primary-400"
-											size="1x"
-											icon={faFile}
-										/>
-										Creating a session type
-									</a>
-								</Link>
-							</li>
-						</ul>
-					</div>
-				</div>
+
+						<UnorderedIconList
+							items={[
+								{
+									text: 'Creating a session',
+									relativeLink: '/guides/session/creating-a-session'
+								},
+								{
+									text: 'Creating a session type',
+									relativeLink: '/guides/session/creating-a-session-type'
+								}
+							]}
+						/>
+					</GuideCategoryCard>
+				</GuideCategoryCardWrapper>
 			</Column>
 
 			<Footer />
