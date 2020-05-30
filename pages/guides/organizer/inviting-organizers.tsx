@@ -19,7 +19,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 				title="Inviting Organizers — Evental"
 				description={`Learn how to invite additional organizers to assist you in setting up your event.`}
 				openGraph={{
-					url: 'https://evental.app/guides/session/creating-a-session-type',
+					url: 'https://evental.app/guides/organizer/inviting-organizers',
 					title: 'Inviting Organizers — Evental',
 					description: `Learn how to invite additional organizers to assist you in setting up your event.`,
 					images: [
@@ -49,17 +49,17 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 					items={[
 						{
 							text: 'Navigate to the events dashboard',
-							relativeLink: '/guides/session/creating-a-session-type#navigate-to-the-dashboard'
+							relativeLink: '/guides/organizer/inviting-organizers#navigate-to-the-dashboard'
 						},
 
 						{
-							text: 'Navigate to the session types dashboard',
+							text: 'Navigate to the organizer dashboard',
 							relativeLink:
-								'/guides/session/creating-a-session-type#navigate-to-the-session-dashboard'
+								'/guides/organizer/inviting-organizers#navigate-to-the-organizer-dashboard'
 						},
 						{
-							text: 'Create a session type',
-							relativeLink: '/guides/session/creating-a-session-type#create-a-type'
+							text: 'Invite an organizer',
+							relativeLink: '/guides/organizer/inviting-organizers#invite-an-organizer'
 						}
 					]}
 				/>
@@ -69,7 +69,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						text="Navigate to the dashboard"
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session-type#navigate-to-the-dashboard`}
+						}/guides/organizer/inviting-organizers#navigate-to-the-dashboard`}
 					/>
 
 					<p className="text-gray-700 mb-4">
@@ -88,55 +88,45 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 					/>
 				</GuideSection>
 
-				<GuideSection id="navigate-to-the-session-dashboard">
+				<GuideSection id="navigate-to-the-organizer-dashboard">
 					<GuideSectionHeader
-						text="Navigate to the session types dashboard"
+						text="Navigate to the organizer dashboard"
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session-type#navigate-to-the-session-dashboard`}
+						}/guides/organizer/inviting-organizers#navigate-to-the-organizer-dashboard`}
 					/>
 
 					<p className="text-gray-700 mb-4">
 						After visiting the events dashboard, click the{' '}
-						<span className="font-medium">"Types"</span> page.
+						<span className="font-medium">"Organizers"</span> page.
 					</p>
 
 					<AspectImage
-						ratio={1597 / 475}
-						imageUrl={'https://cdn.evental.app/images/types-dashboard.png'}
-						alt={'Manage this event'}
+						ratio={1606 / 408}
+						imageUrl={'https://cdn.evental.app/images/organizer-dashboard.png'}
+						alt={'Organizer dashboard'}
 					/>
 				</GuideSection>
 
-				<GuideSection id="create-a-type">
+				<GuideSection id="invite-an-organizer">
 					<GuideSectionHeader
-						text="Create a session type"
+						text="Invite an organizer"
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session-type#create-a-type`}
+						}/guides/organizer/inviting-organizers#invite-an-organizer`}
 					/>
 
 					<p className="text-gray-700 mb-4">
-						After visiting the session type dashboard page, click the{' '}
-						<span className="font-medium">"Create Type"</span> button. This will navigate you to the
-						create session type page, where you can create a type/category to group sessions.
+						After visiting the organizer dashboard page, click the{' '}
+						<span className="font-medium">"Invite Organizer"</span> button. This will navigate you
+						to the organizer invite page, where you can fill out the form and invite an organizer to
+						your event.
 					</p>
 
 					<AspectImage
-						ratio={1602 / 493}
-						imageUrl={'https://cdn.evental.app/images/create-a-type.png'}
-						alt={'Create a type'}
-					/>
-
-					<p className="text-gray-700 my-4">
-						Now that you are on the create a type form, fill out the form and click the{' '}
-						<span className="font-medium">"Create Type"</span> button.
-					</p>
-
-					<AspectImage
-						ratio={1607 / 468}
-						imageUrl={'https://cdn.evental.app/images/create-type-form.png'}
-						alt={'Create a type form'}
+						ratio={1604 / 473}
+						imageUrl={'https://cdn.evental.app/images/invite-organizer-form.png'}
+						alt={'Invite organizer form'}
 					/>
 				</GuideSection>
 
