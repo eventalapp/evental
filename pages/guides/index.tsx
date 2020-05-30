@@ -4,9 +4,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
-
 import { Footer } from '../../components/Footer';
-import { LinkButton } from '../../components/form/LinkButton';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
@@ -118,23 +116,18 @@ const GuidesPage: NextPage = () => {
 					</div>
 					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Speakers</span>
-						<p className="text-gray-600 text-center">
+						<p className="text-gray-600 text-sm">
 							Considering using Evental? Not sure if Evental will meet your needs? Reach out to our
 							team by booking a call or demo below, or email us at{' '}
 							<a
 								href="mailto:sales@evental.app"
-								className="underline"
+								className="underline text-gray-900"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
 								sales@evental.app
 							</a>
 						</p>
-						<div className="flex flex-col items-end mt-6">
-							<Link href="/demo">
-								<LinkButton>View All</LinkButton>
-							</Link>
-						</div>
 					</div>
 				</div>
 
@@ -159,6 +152,78 @@ const GuidesPage: NextPage = () => {
 							</Link>
 							.
 						</p>
+						<ul className="pt-4 space-y-0.5">
+							<li>
+								<Link href="/guides/session/creating-a-session">
+									<a>
+										<FontAwesomeIcon
+											className="cursor-pointer pr-2 text-primary-400"
+											size="1x"
+											icon={faFile}
+										/>
+										Creating a session
+									</a>
+								</Link>
+							</li>
+							<li>
+								<Link href="/guides/session/creating-a-session-type">
+									<a>
+										<FontAwesomeIcon
+											className="cursor-pointer pr-2 text-primary-400"
+											size="1x"
+											icon={faFile}
+										/>
+										Creating a session type
+									</a>
+								</Link>
+							</li>
+						</ul>
+					</div>
+					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Organizers</span>
+						<p className="text-gray-600 text-sm">
+							Checkout the following guides for inviting organizers below, if you are still in need
+							help, reach out to us at{' '}
+							<a
+								href="mailto:support@evental.app"
+								className="underline text-gray-900"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								support@evental.app
+							</a>{' '}
+							or by fill out a{' '}
+							<Link href="/support">
+								<a className="underline text-gray-900">support ticket</a>
+							</Link>
+							.
+						</p>
+						<ul className="pt-4 space-y-0.5">
+							<li>
+								<Link href="/guides/session/creating-a-session">
+									<a>
+										<FontAwesomeIcon
+											className="cursor-pointer pr-2 text-primary-400"
+											size="1x"
+											icon={faFile}
+										/>
+										Creating a session
+									</a>
+								</Link>
+							</li>
+							<li>
+								<Link href="/guides/session/creating-a-session-type">
+									<a>
+										<FontAwesomeIcon
+											className="cursor-pointer pr-2 text-primary-400"
+											size="1x"
+											icon={faFile}
+										/>
+										Creating a session type
+									</a>
+								</Link>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</Column>
