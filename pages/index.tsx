@@ -106,7 +106,7 @@ const HomePage: NextPage = () => {
 				<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6">
 					<Link href="/education">
 						<a>
-							<div className="border border-gray-200 shadow-sm p-4 rounded-md">
+							<div className="border border-gray-200 shadow-sm p-4 rounded-md hover:bg-gray-50 transition-all duration-100">
 								<h4 className="font-bold text-xl text-center">
 									<FontAwesomeIcon
 										fill="currentColor"
@@ -125,7 +125,7 @@ const HomePage: NextPage = () => {
 
 					<Link href="/convention">
 						<a>
-							<div className="border border-gray-200 shadow-sm p-4 rounded-md">
+							<div className="border border-gray-200 shadow-sm p-4 rounded-md hover:bg-gray-50 transition-all duration-100">
 								<h4 className="font-bold text-xl text-center">
 									<FontAwesomeIcon
 										fill="currentColor"
@@ -144,7 +144,7 @@ const HomePage: NextPage = () => {
 
 					<Link href="/festival">
 						<a>
-							<div className="border border-gray-200 shadow-sm p-4 rounded-md">
+							<div className="border border-gray-200 shadow-sm p-4 rounded-md hover:bg-gray-50 transition-all duration-100">
 								<h4 className="font-bold text-xl text-center">
 									<FontAwesomeIcon
 										fill="currentColor"
@@ -163,7 +163,7 @@ const HomePage: NextPage = () => {
 
 					<Link href="/conference">
 						<a>
-							<div className="border border-gray-200 shadow-sm p-4 rounded-md">
+							<div className="border border-gray-200 shadow-sm p-4 rounded-md hover:bg-gray-50 transition-all duration-100">
 								<h4 className="font-bold text-xl text-center">
 									<FontAwesomeIcon
 										fill="currentColor"
@@ -182,7 +182,7 @@ const HomePage: NextPage = () => {
 
 					<Link href="/virtual">
 						<a>
-							<div className="border border-gray-200 shadow-sm p-4 rounded-md">
+							<div className="border border-gray-200 shadow-sm p-4 rounded-md hover:bg-gray-50 transition-all duration-100">
 								<h4 className="font-bold text-xl text-center">
 									<FontAwesomeIcon
 										fill="currentColor"
@@ -201,7 +201,7 @@ const HomePage: NextPage = () => {
 
 					<Link href="/hybrid">
 						<a>
-							<div className="border border-gray-200 shadow-sm p-4 rounded-md">
+							<div className="border border-gray-200 shadow-sm p-4 rounded-md hover:bg-gray-50 transition-all duration-100">
 								<h4 className="font-bold text-xl text-center">
 									<FontAwesomeIcon
 										fill="currentColor"
