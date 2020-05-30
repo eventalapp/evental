@@ -1,10 +1,11 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import router from 'next/router';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { CreateSessionTypePayload } from '../../utils/schemas';
-import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
+
+import { CreateSessionTypePayload } from '../../utils/schemas';
 
 export interface UseCreateSessionTypeMutationData {
 	createSessionTypeMutation: UseMutationResult<
@@ -14,7 +15,16 @@ export interface UseCreateSessionTypeMutationData {
 	>;
 }
 
-export const useCreateSessionTypeMutation = (eid: string): UseCreateSessionTypeMutationData => {
+interface UseCreateSessionTypeOptions {
+	redirect?: boolean;
+}
+
+export const useCreateSessionTypeMutation = (
+	eid: string,
+	args: UseCreateSessionTypeOptions = {}
+): UseCreateSessionTypeMutationData => {
+	const { redirect = true } = args;
+
 	const queryClient = useQueryClient();
 
 	const createSessionTypeMutation = useMutation<
@@ -34,9 +44,13 @@ export const useCreateSessionTypeMutation = (eid: string): UseCreateSessionTypeM
 			onSuccess: () => {
 				toast.success('Session type created successfully');
 
-				router.push(`/events/${eid}/admin/sessions/types`).then(() => {
-					void queryClient.invalidateQueries('types');
-				});
+				if (redirect) {
+					router.push(`/events/${eid}/admin/sessions/types`).then(() => {
+						void queryClient.invalidateQueries(['types', eid]);
+					});
+				} else {
+					void queryClient.invalidateQueries(['types', eid]);
+				}
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'An error has occurred.');
