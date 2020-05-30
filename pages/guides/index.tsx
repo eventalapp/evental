@@ -7,7 +7,7 @@ import { BlankLink } from '../../components/BlankLink';
 import { Footer } from '../../components/Footer';
 import { GuideCategoryCard } from '../../components/guides/GuideCategoryCard';
 import { GuideCategoryCardWrapper } from '../../components/guides/GuideCategoryCardWrapper';
-import { UnorderedIconList } from '../../components/guides/UnorderedIconList';
+import { UnorderedIconLinkList } from '../../components/guides/UnorderedIconLinkList';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
@@ -61,7 +61,7 @@ const GuidesPage: NextPage = () => {
 							.
 						</p>
 
-						<UnorderedIconList
+						<UnorderedIconLinkList
 							items={[
 								{
 									text: 'Attending an event',
@@ -111,7 +111,7 @@ const GuidesPage: NextPage = () => {
 							.
 						</p>
 
-						<UnorderedIconList
+						<UnorderedIconLinkList
 							items={[
 								{
 									text: 'Creating a session',
@@ -139,7 +139,7 @@ const GuidesPage: NextPage = () => {
 							.
 						</p>
 
-						<UnorderedIconList
+						<UnorderedIconLinkList
 							items={[
 								{
 									text: 'Creating a session',
