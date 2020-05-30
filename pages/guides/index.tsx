@@ -54,7 +54,7 @@ const GuidesPage: NextPage = () => {
 							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
 								support@evental.app
 							</BlankLink>{' '}
-							or by fill out a{' '}
+							or fill out a{' '}
 							<Link href="/support">
 								<a className="underline text-gray-900">support ticket</a>
 							</Link>
@@ -104,7 +104,7 @@ const GuidesPage: NextPage = () => {
 							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
 								support@evental.app
 							</BlankLink>{' '}
-							or by fill out a{' '}
+							or fill out a{' '}
 							<Link href="/support">
 								<a className="underline text-gray-900">support ticket</a>
 							</Link>
@@ -132,7 +132,7 @@ const GuidesPage: NextPage = () => {
 							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
 								support@evental.app
 							</BlankLink>{' '}
-							or by fill out a{' '}
+							or fill out a{' '}
 							<Link href="/support">
 								<a className="underline text-gray-900">support ticket</a>
 							</Link>
