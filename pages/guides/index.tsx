@@ -142,12 +142,8 @@ const GuidesPage: NextPage = () => {
 						<UnorderedIconLinkList
 							items={[
 								{
-									text: 'Creating a session',
-									relativeLink: '/guides/session/creating-a-session'
-								},
-								{
-									text: 'Creating a session type',
-									relativeLink: '/guides/session/creating-a-session-type'
+									text: 'Inviting organizers',
+									relativeLink: '/guides/organizer/inviting-organizers'
 								}
 							]}
 						/>
