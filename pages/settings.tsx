@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 
+import { Footer } from '../components/Footer';
 import { LoadingInner } from '../components/error/LoadingInner';
 import { LoadingPage } from '../components/error/LoadingPage';
 import { NotFoundPage } from '../components/error/NotFoundPage';
@@ -74,6 +75,7 @@ const SettingsPage: NextPage<Props> = (props) => {
 					isUserLoading={isUserLoading}
 				/>
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };
