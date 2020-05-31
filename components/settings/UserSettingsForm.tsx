@@ -98,7 +98,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="position">
 							Position
-							<HelpTooltip message={copy.userPositionTooltip} />
+							<HelpTooltip message={copy.tooltip.userPosition} />
 						</Label>
 						<Input placeholder="Position" {...register('position')} />
 						{errors.position?.message && <ErrorMessage>{errors.position?.message}</ErrorMessage>}
@@ -107,7 +107,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="company">
 							Company
-							<HelpTooltip message={copy.userCompanyTooltip} />
+							<HelpTooltip message={copy.tooltip.userCompany} />
 						</Label>
 						<Input placeholder="Company" {...register('company')} />
 						{errors.company?.message && <ErrorMessage>{errors.company?.message}</ErrorMessage>}
@@ -138,7 +138,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 				<div>
 					<div>
 						<Label htmlFor="slug">
-							Username *<HelpTooltip message={copy.userSlugTooltip} />
+							Username *<HelpTooltip message={copy.tooltip.userSlug} />
 						</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-md">evental.app/users/</span>
@@ -153,7 +153,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 				<div>
 					<Label htmlFor="website">
 						Website
-						<HelpTooltip message={copy.userWebsiteTooltip} />
+						<HelpTooltip message={copy.tooltip.userWebsite} />
 					</Label>
 					<Input placeholder="Website" {...register('website')} />
 					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}

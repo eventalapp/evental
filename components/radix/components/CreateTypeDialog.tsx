@@ -98,7 +98,7 @@ const CreateTypeDialog: React.FC<Props> = (props) => {
 
 							<div className="flex-initial w-full md:w-auto my-5 md:mt-0">
 								<Label htmlFor="color">
-									Color *<HelpTooltip message={copy.typeColorTooltip} />
+									Color *<HelpTooltip message={copy.tooltip.typeColor} />
 								</Label>
 								<Controller
 									control={control}

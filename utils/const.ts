@@ -1,33 +1,35 @@
 import { eduAttendeesToPrice, proAttendeesToPrice } from './price';
 
 export const copy = {
-	typeTooltip: 'A session type is used to categorize sessions.',
-	venueTooltip: 'A venue is used to group sessions by location.',
-	maxAttendeesTooltip:
-		'You can specify the max attendees to limit how many people can attend a session. Leave the input blank if you do not want a attendee limit.',
-	topLevelTooltip: 'A top level page is displayed on the main navigation for the event.',
-	attachPeopleTooltip:
-		'You can attach people to a session, they will be listed under their role. If a user has the Speaker role, they will show as a Speaker for this session.',
-	typeColorTooltip: 'A color is used to identify a session type.',
-	eventTypeTooltip: 'You can specify whether your event is In-Person, Hybrid, or Virtual.',
-	eventPrivacyTooltip:
-		'If your event is Public, it will be displayed on the public events page. If your event is Unlisted, only users with the link to the event will be able to view it. And if it is Private, only organizers can view your event.',
-	eventTimeZoneTooltip:
-		'You can specify the timezone for your event, all times will be displayed in the users timezone regardless.',
-	eventSlugTooltip:
-		'You can set the slug for your event, which will dictate the link/url for your event.',
-	eventWebsiteTooltip:
-		'You can set the external website for your event, this will be displayed to all viewers of your event.',
-	eventCategoryTooltip:
-		'You can define the category for your event, which will help identify which kind of event you are hosting.',
-	userPositionTooltip:
-		'You can specify your position here, this could be your job title, or your role in the event.',
-	userCompanyTooltip:
-		'You can specify your company here, this could be your company name, or your organization.',
-	userSlugTooltip:
-		'You can set the username for your account, which will dictate the link/url for your profile.',
-	userWebsiteTooltip:
-		'You can set the external website for your profile, this will be displayed to all viewers of your profile.'
+	tooltip: {
+		type: 'A session type is used to categorize sessions.',
+		venue: 'A venue is used to group sessions by location.',
+		maxAttendees:
+			'You can specify the max attendees to limit how many people can attend a session. Leave the input blank if you do not want a attendee limit.',
+		topLevel: 'A top level page is displayed on the main navigation for the event.',
+		attachPeople:
+			'You can attach people to a session, they will be listed under their role. If a user has the Speaker role, they will show as a Speaker for this session.',
+		typeColor: 'A color is used to identify a session type.',
+		eventType: 'You can specify whether your event is In-Person, Hybrid, or Virtual.',
+		eventPrivacy:
+			'If your event is Public, it will be displayed on the public events page. If your event is Unlisted, only users with the link to the event will be able to view it. And if it is Private, only organizers can view your event.',
+		eventTimeZone:
+			'You can specify the timezone for your event, all times will be displayed in the users timezone regardless.',
+		eventSlug:
+			'You can set the slug for your event, which will dictate the link/url for your event.',
+		eventWebsite:
+			'You can set the external website for your event, this will be displayed to all viewers of your event.',
+		eventCategory:
+			'You can define the category for your event, which will help identify which kind of event you are hosting.',
+		userPosition:
+			'You can specify your position here, this could be your job title, or your role in the event.',
+		userCompany:
+			'You can specify your company here, this could be your company name, or your organization.',
+		userSlug:
+			'You can set the username for your account, which will dictate the link/url for your profile.',
+		userWebsite:
+			'You can set the external website for your profile, this will be displayed to all viewers of your profile.'
+	}
 };
 
 export const colors = [
