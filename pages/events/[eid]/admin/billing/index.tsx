@@ -62,6 +62,7 @@ const EventBillingPage: NextPage = () => {
 					<PurchaseProPlan eid={String(eid)} />
 				</Column>
 			</PageWrapper>
+
 			<Footer />
 		</Elements>
 	);

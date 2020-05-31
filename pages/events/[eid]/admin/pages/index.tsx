@@ -81,6 +81,7 @@ const PagesAdminPage: NextPage = () => {
 					/>
 				</div>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

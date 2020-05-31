@@ -85,6 +85,7 @@ const AttendeesAdminPage: NextPage = () => {
 					<AttendeeList admin eid={String(eid)} attendees={attendeesData} />
 				</div>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

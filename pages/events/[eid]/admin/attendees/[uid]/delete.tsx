@@ -82,6 +82,7 @@ const DeleteAttendeePage: NextPage = () => {
 					deleteAttendeeMutation={deleteAttendeeMutation}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

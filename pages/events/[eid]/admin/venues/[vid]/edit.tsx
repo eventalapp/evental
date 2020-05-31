@@ -73,6 +73,7 @@ const EditVenuePage: NextPage = () => {
 					isVenueLoading={isVenueLoading}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

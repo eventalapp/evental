@@ -56,6 +56,7 @@ const MessagePage: NextPage = () => {
 			<Column>
 				<h3 className="text-xl md:text-2xl font-medium">Messages</h3>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

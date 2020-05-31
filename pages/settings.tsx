@@ -75,6 +75,7 @@ const SettingsPage: NextPage<Props> = (props) => {
 					isUserLoading={isUserLoading}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

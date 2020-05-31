@@ -95,6 +95,7 @@ const EditAttendeePage: NextPage = () => {
 					rolesError={rolesError}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

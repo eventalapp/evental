@@ -81,6 +81,7 @@ const EditSessionPage: NextPage = () => {
 					editSessionTypeMutation={editSessionTypeMutation}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

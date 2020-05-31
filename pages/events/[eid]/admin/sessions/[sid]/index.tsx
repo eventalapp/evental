@@ -77,6 +77,7 @@ const ViewSessionPage: NextPage = () => {
 					event={event}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

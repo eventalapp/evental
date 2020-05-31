@@ -75,6 +75,7 @@ const SessionTypesAdminPage: NextPage = () => {
 					{sessionTypes && <SessionTypeList eid={String(eid)} sessionTypes={sessionTypes} admin />}
 				</div>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

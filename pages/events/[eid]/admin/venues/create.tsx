@@ -56,6 +56,7 @@ const CreateSessionPage: NextPage = () => {
 
 				<CreateVenueForm createVenueMutation={createVenueMutation} eid={String(eid)} />
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

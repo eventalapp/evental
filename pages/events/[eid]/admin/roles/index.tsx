@@ -73,6 +73,7 @@ const RolesAdminPage: NextPage = () => {
 					/>
 				</div>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

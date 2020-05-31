@@ -103,6 +103,7 @@ const EditSessionPage: NextPage = () => {
 					isEventLoading={isEventLoading}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

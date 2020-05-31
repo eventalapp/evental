@@ -6,6 +6,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../components/Footer';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
@@ -135,6 +136,8 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 
 				<SessionList sessions={sessionsByDateData} eid={String(eid)} event={event} />
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

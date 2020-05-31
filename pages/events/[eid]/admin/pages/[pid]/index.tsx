@@ -58,6 +58,7 @@ const ViewPagePage: NextPage = () => {
 			<Column>
 				<ViewPage admin page={page} eid={String(eid)} pid={String(pid)} />
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

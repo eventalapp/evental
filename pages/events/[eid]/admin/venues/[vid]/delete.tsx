@@ -76,6 +76,7 @@ const DeleteVenuePage: NextPage = () => {
 					isVenueLoading={isVenueLoading}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

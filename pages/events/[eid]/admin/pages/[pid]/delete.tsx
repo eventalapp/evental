@@ -76,6 +76,7 @@ const DeletePagePage: NextPage = () => {
 					deletePageMutation={deletePageMutation}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);
