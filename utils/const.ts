@@ -1,5 +1,15 @@
 import { eduAttendeesToPrice, proAttendeesToPrice } from './price';
 
+export const copy = {
+	typeTooltip: 'A session type is used to categorize sessions.',
+	venueTooltip: 'A venue is used to group sessions by location.',
+	maxAttendeesTooltip:
+		'You can specify the max attendees to limit how many people can attend a session. Leave the input blank if you do not want a attendee limit.',
+	topLevelTooltip: 'A top level page is displayed on the main navigation for the event.',
+	attachPeopleTooltip:
+		'You can attach people to a session, they will be listed under their role. If a user has the Speaker role, they will show as a Speaker for this session.'
+};
+
 export const colors = [
 	'#ff3b91',
 	'#d74bff',
