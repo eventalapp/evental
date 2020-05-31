@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { roundToNearestMinutes } from 'date-fns';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -11,8 +10,9 @@ import { UseCreateSessionMutationData } from '../../hooks/mutations/useCreateSes
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { FIFTEEN_MINUTES } from '../../utils/const';
+import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
+import { HelpTooltip } from '../HelpTooltip';
 import { TimeZoneNotice } from '../TimeZoneNotice';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
@@ -21,6 +21,8 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
+import CreateTypeDialog from '../radix/components/CreateTypeDialog';
+import CreateVenueDialog from '../radix/components/CreateVenueDialog';
 import Select from '../radix/components/Select';
 
 type Props = {
@@ -98,7 +100,10 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					</div>
 
 					<div>
-						<Label htmlFor="venueId">Venue</Label>
+						<Label htmlFor="venueId">
+							Venue
+							<HelpTooltip message={copy.venueTooltip} />
+						</Label>
 
 						<Controller
 							control={control}
@@ -119,9 +124,11 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 								/>
 							)}
 						/>
-						<Link href={`/events/${eid}/admin/venues/create`}>
-							<a className="text-gray-600 text-sm mt-1">Dont see your venue? Create a Venue</a>
-						</Link>
+						<CreateVenueDialog eid={String(eid)}>
+							<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+								Dont see your venue? Create a Venue
+							</span>
+						</CreateVenueDialog>
 
 						{errors.venueId?.message && <ErrorMessage>{errors.venueId?.message}</ErrorMessage>}
 					</div>
@@ -129,7 +136,10 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="venueId">Type</Label>
+						<Label htmlFor="typeId">
+							Type
+							<HelpTooltip message={copy.typeTooltip} />
+						</Label>
 
 						<Controller
 							control={control}
@@ -150,15 +160,20 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 								/>
 							)}
 						/>
-						<Link href={`/events/${eid}/admin/sessions/types/create`}>
-							<a className="text-gray-600 text-sm mt-1">Dont see your type? Create a Type</a>
-						</Link>
+						<CreateTypeDialog eid={String(eid)}>
+							<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+								Dont see your type? Create a Type
+							</span>
+						</CreateTypeDialog>
 
 						{errors.typeId?.message && <ErrorMessage>{errors.typeId?.message}</ErrorMessage>}
 					</div>
 
 					<div>
-						<Label htmlFor="name">Max Attendees *</Label>
+						<Label htmlFor="name">
+							Max Attendees *
+							<HelpTooltip message={copy.maxAttendeesTooltip} />
+						</Label>
 						<Input
 							placeholder="No Limit"
 							type="number"

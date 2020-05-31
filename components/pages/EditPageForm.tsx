@@ -5,7 +5,9 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { UseEditPageMutationData } from '../../hooks/mutations/useEditPageMutation';
 import { UsePageQueryData } from '../../hooks/queries/usePageQuery';
+import { copy } from '../../utils/const';
 import { EditPagePayload, EditPageSchema } from '../../utils/schemas';
+import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { StyledEditor } from '../form/Editor';
@@ -55,7 +57,10 @@ export const EditPageForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="flex-initial ml-5">
-					<Label htmlFor="topLevel">Top Level Page</Label>
+					<Label htmlFor="topLevel">
+						Top Level Page
+						<HelpTooltip message={copy.topLevelTooltip} />
+					</Label>
 					<Controller
 						control={control}
 						name="topLevel"
