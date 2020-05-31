@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../../components/Footer';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
@@ -123,6 +124,7 @@ const ViewVenuePage: NextPage = () => {
 
 				<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} admin />
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };

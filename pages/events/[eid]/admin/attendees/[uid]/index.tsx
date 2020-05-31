@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../../components/Footer';
 import { ViewAttendee } from '../../../../../../components/attendees/ViewAttendee';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
@@ -57,6 +58,7 @@ const ViewAttendeePage: NextPage = () => {
 			<Column>
 				<ViewAttendee admin attendee={attendee} eid={String(eid)} uid={String(uid)} />
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };

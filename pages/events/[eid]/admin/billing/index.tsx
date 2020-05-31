@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../components/Footer';
 import { PurchaseProPlan } from '../../../../../components/billing/PurchaseProForm';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
@@ -61,6 +62,7 @@ const EventBillingPage: NextPage = () => {
 					<PurchaseProPlan eid={String(eid)} />
 				</Column>
 			</PageWrapper>
+			<Footer />
 		</Elements>
 	);
 };
