@@ -5,8 +5,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { UseEditUserMutationData } from '../../hooks/mutations/useEditUserMutation';
 import { UseUserData } from '../../hooks/queries/useUser';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
+import { copy } from '../../utils/const';
 import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
+import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { Button } from '../form/Button';
@@ -94,13 +96,19 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 			<div className="flex flex-col w-full">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="position">Position</Label>
+						<Label htmlFor="position">
+							Position
+							<HelpTooltip message={copy.userPositionTooltip} />
+						</Label>
 						<Input placeholder="Position" {...register('position')} />
 						{errors.position?.message && <ErrorMessage>{errors.position?.message}</ErrorMessage>}
 					</div>
 
 					<div>
-						<Label htmlFor="company">Company</Label>
+						<Label htmlFor="company">
+							Company
+							<HelpTooltip message={copy.userCompanyTooltip} />
+						</Label>
 						<Input placeholder="Company" {...register('company')} />
 						{errors.company?.message && <ErrorMessage>{errors.company?.message}</ErrorMessage>}
 					</div>
@@ -129,7 +137,9 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
 					<div>
-						<Label htmlFor="slug">Username *</Label>
+						<Label htmlFor="slug">
+							Username *<HelpTooltip message={copy.userSlugTooltip} />
+						</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-md">evental.app/users/</span>
 							<Input placeholder="user-slug" {...register('slug')} />
@@ -141,7 +151,10 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					</div>
 				</div>
 				<div>
-					<Label htmlFor="website">Website</Label>
+					<Label htmlFor="website">
+						Website
+						<HelpTooltip message={copy.userWebsiteTooltip} />
+					</Label>
 					<Input placeholder="Website" {...register('website')} />
 					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 				</div>
