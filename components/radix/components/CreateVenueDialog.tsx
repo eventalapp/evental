@@ -131,8 +131,8 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 								)}
 								disabled={createVenueMutation.isLoading}
 								onClick={handleSubmit((data) => {
-									createVenueMutation.mutate(data);
 									setIsOpen(false);
+									createVenueMutation.mutate(data);
 									reset();
 								})}
 							>
