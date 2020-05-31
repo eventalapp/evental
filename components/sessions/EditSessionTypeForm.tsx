@@ -6,8 +6,9 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { UseEditSessionTypeMutationData } from '../../hooks/mutations/useEditSessionTypeMutation';
 import { UseSessionTypeQueryData } from '../../hooks/queries/useSessionTypeQuery';
-import { colors } from '../../utils/const';
+import { colors, copy } from '../../utils/const';
 import { EditSessionTypePayload, EditSessionTypeSchema } from '../../utils/schemas';
+import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -51,7 +52,9 @@ export const EditSessionTypeForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="flex-initial w-full md:w-auto my-5 md:mt-0">
-					<Label htmlFor="color">Color *</Label>
+					<Label htmlFor="color">
+						Color *<HelpTooltip message={copy.typeColorTooltip} />
+					</Label>
 					<Controller
 						control={control}
 						name="color"

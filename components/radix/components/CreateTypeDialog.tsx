@@ -8,8 +8,9 @@ import { CirclePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useCreateSessionTypeMutation } from '../../../hooks/mutations/useCreateSessionTypeMutation';
-import { colors } from '../../../utils/const';
+import { colors, copy } from '../../../utils/const';
 import { CreateSessionTypePayload, CreateSessionTypeSchema } from '../../../utils/schemas';
+import { HelpTooltip } from '../../HelpTooltip';
 import { LoadingInner } from '../../error/LoadingInner';
 import { Button } from '../../form/Button';
 import { ErrorMessage } from '../../form/ErrorMessage';
@@ -96,7 +97,9 @@ const CreateTypeDialog: React.FC<Props> = (props) => {
 							</div>
 
 							<div className="flex-initial w-full md:w-auto my-5 md:mt-0">
-								<Label htmlFor="color">Color *</Label>
+								<Label htmlFor="color">
+									Color *<HelpTooltip message={copy.typeColorTooltip} />
+								</Label>
 								<Controller
 									control={control}
 									name="color"
