@@ -133,7 +133,9 @@ export const SessionList: React.FC<Props> = (props) => {
 				</div>
 			)}
 
-			{showPastEvents && <HorizontalTextRule text="Upcoming Sessions" />}
+			{showPastEvents && upcomingSessions.length >= 1 && (
+				<HorizontalTextRule text="Upcoming Sessions" />
+			)}
 
 			{Object.entries(upcomingSessions.reduce(sessionListReducer, {})).map(([date, hourObject]) => {
 				return (
