@@ -12,14 +12,13 @@ import { NavigationWrapper } from './NavigationWrapper';
 import { ProfileDropdown } from './dropdown';
 
 type Props = {
-	className?: string;
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	user: PasswordlessUser | undefined;
 } & UseSignOutMutationData;
 
 export const Authenticated: React.FC<Props> = (props) => {
-	const { signOutMutation, className, isOpen, setIsOpen, user } = props;
+	const { signOutMutation, isOpen, setIsOpen, user } = props;
 
 	return (
 		<div>

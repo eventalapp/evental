@@ -13,7 +13,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 export default api({
-	async POST({ ctx, req }) {
+	async POST({ req }) {
 		const body = PurchaseProSchema.parse(req.body);
 		const product = proAttendeePricing[body.attendees];
 

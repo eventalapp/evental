@@ -8,8 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 export default api({
-	async POST({ ctx, req }) {
-		const user = await ctx.getUser();
+	async POST({ req }) {
 		const { id } = req.query;
 
 		if (!String(id).startsWith('cs_')) {

@@ -5,7 +5,7 @@ import { sendVerifyEmail } from '../../../../email/sendVerifyEmail';
 import { api } from '../../../../utils/api';
 
 export default api({
-	async POST({ ctx, req }) {
+	async POST({ ctx }) {
 		const user = await ctx.getUser();
 
 		if (!user) {

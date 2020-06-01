@@ -7,7 +7,7 @@ import { api } from '../../../../utils/api';
 import { VerifyEmailSchema } from '../../../../utils/schemas';
 
 export default api({
-	async POST({ ctx, req, res }) {
+	async POST({ ctx, req }) {
 		const body = VerifyEmailSchema.parse(req.body);
 
 		const userId = await ctx.redis.get<string>(`verify:${body.code}`);

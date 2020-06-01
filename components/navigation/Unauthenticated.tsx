@@ -8,13 +8,12 @@ import { FullscreenLinkItem } from '../events/navigation/Unauthenticated';
 import { NavigationWrapper } from './NavigationWrapper';
 
 interface UnauthenticatedProps {
-	className?: string;
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
-	const { className, isOpen, setIsOpen } = props;
+	const { isOpen, setIsOpen } = props;
 
 	return (
 		<div>
