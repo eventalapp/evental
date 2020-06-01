@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
+import { SocialShare } from '../../../components/SocialShare';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
@@ -16,7 +17,6 @@ import { EventHeader } from '../../../components/events/EventHeader';
 import { EventNavigation } from '../../../components/events/navigation';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
-import { SocialShareDropdown } from '../../../components/radix/components/SocialShareDropdown';
 import { SessionList } from '../../../components/sessions/SessionList';
 import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
@@ -174,8 +174,8 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						<SessionList sessions={sessionsData} eid={String(eid)} event={event} />
 					</div>
 					<div className="md:col-span-3 col-span-12">
-						<div className="mb-3">
-							<SocialShareDropdown event={event} align={'end'} />
+						<div className="mb-4">
+							<SocialShare event={event} />
 						</div>
 
 						{venues && venues.length > 0 && (
