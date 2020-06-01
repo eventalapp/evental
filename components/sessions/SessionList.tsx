@@ -36,20 +36,22 @@ export const SessionList: React.FC<Props> = (props) => {
 
 	return (
 		<div className="relative">
-			<button
-				className="text-gray-500 cursor-pointer absolute top-0 right-0 z-20"
-				onClick={() => {
-					setShowPastEvents(!showPastEvents);
-				}}
-			>
-				{showPastEvents ? 'Hide' : 'Show'} past sessions{' '}
-				<FontAwesomeIcon
-					fill="currentColor"
-					className="ml-0.5 w-3.5 h-3.5"
-					style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
-					icon={faChevronUp}
-				/>
-			</button>
+			{previousSessions && previousSessions.length >= 1 && (
+				<button
+					className="text-gray-500 cursor-pointer absolute top-0 right-0 z-20"
+					onClick={() => {
+						setShowPastEvents(!showPastEvents);
+					}}
+				>
+					{showPastEvents ? 'Hide' : 'Show'} past sessions{' '}
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="ml-0.5 w-3.5 h-3.5"
+						style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
+						icon={faChevronUp}
+					/>
+				</button>
+			)}
 
 			{previousSessions && previousSessions.length >= 1 && (
 				<div
