@@ -30,16 +30,11 @@ export const SocialShareIcon: React.FC<{
 			<a target="_blank" rel="noopener noreferrer" href={href}>
 				<div
 					className={classNames(
-						`w-10 h-10 flex items-center justify-center rounded-md cursor-pointer`,
+						`w-8 h-8 flex items-center justify-center rounded-md cursor-pointer`,
 						className
 					)}
 				>
-					<FontAwesomeIcon
-						fill="currentColor"
-						className="h-5 w-5 text-white"
-						size="1x"
-						icon={icon}
-					/>
+					<FontAwesomeIcon fill="currentColor" className="h-5 w-5 " size="1x" icon={icon} />
 				</div>
 			</a>
 		</Tooltip>
@@ -62,7 +57,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 						related: ['eventalapp', 'eventalapp.com']
 					}
 				)}
-				className="bg-[#1DA1F2]"
+				className="text-[#1DA1F2]"
 				tooltipMessage="Click to share this event to Twitter."
 			/>
 
@@ -75,7 +70,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 						hashtag: 'evental'
 					}
 				)}
-				className="bg-[#4267B2]"
+				className="text-[#4267B2]"
 				tooltipMessage="Click to share this event to Facebook."
 			/>
 
@@ -89,7 +84,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 						summary: `Checkout ${event.name} on Evental!`
 					}
 				)}
-				className="bg-[#0077B5]"
+				className="text-[#0077B5]"
 				tooltipMessage="Click to share this event to LinkedIn."
 			/>
 
@@ -103,7 +98,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 						subject: `Checkout ${event.name} on Evental!`
 					}
 				)}
-				className="bg-primary-600"
+				className="text-primary-600"
 				tooltipMessage="Click to share this event via email."
 			/>
 		</div>
