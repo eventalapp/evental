@@ -4,6 +4,8 @@ import Prisma from '@prisma/client';
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
 import cx from 'classnames';
 import { htmlToText } from 'html-to-text';
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
@@ -87,6 +89,37 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 						<p className="mt-1 text-sm font-normal text-gray-700 dark:text-gray-400">
 							{htmlToText(session.description)}
 						</p>
+					)}
+
+					{session.roleMembers && session.roleMembers.length > 0 && (
+						<ul className="grid grid-cols-4 gap-2 mt-4">
+							{session.roleMembers.slice(0, 4).map((roleMember) => (
+								<li
+									key={roleMember.attendee.id}
+									className="block flex items-center justify-between flex-col h-full relative"
+								>
+									<Link
+										href={`/events/${event.slug}/admin/attendees/${roleMember.attendee.user.slug}`}
+									>
+										<a className="flex items-center justify-start flex-col h-full">
+											<div className="h-10 w-10 relative mb-1 border-2 border-gray-100 rounded-full">
+												<Image
+													alt={String(roleMember.attendee.user.name)}
+													src={String(
+														roleMember.attendee?.user.image
+															? `https://cdn.evental.app${roleMember.attendee?.user.image}`
+															: `https://cdn.evental.app/images/default-avatar.jpg`
+													)}
+													className="rounded-full"
+													layout="fill"
+												/>
+											</div>
+											<span className="text-sm text-center">{roleMember.attendee.user.name}</span>
+										</a>
+									</Link>
+								</li>
+							))}
+						</ul>
 					)}
 
 					<div className="flex flex-row justify-end w-full">
