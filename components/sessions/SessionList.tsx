@@ -7,6 +7,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { sessionListReducer } from '../../utils/reducer';
 import { NotFound } from '../error/NotFound';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
 import Button from '../radix/components/shared/Button';
@@ -34,11 +35,11 @@ export const SessionList: React.FC<Props> = (props) => {
 	const upcomingSessions = sessions.filter((session) => dayjs(session.endDate).isAfter(new Date()));
 
 	return (
-		<div className="mt-3">
+		<div className="mt-3 relative">
 			{previousSessions && previousSessions.length >= 1 && (
 				<>
 					<Button
-						className="cursor-pointer"
+						className="cursor-pointer absolute top-0 right-0"
 						onClick={() => {
 							setShowPastEvents(!showPastEvents);
 						}}
@@ -59,122 +60,88 @@ export const SessionList: React.FC<Props> = (props) => {
 							showPastEvents ? 'h-auto' : 'h-0'
 						)}
 					>
-						{Object.entries(
-							previousSessions.reduce(
-								(acc: Record<string, Record<string, SessionWithVenue[]>>, session) => {
-									const day = dayjs(session.startDate).format('YYYY/MM/DD');
-									const hour = dayjs(session.startDate).format('YYYY/MM/DD HH:mm');
-
-									if (!acc[day]) {
-										acc[day] = {};
-									}
-
-									if (!acc[day][hour]) {
-										acc[day][hour] = [];
-									}
-
-									acc[day][hour].push(session);
-
-									return acc;
-								},
-								{}
-							)
-						).map(([date, hourObject]) => {
-							return (
-								<div key={date}>
-									<p className="text-xl mt-2 pb-0.5 border-b-2 px-2 border-gray-200 inline-block">
-										{dayjs(date).format('dddd, MMM D')}
-									</p>
-									{Object.entries(hourObject).map(([hour, sessions]) => {
-										return (
-											<div className="flex flex-row" key={hour}>
-												<span className="text-gray-700 text-sm w-24 py-2 pr-3 text-right border-r-2 border-gray-200">
-													{dayjs(hour).format('h:mm A z')}
-												</span>
-												<div className="w-full">
-													{sessions.map((session) => {
-														return (
-															<SessionHoverCard session={session} event={event} key={session.id}>
-																<div className="mr-2 mb-2 inline-block">
-																	<Link
-																		href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${
-																			session.slug
-																		}`}
-																	>
-																		<a className="inline-block">
-																			<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
-																				<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
-																					<div className="flex flex-row items-center justify-between">
-																						<div
-																							className="rounded-full mr-3 w-4 h-4"
-																							style={{
-																								backgroundColor: session?.type?.color ?? '#888888'
-																							}}
-																						/>
-																						<div>
-																							<span className="text-lg block leading-tight">
-																								{session.name}
-																							</span>
-
-																							{session.roleMembers.length >= 1 && (
-																								<span className="text-sm text-gray-500">
-																									{session.roleMembers
-																										.map((member) => member.attendee.user.name)
-																										.splice(0, 3)
-																										.join(', ')}
+						{Object.entries(previousSessions.reduce(sessionListReducer, {})).map(
+							([date, hourObject]) => {
+								return (
+									<div key={date}>
+										<p className="text-xl pb-0.5 inline-block text-gray-700">
+											<span className="font-medium text-gray-900">
+												{dayjs(date).format('dddd')}
+											</span>
+											, {dayjs(date).format('MMMM D')}
+										</p>
+										{Object.entries(hourObject).map(([hour, sessions]) => {
+											return (
+												<div className="flex flex-row" key={hour}>
+													<span className="text-gray-700 text-sm w-24 py-2 pr-5 text-right">
+														{dayjs(hour).format('h:mm A z')}
+													</span>
+													<div className="w-full">
+														{sessions.map((session) => {
+															return (
+																<SessionHoverCard session={session} event={event} key={session.id}>
+																	<div className="mr-2 mb-2 inline-block">
+																		<Link
+																			href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${
+																				session.slug
+																			}`}
+																		>
+																			<a className="inline-block">
+																				<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
+																					<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
+																						<div className="flex flex-row items-center justify-between">
+																							<div
+																								className="rounded-full mr-3 w-4 h-4"
+																								style={{
+																									backgroundColor: session?.type?.color ?? '#888888'
+																								}}
+																							/>
+																							<div>
+																								<span className="text-lg block leading-tight">
+																									{session.name}
 																								</span>
-																							)}
+
+																								{session.roleMembers.length >= 1 && (
+																									<span className="text-sm text-gray-500">
+																										{session.roleMembers
+																											.map((member) => member.attendee.user.name)
+																											.splice(0, 3)
+																											.join(', ')}
+																									</span>
+																								)}
+																							</div>
 																						</div>
 																					</div>
 																				</div>
-																			</div>
-																		</a>
-																	</Link>
-																</div>
-															</SessionHoverCard>
-														);
-													})}
+																			</a>
+																		</Link>
+																	</div>
+																</SessionHoverCard>
+															);
+														})}
+													</div>
 												</div>
-											</div>
-										);
-									})}
-								</div>
-							);
-						})}
+											);
+										})}
+									</div>
+								);
+							}
+						)}
 					</div>
 				</>
 			)}
 
-			{Object.entries(
-				upcomingSessions.reduce(
-					(acc: Record<string, Record<string, SessionWithVenue[]>>, session) => {
-						const day = dayjs(session.startDate).format('YYYY/MM/DD');
-						const hour = dayjs(session.startDate).format('YYYY/MM/DD HH:mm');
-
-						if (!acc[day]) {
-							acc[day] = {};
-						}
-
-						if (!acc[day][hour]) {
-							acc[day][hour] = [];
-						}
-
-						acc[day][hour].push(session);
-
-						return acc;
-					},
-					{}
-				)
-			).map(([date, hourObject]) => {
+			{Object.entries(upcomingSessions.reduce(sessionListReducer, {})).map(([date, hourObject]) => {
 				return (
 					<div key={date}>
-						<p className="text-xl mt-2 pb-0.5 border-b-2 px-2 border-gray-200 inline-block">
-							{dayjs(date).format('dddd, MMM D')}
+						<p className="text-xl pb-0.5 inline-block text-gray-700">
+							<span className="font-medium text-gray-900">{dayjs(date).format('dddd')}</span>,{' '}
+							{dayjs(date).format('MMMM D')}
 						</p>
 						{Object.entries(hourObject).map(([hour, sessions]) => {
 							return (
 								<div className="flex flex-row" key={hour}>
-									<span className="text-gray-700 text-sm w-24 py-2 pr-3 text-right border-r-2 border-gray-200">
+									<span className="text-gray-700 text-sm w-24 py-2 pr-5 text-right">
 										{dayjs(hour).format('h:mm A z')}
 									</span>
 									<div className="w-full">
