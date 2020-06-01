@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
 import { SessionWithVenue } from '../pages/api/events/[eid]/sessions';
+import { AttendeeWithUser } from './stripUserPassword';
 
 export const sessionListReducer = (
 	acc: Record<string, Record<string, SessionWithVenue[]>>,
@@ -19,5 +20,16 @@ export const sessionListReducer = (
 
 	acc[day][hour].push(session);
 
+	return acc;
+};
+
+export const sessionAttendeeReducer = (
+	acc: Record<string, AttendeeWithUser[]>,
+	attendee: AttendeeWithUser
+) => {
+	if (!acc[attendee.role.name]) {
+		acc[attendee.role.name] = [];
+	}
+	acc[attendee.role.name].push(attendee);
 	return acc;
 };
