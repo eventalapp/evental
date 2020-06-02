@@ -9,6 +9,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
+import { faWarehouseFull } from '../../icons';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
@@ -163,8 +164,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 								fill="currentColor"
 								className="w-5 h-5 mr-1.5"
 								size="1x"
-								icon={faLocationDot}
+								icon={faWarehouseFull}
 							/>
+
 							<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
 						</div>
 					</Tooltip>
