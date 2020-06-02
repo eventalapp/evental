@@ -55,7 +55,7 @@ const DeleteVenuePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Delete Venue</title>
 			</Head>

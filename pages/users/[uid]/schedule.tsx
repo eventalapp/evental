@@ -46,7 +46,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`${user.name} — Evental`}
 				description={`View ${user.name} at Evental.`}

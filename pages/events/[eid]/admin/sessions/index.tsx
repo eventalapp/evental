@@ -53,7 +53,7 @@ const SessionsAdminPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Edit Sessions</title>
 			</Head>

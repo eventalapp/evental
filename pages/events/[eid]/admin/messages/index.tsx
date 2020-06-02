@@ -46,7 +46,7 @@ const MessagePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Messages</title>
 			</Head>

@@ -35,7 +35,7 @@ const OrganizerInvitePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`Accept Organizer Invite`}
 				additionalLinkTags={[

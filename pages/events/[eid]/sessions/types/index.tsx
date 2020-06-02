@@ -80,7 +80,7 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`Sessions Types — ${event.name}`}
 				description={`View all of the sessions types for ${event.name}.`}
