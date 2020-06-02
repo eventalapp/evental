@@ -28,16 +28,12 @@ export default api({
 		const params: Stripe.Checkout.SessionCreateParams = {
 			payment_method_types: ['card'],
 			mode: 'payment',
-			success_url: `${
-				location.hostname === 'localhost' || location.hostname === '127.0.0.1'
-					? 'http://'
-					: 'https://'
-			}${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${body.eventId}/admin`,
-			cancel_url: `${
-				location.hostname === 'localhost' || location.hostname === '127.0.0.1'
-					? 'http://'
-					: 'https://'
-			}${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${body.eventId}/admin/billing`,
+			success_url: `${req.headers.host?.includes('localhost') ? 'http://' : 'https://'}${
+				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
+			}/events/${body.eventId}/admin`,
+			cancel_url: `${req.headers.host?.includes('localhost') ? 'http://' : 'https://'}${
+				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
+			}/events/${body.eventId}/admin/billing`,
 			metadata: {
 				eventId: body.eventId,
 				level: product.level,
