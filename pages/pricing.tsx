@@ -21,7 +21,7 @@ const PricingPage: NextPage = () => {
 	const attendees = watch('attendees');
 
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Pricing — Evental"
 				description={`Single Event Plans & Pricing. Starting at ${proAttendeePricing[250].price} USD.`}

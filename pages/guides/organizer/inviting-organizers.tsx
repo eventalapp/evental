@@ -14,7 +14,7 @@ import { Navigation } from '../../../components/navigation';
 
 const CreatingASessionTypeGuidePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Inviting Organizers — Evental"
 				description={`Learn how to invite additional organizers to assist you in setting up your event.`}
