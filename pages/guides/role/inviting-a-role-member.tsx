@@ -20,19 +20,19 @@ const sections: Section[] = [
 	{ anchor: 'navigate-to-the-dashboard', title: 'Navigate to the dashboard' },
 	{ anchor: 'navigate-to-the-roles-page', title: 'Navigate to the roles page' },
 	{ anchor: 'select-a-role', title: 'Select a role' },
-	{ anchor: 'invite-a-member', title: 'Invite a member' }
+	{ anchor: 'invite-a-member', title: 'Invite a role member' }
 ];
 
-const CreatingASessionGuidePage: NextPage = () => {
+const InvitingRoleMemberGuidePage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
-				title="Inviting a speaker — Evental"
-				description={`Learn how to invite a speaker or role member to your event on Evental.`}
+				title="Inviting a role member — Evental"
+				description={`Learn how to invite a role member to your event on Evental.`}
 				openGraph={{
-					url: 'https://evental.app/guides/speaker/inviting-speakers',
-					title: 'Inviting a speaker — Evental',
-					description: `Learn how to invite a speaker or role member to your event on Evental.`,
+					url: 'https://evental.app/guides/role/inviting-a-role-member',
+					title: 'Inviting a role member — Evental',
+					description: `Learn how to invite a role member to your event on Evental.`,
 					images: [
 						{
 							url: 'https://cdn.evental.app/images/logo.jpg',
@@ -48,9 +48,9 @@ const CreatingASessionGuidePage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Inviting a speaker</h1>
+					<h1 className="text-2xl md:text-3xl font-bold">Inviting a role member</h1>
 					<p className="text-gray-100 text-md mt-4">
-						Learn how to invite a speaker or role member to your event on Evental.
+						Learn how to invite a role member to your event on Evental
 					</p>
 				</Column>
 			</div>
@@ -60,19 +60,19 @@ const CreatingASessionGuidePage: NextPage = () => {
 					items={[
 						{
 							text: sections[0].title,
-							relativeLink: `/guides/speaker/inviting-speakers#${sections[0].anchor}`
+							relativeLink: `/guides/role/inviting-a-role-member#${sections[0].anchor}`
 						},
 						{
 							text: sections[1].title,
-							relativeLink: `/guides/speaker/inviting-speakers#${sections[1].anchor}`
+							relativeLink: `/guides/role/inviting-a-role-member#${sections[1].anchor}`
 						},
 						{
 							text: sections[2].title,
-							relativeLink: `/guides/speaker/inviting-speakers#${sections[2].anchor}`
+							relativeLink: `/guides/role/inviting-a-role-member#${sections[2].anchor}`
 						},
 						{
 							text: sections[3].title,
-							relativeLink: `/guides/speaker/inviting-speakers#${sections[3].anchor}`
+							relativeLink: `/guides/role/inviting-a-role-member#${sections[3].anchor}`
 						}
 					]}
 				/>
@@ -82,7 +82,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 						text={sections[0].title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/speaker/inviting-speakers#${sections[0].anchor}`}
+						}/guides/role/inviting-a-role-member#${sections[0].anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
@@ -102,7 +102,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 						text={sections[1].title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/speaker/inviting-speakers#${sections[1].anchor}`}
+						}/guides/role/inviting-a-role-member#${sections[1].anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
@@ -116,7 +116,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 						text={sections[2].title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/speaker/inviting-speakers#${sections[2].anchor}`}
+						}/guides/role/inviting-a-role-member#${sections[2].anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
@@ -128,7 +128,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 						text={sections[3].title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/speaker/inviting-speakers#${sections[3].anchor}`}
+						}/guides/role/inviting-a-role-member#${sections[3].anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
@@ -147,4 +147,4 @@ const CreatingASessionGuidePage: NextPage = () => {
 	);
 };
 
-export default CreatingASessionGuidePage;
+export default InvitingRoleMemberGuidePage;
