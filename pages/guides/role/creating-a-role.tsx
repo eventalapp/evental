@@ -22,7 +22,7 @@ const sections: Record<string, Section> = {
 	createRole: { anchor: 'create-a-role', title: 'Create a role' }
 };
 
-const CreatingASessionGuidePage: NextPage = () => {
+const CreatingARoleGuidePage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
@@ -81,7 +81,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 					/>
 
 					<p className="text-gray-700 mb-4">
-						To create a session, navigate to the events admin dashboard by clicking the{' '}
+						To create a role, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
 
@@ -135,4 +135,4 @@ const CreatingASessionGuidePage: NextPage = () => {
 	);
 };
 
-export default CreatingASessionGuidePage;
+export default CreatingARoleGuidePage;
