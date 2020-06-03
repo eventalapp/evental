@@ -152,7 +152,51 @@ const GuidesPage: NextPage = () => {
 								{
 									text: 'Inviting organizers',
 									relativeLink: '/guides/organizer/inviting-organizers'
-								},
+								}
+							]}
+						/>
+					</GuideCategoryCard>
+					<GuideCategoryCard className="border border-gray-200 p-5 rounded-md shadow-sm">
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Roles</span>
+						<p className="text-gray-600 text-sm">
+							Checkout the following organizer guides for organizers below, if you are still in need
+							help, reach out to us at{' '}
+							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
+								support@evental.app
+							</BlankLink>{' '}
+							or fill out a{' '}
+							<Link href="/support">
+								<a className="underline text-gray-900">support ticket</a>
+							</Link>
+							.
+						</p>
+
+						<UnorderedIconLinkList
+							items={[
+								{
+									text: 'Creating a role',
+									relativeLink: '/guides/role/creating-a-role'
+								}
+							]}
+						/>
+					</GuideCategoryCard>
+					<GuideCategoryCard className="border border-gray-200 p-5 rounded-md shadow-sm">
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Speakers</span>
+						<p className="text-gray-600 text-sm">
+							Checkout the following organizer guides for speakers below, if you are still in need
+							help, reach out to us at{' '}
+							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
+								support@evental.app
+							</BlankLink>{' '}
+							or fill out a{' '}
+							<Link href="/support">
+								<a className="underline text-gray-900">support ticket</a>
+							</Link>
+							.
+						</p>
+
+						<UnorderedIconLinkList
+							items={[
 								{
 									text: 'Inviting speakers',
 									relativeLink: '/guides/speaker/inviting-speakers'
