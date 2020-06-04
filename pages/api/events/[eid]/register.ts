@@ -3,7 +3,6 @@ import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { getEvent } from './index';
 
-
 export default api({
 	async POST({ ctx, req }) {
 		const { eid } = req.query;
@@ -43,8 +42,6 @@ export default api({
 				eventId: event.id
 			}
 		});
-
-
 
 		if (attendeeCount >= event.maxAttendees) {
 			throw new NextkitError(
