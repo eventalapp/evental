@@ -1,20 +1,28 @@
 import axios, { AxiosError } from 'axios';
 import router from 'next/router';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
-export interface UseDeleteAttendeeMutationData {
-	deleteAttendeeMutation: UseMutationResult<void, AxiosError<ErroredAPIResponse, unknown>, void>;
+export interface UseAdminDeleteAttendeeMutationData {
+	adminDeleteAttendeeMutation: UseMutationResult<
+		void,
+		AxiosError<ErroredAPIResponse, unknown>,
+		void
+	>;
 }
 
-export const useDeleteAttendeeMutation = (
+export const useAdminDeleteAttendeeMutation = (
 	eid: string,
 	uid: string
-): UseDeleteAttendeeMutationData => {
+): UseAdminDeleteAttendeeMutationData => {
 	const queryClient = useQueryClient();
 
-	const deleteAttendeeMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
+	const adminDeleteAttendeeMutation = useMutation<
+		void,
+		AxiosError<ErroredAPIResponse, unknown>,
+		void
+	>(
 		async () => {
 			return await axios
 				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/attendees/${uid}/delete`)
@@ -35,5 +43,5 @@ export const useDeleteAttendeeMutation = (
 		}
 	);
 
-	return { deleteAttendeeMutation };
+	return { adminDeleteAttendeeMutation };
 };
