@@ -50,15 +50,23 @@ const EventBillingPage: NextPage = () => {
 
 	return (
 		<Elements stripe={getStripe()}>
-			<PageWrapper variant="gray">
+			<PageWrapper>
 				<Head>
 					<title>Event Billing</title>
 				</Head>
 
 				<EventSettingsNavigation event={event} roles={roles} user={user} />
 
+				<div className="dark-topography text-white">
+					<Column className="flex flex-col items-center">
+						<h1 className="text-2xl md:text-3xl font-bold">Single Event Plans & Pricing</h1>
+						<p className="text-gray-100 text-md mt-4 max-w-2xl text-center">
+							View pricing for single event plans for standard and nonprofit or educational events.
+						</p>
+					</Column>
+				</div>
+
 				<Column className="flex flex-col items-center">
-					<h3 className="text-xl md:text-2xl font-medium">Single Event Plans & Pricing</h3>
 					<PurchaseProPlan eid={String(eid)} />
 				</Column>
 			</PageWrapper>

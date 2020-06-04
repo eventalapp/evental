@@ -38,7 +38,7 @@ const VerifyEmailPage: NextPage<Props> = (props) => {
 
 	if (user && user.emailVerified) {
 		return (
-			<PageWrapper variant="gray">
+			<PageWrapper>
 				<NextSeo
 					title="Verify Email — Evental"
 					description="Verify your email for your Evental account"
@@ -76,7 +76,7 @@ const VerifyEmailPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title="Verify Email — Evental"
 				description="Verify your email for your Evental account"

@@ -9,7 +9,7 @@ import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
 
 export const AlreadySignedInPage = () => (
-	<PageWrapper variant="gray">
+	<PageWrapper>
 		<Head>
 			<title>Already Signed In</title>
 		</Head>

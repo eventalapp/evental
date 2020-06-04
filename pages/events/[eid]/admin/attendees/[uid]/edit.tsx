@@ -67,7 +67,7 @@ const EditAttendeePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Edit Attendee</title>
 			</Head>

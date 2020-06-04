@@ -66,7 +66,7 @@ const ViewVenuePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Viewing Venue: {venue && venue.name}</title>
 			</Head>

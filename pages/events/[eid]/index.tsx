@@ -130,7 +130,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`${event.name} — Evental`}
 				description={htmlToText(event.description || '')}

@@ -53,7 +53,7 @@ const SessionTypesAdminPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Session Types</title>
 			</Head>

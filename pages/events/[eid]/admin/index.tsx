@@ -49,7 +49,7 @@ const EditEventPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Event Settings</title>
 			</Head>

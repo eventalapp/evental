@@ -56,7 +56,7 @@ const InviteRolePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Invite Role</title>
 			</Head>

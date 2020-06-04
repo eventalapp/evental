@@ -11,6 +11,7 @@ import { sessionListReducer } from '../../utils/reducer';
 import { HorizontalTextRule } from '../HorizontalTextRule';
 import { NotFound } from '../error/NotFound';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -112,6 +113,30 @@ export const SessionList: React.FC<Props> = (props) => {
 																										.join(', ')}
 																								</span>
 																							)}
+
+																							{admin && session?.maxAttendees !== null && (
+																								<Tooltip
+																									side={'bottom'}
+																									message={`This sessions is currently ${Math.ceil(
+																										(session?.attendeeCount /
+																											session?.maxAttendees) *
+																											100
+																									)}% Full (${session?.attendeeCount}/${
+																										session?.maxAttendees
+																									} attendees).`}
+																								>
+																									<div className="inline-flex flex-row items-center mb-1 cursor-help text-gray-500 text-sm">
+																										<p>
+																											{Math.ceil(
+																												(session?.attendeeCount /
+																													session?.maxAttendees) *
+																													100
+																											)}
+																											% Full
+																										</p>
+																									</div>
+																								</Tooltip>
+																							)}
 																						</div>
 																					</div>
 																				</div>
@@ -182,6 +207,27 @@ export const SessionList: React.FC<Props> = (props) => {
 																						.splice(0, 3)
 																						.join(', ')}
 																				</span>
+																			)}
+
+																			{admin && session?.maxAttendees !== null && (
+																				<Tooltip
+																					side={'bottom'}
+																					message={`This sessions is currently ${Math.ceil(
+																						(session?.attendeeCount / session?.maxAttendees) * 100
+																					)}% Full (${session?.attendeeCount}/${
+																						session?.maxAttendees
+																					} attendees).`}
+																				>
+																					<div className="inline-flex flex-row items-center mb-1 cursor-help text-gray-500 text-sm">
+																						<p>
+																							{Math.ceil(
+																								(session?.attendeeCount / session?.maxAttendees) *
+																									100
+																							)}
+																							% Full
+																						</p>
+																					</div>
+																				</Tooltip>
 																			)}
 																		</div>
 																	</div>

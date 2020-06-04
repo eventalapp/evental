@@ -25,7 +25,7 @@ const RequestPasswordResetPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Request Password Reset</title>
 			</Head>
