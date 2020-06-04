@@ -1,12 +1,11 @@
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import Link from 'next/link';
 import React from 'react';
-
-import { BlankLink } from '../../components/BlankLink';
 import { Footer } from '../../components/Footer';
 import { GuideCategoryCard } from '../../components/guides/GuideCategoryCard';
 import { GuideCategoryCardWrapper } from '../../components/guides/GuideCategoryCardWrapper';
+import { GuideSection } from '../../components/guides/GuideSection';
+import { StillNeedHelp } from '../../components/guides/StillNeedHelp';
 import { UnorderedIconLinkList } from '../../components/guides/UnorderedIconLinkList';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
@@ -45,20 +44,13 @@ const GuidesPage: NextPage = () => {
 			</div>
 
 			<Column>
-				<h2 className="text-2xl md:text-3xl font-bold mb-3">Guides for Attendees & Speakers</h2>
+				<h2 className="text-2xl md:text-3xl font-bold mb-5">Guides for Attendees & Speakers</h2>
 				<GuideCategoryCardWrapper className="mb-7 md:mb-14">
 					<GuideCategoryCard>
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Attendees</span>
 						<p className="text-gray-600 text-sm">
-							Checkout the following guides below, if you are still in need help, reach out to us at{' '}
-							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
-								support@evental.app
-							</BlankLink>{' '}
-							or fill out a{' '}
-							<Link href="/support">
-								<a className="underline text-gray-900">support ticket</a>
-							</Link>
-							.
+							Attending an event on Evental and need some extra help? Checkout the following
+							attendee guides below.
 						</p>
 
 						<UnorderedIconLinkList
@@ -82,33 +74,31 @@ const GuidesPage: NextPage = () => {
 							]}
 						/>
 					</GuideCategoryCard>
-					<GuideCategoryCard className="border border-gray-200 p-5 rounded-md shadow-sm">
+					<GuideCategoryCard>
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Speakers</span>
 						<p className="text-gray-600 text-sm">
-							Considering using Evental? Not sure if Evental will meet your needs? Reach out to our
-							team by booking a call or demo below, or email us at{' '}
-							<BlankLink href="mailto:sales@evental.app" className="underline text-gray-900">
-								sales@evental.app
-							</BlankLink>
+							Are you speaking at an event that is using Evental? Check out the following guides
+							below to help you get started.
 						</p>
+
+						<UnorderedIconLinkList
+							items={[
+								{
+									text: 'Creating & Customizing your profile',
+									relativeLink: '/guides/user/creating-an-account'
+								}
+							]}
+						/>
 					</GuideCategoryCard>
 				</GuideCategoryCardWrapper>
 
-				<h2 className="text-2xl md:text-3xl font-bold mb-3">Guides for Organizers</h2>
-				<GuideCategoryCardWrapper>
+				<h2 className="text-2xl md:text-3xl font-bold mb-5">Guides for Organizers</h2>
+				<GuideCategoryCardWrapper className="mb-7 md:mb-14">
 					<GuideCategoryCard>
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Sessions</span>
 						<p className="text-gray-600 text-sm">
-							Checkout the following guides for organizing sessions below, if you are still in need
-							help, reach out to us at{' '}
-							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
-								support@evental.app
-							</BlankLink>{' '}
-							or fill out a{' '}
-							<Link href="/support">
-								<a className="underline text-gray-900">support ticket</a>
-							</Link>
-							.
+							Sessions are specific talks/events occuring at your event. Attendees can register for
+							these sessions. Checkout the following guides for organizing sessions below.
 						</p>
 
 						<UnorderedIconLinkList
@@ -120,23 +110,46 @@ const GuidesPage: NextPage = () => {
 								{
 									text: 'Creating a session type',
 									relativeLink: '/guides/session/creating-a-session-type'
+								},
+								{
+									text: 'Attaching role members to a session',
+									relativeLink: '/guides/session/attaching-a-role-member'
 								}
 							]}
 						/>
 					</GuideCategoryCard>
-					<GuideCategoryCard className="border border-gray-200 p-5 rounded-md shadow-sm">
+
+					<GuideCategoryCard>
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Roles</span>
+						<p className="text-gray-600 text-sm">
+							Roles are used to categorize and display attendees such as speakers, sponsors,
+							exhibitors, artists, etc. Checkout the following organizer guides for organizers
+							below.
+						</p>
+
+						<UnorderedIconLinkList
+							items={[
+								{
+									text: 'Creating a role',
+									relativeLink: '/guides/role/creating-a-role'
+								},
+								{
+									text: 'Inviting a role member',
+									relativeLink: '/guides/role/inviting-a-role-member'
+								},
+								{
+									text: 'Creating a role member',
+									relativeLink: '/guides/role/creating-a-role-member'
+								}
+							]}
+						/>
+					</GuideCategoryCard>
+
+					<GuideCategoryCard>
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Organizers</span>
 						<p className="text-gray-600 text-sm">
-							Checkout the following guides for inviting organizers below, if you are still in need
-							help, reach out to us at{' '}
-							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
-								support@evental.app
-							</BlankLink>{' '}
-							or fill out a{' '}
-							<Link href="/support">
-								<a className="underline text-gray-900">support ticket</a>
-							</Link>
-							.
+							As the event founder, you can invite additional organizers to assist you in setting up
+							your event. Checkout the following guides for inviting organizers below.
 						</p>
 
 						<UnorderedIconLinkList
@@ -144,11 +157,52 @@ const GuidesPage: NextPage = () => {
 								{
 									text: 'Inviting organizers',
 									relativeLink: '/guides/organizer/inviting-organizers'
+								},
+								{
+									text: 'Granting the organizer role',
+									relativeLink: '/guides/organizer/granting-the-organizer-role'
+								}
+							]}
+						/>
+					</GuideCategoryCard>
+
+					<GuideCategoryCard>
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Venues</span>
+						<p className="text-gray-600 text-sm">
+							Venues are used to group sessions by location. Checkout the following organizer guides
+							for venues below.
+						</p>
+
+						<UnorderedIconLinkList
+							items={[
+								{
+									text: 'Creating a venue',
+									relativeLink: '/guides/venue/creating-a-venue'
+								}
+							]}
+						/>
+					</GuideCategoryCard>
+					<GuideCategoryCard>
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Pages</span>
+						<p className="text-gray-600 text-sm">
+							Pages can be used to make event specific information such as hotels nearby, or a map
+							of the convention available. Checkout the following organizer guides for pages below.
+						</p>
+
+						<UnorderedIconLinkList
+							items={[
+								{
+									text: 'Creating a page',
+									relativeLink: '/guides/page/creating-a-page'
 								}
 							]}
 						/>
 					</GuideCategoryCard>
 				</GuideCategoryCardWrapper>
+
+				<GuideSection>
+					<StillNeedHelp />
+				</GuideSection>
 			</Column>
 
 			<Footer />
