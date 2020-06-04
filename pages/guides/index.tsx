@@ -112,6 +112,14 @@ const GuidesPage: NextPage = () => {
 									relativeLink: '/guides/session/creating-a-session-type'
 								},
 								{
+									text: 'Editing a session',
+									relativeLink: '/guides/session/editing-a-session'
+								},
+								{
+									text: 'Editing a session type',
+									relativeLink: '/guides/session/editing-a-session-type'
+								},
+								{
 									text: 'Attaching role members to a session',
 									relativeLink: '/guides/session/attaching-a-role-member'
 								}
@@ -132,6 +140,10 @@ const GuidesPage: NextPage = () => {
 								{
 									text: 'Creating a role',
 									relativeLink: '/guides/role/creating-a-role'
+								},
+								{
+									text: 'Editing a role',
+									relativeLink: '/guides/role/editing-a-role'
 								},
 								{
 									text: 'Inviting a role member',
@@ -178,6 +190,10 @@ const GuidesPage: NextPage = () => {
 								{
 									text: 'Creating a venue',
 									relativeLink: '/guides/venue/creating-a-venue'
+								},
+								{
+									text: 'Editing a venue',
+									relativeLink: '/guides/venue/editing-a-venue'
 								}
 							]}
 						/>
@@ -194,6 +210,10 @@ const GuidesPage: NextPage = () => {
 								{
 									text: 'Creating a page',
 									relativeLink: '/guides/page/creating-a-page'
+								},
+								{
+									text: 'Editing a page',
+									relativeLink: '/guides/page/editing-a-page'
 								}
 							]}
 						/>
