@@ -2,8 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-import { Footer } from '../../../../../../components/Footer';
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
@@ -11,9 +9,10 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import { Footer } from '../../../../../../components/Footer';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutation';
+import { useAdminDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useAdminDeleteAttendeeMutation';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
@@ -25,7 +24,7 @@ const DeleteAttendeePage: NextPage = () => {
 	const { eid, uid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
-	const { deleteAttendeeMutation } = useDeleteAttendeeMutation(String(eid), String(uid));
+	const { adminDeleteAttendeeMutation } = useAdminDeleteAttendeeMutation(String(eid), String(uid));
 	const { user, isUserLoading } = useUser();
 	const { event, isEventLoading } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
@@ -79,7 +78,7 @@ const DeleteAttendeePage: NextPage = () => {
 					attendee={attendee}
 					attendeeError={attendeeError}
 					isAttendeeLoading={isAttendeeLoading}
-					deleteAttendeeMutation={deleteAttendeeMutation}
+					adminDeleteAttendeeMutation={adminDeleteAttendeeMutation}
 				/>
 			</Column>
 
