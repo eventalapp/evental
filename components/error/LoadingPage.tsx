@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
-
+import { Footer } from '../Footer';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
@@ -17,5 +17,7 @@ export const LoadingPage = () => (
 		<Column variant="halfWidth" className="flex flex-col items-center justify-center">
 			<Loading />
 		</Column>
+
+		<Footer />
 	</PageWrapper>
 );
