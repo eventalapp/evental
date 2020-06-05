@@ -1,6 +1,7 @@
 # Evental
 
 ## low importance
+
 - featured role members
 - leave session, event, etc
 - send email to all event attendees
@@ -13,14 +14,18 @@
 - remove unused radix
 - clean up queries/mutations (export whole mut/query?)
 - rate limit request password reset & verify email request etc
+- session file upload
+- role member session edit
 
 ## post mvp
+
 - make events truly private
 - adjust session times when event date is moved
 
 ## Installation 💾
 
 Prerequisites:
+
 - [Docker](https://www.docker.com/products/docker-desktop/)
 - [Node 16.13](https://nodejs.org/ko/blog/release/v16.13.0/)
 - [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
@@ -50,6 +55,3 @@ Start the Next.js dev server:
 ```bash
 yarn dev
 ```
-
-
- 
