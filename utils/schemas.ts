@@ -1,7 +1,6 @@
 import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
 import { htmlToText } from 'html-to-text';
 import { z } from 'zod';
-
 import { timeZoneList } from './const';
 import { isBrowser } from './isBrowser';
 
@@ -18,6 +17,11 @@ const nameValidator = z
 	.min(1, 'Name is required.')
 	.min(3, 'Name must be at least 3 characters')
 	.max(100, 'Name must be less than 100 characters');
+const titleValidator = z
+	.string()
+	.min(1, 'Title is required.')
+	.min(3, 'Title must be at least 3 characters')
+	.max(100, 'Title must be less than 100 characters');
 const addressValidator = z.string().max(100, 'Address must be less than 100 characters');
 const dateValidator = z.preprocess((val) => new Date(val as string | Date), z.date());
 const descriptionValidator = z.string().max(3000, 'Description must be less than 3000 characters');
@@ -394,3 +398,14 @@ export const SubmitDemoRequestSchema = z.object({
 });
 
 export type SubmitDemoRequestPayload = z.infer<typeof SubmitDemoRequestSchema>;
+
+// Event message
+
+export const SendEventMessageSchema = z.object({
+	body: z.string().min(1, 'Body is required').max(5000, 'Body is too long'),
+	title: titleValidator,
+	eventId: z.string().min(1, 'Event ID is required').max(200, 'Event ID is too long'),
+	sentBy: z.string().max(200, 'Sent By is too long').optional()
+});
+
+export type SendEventMessagePayload = z.infer<typeof SendEventMessageSchema>;
