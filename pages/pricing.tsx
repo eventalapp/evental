@@ -43,7 +43,7 @@ const PricingPage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Single Event Plans & Pricing</h1>
+					<h1 className="text-2xl md:text-3xl font-bold">Single Event Plans &amp; Pricing</h1>
 					<p className="text-gray-100 text-md mt-4 max-w-2xl text-center">
 						View pricing for single event plans for standard and nonprofit or educational events.
 					</p>
@@ -192,7 +192,7 @@ const PricingPage: NextPage = () => {
 						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Responsive event website</li>
 							<li>Customizable event branding</li>
-							<li>Control event privacy & access</li>
+							<li>Control event privacy &amp; access</li>
 							<li>Unlimited sessions, venues, pages, types, and roles</li>
 							<li>Create custom top-level and standard pages</li>
 						</ul>
@@ -211,7 +211,7 @@ const PricingPage: NextPage = () => {
 					</div>
 					<div>
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
-							Virtual & Hybrid Events
+							Virtual &amp; Hybrid Events
 						</h3>
 						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Use Evental with any webinar or video platform</li>
