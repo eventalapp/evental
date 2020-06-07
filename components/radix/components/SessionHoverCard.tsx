@@ -99,7 +99,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 							{session.roleMembers.slice(0, 4).map((roleMember) => (
 								<li
 									key={roleMember.attendee.id}
-									className="block flex items-center justify-between flex-col h-full relative"
+									className="flex items-center justify-between flex-col h-full relative"
 								>
 									<Link
 										href={`/events/${event.slug}${admin ? '/admin' : ''}/attendees/${
