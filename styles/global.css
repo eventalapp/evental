@@ -193,3 +193,45 @@
 .shadow-sm-bottom {
 	box-shadow: rgba(0, 0, 0, 0.05) 0 -1px 2px 0;
 }
+
+.bloom {
+	@apply absolute w-72 h-72;
+	will-change: opacity;
+	opacity: 0;
+	filter: blur(80px);
+	border-radius: 50%;
+	transform: scale(1.5);
+	animation-name: bloomBurst;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1;
+	animation-direction: forwards;
+}
+
+.bloom.bloom-one {
+	background: conic-gradient(from 90deg at 50% 50%, #69a5ff, #b1cbff);
+	animation-delay: 300ms;
+}
+
+.bloom.bloom-two {
+	background: conic-gradient(from 90deg at 50% 50%, #448fff, #aea1f9);
+	animation-delay: 0ms;
+}
+
+.bloom.bloom-three {
+	background: conic-gradient(from 90deg at 50% 50%, #81b4ff, #a9c1ff);
+	animation-delay: 600ms;
+}
+
+@keyframes bloomBurst {
+	from {
+		opacity: 0;
+	}
+	40% {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.6;
+	}
+}
