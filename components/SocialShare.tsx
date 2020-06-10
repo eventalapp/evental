@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import classNames from 'classnames';
 import React from 'react';
-
 import { emailLink } from '../utils/sharing/email';
 import { facebookLink } from '../utils/sharing/facebook';
 import { linkedinLink } from '../utils/sharing/linkedin';
@@ -98,7 +97,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 						subject: `Checkout ${event.name} on Evental!`
 					}
 				)}
-				className="text-primary-600"
+				className="text-primary-500"
 				tooltipMessage="Click to share this event via email."
 			/>
 		</div>
