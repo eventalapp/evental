@@ -1,10 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EventPermissionRole } from '@prisma/client';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-
 import { UseEditAttendeeMutationData } from '../../hooks/mutations/useEditAttendeeMutation';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
@@ -15,6 +13,7 @@ import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Label } from '../form/Label';
+import CreateRoleDialog from '../radix/components/CreateRoleDialog';
 import Select from '../radix/components/Select';
 
 type Props = { eid: string } & DetailedHTMLProps<
@@ -70,9 +69,12 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 					{errors.eventRoleId?.message && (
 						<ErrorMessage>{errors.eventRoleId?.message}</ErrorMessage>
 					)}
-					<Link href={`/events/${eid}/admin/roles/create`}>
-						<a className="text-gray-600 block mt-1 text-sm">Dont see your role? Create a role</a>
-					</Link>
+
+					<CreateRoleDialog eid={String(eid)}>
+						<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+							Dont see your role? Create a role
+						</span>
+					</CreateRoleDialog>
 				</div>
 				<div>
 					<Label htmlFor="permissionRole">Permission Role *</Label>

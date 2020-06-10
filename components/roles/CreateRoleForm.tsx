@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-
 import { UseCreateRoleMutationData } from '../../hooks/mutations/useCreateRoleMutation';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
@@ -39,7 +38,7 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 				createRoleMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-row w-full mt-5 mt-3">
+			<div className="flex flex-row w-full mt-3">
 				<div className="mb-5 flex-1">
 					<Label htmlFor="name">Role Name *</Label>
 					<Input placeholder="Role name" {...register('name')} />
