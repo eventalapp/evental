@@ -1,13 +1,12 @@
 import { faGoogle, faYahoo } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarPlus, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CalendarEvent, google, ics, office365, outlook, yahoo } from 'calendar-link';
 import cx from 'classnames';
 import React from 'react';
-
 import { faOutlook } from '../../../icons/';
-import Button from './shared/Button';
+import Tooltip from './Tooltip';
 
 interface Props {
 	event: CalendarEvent;
@@ -20,8 +19,19 @@ export const AddToCalendarDropdown = (props: Props) => {
 	return (
 		<div className="relative inline-block text-left">
 			<DropdownMenuPrimitive.Root>
-				<DropdownMenuPrimitive.Trigger asChild>
-					<Button>Add to Calendar</Button>
+				<DropdownMenuPrimitive.Trigger>
+					<div>
+						<Tooltip message="Add this session to your calendar" side="top">
+							<button className="flex items-center justify-center p-1.5">
+								<FontAwesomeIcon
+									fill="currentColor"
+									className="h-5 w-5"
+									size="1x"
+									icon={faCalendarPlus}
+								/>
+							</button>
+						</Tooltip>
+					</div>
 				</DropdownMenuPrimitive.Trigger>
 
 				<DropdownMenuPrimitive.Content
