@@ -93,10 +93,10 @@ export const EventHeader: React.FC<{
 							{event?.name}
 						</h1>
 
-						<div className="flex-row flex items-center text-gray-600 flex-wrap space-x-3">
+						<div className="flex-row flex items-center text-gray-600 flex-wrap">
 							{event?.location && (
 								<Tooltip message={`This is event is taking place at ${event?.location}.`}>
-									<div className="flex flex-row items-center cursor-help">
+									<div className="flex flex-row items-center cursor-help mr-3">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
@@ -119,7 +119,7 @@ export const EventHeader: React.FC<{
 									'MMMM do zzz'
 								)}.`}
 							>
-								<div className="flex flex-row items-center cursor-help">
+								<div className="flex flex-row items-center cursor-help mr-3">
 									<FontAwesomeIcon
 										fill="currentColor"
 										className="w-5 h-5 mr-1.5"
@@ -148,7 +148,7 @@ export const EventHeader: React.FC<{
 									' '
 								)} timezone.`}
 							>
-								<div className="flex flex-row items-center cursor-help">
+								<div className="flex flex-row items-center cursor-help mr-3">
 									<FontAwesomeIcon
 										fill="currentColor"
 										className="w-5 h-5 mr-1.5"
@@ -161,7 +161,7 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'IN_PERSON' && (
 								<Tooltip message={`This is event is taking place in person.`}>
-									<div className="flex flex-row items-center cursor-help">
+									<div className="flex flex-row items-center cursor-help mr-3">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
@@ -175,7 +175,7 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'HYBRID' && (
 								<Tooltip message={`This is event is taking place virtually & in person.`}>
-									<div className="flex flex-row items-center cursor-help">
+									<div className="flex flex-row items-center cursor-help mr-3">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
@@ -189,7 +189,7 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'VIRTUAL' && (
 								<Tooltip message={`This is event is taking place virtually.`}>
-									<div className="flex flex-row items-center cursor-help">
+									<div className="flex flex-row items-center cursor-help mr-3">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
