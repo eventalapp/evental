@@ -3,7 +3,6 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import { SelectProps } from '@radix-ui/react-select';
 import cx from 'classnames';
 import React from 'react';
-
 import Button from './shared/Button';
 
 export type Option = {
@@ -20,7 +19,7 @@ const Select = (props: Props) => {
 
 	return (
 		<SelectPrimitive.Root {...rest}>
-			<SelectPrimitive.Trigger asChild aria-label="Food">
+			<SelectPrimitive.Trigger className="w-full">
 				<Button className="w-full">
 					<SelectPrimitive.Value />
 					<SelectPrimitive.Icon className="ml-2">

@@ -21,7 +21,7 @@ interface Props {}
 const HoverCard = (props: Props) => {
 	return (
 		<HoverCardPrimitive.Root>
-			<HoverCardPrimitive.Trigger asChild>
+			<HoverCardPrimitive.Trigger>
 				<div
 					className={cx(
 						'inline-flex h-12 w-12 items-center justify-center rounded-full bg-white p-2.5 dark:bg-gray-900'

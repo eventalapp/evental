@@ -5,7 +5,6 @@ import Prisma from '@prisma/client';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import cx from 'classnames';
 import React from 'react';
-
 import { emailLink } from '../../../utils/sharing/email';
 import { facebookLink } from '../../../utils/sharing/facebook';
 import { linkedinLink } from '../../../utils/sharing/linkedin';
@@ -23,7 +22,7 @@ export const SocialShareDropdown = (props: Props) => {
 	return (
 		<div className="relative inline-block text-left">
 			<DropdownMenuPrimitive.Root>
-				<DropdownMenuPrimitive.Trigger asChild>
+				<DropdownMenuPrimitive.Trigger>
 					<Button>Share this Event</Button>
 				</DropdownMenuPrimitive.Trigger>
 

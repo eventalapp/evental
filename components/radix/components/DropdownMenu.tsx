@@ -15,7 +15,6 @@ import {
 } from '@radix-ui/react-icons';
 import cx from 'classnames';
 import React, { ReactNode, useState } from 'react';
-
 import Button from './shared/Button';
 
 interface RadixMenuItem {
@@ -79,7 +78,7 @@ const DropdownMenu = (props: Props) => {
 	return (
 		<div className="relative inline-block text-left">
 			<DropdownMenuPrimitive.Root>
-				<DropdownMenuPrimitive.Trigger asChild>
+				<DropdownMenuPrimitive.Trigger>
 					<Button>Click</Button>
 				</DropdownMenuPrimitive.Trigger>
 

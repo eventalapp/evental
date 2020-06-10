@@ -6,16 +6,15 @@ import cx from 'classnames';
 import React, { Fragment, useState } from 'react';
 import { CirclePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
-
 import { useCreateSessionTypeMutation } from '../../../hooks/mutations/useCreateSessionTypeMutation';
 import { colors, copy } from '../../../utils/const';
 import { CreateSessionTypePayload, CreateSessionTypeSchema } from '../../../utils/schemas';
-import { HelpTooltip } from '../../HelpTooltip';
 import { LoadingInner } from '../../error/LoadingInner';
 import { Button } from '../../form/Button';
 import { ErrorMessage } from '../../form/ErrorMessage';
 import { Input } from '../../form/Input';
 import { Label } from '../../form/Label';
+import { HelpTooltip } from '../../HelpTooltip';
 
 interface Props {
 	eid: string;
@@ -48,7 +47,7 @@ const CreateTypeDialog: React.FC<Props> = (props) => {
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-			<DialogPrimitive.Trigger asChild>{children}</DialogPrimitive.Trigger>
+			<DialogPrimitive.Trigger>{children}</DialogPrimitive.Trigger>
 
 			<Transition.Root show={isOpen}>
 				<Transition.Child
