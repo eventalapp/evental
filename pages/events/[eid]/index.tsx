@@ -191,6 +191,20 @@ const ViewEventPage: NextPage<Props> = (props) => {
 							<SocialShare event={event} />
 						</div>
 
+						<div className="mb-3">
+							<span className="block font-bold mb-1">Filter by Date</span>
+							<div className="relative">
+								<SessionDatePicker
+									onChange={(date) => {
+										console.log(date);
+									}}
+									renderDayContents={renderDayContents}
+									maxDate={new Date(String(event.endDate))}
+									minDate={new Date(String(event.startDate))}
+								/>
+							</div>
+						</div>
+
 						{sessionTypes && sessionTypes.length > 0 && (
 							<div className="mb-3">
 								<span className="block font-bold mb-1">Filter by Type</span>
@@ -225,20 +239,6 @@ const ViewEventPage: NextPage<Props> = (props) => {
 								</ul>
 							</div>
 						)}
-
-						<div className="mb-3">
-							<span className="block font-bold mb-1">Filter by Date</span>
-							<div className="relative">
-								<SessionDatePicker
-									onChange={(date) => {
-										console.log(date);
-									}}
-									renderDayContents={renderDayContents}
-									maxDate={new Date(String(event.endDate))}
-									minDate={new Date(String(event.startDate))}
-								/>
-							</div>
-						</div>
 					</div>
 				</div>
 			</Column>
