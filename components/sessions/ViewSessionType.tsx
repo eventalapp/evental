@@ -1,7 +1,6 @@
 import Prisma from '@prisma/client';
 import Link from 'next/link';
 import React from 'react';
-
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { LinkButton } from '../form/LinkButton';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
@@ -47,10 +46,6 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 					)}
 				</div>
 			</FlexRowBetween>
-
-			<h3 className="text-xl md:text-2xl font-medium mt-5">
-				Sessions <span className="font-normal text-gray-500">({sessions?.length || 0})</span>
-			</h3>
 
 			{sessions && (
 				<SessionList eid={String(eid)} sessions={sessions} admin={admin} event={event} />
