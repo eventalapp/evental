@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
+import { faWarehouseFull } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
 import Button from './shared/Button';
 import Tooltip from './Tooltip';
@@ -47,45 +48,68 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				<div className="h-full w-full">
 					<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{session.name}</h3>
 
-					{session.venue && (
-						<div>
-							<Tooltip
-								side={'top'}
-								message={`This session is taking place at the ${session.venue.name} venue`}
-							>
-								<div className="inline-flex text-gray-800 flex-row items-center cursor-help">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="w-5 h-5 mr-1.5"
-										size="1x"
-										icon={faLocationDot}
-									/>
-									{session.venue.name}
-								</div>
-							</Tooltip>
-						</div>
-					)}
-
-					{session.type && (
-						<div>
-							<Tooltip
-								side={'top'}
-								message={`This session is in the ${session.type.name} category`}
-							>
-								<div className="inline-flex text-gray-800 flex-row items-center cursor-help">
-									<div className="w-5 h-5 flex items-center justify-center mr-1.5">
-										<div
-											className="rounded-full w-3 h-3"
-											style={{
-												backgroundColor: session?.type?.color ?? '#888888'
-											}}
-										/>
+					<div className="text-gray-600 flex flex-row flex-wrap items-center">
+						{session.type && (
+							<div className="mr-3">
+								<Tooltip
+									side={'top'}
+									message={`This session is in the ${session.type.name} category`}
+								>
+									<div className="inline-flex flex-row items-center cursor-help">
+										<div className="w-5 h-5 flex items-center justify-center mr-1.5">
+											<div
+												className="rounded-full w-3 h-3"
+												style={{
+													backgroundColor: session?.type?.color ?? '#888888'
+												}}
+											/>
+										</div>
+										{session.type.name}
 									</div>
-									{session.type.name}
-								</div>
-							</Tooltip>
-						</div>
-					)}
+								</Tooltip>
+							</div>
+						)}
+
+						{session.venue && (
+							<div className="mr-3">
+								<Tooltip
+									side={'top'}
+									message={`This session is taking place at the ${session.venue.name} venue`}
+								>
+									<div className="inline-flex flex-row items-center cursor-help">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="w-5 h-5 mr-1.5"
+											size="1x"
+											icon={faLocationDot}
+										/>
+										{session.venue.name}
+									</div>
+								</Tooltip>
+							</div>
+						)}
+
+						{session?.maxAttendees !== null && (
+							<div className="mr-3">
+								<Tooltip
+									side={'top'}
+									message={`This sessions is currently ${Math.ceil(
+										(session?.attendeeCount / session?.maxAttendees) * 100
+									)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+								>
+									<div className="inline-flex flex-row items-center cursor-help">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="w-5 h-5 mr-1.5"
+											size="1x"
+											icon={faWarehouseFull}
+										/>
+										<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
+									</div>
+								</Tooltip>
+							</div>
+						)}
+					</div>
 
 					{session.description && (
 						<p className="mt-1 text-sm font-normal text-gray-700 dark:text-gray-400">
