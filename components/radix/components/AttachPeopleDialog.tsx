@@ -34,7 +34,7 @@ const AttachPeopleDialog = (props: Props) => {
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
 			<DialogPrimitive.Trigger>
-				<Button>Attach People</Button>
+				<Button type="button">Attach People</Button>
 			</DialogPrimitive.Trigger>
 			<Portal.Root>
 				<Transition.Root show={isOpen}>
@@ -71,7 +71,7 @@ const AttachPeopleDialog = (props: Props) => {
 							<DialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
 								Attach People
 							</DialogPrimitive.Title>
-							<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
+							<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-600 dark:text-gray-400">
 								Search for users in the field below to attach them to this session.
 							</DialogPrimitive.Description>
 							<div className="border-b border-gray-300 my-3" />
