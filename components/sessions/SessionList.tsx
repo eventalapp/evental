@@ -5,11 +5,10 @@ import classNames from 'classnames';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { useState } from 'react';
-
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { sessionListReducer } from '../../utils/reducer';
-import { HorizontalTextRule } from '../HorizontalTextRule';
 import { NotFound } from '../error/NotFound';
+import { HorizontalTextRule } from '../HorizontalTextRule';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
 import Tooltip from '../radix/components/Tooltip';
 
@@ -125,7 +124,7 @@ export const SessionList: React.FC<Props> = (props) => {
 																										session?.maxAttendees
 																									} attendees).`}
 																								>
-																									<div className="inline-flex flex-row items-center mb-1 cursor-help text-gray-500 text-sm">
+																									<div className="inline-flex flex-row items-center mb-1 cursor-help text-gray-500 text-sm ml-2">
 																										<p>
 																											{Math.ceil(
 																												(session?.attendeeCount /
