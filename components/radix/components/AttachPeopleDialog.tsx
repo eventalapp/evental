@@ -147,14 +147,13 @@ const AttachPeopleDialog = (props: Props) => {
 														{attendee.role.name}
 													</p>
 												</div>
-											</div>{' '}
+											</div>
 											<Tooltip side={'top'} message={`Add this user to this session.`}>
 												<button
 													type="button"
 													className="p-1"
 													onClick={() => {
 														addAttendeeToSessionMutation.mutate({ userId: attendee.user.id });
-														setIsOpen(false);
 													}}
 												>
 													<FontAwesomeIcon
