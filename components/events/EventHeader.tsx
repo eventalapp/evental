@@ -69,7 +69,7 @@ export const EventHeader: React.FC<{
 					</div>
 				)}
 				<div className="flex flex-row items-center">
-					<div className="flex-shrink-0 relative w-12 h-12 md:w-20 md:h-20 rounded-md mr-3 md:mr-5 border-2 border-gray-100">
+					<div className="flex-shrink-0 relative w-16 h-16 md:w-20 md:h-20 rounded-md mr-3 md:mr-5 border-2 border-gray-100">
 						<Image
 							alt={event.name}
 							src={
@@ -96,7 +96,7 @@ export const EventHeader: React.FC<{
 						<div className="flex-row flex items-center text-gray-600 flex-wrap">
 							{event?.location && (
 								<Tooltip message={`This is event is taking place at ${event?.location}.`}>
-									<div className="flex flex-row items-center cursor-help mr-3">
+									<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
@@ -119,7 +119,7 @@ export const EventHeader: React.FC<{
 									'MMMM do zzz'
 								)}.`}
 							>
-								<div className="flex flex-row items-center cursor-help mr-3">
+								<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
 									<FontAwesomeIcon
 										fill="currentColor"
 										className="w-5 h-5 mr-1.5"
@@ -148,7 +148,7 @@ export const EventHeader: React.FC<{
 									' '
 								)} timezone.`}
 							>
-								<div className="flex flex-row items-center cursor-help mr-3">
+								<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
 									<FontAwesomeIcon
 										fill="currentColor"
 										className="w-5 h-5 mr-1.5"
@@ -161,7 +161,7 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'IN_PERSON' && (
 								<Tooltip message={`This is event is taking place in person.`}>
-									<div className="flex flex-row items-center cursor-help mr-3">
+									<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
@@ -175,7 +175,7 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'HYBRID' && (
 								<Tooltip message={`This is event is taking place virtually & in person.`}>
-									<div className="flex flex-row items-center cursor-help mr-3">
+									<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
@@ -189,7 +189,7 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'VIRTUAL' && (
 								<Tooltip message={`This is event is taking place virtually.`}>
-									<div className="flex flex-row items-center cursor-help mr-3">
+									<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
@@ -204,7 +204,7 @@ export const EventHeader: React.FC<{
 							{event.website && (
 								<Tooltip message={`This is event's website is ${event.website}.`}>
 									<a href={event.website} target="_blank" rel="noopener noreferrer">
-										<div className="flex flex-row items-center cursor-pointer">
+										<div className="flex flex-row items-center cursor-pointer text-sm md:text-base">
 											<FontAwesomeIcon
 												fill="currentColor"
 												className="w-5 h-5 mr-1.5"
