@@ -200,7 +200,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						</div>
 
 						<div className="mb-3">
-							<span className="block font-bold mb-1">Filter by Date</span>
+							<span className="block font-medium mb-1">Filter by Date</span>
 							<div className="relative">
 								<SessionDatePicker
 									onChange={(date) => {
@@ -215,36 +215,40 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						{sessionTypes && sessionTypes.length > 0 && (
 							<div className="mb-3">
-								<span className="block font-bold mb-1">Filter by Type</span>
-								<ul>
-									{sessionTypes.map((sessionType) => (
-										<Link
-											key={sessionType.id}
-											href={`/events/${eid}/sessions/types/${sessionType.slug}`}
-										>
-											<a className="flex flex-row items-center">
-												<div
-													className="rounded-full mr-2 w-3 h-3"
-													style={{ backgroundColor: sessionType.color ?? '#888888' }}
-												/>
-												{sessionType.name}
-											</a>
-										</Link>
-									))}
-								</ul>
+								<span className="block font-medium mb-1">Filter by Type</span>
+								<div className="text-gray-600">
+									<ul>
+										{sessionTypes.map((sessionType) => (
+											<Link
+												key={sessionType.id}
+												href={`/events/${eid}/sessions/types/${sessionType.slug}`}
+											>
+												<a className="flex flex-row items-center">
+													<div
+														className="rounded-full mr-2 w-3 h-3"
+														style={{ backgroundColor: sessionType.color ?? '#888888' }}
+													/>
+													{sessionType.name}
+												</a>
+											</Link>
+										))}
+									</ul>
+								</div>
 							</div>
 						)}
 
 						{venues && venues.length > 0 && (
 							<div className="mb-3">
-								<span className="block font-bold mb-1">Filter by Venue</span>
-								<ul>
-									{venues.map((venue) => (
-										<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
-											<a className="block">{venue.name}</a>
-										</Link>
-									))}
-								</ul>
+								<span className="block font-medium mb-1">Filter by Venue</span>
+								<div className="text-gray-600">
+									<ul>
+										{venues.map((venue) => (
+											<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
+												<a className="block">{venue.name}</a>
+											</Link>
+										))}
+									</ul>
+								</div>
 							</div>
 						)}
 					</div>
