@@ -42,7 +42,10 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75 min-w-[350px] relative'
 				)}
 			>
-				<HoverCardPrimitive.Arrow className="fill-current text-gray-200 dark:text-gray-800" />
+				<HoverCardPrimitive.Arrow
+					className="fill-current text-gray-200 dark:text-gray-800"
+					offset={10}
+				/>
 
 				<div className="h-full w-full">
 					<div className="flex flex-row justify-end w-full absolute top-2 right-2">
