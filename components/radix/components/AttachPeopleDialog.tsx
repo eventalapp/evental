@@ -34,14 +34,16 @@ const AttachPeopleDialog = (props: Props) => {
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
 			<DialogPrimitive.Trigger asChild>
 				<button className="flex items-center justify-center">
-					<div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center">
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="h-5 w-5 text-gray-800"
-							size="1x"
-							icon={faPlus}
-						/>
-					</div>
+					<Tooltip message="Click to attach people to this session">
+						<div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="h-5 w-5 text-gray-800"
+								size="1x"
+								icon={faPlus}
+							/>
+						</div>
+					</Tooltip>
 				</button>
 			</DialogPrimitive.Trigger>
 
