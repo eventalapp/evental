@@ -30,7 +30,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 
 	return (
 		<HoverCardPrimitive.Root openDelay={150} closeDelay={150}>
-			<HoverCardPrimitive.Trigger>{children}</HoverCardPrimitive.Trigger>
+			<HoverCardPrimitive.Trigger asChild>{children}</HoverCardPrimitive.Trigger>
 			<HoverCardPrimitive.Content
 				side={'top'}
 				align="center"
