@@ -7,13 +7,12 @@ import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-import { Footer } from '../../../../components/Footer';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../components/events/navigation';
+import { Footer } from '../../../../components/Footer';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import Tooltip from '../../../../components/radix/components/Tooltip';
@@ -31,7 +30,7 @@ import { getEvent } from '../../../api/events/[eid]';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { getRoles } from '../../../api/events/[eid]/roles';
-import { SessionWithVenue, getSessionsByVenue } from '../../../api/events/[eid]/sessions';
+import { getSessionsByVenue, SessionWithVenue } from '../../../api/events/[eid]/sessions';
 import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
 
 type Props = {
@@ -137,23 +136,25 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				<div className="mb-5">
 					<h3 className="text-xl md:text-2xl font-medium mb-1">{venue.name}</h3>
 
-					<Tooltip
-						message={
-							venue.address
-								? `This is venue is located at ${venue?.address}.`
-								: 'This venue has not specified an address'
-						}
-					>
-						<div className="inline-flex flex-row items-center mb-1 cursor-help">
-							<FontAwesomeIcon
-								fill="currentColor"
-								className="w-5 h-5 mr-1.5"
-								size="1x"
-								icon={faLocationDot}
-							/>
-							{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
-						</div>
-					</Tooltip>
+					<div className="text-gray-600">
+						<Tooltip
+							message={
+								venue.address
+									? `This is venue is located at ${venue?.address}.`
+									: 'This venue has not specified an address'
+							}
+						>
+							<div className="inline-flex flex-row items-center mb-1 cursor-help">
+								<FontAwesomeIcon
+									fill="currentColor"
+									className="w-5 h-5 mr-1.5"
+									size="1x"
+									icon={faLocationDot}
+								/>
+								{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
+							</div>
+						</Tooltip>
+					</div>
 
 					{venue.description && (
 						<div className="prose focus:outline-none prose-a:text-primary mt-1">
@@ -161,11 +162,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 						</div>
 					)}
 				</div>
-
-				<h3 className="text-xl md:text-2xl font-medium">
-					Sessions{' '}
-					<span className="font-normal text-gray-500">({sessionsByVenueData.length || 0})</span>
-				</h3>
 
 				{sessionsByVenueData && (
 					<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} />
