@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-
 import { NEAREST_MINUTE } from '../../config';
 import { UseEditSessionMutationData } from '../../hooks/mutations/useEditSessionMutation';
 import { useRemoveAttendeeFromSessionMutation } from '../../hooks/mutations/useRemoveAttendeeFromSessionMutation';
@@ -16,11 +15,9 @@ import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { UseSessionRoleAttendeesQueryData } from '../../hooks/queries/useSessionRoleAttendeesQuery';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { FIFTEEN_MINUTES, copy } from '../../utils/const';
+import { copy, FIFTEEN_MINUTES } from '../../utils/const';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { HelpTooltip } from '../HelpTooltip';
-import { TimeZoneNotice } from '../TimeZoneNotice';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { DatePicker } from '../form/DatePicker';
@@ -28,11 +25,13 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
+import { HelpTooltip } from '../HelpTooltip';
 import AttachPeopleDialog from '../radix/components/AttachPeopleDialog';
 import CreateTypeDialog from '../radix/components/CreateTypeDialog';
 import CreateVenueDialog from '../radix/components/CreateVenueDialog';
 import Select from '../radix/components/Select';
 import Tooltip from '../radix/components/Tooltip';
+import { TimeZoneNotice } from '../TimeZoneNotice';
 
 type Props = {
 	eid: string;
@@ -184,22 +183,24 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 										</a>
 									</Link>
 
-									<Tooltip side={'top'} message={`Remove this user from this session.`}>
-										<button
-											type="button"
-											className="absolute -top-1 -right-1 p-1"
-											onClick={() => {
-												removeAttendeeFromSessionMutation.mutate({ userId: attendee.user.id });
-											}}
-										>
-											<FontAwesomeIcon
-												fill="currentColor"
-												className="w-5 h-5 cursor-pointer text-gray-700"
-												size="lg"
-												icon={faXmark}
-											/>
-										</button>
-									</Tooltip>
+									<div className="absolute -top-1 -right-1">
+										<Tooltip side={'top'} message={`Remove this user from this session.`}>
+											<button
+												type="button"
+												className="p-1"
+												onClick={() => {
+													removeAttendeeFromSessionMutation.mutate({ userId: attendee.user.id });
+												}}
+											>
+												<FontAwesomeIcon
+													fill="currentColor"
+													className="w-5 h-5 cursor-pointer text-gray-700 hover:text-red-500 transition-colors duration-200"
+													size="lg"
+													icon={faXmark}
+												/>
+											</button>
+										</Tooltip>
+									</div>
 								</li>
 							))}
 						</ul>
