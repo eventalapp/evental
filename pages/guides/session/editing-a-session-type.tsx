@@ -32,7 +32,7 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 				title="Editing a session type — Evental"
 				description={`Learn how to edit a session type for your event on Evental.`}
 				openGraph={{
-					url: 'https://evental.app/guides/session-type/editing-a-session-type',
+					url: 'https://evental.app/guides/session/editing-a-session-type',
 					title: 'Editing a session type — Evental',
 					description: `Learn how to edit a session type for your event on Evental.`,
 					images: [
@@ -62,15 +62,15 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 					items={[
 						{
 							text: sections.navigateDashboard.title,
-							relativeLink: `/guides/session-type/editing-a-session-type#${sections.navigateDashboard.anchor}`
+							relativeLink: `/guides/session/editing-a-session-type#${sections.navigateDashboard.anchor}`
 						},
 						{
 							text: sections.navigateSessionTypes.title,
-							relativeLink: `/guides/session-type/editing-a-session-type#${sections.navigateSessionTypes.anchor}`
+							relativeLink: `/guides/session/editing-a-session-type#${sections.navigateSessionTypes.anchor}`
 						},
 						{
 							text: sections.editSessionType.title,
-							relativeLink: `/guides/session-type/editing-a-session-type#${sections.editSessionType.anchor}`
+							relativeLink: `/guides/session/editing-a-session-type#${sections.editSessionType.anchor}`
 						}
 					]}
 				/>
@@ -80,11 +80,11 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 						text={sections.navigateDashboard.title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session-type/editing-a-session-type#${sections.navigateDashboard.anchor}`}
+						}/guides/session/editing-a-session-type#${sections.navigateDashboard.anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
-						To edit a session-type, navigate to the events admin dashboard by clicking the{' '}
+						To edit a session type, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
 
@@ -100,7 +100,7 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 						text={sections.navigateSessionTypes.title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session-type/editing-a-session-type#${sections.navigateSessionTypes.anchor}`}
+						}/guides/session/editing-a-session-type#${sections.navigateSessionTypes.anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
@@ -114,12 +114,12 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 						text={sections.editSessionType.title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session-type/editing-a-session-type#${sections.editSessionType.anchor}`}
+						}/guides/session/editing-a-session-type#${sections.editSessionType.anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
-						After visiting the session types dashboard page, select the session-type you wish to
-						edit by clicking the session-type.
+						After visiting the session types dashboard page, select the session type you wish to
+						edit by clicking the session type.
 					</p>
 					<p className="text-gray-700 mb-4">
 						After selecting a session type, select the <span className="font-medium">"Edit"</span>{' '}
