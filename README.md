@@ -1,10 +1,13 @@
 # Evental
 
+## pre mvp
+
+- send email to all event attendees
+- leave session
+
 ## low importance
 
 - featured role members
-- leave session, event, etc
-- send email to all event attendees
 - event banner
 - Excel export for event data
 - print your schedule
