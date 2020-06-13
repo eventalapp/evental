@@ -51,7 +51,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				/>
 
 				<div className="h-full w-full">
-					<div className="flex flex-row justify-end w-full absolute top-2 right-2">
+					<div className="flex flex-row justify-end w-full absolute top-3 right-3">
 						<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
 							<button
 								onClick={() => {
@@ -60,7 +60,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 							>
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="w-7 h-7 cursor-pointer text-gray-700"
+									className="w-7 h-7 cursor-pointer text-gray-600"
 									size="lg"
 									icon={faCalendarCirclePlus}
 								/>
