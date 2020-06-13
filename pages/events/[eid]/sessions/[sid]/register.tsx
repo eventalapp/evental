@@ -4,14 +4,13 @@ import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-import { Footer } from '../../../../../components/Footer';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/navigation';
+import { Footer } from '../../../../../components/Footer';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { CreateSessionAttendeeForm } from '../../../../../components/sessions/CreateSessionAttendeeForm';
@@ -56,12 +55,13 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 		String(sid),
 		initialSession
 	);
+	const { user } = useUser(initialUser);
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
 		String(eid),
 		String(sid),
+		user?.id,
 		{ redirectUrl: `/events/${eid}/sessions/${sid}` }
 	);
-	const { user } = useUser(initialUser);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {

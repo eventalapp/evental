@@ -2,6 +2,7 @@ import Prisma from '@prisma/client';
 import Link from 'next/link';
 import React from 'react';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { LinkButton } from '../form/LinkButton';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { SessionList } from './SessionList';
@@ -13,10 +14,11 @@ type Props = {
 	sessionType: Prisma.EventSessionType;
 	sessions: SessionWithVenue[];
 	admin?: boolean;
+	user: PasswordlessUser | undefined;
 };
 
 export const ViewSessionType: React.FC<Props> = (props) => {
-	const { sessionType, tid, eid, admin = false, sessions, event } = props;
+	const { sessionType, tid, eid, admin = false, sessions, event, user } = props;
 
 	if (!sessionType) return null;
 
@@ -48,7 +50,13 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 			</FlexRowBetween>
 
 			{sessions && (
-				<SessionList eid={String(eid)} sessions={sessions} admin={admin} event={event} />
+				<SessionList
+					eid={String(eid)}
+					sessions={sessions}
+					admin={admin}
+					event={event}
+					user={user}
+				/>
 			)}
 		</div>
 	);

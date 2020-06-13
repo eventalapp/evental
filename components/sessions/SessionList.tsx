@@ -7,6 +7,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { sessionListReducer } from '../../utils/reducer';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { NotFound } from '../error/NotFound';
 import { HorizontalTextRule } from '../HorizontalTextRule';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
@@ -17,10 +18,11 @@ type Props = {
 	admin?: boolean;
 	sessions: SessionWithVenue[];
 	event: Prisma.Event;
+	user: PasswordlessUser | undefined;
 };
 
 export const SessionList: React.FC<Props> = (props) => {
-	const { eid, sessions, event, admin = false } = props;
+	const { eid, sessions, event, admin = false, user } = props;
 	const [showPastEvents, setShowPastEvents] = useState(false);
 
 	if (sessions && sessions?.length === 0) {
@@ -91,6 +93,7 @@ export const SessionList: React.FC<Props> = (props) => {
 																session={session}
 																event={event}
 																key={session.id}
+																user={user}
 															>
 																<div className="mr-2 mb-2 inline-block">
 																	<Link
@@ -186,6 +189,7 @@ export const SessionList: React.FC<Props> = (props) => {
 									<div className="w-full">
 										{sessions.map((session) => (
 											<SessionHoverCard
+												user={user}
 												admin={admin}
 												session={session}
 												event={event}

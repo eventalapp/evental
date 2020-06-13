@@ -6,13 +6,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-import { Footer } from '../../../../../../components/Footer';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import { Footer } from '../../../../../../components/Footer';
 import { LinkButton } from '../../../../../../components/form/LinkButton';
 import Column from '../../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
@@ -122,7 +121,13 @@ const ViewVenuePage: NextPage = () => {
 					<span className="font-normal text-gray-500">({sessionsByVenueData.length || 0})</span>
 				</h3>
 
-				<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} admin />
+				<SessionList
+					eid={String(eid)}
+					sessions={sessionsByVenueData}
+					event={event}
+					user={user}
+					admin
+				/>
 			</Column>
 
 			<Footer />

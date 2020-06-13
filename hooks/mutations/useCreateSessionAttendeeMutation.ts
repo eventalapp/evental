@@ -2,7 +2,7 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
 export interface UseCreateSessionAttendeeMutationData {
@@ -20,6 +20,7 @@ interface UseCreateSessionAttendeeOptions {
 export const useCreateSessionAttendeeMutation = (
 	eid: string,
 	sid: string,
+	userId: string | undefined,
 	args: UseCreateSessionAttendeeOptions = {}
 ): UseCreateSessionAttendeeMutationData => {
 	const { redirectUrl } = args;
@@ -47,10 +48,16 @@ export const useCreateSessionAttendeeMutation = (
 					router.push(`/events/${eid}/sessions/${sid}`).then(() => {
 						void queryClient.invalidateQueries(['attendees', eid, sid]);
 						void queryClient.invalidateQueries(['session', eid, sid]);
+						if (userId) {
+							void queryClient.invalidateQueries(['attendee', eid, sid, userId]);
+						}
 					});
 				} else {
 					void queryClient.invalidateQueries(['attendees', eid, sid]);
 					void queryClient.invalidateQueries(['session', eid, sid]);
+					if (userId) {
+						void queryClient.invalidateQueries(['attendee', eid, sid, userId]);
+					}
 				}
 			},
 			onError: (error) => {

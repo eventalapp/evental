@@ -135,7 +135,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 					</h3>
 				</FlexRowBetween>
 
-				<SessionList sessions={sessionsByDateData} eid={String(eid)} event={event} />
+				<SessionList sessions={sessionsByDateData} eid={String(eid)} event={event} user={user} />
 			</Column>
 
 			<Footer />

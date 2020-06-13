@@ -6,16 +6,18 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { SessionWithVenueEvent } from '../../pages/api/users/[uid]/sessions';
 import { sessionWithEventListReducer } from '../../utils/reducer';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { NotFound } from '../error/NotFound';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
 
 type Props = {
 	admin?: boolean;
 	sessions: SessionWithVenueEvent[];
+	user: PasswordlessUser | undefined;
 };
 
 export const SessionWithEventList: React.FC<Props> = (props) => {
-	const { sessions, admin = false } = props;
+	const { sessions, admin = false, user } = props;
 	const [showPastEvents, setShowPastEvents] = useState(false);
 
 	if (sessions && sessions?.length === 0) {
@@ -81,6 +83,7 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 
 													return (
 														<SessionHoverCard
+															user={user}
 															admin={admin}
 															session={session}
 															event={session.event}
@@ -154,6 +157,7 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 
 												return (
 													<SessionHoverCard
+														user={user}
 														admin={admin}
 														session={session}
 														event={session.event}

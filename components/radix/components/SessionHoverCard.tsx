@@ -10,20 +10,23 @@ import React from 'react';
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { faCalendarCirclePlus } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import Tooltip from './Tooltip';
 
 interface Props {
 	event: Prisma.Event;
 	session: SessionWithVenue;
 	admin?: boolean;
+	user: PasswordlessUser | undefined;
 }
 
 export const SessionHoverCard: React.FC<Props> = (props) => {
-	const { children, session, event, admin } = props;
+	const { children, session, event, admin, user } = props;
 
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
 		event.slug,
-		session.slug
+		session.slug,
+		user?.id
 	);
 
 	const descriptionAsText = htmlToText(session.description ?? '');
