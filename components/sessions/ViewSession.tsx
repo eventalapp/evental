@@ -1,15 +1,18 @@
-import { faCalendarDay, faClipboardList, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import {
+	faCalendarDay,
+	faClipboardList,
+	faLocationDot,
+	faUserGroup
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import { CalendarEvent } from 'calendar-link';
-import { format } from 'date-fns';
-import { formatInTimeZone } from 'date-fns-tz';
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import React from 'react';
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
-import { faWarehouseFull } from '../../icons';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { formatDateRange } from '../../utils/formatDateRange';
 import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { AddToCalendar } from '../AddToCalendar';
@@ -106,6 +109,24 @@ export const ViewSession: React.FC<Props> = (props) => {
 			</FlexRowBetween>
 
 			<div className="text-gray-600">
+				<Tooltip
+					side={'top'}
+					message={`This is session is taking place on ${formatDateRange(
+						new Date(session.startDate),
+						new Date(session.endDate)
+					)}.`}
+				>
+					<div className="inline-flex flex-row items-center mb-2 cursor-help">
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="w-5 h-5 mr-1.5"
+							size="1x"
+							icon={faCalendarDay}
+						/>
+						<p>{formatDateRange(new Date(session.startDate), new Date(session.endDate))}</p>
+					</div>
+				</Tooltip>
+
 				{session?.type?.name && (
 					<div className="block">
 						<Link
@@ -162,46 +183,13 @@ export const ViewSession: React.FC<Props> = (props) => {
 									fill="currentColor"
 									className="w-5 h-5 mr-1.5"
 									size="1x"
-									icon={faWarehouseFull}
+									icon={faUserGroup}
 								/>
 								<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
 							</div>
 						</Tooltip>
 					</div>
 				)}
-				<Tooltip
-					side={'top'}
-					message={`This is session is taking place from ${format(
-						new Date(session.startDate),
-						'MMMM do h:mm a'
-					)} to ${formatInTimeZone(
-						new Date(session.endDate),
-						Intl.DateTimeFormat().resolvedOptions().timeZone,
-						'MMMM do h:mm a zzz'
-					)}.`}
-				>
-					<div className="inline-flex flex-row items-center mb-2 cursor-help">
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="w-5 h-5 mr-1.5"
-							size="1x"
-							icon={faCalendarDay}
-						/>
-						<p>
-							{formatInTimeZone(
-								new Date(session.startDate),
-								Intl.DateTimeFormat().resolvedOptions().timeZone,
-								'MMMM dd h:mm a'
-							)}{' '}
-							-{' '}
-							{formatInTimeZone(
-								new Date(session.endDate),
-								Intl.DateTimeFormat().resolvedOptions().timeZone,
-								'MMMM dd h:mm a'
-							)}
-						</p>
-					</div>
-				</Tooltip>
 			</div>
 
 			{session.description && (
