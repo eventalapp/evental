@@ -235,3 +235,7 @@
 		opacity: 0.6;
 	}
 }
+
+html {
+	@apply scroll-pt-14;
+}
