@@ -18,7 +18,6 @@ import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import Tooltip from '../../../components/radix/components/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
-import { SocialShare } from '../../../components/SocialShare';
 import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
@@ -195,10 +194,6 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						<SessionList sessions={sessionsData} eid={String(eid)} event={event} user={user} />
 					</div>
 					<div className="lg:col-span-3 col-span-12">
-						<div className="mb-4 max-w-[160px]">
-							<SocialShare event={event} />
-						</div>
-
 						<div className="mb-3">
 							<span className="block font-medium mb-1">Filter by Date</span>
 							<div className="relative">
