@@ -17,6 +17,7 @@ import { useLeaveEvent } from '../../hooks/mutations/useLeaveEvent';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
+import LeaveEventDialog from '../radix/components/LeaveEventDialog';
 import Tooltip from '../radix/components/Tooltip';
 
 export const EventHeader: React.FC<{
@@ -52,20 +53,20 @@ export const EventHeader: React.FC<{
 			<div className="relative">
 				{user && Boolean(isAttendee) && (
 					<div className="top-0 right-0 absolute">
-						<Tooltip side={'top'} message={'Leave this event.'}>
-							<button
-								onClick={() => {
-									leaveEventMutation.mutate();
-								}}
-							>
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="mr-2 h-5 w-5 text-red-500"
-									size="1x"
-									icon={faArrowRightFromBracket}
-								/>
-							</button>
-						</Tooltip>
+						<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
+							<div>
+								<Tooltip side={'top'} message={'Leave this event.'}>
+									<button type="button" className="bg-white">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-5 w-5 text-red-500"
+											size="1x"
+											icon={faArrowRightFromBracket}
+										/>
+									</button>
+								</Tooltip>
+							</div>
+						</LeaveEventDialog>
 					</div>
 				)}
 				<div className="flex flex-row items-center">
