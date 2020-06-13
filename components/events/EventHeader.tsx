@@ -19,6 +19,7 @@ import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
 import LeaveEventDialog from '../radix/components/LeaveEventDialog';
+import { ShareDropdown } from '../radix/components/ShareDropdown';
 import Tooltip from '../radix/components/Tooltip';
 
 export const EventHeader: React.FC<{
@@ -54,16 +55,20 @@ export const EventHeader: React.FC<{
 			<div className="relative">
 				<div className="top-0 right-0 absolute flex flex-row">
 					<div className="mr-5">
-						<Tooltip side={'top'} message={'Share this event.'}>
-							<button type="button" className="bg-white">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="h-5 w-5 text-primary"
-									size="1x"
-									icon={faShare}
-								/>
-							</button>
-						</Tooltip>
+						<ShareDropdown event={event}>
+							<div>
+								<Tooltip side={'top'} message={'Share this event.'}>
+									<button type="button" className="bg-white">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-5 w-5 text-primary"
+											size="1x"
+											icon={faShare}
+										/>
+									</button>
+								</Tooltip>
+							</div>
+						</ShareDropdown>
 					</div>
 
 					{user && Boolean(isAttendee) && (
