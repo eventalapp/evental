@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { format } from 'date-fns';
 import React from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
-
 import { NEAREST_MINUTE } from '../../config';
 import { DatePickerButton } from './DatePickerButton';
 
@@ -63,7 +62,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 							type="button"
 							className={classNames(
 								prevMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex p-1 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500'
+								'inline-flex p-1 text-base font-medium text-gray-700 bg-white rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500'
 							)}
 						>
 							<FontAwesomeIcon
@@ -80,7 +79,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 							type="button"
 							className={classNames(
 								nextMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex p-1 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500'
+								'inline-flex p-1 text-base font-medium text-gray-700 bg-white rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500'
 							)}
 						>
 							<FontAwesomeIcon

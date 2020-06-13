@@ -136,11 +136,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		) {
 			return (
 				<Tooltip message={`View sessions for ${dayjs(date).format('MMMM D')}`} side="top">
-					<div>
-						<Link href={`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`}>
-							<a className="block">{dayOfMonth}</a>
-						</Link>
-					</div>
+					<span>{dayOfMonth}</span>
 				</Tooltip>
 			);
 		}
@@ -199,7 +195,9 @@ const ViewEventPage: NextPage<Props> = (props) => {
 							<div className="relative">
 								<SessionDatePicker
 									onChange={(date) => {
-										console.log(date);
+										router.push(
+											`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`
+										);
 									}}
 									renderDayContents={renderDayContents}
 									maxDate={new Date(String(event.endDate))}
