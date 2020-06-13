@@ -24,5 +24,5 @@ export const formatDateRange = (start: Date, end: Date, args: FormatDateRangeArg
 
 	return `${dayjs(startDate).format('MMMM Do')}${
 		showHour ? dayjs(startDate).format(', h:mm a') : ''
-	} - ${dayjs(endDate).format('Do')}${showHour ? dayjs(endDate).format(', h:mm a') : ''}`;
+	} - ${dayjs(endDate).format('MMMM Do')}${showHour ? dayjs(endDate).format(', h:mm a') : ''}`;
 };
