@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { NotFound } from '../error/NotFound';
@@ -21,7 +20,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-5">
+			<ul className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-5">
 				{attendees &&
 					attendees.map(
 						(attendee) =>
@@ -33,7 +32,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 										href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${attendee.user.slug}`}
 									>
 										<a className="flex items-center justify-start flex-col h-full">
-											<div className="h-16 w-16 relative mb-1 border-2 border-gray-100 rounded-full">
+											<div className="h-28 w-28 relative mb-1 border-2 border-gray-100 rounded-full">
 												<Image
 													alt={String(attendee.user.name)}
 													src={String(
