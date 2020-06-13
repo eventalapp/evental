@@ -52,7 +52,7 @@ const LeaveEventDialog: React.FC<Props> = (props) => {
 						)}
 					>
 						<AlertDialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
-							Are you sure you want to leave?
+							Leave this event?
 						</AlertDialogPrimitive.Title>
 						<AlertDialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
 							You may rejoin this event, but your session attendance and event permissions will be
