@@ -3,19 +3,18 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React from 'react';
 
-import { Footer } from '../../../../components/Footer';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../components/events/navigation';
+import { Footer } from '../../../../components/Footer';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { ViewPage } from '../../../../components/pages/ViewPage';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { usePageQuery } from '../../../../hooks/queries/usePageQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
@@ -47,7 +46,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
 
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
 
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages

@@ -10,10 +10,8 @@ import { UseCreateSessionMutationData } from '../../hooks/mutations/useCreateSes
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { FIFTEEN_MINUTES, copy } from '../../utils/const';
+import { copy, FIFTEEN_MINUTES } from '../../utils/const';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
-import { HelpTooltip } from '../HelpTooltip';
-import { TimeZoneNotice } from '../TimeZoneNotice';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { DatePicker } from '../form/DatePicker';
@@ -21,9 +19,11 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
+import { HelpTooltip } from '../HelpTooltip';
 import CreateTypeDialog from '../radix/components/CreateTypeDialog';
 import CreateVenueDialog from '../radix/components/CreateVenueDialog';
 import Select from '../radix/components/Select';
+import { TimeZoneNotice } from '../TimeZoneNotice';
 
 type Props = {
 	eid: string;

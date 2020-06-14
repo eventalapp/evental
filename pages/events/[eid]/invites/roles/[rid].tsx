@@ -1,20 +1,19 @@
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React from 'react';
 
-import { Footer } from '../../../../../components/Footer';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { Footer } from '../../../../../components/Footer';
 import { Button } from '../../../../../components/form/Button';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Navigation } from '../../../../../components/navigation';
 import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useAcceptRoleInviteMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRoleQuery } from '../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
 import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
@@ -26,7 +25,7 @@ const RoleInvitePage: NextPage = () => {
 	const { acceptRoleInviteMutation } = useAcceptRoleInviteMutation(String(eid), String(rid));
 	const { role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
 	const { event, isEventLoading } = useEventQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
 	if (isUserLoading || isRoleLoading || isOrganizerLoading || isEventLoading) {
 		return <LoadingPage />;

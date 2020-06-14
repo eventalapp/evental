@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { LoadingPage } from '../../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../../components/error/NotFoundPage';
@@ -12,7 +11,7 @@ import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
 import { ViewSessionType } from '../../../../../../../components/sessions/ViewSessionType';
 import { useEventQuery } from '../../../../../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../../../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../../../../hooks/queries/useRolesQuery';
 import { useSessionsByTypeQuery } from '../../../../../../../hooks/queries/useSessionsByTypeQuery';
 import { useSessionTypeQuery } from '../../../../../../../hooks/queries/useSessionTypeQuery';
@@ -22,7 +21,7 @@ const ViewSessionTypePage: NextPage = () => {
 	const router = useRouter();
 	const { tid, eid } = router.query;
 	const { user } = useUser();
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { isSessionTypeLoading, sessionType, sessionTypeError } = useSessionTypeQuery(

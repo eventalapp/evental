@@ -5,7 +5,6 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
@@ -18,9 +17,9 @@ import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import Tooltip from '../../../components/radix/components/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
-import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
+import { useIsAttendeeQuery } from '../../../hooks/queries/useIsAttendeeQuery';
+import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
 import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
@@ -28,9 +27,9 @@ import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuer
 import { useUser } from '../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
 import { ssrGetUser } from '../../../utils/api';
-import { AttendeeWithUser, PasswordlessUser } from '../../../utils/stripUserPassword';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getEvent } from '../../api/events/[eid]';
-import { getAttendee } from '../../api/events/[eid]/attendees/[uid]';
+import { getIsAttendee } from '../../api/events/[eid]/attendee';
 import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 import { getPages } from '../../api/events/[eid]/pages';
 import { getRoles } from '../../api/events/[eid]/roles';
@@ -42,8 +41,8 @@ type Props = {
 	initialEvent: Prisma.Event | undefined;
 	initialSessions: SessionWithVenue[] | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
-	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
-	initialOrganizer: boolean;
+	initialIsAttendee: boolean;
+	initialIsOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialVenues: Prisma.EventVenue[] | undefined;
 	initialSessionTypes: Prisma.EventSessionType[] | undefined;
@@ -53,29 +52,37 @@ type Props = {
 const ViewEventPage: NextPage<Props> = (props) => {
 	const {
 		initialEvent,
-		initialOrganizer,
+		initialIsOrganizer,
 		initialUser,
 		initialRoles,
 		initialSessions,
-		initialIsAttendeeByUserId,
+		initialIsAttendee,
 		initialVenues,
 		initialSessionTypes,
 		initialPages
 	} = props;
+
+	console.log({
+		initialEvent,
+		initialIsOrganizer,
+		initialUser,
+		initialRoles,
+		initialSessions,
+		initialIsAttendee,
+		initialVenues,
+		initialSessionTypes,
+		initialPages
+	});
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { user } = useUser(initialUser);
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialIsOrganizer);
+	const { isAttendee, isAttendeeLoading } = useIsAttendeeQuery(String(eid), initialIsAttendee);
 	const { sessionsData, isSessionsLoading, sessionsError } = useSessionsQuery(String(eid), {
 		initialData: initialSessions
 	});
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { user } = useUser(initialUser);
-	const {
-		attendee: isAttendee,
-		attendeeError,
-		isAttendeeLoading
-	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 	const { venues, venuesError, isVenuesLoading } = useVenuesQuery(String(eid), initialVenues);
 	const { sessionTypesError, isSessionTypesLoading, sessionTypes } = useSessionTypesQuery(
 		String(eid),
@@ -98,24 +105,10 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (
-		rolesError ||
-		eventError ||
-		sessionsError ||
-		attendeeError ||
-		venuesError ||
-		sessionTypesError
-	) {
+	if (rolesError || eventError || sessionsError || venuesError || sessionTypesError) {
 		return (
 			<ViewErrorPage
-				errors={[
-					rolesError,
-					eventError,
-					sessionsError,
-					attendeeError,
-					venuesError,
-					sessionTypesError
-				]}
+				errors={[rolesError, eventError, sessionsError, venuesError, sessionTypesError]}
 			/>
 		);
 	}
@@ -262,17 +255,17 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialSessionTypes = (await getSessionTypes(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialVenues = (await getVenues(String(eid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialIsAttendeeByUserId =
-		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
+	const initialIsOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
+	const initialIsAttendee =
+		(await getIsAttendee(String(eid), String(initialUser?.id))) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialEvent,
 			initialUser,
-			initialOrganizer,
-			initialIsAttendeeByUserId,
+			initialIsOrganizer,
+			initialIsAttendee,
 			initialRoles,
 			initialSessions,
 			initialVenues,

@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
@@ -14,7 +13,7 @@ import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { ViewSessionType } from '../../../../../components/sessions/ViewSessionType';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { useSessionsByTypeQuery } from '../../../../../hooks/queries/useSessionsByTypeQuery';
@@ -67,7 +66,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
 
 	if (
 		isSessionTypeLoading ||
