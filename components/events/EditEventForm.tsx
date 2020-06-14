@@ -99,123 +99,96 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				editEventMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full mt-5 items-center justify-center">
-				<Label htmlFor="image" className="hidden">
-					Image
-				</Label>
+			<div className="grid grid-cols-4 gap-5 grid-flow-row-dense my-5">
+				<div className="col-span-2 md:col-span-1 row-span-2">
+					<Label htmlFor="image">Image</Label>
 
-				<AvatarUpload
-					rounded={false}
-					files={files}
-					setFiles={setFiles}
-					placeholderImageUrl={`https://cdn.evental.app${event.image}`}
-				/>
+					<AvatarUpload
+						rounded={false}
+						files={files}
+						setFiles={setFiles}
+						placeholderImageUrl={`https://cdn.evental.app${event.image}`}
+					/>
 
-				{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
-			</div>
-			<div className="flex flex-col w-full mt-5">
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-					<div>
-						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="Event name" {...register('name')} />
-						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
-					</div>
-
-					<div>
-						<Label htmlFor="location">Location</Label>
-						<Input placeholder="Event location" {...register('location')} />
-						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
-					</div>
-				</div>
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-					<div>
-						<Label htmlFor="website">
-							Website *<HelpTooltip message={copy.tooltip.eventWebsite} />
-						</Label>
-						<Input placeholder="https://website.com" {...register('website')} />
-						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
-					</div>
-
-					<div>
-						<Label htmlFor="maxAttendees">
-							Max Attendees *
-							<HelpTooltip
-								message={`Your events max attendee count is ${event.maxAttendees}. To increase this, please contact us.`}
-							/>
-						</Label>
-						<Input onChange={() => {}} value={`${event.maxAttendees}`} type="number" />
-						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
-						{event.level === 'TRIAL' ? (
-							<p className="text-gray-600 text-sm mt-1">
-								Want to increase your max attendee count?{' '}
-								<Link href={`/events/${event.slug}/admin/billing`}>
-									<a className="text-primary font-medium">Upgrade your plan</a>
-								</Link>
-							</p>
-						) : (
-							<p className="text-gray-600 text-sm mt-1">
-								Want to increase your max attendee count?{' '}
-								<Link href={`/contact`}>
-									<a className="text-primary font-medium">Contact Us</a>
-								</Link>
-							</p>
-						)}
-					</div>
+					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-					<div>
-						<Label htmlFor="startDate">Start Date *</Label>
-						<div className="relative">
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="name">Name *</Label>
+					<Input placeholder="Event name" {...register('name')} />
+					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-2 md:col-span-1">
+					<Label htmlFor="category">
+						Category
+						<HelpTooltip message={copy.tooltip.eventCategory} />
+					</Label>
+					{EventCategory && (
+						<div>
 							<Controller
 								control={control}
-								name="startDate"
+								name="category"
 								render={({ field }) => (
-									<DatePicker
-										onChange={(date) => {
-											field.onChange(dayjs(date).toDate());
+									<Select
+										options={Object.values(EventCategory).map((category) => ({
+											label: capitalizeFirstLetter(category.toLowerCase().replace('_', ' ')),
+											value: category
+										}))}
+										value={field.value}
+										onValueChange={(value) => {
+											setValue('category', EventCategory[value as keyof typeof EventCategory]);
 										}}
-										selected={dayjs(field.value).toDate()}
-										startDate={dayjs(field.value).toDate()}
-										endDate={endDateWatcher}
-										selectsStart
-										required
-										dateFormat="MM/dd/yyyy"
 									/>
 								)}
 							/>
 						</div>
-						{errors.startDate?.message && <ErrorMessage>{errors.startDate?.message}</ErrorMessage>}
-					</div>
+					)}
+					{errors.type?.message && <ErrorMessage>{errors.type?.message}</ErrorMessage>}
+				</div>
 
-					<div>
-						<Label htmlFor="endDate">End Date *</Label>
-						<div className="relative">
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="location">Location</Label>
+					<Input placeholder="Event location" {...register('location')} />
+					{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-2 md:col-span-1">
+					<Label htmlFor="type">
+						Type *<HelpTooltip message={copy.tooltip.eventType} />
+					</Label>
+					{EventType && (
+						<div>
 							<Controller
 								control={control}
-								name="endDate"
+								name="type"
 								render={({ field }) => (
-									<DatePicker
-										onChange={(date) => {
-											field.onChange(dayjs(date).toDate());
+									<Select
+										options={Object.values(EventType).map((type) => ({
+											label: capitalizeFirstLetter(type.toLowerCase().replace('_', ' ')),
+											value: type
+										}))}
+										value={field.value}
+										onValueChange={(value) => {
+											setValue('type', EventType[value as keyof typeof EventType]);
 										}}
-										selected={dayjs(field.value).toDate()}
-										selectsEnd
-										required
-										startDate={startDateWatcher}
-										endDate={dayjs(field.value).toDate()}
-										dateFormat="MM/dd/yyyy"
 									/>
 								)}
 							/>
 						</div>
-						{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
-					</div>
+					)}
+					{errors.type?.message && <ErrorMessage>{errors.type?.message}</ErrorMessage>}
 				</div>
-			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-				<div>
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="website">
+						Website *<HelpTooltip message={copy.tooltip.eventWebsite} />
+					</Label>
+					<Input placeholder="https://website.com" {...register('website')} />
+					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="slug">
 						Time Zone *<HelpTooltip message={copy.tooltip.eventTimeZone} />
 					</Label>
@@ -237,7 +210,82 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 					{errors.timeZone?.message && <ErrorMessage>{errors.timeZone?.message}</ErrorMessage>}
 				</div>
-				<div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="startDate">Start Date *</Label>
+					<div className="relative">
+						<Controller
+							control={control}
+							name="startDate"
+							render={({ field }) => (
+								<DatePicker
+									onChange={(date) => {
+										field.onChange(dayjs(date).toDate());
+									}}
+									selected={dayjs(field.value).toDate()}
+									startDate={dayjs(field.value).toDate()}
+									endDate={endDateWatcher}
+									selectsStart
+									required
+									dateFormat="MM/dd/yyyy"
+								/>
+							)}
+						/>
+					</div>
+					{errors.startDate?.message && <ErrorMessage>{errors.startDate?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="endDate">End Date *</Label>
+					<div className="relative">
+						<Controller
+							control={control}
+							name="endDate"
+							render={({ field }) => (
+								<DatePicker
+									onChange={(date) => {
+										field.onChange(dayjs(date).toDate());
+									}}
+									selected={dayjs(field.value).toDate()}
+									selectsEnd
+									required
+									startDate={startDateWatcher}
+									endDate={dayjs(field.value).toDate()}
+									dateFormat="MM/dd/yyyy"
+								/>
+							)}
+						/>
+					</div>
+					{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="maxAttendees">
+						Max Attendees *
+						<HelpTooltip
+							message={`Your events max attendee count is ${event.maxAttendees}. To increase this, please contact us.`}
+						/>
+					</Label>
+					<Input onChange={() => {}} value={`${event.maxAttendees}`} type="number" />
+					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
+					{event.level === 'TRIAL' ? (
+						<p className="text-gray-600 text-sm mt-1">
+							Want to increase your max attendee count?{' '}
+							<Link href={`/events/${event.slug}/admin/billing`}>
+								<a className="text-primary font-medium">Upgrade your plan</a>
+							</Link>
+						</p>
+					) : (
+						<p className="text-gray-600 text-sm mt-1">
+							Want to increase your max attendee count?{' '}
+							<Link href={`/contact`}>
+								<a className="text-primary font-medium">Contact Us</a>
+							</Link>
+						</p>
+					)}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="privacy">
 						Privacy *<HelpTooltip message={copy.tooltip.eventPrivacy} />
 					</Label>
@@ -271,88 +319,27 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						</p>
 					)}
 				</div>
-			</div>
 
-			<div className="grid grid-cols-1 mb-5 gap-5">
-				<div>
+				<div className="col-span-4">
 					<Label htmlFor="description">Description</Label>
 					<Textarea rows={5} placeholder="Event description" {...register('description')} />
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
 				</div>
-			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-				<div>
-					<div>
-						<Label htmlFor="slug">
-							Slug *<HelpTooltip message={copy.tooltip.eventSlug} />
-						</Label>
-						<div className="flex items-center">
-							<span className="mr-1 text-sm md:text-base">evental.app/events/</span>
-							<Input placeholder="event-slug" {...register('slug')} />
-						</div>
-						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{slugWatcher !== event?.slug && eventSlugCheck && (
-							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
-						)}
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="slug">
+						Slug *<HelpTooltip message={copy.tooltip.eventSlug} />
+					</Label>
+					<div className="flex items-center">
+						<span className="mr-1 text-sm md:text-base">evental.app/events/</span>
+						<Input placeholder="event-slug" {...register('slug')} />
 					</div>
-				</div>
-				<div className="grid grid-cols-2 mb-5 gap-5">
-					<div>
-						<Label htmlFor="category">
-							Category
-							<HelpTooltip message={copy.tooltip.eventCategory} />
-						</Label>
-						{EventCategory && (
-							<div>
-								<Controller
-									control={control}
-									name="category"
-									render={({ field }) => (
-										<Select
-											options={Object.values(EventCategory).map((category) => ({
-												label: capitalizeFirstLetter(category.toLowerCase().replace('_', ' ')),
-												value: category
-											}))}
-											value={field.value}
-											onValueChange={(value) => {
-												setValue('category', EventCategory[value as keyof typeof EventCategory]);
-											}}
-										/>
-									)}
-								/>
-							</div>
-						)}
-						{errors.type?.message && <ErrorMessage>{errors.type?.message}</ErrorMessage>}
-					</div>
-					<div>
-						<Label htmlFor="type">
-							Type *<HelpTooltip message={copy.tooltip.eventType} />
-						</Label>
-						{EventType && (
-							<div>
-								<Controller
-									control={control}
-									name="type"
-									render={({ field }) => (
-										<Select
-											options={Object.values(EventType).map((type) => ({
-												label: capitalizeFirstLetter(type.toLowerCase().replace('_', ' ')),
-												value: type
-											}))}
-											value={field.value}
-											onValueChange={(value) => {
-												setValue('type', EventType[value as keyof typeof EventType]);
-											}}
-										/>
-									)}
-								/>
-							</div>
-						)}
-						{errors.type?.message && <ErrorMessage>{errors.type?.message}</ErrorMessage>}
-					</div>
+					{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
+					{slugWatcher !== event?.slug && eventSlugCheck && (
+						<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
+					)}
 				</div>
 			</div>
 
