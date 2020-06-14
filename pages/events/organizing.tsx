@@ -2,8 +2,6 @@ import type Prisma from '@prisma/client';
 import type { GetServerSideProps, NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
-
-import { Footer } from '../../components/Footer';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
@@ -11,6 +9,7 @@ import { ViewErrorPage } from '../../components/error/ViewErrorPage';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { EventList } from '../../components/events/EventList';
 import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
+import { Footer } from '../../components/Footer';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
@@ -78,8 +77,8 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 
 					<EventsPageNavigation />
 
-					<span className="block font-bold text-center text-lg mt-5 text-center">
-						Organizing an event?
+					<span className="block font-bold text-lg mt-5 text-center">
+						Organizing an event? Create an event below
 					</span>
 
 					<CreateEventForm createEventMutation={createEventMutation} />
@@ -118,7 +117,9 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 
 				{user && <EventsPageNavigation />}
 
-				<span className="block font-medium text-center text-lg mt-5">Organizing an event?</span>
+				<span className="block font-medium text-center text-lg mt-5">
+					Organizing an event? Create an event below
+				</span>
 
 				<CreateEventForm createEventMutation={createEventMutation} />
 
