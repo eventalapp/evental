@@ -13,16 +13,16 @@ import { Footer } from '../../../../components/Footer';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { RoleList } from '../../../../components/roles/RoleList';
-import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { ssrGetUser } from '../../../../utils/api';
-import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { getEvent } from '../../../api/events/[eid]';
-import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
+import { getIsAttendee } from '../../../api/events/[eid]/attendee';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { getRoles } from '../../../api/events/[eid]/roles';
@@ -32,7 +32,7 @@ type Props = {
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
-	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
+	initialIsAttendee: boolean;
 	initialPages: Prisma.EventPage[] | undefined;
 };
 
@@ -42,20 +42,17 @@ const RolesPage: NextPage<Props> = (props) => {
 		initialOrganizer,
 		initialEvent,
 		initialUser,
-		initialIsAttendeeByUserId,
+		initialIsAttendee,
 		initialPages
 	} = props;
 	const router = useRouter();
 	const { eid } = router.query;
+
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { user } = useUser(initialUser);
-	const {
-		attendee: isAttendee,
-		attendeeError,
-		isAttendeeLoading
-	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
+	const { isAttendee, isAttendeeLoading } = useIsAttendeeQuery(String(eid), initialIsAttendee);
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
@@ -74,7 +71,7 @@ const RolesPage: NextPage<Props> = (props) => {
 		return <NotFoundPage message="No roles found." />;
 	}
 
-	if (rolesError || eventError || attendeeError) {
+	if (rolesError || eventError) {
 		return <ViewErrorPage errors={[rolesError, eventError]} />;
 	}
 	if (!event) {
@@ -148,8 +145,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
-	const initialIsAttendeeByUserId =
-		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
+	const initialIsAttendee =
+		(await getIsAttendee({ eid: String(eid), userId: String(initialUser?.id) })) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
@@ -158,7 +155,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialRoles,
 			initialOrganizer,
 			initialEvent,
-			initialIsAttendeeByUserId,
+			initialIsAttendee,
 			initialPages
 		}
 	};

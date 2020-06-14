@@ -257,7 +257,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialVenues = (await getVenues(String(eid))) ?? undefined;
 	const initialIsOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialIsAttendee =
-		(await getIsAttendee(String(eid), String(initialUser?.id))) ?? undefined;
+		(await getIsAttendee({ eid: String(eid), userId: String(initialUser?.id) })) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {

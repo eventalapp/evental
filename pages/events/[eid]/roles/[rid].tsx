@@ -14,9 +14,9 @@ import { Footer } from '../../../../components/Footer';
 import Column from '../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useAttendeesByRoleQuery } from '../../../../hooks/queries/useAttendeesByRoleQuery';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { useRoleQuery } from '../../../../hooks/queries/useRoleAttendeesQuery';
@@ -26,8 +26,8 @@ import { ssrGetUser } from '../../../../utils/api';
 import { capitalizeFirstLetter } from '../../../../utils/string';
 import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { getEvent } from '../../../api/events/[eid]';
+import { getIsAttendee } from '../../../api/events/[eid]/attendee';
 import { getAttendeesByRole } from '../../../api/events/[eid]/attendees';
-import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { getRoles } from '../../../api/events/[eid]/roles';
@@ -40,7 +40,7 @@ type Props = {
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
-	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
+	initialIsAttendee: boolean;
 	initialPages: Prisma.EventPage[] | undefined;
 };
 
@@ -52,21 +52,18 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		initialUser,
 		initialEvent,
 		initialRoles,
-		initialIsAttendeeByUserId,
+		initialIsAttendee,
 		initialPages
 	} = props;
 	const router = useRouter();
 	const { rid, eid } = router.query;
+
 	const { role, isRoleLoading, roleError } = useRoleQuery(String(eid), String(rid), initialRole);
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
-	const {
-		attendee: isAttendee,
-		attendeeError,
-		isAttendeeLoading
-	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
+	const { isAttendee, isAttendeeLoading } = useIsAttendeeQuery(String(eid), initialIsAttendee);
 	const { attendeesData, isAttendeesLoading } = useAttendeesByRoleQuery(String(eid), String(rid), {
 		initialData: initialAttendees
 	});
@@ -90,7 +87,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		return <NotFoundPage message="Role not found." />;
 	}
 
-	if (roleError || eventError || rolesError || attendeeError) {
+	if (roleError || eventError || rolesError) {
 		return <ViewErrorPage errors={[roleError, rolesError, eventError]} />;
 	}
 
@@ -171,8 +168,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialIsAttendeeByUserId =
-		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
+	const initialIsAttendee =
+		(await getIsAttendee({ eid: String(eid), userId: String(initialUser?.id) })) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
@@ -183,7 +180,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialOrganizer,
 			initialEvent,
 			initialRoles,
-			initialIsAttendeeByUserId,
+			initialIsAttendee,
 			initialPages
 		}
 	};
