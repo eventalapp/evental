@@ -47,6 +47,19 @@ export const EventHeader: React.FC<{
 				</Link>
 			)}
 
+			{!user && (
+				<Link href={`/events/${eid}/register`}>
+					<a
+						className="block text-white px-5 py-3 rounded-md mb-4 font-medium"
+						style={{
+							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+						}}
+					>
+						Are you attending this event? Create an account and register.
+					</a>
+				</Link>
+			)}
+
 			{user && !Boolean(isAttendee) && (
 				<Link href={`/events/${eid}/register`}>
 					<a
