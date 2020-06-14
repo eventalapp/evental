@@ -6,7 +6,7 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import * as Portal from '@radix-ui/react-portal';
 import cx from 'classnames';
 import Image from 'next/image';
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useAddAttendeeToSessionMutation } from '../../../hooks/mutations/useAddAttendeeToSessionMutation';
 import { useAttendeesByNameQuery } from '../../../hooks/queries/useAttendeesByNameQuery';
 import { LoadingInner } from '../../error/LoadingInner';
@@ -17,8 +17,8 @@ interface Props {
 	sid: string;
 }
 
-const AttachPeopleDialog = (props: Props) => {
-	const { eid, sid } = props;
+const AttachPeopleDialog: React.FC<Props> = (props) => {
+	const { eid, sid, children } = props;
 
 	let [isOpen, setIsOpen] = useState(false);
 	const [name, setName] = useState('');
@@ -32,15 +32,7 @@ const AttachPeopleDialog = (props: Props) => {
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-			<DialogPrimitive.Trigger>
-				<button type="button">
-					<Tooltip message="Click to attach people to this session">
-						<div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-800 hover:text-primary-500 transition-colors duration-200">
-							<FontAwesomeIcon fill="currentColor" className="h-5 w-5" size="1x" icon={faPlus} />
-						</div>
-					</Tooltip>
-				</button>
-			</DialogPrimitive.Trigger>
+			<DialogPrimitive.Trigger asChild>{children}</DialogPrimitive.Trigger>
 
 			<Portal.Root>
 				<Transition.Root show={isOpen}>

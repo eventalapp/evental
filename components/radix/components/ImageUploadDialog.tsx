@@ -36,11 +36,12 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 	}, [isOpen]);
 
 	return (
-		<DialogPrimitive.Root open={isOpen}>
+		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
 			<DialogPrimitive.Trigger
 				onClick={() => {
 					setIsOpen(true);
 				}}
+				asChild
 			>
 				{children}
 			</DialogPrimitive.Trigger>
