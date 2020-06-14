@@ -42,7 +42,7 @@ const HomePage: NextPage = () => {
 					Event management software that's highly intuitive. Your attendees and organizers will love
 					using Evental for your in-person, hybrid, and virtual events.
 				</p>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-3 z-10">
+				<div className="grid grid-cols-2 gap-3 z-10">
 					<Link href="/events/create" passHref>
 						<LinkButton variant="primary" padding="large">
 							Host An Event
