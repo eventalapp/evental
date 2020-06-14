@@ -35,14 +35,19 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 
 						<div className="h-full flex-row justify-end hidden lg:flex">
 							<div className="flex flex-row items-end">
-								<LinkItem link={`/events/${event.slug}`} label={'Sessions'} />
-								<LinkItem link={`/events/${event.slug}/venues`} label={'Venues'} />
+								<LinkItem link={`/events/${event.slug}`} label={'Sessions'} color={event.color} />
+								<LinkItem
+									link={`/events/${event.slug}/venues`}
+									label={'Venues'}
+									color={event.color}
+								/>
 
 								{roles.map((role) => (
 									<LinkItem
 										key={role.id}
 										link={`/events/${event.slug}/roles/${role.slug}`}
 										label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
+										color={event.color}
 									/>
 								))}
 
@@ -53,6 +58,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 											key={page.id}
 											link={`/events/${event.slug}/pages/${page.slug}`}
 											label={page.name}
+											color={event.color}
 										/>
 									))}
 							</div>
@@ -72,7 +78,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 
 						<div className="h-full flex-row justify-end hidden lg:flex">
 							<div className="flex flex-row items-end">
-								<LinkItem link={`/auth/signin`} label={'Sign in'} />
+								<LinkItem link={`/auth/signin`} label={'Sign in'} color={event.color} />
 							</div>
 						</div>
 					</NavigationMenuPrimitive.List>
