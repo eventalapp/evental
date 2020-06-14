@@ -239,3 +239,10 @@
 html {
 	@apply scroll-pt-14;
 }
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+	-webkit-appearance: none;
+}

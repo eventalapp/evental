@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CalendarEvent, google, ics, office365, outlook, yahoo } from 'calendar-link';
 import cx from 'classnames';
-import React from 'react';
 import { faCalendarCirclePlus, faOutlook } from '../../../icons/';
 import Tooltip from './Tooltip';
 
@@ -19,7 +18,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 	return (
 		<div className="relative inline-block text-left">
 			<DropdownMenuPrimitive.Root>
-				<DropdownMenuPrimitive.Trigger>
+				<DropdownMenuPrimitive.Trigger asChild>
 					<div>
 						<Tooltip message="Add this session to your calendar" side="top">
 							<button className="flex items-center justify-center p-1.5 text-gray-600">
