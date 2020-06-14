@@ -3,6 +3,7 @@ import { eduAttendeesToPrice, proAttendeesToPrice } from './price';
 export const copy = {
 	tooltip: {
 		type: 'A session type is used to categorize sessions.',
+		color: 'Pick a color for your event to push your brand. We recommend you pick a darker color.',
 		venue: 'A venue is used to group sessions by location.',
 		maxAttendees:
 			'You can specify the max attendees to limit how many people can attend a session. Leave the input blank if you do not want a attendee limit.',
