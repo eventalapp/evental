@@ -2,10 +2,12 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import classNames from 'classnames';
+import Link from 'next/link';
 import React from 'react';
 import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
 import { faBarsSquare } from '../../icons';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { LinkButton } from '../form/LinkButton';
 import { ProfileDropdown } from './dropdown';
 import { FullscreenLinkItem } from './FullscreenLinkItem';
 import { LinkItem } from './LinkItem';
@@ -52,6 +54,12 @@ export const Authenticated: React.FC<Props> = (props) => {
 						</div>
 
 						<div className="justify-end items-center hidden lg:flex">
+							<div className="mr-6">
+								<Link href="/events/create">
+									<LinkButton>Create Event</LinkButton>
+								</Link>
+							</div>
+
 							<NavigationMenuPrimitive.Item className="flex">
 								{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
 							</NavigationMenuPrimitive.Item>
