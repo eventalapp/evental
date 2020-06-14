@@ -12,7 +12,6 @@
 - Excel export for event data
 - print your schedule
 - customize react toast
-- refactor navigations
 - refactor buttons
 - remove unused radix
 - clean up queries/mutations (export whole mut/query?)
