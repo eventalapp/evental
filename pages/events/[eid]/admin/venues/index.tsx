@@ -1,6 +1,6 @@
+import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
@@ -9,7 +9,7 @@ import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import { Footer } from '../../../../../components/Footer';
-import { LinkButton } from '../../../../../components/form/LinkButton';
+import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
@@ -58,11 +58,13 @@ const VenuesAdminPage: NextPage = () => {
 					<FlexRowBetween>
 						<h3 className="text-xl md:text-2xl font-medium">Venues</h3>
 
-						<div>
-							<Link href={`/events/${eid}/admin/venues/create`} passHref>
-								<LinkButton padding="medium">Create</LinkButton>
-							</Link>
-						</div>
+						<IconLinkTooltip
+							message="Click to create a venue"
+							side="top"
+							href={`/events/${eid}/admin/venues/create`}
+							icon={faSquarePlus}
+							className="text-gray-700"
+						/>
 					</FlexRowBetween>
 
 					<VenueList

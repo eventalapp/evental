@@ -1,6 +1,6 @@
+import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
@@ -8,7 +8,7 @@ import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import { Footer } from '../../../../../components/Footer';
-import { LinkButton } from '../../../../../components/form/LinkButton';
+import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
@@ -66,11 +66,13 @@ const SessionsAdminPage: NextPage = () => {
 							<span className="font-normal text-gray-500">({sessionsData.length || 0})</span>
 						</h3>
 
-						<div>
-							<Link href={`/events/${eid}/admin/sessions/create`} passHref>
-								<LinkButton padding="medium">Create</LinkButton>
-							</Link>
-						</div>
+						<IconLinkTooltip
+							message="Click to create a session"
+							side="top"
+							href={`/events/${eid}/admin/sessions/create`}
+							icon={faSquarePlus}
+							className="text-gray-700"
+						/>
 					</FlexRowBetween>
 
 					<SessionList admin eid={String(eid)} sessions={sessionsData} event={event} user={user} />

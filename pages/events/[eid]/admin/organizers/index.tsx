@@ -1,6 +1,6 @@
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
@@ -11,7 +11,7 @@ import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPa
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import { Footer } from '../../../../../components/Footer';
-import { LinkButton } from '../../../../../components/form/LinkButton';
+import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
@@ -71,9 +71,14 @@ const EventOrganizersPage: NextPage = () => {
 			<Column>
 				<FlexRowBetween>
 					<h3 className="text-xl md:text-2xl font-medium">Organizers</h3>
-					<Link href={`/events/${eid}/admin/organizers/invite`}>
-						<LinkButton>Invite Organizer</LinkButton>
-					</Link>
+
+					<IconLinkTooltip
+						message="Click to invite an organizer"
+						side="top"
+						href={`/events/${eid}/admin/organizers/invite`}
+						icon={faPaperPlane}
+						className="text-gray-700"
+					/>
 				</FlexRowBetween>
 
 				<AttendeeList attendees={organizers} eid={String(eid)} admin />
