@@ -68,7 +68,9 @@ const InviteRolePage: NextPage = () => {
 				</FlexRowBetween>
 
 				<p className="text-md text-gray-700 mb-2">
-					Roles are used to separate users into different groups.
+					Enter the users email that you wish to invite to the{' '}
+					<span className="font-medium">"{role.name}"</span> role. They will receive an email with
+					information on how to claim their role.
 				</p>
 
 				<InviteRoleForm inviteRoleMutation={inviteRoleMutation} />
