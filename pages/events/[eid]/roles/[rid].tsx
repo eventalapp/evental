@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
@@ -12,8 +11,8 @@ import { EventHeader } from '../../../../components/events/EventHeader';
 import { EventNavigation } from '../../../../components/events/navigation';
 import { Footer } from '../../../../components/Footer';
 import Column from '../../../../components/layout/Column';
-import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { ViewRole } from '../../../../components/roles/ViewRole';
 import { useAttendeesByRoleQuery } from '../../../../hooks/queries/useAttendeesByRoleQuery';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
@@ -23,7 +22,6 @@ import { useRoleQuery } from '../../../../hooks/queries/useRoleAttendeesQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { ssrGetUser } from '../../../../utils/api';
-import { capitalizeFirstLetter } from '../../../../utils/string';
 import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { getEvent } from '../../../api/events/[eid]';
 import { getIsAttendee } from '../../../api/events/[eid]/attendee';
@@ -140,18 +138,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium">
-						{capitalizeFirstLetter(role.name.toLowerCase())}s{' '}
-						<span className="font-normal text-gray-500">({attendeesData?.length || 0})</span>
-					</h3>
-				</FlexRowBetween>
-
-				{attendeesData?.length === 0 ? (
-					<p>No {role.name.toLowerCase()}s found.</p>
-				) : (
-					<AttendeeList eid={String(eid)} attendees={attendeesData} />
-				)}
+				<ViewRole attendees={attendeesData} eid={String(eid)} rid={String(rid)} role={role} />
 			</Column>
 
 			<Footer />
