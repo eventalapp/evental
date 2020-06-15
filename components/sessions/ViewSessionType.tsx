@@ -1,9 +1,9 @@
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Prisma from '@prisma/client';
-import Link from 'next/link';
 import React from 'react';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { LinkButton } from '../form/LinkButton';
+import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { SessionList } from './SessionList';
 
@@ -35,18 +35,25 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 					</div>
 				</div>
 
-				<div>
-					{admin && (
-						<Link href={`/events/${eid}/admin/sessions/types/${tid}/edit`} passHref>
-							<LinkButton className="ml-3">Edit session type</LinkButton>
-						</Link>
-					)}
-					{admin && (
-						<Link href={`/events/${eid}/admin/sessions/types/${tid}/delete`} passHref>
-							<LinkButton className="ml-3">Delete session type</LinkButton>
-						</Link>
-					)}
-				</div>
+				{admin && (
+					<div className="space-x-4">
+						<IconLinkTooltip
+							message="Click to edit this session type"
+							side="top"
+							href={`/events/${eid}/admin/sessions/types/${tid}/edit`}
+							icon={faPenToSquare}
+							className="text-gray-700"
+						/>
+
+						<IconLinkTooltip
+							message="Click to delete this session type"
+							side="top"
+							href={`/events/${eid}/admin/sessions/types/${tid}/delete`}
+							icon={faTrashCan}
+							className="text-red-500"
+						/>
+					</div>
+				)}
 			</FlexRowBetween>
 
 			{sessions && (
