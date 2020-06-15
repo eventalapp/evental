@@ -18,10 +18,10 @@ export const IconLinkTooltip: Props = (props) => {
 
 	return (
 		<Tooltip message={message} side={side}>
-			<div className="p-1 -mr-1 inline-block">
+			<div className="-mr-1 inline-block">
 				<Link href={href} passHref>
 					<a {...rest}>
-						<FontAwesomeIcon fill="currentColor" className="h-6 w-6" size="1x" icon={icon} />
+						<FontAwesomeIcon fill="currentColor" className="h-6 w-6 p-1" size="1x" icon={icon} />
 					</a>
 				</Link>
 			</div>
