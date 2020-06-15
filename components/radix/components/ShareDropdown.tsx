@@ -134,7 +134,7 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-primary-500"
+								className="mr-2 h-4 w-4 text-gray-600"
 								size="1x"
 								icon={faPaperPlane}
 							/>
