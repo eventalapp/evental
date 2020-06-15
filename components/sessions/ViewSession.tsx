@@ -2,6 +2,8 @@ import {
 	faCalendarDay,
 	faClipboardList,
 	faLocationDot,
+	faPenToSquare,
+	faTrashCan,
 	faUserGroup
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,15 +13,15 @@ import parse from 'html-react-parser';
 import Link from 'next/link';
 import React from 'react';
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
+import { faCalendarCirclePlus } from '../../icons';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
 import { AddToCalendar } from '../AddToCalendar';
 import { AttendeeList } from '../attendees/AttendeeList';
-import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
-import { LinkButton } from '../form/LinkButton';
+import { IconButtonTooltip } from '../IconButtonTooltip';
+import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import Tooltip from '../radix/components/Tooltip';
 
@@ -94,28 +96,35 @@ export const ViewSession: React.FC<Props> = (props) => {
 					{isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
 
 					{!isAttending && !admin && (
-						<Button
-							type="button"
-							className="ml-4"
-							variant="primary"
-							padding="medium"
+						<IconButtonTooltip
+							message="Click to add this session to your schedule"
+							side="top"
+							icon={faCalendarCirclePlus}
+							disabled={createSessionAttendeeMutation.isLoading}
+							isLoading={createSessionAttendeeMutation.isLoading}
+							className="text-gray-700"
 							onClick={() => {
 								createSessionAttendeeMutation.mutate();
 							}}
-							disabled={createSessionAttendeeMutation.isLoading}
-						>
-							{createSessionAttendeeMutation.isLoading ? <LoadingInner /> : 'Attend This Session'}
-						</Button>
+						/>
 					)}
 					{admin && (
-						<Link href={`/events/${eid}/admin/sessions/${sid}/edit`} passHref>
-							<LinkButton className="ml-3">Edit session</LinkButton>
-						</Link>
+						<IconLinkTooltip
+							message="Click to edit this session"
+							side="top"
+							href={`/events/${eid}/admin/sessions/${sid}/edit`}
+							icon={faPenToSquare}
+							className="text-gray-700"
+						/>
 					)}
 					{admin && (
-						<Link href={`/events/${eid}/admin/sessions/${sid}/delete`} passHref>
-							<LinkButton className="ml-3">Delete session</LinkButton>
-						</Link>
+						<IconLinkTooltip
+							message="Click to delete this session"
+							side="top"
+							href={`/events/${eid}/admin/sessions/${sid}/delete`}
+							icon={faTrashCan}
+							className="text-red-500"
+						/>
 					)}
 				</div>
 			</FlexRowBetween>
