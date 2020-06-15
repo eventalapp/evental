@@ -11,6 +11,7 @@ import { EventHeader } from '../../../../components/events/EventHeader';
 import { EventNavigation } from '../../../../components/events/navigation';
 import { Footer } from '../../../../components/Footer';
 import Column from '../../../../components/layout/Column';
+import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
@@ -130,7 +131,9 @@ const SessionsPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<h3 className="text-xl md:text-2xl font-medium">Venues</h3>
+				<FlexRowBetween>
+					<h3 className="text-xl md:text-2xl font-medium">Venues</h3>
+				</FlexRowBetween>
 
 				<VenueList
 					eid={String(eid)}
