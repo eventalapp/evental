@@ -3,16 +3,17 @@ import {
 	faAddressCard,
 	faArrowUpRightFromSquare,
 	faBuilding,
-	faLocationDot
+	faLocationDot,
+	faPenToSquare,
+	faTrashCan
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import parse from 'html-react-parser';
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
-import { LinkButton } from '../form/LinkButton';
+import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import Tooltip from '../radix/components/Tooltip';
 
@@ -40,14 +41,22 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				</div>
 
 				{admin && (
-					<div>
-						<Link href={`/events/${eid}/admin/attendees/${uid}/edit`} passHref>
-							<LinkButton className="mr-3">Edit Attendee</LinkButton>
-						</Link>
+					<div className="space-x-5">
+						<IconLinkTooltip
+							message="Click to edit this attendee"
+							side="top"
+							href={`/events/${eid}/admin/attendees/${uid}/edit`}
+							icon={faPenToSquare}
+							className="text-gray-700"
+						/>
 
-						<Link href={`/events/${eid}/admin/attendees/${uid}/delete`} passHref>
-							<LinkButton className="mr-3">Delete Attendee</LinkButton>
-						</Link>
+						<IconLinkTooltip
+							message="Click to delete this attendee"
+							side="top"
+							href={`/events/${eid}/admin/attendees/${uid}/delete`}
+							icon={faTrashCan}
+							className="text-red-500"
+						/>
 					</div>
 				)}
 			</FlexRowBetween>
