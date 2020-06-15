@@ -1,9 +1,5 @@
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import parse from 'html-react-parser';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
@@ -11,12 +7,9 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { Footer } from '../../../../../../components/Footer';
-import { LinkButton } from '../../../../../../components/form/LinkButton';
 import Column from '../../../../../../components/layout/Column';
-import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import Tooltip from '../../../../../../components/radix/components/Tooltip';
-import { SessionList } from '../../../../../../components/sessions/SessionList';
+import { ViewVenue } from '../../../../../../components/venues/ViewVenue';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
@@ -72,59 +65,13 @@ const ViewVenuePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<div className="mb-5">
-					<FlexRowBetween className="mb-1">
-						<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
-
-						<div>
-							{!isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/venues/${vid}/edit`} passHref>
-									<LinkButton className="mr-3">Edit venue</LinkButton>
-								</Link>
-							)}
-							{!isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/venues/${vid}/delete`} passHref>
-									<LinkButton className="mr-3">Delete venue</LinkButton>
-								</Link>
-							)}
-						</div>
-					</FlexRowBetween>
-
-					<Tooltip
-						message={
-							venue.address
-								? `This is venue is located at ${venue?.address}.`
-								: 'This venue has not specified an address'
-						}
-					>
-						<div className="inline-flex flex-row items-center mb-1 cursor-help">
-							<FontAwesomeIcon
-								fill="currentColor"
-								className="w-5 h-5 mr-1.5"
-								size="1x"
-								icon={faLocationDot}
-							/>
-							{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
-						</div>
-					</Tooltip>
-
-					{venue.description && (
-						<div className="prose focus:outline-none prose-a:text-primary mt-1">
-							{parse(String(venue.description))}
-						</div>
-					)}
-				</div>
-
-				<h3 className="text-xl md:text-2xl font-medium">
-					Sessions{' '}
-					<span className="font-normal text-gray-500">({sessionsByVenueData.length || 0})</span>
-				</h3>
-
-				<SessionList
+				<ViewVenue
 					eid={String(eid)}
-					sessions={sessionsByVenueData}
+					vid={String(vid)}
 					event={event}
+					sessions={sessionsByVenueData}
 					user={user}
+					venue={venue}
 					admin
 				/>
 			</Column>
