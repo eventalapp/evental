@@ -69,7 +69,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 			{attendees?.length === 0 ? (
 				<p>No {role.name.toLowerCase()}s found.</p>
 			) : (
-				<AttendeeList admin eid={String(eid)} attendees={attendees} />
+				<AttendeeList admin={admin} eid={String(eid)} attendees={attendees} />
 			)}
 		</div>
 	);
