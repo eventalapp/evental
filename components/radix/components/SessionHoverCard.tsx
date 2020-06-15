@@ -51,7 +51,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				/>
 
 				<div className="h-full w-full">
-					<div className="flex flex-row justify-end w-full absolute top-3 right-3">
+					<div className="flex flex-row justify-end w-full absolute bottom-3 right-3">
 						<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
 							<button
 								onClick={() => {
