@@ -4,7 +4,6 @@ import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { LoadingInner } from '../../../../../components/error/LoadingInner';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
@@ -12,9 +11,9 @@ import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPa
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/navigation';
 import { Footer } from '../../../../../components/Footer';
-import { Button } from '../../../../../components/form/Button';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { CreateSessionAttendeeForm } from '../../../../../components/sessions/CreateSessionAttendeeForm';
 import { useCreateSessionAttendeeMutation } from '../../../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -137,26 +136,12 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 					To attend this session, please click the register button below.
 				</p>
 
-				<form
-					onSubmit={handleSubmit(() => {
-						createSessionAttendeeMutation.mutate();
-					})}
-				>
-					<div className="flex flex-row justify-end">
-						<Button type="button" variant="no-bg" onClick={router.back}>
-							Cancel
-						</Button>
-						<Button
-							type="submit"
-							className="ml-4"
-							variant="primary"
-							padding="medium"
-							disabled={createSessionAttendeeMutation.isLoading}
-						>
-							{createSessionAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
-						</Button>
-					</div>
-				</form>
+				<CreateSessionAttendeeForm
+					session={session}
+					sessionError={sessionError}
+					isSessionLoading={isSessionLoading}
+					createSessionAttendeeMutation={createSessionAttendeeMutation}
+				/>
 			</Column>
 
 			<Footer />
