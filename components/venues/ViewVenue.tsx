@@ -30,6 +30,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 			<div className="mb-5">
 				<FlexRowBetween className="mb-1">
 					<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
+
 					{admin && (
 						<div className="space-x-4">
 							<IconLinkTooltip
