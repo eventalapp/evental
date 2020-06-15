@@ -15,7 +15,7 @@ export const LinkItem: React.FC<{ link: string; label: string; color?: string }>
 				className={classNames('cursor-pointer pb-1.5 border-b-2')}
 				style={{
 					borderColor:
-						router.asPath == link ? color ?? theme.extend.colors.primary.DEFAULT : 'transparent'
+						router.asPath === link ? color ?? theme.extend.colors.primary.DEFAULT : 'transparent'
 				}}
 			>
 				<NavigationMenuPrimitive.Item
@@ -25,7 +25,9 @@ export const LinkItem: React.FC<{ link: string; label: string; color?: string }>
 					)}
 					style={{
 						color:
-							router.asPath == link ? color ?? theme.extend.colors.primary.DEFAULT : 'text-gray-900'
+							router.asPath === link
+								? color ?? theme.extend.colors.primary.DEFAULT
+								: theme.extend.colors.gray[900]
 					}}
 				>
 					{label}
