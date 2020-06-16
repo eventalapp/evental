@@ -126,7 +126,7 @@ export const SessionList: React.FC<Props> = (props) => {
 																								</span>
 																							)}
 
-																							{admin && session?.maxAttendees !== null && (
+																							{session?.maxAttendees !== null && (
 																								<Tooltip
 																									side={'bottom'}
 																									message={`This sessions is currently ${Math.ceil(
