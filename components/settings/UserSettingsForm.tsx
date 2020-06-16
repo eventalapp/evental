@@ -16,6 +16,7 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEditUserMutationData &
@@ -65,57 +66,77 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 				editUserMutation.mutate(data);
 			})}
 		>
-			<div className="mt-5 flex w-full flex-col items-center justify-center">
-				<Label htmlFor="image" className="hidden">
-					Image
-				</Label>
+			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
+				<div className="col-span-2 row-span-2 md:col-span-1">
+					<Label htmlFor="image">Image</Label>
 
-				<AvatarUpload
-					files={files}
-					setFiles={setFiles}
-					placeholderImageUrl={`https://cdn.evental.app${user.image}`}
-				/>
+					<Tooltip message={'Click to upload an image for your profile.'}>
+						<div className="inline-block">
+							<AvatarUpload
+								files={files}
+								setFiles={setFiles}
+								placeholderImageUrl={`https://cdn.evental.app${user.image}`}
+							/>
+						</div>
+					</Tooltip>
 
-				{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
-			</div>
-			<div className="mt-5 flex w-full flex-col">
-				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-					<div>
-						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="User name" {...register('name')} />
-						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
-					</div>
-
-					<div>
-						<Label htmlFor="location">Location</Label>
-						<Input placeholder="User location" {...register('location')} />
-						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
-					</div>
+					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 				</div>
-			</div>
-			<div className="flex w-full flex-col">
-				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-					<div>
-						<Label htmlFor="position">
-							Position
-							<HelpTooltip message={copy.tooltip.userPosition} />
-						</Label>
-						<Input placeholder="Position" {...register('position')} />
-						{errors.position?.message && <ErrorMessage>{errors.position?.message}</ErrorMessage>}
-					</div>
 
-					<div>
-						<Label htmlFor="company">
-							Company
-							<HelpTooltip message={copy.tooltip.userCompany} />
-						</Label>
-						<Input placeholder="Company" {...register('company')} />
-						{errors.company?.message && <ErrorMessage>{errors.company?.message}</ErrorMessage>}
+				<div className="col-span-4 md:col-span-3">
+					<Label htmlFor="slug">
+						Username *<HelpTooltip message={copy.tooltip.userSlug} />
+					</Label>
+					<div className="flex items-center">
+						<span className="mr-1 text-base text-gray-700">evental.app/users/</span>
+						<Input placeholder="user-slug" {...register('slug')} />
 					</div>
+					{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
+					{slugWatcher !== user?.slug && userSlugCheck && (
+						<ErrorMessage>This username is already taken, please choose another</ErrorMessage>
+					)}
 				</div>
-			</div>
-			<div className="mb-5 grid grid-cols-1 gap-5">
-				<div>
+
+				<div className="col-span-4 md:col-span-3">
+					<Label htmlFor="name">Name *</Label>
+					<Input placeholder="User name" {...register('name')} />
+					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="location">Location</Label>
+					<Input placeholder="User location" {...register('location')} />
+					{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="position">
+						Position
+						<HelpTooltip message={copy.tooltip.userPosition} />
+					</Label>
+					<Input placeholder="Position" {...register('position')} />
+					{errors.position?.message && <ErrorMessage>{errors.position?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="company">
+						Company
+						<HelpTooltip message={copy.tooltip.userCompany} />
+					</Label>
+					<Input placeholder="Company" {...register('company')} />
+					{errors.company?.message && <ErrorMessage>{errors.company?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="website">
+						Website
+						<HelpTooltip message={copy.tooltip.userWebsite} />
+					</Label>
+					<Input placeholder="Website" {...register('website')} />
+					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4">
 					<Label htmlFor="description">Description</Label>
 					<Controller
 						control={control}
@@ -132,31 +153,6 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
-				</div>
-			</div>
-			<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-				<div>
-					<div>
-						<Label htmlFor="slug">
-							Username *<HelpTooltip message={copy.tooltip.userSlug} />
-						</Label>
-						<div className="flex items-center">
-							<span className="mr-1 text-base">evental.app/users/</span>
-							<Input placeholder="user-slug" {...register('slug')} />
-						</div>
-						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{slugWatcher !== user?.slug && userSlugCheck && (
-							<ErrorMessage>This username is already taken, please choose another</ErrorMessage>
-						)}
-					</div>
-				</div>
-				<div>
-					<Label htmlFor="website">
-						Website
-						<HelpTooltip message={copy.tooltip.userWebsite} />
-					</Label>
-					<Input placeholder="Website" {...register('website')} />
-					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 				</div>
 			</div>
 
