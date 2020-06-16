@@ -30,7 +30,6 @@ export const SessionDatePicker: React.FC<Props> = (props) => {
 	return (
 		<ReactDatePicker
 			popperPlacement={'bottom'}
-			className="input"
 			placeholderText="Select date"
 			onChange={onChange}
 			selected={selected}
