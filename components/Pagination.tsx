@@ -14,10 +14,10 @@ export const Pagination: React.FC<Props> = (props) => {
 	const { page, pageCount, setPage } = props;
 
 	return (
-		<div className="flex flex-row justify-end items-center mt-4">
+		<div className="mt-4 flex flex-row items-center justify-end">
 			<button
 				disabled={page <= 1}
-				className="disabled:text-gray-300 disabled:cursor-not-allowed"
+				className="disabled:cursor-not-allowed disabled:text-gray-300"
 				onClick={() => {
 					if (page > 1) {
 						scrollTo(0);
@@ -33,7 +33,7 @@ export const Pagination: React.FC<Props> = (props) => {
 			</span>
 			<button
 				disabled={!(page < pageCount)}
-				className="disabled:text-gray-300 disabled:cursor-not-allowed"
+				className="disabled:cursor-not-allowed disabled:text-gray-300"
 				onClick={() => {
 					if (page < pageCount) {
 						scrollTo(0);
