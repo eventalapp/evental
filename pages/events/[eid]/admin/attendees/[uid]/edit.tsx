@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
@@ -74,11 +75,18 @@ const EditAttendeePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="text-xl font-medium md:text-2xl">Edit Attendee</h3>
+				<div className="mb-2">
+					<h3 className="text-xl font-medium md:text-2xl">Edit Attendee</h3>
+				</div>
 
-				<p className="mt-1 text-gray-700">
-					This attendee profile will be visible on the event page. This profile is separate from
-					your user profile.
+				<p className="mt-1 mb-8 text-sm text-gray-600">
+					This attendee profile will be visible on the event page. This profile is separate from the
+					users profile. You cannot edit the users details such as company, description, image, etc.
+					You may want to{' '}
+					<Link href={`/events/${eid}/admin/attendees/create`}>
+						<a className="text-gray-900 underline">create an attendee</a>
+					</Link>{' '}
+					if you're looking to change the users details.
 				</p>
 
 				<AdminEditAttendeeForm
