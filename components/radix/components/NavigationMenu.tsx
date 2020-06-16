@@ -106,7 +106,7 @@ const NavigationMenu = (props: Props) => {
 				<NavigationMenuPrimitive.Item
 					className={cx(
 						'rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-900',
-						'text-sm font-medium font-medium text-gray-700 dark:text-gray-100'
+						'text-sm font-medium text-gray-700 dark:text-gray-100'
 					)}
 				>
 					<NavigationMenuPrimitive.Link href="https://github.com/ecklf/tailwindcss-radix">
