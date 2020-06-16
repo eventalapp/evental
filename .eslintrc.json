@@ -7,9 +7,17 @@
 		"plugin:react-hooks/recommended",
 		"plugin:jsx-a11y/strict",
 		"next",
-		"next/core-web-vitals"
+		"next/core-web-vitals",
+		"plugin:tailwindcss/recommended"
 	],
-	"plugins": ["jsx-a11y", "react-app", "react-hooks", "@typescript-eslint", "prettier"],
+	"plugins": [
+		"jsx-a11y",
+		"react-app",
+		"react-hooks",
+		"@typescript-eslint",
+		"prettier",
+		"tailwindcss"
+	],
 	"env": {
 		"es6": true,
 		"browser": true,
@@ -41,7 +49,8 @@
 		"@next/next/no-img-element": 0,
 		"jsx-a11y/click-events-have-key-events": 0,
 		"jsx-a11y/no-static-element-interactions": 0,
-		"@typescript-eslint/no-explicit-any": "warn"
+		"@typescript-eslint/no-explicit-any": "warn",
+		"tailwindcss/classnames-order": 0
 	},
 	"parserOptions": {
 		"ecmaVersion": 12,
