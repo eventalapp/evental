@@ -31,7 +31,7 @@ export const VenueList: React.FC<Props> = (props) => {
 					passHref
 				>
 					<a>
-						<div className={classNames('border-gray-200', i !== venues.length - 1 && 'border-b-2')}>
+						<div className={classNames('border-gray-200', i !== venues.length - 1 && 'border-b')}>
 							<div className="-mx-3 flex flex-row flex-wrap items-center justify-between rounded-md p-3 hover:bg-gray-75">
 								<div>
 									<span className="block text-lg">{venue.name}</span>{' '}

@@ -23,7 +23,7 @@ export const EventList: React.FC<Props> = (props) => {
 				events.map((event, i) => (
 					<div
 						key={event.id}
-						className={classNames('border-gray-100', i + 1 !== events.length ? 'border-b-2' : null)}
+						className={classNames('border-gray-100', i + 1 !== events.length ? 'border-b' : null)}
 					>
 						<div className="-mx-1 rounded-md hover:bg-gray-75">
 							<Link href={`/events/${event.slug}`}>

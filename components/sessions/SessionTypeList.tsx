@@ -35,7 +35,7 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 							<div
 								className={classNames(
 									'flex flex-row border-gray-200 bg-white',
-									i !== sessionTypes.length - 1 && 'border-b-2'
+									i !== sessionTypes.length - 1 && 'border-b'
 								)}
 							>
 								<div className="-mx-3 flex grow flex-row flex-wrap items-center justify-between rounded-md p-3 hover:bg-gray-75">
