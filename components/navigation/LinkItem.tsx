@@ -21,8 +21,8 @@ export const LinkItem: React.FC<{ link: string; label: string; color?: string }>
 			>
 				<NavigationMenuPrimitive.Item
 					className={classNames(
-						'hover:bg-gray-75 rounded-md px-3 py-1.5 text-sm dark:hover:bg-gray-900',
-						'dark:text-gray-75 text-sm font-medium'
+						'rounded-md px-3 py-1.5 text-sm hover:bg-gray-75 dark:hover:bg-gray-900',
+						'text-sm font-medium dark:text-gray-75'
 					)}
 					style={{
 						color:
