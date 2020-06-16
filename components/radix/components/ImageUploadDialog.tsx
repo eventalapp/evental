@@ -5,6 +5,7 @@ import * as Portal from '@radix-ui/react-portal';
 import { Editor } from '@tiptap/react';
 import cx from 'classnames';
 import React, { Fragment, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
 import { LoadingInner } from '../../error/LoadingInner';
 import { FileWithPreview } from '../../form/AvatarUpload';
@@ -84,7 +85,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 								Make changes to your link here. Click save when you&apos;re done.
 							</DialogPrimitive.Description>
 							<div className="mt-2 space-y-3">
-								<div className="flex flex-col justify-center items-center mt-5 w-full min-h-[250px]">
+								<div className="mt-5 flex min-h-[250px] w-full flex-col items-center justify-center">
 									<Label htmlFor="image" className="hidden">
 										Image
 									</Label>
@@ -92,11 +93,16 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 									<ImageUpload files={files} setFiles={setFiles} />
 								</div>
 
-								<div className="flex justify-end mt-4">
-									<DialogPrimitive.Close
+								<div className="mt-4 flex justify-end">
+									<button
 										disabled={imageUploadMutation.isLoading}
 										onClick={() => {
-											imageUploadMutation.mutate({ image: files[0] });
+											if (files.length >= 1) {
+												imageUploadMutation.mutate({ image: files[0] });
+												setIsOpen(false);
+											} else {
+												toast.error('Please upload an image');
+											}
 										}}
 										className={cx(
 											'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',
@@ -106,7 +112,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 										)}
 									>
 										{imageUploadMutation.isLoading ? <LoadingInner /> : 'Add Image'}
-									</DialogPrimitive.Close>
+									</button>
 								</div>
 							</div>
 
@@ -119,7 +125,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 									'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 								)}
 							>
-								<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+								<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 							</DialogPrimitive.Close>
 						</DialogPrimitive.Content>
 					</Transition.Child>
