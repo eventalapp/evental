@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { theme } from '../../tailwind.config';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 
@@ -13,8 +14,10 @@ type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElem
 
 export const CreateAttendeeForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { createAttendeeMutation } = props;
+	const { createAttendeeMutation, event } = props;
 	const { handleSubmit } = useForm();
+
+	if (!event) return null;
 
 	return (
 		<form
@@ -32,6 +35,9 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 					variant="primary"
 					padding="medium"
 					disabled={createAttendeeMutation.isLoading}
+					style={{
+						backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+					}}
 				>
 					{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
 				</Button>
