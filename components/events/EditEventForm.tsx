@@ -26,6 +26,7 @@ import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import Select from '../radix/components/Select';
 import Button from '../radix/components/shared/Button';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -106,12 +107,19 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				<div className="col-span-2 row-span-2 md:col-span-1">
 					<Label htmlFor="image">Image</Label>
 
-					<AvatarUpload
-						rounded={false}
-						files={files}
-						setFiles={setFiles}
-						placeholderImageUrl={`https://cdn.evental.app${event.image}`}
-					/>
+					<Tooltip
+						message={
+							'Click to upload an image for your event. You can use an event logo or icon here.'
+						}
+					>
+						<div className="inline-block">
+							<AvatarUpload
+								files={files}
+								setFiles={setFiles}
+								placeholderImageUrl={`https://cdn.evental.app${event.image}`}
+							/>
+						</div>
+					</Tooltip>
 
 					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 				</div>
