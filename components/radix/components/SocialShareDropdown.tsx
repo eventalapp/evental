@@ -20,7 +20,7 @@ export const SocialShareDropdown = (props: Props) => {
 	const { event, align = 'end' } = props;
 
 	return (
-		<div className="relative inline-block text-left">
+		<div className="inline-block relative text-left">
 			<DropdownMenuPrimitive.Root>
 				<DropdownMenuPrimitive.Trigger>
 					<Button>Share this Event</Button>
@@ -56,11 +56,11 @@ export const SocialShareDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-[#1DA1F2]"
+								className="mr-2 w-3.5 h-3.5 text-[#1DA1F2]"
 								size="1x"
 								icon={faTwitter}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Twitter</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Twitter</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 					<a
@@ -82,11 +82,11 @@ export const SocialShareDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-[#4267B2]"
+								className="mr-2 w-3.5 h-3.5 text-[#4267B2]"
 								size="1x"
 								icon={faFacebook}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Facebook</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Facebook</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 					<a
@@ -110,11 +110,11 @@ export const SocialShareDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-[#0077B5]"
+								className="mr-2 w-3.5 h-3.5 text-[#0077B5]"
 								size="1x"
 								icon={faLinkedin}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">LinkedIn</span>
+							<span className="grow text-gray-700 dark:text-gray-300">LinkedIn</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 					<a
@@ -137,11 +137,11 @@ export const SocialShareDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-gray-500"
+								className="mr-2 w-3.5 h-3.5 text-gray-500"
 								size="1x"
 								icon={faEnvelope}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Email</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Email</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 				</DropdownMenuPrimitive.Content>

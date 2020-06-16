@@ -128,7 +128,7 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column variant="halfWidth" className="space-y-5">
-				<h1 className="text-2xl md:text-3xl font-medium">Register for {session.name}</h1>
+				<h1 className="text-2xl font-medium md:text-3xl">Register for {session.name}</h1>
 
 				<p className="text-gray-700">
 					To attend this session, please click the register button below.

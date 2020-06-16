@@ -129,7 +129,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 
 			<Column>
 				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium">
+					<h3 className="text-xl font-medium md:text-2xl">
 						{dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')}
 					</h3>
 				</FlexRowBetween>

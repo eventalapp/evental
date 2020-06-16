@@ -4,48 +4,48 @@ import React from 'react';
 export const Footer = () => {
 	return (
 		<footer className="bg-white border-t border-gray-200 shadow-sm-bottom">
-			<div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-				<nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
-					<div className="px-5 py-2">
+			<div className="overflow-hidden py-12 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+				<nav className="flex flex-wrap justify-center -my-2 -mx-5" aria-label="Footer">
+					<div className="py-2 px-5">
 						<Link href="/about">
 							<a className="text-base text-gray-500 hover:text-gray-900">About</a>
 						</Link>
 					</div>
 
-					<div className="px-5 py-2">
+					<div className="py-2 px-5">
 						<Link href="/pricing">
 							<a className="text-base text-gray-500 hover:text-gray-900">Pricing</a>
 						</Link>
 					</div>
 
-					<div className="px-5 py-2">
+					<div className="py-2 px-5">
 						<Link href="/contact">
 							<a className="text-base text-gray-500 hover:text-gray-900">Contact</a>
 						</Link>
 					</div>
 
-					<div className="px-5 py-2">
+					<div className="py-2 px-5">
 						<Link href="/guides">
 							<a className="text-base text-gray-500 hover:text-gray-900">Guides</a>
 						</Link>
 					</div>
 
-					<div className="px-5 py-2">
+					<div className="py-2 px-5">
 						<Link href="/events">
 							<a className="text-base text-gray-500 hover:text-gray-900">Events</a>
 						</Link>
 					</div>
 				</nav>
 
-				<div className="flex items-center justify-center my-5">
+				<div className="flex justify-center items-center my-5">
 					<span className="flex flex-row items-center">
 						<img
 							src="https://cdn.evental.app/images/logo.svg"
-							className="w-12 h-12 pr-3"
+							className="pr-3 w-12 h-12"
 							alt="logo"
 						/>
 						<strong
-							className="text-2xl tracking-tight font-bold font-display"
+							className="font-display text-2xl font-bold tracking-tight"
 							aria-label="evental homepage"
 						>
 							Evental
@@ -53,7 +53,7 @@ export const Footer = () => {
 					</span>
 				</div>
 
-				<p className="text-center text-base text-gray-400">
+				<p className="text-base text-center text-gray-400">
 					&copy; {new Date().getFullYear()} Evental, Inc. All rights reserved.
 				</p>
 			</div>

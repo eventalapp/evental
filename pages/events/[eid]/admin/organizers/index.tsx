@@ -70,7 +70,7 @@ const EventOrganizersPage: NextPage = () => {
 
 			<Column>
 				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium">Organizers</h3>
+					<h3 className="text-xl font-medium md:text-2xl">Organizers</h3>
 
 					<IconLinkTooltip
 						message="Click to invite an organizer"

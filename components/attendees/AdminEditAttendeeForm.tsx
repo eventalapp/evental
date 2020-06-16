@@ -48,7 +48,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 				adminEditAttendeeMutation.mutate(data);
 			})}
 		>
-			<div className="mb-5 mt-3 grid grid-cols-1 gap-5 md:grid-cols-2">
+			<div className="mt-3 mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 				<div>
 					<Label htmlFor="eventRoleId">Role *</Label>
 					{roles && (

@@ -27,13 +27,13 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<NavigationWrapper>
-				<NavigationMenuPrimitive.Root className="w-full relative">
-					<NavigationMenuPrimitive.List className="flex items-center justify-between w-full max-w-7xl m-auto h-14 px-3">
+				<NavigationMenuPrimitive.Root className="relative w-full">
+					<NavigationMenuPrimitive.List className="flex justify-between items-center px-3 m-auto w-full max-w-7xl h-14">
 						<div>
 							<LogoLinkItem />
 						</div>
 
-						<div className="h-full flex-row justify-end hidden lg:flex">
+						<div className="hidden flex-row justify-end h-full lg:flex">
 							<div className="flex flex-row items-end">
 								<LinkItem link={`/events/${event.slug}`} label={'Sessions'} color={event.color} />
 								<LinkItem
@@ -63,9 +63,9 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 									))}
 							</div>
 
-							<div className="flex-row space-x-8 font-medium flex lg:hidden">
+							<div className="flex flex-row space-x-8 font-medium lg:hidden">
 								<FontAwesomeIcon
-									className="cursor-pointer text-gray-900"
+									className="text-gray-900 cursor-pointer"
 									size="2x"
 									fill="currentColor"
 									icon={faBarsSquare}
@@ -76,7 +76,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
-						<div className="h-full flex-row justify-end hidden lg:flex">
+						<div className="hidden flex-row justify-end h-full lg:flex">
 							<div className="flex flex-row items-end">
 								<LinkItem link={`/auth/signin`} label={'Sign in'} color={event.color} />
 							</div>
@@ -91,7 +91,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 				)}
 			>
 				<div className="relative w-full h-full">
-					<div className="w-full h-full flex flex-col items-center justify-center">
+					<div className="flex flex-col justify-center items-center w-full h-full">
 						<button
 							onClick={() => {
 								setIsOpen(false);
@@ -99,7 +99,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="w-5 h-5 mb-3 cursor-pointer"
+								className="mb-3 w-5 h-5 cursor-pointer"
 								size="2x"
 								icon={faXmark}
 							/>

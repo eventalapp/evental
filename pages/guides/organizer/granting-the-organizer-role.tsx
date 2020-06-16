@@ -46,10 +46,10 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Granting the Organizer role — Evental</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Granting the Organizer role — Evental</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to grant the organizer role to an attendee for your event on Evental
 					</p>
 				</Column>
@@ -85,7 +85,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						}/guides/organizer/granting-the-organizer-role#${sections[0].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To grant the organizer permission role to an attendee, navigate to the events admin
 						dashboard by clicking the <span className="font-medium">"manage this event"</span>{' '}
 						button.
@@ -106,7 +106,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						}/guides/organizer/granting-the-organizer-role#${sections[1].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Attendees"</span> link in the top navigation.
 					</p>
@@ -120,7 +120,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						}/guides/organizer/granting-the-organizer-role#${sections[2].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the attendees dashboard page, select the attendee you wish to grant the
 						organizer role to.
 					</p>
@@ -133,18 +133,18 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						}/guides/organizer/granting-the-organizer-role#${sections[3].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting and viewing an attendee. Select the{' '}
 						<span className="font-medium">"Edit"</span> button
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visting the edit attendee form. Select the{' '}
 						<span className="font-medium">"Permission Role"</span> dropdown, and select{' '}
 						<span className="font-medium">"Organizer"</span>
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting the organizer option in the permission role dropdown, click the{' '}
 						<span className="font-medium">"Save"</span> button.
 					</p>

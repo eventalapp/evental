@@ -19,7 +19,7 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 	const { event, align = 'end', children } = props;
 
 	return (
-		<div className="relative inline-block text-left">
+		<div className="inline-block relative text-left">
 			<DropdownMenuPrimitive.Root>
 				<DropdownMenuPrimitive.Trigger asChild>{children}</DropdownMenuPrimitive.Trigger>
 
@@ -53,11 +53,11 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-[#1DA1F2]"
+								className="mr-2 w-4 h-4 text-[#1DA1F2]"
 								size="1x"
 								icon={faTwitter}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Twitter</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Twitter</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 					<a
@@ -79,11 +79,11 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-[#4267B2]"
+								className="mr-2 w-4 h-4 text-[#4267B2]"
 								size="1x"
 								icon={faFacebook}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Facebook</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Facebook</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 
@@ -107,11 +107,11 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-[#0077B5]"
+								className="mr-2 w-4 h-4 text-[#0077B5]"
 								size="1x"
 								icon={faLinkedin}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">LinkedIn</span>
+							<span className="grow text-gray-700 dark:text-gray-300">LinkedIn</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 					<a
@@ -134,11 +134,11 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-gray-600"
+								className="mr-2 w-4 h-4 text-gray-600"
 								size="1x"
 								icon={faPaperPlane}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Email</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Email</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 				</DropdownMenuPrimitive.Content>

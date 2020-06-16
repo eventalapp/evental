@@ -61,8 +61,8 @@ const VerifyEmailPage: NextPage<Props> = (props) => {
 				<Navigation />
 
 				<Column variant="halfWidth">
-					<div className="flex items-center flex-col">
-						<h1 className="text-2xl md:text-3xl font-bold mb-3">Verify Your Account</h1>
+					<div className="flex flex-col items-center">
+						<h1 className="mb-3 text-2xl font-bold md:text-3xl">Verify Your Account</h1>
 
 						<p>You have already verified your email</p>
 					</div>
@@ -99,8 +99,8 @@ const VerifyEmailPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<div className="flex items-center flex-col">
-					<h1 className="text-2xl md:text-3xl font-bold mb-3">Verify Your Account</h1>
+				<div className="flex flex-col items-center">
+					<h1 className="mb-3 text-2xl font-bold md:text-3xl">Verify Your Account</h1>
 
 					{code ? (
 						<p>

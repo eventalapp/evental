@@ -168,12 +168,12 @@ const ViewEventPage: NextPage<Props> = (props) => {
 				)}
 
 				<div className="grid grid-cols-12 gap-4">
-					<div className="lg:col-span-9 col-span-12">
+					<div className="col-span-12 lg:col-span-9">
 						<SessionList sessions={sessionsData} eid={String(eid)} event={event} user={user} />
 					</div>
-					<div className="lg:col-span-3 col-span-12">
+					<div className="col-span-12 lg:col-span-3">
 						<div className="mb-3">
-							<span className="block font-medium mb-1">Filter by Date</span>
+							<span className="block mb-1 font-medium">Filter by Date</span>
 							<div className="relative">
 								<SessionDatePicker
 									onChange={(date) => {
@@ -190,7 +190,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						{sessionTypes && sessionTypes.length > 0 && (
 							<div className="mb-3">
-								<span className="block font-medium mb-1">Filter by Type</span>
+								<span className="block mb-1 font-medium">Filter by Type</span>
 								<div className="text-gray-600">
 									<ul>
 										{sessionTypes.map((sessionType) => (
@@ -200,7 +200,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 											>
 												<a className="flex flex-row items-center">
 													<div
-														className="rounded-full mr-2 w-3 h-3"
+														className="mr-2 w-3 h-3 rounded-full"
 														style={{ backgroundColor: sessionType.color ?? '#888888' }}
 													/>
 													{sessionType.name}
@@ -214,7 +214,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						{venues && venues.length > 0 && (
 							<div className="mb-3">
-								<span className="block font-medium mb-1">Filter by Venue</span>
+								<span className="block mb-1 font-medium">Filter by Venue</span>
 								<div className="text-gray-600">
 									<ul>
 										{venues.map((venue) => (

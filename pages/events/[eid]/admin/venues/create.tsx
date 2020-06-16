@@ -51,7 +51,7 @@ const CreateSessionPage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="text-xl md:text-2xl font-medium">Create Venue</h3>
+				<h3 className="text-xl font-medium md:text-2xl">Create Venue</h3>
 
 				<CreateVenueForm createVenueMutation={createVenueMutation} eid={String(eid)} />
 			</Column>

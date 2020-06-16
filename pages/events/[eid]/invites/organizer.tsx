@@ -50,10 +50,10 @@ const OrganizerInvitePage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="flex flex-row justify-between mb-3">
-					<h1 className="text-2xl md:text-3xl font-bold">Accept Organizer Invite</h1>
+					<h1 className="text-2xl font-bold md:text-3xl">Accept Organizer Invite</h1>
 				</div>
 
-				<p className="text-md text-gray-700 mb-2">
+				<p className="mb-2 text-base text-gray-700">
 					As an organizer you will be able to create, edit, and delete sessions, venues, and roles.
 				</p>
 

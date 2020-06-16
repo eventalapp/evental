@@ -40,7 +40,7 @@ const ClaimProfilePage: NextPage = () => {
 
 				<Column variant="halfWidth">
 					<div className="flex flex-row justify-between mb-3">
-						<h1 className="text-2xl md:text-3xl font-bold">Claim Profile</h1>
+						<h1 className="text-2xl font-bold md:text-3xl">Claim Profile</h1>
 					</div>
 
 					<p>
@@ -66,7 +66,7 @@ const ClaimProfilePage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="flex flex-row justify-between mb-3">
-					<h1 className="text-2xl md:text-3xl font-bold">Claim Profile</h1>
+					<h1 className="text-2xl font-bold md:text-3xl">Claim Profile</h1>
 				</div>
 
 				<p>

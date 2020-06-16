@@ -9,10 +9,10 @@ const AspectRatio = (props: Props) => {
 		<Fragment>
 			<AspectRatioPrimitive.Root
 				ratio={16 / 9}
-				className="group relative h-full w-full overflow-hidden rounded-lg shadow-md"
+				className="group overflow-hidden relative w-full h-full rounded-lg shadow-md"
 			>
-				<div className="absolute inset-0 z-10 flex items-center justify-center">
-					<h3 className="select-none bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-2xl md:text-3xl font-black uppercase text-transparent duration-300 ease-in-out group-hover:opacity-0 sm:text-4xl">
+				<div className="flex absolute inset-0 z-10 justify-center items-center">
+					<h3 className="text-2xl font-black text-transparent uppercase bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 group-hover:opacity-0 duration-300 ease-in-out select-none sm:text-4xl md:text-3xl">
 						Vancouver
 					</h3>
 				</div>
@@ -26,7 +26,7 @@ const AspectRatio = (props: Props) => {
 					<img
 						src="https://images.unsplash.com/photo-1609825488888-3a766db05542?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80"
 						alt="Vancouver by Matt Wang"
-						className="h-full w-full mix-blend-overlay"
+						className="w-full h-full mix-blend-overlay"
 					/>
 				</div>
 			</AspectRatioPrimitive.Root>

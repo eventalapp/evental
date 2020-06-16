@@ -25,10 +25,10 @@ const Slider = (props: Props) => {
 				onChange?.(value[0]);
 			}}
 			aria-label="value"
-			className="relative flex h-5 w-96 touch-none items-center"
+			className="flex relative items-center w-96 h-5 touch-none"
 		>
-			<SliderPrimitive.Track className="relative h-1 w-full grow rounded-full bg-gray-200 dark:bg-gray-800">
-				<SliderPrimitive.Range className="absolute h-full rounded-full bg-primary-500 dark:bg-white" />
+			<SliderPrimitive.Track className="relative grow w-full h-1 bg-gray-200 dark:bg-gray-800 rounded-full">
+				<SliderPrimitive.Range className="absolute h-full bg-primary-500 dark:bg-white rounded-full" />
 			</SliderPrimitive.Track>
 			<SliderPrimitive.Thumb
 				className={cx(

@@ -27,10 +27,10 @@ const Tooltip: React.FC<Props> = (props) => {
 					)}
 				>
 					<TooltipPrimitive.Arrow
-						className="fill-current text-gray-800 dark:text-gray-800"
+						className="text-gray-800 dark:text-gray-800 fill-current"
 						offset={10}
 					/>
-					<span className="block text-sm text-white text-center dark:text-gray-100 max-w-xs">
+					<span className="block max-w-xs text-sm text-center text-white dark:text-gray-100">
 						{message}
 					</span>
 				</TooltipPrimitive.Content>

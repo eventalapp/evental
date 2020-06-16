@@ -40,7 +40,7 @@ export const RoleList: React.FC<Props> = (props) => {
 							<div className="flex flex-row flex-wrap items-center justify-between">
 								<span className="block text-lg">
 									{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
-									<span className="text-md text-gray-500">{role.defaultRole && '(Default)'}</span>
+									<span className="text-base text-gray-500">{role.defaultRole && '(Default)'}</span>
 								</span>
 
 								<FontAwesomeIcon fill="currentColor" size="lg" icon={faChevronRight} />

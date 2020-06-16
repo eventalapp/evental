@@ -67,7 +67,7 @@ const AttendeesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl md:text-2xl font-medium">
+						<h3 className="text-xl font-medium md:text-2xl">
 							Attendees{' '}
 							<span className="font-normal text-gray-500">({attendeesData.length || 0})</span>
 						</h3>

@@ -47,10 +47,10 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Attach a role member — Evental</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Attach a role member — Evental</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to attach a role member to your session on Evental
 					</p>
 				</Column>
@@ -86,7 +86,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						}/guides/session/attaching-a-role-member#${sections[0].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To attach a role member to a session, navigate to the events admin dashboard by clicking
 						the <span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -106,7 +106,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						}/guides/session/attaching-a-role-member#${sections[1].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Sessions"</span> link in the top navigation.
 					</p>
@@ -120,7 +120,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						}/guides/session/attaching-a-role-member#${sections[2].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the sessions dashboard page, select the session you wish to attach role
 						to.
 					</p>
@@ -133,26 +133,26 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						}/guides/session/attaching-a-role-member#${sections[3].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting and viewing a session. Select the{' '}
 						<span className="font-medium">"Edit"</span> button
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visting the edit session form. Select the{' '}
 						<span className="font-medium">"Attach People"</span> button
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						A modal will appear, and you can start typing in the attendees name, and once you see
 						the desired attendee, click the plus button. If you do not see the attendee you are
 						looking for, they may not be attending you event. See the{' '}
 						<Link href="/guides/role/inviting-a-role-member">
-							<a className="underline text-gray-900">invite a role member guide</a>
+							<a className="text-gray-900 underline">invite a role member guide</a>
 						</Link>{' '}
 						or{' '}
 						<Link href="/guides/role/creating-a-role-member">
-							<a className="underline text-gray-900">create a role member guide</a>
+							<a className="text-gray-900 underline">create a role member guide</a>
 						</Link>
 						.
 					</p>

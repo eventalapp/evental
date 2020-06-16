@@ -257,7 +257,7 @@ export const StyledEditor: React.FC<{
 	}
 
 	return (
-		<div className="rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none">
+		<div className="rounded border border-gray-300 py-2 px-3 shadow-sm focus:outline-none">
 			<MenuBar editor={editor} setLink={setLink} addImage={addImage} imageUpload={imageUpload} />
 			<article className="prose focus:outline-none prose-a:text-primary">
 				<EditorContent editor={editor} />

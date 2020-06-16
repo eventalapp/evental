@@ -4,7 +4,7 @@ import React from 'react';
 
 const TailwindLogo = () => (
 	<svg
-		className="h-7 w-7 shrink-0"
+		className="shrink-0 w-7 h-7"
 		viewBox="0 0 99 59"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
@@ -40,9 +40,9 @@ const HoverCard = (props: Props) => {
 					'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 				)}
 			>
-				<HoverCardPrimitive.Arrow className="fill-current text-white dark:text-gray-800" />
+				<HoverCardPrimitive.Arrow className="text-white dark:text-gray-800 fill-current" />
 
-				<div className="flex h-full w-full space-x-4">
+				<div className="flex space-x-4 w-full h-full">
 					<div
 						className={cx(
 							'flex h-12 w-12 shrink-0 items-center justify-center rounded-full shadow-inner bg-gray-50/60 p-2.5 dark:bg-gray-900'

@@ -72,10 +72,10 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 							<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-600 dark:text-gray-400">
 								Search for users in the field below to attach them to this session.
 							</DialogPrimitive.Description>
-							<div className="border-b border-gray-300 my-3" />
+							<div className="my-3 border-b border-gray-300" />
 
 							<form
-								className=" space-y-2 mb-3"
+								className=" mb-3 space-y-2"
 								onSubmit={() => {
 									setIsOpen(false);
 								}}
@@ -103,7 +103,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 								</fieldset>
 							</form>
 
-							<p className="font-medium mb-2">
+							<p className="mb-2 font-medium">
 								Results{' '}
 								<span className="text-gray-500">({attendeesByNameQuery?.data?.length || 0})</span>
 							</p>
@@ -118,10 +118,10 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 									Array.from(attendeesByNameQuery.data).map((attendee) => (
 										<div
 											key={attendee.id}
-											className="flex justify-between items-center flex-row flex-wrap w-full"
+											className="flex flex-row flex-wrap justify-between items-center w-full"
 										>
 											<div className="flex items-center">
-												<div className="h-12 w-12 relative border-2 border-gray-100 rounded-full">
+												<div className="relative w-12 h-12 rounded-full border-2 border-gray-100">
 													<Image
 														alt={String(attendee.user.name)}
 														src={String(
@@ -135,7 +135,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 												</div>
 												<div className="flex flex-col ml-3">
 													<p className="leading-tight">{attendee.user.name}</p>
-													<p className="text-gray-600 text-sm leading-tight">
+													<p className="text-sm leading-tight text-gray-600">
 														{attendee.role.name}
 													</p>
 												</div>
@@ -150,7 +150,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 												>
 													<FontAwesomeIcon
 														fill="currentColor"
-														className="w-5 h-5 cursor-pointer text-gray-700"
+														className="w-5 h-5 text-gray-700 cursor-pointer"
 														size="lg"
 														icon={faPlus}
 													/>
@@ -163,7 +163,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 								)}
 							</div>
 
-							<div className="mt-4 flex justify-end">
+							<div className="flex justify-end mt-4">
 								<DialogPrimitive.Close
 									type="submit"
 									className={cx(
@@ -183,7 +183,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 									'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 								)}
 							>
-								<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+								<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 							</DialogPrimitive.Close>
 						</DialogPrimitive.Content>
 					</Transition.Child>

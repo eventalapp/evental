@@ -18,9 +18,9 @@ const Collapsible = (props: Props) => {
 				)}
 			>
 				<div>My Playlists</div>
-				<TriangleRightIcon className="transform duration-300 ease-in-out group-radix-state-open:rotate-90" />
+				<TriangleRightIcon className="duration-300 ease-in-out group-radix-state-open:rotate-90" />
 			</CollapsiblePrimitive.Trigger>
-			<CollapsiblePrimitive.Content className="mt-4 flex flex-col space-y-4">
+			<CollapsiblePrimitive.Content className="flex flex-col mt-4 space-y-4">
 				{['80s Synthwave', 'Maximale Konzentration', '高人氣金曲'].map((title, i) => (
 					<div
 						key={`collapsible-${title}-${i}`}
@@ -31,9 +31,9 @@ const Collapsible = (props: Props) => {
 						)}
 					>
 						{title}
-						<div className="hidden items-center space-x-3 group-hover:flex">
-							<Share2Icon className="cursor-pointer text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" />
-							<PlayIcon className="cursor-pointer text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" />
+						<div className="hidden group-hover:flex items-center space-x-3">
+							<Share2Icon className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 cursor-pointer" />
+							<PlayIcon className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 cursor-pointer" />
 						</div>
 					</div>
 				))}

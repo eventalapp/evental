@@ -74,9 +74,9 @@ const EditAttendeePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="text-xl md:text-2xl font-medium">Edit Attendee</h3>
+				<h3 className="text-xl font-medium md:text-2xl">Edit Attendee</h3>
 
-				<p className="text-gray-700 mt-1">
+				<p className="mt-1 text-gray-700">
 					This attendee profile will be visible on the event page. This profile is separate from
 					your user profile.
 				</p>

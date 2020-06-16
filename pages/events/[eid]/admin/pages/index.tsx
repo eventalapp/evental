@@ -62,7 +62,7 @@ const PagesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl md:text-2xl font-medium">Pages</h3>
+						<h3 className="text-xl font-medium md:text-2xl">Pages</h3>
 
 						<IconLinkTooltip
 							message="Click to create a page"

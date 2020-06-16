@@ -7,11 +7,11 @@ type Props = {};
 const NavigationMenu = (props: Props) => {
 	return (
 		<NavigationMenuPrimitive.Root className="relative">
-			<NavigationMenuPrimitive.List className="flex flex-row rounded-lg bg-white dark:bg-gray-800 p-2 space-x-2">
+			<NavigationMenuPrimitive.List className="flex flex-row space-x-2 rounded-lg bg-white p-2 dark:bg-gray-800">
 				<NavigationMenuPrimitive.Item>
 					<NavigationMenuPrimitive.Trigger
 						className={cx(
-							'px-3 py-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
+							'rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-900',
 							'text-sm font-medium',
 							'text-gray-700 dark:text-gray-100',
 							'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
@@ -22,22 +22,22 @@ const NavigationMenu = (props: Props) => {
 
 					<NavigationMenuPrimitive.Content
 						className={cx(
-							'absolute w-auto top-0 left-0 rounded-lg',
+							'absolute top-0 left-0 w-auto rounded-lg',
 							'radix-motion-from-start:animate-enter-from-left',
 							'radix-motion-from-end:animate-enter-from-right',
 							'radix-motion-to-start:animate-exit-to-left',
 							'radix-motion-to-end:animate-exit-to-right'
 						)}
 					>
-						<div className="w-[21rem] lg:w-[23rem] p-3">
+						<div className="w-[21rem] p-3 lg:w-[23rem]">
 							<div className="grid grid-cols-6 gap-4">
-								<div className="col-span-2 w-full bg-gray-75 dark:bg-gray-900 p-4 rounded-md"></div>
+								<div className="col-span-2 w-full rounded-md bg-gray-100 p-4 dark:bg-gray-900"></div>
 
-								<div className="col-span-4 w-full flex flex-col space-y-3 bg-gray-75 dark:bg-gray-900 p-4 rounded-md">
-									<div className="w-full bg-white dark:bg-gray-700 h-12 rounded-md"></div>
-									<div className="w-full bg-white dark:bg-gray-700 h-12 rounded-md"></div>
-									<div className="w-full bg-white dark:bg-gray-700 h-12 rounded-md"></div>
-									<div className="w-full bg-white dark:bg-gray-700 h-12 rounded-md"></div>
+								<div className="col-span-4 flex w-full flex-col space-y-3 rounded-md bg-gray-100 p-4 dark:bg-gray-900">
+									<div className="h-12 w-full rounded-md bg-white dark:bg-gray-700"></div>
+									<div className="h-12 w-full rounded-md bg-white dark:bg-gray-700"></div>
+									<div className="h-12 w-full rounded-md bg-white dark:bg-gray-700"></div>
+									<div className="h-12 w-full rounded-md bg-white dark:bg-gray-700"></div>
 								</div>
 							</div>
 						</div>
@@ -47,8 +47,8 @@ const NavigationMenu = (props: Props) => {
 				<NavigationMenuPrimitive.Item>
 					<NavigationMenuPrimitive.Trigger
 						className={cx(
-							'px-3 py-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
-							'text-sm font-medium text-gray-700 dark:text-gray-100 font-medium',
+							'rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-900',
+							'text-sm font-medium text-gray-700 dark:text-gray-100',
 							'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 						)}
 					>
@@ -57,18 +57,18 @@ const NavigationMenu = (props: Props) => {
 
 					<NavigationMenuPrimitive.Content
 						className={cx(
-							'absolute w-auto top-0 left-0 rounded-lg',
+							'absolute top-0 left-0 w-auto rounded-lg',
 							'radix-motion-from-start:animate-enter-from-left',
 							'radix-motion-from-end:animate-enter-from-right',
 							'radix-motion-to-start:animate-exit-to-left',
 							'radix-motion-to-end:animate-exit-to-right'
 						)}
 					>
-						<div className="w-[16rem] lg:w-[18rem] p-3">
-							<div className="w-full flex flex-col space-y-2">
+						<div className="w-[16rem] p-3 lg:w-[18rem]">
+							<div className="flex w-full flex-col space-y-2">
 								<NavigationMenuPrimitive.Link
 									className={cx(
-										'w-full px-4 py-3 hover:bg-gray-75 dark:hover:bg-gray-900 rounded-md',
+										'w-full rounded-md px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-900',
 										'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 									)}
 									href="https://tailwindcss.com"
@@ -84,7 +84,7 @@ const NavigationMenu = (props: Props) => {
 
 								<NavigationMenuPrimitive.Link
 									className={cx(
-										'w-full px-4 py-3 hover:bg-gray-75 dark:hover:bg-gray-900 rounded-md',
+										'w-full rounded-md px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-900',
 										'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 									)}
 									href="https://www.radix-ui.com"
@@ -105,8 +105,8 @@ const NavigationMenu = (props: Props) => {
 
 				<NavigationMenuPrimitive.Item
 					className={cx(
-						'px-3 py-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
-						'text-sm font-medium text-gray-700 dark:text-gray-100 font-medium'
+						'rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-900',
+						'text-sm font-medium font-medium text-gray-700 dark:text-gray-100'
 					)}
 				>
 					<NavigationMenuPrimitive.Link href="https://github.com/ecklf/tailwindcss-radix">
@@ -117,25 +117,25 @@ const NavigationMenu = (props: Props) => {
 				<NavigationMenuPrimitive.Indicator
 					className={cx(
 						'z-10',
-						'top-[100%] flex items-end justify-center h-2 overflow-hidden',
+						'top-[100%] flex h-2 items-end justify-center overflow-hidden',
 						'radix-state-visible:animate-fade-in',
 						'radix-state-hidden:animate-fade-out',
 						'transition-[width_transform] duration-[250ms] ease-[ease]'
 					)}
 				>
-					<div className="top-1 relative bg-white dark:bg-gray-800 w-2 h-2 rotate-45" />
+					<div className="relative top-1 h-2 w-2 rotate-45 bg-white dark:bg-gray-800" />
 				</NavigationMenuPrimitive.Indicator>
 			</NavigationMenuPrimitive.List>
 
 			<div
-				className={cx('absolute flex justify-center', 'w-[140%] left-[-20%] top-[100%]')}
+				className={cx('absolute flex justify-center', 'left-[-20%] top-[100%] w-[140%]')}
 				style={{
 					perspective: '2000px'
 				}}
 			>
 				<NavigationMenuPrimitive.Viewport
 					className={cx(
-						'relative mt-2 shadow-lg rounded-md bg-white dark:bg-gray-800 overflow-hidden',
+						'relative mt-2 overflow-hidden rounded-md bg-white shadow-lg dark:bg-gray-800',
 						'w-radix-navigation-menu-viewport',
 						'h-radix-navigation-menu-viewport',
 						'radix-state-open:animate-scale-in-content',

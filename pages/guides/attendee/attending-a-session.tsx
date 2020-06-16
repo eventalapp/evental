@@ -36,10 +36,10 @@ const AttendingASessionGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Attending a session</h1>
-					<p className="text-gray-100 text-md mt-4">Learn how to attend a session on evental.</p>
+					<h1 className="text-2xl font-bold md:text-3xl">Attending a session</h1>
+					<p className="mt-4 text-base text-gray-100">Learn how to attend a session on evental.</p>
 				</Column>
 			</div>
 
@@ -69,10 +69,10 @@ const AttendingASessionGuidePage: NextPage = () => {
 						}/guides/attendee/attending-a-session#find-an-event`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						Before registering for a session, you will need to{' '}
 						<Link href="/guides/attendee/attending-an-event">
-							<a className="underline text-gray-900">find & register for an event</a>
+							<a className="text-gray-900 underline">find & register for an event</a>
 						</Link>
 						.
 					</p>
@@ -92,7 +92,7 @@ const AttendingASessionGuidePage: NextPage = () => {
 						}/guides/attendee/attending-a-session#find-a-session`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After registering for the event, you can find a session on the events sessions page.
 					</p>
 
@@ -111,7 +111,7 @@ const AttendingASessionGuidePage: NextPage = () => {
 						}/guides/attendee/attending-a-session#register-for-a-session`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						Once you have found a session, you can attend it by hovering on the session you want to
 						attend, and clicking the <span className="font-medium">"Register"</span> button.
 					</p>
@@ -122,7 +122,7 @@ const AttendingASessionGuidePage: NextPage = () => {
 						alt={'Register for a session 1'}
 					/>
 
-					<p className="text-gray-700 my-4">
+					<p className="my-4 text-gray-700">
 						Or you can click on the session you want to attend, and select the{' '}
 						<span className="font-medium">"Attend this session"</span> button.
 					</p>

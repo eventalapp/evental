@@ -37,7 +37,7 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 										i !== sessionTypes.length - 1 && 'border-b-2'
 									)}
 								>
-									<div className="flex flex-grow flex-row flex-wrap justify-between">
+									<div className="flex grow flex-row flex-wrap justify-between">
 										<div className="flex flex-row items-center justify-between">
 											<div
 												className="mr-3 h-4 w-4 rounded-full"
@@ -72,7 +72,7 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 								<span className="w-20 py-2 pr-3 text-right text-sm text-gray-700">
 									{sessionType.color}
 								</span>
-								<div className="flex flex-grow flex-row flex-wrap justify-between border-l-2 border-gray-200 py-2 pl-3">
+								<div className="flex grow flex-row flex-wrap justify-between border-l-2 border-gray-200 py-2 pl-3">
 									<div className="flex flex-row items-center justify-between">
 										<div
 											className="mr-3 h-4 w-4 rounded-full"

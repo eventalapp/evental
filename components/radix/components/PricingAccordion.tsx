@@ -40,7 +40,7 @@ export const PricingAccordion: React.FC<Props> = (props) => {
 							/>
 						</AccordionPrimitive.Trigger>
 					</AccordionPrimitive.Header>
-					<AccordionPrimitive.Content className="pt-r1 w-full rounded-b-lg bg-gray-100 px-4 pb-3 dark:bg-gray-800">
+					<AccordionPrimitive.Content className="w-full rounded-b-lg bg-gray-100 px-4 pb-3 pt-1 dark:bg-gray-800">
 						<div className="text-sm text-gray-700 dark:text-gray-400">{content}</div>
 					</AccordionPrimitive.Content>
 				</AccordionPrimitive.Item>

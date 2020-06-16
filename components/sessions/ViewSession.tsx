@@ -76,7 +76,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 			{!isAttending &&
 				session.maxAttendees !== null &&
 				session.attendeeCount >= session.maxAttendees && (
-					<div className="mb-4 block rounded-md bg-red-500 px-5 py-3 font-medium text-white">
+					<div className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
 						This session is full
 					</div>
 				)}

@@ -96,7 +96,7 @@ const Dialog = (props: Props) => {
 							</fieldset>
 						</form>
 
-						<div className="mt-4 flex justify-end">
+						<div className="flex justify-end mt-4">
 							<DialogPrimitive.Close
 								className={cx(
 									'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',
@@ -115,7 +115,7 @@ const Dialog = (props: Props) => {
 								'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 							)}
 						>
-							<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+							<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 						</DialogPrimitive.Close>
 					</DialogPrimitive.Content>
 				</Transition.Child>

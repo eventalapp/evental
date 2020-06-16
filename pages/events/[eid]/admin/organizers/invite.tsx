@@ -70,10 +70,10 @@ const EventOrganizersPage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium">Invite Organizer</h3>
+					<h3 className="text-xl font-medium md:text-2xl">Invite Organizer</h3>
 				</FlexRowBetween>
 
-				<p className="text-md text-gray-700 mb-2">
+				<p className="mb-2 text-base text-gray-700">
 					Organizers are able to create, edit, and delete sessions, venues, and roles.
 				</p>
 

@@ -108,7 +108,7 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<div>
-					<h3 className="text-xl md:text-2xl font-medium">Session Types</h3>
+					<h3 className="text-xl font-medium md:text-2xl">Session Types</h3>
 
 					{sessionTypes && <SessionTypeList eid={String(eid)} sessionTypes={sessionTypes} />}
 				</div>

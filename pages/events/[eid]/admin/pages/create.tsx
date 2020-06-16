@@ -51,7 +51,7 @@ const CreatePagePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl md:text-2xl font-medium">Create Page</h3>
+				<h3 className="text-xl font-medium md:text-2xl">Create Page</h3>
 
 				<CreatePageForm eid={String(eid)} createPageMutation={createPageMutation} />
 			</Column>

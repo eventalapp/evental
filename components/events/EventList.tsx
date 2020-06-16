@@ -31,7 +31,7 @@ export const EventList: React.FC<Props> = (props) => {
 						<Link href={`/events/${event.slug}`}>
 							<a className="block py-3">
 								<div className="flex flex-row items-center">
-									<div className="align-center flex w-12 flex-col justify-center md:ml-5">
+									<div className="flex w-12 flex-col justify-center text-center md:ml-5">
 										<Tooltip
 											side={'top'}
 											message={`This is event is taking place from ${formatInTimeZone(
@@ -78,7 +78,7 @@ export const EventList: React.FC<Props> = (props) => {
 											side={'top'}
 											message={`This is a ${event?.category?.toLowerCase()} event.`}
 										>
-											<span className="inline-block flex-shrink text-tiny font-medium text-gray-500">
+											<span className="inline-block shrink text-tiny font-medium text-gray-500">
 												{event.category}
 											</span>
 										</Tooltip>

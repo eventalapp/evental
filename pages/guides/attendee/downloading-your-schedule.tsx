@@ -39,10 +39,10 @@ const AttendingASessionGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Downloading your schedule</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Downloading your schedule</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to view and download your schedule on evental.
 					</p>
 				</Column>
@@ -74,11 +74,11 @@ const AttendingASessionGuidePage: NextPage = () => {
 						}/guides/attendee/downloading-your-schedule#view-your-schedule`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						You can view your schedule at the{' '}
 						{user ? (
 							<Link href={`/users/${user.slug}/schedule`}>
-								<a className="underline text-gray-900">my schedule page</a>
+								<a className="text-gray-900 underline">my schedule page</a>
 							</Link>
 						) : (
 							'my schedule page, which can be found by signing in and clicking the top right user icon and selecting "Schedule"'
@@ -101,12 +101,12 @@ const AttendingASessionGuidePage: NextPage = () => {
 						}/guides/attendee/downloading-your-schedule#download-your-schedule`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the schedule page, you can download your schedule by clicking the{' '}
 						<span className="font-medium">"Download Schedule (Excel)"</span> button. If you would
 						like more export options, please fill out a feature request{' '}
 						<Link href="/support">
-							<a className="underline text-gray-900">support ticket</a>
+							<a className="text-gray-900 underline">support ticket</a>
 						</Link>
 						.
 					</p>

@@ -141,7 +141,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 							Username *<HelpTooltip message={copy.tooltip.userSlug} />
 						</Label>
 						<div className="flex items-center">
-							<span className="text-md mr-1">evental.app/users/</span>
+							<span className="mr-1 text-base">evental.app/users/</span>
 							<Input placeholder="user-slug" {...register('slug')} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}

@@ -33,7 +33,7 @@ export const SocialShareIcon: React.FC<{
 						className
 					)}
 				>
-					<FontAwesomeIcon fill="currentColor" className="h-5 w-5 " size="1x" icon={icon} />
+					<FontAwesomeIcon fill="currentColor" className="w-5 h-5 " size="1x" icon={icon} />
 				</div>
 			</a>
 		</Tooltip>

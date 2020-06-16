@@ -54,7 +54,7 @@ const RolesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl md:text-2xl font-medium">Roles</h3>
+						<h3 className="text-xl font-medium md:text-2xl">Roles</h3>
 
 						<IconLinkTooltip
 							message="Click to create a role"

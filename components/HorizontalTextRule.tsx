@@ -13,9 +13,9 @@ export const HorizontalTextRule: Props = (props) => {
 
 	return (
 		<div className={classNames('relative flex py-1.5 items-center', className)} {...rest}>
-			<div className="flex-grow border-t border-gray-300" />
-			<span className="flex-shrink mx-4 text-gray-400">{text}</span>
-			<div className="flex-grow border-t border-gray-300" />
+			<div className="grow border-t border-gray-300" />
+			<span className="shrink mx-4 text-gray-400">{text}</span>
+			<div className="grow border-t border-gray-300" />
 		</div>
 	);
 };

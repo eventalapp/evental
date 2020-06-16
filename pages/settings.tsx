@@ -53,7 +53,7 @@ const SettingsPage: NextPage<Props> = (props) => {
 			<Column variant="halfWidth">
 				{canVerify && !user.emailVerified && (
 					<button
-						className="block w-full bg-primary block text-white px-5 py-3 rounded-md mb-4 font-medium"
+						className="block py-3 px-5 mb-4 w-full font-medium text-white bg-primary rounded-md"
 						disabled={requestVerificationEmailMutation.isLoading}
 						onClick={() => {
 							requestVerificationEmailMutation.mutate();
@@ -67,7 +67,7 @@ const SettingsPage: NextPage<Props> = (props) => {
 					</button>
 				)}
 
-				<h1 className="text-2xl md:text-3xl font-bold">User Settings</h1>
+				<h1 className="text-2xl font-bold md:text-3xl">User Settings</h1>
 
 				<UserSettingsForm
 					user={user}

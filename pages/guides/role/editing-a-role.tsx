@@ -48,10 +48,10 @@ const EditingARoleGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Editing a role</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Editing a role</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to edit a role for your event on Evental.
 					</p>
 				</Column>
@@ -83,7 +83,7 @@ const EditingARoleGuidePage: NextPage = () => {
 						}/guides/role/editing-a-role#${sections.navigateDashboard.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To edit a role, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -103,7 +103,7 @@ const EditingARoleGuidePage: NextPage = () => {
 						}/guides/role/editing-a-role#${sections.navigateRoles.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Roles"</span> link in the top navigation.
 					</p>
@@ -117,15 +117,15 @@ const EditingARoleGuidePage: NextPage = () => {
 						}/guides/role/editing-a-role#${sections.editRole.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the roles dashboard page, select the role you wish to edit by clicking
 						the role.
 					</p>
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting a role, select the <span className="font-medium">"Edit"</span> button.
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting the "Edit" button. You will be navigated to the edit role form. Fill out
 						the edit role form to edit a role.
 					</p>

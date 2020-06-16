@@ -56,10 +56,10 @@ const EventBillingPage: NextPage = () => {
 
 				<EventSettingsNavigation event={event} roles={roles} user={user} />
 
-				<div className="dark-topography text-white">
+				<div className="text-white dark-topography">
 					<Column className="flex flex-col items-center">
-						<h1 className="text-2xl md:text-3xl font-bold">Single Event Plans &amp; Pricing</h1>
-						<p className="text-gray-100 text-md mt-4 max-w-2xl text-center">
+						<h1 className="text-2xl font-bold md:text-3xl">Single Event Plans &amp; Pricing</h1>
+						<p className="mt-4 max-w-2xl text-base text-center text-gray-100">
 							View pricing for single event plans for standard and nonprofit or educational events.
 						</p>
 					</Column>
