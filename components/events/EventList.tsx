@@ -57,7 +57,7 @@ export const EventList: React.FC<Props> = (props) => {
 												</span>
 											</Tooltip>
 										</div>
-										<div className="relative mx-3 min-h-[3em] min-w-[3em] rounded-md border-2 border-gray-100 md:mx-5 md:h-16 md:w-16">
+										<div className="relative mx-3 min-h-[3em] min-w-[3em] rounded-md border border-gray-100 md:mx-5 md:h-16 md:w-16">
 											<Image
 												alt={event.name}
 												src={

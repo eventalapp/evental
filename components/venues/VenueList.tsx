@@ -6,6 +6,7 @@ import React from 'react';
 
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { NotFound } from '../error/NotFound';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -30,13 +31,8 @@ export const VenueList: React.FC<Props> = (props) => {
 					passHref
 				>
 					<a>
-						<div
-							className={classNames(
-								'border-gray-200 p-3 py-4',
-								i !== venues.length - 1 && 'border-b-2'
-							)}
-						>
-							<div className="flex flex-row flex-wrap items-center justify-between">
+						<div className={classNames('border-gray-200', i !== venues.length - 1 && 'border-b-2')}>
+							<div className="-mx-3 flex flex-row flex-wrap items-center justify-between rounded-md p-3 hover:bg-gray-75">
 								<div>
 									<span className="block text-lg">{venue.name}</span>{' '}
 									{venue.address ? (
@@ -46,7 +42,16 @@ export const VenueList: React.FC<Props> = (props) => {
 									)}
 								</div>
 
-								<FontAwesomeIcon fill="currentColor" size="lg" icon={faChevronRight} />
+								<Tooltip side={'top'} message={`Click to view the ${venue.name} venue`}>
+									<div className="-m-2 flex items-center justify-center p-2">
+										<FontAwesomeIcon
+											fill="currentColor"
+											size="1x"
+											className="h-5 w-5 text-gray-500"
+											icon={faChevronRight}
+										/>
+									</div>
+								</Tooltip>
 							</div>
 						</div>
 					</a>
