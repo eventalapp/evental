@@ -41,32 +41,34 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				className={cx(
 					'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
 					'max-w-lg rounded-lg p-4 md:w-full',
-					'bg-white dark:bg-gray-800 border-gray-200 border shadow-sm',
-					'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75 min-w-[350px] relative'
+					'border border-gray-200 bg-white shadow-sm dark:bg-gray-800',
+					'relative min-w-[350px] focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 				)}
 			>
 				<HoverCardPrimitive.Arrow
-					className="text-gray-200 dark:text-gray-800 fill-current"
+					className="fill-current text-gray-200 dark:text-gray-800"
 					offset={10}
 				/>
 
-				<div className="w-full h-full">
-					<div className="flex absolute right-3 bottom-3 flex-row justify-end w-full">
-						<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
-							<button
-								onClick={() => {
-									createSessionAttendeeMutation.mutate();
-								}}
-							>
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="w-7 h-7 text-gray-600 cursor-pointer"
-									size="lg"
-									icon={faCalendarCirclePlus}
-								/>
-							</button>
-						</Tooltip>
-					</div>
+				<div className="h-full w-full">
+					{user && (
+						<div className="absolute right-3 bottom-3 flex w-full flex-row justify-end">
+							<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
+								<button
+									onClick={() => {
+										createSessionAttendeeMutation.mutate();
+									}}
+								>
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="h-7 w-7 cursor-pointer text-gray-600"
+										size="lg"
+										icon={faCalendarCirclePlus}
+									/>
+								</button>
+							</Tooltip>
+						</div>
+					)}
 
 					<h3 className="mb-1 text-lg font-medium text-gray-900 dark:text-gray-100">
 						{session.name}
@@ -79,10 +81,10 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 									side={'top'}
 									message={`This session is in the ${session.type.name} category`}
 								>
-									<div className="inline-flex flex-row items-center cursor-help">
-										<div className="flex justify-center items-center mr-1.5 w-5 h-5">
+									<div className="inline-flex cursor-help flex-row items-center">
+										<div className="mr-1.5 flex h-5 w-5 items-center justify-center">
 											<div
-												className="w-3 h-3 rounded-full"
+												className="h-3 w-3 rounded-full"
 												style={{
 													backgroundColor: session?.type?.color ?? '#888888'
 												}}
@@ -100,10 +102,10 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 									side={'top'}
 									message={`This session is taking place at the ${session.venue.name} venue`}
 								>
-									<div className="inline-flex flex-row items-center cursor-help">
+									<div className="inline-flex cursor-help flex-row items-center">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="mr-1.5 w-5 h-5"
+											className="mr-1.5 h-5 w-5"
 											size="1x"
 											icon={faLocationDot}
 										/>
@@ -121,10 +123,10 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 										(session?.attendeeCount / session?.maxAttendees) * 100
 									)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
 								>
-									<div className="inline-flex flex-row items-center cursor-help">
+									<div className="inline-flex cursor-help flex-row items-center">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="mr-1.5 w-5 h-5"
+											className="mr-1.5 h-5 w-5"
 											size="1x"
 											icon={faUserGroup}
 										/>
@@ -143,19 +145,19 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					)}
 
 					{session.roleMembers && session.roleMembers.length > 0 && (
-						<ul className="grid grid-cols-4 gap-2 mt-4">
+						<ul className="mt-4 grid grid-cols-4 gap-2">
 							{session.roleMembers.slice(0, 4).map((roleMember) => (
 								<li
 									key={roleMember.attendee.id}
-									className="flex relative flex-col justify-between items-center h-full"
+									className="relative flex h-full flex-col items-center justify-between"
 								>
 									<Link
 										href={`/events/${event.slug}${admin ? '/admin' : ''}/attendees/${
 											roleMember.attendee.user.slug
 										}`}
 									>
-										<a className="flex flex-col justify-start items-center h-full">
-											<div className="relative mb-1 w-10 h-10 rounded-full border-2 border-gray-100">
+										<a className="flex h-full flex-col items-center justify-start">
+											<div className="relative mb-1 h-10 w-10 rounded-full border-2 border-gray-100">
 												<Image
 													alt={String(roleMember.attendee.user.name)}
 													src={String(
@@ -167,7 +169,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 													layout="fill"
 												/>
 											</div>
-											<span className="text-sm text-center">{roleMember.attendee.user.name}</span>
+											<span className="text-center text-sm">{roleMember.attendee.user.name}</span>
 										</a>
 									</Link>
 								</li>
