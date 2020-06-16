@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+
 import { NEAREST_MINUTE } from '../../config';
 import { UseEditSessionMutationData } from '../../hooks/mutations/useEditSessionMutation';
 import { useRemoveAttendeeFromSessionMutation } from '../../hooks/mutations/useRemoveAttendeeFromSessionMutation';
@@ -15,9 +16,11 @@ import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { UseSessionRoleAttendeesQueryData } from '../../hooks/queries/useSessionRoleAttendeesQuery';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { copy, FIFTEEN_MINUTES } from '../../utils/const';
+import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { HelpTooltip } from '../HelpTooltip';
+import { TimeZoneNotice } from '../TimeZoneNotice';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { DatePicker } from '../form/DatePicker';
@@ -25,13 +28,11 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { HelpTooltip } from '../HelpTooltip';
 import AttachPeopleDialog from '../radix/components/AttachPeopleDialog';
 import CreateTypeDialog from '../radix/components/CreateTypeDialog';
 import CreateVenueDialog from '../radix/components/CreateVenueDialog';
 import Select from '../radix/components/Select';
 import Tooltip from '../radix/components/Tooltip';
-import { TimeZoneNotice } from '../TimeZoneNotice';
 
 type Props = {
 	eid: string;
@@ -106,8 +107,8 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 				editSessionMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full mt-5">
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+			<div className="mt-5 flex w-full flex-col">
+				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Session name" {...register('name')} />
@@ -139,7 +140,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 							)}
 						/>
 						<CreateVenueDialog eid={String(eid)}>
-							<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+							<span className="mt-1 cursor-pointer text-sm text-gray-600">
 								Dont see your venue? Create a Venue
 							</span>
 						</CreateVenueDialog>
@@ -154,15 +155,15 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 							Attach People *<HelpTooltip message={copy.tooltip.attachPeople} />
 						</Label>
 
-						<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 mt-3">
+						<ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
 							{sessionRoleAttendeesQuery?.data?.map((attendee) => (
 								<li
 									key={attendee.id}
-									className="flex items-center justify-between flex-col h-full relative"
+									className="relative flex h-full flex-col items-center justify-between"
 								>
 									<Link href={`/events/${eid}/admin/attendees/${attendee.user.slug}`}>
-										<a className="flex items-center justify-start flex-col h-full">
-											<div className="h-16 w-16 relative mb-1 border-2 border-gray-100 rounded-full">
+										<a className="flex h-full flex-col items-center justify-start">
+											<div className="relative mb-1 h-16 w-16 rounded-full border-2 border-gray-100">
 												<Image
 													alt={String(attendee.user.name)}
 													src={String(
@@ -174,8 +175,8 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 													layout="fill"
 												/>
 											</div>
-											<span className="text-lg text-center">{attendee.user.name}</span>
-											<span className="block text-gray-700 text-sm leading-none">
+											<span className="text-center text-lg">{attendee.user.name}</span>
+											<span className="block text-sm leading-none text-gray-700">
 												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
 											</span>
 										</a>
@@ -192,7 +193,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 											>
 												<FontAwesomeIcon
 													fill="currentColor"
-													className="w-5 h-5 cursor-pointer text-gray-700 hover:text-red-500 transition-colors duration-200"
+													className="h-5 w-5 cursor-pointer text-gray-700 transition-colors duration-200 hover:text-red-500"
 													size="lg"
 													icon={faXmark}
 												/>
@@ -202,11 +203,11 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 								</li>
 							))}
 
-							<div className="flex items-center justify-center w-full h-full">
+							<div className="flex h-full w-full items-center justify-center">
 								<AttachPeopleDialog eid={String(eid)} sid={String(sid)}>
 									<button type="button">
 										<Tooltip message="Click to attach people to this session">
-											<div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-800 hover:text-primary-500 transition-colors duration-200">
+											<div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-gray-800 transition-colors duration-200 hover:text-primary-500">
 												<FontAwesomeIcon
 													fill="currentColor"
 													className="h-5 w-5"
@@ -222,7 +223,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="venueId">
 							Type *<HelpTooltip message={copy.tooltip.type} />
@@ -248,7 +249,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 							)}
 						/>
 						<CreateTypeDialog eid={String(eid)}>
-							<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+							<span className="mt-1 cursor-pointer text-sm text-gray-600">
 								Dont see your type? Create a Type
 							</span>
 						</CreateTypeDialog>
@@ -274,7 +275,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="startDate">Start Date *</Label>
 						<div className="relative">
@@ -335,7 +336,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className="grid grid-cols-1 mb-5 gap-5">
+			<div className="mb-5 grid grid-cols-1 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
 					<Controller

@@ -53,7 +53,7 @@ export const SubmitSupportTicketForm = () => {
 			className="w-full"
 		>
 			<div className="space-y-6">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					<div>
 						<Label htmlFor="attendanceType">Are you organizing or attending an event? *</Label>
 
@@ -116,7 +116,7 @@ export const SubmitSupportTicketForm = () => {
 					{errors.body?.message && <ErrorMessage>{errors.body?.message}</ErrorMessage>}
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					<div>
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="John Doe" {...register('name')} />
@@ -130,7 +130,7 @@ export const SubmitSupportTicketForm = () => {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					<div>
 						<Label htmlFor="website">Website</Label>
 						<Input placeholder="evental.app/events/your-event" {...register('website')} />

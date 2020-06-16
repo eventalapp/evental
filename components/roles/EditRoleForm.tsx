@@ -43,14 +43,14 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 				editRoleMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-row w-full mt-5 mt-3">
+			<div className="mt-5 mt-3 flex w-full flex-row">
 				<div className="mb-5 flex-1">
 					<Label htmlFor="name">Role Name *</Label>
 					<Input placeholder="Role name" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
-				<div className="flex-initial ml-5">
+				<div className="ml-5 flex-initial">
 					<Label htmlFor="defaultRole">Default Role</Label>
 					<Controller
 						control={control}

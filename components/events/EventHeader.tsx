@@ -14,6 +14,7 @@ import Prisma from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
 import { theme } from '../../tailwind.config';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
@@ -37,7 +38,7 @@ export const EventHeader: React.FC<{
 			{user && isOrganizer && (
 				<Link href={`/events/${eid}/admin${adminLink}`}>
 					<a
-						className="block text-white px-5 py-3 rounded-md mb-4 font-medium"
+						className="mb-4 block rounded-md px-5 py-3 font-medium text-white"
 						style={{
 							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
 						}}
@@ -50,7 +51,7 @@ export const EventHeader: React.FC<{
 			{!user && (
 				<Link href={`/events/${eid}/register`}>
 					<a
-						className="block text-white px-5 py-3 rounded-md mb-4 font-medium"
+						className="mb-4 block rounded-md px-5 py-3 font-medium text-white"
 						style={{
 							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
 						}}
@@ -63,7 +64,7 @@ export const EventHeader: React.FC<{
 			{user && !Boolean(isAttendee) && (
 				<Link href={`/events/${eid}/register`}>
 					<a
-						className="block text-white px-5 py-3 rounded-md mb-4 font-medium"
+						className="mb-4 block rounded-md px-5 py-3 font-medium text-white"
 						style={{
 							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
 						}}
@@ -74,11 +75,11 @@ export const EventHeader: React.FC<{
 			)}
 
 			<div className="relative">
-				<div className="top-0 right-0 absolute flex flex-row space-x-4">
+				<div className="absolute top-0 right-0 flex flex-row space-x-4">
 					<ShareDropdown event={event}>
 						<div>
 							<Tooltip side={'top'} message={'Share this event.'}>
-								<button type="button" className="w-6 h-6 text-gray-700">
+								<button type="button" className="h-6 w-6 text-gray-700">
 									<FontAwesomeIcon
 										fill="currentColor"
 										className="h-5 w-5"
@@ -94,7 +95,7 @@ export const EventHeader: React.FC<{
 						<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
 							<div>
 								<Tooltip side={'top'} message={'Leave this event.'}>
-									<button type="button" className="w-6 h-6">
+									<button type="button" className="h-6 w-6">
 										<FontAwesomeIcon
 											fill="currentColor"
 											className="h-5 w-5 text-red-500"
@@ -109,7 +110,7 @@ export const EventHeader: React.FC<{
 				</div>
 
 				<div className="flex flex-row items-center">
-					<div className="flex-shrink-0 relative w-16 h-16 md:w-20 md:h-20 mr-3 md:mr-5 border border-gray-200 shadow-sm rounded-md">
+					<div className="relative mr-3 h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 shadow-sm md:mr-5 md:h-20 md:w-20">
 						<Image
 							alt={event.name}
 							src={
@@ -123,17 +124,17 @@ export const EventHeader: React.FC<{
 					</div>
 
 					<div>
-						<h1 className="text-2xl md:text-3xl font-bold max-w-lg tracking-tight leading-[1.1] mb-1.5">
+						<h1 className="mb-1.5 max-w-lg text-2xl font-bold leading-[1.1] tracking-tight md:text-3xl">
 							{event?.name}
 						</h1>
 
-						<div className="flex-row flex items-center text-gray-600 flex-wrap">
+						<div className="flex flex-row flex-wrap items-center text-gray-600">
 							{event?.location && (
 								<Tooltip message={`This is event is taking place at ${event?.location}.`}>
-									<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
+									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="w-5 h-5 mr-1.5"
+											className="mr-1.5 h-5 w-5"
 											size="1x"
 											icon={faLocationDot}
 										/>
@@ -151,10 +152,10 @@ export const EventHeader: React.FC<{
 									}
 								)}.`}
 							>
-								<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
+								<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="w-5 h-5 mr-1.5"
+										className="mr-1.5 h-5 w-5"
 										size="1x"
 										icon={faCalendarDay}
 									/>
@@ -172,10 +173,10 @@ export const EventHeader: React.FC<{
 									' '
 								)} timezone.`}
 							>
-								<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
+								<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="w-5 h-5 mr-1.5"
+										className="mr-1.5 h-5 w-5"
 										size="1x"
 										icon={faClock}
 									/>
@@ -185,10 +186,10 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'IN_PERSON' && (
 								<Tooltip message={`This is event is taking place in person.`}>
-									<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
+									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="w-5 h-5 mr-1.5"
+											className="mr-1.5 h-5 w-5"
 											size="1x"
 											icon={faPerson}
 										/>
@@ -199,10 +200,10 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'HYBRID' && (
 								<Tooltip message={`This is event is taking place virtually & in person.`}>
-									<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
+									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="w-5 h-5 mr-1.5"
+											className="mr-1.5 h-5 w-5"
 											size="1x"
 											icon={faStreetView}
 										/>
@@ -213,10 +214,10 @@ export const EventHeader: React.FC<{
 
 							{event?.type && event.type === 'VIRTUAL' && (
 								<Tooltip message={`This is event is taking place virtually.`}>
-									<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
+									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="w-5 h-5 mr-1.5"
+											className="mr-1.5 h-5 w-5"
 											size="1x"
 											icon={faHeadset}
 										/>
@@ -228,10 +229,10 @@ export const EventHeader: React.FC<{
 							{event.website && (
 								<Tooltip message={`This is event's website is ${event.website}.`}>
 									<a href={event.website} target="_blank" rel="noopener noreferrer">
-										<div className="flex flex-row items-center cursor-pointer text-sm md:text-base">
+										<div className="flex cursor-pointer flex-row items-center text-sm md:text-base">
 											<FontAwesomeIcon
 												fill="currentColor"
-												className="w-5 h-5 mr-1.5"
+												className="mr-1.5 h-5 w-5"
 												size="1x"
 												icon={faArrowUpRightFromSquare}
 											/>

@@ -22,7 +22,7 @@ export const CreateSessionAttendeeForm: React.FC<Props> = (props) => {
 				createSessionAttendeeMutation.mutate();
 			})}
 		>
-			<div className="flex flex-row justify-end mt-3">
+			<div className="mt-3 flex flex-row justify-end">
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>

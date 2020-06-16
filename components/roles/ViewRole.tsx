@@ -6,10 +6,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Prisma from '@prisma/client';
 import React from 'react';
+
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
-import { AttendeeList } from '../attendees/AttendeeList';
 import { IconLinkTooltip } from '../IconLinkTooltip';
+import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 
 type Props = {
@@ -28,7 +29,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween>
-				<h3 className="text-xl md:text-2xl font-medium">
+				<h3 className="text-xl font-medium md:text-2xl">
 					{capitalizeFirstLetter(role.name.toLowerCase())}s{' '}
 					<span className="font-normal text-gray-500">({attendees.length || 0})</span>
 				</h3>

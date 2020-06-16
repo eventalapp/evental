@@ -3,6 +3,7 @@ import { EventPermissionRole } from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
 import { UseEditAttendeeMutationData } from '../../hooks/mutations/useEditAttendeeMutation';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
@@ -47,7 +48,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 				adminEditAttendeeMutation.mutate(data);
 			})}
 		>
-			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5 mt-3">
+			<div className="mb-5 mt-3 grid grid-cols-1 gap-5 md:grid-cols-2">
 				<div>
 					<Label htmlFor="eventRoleId">Role *</Label>
 					{roles && (
@@ -71,7 +72,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 					)}
 
 					<CreateRoleDialog eid={String(eid)}>
-						<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+						<span className="mt-1 cursor-pointer text-sm text-gray-600">
 							Dont see your role? Create a role
 						</span>
 					</CreateRoleDialog>

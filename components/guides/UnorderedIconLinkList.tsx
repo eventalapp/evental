@@ -21,7 +21,7 @@ export const UnorderedIconLinkList: Props = (props) => {
 	const { children, items, ...rest } = props;
 
 	return (
-		<ul className="pt-4 space-y-0.5" {...rest}>
+		<ul className="space-y-0.5 pt-4" {...rest}>
 			{items.map((item, i) => {
 				const { text, relativeLink, icon = faFile } = item;
 

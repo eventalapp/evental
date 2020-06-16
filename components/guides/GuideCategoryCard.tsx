@@ -8,7 +8,7 @@ export const GuideCategoryCard: Props = (props) => {
 	const { children, ...rest } = props;
 
 	return (
-		<div className="border border-gray-200 p-5 rounded-md shadow-sm" {...rest}>
+		<div className="rounded-md border border-gray-200 p-5 shadow-sm" {...rest}>
 			{children}
 		</div>
 	);

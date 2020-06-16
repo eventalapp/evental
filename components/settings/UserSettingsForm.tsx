@@ -65,7 +65,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 				editUserMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full mt-5 items-center justify-center">
+			<div className="mt-5 flex w-full flex-col items-center justify-center">
 				<Label htmlFor="image" className="hidden">
 					Image
 				</Label>
@@ -78,8 +78,8 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 
 				{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 			</div>
-			<div className="flex flex-col w-full mt-5">
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+			<div className="mt-5 flex w-full flex-col">
+				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="User name" {...register('name')} />
@@ -93,8 +93,8 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-col w-full">
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+			<div className="flex w-full flex-col">
+				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="position">
 							Position
@@ -114,7 +114,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="grid grid-cols-1 mb-5 gap-5">
+			<div className="mb-5 grid grid-cols-1 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
 					<Controller
@@ -134,14 +134,14 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					)}
 				</div>
 			</div>
-			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+			<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 				<div>
 					<div>
 						<Label htmlFor="slug">
 							Username *<HelpTooltip message={copy.tooltip.userSlug} />
 						</Label>
 						<div className="flex items-center">
-							<span className="mr-1 text-md">evental.app/users/</span>
+							<span className="text-md mr-1">evental.app/users/</span>
 							<Input placeholder="user-slug" {...register('slug')} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}

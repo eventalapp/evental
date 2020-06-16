@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
+
 import { Footer } from '../../components/Footer';
 import { GuideCategoryCard } from '../../components/guides/GuideCategoryCard';
 import { GuideCategoryCardWrapper } from '../../components/guides/GuideCategoryCardWrapper';
@@ -36,19 +37,19 @@ const GuidesPage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Support Guides</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Support Guides</h1>
+					<p className="text-md mt-4 text-gray-100">
 						Need help getting started as an organizer, speaker or an attendee? Check out our guides.
 					</p>
 				</Column>
 			</div>
 
 			<Column>
-				<h2 className="text-2xl md:text-3xl font-bold mb-5">Guides for Attendees & Speakers</h2>
+				<h2 className="mb-5 text-2xl font-bold md:text-3xl">Guides for Attendees & Speakers</h2>
 				<GuideCategoryCardWrapper className="mb-7 md:mb-14">
 					<GuideCategoryCard>
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Attendees</span>
-						<p className="text-gray-600 text-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Attendees</span>
+						<p className="text-sm text-gray-600">
 							Attending an event on Evental and need some extra help? Checkout the following
 							attendee guides below.
 						</p>
@@ -75,8 +76,8 @@ const GuidesPage: NextPage = () => {
 						/>
 					</GuideCategoryCard>
 					<GuideCategoryCard>
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Speakers</span>
-						<p className="text-gray-600 text-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Speakers</span>
+						<p className="text-sm text-gray-600">
 							Are you speaking at an event that is using Evental? Check out the following guides
 							below to help you get started.
 						</p>
@@ -92,11 +93,11 @@ const GuidesPage: NextPage = () => {
 					</GuideCategoryCard>
 				</GuideCategoryCardWrapper>
 
-				<h2 className="text-2xl md:text-3xl font-bold mb-5">Guides for Organizers</h2>
+				<h2 className="mb-5 text-2xl font-bold md:text-3xl">Guides for Organizers</h2>
 				<GuideCategoryCardWrapper className="mb-7 md:mb-14">
 					<GuideCategoryCard>
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Sessions</span>
-						<p className="text-gray-600 text-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Sessions</span>
+						<p className="text-sm text-gray-600">
 							Sessions are specific talks/events occuring at your event. Attendees can register for
 							these sessions. Checkout the following guides for organizing sessions below.
 						</p>
@@ -128,8 +129,8 @@ const GuidesPage: NextPage = () => {
 					</GuideCategoryCard>
 
 					<GuideCategoryCard>
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Roles</span>
-						<p className="text-gray-600 text-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Roles</span>
+						<p className="text-sm text-gray-600">
 							Roles are used to categorize and display attendees such as speakers, sponsors,
 							exhibitors, artists, etc. Checkout the following organizer guides for organizers
 							below.
@@ -158,8 +159,8 @@ const GuidesPage: NextPage = () => {
 					</GuideCategoryCard>
 
 					<GuideCategoryCard>
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Organizers</span>
-						<p className="text-gray-600 text-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Organizers</span>
+						<p className="text-sm text-gray-600">
 							As the event founder, you can invite additional organizers to assist you in setting up
 							your event. Checkout the following guides for inviting organizers below.
 						</p>
@@ -179,8 +180,8 @@ const GuidesPage: NextPage = () => {
 					</GuideCategoryCard>
 
 					<GuideCategoryCard>
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Venues</span>
-						<p className="text-gray-600 text-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Venues</span>
+						<p className="text-sm text-gray-600">
 							Venues are used to group sessions by location. Checkout the following organizer guides
 							for venues below.
 						</p>
@@ -199,8 +200,8 @@ const GuidesPage: NextPage = () => {
 						/>
 					</GuideCategoryCard>
 					<GuideCategoryCard>
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Pages</span>
-						<p className="text-gray-600 text-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Pages</span>
+						<p className="text-sm text-gray-600">
 							Pages can be used to make event specific information such as hotels nearby, or a map
 							of the convention available. Checkout the following organizer guides for pages below.
 						</p>

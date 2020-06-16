@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+
 import { UseAdminDeleteAttendeeMutationData } from '../../hooks/mutations/useAdminDeleteAttendeeMutation';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import { LoadingInner } from '../error/LoadingInner';
@@ -32,7 +33,7 @@ export const DeleteAttendeeForm: React.FC<Props> = (props) => {
 				adminDeleteAttendeeMutation.mutate();
 			})}
 		>
-			<div className="flex flex-col w-full mt-3">
+			<div className="mt-3 flex w-full flex-col">
 				<div className="mb-5">
 					<div>
 						<p className="mb-3">

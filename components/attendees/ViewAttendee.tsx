@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import parse from 'html-react-parser';
 import Image from 'next/image';
 import React from 'react';
+
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
@@ -27,7 +28,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween variant="start">
-				<div className="h-32 w-32 relative">
+				<div className="relative h-32 w-32">
 					<Image
 						alt={String(attendee.user.name)}
 						src={String(
@@ -61,16 +62,16 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				)}
 			</FlexRowBetween>
 
-			<h1 className="text-2xl md:text-3xl font-bold">{attendee.user.name}</h1>
+			<h1 className="text-2xl font-bold md:text-3xl">{attendee.user.name}</h1>
 
 			<div className="text-gray-600">
 				<div>
 					{attendee.role.name && (
 						<Tooltip side={'top'} message={`This user is attending as a ${attendee.role.name}`}>
-							<div className="inline-flex flex-row items-center mb-1 cursor-help">
+							<div className="mb-1 inline-flex cursor-help flex-row items-center">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
+									className="mr-1.5 h-5 w-5"
 									size="1x"
 									icon={faAddressCard}
 								/>
@@ -82,10 +83,10 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				<div>
 					{attendee.user.location && (
 						<Tooltip side={'top'} message={`This user is located in ${attendee.user.location}`}>
-							<div className="inline-flex flex-row items-center mb-1 cursor-help">
+							<div className="mb-1 inline-flex cursor-help flex-row items-center">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
+									className="mr-1.5 h-5 w-5"
 									size="1x"
 									icon={faLocationDot}
 								/>
@@ -97,10 +98,10 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				<div>
 					{attendee.user.company && (
 						<Tooltip side={'top'} message={`This user works for ${attendee.user.company}`}>
-							<div className="inline-flex flex-row items-center mb-1 cursor-help">
+							<div className="mb-1 inline-flex cursor-help flex-row items-center">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
+									className="mr-1.5 h-5 w-5"
 									size="1x"
 									icon={faBuilding}
 								/>
@@ -119,10 +120,10 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 									: `This user works as a ${attendee.user.position}`
 							}
 						>
-							<div className="inline-flex flex-row items-center mb-1  cursor-help">
+							<div className="mb-1 inline-flex cursor-help flex-row  items-center">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
+									className="mr-1.5 h-5 w-5"
 									size="1x"
 									icon={faAddressBook}
 								/>
@@ -135,10 +136,10 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 					{attendee.user.website && (
 						<Tooltip side={'top'} message={`This user's website link is ${attendee.user.website}`}>
 							<a href={attendee.user.website} target="_blank" rel="noopener noreferrer">
-								<div className="inline-flex flex-row items-center mb-1">
+								<div className="mb-1 inline-flex flex-row items-center">
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="w-5 h-5 mr-1.5"
+										className="mr-1.5 h-5 w-5"
 										size="1x"
 										icon={faArrowUpRightFromSquare}
 									/>

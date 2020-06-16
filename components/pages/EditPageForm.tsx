@@ -49,14 +49,14 @@ export const EditPageForm: React.FC<Props> = (props) => {
 				editPageMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-row w-full mt-5 mt-3">
+			<div className="mt-5 mt-3 flex w-full flex-row">
 				<div className="mb-5 flex-1">
 					<Label htmlFor="name">Name *</Label>
 					<Input placeholder="Room 415" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
-				<div className="flex-initial ml-5">
+				<div className="ml-5 flex-initial">
 					<Label htmlFor="topLevel">
 						Top Level Page
 						<HelpTooltip message={copy.tooltip.topLevel} />
@@ -77,7 +77,7 @@ export const EditPageForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className="flex flex-col w-full mt-5">
+			<div className="mt-5 flex w-full flex-col">
 				<div className="mb-5">
 					<Label htmlFor="body">Description</Label>
 					<Controller

@@ -46,7 +46,7 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 				editVenueMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full mt-5">
+			<div className="mt-5 flex w-full flex-col">
 				<div className="mb-5">
 					<Label htmlFor="name">Name *</Label>
 					<Input placeholder="Room 415" {...register('name')} />

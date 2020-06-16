@@ -11,7 +11,7 @@ export const CopyToClipboard: Props = (props) => {
 	return (
 		<Tooltip side={'top'} message={tooltipText}>
 			<span
-				className="text-primary font-bold cursor-pointer ml-1.5"
+				className="ml-1.5 cursor-pointer font-bold text-primary"
 				onClick={() => {
 					navigator.clipboard.writeText(link).then(() => {
 						toast.success('Link successfully copied to clipboard.');

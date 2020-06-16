@@ -51,25 +51,25 @@ export const ImageUpload: React.FC<Props> = (props) => {
 						<input {...getInputProps()} />
 						{files && Object.keys(files).length !== 0 ? (
 							files.map((file, i) => (
-								<div className="inline-block relative" key={`${i}-${file.name}`}>
+								<div className="relative inline-block" key={`${i}-${file.name}`}>
 									<img
-										className="object-cover object-center w-full max-h-[300px] border-2 border-gray-200 bg-gray-200"
+										className="max-h-[300px] w-full border-2 border-gray-200 bg-gray-200 object-cover object-center"
 										src={file.preview}
 										alt="File Preview"
 									/>
-									<div className="bg-black/50 w-10 h-10 rounded-full cursor-pointer absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex items-center justify-center text-white">
+									<div className="absolute bottom-1/2 right-1/2 flex h-10 w-10 translate-x-1/2 translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white">
 										<FontAwesomeIcon size="lg" icon={faCamera} />
 									</div>
 								</div>
 							))
 						) : (
-							<div className="inline-block relative">
+							<div className="relative inline-block">
 								<img
-									className="object-cover object-center w-full max-h-[300px] border-2 border-gray-200 bg-gray-200"
+									className="max-h-[300px] w-full border-2 border-gray-200 bg-gray-200 object-cover object-center"
 									src={placeholderImageUrl}
 									alt=""
 								/>
-								<div className="bg-black/50 w-10 h-10 rounded-full cursor-pointer absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex items-center justify-center text-white">
+								<div className="absolute bottom-1/2 right-1/2 flex h-10 w-10 translate-x-1/2 translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white">
 									<FontAwesomeIcon size="lg" icon={faCamera} />
 								</div>
 							</div>

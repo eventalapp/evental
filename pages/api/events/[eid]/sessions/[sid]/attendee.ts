@@ -1,7 +1,7 @@
 import { api } from '../../../../../../utils/api';
 import {
-	isSessionAttendee,
-	IsSessionAttendeeArguments
+	IsSessionAttendeeArguments,
+	isSessionAttendee
 } from '../../../../../../utils/isSessionAttendee';
 
 export default api({

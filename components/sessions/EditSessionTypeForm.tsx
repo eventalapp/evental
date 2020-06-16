@@ -44,14 +44,14 @@ export const EditSessionTypeForm: React.FC<Props> = (props) => {
 				editSessionTypeMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-row w-full mt-5 flex-wrap">
+			<div className="mt-5 flex w-full flex-row flex-wrap">
 				<div className="flex-1 flex-grow md:mr-5">
 					<Label htmlFor="name">Name *</Label>
 					<Input placeholder="Session type name" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
-				<div className="flex-initial w-full md:w-auto my-5 md:mt-0">
+				<div className="my-5 w-full flex-initial md:mt-0 md:w-auto">
 					<Label htmlFor="color">
 						Color *<HelpTooltip message={copy.tooltip.typeColor} />
 					</Label>

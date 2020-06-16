@@ -21,7 +21,7 @@ export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> 
 			<Navigation />
 
 			<Column variant="halfWidth" className="flex flex-col items-center justify-center">
-				<h1 className="text-2xl md:text-3xl font-bold">Not Found</h1>
+				<h1 className="text-2xl font-bold md:text-3xl">Not Found</h1>
 				<NotFound message={message} className="my-3" />
 				{renderLink && (
 					<Link href="/events" passHref>

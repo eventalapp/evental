@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import classNames from 'classnames';
 import React from 'react';
+
 import { faBarsSquare } from '../../icons';
 import { FullscreenLinkItem } from './FullscreenLinkItem';
 import { LinkItem } from './LinkItem';
@@ -20,13 +21,13 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 	return (
 		<div>
 			<NavigationWrapper>
-				<NavigationMenuPrimitive.Root className="w-full relative">
-					<NavigationMenuPrimitive.List className="flex items-center justify-between w-full max-w-7xl m-auto h-14 px-3">
+				<NavigationMenuPrimitive.Root className="relative w-full">
+					<NavigationMenuPrimitive.List className="m-auto flex h-14 w-full max-w-7xl items-center justify-between px-3">
 						<div>
 							<LogoLinkItem />
 						</div>
 
-						<div className="h-full flex-row justify-end hidden lg:flex">
+						<div className="hidden h-full flex-row justify-end lg:flex">
 							<div className="flex flex-row items-end">
 								<LinkItem link={`/pricing`} label={'Pricing'} />
 								<LinkItem link={`/contact`} label={'Contact'} />
@@ -35,7 +36,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 							</div>
 						</div>
 
-						<div className="flex-row space-x-8 font-medium flex lg:hidden">
+						<div className="flex flex-row space-x-8 font-medium lg:hidden">
 							<FontAwesomeIcon
 								className="cursor-pointer text-gray-900"
 								size="2x"
@@ -47,7 +48,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 							/>
 						</div>
 
-						<div className="h-full flex-row justify-end hidden lg:flex">
+						<div className="hidden h-full flex-row justify-end lg:flex">
 							<div className="flex flex-row items-end">
 								<LinkItem link={`/auth/signin`} label={'Sign in'} />
 							</div>
@@ -58,12 +59,12 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 
 			<ul
 				className={classNames(
-					'fixed top-0 bottom-0 bg-white w-full z-50 transition-all duration-100',
+					'fixed top-0 bottom-0 z-50 w-full bg-white transition-all duration-100',
 					isOpen ? 'right-0' : '-right-full'
 				)}
 			>
-				<div className="relative w-full h-full">
-					<div className="w-full h-full flex flex-col items-center justify-center">
+				<div className="relative h-full w-full">
+					<div className="flex h-full w-full flex-col items-center justify-center">
 						<button
 							onClick={() => {
 								setIsOpen(false);
@@ -71,7 +72,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="w-5 h-5 mb-3 cursor-pointer"
+								className="mb-3 h-5 w-5 cursor-pointer"
 								size="2x"
 								icon={faXmark}
 							/>

@@ -42,14 +42,14 @@ export const CreatePageForm: React.FC<Props> = (props) => {
 				createPageMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-row w-full mt-5">
+			<div className="mt-5 flex w-full flex-row">
 				<div className="mb-5 flex-1">
 					<Label htmlFor="name">Name *</Label>
 					<Input placeholder="Event Map" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
-				<div className="flex-initial ml-5">
+				<div className="ml-5 flex-initial">
 					<Label htmlFor="topLevel">
 						Top Level Page
 						<HelpTooltip message={copy.tooltip.topLevel} />

@@ -10,8 +10,10 @@ import { UseCreateSessionMutationData } from '../../hooks/mutations/useCreateSes
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { copy, FIFTEEN_MINUTES } from '../../utils/const';
+import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
+import { HelpTooltip } from '../HelpTooltip';
+import { TimeZoneNotice } from '../TimeZoneNotice';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { DatePicker } from '../form/DatePicker';
@@ -19,11 +21,9 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { HelpTooltip } from '../HelpTooltip';
 import CreateTypeDialog from '../radix/components/CreateTypeDialog';
 import CreateVenueDialog from '../radix/components/CreateVenueDialog';
 import Select from '../radix/components/Select';
-import { TimeZoneNotice } from '../TimeZoneNotice';
 
 type Props = {
 	eid: string;
@@ -91,8 +91,8 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 				createSessionMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full mt-5">
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+			<div className="mt-5 flex w-full flex-col">
+				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Session name" {...register('name')} />
@@ -125,7 +125,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 							)}
 						/>
 						<CreateVenueDialog eid={String(eid)}>
-							<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+							<span className="mt-1 cursor-pointer text-sm text-gray-600">
 								Dont see your venue? Create a Venue
 							</span>
 						</CreateVenueDialog>
@@ -134,7 +134,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="typeId">
 							Type
@@ -161,7 +161,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 							)}
 						/>
 						<CreateTypeDialog eid={String(eid)}>
-							<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+							<span className="mt-1 cursor-pointer text-sm text-gray-600">
 								Dont see your type? Create a Type
 							</span>
 						</CreateTypeDialog>
@@ -187,7 +187,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="startDate">Start Date *</Label>
 						<div className="relative">
@@ -246,7 +246,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 				</div>
 			</div>
 
-			<div className="grid grid-cols-1 mb-5 gap-5">
+			<div className="mb-5 grid grid-cols-1 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
 					<Controller

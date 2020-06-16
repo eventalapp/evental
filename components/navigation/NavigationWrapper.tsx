@@ -9,10 +9,10 @@ export const NavigationWrapper: React.FC<Props> = (props) => {
 	const { className, children, ...restProps } = props;
 
 	return (
-		<nav {...restProps} className="bg-white border-b border-gray-200 shadow-sm">
+		<nav {...restProps} className="border-b border-gray-200 bg-white shadow-sm">
 			<div
 				className={classNames(
-					'flex flex-row items-center justify-between w-full max-w-7xl m-auto h-14 px-3',
+					'm-auto flex h-14 w-full max-w-7xl flex-row items-center justify-between px-3',
 					className
 				)}
 			>

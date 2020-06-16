@@ -29,9 +29,9 @@ export const EventList: React.FC<Props> = (props) => {
 						)}
 					>
 						<Link href={`/events/${event.slug}`}>
-							<a className="py-3 block">
+							<a className="block py-3">
 								<div className="flex flex-row items-center">
-									<div className="flex flex-col align-center justify-center w-12 md:ml-5">
+									<div className="align-center flex w-12 flex-col justify-center md:ml-5">
 										<Tooltip
 											side={'top'}
 											message={`This is event is taking place from ${formatInTimeZone(
@@ -44,7 +44,7 @@ export const EventList: React.FC<Props> = (props) => {
 												'MMMM do  zzz'
 											)}.`}
 										>
-											<span className="text-gray-600 text-center block text-tiny">
+											<span className="block text-center text-tiny text-gray-600">
 												{formatInTimeZone(
 													new Date(event.startDate),
 													Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -60,7 +60,7 @@ export const EventList: React.FC<Props> = (props) => {
 										</Tooltip>
 									</div>
 
-									<div className="relative min-w-[3em] min-h-[3em] md:w-16 md:h-16 rounded-md mx-3 md:mx-5 border-2 border-gray-100">
+									<div className="relative mx-3 min-h-[3em] min-w-[3em] rounded-md border-2 border-gray-100 md:mx-5 md:h-16 md:w-16">
 										<Image
 											alt={event.name}
 											src={
@@ -78,12 +78,12 @@ export const EventList: React.FC<Props> = (props) => {
 											side={'top'}
 											message={`This is a ${event?.category?.toLowerCase()} event.`}
 										>
-											<span className="text-gray-500 text-tiny font-medium inline-block flex-shrink">
+											<span className="inline-block flex-shrink text-tiny font-medium text-gray-500">
 												{event.category}
 											</span>
 										</Tooltip>
 
-										<span className="text-lg md:text-xl font-medium block">{event.name}</span>
+										<span className="block text-lg font-medium md:text-xl">{event.name}</span>
 									</div>
 								</div>
 							</a>

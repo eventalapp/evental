@@ -13,11 +13,11 @@ export const LogoLinkItem: React.FC<{
 					<span className="flex flex-row items-center">
 						<img
 							src="https://cdn.evental.app/images/logo.svg"
-							className="w-12 h-12 pr-3"
+							className="h-12 w-12 pr-3"
 							alt="logo"
 						/>
 						<strong
-							className="text-2xl tracking-tight font-bold font-display"
+							className="font-display text-2xl font-bold tracking-tight"
 							aria-label="evental homepage"
 						>
 							Evental

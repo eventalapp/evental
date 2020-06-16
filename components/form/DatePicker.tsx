@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { format } from 'date-fns';
 import React from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
+
 import { NEAREST_MINUTE } from '../../config';
 import { DatePickerButton } from './DatePickerButton';
 
@@ -53,7 +54,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 				nextMonthButtonDisabled
 			}) => (
 				<div className="flex items-center justify-between px-2 py-2">
-					<span className="text-lg text-gray-700 font-bold">{format(date, 'MMMM yyyy')}</span>
+					<span className="text-lg font-bold text-gray-700">{format(date, 'MMMM yyyy')}</span>
 
 					<div className="space-x-2">
 						<button
@@ -62,12 +63,12 @@ export const DatePicker: React.FC<Props> = (props) => {
 							type="button"
 							className={classNames(
 								prevMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex p-1 text-base font-medium text-gray-700 bg-white rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500'
+								'inline-flex rounded bg-white p-1 text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-0'
 							)}
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="w-5 h-5 text-gray-600"
+								className="h-5 w-5 text-gray-600"
 								size="1x"
 								icon={faChevronLeft}
 							/>
@@ -79,12 +80,12 @@ export const DatePicker: React.FC<Props> = (props) => {
 							type="button"
 							className={classNames(
 								nextMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex p-1 text-base font-medium text-gray-700 bg-white rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary-500'
+								'inline-flex rounded bg-white p-1 text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-0'
 							)}
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="w-5 h-5 text-gray-600"
+								className="h-5 w-5 text-gray-600"
 								size="1x"
 								icon={faChevronRight}
 							/>

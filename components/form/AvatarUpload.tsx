@@ -56,31 +56,31 @@ export const AvatarUpload: React.FC<Props> = (props) => {
 						<input {...getInputProps()} />
 						{files && Object.keys(files).length !== 0 ? (
 							files.map((file, i) => (
-								<div className="inline-block relative" key={`${i}-${file.name}`}>
+								<div className="relative inline-block" key={`${i}-${file.name}`}>
 									<img
 										className={classNames(
-											'object-cover object-center w-32 h-32 border shadow-sm border-gray-300 bg-gray-200',
+											'h-32 w-32 border border-gray-300 bg-gray-200 object-cover object-center shadow-sm',
 											rounded ? 'rounded-full' : 'rounded-md'
 										)}
 										src={file.preview}
 										alt="profile"
 									/>
-									<div className="bg-black/50 w-10 h-10 rounded-full cursor-pointer absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex items-center justify-center text-white">
+									<div className="absolute bottom-1/2 right-1/2 flex h-10 w-10 translate-x-1/2 translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white">
 										<FontAwesomeIcon size="lg" icon={faCamera} />
 									</div>
 								</div>
 							))
 						) : (
-							<div className="inline-block relative">
+							<div className="relative inline-block">
 								<img
 									alt="avatar"
 									className={classNames(
-										'object-cover object-center w-32 h-32 border shadow-sm border-gray-300 bg-gray-200',
+										'h-32 w-32 border border-gray-300 bg-gray-200 object-cover object-center shadow-sm',
 										rounded ? 'rounded-full' : 'rounded-md'
 									)}
 									src={placeholderImageUrl}
 								/>
-								<div className="bg-black/50 w-10 h-10 rounded-full cursor-pointer absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex items-center justify-center text-white">
+								<div className="absolute bottom-1/2 right-1/2 flex h-10 w-10 translate-x-1/2 translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white">
 									<FontAwesomeIcon size="lg" icon={faCamera} />
 								</div>
 							</div>

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+
 import { Footer } from '../Footer';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
