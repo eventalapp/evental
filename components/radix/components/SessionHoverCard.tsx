@@ -52,7 +52,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 
 				<div className="h-full w-full">
 					{user && (
-						<div className="absolute right-3 bottom-3 flex w-full flex-row justify-end">
+						<div className="absolute right-3.5 top-3.5 flex w-full flex-row justify-end">
 							<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
 								<button
 									onClick={() => {
