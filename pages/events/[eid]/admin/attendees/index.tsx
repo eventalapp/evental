@@ -81,7 +81,7 @@ const AttendeesAdminPage: NextPage = () => {
 						/>
 					</FlexRowBetween>
 
-					<AttendeeList admin eid={String(eid)} attendees={attendeesData} />
+					<AttendeeList admin eid={String(eid)} attendees={attendeesData} tiny />
 				</div>
 			</Column>
 

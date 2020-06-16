@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -10,10 +11,11 @@ type Props = {
 	eid: string;
 	attendees: AttendeeWithUser[];
 	admin?: boolean;
+	tiny?: boolean;
 };
 
 export const AttendeeList: React.FC<Props> = (props) => {
-	const { eid, attendees, admin = false } = props;
+	const { eid, attendees, admin = false, tiny = false } = props;
 
 	if (attendees && attendees?.length === 0) {
 		return <NotFound message="No attendees found." />;
@@ -33,7 +35,12 @@ export const AttendeeList: React.FC<Props> = (props) => {
 										href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${attendee.user.slug}`}
 									>
 										<a className="flex h-full flex-col items-center justify-start">
-											<div className="relative mb-1 h-28 w-28 rounded-full border border-gray-100">
+											<div
+												className={classNames(
+													'relative mb-1 rounded-md border border-gray-100 shadow-sm',
+													tiny ? 'h-16 w-16' : 'h-28 w-28'
+												)}
+											>
 												<Image
 													alt={String(attendee.user.name)}
 													src={String(
@@ -41,12 +48,12 @@ export const AttendeeList: React.FC<Props> = (props) => {
 															? `https://cdn.evental.app${attendee?.user.image}`
 															: `https://cdn.evental.app/images/default-avatar.jpg`
 													)}
-													className="rounded-full"
+													className="rounded-md"
 													layout="fill"
 												/>
 											</div>
 											<span className="text-center text-lg">{attendee.user.name}</span>
-											<span className="block text-sm leading-none text-gray-700">
+											<span className="block text-xs leading-none text-gray-700">
 												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
 											</span>
 										</a>

@@ -36,7 +36,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 								? `https://cdn.evental.app${attendee?.user.image}`
 								: `https://cdn.evental.app/images/default-avatar.jpg`
 						)}
-						className="rounded-full"
+						className="rounded-md"
 						layout="fill"
 					/>
 				</div>

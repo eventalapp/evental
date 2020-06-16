@@ -16,9 +16,9 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 	return (
 		<Root>
 			<Trigger>
-				<div className="relative w-10 h-10 rounded-full border border-gray-200 shadow-sm">
+				<div className="relative h-10 w-10 rounded-md border border-gray-200 shadow-sm">
 					<Image
-						className="rounded-full"
+						className="rounded-md"
 						layout="fill"
 						src={
 							user?.image
@@ -31,8 +31,8 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 			</Trigger>
 			<Content
 				align="end"
-				className="p-2 text-left text-gray-900 bg-white rounded-md border border-gray-200 shadow-sm"
-				sideOffset={10}
+				className="rounded-md border border-gray-200 bg-white p-2 text-left text-gray-900 shadow-sm"
+				sideOffset={3}
 			>
 				<Item className="outline-none">
 					<Link href={`/users/${user?.slug}`} passHref>
@@ -54,7 +54,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 						<DropdownLink className="mt-1">Settings</DropdownLink>
 					</Link>
 				</Item>
-				<div className="my-2 w-full h-0.5 bg-gray-200" />
+				<div className="my-2 h-0.5 w-full bg-gray-200" />
 				<Item className="outline-none">
 					<DropdownLink
 						className="text-red-600"
@@ -65,7 +65,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 						Sign out
 					</DropdownLink>
 				</Item>
-				<Arrow className="text-gray-200" fill="currentColor" offset={14} />
+				<Arrow className="text-gray-200" fill="currentColor" offset={15} />
 			</Content>
 		</Root>
 	);

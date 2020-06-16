@@ -157,7 +157,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 										}`}
 									>
 										<a className="flex h-full flex-col items-center justify-start">
-											<div className="relative mb-1 h-10 w-10 rounded-full border border-gray-100">
+											<div className="relative mb-1 h-14 w-14 rounded-md border border-gray-200 shadow-sm">
 												<Image
 													alt={String(roleMember.attendee.user.name)}
 													src={String(
@@ -165,7 +165,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 															? `https://cdn.evental.app${roleMember.attendee?.user.image}`
 															: `https://cdn.evental.app/images/default-avatar.jpg`
 													)}
-													className="rounded-full"
+													className="rounded-md"
 													layout="fill"
 												/>
 											</div>
