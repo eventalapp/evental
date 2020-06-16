@@ -27,22 +27,9 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<FlexRowBetween variant="start">
-				<div className="relative h-32 w-32">
-					<Image
-						alt={String(attendee.user.name)}
-						src={String(
-							attendee?.user.image
-								? `https://cdn.evental.app${attendee?.user.image}`
-								: `https://cdn.evental.app/images/default-avatar.jpg`
-						)}
-						className="rounded-md"
-						layout="fill"
-					/>
-				</div>
-
+			<div className="relative mb-7 flex flex-row items-center">
 				{admin && (
-					<div className="space-x-4">
+					<div className="absolute top-0 right-0 space-x-4">
 						<IconLinkTooltip
 							message="Click to edit this attendee"
 							side="top"
@@ -60,94 +47,118 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 						/>
 					</div>
 				)}
-			</FlexRowBetween>
 
-			<h1 className="text-2xl font-bold md:text-3xl">{attendee.user.name}</h1>
+				<div className="relative mr-3 h-16 w-16 shrink-0 rounded-md border border-gray-200 shadow-sm md:mr-5 md:h-20 md:w-20">
+					<Image
+						alt={String(attendee.user.name)}
+						src={String(
+							attendee?.user.image
+								? `https://cdn.evental.app${attendee?.user.image}`
+								: `https://cdn.evental.app/images/default-avatar.jpg`
+						)}
+						className="rounded-md"
+						layout="fill"
+					/>
+				</div>
 
-			<div className="text-gray-600">
 				<div>
-					{attendee.role.name && (
-						<Tooltip side={'top'} message={`This user is attending as a ${attendee.role.name}`}>
-							<div className="mb-1 inline-flex cursor-help flex-row items-center">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="mr-1.5 h-5 w-5"
-									size="1x"
-									icon={faAddressCard}
-								/>
-								<p>{capitalizeFirstLetter(String(attendee.role.name))}</p>
+					<h1 className="mb-1.5 max-w-lg text-2xl font-bold leading-[1.1] tracking-tight md:text-3xl">
+						{attendee.user.name}
+					</h1>
+
+					<div className="flex flex-row flex-wrap items-center text-gray-600">
+						{attendee.role.name && (
+							<div className="mr-3">
+								<Tooltip side={'top'} message={`This user is attending as a ${attendee.role.name}`}>
+									<div className="mb-1 inline-flex cursor-help flex-row items-center">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="mr-1.5 h-5 w-5"
+											size="1x"
+											icon={faAddressCard}
+										/>
+										<p>{capitalizeFirstLetter(String(attendee.role.name))}</p>
+									</div>
+								</Tooltip>
 							</div>
-						</Tooltip>
-					)}
-				</div>
-				<div>
-					{attendee.user.location && (
-						<Tooltip side={'top'} message={`This user is located in ${attendee.user.location}`}>
-							<div className="mb-1 inline-flex cursor-help flex-row items-center">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="mr-1.5 h-5 w-5"
-									size="1x"
-									icon={faLocationDot}
-								/>
-								<p>{attendee.user.location}</p>
+						)}
+
+						{attendee.user.location && (
+							<div className="mr-3">
+								<Tooltip side={'top'} message={`This user is located in ${attendee.user.location}`}>
+									<div className="mb-1 inline-flex cursor-help flex-row items-center">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="mr-1.5 h-5 w-5"
+											size="1x"
+											icon={faLocationDot}
+										/>
+										<p>{attendee.user.location}</p>
+									</div>
+								</Tooltip>
 							</div>
-						</Tooltip>
-					)}
-				</div>
-				<div>
-					{attendee.user.company && (
-						<Tooltip side={'top'} message={`This user works for ${attendee.user.company}`}>
-							<div className="mb-1 inline-flex cursor-help flex-row items-center">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="mr-1.5 h-5 w-5"
-									size="1x"
-									icon={faBuilding}
-								/>
-								<p>{attendee.user.company}</p>
+						)}
+
+						{attendee.user.company && (
+							<div className="mr-3">
+								<Tooltip side={'top'} message={`This user works for ${attendee.user.company}`}>
+									<div className="mb-1 inline-flex cursor-help flex-row items-center">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="mr-1.5 h-5 w-5"
+											size="1x"
+											icon={faBuilding}
+										/>
+										<p>{attendee.user.company}</p>
+									</div>
+								</Tooltip>
 							</div>
-						</Tooltip>
-					)}
-				</div>
-				<div>
-					{attendee.user.position && (
-						<Tooltip
-							side={'top'}
-							message={
-								attendee.user.company
-									? `This user works for ${attendee.user.company} as a ${attendee.user.position}`
-									: `This user works as a ${attendee.user.position}`
-							}
-						>
-							<div className="mb-1 inline-flex cursor-help flex-row  items-center">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="mr-1.5 h-5 w-5"
-									size="1x"
-									icon={faAddressBook}
-								/>
-								<p>{attendee.user.position}</p>
+						)}
+
+						{attendee.user.position && (
+							<div className="mr-3">
+								<Tooltip
+									side={'top'}
+									message={
+										attendee.user.company
+											? `This user works for ${attendee.user.company} as a ${attendee.user.position}`
+											: `This user works as a ${attendee.user.position}`
+									}
+								>
+									<div className="mb-1 inline-flex cursor-help flex-row  items-center">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="mr-1.5 h-5 w-5"
+											size="1x"
+											icon={faAddressBook}
+										/>
+										<p>{attendee.user.position}</p>
+									</div>
+								</Tooltip>
 							</div>
-						</Tooltip>
-					)}
-				</div>
-				<div>
-					{attendee.user.website && (
-						<Tooltip side={'top'} message={`This user's website link is ${attendee.user.website}`}>
-							<a href={attendee.user.website} target="_blank" rel="noopener noreferrer">
-								<div className="mb-1 inline-flex flex-row items-center">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="mr-1.5 h-5 w-5"
-										size="1x"
-										icon={faArrowUpRightFromSquare}
-									/>
-									<p>{attendee.user.website}</p>
-								</div>
-							</a>
-						</Tooltip>
-					)}
+						)}
+
+						{attendee.user.website && (
+							<div className="mr-3">
+								<Tooltip
+									side={'top'}
+									message={`This user's website link is ${attendee.user.website}`}
+								>
+									<a href={attendee.user.website} target="_blank" rel="noopener noreferrer">
+										<div className="mb-1 inline-flex flex-row items-center">
+											<FontAwesomeIcon
+												fill="currentColor"
+												className="mr-1.5 h-5 w-5"
+												size="1x"
+												icon={faArrowUpRightFromSquare}
+											/>
+											<p>{attendee.user.website}</p>
+										</div>
+									</a>
+								</Tooltip>
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 
