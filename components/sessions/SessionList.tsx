@@ -231,7 +231,7 @@ export const SessionList: React.FC<Props> = (props) => {
 																						session?.maxAttendees
 																					} attendees).`}
 																				>
-																					<div className="mb-1 inline-flex cursor-help flex-row items-center text-sm text-gray-500">
+																					<div className="mb-1 ml-2 inline-flex cursor-help flex-row items-center text-sm text-gray-500">
 																						<p>
 																							{Math.ceil(
 																								(session?.attendeeCount / session?.maxAttendees) *
