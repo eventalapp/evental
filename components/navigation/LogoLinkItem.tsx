@@ -36,7 +36,7 @@ export const LogoLinkItem: React.FC<Props> = (props) => {
 									gradientUnits="userSpaceOnUse"
 								>
 									<stop stopColor={color ?? '#5C41FF'} />
-									<stop offset="1" stopColor={color ? newShade(color, -30) : '#0066FF'} />
+									<stop offset="1" stopColor={color ? newShade(color, 30) : '#0066FF'} />
 								</linearGradient>
 							</defs>
 						</svg>
