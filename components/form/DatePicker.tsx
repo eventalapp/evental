@@ -8,7 +8,7 @@ import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 import { NEAREST_MINUTE } from '../../config';
 import { DatePickerButton } from './DatePickerButton';
 
-type Props = { formatTime?: string } & ReactDatePickerProps;
+type Props = { formatTime?: string; color?: string } & ReactDatePickerProps;
 
 export const DatePicker: React.FC<Props> = (props) => {
 	const {
@@ -23,7 +23,8 @@ export const DatePicker: React.FC<Props> = (props) => {
 		timeIntervals = NEAREST_MINUTE,
 		formatTime = 'MM/dd/yyyy',
 		minDate,
-		maxDate
+		maxDate,
+		color
 	} = props;
 
 	return (
@@ -41,7 +42,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 			nextMonthButtonLabel=">"
 			previousMonthButtonLabel="<"
 			popperClassName="react-datepicker-right"
-			customInput={<DatePickerButton value={selected} formatTime={formatTime} />}
+			customInput={<DatePickerButton value={selected} formatTime={formatTime} color={color} />}
 			startDate={startDate}
 			endDate={endDate}
 			showTimeSelect={showTimeSelect}
