@@ -59,7 +59,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 				<h3 className="mb-3 text-xl font-medium md:text-2xl">{user.name}</h3>
 
 				{user.description && (
-					<div className="prose-a:text-primary focus:outline-none prose">
+					<div className="prose focus:outline-none prose-a:text-primary">
 						{parse(String(user.description))}
 					</div>
 				)}

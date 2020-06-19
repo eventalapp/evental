@@ -48,7 +48,7 @@ const EditingApageGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="text-white dark-topography">
+			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
 					<h1 className="text-2xl font-bold md:text-3xl">Editing a page</h1>
 					<p className="mt-4 text-base text-gray-100">

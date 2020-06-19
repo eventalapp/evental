@@ -10,7 +10,7 @@
 		"dev": "next dev -p 5555",
 		"lint": "next lint --fix",
 		"seed": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
-		"format": "prettier --write ./**/**/*.{js,jsx,md,ts,tsx} && prisma format",
+		"format": "prettier --write ./{server,pages,utils,components,config,email,hooks,prisma,styles}/**/**/*.{js,jsx,md,ts,tsx} && prisma format",
 		"migrate:dev": "prisma migrate dev",
 		"migrate:reset": "prisma migrate reset",
 		"migrate:prod": "prisma migrate deploy",

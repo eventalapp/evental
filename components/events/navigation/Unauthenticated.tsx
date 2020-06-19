@@ -28,12 +28,12 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 		<div>
 			<NavigationWrapper>
 				<NavigationMenuPrimitive.Root className="relative w-full">
-					<NavigationMenuPrimitive.List className="flex justify-between items-center px-3 m-auto w-full max-w-7xl h-14">
+					<NavigationMenuPrimitive.List className="m-auto flex h-14 w-full max-w-7xl items-center justify-between px-3">
 						<div>
 							<LogoLinkItem />
 						</div>
 
-						<div className="hidden flex-row justify-end h-full lg:flex">
+						<div className="hidden h-full flex-row justify-end lg:flex">
 							<div className="flex flex-row items-end">
 								<LinkItem link={`/events/${event.slug}`} label={'Sessions'} color={event.color} />
 								<LinkItem
@@ -65,7 +65,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 
 							<div className="flex flex-row space-x-8 font-medium lg:hidden">
 								<FontAwesomeIcon
-									className="text-gray-900 cursor-pointer"
+									className="cursor-pointer text-gray-900"
 									size="2x"
 									fill="currentColor"
 									icon={faBarsSquare}
@@ -76,7 +76,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
-						<div className="hidden flex-row justify-end h-full lg:flex">
+						<div className="hidden h-full flex-row justify-end lg:flex">
 							<div className="flex flex-row items-end">
 								<LinkItem link={`/auth/signin`} label={'Sign in'} color={event.color} />
 							</div>
@@ -86,12 +86,12 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 			</NavigationWrapper>
 			<ul
 				className={classNames(
-					'fixed top-0 bottom-0 bg-white w-full z-50 transition-all duration-100',
+					'fixed top-0 bottom-0 z-50 w-full bg-white transition-all duration-100',
 					isOpen ? 'right-0' : '-right-full'
 				)}
 			>
-				<div className="relative w-full h-full">
-					<div className="flex flex-col justify-center items-center w-full h-full">
+				<div className="relative h-full w-full">
+					<div className="flex h-full w-full flex-col items-center justify-center">
 						<button
 							onClick={() => {
 								setIsOpen(false);
@@ -99,7 +99,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mb-3 w-5 h-5 cursor-pointer"
+								className="mb-3 h-5 w-5 cursor-pointer"
 								size="2x"
 								icon={faXmark}
 							/>

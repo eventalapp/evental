@@ -26,7 +26,7 @@ const Avatar = ({ variant, isOnline, renderInvalidUrls = false }: Props) => {
 	return (
 		<Fragment>
 			{urls.map((src, i) => (
-				<AvatarPrimitive.Root key={`avatar-${i}-{src}`} className="inline-flex relative w-10 h-10">
+				<AvatarPrimitive.Root key={`avatar-${i}-{src}`} className="relative inline-flex h-10 w-10">
 					<AvatarPrimitive.Image
 						src={src}
 						alt="Avatar"
@@ -48,7 +48,7 @@ const Avatar = ({ variant, isOnline, renderInvalidUrls = false }: Props) => {
 								}[variant]
 							)}
 						>
-							<span className="block w-2.5 h-2.5 bg-green-400 rounded-full" />
+							<span className="block h-2.5 w-2.5 rounded-full bg-green-400" />
 						</div>
 					)}
 					<AvatarPrimitive.Fallback
@@ -61,7 +61,7 @@ const Avatar = ({ variant, isOnline, renderInvalidUrls = false }: Props) => {
 						)}
 						delayMs={600}
 					>
-						<span className="text-sm font-medium text-gray-700 dark:text-gray-400 uppercase">
+						<span className="text-sm font-medium uppercase text-gray-700 dark:text-gray-400">
 							{'fdsafdas'}
 						</span>
 					</AvatarPrimitive.Fallback>

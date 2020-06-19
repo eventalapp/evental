@@ -19,7 +19,7 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 	const { event, align = 'end', children } = props;
 
 	return (
-		<div className="inline-block relative text-left">
+		<div className="relative inline-block text-left">
 			<DropdownMenuPrimitive.Root>
 				<DropdownMenuPrimitive.Trigger asChild>{children}</DropdownMenuPrimitive.Trigger>
 
@@ -29,7 +29,7 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 					className={cx(
 						' radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
 						'w-48 rounded-lg px-1.5 py-1 shadow-sm md:w-56',
-						'bg-white border border-gray-200 dark:bg-gray-800'
+						'border border-gray-200 bg-white dark:bg-gray-800'
 					)}
 				>
 					<a
@@ -53,7 +53,7 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-[#1DA1F2]"
+								className="mr-2 h-4 w-4 text-[#1DA1F2]"
 								size="1x"
 								icon={faTwitter}
 							/>
@@ -79,7 +79,7 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-[#4267B2]"
+								className="mr-2 h-4 w-4 text-[#4267B2]"
 								size="1x"
 								icon={faFacebook}
 							/>
@@ -107,7 +107,7 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-[#0077B5]"
+								className="mr-2 h-4 w-4 text-[#0077B5]"
 								size="1x"
 								icon={faLinkedin}
 							/>
@@ -134,7 +134,7 @@ export const ShareDropdown: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-gray-600"
+								className="mr-2 h-4 w-4 text-gray-600"
 								size="1x"
 								icon={faPaperPlane}
 							/>

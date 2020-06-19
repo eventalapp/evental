@@ -80,14 +80,14 @@ const CreateRoleDialog: React.FC<Props> = (props) => {
 							Fill out and submit the form below to create a role.
 						</DialogPrimitive.Description>
 
-						<div className="flex flex-row mt-3 w-full">
-							<div className="flex-1 mb-5">
+						<div className="mt-3 flex w-full flex-row">
+							<div className="mb-5 flex-1">
 								<Label htmlFor="name">Role Name *</Label>
 								<Input placeholder="Role name" {...register('name')} />
 								{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 							</div>
 
-							<div className="flex-initial ml-5">
+							<div className="ml-5 flex-initial">
 								<Label htmlFor="defaultRole">Default Role</Label>
 								<Controller
 									control={control}
@@ -107,7 +107,7 @@ const CreateRoleDialog: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
-						<div className="flex flex-row justify-end mt-4">
+						<div className="mt-4 flex flex-row justify-end">
 							<Button
 								type="button"
 								variant="no-bg"
@@ -141,7 +141,7 @@ const CreateRoleDialog: React.FC<Props> = (props) => {
 								'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 							)}
 						>
-							<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+							<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 						</DialogPrimitive.Close>
 					</DialogPrimitive.Content>
 				</Transition.Child>

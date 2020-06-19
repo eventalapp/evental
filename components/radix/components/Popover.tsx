@@ -31,7 +31,7 @@ const items = [
 
 const Popover = (props: Props) => {
 	return (
-		<div className="inline-block relative text-left">
+		<div className="relative inline-block text-left">
 			<PopoverPrimitive.Root>
 				<PopoverPrimitive.Trigger>
 					<Button>Click</Button>
@@ -45,7 +45,7 @@ const Popover = (props: Props) => {
 						'bg-white dark:bg-gray-800'
 					)}
 				>
-					<PopoverPrimitive.Arrow className="text-white dark:text-gray-800 fill-current" />
+					<PopoverPrimitive.Arrow className="fill-current text-white dark:text-gray-800" />
 					<h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">Dimensions</h3>
 
 					<form className="mt-4 space-y-2">
@@ -55,7 +55,7 @@ const Popover = (props: Props) => {
 									{/* <legend>Choose your favorite monster</legend> */}
 									<label
 										htmlFor={id}
-										className="grow shrink-0 text-xs font-medium text-gray-700 dark:text-gray-400"
+										className="shrink-0 grow text-xs font-medium text-gray-700 dark:text-gray-400"
 									>
 										{label}
 									</label>
@@ -82,7 +82,7 @@ const Popover = (props: Props) => {
 							'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 						)}
 					>
-						<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+						<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 					</PopoverPrimitive.Close>
 				</PopoverPrimitive.Content>
 			</PopoverPrimitive.Root>

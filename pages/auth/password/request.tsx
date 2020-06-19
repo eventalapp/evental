@@ -33,7 +33,7 @@ const RequestPasswordResetPage: NextPage = () => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<div className="flex flex-row justify-between mb-3">
+				<div className="mb-3 flex flex-row justify-between">
 					<h1 className="text-2xl font-bold md:text-3xl">Request Password Reset</h1>
 				</div>
 
