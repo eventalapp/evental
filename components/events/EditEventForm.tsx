@@ -146,6 +146,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 								name="category"
 								render={({ field }) => (
 									<Select
+										color={colorWatcher}
 										options={Object.values(EventCategory).map((category) => ({
 											label: capitalizeFirstLetter(category.toLowerCase().replace('_', ' ')),
 											value: category
@@ -179,6 +180,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 								name="type"
 								render={({ field }) => (
 									<Select
+										color={colorWatcher}
 										options={Object.values(EventType).map((type) => ({
 											label: capitalizeFirstLetter(type.toLowerCase().replace('_', ' ')),
 											value: type
@@ -367,6 +369,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 										onValueChange={(value) => {
 											setValue('privacy', PrivacyLevel[value as keyof typeof PrivacyLevel]);
 										}}
+										color={colorWatcher}
 									/>
 								)}
 							/>
@@ -457,7 +460,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						Boolean(slugWatcher !== event?.slug && eventSlugCheck)
 					}
 				>
-					{editEventMutation.isLoading ? <LoadingInner /> : 'Edit Event'}
+					{editEventMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>
