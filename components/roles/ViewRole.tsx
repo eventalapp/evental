@@ -41,28 +41,28 @@ export const ViewRole: React.FC<Props> = (props) => {
 							side="top"
 							href={`/events/${eid}/admin/attendees/create`}
 							icon={faSquarePlus}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 						<IconLinkTooltip
 							message={`Click to invite a ${role.name}`}
 							side="top"
 							href={`/events/${eid}/admin/roles/${rid}/invite`}
 							icon={faPaperPlane}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 						<IconLinkTooltip
 							message={`Click to edit the ${role.name} role`}
 							side="top"
 							href={`/events/${eid}/admin/roles/${rid}/edit`}
 							icon={faPenToSquare}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 						<IconLinkTooltip
 							message={`Click to delete the ${role.name} role`}
 							side="top"
 							href={`/events/${eid}/admin/roles/${rid}/delete`}
 							icon={faTrashCan}
-							className="text-red-500"
+							className="text-red-500 text-red-400"
 						/>
 					</div>
 				)}

@@ -69,7 +69,7 @@ const SessionTypesAdminPage: NextPage = () => {
 							side="top"
 							href={`/events/${eid}/admin/sessions/types/create`}
 							icon={faSquarePlus}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 					</FlexRowBetween>
 

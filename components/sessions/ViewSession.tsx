@@ -1,6 +1,5 @@
 import {
 	faCalendarDay,
-	faClipboardList,
 	faLocationDot,
 	faPenToSquare,
 	faTrashCan,
@@ -117,7 +116,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							side="top"
 							href={`/events/${eid}/admin/sessions/${sid}/delete`}
 							icon={faTrashCan}
-							className="text-red-500"
+							className="text-red-500 hover:text-red-400"
 						/>
 					)}
 				</div>

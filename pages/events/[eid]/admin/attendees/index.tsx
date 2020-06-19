@@ -77,7 +77,7 @@ const AttendeesAdminPage: NextPage = () => {
 							side="top"
 							href={`/events/${eid}/admin/attendees/create`}
 							icon={faSquarePlus}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 					</FlexRowBetween>
 

@@ -61,7 +61,7 @@ const RolesAdminPage: NextPage = () => {
 							side="top"
 							href={`/events/${eid}/admin/roles/create`}
 							icon={faSquarePlus}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 					</FlexRowBetween>
 

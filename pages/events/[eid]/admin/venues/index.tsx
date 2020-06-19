@@ -63,7 +63,7 @@ const VenuesAdminPage: NextPage = () => {
 							side="top"
 							href={`/events/${eid}/admin/venues/create`}
 							icon={faSquarePlus}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 					</FlexRowBetween>
 

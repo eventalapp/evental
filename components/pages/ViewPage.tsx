@@ -36,14 +36,14 @@ export const ViewPage: React.FC<Props> = (props) => {
 							side="top"
 							href={`/events/${eid}/admin/pages/${pid}/edit`}
 							icon={faPenToSquare}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 						<IconLinkTooltip
 							message="Click to delete this page"
 							side="top"
 							href={`/events/${eid}/admin/pages/${pid}/delete`}
 							icon={faTrashCan}
-							className="text-red-500"
+							className="text-red-500 hover:text-red-400"
 						/>
 					</div>
 				)}

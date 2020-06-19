@@ -43,7 +43,7 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 							side="top"
 							href={`/events/${eid}/admin/sessions/types/${tid}/edit`}
 							icon={faPenToSquare}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 
 						<IconLinkTooltip
@@ -51,7 +51,7 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 							side="top"
 							href={`/events/${eid}/admin/sessions/types/${tid}/delete`}
 							icon={faTrashCan}
-							className="text-red-500"
+							className="text-red-500 hover:text-red-400"
 						/>
 					</div>
 				)}
