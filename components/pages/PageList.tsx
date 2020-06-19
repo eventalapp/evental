@@ -36,7 +36,7 @@ export const PageList: React.FC<Props> = (props) => {
 							<div className="-mx-3 flex flex-row flex-wrap items-center justify-between rounded-md p-3 hover:bg-gray-75">
 								<div>
 									<span className="block text-lg">{page.name}</span>{' '}
-									<span className="block text-sm text-gray-600">
+									<span className="mt-0.5 block text-sm text-gray-500">
 										Updated{' '}
 										{formatDistance(new Date(page.updatedAt), new Date(), { addSuffix: true })}
 									</span>
