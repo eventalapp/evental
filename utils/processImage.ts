@@ -65,13 +65,12 @@ export const processAvatar = async (
 	options: ProcessAvatarOptions = {
 		height: 300,
 		width: 300,
-		toFormat: 'jpg'
+		toFormat: 'png'
 	}
 ) => {
 	const { height, width, toFormat } = options;
 
 	return await sharp(input)
-		.flatten()
 		.rotate()
 		.resize({
 			height,
