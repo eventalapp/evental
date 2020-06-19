@@ -81,11 +81,11 @@
 }
 
 .react-datepicker__day--selecting-range-start {
-	@apply border border-primary-500 bg-white;
+	@apply border-2 border-primary-500 bg-white;
 }
 
 .react-datepicker__day--selecting-range-end {
-	@apply border border-primary-500 bg-white;
+	@apply border-2 border-primary-500 bg-white;
 }
 
 .react-datepicker__day--selected {
@@ -206,7 +206,6 @@
 	animation-timing-function: ease-in-out;
 	animation-fill-mode: forwards;
 	animation-iteration-count: 1;
-	animation-direction: forwards;
 }
 
 .bloom.bloom-one {
