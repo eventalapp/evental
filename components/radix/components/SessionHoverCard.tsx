@@ -138,7 +138,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					</div>
 
 					{session.description && (
-						<p className="mt-1 text-sm font-normal text-gray-700 dark:text-gray-400">
+						<p className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
 							{descriptionAsText.substring(0, 150)}
 							{descriptionAsText.length > 150 && '...'}
 						</p>
