@@ -10,7 +10,7 @@ import ReactSelect from 'react-select';
 import { toast } from 'react-toastify';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
-import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
+import { useEventQuery, UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
@@ -27,6 +27,7 @@ import { Textarea } from '../form/Textarea';
 import Select from '../radix/components/Select';
 import Button from '../radix/components/shared/Button';
 import Tooltip from '../radix/components/Tooltip';
+import { newShade } from '../../utils/newShade';
 
 type Props = {
 	eid: string;
@@ -69,6 +70,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
 	const colorWatcher = watch('color');
+
+	console.log(colorWatcher);
+	console.log(newShade(colorWatcher, 50));
 
 	const { event: eventSlugCheck, isEventLoading: isEventSlugCheckLoading } =
 		useEventQuery(slugWatcher);
@@ -126,7 +130,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="name">Name *</Label>
-					<Input placeholder="Event name" {...register('name')} />
+					<Input placeholder="Event name" {...register('name')} color={colorWatcher} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
@@ -160,7 +164,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="location">Location</Label>
-					<Input placeholder="Event location" {...register('location')} />
+					<Input placeholder="Event location" {...register('location')} color={colorWatcher} />
 					{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 				</div>
 
@@ -195,7 +199,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<Label htmlFor="website">
 						Website *<HelpTooltip message={copy.tooltip.eventWebsite} />
 					</Label>
-					<Input placeholder="https://website.com" {...register('website')} />
+					<Input placeholder="https://website.com" {...register('website')} color={colorWatcher} />
 					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 				</div>
 
@@ -209,6 +213,33 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						name="timeZone"
 						render={({ field }) => (
 							<ReactSelect
+								theme={{
+									colors: {
+										primary: colorWatcher ?? theme.extend.colors.primary.DEFAULT,
+										primary25: newShade(colorWatcher, 140) ?? theme.extend.colors.primary[200],
+										primary50: newShade(colorWatcher, 75) ?? theme.extend.colors.primary[300],
+										primary75: newShade(colorWatcher, 45) ?? theme.extend.colors.primary[900],
+										danger: theme.extend.colors.red.DEFAULT,
+										dangerLight: theme.extend.colors.red[300],
+										neutral0: '#FFFFFF',
+										neutral5: theme.extend.colors.gray[50],
+										neutral10: theme.extend.colors.gray[100],
+										neutral20: theme.extend.colors.gray[200],
+										neutral30: theme.extend.colors.gray[300],
+										neutral40: theme.extend.colors.gray[400],
+										neutral50: theme.extend.colors.gray[500],
+										neutral60: theme.extend.colors.gray[600],
+										neutral70: theme.extend.colors.gray[700],
+										neutral80: theme.extend.colors.gray[800],
+										neutral90: theme.extend.colors.gray[900]
+									},
+									borderRadius: 4,
+									spacing: {
+										baseUnit: 4,
+										controlHeight: 36,
+										menuGutter: 0
+									}
+								}}
 								options={timeZoneOptions}
 								className="block w-full"
 								value={timeZoneOptions.find((val) => val.value === field.value)}
@@ -233,6 +264,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 									onChange={(date) => {
 										field.onChange(dayjs(date).toDate());
 									}}
+									color={colorWatcher}
 									selected={dayjs(field.value).toDate()}
 									startDate={dayjs(field.value).toDate()}
 									endDate={endDateWatcher}
@@ -257,6 +289,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 									onChange={(date) => {
 										field.onChange(dayjs(date).toDate());
 									}}
+									color={colorWatcher}
 									selected={dayjs(field.value).toDate()}
 									selectsEnd
 									required
@@ -277,7 +310,12 @@ export const EditEventForm: React.FC<Props> = (props) => {
 							message={`Your events max attendee count is ${event.maxAttendees}. To increase this, please contact us.`}
 						/>
 					</Label>
-					<Input onChange={() => {}} value={`${event.maxAttendees}`} type="number" />
+					<Input
+						onChange={() => {}}
+						value={`${event.maxAttendees}`}
+						type="number"
+						color={colorWatcher}
+					/>
 					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 					{event.level === 'TRIAL' ? (
 						<p className="mt-1 text-sm text-gray-600">
@@ -354,7 +392,12 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4">
 					<Label htmlFor="description">Description</Label>
-					<Textarea rows={5} placeholder="Event description" {...register('description')} />
+					<Textarea
+						rows={5}
+						placeholder="Event description"
+						{...register('description')}
+						color={colorWatcher}
+					/>
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
@@ -366,7 +409,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					</Label>
 					<div className="flex items-center">
 						<span className="mr-1 text-sm md:text-base">evental.app/events/</span>
-						<Input placeholder="event-slug" {...register('slug')} />
+						<Input placeholder="event-slug" {...register('slug')} color={colorWatcher} />
 					</div>
 					{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
 					{slugWatcher !== event?.slug && eventSlugCheck && (
