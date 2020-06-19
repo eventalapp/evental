@@ -1,6 +1,7 @@
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import Link from 'next/link';
 import React from 'react';
+import { newShade } from '../../utils/newShade';
 
 type Props = {
 	link?: string;
@@ -35,7 +36,7 @@ export const LogoLinkItem: React.FC<Props> = (props) => {
 									gradientUnits="userSpaceOnUse"
 								>
 									<stop stopColor={color ?? '#5C41FF'} />
-									<stop offset="1" stopColor={color ?? '#0066FF'} />
+									<stop offset="1" stopColor={newShade(color || '#5C41FF', 50)} />
 								</linearGradient>
 							</defs>
 						</svg>
