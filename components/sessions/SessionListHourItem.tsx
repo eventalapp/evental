@@ -39,7 +39,7 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 										<div className="flex grow flex-row flex-wrap justify-between py-2 px-3">
 											<div className="flex flex-row items-center justify-between">
 												<div
-													className="mr-3 h-4 w-4 rounded-full"
+													className="mr-3 h-4 min-h-[1rem] w-4 min-w-[1rem] rounded-full"
 													style={{ backgroundColor: session?.type?.color ?? '#888888' }}
 												/>
 												<div>
