@@ -56,7 +56,7 @@ const MessagePage: NextPage = () => {
 				<h3 className="text-xl font-medium md:text-2xl">Messages</h3>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

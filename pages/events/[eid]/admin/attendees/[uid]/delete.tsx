@@ -81,7 +81,7 @@ const DeleteAttendeePage: NextPage = () => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

@@ -105,7 +105,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				<ViewPage page={page} eid={String(eid)} pid={String(pid)} />
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

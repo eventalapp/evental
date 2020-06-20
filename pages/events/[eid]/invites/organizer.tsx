@@ -73,7 +73,7 @@ const OrganizerInvitePage: NextPage = () => {
 				</div>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

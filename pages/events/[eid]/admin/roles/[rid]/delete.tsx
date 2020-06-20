@@ -86,7 +86,7 @@ const DeleteRolePage: NextPage = () => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

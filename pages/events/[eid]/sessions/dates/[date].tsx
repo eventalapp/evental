@@ -137,7 +137,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 				<SessionList sessions={sessionsByDateData} eid={String(eid)} event={event} user={user} />
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

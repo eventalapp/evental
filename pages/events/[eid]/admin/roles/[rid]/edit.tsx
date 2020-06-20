@@ -83,7 +83,7 @@ const EditRolePage: NextPage = () => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

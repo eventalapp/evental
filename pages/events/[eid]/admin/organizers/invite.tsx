@@ -80,7 +80,7 @@ const EventOrganizersPage: NextPage = () => {
 				<InviteOrganizerForm event={event} inviteOrganizerMutation={inviteOrganizerMutation} />
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

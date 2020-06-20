@@ -137,7 +137,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 					</div>
 				</Column>
 
-				<Footer />
+				<Footer color={event.color} />
 			</PageWrapper>
 		);
 	}
@@ -206,7 +206,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

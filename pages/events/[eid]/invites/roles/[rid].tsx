@@ -86,7 +86,7 @@ const RoleInvitePage: NextPage = () => {
 				</div>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };
