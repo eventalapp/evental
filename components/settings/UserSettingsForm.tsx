@@ -168,7 +168,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 						Boolean(slugWatcher !== user?.slug && userSlugCheck)
 					}
 				>
-					{editUserMutation.isLoading ? <LoadingInner /> : 'Edit User'}
+					{editUserMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>

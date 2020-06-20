@@ -13,7 +13,7 @@ import { FullscreenLinkItem } from './FullscreenLinkItem';
 import { LinkItem } from './LinkItem';
 import { LogoLinkItem } from './LogoLinkItem';
 import { NavigationWrapper } from './NavigationWrapper';
-import { ProfileDropdown } from './dropdown';
+import { ProfileDropdown } from '../radix/components/ProfileDropdown';
 
 type Props = {
 	isOpen: boolean;
@@ -62,7 +62,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 							</div>
 
 							<NavigationMenuPrimitive.Item className="flex">
-								{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
+								<ProfileDropdown user={user} signOutMutation={signOutMutation} />
 							</NavigationMenuPrimitive.Item>
 						</div>
 					</NavigationMenuPrimitive.List>

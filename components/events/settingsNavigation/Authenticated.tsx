@@ -8,11 +8,11 @@ import React from 'react';
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 import { faBarsSquare } from '../../../icons';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
-import { ProfileDropdown } from '../../navigation/dropdown';
 import { FullscreenLinkItem } from '../../navigation/FullscreenLinkItem';
 import { LinkItem } from '../../navigation/LinkItem';
 import { LogoLinkItem } from '../../navigation/LogoLinkItem';
 import { NavigationWrapper } from '../../navigation/NavigationWrapper';
+import { ProfileDropdown } from '../../radix/components/ProfileDropdown';
 
 type Props = {
 	className?: string;
