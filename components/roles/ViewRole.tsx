@@ -62,7 +62,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 							side="top"
 							href={`/events/${eid}/admin/roles/${rid}/delete`}
 							icon={faTrashCan}
-							className="text-red-500 text-red-400"
+							className="text-red-500 hover:text-red-400"
 						/>
 					</div>
 				)}
