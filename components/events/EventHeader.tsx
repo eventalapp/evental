@@ -134,7 +134,7 @@ export const EventHeader: React.FC<{
 									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
+											className="mr-1.5 h-5 w-5 text-gray-500"
 											size="1x"
 											icon={faLocationDot}
 										/>
@@ -155,7 +155,7 @@ export const EventHeader: React.FC<{
 								<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="mr-1.5 h-5 w-5"
+										className="mr-1.5 h-5 w-5 text-gray-500"
 										size="1x"
 										icon={faCalendarDay}
 									/>
@@ -176,7 +176,7 @@ export const EventHeader: React.FC<{
 								<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="mr-1.5 h-5 w-5"
+										className="mr-1.5 h-5 w-5 text-gray-500"
 										size="1x"
 										icon={faClock}
 									/>
@@ -189,7 +189,7 @@ export const EventHeader: React.FC<{
 									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
+											className="mr-1.5 h-5 w-5 text-gray-500"
 											size="1x"
 											icon={faPerson}
 										/>
@@ -203,7 +203,7 @@ export const EventHeader: React.FC<{
 									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
+											className="mr-1.5 h-5 w-5 text-gray-500"
 											size="1x"
 											icon={faStreetView}
 										/>
@@ -217,7 +217,7 @@ export const EventHeader: React.FC<{
 									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
+											className="mr-1.5 h-5 w-5 text-gray-500"
 											size="1x"
 											icon={faHeadset}
 										/>
@@ -232,7 +232,7 @@ export const EventHeader: React.FC<{
 										<div className="flex cursor-pointer flex-row items-center text-sm md:text-base">
 											<FontAwesomeIcon
 												fill="currentColor"
-												className="mr-1.5 h-5 w-5"
+												className="mr-1.5 h-5 w-5 text-gray-500"
 												size="1x"
 												icon={faArrowUpRightFromSquare}
 											/>
