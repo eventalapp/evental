@@ -107,7 +107,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							side="top"
 							href={`/events/${eid}/admin/sessions/${sid}/edit`}
 							icon={faPenToSquare}
-							className="text-gray-700"
+							className="text-gray-700 hover:text-gray-600"
 						/>
 					)}
 					{admin && (
@@ -158,7 +158,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							<div className="inline-flex cursor-help flex-row items-center">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="mr-1.5 h-5 w-5"
+									className="mr-1.5 h-5 w-5 text-gray-500"
 									size="1x"
 									icon={faCalendarDay}
 								/>
@@ -178,7 +178,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 										<div className="mb-1 inline-flex flex-row items-center">
 											<FontAwesomeIcon
 												fill="currentColor"
-												className="mr-1.5 h-5 w-5"
+												className="mr-1.5 h-5 w-5 text-gray-500"
 												size="1x"
 												icon={faLocationDot}
 											/>
@@ -201,7 +201,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 								<div className="mb-1 inline-flex cursor-help flex-row items-center">
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="mr-1.5 h-5 w-5"
+										className="mr-1.5 h-5 w-5 text-gray-500"
 										size="1x"
 										icon={faUserGroup}
 									/>
