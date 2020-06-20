@@ -61,7 +61,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 								>
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="h-7 w-7 cursor-pointer text-gray-600"
+										className="h-7 w-7 cursor-pointer text-gray-500"
 										size="lg"
 										icon={faCalendarCirclePlus}
 									/>
@@ -105,7 +105,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 									<div className="inline-flex cursor-help flex-row items-center">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
+											className="mr-1.5 h-5 w-5 text-gray-500"
 											size="1x"
 											icon={faLocationDot}
 										/>
@@ -126,7 +126,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 									<div className="inline-flex cursor-help flex-row items-center">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
+											className="mr-1.5 h-5 w-5 text-gray-500"
 											size="1x"
 											icon={faUserGroup}
 										/>
