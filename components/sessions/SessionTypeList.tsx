@@ -41,7 +41,7 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 								<div className="-mx-3 flex grow flex-row flex-wrap items-center justify-between rounded-md p-3 hover:bg-gray-75">
 									<div className="flex flex-row items-center justify-between">
 										<div
-											className="mr-3 h-4 w-4 rounded-full"
+											className="mr-3 h-3.5 w-3.5 rounded-full"
 											style={{ backgroundColor: sessionType.color ?? '#888888' }}
 										/>
 										<div>
