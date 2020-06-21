@@ -195,18 +195,27 @@ const ViewEventPage: NextPage<Props> = (props) => {
 								<div className="text-gray-600">
 									<ul>
 										{sessionTypes.map((sessionType) => (
-											<Link
-												key={sessionType.id}
-												href={`/events/${eid}/sessions/types/${sessionType.slug}`}
-											>
-												<a className="flex flex-row items-center">
-													<div
-														className="mr-2 h-3 w-3 rounded-full"
-														style={{ backgroundColor: sessionType.color ?? '#888888' }}
-													/>
-													{sessionType.name}
-												</a>
-											</Link>
+											<li className="block">
+												<Tooltip
+													message={`Click to view all sessions occurring with the ${sessionType.name} session category`}
+													side="left"
+												>
+													<div>
+														<Link
+															key={sessionType.id}
+															href={`/events/${eid}/sessions/types/${sessionType.slug}`}
+														>
+															<a className="inline-flex flex-row items-center">
+																<div
+																	className="mr-2 h-3 w-3 rounded-full"
+																	style={{ backgroundColor: sessionType.color ?? '#888888' }}
+																/>
+																{sessionType.name}
+															</a>
+														</Link>
+													</div>
+												</Tooltip>
+											</li>
 										))}
 									</ul>
 								</div>
@@ -219,9 +228,18 @@ const ViewEventPage: NextPage<Props> = (props) => {
 								<div className="text-gray-600">
 									<ul>
 										{venues.map((venue) => (
-											<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
-												<a className="block">{venue.name}</a>
-											</Link>
+											<li className="block">
+												<Tooltip
+													message={`Click to view all sessions occurring at the ${venue.name} venue`}
+													side="left"
+												>
+													<div className="inline-block">
+														<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
+															<a className="inline-block">{venue.name}</a>
+														</Link>
+													</div>
+												</Tooltip>
+											</li>
 										))}
 									</ul>
 								</div>
