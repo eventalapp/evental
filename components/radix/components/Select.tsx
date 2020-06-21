@@ -2,6 +2,7 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { SelectProps } from '@radix-ui/react-select';
 import cx from 'classnames';
+
 import Button from './shared/Button';
 
 export type Option = {

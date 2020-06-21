@@ -1,9 +1,10 @@
 import axios, { AxiosError } from 'axios';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { SignInPayload } from '../../utils/schemas';
-import { toast } from 'react-toastify';
-import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import router from 'next/router';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
+
+import { SignInPayload } from '../../utils/schemas';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 
 export interface UseSignInMutationData {

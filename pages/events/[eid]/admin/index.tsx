@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { Footer } from '../../../../components/Footer';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
@@ -10,7 +11,6 @@ import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage'
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
 import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
-import { Footer } from '../../../../components/Footer';
 import { LinkButton } from '../../../../components/form/LinkButton';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';

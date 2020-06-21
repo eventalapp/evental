@@ -1,6 +1,7 @@
 import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
 import { htmlToText } from 'html-to-text';
 import { z } from 'zod';
+
 import { timeZoneList } from './const';
 import { isBrowser } from './isBrowser';
 

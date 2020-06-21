@@ -5,12 +5,13 @@ import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import { Footer } from '../../../components/Footer';
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
 import { EventNavigation } from '../../../components/events/navigation';
-import { Footer } from '../../../components/Footer';
 import { Button } from '../../../components/form/Button';
 import { LinkButton } from '../../../components/form/LinkButton';
 import Column from '../../../components/layout/Column';
@@ -22,13 +23,13 @@ import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery'
 import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../hooks/queries/useUser';
+import { theme } from '../../../tailwind.config';
 import { ssrGetUser } from '../../../utils/api';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getEvent } from '../../api/events/[eid]';
 import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 import { getPages } from '../../api/events/[eid]/pages';
 import { getRoles } from '../../api/events/[eid]/roles';
-import { theme } from '../../../tailwind.config';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

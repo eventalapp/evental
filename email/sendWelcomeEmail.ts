@@ -1,9 +1,10 @@
-import mjml2html from 'mjml';
-import { convert } from 'html-to-text';
-import { sendEmail } from '../utils/sendEmail';
 import { SESV2 } from 'aws-sdk';
-import { welcomeTemplate } from './templates/welcome';
+import { convert } from 'html-to-text';
+import mjml2html from 'mjml';
 import { NextkitError } from 'nextkit';
+
+import { sendEmail } from '../utils/sendEmail';
+import { welcomeTemplate } from './templates/welcome';
 
 export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {
 	const htmlOutput = mjml2html(

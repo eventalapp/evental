@@ -4,6 +4,7 @@ import Prisma from '@prisma/client';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { default as classNames } from 'classnames';
 import React from 'react';
+
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 import { faBarsSquare } from '../../../icons';
 import { capitalizeFirstLetter } from '../../../utils/string';

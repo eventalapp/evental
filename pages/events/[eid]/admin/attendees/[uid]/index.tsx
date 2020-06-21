@@ -2,13 +2,13 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import { Footer } from '../../../../../../components/Footer';
 import { ViewAttendee } from '../../../../../../components/attendees/ViewAttendee';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
-import { Footer } from '../../../../../../components/Footer';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';

@@ -6,6 +6,7 @@ import { Editor } from '@tiptap/react';
 import cx from 'classnames';
 import React, { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+
 import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
 import { LoadingInner } from '../../error/LoadingInner';
 import { FileWithPreview } from '../../form/AvatarUpload';

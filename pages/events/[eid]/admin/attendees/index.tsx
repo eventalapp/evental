@@ -3,14 +3,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import { Footer } from '../../../../../components/Footer';
+import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
-import { Footer } from '../../../../../components/Footer';
-import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';

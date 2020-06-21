@@ -1,11 +1,12 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import router from 'next/router';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { AdminCreateAttendeePayload } from '../../utils/schemas';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
+
 import { populateFormData } from '../../utils/populateFormData';
+import { AdminCreateAttendeePayload } from '../../utils/schemas';
 
 export interface UseAdminCreateAttendeeMutationData {
 	adminCreateAttendeeMutation: UseMutationResult<

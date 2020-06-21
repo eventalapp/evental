@@ -7,6 +7,7 @@ import * as Portal from '@radix-ui/react-portal';
 import cx from 'classnames';
 import Image from 'next/image';
 import { Fragment, useState } from 'react';
+
 import { useAddAttendeeToSessionMutation } from '../../../hooks/mutations/useAddAttendeeToSessionMutation';
 import { useAttendeesByNameQuery } from '../../../hooks/queries/useAttendeesByNameQuery';
 import { LoadingInner } from '../../error/LoadingInner';

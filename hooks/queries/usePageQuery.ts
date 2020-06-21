@@ -1,8 +1,8 @@
+import Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import Prisma from '@prisma/client';
 
 export interface UsePageQueryData {
 	page: Prisma.EventPage | undefined;

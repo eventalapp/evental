@@ -1,8 +1,9 @@
-import mjml2html from 'mjml';
+import { SESV2 } from 'aws-sdk';
 import { convert } from 'html-to-text';
+import mjml2html from 'mjml';
+
 import { sendEmail } from '../utils/sendEmail';
 import { forgotPasswordTemplate } from './templates/forgotPassword';
-import { SESV2 } from 'aws-sdk';
 
 export const sendPasswordResetEmail = async (sendToAddress: string, resetCode: string) => {
 	const htmlOutput = mjml2html(

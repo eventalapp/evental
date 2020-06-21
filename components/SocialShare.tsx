@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import classNames from 'classnames';
 import React from 'react';
+
 import { emailLink } from '../utils/sharing/email';
 import { facebookLink } from '../utils/sharing/facebook';
 import { linkedinLink } from '../utils/sharing/linkedin';

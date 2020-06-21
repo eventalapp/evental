@@ -1,7 +1,8 @@
 import axios, { AxiosError } from 'axios';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 
 export interface UseUserData {

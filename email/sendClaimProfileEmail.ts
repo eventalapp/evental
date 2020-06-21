@@ -1,9 +1,10 @@
-import mjml2html from 'mjml';
-import { convert } from 'html-to-text';
-import { sendEmail } from '../utils/sendEmail';
-import { SESV2 } from 'aws-sdk';
-import { claimProfileTemplate } from './templates/claimProfile';
 import Prisma from '@prisma/client';
+import { SESV2 } from 'aws-sdk';
+import { convert } from 'html-to-text';
+import mjml2html from 'mjml';
+
+import { sendEmail } from '../utils/sendEmail';
+import { claimProfileTemplate } from './templates/claimProfile';
 
 type ClaimProfileEmailArgs = {
 	event: Prisma.Event;

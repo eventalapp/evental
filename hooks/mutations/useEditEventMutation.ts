@@ -1,11 +1,12 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { EditEventPayload } from '../../utils/schemas';
-import { toast } from 'react-toastify';
-import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { populateFormData } from '../../utils/populateFormData';
 import router from 'next/router';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
+
+import { populateFormData } from '../../utils/populateFormData';
+import { EditEventPayload } from '../../utils/schemas';
 
 export interface UseEditEventMutationData {
 	editEventMutation: UseMutationResult<

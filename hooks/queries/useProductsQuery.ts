@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import Stripe from 'stripe';
 
 export interface UseProductsQueryData {

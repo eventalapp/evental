@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+
 import { theme } from '../../tailwind.config';
 
 const variants = {

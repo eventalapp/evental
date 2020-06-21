@@ -2,11 +2,11 @@ import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 
+import { Footer } from '../../../../../components/Footer';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
-import { Footer } from '../../../../../components/Footer';
 import { Button } from '../../../../../components/form/Button';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';

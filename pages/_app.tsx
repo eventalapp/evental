@@ -15,6 +15,7 @@ import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import '../styles/global.css';
 
 dayjs.extend(advancedFormat);

@@ -10,9 +10,10 @@ import ReactSelect from 'react-select';
 import { toast } from 'react-toastify';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
-import { useEventQuery, UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
+import { newShade } from '../../utils/newShade';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
 import { capitalizeFirstLetter } from '../../utils/string';
@@ -25,9 +26,8 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import Select from '../radix/components/Select';
-import Button from '../radix/components/shared/Button';
 import Tooltip from '../radix/components/Tooltip';
-import { newShade } from '../../utils/newShade';
+import Button from '../radix/components/shared/Button';
 
 type Props = {
 	eid: string;

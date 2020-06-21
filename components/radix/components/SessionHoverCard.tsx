@@ -7,6 +7,7 @@ import { htmlToText } from 'html-to-text';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { faCalendarCirclePlus } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';

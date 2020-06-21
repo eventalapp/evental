@@ -1,11 +1,3 @@
-import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { Arrow } from '@radix-ui/react-dropdown-menu';
-import cx from 'classnames';
-import React from 'react';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
-import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
-import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faAddressCard,
 	faCalendar,
@@ -13,7 +5,16 @@ import {
 	faCog,
 	faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { Arrow } from '@radix-ui/react-dropdown-menu';
+import cx from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
+
+import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
 
 type Props = {
 	user: PasswordlessUser | undefined;
