@@ -19,6 +19,7 @@ import { theme } from '../../tailwind.config';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { TooltipIcon } from '../TooltipIcon';
 import LeaveEventDialog from '../radix/components/LeaveEventDialog';
 import { ShareDropdown } from '../radix/components/ShareDropdown';
 import Tooltip from '../radix/components/Tooltip';
@@ -130,116 +131,67 @@ export const EventHeader: React.FC<{
 
 						<div className="flex flex-row flex-wrap items-center text-gray-600">
 							{event?.location && (
-								<Tooltip message={`This is event is taking place at ${event?.location}.`}>
-									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-4 w-4 text-gray-500"
-											size="1x"
-											icon={faLocationDot}
-										/>
-										<p>{event?.location}</p>
-									</div>
-								</Tooltip>
+								<TooltipIcon
+									icon={faLocationDot}
+									tooltipMessage={`This is event is taking place at ${event?.location}.`}
+									label={event?.location}
+								/>
 							)}
 
-							<Tooltip
-								message={`This is event is taking place from ${formatDateRange(
+							<TooltipIcon
+								icon={faCalendarDay}
+								tooltipMessage={`This is event is taking place from ${formatDateRange(
 									new Date(event.startDate),
 									new Date(event.endDate),
 									{
 										showHour: false
 									}
 								)}.`}
-							>
-								<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="mr-1.5 h-4 w-4 text-gray-500"
-										size="1x"
-										icon={faCalendarDay}
-									/>
-									<p>
-										{formatDateRange(new Date(event.startDate), new Date(event.endDate), {
-											showHour: false
-										})}
-									</p>
-								</div>
-							</Tooltip>
+								label={formatDateRange(new Date(event.startDate), new Date(event.endDate), {
+									showHour: false
+								})}
+							/>
 
-							<Tooltip
-								message={`This is event is taking in the ${event.timeZone.replace(
+							<TooltipIcon
+								icon={faClock}
+								tooltipMessage={`This is event is taking in the ${event.timeZone.replace(
 									/_/g,
 									' '
 								)} timezone.`}
-							>
-								<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="mr-1.5 h-4 w-4 text-gray-500"
-										size="1x"
-										icon={faClock}
-									/>
-									<p>{event.timeZone.replace(/_/g, ' ')}</p>
-								</div>
-							</Tooltip>
+								label={event.timeZone.replace(/_/g, ' ')}
+							/>
 
 							{event?.type && event.type === 'IN_PERSON' && (
-								<Tooltip message={`This is event is taking place in person.`}>
-									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-4 w-4 text-gray-500"
-											size="1x"
-											icon={faPerson}
-										/>
-										<p>{capitalizeOnlyFirstLetter(event?.type.replace('_', ' '))}</p>
-									</div>
-								</Tooltip>
+								<TooltipIcon
+									icon={faPerson}
+									tooltipMessage={`This is event is taking place in person.`}
+									label={capitalizeOnlyFirstLetter(event?.type.replace('_', ' '))}
+								/>
 							)}
 
 							{event?.type && event.type === 'HYBRID' && (
-								<Tooltip message={`This is event is taking place virtually & in person.`}>
-									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-4 w-4 text-gray-500"
-											size="1x"
-											icon={faStreetView}
-										/>
-										<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
-									</div>
-								</Tooltip>
+								<TooltipIcon
+									icon={faStreetView}
+									tooltipMessage={`This is event is taking place virtually & in person.`}
+									label={capitalizeOnlyFirstLetter(event?.type)}
+								/>
 							)}
 
 							{event?.type && event.type === 'VIRTUAL' && (
-								<Tooltip message={`This is event is taking place virtually.`}>
-									<div className="mr-3 mb-1 flex cursor-help flex-row items-center text-sm md:text-base">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-4 w-4 text-gray-500"
-											size="1x"
-											icon={faHeadset}
-										/>
-										<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
-									</div>
-								</Tooltip>
+								<TooltipIcon
+									icon={faHeadset}
+									tooltipMessage={`This is event is taking place virtually.`}
+									label={capitalizeOnlyFirstLetter(event?.type)}
+								/>
 							)}
 
 							{event.website && (
-								<Tooltip message={`This is event's website is ${event.website}.`}>
-									<a href={event.website} target="_blank" rel="noopener noreferrer">
-										<div className="mb-1 flex cursor-pointer flex-row items-center text-sm md:text-base">
-											<FontAwesomeIcon
-												fill="currentColor"
-												className="mr-1.5 h-4 w-4 text-gray-500"
-												size="1x"
-												icon={faArrowUpRightFromSquare}
-											/>
-											<p>{event.website}</p>
-										</div>
-									</a>
-								</Tooltip>
+								<TooltipIcon
+									icon={faArrowUpRightFromSquare}
+									tooltipMessage={`This is event's website is ${event.website}.`}
+									label={event.website}
+									externalLink={event.website}
+								/>
 							)}
 						</div>
 					</div>

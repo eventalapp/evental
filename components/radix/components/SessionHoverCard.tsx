@@ -12,6 +12,7 @@ import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCr
 import { faCalendarCirclePlus } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { TooltipIcon } from '../../TooltipIcon';
 import Tooltip from './Tooltip';
 
 interface Props {
@@ -77,64 +78,34 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 
 					<div className="flex flex-row flex-wrap items-center text-gray-600">
 						{session.type && (
-							<div className="mr-3">
-								<Tooltip
-									side={'top'}
-									message={`This session is in the ${session.type.name} category`}
-								>
-									<div className="inline-flex cursor-help flex-row items-center">
-										<div className="mr-1.5 flex h-5 w-5 items-center justify-center">
-											<div
-												className="h-3 w-3 rounded-full"
-												style={{
-													backgroundColor: session?.type?.color ?? '#888888'
-												}}
-											/>
-										</div>
-										{session.type.name}
-									</div>
-								</Tooltip>
-							</div>
+							<TooltipIcon
+								customIcon={
+									<div
+										className="mr-1.5 h-3 w-3 rounded-full"
+										style={{ backgroundColor: session.type.color ?? '#888888' }}
+									/>
+								}
+								tooltipMessage={`This session is a part of the ${session.type.name} category.`}
+								label={session.type.name}
+							/>
 						)}
 
 						{session.venue && (
-							<div className="mr-3">
-								<Tooltip
-									side={'top'}
-									message={`This session is taking place at the ${session.venue.name} venue`}
-								>
-									<div className="inline-flex cursor-help flex-row items-center">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-4 w-4 text-gray-500"
-											size="1x"
-											icon={faLocationDot}
-										/>
-										{session.venue.name}
-									</div>
-								</Tooltip>
-							</div>
+							<TooltipIcon
+								icon={faLocationDot}
+								tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
+								label={session?.venue?.name}
+							/>
 						)}
 
 						{session?.maxAttendees !== null && (
-							<div className="mr-3">
-								<Tooltip
-									side={'top'}
-									message={`This sessions is currently ${Math.ceil(
-										(session?.attendeeCount / session?.maxAttendees) * 100
-									)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
-								>
-									<div className="inline-flex cursor-help flex-row items-center">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-4 w-4 text-gray-500"
-											size="1x"
-											icon={faUserGroup}
-										/>
-										<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
-									</div>
-								</Tooltip>
-							</div>
+							<TooltipIcon
+								icon={faUserGroup}
+								tooltipMessage={`This sessions is currently ${Math.ceil(
+									(session?.attendeeCount / session?.maxAttendees) * 100
+								)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+								label={`${Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full`}
+							/>
 						)}
 					</div>
 
