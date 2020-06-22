@@ -10,12 +10,13 @@ import Tooltip from './radix/components/Tooltip';
 export const TooltipIcon: React.FC<{
 	icon?: IconDefinition;
 	tooltipMessage: string;
-	label: string;
+	label?: string;
 	iconClassName?: string;
 	wrapperClassName?: string;
 	externalLink?: string;
 	link?: string;
 	customIcon?: React.ReactNode;
+	labelComponent?: React.ReactNode;
 }> = (props) => {
 	const {
 		icon = faQuestion,
@@ -25,8 +26,11 @@ export const TooltipIcon: React.FC<{
 		wrapperClassName,
 		externalLink,
 		customIcon,
-		link
+		link,
+		labelComponent
 	} = props;
+
+	const finalLabel = label || labelComponent;
 
 	const finalIcon = customIcon ? (
 		customIcon
@@ -52,7 +56,7 @@ export const TooltipIcon: React.FC<{
 						>
 							{finalIcon}
 
-							<p>{label}</p>
+							<p>{finalLabel}</p>
 						</div>
 					</Tooltip>
 				</a>
@@ -72,7 +76,7 @@ export const TooltipIcon: React.FC<{
 					>
 						{finalIcon}
 
-						<p>{label}</p>
+						<p>{finalLabel}</p>
 					</div>
 				</a>
 			</Tooltip>
@@ -89,7 +93,7 @@ export const TooltipIcon: React.FC<{
 			>
 				{finalIcon}
 
-				<p>{label}</p>
+				<p>{finalLabel}</p>
 			</div>
 		</Tooltip>
 	);
