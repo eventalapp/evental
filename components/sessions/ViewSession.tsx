@@ -7,6 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Prisma from '@prisma/client';
 import { CalendarEvent } from 'calendar-link';
+import dayjs from 'dayjs';
 import parse from 'html-react-parser';
 import React from 'react';
 
@@ -130,6 +131,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 									style={{ backgroundColor: session.type.color ?? '#888888' }}
 								/>
 							}
+							link={`/events/${eid}/sessions/types/${session.type.slug}`}
 							tooltipMessage={`This session is a part of the ${session.type.name} category.`}
 							label={session.type.name}
 						/>
@@ -141,12 +143,14 @@ export const ViewSession: React.FC<Props> = (props) => {
 							new Date(session.startDate),
 							new Date(session.endDate)
 						)}.`}
+						link={`/events/${eid}/sessions/dates/${dayjs(session.startDate).format('YYYY-MM-DD')}`}
 						label={formatDateRange(new Date(session.startDate), new Date(session.endDate))}
 					/>
 
 					{session?.venue?.name && (
 						<TooltipIcon
 							icon={faLocationDot}
+							link={`/events/${event.slug}/venues/${session.venue.slug}`}
 							tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
 							label={session?.venue?.name}
 						/>
