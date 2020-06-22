@@ -1,10 +1,18 @@
+import {
+	faAddressBook,
+	faArrowUpRightFromSquare,
+	faBuilding,
+	faLocationDot
+} from '@fortawesome/free-solid-svg-icons';
 import parse from 'html-react-parser';
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { TooltipIcon } from '../../../components/TooltipIcon';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import Column from '../../../components/layout/Column';
@@ -56,7 +64,66 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h3 className="mb-3 text-xl font-medium md:text-2xl">{user.name}</h3>
+				<div>
+					<div className="relative mb-7 flex flex-row items-center">
+						<div className="relative mr-3 h-16 w-16 shrink-0 rounded-md border border-gray-200 shadow-sm md:mr-5 md:h-20 md:w-20">
+							<Image
+								alt={String(user.name)}
+								src={String(
+									user.image
+										? `https://cdn.evental.app${user.image}`
+										: `https://cdn.evental.app/images/default-avatar.jpg`
+								)}
+								className="rounded-md"
+								layout="fill"
+							/>
+						</div>
+
+						<div>
+							<h1 className="mb-1.5 max-w-lg text-2xl font-bold leading-[1.1] tracking-tight md:text-3xl">
+								{user.name}
+							</h1>
+							<div className="flex flex-row flex-wrap items-center text-gray-600">
+								{user.location && (
+									<TooltipIcon
+										icon={faLocationDot}
+										tooltipMessage={`This user is located in ${user.location}`}
+										label={user.location}
+									/>
+								)}
+
+								{user.company && (
+									<TooltipIcon
+										icon={faBuilding}
+										tooltipMessage={`This user works for ${user.company}`}
+										label={user.company}
+									/>
+								)}
+
+								{user.position && (
+									<TooltipIcon
+										icon={faAddressBook}
+										tooltipMessage={
+											user.company
+												? `This user works for ${user.company} as a ${user.position}`
+												: `This user works as a ${user.position}`
+										}
+										label={user.position}
+									/>
+								)}
+
+								{user.website && (
+									<TooltipIcon
+										icon={faArrowUpRightFromSquare}
+										tooltipMessage={`This user's website link is ${user.website}`}
+										label={user.website}
+										externalLink={user.website}
+									/>
+								)}
+							</div>
+						</div>
+					</div>
+				</div>
 
 				{user.description && (
 					<div className="prose focus:outline-none prose-a:text-primary">
