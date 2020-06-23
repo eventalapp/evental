@@ -2,9 +2,11 @@ import {
 	faCalendarDay,
 	faLocationDot,
 	faPenToSquare,
+	faRightFromBracket,
 	faTrashCan,
 	faUserGroup
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import { CalendarEvent } from 'calendar-link';
 import dayjs from 'dayjs';
@@ -23,6 +25,8 @@ import { IconLinkTooltip } from '../IconLinkTooltip';
 import { TooltipIcon } from '../TooltipIcon';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import { LeaveSessionDialog } from '../radix/components/LeaveSessionDialog';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -79,13 +83,32 @@ export const ViewSession: React.FC<Props> = (props) => {
 					</div>
 				)}
 
-			<FlexRowBetween>
-				<div className="flex items-center">
-					<h1 className="text-xl font-medium md:text-2xl">{session.name}</h1>
-				</div>
+			<FlexRowBetween variant="noWrap">
+				<h1 className="text-xl font-bold md:text-2xl">{session.name}</h1>
 
-				<div className="space-x-4">
-					{isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
+				<div className="flex flex-row items-center">
+					{user && isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
+
+					{user && Boolean(isAttending) && (
+						<LeaveSessionDialog
+							eventSlug={event.slug}
+							sessionSlug={session.slug}
+							userSlug={String(user?.slug)}
+						>
+							<div className="flex items-center justify-center">
+								<Tooltip side={'top'} message={'Leave this session.'}>
+									<button type="button" className="ml-4">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-5 w-5 text-red-500 block"
+											size="1x"
+											icon={faRightFromBracket}
+										/>
+									</button>
+								</Tooltip>
+							</div>
+						</LeaveSessionDialog>
+					)}
 
 					{user && !isAttending && !admin && (
 						<IconButtonTooltip
@@ -94,7 +117,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							icon={faCalendarCirclePlus}
 							disabled={createSessionAttendeeMutation.isLoading}
 							isLoading={createSessionAttendeeMutation.isLoading}
-							className="text-gray-700"
+							className="text-gray-600"
 							onClick={() => {
 								createSessionAttendeeMutation.mutate();
 							}}
