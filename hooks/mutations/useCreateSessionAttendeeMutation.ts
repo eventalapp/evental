@@ -48,6 +48,7 @@ export const useCreateSessionAttendeeMutation = (
 					router.push(`/events/${eid}/sessions/${sid}`).then(() => {
 						void queryClient.invalidateQueries(['attendees', eid, sid]);
 						void queryClient.invalidateQueries(['session', eid, sid]);
+						void queryClient.invalidateQueries(['isSessionAttendee', eid, sid]);
 						if (userId) {
 							void queryClient.invalidateQueries(['attendee', eid, sid, userId]);
 						}
@@ -55,6 +56,7 @@ export const useCreateSessionAttendeeMutation = (
 				} else {
 					void queryClient.invalidateQueries(['attendees', eid, sid]);
 					void queryClient.invalidateQueries(['session', eid, sid]);
+					void queryClient.invalidateQueries(['isSessionAttendee', eid, sid]);
 					if (userId) {
 						void queryClient.invalidateQueries(['attendee', eid, sid, userId]);
 					}
