@@ -63,7 +63,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 								>
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="h-7 w-7 cursor-pointer text-gray-500"
+										className="h-6 w-6 cursor-pointer text-gray-500"
 										size="lg"
 										icon={faCalendarCirclePlus}
 									/>
