@@ -152,7 +152,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							customIcon={
 								<div
 									className="mr-1.5 h-3 w-3 rounded-full"
-									style={{ backgroundColor: session.type.color ?? '#888888' }}
+									style={{ backgroundColor: session.type.color }}
 								/>
 							}
 							link={`/events/${eid}/sessions/types/${session.type.slug}`}
