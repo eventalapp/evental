@@ -62,8 +62,6 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 											color={event.color}
 										/>
 									))}
-
-								<LinkItem link={`/auth/signin`} label={'Sign in'} />
 							</div>
 
 							<div className="flex flex-row space-x-8 font-medium lg:hidden">
@@ -107,8 +105,17 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 								icon={faXmark}
 							/>
 						</button>
+
 						<FullscreenLinkItem
 							index={0}
+							link={`/ath/signin`}
+							label={'Sign In'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={1}
 							link={`/events/${event.slug}`}
 							label={'Sessions'}
 							onClick={() => {
@@ -116,7 +123,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 							}}
 						/>
 						<FullscreenLinkItem
-							index={1}
+							index={2}
 							link={`/events/${event.slug}/venues`}
 							label={'Venues'}
 							onClick={() => {
@@ -126,7 +133,7 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 
 						{roles.map((role, i) => (
 							<FullscreenLinkItem
-								index={i + 2}
+								index={i + 3}
 								key={role.id}
 								link={`/events/${event.slug}/roles/${role.slug}`}
 								label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
@@ -141,3 +148,4 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 		</div>
 	);
 };
+
