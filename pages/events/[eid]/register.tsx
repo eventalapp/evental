@@ -1,4 +1,5 @@
 import Prisma from '@prisma/client';
+import Color from 'color';
 import { formatInTimeZone } from 'date-fns-tz';
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
@@ -128,7 +129,8 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 								<LinkButton
 									padding="large"
 									style={{
-										backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+										backgroundColor: event.color,
+										color: Color(event.color).isLight() ? '#000' : '#FFF'
 									}}
 								>
 									Sign in
@@ -233,3 +235,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 };
 
 export default EventRegisterPage;
+

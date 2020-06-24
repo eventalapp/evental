@@ -1,3 +1,4 @@
+import Color from 'color';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
@@ -36,7 +37,8 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={createAttendeeMutation.isLoading}
 					style={{
-						backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+						backgroundColor: event.color,
+						color: Color(event.color).isLight() ? '#000' : '#FFF'
 					}}
 				>
 					{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
@@ -45,3 +47,4 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 		</form>
 	);
 };
+

@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
+import Color from 'color';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -41,7 +42,8 @@ export const EventHeader: React.FC<{
 					<a
 						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
 						style={{
-							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+							backgroundColor: event.color,
+							color: Color(event.color).isLight() ? '#000' : '#FFF'
 						}}
 					>
 						You are an organizer for this event, click here to manage this event
@@ -54,7 +56,8 @@ export const EventHeader: React.FC<{
 					<a
 						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
 						style={{
-							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+							backgroundColor: event.color,
+							color: Color(event.color).isLight() ? '#000' : '#FFF'
 						}}
 					>
 						Are you attending this event? Create an account and register.
@@ -67,7 +70,8 @@ export const EventHeader: React.FC<{
 					<a
 						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
 						style={{
-							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+							backgroundColor: event.color,
+							color: Color(event.color).isLight() ? '#000' : '#FFF'
 						}}
 					>
 						Are you attending this event? Register here.
@@ -204,3 +208,4 @@ export const EventHeader: React.FC<{
 		</div>
 	);
 };
+

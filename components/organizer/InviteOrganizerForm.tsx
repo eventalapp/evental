@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Prisma from '@prisma/client';
+import Color from 'color';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
@@ -52,7 +53,8 @@ export const InviteOrganizerForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={inviteOrganizerMutation.isLoading}
 					style={{
-						backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+						backgroundColor: event.color,
+						color: Color(event.color).isLight() ? '#000' : '#FFF'
 					}}
 				>
 					{inviteOrganizerMutation.isLoading ? <LoadingInner /> : 'Invite Organizer'}
@@ -61,3 +63,4 @@ export const InviteOrganizerForm: React.FC<Props> = (props) => {
 		</form>
 	);
 };
+
