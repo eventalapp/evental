@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../prisma/client';
+import { theme } from '../../../tailwind.config';
 import { api } from '../../../utils/api';
 import { generateSlug } from '../../../utils/generateSlug';
 import { CreateEventSchema } from '../../../utils/schemas';
@@ -39,7 +40,8 @@ export default api({
 				name: body.name,
 				startDate: dayjs(body.startDate).tz(body.timeZone).startOf('day').toDate(),
 				endDate: dayjs(body.endDate).tz(body.timeZone).endOf('day').toDate(),
-				timeZone: body.timeZone
+				timeZone: body.timeZone,
+				color: theme.extend.colors.primary.DEFAULT
 			}
 		});
 
@@ -93,3 +95,4 @@ export default api({
 		return event;
 	}
 });
+
