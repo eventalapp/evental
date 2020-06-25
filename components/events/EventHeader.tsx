@@ -3,7 +3,6 @@ import {
 	faCalendarDay,
 	faClock,
 	faCog,
-	faFilter,
 	faHeadset,
 	faLocationDot,
 	faPerson,
@@ -41,19 +40,6 @@ export const EventHeader: React.FC<{
 		<div className="mb-7">
 			<div className="relative">
 				<div className="absolute top-0 right-0 flex flex-row">
-					<div>
-						<Tooltip side={'top'} message={'Filter sessions'}>
-							<button type="button" className="h-6 w-6 text-gray-700">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="h-5 w-5"
-									size="1x"
-									icon={faFilter}
-								/>
-							</button>
-						</Tooltip>
-					</div>
-
 					{!Boolean(isAttendee) && (
 						<CreateAttendeeDialog event={event} user={user}>
 							<div className="ml-4">
