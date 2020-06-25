@@ -1,18 +1,28 @@
-import { faLocationDot, faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import {
+	faArrowRight,
+	faCalendarDay,
+	faLocationDot,
+	faRightFromBracket,
+	faUserGroup
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
 import cx from 'classnames';
+import dayjs from 'dayjs';
 import { htmlToText } from 'html-to-text';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
-import { faCalendarCirclePlus } from '../../../icons';
+import { useIsSessionAttendeeQuery } from '../../../hooks/queries/useIsSessionAttendeeQuery';
+import { faCalendarCirclePlus, faSpinnerThird } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
+import { formatDateRange } from '../../../utils/formatDateRange';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { TooltipIcon } from '../../TooltipIcon';
+import { LeaveSessionDialog } from './LeaveSessionDialog';
 import Tooltip from './Tooltip';
 
 interface Props {
@@ -22,14 +32,82 @@ interface Props {
 	user: PasswordlessUser | undefined;
 }
 
-export const SessionHoverCard: React.FC<Props> = (props) => {
-	const { children, session, event, admin, user } = props;
+type AttendThisSessionProps = Props;
 
+const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
+	const { event, session, user } = props;
+
+	const { isSessionAttendee, isSessionAttendeeLoading } = useIsSessionAttendeeQuery(
+		event.slug,
+		session.slug
+	);
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
 		event.slug,
 		session.slug,
 		user?.id
 	);
+
+	if (isSessionAttendeeLoading) {
+		return (
+			<div className="mb-3">
+				<FontAwesomeIcon
+					fill="currentColor"
+					className="h-6 w-6 animate-spin"
+					size="1x"
+					icon={faSpinnerThird}
+				/>
+			</div>
+		);
+	}
+
+	if (user && !isSessionAttendee) {
+		return (
+			<Tooltip side={'right'} message={`Add the ${session.name} session to your schedule`}>
+				<button
+					onClick={() => {
+						createSessionAttendeeMutation.mutate();
+					}}
+					className="mb-3"
+				>
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="h-6 w-6 cursor-pointer text-gray-500"
+						size="lg"
+						icon={faCalendarCirclePlus}
+					/>
+				</button>
+			</Tooltip>
+		);
+	}
+
+	if (user && isSessionAttendee) {
+		return (
+			<LeaveSessionDialog
+				eventSlug={event.slug}
+				sessionSlug={session.slug}
+				userSlug={String(user.slug)}
+			>
+				<div className="flex items-center justify-center">
+					<Tooltip side={'top'} message={'Leave this session'}>
+						<button type="button" className="mb-3">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="h-5 w-5 text-red-500 block"
+								size="1x"
+								icon={faRightFromBracket}
+							/>
+						</button>
+					</Tooltip>
+				</div>
+			</LeaveSessionDialog>
+		);
+	}
+
+	return null;
+};
+
+export const SessionHoverCard: React.FC<Props> = (props) => {
+	const { children, session, event, admin, user } = props;
 
 	const descriptionAsText = htmlToText(session.description ?? '');
 
@@ -53,30 +131,49 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				/>
 
 				<div className="h-full w-full">
-					{user && (
-						<div className="absolute right-3.5 top-3.5 flex w-full flex-col justify-end items-end">
-							<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
-								<button
-									onClick={() => {
-										createSessionAttendeeMutation.mutate();
-									}}
-								>
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="h-6 w-6 cursor-pointer text-gray-500"
-										size="lg"
-										icon={faCalendarCirclePlus}
-									/>
-								</button>
-							</Tooltip>
-						</div>
-					)}
+					<div className="absolute right-3.5 top-3.5 flex w-full flex-col justify-end items-end">
+						<AttendThisSession event={event} session={session} user={user} />
+
+						<Tooltip side={'right'} message={`View session`}>
+							<div>
+								<Link href={`/events/${event.slug}/sessions/${session.slug}`} passHref>
+									<a>
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-6 w-6 cursor-pointer text-gray-500"
+											size="lg"
+											icon={faArrowRight}
+										/>
+									</a>
+								</Link>
+							</div>
+						</Tooltip>
+					</div>
 
 					<h3 className="text-lg font-bold leading-[1.3] tracking-tight md:text-xl">
 						{session.name}
 					</h3>
 
-					<div className="flex flex-row flex-wrap items-center text-gray-600 mt-1.5 mb-0.5">
+					{session.description && (
+						<p className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
+							{descriptionAsText.substring(0, 150)}
+							{descriptionAsText.length > 150 && '...'}
+						</p>
+					)}
+
+					<div className="flex flex-row flex-wrap items-center text-gray-600 mt-3 mb-0.5">
+						<TooltipIcon
+							icon={faCalendarDay}
+							tooltipMessage={`This is session is taking place on ${formatDateRange(
+								new Date(session.startDate),
+								new Date(session.endDate)
+							)}.`}
+							link={`/events/${event.slug}/sessions/dates/${dayjs(session.startDate).format(
+								'YYYY-MM-DD'
+							)}`}
+							label={formatDateRange(new Date(session.startDate), new Date(session.endDate))}
+						/>
+
 						{session.type && (
 							<TooltipIcon
 								customIcon={
@@ -110,13 +207,6 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 							/>
 						)}
 					</div>
-
-					{session.description && (
-						<p className="text-sm font-normal text-gray-700 dark:text-gray-400">
-							{descriptionAsText.substring(0, 150)}
-							{descriptionAsText.length > 150 && '...'}
-						</p>
-					)}
 
 					{session.roleMembers && session.roleMembers.length > 0 && (
 						<ul className="mt-4 grid grid-cols-4 gap-2">
