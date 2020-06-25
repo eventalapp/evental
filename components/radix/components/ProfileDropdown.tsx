@@ -47,7 +47,7 @@ export const ProfileDropdown = (props: Props) => {
 					'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
 					'w-48 rounded-lg px-1.5 py-1 md:w-56',
 					'bg-white dark:bg-gray-800',
-					'border border-gray-300 shadow-sm'
+					'border border-gray-300 shadow'
 				)}
 			>
 				<Link href={`/users/${user?.slug}`}>
