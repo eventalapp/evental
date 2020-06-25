@@ -42,7 +42,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				sideOffset={4}
 				className={cx(
 					'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
-					'max-w-lg rounded-lg p-4 pr-12 md:w-full',
+					'max-w-lg rounded-lg p-4 pr-16 md:w-full',
 					'border border-gray-200 bg-white shadow dark:bg-gray-800',
 					'relative min-w-[350px] overflow-hidden focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 				)}
@@ -54,7 +54,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 
 				<div className="h-full w-full">
 					{user && (
-						<div className="absolute right-3.5 top-3.5 flex w-full flex-row justify-end">
+						<div className="absolute right-3.5 top-3.5 flex w-full flex-col justify-end items-end">
 							<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
 								<button
 									onClick={() => {
@@ -72,11 +72,11 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 						</div>
 					)}
 
-					<h3 className="mb-1 text-lg font-medium text-gray-900 dark:text-gray-100">
+					<h3 className="text-lg font-bold leading-[1.3] tracking-tight md:text-xl">
 						{session.name}
 					</h3>
 
-					<div className="flex flex-row flex-wrap items-center text-gray-600">
+					<div className="flex flex-row flex-wrap items-center text-gray-600 mt-1.5 mb-0.5">
 						{session.type && (
 							<TooltipIcon
 								customIcon={
@@ -112,7 +112,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					</div>
 
 					{session.description && (
-						<p className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
+						<p className="text-sm font-normal text-gray-700 dark:text-gray-400">
 							{descriptionAsText.substring(0, 150)}
 							{descriptionAsText.length > 150 && '...'}
 						</p>
