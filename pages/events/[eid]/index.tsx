@@ -172,6 +172,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					<div className="col-span-12 lg:col-span-9">
 						<SessionList sessions={sessionsData} eid={String(eid)} event={event} user={user} />
 					</div>
+
 					<div className="col-span-12 lg:col-span-3">
 						<div className="mb-3">
 							<span className="mb-1 block font-medium">Filter by Date</span>
@@ -193,7 +194,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 							<div className="mb-3">
 								<span className="mb-1 block font-medium">Filter by Type</span>
 								<div className="text-gray-600">
-									<ul>
+									<ul className="space-y-0.5">
 										{sessionTypes.map((sessionType) => (
 											<li className="block" key={sessionType.id}>
 												<Tooltip
@@ -223,7 +224,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 							<div className="mb-3">
 								<span className="mb-1 block font-medium">Filter by Venue</span>
 								<div className="text-gray-600">
-									<ul>
+									<ul className="space-y-0.5">
 										{venues.map((venue) => (
 											<li className="block" key={venue.id}>
 												<Tooltip

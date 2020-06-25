@@ -42,7 +42,7 @@ export const EventHeader: React.FC<{
 			<div className="relative">
 				<div className="absolute top-0 right-0 flex flex-row">
 					<div>
-						<Tooltip side={'top'} message={'Filter sessions.'}>
+						<Tooltip side={'top'} message={'Filter sessions'}>
 							<button type="button" className="h-6 w-6 text-gray-700">
 								<FontAwesomeIcon
 									fill="currentColor"
@@ -57,7 +57,7 @@ export const EventHeader: React.FC<{
 					{!Boolean(isAttendee) && (
 						<CreateAttendeeDialog event={event} user={user}>
 							<div className="ml-4">
-								<Tooltip side={'top'} message={'Are you attending this event? Click to register.'}>
+								<Tooltip side={'top'} message={'Are you attending this event? Click to register'}>
 									<button type="button" className="h-6 w-6 text-gray-700">
 										<FontAwesomeIcon
 											fill="currentColor"
@@ -76,7 +76,7 @@ export const EventHeader: React.FC<{
 							<a className="ml-4">
 								<Tooltip
 									side={'top'}
-									message={'You are an organizer for this event, click here to manage this event.'}
+									message={'You are an organizer for this event, click here to manage this event'}
 								>
 									<button type="button" className="h-6 w-6 text-gray-700">
 										<FontAwesomeIcon
@@ -93,7 +93,7 @@ export const EventHeader: React.FC<{
 
 					<ShareEventDropdown event={event}>
 						<div className="ml-4">
-							<Tooltip side={'top'} message={'Share this event.'}>
+							<Tooltip side={'top'} message={'Share this event'}>
 								<button type="button" className="h-6 w-6 text-gray-700">
 									<FontAwesomeIcon
 										fill="currentColor"
@@ -109,7 +109,7 @@ export const EventHeader: React.FC<{
 					{user && Boolean(isAttendee) && (
 						<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
 							<div className="ml-4">
-								<Tooltip side={'top'} message={'Leave this event.'}>
+								<Tooltip side={'top'} message={'Leave this event'}>
 									<button type="button" className="h-6 w-6">
 										<FontAwesomeIcon
 											fill="currentColor"
