@@ -24,7 +24,7 @@ import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { TooltipIcon } from '../TooltipIcon';
 import { CreateAttendeeDialog } from '../radix/components/CreateAttendeeDialog';
 import LeaveEventDialog from '../radix/components/LeaveEventDialog';
-import { ShareDropdown } from '../radix/components/ShareDropdown';
+import { ShareEventDropdown } from '../radix/components/ShareEventDropdown';
 import Tooltip from '../radix/components/Tooltip';
 
 export const EventHeader: React.FC<{
@@ -91,7 +91,7 @@ export const EventHeader: React.FC<{
 						</Link>
 					)}
 
-					<ShareDropdown event={event}>
+					<ShareEventDropdown event={event}>
 						<div className="ml-4">
 							<Tooltip side={'top'} message={'Share this event.'}>
 								<button type="button" className="h-6 w-6 text-gray-700">
@@ -104,7 +104,7 @@ export const EventHeader: React.FC<{
 								</button>
 							</Tooltip>
 						</div>
-					</ShareDropdown>
+					</ShareEventDropdown>
 
 					{user && Boolean(isAttendee) && (
 						<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
