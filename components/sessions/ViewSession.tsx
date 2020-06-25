@@ -85,7 +85,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 				)}
 
 			<FlexRowBetween variant="noWrap">
-				<h1 className="text-xl font-bold md:text-2xl">{session.name}</h1>
+				<h1 className="mb-1.5 text-2xl font-bold leading-[1.2] tracking-tight md:text-3xl">
+					{session.name}
+				</h1>
 
 				<div className="flex flex-row items-center">
 					{user && isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
@@ -217,4 +219,3 @@ export const ViewSession: React.FC<Props> = (props) => {
 		</div>
 	);
 };
-
