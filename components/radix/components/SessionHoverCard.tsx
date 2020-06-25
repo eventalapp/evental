@@ -88,7 +88,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 				userSlug={String(user.slug)}
 			>
 				<div className="flex items-center justify-center">
-					<Tooltip side={'top'} message={'Leave this session'}>
+					<Tooltip side={'right'} message={'Leave this session'}>
 						<button type="button" className="mb-3">
 							<FontAwesomeIcon
 								fill="currentColor"
