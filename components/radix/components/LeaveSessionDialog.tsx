@@ -37,7 +37,7 @@ export const LeaveSessionDialog: React.FC<Props> = (props) => {
 					>
 						<AlertDialogPrimitive.Overlay
 							forceMount
-							className="fixed inset-0 z-20 bg-black/50 z-[10000000000]"
+							className="fixed inset-0 bg-black/50 z-[10000000000]"
 						/>
 					</Transition.Child>
 					<Transition.Child
