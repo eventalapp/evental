@@ -23,7 +23,7 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 
 	return (
 		<div className="flex flex-row">
-			<span className="w-24 py-2 pr-5 text-right text-sm text-gray-700">
+			<span className="w-24 py-2 pr-3 text-right text-sm text-gray-500">
 				{dayjs(hour).format('h:mm A z')}
 			</span>
 			<div className="w-full">
