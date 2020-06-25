@@ -213,7 +213,9 @@ const ViewEventPage: NextPage<Props> = (props) => {
 																		className="mr-2 h-3 w-3 rounded-full"
 																		style={{ backgroundColor: sessionType.color ?? '#888888' }}
 																	/>
-																	{sessionType.name}
+																	<span className="transition-all duration-100 group-hover:text-gray-900">
+																		{sessionType.name}
+																	</span>
 																</div>
 																<FontAwesomeIcon
 																	fill="currentColor"
