@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 
 import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
-import { theme } from '../../tailwind.config';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 
@@ -47,4 +46,3 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 		</form>
 	);
 };
-

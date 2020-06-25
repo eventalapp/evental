@@ -465,4 +465,3 @@ export const EditEventForm: React.FC<Props> = (props) => {
 		</form>
 	);
 };
-

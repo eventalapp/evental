@@ -55,4 +55,3 @@ export const useCreateAttendeeMutation = (
 
 	return { createAttendeeMutation };
 };
-

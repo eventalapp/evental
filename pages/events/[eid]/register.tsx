@@ -234,4 +234,3 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 };
 
 export default EventRegisterPage;
-
