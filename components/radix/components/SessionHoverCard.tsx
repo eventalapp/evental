@@ -49,7 +49,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 
 	if (isSessionAttendeeLoading) {
 		return (
-			<div className="mb-3">
+			<div>
 				<FontAwesomeIcon
 					fill="currentColor"
 					className="h-6 w-6 animate-spin"
@@ -67,7 +67,6 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 					onClick={() => {
 						createSessionAttendeeMutation.mutate();
 					}}
-					className="mb-3"
 				>
 					<FontAwesomeIcon
 						fill="currentColor"
@@ -89,7 +88,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 			>
 				<div className="flex items-center justify-center">
 					<Tooltip side={'right'} message={'Leave this session'}>
-						<button type="button" className="mb-3">
+						<button type="button">
 							<FontAwesomeIcon
 								fill="currentColor"
 								className="h-5 w-5 text-red-500 block"
@@ -133,7 +132,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				<div className="h-full w-full">
 					<div className="absolute right-3.5 top-3.5 flex flex-col justify-end items-end">
 						<Tooltip side={'right'} message={`View session`}>
-							<div>
+							<div className="mb-3">
 								<Link href={`/events/${event.slug}/sessions/${session.slug}`} passHref>
 									<a>
 										<FontAwesomeIcon
