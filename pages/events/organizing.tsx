@@ -75,11 +75,11 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 				<Navigation />
 
 				<Column>
-					<Heading>Organizing Events</Heading>
+					<Heading className="text-center mb-4">Organizing Events</Heading>
 
 					<EventsPageNavigation />
 
-					<span className="mt-5 block text-center text-lg font-bold">
+					<span className="mt-5 block text-center text-lg font-medium">
 						Organizing an event? Create an event below
 					</span>
 
