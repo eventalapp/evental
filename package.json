@@ -13,7 +13,7 @@
 		"format": "prettier --write ./{server,pages,utils,components,config,email,hooks,prisma,styles}/**/**/*.{js,jsx,md,ts,tsx} && prisma format",
 		"migrate:dev": "prisma migrate dev",
 		"migrate:reset": "prisma migrate reset",
-		"migrate:prod": "DATABASE_URL=\"$DATABASE_MIGRATE_URL\" prisma migrate deploy",
+		"migrate:prod": "prisma migrate deploy",
 		"email:forgotPassword": "ts-node --project tsconfig.json  --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/forgotPassword.ts",
 		"stripe:listen": "stripe listen --forward-to localhost:5555/api/payment/webhooks"
 	},
