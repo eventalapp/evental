@@ -69,8 +69,9 @@ const EditEventPage: NextPage = () => {
 					isEventLoading={isEventLoading}
 				/>
 
-				<p className="mt-5 mb-3 text-lg font-bold text-red-500">Danger Zone</p>
-				<div className="rounded-md bg-red-100 p-4">
+				<p className="mt-5 mb-3 text-lg font-bold text-red-600">Danger Zone</p>
+
+				<div className="rounded-md border shadow-sm p-4">
 					<Link href={`/events/${eid}/admin/delete`} passHref>
 						<LinkButton variant="danger">Delete Event</LinkButton>
 					</Link>
