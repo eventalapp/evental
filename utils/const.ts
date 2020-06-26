@@ -2,6 +2,8 @@ import { eduAttendeesToPrice, proAttendeesToPrice } from './price';
 
 export const copy = {
 	tooltip: {
+		defaultRole:
+			'You can set this role to the default role. When new members join your event, they will be given this role.',
 		type: 'A session type is used to categorize sessions.',
 		color: 'Pick a color for your event to push your brand. We recommend you pick a darker color.',
 		venue: 'A venue is used to group sessions by location.',
@@ -29,7 +31,9 @@ export const copy = {
 		userSlug:
 			'You can set the username for your account, which will dictate the link/url for your profile.',
 		userWebsite:
-			'You can set the external website for your profile, this will be displayed to all viewers of your profile.'
+			'You can set the external website for your profile, this will be displayed to all viewers of your profile.',
+		tinyImage:
+			'You can set a tiny image for this role, this user images will be small when displayed in the role member list view.'
 	}
 };
 
