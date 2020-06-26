@@ -2,7 +2,7 @@
 	"name": "evental",
 	"private": true,
 	"scripts": {
-		"prepare": "prisma generate",
+		"prepare": "prisma generate --data-proxy",
 		"docker": "docker-compose up -d",
 		"quickstart": "yarn && yarn docker && yarn dev",
 		"build": "next build",
