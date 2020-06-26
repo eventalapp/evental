@@ -132,8 +132,6 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 
 				<div className="h-full w-full">
 					<div className="absolute right-3.5 top-3.5 flex flex-col justify-end items-end">
-						<AttendThisSession event={event} session={session} user={user} />
-
 						<Tooltip side={'right'} message={`View session`}>
 							<div>
 								<Link href={`/events/${event.slug}/sessions/${session.slug}`} passHref>
@@ -148,6 +146,8 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 								</Link>
 							</div>
 						</Tooltip>
+
+						<AttendThisSession event={event} session={session} user={user} />
 					</div>
 
 					<h3 className="text-lg font-bold leading-[1.3] tracking-tight md:text-xl">
