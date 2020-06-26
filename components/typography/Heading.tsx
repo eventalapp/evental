@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 
 const variants = {
-	default: 'text-2xl font-bold leading-[1.2] tracking-tight md:text-3xl'
+	'default': 'text-2xl font-bold leading-[1.2] tracking-tight md:text-3xl',
+	'4xl': 'text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl'
 };
 
 type Props = { className?: string; level?: 1 | 2 | 3 | 5 | 6; variant?: keyof typeof variants };
