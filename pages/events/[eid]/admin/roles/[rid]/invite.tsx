@@ -13,6 +13,7 @@ import Column from '../../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { InviteRoleForm } from '../../../../../../components/roles/InviteRoleForm';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useInviteRoleMutation } from '../../../../../../hooks/mutations/useInviteRoleMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
@@ -64,7 +65,7 @@ const InviteRolePage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<FlexRowBetween>
-					<h3 className="text-xl font-medium md:text-2xl">Invite {role.name}</h3>
+					<Heading>Invite {role.name}</Heading>
 				</FlexRowBetween>
 
 				<p className="mb-2 text-base text-gray-700">

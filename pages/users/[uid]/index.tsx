@@ -18,6 +18,7 @@ import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
+import { Heading } from '../../../components/typography/Heading';
 import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getUser } from '../../api/users/[uid]';
@@ -80,9 +81,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 						</div>
 
 						<div>
-							<h1 className="mb-1.5 max-w-lg text-2xl font-bold leading-[1.1] tracking-tight md:text-3xl">
-								{user.name}
-							</h1>
+							<Heading>{user.name}</Heading>
 							<div className="flex flex-row flex-wrap items-center text-gray-600">
 								{user.location && (
 									<TooltipIcon

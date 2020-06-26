@@ -12,6 +12,7 @@ import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { PasswordResetForm } from '../../../components/password/PasswordResetForm';
+import { Heading } from '../../../components/typography/Heading';
 import { PASSWORD_RESET_EXPIRY } from '../../../config';
 import { usePasswordReset } from '../../../hooks/mutations/usePasswordReset';
 import { useUser } from '../../../hooks/queries/useUser';
@@ -41,7 +42,7 @@ const ResetPasswordPage: NextPage = () => {
 
 				<Column variant="halfWidth">
 					<div className="mb-3 flex flex-row justify-between">
-						<h1 className="text-2xl font-bold md:text-3xl">Reset Password</h1>
+						<Heading>Reset Password</Heading>
 					</div>
 
 					<p>
@@ -69,7 +70,7 @@ const ResetPasswordPage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="mb-3 flex flex-row justify-between">
-					<h1 className="text-2xl font-bold md:text-3xl">Reset Password</h1>
+					<Heading>Reset Password</Heading>
 				</div>
 
 				<PasswordResetForm passwordResetMutation={passwordResetMutation} code={String(code)} />

@@ -10,6 +10,7 @@ import { LoadingPage } from '../../components/error/LoadingPage';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
+import { Heading } from '../../components/typography/Heading';
 import { useSignInMutation } from '../../hooks/mutations/useSignInMutation';
 import { useUser } from '../../hooks/queries/useUser';
 import { ssrGetUser } from '../../utils/api';
@@ -68,7 +69,7 @@ const SignInPage: NextPage<Props> = (props) => {
 			<Column variant="halfWidth">
 				<div className="m-auto max-w-sm">
 					<div className="mb-3 flex flex-row justify-between">
-						<h1 className="text-2xl font-bold md:text-3xl">Sign in</h1>
+						<Heading>Sign in</Heading>
 					</div>
 
 					<SignInForm signInMutation={signInMutation} params={params.toString()} />

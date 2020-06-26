@@ -11,6 +11,7 @@ import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage'
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { EditVenueForm } from '../../../../../../components/venues/EditVenueForm';
 import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditVenueMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
@@ -62,7 +63,7 @@ const EditVenuePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl font-medium md:text-2xl">Edit Venue</h3>
+				<Heading>Edit Venue</Heading>
 
 				<EditVenueForm
 					eid={String(eid)}

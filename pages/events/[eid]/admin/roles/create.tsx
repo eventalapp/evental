@@ -11,6 +11,7 @@ import { EventSettingsNavigation } from '../../../../../components/events/settin
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { CreateRoleForm } from '../../../../../components/roles/CreateRoleForm';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useCreateRoleMutation } from '../../../../../hooks/mutations/useCreateRoleMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -51,7 +52,7 @@ const CreateRolePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="text-xl font-medium md:text-2xl">Create Role Page</h3>
+				<Heading>Create Role Page</Heading>
 
 				<CreateRoleForm eid={String(eid)} createRoleMutation={createRoleMutation} />
 			</Column>

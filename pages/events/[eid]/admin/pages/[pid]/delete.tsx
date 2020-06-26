@@ -12,6 +12,7 @@ import { EventSettingsNavigation } from '../../../../../../components/events/set
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { DeletePageForm } from '../../../../../../components/pages/DeletePageForm';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useDeletePageMutation } from '../../../../../../hooks/mutations/useDeletePageMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
@@ -66,7 +67,7 @@ const DeletePagePage: NextPage = () => {
 					You are about to delete an page ("{page.name}")
 				</p>
 
-				<h1 className="text-2xl font-bold md:text-3xl">Delete Page</h1>
+				<Heading>Delete Page</Heading>
 
 				<DeletePageForm
 					page={page}

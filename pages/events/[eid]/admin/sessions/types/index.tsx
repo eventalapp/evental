@@ -14,6 +14,7 @@ import Column from '../../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { SessionTypeList } from '../../../../../../components/sessions/SessionTypeList';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
@@ -62,7 +63,7 @@ const SessionTypesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl font-medium md:text-2xl">Session Types</h3>
+						<Heading>Session Types</Heading>
 
 						<IconLinkTooltip
 							message="Click to create a session type"

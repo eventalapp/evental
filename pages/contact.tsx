@@ -8,6 +8,7 @@ import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
+import { Heading } from '../components/typography/Heading';
 
 const ContactPage: NextPage = () => {
 	return (
@@ -36,7 +37,7 @@ const ContactPage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl font-bold md:text-3xl">Contact Us</h1>
+					<Heading>Contact Us</Heading>
 					<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
 						Have some suggestions or feedback? Questions about Evental? Just want to have a chat?
 						We'd love to hear from you.

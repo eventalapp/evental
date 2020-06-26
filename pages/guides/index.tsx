@@ -11,6 +11,7 @@ import { UnorderedIconLinkList } from '../../components/guides/UnorderedIconLink
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
+import { Heading } from '../../components/typography/Heading';
 
 const GuidesPage: NextPage = () => {
 	return (
@@ -37,7 +38,7 @@ const GuidesPage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl font-bold md:text-3xl">Support Guides</h1>
+					<Heading>Support Guides</Heading>
 					<p className="mt-4 text-base text-gray-100">
 						Need help getting started as an organizer, speaker or an attendee? Check out our guides.
 					</p>
@@ -45,7 +46,9 @@ const GuidesPage: NextPage = () => {
 			</div>
 
 			<Column>
-				<h2 className="mb-5 text-2xl font-bold md:text-3xl">Guides for Attendees & Speakers</h2>
+				<Heading level={2} className="mb-4">
+					Guides for Attendees & Speakers
+				</Heading>
 				<GuideCategoryCardWrapper className="mb-7 md:mb-14">
 					<GuideCategoryCard>
 						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Attendees</span>
@@ -93,7 +96,9 @@ const GuidesPage: NextPage = () => {
 					</GuideCategoryCard>
 				</GuideCategoryCardWrapper>
 
-				<h2 className="mb-5 text-2xl font-bold md:text-3xl">Guides for Organizers</h2>
+				<Heading level={2} className="mb-4">
+					Guides for Organizers
+				</Heading>
 				<GuideCategoryCardWrapper className="mb-7 md:mb-14">
 					<GuideCategoryCard>
 						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Sessions</span>

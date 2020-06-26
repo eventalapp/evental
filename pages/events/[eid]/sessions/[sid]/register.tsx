@@ -14,6 +14,7 @@ import { EventNavigation } from '../../../../../components/events/navigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { CreateSessionAttendeeForm } from '../../../../../components/sessions/CreateSessionAttendeeForm';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useCreateSessionAttendeeMutation } from '../../../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -129,7 +130,7 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column variant="halfWidth" className="space-y-5">
-				<h1 className="text-2xl font-medium md:text-3xl">Register for {session.name}</h1>
+				<Heading>Register for {session.name}</Heading>
 
 				<p className="text-gray-700">
 					To attend this session, please click the register button below.

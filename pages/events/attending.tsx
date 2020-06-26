@@ -14,6 +14,7 @@ import { EventsPageNavigation } from '../../components/events/EventsPageNavigati
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
+import { Heading } from '../../components/typography/Heading';
 import { useAttendingEventsQuery } from '../../hooks/queries/useAttendingEventsQuery';
 import { useUser } from '../../hooks/queries/useUser';
 import { ssrGetUser } from '../../utils/api';
@@ -72,7 +73,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 				<Navigation />
 
 				<Column>
-					<h1 className="mb-3 text-center text-2xl font-bold md:text-3xl">Attending Events</h1>
+					<Heading>Attending Events</Heading>
 
 					{user && <EventsPageNavigation />}
 

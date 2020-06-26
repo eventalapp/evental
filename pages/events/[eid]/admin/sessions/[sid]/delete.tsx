@@ -12,6 +12,7 @@ import { EventSettingsNavigation } from '../../../../../../components/events/set
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { DeleteSessionForm } from '../../../../../../components/sessions/DeleteSessionForm';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useDeleteSessionMutation } from '../../../../../../hooks/mutations/useDeleteSessionMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
@@ -66,7 +67,7 @@ const DeleteSessionPage: NextPage = () => {
 					You are about to delete an session ("{session.name}")
 				</p>
 
-				<h1 className="text-2xl font-bold md:text-3xl">Delete Session</h1>
+				<Heading>Delete Session</Heading>
 
 				<DeleteSessionForm
 					session={session}

@@ -14,6 +14,7 @@ import { EventNavigation } from '../../../../components/events/navigation';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { PageList } from '../../../../components/pages/PageList';
+import { Heading } from '../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
@@ -125,7 +126,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<h3 className="text-xl font-medium md:text-2xl">Pages</h3>
+				<Heading>Pages</Heading>
 
 				<PageList
 					eid={String(eid)}

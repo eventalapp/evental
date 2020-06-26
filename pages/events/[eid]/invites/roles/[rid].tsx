@@ -9,8 +9,10 @@ import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { Button } from '../../../../../components/form/Button';
 import Column from '../../../../../components/layout/Column';
+import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Navigation } from '../../../../../components/navigation';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useAcceptRoleInviteMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -62,9 +64,9 @@ const RoleInvitePage: NextPage = () => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<div className="mb-3 flex flex-row justify-between">
-					<h1 className="text-2xl font-bold md:text-3xl">Accept {role.name} Invite</h1>
-				</div>
+				<FlexRowBetween>
+					<Heading>Accept {role.name} Invite</Heading>
+				</FlexRowBetween>
 
 				<p className="mb-2 text-base text-gray-700">
 					Roles are used to separate users into different groups.

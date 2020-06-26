@@ -12,6 +12,7 @@ import { FlexRowBetween } from '../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { SessionWithEventList } from '../../../components/sessions/SessionWithEventList';
+import { Heading } from '../../../components/typography/Heading';
 import { useSessionsByUserQuery } from '../../../hooks/queries/useSessionsByUserQuery';
 import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
@@ -70,10 +71,10 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<FlexRowBetween>
-					<h3 className="mt-3 text-xl font-medium md:text-2xl">
+					<Heading>
 						{user.name}'s Schedule{' '}
 						<span className="font-normal text-gray-500">({sessionsByUserData.length || 0})</span>
-					</h3>
+					</Heading>
 
 					<Link href={`/api/users/${user.slug}/schedule/generate`}>
 						<a className="text-gray-600">Download Schedule (Excel)</a>

@@ -9,6 +9,7 @@ import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { RequestPasswordResetForm } from '../../../components/password/RequestPasswordResetForm';
+import { Heading } from '../../../components/typography/Heading';
 import { useRequestPasswordReset } from '../../../hooks/mutations/useRequestPasswordReset';
 import { useUser } from '../../../hooks/queries/useUser';
 
@@ -34,7 +35,7 @@ const RequestPasswordResetPage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="mb-3 flex flex-row justify-between">
-					<h1 className="text-2xl font-bold md:text-3xl">Request Password Reset</h1>
+					<Heading>Request Password Reset</Heading>
 				</div>
 
 				<RequestPasswordResetForm requestPasswordResetMutation={requestPasswordResetMutation} />

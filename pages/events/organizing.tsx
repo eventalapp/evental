@@ -14,6 +14,7 @@ import { EventsPageNavigation } from '../../components/events/EventsPageNavigati
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
+import { Heading } from '../../components/typography/Heading';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import { useOrganizingEventsQuery } from '../../hooks/queries/useOrganizingEventsQuery';
 import { useUser } from '../../hooks/queries/useUser';
@@ -74,7 +75,7 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 				<Navigation />
 
 				<Column>
-					<h1 className="mb-3 text-center text-2xl font-bold md:text-3xl">Organizing Events</h1>
+					<Heading>Organizing Events</Heading>
 
 					<EventsPageNavigation />
 

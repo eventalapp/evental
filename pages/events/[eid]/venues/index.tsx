@@ -14,6 +14,7 @@ import { EventNavigation } from '../../../../components/events/navigation';
 import Column from '../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../components/typography/Heading';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
@@ -133,7 +134,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 				)}
 
 				<FlexRowBetween>
-					<h3 className="text-xl font-medium md:text-2xl">Venues</h3>
+					<Heading>Venues</Heading>
 				</FlexRowBetween>
 
 				<VenueList

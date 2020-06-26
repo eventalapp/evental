@@ -12,6 +12,7 @@ import { EventNavigation } from '../../../../../components/events/navigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { SessionTypeList } from '../../../../../components/sessions/SessionTypeList';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
@@ -109,7 +110,7 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<div>
-					<h3 className="text-xl font-medium md:text-2xl">Session Types</h3>
+					<Heading>Session Types</Heading>
 
 					{sessionTypes && <SessionTypeList eid={String(eid)} sessionTypes={sessionTypes} />}
 				</div>

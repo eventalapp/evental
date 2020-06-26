@@ -9,8 +9,10 @@ import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { Button } from '../../../../components/form/Button';
 import Column from '../../../../components/layout/Column';
+import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { Navigation } from '../../../../components/navigation';
+import { Heading } from '../../../../components/typography/Heading';
 import { useAcceptOrganizerInviteMutation } from '../../../../hooks/mutations/useAcceptOrganizerInviteMutation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
@@ -49,9 +51,9 @@ const OrganizerInvitePage: NextPage = () => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<div className="mb-3 flex flex-row justify-between">
-					<h1 className="text-2xl font-bold md:text-3xl">Accept Organizer Invite</h1>
-				</div>
+				<FlexRowBetween>
+					<Heading>Accept Organizer Invite</Heading>
+				</FlexRowBetween>
 
 				<p className="mb-2 text-base text-gray-700">
 					As an organizer you will be able to create, edit, and delete sessions, venues, and roles.

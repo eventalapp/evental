@@ -14,6 +14,7 @@ import { EventSettingsNavigation } from '../../../../components/events/settingsN
 import { LinkButton } from '../../../../components/form/LinkButton';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../components/typography/Heading';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
@@ -58,7 +59,7 @@ const EditEventPage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl font-medium md:text-2xl">Settings</h3>
+				<Heading>Settings</Heading>
 
 				<EditEventForm
 					eid={String(eid)}

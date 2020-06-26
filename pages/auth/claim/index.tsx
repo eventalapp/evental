@@ -11,6 +11,7 @@ import { LinkButton } from '../../../components/form/LinkButton';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
+import { Heading } from '../../../components/typography/Heading';
 import { CLAIM_PROFILE_EXPIRY } from '../../../config';
 import { useClaimProfileMutation } from '../../../hooks/mutations/useClaimProfileMutation';
 import { useUser } from '../../../hooks/queries/useUser';
@@ -40,7 +41,7 @@ const ClaimProfilePage: NextPage = () => {
 
 				<Column variant="halfWidth">
 					<div className="mb-3 flex flex-row justify-between">
-						<h1 className="text-2xl font-bold md:text-3xl">Claim Profile</h1>
+						<Heading>Claim Profile</Heading>
 					</div>
 
 					<p>
@@ -66,7 +67,7 @@ const ClaimProfilePage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="mb-3 flex flex-row justify-between">
-					<h1 className="text-2xl font-bold md:text-3xl">Claim Profile</h1>
+					<Heading>Claim Profile</Heading>
 				</div>
 
 				<p>

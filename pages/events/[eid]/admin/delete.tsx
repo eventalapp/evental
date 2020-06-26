@@ -12,6 +12,7 @@ import { DeleteEventForm } from '../../../../components/events/DeleteEventForm';
 import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../components/typography/Heading';
 import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
@@ -60,7 +61,7 @@ const DeleteEventPage: NextPage = () => {
 					You are about to delete an event ("{event.name}")
 				</p>
 
-				<h1 className="text-2xl font-bold md:text-3xl">Delete Event</h1>
+				<Heading>Delete Event</Heading>
 
 				<DeleteEventForm
 					eventError={eventError}

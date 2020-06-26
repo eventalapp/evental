@@ -6,6 +6,7 @@ import { Footer } from '../components/Footer';
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
+import { Heading } from '../components/typography/Heading';
 
 const SuggestPage: NextPage = () => {
 	return (
@@ -32,7 +33,7 @@ const SuggestPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="flex flex-col items-center">
-				<h1 className="mb-2 text-2xl font-bold md:text-3xl">Suggest a feature</h1>
+				<Heading>Suggest a feature</Heading>
 				<iframe
 					title="Suggest a feature"
 					src="https://docs.google.com/forms/d/e/1FAIpQLSeXAr_Ij5eiYzGPl9v_rKVJgkoZq6m6jvLDStGoiq4SQGnSLQ/viewform?embedded=true"

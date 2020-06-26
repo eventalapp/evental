@@ -15,6 +15,7 @@ import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { TooltipIcon } from '../TooltipIcon';
+import { Heading } from '../typography/Heading';
 
 type Props = { eid: string; uid: string; admin?: boolean; attendee: AttendeeWithUser };
 
@@ -60,9 +61,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				</div>
 
 				<div>
-					<h1 className="mb-1.5 max-w-lg text-2xl font-bold leading-[1.1] tracking-tight md:text-3xl">
-						{attendee.user.name}
-					</h1>
+					<Heading>{attendee.user.name}</Heading>
 
 					<div className="flex flex-row flex-wrap items-center text-gray-600">
 						{attendee.role.name && (

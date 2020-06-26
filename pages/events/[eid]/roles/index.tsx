@@ -14,6 +14,7 @@ import { EventNavigation } from '../../../../components/events/navigation';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { RoleList } from '../../../../components/roles/RoleList';
+import { Heading } from '../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
@@ -124,7 +125,7 @@ const RolesPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<h3 className="text-xl font-medium md:text-2xl">Roles</h3>
+				<Heading>Roles</Heading>
 
 				<RoleList
 					eid={String(eid)}

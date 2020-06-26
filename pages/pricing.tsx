@@ -12,6 +12,7 @@ import { Navigation } from '../components/navigation';
 import { PricingAccordion } from '../components/radix/components/PricingAccordion';
 import Slider from '../components/radix/components/Slider';
 import Button from '../components/radix/components/shared/Button';
+import { Heading } from '../components/typography/Heading';
 import { eduAttendeePricing, proAttendeePricing } from '../utils/const';
 
 const PricingPage: NextPage = () => {
@@ -44,7 +45,7 @@ const PricingPage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl font-bold md:text-3xl">Single Event Plans &amp; Pricing</h1>
+					<Heading>Single Event Plans &amp; Pricing</Heading>
 					<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
 						View pricing for single event plans for standard and nonprofit or educational events.
 					</p>

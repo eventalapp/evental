@@ -12,6 +12,7 @@ import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage'
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useAdminDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useAdminDeleteAttendeeMutation';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
@@ -72,7 +73,7 @@ const DeleteAttendeePage: NextPage = () => {
 					You are about to delete an attendee ("{attendee.user.name}")
 				</p>
 
-				<h1 className="text-2xl font-bold md:text-3xl">Delete Attendee</h1>
+				<Heading>Delete Attendee</Heading>
 
 				<DeleteAttendeeForm
 					attendee={attendee}

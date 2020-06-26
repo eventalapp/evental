@@ -11,6 +11,7 @@ import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
 import { UserSettingsForm } from '../components/settings/UserSettingsForm';
+import { Heading } from '../components/typography/Heading';
 import { useEditUserMutation } from '../hooks/mutations/useEditUserMutation';
 import { useRequestVerificationEmail } from '../hooks/mutations/useRequestVerificationEmail';
 import { useUser } from '../hooks/queries/useUser';
@@ -67,7 +68,7 @@ const SettingsPage: NextPage<Props> = (props) => {
 					</button>
 				)}
 
-				<h1 className="text-2xl font-bold md:text-3xl">Settings</h1>
+				<Heading>Settings</Heading>
 
 				<UserSettingsForm
 					user={user}

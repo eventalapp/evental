@@ -8,6 +8,7 @@ import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { TooltipIcon } from '../TooltipIcon';
 import { SessionList } from '../sessions/SessionList';
+import { Heading } from '../typography/Heading';
 
 type Props = {
 	eid: string;
@@ -28,7 +29,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 		<div>
 			<div className="mb-3">
 				<div className="mb-1 flex flex-row justify-between items-center">
-					<h3 className="text-xl font-bold md:text-2xl">{venue.name}</h3>
+					<Heading>{venue.name}</Heading>
 
 					{admin && (
 						<div className="space-x-4">

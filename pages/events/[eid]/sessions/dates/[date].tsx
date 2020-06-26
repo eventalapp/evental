@@ -15,6 +15,7 @@ import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { SessionList } from '../../../../../components/sessions/SessionList';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
@@ -130,9 +131,9 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 
 			<Column>
 				<FlexRowBetween>
-					<h3 className="text-xl font-medium md:text-2xl">
+					<Heading>
 						{dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')}
-					</h3>
+					</Heading>
 				</FlexRowBetween>
 
 				<SessionList sessions={sessionsByDateData} eid={String(eid)} event={event} user={user} />

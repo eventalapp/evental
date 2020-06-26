@@ -14,6 +14,7 @@ import { EventSettingsNavigation } from '../../../../../components/events/settin
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useAttendeesQuery } from '../../../../../hooks/queries/useAttendeesQuery';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -67,10 +68,10 @@ const AttendeesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl font-medium md:text-2xl">
+						<Heading>
 							Attendees{' '}
 							<span className="font-normal text-gray-500">({attendeesData.length || 0})</span>
-						</h3>
+						</Heading>
 
 						<IconLinkTooltip
 							message="Click to create an attendee"
