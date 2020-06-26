@@ -9,6 +9,7 @@ import { AspectImage } from '../components/guides/AspectImage';
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
+import { Heading } from '../components/typography/Heading';
 
 const HomePage: NextPage = () => {
 	return (
@@ -76,8 +77,8 @@ const HomePage: NextPage = () => {
 
 			<div className="bg-primary-600 text-white">
 				<Column>
-					<h3 className="text-xl font-bold md:text-2xl">Creating events couldn't be easier</h3>
-					<p className="mt-1 text-base text-gray-100 md:text-lg">
+					<Heading level={3}>Creating events couldn't be easier</Heading>
+					<p className="mt-3 text-base text-gray-100 md:text-lg">
 						In 3 quick steps, you can get your event up and running
 					</p>
 					<div className="mt-6 grid grid-cols-1 gap-5 border-t-2 border-primary-500 pt-6 lg:grid-cols-2 xl:grid-cols-3">
@@ -113,7 +114,7 @@ const HomePage: NextPage = () => {
 			<Column>
 				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 					<div className="flex flex-col justify-center">
-						<h3 className="text-xl font-bold md:text-2xl">Organizer experience</h3>
+						<Heading level={3}>Organizer experience</Heading>
 						<p className="mt-3 text-gray-700">
 							The Evental admin dashboard has been made with simplicity and ease-of-use in mind.
 						</p>
@@ -141,7 +142,7 @@ const HomePage: NextPage = () => {
 						<div className="h-72 rounded-md bg-gray-200" />
 					</div>
 					<div className="flex flex-col justify-center">
-						<h3 className="text-xl font-bold md:text-2xl">Attendee experience</h3>
+						<Heading level={3}>Attendee experience</Heading>
 						<p className="mt-3 text-gray-700">
 							Allow attendees to easily attendee sessions, view venues, and learn more information
 							about your event.
@@ -164,7 +165,7 @@ const HomePage: NextPage = () => {
 			<Column>
 				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 					<div className="flex flex-col justify-center">
-						<h3 className="text-xl font-bold md:text-2xl">Speaker experience</h3>
+						<Heading level={3}>Speaker experience</Heading>
 						<p className="mt-3 text-gray-700">
 							Speakers can easily create and manage their user profile and sessions
 						</p>
