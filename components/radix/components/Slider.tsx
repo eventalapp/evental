@@ -25,7 +25,7 @@ const Slider = (props: Props) => {
 				onChange?.(value[0]);
 			}}
 			aria-label="value"
-			className="relative flex h-5 w-96 touch-none items-center"
+			className="relative flex h-5 w-80 touch-none items-center"
 		>
 			<SliderPrimitive.Track className="relative h-1 w-full grow rounded-full bg-gray-200 dark:bg-gray-800">
 				<SliderPrimitive.Range className="absolute h-full rounded-full bg-primary-500 dark:bg-white" />
