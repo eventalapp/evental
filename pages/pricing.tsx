@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { EventalProCard } from '../components/EventalProCard';
 import { Footer } from '../components/Footer';
 import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
@@ -13,7 +14,7 @@ import { PricingAccordion } from '../components/radix/components/PricingAccordio
 import Slider from '../components/radix/components/Slider';
 import Button from '../components/radix/components/shared/Button';
 import { Heading } from '../components/typography/Heading';
-import { eduAttendeePricing, priceAfterSale, proAttendeePricing, sale } from '../utils/const';
+import { proAttendeePricing } from '../utils/const';
 
 const PricingPage: NextPage = () => {
 	const { control, watch } = useForm({ defaultValues: { attendees: 250 } });
@@ -72,75 +73,11 @@ const PricingPage: NextPage = () => {
 					</Button>
 				</div>
 
-				<div className="my-3 flex min-h-[350px] max-w-[450px] flex-col items-center justify-between space-y-4 rounded border border-gray-300 bg-white p-5 shadow-sm">
-					<div className="flex flex-row items-center">
-						<strong
-							className="mr-2 font-display text-2xl font-bold tracking-tight"
-							aria-label="evental homepage"
-						>
-							Evental
-						</strong>
-						<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">
-							{isEducation ? 'EDU' : 'PRO'}
-						</span>
-					</div>
-
-					<p className="text-gray-700">
-						The {isEducation ? 'education/non-profit' : 'pro'} plan allows event organizers to
-						create unlimited roles, sessions, venues, and pages. It also allows you to invite
-						additional organizers to help you manage your event.
-					</p>
-
-					<div>
-						<p className="text-center text-2xl font-bold md:text-3xl flex flex-row items-start justify-center">
-							<span className="mr-0.5 align-text-top text-lg text-gray-700">$</span>
-							<span className="mr-2">
-								{isEducation
-									? priceAfterSale(eduAttendeePricing[attendees].price)
-									: priceAfterSale(proAttendeePricing[attendees].price)}
-							</span>
-
-							{sale.percentage > 0 && (
-								<span className="text-tiny bg-green-400 text-white p-1 rounded-md">
-									{sale.percentage}% OFF
-								</span>
-							)}
-							{sale.flatAmount > 0 && (
-								<span className="text-tiny bg-green-400 text-white p-1 rounded-md">
-									${sale.flatAmount} OFF
-								</span>
-							)}
-						</p>
-						<p className="text-center text-sm text-gray-600">
-							Includes {attendees} attendees (
-							{isEducation
-								? priceAfterSale(eduAttendeePricing[attendees].price) / attendees < 1
-									? `${Math.ceil(
-											(priceAfterSale(eduAttendeePricing[attendees].price) / attendees) * 100
-									  )}¢`
-									: `$${(priceAfterSale(eduAttendeePricing[attendees].price) / attendees).toFixed(
-											2
-									  )}`
-								: priceAfterSale(proAttendeePricing[attendees].price) / attendees < 1
-								? `${Math.ceil(
-										(priceAfterSale(proAttendeePricing[attendees].price) / attendees) * 100
-								  )}¢`
-								: `$${(priceAfterSale(proAttendeePricing[attendees].price) / attendees).toFixed(
-										2
-								  )}`}
-							/per)
-						</p>
-					</div>
-
+				<EventalProCard attendees={attendees} isEducation={isEducation}>
 					<Link href="/events/create">
 						<LinkButton>Start Free Trial</LinkButton>
 					</Link>
-					<Link href="/contact">
-						<a className="text-sm text-gray-500">
-							Need help? <span className="text-gray-800 underline">Contact us</span>
-						</a>
-					</Link>
-				</div>
+				</EventalProCard>
 
 				<div className="mt-4 flex flex-col items-center space-y-3">
 					<p className="text-lg font-medium">How many attendees are you expecting?</p>
@@ -450,4 +387,3 @@ const PricingPage: NextPage = () => {
 };
 
 export default PricingPage;
-
