@@ -35,6 +35,11 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 					toast.error('Something went wrong. Please try again.');
 				}
 
+				if (response.status === 200) {
+					toast.success('Your event has been upgraded');
+					return;
+				}
+
 				const { error } = await stripe!.redirectToCheckout({
 					sessionId: response.data.data.id
 				});
@@ -123,3 +128,4 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 		</form>
 	);
 };
+
