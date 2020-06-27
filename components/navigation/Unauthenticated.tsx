@@ -79,12 +79,21 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 						</button>
 						<FullscreenLinkItem
 							index={0}
+							link={`/auth/signin`}
+							label={'Sign In'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={0}
 							link={`/events/`}
 							label={'Events'}
 							onClick={() => {
 								setIsOpen(false);
 							}}
 						/>
+
 						<FullscreenLinkItem
 							index={1}
 							link={`/pricing`}
@@ -123,3 +132,4 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 		</div>
 	);
 };
+
