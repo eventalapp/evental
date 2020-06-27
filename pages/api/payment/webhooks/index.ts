@@ -65,7 +65,6 @@ const handler = api({
 			}
 
 			if (eventFound && eventId && attendees && level) {
-				console.log('Updating event');
 				await prisma.event.update({
 					where: {
 						id: eventFound.id
