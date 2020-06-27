@@ -6,9 +6,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { CURRENCY } from '../../config';
-import { proAttendeePricing } from '../../utils/const';
 import { proAttendeesToPrice } from '../../utils/price';
 import { formatAmountForDisplay } from '../../utils/stripeHelpers';
+import { EventalProCard } from '../EventalProCard';
 import { Button } from '../form/Button';
 import Slider from '../radix/components/Slider';
 
@@ -26,6 +26,7 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit(async (data) => {
+				console.log(data.attendees);
 				const response = await axios.post('/api/payment/sessions', {
 					attendees: data.attendees,
 					eventId: data.eid
@@ -35,13 +36,13 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 					toast.error('Something went wrong. Please try again.');
 				}
 
-				if (response.status === 200) {
+				if (response.status === 200 && response?.data?.data?.upgraded) {
 					toast.success('Your event has been upgraded');
 					return;
 				}
 
 				const { error } = await stripe!.redirectToCheckout({
-					sessionId: response.data.data.id
+					sessionId: response?.data?.data?.id
 				});
 
 				if (error) {
@@ -50,48 +51,13 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 			})}
 		>
 			<div className="flex flex-col items-center">
-				<div className="my-3 flex min-h-[350px] max-w-[450px] flex-col items-center justify-between space-y-4 rounded border border-gray-300 bg-white p-5 shadow-sm">
-					<div className="flex flex-row items-center">
-						<strong
-							className="mr-2 font-display text-2xl font-bold tracking-tight"
-							aria-label="evental homepage"
-						>
-							Evental
-						</strong>
-						<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">PRO</span>
-					</div>
-
-					<p className="text-gray-700">
-						The pro plan allows event organizers to create unlimited roles, sessions, venues, and
-						pages. It also allows you to invite additional organizers to help you manage your event.
-					</p>
-
-					<div>
-						<p className="text-center text-2xl font-bold md:text-3xl">
-							<span className="mr-0.5 align-text-top text-lg text-gray-700">$</span>
-							{proAttendeePricing[attendees].price}
-						</p>
-						<p className="text-center text-sm text-gray-600">
-							Includes {attendees} attendees (
-							{proAttendeePricing[attendees].perAttendeePrice < 1
-								? `${Math.ceil(proAttendeePricing[attendees].perAttendeePrice * 100)}¢`
-								: `$${proAttendeePricing[attendees].perAttendeePrice.toFixed(2)}`}
-							/per)
-						</p>
-					</div>
-
+				<EventalProCard attendees={attendees}>
 					<div className="flex flex-row justify-end">
 						<Button type="submit">
 							Purchase ({formatAmountForDisplay(proAttendeesToPrice(attendees), CURRENCY)})
 						</Button>
 					</div>
-
-					<Link href="/contact">
-						<a className="text-sm text-gray-500">
-							Need help? <span className="text-gray-800 underline">Contact us</span>
-						</a>
-					</Link>
-				</div>
+				</EventalProCard>
 
 				<div className="mt-4 flex flex-col items-center space-y-3">
 					<p className="text-lg font-medium">How many attendees are you expecting?</p>
@@ -128,4 +94,3 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 		</form>
 	);
 };
-
