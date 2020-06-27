@@ -1,11 +1,14 @@
+import { EventLevel } from '@prisma/client';
 import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
 
 import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
 import { api } from '../../../../utils/api';
-import { proAttendeePricing } from '../../../../utils/const';
+import { proAttendeePricing, sale } from '../../../../utils/const';
 import { PurchaseProSchema } from '../../../../utils/schemas';
 import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
+import { getEvent } from '../../events/[eid]';
+import { prisma } from './../../../../prisma/client';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	// https://github.com/stripe/stripe-node#configuration
@@ -23,6 +26,42 @@ export default api({
 
 		if (!(product.price >= MIN_AMOUNT && product.price <= MAX_AMOUNT)) {
 			throw new NextkitError(400, 'Invalid amount.');
+		}
+
+		let finalPrice = product.price;
+
+		if (sale.flatAmount > 0) {
+			finalPrice -= sale.flatAmount;
+		}
+
+		if (sale.percentage > 0) {
+			finalPrice *= 1 - sale.percentage / 100;
+		}
+
+		if (finalPrice <= 1) {
+			const eventFound = await getEvent(String(body.eventId));
+
+			if (!eventFound) {
+				console.error('Event not found');
+				throw new NextkitError(500, 'An error has occurred. Please email support@evental.app');
+			}
+
+			if (eventFound && body.eventId) {
+				console.log('Updating event');
+				await prisma.event.update({
+					where: {
+						id: eventFound.id
+					},
+					data: {
+						level: EventLevel[product.level as keyof typeof EventLevel] ?? EventLevel.PRO,
+						maxAttendees: Number(product.attendees) ?? 250
+					}
+				});
+
+				return;
+			} else {
+				throw new NextkitError(500, 'An error has occurred. Please email support@evental.app');
+			}
 		}
 
 		const params: Stripe.Checkout.SessionCreateParams = {
@@ -48,7 +87,7 @@ export default api({
 							name: product.name,
 							description: product.description
 						},
-						unit_amount: formatAmountForStripe(product.price, CURRENCY),
+						unit_amount: formatAmountForStripe(finalPrice, CURRENCY),
 						currency: CURRENCY
 					}
 				}
@@ -59,3 +98,4 @@ export default api({
 		return checkoutSession;
 	}
 });
+
