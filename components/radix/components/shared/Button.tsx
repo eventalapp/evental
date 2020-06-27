@@ -10,7 +10,7 @@ export const variants = {
 	secondary: 'duration-50 transition bg-secondary-500 text-white',
 	gradient: 'duration-50 transition bg-gradient-to-r from-secondary-500 to-primary-500 text-white',
 	default:
-		'duration-50 transition focus-visible:ring-primary-500 border-gray-300 bg-white text-gray-800 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-900'
+		'duration-50 transition focus-visible:ring-primary-500 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-900'
 };
 
 export const paddings = {
@@ -37,7 +37,7 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(
 			ref={ref}
 			{...props}
 			className={cx(
-				'inline-flex select-none items-center justify-center rounded-md border text-sm font-medium',
+				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium',
 				'duration-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring focus-visible:ring-opacity-75',
 				// Register all radix states
 				'group',
