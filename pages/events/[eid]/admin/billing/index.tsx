@@ -67,7 +67,7 @@ const EventBillingPage: NextPage = () => {
 					</Column>
 				</div>
 
-				<Column className="flex flex-col items-center">
+				<Column>
 					<PurchaseProPlan eid={String(eid)} />
 				</Column>
 			</PageWrapper>
