@@ -77,7 +77,7 @@ const EventsPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<h1 className="mb-3 text-center text-2xl font-bold md:text-3xl">Upcoming Events</h1>
+				<Heading className="text-center mb-4">Upcoming Events</Heading>
 
 				{user && <EventsPageNavigation />}
 
