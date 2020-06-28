@@ -14,17 +14,13 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../components/typography/Heading';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
-import { useUser } from '../../../../hooks/queries/useUser';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { attendeesData } = useAttendeesQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
-	const { user } = useUser();
-	const { isAttendee } = useIsAttendeeQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
 	if (eventError) {
@@ -67,13 +63,7 @@ const ViewAttendeePage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
-				<EventHeader
-					adminLink={'/attendees'}
-					event={event}
-					isOrganizer={isOrganizer}
-					isAttendee={isAttendee}
-					user={user}
-				/>
+				<EventHeader adminLink={'/attendees'} eid={String(eid)} />
 
 				<Heading>
 					Attendees{' '}

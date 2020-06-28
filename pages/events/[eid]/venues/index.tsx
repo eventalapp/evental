@@ -14,20 +14,15 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../components/typography/Heading';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
-import { useUser } from '../../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 
 const SessionsPage: NextPage = () => {
 	const router = useRouter();
-
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { venues } = useVenuesQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
-	const { user } = useUser();
-	const { isAttendee } = useIsAttendeeQuery(String(eid));
 
 	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
@@ -69,13 +64,7 @@ const SessionsPage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
-				<EventHeader
-					adminLink={'/venues'}
-					event={event}
-					isOrganizer={isOrganizer}
-					isAttendee={isAttendee}
-					user={user}
-				/>
+				<EventHeader adminLink={'/venues'} eid={String(eid)} />
 
 				<FlexRowBetween>
 					<Heading>Venues</Heading>

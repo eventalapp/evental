@@ -13,20 +13,15 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { RoleList } from '../../../../components/roles/RoleList';
 import { Heading } from '../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
-import { useUser } from '../../../../hooks/queries/useUser';
 
 const RolesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
-	const { user } = useUser();
-	const { isAttendee } = useIsAttendeeQuery(String(eid));
 
 	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
@@ -68,13 +63,7 @@ const RolesPage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
-				<EventHeader
-					adminLink={'/roles'}
-					event={event}
-					isOrganizer={isOrganizer}
-					isAttendee={isAttendee}
-					user={user}
-				/>
+				<EventHeader adminLink={'/roles'} eid={String(eid)} />
 
 				<Heading>Roles</Heading>
 

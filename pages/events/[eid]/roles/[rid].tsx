@@ -13,10 +13,8 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { ViewRole } from '../../../../components/roles/ViewRole';
 import { useAttendeesByRoleQuery } from '../../../../hooks/queries/useAttendeesByRoleQuery';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { useRoleQuery } from '../../../../hooks/queries/useRoleAttendeesQuery';
-import { useUser } from '../../../../hooks/queries/useUser';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -24,8 +22,6 @@ const ViewAttendeePage: NextPage = () => {
 	const { role, roleError } = useRoleQuery(String(eid), String(rid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
-	const { user } = useUser();
-	const { isAttendee } = useIsAttendeeQuery(String(eid));
 	const { attendeesData } = useAttendeesByRoleQuery(String(eid), String(rid));
 
 	if (roleError) {
@@ -72,13 +68,7 @@ const ViewAttendeePage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
-				<EventHeader
-					adminLink={`/roles/${rid}`}
-					event={event}
-					isOrganizer={isOrganizer}
-					isAttendee={isAttendee}
-					user={user}
-				/>
+				<EventHeader adminLink={`/roles/${rid}`} eid={String(eid)} />
 
 				<ViewRole attendees={attendeesData} eid={String(eid)} rid={String(rid)} role={role} />
 			</Column>

@@ -12,7 +12,6 @@ import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { SessionList } from '../../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
@@ -20,12 +19,10 @@ import { useUser } from '../../../../hooks/queries/useUser';
 const SessionsPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-
 	const { sessionsData } = useSessionsQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
 	const { user } = useUser();
-	const { isAttendee } = useIsAttendeeQuery(String(eid));
 
 	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
@@ -67,13 +64,7 @@ const SessionsPage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
-				<EventHeader
-					adminLink={'/sessions'}
-					event={event}
-					isOrganizer={isOrganizer}
-					isAttendee={isAttendee}
-					user={user}
-				/>
+				<EventHeader adminLink={'/sessions'} eid={String(eid)} />
 
 				<SessionList sessions={sessionsData} eid={String(eid)} event={event} user={user} />
 			</Column>

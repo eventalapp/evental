@@ -14,10 +14,8 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { PageList } from '../../../../components/pages/PageList';
 import { Heading } from '../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
-import { useUser } from '../../../../hooks/queries/useUser';
 
 const SessionsPage: NextPage = () => {
 	const router = useRouter();
@@ -25,8 +23,6 @@ const SessionsPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { pages, pagesError } = usePagesQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
-	const { user } = useUser();
-	const { isAttendee } = useIsAttendeeQuery(String(eid));
 
 	if (pagesError) {
 		return <ViewErrorPage errors={[pagesError]} />;
@@ -72,13 +68,7 @@ const SessionsPage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
-				<EventHeader
-					adminLink={'/pages'}
-					event={event}
-					isOrganizer={isOrganizer}
-					isAttendee={isAttendee}
-					user={user}
-				/>
+				<EventHeader adminLink={'/pages'} eid={String(eid)} />
 
 				<Heading>Pages</Heading>
 

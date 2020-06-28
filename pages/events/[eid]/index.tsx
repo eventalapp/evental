@@ -20,7 +20,6 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import Tooltip from '../../../components/radix/components/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
-import { useIsAttendeeQuery } from '../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
@@ -32,7 +31,6 @@ const ViewEventPage: NextPage = () => {
 	const { eid } = router.query;
 	const { user } = useUser();
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { isAttendee } = useIsAttendeeQuery(String(eid));
 	const { sessionsData } = useSessionsQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
 	const { venues } = useVenuesQuery(String(eid));
@@ -95,13 +93,7 @@ const ViewEventPage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
-				<EventHeader
-					event={event}
-					adminLink={'/sessions'}
-					isOrganizer={isOrganizer}
-					isAttendee={isAttendee}
-					user={user}
-				/>
+				<EventHeader adminLink={'/sessions'} eid={String(eid)} />
 
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-12 lg:col-span-9">
