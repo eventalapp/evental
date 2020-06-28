@@ -1,15 +1,12 @@
-import Prisma from '@prisma/client';
-import Color from 'color';
 import { formatInTimeZone } from 'date-fns-tz';
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Skeleton from 'react-loading-skeleton';
 
 import { Footer } from '../../../components/Footer';
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
-import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
 import { EventNavigation } from '../../../components/events/navigation';
@@ -22,44 +19,15 @@ import { Heading } from '../../../components/typography/Heading';
 import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
-import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
-import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../hooks/queries/useUser';
-import { ssrGetUser } from '../../../utils/api';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
-import { getEvent } from '../../api/events/[eid]';
-import { getIsOrganizer } from '../../api/events/[eid]/organizer';
-import { getPages } from '../../api/events/[eid]/pages';
-import { getRoles } from '../../api/events/[eid]/roles';
 
-type Props = {
-	initialUser: PasswordlessUser | undefined;
-	initialEvent: Prisma.Event | undefined;
-	initialOrganizer: boolean;
-	initialRoles: Prisma.EventRole[] | undefined;
-	initialPages: Prisma.EventPage[] | undefined;
-};
-
-const EventRegisterPage: NextPage<Props> = (props) => {
-	const { initialUser, initialEvent, initialOrganizer, initialPages, initialRoles } = props;
+const EventRegisterPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
-	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
-		initialData: initialPages
-	});
-	const { roles, isRolesLoading } = useRolesQuery(String(eid), initialRoles);
-	const { user } = useUser(initialUser);
-
-	if (isEventLoading || isOrganizerLoading || isRolesLoading || isPagesLoading) {
-		return <LoadingPage />;
-	}
-
-	if (!event) {
-		return <NotFoundPage />;
-	}
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { user } = useUser();
 
 	if (!user?.id) {
 		let params = new URLSearchParams();
@@ -68,6 +36,89 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 
 		return (
 			<PageWrapper>
+				{event && (
+					<NextSeo
+						title={`Register for ${event.name} — Evental`}
+						description={`Fill out the form below to register for ${
+							event.name
+						} taking place from ${formatInTimeZone(
+							event.startDate,
+							event.timeZone,
+							'MMMM do'
+						)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`}
+						additionalLinkTags={[
+							{
+								rel: 'icon',
+								href: `https://cdn.evental.app${event.image}`
+							}
+						]}
+						openGraph={{
+							url: `https://evental.app/events/${event.slug}/register`,
+							title: `Register for ${event.name} — Evental`,
+							description: `Fill out the form below to register for ${
+								event.name
+							} taking place from ${formatInTimeZone(
+								event.startDate,
+								event.timeZone,
+								'MMMM do'
+							)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`,
+							images: [
+								{
+									url: `https://cdn.evental.app${event.image}`,
+									width: 300,
+									height: 300,
+									alt: `${event.name} Logo Alt`,
+									type: 'image/jpeg'
+								}
+							]
+						}}
+					/>
+				)}
+
+				<Navigation />
+
+				<Column variant="halfWidth">
+					<div className="space-y-5">
+						<Heading>Create an account</Heading>
+						<p className="text-gray-700">
+							To register for this event, please{' '}
+							<Link href={`/auth/signup?${params}`}>
+								<a className="text-gray-900 underline">create an account</a>
+							</Link>{' '}
+							or{' '}
+							<Link href={`/auth/signin?${params}`}>
+								<a className="text-gray-900 underline">sign in</a>
+							</Link>{' '}
+							with your existing account.
+						</p>
+						<div className="flex flex-row justify-end">
+							<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
+								Cancel
+							</Button>
+
+							<Link href={`/auth/signin?${params}`} passHref>
+								<LinkButton padding="large">Sign in</LinkButton>
+							</Link>
+						</div>
+					</div>
+				</Column>
+
+				<Footer color={event?.color} />
+			</PageWrapper>
+		);
+	}
+
+	if (!event && !isEventLoading) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
+	if (event && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {
+		return <PrivatePage />;
+	}
+
+	return (
+		<PageWrapper>
+			{event && (
 				<NextSeo
 					title={`Register for ${event.name} — Evental`}
 					description={`Fill out the form below to register for ${
@@ -104,98 +155,14 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 						]
 					}}
 				/>
+			)}
 
-				<Navigation />
-
-				<Column variant="halfWidth">
-					<div className="space-y-5">
-						<Heading>Create an account</Heading>
-						<p className="text-gray-700">
-							To register for this event, please{' '}
-							<Link href={`/auth/signup?${params}`}>
-								<a className="text-gray-900 underline">create an account</a>
-							</Link>{' '}
-							or{' '}
-							<Link href={`/auth/signin?${params}`}>
-								<a className="text-gray-900 underline">sign in</a>
-							</Link>{' '}
-							with your existing account.
-						</p>
-						<div className="flex flex-row justify-end">
-							<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
-								Cancel
-							</Button>
-							<Link href={`/auth/signin?${params}`} passHref>
-								<LinkButton
-									padding="large"
-									style={{
-										backgroundColor: event.color,
-										color: Color(event.color).isLight() ? '#000' : '#FFF'
-									}}
-								>
-									Sign in
-								</LinkButton>
-							</Link>
-						</div>
-					</div>
-				</Column>
-
-				<Footer color={event.color} />
-			</PageWrapper>
-		);
-	}
-
-	if (!event) {
-		return <NotFoundPage message="Event not found." />;
-	}
-
-	if (event.privacy === 'PRIVATE' && !isOrganizer) {
-		return <PrivatePage />;
-	}
-
-	return (
-		<PageWrapper>
-			<NextSeo
-				title={`Register for ${event.name} — Evental`}
-				description={`Fill out the form below to register for ${
-					event.name
-				} taking place from ${formatInTimeZone(
-					event.startDate,
-					event.timeZone,
-					'MMMM do'
-				)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`}
-				additionalLinkTags={[
-					{
-						rel: 'icon',
-						href: `https://cdn.evental.app${event.image}`
-					}
-				]}
-				openGraph={{
-					url: `https://evental.app/events/${event.slug}/register`,
-					title: `Register for ${event.name} — Evental`,
-					description: `Fill out the form below to register for ${
-						event.name
-					} taking place from ${formatInTimeZone(
-						event.startDate,
-						event.timeZone,
-						'MMMM do'
-					)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`,
-					images: [
-						{
-							url: `https://cdn.evental.app${event.image}`,
-							width: 300,
-							height: 300,
-							alt: `${event.name} Logo Alt`,
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
-
-			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
+			<EventNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth" className="space-y-5">
-				<Heading>Register for {event.name}</Heading>
+				<Heading>
+					{event ? `Register for ${event.name}` : <Skeleton className="w-full max-w-xl" />}
+				</Heading>
 
 				<p className="text-gray-700">
 					To attend this event, please click the register button below.
@@ -209,29 +176,9 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 				/>
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialEvent = (await getEvent(String(eid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialPages = (await getPages(String(eid))) ?? undefined;
-
-	return {
-		props: {
-			initialUser,
-			initialEvent,
-			initialOrganizer,
-			initialPages,
-			initialRoles
-		}
-	};
 };
 
 export default EventRegisterPage;

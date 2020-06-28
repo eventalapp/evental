@@ -25,9 +25,9 @@ const VenuesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
+	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
 	const { user, isUserLoading } = useUser();
-	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { event, eventError, isEventLoading } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
 	if (isVenuesLoading || isUserLoading || isEventLoading || isOrganizerLoading || isRolesLoading) {
@@ -42,7 +42,7 @@ const VenuesAdminPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -68,17 +68,11 @@ const VenuesAdminPage: NextPage = () => {
 						/>
 					</FlexRowBetween>
 
-					<VenueList
-						admin
-						eid={String(eid)}
-						venues={venues}
-						isVenuesLoading={isVenuesLoading}
-						venuesError={venuesError}
-					/>
+					<VenueList admin eid={String(eid)} venues={venues} />
 				</div>
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

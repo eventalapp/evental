@@ -84,7 +84,7 @@ const CreateSessionPage: NextPage = () => {
 				/>
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

@@ -72,7 +72,7 @@ const EventBillingPage: NextPage = () => {
 				</Column>
 			</PageWrapper>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</Elements>
 	);
 };

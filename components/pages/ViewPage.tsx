@@ -3,6 +3,7 @@ import Prisma from '@prisma/client';
 import { formatDistance } from 'date-fns';
 import parse from 'html-react-parser';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
@@ -11,22 +12,24 @@ import { Heading } from '../typography/Heading';
 type Props = {
 	eid: string;
 	pid: string;
-	page: Prisma.EventPage;
+	page?: Prisma.EventPage;
 	admin?: boolean;
 };
 
 export const ViewPage: React.FC<Props> = (props) => {
 	const { page, pid, eid, admin = false } = props;
 
-	if (!page) return null;
-
 	return (
 		<div>
 			<FlexRowBetween>
 				<div>
-					<Heading>{page.name}</Heading>
+					<Heading>{page ? page.name : <Skeleton className="w-full max-w-2xl" />}</Heading>
 					<span className="block text-sm text-gray-600">
-						Updated {formatDistance(new Date(page.updatedAt), new Date(), { addSuffix: true })}
+						{page ? (
+							`Updated ${formatDistance(new Date(page.updatedAt), new Date(), { addSuffix: true })}`
+						) : (
+							<Skeleton className="w-40" />
+						)}
 					</span>
 				</div>
 
@@ -50,10 +53,14 @@ export const ViewPage: React.FC<Props> = (props) => {
 				)}
 			</FlexRowBetween>
 
-			{page.body && (
-				<div className="prose mt-1 focus:outline-none prose-a:text-primary">
-					{parse(String(page.body))}
-				</div>
+			{page ? (
+				page.body && (
+					<div className="prose mt-1 focus:outline-none prose-a:text-primary">
+						{parse(String(page.body))}
+					</div>
+				)
+			) : (
+				<Skeleton className="w-full" count={20} />
 			)}
 		</div>
 	);

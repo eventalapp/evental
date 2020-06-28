@@ -25,7 +25,7 @@ const PagesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { pages, isPagesLoading, pagesError } = usePagesQuery(String(eid));
+	const { pages } = usePagesQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { event, isEventLoading } = useEventQuery(String(eid));
@@ -74,17 +74,11 @@ const PagesAdminPage: NextPage = () => {
 						/>
 					</FlexRowBetween>
 
-					<PageList
-						admin
-						eid={String(eid)}
-						pages={pages}
-						isPagesLoading={isPagesLoading}
-						pagesError={pagesError}
-					/>
+					<PageList admin eid={String(eid)} pages={pages} />
 				</div>
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

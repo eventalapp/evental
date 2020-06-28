@@ -9,11 +9,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
-import { CalendarEvent } from 'calendar-link';
 import dayjs from 'dayjs';
 import parse from 'html-react-parser';
 import { htmlToText } from 'html-to-text';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { faCalendarCirclePlus } from '../../icons';
@@ -24,7 +24,7 @@ import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPasswor
 import { AddToCalendar } from '../AddToCalendar';
 import { IconButtonTooltip } from '../IconButtonTooltip';
 import { IconLinkTooltip } from '../IconLinkTooltip';
-import { TooltipIcon } from '../TooltipIcon';
+import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { LeaveSessionDialog } from '../radix/components/LeaveSessionDialog';
@@ -35,13 +35,13 @@ import { Heading } from '../typography/Heading';
 type Props = {
 	eid: string;
 	sid: string;
-	isAttending: boolean;
-	roleAttendees: AttendeeWithUser[] | undefined;
-	attendees: AttendeeWithUser[] | undefined;
-	session: SessionWithVenue;
+	isAttending?: boolean;
+	roleAttendees?: AttendeeWithUser[] | undefined;
+	attendees?: AttendeeWithUser[] | undefined;
+	session?: SessionWithVenue;
 	admin?: boolean;
-	event: Prisma.Event;
-	user: PasswordlessUser | undefined;
+	event?: Prisma.Event;
+	user?: PasswordlessUser | undefined;
 };
 
 export const ViewSession: React.FC<Props> = (props) => {
@@ -63,23 +63,10 @@ export const ViewSession: React.FC<Props> = (props) => {
 		{ redirectUrl: `/events/${eid}/sessions/${sid}` }
 	);
 
-	if (!session) return null;
-
-	const SESSION_CALENDAR_EVENT: CalendarEvent = {
-		title: session.name,
-		description: htmlToText(session.description || 'No description'),
-		location: session?.venue?.address || event.location || session?.venue?.name,
-		end: new Date(session.endDate).toISOString(),
-		start: new Date(session.startDate).toISOString(),
-		url: `${
-			process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-		}/events/${eid}/sessions/${sid}`,
-		guests: attendees?.map((attendee) => attendee.user.name) ?? undefined
-	};
-
 	return (
 		<div>
 			{!isAttending &&
+				session &&
 				session.maxAttendees !== null &&
 				session.attendeeCount >= session.maxAttendees && (
 					<div className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
@@ -88,27 +75,47 @@ export const ViewSession: React.FC<Props> = (props) => {
 				)}
 
 			<FlexRowBetween variant="noWrapStart">
-				<Heading>{session.name}</Heading>
+				<Heading>{session ? session.name : <Skeleton className="w-full max-w-xl" />}</Heading>
 
 				<div className="flex flex-row items-center">
-					<ShareSessionDropdown event={event} session={session}>
-						<div className="ml-4 flex items-center">
-							<Tooltip side={'top'} message={'Share this session'}>
-								<button type="button" className="h-5 w-5 text-gray-600">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="h-5 w-5"
-										size="1x"
-										icon={faShare}
-									/>
-								</button>
-							</Tooltip>
-						</div>
-					</ShareSessionDropdown>
+					{event && session ? (
+						<ShareSessionDropdown event={event} session={session}>
+							<div className="ml-4 flex items-center">
+								<Tooltip side={'top'} message={'Share this session'}>
+									<button type="button" className="h-5 w-5 text-gray-600">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-5 w-5"
+											size="1x"
+											icon={faShare}
+										/>
+									</button>
+								</Tooltip>
+							</div>
+						</ShareSessionDropdown>
+					) : (
+						<Skeleton className="w-5 h-5 ml-4" />
+					)}
 
-					{user && isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
+					{user && session && event && isAttending && !admin ? (
+						<AddToCalendar
+							event={{
+								title: session.name,
+								description: htmlToText(session.description || 'No description'),
+								location: session?.venue?.address || event.location || session?.venue?.name,
+								end: new Date(session.endDate).toISOString(),
+								start: new Date(session.startDate).toISOString(),
+								url: `${
+									process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+								}/events/${eid}/sessions/${sid}`,
+								guests: attendees?.map((attendee) => attendee.user.name) ?? undefined
+							}}
+						/>
+					) : (
+						<Skeleton className="w-5 h-5 ml-4" />
+					)}
 
-					{user && Boolean(isAttending) && (
+					{user && Boolean(isAttending) && event && session ? (
 						<LeaveSessionDialog
 							eventSlug={event.slug}
 							sessionSlug={session.slug}
@@ -127,9 +134,11 @@ export const ViewSession: React.FC<Props> = (props) => {
 								</Tooltip>
 							</div>
 						</LeaveSessionDialog>
+					) : (
+						<Skeleton className="w-5 h-5 ml-4" />
 					)}
 
-					{user && !isAttending && !admin && (
+					{user && !isAttending && !admin ? (
 						<IconButtonTooltip
 							message="Click to add this session to your schedule"
 							side="top"
@@ -141,6 +150,8 @@ export const ViewSession: React.FC<Props> = (props) => {
 								createSessionAttendeeMutation.mutate();
 							}}
 						/>
+					) : (
+						<Skeleton className="w-5 h-5 ml-4" />
 					)}
 					{admin && (
 						<IconLinkTooltip
@@ -179,26 +190,34 @@ export const ViewSession: React.FC<Props> = (props) => {
 						/>
 					)}
 
-					<TooltipIcon
-						icon={faCalendarDay}
-						tooltipMessage={`This is session is taking place on ${formatDateRange(
-							new Date(session.startDate),
-							new Date(session.endDate)
-						)}.`}
-						link={`/events/${eid}/sessions/dates/${dayjs(session.startDate).format('YYYY-MM-DD')}`}
-						label={formatDateRange(new Date(session.startDate), new Date(session.endDate))}
-					/>
+					{session ? (
+						<TooltipIcon
+							icon={faCalendarDay}
+							tooltipMessage={`This is session is taking place on ${formatDateRange(
+								new Date(session.startDate),
+								new Date(session.endDate)
+							)}.`}
+							link={`/events/${eid}/sessions/dates/${dayjs(session.startDate).format(
+								'YYYY-MM-DD'
+							)}`}
+							label={formatDateRange(new Date(session.startDate), new Date(session.endDate))}
+						/>
+					) : (
+						<TooltipIconSkeleton />
+					)}
 
-					{session?.venue?.name && (
+					{session && session.venue?.name ? (
 						<TooltipIcon
 							icon={faLocationDot}
-							link={`/events/${event.slug}/venues/${session.venue.slug}`}
+							link={`/events/${eid}/venues/${session.venue.slug}`}
 							tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
 							label={session?.venue?.name}
 						/>
+					) : (
+						<TooltipIconSkeleton />
 					)}
 
-					{session?.maxAttendees !== null && (
+					{session && session?.maxAttendees !== null ? (
 						<TooltipIcon
 							icon={faUserGroup}
 							tooltipMessage={`This sessions is currently ${Math.ceil(
@@ -206,14 +225,18 @@ export const ViewSession: React.FC<Props> = (props) => {
 							)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
 							label={`${Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full`}
 						/>
+					) : (
+						<TooltipIconSkeleton />
 					)}
 				</div>
 			</div>
 
-			{session.description && (
+			{session && session.description ? (
 				<div className="prose mt-1 focus:outline-none prose-a:text-primary">
 					{parse(String(session.description))}
 				</div>
+			) : (
+				<Skeleton className="w-full" count={5} />
 			)}
 
 			{roleAttendees &&
@@ -231,7 +254,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				Attendees <span className="font-normal text-gray-500">({attendees?.length || 0})</span>
 			</h3>
 
-			{attendees && <AttendeeList admin={admin} eid={eid} attendees={attendees} tiny />}
+			<AttendeeList admin={admin} eid={eid} attendees={attendees} tiny />
 		</div>
 	);
 };

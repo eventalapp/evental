@@ -57,7 +57,7 @@ const MessagePage: NextPage = () => {
 				<Heading>Messages</Heading>
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

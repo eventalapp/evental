@@ -21,7 +21,7 @@ import Skeleton from 'react-loading-skeleton';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { TooltipIcon } from '../TooltipIcon';
+import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
 import { CreateAttendeeDialog } from '../radix/components/CreateAttendeeDialog';
 import LeaveEventDialog from '../radix/components/LeaveEventDialog';
 import { ShareEventDropdown } from '../radix/components/ShareEventDropdown';
@@ -143,7 +143,7 @@ export const EventHeader: React.FC<{
 							</Link>
 						</div>
 					) : (
-						<Skeleton className="mr-3 h-16 w-16 rounded-md md:h-20 md:w-20 inline-block" />
+						<Skeleton className="mr-3 h-16 w-16 rounded-md shrink-0 md:h-20 md:w-20 md:mr-5 inline-block" />
 					)}
 
 					<div className="-mb-1 w-full">
@@ -161,10 +161,7 @@ export const EventHeader: React.FC<{
 									/>
 								)
 							) : (
-								<>
-									<Skeleton className="mr-1.5 h-4 w-4" />
-									<Skeleton className="mr-1.5 h-4 w-28" />
-								</>
+								<TooltipIconSkeleton />
 							)}
 
 							{event ? (
@@ -182,10 +179,7 @@ export const EventHeader: React.FC<{
 									})}
 								/>
 							) : (
-								<>
-									<Skeleton className="mr-1.5 h-4 w-4" />
-									<Skeleton className="mr-1.5 h-4 w-28" />
-								</>
+								<TooltipIconSkeleton />
 							)}
 
 							{event ? (
@@ -198,10 +192,7 @@ export const EventHeader: React.FC<{
 									label={event.timeZone.replace(/_/g, ' ')}
 								/>
 							) : (
-								<>
-									<Skeleton className="mr-1.5 h-4 w-4" />
-									<Skeleton className="mr-1.5 h-4 w-28" />
-								</>
+								<TooltipIconSkeleton />
 							)}
 
 							{event ? (
@@ -214,10 +205,7 @@ export const EventHeader: React.FC<{
 									/>
 								)
 							) : (
-								<>
-									<Skeleton className="mr-1.5 h-4 w-4" />
-									<Skeleton className="mr-1.5 h-4 w-28" />
-								</>
+								<TooltipIconSkeleton />
 							)}
 
 							{event ? (
@@ -230,10 +218,7 @@ export const EventHeader: React.FC<{
 									/>
 								)
 							) : (
-								<>
-									<Skeleton className="mr-1.5 h-4 w-4" />
-									<Skeleton className="mr-1.5 h-4 w-28" />
-								</>
+								<TooltipIconSkeleton />
 							)}
 
 							{event && event?.type && event.type === 'HYBRID' && (

@@ -4,8 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import Tooltip from './radix/components/Tooltip';
+
+export const TooltipIconSkeleton: React.FC = () => {
+	return (
+		<>
+			<Skeleton className="mr-1.5 h-4 w-4" />
+			<Skeleton className="mr-1.5 h-4 w-28" />
+		</>
+	);
+};
 
 export const TooltipIcon: React.FC<{
 	icon?: IconDefinition;
