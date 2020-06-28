@@ -1,0 +1,19 @@
+{
+  "functions": {
+    "pages/api/auth": {
+      "maxDuration": 30
+    },
+    "pages/api/{events,users}": {
+      "maxDuration": 30
+    },
+    "pages/api/payment": {
+      "maxDuration": 30
+    },
+    "pages/api/{support,upload,demo}": {
+      "maxDuration": 30
+    },
+    "pages/events": {
+      "maxDuration": 30
+    }
+  }
+}
