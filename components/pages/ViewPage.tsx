@@ -62,7 +62,7 @@ export const ViewPage: React.FC<Props> = (props) => {
 					</div>
 				)
 			) : (
-				<Skeleton className="w-full" count={20} />
+				<Skeleton className="w-full mb-2 h-5" count={10} />
 			)}
 		</div>
 	);
