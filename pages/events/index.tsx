@@ -1,13 +1,10 @@
-import type Prisma from '@prisma/client';
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 
 import { Footer } from '../../components/Footer';
-import { LoadingPage } from '../../components/error/LoadingPage';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
-import { ViewErrorPage } from '../../components/error/ViewErrorPage';
 import { EventList } from '../../components/events/EventList';
 import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
 import Column from '../../components/layout/Column';
@@ -16,56 +13,42 @@ import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/typography/Heading';
 import { useUpcomingEventsQuery } from '../../hooks/queries/useUpcomingEventsQuery';
 import { useUser } from '../../hooks/queries/useUser';
-import { ssrGetUser } from '../../utils/api';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { getUpcomingEvents } from '../api/events';
 
-type Props = {
-	initialUser: PasswordlessUser | undefined;
-	initialUpcomingEvents: Prisma.Event[];
-};
-
-const EventsPage: NextPage<Props> = (props) => {
-	const { initialUpcomingEvents, initialUser } = props;
-	const { upcomingEvents, upcomingEventsError, isUpcomingEventsLoading } =
-		useUpcomingEventsQuery(initialUpcomingEvents);
-	const { user } = useUser(initialUser);
-
-	if (isUpcomingEventsLoading) {
-		return <LoadingPage />;
-	}
+const EventsPage: NextPage = () => {
+	const { upcomingEvents, upcomingEventsError } = useUpcomingEventsQuery();
+	const { user } = useUser();
 
 	if (upcomingEventsError) {
-		return <ViewErrorPage errors={[upcomingEventsError]} />;
-	}
-
-	if (!upcomingEvents) {
 		return <NotFoundPage message="No Upcoming Events" />;
 	}
 
-	if (upcomingEvents.length === 0) {
+	const Seo = (
+		<NextSeo
+			title="Upcoming Events — Evental"
+			description="View all of the public upcoming events on evental.app."
+			canonical="https://evental.app/events"
+			openGraph={{
+				url: 'https://evental.app/events',
+				title: 'Upcoming Events',
+				description: 'View all of the public upcoming events on evental.app.',
+				images: [
+					{
+						url: 'https://cdn.evental.app/images/logo.jpg',
+						width: 800,
+						height: 600,
+						alt: 'Evental Logo Alt',
+						type: 'image/jpeg'
+					}
+				],
+				site_name: 'Evental'
+			}}
+		/>
+	);
+
+	if (upcomingEvents && upcomingEvents.length === 0) {
 		return (
 			<PageWrapper>
-				<NextSeo
-					title="Upcoming Events — Evental"
-					description="View all of the public upcoming events on evental.app."
-					canonical="https://evental.app/events"
-					openGraph={{
-						url: 'https://evental.app/events',
-						title: 'Upcoming Events',
-						description: 'View all of the public upcoming events on evental.app.',
-						images: [
-							{
-								url: 'https://cdn.evental.app/images/logo.jpg',
-								width: 800,
-								height: 600,
-								alt: 'Evental Logo Alt',
-								type: 'image/jpeg'
-							}
-						],
-						site_name: 'Evental'
-					}}
-				/>
+				{Seo}
 
 				<Navigation />
 
@@ -89,24 +72,7 @@ const EventsPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper>
-			<NextSeo
-				title="Upcoming Events — Evental"
-				description="View all of the public upcoming events on evental.app."
-				openGraph={{
-					url: 'https://evental.app/events',
-					title: 'Upcoming Events',
-					description: 'View all of the public upcoming events on evental.app.',
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
+			{Seo}
 
 			<Navigation />
 
@@ -121,15 +87,6 @@ const EventsPage: NextPage<Props> = (props) => {
 			<Footer />
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialUpcomingEvents = await getUpcomingEvents();
-
-	return {
-		props: { initialUpcomingEvents, initialUser }
-	};
 };
 
 export default EventsPage;
