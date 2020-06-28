@@ -5,18 +5,18 @@ import { default as classNames } from 'classnames';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useSignOutMutation } from '../../../hooks/mutations/useSignOutMutation';
-import { useEventQuery } from '../../../hooks/queries/useEventQuery';
-import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
-import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
-import { useUser } from '../../../hooks/queries/useUser';
-import { faBarsSquare } from '../../../icons';
-import { capitalizeFirstLetter } from '../../../utils/string';
-import { FullscreenLinkItem } from '../../navigation/FullscreenLinkItem';
-import { LinkItem } from '../../navigation/LinkItem';
-import { LogoLinkItem } from '../../navigation/LogoLinkItem';
-import { NavigationWrapper } from '../../navigation/NavigationWrapper';
-import { ProfileDropdown } from '../../radix/components/ProfileDropdown';
+import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
+import { useEventQuery } from '../../hooks/queries/useEventQuery';
+import { usePagesQuery } from '../../hooks/queries/usePagesQuery';
+import { useRolesQuery } from '../../hooks/queries/useRolesQuery';
+import { useUser } from '../../hooks/queries/useUser';
+import { faBarsSquare } from '../../icons';
+import { capitalizeFirstLetter } from '../../utils/string';
+import { FullscreenLinkItem } from '../navigation/FullscreenLinkItem';
+import { LinkItem } from '../navigation/LinkItem';
+import { LogoLinkItem } from '../navigation/LogoLinkItem';
+import { NavigationWrapper } from '../navigation/NavigationWrapper';
+import { ProfileDropdown } from '../radix/components/ProfileDropdown';
 
 type Props = {
 	eid: string;
@@ -106,8 +106,12 @@ export const EventNavigation: React.FC<Props> = (props) => {
 
 						<div className="hidden h-full flex-row justify-end lg:flex">
 							<div className="flex flex-row items-end">
-								{user === undefined && (
-									<LinkItem link={`/auth/signin`} label={'Sign in'} color={event?.color} />
+								{isUserLoading ? (
+									<Skeleton className="w-20 h-7 mb-2 mx-2" />
+								) : (
+									user === undefined && (
+										<LinkItem link={`/auth/signin`} label={'Sign in'} color={event?.color} />
+									)
 								)}
 							</div>
 							<div className="flex flex-row items-center">
