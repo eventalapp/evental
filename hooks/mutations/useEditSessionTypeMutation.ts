@@ -29,7 +29,7 @@ export const useEditSessionTypeMutation = (
 		async (data) => {
 			return await axios
 				.put<SuccessAPIResponse<Prisma.EventSessionType>>(
-					`/api/events/${eid}/admin/sessions/types/${tid}/edit`,
+					`/api/events/${eid}/admin/sessions/types/${tid}`,
 					data
 				)
 				.then((res) => res.data.data);

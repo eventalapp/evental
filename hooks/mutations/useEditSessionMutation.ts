@@ -26,7 +26,7 @@ export const useEditSessionMutation = (eid: string, sid: string): UseEditSession
 		async (data) => {
 			return await axios
 				.put<SuccessAPIResponse<Prisma.EventSession>>(
-					`/api/events/${eid}/admin/sessions/${sid}/edit`,
+					`/api/events/${eid}/admin/sessions/${sid}`,
 					data
 				)
 				.then((res) => res.data.data);

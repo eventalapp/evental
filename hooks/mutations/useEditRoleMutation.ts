@@ -25,10 +25,7 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 	>(
 		async (data) => {
 			return await axios
-				.put<SuccessAPIResponse<Prisma.EventRole>>(
-					`/api/events/${eid}/admin/roles/${rid}/edit`,
-					data
-				)
+				.put<SuccessAPIResponse<Prisma.EventRole>>(`/api/events/${eid}/admin/roles/${rid}`, data)
 				.then((res) => res.data.data);
 		},
 		{

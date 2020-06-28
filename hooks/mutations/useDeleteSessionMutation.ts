@@ -17,7 +17,7 @@ export const useDeleteSessionMutation = (
 	const deleteSessionMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/sessions/${sid}/delete`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/sessions/${sid}`)
 				.then((res) => res.data.data);
 		},
 		{

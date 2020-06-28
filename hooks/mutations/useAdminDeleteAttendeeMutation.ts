@@ -25,7 +25,7 @@ export const useAdminDeleteAttendeeMutation = (
 	>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/attendees/${uid}/delete`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/attendees/${uid}`)
 				.then((res) => res.data.data);
 		},
 		{

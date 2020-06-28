@@ -21,7 +21,7 @@ export const useDeleteSessionTypeMutation = (
 	>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/sessions/types/${tid}/delete`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/sessions/types/${tid}`)
 				.then((res) => res.data.data);
 		},
 		{

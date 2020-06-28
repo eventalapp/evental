@@ -25,10 +25,7 @@ export const useEditVenueMutation = (eid: string, vid: string): UseEditVenueMuta
 	>(
 		async (data) => {
 			return await axios
-				.put<SuccessAPIResponse<Prisma.EventVenue>>(
-					`/api/events/${eid}/admin/venues/${vid}/edit`,
-					data
-				)
+				.put<SuccessAPIResponse<Prisma.EventVenue>>(`/api/events/${eid}/admin/venues/${vid}`, data)
 				.then((res) => res.data.data);
 		},
 		{
