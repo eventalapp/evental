@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
@@ -16,6 +17,16 @@ type Props = {
 	logo?: string;
 };
 
+const FreeEventalPro = (
+	<div className="w-full bg-green-500">
+		<Link href={`/pricing`}>
+			<a className="m-auto block py-1 text-center text-sm text-white">
+				Upgrade your event to PRO for free! Click to learn more
+			</a>
+		</Link>
+	</div>
+);
+
 export const Navigation: React.FC<Props> = (props) => {
 	const { className, ...restProps } = props;
 	const [isOpen, setIsOpen] = useState(false);
@@ -24,15 +35,23 @@ export const Navigation: React.FC<Props> = (props) => {
 
 	if (user) {
 		return (
-			<Authenticated
-				signOutMutation={signOutMutation}
-				user={user}
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-				{...restProps}
-			/>
+			<>
+				{FreeEventalPro}
+				<Authenticated
+					signOutMutation={signOutMutation}
+					user={user}
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					{...restProps}
+				/>
+			</>
 		);
 	}
 
-	return <Unauthenticated isOpen={isOpen} setIsOpen={setIsOpen} {...restProps} />;
+	return (
+		<>
+			{FreeEventalPro}
+			<Unauthenticated isOpen={isOpen} setIsOpen={setIsOpen} {...restProps} />
+		</>
+	);
 };
