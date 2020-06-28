@@ -15,7 +15,7 @@ import Skeleton from 'react-loading-skeleton';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
-import { TooltipIcon, TooltipIconSkeleton } from "../TooltipIcon";
+import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
 import { Heading } from '../typography/Heading';
 
 type Props = { eid: string; uid: string; admin?: boolean; attendee?: AttendeeWithUser };
@@ -78,7 +78,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 								/>
 							)
 						) : (
-							<TooltipIconSkeleton/>
+							<TooltipIconSkeleton />
 						)}
 
 						{attendee ? (
@@ -90,7 +90,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 								/>
 							)
 						) : (
-							<TooltipIconSkeleton/>
+							<TooltipIconSkeleton />
 						)}
 
 						{attendee ? (
@@ -102,7 +102,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 								/>
 							)
 						) : (
-							<TooltipIconSkeleton/>
+							<TooltipIconSkeleton />
 						)}
 
 						{attendee ? (
@@ -118,7 +118,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 								/>
 							)
 						) : (
-							<TooltipIconSkeleton/>
+							<TooltipIconSkeleton />
 						)}
 
 						{attendee ? (
@@ -131,7 +131,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 								/>
 							)
 						) : (
-							<TooltipIconSkeleton/>
+							<TooltipIconSkeleton />
 						)}
 					</div>
 				</div>
