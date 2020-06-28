@@ -29,11 +29,11 @@ export const ViewRole: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween>
-				<Heading>
+				<Heading className="w-full">
 					{role ? (
 						`${capitalizeFirstLetter(role.name.toLowerCase())}s`
 					) : (
-						<Skeleton className="w-full" />
+						<Skeleton className="w-full max-w-2xl" />
 					)}
 				</Heading>
 
