@@ -24,7 +24,7 @@ type Props = {
 };
 
 export const EventNavigation: React.FC<Props> = (props) => {
-	const { roles, event, user, pages, ...restProps } = props;
+	const { roles, event, user, pages } = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const { signOutMutation } = useSignOutMutation();
 
@@ -65,7 +65,11 @@ export const EventNavigation: React.FC<Props> = (props) => {
 										/>
 									))
 								) : (
-									<Skeleton className="w-20 h-7 mb-2 mx-2" />
+									<>
+										<Skeleton className="w-20 h-7 mb-2 mx-2" />
+										<Skeleton className="w-20 h-7 mb-2 mx-2" />
+										<Skeleton className="w-20 h-7 mb-2 mx-2" />
+									</>
 								)}
 
 								{event && pages ? (
