@@ -116,9 +116,11 @@ export const EventNavigation: React.FC<Props> = (props) => {
 							</div>
 							<div className="flex flex-row items-center">
 								{user ? (
-									<ProfileDropdown user={user} signOutMutation={signOutMutation} />
+									<NavigationMenuPrimitive.Item className="flex">
+										<ProfileDropdown user={user} signOutMutation={signOutMutation} />
+									</NavigationMenuPrimitive.Item>
 								) : (
-									isUserLoading && <Skeleton className="h-10 w-10" />
+									isUserLoading && <Skeleton className="h-10 w-10" containerClassName="flex" />
 								)}
 							</div>
 						</div>
@@ -137,7 +139,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 						{user ? (
 							<ProfileDropdown user={user} signOutMutation={signOutMutation} />
 						) : (
-							<Skeleton className="h-10 w-10" />
+							isUserLoading && <Skeleton className="h-10 w-10" />
 						)}
 					</div>
 
@@ -149,20 +151,22 @@ export const EventNavigation: React.FC<Props> = (props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mb-3 h-5 w-5 cursor-pointer"
+								className="mb-3 h-8 w-8 cursor-pointer"
 								size="2x"
 								icon={faXmark}
 							/>
 						</button>
 
-						<FullscreenLinkItem
-							index={0}
-							link={`/ath/signin`}
-							label={'Sign In'}
-							onClick={() => {
-								setIsOpen(false);
-							}}
-						/>
+						{!user && !isUserLoading && (
+							<FullscreenLinkItem
+								index={0}
+								link={`/auth/signin`}
+								label={'Sign In'}
+								onClick={() => {
+									setIsOpen(false);
+								}}
+							/>
+						)}
 
 						{event ? (
 							<FullscreenLinkItem
