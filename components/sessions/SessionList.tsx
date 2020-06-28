@@ -4,6 +4,7 @@ import Prisma from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { sessionListReducer } from '../../utils/reducer';
@@ -15,8 +16,8 @@ import { SessionListHourItem } from './SessionListHourItem';
 type Props = {
 	eid: string;
 	admin?: boolean;
-	sessions: SessionWithVenue[];
-	event: Prisma.Event;
+	sessions?: SessionWithVenue[];
+	event?: Prisma.Event;
 	user: PasswordlessUser | undefined;
 };
 
@@ -24,16 +25,16 @@ export const SessionList: React.FC<Props> = (props) => {
 	const { eid, sessions, event, admin = false, user } = props;
 	const [showPastEvents, setShowPastEvents] = useState(false);
 
+	const previousSessions = sessions?.filter((session) =>
+		dayjs(session.endDate).isBefore(new Date())
+	);
+	const upcomingSessions = sessions?.filter((session) =>
+		dayjs(session.endDate).isAfter(new Date())
+	);
+
 	if (sessions && sessions?.length === 0) {
 		return <NotFound message="No sessions found." />;
 	}
-
-	if (!sessions) return null;
-
-	const previousSessions = sessions.filter((session) =>
-		dayjs(session.endDate).isBefore(new Date())
-	);
-	const upcomingSessions = sessions.filter((session) => dayjs(session.endDate).isAfter(new Date()));
 
 	return (
 		<div className="relative min-h-[25px]">
@@ -53,7 +54,7 @@ export const SessionList: React.FC<Props> = (props) => {
 				</button>
 			)}
 
-			{previousSessions && previousSessions.length >= 1 && (
+			{previousSessions && event && previousSessions.length >= 1 && (
 				<div
 					className={classNames(
 						'overflow-hidden transition-all',
@@ -88,33 +89,49 @@ export const SessionList: React.FC<Props> = (props) => {
 				</div>
 			)}
 
-			{showPastEvents && upcomingSessions.length >= 1 && (
+			{showPastEvents && upcomingSessions && upcomingSessions.length >= 1 && (
 				<HorizontalTextRule text="Upcoming Sessions" />
 			)}
 
-			{Object.entries(upcomingSessions.reduce(sessionListReducer, {})).map(([date, hourObject]) => {
-				return (
-					<div key={date}>
-						<p className="inline-block pb-0.5 text-xl text-gray-700">
-							<span className="font-medium text-gray-900">{dayjs(date).format('dddd')}</span>,{' '}
-							{dayjs(date).format('MMMM D')}
-						</p>
-						{Object.entries(hourObject).map(([hour, sessions]) => {
+			{upcomingSessions && upcomingSessions.length >= 1 && event
+				? Object.entries(upcomingSessions.reduce(sessionListReducer, {})).map(
+						([date, hourObject]) => {
 							return (
-								<SessionListHourItem
-									key={hour}
-									eid={String(eid)}
-									sessions={sessions}
-									admin={admin}
-									event={event}
-									user={user}
-									hour={hour}
-								/>
+								<div key={date}>
+									<p className="inline-block pb-0.5 text-xl text-gray-700">
+										<span className="font-medium text-gray-900">{dayjs(date).format('dddd')}</span>,{' '}
+										{dayjs(date).format('MMMM D')}
+									</p>
+									{Object.entries(hourObject).map(([hour, sessions]) => {
+										return (
+											<SessionListHourItem
+												key={hour}
+												eid={String(eid)}
+												sessions={sessions}
+												admin={admin}
+												event={event}
+												user={user}
+												hour={hour}
+											/>
+										);
+									})}
+								</div>
 							);
-						})}
-					</div>
-				);
-			})}
+						}
+				  )
+				: Array.apply(null, Array(5)).map((_, i) => (
+						<div className="mb-4">
+							<Skeleton className="w-48 mb-2 h-5" key={i} />
+							<div className="flex flex-row mb-3">
+								<Skeleton className="w-24 mr-5 h-6" />
+								<div className="w-full flex-row flex">
+									<Skeleton className="w-48 mr-3 h-6 mb-2" />
+									<Skeleton className="w-48 mr-3 h-6 mb-2" />
+									<Skeleton className="w-48 mr-3 h-6 mb-2" />
+								</div>
+							</div>
+						</div>
+				  ))}
 		</div>
 	);
 };

@@ -127,7 +127,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					<EventHeader
 						adminLink={'/attendees'}
 						event={event}
-						eid={String(eid)}
 						isOrganizer={isOrganizer}
 						isAttendee={isAttendee}
 						user={user}

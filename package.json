@@ -94,6 +94,7 @@
 		"react-dom": "17.0.2",
 		"react-dropzone": "^14.1.1",
 		"react-hook-form": "^7.30.0",
+		"react-loading-skeleton": "^3.1.0",
 		"react-query": "^3.35.0",
 		"react-select": "^5.3.2",
 		"react-toastify": "^8.2.0",
@@ -154,4 +155,3 @@
 		"*.js": "eslint --cache --fix"
 	}
 }
-
