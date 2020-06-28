@@ -1,10 +1,9 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { LoadingPage } from '../../../components/error/LoadingPage';
 import { LoadingSpinner } from '../../../components/error/LoadingSpinner';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
 import Column from '../../../components/layout/Column';
@@ -12,16 +11,9 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { useVerifyEmail } from '../../../hooks/mutations/useVerifyAccount';
 import { useUser } from '../../../hooks/queries/useUser';
-import { ssrGetUser } from '../../../utils/api';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
 
-type Props = {
-	initialUser: PasswordlessUser | undefined;
-};
-
-const VerifyEmailPage: NextPage<Props> = (props) => {
-	const { initialUser } = props;
-	const { user, isUserLoading } = useUser(initialUser);
+const VerifyEmailPage: NextPage = () => {
+	const { user } = useUser();
 	const router = useRouter();
 	const { verifyEmailMutation } = useVerifyEmail();
 	const { code } = router.query;
@@ -71,10 +63,6 @@ const VerifyEmailPage: NextPage<Props> = (props) => {
 		);
 	}
 
-	if (isUserLoading) {
-		return <LoadingPage />;
-	}
-
 	return (
 		<PageWrapper>
 			<NextSeo
@@ -115,16 +103,6 @@ const VerifyEmailPage: NextPage<Props> = (props) => {
 			<Footer />
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-
-	return {
-		props: {
-			initialUser
-		}
-	};
 };
 
 export default VerifyEmailPage;

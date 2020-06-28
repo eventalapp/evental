@@ -13,8 +13,8 @@ import { SessionHoverCard } from '../radix/components/SessionHoverCard';
 
 type Props = {
 	admin?: boolean;
-	sessions: SessionWithVenueEvent[];
-	user: PasswordlessUser | undefined;
+	sessions?: SessionWithVenueEvent[];
+	user?: PasswordlessUser | undefined;
 };
 
 export const SessionWithEventList: React.FC<Props> = (props) => {
@@ -26,6 +26,7 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 	}
 
 	if (!sessions) return null;
+	// TODO: Componetize this and impl react skeleton
 
 	const previousSessions = sessions.filter((session) =>
 		dayjs(session.endDate).isBefore(new Date())

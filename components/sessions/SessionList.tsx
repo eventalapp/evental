@@ -120,7 +120,17 @@ export const SessionList: React.FC<Props> = (props) => {
 						}
 				  )
 				: Array.apply(null, Array(5)).map((_, i) => (
-						<Skeleton className="w-full h-12 mb-4" key={i} />
+						<div className="mb-4" key={i}>
+							<Skeleton className="w-48 mb-2 h-5" />
+							<div className="flex flex-row mb-3">
+								<Skeleton className="w-24 mr-5 h-6" />
+								<div className="w-full flex-row flex flex-wrap">
+									<Skeleton className="w-48 mr-3 h-6 mb-2" />
+									<Skeleton className="w-48 mr-3 h-6 mb-2" />
+									<Skeleton className="w-48 mr-3 h-6 mb-2" />
+								</div>
+							</div>
+						</div>
 				  ))}
 		</div>
 	);
