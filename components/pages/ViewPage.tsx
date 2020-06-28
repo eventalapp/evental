@@ -23,12 +23,14 @@ export const ViewPage: React.FC<Props> = (props) => {
 		<div>
 			<FlexRowBetween>
 				<div>
-					<Heading>{page ? page.name : <Skeleton className="w-full max-w-2xl" />}</Heading>
+					<Heading className="mb-2">
+						{page ? page.name : <Skeleton className="w-full max-w-2xl" />}
+					</Heading>
 					<span className="block text-sm text-gray-600">
 						{page ? (
 							`Updated ${formatDistance(new Date(page.updatedAt), new Date(), { addSuffix: true })}`
 						) : (
-							<Skeleton className="w-40" />
+							<Skeleton className="w-52" />
 						)}
 					</span>
 				</div>
