@@ -199,7 +199,7 @@ export const EventHeader: React.FC<{
 							)}
 
 							{event ? (
-								event?.type &&
+								event.type &&
 								event.type === 'IN_PERSON' && (
 									<TooltipIcon
 										icon={faPerson}
@@ -212,7 +212,7 @@ export const EventHeader: React.FC<{
 							)}
 
 							{event ? (
-								event?.type &&
+								event.type &&
 								event.type === 'HYBRID' && (
 									<TooltipIcon
 										icon={faStreetView}
@@ -224,20 +224,17 @@ export const EventHeader: React.FC<{
 								<TooltipIconSkeleton />
 							)}
 
-							{event && event?.type && event.type === 'HYBRID' && (
-								<TooltipIcon
-									icon={faStreetView}
-									tooltipMessage={`This is event is taking place virtually & in person.`}
-									label={capitalizeOnlyFirstLetter(event?.type)}
-								/>
-							)}
-
-							{event && event?.type && event.type === 'VIRTUAL' && (
-								<TooltipIcon
-									icon={faHeadset}
-									tooltipMessage={`This is event is taking place virtually.`}
-									label={capitalizeOnlyFirstLetter(event?.type)}
-								/>
+							{event ? (
+								event.type &&
+								event.type === 'VIRTUAL' && (
+									<TooltipIcon
+										icon={faHeadset}
+										tooltipMessage={`This is event is taking place virtually.`}
+										label={capitalizeOnlyFirstLetter(event?.type)}
+									/>
+								)
+							) : (
+								<TooltipIconSkeleton />
 							)}
 
 							{event && event.website && (
