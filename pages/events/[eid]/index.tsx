@@ -125,7 +125,7 @@ const ViewEventPage: NextPage = () => {
 
 						<div className="mb-4">
 							<span className="mb-1 block font-medium">
-								{sessionTypes ? (
+								{event && sessionTypes ? (
 									sessionTypes.length > 0 && 'Filter by Type'
 								) : (
 									<Skeleton className="w-3/4" />
@@ -174,7 +174,11 @@ const ViewEventPage: NextPage = () => {
 
 						<div className="mb-4">
 							<span className="mb-1 block font-medium">
-								{venues ? venues.length > 0 && 'Filter by Venue' : <Skeleton className="w-3/4" />}
+								{event && venues ? (
+									venues.length > 0 && 'Filter by Venue'
+								) : (
+									<Skeleton className="w-3/4" />
+								)}
 							</span>
 							<div className="text-gray-600">
 								<ul className="space-y-1">
