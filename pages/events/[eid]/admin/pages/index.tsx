@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../components/Footer';
 import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
-import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
@@ -28,17 +27,7 @@ const PagesAdminPage: NextPage = () => {
 	const { pages } = usePagesQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 	const { user, isUserLoading } = useUser();
-	const { event, isEventLoading } = useEventQuery(String(eid));
-
-	if (
-		isEventLoading ||
-		isUserLoading ||
-		isOrganizerLoading ||
-		isOrganizerLoading ||
-		isRolesLoading
-	) {
-		return <LoadingPage />;
-	}
+	const { event, eventError } = useEventQuery(String(eid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -48,7 +37,7 @@ const PagesAdminPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -58,7 +47,7 @@ const PagesAdminPage: NextPage = () => {
 				<title>Edit Pages</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<div>

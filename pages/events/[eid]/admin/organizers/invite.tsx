@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../components/Footer';
-import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
@@ -31,21 +30,11 @@ const EventOrganizersPage: NextPage = () => {
 	const { isOrganizersLoading, organizers } = useOrganizersQuery(String(eid));
 	const { inviteOrganizerMutation } = useInviteOrganizerMutation(String(eid));
 
-	if (
-		isEventLoading ||
-		isUserLoading ||
-		isOrganizerLoading ||
-		isRolesLoading ||
-		isOrganizersLoading
-	) {
-		return <LoadingPage />;
-	}
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -67,18 +56,20 @@ const EventOrganizersPage: NextPage = () => {
 				<title>Invite Organizer</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
 				<FlexRowBetween>
 					<Heading>Invite Organizer</Heading>
 				</FlexRowBetween>
-
 				<p className="mb-2 text-base text-gray-700">
 					Organizers are able to create, edit, and delete sessions, venues, and roles.
 				</p>
 
-				<InviteOrganizerForm event={event} inviteOrganizerMutation={inviteOrganizerMutation} />
+				{/*TODO: Skeletonize*/}
+				{event && (
+					<InviteOrganizerForm event={event} inviteOrganizerMutation={inviteOrganizerMutation} />
+				)}
 			</Column>
 
 			<Footer color={event?.color} />

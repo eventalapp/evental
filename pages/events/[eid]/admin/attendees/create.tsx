@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../components/Footer';
 import { AdminCreateAttendeeForm } from '../../../../../components/attendees/AdminCreateAttendeeForm';
-import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
@@ -29,16 +28,6 @@ const CreateAttendeePage: NextPage = () => {
 	const { attendeesData, isAttendeesLoading } = useAttendeesQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (
-		isOrganizerLoading ||
-		isUserLoading ||
-		isEventLoading ||
-		isAttendeesLoading ||
-		isRolesLoading
-	) {
-		return <LoadingPage />;
-	}
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -57,7 +46,7 @@ const CreateAttendeePage: NextPage = () => {
 				<title>Create Attendee</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
 				<Heading>Create Attendee Page</Heading>

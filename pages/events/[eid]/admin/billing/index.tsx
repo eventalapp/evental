@@ -6,7 +6,6 @@ import React from 'react';
 
 import { Footer } from '../../../../../components/Footer';
 import { PurchaseProPlan } from '../../../../../components/billing/PurchaseProForm';
-import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
@@ -29,15 +28,11 @@ const EventBillingPage: NextPage = () => {
 	const { isFounderLoading, isFounder } = useFounderQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isEventLoading || isUserLoading || isFounderLoading || isRolesLoading) {
-		return <LoadingPage />;
-	}
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -56,7 +51,7 @@ const EventBillingPage: NextPage = () => {
 					<title>Event Billing</title>
 				</Head>
 
-				<EventSettingsNavigation event={event} roles={roles} user={user} />
+				<EventSettingsNavigation eid={String(eid)} />
 
 				<div className="dark-topography text-white">
 					<Column className="flex flex-col items-center">

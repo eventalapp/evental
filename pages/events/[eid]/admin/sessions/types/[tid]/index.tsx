@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../../components/error/ViewErrorPage';
@@ -34,17 +33,7 @@ const ViewSessionTypePage: NextPage = () => {
 		String(tid)
 	);
 
-	if (
-		isOrganizerLoading ||
-		isSessionTypeLoading ||
-		isRolesLoading ||
-		isEventLoading ||
-		isSessionsByTypeLoading
-	) {
-		return <LoadingPage />;
-	}
-
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -70,7 +59,7 @@ const ViewSessionTypePage: NextPage = () => {
 				<title>Viewing Session</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<ViewSessionType

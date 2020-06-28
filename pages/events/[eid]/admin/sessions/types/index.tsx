@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
 import { IconLinkTooltip } from '../../../../../../components/IconLinkTooltip';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
@@ -26,19 +25,9 @@ const SessionTypesAdminPage: NextPage = () => {
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { user, isUserLoading } = useUser();
-	const { event } = useEventQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 	const { isSessionTypesLoading, sessionTypes } = useSessionTypesQuery(String(eid));
-
-	if (
-		isSessionTypesLoading ||
-		isUserLoading ||
-		isOrganizerLoading ||
-		isOrganizerLoading ||
-		isRolesLoading
-	) {
-		return <LoadingPage />;
-	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -48,7 +37,7 @@ const SessionTypesAdminPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -58,7 +47,7 @@ const SessionTypesAdminPage: NextPage = () => {
 				<title>Session Types</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<div>

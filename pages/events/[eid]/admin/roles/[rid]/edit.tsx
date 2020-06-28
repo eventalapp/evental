@@ -4,11 +4,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { Footer } from '../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -29,20 +27,9 @@ const EditRolePage: NextPage = () => {
 	const { roleError, role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
 	const { editRoleMutation } = useEditRoleMutation(String(eid), String(rid));
 	const { user, isUserLoading } = useUser();
-	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 	const { attendeesData, isAttendeesLoading } = useAttendeesByRoleQuery(String(eid), String(rid));
-
-	if (
-		isOrganizerLoading ||
-		isRoleLoading ||
-		isUserLoading ||
-		isEventLoading ||
-		isRolesLoading ||
-		isAttendeesLoading
-	) {
-		return <LoadingPage />;
-	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -52,15 +39,11 @@ const EditRolePage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!role || !attendeesData) {
+	if (roleError) {
 		return <NotFoundPage message="Role not found." />;
 	}
 
-	if (roleError) {
-		return <ViewErrorPage errors={[roleError]} />;
-	}
-
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -70,19 +53,22 @@ const EditRolePage: NextPage = () => {
 				<title>Edit Role</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
 				<Heading>Edit Role</Heading>
 
-				<EditRoleForm
-					eid={String(eid)}
-					role={role}
-					roleError={roleError}
-					editRoleMutation={editRoleMutation}
-					isRoleLoading={isRoleLoading}
-					attendees={attendeesData}
-				/>
+				{/*TODO: Skeletonize*/}
+				{attendeesData && (
+					<EditRoleForm
+						eid={String(eid)}
+						role={role}
+						roleError={roleError}
+						editRoleMutation={editRoleMutation}
+						isRoleLoading={isRoleLoading}
+						attendees={attendeesData}
+					/>
+				)}
 			</Column>
 
 			<Footer color={event?.color} />

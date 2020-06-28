@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
@@ -28,10 +27,6 @@ const CreateSessionPage: NextPage = () => {
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 	const { createSessionTypeMutation } = useCreateSessionTypeMutation(String(eid));
 
-	if (isEventLoading || isUserLoading || isOrganizerLoading || isRolesLoading) {
-		return <LoadingPage />;
-	}
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -44,7 +39,7 @@ const CreateSessionPage: NextPage = () => {
 		return <ViewErrorPage errors={[eventError]} />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -54,7 +49,7 @@ const CreateSessionPage: NextPage = () => {
 				<title>Create Session Type</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<Heading>Create Session Types</Heading>

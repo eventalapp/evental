@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
@@ -31,16 +30,6 @@ const ViewVenuePage: NextPage = () => {
 		String(vid)
 	);
 
-	if (
-		isVenueLoading ||
-		isOrganizerLoading ||
-		isEventLoading ||
-		isRolesLoading ||
-		isSessionsByVenueLoading
-	) {
-		return <LoadingPage />;
-	}
-
 	if (!venue || !sessionsByVenueData) {
 		return <NotFoundPage message="Venue not found." />;
 	}
@@ -49,7 +38,7 @@ const ViewVenuePage: NextPage = () => {
 		return <ViewErrorPage errors={[venueError, eventError, rolesError]} />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -63,7 +52,7 @@ const ViewVenuePage: NextPage = () => {
 				<title>Viewing Venue: {venue && venue.name}</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<ViewVenue

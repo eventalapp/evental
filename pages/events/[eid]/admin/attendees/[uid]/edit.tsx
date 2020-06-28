@@ -5,11 +5,9 @@ import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -31,17 +29,7 @@ const EditAttendeePage: NextPage = () => {
 	const { adminEditAttendeeMutation } = useEditAttendeeMutation(String(eid), String(uid));
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user, isUserLoading } = useUser();
-	const { event, isEventLoading } = useEventQuery(String(eid));
-
-	if (
-		isOrganizerLoading ||
-		isEventLoading ||
-		isAttendeeLoading ||
-		isRolesLoading ||
-		isUserLoading
-	) {
-		return <LoadingPage />;
-	}
+	const { event, eventError } = useEventQuery(String(eid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -51,19 +39,15 @@ const EditAttendeePage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!attendee) {
+	if (attendeeError) {
 		return <NotFoundPage message="Attendee not found." />;
 	}
 
-	if (!roles) {
+	if (rolesError) {
 		return <NotFoundPage message="No roles not found." />;
 	}
 
-	if (attendeeError || rolesError) {
-		return <ViewErrorPage errors={[attendeeError, rolesError]} />;
-	}
-
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -73,7 +57,7 @@ const EditAttendeePage: NextPage = () => {
 				<title>Edit Attendee</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
 				<div className="mb-2">

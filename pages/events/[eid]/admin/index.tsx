@@ -4,11 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../components/Footer';
-import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
 import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
 import { LinkButton } from '../../../../components/form/LinkButton';
@@ -30,20 +28,12 @@ const EditEventPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isEventLoading || isUserLoading || isOrganizerLoading || isRolesLoading) {
-		return <LoadingPage />;
-	}
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!event) {
-		return <NotFoundPage message="Event not found." />;
-	}
-
 	if (eventError) {
-		return <ViewErrorPage errors={[eventError]} />;
+		return <NotFoundPage message="Event not found." />;
 	}
 
 	if (!isOrganizer) {
@@ -56,7 +46,7 @@ const EditEventPage: NextPage = () => {
 				<title>Event Settings</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<Heading>Settings</Heading>

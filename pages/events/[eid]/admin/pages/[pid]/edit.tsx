@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
@@ -32,10 +31,6 @@ const EditPagePage: NextPage = () => {
 	const { user, isUserLoading } = useUser();
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isRolesLoading || isVenuesLoading || isEventLoading || isUserLoading || isOrganizerLoading) {
-		return <LoadingPage />;
-	}
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -56,7 +51,7 @@ const EditPagePage: NextPage = () => {
 		return <ViewErrorPage errors={[venuesError, eventError]} />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -66,7 +61,7 @@ const EditPagePage: NextPage = () => {
 				<title>Edit Page</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<Heading>Edit Page</Heading>

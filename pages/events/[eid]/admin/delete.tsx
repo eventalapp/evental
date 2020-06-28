@@ -3,11 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../components/Footer';
-import { Loading } from '../../../../components/error/Loading';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { DeleteEventForm } from '../../../../components/events/DeleteEventForm';
 import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
 import Column from '../../../../components/layout/Column';
@@ -28,20 +26,12 @@ const DeleteEventPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isEventLoading || isOrganizerLoading || isUserLoading || isRolesLoading) {
-		return <Loading />;
-	}
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!event) {
-		return <NotFoundPage message="Event not found." />;
-	}
-
 	if (eventError) {
-		return <ViewErrorPage errors={[eventError]} />;
+		return <NotFoundPage message="Event not found." />;
 	}
 
 	if (!isOrganizer) {
@@ -54,12 +44,14 @@ const DeleteEventPage: NextPage = () => {
 				<title>Delete Event</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
-				<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
-					You are about to delete an event ("{event.name}")
-				</p>
+				{event && (
+					<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
+						You are about to delete an event ("{event.name}")
+					</p>
+				)}
 
 				<Heading>Delete Event</Heading>
 
