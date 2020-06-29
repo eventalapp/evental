@@ -29,11 +29,11 @@ export const ViewRole: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween>
-				<Heading className="w-full">
+				<Heading>
 					{role ? (
 						`${capitalizeFirstLetter(role.name.toLowerCase())}s`
 					) : (
-						<Skeleton className="w-full max-w-2xl" />
+						<Skeleton className="w-40 max-w-2xl" />
 					)}
 				</Heading>
 
@@ -93,12 +93,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 			{role && attendees?.length === 0 ? (
 				<p>No {role.name.toLowerCase()}s found.</p>
 			) : (
-				<AttendeeList
-					admin={admin}
-					eid={String(eid)}
-					attendees={attendees}
-					tiny={role?.tinyImage}
-				/>
+				<AttendeeList admin={admin} eid={String(eid)} attendees={attendees} />
 			)}
 		</div>
 	);
