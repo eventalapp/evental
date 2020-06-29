@@ -11,6 +11,26 @@ import Tooltip from '../radix/components/Tooltip';
 
 type Props = { events?: Prisma.Event[]; className?: string };
 
+const eventListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
+	<div className="flex flex-row items-center py-3" key={i}>
+		<div className="flex w-12 flex-col justify-center text-center md:ml-5">
+			<span className="block text-center text-tiny text-gray-600">
+				<Skeleton className="w-full" />
+				<Skeleton className="w-full" />
+			</span>
+		</div>
+		<Skeleton className="mx-3 min-h-[3em] min-w-[3em] rounded-md md:mx-5 md:h-16 md:w-16" />
+		<div className="flex flex-col items-start w-full">
+			<span className="shrink text-tiny">
+				<Skeleton className="w-20" />
+			</span>
+			<span className="block text-lg font-medium md:text-xl w-full">
+				<Skeleton className="w-full max-w-lg" />
+			</span>
+		</div>
+	</div>
+));
+
 export const EventList: React.FC<Props> = (props) => {
 	const { events, className } = props;
 
@@ -21,7 +41,7 @@ export const EventList: React.FC<Props> = (props) => {
 	return (
 		<div className={classNames(className)}>
 			{events
-				? events.map((event, i) => (
+				? events.map((event) => (
 						<div key={event.id}>
 							<div className="-mx-1 rounded-md hover:bg-gray-75">
 								<Link href={`/events/${event.slug}`}>
@@ -84,25 +104,7 @@ export const EventList: React.FC<Props> = (props) => {
 							</div>
 						</div>
 				  ))
-				: Array.apply(null, Array(5)).map((_, i) => (
-						<div className="flex flex-row items-center py-3" key={i}>
-							<div className="flex w-12 flex-col justify-center text-center md:ml-5">
-								<span className="block text-center text-tiny text-gray-600">
-									<Skeleton className="w-full" />
-									<Skeleton className="w-full" />
-								</span>
-							</div>
-							<Skeleton className="mx-3 min-h-[3em] min-w-[3em] rounded-md md:mx-5 md:h-16 md:w-16" />
-							<div className="flex flex-col items-start w-full">
-								<span className="shrink text-tiny">
-									<Skeleton className="w-20" />
-								</span>
-								<span className="block text-lg font-medium md:text-xl w-full">
-									<Skeleton className="w-full max-w-lg" />
-								</span>
-							</div>
-						</div>
-				  ))}
+				: eventListSkeleton}
 		</div>
 	);
 };
