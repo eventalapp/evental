@@ -88,7 +88,7 @@ model Event {
   type         EventType     @default(HYBRID)
   category     EventCategory @default(EVENT)
   privacy      PrivacyLevel  @default(PRIVATE)
-  image        String        @default("/images/inverse-logo.jpg")
+  image        String        @default("/images/inverse-logo.png")
   banner       String?
   website      String?
   color        String        @default("#0066FF")
