@@ -24,6 +24,10 @@
 - make events truly private
 - adjust session times when event date is moved
 
+## DB Pushing
+
+- swap out database url for true db url to db push, then revert back to prisma data layer
+
 ## Installation 💾
 
 Prerequisites:
