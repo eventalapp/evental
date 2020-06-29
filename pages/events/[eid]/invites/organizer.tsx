@@ -19,7 +19,7 @@ import { AcceptOrganizerInviteSchema } from '../../../../utils/schemas';
 
 const OrganizerInvitePage: NextPage = () => {
 	const router = useRouter();
-	const { user } = useUser();
+	const { user, isUserLoading } = useUser();
 	const { eid, code } = router.query;
 	const { acceptOrganizerInviteMutation } = useAcceptOrganizerInviteMutation(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
@@ -28,7 +28,7 @@ const OrganizerInvitePage: NextPage = () => {
 		return <NotFoundPage message="Event not found." />;
 	}
 
-	if (!user) {
+	if (!user && !isUserLoading) {
 		return <UnauthorizedPage />;
 	}
 

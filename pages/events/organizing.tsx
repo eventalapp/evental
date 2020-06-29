@@ -17,7 +17,7 @@ import { useOrganizingEventsQuery } from '../../hooks/queries/useOrganizingEvent
 import { useUser } from '../../hooks/queries/useUser';
 
 const OrganizingEventsPage: NextPage = () => {
-	const { user } = useUser();
+	const { user, isUserLoading } = useUser();
 	const { organizingEventsError, organizingEvents } = useOrganizingEventsQuery(String(user?.id));
 	const { createEventMutation } = useCreateEventMutation();
 
@@ -25,7 +25,7 @@ const OrganizingEventsPage: NextPage = () => {
 		return <ViewErrorPage errors={[organizingEventsError]} />;
 	}
 
-	if (!user) {
+	if (!user && !isUserLoading) {
 		return <UnauthorizedPage />;
 	}
 
