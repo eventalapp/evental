@@ -54,7 +54,7 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 													<FontAwesomeIcon
 														fill="currentColor"
 														size="1x"
-														className="h-5 w-5 text-gray-500"
+														className="h-5 w-5 text-gray-400"
 														icon={faChevronRight}
 													/>
 												</div>
