@@ -9,6 +9,7 @@ import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/typography/Heading';
+import { Paragraph } from '../../components/typography/Paragraph';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import { useUser } from '../../hooks/queries/useUser';
 
@@ -44,12 +45,12 @@ const CreateEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<Heading>Create an event</Heading>
+				<Heading className="mb-3">Create an event</Heading>
 
-				<p className="mt-2">
-					Create and setup a private event, invite organizers, customize your event, create
-					sessions, attendees, pages, and more.
-				</p>
+				<Paragraph className="text-gray-600 max-w-3xl">
+					Fill out the form below to create an event. You can edit these details later. Once you
+					have created your event you can access billing, create roles, manage attendees, and more.
+				</Paragraph>
 
 				<CreateEventForm createEventMutation={createEventMutation} canCancel />
 			</Column>
