@@ -91,7 +91,6 @@ export const SessionList: React.FC<Props> = (props) => {
 												sessions={sessions}
 												admin={admin}
 												event={event}
-												user={user}
 												hour={hour}
 											/>
 										);
@@ -124,7 +123,6 @@ export const SessionList: React.FC<Props> = (props) => {
 												sessions={sessions}
 												admin={admin}
 												event={event}
-												user={user}
 												hour={hour}
 											/>
 										);
