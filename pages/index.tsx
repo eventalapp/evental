@@ -291,13 +291,13 @@ const HomePage: NextPage = () => {
 							<Card
 								header="Attendee Experience"
 								icon={faAddressCard}
-								iconWrapperClassName="text-orange-600 bg-orange-200"
+								iconWrapperClassName="text-red-600 bg-red-200"
 								className="relative"
 								body={
 									<>
-										Attendees will have access to a user settings dashboard, where they can build
-										out a customizable profile to include their location, job title, website, and a
-										custom biography.
+										Attendees have access to a user settings dashboard, where they can build out a
+										customizable profile to include their location, job title, website, and a custom
+										biography.
 									</>
 								}
 							/>
