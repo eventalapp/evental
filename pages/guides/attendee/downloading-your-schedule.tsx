@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
 import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
@@ -86,12 +85,6 @@ const AttendingASessionGuidePage: NextPage = () => {
 						)}
 						.
 					</p>
-
-					<AspectImage
-						ratio={1610 / 548}
-						imageUrl={'https://cdn.evental.app/images/my-schedule.png'}
-						alt={'My Schedule'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="download-your-schedule">
@@ -111,12 +104,6 @@ const AttendingASessionGuidePage: NextPage = () => {
 						</Link>
 						.
 					</p>
-
-					<AspectImage
-						ratio={1613 / 606}
-						imageUrl={'https://cdn.evental.app/images/download-your-schedule.png'}
-						alt={'Download your schedule'}
-					/>
 				</GuideSection>
 
 				<GuideSection>

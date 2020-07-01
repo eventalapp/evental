@@ -3,7 +3,6 @@ import { NextSeo } from 'next-seo';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
 import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
@@ -76,12 +75,6 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						To create a session, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
-
-					<AspectImage
-						ratio={1603 / 798}
-						imageUrl={'https://cdn.evental.app/images/manage-this-event.png'}
-						alt={'Manage this event'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="navigate-to-the-session-dashboard">
@@ -96,12 +89,6 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Types"</span> page.
 					</p>
-
-					<AspectImage
-						ratio={1597 / 475}
-						imageUrl={'https://cdn.evental.app/images/types-dashboard.png'}
-						alt={'Manage this event'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="create-a-type">
@@ -118,22 +105,10 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						create session type page, where you can create a type/category to group sessions.
 					</p>
 
-					<AspectImage
-						ratio={1602 / 493}
-						imageUrl={'https://cdn.evental.app/images/create-a-type.png'}
-						alt={'Create a type'}
-					/>
-
 					<p className="my-4 text-gray-700">
 						Now that you are on the create a type form, fill out the form and click the{' '}
 						<span className="font-medium">"Create Type"</span> button.
 					</p>
-
-					<AspectImage
-						ratio={1607 / 468}
-						imageUrl={'https://cdn.evental.app/images/create-type-form.png'}
-						alt={'Create a type form'}
-					/>
 				</GuideSection>
 
 				<GuideSection>

@@ -3,7 +3,6 @@ import { NextSeo } from 'next-seo';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
 import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
@@ -91,12 +90,6 @@ const InvitingRoleMemberGuidePage: NextPage = () => {
 						To invite a speaker or role member, navigate to the events admin dashboard by clicking
 						the <span className="font-medium">"manage this event"</span> button.
 					</p>
-
-					<AspectImage
-						ratio={1603 / 798}
-						imageUrl={'https://cdn.evental.app/images/manage-this-event.png'}
-						alt={'Manage this event'}
-					/>
 				</GuideSection>
 
 				<GuideSection id={sections[1].anchor}>

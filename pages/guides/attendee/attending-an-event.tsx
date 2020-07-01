@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
 import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
@@ -84,12 +83,6 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						</Link>
 						.
 					</p>
-
-					<AspectImage
-						ratio={1666 / 656}
-						imageUrl={'https://cdn.evental.app/images/evental-signup.png'}
-						alt={'Signup for evental'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="find-your-event">
@@ -107,12 +100,6 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						</Link>
 						.
 					</p>
-
-					<AspectImage
-						ratio={1580 / 502}
-						imageUrl={'https://cdn.evental.app/images/upcoming-events.png'}
-						alt={'Attend this event'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="registering-for-an-event" className="my-7">
@@ -127,12 +114,6 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						Once you have found an event, you can attend it by clicking the{' '}
 						<span className="font-medium">"Registering here"</span> button
 					</p>
-
-					<AspectImage
-						ratio={1613 / 651}
-						imageUrl={'https://cdn.evental.app/images/attend-this-event.png'}
-						alt={'Attend this event'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="attending-a-session">

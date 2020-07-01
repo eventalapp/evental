@@ -3,7 +3,6 @@ import { NextSeo } from 'next-seo';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
 import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
@@ -81,12 +80,6 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						Then navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
-
-					<AspectImage
-						ratio={1603 / 798}
-						imageUrl={'https://cdn.evental.app/images/manage-this-event.png'}
-						alt={'Manage this event'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="navigate-to-the-organizer-dashboard">
@@ -101,12 +94,6 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Organizers"</span> page.
 					</p>
-
-					<AspectImage
-						ratio={1606 / 408}
-						imageUrl={'https://cdn.evental.app/images/organizer-dashboard.png'}
-						alt={'Organizer dashboard'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="invite-an-organizer">
@@ -123,12 +110,6 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						to the organizer invite page, where you can fill out the form and invite an organizer to
 						your event.
 					</p>
-
-					<AspectImage
-						ratio={1604 / 473}
-						imageUrl={'https://cdn.evental.app/images/invite-organizer-form.png'}
-						alt={'Invite organizer form'}
-					/>
 				</GuideSection>
 
 				<GuideSection>
