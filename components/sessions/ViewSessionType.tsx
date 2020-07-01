@@ -21,7 +21,7 @@ type Props = {
 };
 
 export const ViewSessionType: React.FC<Props> = (props) => {
-	const { sessionType, tid, eid, admin = false, sessions, event, user } = props;
+	const { sessionType, tid, eid, admin = false, sessions, event } = props;
 
 	return (
 		<div>
@@ -64,7 +64,7 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 				)}
 			</FlexRowBetween>
 
-			<SessionList eid={String(eid)} sessions={sessions} admin={admin} event={event} user={user} />
+			<SessionList sessions={sessions} admin={admin} event={event} />
 		</div>
 	);
 };

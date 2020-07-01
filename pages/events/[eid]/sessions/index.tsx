@@ -14,7 +14,6 @@ import { SessionList } from '../../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
-import { useUser } from '../../../../hooks/queries/useUser';
 
 const SessionsPage: NextPage = () => {
 	const router = useRouter();
@@ -22,7 +21,6 @@ const SessionsPage: NextPage = () => {
 	const { sessionsData } = useSessionsQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
-	const { user } = useUser();
 
 	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
@@ -66,7 +64,7 @@ const SessionsPage: NextPage = () => {
 			<Column>
 				<EventHeader adminLink={'/sessions'} eid={String(eid)} />
 
-				<SessionList sessions={sessionsData} eid={String(eid)} event={event} user={user} />
+				<SessionList sessions={sessionsData} event={event} />
 			</Column>
 
 			<Footer color={event?.color} />
