@@ -29,7 +29,7 @@ const ViewSessionPage: NextPage = () => {
 	const { isSessionAttendee } = useIsSessionAttendeeQuery(String(eid), String(sid));
 	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
 
-	if (!sessionError) {
+	if (sessionError) {
 		return <NotFoundPage message="Session not found." />;
 	}
 
