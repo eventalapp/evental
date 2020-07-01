@@ -73,13 +73,23 @@ const PricingPage: NextPage = () => {
 					</Button>
 				</div>
 
-				<EventalProCard attendees={attendees} isEducation={isEducation}>
-					<Link href="/events/create">
-						<LinkButton>Start Free Trial</LinkButton>
-					</Link>
-				</EventalProCard>
+				<div className="relative">
+					<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
+						<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[100px]">
+							<div className="bloom small bloom-one left-0" />
+							<div className="bloom small bloom-three left-[34%] top-[120%]" />
+							<div className="bloom small bloom-two right-0" />
+						</div>
+					</div>
 
-				<div className="mt-4 flex flex-col items-center space-y-3">
+					<EventalProCard attendees={attendees} isEducation={isEducation} className="relative">
+						<Link href="/events/create">
+							<LinkButton>Start Free Trial</LinkButton>
+						</Link>
+					</EventalProCard>
+				</div>
+
+				<div className="mt-4 flex flex-col items-center space-y-3 z-10 relative">
 					<p className="text-lg font-medium">How many attendees are you expecting?</p>
 					<Controller
 						control={control}
