@@ -67,9 +67,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 				<GuideSection id="navigate-to-the-dashboard">
 					<GuideSectionHeader
 						text="Navigate to the dashboard"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/organizer/inviting-organizers#navigate-to-the-dashboard`}
+						url={`/guides/organizer/inviting-organizers#navigate-to-the-dashboard`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -85,9 +83,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 				<GuideSection id="navigate-to-the-organizer-dashboard">
 					<GuideSectionHeader
 						text="Navigate to the organizer dashboard"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/organizer/inviting-organizers#navigate-to-the-organizer-dashboard`}
+						url={`/guides/organizer/inviting-organizers#navigate-to-the-organizer-dashboard`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -99,9 +95,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 				<GuideSection id="invite-an-organizer">
 					<GuideSectionHeader
 						text="Invite an organizer"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/organizer/inviting-organizers#invite-an-organizer`}
+						url={`/guides/organizer/inviting-organizers#invite-an-organizer`}
 					/>
 
 					<p className="mb-4 text-gray-700">

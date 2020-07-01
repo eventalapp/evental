@@ -79,9 +79,7 @@ const CreatingAPageGuidePage: NextPage = () => {
 				<GuideSection id={sections.navigateDashboard.anchor}>
 					<GuideSectionHeader
 						text={sections.navigateDashboard.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/page/creating-a-page#${sections.navigateDashboard.anchor}`}
+						url={`/guides/page/creating-a-page#${sections.navigateDashboard.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -93,9 +91,7 @@ const CreatingAPageGuidePage: NextPage = () => {
 				<GuideSection id={sections.navigatePages.anchor}>
 					<GuideSectionHeader
 						text={sections.navigatePages.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/page/creating-a-page#${sections.navigatePages.anchor}`}
+						url={`/guides/page/creating-a-page#${sections.navigatePages.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -107,9 +103,7 @@ const CreatingAPageGuidePage: NextPage = () => {
 				<GuideSection id={sections.createPage.anchor}>
 					<GuideSectionHeader
 						text={sections.createPage.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/page/creating-a-page#${sections.createPage.anchor}`}
+						url={`/guides/page/creating-a-page#${sections.createPage.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">

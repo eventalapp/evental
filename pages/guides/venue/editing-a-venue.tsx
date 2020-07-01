@@ -76,9 +76,7 @@ const EditingASessionGuidePage: NextPage = () => {
 				<GuideSection id={sections.navigateDashboard.anchor}>
 					<GuideSectionHeader
 						text={sections.navigateDashboard.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/venue/editing-a-venue#${sections.navigateDashboard.anchor}`}
+						url={`/guides/venue/editing-a-venue#${sections.navigateDashboard.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -90,9 +88,7 @@ const EditingASessionGuidePage: NextPage = () => {
 				<GuideSection id={sections.navigateVenues.anchor}>
 					<GuideSectionHeader
 						text={sections.navigateVenues.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/venue/editing-a-venue#${sections.navigateVenues.anchor}`}
+						url={`/guides/venue/editing-a-venue#${sections.navigateVenues.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -104,9 +100,7 @@ const EditingASessionGuidePage: NextPage = () => {
 				<GuideSection id={sections.editVenue.anchor}>
 					<GuideSectionHeader
 						text={sections.editVenue.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/venue/editing-a-venue#${sections.editVenue.anchor}`}
+						url={`/guides/venue/editing-a-venue#${sections.editVenue.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
