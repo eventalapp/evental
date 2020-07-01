@@ -3,7 +3,6 @@
 ## pre mvp
 
 - send email to all event attendees
-- leave session
 
 ## low importance
 
