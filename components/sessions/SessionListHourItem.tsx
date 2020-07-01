@@ -10,7 +10,6 @@ import { SessionHoverCard } from '../radix/components/SessionHoverCard';
 import Tooltip from '../radix/components/Tooltip';
 
 type SessionListHourItemProps = {
-	eid: string;
 	admin?: boolean;
 	sessions: SessionWithVenue[];
 	event: Prisma.Event;
@@ -18,7 +17,7 @@ type SessionListHourItemProps = {
 };
 
 export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) => {
-	const { eid, sessions, event, admin = false, hour } = props;
+	const { sessions, event, admin = false, hour } = props;
 
 	return (
 		<div className="flex flex-row">
@@ -30,7 +29,9 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 					sessions.map((session) => (
 						<SessionHoverCard admin={admin} session={session} event={event} key={session.id}>
 							<div className="mr-2 mb-2 inline-block">
-								<Link href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${session.slug}`}>
+								<Link
+									href={`/events/${event.slug}${admin ? '/admin' : ''}/sessions/${session.slug}`}
+								>
 									<a className="inline-block">
 										<div className="flex flex-row rounded-md transition-all duration-100 hover:bg-gray-50">
 											<div className="flex grow flex-row flex-wrap justify-between py-2 px-3">
