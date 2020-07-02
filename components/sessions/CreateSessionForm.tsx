@@ -138,7 +138,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					<div>
 						<Label htmlFor="categoryId">
 							Type
-							<HelpTooltip message={copy.tooltip.type} />
+							<HelpTooltip message={copy.tooltip.category} />
 						</Label>
 
 						<Controller

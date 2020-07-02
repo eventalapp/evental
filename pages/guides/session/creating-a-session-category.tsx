@@ -16,12 +16,12 @@ const CreatingASessionCategoryGuidePage: NextPage = () => {
 	return (
 		<PageWrapper>
 			<NextSeo
-				title="Creating a session type — Evental"
-				description={`Learn how to create a session type for your event on Evental.`}
+				title="Creating a session category — Evental"
+				description={`Learn how to create a session category for your event on Evental.`}
 				openGraph={{
 					url: 'https://evental.app/guides/session/creating-a-session-type',
-					title: 'Creating a session type — Evental',
-					description: `Learn how to create a session type for your event on Evental.`,
+					title: 'Creating a session category — Evental',
+					description: `Learn how to create a session category for your event on Evental.`,
 					images: [
 						{
 							url: 'https://cdn.evental.app/images/logo.jpg',
@@ -37,9 +37,9 @@ const CreatingASessionCategoryGuidePage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<Heading>Creating a session type</Heading>
+					<Heading>Creating a session category</Heading>
 					<p className="mt-4 text-base text-gray-100">
-						Learn how to create a session type for your event on Evental.
+						Learn how to create a session category for your event on Evental.
 					</p>
 				</Column>
 			</div>
@@ -52,12 +52,12 @@ const CreatingASessionCategoryGuidePage: NextPage = () => {
 							relativeLink: '/guides/session/creating-a-session-type#navigate-to-the-dashboard'
 						},
 						{
-							text: 'Navigate to the session types dashboard',
+							text: 'Navigate to the session categories dashboard',
 							relativeLink:
 								'/guides/session/creating-a-session-type#navigate-to-the-session-dashboard'
 						},
 						{
-							text: 'Create a session type',
+							text: 'Create a session category',
 							relativeLink: '/guides/session/creating-a-session-type#create-a-type'
 						}
 					]}
@@ -77,7 +77,7 @@ const CreatingASessionCategoryGuidePage: NextPage = () => {
 
 				<GuideSection id="navigate-to-the-session-dashboard">
 					<GuideSectionHeader
-						text="Navigate to the session types dashboard"
+						text="Navigate to the session categories dashboard"
 						url={`/guides/session/creating-a-session-type#navigate-to-the-session-dashboard`}
 					/>
 
@@ -89,14 +89,14 @@ const CreatingASessionCategoryGuidePage: NextPage = () => {
 
 				<GuideSection id="create-a-type">
 					<GuideSectionHeader
-						text="Create a session type"
+						text="Create a session category"
 						url={`/guides/session/creating-a-session-type#create-a-type`}
 					/>
 
 					<p className="mb-4 text-gray-700">
-						After visiting the session type dashboard page, click the{' '}
+						After visiting the session category dashboard page, click the{' '}
 						<span className="font-medium">"Create Type"</span> button. This will navigate you to the
-						create session type page, where you can create a type/category to group sessions.
+						create session category page, where you can create a type/category to group sessions.
 					</p>
 
 					<p className="my-4 text-gray-700">

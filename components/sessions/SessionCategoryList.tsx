@@ -19,7 +19,7 @@ export const SessionCategoryList: React.FC<Props> = (props) => {
 	const { eid, sessionCategories, admin = false } = props;
 
 	if (sessionCategories && sessionCategories?.length === 0) {
-		return <NotFound message="No session types found." />;
+		return <NotFound message="No session categories found." />;
 	}
 
 	return (

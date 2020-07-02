@@ -63,7 +63,7 @@ const EditSessionPage: NextPage = () => {
 			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
-				<Heading>Edit Session Type</Heading>
+				<Heading>Edit Session Category</Heading>
 
 				<EditSessionCategoryForm
 					sessionCategory={sessionCategory}

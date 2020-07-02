@@ -42,7 +42,7 @@ const SessionCategoriesAdminPage: NextPage = () => {
 	return (
 		<PageWrapper>
 			<Head>
-				<title>Session Types</title>
+				<title>Session Categories</title>
 			</Head>
 
 			<EventSettingsNavigation eid={String(eid)} />
@@ -50,10 +50,10 @@ const SessionCategoriesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<Heading>Session Types</Heading>
+						<Heading>Session Categories</Heading>
 
 						<IconLinkTooltip
-							message="Click to create a session type"
+							message="Click to create a session category"
 							side="top"
 							href={`/events/${eid}/admin/sessions/categories/create`}
 							icon={faSquarePlus}

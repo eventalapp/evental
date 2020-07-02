@@ -37,7 +37,7 @@ export const DeleteSessionCategoryForm: React.FC<Props> = (props) => {
 				<div className="mb-5">
 					<div>
 						<p className="mb-3">
-							All of the data regarding this session type will be permanently deleted.
+							All of the data regarding this session category will be permanently deleted.
 						</p>
 
 						<Label htmlFor="confirmDelete">

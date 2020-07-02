@@ -23,19 +23,19 @@ const sections: Record<string, Section> = {
 		anchor: 'navigate-to-the-session-categories-page',
 		title: 'Navigate to the session categories page'
 	},
-	editSessionCategory: { anchor: 'edit-a-session-type', title: 'Edit a session type' }
+	editSessionCategory: { anchor: 'edit-a-session-type', title: 'Edit a session category' }
 };
 
 const EditingASessionCategoryGuidePage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
-				title="Editing a session type — Evental"
-				description={`Learn how to edit a session type for your event on Evental.`}
+				title="Editing a session category — Evental"
+				description={`Learn how to edit a session category for your event on Evental.`}
 				openGraph={{
 					url: 'https://evental.app/guides/session/editing-a-session-type',
-					title: 'Editing a session type — Evental',
-					description: `Learn how to edit a session type for your event on Evental.`,
+					title: 'Editing a session category — Evental',
+					description: `Learn how to edit a session category for your event on Evental.`,
 					images: [
 						{
 							url: 'https://cdn.evental.app/images/logo.jpg',
@@ -51,9 +51,9 @@ const EditingASessionCategoryGuidePage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<Heading>Editing a session type</Heading>
+					<Heading>Editing a session category</Heading>
 					<p className="mt-4 text-base text-gray-100">
-						Learn how to edit a session type for your event on Evental.
+						Learn how to edit a session category for your event on Evental.
 					</p>
 				</Column>
 			</div>
@@ -83,7 +83,7 @@ const EditingASessionCategoryGuidePage: NextPage = () => {
 					/>
 
 					<p className="mb-4 text-gray-700">
-						To edit a session type, navigate to the events admin dashboard by clicking the{' '}
+						To edit a session category, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
 				</GuideSection>
@@ -107,17 +107,17 @@ const EditingASessionCategoryGuidePage: NextPage = () => {
 					/>
 
 					<p className="mb-4 text-gray-700">
-						After visiting the session types dashboard page, select the session type you wish to
-						edit by clicking the session type.
+						After visiting the session categories dashboard page, select the session category you
+						wish to edit by clicking the session category.
 					</p>
 					<p className="mb-4 text-gray-700">
-						After selecting a session type, select the <span className="font-medium">"Edit"</span>{' '}
-						button.
+						After selecting a session category, select the{' '}
+						<span className="font-medium">"Edit"</span> button.
 					</p>
 
 					<p className="mb-4 text-gray-700">
-						After selecting the "Edit" button. You will be navigated to the edit session type form.
-						Fill out the edit session type form to edit a session type.
+						After selecting the "Edit" button. You will be navigated to the edit session category
+						form. Fill out the edit session category form to edit a session category.
 					</p>
 				</GuideSection>
 

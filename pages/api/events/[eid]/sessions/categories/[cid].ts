@@ -12,7 +12,7 @@ export default api({
 		const sessionCategory = await getSessionCategory(String(eid), String(cid));
 
 		if (!sessionCategory) {
-			throw new NextkitError(404, 'Session Type not found.');
+			throw new NextkitError(404, 'Session category not found.');
 		}
 
 		return sessionCategory;

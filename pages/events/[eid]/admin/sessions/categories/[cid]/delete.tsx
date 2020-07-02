@@ -39,7 +39,7 @@ const DeleteSessionCategoryPage: NextPage = () => {
 	}
 
 	if (sessionCategoryError) {
-		return <NotFoundPage message="Session type not found" />;
+		return <NotFoundPage message="Session category not found" />;
 	}
 
 	if (eventError) {
@@ -57,11 +57,11 @@ const DeleteSessionCategoryPage: NextPage = () => {
 			<Column variant="halfWidth">
 				{sessionCategory && (
 					<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
-						You are about to delete a session type ("{sessionCategory.name}")
+						You are about to delete a session category ("{sessionCategory.name}")
 					</p>
 				)}
 
-				<Heading>Delete Session Type</Heading>
+				<Heading>Delete Session Category</Heading>
 
 				<DeleteSessionCategoryForm
 					sessionCategory={sessionCategory}

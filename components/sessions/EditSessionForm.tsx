@@ -226,7 +226,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="venueId">
-							Type *<HelpTooltip message={copy.tooltip.type} />
+							Type *<HelpTooltip message={copy.tooltip.category} />
 						</Label>
 
 						<Controller

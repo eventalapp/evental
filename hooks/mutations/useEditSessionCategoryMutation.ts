@@ -36,7 +36,7 @@ export const useEditSessionCategoryMutation = (
 		},
 		{
 			onSuccess: () => {
-				toast.success('Session type edited successfully');
+				toast.success('Session category edited successfully');
 
 				router.push(`/events/${eid}/admin/sessions/categories`).then(() => {
 					void queryClient.invalidateQueries(['type', eid, cid]);
