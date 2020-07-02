@@ -60,7 +60,9 @@ const CreateSessionPage: NextPage = () => {
 
 			<Column>
 				<Heading>Create Session</Heading>
-				//TODO: add what a session is
+
+				{/*TODO: add what a session is*/}
+
 				<CreateSessionForm
 					sessionCategories={sessionCategories}
 					isSessionCategoriesLoading={isSessionCategoriesLoading}
