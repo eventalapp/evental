@@ -220,13 +220,15 @@ export const ViewSession: React.FC<Props> = (props) => {
 						<TooltipIconSkeleton />
 					)}
 
-					{session && session.venue?.name ? (
-						<TooltipIcon
-							icon={faLocationDot}
-							link={`/events/${eid}/venues/${session.venue.slug}`}
-							tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
-							label={session?.venue?.name}
-						/>
+					{session ? (
+						session.venue?.name && (
+							<TooltipIcon
+								icon={faLocationDot}
+								link={`/events/${eid}/venues/${session.venue.slug}`}
+								tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
+								label={session?.venue?.name}
+							/>
+						)
 					) : (
 						<TooltipIconSkeleton />
 					)}
