@@ -4,7 +4,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { StrippedUser } from '../../utils/stripUser';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { Heading } from '../typography/Heading';
@@ -17,7 +17,7 @@ type Props = {
 	sessionCategory?: Prisma.EventSessionCategory;
 	sessions?: SessionWithVenue[];
 	admin?: boolean;
-	user?: PasswordlessUser | undefined;
+	user?: StrippedUser | undefined;
 };
 
 export const ViewSessionCategory: React.FC<Props> = (props) => {

@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { AttendeeWithUser } from '../../utils/stripUser';
 
 export interface UseAttendeesQueryData {
 	attendeesData: AttendeeWithUser[] | undefined;

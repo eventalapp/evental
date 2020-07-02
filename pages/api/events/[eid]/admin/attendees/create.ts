@@ -22,7 +22,7 @@ export default api({
 	async POST({ ctx, req }) {
 		const { eid } = req.query;
 
-		const requestingUser = await ctx.getUser();
+		const requestingUser = await ctx.getStrippedUser();
 
 		if (!requestingUser?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
@@ -100,7 +100,7 @@ export default api({
 			}
 		});
 
-		const attendee = await prisma.eventAttendee.create({
+		await prisma.eventAttendee.create({
 			data: {
 				eventId: event.id,
 				userId: user.id,

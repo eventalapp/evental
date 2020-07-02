@@ -6,7 +6,7 @@ import { api } from '../../../../utils/api';
 
 export default api({
 	async POST({ ctx }) {
-		const user = await ctx.getUser();
+		const user = await ctx.getFullUser();
 
 		if (!user) {
 			throw new NextkitError(404, 'User not found');

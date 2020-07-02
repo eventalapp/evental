@@ -5,10 +5,7 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
-import {
-	AttendeeWithUser,
-	stripAttendeeWithUserPassword
-} from '../../../../../utils/stripUserPassword';
+import { AttendeeWithUser, stripAttendeeWithUser } from '../../../../../utils/stripUser';
 import { getEvent } from '../index';
 import { getVenue } from '../venues/[vid]';
 import { getSessionCategory } from './categories/[cid]';
@@ -107,7 +104,7 @@ export const getSessions = async (eid: string): Promise<SessionWithVenue[] | nul
 
 			return {
 				...sessionAttendee,
-				attendee: stripAttendeeWithUserPassword(attendee)
+				attendee: stripAttendeeWithUser(attendee)
 			};
 		}),
 		...session
@@ -167,7 +164,7 @@ export const getSessionsByVenue = async (
 
 			return {
 				...sessionAttendee,
-				attendee: stripAttendeeWithUserPassword(attendee)
+				attendee: stripAttendeeWithUser(attendee)
 			};
 		}),
 		...session
@@ -244,7 +241,7 @@ export const getSessionsByDate = async (
 
 			return {
 				...sessionAttendee,
-				attendee: stripAttendeeWithUserPassword(attendee)
+				attendee: stripAttendeeWithUser(attendee)
 			};
 		}),
 		...session
@@ -304,7 +301,7 @@ export const getSessionsByCategory = async (
 
 			return {
 				...sessionAttendee,
-				attendee: stripAttendeeWithUserPassword(attendee)
+				attendee: stripAttendeeWithUser(attendee)
 			};
 		}),
 		...session

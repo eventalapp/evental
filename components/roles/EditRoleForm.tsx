@@ -7,7 +7,7 @@ import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutati
 import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 import { copy } from '../../utils/const';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { AttendeeWithUser } from '../../utils/stripUser';
 import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';

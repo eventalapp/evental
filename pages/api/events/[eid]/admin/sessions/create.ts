@@ -8,7 +8,7 @@ import { CreateSessionSchema } from '../../../../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req }) {
-		const user = await ctx.getUser();
+		const user = await ctx.getStrippedUser();
 		const { eid } = req.query;
 
 		if (!user?.id) {

@@ -6,7 +6,7 @@ import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { AdminEditAttendeePayload } from '../../utils/schemas';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { AttendeeWithUser } from '../../utils/stripUser';
 
 export interface UseEditAttendeeMutationData {
 	adminEditAttendeeMutation: UseMutationResult<

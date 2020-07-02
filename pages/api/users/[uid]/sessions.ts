@@ -3,7 +3,7 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
-import { stripAttendeeWithUserPassword } from '../../../../utils/stripUserPassword';
+import { stripAttendeeWithUser } from '../../../../utils/stripUser';
 import { SessionWithVenue } from '../../events/[eid]/sessions';
 import { getUser } from './index';
 
@@ -78,7 +78,7 @@ export const getSessionsByUser = async (uid: string): Promise<SessionWithVenueEv
 
 			return {
 				...sessionAttendee,
-				attendee: stripAttendeeWithUserPassword(attendee)
+				attendee: stripAttendeeWithUser(attendee)
 			};
 		}),
 		...session

@@ -3,22 +3,22 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { StrippedUser } from '../../utils/stripUser';
 
 export interface UseUserData {
-	user: PasswordlessUser | undefined;
+	user: StrippedUser | undefined;
 	isUserLoading: boolean;
 }
 
-export const useUser = (initialData?: PasswordlessUser | undefined): UseUserData => {
+export const useUser = (initialData?: StrippedUser | undefined): UseUserData => {
 	const { data: user, isLoading: isUserLoading } = useQuery<
-		PasswordlessUser | undefined,
+		StrippedUser | undefined,
 		AxiosError<ErroredAPIResponse>
 	>(
 		['user'],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<PasswordlessUser>>(`/api/auth/user`)
+				.get<SuccessAPIResponse<StrippedUser>>(`/api/auth/user`)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					if (err?.response?.status === 401) {

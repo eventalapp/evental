@@ -14,10 +14,10 @@ import Link from 'next/link';
 import React from 'react';
 
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { StrippedUser } from '../../../utils/stripUser';
 
 type Props = {
-	user: PasswordlessUser | undefined;
+	user: StrippedUser | undefined;
 } & UseSignOutMutationData;
 
 export const ProfileDropdown = (props: Props) => {

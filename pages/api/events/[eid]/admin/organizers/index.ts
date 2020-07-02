@@ -2,15 +2,12 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
-import {
-	AttendeeWithUser,
-	stripAttendeesWithUserPassword
-} from '../../../../../../utils/stripUserPassword';
+import { AttendeeWithUser, stripAttendeesWithUser } from '../../../../../../utils/stripUser';
 import { getEvent } from '../../index';
 
 export default api({
 	async GET({ ctx, req }) {
-		const user = await ctx.getUser();
+		const user = await ctx.getStrippedUser();
 		const { eid } = req.query;
 
 		if (!user?.id) {
@@ -45,5 +42,5 @@ export const getOrganizers = async (eid: string): Promise<AttendeeWithUser[] | n
 		}
 	});
 
-	return stripAttendeesWithUserPassword(attendees);
+	return stripAttendeesWithUser(attendees);
 };

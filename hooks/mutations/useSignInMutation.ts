@@ -5,11 +5,11 @@ import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { SignInPayload } from '../../utils/schemas';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { StrippedUser } from '../../utils/stripUser';
 
 export interface UseSignInMutationData {
 	signInMutation: UseMutationResult<
-		PasswordlessUser,
+		StrippedUser,
 		AxiosError<ErroredAPIResponse, unknown>,
 		SignInPayload
 	>;
@@ -25,13 +25,13 @@ export const useSignInMutation = (args: UseSignInMutationOptions = {}): UseSignI
 	const queryClient = useQueryClient();
 
 	const signInMutation = useMutation<
-		PasswordlessUser,
+		StrippedUser,
 		AxiosError<ErroredAPIResponse, unknown>,
 		SignInPayload
 	>(
 		async (data) => {
 			return await axios
-				.post<SuccessAPIResponse<PasswordlessUser>>(`/api/auth/signin`, data)
+				.post<SuccessAPIResponse<StrippedUser>>(`/api/auth/signin`, data)
 				.then((res) => res.data.data);
 		},
 		{

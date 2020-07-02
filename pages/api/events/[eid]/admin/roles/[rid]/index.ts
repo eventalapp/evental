@@ -8,7 +8,7 @@ import { EditRoleSchema } from '../../../../../../../utils/schemas';
 
 export default api({
 	async PUT({ ctx, req }) {
-		const user = await ctx.getUser();
+		const user = await ctx.getStrippedUser();
 		const { eid, rid } = req.query;
 
 		if (!user?.id) {
@@ -120,7 +120,7 @@ export default api({
 		return editedRole;
 	},
 	async DELETE({ req, ctx }) {
-		const user = await ctx.getUser();
+		const user = await ctx.getStrippedUser();
 		const { eid, rid } = req.query;
 
 		if (!user?.id) {

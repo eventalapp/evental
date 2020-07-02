@@ -6,11 +6,11 @@ import { toast } from 'react-toastify';
 
 import { populateFormData } from '../../utils/populateFormData';
 import { EditUserPayload } from '../../utils/schemas';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { StrippedUser } from '../../utils/stripUser';
 
 export interface UseEditUserMutationData {
 	editUserMutation: UseMutationResult<
-		PasswordlessUser,
+		StrippedUser,
 		AxiosError<ErroredAPIResponse, unknown>,
 		EditUserPayload
 	>;
@@ -20,7 +20,7 @@ export const useEditUserMutation = (uid: string): UseEditUserMutationData => {
 	const queryClient = useQueryClient();
 
 	const editUserMutation = useMutation<
-		PasswordlessUser,
+		StrippedUser,
 		AxiosError<ErroredAPIResponse, unknown>,
 		EditUserPayload
 	>(

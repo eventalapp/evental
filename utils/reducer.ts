@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 
 import { SessionWithVenue } from '../pages/api/events/[eid]/sessions';
 import { SessionWithVenueEvent } from '../pages/api/users/[uid]/sessions';
-import { AttendeeWithUser } from './stripUserPassword';
+import { AttendeeWithUser } from './stripUser';
 
 export const sessionListReducer = (
 	acc: Record<string, Record<string, SessionWithVenue[]>>,

@@ -7,6 +7,7 @@ import { sendWelcomeEmail } from '../../../../email/sendWelcomeEmail';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { ClaimProfileSchema } from '../../../../utils/schemas';
+import { stripUser } from '../../../../utils/stripUser';
 
 export default api({
 	async POST({ ctx, req, res }) {
@@ -61,8 +62,6 @@ export default api({
 
 		res.setHeader('Set-Cookie', cookie);
 
-		const { password, ...rest } = user;
-
-		return rest;
+		return stripUser(user);
 	}
 });

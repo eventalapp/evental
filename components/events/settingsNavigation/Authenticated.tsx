@@ -9,7 +9,7 @@ import React from 'react';
 
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 import { faBarsSquare } from '../../../icons';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { StrippedUser } from '../../../utils/stripUser';
 import { FullscreenLinkItem } from '../../navigation/FullscreenLinkItem';
 import { LinkItem } from '../../navigation/LinkItem';
 import { LogoLinkItem } from '../../navigation/LogoLinkItem';
@@ -20,7 +20,7 @@ type Props = {
 	className?: string;
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	user: PasswordlessUser | undefined;
+	user: StrippedUser | undefined;
 	event: Prisma.Event;
 } & UseSignOutMutationData;
 

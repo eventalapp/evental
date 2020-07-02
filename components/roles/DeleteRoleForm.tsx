@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
 import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { AttendeeWithUser } from '../../utils/stripUser';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
