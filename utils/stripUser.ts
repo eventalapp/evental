@@ -1,9 +1,6 @@
 import Prisma from '@prisma/client';
 
-export type StrippedUser = Omit<
-	Prisma.User,
-	'password' | 'email' | 'createdAt' | 'updatedAt' | 'role'
->;
+export type StrippedUser = Omit<Prisma.User, 'password' | 'email' | 'role'>;
 export type FullUser = Omit<Prisma.User, 'password'>;
 
 export type AttendeeWithUser = Prisma.EventAttendee & {
@@ -23,7 +20,7 @@ export const fullUser = (user: Prisma.User): FullUser => {
 };
 
 export const stripUser = (user: Prisma.User): StrippedUser => {
-	const { password, email, ...rest } = user;
+	const { password, email, role, ...rest } = user;
 
 	return rest;
 };
