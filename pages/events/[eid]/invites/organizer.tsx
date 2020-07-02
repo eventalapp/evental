@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { Footer } from '../../../../components/Footer';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { Button } from '../../../../components/form/Button';
 import Column from '../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
@@ -25,7 +25,7 @@ const OrganizerInvitePage: NextPage = () => {
 	const { event, eventError } = useEventQuery(String(eid));
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (!user && !isUserLoading) {

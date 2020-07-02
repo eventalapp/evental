@@ -5,8 +5,8 @@ import React from 'react';
 
 import { Footer } from '../../../../components/Footer';
 import { AttendeeList } from '../../../../components/attendees/AttendeeList';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../../components/events/EventHeader';
 import { EventNavigation } from '../../../../components/events/Navigation';
 import Column from '../../../../components/layout/Column';
@@ -24,7 +24,7 @@ const ViewAttendeePage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (event && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {

@@ -7,8 +7,8 @@ import { Footer } from '../../../../../components/Footer';
 import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
@@ -36,7 +36,7 @@ const AttendeesAdminPage: NextPage = () => {
 	}
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	return (

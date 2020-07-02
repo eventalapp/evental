@@ -29,7 +29,7 @@ const ViewSessionCategoryPage: NextPage = () => {
 	const { sessionsByTypeData } = useSessionsByCategoryQuery(String(eid), String(cid));
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (!sessionCategory) {

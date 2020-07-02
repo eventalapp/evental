@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { Footer } from '../../../../components/Footer';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../../components/events/EventHeader';
@@ -29,7 +28,7 @@ const SessionsPage: NextPage = () => {
 	}
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (event && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {
