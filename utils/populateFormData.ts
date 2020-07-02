@@ -7,7 +7,9 @@ export const populateFormData = (data: Record<string, unknown>) => {
 		} else if (value instanceof Date) {
 			formData.append(key, value.toISOString());
 		} else {
-			formData.append(key, String(value));
+			if (value !== undefined) {
+				formData.append(key, String(value));
+			}
 		}
 	});
 
