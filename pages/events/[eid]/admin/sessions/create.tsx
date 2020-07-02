@@ -63,7 +63,7 @@ const CreateSessionPage: NextPage = () => {
 
 			<Column>
 				<Heading>Create Session</Heading>
-
+				//TODO: add what a session is
 				<CreateSessionForm
 					sessionTypes={sessionTypes}
 					isSessionTypesLoading={isSessionTypesLoading}
