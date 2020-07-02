@@ -22,10 +22,10 @@
 - attach people on session creation
 - attach people -> create attendee (new modal)
 - make event placeholder with year
+- event admin dashboard sidebar
 - make default avatar more neutral
 - hide leave button as founder
 - varchar match schema
-- strip user email
 - user not caching when unauthed (bc rc doesn't cache errors)
 
 try to make your own event, be a user
