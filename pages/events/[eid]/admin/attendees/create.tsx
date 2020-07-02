@@ -11,7 +11,6 @@ import { EventSettingsNavigation } from '../../../../../components/events/settin
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/typography/Heading';
-import { useAdminCreateAttendeeMutation } from '../../../../../hooks/mutations/useAdminCreateAttendeeMutation';
 import { useAttendeesQuery } from '../../../../../hooks/queries/useAttendeesQuery';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -21,12 +20,11 @@ import { useUser } from '../../../../../hooks/queries/useUser';
 const CreateAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { adminCreateAttendeeMutation } = useAdminCreateAttendeeMutation(String(eid));
-	const { user, isUserLoading } = useUser();
-	const { event, isEventLoading } = useEventQuery(String(eid));
-	const { attendeesData, isAttendeesLoading } = useAttendeesQuery(String(eid));
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { user } = useUser();
+	const { event } = useEventQuery(String(eid));
+	const { attendeesData } = useAttendeesQuery(String(eid));
+	const { roles } = useRolesQuery(String(eid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -48,19 +46,15 @@ const CreateAttendeePage: NextPage = () => {
 
 			<EventSettingsNavigation eid={String(eid)} />
 
-			<Column variant="halfWidth">
-				<Heading>Create Attendee Page</Heading>
+			<Column>
+				<Heading className="mb-3">Create Attendee Page</Heading>
 
 				<p className="mb-5 text-gray-600">
 					Filling out the information below will create an placeholder account for this user. They
 					will receive an email with instructions on how to claim their account.
 				</p>
 
-				<AdminCreateAttendeeForm
-					eid={String(eid)}
-					roles={roles}
-					adminCreateAttendeeMutation={adminCreateAttendeeMutation}
-				/>
+				<AdminCreateAttendeeForm eid={String(eid)} roles={roles} />
 			</Column>
 
 			<Footer color={event?.color} />
