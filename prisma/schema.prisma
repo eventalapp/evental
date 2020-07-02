@@ -183,7 +183,7 @@ model EventSessionCategory {
 
   @@unique([eventId, slug])
   @@index([eventId])
-  @@map("event_session_type")
+  @@map("event_session_category")
 }
 
 enum EventSessionAttendeeType {
