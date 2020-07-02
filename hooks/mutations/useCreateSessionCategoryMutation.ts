@@ -46,10 +46,10 @@ export const useCreateSessionCategoryMutation = (
 
 				if (redirect) {
 					router.push(`/events/${eid}/admin/sessions/categories`).then(() => {
-						void queryClient.invalidateQueries(['types', eid]);
+						void queryClient.invalidateQueries(['session-categories', eid]);
 					});
 				} else {
-					void queryClient.invalidateQueries(['types', eid]);
+					void queryClient.invalidateQueries(['session-categories', eid]);
 				}
 			},
 			onError: (error) => {
