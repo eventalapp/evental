@@ -17,6 +17,20 @@
 - rate limit request password reset & verify email request etc
 - session file upload
 - role member session edit
+- google maps embed for addresses
+- default to first available venue
+- range select date picker 
+- bulk create sessions
+- attach people on session creation
+- attach people -> create attendee (new modal)
+- undefined user description
+- rename session type to category
+- make event placeholder with year
+- make default avatar more neutral
+- hide leave button as founder
+- varchar match schema
+
+try to make your own event, be a user
 
 ## post mvp
 
