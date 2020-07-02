@@ -93,11 +93,11 @@
 }
 
 .react-datepicker__day--range-start {
-	@apply bg-primary-500 text-white hover:bg-white hover:text-gray-700;
+	@apply bg-primary-500 text-white hover:border-2 hover:border-primary-500 hover:bg-white hover:text-gray-700;
 }
 
 .react-datepicker__day--range-end {
-	@apply bg-primary-500 text-white hover:bg-white hover:text-gray-700;
+	@apply bg-primary-500 text-white hover:border-2 hover:border-primary-500 hover:bg-white hover:text-gray-700;
 }
 
 .Toastify__toast-container--top-right {
