@@ -24,7 +24,10 @@ const titleValidator = z
 	.min(3, 'Title must be at least 3 characters')
 	.max(100, 'Title must be less than 100 characters');
 const addressValidator = z.string().max(100, 'Address must be less than 100 characters');
-const dateValidator = z.preprocess((val) => new Date(val as string | Date), z.date());
+const dateValidator = z.preprocess(
+	(val) => (val ? new Date(val as string | Date) : null),
+	z.date()
+);
 const descriptionValidator = z.string().max(3000, 'Description must be less than 3000 characters');
 const emailValidator = z
 	.string()
@@ -120,7 +123,7 @@ export const CreateSessionSchema = z.object({
 	startDate: dateValidator,
 	maxAttendees: z.number().nullable().optional(),
 	endDate: dateValidator,
-	typeId: typeIdValidator,
+	categoryId: typeIdValidator,
 	description: descriptionValidator.optional()
 });
 
@@ -132,27 +135,27 @@ export const EditSessionSchema = z.object({
 	startDate: dateValidator,
 	maxAttendees: z.number().nullable().optional(),
 	endDate: dateValidator,
-	typeId: typeIdValidator,
+	categoryId: typeIdValidator,
 	description: descriptionValidator.optional()
 });
 
 export type EditSessionPayload = z.infer<typeof EditSessionSchema>;
 
-// Session Types
+// Session Categories
 
-export const CreateSessionTypeSchema = z.object({
+export const CreateSessionCategorySchema = z.object({
 	name: nameValidator,
 	color: z.string()
 });
 
-export type CreateSessionTypePayload = z.infer<typeof CreateSessionTypeSchema>;
+export type CreateSessionCategoryPayload = z.infer<typeof CreateSessionCategorySchema>;
 
-export const EditSessionTypeSchema = z.object({
+export const EditSessionCategorySchema = z.object({
 	name: nameValidator,
 	color: z.string()
 });
 
-export type EditSessionTypePayload = z.infer<typeof EditSessionTypeSchema>;
+export type EditSessionCategoryPayload = z.infer<typeof EditSessionCategorySchema>;
 
 // Event
 

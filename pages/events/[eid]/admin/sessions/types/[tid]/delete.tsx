@@ -9,27 +9,26 @@ import { UnauthorizedPage } from '../../../../../../../components/error/Unauthor
 import { EventSettingsNavigation } from '../../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
-import { DeleteSessionTypeForm } from '../../../../../../../components/sessions/DeleteSessionTypeForm';
+import { DeleteSessionCategoryForm } from '../../../../../../../components/sessions/DeleteSessionCategoryForm';
 import { Heading } from '../../../../../../../components/typography/Heading';
-import { useDeleteSessionTypeMutation } from '../../../../../../../hooks/mutations/useDeleteSessionTypeMutation';
+import { useDeleteSessionCategoryMutation } from '../../../../../../../hooks/mutations/useDeleteSessionCategoryMutation';
 import { useEventQuery } from '../../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../../../hooks/queries/useRolesQuery';
-import { useSessionTypeQuery } from '../../../../../../../hooks/queries/useSessionTypeQuery';
+import { useSessionCategoryQuery } from '../../../../../../../hooks/queries/useSessionCategoryQuery';
 import { useUser } from '../../../../../../../hooks/queries/useUser';
 
-const DeleteSessionTypePage: NextPage = () => {
+const DeleteSessionCategoryPage: NextPage = () => {
 	const router = useRouter();
-	const { eid, tid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { sessionType, isSessionTypeLoading, sessionTypeError } = useSessionTypeQuery(
+	const { eid, cid } = router.query;
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { sessionCategory, isSessionCategoryLoading, sessionCategoryError } =
+		useSessionCategoryQuery(String(eid), String(cid));
+	const { deleteSessionCategoryMutation } = useDeleteSessionCategoryMutation(
 		String(eid),
-		String(tid)
+		String(cid)
 	);
-	const { deleteSessionTypeMutation } = useDeleteSessionTypeMutation(String(eid), String(tid));
-	const { user, isUserLoading } = useUser();
+	const { user } = useUser();
 	const { event, eventError } = useEventQuery(String(eid));
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -39,7 +38,7 @@ const DeleteSessionTypePage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (sessionTypeError) {
+	if (sessionCategoryError) {
 		return <NotFoundPage message="Session type not found" />;
 	}
 
@@ -50,25 +49,25 @@ const DeleteSessionTypePage: NextPage = () => {
 	return (
 		<PageWrapper>
 			<Head>
-				<title>Delete SessionType</title>
+				<title>Delete SessionCategory</title>
 			</Head>
 
 			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
-				{sessionType && (
+				{sessionCategory && (
 					<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
-						You are about to delete a session type ("{sessionType.name}")
+						You are about to delete a session type ("{sessionCategory.name}")
 					</p>
 				)}
 
 				<Heading>Delete Session Type</Heading>
 
-				<DeleteSessionTypeForm
-					sessionType={sessionType}
-					isSessionTypeLoading={isSessionTypeLoading}
-					sessionTypeError={sessionTypeError}
-					deleteSessionTypeMutation={deleteSessionTypeMutation}
+				<DeleteSessionCategoryForm
+					sessionCategory={sessionCategory}
+					isSessionCategoryLoading={isSessionCategoryLoading}
+					sessionCategoryError={sessionCategoryError}
+					deleteSessionCategoryMutation={deleteSessionCategoryMutation}
 				/>
 			</Column>
 
@@ -77,4 +76,4 @@ const DeleteSessionTypePage: NextPage = () => {
 	);
 };
 
-export default DeleteSessionTypePage;
+export default DeleteSessionCategoryPage;

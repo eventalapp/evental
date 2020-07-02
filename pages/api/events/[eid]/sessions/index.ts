@@ -11,18 +11,18 @@ import {
 } from '../../../../../utils/stripUserPassword';
 import { getEvent } from '../index';
 import { getVenue } from '../venues/[vid]';
-import { getSessionType } from './types/[tid]';
+import { getSessionCategory } from './categories/[cid]';
 
 export type SessionWithVenue = {
 	venue: Prisma.EventVenue | null;
-	type: Prisma.EventSessionType | null;
+	category: Prisma.EventSessionCategory | null;
 	attendeeCount: number;
 	roleMembers: Array<Prisma.EventSessionAttendee & { attendee: AttendeeWithUser }>;
 } & Prisma.EventSession;
 
 export default api({
 	async GET({ req }) {
-		const { eid, venue, date, type } = req.query;
+		const { eid, venue, date, category } = req.query;
 
 		if (venue) {
 			const sessionByVenueList = await getSessionsByVenue(String(eid), String(venue));
@@ -44,8 +44,8 @@ export default api({
 			return sessionByDateList;
 		}
 
-		if (type) {
-			const sessionByTypeList = await getSessionsByType(String(eid), String(type));
+		if (category) {
+			const sessionByTypeList = await getSessionsByCategory(String(eid), String(category));
 
 			if (!sessionByTypeList) {
 				throw new NextkitError(404, 'Sessions by type not found');
@@ -77,7 +77,7 @@ export const getSessions = async (eid: string): Promise<SessionWithVenue[] | nul
 		},
 		include: {
 			venue: true,
-			type: true,
+			category: true,
 			_count: {
 				select: { attendees: true }
 			},
@@ -137,7 +137,7 @@ export const getSessionsByVenue = async (
 		},
 		include: {
 			venue: true,
-			type: true,
+			category: true,
 			_count: {
 				select: { attendees: true }
 			},
@@ -214,7 +214,7 @@ export const getSessionsByDate = async (
 		},
 		include: {
 			venue: true,
-			type: true,
+			category: true,
 			_count: {
 				select: { attendees: true }
 			},
@@ -251,9 +251,9 @@ export const getSessionsByDate = async (
 	}));
 };
 
-export const getSessionsByType = async (
+export const getSessionsByCategory = async (
 	eid: string,
-	tid: string
+	cid: string
 ): Promise<SessionWithVenue[] | null> => {
 	const event = await getEvent(eid);
 
@@ -261,7 +261,7 @@ export const getSessionsByType = async (
 		return null;
 	}
 
-	const type = await getSessionType(eid, tid);
+	const type = await getSessionCategory(eid, cid);
 
 	if (!type) {
 		return null;
@@ -270,11 +270,11 @@ export const getSessionsByType = async (
 	const sessions = await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id,
-			typeId: type.id
+			categoryId: type.id
 		},
 		include: {
 			venue: true,
-			type: true,
+			category: true,
 			_count: {
 				select: { attendees: true }
 			},

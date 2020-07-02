@@ -12,44 +12,49 @@ import Tooltip from '../radix/components/Tooltip';
 type Props = {
 	eid: string;
 	admin?: boolean;
-	sessionTypes?: Prisma.EventSessionType[];
+	sessionCategories?: Prisma.EventSessionCategory[];
 };
 
-export const SessionTypeList: React.FC<Props> = (props) => {
-	const { eid, sessionTypes, admin = false } = props;
+export const SessionCategoryList: React.FC<Props> = (props) => {
+	const { eid, sessionCategories, admin = false } = props;
 
-	if (sessionTypes && sessionTypes?.length === 0) {
+	if (sessionCategories && sessionCategories?.length === 0) {
 		return <NotFound message="No session types found." />;
 	}
 
 	return (
 		<div className="mt-3">
-			{sessionTypes
-				? sessionTypes.map((sessionType, i) => {
+			{sessionCategories
+				? sessionCategories.map((sessionCategory, i) => {
 						return (
 							<Link
-								href={`/events/${eid}${admin ? '/admin' : ''}/sessions/types/${sessionType.slug}`}
-								key={sessionType.id}
+								href={`/events/${eid}${admin ? '/admin' : ''}/sessions/categories/${
+									sessionCategory.slug
+								}`}
+								key={sessionCategory.id}
 							>
 								<a>
 									<div
 										className={classNames(
 											'flex flex-row border-gray-200 bg-white',
-											i !== sessionTypes.length - 1 && 'border-b'
+											i !== sessionCategories.length - 1 && 'border-b'
 										)}
 									>
 										<div className="-mx-3 flex grow flex-row flex-wrap items-center justify-between rounded-md p-3 hover:bg-gray-75">
 											<div className="flex flex-row items-center justify-between">
 												<div
 													className="mr-3 h-3.5 w-3.5 rounded-full"
-													style={{ backgroundColor: sessionType.color ?? '#888888' }}
+													style={{ backgroundColor: sessionCategory.color ?? '#888888' }}
 												/>
 												<div>
-													<span className="text-xl">{sessionType.name}</span>
+													<span className="text-xl">{sessionCategory.name}</span>
 												</div>
 											</div>
 
-											<Tooltip side={'top'} message={`Click to view the ${sessionType.name} type`}>
+											<Tooltip
+												side={'top'}
+												message={`Click to view the ${sessionCategory.name} type`}
+											>
 												<div className="-m-2 flex items-center justify-center p-2">
 													<FontAwesomeIcon
 														fill="currentColor"

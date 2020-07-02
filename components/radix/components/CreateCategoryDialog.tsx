@@ -7,9 +7,9 @@ import React, { Fragment, useState } from 'react';
 import { CirclePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useCreateSessionTypeMutation } from '../../../hooks/mutations/useCreateSessionTypeMutation';
+import { useCreateSessionCategoryMutation } from '../../../hooks/mutations/useCreateSessionCategoryMutation';
 import { colors, copy } from '../../../utils/const';
-import { CreateSessionTypePayload, CreateSessionTypeSchema } from '../../../utils/schemas';
+import { CreateSessionCategoryPayload, CreateSessionCategorySchema } from '../../../utils/schemas';
 import { HelpTooltip } from '../../HelpTooltip';
 import { LoadingInner } from '../../error/LoadingInner';
 import { Button } from '../../form/Button';
@@ -21,12 +21,12 @@ interface Props {
 	eid: string;
 }
 
-const CreateTypeDialog: React.FC<Props> = (props) => {
+const CreateCategoryDialog: React.FC<Props> = (props) => {
 	const { eid, children } = props;
 
 	let [isOpen, setIsOpen] = useState(false);
 
-	const { createSessionTypeMutation } = useCreateSessionTypeMutation(String(eid), {
+	const { createSessionCategoryMutation } = useCreateSessionCategoryMutation(String(eid), {
 		redirect: false
 	});
 
@@ -37,11 +37,11 @@ const CreateTypeDialog: React.FC<Props> = (props) => {
 		watch,
 		reset,
 		formState: { errors }
-	} = useForm<CreateSessionTypePayload>({
+	} = useForm<CreateSessionCategoryPayload>({
 		defaultValues: {
 			color: colors[0]
 		},
-		resolver: zodResolver(CreateSessionTypeSchema)
+		resolver: zodResolver(CreateSessionCategorySchema)
 	});
 
 	const colorWatcher = watch('color');
@@ -135,14 +135,14 @@ const CreateTypeDialog: React.FC<Props> = (props) => {
 									'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 								)}
 								style={{ backgroundColor: colorWatcher, color: '#000000' }}
-								disabled={createSessionTypeMutation.isLoading}
+								disabled={createSessionCategoryMutation.isLoading}
 								onClick={handleSubmit((data) => {
-									createSessionTypeMutation.mutate(data);
+									createSessionCategoryMutation.mutate(data);
 									setIsOpen(false);
 									reset();
 								})}
 							>
-								{createSessionTypeMutation.isLoading ? <LoadingInner /> : 'Create Type'}
+								{createSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Create Type'}
 							</DialogPrimitive.Close>
 						</div>
 
@@ -161,4 +161,4 @@ const CreateTypeDialog: React.FC<Props> = (props) => {
 	);
 };
 
-export default CreateTypeDialog;
+export default CreateCategoryDialog;

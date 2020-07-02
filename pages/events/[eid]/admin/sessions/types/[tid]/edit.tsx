@@ -10,29 +10,25 @@ import { ViewErrorPage } from '../../../../../../../components/error/ViewErrorPa
 import { EventSettingsNavigation } from '../../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
-import { EditSessionTypeForm } from '../../../../../../../components/sessions/EditSessionTypeForm';
+import { EditSessionCategoryForm } from '../../../../../../../components/sessions/EditSessionCategoryForm';
 import { Heading } from '../../../../../../../components/typography/Heading';
-import { useEditSessionTypeMutation } from '../../../../../../../hooks/mutations/useEditSessionTypeMutation';
+import { useEditSessionCategoryMutation } from '../../../../../../../hooks/mutations/useEditSessionCategoryMutation';
 import { useEventQuery } from '../../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../../../hooks/queries/useRolesQuery';
-import { useSessionTypeQuery } from '../../../../../../../hooks/queries/useSessionTypeQuery';
+import { useSessionCategoryQuery } from '../../../../../../../hooks/queries/useSessionCategoryQuery';
 import { useUser } from '../../../../../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../../../../../hooks/queries/useVenuesQuery';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();
-	const { eid, tid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { user, isUserLoading } = useUser();
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-	const { editSessionTypeMutation } = useEditSessionTypeMutation(String(eid), String(tid));
-	const { isSessionTypeLoading, sessionType, sessionTypeError } = useSessionTypeQuery(
-		String(eid),
-		String(tid)
-	);
+	const { eid, cid } = router.query;
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { venues, venuesError } = useVenuesQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
+	const { user } = useUser();
+	const { editSessionCategoryMutation } = useEditSessionCategoryMutation(String(eid), String(cid));
+	const { isSessionCategoryLoading, sessionCategory, sessionCategoryError } =
+		useSessionCategoryQuery(String(eid), String(cid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -42,7 +38,7 @@ const EditSessionPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!sessionType) {
+	if (!sessionCategory) {
 		return <NotFoundPage message="Session not found" />;
 	}
 
@@ -69,11 +65,11 @@ const EditSessionPage: NextPage = () => {
 			<Column>
 				<Heading>Edit Session Type</Heading>
 
-				<EditSessionTypeForm
-					sessionType={sessionType}
-					isSessionTypeLoading={isSessionTypeLoading}
-					sessionTypeError={sessionTypeError}
-					editSessionTypeMutation={editSessionTypeMutation}
+				<EditSessionCategoryForm
+					sessionCategory={sessionCategory}
+					isSessionCategoryLoading={isSessionCategoryLoading}
+					sessionCategoryError={sessionCategoryError}
+					editSessionCategoryMutation={editSessionCategoryMutation}
 				/>
 			</Column>
 

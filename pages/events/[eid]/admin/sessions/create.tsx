@@ -15,23 +15,20 @@ import { Heading } from '../../../../../components/typography/Heading';
 import { useCreateSessionMutation } from '../../../../../hooks/mutations/useCreateSessionMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
-import { useSessionTypesQuery } from '../../../../../hooks/queries/useSessionTypesQuery';
+import { useSessionCategoriesQuery } from '../../../../../hooks/queries/useSessionCategoriesQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 
 const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
 	const { createSessionMutation } = useCreateSessionMutation(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { user, isUserLoading } = useUser();
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-	const { sessionTypes, isSessionTypesLoading, sessionTypesError } = useSessionTypesQuery(
-		String(eid)
-	);
+	const { user } = useUser();
+	const { sessionCategories, isSessionCategoriesLoading, sessionCategoriesError } =
+		useSessionCategoriesQuery(String(eid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -65,9 +62,9 @@ const CreateSessionPage: NextPage = () => {
 				<Heading>Create Session</Heading>
 				//TODO: add what a session is
 				<CreateSessionForm
-					sessionTypes={sessionTypes}
-					isSessionTypesLoading={isSessionTypesLoading}
-					sessionTypesError={sessionTypesError}
+					sessionCategories={sessionCategories}
+					isSessionCategoriesLoading={isSessionCategoriesLoading}
+					sessionCategoriesError={sessionCategoriesError}
 					eid={String(eid)}
 					venues={venues}
 					venuesError={venuesError}

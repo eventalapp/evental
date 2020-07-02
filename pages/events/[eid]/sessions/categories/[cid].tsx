@@ -9,20 +9,20 @@ import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { EventNavigation } from '../../../../../components/events/Navigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { ViewSessionType } from '../../../../../components/sessions/ViewSessionType';
+import { ViewSessionCategory } from '../../../../../components/sessions/ViewSessionCategory';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useSessionTypeQuery } from '../../../../../hooks/queries/useSessionTypeQuery';
-import { useSessionsByTypeQuery } from '../../../../../hooks/queries/useSessionsByTypeQuery';
+import { useSessionCategoryQuery } from '../../../../../hooks/queries/useSessionCategoryQuery';
+import { useSessionsByCategoryQuery } from '../../../../../hooks/queries/useSessionsByCategoryQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
 
-const ViewSessionTypePage: NextPage = () => {
+const ViewSessionCategoryPage: NextPage = () => {
 	const router = useRouter();
-	const { tid, eid } = router.query;
+	const { cid, eid } = router.query;
 	const { user } = useUser();
 	const { event, eventError } = useEventQuery(String(eid));
-	const { sessionType } = useSessionTypeQuery(String(eid), String(tid));
-	const { sessionsByTypeData } = useSessionsByTypeQuery(String(eid), String(tid));
+	const { sessionCategory } = useSessionCategoryQuery(String(eid), String(cid));
+	const { sessionsByTypeData } = useSessionsByCategoryQuery(String(eid), String(cid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
 	if (eventError) {
@@ -35,10 +35,10 @@ const ViewSessionTypePage: NextPage = () => {
 
 	return (
 		<PageWrapper>
-			{event && sessionType && (
+			{event && sessionCategory && (
 				<NextSeo
-					title={`${sessionType.name} — ${event.name}`}
-					description={`View all of the ${sessionType.name} sessions.`}
+					title={`${sessionCategory.name} — ${event.name}`}
+					description={`View all of the ${sessionCategory.name} sessions.`}
 					additionalLinkTags={[
 						{
 							rel: 'icon',
@@ -46,9 +46,9 @@ const ViewSessionTypePage: NextPage = () => {
 						}
 					]}
 					openGraph={{
-						url: `https://evental.app/events/${event.slug}/sessions/types/${sessionType.slug}`,
-						title: `${sessionType.name} — ${event.name}`,
-						description: `View all of the ${sessionType.name} sessions.`,
+						url: `https://evental.app/events/${event.slug}/sessions/categories/${sessionCategory.slug}`,
+						title: `${sessionCategory.name} — ${event.name}`,
+						description: `View all of the ${sessionCategory.name} sessions.`,
 						images: [
 							{
 								url: `https://cdn.evental.app${event.image}`,
@@ -65,10 +65,10 @@ const ViewSessionTypePage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
-				<ViewSessionType
-					sessionType={sessionType}
+				<ViewSessionCategory
+					sessionCategory={sessionCategory}
 					eid={String(eid)}
-					tid={String(tid)}
+					cid={String(cid)}
 					sessions={sessionsByTypeData}
 					event={event}
 					user={user}
@@ -80,4 +80,4 @@ const ViewSessionTypePage: NextPage = () => {
 	);
 };
 
-export default ViewSessionTypePage;
+export default ViewSessionCategoryPage;

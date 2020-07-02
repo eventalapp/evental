@@ -10,22 +10,20 @@ import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage'
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { CreateSessionTypeForm } from '../../../../../../components/sessions/CreateSessionTypeForm';
+import { CreateSessionCategoryForm } from '../../../../../../components/sessions/CreateSessionCategoryForm';
 import { Heading } from '../../../../../../components/typography/Heading';
-import { useCreateSessionTypeMutation } from '../../../../../../hooks/mutations/useCreateSessionTypeMutation';
+import { useCreateSessionCategoryMutation } from '../../../../../../hooks/mutations/useCreateSessionCategoryMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { user, isUserLoading } = useUser();
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-	const { createSessionTypeMutation } = useCreateSessionTypeMutation(String(eid));
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
+	const { user } = useUser();
+	const { createSessionCategoryMutation } = useCreateSessionCategoryMutation(String(eid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -54,7 +52,7 @@ const CreateSessionPage: NextPage = () => {
 			<Column>
 				<Heading>Create Session Types</Heading>
 
-				<CreateSessionTypeForm createSessionTypeMutation={createSessionTypeMutation} />
+				<CreateSessionCategoryForm createSessionCategoryMutation={createSessionCategoryMutation} />
 			</Column>
 
 			<Footer color={event?.color} />

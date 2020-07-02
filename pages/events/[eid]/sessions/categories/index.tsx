@@ -9,17 +9,17 @@ import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { EventNavigation } from '../../../../../components/events/Navigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SessionTypeList } from '../../../../../components/sessions/SessionTypeList';
+import { SessionCategoryList } from '../../../../../components/sessions/SessionCategoryList';
 import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useSessionTypesQuery } from '../../../../../hooks/queries/useSessionTypesQuery';
+import { useSessionCategoriesQuery } from '../../../../../hooks/queries/useSessionCategoriesQuery';
 
-const SessionTypesPage: NextPage = () => {
+const SessionCategoriesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { event, eventError } = useEventQuery(String(eid));
-	const { sessionTypes } = useSessionTypesQuery(String(eid));
+	const { sessionCategories } = useSessionCategoriesQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
 	if (eventError) {
@@ -34,7 +34,7 @@ const SessionTypesPage: NextPage = () => {
 		<PageWrapper>
 			{event && (
 				<NextSeo
-					title={`Sessions Types — ${event.name}`}
+					title={`Sessions Categories — ${event.name}`}
 					description={`View all of the sessions types for ${event.name}.`}
 					additionalLinkTags={[
 						{
@@ -43,7 +43,7 @@ const SessionTypesPage: NextPage = () => {
 						}
 					]}
 					openGraph={{
-						url: `https://evental.app/events/${event.slug}/sessions/types`,
+						url: `https://evental.app/events/${event.slug}/sessions/categories`,
 						title: `Session Types — ${event.name}`,
 						description: `View all of the sessions types for ${event.name}.`,
 						images: [
@@ -63,9 +63,9 @@ const SessionTypesPage: NextPage = () => {
 
 			<Column>
 				<div>
-					<Heading>Session Types</Heading>
+					<Heading>Session Categories</Heading>
 
-					<SessionTypeList eid={String(eid)} sessionTypes={sessionTypes} />
+					<SessionCategoryList eid={String(eid)} sessionCategories={sessionCategories} />
 				</div>
 			</Column>
 
@@ -74,4 +74,4 @@ const SessionTypesPage: NextPage = () => {
 	);
 };
 
-export default SessionTypesPage;
+export default SessionCategoriesPage;

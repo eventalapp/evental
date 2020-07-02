@@ -4,7 +4,7 @@ import { prisma } from '../../../../../../../prisma/client';
 import { api } from '../../../../../../../utils/api';
 import { generateSlug } from '../../../../../../../utils/generateSlug';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
-import { CreateSessionTypeSchema } from '../../../../../../../utils/schemas';
+import { CreateSessionCategorySchema } from '../../../../../../../utils/schemas';
 import { getEvent } from '../../../index';
 
 export default api({
@@ -27,7 +27,7 @@ export default api({
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
-		const body = CreateSessionTypeSchema.parse(req.body);
+		const body = CreateSessionCategorySchema.parse(req.body);
 
 		const event = await getEvent(String(eid));
 
@@ -37,7 +37,7 @@ export default api({
 
 		const slug = await generateSlug(body.name, async (val) => {
 			return !Boolean(
-				await prisma.eventSessionType.findFirst({
+				await prisma.eventSessionCategory.findFirst({
 					where: {
 						eventId: event.id,
 						slug: val
@@ -46,7 +46,7 @@ export default api({
 			);
 		});
 
-		let createdSessionType = await prisma.eventSessionType.create({
+		let createdSessionCategory = await prisma.eventSessionCategory.create({
 			data: {
 				eventId: event.id,
 				slug: slug,
@@ -55,10 +55,10 @@ export default api({
 			}
 		});
 
-		if (!createdSessionType) {
+		if (!createdSessionCategory) {
 			throw new NextkitError(500, 'Error creating session.');
 		}
 
-		return createdSessionType;
+		return createdSessionCategory;
 	}
 });

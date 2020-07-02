@@ -9,24 +9,26 @@ export default api({
 	async GET({ req }) {
 		const { eid } = req.query;
 
-		const sessionTypeList = await getSessionTypes(String(eid));
+		const sessionCategoryList = await getSessionCategories(String(eid));
 
-		if (!sessionTypeList) {
+		if (!sessionCategoryList) {
 			throw new NextkitError(404, 'Session types not found');
 		}
 
-		return sessionTypeList;
+		return sessionCategoryList;
 	}
 });
 
-export const getSessionTypes = async (eid: string): Promise<Prisma.EventSessionType[] | null> => {
+export const getSessionCategories = async (
+	eid: string
+): Promise<Prisma.EventSessionCategory[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
 		return null;
 	}
 
-	return await prisma.eventSessionType.findMany({
+	return await prisma.eventSessionCategory.findMany({
 		where: {
 			eventId: event.id
 		}

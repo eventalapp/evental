@@ -163,7 +163,7 @@ const PricingPage: NextPage = () => {
 							<li>Responsive event website</li>
 							<li>Customizable event branding</li>
 							<li>Control event privacy &amp; access</li>
-							<li>Unlimited sessions, venues, pages, types, and roles</li>
+							<li>Unlimited sessions, venues, pages, categories, and roles</li>
 							<li>Create custom top-level and standard pages</li>
 						</ul>
 					</div>

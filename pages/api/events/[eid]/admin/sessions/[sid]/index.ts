@@ -133,7 +133,7 @@ export default api({
 				startDate: dayjs(body.startDate).tz(event.timeZone).toDate(),
 				endDate: dayjs(body.endDate).tz(event.timeZone).toDate(),
 				description: body.description,
-				typeId: body.typeId
+				categoryId: body.categoryId
 			}
 		});
 

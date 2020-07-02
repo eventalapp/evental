@@ -9,35 +9,30 @@ import { ViewErrorPage } from '../../../../../../../components/error/ViewErrorPa
 import { EventSettingsNavigation } from '../../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
-import { ViewSessionType } from '../../../../../../../components/sessions/ViewSessionType';
+import { ViewSessionCategory } from '../../../../../../../components/sessions/ViewSessionCategory';
 import { useEventQuery } from '../../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../../../hooks/queries/useRolesQuery';
-import { useSessionTypeQuery } from '../../../../../../../hooks/queries/useSessionTypeQuery';
-import { useSessionsByTypeQuery } from '../../../../../../../hooks/queries/useSessionsByTypeQuery';
+import { useSessionCategoryQuery } from '../../../../../../../hooks/queries/useSessionCategoryQuery';
+import { useSessionsByCategoryQuery } from '../../../../../../../hooks/queries/useSessionsByCategoryQuery';
 import { useUser } from '../../../../../../../hooks/queries/useUser';
 
-const ViewSessionTypePage: NextPage = () => {
+const ViewSessionCategoryPage: NextPage = () => {
 	const router = useRouter();
-	const { tid, eid } = router.query;
+	const { cid, eid } = router.query;
 	const { user } = useUser();
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
-	const { isSessionTypeLoading, sessionType, sessionTypeError } = useSessionTypeQuery(
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
+	const { sessionCategory, sessionCategoryError } = useSessionCategoryQuery(
 		String(eid),
-		String(tid)
+		String(cid)
 	);
-	const { sessionsByTypeData, isSessionsByTypeLoading } = useSessionsByTypeQuery(
-		String(eid),
-		String(tid)
-	);
+	const { sessionsByTypeData } = useSessionsByCategoryQuery(String(eid), String(cid));
 
 	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
-	if (!sessionType) {
+	if (!sessionCategory) {
 		return <NotFoundPage message="Session Type not found." />;
 	}
 
@@ -45,8 +40,8 @@ const ViewSessionTypePage: NextPage = () => {
 		return <NotFoundPage message="Sessions not found." />;
 	}
 
-	if (sessionTypeError || rolesError || eventError) {
-		return <ViewErrorPage errors={[sessionTypeError, eventError, rolesError]} />;
+	if (sessionCategoryError || eventError) {
+		return <ViewErrorPage errors={[sessionCategoryError, eventError]} />;
 	}
 
 	if (!isOrganizer) {
@@ -62,10 +57,10 @@ const ViewSessionTypePage: NextPage = () => {
 			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
-				<ViewSessionType
-					sessionType={sessionType}
+				<ViewSessionCategory
+					sessionCategory={sessionCategory}
 					eid={String(eid)}
-					tid={String(tid)}
+					cid={String(cid)}
 					sessions={sessionsByTypeData}
 					event={event}
 					user={user}
@@ -78,4 +73,4 @@ const ViewSessionTypePage: NextPage = () => {
 	);
 };
 
-export default ViewSessionTypePage;
+export default ViewSessionCategoryPage;

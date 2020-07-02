@@ -5,31 +5,31 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { EditSessionTypePayload } from '../../utils/schemas';
+import { EditSessionCategoryPayload } from '../../utils/schemas';
 
-export interface UseEditSessionTypeMutationData {
-	editSessionTypeMutation: UseMutationResult<
-		Prisma.EventSessionType,
+export interface UseEditSessionCategoryMutationData {
+	editSessionCategoryMutation: UseMutationResult<
+		Prisma.EventSessionCategory,
 		AxiosError<ErroredAPIResponse, unknown>,
-		EditSessionTypePayload
+		EditSessionCategoryPayload
 	>;
 }
 
-export const useEditSessionTypeMutation = (
+export const useEditSessionCategoryMutation = (
 	eid: string,
-	tid: string
-): UseEditSessionTypeMutationData => {
+	cid: string
+): UseEditSessionCategoryMutationData => {
 	const queryClient = useQueryClient();
 
-	const editSessionTypeMutation = useMutation<
-		Prisma.EventSessionType,
+	const editSessionCategoryMutation = useMutation<
+		Prisma.EventSessionCategory,
 		AxiosError<ErroredAPIResponse, unknown>,
-		EditSessionTypePayload
+		EditSessionCategoryPayload
 	>(
 		async (data) => {
 			return await axios
-				.put<SuccessAPIResponse<Prisma.EventSessionType>>(
-					`/api/events/${eid}/admin/sessions/types/${tid}`,
+				.put<SuccessAPIResponse<Prisma.EventSessionCategory>>(
+					`/api/events/${eid}/admin/sessions/categories/${cid}`,
 					data
 				)
 				.then((res) => res.data.data);
@@ -38,8 +38,8 @@ export const useEditSessionTypeMutation = (
 			onSuccess: () => {
 				toast.success('Session type edited successfully');
 
-				router.push(`/events/${eid}/admin/sessions/types`).then(() => {
-					void queryClient.invalidateQueries(['type', eid, tid]);
+				router.push(`/events/${eid}/admin/sessions/categories`).then(() => {
+					void queryClient.invalidateQueries(['type', eid, cid]);
 					void queryClient.invalidateQueries(['types', eid]);
 				});
 			},
@@ -49,5 +49,5 @@ export const useEditSessionTypeMutation = (
 		}
 	);
 
-	return { editSessionTypeMutation };
+	return { editSessionCategoryMutation };
 };

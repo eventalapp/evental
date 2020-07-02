@@ -18,7 +18,7 @@ import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionsByDateQuery } from '../../../../../hooks/queries/useSessionsByDateQuery';
 
-const ViewSessionTypePage: NextPage = () => {
+const ViewSessionCategoryPage: NextPage = () => {
 	const router = useRouter();
 	const { date, eid } = router.query;
 	const { event, eventError } = useEventQuery(String(eid));
@@ -94,4 +94,4 @@ const ViewSessionTypePage: NextPage = () => {
 	);
 };
 
-export default ViewSessionTypePage;
+export default ViewSessionCategoryPage;
