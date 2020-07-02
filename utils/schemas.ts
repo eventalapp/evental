@@ -11,7 +11,7 @@ const slugValidator = z
 	.string()
 	.min(1, 'Slug is required.')
 	.min(3, 'Slug must be at least 3 characters')
-	.max(40, 'Slug must be less than 40 characters')
+	.max(100, 'Slug must be less than 100 characters')
 	.regex(new RegExp(/^(?!-)(?!.*-$).+$/), 'Slug cannot start or end with a hyphen.');
 const nameValidator = z
 	.string()
