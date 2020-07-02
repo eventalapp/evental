@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseEditAttendeeMutationData } from '../../hooks/mutations/useEditAttendeeMutation';
-import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
+import { useEditAttendeeMutation } from '../../hooks/mutations/useEditAttendeeMutation';
+import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
@@ -17,18 +17,18 @@ import { Label } from '../form/Label';
 import CreateRoleDialog from '../radix/components/CreateRoleDialog';
 import Select from '../radix/components/Select';
 
-type Props = { eid: string } & DetailedHTMLProps<
-	FormHTMLAttributes<HTMLFormElement>,
-	HTMLFormElement
-> &
-	UseEditAttendeeMutationData &
-	UseAttendeeQueryData &
-	UseRolesQueryData &
-	UseImageUploadMutationData;
+type Props = {
+	eid: string;
+	uid: string;
+	attendee: UseAttendeeQueryData['attendee'];
+	roles: UseRolesQueryData['roles'];
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { adminEditAttendeeMutation, attendee, roles, eid, imageUploadMutation } = props;
+	const { attendee, roles, eid, uid } = props;
+	const { adminEditAttendeeMutation } = useEditAttendeeMutation(String(eid), String(uid));
+	const { imageUploadMutation } = useImageUploadMutation();
 	const {
 		handleSubmit,
 		control,

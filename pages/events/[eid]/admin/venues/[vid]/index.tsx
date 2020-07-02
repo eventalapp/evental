@@ -1,18 +1,14 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import React from 'react';
 
-import { Footer } from '../../../../../../components/Footer';
-import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
-import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import { AdminPageWrapper } from '../../../../../../components/AdminPageWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { SidebarWrapper } from '../../../../../../components/sidebar/SidebarWrapper';
 import { ViewVenue } from '../../../../../../components/venues/ViewVenue';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
@@ -20,54 +16,37 @@ import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 const ViewVenuePage: NextPage = () => {
 	const router = useRouter();
 	const { vid, eid } = router.query;
-	const { venue, isVenueLoading, venueError } = useVenueQuery(String(eid), String(vid));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { venue, isVenueLoading } = useVenueQuery(String(eid), String(vid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
-	const { user } = useUser();
-	const { isSessionsByVenueLoading, sessionsByVenueData } = useSessionsByVenueQuery(
-		String(eid),
-		String(vid)
-	);
-
-	if (!venue || !sessionsByVenueData) {
-		return <NotFoundPage message="Venue not found." />;
-	}
-
-	if (venueError || eventError || rolesError) {
-		return <ViewErrorPage errors={[venueError, eventError, rolesError]} />;
-	}
-
-	if (eventError) {
-		return <ViewErrorPage errors={[eventError]} />;
-	}
-
-	if (!isOrganizer) {
-		return <NoAccessPage />;
-	}
+	const { user, isUserLoading } = useUser();
+	const { sessionsByVenueData } = useSessionsByVenueQuery(String(eid), String(vid));
 
 	return (
-		<PageWrapper>
-			<Head>
-				<title>Viewing Venue: {venue && venue.name}</title>
-			</Head>
+		<AdminPageWrapper
+			errors={[eventError]}
+			isLoading={isEventLoading || isUserLoading || isVenueLoading}
+			eid={String(eid)}
+		>
+			<PageWrapper>
+				<Head>
+					<title>Viewing Venue</title>
+				</Head>
 
-			<EventSettingsNavigation eid={String(eid)} />
-
-			<Column>
-				<ViewVenue
-					eid={String(eid)}
-					vid={String(vid)}
-					event={event}
-					sessions={sessionsByVenueData}
-					user={user}
-					venue={venue}
-					admin
-				/>
-			</Column>
-
-			<Footer color={event?.color} />
-		</PageWrapper>
+				<SidebarWrapper eid={String(eid)}>
+					<Column variant="noMargin">
+						<ViewVenue
+							eid={String(eid)}
+							vid={String(vid)}
+							event={event}
+							sessions={sessionsByVenueData}
+							user={user}
+							venue={venue}
+							admin
+						/>
+					</Column>
+				</SidebarWrapper>
+			</PageWrapper>
+		</AdminPageWrapper>
 	);
 };
 

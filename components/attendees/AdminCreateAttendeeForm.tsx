@@ -15,7 +15,7 @@ import { Label } from '../form/Label';
 import CreateRoleDialog from '../radix/components/CreateRoleDialog';
 import Select from '../radix/components/Select';
 
-type Props = { eid: string; roles: Prisma.EventRole[] | undefined } & DetailedHTMLProps<
+type Props = { eid: string; roles: Prisma.EventRole[] } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
 >;
@@ -75,21 +75,20 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="eventRoleId">Role *</Label>
-					{roles && (
-						<Controller
-							control={control}
-							name="eventRoleId"
-							render={({ field }) => (
-								<Select
-									options={roles.map((role) => ({ label: role.name, value: role.id }))}
-									value={field.value}
-									onValueChange={(value) => {
-										setValue('eventRoleId', value);
-									}}
-								/>
-							)}
-						/>
-					)}
+
+					<Controller
+						control={control}
+						name="eventRoleId"
+						render={({ field }) => (
+							<Select
+								options={roles.map((role) => ({ label: role.name, value: role.id }))}
+								value={field.value}
+								onValueChange={(value) => {
+									setValue('eventRoleId', value);
+								}}
+							/>
+						)}
+					/>
 
 					{errors.eventRoleId?.message && (
 						<ErrorMessage>{errors.eventRoleId?.message}</ErrorMessage>

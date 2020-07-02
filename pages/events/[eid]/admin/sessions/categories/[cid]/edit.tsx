@@ -2,79 +2,46 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { Footer } from '../../../../../../../components/Footer';
-import { NoAccessPage } from '../../../../../../../components/error/NoAccessPage';
-import { NotFoundPage } from '../../../../../../../components/error/NotFoundPage';
-import { UnauthorizedPage } from '../../../../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../../../../components/error/ViewErrorPage';
-import { EventSettingsNavigation } from '../../../../../../../components/events/settingsNavigation';
+import { AdminPageWrapper } from '../../../../../../../components/AdminPageWrapper';
 import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
 import { EditSessionCategoryForm } from '../../../../../../../components/sessions/EditSessionCategoryForm';
+import { SidebarWrapper } from '../../../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../../../components/typography/Heading';
-import { useEditSessionCategoryMutation } from '../../../../../../../hooks/mutations/useEditSessionCategoryMutation';
-import { useEventQuery } from '../../../../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionCategoryQuery } from '../../../../../../../hooks/queries/useSessionCategoryQuery';
-import { useUser } from '../../../../../../../hooks/queries/useUser';
-import { useVenuesQuery } from '../../../../../../../hooks/queries/useVenuesQuery';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid, cid } = router.query;
-	const { isOrganizer } = useIsOrganizerQuery(String(eid));
-	const { venues, venuesError } = useVenuesQuery(String(eid));
-	const { event, eventError } = useEventQuery(String(eid));
-	const { user } = useUser();
-	const { editSessionCategoryMutation } = useEditSessionCategoryMutation(String(eid), String(cid));
 	const { isSessionCategoryLoading, sessionCategory, sessionCategoryError } =
 		useSessionCategoryQuery(String(eid), String(cid));
 
-	if (!user?.id) {
-		return <UnauthorizedPage />;
-	}
-
-	if (!isOrganizer) {
-		return <NoAccessPage />;
-	}
-
-	if (!sessionCategory) {
-		return <NotFoundPage message="Session not found" />;
-	}
-
-	if (!venues) {
-		return <NotFoundPage message="No venues found." />;
-	}
-
-	if (venuesError || eventError) {
-		return <ViewErrorPage errors={[venuesError, eventError]} />;
-	}
-
-	if (eventError) {
-		return <ViewErrorPage errors={[eventError]} />;
-	}
-
 	return (
-		<PageWrapper>
-			<Head>
-				<title>Edit Session</title>
-			</Head>
+		<AdminPageWrapper
+			eid={String(eid)}
+			isLoading={isSessionCategoryLoading}
+			errors={[sessionCategoryError]}
+		>
+			<PageWrapper>
+				<Head>
+					<title>Edit Session</title>
+				</Head>
 
-			<EventSettingsNavigation eid={String(eid)} />
+				<SidebarWrapper eid={String(eid)}>
+					<Column variant="noMargin">
+						<Heading>Edit Session Category</Heading>
 
-			<Column>
-				<Heading>Edit Session Category</Heading>
-
-				<EditSessionCategoryForm
-					sessionCategory={sessionCategory}
-					isSessionCategoryLoading={isSessionCategoryLoading}
-					sessionCategoryError={sessionCategoryError}
-					editSessionCategoryMutation={editSessionCategoryMutation}
-				/>
-			</Column>
-
-			<Footer color={event?.color} />
-		</PageWrapper>
+						{sessionCategory && (
+							<EditSessionCategoryForm
+								eid={String(eid)}
+								cid={String(cid)}
+								sessionCategory={sessionCategory}
+							/>
+						)}
+					</Column>
+				</SidebarWrapper>
+			</PageWrapper>
+		</AdminPageWrapper>
 	);
 };
 

@@ -1,10 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import Prisma from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutation';
-import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+import { useEditRoleMutation } from '../../hooks/mutations/useEditRoleMutation';
 import { copy } from '../../utils/const';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
 import { AttendeeWithUser } from '../../utils/stripUser';
@@ -16,14 +16,17 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import Switch from '../radix/components/Switch';
 
-type Props = { eid: string; attendees: AttendeeWithUser[] } & UseRoleQueryData &
-	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
-	UseEditRoleMutationData;
+type Props = {
+	eid: string;
+	rid: string;
+	attendees: AttendeeWithUser[];
+	role: Prisma.EventRole;
+} & Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'>;
 
 export const EditRoleForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-
-	const { editRoleMutation, role } = props;
+	const { role, eid, rid } = props;
+	const { editRoleMutation } = useEditRoleMutation(String(eid), String(rid));
 	const {
 		register,
 		handleSubmit,
@@ -36,8 +39,6 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 		},
 		resolver: zodResolver(EditRoleSchema)
 	});
-
-	if (!role) return null;
 
 	return (
 		<form

@@ -9,10 +9,11 @@ import NoAccess from './NoAccess';
 
 type Props = {
 	navigation?: React.ReactNode;
+	message?: string;
 };
 
 export const NoAccessPage: React.FC<Props> = (props) => {
-	const { navigation = <Navigation /> } = props;
+	const { navigation = <Navigation />, message } = props;
 
 	return (
 		<PageWrapper>
@@ -23,7 +24,7 @@ export const NoAccessPage: React.FC<Props> = (props) => {
 			{navigation}
 
 			<Column variant="halfWidth" className="flex flex-col items-center justify-center">
-				<NoAccess />
+				<NoAccess message={message} />
 			</Column>
 
 			<Footer />

@@ -22,7 +22,7 @@ const ViewSessionCategoryPage: NextPage = () => {
 	const { user } = useUser();
 	const { event, eventError } = useEventQuery(String(eid));
 	const { sessionCategory } = useSessionCategoryQuery(String(eid), String(cid));
-	const { sessionsByTypeData } = useSessionsByCategoryQuery(String(eid), String(cid));
+	const { sessionsByCategoryData } = useSessionsByCategoryQuery(String(eid), String(cid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
 	if (eventError) {
@@ -69,7 +69,7 @@ const ViewSessionCategoryPage: NextPage = () => {
 					sessionCategory={sessionCategory}
 					eid={String(eid)}
 					cid={String(cid)}
-					sessions={sessionsByTypeData}
+					sessions={sessionsByCategoryData}
 					event={event}
 					user={user}
 				/>

@@ -3,79 +3,47 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { Footer } from '../../../../../components/Footer';
+import { AdminPageWrapper } from '../../../../../components/AdminPageWrapper';
 import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
-import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
-import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
-import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../components/typography/Heading';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useOrganizersQuery } from '../../../../../hooks/queries/useOrganizersQuery';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
-import { useUser } from '../../../../../hooks/queries/useUser';
 
 const EventOrganizersPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { user, isUserLoading } = useUser();
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 	const { isOrganizersLoading, organizers } = useOrganizersQuery(String(eid));
 
-	if (!user?.id) {
-		return <UnauthorizedPage />;
-	}
-
-	if (eventError) {
-		return <ViewErrorPage errors={[eventError]} />;
-	}
-
-	if (!organizers) {
-		return <NotFoundPage message="Organizers not found." />;
-	}
-
-	if (eventError) {
-		return <ViewErrorPage errors={[eventError]} />;
-	}
-
-	if (!isOrganizer) {
-		return <NoAccessPage />;
-	}
-
 	return (
-		<PageWrapper>
-			<Head>
-				<title>Organizers</title>
-			</Head>
+		<AdminPageWrapper isLoading={isOrganizersLoading} eid={String(eid)}>
+			<PageWrapper>
+				<Head>
+					<title>Organizers</title>
+				</Head>
 
-			<EventSettingsNavigation eid={String(eid)} />
+				<SidebarWrapper eid={String(eid)}>
+					<Column variant="noMargin">
+						<FlexRowBetween>
+							<Heading>Organizers</Heading>
 
-			<Column>
-				<FlexRowBetween>
-					<Heading>Organizers</Heading>
+							<IconLinkTooltip
+								message="Click to invite an organizer"
+								side="top"
+								href={`/events/${eid}/admin/organizers/invite`}
+								icon={faPaperPlane}
+								className="text-gray-700 hover:text-gray-600"
+							/>
+						</FlexRowBetween>
 
-					<IconLinkTooltip
-						message="Click to invite an organizer"
-						side="top"
-						href={`/events/${eid}/admin/organizers/invite`}
-						icon={faPaperPlane}
-						className="text-gray-700 hover:text-gray-600"
-					/>
-				</FlexRowBetween>
-
-				<AttendeeList attendees={organizers} eid={String(eid)} admin />
-			</Column>
-
-			<Footer color={event?.color} />
-		</PageWrapper>
+						<AttendeeList attendees={organizers} eid={String(eid)} admin />
+					</Column>
+				</SidebarWrapper>
+			</PageWrapper>
+		</AdminPageWrapper>
 	);
 };
 

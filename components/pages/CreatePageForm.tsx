@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseCreatePageMutationData } from '../../hooks/mutations/useCreatePageMutation';
+import { useCreatePageMutation } from '../../hooks/mutations/useCreatePageMutation';
 import { copy } from '../../utils/const';
 import { CreatePagePayload, CreatePageSchema } from '../../utils/schemas';
 import { HelpTooltip } from '../HelpTooltip';
@@ -18,13 +18,13 @@ import Switch from '../radix/components/Switch';
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
-> &
-	UseCreatePageMutationData;
+>;
 
 export const CreatePageForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 
-	const { createPageMutation } = props;
+	const { eid } = props;
+	const { createPageMutation } = useCreatePageMutation(String(eid));
 
 	const {
 		register,

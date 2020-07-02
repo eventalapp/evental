@@ -4,7 +4,7 @@ import React from 'react';
 import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseCreateSessionCategoryMutationData } from '../../hooks/mutations/useCreateSessionCategoryMutation';
+import { useCreateSessionCategoryMutation } from '../../hooks/mutations/useCreateSessionCategoryMutation';
 import { colors, copy } from '../../utils/const';
 import { CreateSessionCategoryPayload, CreateSessionCategorySchema } from '../../utils/schemas';
 import { HelpTooltip } from '../HelpTooltip';
@@ -14,11 +14,13 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 
-type Props = UseCreateSessionCategoryMutationData;
+type Props = { eid: string };
 
 export const CreateSessionCategoryForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { createSessionCategoryMutation } = props;
+	const { eid } = props;
+	const { createSessionCategoryMutation } = useCreateSessionCategoryMutation(String(eid));
+
 	const {
 		register,
 		handleSubmit,

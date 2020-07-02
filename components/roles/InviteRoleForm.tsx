@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { UseInviteRoleData } from '../../hooks/mutations/useInviteRoleMutation';
+import { useInviteRoleMutation } from '../../hooks/mutations/useInviteRoleMutation';
 import { InviteRolePayload, InviteRoleSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
@@ -11,12 +11,15 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseInviteRoleData;
+type Props = { eid: string; rid: string } & DetailedHTMLProps<
+	FormHTMLAttributes<HTMLFormElement>,
+	HTMLFormElement
+>;
 
 export const InviteRoleForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { inviteRoleMutation } = props;
+	const { eid, rid } = props;
+	const { inviteRoleMutation } = useInviteRoleMutation(String(eid), String(rid));
 	const {
 		register,
 		handleSubmit,

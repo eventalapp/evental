@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseCreateRoleMutationData } from '../../hooks/mutations/useCreateRoleMutation';
+import { useCreateRoleMutation } from '../../hooks/mutations/useCreateRoleMutation';
 import { copy } from '../../utils/const';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { HelpTooltip } from '../HelpTooltip';
@@ -17,12 +17,12 @@ import Switch from '../radix/components/Switch';
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
-> &
-	UseCreateRoleMutationData;
+>;
 
 export const CreateRoleForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { createRoleMutation } = props;
+	const { eid } = props;
+	const { createRoleMutation } = useCreateRoleMutation(String(eid));
 	const {
 		register,
 		handleSubmit,

@@ -4,70 +4,50 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Footer } from '../../../../../components/Footer';
+import { AdminPageWrapper } from '../../../../../components/AdminPageWrapper';
 import { PurchaseProPlan } from '../../../../../components/billing/PurchaseProForm';
-import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
-import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../components/typography/Heading';
+import { Paragraph } from '../../../../../components/typography/Paragraph';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useFounderQuery } from '../../../../../hooks/queries/useFounderQuery';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
-import { useUser } from '../../../../../hooks/queries/useUser';
 import { getStripe } from '../../../../../utils/stripe';
 
 const EventBillingPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { user, isUserLoading } = useUser();
-	const { isFounderLoading, isFounder } = useFounderQuery(String(eid));
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-
-	if (!user?.id) {
-		return <UnauthorizedPage />;
-	}
-
-	if (eventError) {
-		return <ViewErrorPage errors={[eventError]} />;
-	}
-
-	if (eventError) {
-		return <ViewErrorPage errors={[eventError]} />;
-	}
-
-	if (!isFounder) {
-		return <NoAccessPage />;
-	}
 
 	return (
-		<Elements stripe={getStripe()}>
+		<AdminPageWrapper
+			eid={String(eid)}
+			founderPage
+			isLoading={isEventLoading}
+			errors={[eventError]}
+		>
 			<PageWrapper>
-				<Head>
-					<title>Event Billing</title>
-				</Head>
+				<Elements stripe={getStripe()}>
+					<SidebarWrapper eid={String(eid)}>
+						<Head>
+							<title>Event Billing</title>
+						</Head>
 
-				<EventSettingsNavigation eid={String(eid)} />
+						<Column variant="noMargin">
+							<Heading className="mb-3">Single Event Plans &amp; Pricing</Heading>
+							<Paragraph className="text-gray-600 mb-3">
+								View pricing for single event plans for standard and nonprofit or educational
+								events.
+							</Paragraph>
 
-				<div className="dark-topography text-white">
-					<Column className="flex flex-col items-center">
-						<Heading>Single Event Plans &amp; Pricing</Heading>
-						<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
-							View pricing for single event plans for standard and nonprofit or educational events.
-						</p>
-					</Column>
-				</div>
+							<Paragraph>Your current plan {event?.level}</Paragraph>
 
-				<Column>
-					<PurchaseProPlan eid={String(eid)} />
-				</Column>
+							<PurchaseProPlan eid={String(eid)} />
+						</Column>
+					</SidebarWrapper>
+				</Elements>
 			</PageWrapper>
-
-			<Footer color={event?.color} />
-		</Elements>
+		</AdminPageWrapper>
 	);
 };
 
