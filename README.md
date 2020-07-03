@@ -16,13 +16,11 @@
 - clean up queries/mutations (export whole mut/query?)
 - rate limit request password reset & verify email request etc
 - session file upload
-- role member session edit
+- role member's can edit sessions?
 - google maps embed for addresses
 - bulk create sessions
-- attach people on session creation
 - attach people -> create attendee (new modal)
 - make event placeholder with year
-- event admin dashboard sidebar
 - make default avatar more neutral
 - hide leave button as founder
 - varchar match schema
