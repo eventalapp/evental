@@ -16,7 +16,16 @@ export interface UseAdminCreateAttendeeMutationData {
 	>;
 }
 
-export const useAdminCreateAttendeeMutation = (eid: string): UseAdminCreateAttendeeMutationData => {
+interface UseAdminCreateAttendeeMutationOptions {
+	redirectUrl?: string;
+}
+
+export const useAdminCreateAttendeeMutation = (
+	eid: string,
+	args: UseAdminCreateAttendeeMutationOptions = {}
+): UseAdminCreateAttendeeMutationData => {
+	const { redirectUrl = `/events/${eid}/admin/attendees` } = args;
+
 	const queryClient = useQueryClient();
 
 	const adminCreateAttendeeMutation = useMutation<
@@ -38,7 +47,7 @@ export const useAdminCreateAttendeeMutation = (eid: string): UseAdminCreateAtten
 			onSuccess: () => {
 				toast.success('You have successfully created the users profile.');
 
-				router.push(`/events/${eid}/attendees`).then(() => {
+				router.push(redirectUrl).then(() => {
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
