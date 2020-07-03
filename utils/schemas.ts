@@ -124,7 +124,8 @@ export const CreateSessionSchema = z.object({
 	maxAttendees: z.number().nullable().optional(),
 	endDate: dateValidator,
 	categoryId: typeIdValidator,
-	description: descriptionValidator.optional()
+	description: descriptionValidator.optional(),
+	roleMembers: z.string().array()
 });
 
 export type CreateSessionPayload = z.infer<typeof CreateSessionSchema>;

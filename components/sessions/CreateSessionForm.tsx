@@ -254,19 +254,28 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 					</Label>
 
 					<ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
-						{roleMembersWatcher?.map(({ userId }) => (
-							<RoleMemberListItem eid={String(eid)} userId={userId} />
+						{roleMembersWatcher?.map((userId) => (
+							<RoleMemberListItem
+								eid={String(eid)}
+								userId={userId}
+								removeRoleMember={(userId) => {
+									toast.success('The user has been removed from the session');
+									setValue(
+										'roleMembers',
+										roleMembersWatcher.filter((roleMemberUserId) => roleMemberUserId !== userId)
+									);
+								}}
+							/>
 						))}
-
-						{/*{roleAttendees?.map((attendee) => (*/}
-						{/*	<RoleMemberListItem eid={String(eid)} attendee={attendee} />*/}
-						{/*))}*/}
 
 						<div className="flex h-full w-full items-center justify-center">
 							<AttachPeopleDialog
 								eid={String(eid)}
 								addAttendeeToSession={(userId) => {
-									setValue('roleMembers', [...roleMembersWatcher, { userId }]);
+									if (roleMembersWatcher.indexOf(userId) === -1) {
+										toast.success('The user has been added to the session');
+										setValue('roleMembers', [...roleMembersWatcher, userId]);
+									}
 								}}
 							>
 								<button type="button">

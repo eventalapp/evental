@@ -12,10 +12,11 @@ import Tooltip from '../radix/components/Tooltip';
 type RoleMemberListItemProps = {
 	userId: string;
 	eid: string;
+	removeRoleMember: (userId: string) => void;
 };
 
 export const RoleMemberListItem: React.FC<RoleMemberListItemProps> = (props) => {
-	const { eid, userId } = props;
+	const { eid, userId, removeRoleMember } = props;
 
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(eid, userId);
 
@@ -23,8 +24,8 @@ export const RoleMemberListItem: React.FC<RoleMemberListItemProps> = (props) => 
 		return (
 			<li className="relative flex h-full flex-col items-center justify-between">
 				<Skeleton className="h-16 w-16 rounded-md" />
-				<Skeleton className="h-5 w-14" />
-				<Skeleton className="h-5 w-12" />
+				<Skeleton className="h-4 w-14" />
+				<Skeleton className="h-4 w-12" />
 			</li>
 		);
 	}
@@ -58,7 +59,7 @@ export const RoleMemberListItem: React.FC<RoleMemberListItemProps> = (props) => 
 						type="button"
 						className="p-1"
 						onClick={() => {
-							alert('TODO: impl remove user from session');
+							removeRoleMember(userId);
 						}}
 					>
 						<FontAwesomeIcon
