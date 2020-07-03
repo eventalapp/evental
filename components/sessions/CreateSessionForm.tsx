@@ -256,6 +256,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 					<ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
 						{roleMembersWatcher?.map((userId) => (
 							<RoleMemberListItem
+								key={userId}
 								eid={String(eid)}
 								userId={userId}
 								removeRoleMember={(userId) => {
