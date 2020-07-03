@@ -14,7 +14,7 @@ export const SidebarWrapper: React.FC<SidebarWrapperProps> = (props) => {
 	const { children, eid } = props;
 
 	return (
-		<div className="flex flex-row overflow-hidden absolute top-0 right-0 left-0 bottom-0">
+		<div className="flex flex-row overflow-hidden absolute inset-0">
 			<div
 				style={{ flex: '1 0 218px' }}
 				className="flex justify-end flex-row bg-gray-100 overflow-x-hidden overflow-y-scroll"
