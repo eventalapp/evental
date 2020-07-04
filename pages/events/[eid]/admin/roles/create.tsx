@@ -8,6 +8,7 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { CreateRoleForm } from '../../../../../components/roles/CreateRoleForm';
 import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../components/typography/Heading';
+import { Paragraph } from '../../../../../components/typography/Paragraph';
 
 const CreateRolePage: NextPage = () => {
 	const router = useRouter();
@@ -23,6 +24,11 @@ const CreateRolePage: NextPage = () => {
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading>Create Role</Heading>
+
+						<Paragraph className="text-gray-600">
+							Roles are used to categorize your attendees. For example, you might have a role called
+							"Speaker", which would be used to group speakers.
+						</Paragraph>
 
 						<CreateRoleForm eid={String(eid)} />
 					</Column>

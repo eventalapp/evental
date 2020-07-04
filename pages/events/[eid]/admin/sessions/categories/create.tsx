@@ -8,6 +8,7 @@ import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { CreateSessionCategoryForm } from '../../../../../../components/sessions/CreateSessionCategoryForm';
 import { SidebarWrapper } from '../../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../../components/typography/Heading';
+import { Paragraph } from '../../../../../../components/typography/Paragraph';
 
 const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -22,7 +23,12 @@ const CreateSessionPage: NextPage = () => {
 
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
-						<Heading>Create Session Category</Heading>
+						<Heading className="mb-3">Create Session Category</Heading>
+
+						<Paragraph className="text-gray-600">
+							A session category is used to group sessions together. For example a session category
+							might be "Keynote", "Workshop", or "Panel".
+						</Paragraph>
 
 						<CreateSessionCategoryForm eid={String(eid)} />
 					</Column>

@@ -8,6 +8,7 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { CreatePageForm } from '../../../../../components/pages/CreatePageForm';
 import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../components/typography/Heading';
+import { Paragraph } from '../../../../../components/typography/Paragraph';
 
 const CreatePagePage: NextPage = () => {
 	const router = useRouter();
@@ -23,6 +24,11 @@ const CreatePagePage: NextPage = () => {
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading>Create Page</Heading>
+
+						<Paragraph className="text-gray-600">
+							Pages are used to create custom content for your event. For example, you might have a
+							page called "Map" which would be used to display a map of your event.
+						</Paragraph>
 
 						<CreatePageForm eid={String(eid)} />
 					</Column>

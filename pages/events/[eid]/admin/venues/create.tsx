@@ -7,6 +7,7 @@ import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../components/typography/Heading';
+import { Paragraph } from '../../../../../components/typography/Paragraph';
 import { CreateVenueForm } from '../../../../../components/venues/CreateVenueForm';
 
 const CreateSessionPage: NextPage = () => {
@@ -23,6 +24,11 @@ const CreateSessionPage: NextPage = () => {
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading>Create Venue</Heading>
+
+						<Paragraph className="text-gray-600">
+							A venue is a location that a session is taking place. For example, a venue might be a
+							conference room, a meeting room, or a hotel room.
+						</Paragraph>
 
 						<CreateVenueForm eid={String(eid)} />
 					</Column>
