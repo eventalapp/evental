@@ -21,7 +21,7 @@ const CreateSessionPage: NextPage = () => {
 				</Head>
 
 				<SidebarWrapper eid={String(eid)}>
-					<Column variant="halfWidth">
+					<Column variant="noMargin">
 						<Heading>Create Venue</Heading>
 
 						<CreateVenueForm eid={String(eid)} />
