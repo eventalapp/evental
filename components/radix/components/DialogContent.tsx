@@ -15,7 +15,7 @@ type DialogContentProps = {
 
 export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
 	(props, forwardedRef) => {
-		const { children, isOpen, setIsOpen, showCloseDialog, ...rest } = props;
+		const { children, isOpen, setIsOpen, showCloseDialog = true, ...rest } = props;
 
 		return (
 			<DialogPrimitive.Portal>
