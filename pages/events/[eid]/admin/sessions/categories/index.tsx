@@ -36,7 +36,7 @@ const SessionCategoriesAdminPage: NextPage = () => {
 							<Heading>Session Categories</Heading>
 
 							<IconLinkTooltip
-								message="Click to create a session category"
+								message="Create a session category"
 								side="top"
 								href={`/events/${eid}/admin/sessions/categories/create`}
 								icon={faSquarePlus}

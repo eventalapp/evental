@@ -71,7 +71,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 				<div className="col-span-2 row-span-2 md:col-span-1">
 					<Label htmlFor="image">Image</Label>
 
-					<Tooltip message={'Click to upload an image for your profile.'}>
+					<Tooltip message={'Upload an image for your profile.'}>
 						<div className="inline-block">
 							<AvatarUpload
 								files={files}

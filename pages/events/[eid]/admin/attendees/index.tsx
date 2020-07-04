@@ -31,7 +31,7 @@ const AttendeesAdminPage: NextPage = () => {
 							<Heading>Attendees</Heading>
 
 							<IconLinkTooltip
-								message="Click to create an attendee"
+								message="Create an attendee"
 								side="top"
 								href={`/events/${eid}/admin/attendees/create`}
 								icon={faSquarePlus}

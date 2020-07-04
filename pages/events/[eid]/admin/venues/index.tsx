@@ -32,7 +32,7 @@ const VenuesAdminPage: NextPage = () => {
 							<Heading>Venues</Heading>
 
 							<IconLinkTooltip
-								message="Click to create a venue"
+								message="Create a venue"
 								side="top"
 								href={`/events/${eid}/admin/venues/create`}
 								icon={faSquarePlus}

@@ -31,7 +31,7 @@ const EventOrganizersPage: NextPage = () => {
 							<Heading>Organizers</Heading>
 
 							<IconLinkTooltip
-								message="Click to invite an organizer"
+								message="Invite an organizer"
 								side="top"
 								href={`/events/${eid}/admin/organizers/invite`}
 								icon={faPaperPlane}

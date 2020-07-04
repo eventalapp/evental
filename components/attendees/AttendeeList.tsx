@@ -32,7 +32,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 								attendee.user &&
 								attendee.role && (
 									<Tooltip
-										message={`Click to view ${attendee.user.name}'s profile`}
+										message={`View ${attendee.user.name}'s profile`}
 										key={attendee.id}
 									>
 										<li>

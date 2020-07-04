@@ -42,7 +42,7 @@ export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps
 
 						{showCloseDialog && (
 							<div className="absolute top-0 right-0">
-								<Tooltip message="Click to close this dialog">
+								<Tooltip message="Close this dialog">
 									<DialogPrimitive.Cancel aria-label="Close">
 										<FontAwesomeIcon
 											fill="currentColor"

@@ -210,7 +210,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 						<ul className="mt-4 grid grid-cols-4 gap-2">
 							{session.roleMembers.slice(0, 4).map((roleMember) => (
 								<Tooltip
-									message={`Click to view ${roleMember.attendee.user.name}'s profile`}
+									message={`View ${roleMember.attendee.user.name}'s profile`}
 									key={roleMember.attendee.id}
 								>
 									<li className="relative flex h-full flex-col items-center justify-between">

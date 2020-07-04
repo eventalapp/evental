@@ -41,7 +41,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 					<div className="space-x-4 flex flex-row">
 						{role ? (
 							<IconLinkTooltip
-								message={`Click to create a ${role.name}`}
+								message={`Create a ${role.name}`}
 								side="top"
 								href={`/events/${eid}/admin/attendees/create`}
 								icon={faSquarePlus}
@@ -53,7 +53,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 
 						{role ? (
 							<IconLinkTooltip
-								message={`Click to invite a ${role.name}`}
+								message={`Invite a ${role.name}`}
 								side="top"
 								href={`/events/${eid}/admin/roles/${rid}/invite`}
 								icon={faPaperPlane}
@@ -65,7 +65,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 
 						{role ? (
 							<IconLinkTooltip
-								message={`Click to edit the ${role.name} role`}
+								message={`Edit the ${role.name} role`}
 								side="top"
 								href={`/events/${eid}/admin/roles/${rid}/edit`}
 								icon={faPenToSquare}
@@ -77,7 +77,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 
 						{role ? (
 							<IconLinkTooltip
-								message={`Click to delete the ${role.name} role`}
+								message={`Delete the ${role.name} role`}
 								side="top"
 								href={`/events/${eid}/admin/roles/${rid}/delete`}
 								icon={faTrashCan}

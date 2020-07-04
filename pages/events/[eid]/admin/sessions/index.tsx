@@ -39,7 +39,7 @@ const SessionsAdminPage: NextPage = () => {
 							</Heading>
 
 							<IconLinkTooltip
-								message="Click to create a session"
+								message="Create a session"
 								side="top"
 								href={`/events/${eid}/admin/sessions/create`}
 								icon={faSquarePlus}

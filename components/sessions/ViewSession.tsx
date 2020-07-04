@@ -27,6 +27,7 @@ import { IconLinkTooltip } from '../IconLinkTooltip';
 import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import DeleteSessionDialog from '../radix/components/DeleteSessionDialog';
 import { LeaveSessionDialog } from '../radix/components/LeaveSessionDialog';
 import { ShareSessionDropdown } from '../radix/components/ShareSessionDropdown';
 import Tooltip from '../radix/components/Tooltip';
@@ -125,7 +126,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 								sessionSlug={session.slug}
 								userSlug={String(user?.slug)}
 							>
-								<div className="flex items-center justify-center ml-4">
+								<div className="flex items-center justify-center">
 									<Tooltip side={'top'} message={'Leave this session'}>
 										<button type="button" className="ml-4">
 											<FontAwesomeIcon
@@ -148,7 +149,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 						!admin && (
 							<div className="ml-4">
 								<IconButtonTooltip
-									message="Click to add this session to your schedule"
+									message="Add this session to your schedule"
 									side="top"
 									icon={faCalendarCirclePlus}
 									disabled={createSessionAttendeeMutation.isLoading}
@@ -167,7 +168,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 					{admin && (
 						<div className="ml-4">
 							<IconLinkTooltip
-								message="Click to edit this session"
+								message="Edit this session"
 								side="top"
 								href={`/events/${eid}/admin/sessions/${sid}/edit`}
 								icon={faPenToSquare}
@@ -177,15 +178,20 @@ export const ViewSession: React.FC<Props> = (props) => {
 					)}
 
 					{admin && (
-						<div className="ml-4">
-							<IconLinkTooltip
-								message="Click to delete this session"
-								side="top"
-								href={`/events/${eid}/admin/sessions/${sid}/delete`}
-								icon={faTrashCan}
-								className="text-red-500 hover:text-red-400"
-							/>
-						</div>
+						<DeleteSessionDialog eid={String(eid)} sid={String(sid)}>
+							<div className="flex items-center justify-center">
+								<Tooltip side={'top'} message={'Delete this session'}>
+									<button type="button" className="ml-4">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-5 w-5 text-red-500 block"
+											size="1x"
+											icon={faTrashCan}
+										/>
+									</button>
+								</Tooltip>
+							</div>
+						</DeleteSessionDialog>
 					)}
 				</div>
 			</FlexRowBetween>
