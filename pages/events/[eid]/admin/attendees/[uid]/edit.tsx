@@ -45,12 +45,14 @@ const EditAttendeePage: NextPage = () => {
 							if you're looking to change the users details.
 						</p>
 
-						<AdminEditAttendeeForm
-							uid={String(uid)}
-							eid={String(eid)}
-							attendee={attendee}
-							roles={roles}
-						/>
+						{attendee && roles && (
+							<AdminEditAttendeeForm
+								uid={String(uid)}
+								eid={String(eid)}
+								attendee={attendee}
+								roles={roles}
+							/>
+						)}
 					</Column>
 				</SidebarWrapper>
 			</PageWrapper>
