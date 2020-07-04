@@ -1,5 +1,6 @@
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import * as Portal from '@radix-ui/react-portal';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import isBetween from 'dayjs/plugin/isBetween';
@@ -135,7 +136,10 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 				</SkeletonTheme>
 			</Hydrate>
 
-			<ToastContainer />
+			<Portal.Root className="pointer-events-auto">
+				<ToastContainer />
+			</Portal.Root>
+
 			<ReactQueryDevtools />
 			<style jsx global>{`
 				#__next {
