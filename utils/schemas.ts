@@ -414,3 +414,13 @@ export const SendEventMessageSchema = z.object({
 });
 
 export type SendEventMessagePayload = z.infer<typeof SendEventMessageSchema>;
+
+// Delete data
+
+export const DeleteDataSchema = z.object({
+	confirm: z.string().refine((val) => val.toLowerCase() === 'delete', {
+		message: `Please type "Delete" to confirm.`
+	})
+});
+
+export type DeleteDataPayload = z.infer<typeof DeleteDataSchema>;
