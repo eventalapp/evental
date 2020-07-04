@@ -14,8 +14,10 @@ import Skeleton from 'react-loading-skeleton';
 
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUser';
+import { IconButtonTooltip } from '../IconButtonTooltip';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
+import DeleteAttendeeDialog from '../radix/components/DeleteAttendeeDialog';
 import { Heading } from '../typography/Heading';
 
 type Props = { eid: string; uid: string; admin?: boolean; attendee?: AttendeeWithUser };
@@ -26,23 +28,18 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<div className="relative mb-7 flex flex-row items-center">
-				{admin && (
+				{attendee && admin && (
 					<div className="absolute top-0 right-0 space-x-4 flex flex-row">
 						<IconLinkTooltip
 							message="Edit this attendee"
-							side="top"
 							href={`/events/${eid}/admin/attendees/${uid}/edit`}
 							icon={faPenToSquare}
-							className="text-gray-700 hover:text-gray-600"
+							color="gray"
 						/>
 
-						<IconLinkTooltip
-							message="Delete this attendee"
-							side="top"
-							href={`/events/${eid}/admin/attendees/${uid}/delete`}
-							icon={faTrashCan}
-							className="text-red-500 hover:text-red-400"
-						/>
+						<DeleteAttendeeDialog eid={String(eid)} uid={String(uid)}>
+							<IconButtonTooltip icon={faTrashCan} message="Delete this attendee" color="red" />
+						</DeleteAttendeeDialog>
 					</div>
 				)}
 

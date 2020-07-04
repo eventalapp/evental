@@ -37,10 +37,9 @@ const SessionCategoriesAdminPage: NextPage = () => {
 
 							<IconLinkTooltip
 								message="Create a session category"
-								side="top"
 								href={`/events/${eid}/admin/sessions/categories/create`}
 								icon={faSquarePlus}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
 						</FlexRowBetween>
 

@@ -32,10 +32,9 @@ const EventOrganizersPage: NextPage = () => {
 
 							<IconLinkTooltip
 								message="Invite an organizer"
-								side="top"
 								href={`/events/${eid}/admin/organizers/invite`}
 								icon={faPaperPlane}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
 						</FlexRowBetween>
 

@@ -7,7 +7,6 @@ import {
 	faTrashCan,
 	faUserGroup
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 import parse from 'html-react-parser';
@@ -30,7 +29,6 @@ import { FlexRowBetween } from '../layout/FlexRowBetween';
 import DeleteSessionDialog from '../radix/components/DeleteSessionDialog';
 import { LeaveSessionDialog } from '../radix/components/LeaveSessionDialog';
 import { ShareSessionDropdown } from '../radix/components/ShareSessionDropdown';
-import Tooltip from '../radix/components/Tooltip';
 import { Heading } from '../typography/Heading';
 
 type Props = {
@@ -81,18 +79,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				<div className="flex flex-row items-center">
 					{event && session ? (
 						<ShareSessionDropdown event={event} session={session}>
-							<div className="ml-4 flex items-center">
-								<Tooltip side={'top'} message={'Share this session'}>
-									<button type="button" className="h-5 w-5 text-gray-600">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="h-5 w-5"
-											size="1x"
-											icon={faShare}
-										/>
-									</button>
-								</Tooltip>
-							</div>
+							<IconButtonTooltip icon={faShare} message="Share this session" color="gray" />
 						</ShareSessionDropdown>
 					) : (
 						<Skeleton className="w-5 h-5 ml-4" />
@@ -126,18 +113,11 @@ export const ViewSession: React.FC<Props> = (props) => {
 								sessionSlug={session.slug}
 								userSlug={String(user?.slug)}
 							>
-								<div className="flex items-center justify-center">
-									<Tooltip side={'top'} message={'Leave this session'}>
-										<button type="button" className="ml-4">
-											<FontAwesomeIcon
-												fill="currentColor"
-												className="h-5 w-5 text-red-500 block"
-												size="1x"
-												icon={faRightFromBracket}
-											/>
-										</button>
-									</Tooltip>
-								</div>
+								<IconButtonTooltip
+									icon={faRightFromBracket}
+									message="Leave this session"
+									color="red"
+								/>
 							</LeaveSessionDialog>
 						)
 					) : (
@@ -150,11 +130,10 @@ export const ViewSession: React.FC<Props> = (props) => {
 							<div className="ml-4">
 								<IconButtonTooltip
 									message="Add this session to your schedule"
-									side="top"
 									icon={faCalendarCirclePlus}
 									disabled={createSessionAttendeeMutation.isLoading}
 									isLoading={createSessionAttendeeMutation.isLoading}
-									className="text-gray-600"
+									color="gray"
 									onClick={() => {
 										createSessionAttendeeMutation.mutate();
 									}}
@@ -169,28 +148,16 @@ export const ViewSession: React.FC<Props> = (props) => {
 						<div className="ml-4">
 							<IconLinkTooltip
 								message="Edit this session"
-								side="top"
+								color="gray"
 								href={`/events/${eid}/admin/sessions/${sid}/edit`}
 								icon={faPenToSquare}
-								className="text-gray-700 hover:text-gray-600"
 							/>
 						</div>
 					)}
 
 					{admin && (
 						<DeleteSessionDialog eid={String(eid)} sid={String(sid)}>
-							<div className="flex items-center justify-center">
-								<Tooltip side={'top'} message={'Delete this session'}>
-									<button type="button" className="ml-4">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="h-5 w-5 text-red-500 block"
-											size="1x"
-											icon={faTrashCan}
-										/>
-									</button>
-								</Tooltip>
-							</div>
+							<IconButtonTooltip icon={faTrashCan} message="Delete this session" color="red" />
 						</DeleteSessionDialog>
 					)}
 				</div>

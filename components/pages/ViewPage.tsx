@@ -39,17 +39,15 @@ export const ViewPage: React.FC<Props> = (props) => {
 					<div className="space-x-4 flex flex-row">
 						<IconLinkTooltip
 							message="Edit this page"
-							side="top"
 							href={`/events/${eid}/admin/pages/${pid}/edit`}
 							icon={faPenToSquare}
-							className="text-gray-700 hover:text-gray-600"
+							color="gray"
 						/>
 						<IconLinkTooltip
 							message="Delete this page"
-							side="top"
 							href={`/events/${eid}/admin/pages/${pid}/delete`}
 							icon={faTrashCan}
-							className="text-red-500 hover:text-red-400"
+							color="red"
 						/>
 					</div>
 				)}
