@@ -25,7 +25,7 @@ const CreateSessionPage: NextPage = () => {
 					<Column variant="noMargin">
 						<Heading>Create Venue</Heading>
 
-						<Paragraph className="text-gray-600">
+						<Paragraph className="text-gray-600 mb-3">
 							A venue is a location that a session is taking place. For example, a venue might be a
 							conference room, a meeting room, or a hotel room.
 						</Paragraph>

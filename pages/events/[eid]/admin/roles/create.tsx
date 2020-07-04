@@ -23,7 +23,7 @@ const CreateRolePage: NextPage = () => {
 
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
-						<Heading>Create Role</Heading>
+						<Heading className="mb-3">Create Role</Heading>
 
 						<Paragraph className="text-gray-600">
 							Roles are used to categorize your attendees. For example, you might have a role called

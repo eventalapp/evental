@@ -23,7 +23,7 @@ const CreatePagePage: NextPage = () => {
 
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
-						<Heading>Create Page</Heading>
+						<Heading className="mb-3">Create Page</Heading>
 
 						<Paragraph className="text-gray-600">
 							Pages are used to create custom content for your event. For example, you might have a

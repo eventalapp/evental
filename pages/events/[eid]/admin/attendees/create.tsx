@@ -8,6 +8,7 @@ import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../components/typography/Heading';
+import { Paragraph } from '../../../../../components/typography/Paragraph';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 
 const CreateAttendeePage: NextPage = () => {
@@ -26,10 +27,10 @@ const CreateAttendeePage: NextPage = () => {
 					<Column variant="noMargin">
 						<Heading className="mb-3">Create Attendee Page</Heading>
 
-						<p className="mb-5 text-gray-600">
+						<Paragraph className="text-gray-600">
 							Filling out the information below will create an placeholder account for this user.
 							They will receive an email with instructions on how to claim their account.
-						</p>
+						</Paragraph>
 
 						{roles && <AdminCreateAttendeeForm eid={String(eid)} roles={roles} />}
 					</Column>
