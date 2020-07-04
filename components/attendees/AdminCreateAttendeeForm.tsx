@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Prisma from '@prisma/client';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -22,6 +23,7 @@ type Props = { eid: string; roles: Prisma.EventRole[] } & DetailedHTMLProps<
 
 export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 	const { eid, roles } = props;
+	const router = useRouter();
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
 	const { adminCreateAttendeeMutation } = useAdminCreateAttendeeMutation(String(eid));
 	const {
@@ -146,6 +148,9 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
 					variant="primary"
