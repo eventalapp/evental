@@ -36,7 +36,12 @@ export const IconLinkTooltip: Props = (props) => {
 						className={classNames('flex items-center justify-center', iconColors[color], className)}
 						{...rest}
 					>
-						<FontAwesomeIcon fill="currentColor" className="h-5 w-5 p-1" size="1x" icon={icon} />
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="h-5 w-5 p-1 transition-colors duration-100"
+							size="1x"
+							icon={icon}
+						/>
 					</a>
 				</Link>
 			</div>
