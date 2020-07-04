@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Prisma from '@prisma/client';
+import Color from 'color';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { ChromePicker } from 'react-color';
@@ -85,7 +86,10 @@ export const EditSessionCategoryForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					padding="medium"
 					disabled={editSessionCategoryMutation.isLoading}
-					style={{ backgroundColor: colorWatcher, color: '#000000' }}
+					style={{
+						backgroundColor: colorWatcher,
+						color: Color(colorWatcher).isLight() ? '#000' : '#FFF'
+					}}
 				>
 					{editSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Edit Session category'}
 				</Button>
