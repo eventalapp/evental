@@ -1,15 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EventPermissionRole } from '@prisma/client';
+import Prisma, { EventPermissionRole } from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useEditAttendeeMutation } from '../../hooks/mutations/useEditAttendeeMutation';
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
-import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
-import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { AttendeeWithUser } from '../../utils/stripUser';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -20,8 +19,8 @@ import Select from '../radix/components/Select';
 type Props = {
 	eid: string;
 	uid: string;
-	attendee: UseAttendeeQueryData['attendee'];
-	roles: UseRolesQueryData['roles'];
+	attendee: AttendeeWithUser;
+	roles: Prisma.EventRole[];
 } & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
