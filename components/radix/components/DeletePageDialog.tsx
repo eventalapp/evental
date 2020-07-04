@@ -60,7 +60,7 @@ const DeletePageDialog: React.FC<Props> = (props) => {
 							autoComplete="off"
 							placeholder={`Type "Delete" to confirm`}
 							{...register('confirm')}
-							autoFocus={true}
+							autoFocus
 						/>
 						{errors.confirm?.message && <ErrorMessage>{errors.confirm?.message}</ErrorMessage>}
 					</div>
