@@ -3,17 +3,22 @@ import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
 
 import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
+import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { proAttendeePricing, sale } from '../../../../utils/const';
 import { PurchaseProSchema } from '../../../../utils/schemas';
 import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
 import { getEvent } from '../../events/[eid]';
-import { prisma } from './../../../../prisma/client';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	// https://github.com/stripe/stripe-node#configuration
 	apiVersion: '2020-08-27'
 });
+
+export type UpgradeResponsePayload = {
+	upgraded: boolean;
+};
+export type UpgradeResponse = UpgradeResponsePayload | Stripe.Checkout.Session;
 
 export default api({
 	async POST({ req }) {
@@ -57,7 +62,9 @@ export default api({
 					}
 				});
 
-				return { upgraded: true };
+				const response: UpgradeResponse = { upgraded: true };
+
+				return response;
 			} else {
 				throw new NextkitError(500, 'An error has occurred. Please email support@evental.app');
 			}
