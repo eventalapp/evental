@@ -18,6 +18,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useEventQuery } from '../../hooks/queries/useEventQuery';
+import { useFounderQuery } from '../../hooks/queries/useFounderQuery';
 import { useIsAttendeeQuery } from '../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../hooks/queries/useIsOrganizerQuery';
 import { useUser } from '../../hooks/queries/useUser';
@@ -36,6 +37,7 @@ export const EventHeader: React.FC<{
 }> = (props) => {
 	const { eid, adminLink = '/' } = props;
 	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { isFounder } = useFounderQuery(String(eid));
 	const { event } = useEventQuery(String(eid));
 	const { user } = useUser();
 	const { isAttendee } = useIsAttendeeQuery(String(eid));
@@ -100,6 +102,7 @@ export const EventHeader: React.FC<{
 
 				{event ? (
 					user &&
+					!isFounder &&
 					Boolean(isAttendee) && (
 						<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
 							<div className="ml-4">
