@@ -9,7 +9,7 @@ import ReactDatePicker, {
 	ReactDatePickerProps
 } from 'react-datepicker';
 
-import { NEAREST_MINUTE } from '../../config';
+import { NEAREST_MINUTE } from '../../utils/config';
 import { DatePickerButton } from './DatePickerButton';
 
 type Props = { formatTime?: string; color?: string } & ReactDatePickerProps;

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { CURRENCY } from '../../config';
 import { useUpgradeEventMutation } from '../../hooks/mutations/useUpgradeEventMutation';
+import { CURRENCY } from '../../utils/config';
 import { priceAfterSale, proAttendeesToPrice } from '../../utils/price';
 import { PurchaseProPayload, PurchaseProSchema } from '../../utils/schemas';
 import { formatAmountForDisplay } from '../../utils/stripe';

@@ -13,9 +13,9 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
-import { PASSWORD_RESET_EXPIRY } from '../../../config';
 import { usePasswordReset } from '../../../hooks/mutations/usePasswordReset';
 import { useUser } from '../../../hooks/queries/useUser';
+import { PASSWORD_RESET_EXPIRY } from '../../../utils/config';
 
 const ResetPasswordPage: NextPage = () => {
 	const router = useRouter();

@@ -1,7 +1,7 @@
 import { NextkitError } from 'nextkit';
 
-import { sendDemoRequestEmail } from '../../../email/sendDemoRequestEmail';
 import { api } from '../../../utils/api';
+import { sendDemoRequestEmail } from '../../../utils/email/sendDemoRequestEmail';
 import { SubmitDemoRequestSchema } from '../../../utils/schemas';
 
 export default api({

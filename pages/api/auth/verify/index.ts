@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
-import { VERIFY_EMAIL_EXPIRY } from '../../../../config';
-import { sendWelcomeEmail } from '../../../../email/sendWelcomeEmail';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
+import { VERIFY_EMAIL_EXPIRY } from '../../../../utils/config';
+import { sendWelcomeEmail } from '../../../../utils/email/sendWelcomeEmail';
 import { VerifyEmailSchema } from '../../../../utils/schemas';
 
 export default api({

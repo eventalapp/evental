@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-import { SEED_USERS_TO_GENERATE } from '../config';
+import { SEED_USERS_TO_GENERATE } from '../utils/config';
 import { fake } from '../utils/fake';
 
 const prisma = new PrismaClient();
@@ -137,7 +137,10 @@ export const seed = async () => {
 		});
 
 		if (!session) {
-			throw new Error('Session not found');
+			console.error({
+				message: 'Session not found.'
+			});
+			return;
 		}
 
 		await prisma.eventSessionAttendee.createMany({

@@ -2,9 +2,9 @@ import { hash } from 'argon2';
 import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
-import { PASSWORD_RESET_EXPIRY, SESSION_EXPIRY } from '../../../../config';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
+import { PASSWORD_RESET_EXPIRY, SESSION_EXPIRY } from '../../../../utils/config';
 import { ChangePasswordSchema } from '../../../../utils/schemas';
 
 export default api({

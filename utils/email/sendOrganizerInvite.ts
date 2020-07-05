@@ -3,21 +3,24 @@ import { SESV2 } from 'aws-sdk';
 import { convert } from 'html-to-text';
 import mjml2html from 'mjml';
 
-import { sendEmail } from '../utils/email';
-import { eventMessageTemplate } from './templates/eventMessageTemplate';
+import { sendEmail } from '../email';
+import { inviteOrganizerTemplate } from './templates/inviteOrganizer';
 
-type EventMessageArgs = {
-	sendToAddresses: string[];
-	sentBy?: string;
-	title: string;
-	body: string;
-	event: Prisma.Event;
-};
-
-export const sendEventMessageEmail = async (args: EventMessageArgs) => {
-	const { sendToAddresses, body, title, sentBy, event } = args;
-
-	const htmlOutput = mjml2html(eventMessageTemplate({ body, title, sentBy, event }));
+export const sendOrganizerInvite = async (
+	sendToAddress: string,
+	inviteCode: string,
+	event: Prisma.Event,
+	inviterName: string
+) => {
+	const htmlOutput = mjml2html(
+		inviteOrganizerTemplate(
+			`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
+				event.slug
+			}/invites/organizer?code=${inviteCode}`,
+			event,
+			inviterName
+		)
+	);
 
 	const text = convert(htmlOutput.html, {
 		wordwrap: 130
@@ -37,16 +40,16 @@ export const sendEventMessageEmail = async (args: EventMessageArgs) => {
 					}
 				},
 				Subject: {
-					Data: title,
+					Data: 'Organizer Invite',
 					Charset: 'UTF-8'
 				}
 			}
 		},
 		Destination: {
-			ToAddresses: sendToAddresses
+			ToAddresses: [sendToAddress]
 		},
 		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
-		FromEmailAddress: `"${title} - ${event.name}" <no-reply@evental.app>`
+		FromEmailAddress: '"Evental" <no-reply@evental.app>'
 	};
 
 	await sendEmail(params);

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faSpinnerThird } from '../../icons';
+import { faSpinnerThird } from '../../utils/icons';
 
 export const LoadingInner = () => {
 	return (

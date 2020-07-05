@@ -15,9 +15,9 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
-import { faCalendarCirclePlus } from '../../icons';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../utils/date';
+import { faCalendarCirclePlus } from '../../utils/icons';
 import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser, StrippedUser } from '../../utils/user';
 import { AttendeeList } from '../attendees/AttendeeList';
