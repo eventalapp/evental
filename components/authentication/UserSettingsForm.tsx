@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -108,6 +109,17 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					<Label htmlFor="location">Location</Label>
 					<Input placeholder="User location" {...register('location')} />
 					{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4">
+					<Label>Email</Label>
+					<Input onChange={() => {}} value={user.email} disabled />
+					<p className="mt-1 text-sm text-gray-600">
+						Want to change your email?{' '}
+						<Link href={`/contact`}>
+							<a className="font-medium text-primary">Contact Us</a>
+						</Link>
+					</p>
 				</div>
 
 				<div className="col-span-4 md:col-span-2">
