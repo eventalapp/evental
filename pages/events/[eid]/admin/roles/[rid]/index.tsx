@@ -29,7 +29,13 @@ const ViewAttendeePage: NextPage = () => {
 
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
-						<ViewRole attendees={attendeesData} eid={String(eid)} rid={String(rid)} role={role} />
+						<ViewRole
+							attendees={attendeesData}
+							eid={String(eid)}
+							rid={String(rid)}
+							role={role}
+							admin
+						/>
 					</Column>
 				</SidebarWrapper>
 			</PageWrapper>
