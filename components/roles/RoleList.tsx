@@ -34,9 +34,11 @@ export const RoleList: React.FC<Props> = (props) => {
 					<a>
 						<div className={classNames('border-gray-200', i !== roles.length - 1 && 'border-b')}>
 							<div className="-mx-3 flex flex-row flex-wrap items-center justify-between p-3 hover:bg-gray-75">
-								<span className="block text-lg">
+								<span className="block text-lg font-medium text-gray-800">
 									{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
-									<span className="text-base text-gray-500">{role.defaultRole && '(Default)'}</span>
+									<span className="text-base font-normal text-gray-500">
+										{role.defaultRole && '(Default)'}
+									</span>
 								</span>
 
 								<Tooltip side={'top'} message={`Click to view the ${role.name} role`}>
