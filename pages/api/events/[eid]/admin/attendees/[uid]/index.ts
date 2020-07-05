@@ -11,21 +11,21 @@ import { getEvent } from '../../../index';
 
 export default api({
 	async DELETE({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const requestingUser = await ctx.getStrippedUser();
 		const { eid, uid } = req.query;
 
-		if (!user?.id) {
+		if (!requestingUser?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
 
-		if (!user.emailVerified) {
+		if (!requestingUser.emailVerified) {
 			throw new NextkitError(
 				401,
 				'You must verify your account to do this. Request a verification email in your user settings by clicking on your profile in the top right.'
 			);
 		}
 
-		if (!(await isOrganizer(String(user?.id), String(eid)))) {
+		if (!(await isOrganizer(String(requestingUser?.id), String(eid)))) {
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
@@ -48,6 +48,23 @@ export default api({
 
 		if (attendee.permissionRole === 'FOUNDER') {
 			throw new NextkitError(500, 'You cannot delete the founder.');
+		}
+
+		const requestingAttendee = await getAttendee(event.id, String(requestingUser.id));
+
+		if (!requestingAttendee) {
+			throw new NextkitError(400, 'You must be attending this event to remove attendees.');
+		}
+
+		if (requestingAttendee.id === attendee.id) {
+			throw new NextkitError(400, 'You cannot remove yourself, please leave the event.');
+		}
+
+		if (
+			attendee.permissionRole === 'ORGANIZER' &&
+			requestingAttendee.permissionRole === 'ORGANIZER'
+		) {
+			throw new NextkitError(500, 'You must be the event founder to remove organizers.');
 		}
 
 		await prisma.eventAttendee.delete({
