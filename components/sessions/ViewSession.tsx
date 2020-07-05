@@ -128,32 +128,28 @@ export const ViewSession: React.FC<Props> = (props) => {
 					{user ? (
 						!isAttending &&
 						!admin && (
-							<div>
-								<IconButtonTooltip
-									message="Add this session to your schedule"
-									icon={faCalendarCirclePlus}
-									disabled={createSessionAttendeeMutation.isLoading}
-									isLoading={createSessionAttendeeMutation.isLoading}
-									color="gray"
-									onClick={() => {
-										createSessionAttendeeMutation.mutate();
-									}}
-								/>
-							</div>
+							<IconButtonTooltip
+								message="Add this session to your schedule"
+								icon={faCalendarCirclePlus}
+								disabled={createSessionAttendeeMutation.isLoading}
+								isLoading={createSessionAttendeeMutation.isLoading}
+								color="gray"
+								onClick={() => {
+									createSessionAttendeeMutation.mutate();
+								}}
+							/>
 						)
 					) : (
 						<Skeleton className="w-5 h-5" />
 					)}
 
 					{admin && (
-						<div>
-							<IconLinkTooltip
-								message="Edit this session"
-								color="gray"
-								href={`/events/${eid}/admin/sessions/${sid}/edit`}
-								icon={faPenToSquare}
-							/>
-						</div>
+						<IconLinkTooltip
+							message="Edit this session"
+							color="gray"
+							href={`/events/${eid}/admin/sessions/${sid}/edit`}
+							icon={faPenToSquare}
+						/>
 					)}
 
 					{admin && (
