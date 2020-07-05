@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
@@ -66,9 +67,15 @@ const ViewAttendeePage: NextPage = () => {
 				<EventHeader adminLink={'/attendees'} eid={String(eid)} />
 
 				<Heading className="mb-3" variant="xl" level={2}>
-					Attendees{' '}
-					{attendeesData && (
-						<span className="font-normal text-gray-500">({attendeesData.length || 0})</span>
+					{event && attendeesData ? (
+						<>
+							Attendees{' '}
+							{attendeesData && (
+								<span className="font-normal text-gray-500">({attendeesData.length || 0})</span>
+							)}
+						</>
+					) : (
+						<Skeleton className="w-48" />
 					)}
 				</Heading>
 

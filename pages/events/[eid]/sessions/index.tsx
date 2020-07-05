@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
@@ -66,7 +67,7 @@ const SessionsPage: NextPage = () => {
 				<EventHeader adminLink={'/sessions'} eid={String(eid)} />
 
 				<Heading className="mb-3" variant="xl" level={2}>
-					Sessions
+					{event && sessionsData ? 'Sessions' : <Skeleton className="w-48" />}
 				</Heading>
 
 				<SessionList sessions={sessionsData} event={event} />

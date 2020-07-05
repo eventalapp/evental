@@ -95,7 +95,7 @@ const ViewEventPage: NextPage = () => {
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-12 lg:col-span-9">
 						<Heading className="mb-3" variant="xl" level={2}>
-							Sessions
+							{event && sessionsData ? 'Sessions' : <Skeleton className="w-48" />}
 						</Heading>
 
 						<SessionList sessions={sessionsData} event={event} />

@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
@@ -68,7 +69,7 @@ const SessionsPage: NextPage = () => {
 
 				<FlexRowBetween>
 					<Heading variant="xl" level={2}>
-						Venues
+						{event && venues ? 'Venues' : <Skeleton className="w-48" />}
 					</Heading>
 				</FlexRowBetween>
 
