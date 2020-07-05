@@ -81,7 +81,7 @@ const ViewSessionCategoryPage: NextPage = () => {
 						{event ? (
 							dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')
 						) : (
-							<Skeleton className="w-full max-w-xl" />
+							<Skeleton className="w-48" />
 						)}
 					</Heading>
 				</FlexRowBetween>
