@@ -3,13 +3,13 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Footer } from '../../components/Footer';
 import { SignInForm } from '../../components/authentication/SignInForm';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
 import Column from '../../components/layout/Column';
+import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
-import { Heading } from '../../components/typography/Heading';
+import { Heading } from '../../components/primitives/Heading';
 import { useSignInMutation } from '../../hooks/mutations/useSignInMutation';
 import { useUser } from '../../hooks/queries/useUser';
 

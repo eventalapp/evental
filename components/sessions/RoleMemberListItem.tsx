@@ -7,7 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import { useAttendeeQuery } from '../../hooks/queries/useAttendeeQuery';
 import { capitalizeFirstLetter } from '../../utils/string';
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
 
 type RoleMemberListItemProps = {
 	userId: string;

@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { AdminPageWrapper } from '../../../../../../components/AdminPageWrapper';
+import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { ViewPage } from '../../../../../../components/pages/ViewPage';
-import { SidebarWrapper } from '../../../../../../components/sidebar/SidebarWrapper';
 import { usePageQuery } from '../../../../../../hooks/queries/usePageQuery';
 
 const ViewPagePage: NextPage = () => {

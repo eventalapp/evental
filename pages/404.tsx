@@ -4,13 +4,13 @@ import Link from 'next/link';
 import router from 'next/router';
 import React from 'react';
 
-import { Footer } from '../components/Footer';
 import { Button } from '../components/form/Button';
 import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
+import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
-import { Heading } from '../components/typography/Heading';
+import { Heading } from '../components/primitives/Heading';
 
 const ErrorNotFoundPage: NextPage = () => {
 	return (

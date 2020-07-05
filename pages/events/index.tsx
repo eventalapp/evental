@@ -3,14 +3,14 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 
-import { Footer } from '../../components/Footer';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { EventList } from '../../components/events/EventList';
 import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
 import Column from '../../components/layout/Column';
+import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
-import { Heading } from '../../components/typography/Heading';
+import { Heading } from '../../components/primitives/Heading';
 import { useUpcomingEventsQuery } from '../../hooks/queries/useUpcomingEventsQuery';
 import { useUser } from '../../hooks/queries/useUser';
 

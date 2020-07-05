@@ -20,16 +20,16 @@ import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser, StrippedUser } from '../../utils/stripUser';
-import { AddToCalendar } from '../AddToCalendar';
-import { IconButtonTooltip } from '../IconButtonTooltip';
-import { IconLinkTooltip } from '../IconLinkTooltip';
-import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
-import DeleteSessionDialog from '../radix/components/DeleteSessionDialog';
-import { LeaveSessionDialog } from '../radix/components/LeaveSessionDialog';
-import { ShareSessionDropdown } from '../radix/components/ShareSessionDropdown';
-import { Heading } from '../typography/Heading';
+import { AddToCalendar } from '../primitives/AddToCalendar';
+import { Heading } from '../primitives/Heading';
+import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
+import { IconLinkTooltip } from '../primitives/IconLinkTooltip';
+import { TooltipIcon, TooltipIconSkeleton } from '../primitives/TooltipIcon';
+import DeleteSessionDialog from './DeleteSessionDialog';
+import { LeaveSessionDialog } from './LeaveSessionDialog';
+import { ShareSessionDropdown } from './ShareSessionDropdown';
 
 type Props = {
 	eid: string;

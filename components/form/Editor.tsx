@@ -21,9 +21,9 @@ import StarterKit from '@tiptap/starter-kit';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { faBar, faCodeBlock } from '../../icons';
-import { ImageUploadDialog } from '../radix/components/ImageUploadDialog';
-import { LinkDialog } from '../radix/components/LinkDialog';
-import Tooltip from '../radix/components/Tooltip';
+import { LinkDialog } from '../primitives/LinkDialog';
+import Tooltip from '../primitives/Tooltip';
+import { ImageUploadDialog } from './ImageUploadDialog';
 
 const MenuBar: React.FC<{
 	editor: Editor | null;

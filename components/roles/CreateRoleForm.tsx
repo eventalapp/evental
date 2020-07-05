@@ -6,13 +6,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { useCreateRoleMutation } from '../../hooks/mutations/useCreateRoleMutation';
 import { copy } from '../../utils/const';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
-import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import Switch from '../radix/components/Switch';
+import { HelpTooltip } from '../primitives/HelpTooltip';
+import Switch from '../primitives/Switch';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

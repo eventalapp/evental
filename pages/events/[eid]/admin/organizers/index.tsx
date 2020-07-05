@@ -3,15 +3,15 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { AdminPageWrapper } from '../../../../../components/AdminPageWrapper';
-import { IconButtonTooltip } from '../../../../../components/IconButtonTooltip';
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
+import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import InviteOrganizerDialog from '../../../../../components/radix/components/InviteOrganizerDialog';
-import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
-import { Heading } from '../../../../../components/typography/Heading';
+import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
+import InviteOrganizerDialog from '../../../../../components/organizer/InviteOrganizerDialog';
+import { Heading } from '../../../../../components/primitives/Heading';
+import { IconButtonTooltip } from '../../../../../components/primitives/IconButtonTooltip';
 import { useOrganizersQuery } from '../../../../../hooks/queries/useOrganizersQuery';
 
 const EventOrganizersPage: NextPage = () => {

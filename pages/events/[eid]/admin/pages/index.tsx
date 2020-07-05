@@ -3,14 +3,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { AdminPageWrapper } from '../../../../../components/AdminPageWrapper';
-import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
+import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { PageList } from '../../../../../components/pages/PageList';
-import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
-import { Heading } from '../../../../../components/typography/Heading';
+import { Heading } from '../../../../../components/primitives/Heading';
+import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 
 const PagesAdminPage: NextPage = () => {

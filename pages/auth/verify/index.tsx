@@ -3,10 +3,10 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { Footer } from '../../../components/Footer';
 import { LoadingSpinner } from '../../../components/error/LoadingSpinner';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
 import Column from '../../../components/layout/Column';
+import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { useVerifyEmail } from '../../../hooks/mutations/useVerifyAccount';

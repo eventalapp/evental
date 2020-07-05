@@ -2,12 +2,12 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-import { Footer } from '../components/Footer';
 import { SubmitDemoRequestForm } from '../components/contact/SubmitDemoRequestForm';
 import Column from '../components/layout/Column';
+import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
-import { Heading } from '../components/typography/Heading';
+import { Heading } from '../components/primitives/Heading';
 
 const DemoPage: NextPage = () => {
 	return (

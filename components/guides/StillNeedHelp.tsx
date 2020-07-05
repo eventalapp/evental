@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { BlankLink } from '../BlankLink';
+import { BlankLink } from '../primitives/BlankLink';
 
 type Props = React.FC;
 

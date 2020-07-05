@@ -12,6 +12,7 @@ import { useRolesQuery } from '../../hooks/queries/useRolesQuery';
 import { useUser } from '../../hooks/queries/useUser';
 import { faBarsSquare } from '../../icons';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { ProfileDropdown } from '../authentication/ProfileDropdown';
 import { AuthContainer } from '../navigation/AuthContainer';
 import { FullscreenLinkItem } from '../navigation/FullscreenLinkItem';
 import { HamburgerContainer } from '../navigation/HamburgerContainer';
@@ -19,7 +20,6 @@ import { LinkContainer } from '../navigation/LinkContainer';
 import { LinkItem } from '../navigation/LinkItem';
 import { LogoLinkItem } from '../navigation/LogoLinkItem';
 import { NavigationWrapper } from '../navigation/NavigationWrapper';
-import { ProfileDropdown } from '../radix/components/ProfileDropdown';
 
 type Props = {
 	eid: string;

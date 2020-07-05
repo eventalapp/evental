@@ -7,15 +7,15 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { Footer } from '../../../components/Footer';
 import { PrivatePage } from '../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../components/events/EventHeader';
 import { EventNavigation } from '../../../components/events/Navigation';
 import { SessionDatePicker } from '../../../components/events/SessionDatePicker';
 import Column from '../../../components/layout/Column';
+import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
-import Tooltip from '../../../components/radix/components/Tooltip';
+import Tooltip from '../../../components/primitives/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';

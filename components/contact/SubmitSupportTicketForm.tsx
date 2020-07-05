@@ -10,7 +10,7 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import Select, { Option } from '../radix/components/Select';
+import Select, { Option } from '../primitives/Select';
 
 const attendanceTypes: Option[] = [
 	{ value: 'attending', label: 'Attending' },

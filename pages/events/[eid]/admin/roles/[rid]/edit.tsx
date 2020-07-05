@@ -3,12 +3,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { AdminPageWrapper } from '../../../../../../components/AdminPageWrapper';
+import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
+import { Heading } from '../../../../../../components/primitives/Heading';
 import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
-import { SidebarWrapper } from '../../../../../../components/sidebar/SidebarWrapper';
-import { Heading } from '../../../../../../components/typography/Heading';
 import { useAttendeesByRoleQuery } from '../../../../../../hooks/queries/useAttendeesByRoleQuery';
 import { useRoleQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 

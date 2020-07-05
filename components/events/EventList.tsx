@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { NotFound } from '../error/NotFound';
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
 import { EventListItem } from './EventListItem';
 
 type Props = { events?: Prisma.Event[]; className?: string; hidePastEvents?: boolean };

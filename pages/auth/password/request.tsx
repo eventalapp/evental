@@ -2,14 +2,14 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
 
-import { Footer } from '../../../components/Footer';
+import { RequestPasswordResetForm } from '../../../components/authentication/RequestPasswordResetForm';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import Column from '../../../components/layout/Column';
+import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
-import { RequestPasswordResetForm } from '../../../components/password/RequestPasswordResetForm';
-import { Heading } from '../../../components/typography/Heading';
+import { Heading } from '../../../components/primitives/Heading';
 import { useRequestPasswordReset } from '../../../hooks/mutations/useRequestPasswordReset';
 import { useUser } from '../../../hooks/queries/useUser';
 

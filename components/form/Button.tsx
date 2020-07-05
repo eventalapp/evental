@@ -1,48 +1,54 @@
-import classNames from 'classnames';
+import cx from 'classnames';
 import React from 'react';
 
-type Props = {
-	className?: string;
-	variant?: keyof typeof variants;
-	padding?: keyof typeof paddings;
-	[x: string]: unknown;
-} & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+import { theme } from '../../tailwind.config';
 
 export const variants = {
-	'primary':
-		'bg-primary-500 hover:bg-primary-400 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center cursor-pointer select-none',
-	'danger':
-		'bg-red-500 hover:bg-red-400 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center cursor-pointer select-none',
-	'secondary':
-		'bg-secondary-500 hover:bg-secondary-400 border border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center cursor-pointer select-none',
-	'gradient':
-		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center cursor-pointer select-none',
-	'no-bg':
-		'text-gray-600 hover:text-gray-500 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center select-none',
-	'inversePrimary':
-		'bg-white hover:bg-gray-75 border border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center cursor-pointer select-none',
+	'primary': 'focus-visible:ring-primary-500 bg-primary text-white hover:bg-primary-400',
+	'danger': 'bg-red-500 text-white',
+	'secondary': 'bg-secondary-500 text-white',
+	'gradient': 'bg-gradient-to-r from-secondary-500 to-primary-500 text-white',
 	'default':
-		'border inline-flex select-none items-center justify-center rounded-md text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-opacity-75 focus-visible:ring-primary-500 border-gray-300 bg-white text-gray-800 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-900 cursor-pointer'
+		'focus-visible:ring-primary-500 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-900',
+	'no-bg': 'text-gray-600 hover:text-gray-500'
 };
 
 export const paddings = {
-	tiny: 'px-3 py-1',
-	small: 'px-4 py-2',
-	medium: 'px-6 py-2',
-	large: 'px-4 py-2 md:px-8',
+	tiny: 'px-2 py-2',
+	small: 'px-3 py-2',
+	medium: 'px-4 py-2',
+	large: 'px-6 py-2',
 	none: 'p-0'
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
-	const { className, children, variant = 'primary', padding = 'small', ...rest } = props;
+type Props = React.ComponentProps<'button'> & {
+	className?: string;
+	variant?: keyof typeof variants;
+	padding?: keyof typeof paddings;
+	ringColor?: string;
+};
 
-	return (
+export const Button = React.forwardRef<HTMLButtonElement, Props>(
+	(
+		{ style, ringColor, children, className, variant = 'default', padding = 'medium', ...props },
+		ref
+	) => (
 		<button
-			className={classNames(paddings[padding], variants[variant], className)}
 			ref={ref}
-			{...rest}
+			{...props}
+			className={cx(
+				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring focus-visible:ring-opacity-75 select-none group radix-state-open:bg-gray-50 dark:radix-state-open:bg-gray-900 radix-state-on:bg-gray-50 dark:radix-state-on:bg-gray-900 radix-state-instant-open:bg-gray-50 radix-state-delayed-open:bg-gray-50',
+				paddings[padding],
+				variants[variant],
+				className
+			)}
+			style={{
+				...style,
+				// @ts-ignore
+				'--tw-ring-color': ringColor ?? theme.extend.colors.primary.DEFAULT
+			}}
 		>
 			{children}
 		</button>
-	);
-});
+	)
+);

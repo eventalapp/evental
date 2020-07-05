@@ -4,13 +4,13 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { AdminPageWrapper } from '../../../../../components/AdminPageWrapper';
-import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
+import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
-import { Heading } from '../../../../../components/typography/Heading';
+import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
+import { Heading } from '../../../../../components/primitives/Heading';
+import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { VenueList } from '../../../../../components/venues/VenueList';
 import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 

@@ -2,16 +2,16 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-import { Footer } from '../../components/Footer';
 import { GuideCategoryCard } from '../../components/guides/GuideCategoryCard';
 import { GuideCategoryCardWrapper } from '../../components/guides/GuideCategoryCardWrapper';
 import { GuideSection } from '../../components/guides/GuideSection';
 import { StillNeedHelp } from '../../components/guides/StillNeedHelp';
 import { UnorderedIconLinkList } from '../../components/guides/UnorderedIconLinkList';
 import Column from '../../components/layout/Column';
+import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
-import { Heading } from '../../components/typography/Heading';
+import { Heading } from '../../components/primitives/Heading';
 
 const GuidesPage: NextPage = () => {
 	return (

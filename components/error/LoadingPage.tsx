@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import React from 'react';
 
-import { Footer } from '../Footer';
 import Column from '../layout/Column';
+import { Footer } from '../layout/Footer';
 import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
 import { Loading } from './Loading';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
 
 type Props = React.FC<{ tooltipText?: string; text?: string; link: string }>;
 

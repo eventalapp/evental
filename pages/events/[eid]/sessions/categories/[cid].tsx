@@ -3,13 +3,13 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Footer } from '../../../../../components/Footer';
+import { ViewSessionCategory } from '../../../../../components/categories/ViewSessionCategory';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/Navigation';
 import Column from '../../../../../components/layout/Column';
+import { Footer } from '../../../../../components/layout/Footer';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { ViewSessionCategory } from '../../../../../components/sessions/ViewSessionCategory';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionCategoryQuery } from '../../../../../hooks/queries/useSessionCategoryQuery';

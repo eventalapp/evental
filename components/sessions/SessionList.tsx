@@ -7,7 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { sessionListReducer } from '../../utils/reducer';
 import { NotFound } from '../error/NotFound';
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
 import { SessionListDateItem } from './SessionListDateItem';
 
 type Props = {

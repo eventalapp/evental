@@ -4,15 +4,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Footer } from '../../../components/Footer';
+import { PasswordResetForm } from '../../../components/authentication/PasswordResetForm';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { LinkButton } from '../../../components/form/LinkButton';
 import Column from '../../../components/layout/Column';
+import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
-import { PasswordResetForm } from '../../../components/password/PasswordResetForm';
-import { Heading } from '../../../components/typography/Heading';
+import { Heading } from '../../../components/primitives/Heading';
 import { PASSWORD_RESET_EXPIRY } from '../../../config';
 import { usePasswordReset } from '../../../hooks/mutations/usePasswordReset';
 import { useUser } from '../../../hooks/queries/useUser';
