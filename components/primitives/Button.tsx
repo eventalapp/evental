@@ -28,14 +28,20 @@ type Props = React.ComponentProps<'button'> & {
 	ringColor?: string;
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, Props>(
-	(
-		{ style, ringColor, children, className, variant = 'default', padding = 'medium', ...props },
-		ref
-	) => (
+export const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
+	const {
+		style,
+		ringColor,
+		children,
+		className,
+		variant = 'default',
+		padding = 'medium',
+		...rest
+	} = props;
+
+	return (
 		<button
 			ref={ref}
-			{...props}
 			className={cx(
 				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus:ring-2 focus:ring focus:ring-opacity-75 select-none group',
 				paddings[padding],
@@ -47,8 +53,9 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
 				// @ts-ignore
 				'--tw-ring-color': ringColor ?? theme.extend.colors.primary.DEFAULT
 			}}
+			{...rest}
 		>
 			{children}
 		</button>
-	)
-);
+	);
+});
