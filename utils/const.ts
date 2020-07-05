@@ -2,11 +2,13 @@ export const copy = {
 	tooltip: {
 		defaultRole:
 			'You can set this role to the default role. When new members join your event, they will be given this role.',
-		category: 'A session category is used to categorize sessions.',
+		category:
+			'A session category is used to categorize sessions. If you do not wish to set a category, select "No Category"',
 		color: 'Pick a color for your event to push your brand. We recommend you pick a darker color.',
-		venue: 'A venue is used to group sessions by location.',
+		venue:
+			'A venue is used to group sessions by location. If you do not wish to set a venue, select "No Venue"',
 		maxAttendees:
-			'You can specify the max attendees to limit how many people can attend a session. Leave the input blank if you do not want a attendee limit.',
+			'You can specify the max attendees to limit how many people can attend a session. Leave the input blank if you do not want to set an attendee limit.',
 		topLevel: 'A top level page is displayed on the main navigation for the event.',
 		attachPeople:
 			'You can attach people to a session, they will be listed under their role. If a user has the Speaker role, they will show as a Speaker for this session.',
