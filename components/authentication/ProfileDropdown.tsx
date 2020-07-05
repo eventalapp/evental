@@ -106,7 +106,7 @@ export const ProfileDropdown = (props: Props) => {
 					</a>
 				</Link>
 
-				<Link href="/Users/kcjac/Documents/Code/evental/pages/settings">
+				<Link href="/pages/settings">
 					<a className="cursor-pointer">
 						<DropdownMenuPrimitive.Item
 							className={cx(
