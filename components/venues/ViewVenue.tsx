@@ -1,12 +1,11 @@
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Prisma from '@prisma/client';
 import parse from 'html-react-parser';
-import React, { useState } from 'react';
+import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { StrippedUser } from '../../utils/user';
-import { Button } from '../primitives/Button';
 import { Heading } from '../primitives/Heading';
 import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
 import { IconLinkTooltip } from '../primitives/IconLinkTooltip';
@@ -26,7 +25,6 @@ type Props = {
 
 export const ViewVenue: React.FC<Props> = (props) => {
 	const { eid, vid, venue, admin = false, sessions, event } = props;
-	const [showPastSessions, setShowPastSessions] = useState(false);
 
 	return (
 		<div>
@@ -77,24 +75,11 @@ export const ViewVenue: React.FC<Props> = (props) => {
 				)}
 			</div>
 
-			<Heading className="flex flex-row items-center mb-3" variant="xl">
+			<Heading className="mb-3" variant="xl">
 				Sessions
-				<Button
-					className="ml-3"
-					onClick={() => {
-						setShowPastSessions(!showPastSessions);
-					}}
-				>
-					{showPastSessions ? 'Hide' : 'Show'} Past Sessions
-				</Button>
 			</Heading>
 
-			<SessionList
-				sessions={sessions}
-				event={event}
-				admin={admin}
-				showPastSessions={showPastSessions}
-			/>
+			<SessionList sessions={sessions} event={event} admin={admin} />
 		</div>
 	);
 };
