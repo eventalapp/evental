@@ -40,7 +40,7 @@ export const ViewSessionCategory: React.FC<Props> = (props) => {
 
 					<div>
 						<Heading>
-							{sessionCategory ? sessionCategory.name : <Skeleton className={'w-full max-w-xl'} />}
+							{sessionCategory ? sessionCategory.name : <Skeleton className="w-32" />}
 						</Heading>
 					</div>
 				</div>
