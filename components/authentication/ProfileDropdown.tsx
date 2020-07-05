@@ -14,7 +14,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
-import { StrippedUser } from '../../utils/stripUser';
+import { StrippedUser } from '../../utils/user';
 
 type Props = {
 	user: StrippedUser | undefined;

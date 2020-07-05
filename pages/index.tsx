@@ -5,7 +5,6 @@ import Link from 'next/link';
 import React from 'react';
 
 import { EventalProCard } from '../components/billing/EventalProCard';
-import { LinkButton } from '../components/form/LinkButton';
 import { AspectImage } from '../components/guides/AspectImage';
 import { Card } from '../components/layout/Card';
 import { CardGrid } from '../components/layout/CardGrid';
@@ -14,8 +13,9 @@ import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
 import { Heading } from '../components/primitives/Heading';
+import { LinkButton } from '../components/primitives/LinkButton';
 import { Paragraph } from '../components/primitives/Paragraph';
-import { eduAttendeePricing, proAttendeePricing } from '../utils/const';
+import { eduAttendeePricing, proAttendeePricing } from '../utils/price';
 
 const HomePage: NextPage = () => {
 	return (

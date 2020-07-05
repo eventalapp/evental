@@ -1,8 +1,8 @@
 import { SESV2 } from 'aws-sdk';
 import { NextkitError } from 'nextkit';
 
+import { sendEmail } from '../utils/email';
 import { SubmitSupportTicketPayload } from '../utils/schemas';
-import { sendEmail } from '../utils/sendEmail';
 
 type SupportTicketEmailArgs = {
 	sendToAddress: string;

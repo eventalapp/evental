@@ -7,11 +7,11 @@ import { Controller, useForm } from 'react-hook-form';
 import { useEditVenueMutation } from '../../hooks/mutations/useEditVenueMutation';
 import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
 import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 
 type Props = { eid: string; vid: string; venue: Prisma.EventVenue } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

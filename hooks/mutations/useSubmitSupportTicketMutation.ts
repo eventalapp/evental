@@ -5,7 +5,7 @@ import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { SubmitSupportTicketPayload } from '../../utils/schemas';
-import { StrippedUser } from '../../utils/stripUser';
+import { StrippedUser } from '../../utils/user';
 
 export type UseSubmitSupportTicketMutationData = UseMutationResult<
 	StrippedUser,

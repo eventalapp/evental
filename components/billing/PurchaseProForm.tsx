@@ -5,11 +5,10 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { CURRENCY } from '../../config';
 import { useUpgradeEventMutation } from '../../hooks/mutations/useUpgradeEventMutation';
-import { priceAfterSale } from '../../utils/const';
-import { proAttendeesToPrice } from '../../utils/price';
+import { priceAfterSale, proAttendeesToPrice } from '../../utils/price';
 import { PurchaseProPayload, PurchaseProSchema } from '../../utils/schemas';
-import { formatAmountForDisplay } from '../../utils/stripeHelpers';
-import { Button } from '../form/Button';
+import { formatAmountForDisplay } from '../../utils/stripe';
+import { Button } from '../primitives/Button';
 import Slider from '../primitives/Slider';
 import { EventalProCard } from './EventalProCard';
 

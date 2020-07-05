@@ -6,10 +6,10 @@ import { useForm } from 'react-hook-form';
 import { UsePasswordResetData } from '../../hooks/mutations/usePasswordReset';
 import { ChangePasswordPayload, ChangePasswordSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 
 type Props = { code: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

@@ -5,7 +5,7 @@ import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { SignInPayload } from '../../utils/schemas';
-import { StrippedUser } from '../../utils/stripUser';
+import { StrippedUser } from '../../utils/user';
 
 export interface UseSignInMutationData {
 	signInMutation: UseMutationResult<

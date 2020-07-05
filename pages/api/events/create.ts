@@ -4,8 +4,8 @@ import { NextkitError } from 'nextkit';
 import { prisma } from '../../../prisma/client';
 import { theme } from '../../../tailwind.config';
 import { api } from '../../../utils/api';
-import { generateSlug } from '../../../utils/generateSlug';
 import { CreateEventSchema } from '../../../utils/schemas';
+import { generateSlug } from '../../../utils/string';
 
 export default api({
 	async POST({ ctx, req }) {

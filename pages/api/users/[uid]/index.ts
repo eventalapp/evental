@@ -2,7 +2,7 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
-import { StrippedUser, stripUser } from '../../../../utils/stripUser';
+import { StrippedUser, stripUser } from '../../../../utils/user';
 
 export default api({
 	async GET({ req }) {

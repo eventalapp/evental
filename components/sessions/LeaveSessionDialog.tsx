@@ -4,7 +4,7 @@ import cx from 'classnames';
 import React, { Fragment, useState } from 'react';
 
 import { useLeaveSession } from '../../hooks/mutations/useLeaveSession';
-import { Button } from '../form/Button';
+import { Button } from '../primitives/Button';
 
 interface Props {
 	eventSlug: string;

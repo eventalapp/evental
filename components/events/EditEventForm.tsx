@@ -14,21 +14,20 @@ import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMuta
 import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
-import { formatDateRange } from '../../utils/formatDateRange';
+import { formatDateRange } from '../../utils/date';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
-import { slugify } from '../../utils/slugify';
-import { capitalizeFirstLetter } from '../../utils/string';
+import { capitalizeFirstLetter, slugify } from '../../utils/string';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
-import { Button } from '../form/Button';
 import { renderCustomHeader } from '../form/DatePicker';
 import { DatePickerButton } from '../form/DatePickerButton';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
-import { Textarea } from '../form/Textarea';
+import { Button } from '../primitives/Button';
 import { HelpTooltip } from '../primitives/HelpTooltip';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 import Select from '../primitives/Select';
+import { Textarea } from '../primitives/Textarea';
 import Tooltip from '../primitives/Tooltip';
 
 type Props = {

@@ -5,10 +5,10 @@ import { useForm } from 'react-hook-form';
 import { UseSignUpMutationData } from '../../hooks/mutations/useSignUpMutation';
 import { SignUpPayload, SignUpSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseSignUpMutationData;

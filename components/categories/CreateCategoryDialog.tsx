@@ -3,19 +3,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
 import cx from 'classnames';
+import Color from 'color';
 import React, { Fragment, useState } from 'react';
-import { CirclePicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useCreateSessionCategoryMutation } from '../../hooks/mutations/useCreateSessionCategoryMutation';
-import { colors, copy } from '../../utils/const';
+import { copy } from '../../utils/const';
 import { CreateSessionCategoryPayload, CreateSessionCategorySchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
 import { HelpTooltip } from '../primitives/HelpTooltip';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 
 interface Props {
 	eid: string;
@@ -39,7 +40,7 @@ const CreateCategoryDialog: React.FC<Props> = (props) => {
 		formState: { errors }
 	} = useForm<CreateSessionCategoryPayload>({
 		defaultValues: {
-			color: colors[0]
+			color: '#c72727'
 		},
 		resolver: zodResolver(CreateSessionCategorySchema)
 	});
@@ -89,14 +90,14 @@ const CreateCategoryDialog: React.FC<Props> = (props) => {
 							sessions.
 						</DialogPrimitive.Description>
 
-						<div className="mt-5 flex w-full flex-row flex-wrap">
-							<div className="flex-1 grow md:mr-5">
+						<div className="mt-5 grid md:grid-cols-2 gap-5 grid-cols-1">
+							<div className="">
 								<Label htmlFor="name">Name *</Label>
 								<Input placeholder="Session category name" {...register('name')} />
 								{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 							</div>
 
-							<div className="my-5 w-full flex-initial md:mt-0 md:w-auto">
+							<div className="">
 								<Label htmlFor="color">
 									Color *<HelpTooltip message={copy.tooltip.typeColor} />
 								</Label>
@@ -104,8 +105,8 @@ const CreateCategoryDialog: React.FC<Props> = (props) => {
 									control={control}
 									name="color"
 									render={({ field }) => (
-										<CirclePicker
-											colors={colors}
+										<ChromePicker
+											disableAlpha
 											color={field.value}
 											onChange={(val) => {
 												field.onChange(val.hex);
@@ -134,7 +135,10 @@ const CreateCategoryDialog: React.FC<Props> = (props) => {
 									'border border-transparent',
 									'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 								)}
-								style={{ backgroundColor: colorWatcher, color: '#000000' }}
+								style={{
+									backgroundColor: colorWatcher,
+									color: Color(colorWatcher).isLight() ? '#000' : '#FFF'
+								}}
 								disabled={createSessionCategoryMutation.isLoading}
 								onClick={handleSubmit((data) => {
 									createSessionCategoryMutation.mutate(data);

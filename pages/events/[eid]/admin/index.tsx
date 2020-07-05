@@ -5,11 +5,11 @@ import React from 'react';
 
 import DeleteEventDialog from '../../../../components/events/DeleteEventDialog';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
-import { Button } from '../../../../components/form/Button';
 import { AdminPageWrapper } from '../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { SidebarWrapper } from '../../../../components/layout/SidebarWrapper';
+import { Button } from '../../../../components/primitives/Button';
 import { Heading } from '../../../../components/primitives/Heading';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';

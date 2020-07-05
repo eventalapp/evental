@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { useUser } from '../../hooks/queries/useUser';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
+import { Button } from '../primitives/Button';
 
 type Props = { eid: string; sid: string };
 

@@ -9,9 +9,9 @@ import { toast } from 'react-toastify';
 
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 import { LoadingInner } from '../error/LoadingInner';
+import { Label } from '../primitives/Label';
 import { FileWithPreview } from './AvatarUpload';
 import ImageUpload from './ImageUpload';
-import { Label } from './Label';
 
 interface Props {
 	onSubmit: (link?: string) => void;

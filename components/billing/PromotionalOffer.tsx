@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 import { faBadge } from '../../icons';
-import { sale } from '../../utils/const';
+import { sale } from '../../utils/price';
 
 export const PromotionalOffer = () => {
 	if (sale.percentage > 0 || sale.flatAmount > 0) {

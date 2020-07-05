@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 
-import { eduAttendeePricing, priceAfterSale, proAttendeePricing, sale } from '../../utils/const';
+import { eduAttendeePricing, priceAfterSale, proAttendeePricing, sale } from '../../utils/price';
 import { PromotionalOffer } from './PromotionalOffer';
 
 type EventalProCardProps = {

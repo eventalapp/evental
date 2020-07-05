@@ -10,7 +10,7 @@ import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
 import { useUser } from '../../hooks/queries/useUser';
 import { faBarsSquare } from '../../icons';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
-import { LinkButton } from '../form/LinkButton';
+import { LinkButton } from '../primitives/LinkButton';
 import { AuthContainer } from './AuthContainer';
 import { FullscreenLinkItem } from './FullscreenLinkItem';
 import { HamburgerContainer } from './HamburgerContainer';

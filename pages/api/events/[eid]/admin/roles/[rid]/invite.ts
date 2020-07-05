@@ -3,7 +3,7 @@ import { NextkitError } from 'nextkit';
 import { ORGANIZER_INVITE_EXPIRY } from '../../../../../../../config';
 import { sendRoleInvite } from '../../../../../../../email/sendRoleInvite';
 import { api } from '../../../../../../../utils/api';
-import { isFounder } from '../../../../../../../utils/isFounder';
+import { isFounder } from '../../../../../../../utils/attendee';
 import { InviteRoleSchema } from '../../../../../../../utils/schemas';
 import { getEvent } from '../../../index';
 import { getRole } from '../../../roles/[rid]';

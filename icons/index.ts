@@ -1,4 +1,5 @@
 // noinspection JSUnusedGlobalSymbols
+// noinspection JSUnusedGlobalSymbols
 import { IconDefinition, IconName, IconPrefix } from '@fortawesome/fontawesome-common-types';
 
 export let faListOldStyle: IconDefinition = {
@@ -36,6 +37,7 @@ export let faBar: IconDefinition = {
 		'M4 50C4 47.7909 5.79086 46 8 46H92C94.2091 46 96 47.7909 96 50C96 52.2091 94.2091 54 92 54H8C5.79086 54 4 52.2091 4 50Z'
 	]
 };
+
 export let faCodeBlock: IconDefinition = {
 	prefix: 'fac' as IconPrefix,
 	iconName: 'faCodeBlock' as IconName,

@@ -2,6 +2,24 @@ import Busboy from 'busboy';
 import { NextApiRequest } from 'next';
 import { NextkitError } from 'nextkit';
 
+export const populateFormData = (data: Record<string, unknown>) => {
+	const formData = new FormData();
+
+	Object.entries(data).forEach(([key, value]) => {
+		if (value instanceof File) {
+			formData.append(key, value, value.name);
+		} else if (value instanceof Date) {
+			formData.append(key, value.toISOString());
+		} else {
+			if (value !== undefined) {
+				formData.append(key, String(value));
+			}
+		}
+	});
+
+	return formData;
+};
+
 export const busboyParseForm = (
 	req: NextApiRequest
 ): Promise<{
@@ -15,6 +33,7 @@ export const busboyParseForm = (
 		const busboy = Busboy({ headers: req.headers });
 		let chunks: Uint8Array[] = [];
 		let formData: Record<string, string> = {};
+
 		let filename: string;
 		let mimeType: string;
 

@@ -6,11 +6,11 @@ import { useForm } from 'react-hook-form';
 import { useDeletePageMutation } from '../../hooks/mutations/useDeletePageMutation';
 import { DeleteDataPayload, DeleteDataSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
 import { DialogContent } from '../primitives/DialogContent';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 
 interface Props {
 	eid: string;

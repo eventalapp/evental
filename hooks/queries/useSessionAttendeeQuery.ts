@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseQueryResult, useQuery } from 'react-query';
 
-import { AttendeeWithUser } from '../../utils/stripUser';
+import { AttendeeWithUser } from '../../utils/user';
 
 export interface UseSessionAttendeeQueryData {
 	sessionAttendeeQuery: UseQueryResult<

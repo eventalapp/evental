@@ -2,10 +2,10 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 
-import { LinkButton } from '../form/LinkButton';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
+import { LinkButton } from '../primitives/LinkButton';
 
 export const PrivatePage = () => (
 	<PageWrapper>

@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { StrippedUser } from '../../utils/stripUser';
+import { StrippedUser } from '../../utils/user';
 
 export interface UseUserData {
 	user: StrippedUser | undefined;

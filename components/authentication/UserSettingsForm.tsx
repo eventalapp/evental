@@ -7,15 +7,15 @@ import { UseUserData } from '../../hooks/queries/useUser';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import { copy } from '../../utils/const';
 import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
-import { slugify } from '../../utils/slugify';
+import { slugify } from '../../utils/string';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
-import { Button } from '../form/Button';
 import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
 import { HelpTooltip } from '../primitives/HelpTooltip';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 import Tooltip from '../primitives/Tooltip';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
