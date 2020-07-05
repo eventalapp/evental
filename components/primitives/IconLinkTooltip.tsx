@@ -14,18 +14,16 @@ export const iconLinkTooltipSkeleton = (
 	</div>
 );
 
-type Props = React.FC<
-	{
-		href: string;
-		icon: IconDefinition;
-		message: string;
-		side?: 'bottom' | 'top' | 'right' | 'left' | undefined;
-		className?: string;
-		color?: keyof typeof iconColors;
-	} & React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
->;
+type Props = {
+	href: string;
+	icon: IconDefinition;
+	message: string;
+	side?: 'bottom' | 'top' | 'right' | 'left' | undefined;
+	className?: string;
+	color?: keyof typeof iconColors;
+} & React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
-export const IconLinkTooltip: Props = (props) => {
+export const IconLinkTooltip = React.forwardRef<HTMLAnchorElement, Props>((props, ref) => {
 	const { children, href, icon, message, className, side = 'top', color = 'gray', ...rest } = props;
 
 	return (
@@ -33,6 +31,7 @@ export const IconLinkTooltip: Props = (props) => {
 			<div>
 				<Link href={href} passHref>
 					<a
+						ref={ref}
 						className={classNames('flex items-center justify-center', iconColors[color], className)}
 						{...rest}
 					>
@@ -47,4 +46,4 @@ export const IconLinkTooltip: Props = (props) => {
 			</div>
 		</Tooltip>
 	);
-};
+});
