@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
-import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
@@ -15,6 +15,7 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Navigation } from '../../../../../components/navigation';
 import { Button } from '../../../../../components/primitives/Button';
 import { Heading } from '../../../../../components/primitives/Heading';
+import { LinkButton } from '../../../../../components/primitives/LinkButton';
 import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useAcceptRoleInviteMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -24,16 +25,24 @@ import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
 
 const RoleInvitePage: NextPage = () => {
 	const router = useRouter();
-	const { user, isUserLoading } = useUser();
+	const { user } = useUser();
 	const { eid, rid, code } = router.query;
 	const { acceptRoleInviteMutation } = useAcceptRoleInviteMutation(String(eid), String(rid));
 	const { role, roleError } = useRoleQuery(String(eid), String(rid));
 	const { event, eventError } = useEventQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
-	if (!user && !isUserLoading) {
-		return <UnauthorizedPage />;
-	}
+	const Seo = role && event && (
+		<NextSeo
+			title={`Accept ${role.name} Invite`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+		/>
+	);
 
 	if (roleError) {
 		return <NotFoundPage message="Role not found" />;
@@ -47,19 +56,53 @@ const RoleInvitePage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	if (!user?.id) {
+		let params = new URLSearchParams();
+
+		params.append('redirectUrl', String(router.asPath));
+
+		return (
+			<PageWrapper>
+				{Seo}
+
+				<Navigation />
+
+				<Column variant="halfWidth">
+					<div className="space-y-5">
+						<Heading>Create an account</Heading>
+						<p className="text-gray-700">
+							To join this event as a {role && role.name}, please{' '}
+							<Link href={`/auth/signup?${params}`}>
+								<a className="text-gray-900 underline">create an account</a>
+							</Link>{' '}
+							or{' '}
+							<Link href={`/auth/signin?${params}`}>
+								<a className="text-gray-900 underline">sign in</a>
+							</Link>{' '}
+							with your existing account.
+						</p>
+						<div className="flex flex-row justify-end">
+							<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
+								Cancel
+							</Button>
+
+							<Link href={`/auth/signin?${params}`} passHref>
+								<LinkButton padding="large" variant="primary">
+									Sign in
+								</LinkButton>
+							</Link>
+						</div>
+					</div>
+				</Column>
+
+				<Footer color={event?.color} />
+			</PageWrapper>
+		);
+	}
+
 	return (
 		<PageWrapper>
-			{role && event && (
-				<NextSeo
-					title={`Accept ${role.name} Invite`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-				/>
-			)}
+			{Seo}
 
 			<Navigation />
 
@@ -77,6 +120,7 @@ const RoleInvitePage: NextPage = () => {
 						Cancel
 					</Button>
 					<Button
+						variant="primary"
 						onClick={() => {
 							const data = AcceptRoleInviteSchema.parse({ code: String(code) });
 
