@@ -104,7 +104,6 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 							createVenueMutation.mutate(data);
 						})}
 						disabled={createVenueMutation.isLoading}
-						autoFocus
 					>
 						{createVenueMutation.isLoading ? <LoadingInner /> : 'Create'}
 					</Button>
