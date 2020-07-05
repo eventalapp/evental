@@ -65,7 +65,9 @@ const RolesPage: NextPage = () => {
 			<Column>
 				<EventHeader adminLink={'/roles'} eid={String(eid)} />
 
-				<Heading>Roles</Heading>
+				<Heading variant="xl" level={2}>
+					Roles
+				</Heading>
 
 				<RoleList
 					eid={String(eid)}

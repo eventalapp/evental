@@ -69,7 +69,9 @@ const SessionsPage: NextPage = () => {
 			<Column>
 				<EventHeader adminLink={'/pages'} eid={String(eid)} />
 
-				<Heading>Pages</Heading>
+				<Heading variant="xl" level={2}>
+					Pages
+				</Heading>
 
 				<PageList eid={String(eid)} pages={pages} />
 			</Column>

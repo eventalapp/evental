@@ -2,13 +2,14 @@ import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
+import { Button } from '../../../../../components/primitives/Button';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { SessionList } from '../../../../../components/sessions/SessionList';
@@ -20,6 +21,7 @@ const SessionsAdminPage: NextPage = () => {
 	const { eid } = router.query;
 	const { sessionsData } = useSessionsQuery(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+	const [showPastSessions, setShowPastSessions] = useState(false);
 
 	return (
 		<AdminPageWrapper errors={[eventError]} isLoading={isEventLoading} eid={String(eid)}>
@@ -31,11 +33,16 @@ const SessionsAdminPage: NextPage = () => {
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<FlexRowBetween>
-							<Heading>
-								Sessions{' '}
-								<span className="font-normal text-gray-500">
-									({(sessionsData && sessionsData.length) || 0})
-								</span>
+							<Heading className="flex flex-row">
+								Sessions
+								<Button
+									className="ml-3"
+									onClick={() => {
+										setShowPastSessions(!showPastSessions);
+									}}
+								>
+									{showPastSessions ? 'Hide' : 'Show'} Past Sessions
+								</Button>
 							</Heading>
 
 							<IconLinkTooltip
@@ -46,7 +53,12 @@ const SessionsAdminPage: NextPage = () => {
 							/>
 						</FlexRowBetween>
 
-						<SessionList admin sessions={sessionsData} event={event} />
+						<SessionList
+							admin
+							sessions={sessionsData}
+							event={event}
+							showPastSessions={showPastSessions}
+						/>
 					</Column>
 				</SidebarWrapper>
 			</PageWrapper>

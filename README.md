@@ -22,6 +22,8 @@
 - suggest a feature form refactor
 - make events truly private
 - adjust session times when event date is moved
+- upcoming events/session styling
+
 try to make your own event, be a user
 
 ## DB Pushing

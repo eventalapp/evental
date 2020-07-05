@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
@@ -12,6 +12,7 @@ import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import { Footer } from '../../../../../components/layout/Footer';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Button } from '../../../../../components/primitives/Button';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { SessionList } from '../../../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
@@ -24,6 +25,7 @@ const ViewSessionCategoryPage: NextPage = () => {
 	const { event, eventError } = useEventQuery(String(eid));
 	const { sessionsByDateData } = useSessionsByDateQuery(String(eid), String(date));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const [showPastSessions, setShowPastSessions] = useState(false);
 
 	if (eventError) {
 		return <ViewErrorPage errors={[eventError]} />;
@@ -77,16 +79,30 @@ const ViewSessionCategoryPage: NextPage = () => {
 
 			<Column>
 				<FlexRowBetween>
-					<Heading>
+					<Heading className="flex flex-row">
 						{event ? (
-							dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')
+							<>
+								{dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')}{' '}
+								<Button
+									className="ml-3"
+									onClick={() => {
+										setShowPastSessions(!showPastSessions);
+									}}
+								>
+									{showPastSessions ? 'Hide' : 'Show'} Past Sessions
+								</Button>
+							</>
 						) : (
 							<Skeleton className="w-full max-w-xl" />
 						)}
 					</Heading>
 				</FlexRowBetween>
 
-				<SessionList sessions={sessionsByDateData} event={event} />
+				<SessionList
+					sessions={sessionsByDateData}
+					event={event}
+					showPastSessions={showPastSessions}
+				/>
 			</Column>
 
 			<Footer color={event?.color} />

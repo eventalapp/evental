@@ -5,11 +5,11 @@ import { theme } from '../../tailwind.config';
 
 export const variants = {
 	'primary': 'focus-visible:ring-primary-500 bg-primary text-white hover:bg-primary-400',
-	'danger': 'bg-red-500 text-white',
+	'danger': 'bg-red-500 hover:bg-red-400 text-white',
 	'secondary': 'bg-secondary-500 text-white',
 	'gradient': 'bg-gradient-to-r from-secondary-500 to-primary-500 text-white',
 	'default':
-		'focus-visible:ring-primary-500 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-900',
+		'focus-visible:ring-primary-500 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50',
 	'no-bg': 'text-gray-600 hover:text-gray-500'
 };
 
@@ -37,7 +37,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
 			ref={ref}
 			{...props}
 			className={cx(
-				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring focus-visible:ring-opacity-75 select-none group radix-state-open:bg-gray-50 dark:radix-state-open:bg-gray-900 radix-state-on:bg-gray-50 dark:radix-state-on:bg-gray-900 radix-state-instant-open:bg-gray-50 radix-state-delayed-open:bg-gray-50',
+				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring focus-visible:ring-opacity-75 select-none group',
 				paddings[padding],
 				variants[variant],
 				className
