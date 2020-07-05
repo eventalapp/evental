@@ -12,16 +12,18 @@ type Props = {
 	className?: string;
 	variant?: keyof typeof variants;
 	color?: string;
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	[x: string]: unknown;
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 export const Input = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
-	const { className, children, variant = 'default', color, ...rest } = props;
+	const { className, children, variant = 'default', color, onChange, ...rest } = props;
 
 	return (
 		<input
 			className={classNames(variants[variant], className)}
 			ref={ref}
+			onChange={onChange}
 			style={{
 				// @ts-ignore
 				'--tw-ring-color': color ?? theme.extend.colors.primary.DEFAULT
