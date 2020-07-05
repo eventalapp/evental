@@ -16,7 +16,6 @@
 - attach people -> create attendee (new modal)
 - make event placeholder with year
 - make default avatar more neutral
-- hide leave button as founder
 - varchar match schema
 - user not caching when unauthed (bc rc doesn't cache errors)
 - suggest a feature form refactor
