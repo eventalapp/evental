@@ -13,9 +13,3 @@ export const eduAttendeesToPrice = (attendees: number): number => {
 
 	return Math.round(step2 / 10) * 10;
 };
-
-export const priceToAttendees = (price: number): number => {
-	const step1 = price - 200;
-
-	return step1 * 2;
-};

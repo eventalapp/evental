@@ -9,7 +9,7 @@ import Tooltip from '../radix/components/Tooltip';
 type EventListItemProps = { event: Prisma.Event };
 
 export const EventListItem: React.FC<EventListItemProps> = (props) => {
-	const { event, children } = props;
+	const { event } = props;
 
 	return (
 		<div>

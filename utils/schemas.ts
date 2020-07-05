@@ -413,8 +413,6 @@ export const SendEventMessageSchema = z.object({
 	sentBy: z.string().max(200, 'Sent By is too long').optional()
 });
 
-export type SendEventMessagePayload = z.infer<typeof SendEventMessageSchema>;
-
 // Delete data
 
 export const DeleteDataSchema = z.object({
