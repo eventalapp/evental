@@ -106,7 +106,7 @@ export const ProfileDropdown = (props: Props) => {
 					</a>
 				</Link>
 
-				<Link href="/pages/settings">
+				<Link href="/settings">
 					<a className="cursor-pointer">
 						<DropdownMenuPrimitive.Item
 							className={cx(
