@@ -107,7 +107,8 @@ export const ViewSession: React.FC<Props> = (props) => {
 					)}
 
 					{user && event && session ? (
-						Boolean(isAttending) && (
+						Boolean(isAttending) &&
+						!admin && (
 							<LeaveSessionDialog
 								eventSlug={event.slug}
 								sessionSlug={session.slug}
