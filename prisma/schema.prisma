@@ -19,7 +19,7 @@ model User {
   slug          String    @unique
   name          String
   password      String?
-  email         String    @unique
+  email         String?   @unique
   emailVerified DateTime?
   location      String?
   description   String?

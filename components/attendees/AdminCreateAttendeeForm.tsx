@@ -70,7 +70,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="col-span-4 md:col-span-2">
-					<Label htmlFor="name">Email *</Label>
+					<Label htmlFor="name">Email</Label>
 					<Input placeholder="john@email.com" {...register('email')} />
 					{errors.email?.message && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
 				</div>
