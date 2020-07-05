@@ -34,7 +34,7 @@ export default api({
 
 		if (attendee.permissionRole === 'FOUNDER') {
 			throw new NextkitError(
-				500,
+				403,
 				'You cannot leave the event as the founder. If you wish to delete the event, go to the event settings'
 			);
 		}
