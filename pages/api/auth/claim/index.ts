@@ -43,7 +43,9 @@ export default api({
 		});
 
 		try {
-			await sendWelcomeEmail(user.email, user.name);
+			if (user.email) {
+				await sendWelcomeEmail(user.email, user.name);
+			}
 		} catch {
 			// silent fail
 		}
