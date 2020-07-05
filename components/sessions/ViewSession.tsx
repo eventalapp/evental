@@ -76,13 +76,13 @@ export const ViewSession: React.FC<Props> = (props) => {
 			<FlexRowBetween variant="noWrapStart">
 				<Heading>{session ? session.name : <Skeleton className="w-full max-w-xl" />}</Heading>
 
-				<div className="flex flex-row items-center">
+				<div className="flex flex-row items-center space-x-4">
 					{event && session ? (
 						<ShareSessionDropdown event={event} session={session}>
 							<IconButtonTooltip icon={faShare} message="Share this session" color="gray" />
 						</ShareSessionDropdown>
 					) : (
-						<Skeleton className="w-5 h-5 ml-4" />
+						<Skeleton className="w-5 h-5" />
 					)}
 
 					{user && session && event ? (
@@ -103,7 +103,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							/>
 						)
 					) : (
-						<Skeleton className="w-5 h-5 ml-4" />
+						<Skeleton className="w-5 h-5" />
 					)}
 
 					{user && event && session ? (
@@ -121,13 +121,13 @@ export const ViewSession: React.FC<Props> = (props) => {
 							</LeaveSessionDialog>
 						)
 					) : (
-						<Skeleton className="w-5 h-5 ml-4" />
+						<Skeleton className="w-5 h-5" />
 					)}
 
 					{user ? (
 						!isAttending &&
 						!admin && (
-							<div className="ml-4">
+							<div>
 								<IconButtonTooltip
 									message="Add this session to your schedule"
 									icon={faCalendarCirclePlus}
@@ -141,11 +141,11 @@ export const ViewSession: React.FC<Props> = (props) => {
 							</div>
 						)
 					) : (
-						<Skeleton className="w-5 h-5 ml-4" />
+						<Skeleton className="w-5 h-5" />
 					)}
 
 					{admin && (
-						<div className="ml-4">
+						<div>
 							<IconLinkTooltip
 								message="Edit this session"
 								color="gray"
