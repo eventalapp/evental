@@ -1,6 +1,7 @@
 import { Elements } from '@stripe/react-stripe-js';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -43,17 +44,27 @@ const EventBillingPage: NextPage = () => {
 							{event?.level === 'TRIAL' ? (
 								<PurchaseProPlan eid={String(eid)} />
 							) : (
-								<div className="flex flex-row items-center justify-start">
-									<Paragraph className="text-gray-800">Your current plan is</Paragraph>
-									<div className="flex flex-row items-center ml-2">
-										<strong className="mr-2 font-display text-2xl font-bold tracking-tight">
-											Evental
-										</strong>
-										<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">
-											PRO
-										</span>
+								<>
+									<div className="flex flex-row items-center justify-start mb-3">
+										<Paragraph className="text-gray-800">Your current plan is</Paragraph>
+
+										<div className="flex flex-row items-center ml-2">
+											<strong className="mr-2 font-display text-2xl font-bold tracking-tight">
+												Evental
+											</strong>
+											<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">
+												PRO
+											</span>
+										</div>
 									</div>
-								</div>
+									<Paragraph className="text-gray-600">
+										If you have any issues or questions, please{' '}
+										<Link href="/contact">
+											<a className="underline">Contact Us</a>
+										</Link>
+										.
+									</Paragraph>
+								</>
 							)}
 						</Column>
 					</SidebarWrapper>
