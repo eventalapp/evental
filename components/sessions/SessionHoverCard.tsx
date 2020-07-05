@@ -120,7 +120,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
 					'max-w-lg rounded-lg p-4 pr-14 md:w-full',
 					'border border-gray-200 bg-white shadow dark:bg-gray-800',
-					'relative min-w-[350px] overflow-hidden focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75'
+					'relative min-w-[350px] overflow-hidden focus:outline-none focus:ring focus:ring-gray-900 focus:ring-opacity-75'
 				)}
 			>
 				<HoverCardPrimitive.Arrow

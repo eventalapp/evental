@@ -20,7 +20,7 @@ export const PricingAccordion: React.FC<Props> = (props) => {
 				<AccordionPrimitive.Item
 					key={`header-${i}`}
 					value={`item-${i + 1}`}
-					className="rounded-lg focus-within:ring focus-within:ring-primary-500 focus-within:ring-opacity-75 focus:outline-none"
+					className="rounded-lg focus-within:ring focus-within:ring-gray-900 focus-within:ring-opacity-75 focus:outline-none"
 				>
 					<AccordionPrimitive.Header className="w-full">
 						<AccordionPrimitive.Trigger

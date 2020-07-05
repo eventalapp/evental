@@ -5,7 +5,7 @@ import { theme } from '../../tailwind.config';
 
 const variants = {
 	default:
-		'transition duration-50 w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary focus:border-gray-300 min-h-[100px]'
+		'transition duration-50 w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-gray-900 focus:border-gray-300 min-h-[100px]'
 };
 
 type Props = {
@@ -23,7 +23,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref
 			className={classNames(variants[variant], className)}
 			style={{
 				// @ts-ignore
-				'--tw-ring-color': color ?? theme.extend.colors.primary.DEFAULT
+				'--tw-ring-color': color ?? theme.extend.colors.gray[700]
 			}}
 			ref={ref}
 			{...rest}

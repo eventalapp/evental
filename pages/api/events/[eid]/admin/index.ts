@@ -104,7 +104,7 @@ export default api({
 		}
 
 		if (!(await isFounder(String(eid), String(user?.id)))) {
-			throw new NextkitError(403, 'You must be founder for this event to do this.');
+			throw new NextkitError(403, 'You must be the event founder to delete this event.');
 		}
 
 		const event = await prisma.event.findFirst({

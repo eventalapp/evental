@@ -48,7 +48,7 @@ export const LinkDialog: React.FC<Props> = (props) => {
 								'mt-1 block w-full rounded-md',
 								'text-sm text-gray-700 placeholder:text-gray-500 dark:text-gray-400 dark:placeholder:text-gray-600',
 								'border border-gray-400 focus:border-transparent dark:border-gray-700 dark:bg-gray-800',
-								'focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75'
+								'focus:outline-none focus:ring focus:ring-gray-900 focus:ring-opacity-75'
 							)}
 						/>
 					</fieldset>

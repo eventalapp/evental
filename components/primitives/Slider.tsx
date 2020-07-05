@@ -33,7 +33,7 @@ const Slider = (props: Props) => {
 			<SliderPrimitive.Thumb
 				className={cx(
 					'block h-5 w-5 rounded-full bg-primary-400 dark:bg-white',
-					'focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75',
+					'focus:outline-none focus:ring focus:ring-gray-900 focus:ring-opacity-75',
 					'cursor-grab'
 				)}
 			/>

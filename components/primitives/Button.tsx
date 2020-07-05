@@ -4,12 +4,11 @@ import React from 'react';
 import { theme } from '../../tailwind.config';
 
 export const variants = {
-	'primary': 'focus:ring-primary-500 bg-primary text-white hover:bg-primary-400',
+	'primary': 'focus:ring-gray-900 bg-primary text-white hover:bg-primary-400',
 	'danger': 'bg-red-500 hover:bg-red-400 text-white',
 	'secondary': 'bg-secondary-500 text-white',
 	'gradient': 'bg-gradient-to-r from-secondary-500 to-primary-500 text-white',
-	'default':
-		'focus:ring-primary-500 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50',
+	'default': 'focus:ring-gray-900 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50',
 	'no-bg': 'text-gray-600 hover:text-gray-500'
 };
 
@@ -43,7 +42,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) =>
 		<button
 			ref={ref}
 			className={cx(
-				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus:ring-2 focus:ring focus:ring-opacity-75 select-none group',
+				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus:ring-2 focus:ring-opacity-75 select-none group',
 				paddings[padding],
 				variants[variant],
 				className
@@ -51,7 +50,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) =>
 			style={{
 				...style,
 				// @ts-ignore
-				'--tw-ring-color': ringColor ?? theme.extend.colors.primary.DEFAULT
+				'--tw-ring-color': ringColor ?? theme.extend.colors.gray[700]
 			}}
 			{...rest}
 		>
