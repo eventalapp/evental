@@ -111,17 +111,6 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 				</div>
 
-				<div className="col-span-4">
-					<Label>Email</Label>
-					<Input onChange={() => {}} value={user.email} disabled />
-					<p className="mt-1 text-sm text-gray-600">
-						Want to change your email?{' '}
-						<Link href={`/contact`}>
-							<a className="font-medium text-primary">Contact Us</a>
-						</Link>
-					</p>
-				</div>
-
 				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="position">
 						Position
@@ -147,6 +136,17 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					</Label>
 					<Input placeholder="Website" {...register('website')} />
 					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4">
+					<Label>Email</Label>
+					<Input onChange={() => {}} value={user.email} disabled />
+					<p className="mt-1 text-sm text-gray-600">
+						Want to change your email?{' '}
+						<Link href={`/contact`}>
+							<a className="font-medium text-primary">Contact Us</a>
+						</Link>
+					</p>
 				</div>
 
 				<div className="col-span-4">
