@@ -84,7 +84,7 @@ const PricingPage: NextPage = () => {
 
 					<EventalProCard attendees={attendees} isEducation={isEducation} className="relative">
 						<Link href="/events/create">
-							<LinkButton>Start Free Trial</LinkButton>
+							<LinkButton variant="primary">Start Free Trial</LinkButton>
 						</Link>
 					</EventalProCard>
 				</div>

@@ -16,7 +16,7 @@ const NoAccess: React.FC<Props> = (props) => {
 			</h1>
 			<p className="my-3">{message}</p>
 			<Link href="/events/" passHref>
-				<LinkButton>Return to events</LinkButton>
+				<LinkButton variant="primary">Return to events</LinkButton>
 			</Link>
 		</>
 	);

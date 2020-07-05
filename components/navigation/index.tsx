@@ -79,7 +79,7 @@ export const Navigation: React.FC = () => {
 									<>
 										<NavigationMenuPrimitive.Item className="mr-6">
 											<Link href="/events/create" passHref>
-												<LinkButton>Create Event</LinkButton>
+												<LinkButton variant="primary">Create Event</LinkButton>
 											</Link>
 										</NavigationMenuPrimitive.Item>
 										<NavigationMenuPrimitive.Item className="flex">

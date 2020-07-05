@@ -23,7 +23,9 @@ export const AlreadySignedInPage = () => (
 			</div>
 			<p>You are already signed in.</p>
 			<Link href="/" passHref>
-				<LinkButton className="mt-3">Return home</LinkButton>
+				<LinkButton className="mt-3" variant="primary">
+					Return home
+				</LinkButton>
 			</Link>
 		</Column>
 

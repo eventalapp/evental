@@ -35,7 +35,7 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 			<div className="flex flex-col items-center">
 				<EventalProCard attendees={attendees}>
 					<div className="flex flex-row justify-end">
-						<Button type="submit">
+						<Button type="submit" variant="primary">
 							Purchase (
 							{formatAmountForDisplay(priceAfterSale(proAttendeesToPrice(attendees)), CURRENCY)})
 						</Button>

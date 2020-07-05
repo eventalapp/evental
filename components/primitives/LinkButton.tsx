@@ -12,7 +12,7 @@ type Props = {
 } & React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
 export const LinkButton = React.forwardRef<HTMLAnchorElement, Props>((props, ref) => {
-	const { className, children, padding = 'small', variant = 'primary', ...rest } = props;
+	const { className, children, padding = 'small', variant = 'default', ...rest } = props;
 
 	return (
 		<a
