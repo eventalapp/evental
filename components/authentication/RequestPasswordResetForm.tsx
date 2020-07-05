@@ -50,7 +50,7 @@ export const RequestPasswordResetForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={requestPasswordResetMutation.isLoading}
 				>
-					{requestPasswordResetMutation.isLoading ? <LoadingInner /> : 'Request Password Reset'}
+					{requestPasswordResetMutation.isLoading ? <LoadingInner /> : 'Request'}
 				</Button>
 			</div>
 		</form>

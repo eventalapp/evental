@@ -81,7 +81,7 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={createVenueMutation.isLoading}
 				>
-					{createVenueMutation.isLoading ? <LoadingInner /> : 'Create Venue'}
+					{createVenueMutation.isLoading ? <LoadingInner /> : 'Create'}
 				</Button>
 			</div>
 		</form>

@@ -56,7 +56,7 @@ export const ClaimProfileForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={claimProfileMutation.isLoading}
 				>
-					{claimProfileMutation.isLoading ? <LoadingInner /> : 'Change Password'}
+					{claimProfileMutation.isLoading ? <LoadingInner /> : 'Change'}
 				</Button>
 			</div>
 		</form>

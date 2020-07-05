@@ -99,7 +99,7 @@ export const CreatePageForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={createPageMutation.isLoading}
 				>
-					{createPageMutation.isLoading ? <LoadingInner /> : 'Create Page'}
+					{createPageMutation.isLoading ? <LoadingInner /> : 'Create'}
 				</Button>
 			</div>
 		</form>

@@ -81,7 +81,7 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={createRoleMutation.isLoading}
 				>
-					{createRoleMutation.isLoading ? <LoadingInner /> : 'Create Role'}
+					{createRoleMutation.isLoading ? <LoadingInner /> : 'Create'}
 				</Button>
 			</div>
 		</form>

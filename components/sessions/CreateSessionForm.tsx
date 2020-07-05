@@ -308,7 +308,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={createSessionMutation.isLoading}
 				>
-					{createSessionMutation.isLoading ? <LoadingInner /> : 'Create Session'}
+					{createSessionMutation.isLoading ? <LoadingInner /> : 'Create'}
 				</Button>
 			</div>
 		</form>
