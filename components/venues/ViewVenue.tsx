@@ -28,9 +28,9 @@ export const ViewVenue: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<div className="mb-3">
+			<div className="mb-4">
 				<div className="mb-1 flex flex-row justify-between items-center">
-					<Heading>{venue ? venue.name : <Skeleton className="w-full max-w-2xl" />}</Heading>
+					<Heading>{venue ? venue.name : <Skeleton className="w-48" />}</Heading>
 
 					{venue && admin && (
 						<div className="space-x-4 flex flex-row">
@@ -76,7 +76,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 			</div>
 
 			<Heading className="mb-3" variant="xl">
-				Sessions
+				{event && sessions ? 'Sessions' : <Skeleton className="w-32" />}
 			</Heading>
 
 			<SessionList sessions={sessions} event={event} admin={admin} />
