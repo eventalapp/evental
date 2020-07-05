@@ -29,6 +29,45 @@ const EventRegisterPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { user } = useUser();
 
+	const Seo = event && (
+		<NextSeo
+			title={`Register for ${event.name} — Evental`}
+			description={`Fill out the form below to register for ${
+				event.name
+			} taking place from ${formatInTimeZone(
+				event.startDate,
+				event.timeZone,
+				'MMMM do'
+			)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/register`,
+				title: `Register for ${event.name} — Evental`,
+				description: `Fill out the form below to register for ${
+					event.name
+				} taking place from ${formatInTimeZone(
+					event.startDate,
+					event.timeZone,
+					'MMMM do'
+				)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	if (!user?.id) {
 		let params = new URLSearchParams();
 
@@ -36,44 +75,7 @@ const EventRegisterPage: NextPage = () => {
 
 		return (
 			<PageWrapper>
-				{event && (
-					<NextSeo
-						title={`Register for ${event.name} — Evental`}
-						description={`Fill out the form below to register for ${
-							event.name
-						} taking place from ${formatInTimeZone(
-							event.startDate,
-							event.timeZone,
-							'MMMM do'
-						)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`}
-						additionalLinkTags={[
-							{
-								rel: 'icon',
-								href: `https://cdn.evental.app${event.image}`
-							}
-						]}
-						openGraph={{
-							url: `https://evental.app/events/${event.slug}/register`,
-							title: `Register for ${event.name} — Evental`,
-							description: `Fill out the form below to register for ${
-								event.name
-							} taking place from ${formatInTimeZone(
-								event.startDate,
-								event.timeZone,
-								'MMMM do'
-							)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`,
-							images: [
-								{
-									url: `https://cdn.evental.app${event.image}`,
-									width: 300,
-									height: 300,
-									alt: `${event.name} Logo Alt`,
-									type: 'image/jpeg'
-								}
-							]
-						}}
-					/>
-				)}
+				{Seo}
 
 				<Navigation />
 
@@ -120,44 +122,7 @@ const EventRegisterPage: NextPage = () => {
 
 	return (
 		<PageWrapper>
-			{event && (
-				<NextSeo
-					title={`Register for ${event.name} — Evental`}
-					description={`Fill out the form below to register for ${
-						event.name
-					} taking place from ${formatInTimeZone(
-						event.startDate,
-						event.timeZone,
-						'MMMM do'
-					)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/register`,
-						title: `Register for ${event.name} — Evental`,
-						description: `Fill out the form below to register for ${
-							event.name
-						} taking place from ${formatInTimeZone(
-							event.startDate,
-							event.timeZone,
-							'MMMM do'
-						)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
