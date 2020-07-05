@@ -2,7 +2,7 @@ import { SESV2 } from 'aws-sdk';
 import { convert } from 'html-to-text';
 import mjml2html from 'mjml';
 
-import { sendEmail } from '../email';
+import { sendEmail } from './';
 import { forgotPasswordTemplate } from './templates/forgotPassword';
 
 export const sendPasswordResetEmail = async (sendToAddress: string, resetCode: string) => {
