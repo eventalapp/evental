@@ -30,7 +30,7 @@ export const useDeleteSessionCategoryMutation = (
 		},
 		{
 			onSuccess: () => {
-				toast.success('Session deleted successfully');
+				toast.success('Category deleted successfully');
 
 				router.push(`/events/${eid}/admin/sessions/categories`).then(() => {
 					void queryClient.invalidateQueries(['type', eid, cid]);
