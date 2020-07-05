@@ -7,6 +7,7 @@ import { getDefaultRole } from '../roles';
 
 export default api({
 	async POST({ ctx, req }) {
+		const currentUser = await ctx.getFullUser();
 		const body = AcceptOrganizerInviteSchema.parse(req.body);
 
 		const eventAndEmail = await ctx.redis.get<string>(`organizer:${body.code}`);
@@ -24,11 +25,28 @@ export default api({
 			}
 		});
 
+		if (currentUser && currentUser.email !== userEmail) {
+			throw new NextkitError(
+				400,
+				`You must sign into the account with the email of "${userEmail}" to accept this invite.`
+			);
+		}
+
 		if (!user) {
 			throw new NextkitError(400, `You must sign up before accepting this invite.`);
 		}
 
-		if (!user.emailVerified) {
+		if (currentUser && currentUser.email === userEmail) {
+			// When a user has signed up, and followed the link from their email, we can assume their account is verifiable.
+			await prisma.user.update({
+				where: {
+					id: currentUser.id
+				},
+				data: {
+					emailVerified: new Date()
+				}
+			});
+		} else if (!user.emailVerified) {
 			throw new NextkitError(
 				401,
 				'You must verify your account to do this. Request a verification email in your user settings by clicking on your profile in the top right.'
