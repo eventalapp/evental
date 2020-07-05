@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import cx from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useCreateVenueMutation } from '../../hooks/mutations/useCreateVenueMutation';
@@ -35,11 +34,18 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 		resolver: zodResolver(CreateVenueSchema)
 	});
 
+	useEffect(() => {
+		if (createVenueMutation.isSuccess) {
+			setIsOpen(false);
+			reset();
+		}
+	}, [createVenueMutation.isSuccess]);
+
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
 			<DialogPrimitive.Trigger>{children}</DialogPrimitive.Trigger>
 
-			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen}>
+			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen} size="large">
 				<DialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
 					Create a Venue
 				</DialogPrimitive.Title>
@@ -91,22 +97,17 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 					>
 						Cancel
 					</Button>
-					<DialogPrimitive.Close
-						className={cx(
-							'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',
-							'bg-primary-600 text-white hover:bg-primary-700 dark:bg-primary-700 dark:text-gray-100 dark:hover:bg-primary-600',
-							'border border-transparent',
-							'focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75'
-						)}
-						disabled={createVenueMutation.isLoading}
+
+					<Button
+						variant="primary"
 						onClick={handleSubmit((data) => {
-							setIsOpen(false);
 							createVenueMutation.mutate(data);
-							reset();
 						})}
+						disabled={createVenueMutation.isLoading}
+						autoFocus
 					>
-						{createVenueMutation.isLoading ? <LoadingInner /> : 'Create Venue'}
-					</DialogPrimitive.Close>
+						{createVenueMutation.isLoading ? <LoadingInner /> : 'Create'}
+					</Button>
 				</div>
 			</DialogContent>
 		</DialogPrimitive.Root>

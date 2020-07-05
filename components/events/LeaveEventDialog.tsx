@@ -1,4 +1,4 @@
-import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 
 import { useLeaveEvent } from '../../hooks/mutations/useLeaveEvent';
@@ -18,24 +18,24 @@ const LeaveEventDialog: React.FC<Props> = (props) => {
 	const leaveEventMutation = useLeaveEvent(eventSlug, String(userSlug));
 
 	useEffect(() => {
-		if (!leaveEventMutation.isLoading && leaveEventMutation.isSuccess) {
+		if (leaveEventMutation.isSuccess) {
 			setIsOpen(false);
 		}
-	}, [leaveEventMutation.isLoading]);
+	}, [leaveEventMutation.isSuccess]);
 
 	return (
-		<AlertDialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-			<AlertDialogPrimitive.Trigger type="button" asChild>
+		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
+			<DialogPrimitive.Trigger type="button" asChild>
 				{children}
-			</AlertDialogPrimitive.Trigger>
+			</DialogPrimitive.Trigger>
 			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen}>
-				<AlertDialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
+				<DialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
 					Leave this event?
-				</AlertDialogPrimitive.Title>
-				<AlertDialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
+				</DialogPrimitive.Title>
+				<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
 					You may rejoin this event, but your session attendance and event permissions will be
 					removed.
-				</AlertDialogPrimitive.Description>
+				</DialogPrimitive.Description>
 				<div className="mt-4 flex justify-end space-x-2">
 					<Button
 						variant="no-bg"
@@ -52,13 +52,12 @@ const LeaveEventDialog: React.FC<Props> = (props) => {
 							leaveEventMutation.mutate();
 						}}
 						disabled={leaveEventMutation.isLoading}
-						autoFocus
 					>
 						{leaveEventMutation.isLoading ? <LoadingInner /> : 'Confirm'}
 					</Button>
 				</div>
 			</DialogContent>
-		</AlertDialogPrimitive.Root>
+		</DialogPrimitive.Root>
 	);
 };
 

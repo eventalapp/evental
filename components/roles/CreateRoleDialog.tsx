@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import cx from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useCreateRoleMutation } from '../../hooks/mutations/useCreateRoleMutation';
@@ -38,11 +37,18 @@ const CreateRoleDialog: React.FC<Props> = (props) => {
 		resolver: zodResolver(CreateRoleSchema)
 	});
 
+	useEffect(() => {
+		if (createRoleMutation.isSuccess) {
+			setIsOpen(false);
+			reset();
+		}
+	}, [createRoleMutation.isSuccess]);
+
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
 			<DialogPrimitive.Trigger>{children}</DialogPrimitive.Trigger>
 
-			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen}>
+			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen} size="large">
 				<DialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
 					Create a Role
 				</DialogPrimitive.Title>
@@ -53,7 +59,7 @@ const CreateRoleDialog: React.FC<Props> = (props) => {
 				<div className="mt-3 flex w-full flex-row">
 					<div className="mb-5 flex-1">
 						<Label htmlFor="name">Role Name *</Label>
-						<Input placeholder="Role name" {...register('name')} />
+						<Input placeholder="Role name" {...register('name')} autoFocus />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
@@ -87,22 +93,16 @@ const CreateRoleDialog: React.FC<Props> = (props) => {
 					>
 						Cancel
 					</Button>
-					<DialogPrimitive.Close
-						className={cx(
-							'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',
-							'bg-primary-600 text-white hover:bg-primary-700 dark:bg-primary-700 dark:text-gray-100 dark:hover:bg-primary-600',
-							'border border-transparent',
-							'focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75'
-						)}
-						disabled={createRoleMutation.isLoading}
+
+					<Button
+						variant="primary"
 						onClick={handleSubmit((data) => {
-							setIsOpen(false);
 							createRoleMutation.mutate(data);
-							reset();
 						})}
+						disabled={createRoleMutation.isLoading}
 					>
-						{createRoleMutation.isLoading ? <LoadingInner /> : 'Create Role'}
-					</DialogPrimitive.Close>
+						{createRoleMutation.isLoading ? <LoadingInner /> : 'Create'}
+					</Button>
 				</div>
 			</DialogContent>
 		</DialogPrimitive.Root>
