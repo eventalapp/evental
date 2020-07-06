@@ -65,7 +65,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="name">Name *</Label>
-					<Input placeholder="Name" {...register('name')} />
+					<Input placeholder="John Doe" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
@@ -105,20 +105,26 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="location">Location</Label>
-					<Input placeholder="Location" {...register('location')} />
+					<Input placeholder="California" {...register('location')} />
 					{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 				</div>
 
 				<div className="col-span-2 md:col-span-1">
 					<Label htmlFor="position">Position</Label>
-					<Input placeholder="Position" {...register('position')} />
+					<Input placeholder="Doctor" {...register('position')} />
 					{errors.position?.message && <ErrorMessage>{errors.position?.message}</ErrorMessage>}
 				</div>
 
 				<div className="col-span-2 md:col-span-1">
 					<Label htmlFor="company">Company</Label>
-					<Input placeholder="Company" {...register('company')} />
+					<Input placeholder="Google" {...register('company')} />
 					{errors.company?.message && <ErrorMessage>{errors.company?.message}</ErrorMessage>}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="website">Website</Label>
+					<Input placeholder="https://example.com" {...register('website')} />
+					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 				</div>
 
 				<div className="col-span-4">
@@ -138,12 +144,6 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
-				</div>
-
-				<div className="col-span-4 md:col-span-2">
-					<Label htmlFor="website">Website</Label>
-					<Input placeholder="Website" {...register('website')} />
-					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 				</div>
 			</div>
 
