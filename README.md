@@ -18,7 +18,6 @@
 - make default avatar more neutral
 - varchar match schema
 - user not caching when unauthed (bc rc doesn't cache errors)
-- suggest a feature form refactor
 - make events truly private
 - adjust session times when event date is moved
 - upcoming events/session styling
