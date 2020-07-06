@@ -1,5 +1,3 @@
-import { NextkitError } from 'nextkit';
-
 import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
 import { AttendeeWithUser, stripAttendeesWithUser } from '../../../../../utils/user';
@@ -11,42 +9,24 @@ export default api({
 		const { eid, role, name, limit, type } = req.query;
 
 		if (type === 'name') {
-			const attendeesByName = await getAttendeesByName(String(eid), String(name), {
+			return await getAttendeesByName(String(eid), String(name), {
 				limit: Number(limit) || 10
 			});
-
-			if (!attendeesByName) {
-				throw new NextkitError(404, 'Attendees not found');
-			}
-
-			return attendeesByName;
 		}
 
 		if (role) {
-			const attendeesByRole = await getAttendeesByRole(String(eid), String(role));
-
-			if (!attendeesByRole) {
-				throw new NextkitError(404, 'Attendees not found');
-			}
-
-			return attendeesByRole;
+			return await getAttendeesByRole(String(eid), String(role));
 		}
 
-		const attendees = await getAttendees(String(eid));
-
-		if (!attendees) {
-			throw new NextkitError(404, 'Attendees not found');
-		}
-
-		return attendees;
+		return await getAttendees(String(eid));
 	}
 });
 
-export const getAttendees = async (eid: string): Promise<AttendeeWithUser[] | null> => {
+export const getAttendees = async (eid: string): Promise<AttendeeWithUser[]> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
-		return null;
+		return [];
 	}
 
 	const attendees = await prisma.eventAttendee.findMany({
@@ -62,20 +42,17 @@ export const getAttendees = async (eid: string): Promise<AttendeeWithUser[] | nu
 	return stripAttendeesWithUser(attendees);
 };
 
-export const getAttendeesByRole = async (
-	eid: string,
-	rid: string
-): Promise<AttendeeWithUser[] | null> => {
+export const getAttendeesByRole = async (eid: string, rid: string): Promise<AttendeeWithUser[]> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
-		return null;
+		return [];
 	}
 
 	const role = await getRole(event.id, String(rid));
 
 	if (!role) {
-		return null;
+		return [];
 	}
 
 	const attendees = await prisma.eventAttendee.findMany({
@@ -90,7 +67,7 @@ export const getAttendeesByRole = async (
 	});
 
 	if (!attendees) {
-		return null;
+		return [];
 	}
 
 	return stripAttendeesWithUser(attendees);
@@ -100,13 +77,13 @@ export const getAttendeesByName = async (
 	eid: string,
 	name: string,
 	args: { limit?: number } = {}
-): Promise<AttendeeWithUser[] | null> => {
+): Promise<AttendeeWithUser[]> => {
 	const { limit } = args;
 
 	const event = await getEvent(eid);
 
 	if (!event) {
-		return null;
+		return [];
 	}
 
 	const attendees = await prisma.eventAttendee.findMany({
@@ -124,7 +101,7 @@ export const getAttendeesByName = async (
 	});
 
 	if (!attendees) {
-		return null;
+		return [];
 	}
 
 	return stripAttendeesWithUser(attendees);
