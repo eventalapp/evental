@@ -61,17 +61,19 @@ export default api({
 			throw new NextkitError(404, 'Role not found.');
 		}
 
-		const userExists = await prisma.user.findFirst({
-			where: {
-				email: body.email
-			}
-		});
+		if (body.email && body.email.length > 0) {
+			const userExists = await prisma.user.findFirst({
+				where: {
+					email: body.email
+				}
+			});
 
-		if (userExists) {
-			throw new NextkitError(
-				400,
-				'User with this email already exists. Please invite this user instead.'
-			);
+			if (userExists) {
+				throw new NextkitError(
+					400,
+					'User with this email already exists. Please invite this user instead.'
+				);
+			}
 		}
 
 		const slug = await generateSlug(body.name, async (val) => {
