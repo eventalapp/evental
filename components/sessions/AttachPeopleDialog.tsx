@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 
 import { useAttendeesByNameQuery } from '../../hooks/queries/useAttendeesByNameQuery';
+import { CreateAttendeeDialog } from '../attendees/CreateAttendeeDialog';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 import { DialogContent } from '../primitives/DialogContent';
@@ -56,6 +57,12 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 							autoComplete="given-name"
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
 						/>
+						<p className="my-1 text-sm text-gray-600">
+							Don't see who you're looking for?{' '}
+							<CreateAttendeeDialog eid={String(eid)}>
+								<a className="font-medium cursor-pointer">Create an attendee</a>
+							</CreateAttendeeDialog>
+						</p>
 					</fieldset>
 				</form>
 
