@@ -81,6 +81,11 @@ const eventPrivacy = Object.values(PrivacyLevel);
 const [firstPrivacyLevel, ...restPrivacyLevel] = eventPrivacy;
 const privacyLevelValidator = z.enum([firstPrivacyLevel, ...restPrivacyLevel]);
 
+const optionalTextInput = (schema: z.ZodString) =>
+	z.union([z.string(), z.undefined()]).refine((val) => {
+		return !val || schema.safeParse(val).success;
+	});
+
 // Venues
 
 export const CreateVenueSchema = z.object({
@@ -332,7 +337,10 @@ export const AdminCreateAttendeeSchema = z.object({
 	company: companyValidator.optional(),
 	position: positionValidator.optional(),
 	website: urlValidator.optional(),
-	email: emailValidator.optional(),
+	email: z.preprocess(
+		(val) => ((val as string | undefined)?.length === 0 ? undefined : val),
+		optionalTextInput(z.string().email())
+	),
 	eventRoleId: z.string().min(1, 'Event Role ID is required').max(200, 'Event Role ID is too long')
 });
 
