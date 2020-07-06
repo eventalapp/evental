@@ -286,6 +286,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 
 						<div className="flex h-full w-full items-center justify-center">
 							<AttachPeopleDialog
+								attachedUsersById={roleAttendees.map(({ userId }) => userId)}
 								eid={String(eid)}
 								addAttendeeToSession={(userId) => {
 									addAttendeeToSessionMutation.mutate({ userId });

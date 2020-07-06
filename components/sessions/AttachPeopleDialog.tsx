@@ -14,15 +14,20 @@ import { Input } from '../primitives/Input';
 interface Props {
 	eid: string;
 	addAttendeeToSession: (userId: string) => void;
+	attachedUsersById?: string[];
 }
 
 const AttachPeopleDialog: React.FC<Props> = (props) => {
-	const { eid, children, addAttendeeToSession } = props;
+	const { eid, children, addAttendeeToSession, attachedUsersById } = props;
 
 	let [isOpen, setIsOpen] = useState(false);
 	const [name, setName] = useState('');
 
-	const attendeesByNameQuery = useAttendeesByNameQuery(eid, name, { limit: 7 });
+	const attendeesByNameQuery = useAttendeesByNameQuery(eid, name, { limit: 8 });
+
+	const filteredAttendees = attendeesByNameQuery.data?.filter((val) => {
+		return !attachedUsersById?.some((userId) => userId === val.userId);
+	});
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -67,17 +72,15 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 				</form>
 
 				<p className="mb-2 font-medium">
-					Results <span className="text-gray-500">({attendeesByNameQuery?.data?.length || 0})</span>
+					Results <span className="text-gray-500">({filteredAttendees?.length || 0})</span>
 				</p>
 				<div className="space-y-2">
 					{attendeesByNameQuery.isLoading ? (
 						<div>
 							<LoadingInner />
 						</div>
-					) : attendeesByNameQuery &&
-					  attendeesByNameQuery.data &&
-					  attendeesByNameQuery.data.length >= 1 ? (
-						Array.from(attendeesByNameQuery.data).map((attendee) => (
+					) : filteredAttendees && filteredAttendees.length >= 1 ? (
+						filteredAttendees.map((attendee) => (
 							<div
 								key={attendee.id}
 								className="flex w-full flex-row flex-wrap items-center justify-between"
@@ -111,7 +114,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 							</div>
 						))
 					) : (
-						<p>No people found.</p>
+						<p className="text-gray-600">No people found.</p>
 					)}
 				</div>
 
