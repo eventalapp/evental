@@ -16,6 +16,10 @@ type EventMessageArgs = {
 export const sendEventMessageEmail = async (args: EventMessageArgs) => {
 	const { toAddresses, title, body, event, message } = args;
 
+	if (toAddresses.length === 0) {
+		throw new NextkitError(400, 'No recipients specified');
+	}
+
 	const bulkEntries: SESV2.BulkEmailEntryList = toAddresses.map((address) => ({
 		Destination: { ToAddresses: [address] }
 	}));
