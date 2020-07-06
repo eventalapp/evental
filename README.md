@@ -18,6 +18,7 @@
 - user not caching when unauthed (bc rc doesn't cache errors)
 - make events truly private
 - adjust session times when event date is moved
+- migrate all emails to AWS SES templates
 
 try to make your own event, be a user
 
