@@ -4,18 +4,47 @@ import React from 'react';
 
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
+import { SidebarWrapper } from '../layout/SidebarWrapper';
 import { Navigation } from '../navigation';
 import { Heading } from '../primitives/Heading';
 
 type Props = {
 	errors: Array<ErroredAPIResponse | null | undefined>;
+	admin?: boolean;
+	eid?: string;
 };
 
 export const ViewErrorPage: React.FC<Props> = (props) => {
-	const { errors } = props;
+	const { errors, admin = false, eid } = props;
 
 	if (!errors) {
 		return null;
+	}
+
+	if (admin && eid) {
+		return (
+			<PageWrapper>
+				<Head>
+					<title>Not Found</title>
+				</Head>
+
+				<SidebarWrapper eid={String(eid)}>
+					<Column variant="noMargin">
+						<Heading className="mb-3">Error</Heading>
+
+						<ul>
+							{errors
+								.filter((error) => error)
+								.map((error, i) => (
+									<li key={i} className="text-gray-600">
+										{error!.message}
+									</li>
+								))}
+						</ul>
+					</Column>
+				</SidebarWrapper>
+			</PageWrapper>
+		);
 	}
 
 	return (
@@ -27,7 +56,7 @@ export const ViewErrorPage: React.FC<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<Heading>Error</Heading>
+				<Heading className="mb-3">Error</Heading>
 
 				<ul>
 					{errors
