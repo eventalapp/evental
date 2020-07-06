@@ -23,7 +23,7 @@ import { useIsOrganizerQuery } from '../../hooks/queries/useIsOrganizerQuery';
 import { useUser } from '../../hooks/queries/useUser';
 import { formatDateRange } from '../../utils/date';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
-import { CreateAttendeeDialog } from '../attendees/CreateAttendeeDialog';
+import { EventRegistrationDialog } from '../attendees/EventRegistrationDialog';
 import { Heading } from '../primitives/Heading';
 import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
 import { IconLinkTooltip, iconLinkTooltipSkeleton } from '../primitives/IconLinkTooltip';
@@ -48,9 +48,9 @@ export const EventHeader: React.FC<{
 				{event
 					? isAttendee !== undefined &&
 					  !isAttendee && (
-							<CreateAttendeeDialog event={event} user={user}>
+							<EventRegistrationDialog event={event} user={user}>
 								<IconButtonTooltip icon={faUserPlus} message="Register for this event" />
-							</CreateAttendeeDialog>
+							</EventRegistrationDialog>
 					  )
 					: iconLinkTooltipSkeleton}
 
