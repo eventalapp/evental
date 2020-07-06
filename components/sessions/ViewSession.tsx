@@ -85,8 +85,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 						<Skeleton className="w-5 h-5" />
 					)}
 
-					{user && session && event ? (
+					{session && event ? (
 						!admin &&
+						user &&
 						isAttending && (
 							<AddToCalendar
 								event={{
@@ -106,8 +107,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 						<Skeleton className="w-5 h-5" />
 					)}
 
-					{user && event && session ? (
+					{event && session ? (
 						Boolean(isAttending) &&
+						user &&
 						!admin && (
 							<LeaveSessionDialog
 								eventSlug={event.slug}
@@ -125,22 +127,17 @@ export const ViewSession: React.FC<Props> = (props) => {
 						<Skeleton className="w-5 h-5" />
 					)}
 
-					{user ? (
-						!isAttending &&
-						!admin && (
-							<IconButtonTooltip
-								message="Add this session to your schedule"
-								icon={faCalendarCirclePlus}
-								disabled={createSessionAttendeeMutation.isLoading}
-								isLoading={createSessionAttendeeMutation.isLoading}
-								color="gray"
-								onClick={() => {
-									createSessionAttendeeMutation.mutate();
-								}}
-							/>
-						)
-					) : (
-						<Skeleton className="w-5 h-5" />
+					{user && !isAttending && !admin && (
+						<IconButtonTooltip
+							message="Add this session to your schedule"
+							icon={faCalendarCirclePlus}
+							disabled={createSessionAttendeeMutation.isLoading}
+							isLoading={createSessionAttendeeMutation.isLoading}
+							color="gray"
+							onClick={() => {
+								createSessionAttendeeMutation.mutate();
+							}}
+						/>
 					)}
 
 					{admin && (
