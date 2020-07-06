@@ -8,17 +8,18 @@ import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
+import { MessageList } from '../../../../../components/messages/MessageList';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
-import { useMessagesQuery } from '../../../../../hooks/queries/useMessagesQuery';
+import { useMessages } from '../../../../../hooks/queries/useMessages';
 
 const MessagePage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const {} = useMessagesQuery(String(eid));
+	const { messages, messagesError, isMessagesLoading } = useMessages(String(eid));
 
 	return (
-		<AdminPageWrapper eid={String(eid)}>
+		<AdminPageWrapper eid={String(eid)} isLoading={isMessagesLoading} errors={[messagesError]}>
 			<PageWrapper>
 				<Head>
 					<title>Messages</title>
@@ -36,6 +37,8 @@ const MessagePage: NextPage = () => {
 								color="gray"
 							/>
 						</FlexRowBetween>
+
+						{messages && <MessageList eid={String(eid)} messages={messages} admin />}
 					</Column>
 				</SidebarWrapper>
 			</PageWrapper>
