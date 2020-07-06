@@ -2,6 +2,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import classNames from 'classnames';
+import dayjs from 'dayjs';
 import Link from 'next/link';
 import React from 'react';
 
@@ -34,7 +35,15 @@ export const MessageList: React.FC<Props> = (props) => {
 					<a>
 						<div className={classNames('border-gray-200', i !== messages.length - 1 && 'border-b')}>
 							<div className="-mx-3 flex flex-row flex-wrap items-center justify-between p-3 hover:bg-gray-75">
-								<span className="block text-lg font-medium text-gray-800">{message.title}</span>
+								<div>
+									<span className="block text-lg font-medium text-gray-800">{message.title}</span>
+									<span className="mt-0.5 block text-sm text-gray-500">
+										Sent {dayjs(message.createdAt).fromNow()}
+										{admin && message.recipientCount
+											? ` to ${message.recipientCount} recipients`
+											: ''}
+									</span>
+								</div>
 
 								<Tooltip side={'top'} message={`Click to view this message`}>
 									<div className="-m-2 flex items-center justify-center p-2">
