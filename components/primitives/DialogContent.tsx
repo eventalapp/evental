@@ -13,14 +13,16 @@ type DialogContentProps = {
 };
 
 const sizes = {
-	small: 'max-w-md',
-	medium: 'max-w-lg',
-	large: 'max-w-xl'
+	'sm': 'max-w-md',
+	'md': 'max-w-lg',
+	'lg': 'max-w-xl',
+	'xl': 'max-w-2xl',
+	'2xl': 'max-w-3xl'
 };
 
 export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
 	(props, forwardedRef) => {
-		const { children, isOpen, setIsOpen, showCloseDialog = true, size = 'small', ...rest } = props;
+		const { children, isOpen, setIsOpen, showCloseDialog = true, size = 'sm', ...rest } = props;
 
 		return (
 			<DialogPrimitive.Portal>
