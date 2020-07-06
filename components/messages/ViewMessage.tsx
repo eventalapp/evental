@@ -9,6 +9,7 @@ import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { Heading } from '../primitives/Heading';
 import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
 import { IconLinkTooltip } from '../primitives/IconLinkTooltip';
+import DeleteMessageDialog from './DeleteMessageDialog';
 
 type Props = {
 	eid: string;
@@ -46,7 +47,9 @@ export const ViewMessage: React.FC<Props> = (props) => {
 							color="gray"
 						/>
 
-						<IconButtonTooltip message="Delete this message" icon={faTrashCan} color="red" />
+						<DeleteMessageDialog eid={String(eid)} mid={String(mid)}>
+							<IconButtonTooltip message="Delete this message" icon={faTrashCan} color="red" />
+						</DeleteMessageDialog>
 					</div>
 				)}
 			</FlexRowBetween>
