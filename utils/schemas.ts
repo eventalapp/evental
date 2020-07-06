@@ -435,9 +435,15 @@ export const SendEventMessageSchema = z.object({
 	body: z.string().min(1, 'Body is required').max(5000, 'Body is too long'),
 	title: titleValidator,
 	eventId: z.string().min(1, 'Event ID is required').max(200, 'Event ID is too long'),
-	sentBy: z.string().max(200, 'Sent By is too long').optional(),
 	sendType: eventMessageSendTypeValidator,
 	roleId: z.string().max(200, 'Role ID is too long').optional()
 });
 
 export type SendEventMessagePayload = z.infer<typeof SendEventMessageSchema>;
+
+export const EditEventMessageSchema = z.object({
+	body: z.string().min(1, 'Body is required').max(5000, 'Body is too long'),
+	title: titleValidator
+});
+
+export type EditEventMessagePayload = z.infer<typeof EditEventMessageSchema>;
