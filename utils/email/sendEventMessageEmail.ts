@@ -7,7 +7,9 @@ import { sendEmail } from './';
 import { eventMessageTemplate } from './templates/eventMessageTemplate';
 
 type EventMessageArgs = {
-	sendToAddresses: string[];
+	ToAddresses?: string[];
+	CcAddresses?: string[];
+	BccAddresses?: string[];
 	sentBy?: string;
 	title: string;
 	body: string;
@@ -15,7 +17,7 @@ type EventMessageArgs = {
 };
 
 export const sendEventMessageEmail = async (args: EventMessageArgs) => {
-	const { sendToAddresses, body, title, sentBy, event } = args;
+	const { ToAddresses, CcAddresses, BccAddresses, body, title, sentBy, event } = args;
 
 	const htmlOutput = mjml2html(eventMessageTemplate({ body, title, sentBy, event }));
 
@@ -43,7 +45,9 @@ export const sendEventMessageEmail = async (args: EventMessageArgs) => {
 			}
 		},
 		Destination: {
-			ToAddresses: sendToAddresses
+			ToAddresses: ToAddresses,
+			BccAddresses: BccAddresses,
+			CcAddresses: CcAddresses
 		},
 		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
 		FromEmailAddress: `"${title} - ${event.name}" <no-reply@evental.app>`
