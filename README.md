@@ -1,7 +1,6 @@
 # Evental
 
 ## Todo List
-- send email to all event attendees
 - featured role members
 - event banner
 - Excel export for event data
@@ -15,12 +14,10 @@
 - bulk create sessions
 - attach people -> create attendee (new modal)
 - make event placeholder with year
-- make default avatar more neutral
 - varchar match schema
 - user not caching when unauthed (bc rc doesn't cache errors)
 - make events truly private
 - adjust session times when event date is moved
-- upcoming events/session styling
 
 try to make your own event, be a user
 
