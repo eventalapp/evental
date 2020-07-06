@@ -1,15 +1,11 @@
 import Prisma from '@prisma/client';
 import { SESV2 } from 'aws-sdk';
-import { convert } from 'html-to-text';
-import mjml2html from 'mjml';
+import { NextkitError } from 'nextkit';
 
-import { sendEmail } from './';
-import { eventMessageTemplate } from './templates/eventMessageTemplate';
+import { sendBulkEmail } from './index';
 
 type EventMessageArgs = {
-	ToAddresses?: string[];
-	CcAddresses?: string[];
-	BccAddresses?: string[];
+	toAddresses: string[];
 	sentBy?: string;
 	title: string;
 	body: string;
@@ -17,41 +13,33 @@ type EventMessageArgs = {
 };
 
 export const sendEventMessageEmail = async (args: EventMessageArgs) => {
-	const { ToAddresses, CcAddresses, BccAddresses, body, title, sentBy, event } = args;
+	const { toAddresses, title, body, event } = args;
 
-	const htmlOutput = mjml2html(eventMessageTemplate({ body, title, sentBy, event }));
+	const bulkEntries: SESV2.BulkEmailEntryList = toAddresses.map((address) => ({
+		Destination: { ToAddresses: [address] }
+	}));
 
-	const text = convert(htmlOutput.html, {
-		wordwrap: 130
-	});
-
-	const params: SESV2.SendEmailRequest = {
-		Content: {
-			Simple: {
-				Body: {
-					Html: {
-						Data: htmlOutput.html,
-						Charset: 'UTF-8'
-					},
-					Text: {
-						Data: text,
-						Charset: 'UTF-8'
-					}
-				},
-				Subject: {
-					Data: title,
-					Charset: 'UTF-8'
-				}
-			}
-		},
-		Destination: {
-			ToAddresses: ToAddresses,
-			BccAddresses: BccAddresses,
-			CcAddresses: CcAddresses
-		},
-		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
-		FromEmailAddress: `"${title} - ${event.name}" <no-reply@evental.app>`
+	const templateData = {
+		eventImageUrl: `https://cdn.evental.app${event.image}`,
+		eventUrl: `https://evental.app/events/${event.slug}`,
+		eventName: event.name,
+		title,
+		body,
+		messageUrl: `https://evental.app/events/${event.slug}/messages`
 	};
 
-	await sendEmail(params);
+	const params: SESV2.SendBulkEmailRequest = {
+		FromEmailAddress: 'messages@evental.app',
+		BulkEmailEntries: bulkEntries,
+		DefaultContent: {
+			Template: {
+				TemplateData: JSON.stringify(templateData),
+				TemplateName: 'EventMessage'
+			}
+		}
+	};
+
+	await sendBulkEmail(params).catch((err) => {
+		throw new NextkitError(500, err);
+	});
 };
