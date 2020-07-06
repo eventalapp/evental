@@ -1,4 +1,4 @@
-import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
+import { EventCategory, EventMessageSendType, EventType, PrivacyLevel } from '@prisma/client';
 import { htmlToText } from 'html-to-text';
 import { z } from 'zod';
 
@@ -80,6 +80,13 @@ const eventCategoryValidator = z.enum([firstEventCategory, ...restEventCategory]
 const eventPrivacy = Object.values(PrivacyLevel);
 const [firstPrivacyLevel, ...restPrivacyLevel] = eventPrivacy;
 const privacyLevelValidator = z.enum([firstPrivacyLevel, ...restPrivacyLevel]);
+
+const eventMessageSendType = Object.values(EventMessageSendType);
+const [firstEventMessageSendType, ...restEventMessageSendType] = eventMessageSendType;
+const eventMessageSendTypeValidator = z.enum([
+	firstEventMessageSendType,
+	...restEventMessageSendType
+]);
 
 const optionalTextInput = (schema: z.ZodString) =>
 	z.union([z.string(), z.undefined()]).refine((val) => {
@@ -412,15 +419,6 @@ export const SubmitDemoRequestSchema = z.object({
 
 export type SubmitDemoRequestPayload = z.infer<typeof SubmitDemoRequestSchema>;
 
-// Event message
-
-export const SendEventMessageSchema = z.object({
-	body: z.string().min(1, 'Body is required').max(5000, 'Body is too long'),
-	title: titleValidator,
-	eventId: z.string().min(1, 'Event ID is required').max(200, 'Event ID is too long'),
-	sentBy: z.string().max(200, 'Sent By is too long').optional()
-});
-
 // Delete data
 
 export const DeleteDataSchema = z.object({
@@ -430,3 +428,16 @@ export const DeleteDataSchema = z.object({
 });
 
 export type DeleteDataPayload = z.infer<typeof DeleteDataSchema>;
+
+// Event message
+
+export const SendEventMessageSchema = z.object({
+	body: z.string().min(1, 'Body is required').max(5000, 'Body is too long'),
+	title: titleValidator,
+	eventId: z.string().min(1, 'Event ID is required').max(200, 'Event ID is too long'),
+	sentBy: z.string().max(200, 'Sent By is too long').optional(),
+	sendType: eventMessageSendTypeValidator,
+	roleId: z.string().max(200, 'Role ID is too long').optional()
+});
+
+export type SendEventMessagePayload = z.infer<typeof SendEventMessageSchema>;
