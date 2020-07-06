@@ -27,7 +27,7 @@ export const useAttendeesByNameQuery = (
 	params.append('type', 'name');
 
 	return useQuery<AttendeeWithUser[], AxiosError<ErroredAPIResponse>>(
-		['attendee-name', eid, name],
+		['attendees-by-name', eid, name],
 		async () => {
 			return axios
 				.get<SuccessAPIResponse<AttendeeWithUser[]>>(
