@@ -74,7 +74,6 @@ export default api({
 				body: body.body,
 				title: body.title,
 				eventId: event.id,
-				sentBy: body.sentBy,
 				sendTo: body.sendType,
 				slug,
 				roleId: body.roleId,
@@ -91,7 +90,6 @@ export default api({
 			toAddresses: sendToAddresses,
 			body: body.body,
 			title: body.title,
-			sentBy: body.sentBy,
 			message
 		});
 
