@@ -71,7 +71,9 @@ export const ViewVenue: React.FC<Props> = (props) => {
 						</div>
 					)
 				) : (
-					<Skeleton className="w-full" count={3} />
+					<div className="mt-3">
+						<Skeleton className="w-full" count={3} />
+					</div>
 				)}
 			</div>
 
