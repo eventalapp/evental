@@ -28,7 +28,12 @@ export const ViewMessage: React.FC<Props> = (props) => {
 						{message ? message.title : <Skeleton className="w-full max-w-2xl" />}
 					</Heading>
 					<span className="block text-sm text-gray-600">
-						{message ? `Sent ${dayjs(message.createdAt).fromNow()}` : <Skeleton className="w-52" />}
+						{message ? (
+							`Sent ${dayjs(message.createdAt).fromNow()}
+										${admin && message.recipientCount ? ` to ${message.recipientCount} recipients` : ''}`
+						) : (
+							<Skeleton className="w-52" />
+						)}
 					</span>
 				</div>
 
