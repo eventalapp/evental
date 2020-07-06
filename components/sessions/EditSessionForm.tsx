@@ -320,7 +320,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={editSessionMutation.isLoading}
 				>
-					{editSessionMutation.isLoading ? <LoadingInner /> : 'Edit'}
+					{editSessionMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>

@@ -88,7 +88,7 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={editVenueMutation.isLoading}
 				>
-					{editVenueMutation.isLoading ? <LoadingInner /> : 'Edit'}
+					{editVenueMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>

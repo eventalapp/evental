@@ -91,7 +91,7 @@ export const EditSessionCategoryForm: React.FC<Props> = (props) => {
 						color: Color(colorWatcher).isLight() ? '#000' : '#FFF'
 					}}
 				>
-					{editSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Edit'}
+					{editSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>

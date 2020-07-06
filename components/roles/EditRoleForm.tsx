@@ -85,7 +85,7 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={editRoleMutation.isLoading}
 				>
-					{editRoleMutation.isLoading ? <LoadingInner /> : 'Edit'}
+					{editRoleMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>
