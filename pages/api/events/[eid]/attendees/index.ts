@@ -39,6 +39,10 @@ export const getAttendees = async (eid: string): Promise<AttendeeWithUser[]> => 
 		}
 	});
 
+	if (!attendees || attendees.length === 0) {
+		return [];
+	}
+
 	return stripAttendeesWithUser(attendees);
 };
 
@@ -66,7 +70,7 @@ export const getAttendeesByRole = async (eid: string, rid: string): Promise<Atte
 		}
 	});
 
-	if (!attendees) {
+	if (!attendees || attendees.length === 0) {
 		return [];
 	}
 
@@ -100,7 +104,7 @@ export const getAttendeesByName = async (
 		}
 	});
 
-	if (!attendees) {
+	if (!attendees || attendees.length === 0) {
 		return [];
 	}
 
