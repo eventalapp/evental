@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { eduAttendeePricing, priceAfterSale, proAttendeePricing, sale } from '../../utils/price';
+import { EventalPro } from './EventalPro';
 import { PromotionalOffer } from './PromotionalOffer';
 
 type EventalProCardProps = {
@@ -59,12 +60,7 @@ export const EventalProCard: React.FC<EventalProCardProps> = (props) => {
 				className
 			)}
 		>
-			<div className="flex flex-row items-center">
-				<strong className="mr-2 font-display text-2xl font-bold tracking-tight">Evental</strong>
-				<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">
-					{isEducation ? 'EDU' : 'PRO'}
-				</span>
-			</div>
+			<EventalPro isEducation={isEducation} />
 
 			<p className="text-gray-700">
 				The {isEducation ? 'education/non-profit' : 'pro'} plan allows event organizers to create
