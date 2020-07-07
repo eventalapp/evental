@@ -2,10 +2,10 @@ import { hash } from 'argon2';
 import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
+import { sendWelcome } from '../../../../email/templates/welcome';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { CLAIM_PROFILE_EXPIRY, SESSION_EXPIRY } from '../../../../utils/config';
-import { sendWelcomeEmail } from '../../../../utils/email/sendWelcomeEmail';
 import { ClaimProfileSchema } from '../../../../utils/schemas';
 import { stripUser } from '../../../../utils/user';
 
@@ -44,7 +44,7 @@ export default api({
 
 		try {
 			if (user.email) {
-				await sendWelcomeEmail(user.email, user.name);
+				await sendWelcome({ user, toAddresses: [user.email] });
 			}
 		} catch {
 			// silent fail
