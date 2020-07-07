@@ -48,7 +48,7 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 
 			{separator}
 
-			<span className="px-2.5 font-bold text-xs text-gray-400">USERS</span>
+			<span className="px-2.5 font-bold text-xs text-gray-400 ">COMMUNITY</span>
 
 			{event ? (
 				<SidebarLink href={`/events/${event.slug}/admin/attendees`}>Attendees</SidebarLink>
@@ -63,17 +63,23 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 			)}
 
 			{event ? (
-				<SidebarLink href={`/events/${event.slug}/admin/organizers`}>Organizers</SidebarLink>
+				<SidebarLink href={`/events/${event.slug}/admin/messages`}>Messages</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
 
 			{separator}
 
-			<span className="px-2.5 font-bold text-xs text-gray-400">INTERACTION</span>
+			<span className="px-2.5 font-bold text-xs text-gray-400">GENERAL</span>
 
 			{event ? (
-				<SidebarLink href={`/events/${event.slug}/admin/messages`}>Messages</SidebarLink>
+				<SidebarLink href={`/events/${event.slug}/admin`}>Profile</SidebarLink>
+			) : (
+				sidebarSkeleton
+			)}
+
+			{event ? (
+				<SidebarLink href={`/events/${event.slug}/admin/billing`}>Billing</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
@@ -84,18 +90,8 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 				sidebarSkeleton
 			)}
 
-			{separator}
-
-			<span className="px-2.5 font-bold text-xs text-gray-400">SETTINGS</span>
-
 			{event ? (
-				<SidebarLink href={`/events/${event.slug}/admin`}>General</SidebarLink>
-			) : (
-				sidebarSkeleton
-			)}
-
-			{event ? (
-				<SidebarLink href={`/events/${event.slug}/admin/billing`}>Billing</SidebarLink>
+				<SidebarLink href={`/events/${event.slug}/admin/organizers`}>Organizers</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
