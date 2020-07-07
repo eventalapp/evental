@@ -60,7 +60,7 @@ export const resetPassword: GenerateTemplateArgs = {
 	textPart: text,
 	htmlPart: htmlOutput.html,
 	subjectPart: 'Reset your password',
-	templateName: 'Reset Password'
+	templateName: 'ResetPassword'
 };
 
 type SendResetPasswordArgs = {
