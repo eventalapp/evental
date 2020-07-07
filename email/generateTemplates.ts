@@ -64,3 +64,5 @@ templatesToGenerate.forEach((template) => {
 // aws ses create-template --cli-input-json file://template.json
 
 // aws ses delete-template --template-name EventMessage
+
+//aws ses update-template --cli-input-json file://template.json

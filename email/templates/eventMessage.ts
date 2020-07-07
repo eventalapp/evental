@@ -30,7 +30,7 @@ const template = `
         <mj-text font-size="16px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4">{{body}}
         </mj-text>
         
-           <mj-text font-size="13px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4" align="right">
+           <mj-text font-size="13px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4" align="left">
              <a href="{{messageUrl}}" style="color: #0066FF; text-decoration:none;">
                View Full Message
              </a>
