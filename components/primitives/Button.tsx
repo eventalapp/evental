@@ -43,7 +43,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) =>
 		<button
 			ref={ref}
 			className={cx(
-				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 select-none group',
+				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-75 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 select-none group',
 				paddings[padding],
 				variants[variant],
 				className

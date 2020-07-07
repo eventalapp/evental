@@ -5,7 +5,7 @@ import { theme } from '../../tailwind.config';
 
 const variants = {
 	default:
-		'transition duration-50 w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-gray-900 focus:border-gray-300 min-h-[100px]'
+		'transition duration-75 w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-gray-900 focus:border-gray-300 min-h-[100px]'
 };
 
 type Props = {
