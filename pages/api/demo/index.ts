@@ -1,7 +1,7 @@
 import { NextkitError } from 'nextkit';
 
+import { sendDemoRequest } from '../../../email/templates/demoRequest';
 import { api } from '../../../utils/api';
-import { sendDemoRequestEmail } from '../../../utils/email/sendDemoRequestEmail';
 import { SubmitDemoRequestSchema } from '../../../utils/schemas';
 
 export default api({
@@ -21,6 +21,6 @@ export default api({
 
 		const body = SubmitDemoRequestSchema.parse(req.body);
 
-		await sendDemoRequestEmail({ sendToAddress: 'support@evental.app', payload: body });
+		await sendDemoRequest({ sendToAddress: 'support@evental.app', payload: body });
 	}
 });
