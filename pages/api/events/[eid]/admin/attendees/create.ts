@@ -1,10 +1,10 @@
 import { NextkitError } from 'nextkit';
 
+import { sendClaimProfile } from '../../../../../../email/templates/claimProfile';
 import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../utils/attendee';
 import { CLAIM_PROFILE_EXPIRY } from '../../../../../../utils/config';
-import { sendClaimProfileEmail } from '../../../../../../utils/email/sendClaimProfileEmail';
 import { busboyParseForm } from '../../../../../../utils/form';
 import { uploadAndProcessAvatar } from '../../../../../../utils/image';
 import { AdminCreateAttendeeSchema } from '../../../../../../utils/schemas';
@@ -119,8 +119,8 @@ export default api({
 
 		try {
 			if (user.email) {
-				await sendClaimProfileEmail({
-					sendToAddress: user.email,
+				await sendClaimProfile({
+					toAddresses: [user.email],
 					inviterName: requestingUser.name,
 					event,
 					role,
