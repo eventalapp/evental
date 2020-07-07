@@ -29,10 +29,10 @@ export const useCreatePageMutation = (eid: string): UseCreatePageMutationData =>
 				.then((res) => res.data.data);
 		},
 		{
-			onSuccess: (data) => {
+			onSuccess: () => {
 				toast.success('Page created successfully');
 
-				router.push(`/events/${eid}/admin/pages/${data.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/pages/`).then(() => {
 					void queryClient.invalidateQueries(['pages', eid]);
 				});
 			},
