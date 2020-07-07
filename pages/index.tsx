@@ -1,4 +1,3 @@
-import { faAddressCard, faBook, faPaintbrush, faTag } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -209,15 +208,13 @@ const HomePage: NextPage = () => {
 					<CardGrid>
 						<div className="relative">
 							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
-								<div className="absolute top-[50px] h-32 w-full overflow-visible sm:top-[70px]">
+								<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[40px]">
 									<div className="bloom small bloom-one left-[10%]" />
 									<div className="bloom small bloom-two right-[10%]" />
 								</div>
 							</div>
 							<Card
 								header="Attendee Roles"
-								icon={faTag}
-								iconWrapperClassName="text-blue-600 bg-blue-200"
 								className="relative"
 								body={
 									<>
@@ -233,15 +230,32 @@ const HomePage: NextPage = () => {
 						</div>
 						<div className="relative">
 							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
-								<div className="absolute top-[50px] h-32 w-full overflow-visible sm:top-[70px]">
+								<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[40px]">
+									<div className="bloom small bloom-one left-[10%]" />
+									<div className="bloom small bloom-two right-[10%]" />
+								</div>
+							</div>
+							<Card
+								header="Attendee Experience"
+								className="relative"
+								body={
+									<>
+										Attendees have access to a user settings dashboard, where they can build out a
+										customizable profile to include their location, job title, website, and a custom
+										biography.
+									</>
+								}
+							/>
+						</div>
+						<div className="relative">
+							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
+								<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[40px]">
 									<div className="bloom small bloom-one left-[10%]" />
 									<div className="bloom small bloom-two right-[10%]" />
 								</div>
 							</div>
 							<Card
 								header="Guides & Documentation"
-								icon={faBook}
-								iconWrapperClassName="text-green-600 bg-green-200"
 								className="relative"
 								body={
 									<>
@@ -261,43 +275,19 @@ const HomePage: NextPage = () => {
 						</div>
 						<div className="relative">
 							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
-								<div className="absolute top-[50px] h-32 w-full overflow-visible sm:top-[70px]">
+								<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[40px]">
 									<div className="bloom small bloom-one left-[10%]" />
 									<div className="bloom small bloom-two right-[10%]" />
 								</div>
 							</div>
 							<Card
 								header="Event Branding"
-								icon={faPaintbrush}
-								iconWrapperClassName="text-purple-600 bg-purple-200"
 								className="relative"
 								body={
 									<>
 										Use the Evental Organizer dashboard to customize your events branding to fit
 										your organizations needs. You can customize your event color/branding, logo, and
-										more. Set links to your website, social media, and more for all of your
-										attendees to see.
-									</>
-								}
-							/>
-						</div>
-						<div className="relative">
-							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
-								<div className="absolute top-[50px] h-32 w-full overflow-visible sm:top-[70px]">
-									<div className="bloom small bloom-one left-[10%]" />
-									<div className="bloom small bloom-two right-[10%]" />
-								</div>
-							</div>
-							<Card
-								header="Attendee Experience"
-								icon={faAddressCard}
-								iconWrapperClassName="text-red-600 bg-red-200"
-								className="relative"
-								body={
-									<>
-										Attendees have access to a user settings dashboard, where they can build out a
-										customizable profile to include their location, job title, website, and a custom
-										biography.
+										set links to your website, social media.
 									</>
 								}
 							/>
