@@ -132,7 +132,10 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					<div className="absolute right-3.5 top-3.5 flex flex-col justify-end items-end">
 						<Tooltip side={'right'} message={`View session`}>
 							<div className="mb-3">
-								<Link href={`/events/${event.slug}/sessions/${session.slug}`} passHref>
+								<Link
+									href={`/events/${event.slug}${admin ? '/admin' : ''}/sessions/${session.slug}`}
+									passHref
+								>
 									<a>
 										<FontAwesomeIcon
 											fill="currentColor"
@@ -180,7 +183,9 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 										style={{ backgroundColor: session.category.color ?? '#888888' }}
 									/>
 								}
-								link={`/events/${event.slug}/sessions/categories/${session.category.slug}`}
+								link={`/events/${event.slug}${admin ? '/admin' : ''}/sessions/categories/${
+									session.category.slug
+								}`}
 								tooltipMessage={`This session is a part of the ${session.category.name} category.`}
 								label={session.category.name}
 							/>
@@ -189,7 +194,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 						{session.venue && (
 							<TooltipIcon
 								icon={faLocationDot}
-								link={`/events/${event.slug}/venues/${session.venue.slug}`}
+								link={`/events/${event.slug}${admin ? '/admin' : ''}/venues/${session.venue.slug}`}
 								tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
 								label={session?.venue?.name}
 							/>
