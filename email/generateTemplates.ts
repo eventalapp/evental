@@ -4,6 +4,7 @@ import { claimProfile } from './templates/claimProfile';
 import { eventMessage } from './templates/eventMessage';
 import { inviteOrganizer } from './templates/inviteOrganizer';
 import { inviteRole } from './templates/inviteRole';
+import { resetPassword } from './templates/resetPassword';
 import { verifyEmail } from './templates/verifyEmail';
 import { welcome } from './templates/welcome';
 
@@ -62,7 +63,8 @@ const templatesToGenerate = [
 	welcome,
 	verifyEmail,
 	inviteOrganizer,
-	inviteRole
+	inviteRole,
+	resetPassword
 ];
 
 templatesToGenerate.forEach((template) => {
