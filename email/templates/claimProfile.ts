@@ -42,7 +42,7 @@ export const template = `
                 </mj-text>
 
                 <mj-text padding-bottom="30px" font-size="16px" color="#111827" font-family="Inter, Roboto, Arial">
-                	{{ inviterName }} has created a profile for you as a {{roleName}} for the {{eventName}} event.
+                	{{inviterName}} has created a profile for you as a {{roleName}} for the {{eventName}} event.
                 </mj-text> 
  
                 <mj-text font-size="16px" color="#5C41FF" font-family="Inter, Roboto, Arial">
