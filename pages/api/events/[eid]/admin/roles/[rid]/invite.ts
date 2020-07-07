@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
+import { sendRoleInvite } from '../../../../../../../email/templates/inviteRole';
 import { api } from '../../../../../../../utils/api';
 import { isFounder } from '../../../../../../../utils/attendee';
 import { ORGANIZER_INVITE_EXPIRY } from '../../../../../../../utils/config';
-import { sendRoleInvite } from '../../../../../../../utils/email/sendRoleInvite';
 import { InviteRoleSchema } from '../../../../../../../utils/schemas';
 import { getEvent } from '../../../index';
 import { getRole } from '../../../roles/[rid]';
@@ -56,7 +56,7 @@ export default api({
 			event,
 			inviterName: requestingUser.name,
 			inviteCode,
-			sendToAddress: body.email
+			toAddresses: [body.email]
 		});
 
 		return role;
