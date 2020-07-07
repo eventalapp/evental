@@ -4,24 +4,24 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 
-import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
+import { UseeventRegistrationMutationData } from '../../hooks/mutations/useEventRegister';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
-	UseCreateAttendeeMutationData;
+	UseeventRegistrationMutationData;
 
 export const CreateAttendeeForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { createAttendeeMutation, event } = props;
+	const { eventRegistrationMutation, event } = props;
 	const { handleSubmit } = useForm();
 
 	return (
 		<form
 			onSubmit={handleSubmit(() => {
-				createAttendeeMutation.mutate();
+				eventRegistrationMutation.mutate();
 			})}
 		>
 			<div className="mt-3 flex flex-row justify-end">
@@ -34,13 +34,13 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 						className="ml-4"
 						variant="primary"
 						padding="medium"
-						disabled={createAttendeeMutation.isLoading}
+						disabled={eventRegistrationMutation.isLoading}
 						style={{
 							backgroundColor: event.color,
 							color: Color(event.color).isLight() ? '#000' : '#FFF'
 						}}
 					>
-						{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
+						{eventRegistrationMutation.isLoading ? <LoadingInner /> : 'Register'}
 					</Button>
 				) : (
 					<Skeleton className="w-20 h-6" />

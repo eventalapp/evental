@@ -16,7 +16,7 @@ import { Navigation } from '../../../components/navigation';
 import { Button } from '../../../components/primitives/Button';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
-import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
+import { useEventRegister } from '../../../hooks/mutations/useEventRegister';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
 import { useUser } from '../../../hooks/queries/useUser';
@@ -25,7 +25,7 @@ const EventRegisterPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
+	const { eventRegistrationMutation } = useEventRegister(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { user } = useUser();
 
@@ -139,7 +139,7 @@ const EventRegisterPage: NextPage = () => {
 					event={event}
 					eventError={eventError}
 					isEventLoading={isEventLoading}
-					createAttendeeMutation={createAttendeeMutation}
+					eventRegistrationMutation={eventRegistrationMutation}
 				/>
 			</Column>
 

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import { useCreateAttendeeMutation } from '../../hooks/mutations/useCreateAttendeeMutation';
+import { useEventRegister } from '../../hooks/mutations/useEventRegister';
 import { StrippedUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
@@ -22,7 +22,7 @@ export const EventRegistrationDialog: React.FC<Props> = (props) => {
 
 	let [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
-	const { createAttendeeMutation } = useCreateAttendeeMutation(String(event.slug), {
+	const { eventRegistrationMutation } = useEventRegister(String(event.slug), {
 		redirect: false
 	});
 
@@ -31,10 +31,10 @@ export const EventRegistrationDialog: React.FC<Props> = (props) => {
 	params.append('redirectUrl', String(router.asPath));
 
 	useEffect(() => {
-		if (createAttendeeMutation.isSuccess) {
+		if (eventRegistrationMutation.isSuccess) {
 			setIsOpen(false);
 		}
-	}, [createAttendeeMutation.isSuccess]);
+	}, [eventRegistrationMutation.isSuccess]);
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -67,16 +67,16 @@ export const EventRegistrationDialog: React.FC<Props> = (props) => {
 							className="ml-4"
 							variant="primary"
 							padding="medium"
-							disabled={createAttendeeMutation.isLoading}
+							disabled={eventRegistrationMutation.isLoading}
 							style={{
 								backgroundColor: event.color,
 								color: Color(event.color).isLight() ? '#000' : '#FFF'
 							}}
 							onClick={() => {
-								createAttendeeMutation.mutate();
+								eventRegistrationMutation.mutate();
 							}}
 						>
-							{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
+							{eventRegistrationMutation.isLoading ? <LoadingInner /> : 'Register'}
 						</Button>
 					) : (
 						<Link href={`/auth/signin?${params}`} passHref>
