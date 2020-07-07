@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
@@ -7,6 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/user';
 import { NotFound } from '../error/NotFound';
+import { AspectImage } from '../guides/AspectImage';
 import Tooltip from '../primitives/Tooltip';
 
 type Props = {
@@ -51,20 +51,16 @@ export const AttendeeList: React.FC<Props> = (props) => {
 												}`}
 											>
 												<a className="flex h-full flex-col items-center justify-start">
-													<div
-														className={classNames(
-															'relative mb-2 rounded-md border border-gray-100 shadow-sm h-28 w-28'
-														)}
-													>
-														<Image
+													<div className={classNames('relative mb-2 w-full')}>
+														<AspectImage
+															ratio={1}
 															alt={String(attendee.user.name)}
-															src={String(
+															imageUrl={String(
 																attendee?.user.image
 																	? `https://cdn.evental.app${attendee?.user.image}`
 																	: `https://cdn.evental.app/images/default-avatar.jpg`
 															)}
-															className="rounded-md"
-															layout="fill"
+															className="border border-gray-200 shadow-sm"
 														/>
 													</div>
 													<span className="text-center text-lg">{attendee.user.name}</span>
