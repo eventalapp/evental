@@ -15,7 +15,7 @@ export const EventListItem: React.FC<EventListItemProps> = (props) => {
 		<div>
 			<div className="-mx-1 rounded-md hover:bg-gray-75">
 				<Link href={`/events/${event.slug}`}>
-					<a className="block py-3 rounded-md duration-50 transition focus:outline-none focus:ring-2 focus:ring-opacity-75 focus:ring-gray-700">
+					<a className="block py-3 rounded-md duration-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-gray-700">
 						<div className="flex flex-row items-center">
 							<div className="flex w-12 flex-col justify-center text-center md:ml-5">
 								<Tooltip
