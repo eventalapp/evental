@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { EventalProCard } from '../components/billing/EventalProCard';
-import { PricingAccordion } from '../components/billing/PricingAccordion';
+import { FaqAccordion } from '../components/billing/FaqAccordion';
+import { FeatureList } from '../components/billing/FeatureList';
 import Column from '../components/layout/Column';
 import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
@@ -154,93 +155,7 @@ const PricingPage: NextPage = () => {
 					<p className="text-gray-600">Perks and features</p>
 				</div>
 
-				<div className="mt-3 grid grid-cols-1 gap-8 gap-x-6 lg:grid-cols-2">
-					<div>
-						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
-							Publish Features
-						</h3>
-						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Responsive event website</li>
-							<li>Customizable event branding</li>
-							<li>Control event privacy &amp; access</li>
-							<li>Unlimited sessions, venues, pages, categories, and roles</li>
-							<li>Create custom top-level and standard pages</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
-							Attendee Experience
-						</h3>
-						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Generate and export personal schedule</li>
-							<li>View event from any device</li>
-							<li>Sync personal schedule to calendar</li>
-							<li>Create customizable user profile using the profile builder</li>
-							<li>Browse attendee and role lists</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
-							Virtual &amp; Hybrid Events
-						</h3>
-						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Use Evental with any webinar or video platform</li>
-							<li>Automatically display times in users timezone</li>
-							<li>Provide post-event access to session recordings</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
-							Role Management
-						</h3>
-						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Create custom roles for speakers, artists, and exhibitors</li>
-							<li>Attach role members to sessions</li>
-							<li>Top level pages for role members</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
-							Communication
-						</h3>
-						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Custom email builder to develop responsive emails</li>
-							<li>Create a welcome email to automatically send to attendees</li>
-							<li>Notify attendees when they have an upcoming session</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
-							Session Registration
-						</h3>
-						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Attendees can register for sessions</li>
-							<li>Filter sessions by date, type, venue, etc.</li>
-							<li>Attach role members/speakers to sessions</li>
-							<li>Set session max attendee limits and wait lists</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
-							Administration
-						</h3>
-						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Remove attendees from your event</li>
-							<li>Create organizers to assist you in running your event</li>
-							<li>Export event and session data</li>
-							<li>Access to Evental API</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">Support</h3>
-						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Organizer and attendee support guides</li>
-							<li>24/7 Email support</li>
-							<li>Dedicated account manager</li>
-							<li>Post-event review session</li>
-						</ul>
-					</div>
-				</div>
+				<FeatureList />
 			</Column>
 
 			<div className="dark-topography text-white">
@@ -264,131 +179,7 @@ const PricingPage: NextPage = () => {
 					Frequently Asked Questions
 				</h3>
 
-				<PricingAccordion
-					className="col-span-4 md:col-span-3"
-					items={[
-						{
-							header: 'Do you offer a nonprofit or education plans?',
-							content: (
-								<p>
-									Yes, we offer nonprofit and educational plans. Please{' '}
-									<Link href="/contact">
-										<a className="underline">Contact Us</a>
-									</Link>{' '}
-									if you are interested in learning more and accessing this plan.
-								</p>
-							)
-						},
-
-						{
-							header: 'Is event setup assistance offered?',
-							content: (
-								<p>
-									Yes, we offer event setup assistance. You can first review our{' '}
-									<Link href="/guides">
-										<a className="underline">Support Guides</a>
-									</Link>
-									, if you still need help, please{' '}
-									<Link href="/contact">
-										<a className="underline">Contact Us</a>
-									</Link>
-									.
-								</p>
-							)
-						},
-						{
-							header: 'Do you offer any subscriptions plans?',
-							content: (
-								<p>
-									Yes, we offer several subscription plans for and organizations/individuals who
-									plan to hold several events in a year.
-								</p>
-							)
-						},
-						{
-							header: 'What payment methods do you support?',
-							content: (
-								<p>
-									We accept credit cards, debit cards, checks, wire transfers, ACH, and checks. If
-									you are unsure if your payment method is supported. Please{' '}
-									<Link href="/contact">
-										<a className="underline">Contact Us</a>
-									</Link>
-									.
-								</p>
-							)
-						},
-
-						{
-							header: 'How long of events can I host?',
-							content: (
-								<p>
-									Currently we have a 1 month length limit on events. The event will still be
-									viewable after the event end date for attendees, speakers, and organizers to view
-									after the event.
-								</p>
-							)
-						},
-						{
-							header: 'Do you provide quotes?',
-							content: (
-								<p>
-									Yes, we can provide a quote. Please{' '}
-									<Link href="/contact">
-										<a className="underline">Contact Us</a>
-									</Link>{' '}
-									to receive a quote.
-								</p>
-							)
-						},
-						{
-							header: 'How are your plans priced?',
-							content: (
-								<p>
-									Our pricing is based off of the plan level you choose, and the number of attendees
-									you are expecting. If you would like to learn more about our pricing, Please{' '}
-									<Link href="/contact">
-										<a className="underline">Contact Us</a>
-									</Link>
-									.
-								</p>
-							)
-						},
-
-						{
-							header: 'Is there any training/support offered?',
-							content: (
-								<p>
-									Yes, we offer several training and learning opportunities to allow you to easily
-									setup and publish your event. Which includes administration, attendee, and speaker
-									guides at the{' '}
-									<Link href="/guides">
-										<a className="underline">Support Guides</a>
-									</Link>{' '}
-									page.
-								</p>
-							)
-						},
-						{
-							header: 'Is a free trial offered?',
-							content: (
-								<p>
-									Yes, we offer a{' '}
-									<Link href="/events/create">
-										<a className="underline">Free Trial</a>
-									</Link>{' '}
-									so you can create roles, pages, sessions, invite organizers, and customize your
-									event before purchasing a premium plan. If you have any questions regarding the
-									free trial,{' '}
-									<Link href="/contact">
-										<a className="underline">Contact Us</a>
-									</Link>
-									.
-								</p>
-							)
-						}
-					]}
-				/>
+				<FaqAccordion />
 			</Column>
 
 			<Footer />
