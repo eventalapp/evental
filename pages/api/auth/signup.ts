@@ -2,10 +2,10 @@ import { hash } from 'argon2';
 import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
+import { sendVerifyEmail } from '../../../email/templates/verifyEmail';
 import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
 import { SESSION_EXPIRY, VERIFY_EMAIL_EXPIRY } from '../../../utils/config';
-import { sendVerifyEmail } from '../../../utils/email/sendVerifyEmail';
 import { SignUpSchema } from '../../../utils/schemas';
 import { generateSlug } from '../../../utils/string';
 
@@ -73,7 +73,7 @@ export default api({
 			await ctx.redis.set(`verify:${verifyCode}`, user.id, { ex: VERIFY_EMAIL_EXPIRY });
 
 			if (user.email) {
-				await sendVerifyEmail({ verifyCode, sendToAddress: user.email });
+				await sendVerifyEmail({ verifyCode, toAddresses: [user.email] });
 			}
 		} catch {
 			// silent fail

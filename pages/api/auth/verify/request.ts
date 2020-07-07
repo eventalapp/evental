@@ -1,8 +1,8 @@
 import { NextkitError } from 'nextkit';
 
+import { sendVerifyEmail } from '../../../../email/templates/verifyEmail';
 import { api } from '../../../../utils/api';
 import { VERIFY_EMAIL_EXPIRY } from '../../../../utils/config';
-import { sendVerifyEmail } from '../../../../utils/email/sendVerifyEmail';
 
 export default api({
 	async POST({ ctx }) {
@@ -21,7 +21,7 @@ export default api({
 		await ctx.redis.set(`verify:${verifyCode}`, user.id, { ex: VERIFY_EMAIL_EXPIRY });
 
 		if (user.email) {
-			await sendVerifyEmail({ verifyCode, sendToAddress: user.email });
+			await sendVerifyEmail({ verifyCode, toAddresses: [user.email] });
 		}
 	}
 });
