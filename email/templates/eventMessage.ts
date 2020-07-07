@@ -118,7 +118,7 @@ export const sendEventMessage = async (args: SendEventMessageArgs) => {
 		DefaultContent: {
 			Template: {
 				TemplateData: JSON.stringify(templateData),
-				TemplateName: 'EventMessage'
+				TemplateName: eventMessage.templateName
 			}
 		}
 	};

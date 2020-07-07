@@ -102,7 +102,7 @@ export const sendClaimProfile = async (args: SendClaimProfileArgs) => {
 		Content: {
 			Template: {
 				TemplateData: JSON.stringify(templateData),
-				TemplateName: 'EventMessage'
+				TemplateName: claimProfile.templateName
 			}
 		}
 	};
