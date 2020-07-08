@@ -28,7 +28,7 @@ export const useUserSettingsMutation = (uid: string): UseUserSettingsMutationDat
 			const formData = populateFormData(data);
 
 			return await axios
-				.put<SuccessAPIResponse<Prisma.User>>(`/api/users/test/test/`, formData)
+				.put<SuccessAPIResponse<Prisma.User>>(`/api/users/`, formData)
 				.then((res) => res.data.data);
 		},
 		{
