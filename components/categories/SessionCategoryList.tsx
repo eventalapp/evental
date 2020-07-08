@@ -49,11 +49,19 @@ export const SessionCategoryList: React.FC<Props> = (props) => {
 												<div>
 													<span className="block text-xl">{sessionCategory.name}</span>
 													{sessionCategory.sessionCount > 0 ? (
-														<span className="text-sm font-normal text-gray-500">
-															{sessionCategory.sessionCount} Sessions
-														</span>
+														<Tooltip
+															message={`This category has ${sessionCategory.sessionCount} session${
+																sessionCategory.sessionCount > 1 ? 's' : ''
+															}`}
+														>
+															<span className="text-sm font-normal text-gray-500">
+																{sessionCategory.sessionCount} Sessions
+															</span>
+														</Tooltip>
 													) : (
-														<em className="text-sm font-normal text-gray-500">No Sessions</em>
+														<Tooltip message="This category has no sessions">
+															<em className="text-sm font-normal text-gray-500">No Sessions</em>
+														</Tooltip>
 													)}
 												</div>
 											</div>
