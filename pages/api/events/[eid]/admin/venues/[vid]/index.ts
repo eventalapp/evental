@@ -54,6 +54,18 @@ export default api({
 			throw new NextkitError(404, 'Venue not found.');
 		}
 
+		if (body.name !== venue.name) {
+			const venueNameExists = await prisma.eventVenue.findFirst({
+				where: {
+					name: body.name
+				}
+			});
+
+			if (venueNameExists) {
+				throw new NextkitError(400, `Venue with the name "${body.name}" already exists.`);
+			}
+		}
+
 		const slug: string | undefined =
 			body.name !== venue.name
 				? await generateSlug(body.name, async (val) => {
