@@ -5,6 +5,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
+import { populateFormData } from '../../utils/form';
 import { AdminEditAttendeePayload } from '../../utils/schemas';
 import { AttendeeWithUser } from '../../utils/user';
 
@@ -25,18 +26,20 @@ export const useEditAttendeeMutation = (eid: string, uid: string): UseEditAttend
 		AdminEditAttendeePayload
 	>(
 		async (data) => {
+			const formData = populateFormData(data);
+
 			return await axios
 				.put<SuccessAPIResponse<AttendeeWithUser>>(
-					`/api/events/${eid}/admin/attendees/${uid}`,
-					data
+					`/api/events/${eid}/admin/attendees/${uid}/edit`,
+					formData
 				)
 				.then((res) => res.data.data);
 		},
 		{
-			onSuccess: (data) => {
+			onSuccess: () => {
 				toast.success('Attendee edited successfully');
 
-				router.push(`/events/${eid}/admin/attendees/${data.user.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/attendees`).then(() => {
 					void queryClient.invalidateQueries(['attendee', eid, uid]);
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});

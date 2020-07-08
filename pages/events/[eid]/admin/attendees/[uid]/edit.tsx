@@ -5,30 +5,27 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
-import { EditUserForm } from '../../../../../../components/authentication/EditUserForm';
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
-import { useEditUserMutation } from '../../../../../../hooks/mutations/useEditUserMutation';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
-import { useUserQuery } from '../../../../../../hooks/queries/useUserQuery';
+import { useUnclaimedUserQuery } from '../../../../../../hooks/queries/useUnclaimedUserQuery';
 
 const EditAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, uid } = router.query;
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
-	const { user, isUserLoading } = useUserQuery(String(uid));
-	const { editUserMutation } = useEditUserMutation(String(eid), String(user?.id));
+	const { isUnclaimedUserLoading, unclaimedUser } = useUnclaimedUserQuery(String(eid), String(uid));
 
 	return (
 		<AdminPageWrapper
 			errors={[attendeeError, rolesError]}
 			eid={String(eid)}
-			isLoading={isRolesLoading || isAttendeeLoading || isUserLoading}
+			isLoading={isRolesLoading || isAttendeeLoading || isUnclaimedUserLoading}
 		>
 			<PageWrapper>
 				<Head>
@@ -51,16 +48,15 @@ const EditAttendeePage: NextPage = () => {
 							if you're looking to change the users details.
 						</p>
 
-						{attendee && roles && (
+						{attendee && roles && !isUnclaimedUserLoading && (
 							<AdminEditAttendeeForm
 								uid={String(uid)}
 								eid={String(eid)}
 								attendee={attendee}
 								roles={roles}
+								user={unclaimedUser}
 							/>
 						)}
-
-						{user && <EditUserForm user={user} editUserMutation={editUserMutation} />}
 					</Column>
 				</SidebarWrapper>
 			</PageWrapper>
