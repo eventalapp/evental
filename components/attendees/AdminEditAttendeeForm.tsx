@@ -63,10 +63,14 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 
 	const slugWatcher = watch('slug');
 
-	const { user: userSlugCheck, isUserLoading: isUserSlugCheckLoading } = useUserQuery(slugWatcher);
+	const { user: userSlugCheck, isUserLoading: isUserSlugCheckLoading } = useUserQuery(
+		String(slugWatcher)
+	);
 
 	useEffect(() => {
-		setValue('slug', slugify(slugWatcher));
+		if (slugWatcher) {
+			setValue('slug', slugify(slugWatcher));
+		}
 	}, [slugWatcher]);
 
 	useEffect(() => {
