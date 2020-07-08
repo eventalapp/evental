@@ -16,7 +16,9 @@ export default class Document extends NextDocument {
 				itemType="https://schema.org/WebPage"
 				className="h-full"
 			>
-				<Head />
+				<Head>
+					<link rel="manifest" href="/manifest.json" />
+				</Head>
 				<body className="h-full text-gray-900">
 					<Main />
 					<NextScript />
@@ -25,3 +27,4 @@ export default class Document extends NextDocument {
 		);
 	}
 }
+
