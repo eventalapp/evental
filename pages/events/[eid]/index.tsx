@@ -57,155 +57,159 @@ const ViewEventPage: NextPage = () => {
 		return <span>{dayOfMonth}</span>;
 	};
 
+	const Seo = event && (
+		<NextSeo
+			title={`${event.name} — Evental`}
+			description={htmlToText(event.description || '')}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}`,
+				title: `${event.name} — Evental`,
+				description: htmlToText(event.description || ''),
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
 	return (
-		<PageWrapper>
-			{event && (
-				<NextSeo
-					title={`${event.name} — Evental`}
-					description={htmlToText(event.description || '')}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}`,
-						title: `${event.name} — Evental`,
-						description: htmlToText(event.description || ''),
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<EventHeader adminLink={'/sessions'} eid={String(eid)} />
+			<PageWrapper>
+				<Column>
+					<EventHeader adminLink={'/sessions'} eid={String(eid)} />
 
-				<div className="grid grid-cols-12 gap-4">
-					<div className="col-span-12 lg:col-span-9">
-						<SessionList sessions={sessionsData} event={event} />
-					</div>
-
-					<div className="col-span-12 lg:col-span-3">
-						<div className="mb-4">
-							<span className="mb-1 block font-medium">
-								{event ? 'Filter by Date' : <Skeleton className="w-3/4" />}
-							</span>
-							{event ? (
-								<div className="relative">
-									<SessionDatePicker
-										onChange={(date) => {
-											void router.push(
-												`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`
-											);
-										}}
-										renderDayContents={renderDayContents}
-										maxDate={new Date(String(event.endDate))}
-										minDate={new Date(String(event.startDate))}
-									/>
-								</div>
-							) : (
-								<Skeleton className="w-full" />
-							)}
+					<div className="grid grid-cols-12 gap-4">
+						<div className="col-span-12 lg:col-span-9">
+							<SessionList sessions={sessionsData} event={event} />
 						</div>
 
-						<div className="mb-4">
-							<span className="mb-1 block font-medium">
-								{event && sessionCategories ? (
-									sessionCategories.length > 0 && 'Filter by Category'
+						<div className="col-span-12 lg:col-span-3">
+							<div className="mb-4">
+								<span className="mb-1 block font-medium">
+									{event ? 'Filter by Date' : <Skeleton className="w-3/4" />}
+								</span>
+								{event ? (
+									<div className="relative">
+										<SessionDatePicker
+											onChange={(date) => {
+												void router.push(
+													`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`
+												);
+											}}
+											renderDayContents={renderDayContents}
+											maxDate={new Date(String(event.endDate))}
+											minDate={new Date(String(event.startDate))}
+										/>
+									</div>
 								) : (
-									<Skeleton className="w-3/4" />
+									<Skeleton className="w-full" />
 								)}
-							</span>
-							<div className="text-gray-600">
-								<ul className="space-y-1">
+							</div>
+
+							<div className="mb-4">
+								<span className="mb-1 block font-medium">
 									{event && sessionCategories ? (
-										sessionCategories.map((sessionCategory) => (
-											<li key={sessionCategory.id}>
-												<Link
-													href={`/events/${event.slug}/sessions/categories/${sessionCategory.slug}`}
-												>
-													<a>
-														<Tooltip
-															message={`View all sessions occurring with the ${sessionCategory.name} session category`}
-															side="left"
-															sideOffset={6}
-														>
-															<div className="inline-block">
-																<div className="flex flex-row items-center justify-center">
-																	<div
-																		className="mr-2 h-3 w-3 rounded-full"
-																		style={{ backgroundColor: sessionCategory.color ?? '#888888' }}
-																	/>
+										sessionCategories.length > 0 && 'Filter by Category'
+									) : (
+										<Skeleton className="w-3/4" />
+									)}
+								</span>
+								<div className="text-gray-600">
+									<ul className="space-y-1">
+										{event && sessionCategories ? (
+											sessionCategories.map((sessionCategory) => (
+												<li key={sessionCategory.id}>
+													<Link
+														href={`/events/${event.slug}/sessions/categories/${sessionCategory.slug}`}
+													>
+														<a>
+															<Tooltip
+																message={`View all sessions occurring with the ${sessionCategory.name} session category`}
+																side="left"
+																sideOffset={6}
+															>
+																<div className="inline-block">
+																	<div className="flex flex-row items-center justify-center">
+																		<div
+																			className="mr-2 h-3 w-3 rounded-full"
+																			style={{
+																				backgroundColor: sessionCategory.color ?? '#888888'
+																			}}
+																		/>
+																		<span className="transition-all duration-100 hover:text-gray-900">
+																			{sessionCategory.name}
+																		</span>
+																	</div>
+																</div>
+															</Tooltip>
+														</a>
+													</Link>
+												</li>
+											))
+										) : (
+											<Skeleton count={5} className="w-full" containerClassName="space-y-1" />
+										)}
+									</ul>
+								</div>
+							</div>
+
+							<div className="mb-4">
+								<span className="mb-1 block font-medium">
+									{event && venues ? (
+										venues.length > 0 && 'Filter by Venue'
+									) : (
+										<Skeleton className="w-3/4" />
+									)}
+								</span>
+								<div className="text-gray-600">
+									<ul className="space-y-1">
+										{event && venues ? (
+											venues.map((venue) => (
+												<li key={venue.id}>
+													<Link href={`/events/${event.slug}/venues/${venue.slug}`} passHref>
+														<a>
+															<Tooltip
+																message={`View all sessions occurring at the ${venue.name} venue`}
+																side="left"
+																sideOffset={6}
+															>
+																<div className="inline-block">
 																	<span className="transition-all duration-100 hover:text-gray-900">
-																		{sessionCategory.name}
+																		{venue.name}
 																	</span>
 																</div>
-															</div>
-														</Tooltip>
-													</a>
-												</Link>
-											</li>
-										))
-									) : (
-										<Skeleton count={5} className="w-full" containerClassName="space-y-1" />
-									)}
-								</ul>
-							</div>
-						</div>
-
-						<div className="mb-4">
-							<span className="mb-1 block font-medium">
-								{event && venues ? (
-									venues.length > 0 && 'Filter by Venue'
-								) : (
-									<Skeleton className="w-3/4" />
-								)}
-							</span>
-							<div className="text-gray-600">
-								<ul className="space-y-1">
-									{event && venues ? (
-										venues.map((venue) => (
-											<li key={venue.id}>
-												<Link href={`/events/${event.slug}/venues/${venue.slug}`} passHref>
-													<a>
-														<Tooltip
-															message={`View all sessions occurring at the ${venue.name} venue`}
-															side="left"
-															sideOffset={6}
-														>
-															<div className="inline-block">
-																<span className="transition-all duration-100 hover:text-gray-900">
-																	{venue.name}
-																</span>
-															</div>
-														</Tooltip>
-													</a>
-												</Link>
-											</li>
-										))
-									) : (
-										<Skeleton count={5} className="w-full" containerClassName="space-y-1" />
-									)}
-								</ul>
+															</Tooltip>
+														</a>
+													</Link>
+												</li>
+											))
+										) : (
+											<Skeleton count={5} className="w-full" containerClassName="space-y-1" />
+										)}
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</Column>
-
+				</Column>
+			</PageWrapper>
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

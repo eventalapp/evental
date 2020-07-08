@@ -32,49 +32,53 @@ const MessagesPage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = event && (
+		<NextSeo
+			title={`Messages — ${event.name}`}
+			description={`View all of the messages at ${event.name}.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/messages`,
+				title: `Messages — ${event.name}`,
+				description: `View all of the messages at ${event.name}.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{event && (
-				<NextSeo
-					title={`Messages — ${event.name}`}
-					description={`View all of the messages at ${event.name}.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/messages`,
-						title: `Messages — ${event.name}`,
-						description: `View all of the messages at ${event.name}.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<EventHeader adminLink={'/messages'} eid={String(eid)} />
+			<PageWrapper>
+				<Column>
+					<EventHeader adminLink={'/messages'} eid={String(eid)} />
 
-				<Heading variant="xl" level={2} className="mb-3">
-					{event && messages ? 'Messages' : <Skeleton className="w-48" />}
-				</Heading>
+					<Heading variant="xl" level={2} className="mb-3">
+						{event && messages ? 'Messages' : <Skeleton className="w-48" />}
+					</Heading>
 
-				{messages && <MessageList eid={String(eid)} messages={messages} />}
-			</Column>
+					{messages && <MessageList eid={String(eid)} messages={messages} />}
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

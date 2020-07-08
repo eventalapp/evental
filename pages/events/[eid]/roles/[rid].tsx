@@ -37,45 +37,49 @@ const ViewAttendeePage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = role && event && (
+		<NextSeo
+			title={`${role.name} — ${event.name}`}
+			description={`View all of the members of the ${role.name} role.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/roles/${role.slug}`,
+				title: `${role.name} — ${event.name}`,
+				description: `View all of the members of the ${role.name} role.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{role && event && (
-				<NextSeo
-					title={`${role.name} — ${event.name}`}
-					description={`View all of the members of the ${role.name} role.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/roles/${role.slug}`,
-						title: `${role.name} — ${event.name}`,
-						description: `View all of the members of the ${role.name} role.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<EventHeader adminLink={`/roles/${rid}`} eid={String(eid)} />
+			<PageWrapper>
+				<Column>
+					<EventHeader adminLink={`/roles/${rid}`} eid={String(eid)} />
 
-				<ViewRole attendees={attendeesData} eid={String(eid)} rid={String(rid)} role={role} />
-			</Column>
+					<ViewRole attendees={attendeesData} eid={String(eid)} rid={String(rid)} role={role} />
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

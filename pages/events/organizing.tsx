@@ -29,45 +29,51 @@ const OrganizingEventsPage: NextPage = () => {
 		return <UnauthorizedPage />;
 	}
 
+	const Seo = (
+		<NextSeo
+			title="Organizing Events — Evental"
+			description="View all of the events you are organizing."
+			openGraph={{
+				url: 'https://evental.app/events/organizing',
+				title: 'Organizing Events',
+				description: 'View all of the events you are organizing.',
+				images: [
+					{
+						url: 'https://cdn.evental.app/images/logo.jpg',
+						width: 389,
+						height: 389,
+						alt: 'Evental Logo Alt',
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			<NextSeo
-				title="Organizing Events — Evental"
-				description="View all of the events you are organizing."
-				openGraph={{
-					url: 'https://evental.app/events/organizing',
-					title: 'Organizing Events',
-					description: 'View all of the events you are organizing.',
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
+		<>
+			{Seo}
 
 			<Navigation />
 
-			<Column>
-				<Heading className="text-center mb-4">Organizing Events</Heading>
+			<PageWrapper>
+				<Column>
+					<Heading className="text-center mb-4">Organizing Events</Heading>
 
-				<EventsPageNavigation />
+					<EventsPageNavigation />
 
-				<span className="mt-5 block text-center text-lg font-medium">
-					Organizing an event? Create an event below
-				</span>
+					<span className="mt-5 block text-center text-lg font-medium">
+						Organizing an event? Create an event below
+					</span>
 
-				<CreateEventForm createEventMutation={createEventMutation} />
+					<CreateEventForm createEventMutation={createEventMutation} />
 
-				<EventList events={organizingEvents} className="mt-5" />
-			</Column>
+					<EventList events={organizingEvents} className="mt-5" />
+				</Column>
+			</PageWrapper>
 
 			<Footer />
-		</PageWrapper>
+		</>
 	);
 };
 

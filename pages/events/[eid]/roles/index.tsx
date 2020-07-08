@@ -32,54 +32,58 @@ const RolesPage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = event && (
+		<NextSeo
+			title={`Roles — ${event.name}`}
+			description={`View all of the roles at ${event.name}.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/roles`,
+				title: `Roles — ${event.name}`,
+				description: `View all of the roles at ${event.name}.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{event && (
-				<NextSeo
-					title={`Roles — ${event.name}`}
-					description={`View all of the roles at ${event.name}.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/roles`,
-						title: `Roles — ${event.name}`,
-						description: `View all of the roles at ${event.name}.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<EventHeader adminLink={'/roles'} eid={String(eid)} />
+			<PageWrapper>
+				<Column>
+					<EventHeader adminLink={'/roles'} eid={String(eid)} />
 
-				<Heading variant="xl" level={2}>
-					{event && roles ? 'Roles' : <Skeleton className="w-48" />}
-				</Heading>
+					<Heading variant="xl" level={2}>
+						{event && roles ? 'Roles' : <Skeleton className="w-48" />}
+					</Heading>
 
-				<RoleList
-					eid={String(eid)}
-					roles={roles}
-					isRolesLoading={isRolesLoading}
-					rolesError={rolesError}
-				/>
+					<RoleList
+						eid={String(eid)}
+						roles={roles}
+						isRolesLoading={isRolesLoading}
+						rolesError={rolesError}
+					/>
+				</Column>
+			</PageWrapper>
 
-				<Footer color={event?.color} />
-			</Column>
-		</PageWrapper>
+			<Footer color={event?.color} />
+		</>
 	);
 };
 

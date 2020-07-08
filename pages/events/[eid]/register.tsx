@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
@@ -74,41 +75,43 @@ const EventRegisterPage: NextPage = () => {
 		params.append('redirectUrl', String(router.asPath));
 
 		return (
-			<PageWrapper>
+			<>
 				{Seo}
 
 				<Navigation />
 
-				<Column variant="halfWidth">
-					<div className="space-y-5">
-						<Heading>Create an account</Heading>
-						<p className="text-gray-700">
-							To register for this event, please{' '}
-							<Link href={`/auth/signup?${params}`}>
-								<a className="text-gray-900 underline">create an account</a>
-							</Link>{' '}
-							or{' '}
-							<Link href={`/auth/signin?${params}`}>
-								<a className="text-gray-900 underline">sign in</a>
-							</Link>{' '}
-							with your existing account.
-						</p>
-						<div className="flex flex-row justify-end">
-							<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
-								Cancel
-							</Button>
+				<PageWrapper>
+					<Column variant="halfWidth">
+						<div className="space-y-5">
+							<Heading>Create an account</Heading>
+							<p className="text-gray-700">
+								To register for this event, please{' '}
+								<Link href={`/auth/signup?${params}`}>
+									<a className="text-gray-900 underline">create an account</a>
+								</Link>{' '}
+								or{' '}
+								<Link href={`/auth/signin?${params}`}>
+									<a className="text-gray-900 underline">sign in</a>
+								</Link>{' '}
+								with your existing account.
+							</p>
+							<div className="flex flex-row justify-end">
+								<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
+									Cancel
+								</Button>
 
-							<Link href={`/auth/signin?${params}`} passHref>
-								<LinkButton padding="large" variant="primary">
-									Sign in
-								</LinkButton>
-							</Link>
+								<Link href={`/auth/signin?${params}`} passHref>
+									<LinkButton padding="large" variant="primary">
+										Sign in
+									</LinkButton>
+								</Link>
+							</div>
 						</div>
-					</div>
-				</Column>
+					</Column>
+				</PageWrapper>
 
 				<Footer color={event?.color} />
-			</PageWrapper>
+			</>
 		);
 	}
 
@@ -121,30 +124,36 @@ const EventRegisterPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper>
+		<>
 			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column variant="halfWidth" className="space-y-5">
-				<Heading>
-					{event ? `Register for ${event.name}` : <Skeleton className="w-full max-w-xl" />}
-				</Heading>
+			<PageWrapper>
+				{Seo}
 
-				<p className="text-gray-700">
-					To attend this event, please click the register button below.
-				</p>
+				<EventNavigation eid={String(eid)} />
 
-				<CreateAttendeeForm
-					event={event}
-					eventError={eventError}
-					isEventLoading={isEventLoading}
-					eventRegistrationMutation={eventRegistrationMutation}
-				/>
-			</Column>
+				<Column variant="halfWidth" className="space-y-5">
+					<Heading>
+						{event ? `Register for ${event.name}` : <Skeleton className="w-full max-w-xl" />}
+					</Heading>
+
+					<p className="text-gray-700">
+						To attend this event, please click the register button below.
+					</p>
+
+					<CreateAttendeeForm
+						event={event}
+						eventError={eventError}
+						isEventLoading={isEventLoading}
+						eventRegistrationMutation={eventRegistrationMutation}
+					/>
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

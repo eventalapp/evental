@@ -18,7 +18,11 @@ const PageWrapper: React.FC<LayoutProps> = (props) => {
 	const { children, className, variant = 'white', ...rest } = props;
 
 	return (
-		<div className={classNames(variants[variant], className)} {...rest}>
+		<div
+			className={classNames(variants[variant], className)}
+			style={{ minHeight: 'calc(100vh - 57px)' }}
+			{...rest}
+		>
 			{children}
 		</div>
 	);

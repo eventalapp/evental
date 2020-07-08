@@ -30,47 +30,51 @@ const SessionCategoriesPage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = event && (
+		<NextSeo
+			title={`Sessions Categories — ${event.name}`}
+			description={`View all of the sessions types for ${event.name}.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/sessions/categories`,
+				title: `Session Categories — ${event.name}`,
+				description: `View all of the sessions types for ${event.name}.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{event && (
-				<NextSeo
-					title={`Sessions Categories — ${event.name}`}
-					description={`View all of the sessions types for ${event.name}.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/sessions/categories`,
-						title: `Session Categories — ${event.name}`,
-						description: `View all of the sessions types for ${event.name}.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<div>
-					<Heading>Session Categories</Heading>
+			<PageWrapper>
+				<Column>
+					<div>
+						<Heading>Session Categories</Heading>
 
-					<SessionCategoryList eid={String(eid)} sessionCategories={sessionCategories} />
-				</div>
-			</Column>
+						<SessionCategoryList eid={String(eid)} sessionCategories={sessionCategories} />
+					</div>
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

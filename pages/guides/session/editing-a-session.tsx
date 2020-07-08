@@ -28,106 +28,109 @@ const sections: Record<string, Section> = {
 
 const EditingASessionGuidePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
-			<NextSeo
-				title="Editing a session — Evental"
-				description={`Learn how to edit a session for your event on Evental.`}
-				openGraph={{
-					url: 'https://evental.app/guides/session/editing-a-session',
-					title: 'Editing a session — Evental',
-					description: `Learn how to edit a session for your event on Evental.`,
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
+		<>
 			<Navigation />
 
-			<div className="dark-topography text-white">
-				<Column className="flex flex-col items-center">
-					<Heading>Editing a session</Heading>
-					<p className="mt-4 text-base text-gray-100">
-						Learn how to edit a session for your event on Evental.
-					</p>
-				</Column>
-			</div>
-
-			<Column>
-				<TableOfContents
-					items={[
-						{
-							text: sections.navigateDashboard.title,
-							relativeLink: `/guides/session/editing-a-session#${sections.navigateDashboard.anchor}`
-						},
-						{
-							text: sections.navigateSessions.title,
-							relativeLink: `/guides/session/editing-a-session#${sections.navigateSessions.anchor}`
-						},
-						{
-							text: sections.editSession.title,
-							relativeLink: `/guides/session/editing-a-session#${sections.editSession.anchor}`
-						}
-					]}
+			<PageWrapper>
+				<NextSeo
+					title="Editing a session — Evental"
+					description={`Learn how to edit a session for your event on Evental.`}
+					openGraph={{
+						url: 'https://evental.app/guides/session/editing-a-session',
+						title: 'Editing a session — Evental',
+						description: `Learn how to edit a session for your event on Evental.`,
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
 				/>
 
-				<GuideSection id={sections.navigateDashboard.anchor}>
-					<GuideSectionHeader
-						text={sections.navigateDashboard.title}
-						url={`/guides/session/editing-a-session#${sections.navigateDashboard.anchor}`}
+				<div className="dark-topography text-white">
+					<Column className="flex flex-col items-center">
+						<Heading>Editing a session</Heading>
+						<p className="mt-4 text-base text-gray-100">
+							Learn how to edit a session for your event on Evental.
+						</p>
+					</Column>
+				</div>
+
+				<Column>
+					<TableOfContents
+						items={[
+							{
+								text: sections.navigateDashboard.title,
+								relativeLink: `/guides/session/editing-a-session#${sections.navigateDashboard.anchor}`
+							},
+							{
+								text: sections.navigateSessions.title,
+								relativeLink: `/guides/session/editing-a-session#${sections.navigateSessions.anchor}`
+							},
+							{
+								text: sections.editSession.title,
+								relativeLink: `/guides/session/editing-a-session#${sections.editSession.anchor}`
+							}
+						]}
 					/>
 
-					<p className="mb-4 text-gray-700">
-						To edit a session, navigate to the events admin dashboard by clicking the{' '}
-						<span className="font-medium">"manage this event"</span> button.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections.navigateDashboard.anchor}>
+						<GuideSectionHeader
+							text={sections.navigateDashboard.title}
+							url={`/guides/session/editing-a-session#${sections.navigateDashboard.anchor}`}
+						/>
 
-				<GuideSection id={sections.navigateSessions.anchor}>
-					<GuideSectionHeader
-						text={sections.navigateSessions.title}
-						url={`/guides/session/editing-a-session#${sections.navigateSessions.anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							To edit a session, navigate to the events admin dashboard by clicking the{' '}
+							<span className="font-medium">"manage this event"</span> button.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the events dashboard, click the{' '}
-						<span className="font-medium">"Sessions"</span> link in the top navigation.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections.navigateSessions.anchor}>
+						<GuideSectionHeader
+							text={sections.navigateSessions.title}
+							url={`/guides/session/editing-a-session#${sections.navigateSessions.anchor}`}
+						/>
 
-				<GuideSection id={sections.editSession.anchor}>
-					<GuideSectionHeader
-						text={sections.editSession.title}
-						url={`/guides/session/editing-a-session#${sections.editSession.anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							After visiting the events dashboard, click the{' '}
+							<span className="font-medium">"Sessions"</span> link in the top navigation.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the sessions dashboard page, select the session you wish to edit by
-						clicking the session.
-					</p>
-					<p className="mb-4 text-gray-700">
-						After selecting a session, select the <span className="font-medium">"Edit"</span>{' '}
-						button.
-					</p>
+					<GuideSection id={sections.editSession.anchor}>
+						<GuideSectionHeader
+							text={sections.editSession.title}
+							url={`/guides/session/editing-a-session#${sections.editSession.anchor}`}
+						/>
 
-					<p className="mb-4 text-gray-700">
-						After selecting the "Edit" button. You will be navigated to the edit session form. Fill
-						out the edit session form to edit a session.
-					</p>
-				</GuideSection>
+						<p className="mb-4 text-gray-700">
+							After visiting the sessions dashboard page, select the session you wish to edit by
+							clicking the session.
+						</p>
+						<p className="mb-4 text-gray-700">
+							After selecting a session, select the <span className="font-medium">"Edit"</span>{' '}
+							button.
+						</p>
 
-				<GuideSection>
-					<StillNeedHelp />
-				</GuideSection>
-			</Column>
+						<p className="mb-4 text-gray-700">
+							After selecting the "Edit" button. You will be navigated to the edit session form.
+							Fill out the edit session form to edit a session.
+						</p>
+					</GuideSection>
 
-			<Footer />
-		</PageWrapper>
+					<GuideSection>
+						<StillNeedHelp />
+					</GuideSection>
+				</Column>
+
+				<Footer />
+			</PageWrapper>
+		</>
 	);
 };
 

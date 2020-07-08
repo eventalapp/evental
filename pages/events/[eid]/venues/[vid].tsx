@@ -38,50 +38,54 @@ const ViewAttendeePage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = venue && event && (
+		<NextSeo
+			title={`${venue.name} — ${event.name}`}
+			description={`View all of the sessions occurring at ${venue.name}.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/venues/${venue.slug}`,
+				title: `${venue.name} — ${event.name}`,
+				description: `View all of the sessions occurring at ${venue.name}.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{venue && event && (
-				<NextSeo
-					title={`${venue.name} — ${event.name}`}
-					description={`View all of the sessions occurring at ${venue.name}.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/venues/${venue.slug}`,
-						title: `${venue.name} — ${event.name}`,
-						description: `View all of the sessions occurring at ${venue.name}.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<ViewVenue
-					eid={String(eid)}
-					vid={String(vid)}
-					event={event}
-					sessions={sessionsByVenueData}
-					user={user}
-					venue={venue}
-				/>
-			</Column>
+			<PageWrapper>
+				<Column>
+					<ViewVenue
+						eid={String(eid)}
+						vid={String(vid)}
+						event={event}
+						sessions={sessionsByVenueData}
+						user={user}
+						venue={venue}
+					/>
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

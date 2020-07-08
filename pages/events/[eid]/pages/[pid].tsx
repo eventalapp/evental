@@ -36,45 +36,49 @@ const ViewAttendeePage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = event && page && (
+		<NextSeo
+			title={`${page.name} — ${event.name}`}
+			description={`View the ${page.name} page for ${event.name}.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/pages/${page.slug}`,
+				title: `${page.name} — ${event.name}`,
+				description: `View the ${page.name} page for ${event.name}.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{event && page && (
-				<NextSeo
-					title={`${page.name} — ${event.name}`}
-					description={`View the ${page.name} page for ${event.name}.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/pages/${page.slug}`,
-						title: `${page.name} — ${event.name}`,
-						description: `View the ${page.name} page for ${event.name}.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<EventHeader adminLink={`/pages/${pid}`} eid={String(eid)} />
+			<PageWrapper>
+				<Column>
+					<EventHeader adminLink={`/pages/${pid}`} eid={String(eid)} />
 
-				<ViewPage page={page} eid={String(eid)} pid={String(pid)} />
-			</Column>
+					<ViewPage page={page} eid={String(eid)} pid={String(pid)} />
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

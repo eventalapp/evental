@@ -36,49 +36,53 @@ const SessionsPage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = event && (
+		<NextSeo
+			title={`Pages — ${event.name}`}
+			description={`View all of the pages for ${event.name}.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/pages`,
+				title: `Pages — ${event.name}`,
+				description: `View all of the pages for ${event.name}.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{event && (
-				<NextSeo
-					title={`Pages — ${event.name}`}
-					description={`View all of the pages for ${event.name}.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/pages`,
-						title: `Pages — ${event.name}`,
-						description: `View all of the pages for ${event.name}.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<EventHeader adminLink={'/pages'} eid={String(eid)} />
+			<PageWrapper>
+				<Column>
+					<EventHeader adminLink={'/pages'} eid={String(eid)} />
 
-				<Heading variant="xl" level={2}>
-					{event && pages ? 'Pages' : <Skeleton className="w-48" />}
-				</Heading>
+					<Heading variant="xl" level={2}>
+						{event && pages ? 'Pages' : <Skeleton className="w-48" />}
+					</Heading>
 
-				<PageList eid={String(eid)} pages={pages} />
-			</Column>
+					<PageList eid={String(eid)} pages={pages} />
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

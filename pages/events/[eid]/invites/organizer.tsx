@@ -47,78 +47,81 @@ const OrganizerInvitePage: NextPage = () => {
 		params.append('redirectUrl', String(router.asPath));
 
 		return (
-			<PageWrapper>
+			<>
 				{Seo}
-
 				<Navigation />
+				<PageWrapper>
+					<Column variant="halfWidth">
+						<div className="space-y-5">
+							<Heading>Create an account</Heading>
+							<p className="text-gray-700">
+								To organize this event, please{' '}
+								<Link href={`/auth/signup?${params}`}>
+									<a className="text-gray-900 underline">create an account</a>
+								</Link>{' '}
+								or{' '}
+								<Link href={`/auth/signin?${params}`}>
+									<a className="text-gray-900 underline">sign in</a>
+								</Link>{' '}
+								with your existing account.
+							</p>
+							<div className="flex flex-row justify-end">
+								<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
+									Cancel
+								</Button>
 
-				<Column variant="halfWidth">
-					<div className="space-y-5">
-						<Heading>Create an account</Heading>
-						<p className="text-gray-700">
-							To organize this event, please{' '}
-							<Link href={`/auth/signup?${params}`}>
-								<a className="text-gray-900 underline">create an account</a>
-							</Link>{' '}
-							or{' '}
-							<Link href={`/auth/signin?${params}`}>
-								<a className="text-gray-900 underline">sign in</a>
-							</Link>{' '}
-							with your existing account.
-						</p>
-						<div className="flex flex-row justify-end">
-							<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
-								Cancel
-							</Button>
-
-							<Link href={`/auth/signin?${params}`} passHref>
-								<LinkButton padding="large" variant="primary">
-									Sign in
-								</LinkButton>
-							</Link>
+								<Link href={`/auth/signin?${params}`} passHref>
+									<LinkButton padding="large" variant="primary">
+										Sign in
+									</LinkButton>
+								</Link>
+							</div>
 						</div>
-					</div>
-				</Column>
+					</Column>
+				</PageWrapper>
 
 				<Footer color={event?.color} />
-			</PageWrapper>
+			</>
 		);
 	}
 
 	return (
-		<PageWrapper>
+		<>
 			{Seo}
 
 			<Navigation />
 
-			<Column variant="halfWidth">
-				<FlexRowBetween>
-					<Heading>Accept Organizer Invite</Heading>
-				</FlexRowBetween>
+			<PageWrapper>
+				<Column variant="halfWidth">
+					<FlexRowBetween>
+						<Heading>Accept Organizer Invite</Heading>
+					</FlexRowBetween>
 
-				<p className="mb-2 text-base text-gray-700">
-					As an organizer you will be able to create, edit, and delete sessions, venues, and roles.
-				</p>
+					<p className="mb-2 text-base text-gray-700">
+						As an organizer you will be able to create, edit, and delete sessions, venues, and
+						roles.
+					</p>
 
-				<div className="flex flex-row justify-end">
-					<Button type="button" variant="no-bg" onClick={router.back}>
-						Cancel
-					</Button>
-					<Button
-						variant="primary"
-						onClick={() => {
-							const data = AcceptOrganizerInviteSchema.parse({ code: String(code) });
+					<div className="flex flex-row justify-end">
+						<Button type="button" variant="no-bg" onClick={router.back}>
+							Cancel
+						</Button>
+						<Button
+							variant="primary"
+							onClick={() => {
+								const data = AcceptOrganizerInviteSchema.parse({ code: String(code) });
 
-							acceptOrganizerInviteMutation.mutate(data);
-						}}
-					>
-						Accept Invite
-					</Button>
-				</div>
-			</Column>
+								acceptOrganizerInviteMutation.mutate(data);
+							}}
+						>
+							Accept Invite
+						</Button>
+					</div>
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

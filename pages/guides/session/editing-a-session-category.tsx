@@ -28,106 +28,109 @@ const sections: Record<string, Section> = {
 
 const EditingASessionCategoryGuidePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
-			<NextSeo
-				title="Editing a session category — Evental"
-				description={`Learn how to edit a session category for your event on Evental.`}
-				openGraph={{
-					url: 'https://evental.app/guides/session/editing-a-session-type',
-					title: 'Editing a session category — Evental',
-					description: `Learn how to edit a session category for your event on Evental.`,
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
+		<>
 			<Navigation />
 
-			<div className="dark-topography text-white">
-				<Column className="flex flex-col items-center">
-					<Heading>Editing a session category</Heading>
-					<p className="mt-4 text-base text-gray-100">
-						Learn how to edit a session category for your event on Evental.
-					</p>
-				</Column>
-			</div>
-
-			<Column>
-				<TableOfContents
-					items={[
-						{
-							text: sections.navigateDashboard.title,
-							relativeLink: `/guides/session/editing-a-session-type#${sections.navigateDashboard.anchor}`
-						},
-						{
-							text: sections.navigateSessionCategories.title,
-							relativeLink: `/guides/session/editing-a-session-type#${sections.navigateSessionCategories.anchor}`
-						},
-						{
-							text: sections.editSessionCategory.title,
-							relativeLink: `/guides/session/editing-a-session-type#${sections.editSessionCategory.anchor}`
-						}
-					]}
+			<PageWrapper>
+				<NextSeo
+					title="Editing a session category — Evental"
+					description={`Learn how to edit a session category for your event on Evental.`}
+					openGraph={{
+						url: 'https://evental.app/guides/session/editing-a-session-type',
+						title: 'Editing a session category — Evental',
+						description: `Learn how to edit a session category for your event on Evental.`,
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
 				/>
 
-				<GuideSection id={sections.navigateDashboard.anchor}>
-					<GuideSectionHeader
-						text={sections.navigateDashboard.title}
-						url={`/guides/session/editing-a-session-type#${sections.navigateDashboard.anchor}`}
+				<div className="dark-topography text-white">
+					<Column className="flex flex-col items-center">
+						<Heading>Editing a session category</Heading>
+						<p className="mt-4 text-base text-gray-100">
+							Learn how to edit a session category for your event on Evental.
+						</p>
+					</Column>
+				</div>
+
+				<Column>
+					<TableOfContents
+						items={[
+							{
+								text: sections.navigateDashboard.title,
+								relativeLink: `/guides/session/editing-a-session-type#${sections.navigateDashboard.anchor}`
+							},
+							{
+								text: sections.navigateSessionCategories.title,
+								relativeLink: `/guides/session/editing-a-session-type#${sections.navigateSessionCategories.anchor}`
+							},
+							{
+								text: sections.editSessionCategory.title,
+								relativeLink: `/guides/session/editing-a-session-type#${sections.editSessionCategory.anchor}`
+							}
+						]}
 					/>
 
-					<p className="mb-4 text-gray-700">
-						To edit a session category, navigate to the events admin dashboard by clicking the{' '}
-						<span className="font-medium">"manage this event"</span> button.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections.navigateDashboard.anchor}>
+						<GuideSectionHeader
+							text={sections.navigateDashboard.title}
+							url={`/guides/session/editing-a-session-type#${sections.navigateDashboard.anchor}`}
+						/>
 
-				<GuideSection id={sections.navigateSessionCategories.anchor}>
-					<GuideSectionHeader
-						text={sections.navigateSessionCategories.title}
-						url={`/guides/session/editing-a-session-type#${sections.navigateSessionCategories.anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							To edit a session category, navigate to the events admin dashboard by clicking the{' '}
+							<span className="font-medium">"manage this event"</span> button.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the events dashboard, click the{' '}
-						<span className="font-medium">"Types"</span> link in the top navigation.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections.navigateSessionCategories.anchor}>
+						<GuideSectionHeader
+							text={sections.navigateSessionCategories.title}
+							url={`/guides/session/editing-a-session-type#${sections.navigateSessionCategories.anchor}`}
+						/>
 
-				<GuideSection id={sections.editSessionCategory.anchor}>
-					<GuideSectionHeader
-						text={sections.editSessionCategory.title}
-						url={`/guides/session/editing-a-session-type#${sections.editSessionCategory.anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							After visiting the events dashboard, click the{' '}
+							<span className="font-medium">"Types"</span> link in the top navigation.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the session categories dashboard page, select the session category you
-						wish to edit by clicking the session category.
-					</p>
-					<p className="mb-4 text-gray-700">
-						After selecting a session category, select the{' '}
-						<span className="font-medium">"Edit"</span> button.
-					</p>
+					<GuideSection id={sections.editSessionCategory.anchor}>
+						<GuideSectionHeader
+							text={sections.editSessionCategory.title}
+							url={`/guides/session/editing-a-session-type#${sections.editSessionCategory.anchor}`}
+						/>
 
-					<p className="mb-4 text-gray-700">
-						After selecting the "Edit" button. You will be navigated to the edit session category
-						form. Fill out the edit session category form to edit a session category.
-					</p>
-				</GuideSection>
+						<p className="mb-4 text-gray-700">
+							After visiting the session categories dashboard page, select the session category you
+							wish to edit by clicking the session category.
+						</p>
+						<p className="mb-4 text-gray-700">
+							After selecting a session category, select the{' '}
+							<span className="font-medium">"Edit"</span> button.
+						</p>
 
-				<GuideSection>
-					<StillNeedHelp />
-				</GuideSection>
-			</Column>
+						<p className="mb-4 text-gray-700">
+							After selecting the "Edit" button. You will be navigated to the edit session category
+							form. Fill out the edit session category form to edit a session category.
+						</p>
+					</GuideSection>
 
-			<Footer />
-		</PageWrapper>
+					<GuideSection>
+						<StillNeedHelp />
+					</GuideSection>
+				</Column>
+
+				<Footer />
+			</PageWrapper>
+		</>
 	);
 };
 

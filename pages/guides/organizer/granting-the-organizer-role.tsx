@@ -26,124 +26,127 @@ const sections: Section[] = [
 
 const InvitingSessionMemberGuidePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
-			<NextSeo
-				title="Granting the Organizer role — Evental"
-				description={`Learn how to grant the organizer role to an attendee for your event on Evental.`}
-				openGraph={{
-					url: 'https://evental.app/guides/organizer/granting-the-organizer-role',
-					title: 'Granting the Organizer role — Evental',
-					description: `Learn how to grant the organizer role to an attendee for your event on Evental.`,
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
+		<>
 			<Navigation />
 
-			<div className="dark-topography text-white">
-				<Column className="flex flex-col items-center">
-					<Heading>Granting the Organizer role — Evental</Heading>
-					<p className="mt-4 text-base text-gray-100">
-						Learn how to grant the organizer role to an attendee for your event on Evental
-					</p>
-				</Column>
-			</div>
-
-			<Column>
-				<TableOfContents
-					items={[
-						{
-							text: sections[0].title,
-							relativeLink: `/guides/organizer/granting-the-organizer-role#${sections[0].anchor}`
-						},
-						{
-							text: sections[1].title,
-							relativeLink: `/guides/organizer/granting-the-organizer-role#${sections[1].anchor}`
-						},
-						{
-							text: sections[2].title,
-							relativeLink: `/guides/organizer/granting-the-organizer-role#${sections[2].anchor}`
-						},
-						{
-							text: sections[3].title,
-							relativeLink: `/guides/organizer/granting-the-organizer-role#${sections[3].anchor}`
-						}
-					]}
+			<PageWrapper>
+				<NextSeo
+					title="Granting the Organizer role — Evental"
+					description={`Learn how to grant the organizer role to an attendee for your event on Evental.`}
+					openGraph={{
+						url: 'https://evental.app/guides/organizer/granting-the-organizer-role',
+						title: 'Granting the Organizer role — Evental',
+						description: `Learn how to grant the organizer role to an attendee for your event on Evental.`,
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
 				/>
 
-				<GuideSection id={sections[0].anchor}>
-					<GuideSectionHeader
-						text={sections[0].title}
-						url={`/guides/organizer/granting-the-organizer-role#${sections[0].anchor}`}
+				<div className="dark-topography text-white">
+					<Column className="flex flex-col items-center">
+						<Heading>Granting the Organizer role — Evental</Heading>
+						<p className="mt-4 text-base text-gray-100">
+							Learn how to grant the organizer role to an attendee for your event on Evental
+						</p>
+					</Column>
+				</div>
+
+				<Column>
+					<TableOfContents
+						items={[
+							{
+								text: sections[0].title,
+								relativeLink: `/guides/organizer/granting-the-organizer-role#${sections[0].anchor}`
+							},
+							{
+								text: sections[1].title,
+								relativeLink: `/guides/organizer/granting-the-organizer-role#${sections[1].anchor}`
+							},
+							{
+								text: sections[2].title,
+								relativeLink: `/guides/organizer/granting-the-organizer-role#${sections[2].anchor}`
+							},
+							{
+								text: sections[3].title,
+								relativeLink: `/guides/organizer/granting-the-organizer-role#${sections[3].anchor}`
+							}
+						]}
 					/>
 
-					<p className="mb-4 text-gray-700">
-						To grant the organizer permission role to an attendee, navigate to the events admin
-						dashboard by clicking the <span className="font-medium">"manage this event"</span>{' '}
-						button.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections[0].anchor}>
+						<GuideSectionHeader
+							text={sections[0].title}
+							url={`/guides/organizer/granting-the-organizer-role#${sections[0].anchor}`}
+						/>
 
-				<GuideSection id={sections[1].anchor}>
-					<GuideSectionHeader
-						text={sections[1].title}
-						url={`/guides/organizer/granting-the-organizer-role#${sections[1].anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							To grant the organizer permission role to an attendee, navigate to the events admin
+							dashboard by clicking the <span className="font-medium">"manage this event"</span>{' '}
+							button.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the events dashboard, click the{' '}
-						<span className="font-medium">"Attendees"</span> link in the top navigation.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections[1].anchor}>
+						<GuideSectionHeader
+							text={sections[1].title}
+							url={`/guides/organizer/granting-the-organizer-role#${sections[1].anchor}`}
+						/>
 
-				<GuideSection id={sections[2].anchor}>
-					<GuideSectionHeader
-						text={sections[2].title}
-						url={`/guides/organizer/granting-the-organizer-role#${sections[2].anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							After visiting the events dashboard, click the{' '}
+							<span className="font-medium">"Attendees"</span> link in the top navigation.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the attendees dashboard page, select the attendee you wish to grant the
-						organizer role to.
-					</p>
-				</GuideSection>
-				<GuideSection id={sections[3].anchor}>
-					<GuideSectionHeader
-						text={sections[3].title}
-						url={`/guides/organizer/granting-the-organizer-role#${sections[3].anchor}`}
-					/>
+					<GuideSection id={sections[2].anchor}>
+						<GuideSectionHeader
+							text={sections[2].title}
+							url={`/guides/organizer/granting-the-organizer-role#${sections[2].anchor}`}
+						/>
 
-					<p className="mb-4 text-gray-700">
-						After selecting and viewing an attendee. Select the{' '}
-						<span className="font-medium">"Edit"</span> button
-					</p>
+						<p className="mb-4 text-gray-700">
+							After visiting the attendees dashboard page, select the attendee you wish to grant the
+							organizer role to.
+						</p>
+					</GuideSection>
+					<GuideSection id={sections[3].anchor}>
+						<GuideSectionHeader
+							text={sections[3].title}
+							url={`/guides/organizer/granting-the-organizer-role#${sections[3].anchor}`}
+						/>
 
-					<p className="mb-4 text-gray-700">
-						After visting the edit attendee form. Select the{' '}
-						<span className="font-medium">"Permission Role"</span> dropdown, and select{' '}
-						<span className="font-medium">"Organizer"</span>
-					</p>
+						<p className="mb-4 text-gray-700">
+							After selecting and viewing an attendee. Select the{' '}
+							<span className="font-medium">"Edit"</span> button
+						</p>
 
-					<p className="mb-4 text-gray-700">
-						After selecting the organizer option in the permission role dropdown, click the{' '}
-						<span className="font-medium">"Save"</span> button.
-					</p>
-				</GuideSection>
+						<p className="mb-4 text-gray-700">
+							After visting the edit attendee form. Select the{' '}
+							<span className="font-medium">"Permission Role"</span> dropdown, and select{' '}
+							<span className="font-medium">"Organizer"</span>
+						</p>
 
-				<GuideSection>
-					<StillNeedHelp />
-				</GuideSection>
-			</Column>
+						<p className="mb-4 text-gray-700">
+							After selecting the organizer option in the permission role dropdown, click the{' '}
+							<span className="font-medium">"Save"</span> button.
+						</p>
+					</GuideSection>
 
-			<Footer />
-		</PageWrapper>
+					<GuideSection>
+						<StillNeedHelp />
+					</GuideSection>
+				</Column>
+
+				<Footer />
+			</PageWrapper>
+		</>
 	);
 };
 
