@@ -52,17 +52,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 						<LinkContainer>
 							<div className="flex flex-row items-end">
 								{!isLoading && event ? (
-									<LinkItem link={`/events/${event.slug}`} label={'Sessions'} color={event.color} />
-								) : (
-									LinkSkeleton
-								)}
-
-								{!isLoading && event ? (
-									<LinkItem
-										link={`/events/${event.slug}/venues`}
-										label={'Venues'}
-										color={event.color}
-									/>
+									<LinkItem link={`/events/${event.slug}`} label={'Schedule'} color={event.color} />
 								) : (
 									LinkSkeleton
 								)}
