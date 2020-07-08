@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import Prisma from '@prisma/client';
 import Color from 'color';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
@@ -7,6 +6,7 @@ import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useEditSessionCategoryMutation } from '../../hooks/mutations/useEditSessionCategoryMutation';
+import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { colors, copy } from '../../utils/const';
 import { EditSessionCategoryPayload, EditSessionCategorySchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
@@ -19,7 +19,7 @@ import { Label } from '../primitives/Label';
 type Props = {
 	eid: string;
 	cid: string;
-	sessionCategory: Prisma.EventSessionCategory;
+	sessionCategory: SessionCategoryWithCount;
 } & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const EditSessionCategoryForm: React.FC<Props> = (props) => {

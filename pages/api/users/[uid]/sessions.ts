@@ -4,12 +4,59 @@ import { NextkitError } from 'nextkit';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { stripAttendeeWithUser } from '../../../../utils/user';
-import { SessionWithVenue } from '../../events/[eid]/sessions';
+import {
+	SessionWithVenue,
+	SessionWithVenueRaw,
+	sessionWithVenueInclude
+} from '../../events/[eid]/sessions';
+import { SessionCategoryWithCount } from '../../events/[eid]/sessions/categories';
 import { getUser } from './index';
 
 export type SessionWithVenueEvent = {
 	event: Prisma.Event | null;
 } & SessionWithVenue;
+
+export type SessionWithVenueEventRaw = SessionWithVenueRaw & {
+	event: Prisma.Event | null;
+};
+
+export const sessionWithVenueEventInclude = {
+	event: true,
+	...sessionWithVenueInclude
+};
+
+export const rawToSessionWithVenueEvent = (session: SessionWithVenueEventRaw) => {
+	const {
+		venue,
+		category: categoryWithCount,
+		_count: { attendees: attendeeCount },
+		attendees
+	} = session;
+
+	const roleMembers = attendees.map((sessionAttendee) => {
+		const { attendee } = sessionAttendee;
+
+		return {
+			...sessionAttendee,
+			attendee: stripAttendeeWithUser(attendee)
+		};
+	});
+
+	const category: SessionCategoryWithCount | null = categoryWithCount
+		? {
+				sessionCount: categoryWithCount?._count.sessions || 0,
+				...categoryWithCount
+		  }
+		: null;
+
+	return {
+		...session,
+		attendeeCount,
+		roleMembers,
+		category,
+		venue
+	};
+};
 
 export default api({
 	async GET({ req }) {
@@ -44,43 +91,11 @@ export const getSessionsByUser = async (uid: string): Promise<SessionWithVenueEv
 				}
 			}
 		},
-		include: {
-			event: true,
-			venue: true,
-			category: true,
-			_count: {
-				select: { attendees: true }
-			},
-
-			attendees: {
-				include: {
-					attendee: {
-						include: {
-							role: true,
-							user: true
-						}
-					}
-				},
-				where: {
-					type: 'ROLE'
-				}
-			}
-		},
+		include: sessionWithVenueEventInclude,
 		orderBy: {
 			startDate: 'asc'
 		}
 	});
 
-	return sessions.map((session) => ({
-		attendeeCount: session._count.attendees,
-		roleMembers: session.attendees.map((sessionAttendee) => {
-			const { attendee } = sessionAttendee;
-
-			return {
-				...sessionAttendee,
-				attendee: stripAttendeeWithUser(attendee)
-			};
-		}),
-		...session
-	}));
+	return sessions.map(rawToSessionWithVenueEvent);
 };

@@ -12,6 +12,7 @@ import { useAddAttendeeToSessionMutation } from '../../hooks/mutations/useAddAtt
 import { useEditSessionMutation } from '../../hooks/mutations/useEditSessionMutation';
 import { useRemoveAttendeeFromSessionMutation } from '../../hooks/mutations/useRemoveAttendeeFromSessionMutation';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { NEAREST_MINUTE } from '../../utils/config';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
@@ -37,7 +38,7 @@ type Props = {
 	sid: string;
 	venues: Prisma.EventVenue[];
 	session: SessionWithVenue;
-	sessionCategories: Prisma.EventSessionCategory[];
+	sessionCategories: SessionCategoryWithCount[];
 	event: Prisma.Event;
 	roleAttendees: AttendeeWithUser[];
 };

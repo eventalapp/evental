@@ -1,9 +1,9 @@
-import Prisma from '@prisma/client';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
 import { getEvent } from '../../index';
+import { SessionCategoryWithCount, rawToSessionCategoryWithCount } from './index';
 
 export default api({
 	async GET({ req }) {
@@ -22,7 +22,7 @@ export default api({
 export const getSessionCategory = async (
 	eid: string,
 	cid: string
-): Promise<Prisma.EventSessionCategory | null> => {
+): Promise<SessionCategoryWithCount | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
@@ -33,6 +33,11 @@ export const getSessionCategory = async (
 		where: {
 			eventId: event.id,
 			OR: [{ id: cid }, { slug: cid }]
+		},
+		include: {
+			_count: {
+				select: { sessions: true }
+			}
 		}
 	});
 
@@ -40,5 +45,5 @@ export const getSessionCategory = async (
 		return null;
 	}
 
-	return sessionCategory;
+	return rawToSessionCategoryWithCount(sessionCategory);
 };

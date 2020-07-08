@@ -1,18 +1,18 @@
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Prisma from '@prisma/client';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { NotFound } from '../error/NotFound';
 import Tooltip from '../primitives/Tooltip';
 
 type Props = {
 	eid: string;
 	admin?: boolean;
-	sessionCategories?: Prisma.EventSessionCategory[];
+	sessionCategories?: SessionCategoryWithCount[];
 };
 
 export const SessionCategoryList: React.FC<Props> = (props) => {
@@ -47,7 +47,14 @@ export const SessionCategoryList: React.FC<Props> = (props) => {
 													style={{ backgroundColor: sessionCategory.color ?? '#888888' }}
 												/>
 												<div>
-													<span className="text-xl">{sessionCategory.name}</span>
+													<span className="block text-xl">{sessionCategory.name}</span>
+													{sessionCategory.sessionCount > 0 ? (
+														<span className="text-sm font-normal text-gray-500">
+															{sessionCategory.sessionCount} Sessions
+														</span>
+													) : (
+														<em className="text-sm font-normal text-gray-500">No Sessions</em>
+													)}
 												</div>
 											</div>
 
