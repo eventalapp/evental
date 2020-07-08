@@ -137,7 +137,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 					</div>
 				)
 			) : (
-				<Skeleton className="w-full" count={5} />
+				<Skeleton className="w-full" count={20} />
 			)}
 		</div>
 	);
