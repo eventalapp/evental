@@ -16,7 +16,7 @@ type Props = {
 	event?: Prisma.Event;
 };
 
-export const sessionListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
+export const sessionListSkeleton = Array.apply(null, Array(12)).map((_, i) => (
 	<div className="mb-4" key={i}>
 		<Skeleton className="w-48 mb-2 h-5" />
 		<div className="flex flex-row mb-3">
