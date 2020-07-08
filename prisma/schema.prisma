@@ -226,6 +226,7 @@ model EventVenue {
 
   sessions EventSession[]
 
+  @@unique([eventId, name])
   @@unique([eventId, slug])
   @@index([eventId])
   @@map("event_venue")
