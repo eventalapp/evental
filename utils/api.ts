@@ -86,6 +86,7 @@ export const api = createAPI({
 	async getContext(req) {
 		return {
 			redis,
+			prisma,
 			getToken,
 			getPasswordResetCode,
 			getOrganizerInviteCode,
