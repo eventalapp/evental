@@ -22,16 +22,16 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   location      String?
-  description   String? @db.VarChar(5000)
+  description   String?   @db.VarChar(5000)
   company       String?
   position      String?
   website       String?
 
-  image     String   @default("/images/default-avatar.jpg")
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+  image     String    @default("/images/default-avatar.jpg")
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now())
   claimedAt DateTime?
-  role      Role     @default(USER)
+  role      Role      @default(USER)
 
   eventAttendee EventAttendee[]
 
