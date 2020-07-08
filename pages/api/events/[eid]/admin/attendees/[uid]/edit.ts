@@ -48,7 +48,7 @@ export default api({
 		const userToEdit = await ctx.getFullUser(String(uid));
 
 		if (!userToEdit) {
-			throw new NextkitError(404, 'user not found.');
+			throw new NextkitError(404, 'User not found.');
 		}
 
 		if (userToEdit.claimedAt) {
@@ -117,8 +117,6 @@ export default api({
 		if (!attendee) {
 			throw new NextkitError(404, 'Attendee not found.');
 		}
-
-		// const body = AdminEditAttendeeSchema.parse(req.body);
 
 		const requestedPermissionRole =
 			EventPermissionRole[body.permissionRole as keyof typeof EventPermissionRole] ??
