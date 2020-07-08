@@ -25,7 +25,8 @@ export const fake = (count: number) => {
 			location: faker.address.city(),
 			website: faker.internet.url(),
 			position: faker.name.jobTitle(),
-			description: faker.lorem.sentence()
+			description: faker.lorem.sentence(),
+			claimedAt: null
 		});
 
 		i++;
