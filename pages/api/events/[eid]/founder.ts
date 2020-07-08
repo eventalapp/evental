@@ -3,7 +3,7 @@ import { isFounder } from '../../../../utils/attendee';
 
 export default api({
 	async GET({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid } = req.query;
 
 		if (!user?.id) {

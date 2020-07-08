@@ -6,7 +6,7 @@ import { VERIFY_EMAIL_EXPIRY } from '../../../../utils/config';
 
 export default api({
 	async POST({ ctx }) {
-		const user = await ctx.getFullUser();
+		const user = await ctx.getSelfFullUser();
 
 		if (!user) {
 			throw new NextkitError(404, 'User not found');

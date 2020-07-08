@@ -9,7 +9,7 @@ import { getEvent } from '../../../index';
 
 export default api({
 	async POST({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid } = req.query;
 
 		if (!user?.id) {

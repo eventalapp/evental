@@ -3,12 +3,12 @@ import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseEditUserMutationData } from '../../hooks/mutations/useEditUserMutation';
-import { UseUserData } from '../../hooks/queries/useUser';
+import { UseUserSettingsMutationData } from '../../hooks/mutations/useUserSettingsMutation';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import { copy } from '../../utils/const';
-import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
+import { UserSettingsPayload, UserSettingsSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/string';
+import { FullUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { StyledEditor } from '../form/Editor';
@@ -19,12 +19,13 @@ import { Input } from '../primitives/Input';
 import { Label } from '../primitives/Label';
 import Tooltip from '../primitives/Tooltip';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseEditUserMutationData &
-	UseUserData;
+type Props = {
+	user: FullUser | undefined;
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+	UseUserSettingsMutationData;
 
 export const UserSettingsForm: React.FC<Props> = (props) => {
-	const { user, editUserMutation } = props;
+	const { user, userSettingsMutation } = props;
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
 
 	const {
@@ -34,7 +35,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 		setValue,
 		control,
 		formState: { errors }
-	} = useForm<EditUserPayload>({
+	} = useForm<UserSettingsPayload>({
 		defaultValues: {
 			name: user?.name ?? undefined,
 			slug: user?.slug ?? undefined,
@@ -44,7 +45,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 			position: user?.position ?? undefined,
 			website: user?.website ?? undefined
 		},
-		resolver: zodResolver(EditUserSchema)
+		resolver: zodResolver(UserSettingsSchema)
 	});
 
 	const slugWatcher = watch('slug');
@@ -65,7 +66,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				editUserMutation.mutate(data);
+				userSettingsMutation.mutate(data);
 			})}
 		>
 			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
@@ -140,7 +141,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4">
 					<Label>Email</Label>
-					<Input onChange={() => {}} value={user.email} disabled />
+					<Input onChange={() => {}} value={user?.email} disabled />
 					<p className="mt-1 text-sm text-gray-600">
 						Want to change your email?{' '}
 						<Link href={`/contact`}>
@@ -176,12 +177,12 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					padding="medium"
 					disabled={
-						editUserMutation.isLoading ||
+						userSettingsMutation.isLoading ||
 						isUserSlugCheckLoading ||
 						Boolean(slugWatcher !== user?.slug && userSlugCheck)
 					}
 				>
-					{editUserMutation.isLoading ? <LoadingInner /> : 'Save'}
+					{userSettingsMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>

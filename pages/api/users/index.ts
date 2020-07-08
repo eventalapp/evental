@@ -4,7 +4,7 @@ import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
 import { busboyParseForm } from '../../../utils/form';
 import { uploadAndProcessAvatar } from '../../../utils/image';
-import { EditUserSchema } from '../../../utils/schemas';
+import { UserSettingsSchema } from '../../../utils/schemas';
 
 export const config = {
 	api: {
@@ -14,15 +14,17 @@ export const config = {
 
 export default api({
 	async PUT({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
 
-		const { buffer, mimeType, formData } = await busboyParseForm(req);
+		const { buffer, mimeType, formData } = await busboyParseForm(req).catch((err) => {
+			throw new NextkitError(500, err.message);
+		});
 
-		const body = EditUserSchema.parse(formData);
+		const body = UserSettingsSchema.parse(formData);
 
 		let fileLocation = await uploadAndProcessAvatar(buffer, mimeType);
 

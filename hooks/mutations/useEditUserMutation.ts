@@ -16,7 +16,7 @@ export interface UseEditUserMutationData {
 	>;
 }
 
-export const useEditUserMutation = (uid: string): UseEditUserMutationData => {
+export const useEditUserMutation = (eid: string, uid: string): UseEditUserMutationData => {
 	const queryClient = useQueryClient();
 
 	const editUserMutation = useMutation<
@@ -28,7 +28,10 @@ export const useEditUserMutation = (uid: string): UseEditUserMutationData => {
 			const formData = populateFormData(data);
 
 			return await axios
-				.put<SuccessAPIResponse<Prisma.User>>(`/api/users/`, formData)
+				.put<SuccessAPIResponse<Prisma.User>>(
+					`/api/events/${eid}/admin/attendees/${uid}/user`,
+					formData
+				)
 				.then((res) => res.data.data);
 		},
 		{

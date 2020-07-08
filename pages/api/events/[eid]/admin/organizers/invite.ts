@@ -12,7 +12,7 @@ export default api({
 	async POST({ ctx, req }) {
 		const { eid } = req.query;
 
-		const requestingUser = await ctx.getStrippedUser();
+		const requestingUser = await ctx.getSelfStrippedUser();
 
 		if (!requestingUser) {
 			throw new NextkitError(401, 'Unauthorized');

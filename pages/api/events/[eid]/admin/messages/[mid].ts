@@ -9,7 +9,7 @@ import { getMessage } from '../../messages/[mid]';
 
 export default api({
 	async PUT({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid, mid } = req.query;
 
 		if (!user?.id) {
@@ -58,7 +58,7 @@ export default api({
 		return editedMessage;
 	},
 	async DELETE({ req, ctx }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid, mid } = req.query;
 
 		if (!user?.id) {
