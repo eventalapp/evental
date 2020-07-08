@@ -90,7 +90,7 @@ export const sendRoleInvite = async (args: SendInviteRoleArgs) => {
 	};
 
 	const params: SESV2.SendEmailRequest = {
-		FromEmailAddress: `"Evental" <messages@evental.app>`,
+		FromEmailAddress: `"Evental" <notifications@evental.app>`,
 		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
 		Destination: {
 			ToAddresses: toAddresses
