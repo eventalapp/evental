@@ -10,7 +10,7 @@ import { Heading } from '../components/primitives/Heading';
 
 const PricingPage: NextPage = () => {
 	return (
-		<PageWrapper>
+		<>
 			<NextSeo
 				title="Virtual — Evental"
 				description={`See why Evental is perfect for your next virtual event.`}
@@ -29,17 +29,20 @@ const PricingPage: NextPage = () => {
 					]
 				}}
 			/>
+
 			<Navigation />
 
-			<Column className="flex flex-col items-center">
-				<Heading>Virtual Events with Evental</Heading>
-				<p className="mt-4 text-base text-gray-600">
-					See why Evental is perfect for your next virtual event.
-				</p>
-			</Column>
+			<PageWrapper>
+				<Column className="flex flex-col items-center">
+					<Heading>Virtual Events with Evental</Heading>
+					<p className="mt-4 text-base text-gray-600">
+						See why Evental is perfect for your next virtual event.
+					</p>
+				</Column>
+			</PageWrapper>
 
 			<Footer />
-		</PageWrapper>
+		</>
 	);
 };
 

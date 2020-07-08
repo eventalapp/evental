@@ -76,21 +76,23 @@ const AttendingEventsPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper>
+		<>
 			{Seo}
 
 			<Navigation />
 
-			<Column>
-				<Heading className="text-center mb-4">Attending Events</Heading>
+			<PageWrapper>
+				<Column>
+					<Heading className="text-center mb-4">Attending Events</Heading>
 
-				<EventsPageNavigation />
+					<EventsPageNavigation />
 
-				<EventList events={attendingEvents} />
-			</Column>
+					<EventList events={attendingEvents} />
+				</Column>
+			</PageWrapper>
 
 			<Footer />
-		</PageWrapper>
+		</>
 	);
 };
 

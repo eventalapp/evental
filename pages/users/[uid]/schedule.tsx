@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import Column from '../../../components/layout/Column';
 import { FlexRowBetween } from '../../../components/layout/FlexRowBetween';
+import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
@@ -21,47 +22,53 @@ const ViewSessionPage: NextPage = () => {
 	const { user } = useUserQuery(String(uid));
 	const { sessionsByUserData } = useSessionsByUserQuery(String(uid));
 
+	const Seo = user && (
+		<NextSeo
+			title={`${user.name} — Evental`}
+			description={`View ${user.name} at Evental.`}
+			openGraph={{
+				url: `https://evental.app/users/${user.id}`,
+				title: `${user.name} — Evental`,
+				description: `View ${user.name} at Evental.`,
+				images: [
+					{
+						url: 'https://cdn.evental.app/images/logo.jpg',
+						width: 389,
+						height: 389,
+						alt: 'Evental Logo Alt',
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{user && (
-				<NextSeo
-					title={`${user.name} — Evental`}
-					description={`View ${user.name} at Evental.`}
-					openGraph={{
-						url: `https://evental.app/users/${user.id}`,
-						title: `${user.name} — Evental`,
-						description: `View ${user.name} at Evental.`,
-						images: [
-							{
-								url: 'https://cdn.evental.app/images/logo.jpg',
-								width: 389,
-								height: 389,
-								alt: 'Evental Logo Alt',
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<Navigation />
 
-			<Column>
-				<FlexRowBetween>
-					<Heading>{user ? `${user.name}'s Schedule` : <Skeleton className="w-64" />}</Heading>
+			<PageWrapper>
+				<Column>
+					<FlexRowBetween>
+						<Heading>{user ? `${user.name}'s Schedule` : <Skeleton className="w-64" />}</Heading>
 
-					{user ? (
-						<Link href={`/api/users/${user.slug}/schedule/generate`}>
-							<a className="text-gray-600">Download Schedule (Excel)</a>
-						</Link>
-					) : (
-						<Skeleton className="w-48" />
-					)}
-				</FlexRowBetween>
+						{user ? (
+							<Link href={`/api/users/${user.slug}/schedule/generate`}>
+								<a className="text-gray-600">Download Schedule (Excel)</a>
+							</Link>
+						) : (
+							<Skeleton className="w-48" />
+						)}
+					</FlexRowBetween>
 
-				<SessionWithEventList sessions={sessionsByUserData} />
-			</Column>
-		</PageWrapper>
+					<SessionWithEventList sessions={sessionsByUserData} />
+				</Column>
+			</PageWrapper>
+
+			<Footer />
+		</>
 	);
 };
 
