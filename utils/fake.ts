@@ -9,7 +9,7 @@ export const fake = (count: number) => {
 
 	let i = 1;
 
-	let fakeUsers: Array<Omit<Prisma.User, 'createdAt' | 'updatedAt'>> = [];
+	let fakeUsers: Array<Partial<Prisma.User>> = [];
 
 	while (i <= count) {
 		fakeUsers.push({
@@ -34,7 +34,7 @@ export const fake = (count: number) => {
 
 	// Fake events
 
-	let fakeEvent: Omit<Prisma.Event, 'createdAt' | 'updatedAt'>;
+	let fakeEvent: Partial<Prisma.Event>;
 
 	fakeEvent = {
 		color: '#f44336',
@@ -63,7 +63,7 @@ export const fake = (count: number) => {
 
 	i = 1;
 
-	let fakeRoles: Array<Omit<Prisma.EventRole, 'createdAt' | 'updatedAt'>> = [];
+	let fakeRoles: Array<Partial<Prisma.EventRole>> = [];
 
 	while (i <= 5) {
 		fakeRoles.push({
@@ -81,7 +81,7 @@ export const fake = (count: number) => {
 
 	i = 1;
 
-	let fakeAttendees: Array<Omit<Prisma.EventAttendee, 'createdAt' | 'updatedAt'>> = [];
+	let fakeAttendees: Array<Partial<Prisma.EventAttendee>> = [];
 
 	while (i <= count) {
 		fakeAttendees.push({
@@ -89,7 +89,8 @@ export const fake = (count: number) => {
 			userId: fakeUsers[i - 1].id,
 			eventId: fakeEvent.id,
 			permissionRole: 'ATTENDEE',
-			eventRoleId: fakeRoles[0].id
+			eventRoleId: fakeRoles[0].id,
+			featured: false
 		});
 		i++;
 	}
@@ -98,9 +99,7 @@ export const fake = (count: number) => {
 
 	i = 1;
 
-	let fakeSessions: Array<
-		Omit<Prisma.EventSession, 'createdAt' | 'updatedAt' | 'categoryId' | 'venueId'>
-	> = [];
+	let fakeSessions: Array<Partial<Prisma.EventSession>> = [];
 
 	while (i <= count) {
 		fakeSessions.push({
@@ -124,3 +123,4 @@ export const fake = (count: number) => {
 		fakeSessions
 	};
 };
+
