@@ -9,7 +9,7 @@ import { theme } from '../../tailwind.config';
 interface Props {
 	children?: React.ReactNode;
 	className?: string;
-	href: string;
+	href?: string;
 	[x: string]: unknown;
 }
 
@@ -27,19 +27,34 @@ export const SidebarLink = React.forwardRef<HTMLAnchorElement, Props>((props, re
 	const router = useRouter();
 	const { className, children, href, ...rest } = props;
 
+	if (href) {
+		return (
+			<Link href={href} passHref>
+				<a
+					className={classNames(
+						'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 focus:bg-gray-200 text-gray-600 outline-none no-underline mt-1 transition-all duration-75 focus:outline-none focus-visible:ring focus-visible:ring-gray-900 focus-visible:ring-opacity-75',
+						className,
+						router.asPath === href ? 'bg-gray-300' : ''
+					)}
+					ref={ref}
+					{...rest}
+				>
+					{children}
+				</a>
+			</Link>
+		);
+	}
+
 	return (
-		<Link href={href} passHref>
-			<a
-				className={classNames(
-					'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 focus:bg-gray-200 text-gray-600 outline-none no-underline mt-1 transition-all duration-75 focus:outline-none focus-visible:ring focus-visible:ring-gray-900 focus-visible:ring-opacity-75',
-					className,
-					router.asPath === href ? 'bg-gray-300' : ''
-				)}
-				ref={ref}
-				{...rest}
-			>
-				{children}
-			</a>
-		</Link>
+		<a
+			className={classNames(
+				'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 focus:bg-gray-200 text-gray-600 outline-none no-underline mt-1 transition-all duration-75 focus:outline-none focus-visible:ring focus-visible:ring-gray-900 focus-visible:ring-opacity-75',
+				className
+			)}
+			ref={ref}
+			{...rest}
+		>
+			{children}
+		</a>
 	);
 });
