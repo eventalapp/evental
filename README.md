@@ -2,7 +2,6 @@
 
 ## Todo List
 - featured role members
-- notification preferences
 
 ## Post MVP Todo List
 - session tags
