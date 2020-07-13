@@ -39,7 +39,7 @@ Prerequisites:
 Clone the repository:
 
 ```bash
-git clone https://github.com/JackRKelly/evental
+git clone https://github.com/eventalapp/evental
 ```
 
 Duplicate `.env.local.example` and rename it to `.env`
