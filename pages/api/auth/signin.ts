@@ -6,6 +6,7 @@ import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
 import { SESSION_EXPIRY } from '../../../utils/config';
 import { SignInSchema } from '../../../utils/schemas';
+import { stripUser } from '../../../utils/user';
 
 export default api({
 	async POST({ ctx, req, res }) {
@@ -45,8 +46,6 @@ export default api({
 
 		res.setHeader('Set-Cookie', cookie);
 
-		const { password, ...rest } = user;
-
-		return rest;
+		return stripUser(user);
 	}
 });

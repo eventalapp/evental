@@ -9,6 +9,7 @@ import { api } from '../../../utils/api';
 import { SESSION_EXPIRY, VERIFY_EMAIL_EXPIRY } from '../../../utils/config';
 import { SignUpSchema } from '../../../utils/schemas';
 import { generateSlug } from '../../../utils/string';
+import { stripUser } from '../../../utils/user';
 
 export default api({
 	async POST({ ctx, req, res }) {
@@ -91,8 +92,6 @@ export default api({
 			// silent fail
 		}
 
-		const { password, ...rest } = user;
-
-		return rest;
+		return stripUser(user);
 	}
 });
