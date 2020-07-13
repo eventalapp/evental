@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 
 import { SessionCategoryList } from '../../../../../../components/categories/SessionCategoryList';
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../../components/primitives/IconLinkTooltip';
 import { useSessionCategoriesQuery } from '../../../../../../hooks/queries/useSessionCategoriesQuery';
@@ -30,7 +30,7 @@ const SessionCategoriesAdminPage: NextPage = () => {
 					<title>Session Categories</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<FlexRowBetween>
 							<Heading>Session Categories</Heading>
@@ -45,7 +45,7 @@ const SessionCategoriesAdminPage: NextPage = () => {
 
 						<SessionCategoryList eid={String(eid)} sessionCategories={sessionCategories} admin />
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

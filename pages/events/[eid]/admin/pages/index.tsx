@@ -4,10 +4,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { PageList } from '../../../../../components/pages/PageList';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
@@ -25,7 +25,7 @@ const PagesAdminPage: NextPage = () => {
 					<title>Edit Pages</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<FlexRowBetween>
 							<Heading>Pages</Heading>
@@ -40,7 +40,7 @@ const PagesAdminPage: NextPage = () => {
 
 						<PageList admin eid={String(eid)} pages={pages} />
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
 import { useAttendeesByRoleQuery } from '../../../../../../hooks/queries/useAttendeesByRoleQuery';
@@ -30,7 +30,7 @@ const EditRolePage: NextPage = () => {
 					<title>Edit Role</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading>Edit Role</Heading>
 
@@ -45,7 +45,7 @@ const EditRolePage: NextPage = () => {
 							/>
 						)}
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

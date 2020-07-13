@@ -10,9 +10,9 @@ import { FaqAccordion } from '../../../../../components/billing/FaqAccordion';
 import { FeatureList } from '../../../../../components/billing/FeatureList';
 import { PurchaseProPlan } from '../../../../../components/billing/PurchaseProForm';
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { Paragraph } from '../../../../../components/primitives/Paragraph';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
@@ -32,7 +32,7 @@ const EventBillingPage: NextPage = () => {
 		>
 			<PageWrapper>
 				<Elements stripe={getStripe()}>
-					<SidebarWrapper eid={String(eid)}>
+					<AdminSidebarWrapper eid={String(eid)}>
 						<Head>
 							<title>Event Billing</title>
 						</Head>
@@ -95,7 +95,7 @@ const EventBillingPage: NextPage = () => {
 
 							<FaqAccordion />
 						</Column>
-					</SidebarWrapper>
+					</AdminSidebarWrapper>
 				</Elements>
 			</PageWrapper>
 		</AdminPageWrapper>

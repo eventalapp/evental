@@ -6,9 +6,9 @@ import React from 'react';
 import DeleteEventDialog from '../../../../components/events/DeleteEventDialog';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
 import { AdminPageWrapper } from '../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../components/layout/SidebarWrapper';
 import { Button } from '../../../../components/primitives/Button';
 import { Heading } from '../../../../components/primitives/Heading';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
@@ -27,7 +27,7 @@ const EditEventPage: NextPage = () => {
 					<title>Event Settings</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading>Settings</Heading>
 
@@ -49,7 +49,7 @@ const EditEventPage: NextPage = () => {
 							</DeleteEventDialog>
 						</div>
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

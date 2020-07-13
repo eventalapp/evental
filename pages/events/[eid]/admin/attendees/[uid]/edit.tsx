@@ -6,9 +6,9 @@ import React from 'react';
 
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
@@ -32,7 +32,7 @@ const EditAttendeePage: NextPage = () => {
 					<title>Edit Attendee</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<div className="mb-2">
 							<Heading>Edit {attendee?.user.name ?? 'Attendee'}</Heading>
@@ -58,7 +58,7 @@ const EditAttendeePage: NextPage = () => {
 							/>
 						)}
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

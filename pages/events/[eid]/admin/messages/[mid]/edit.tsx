@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { EditMessageForm } from '../../../../../../components/messages/EditMessageForm';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { useMessage } from '../../../../../../hooks/queries/useMessage';
@@ -23,7 +23,7 @@ const EditMessagePage: NextPage = () => {
 					<title>Edit Message</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading>Edit Message</Heading>
 
@@ -31,7 +31,7 @@ const EditMessagePage: NextPage = () => {
 
 						{message && <EditMessageForm eid={String(eid)} mid={String(mid)} message={message} />}
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

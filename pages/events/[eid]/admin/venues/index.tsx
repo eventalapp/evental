@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { VenueList } from '../../../../../components/venues/VenueList';
@@ -26,7 +26,7 @@ const VenuesAdminPage: NextPage = () => {
 					<title>Edit Venues</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<FlexRowBetween>
 							<Heading>Venues</Heading>
@@ -41,7 +41,7 @@ const VenuesAdminPage: NextPage = () => {
 
 						<VenueList admin eid={String(eid)} venues={venues} />
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

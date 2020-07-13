@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { ViewVenue } from '../../../../../../components/venues/ViewVenue';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
@@ -32,7 +32,7 @@ const ViewVenuePage: NextPage = () => {
 					<title>Viewing Venue</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<ViewVenue
 							eid={String(eid)}
@@ -44,7 +44,7 @@ const ViewVenuePage: NextPage = () => {
 							admin
 						/>
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

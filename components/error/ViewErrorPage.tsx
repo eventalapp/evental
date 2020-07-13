@@ -2,9 +2,9 @@ import Head from 'next/head';
 import { ErroredAPIResponse } from 'nextkit';
 import React from 'react';
 
+import { AdminSidebarWrapper } from '../layout/AdminSidebarWrapper';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
-import { SidebarWrapper } from '../layout/SidebarWrapper';
 import { Navigation } from '../navigation';
 import { Heading } from '../primitives/Heading';
 
@@ -28,7 +28,7 @@ export const ViewErrorPage: React.FC<Props> = (props) => {
 					<title>Not Found</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading className="mb-3">Error</Heading>
 
@@ -42,7 +42,7 @@ export const ViewErrorPage: React.FC<Props> = (props) => {
 								))}
 						</ul>
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		);
 	}

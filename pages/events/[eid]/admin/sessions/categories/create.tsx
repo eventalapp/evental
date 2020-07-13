@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 
 import { CreateSessionCategoryForm } from '../../../../../../components/categories/CreateSessionCategoryForm';
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { Paragraph } from '../../../../../../components/primitives/Paragraph';
 
@@ -21,7 +21,7 @@ const CreateSessionPage: NextPage = () => {
 					<title>Create Session Category</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading className="mb-3">Create Session Category</Heading>
 
@@ -32,7 +32,7 @@ const CreateSessionPage: NextPage = () => {
 
 						<CreateSessionCategoryForm eid={String(eid)} />
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

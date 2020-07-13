@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { SessionList } from '../../../../../components/sessions/SessionList';
@@ -28,7 +28,7 @@ const SessionsAdminPage: NextPage = () => {
 					<title>Sessions</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<FlexRowBetween>
 							<Heading>Sessions</Heading>
@@ -43,7 +43,7 @@ const SessionsAdminPage: NextPage = () => {
 
 						<SessionList admin sessions={sessionsData} event={event} />
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

@@ -4,10 +4,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { RoleList } from '../../../../../components/roles/RoleList';
@@ -25,7 +25,7 @@ const RolesAdminPage: NextPage = () => {
 					<title>Edit Roles</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<div>
 							<FlexRowBetween>
@@ -48,7 +48,7 @@ const RolesAdminPage: NextPage = () => {
 							/>
 						</div>
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);
