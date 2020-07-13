@@ -163,18 +163,6 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					)}
 
 					<div className="flex flex-row flex-wrap items-center text-gray-600 mt-3 mb-0.5">
-						<TooltipIcon
-							icon={faCalendarDay}
-							tooltipMessage={`This is session is taking place on ${formatDateRange(
-								new Date(session.startDate),
-								new Date(session.endDate)
-							)}.`}
-							link={`/events/${event.slug}/sessions/dates/${dayjs(session.startDate).format(
-								'YYYY-MM-DD'
-							)}`}
-							label={formatDateRange(new Date(session.startDate), new Date(session.endDate))}
-						/>
-
 						{session.category && (
 							<TooltipIcon
 								customIcon={
@@ -190,6 +178,18 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 								label={session.category.name}
 							/>
 						)}
+
+						<TooltipIcon
+							icon={faCalendarDay}
+							tooltipMessage={`This is session is taking place on ${formatDateRange(
+								new Date(session.startDate),
+								new Date(session.endDate)
+							)}.`}
+							link={`/events/${event.slug}/sessions/dates/${dayjs(session.startDate).format(
+								'YYYY-MM-DD'
+							)}`}
+							label={formatDateRange(new Date(session.startDate), new Date(session.endDate))}
+						/>
 
 						{session.venue && (
 							<TooltipIcon
@@ -250,3 +250,4 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 		</HoverCardPrimitive.Root>
 	);
 };
+

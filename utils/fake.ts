@@ -89,7 +89,8 @@ export const fake = (count: number) => {
 			userId: fakeUsers[i - 1].id,
 			eventId: fakeEvent.id,
 			permissionRole: 'ATTENDEE',
-			eventRoleId: fakeRoles[0].id
+			eventRoleId: fakeRoles[0].id,
+			featured: false
 		});
 		i++;
 	}
@@ -124,3 +125,4 @@ export const fake = (count: number) => {
 		fakeSessions
 	};
 };
+
