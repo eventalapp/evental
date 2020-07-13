@@ -16,43 +16,37 @@ type ClaimProfileTemplateArgs = {
 
 export const template = `
  <mjml>
-    <mj-head>
-        <mj-font name="Inter"
-                 href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
-        <mj-style inline="inline">
-            .link-button {
-                text-decoration: none;
-                background-color: #0066FF;
-                color: #ffffff;
-                padding: 8px 15px;
-                border-radius: 5px
-            }
-        </mj-style>
-    </mj-head>
+  <mj-head>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" />
+  </mj-head>
 
-    <mj-body>
-        <mj-section>
-            <mj-column>
-                <mj-image width="150px" src="https://cdn.evental.app/images/logo-text.png"/>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial" line-height="1.2">Claim your profile
+        </mj-text>
 
-                <mj-divider border-color="#CDCDCD" border-width='3px'/>
+        <mj-text font-size="16px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4">{{inviterName}} has created a profile for you as a {{roleName}} for the {{eventName}} event.
+        </mj-text>
 
-                <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial">
-                	Claim your profile
-                </mj-text>
+        <mj-text font-size="16px" color="#5C41FF" font-family="Inter, Roboto, Arial" align="center" padding-top="15px" padding-bottom="15px">
+          <a href="{{claimLink}}" target="_blank" style="text-decoration: none; background-color: #0066FF; color: #ffffff; padding: 8px 15px; border-radius: 5px;">Claim profile</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
 
-                <mj-text padding-bottom="30px" font-size="16px" color="#111827" font-family="Inter, Roboto, Arial">
-                	{{inviterName}} has created a profile for you as a {{roleName}} for the {{eventName}} event.
-                </mj-text> 
- 
-                <mj-text font-size="16px" color="#5C41FF" font-family="Inter, Roboto, Arial">
-                    <a class="link-button" href="{{claimLink}}" target="_blank">
-                    	Claim profile
-                    </a>
-                </mj-text>
-            </mj-column>
-        </mj-section>
-    </mj-body>
+    <mj-section padding="0 0 20px 0">
+      <mj-column>
+        <mj-divider border-color="#CDCDCD" border-width="1px" />
+
+        <mj-text font-size="12px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4" align="center">
+          You are receiving this email because an account has been created for you on <a href="https://evental.app/support" style="color: #202020; text-decoration:none;">Evental</a>. If you no longer would like to receive these emails, please <a href="https://evental.app/settings/notifications" style="color: #202020; text-decoration:none;">unsubscribe</a>.
+        </mj-text>
+
+        <mj-image href="https://evental.app" target="_blank" width="120px" src="https://cdn.evental.app/images/logo-text.png" />
+      </mj-column>
+    </mj-section>
+  </mj-body>
 </mjml>
 `;
 
