@@ -34,8 +34,23 @@ model User {
   role      Role      @default(USER)
 
   eventAttendee EventAttendee[]
+  notificationPreference NotificationPreference[]
 
   @@map("user")
+}
+
+model NotificationPreference {
+  id     String @id @default(cuid())
+  userId String
+
+  event     Boolean @default(true)
+  marketing Boolean @default(true)
+  news      Boolean @default(true)
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification_preference")
 }
 
 enum EventPermissionRole {
