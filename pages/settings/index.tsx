@@ -6,9 +6,9 @@ import { UserSettingsForm } from '../../components/authentication/UserSettingsFo
 import { LoadingInner } from '../../components/error/LoadingInner';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import Column from '../../components/layout/Column';
-import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
-import { Navigation } from '../../components/navigation';
+import { SettingsPageWrapper } from '../../components/layout/SettingsPageWrapper';
+import { SettingsSidebarWrapper } from '../../components/layout/SettingsSidebarWrapper';
 import { Heading } from '../../components/primitives/Heading';
 import { useRequestVerificationEmail } from '../../hooks/mutations/useRequestVerificationEmail';
 import { useUserSettingsMutation } from '../../hooks/mutations/useUserSettingsMutation';
@@ -31,54 +31,52 @@ const SettingsPage: NextPage = () => {
 	}
 
 	return (
-		<>
-			<NextSeo
-				title="Settings — Evental"
-				description={`Update the form below to update your profile.`}
-				openGraph={{
-					url: 'https://evental.app/settings',
-					title: 'Settings — Evental',
-					description: `Update the form below to update your profile.`,
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
-
-			<Navigation />
-
+		<SettingsPageWrapper>
 			<PageWrapper>
-				<Column variant="halfWidth">
-					{canVerify && user && !user.emailVerified && (
-						<button
-							className="mb-4 block w-full rounded-md bg-primary py-3 px-5 font-medium text-white"
-							disabled={requestVerificationEmailMutation.isLoading}
-							onClick={() => {
-								requestVerificationEmailMutation.mutate();
-							}}
-						>
-							{requestVerificationEmailMutation.isLoading ? (
-								<LoadingInner />
-							) : (
-								'Your account is not verified. Click here to request a verification email.'
-							)}
-						</button>
-					)}
+				<NextSeo
+					title="Settings — Evental"
+					description={`Update the form below to update your profile.`}
+					openGraph={{
+						url: 'https://evental.app/settings',
+						title: 'Settings — Evental',
+						description: `Update the form below to update your profile.`,
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
+				/>
 
-					<Heading>Settings</Heading>
+				<SettingsSidebarWrapper>
+					<Column variant="noMargin">
+						{canVerify && user && !user.emailVerified && (
+							<button
+								className="mb-4 block w-full rounded-md bg-primary py-3 px-5 font-medium text-white"
+								disabled={requestVerificationEmailMutation.isLoading}
+								onClick={() => {
+									requestVerificationEmailMutation.mutate();
+								}}
+							>
+								{requestVerificationEmailMutation.isLoading ? (
+									<LoadingInner />
+								) : (
+									'Your account is not verified. Click here to request a verification email.'
+								)}
+							</button>
+						)}
 
-					<UserSettingsForm user={user} userSettingsMutation={userSettingsMutation} />
-				</Column>
+						<Heading>Settings</Heading>
+
+						<UserSettingsForm user={user} userSettingsMutation={userSettingsMutation} />
+					</Column>
+				</SettingsSidebarWrapper>
 			</PageWrapper>
-
-			<Footer />
-		</>
+		</SettingsPageWrapper>
 	);
 };
 
