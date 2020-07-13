@@ -12,12 +12,11 @@ import { SettingsSidebarWrapper } from '../../components/layout/SettingsSidebarW
 import { Heading } from '../../components/primitives/Heading';
 import { Paragraph } from '../../components/primitives/Paragraph';
 import { useRequestVerificationEmail } from '../../hooks/mutations/useRequestVerificationEmail';
-import { useUserSettingsMutation } from '../../hooks/mutations/useUserSettingsMutation';
 import { useUser } from '../../hooks/queries/useUser';
 
 const SettingsPage: NextPage = () => {
 	const { user, isUserLoading } = useUser();
-	const { userSettingsMutation } = useUserSettingsMutation(String(user?.id));
+
 	const { requestVerificationEmailMutation } = useRequestVerificationEmail();
 	const [canVerify, setCanVerify] = useState(true);
 
@@ -76,7 +75,7 @@ const SettingsPage: NextPage = () => {
 							Update your user profile by filling out the form below and saving your entries
 						</Paragraph>
 
-						<UserSettingsForm user={user} userSettingsMutation={userSettingsMutation} />
+						<UserSettingsForm user={user} />
 					</Column>
 				</SettingsSidebarWrapper>
 			</PageWrapper>

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseUserSettingsMutationData } from '../../hooks/mutations/useUserSettingsMutation';
+import { useUserSettingsMutation } from '../../hooks/mutations/useUserSettingsMutation';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import { copy } from '../../utils/const';
 import { UserSettingsPayload, UserSettingsSchema } from '../../utils/schemas';
@@ -21,13 +21,12 @@ import Tooltip from '../primitives/Tooltip';
 
 type Props = {
 	user: FullUser | undefined;
-} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseUserSettingsMutationData;
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const UserSettingsForm: React.FC<Props> = (props) => {
-	const { user, userSettingsMutation } = props;
+	const { user } = props;
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
-
+	const { userSettingsMutation } = useUserSettingsMutation(String(user?.id));
 	const {
 		register,
 		handleSubmit,
