@@ -12,39 +12,41 @@ type VerifyEmailTemplateArgs = {
 
 export const template = `
 <mjml>
-    <mj-head>
-        <mj-font name="Inter"
-                 href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
-        <mj-style inline="inline">
-            .link-button {
-                text-decoration: none;
-                background-color: #0066FF;
-                color: #ffffff;
-                padding: 8px 15px;
-                border-radius: 5px
-            }
-        </mj-style>
-    </mj-head>
+  <mj-head>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" />
+  </mj-head>
 
-    <mj-body>
-        <mj-section>
-            <mj-column>
-                <mj-image width="150px" src="https://cdn.evental.app/images/logo-text.png"/>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial" line-height="1.2">Verify your account
+        </mj-text>
 
-                <mj-divider border-color="#CDCDCD" border-width='3px'/>
+        <mj-text font-size="16px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4">Verify this email address for your Evental account by clicking the link below.
+        </mj-text>
 
-                <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial">Verify your account
-                </mj-text>
 
-                <mj-text padding-bottom="30px" font-size="16px" color="#111827" font-family="Inter, Roboto, Arial">Follow the link below to verify your account. If you did not request this link, you can ignore this email.
-                </mj-text>
+        <mj-text font-size="16px" color="#5C41FF" font-family="Inter, Roboto, Arial" align="center">
+          <a href="{{verifyLink}}" target="_blank" style="text-decoration: none; background-color: #0066FF; color: #ffffff; padding: 8px 15px; border-radius: 5px">Verify Email Address</a>
+        </mj-text>
 
-                <mj-text font-size="16px" color="#5C41FF" font-family="Inter, Roboto, Arial">
-                    <a class="link-button" href="{{verifyLink}}" target="_blank">Verify Account</a>
-                </mj-text>
-            </mj-column>
-        </mj-section>
-    </mj-body>
+        <mj-text font-size="16px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4">If you did not request to verify your Evental account, you can safely ignore this email.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section padding="0 0 20px 0">
+      <mj-column>
+        <mj-divider border-color="#CDCDCD" border-width="1px" />
+
+        <mj-text font-size="12px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4" align="center">
+          You are receiving this email because you signed up for <a href="https://evental.app/support" style="color: #202020; text-decoration:none;">Evental</a>. If you no longer would like to receive these emails, please <a href="https://evental.app/settings/notifications" style="color: #202020; text-decoration:none;">unsubscribe</a>.
+        </mj-text>
+
+        <mj-image href="https://evental.app" target="_blank" width="120px" src="https://cdn.evental.app/images/logo-text.png" />
+      </mj-column>
+    </mj-section>
+  </mj-body>
 </mjml>
 `;
 
