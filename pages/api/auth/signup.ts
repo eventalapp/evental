@@ -3,6 +3,7 @@ import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
 import { sendVerifyEmail } from '../../../email/templates/verifyEmail';
+import { sendWelcome } from '../../../email/templates/welcome';
 import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
 import { SESSION_EXPIRY, VERIFY_EMAIL_EXPIRY } from '../../../utils/config';
@@ -83,6 +84,7 @@ export default api({
 
 				await ctx.redis.set(`verify:${verifyCode}`, user.id, { ex: VERIFY_EMAIL_EXPIRY });
 
+				await sendWelcome({ user, toAddresses: [user.email] });
 				await sendVerifyEmail({ verifyCode, toAddresses: [user.email] });
 			}
 		} catch {

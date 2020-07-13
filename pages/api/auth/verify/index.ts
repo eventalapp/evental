@@ -1,10 +1,10 @@
 import { NextkitError } from 'nextkit';
 
-import { sendWelcome } from '../../../../email/templates/welcome';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { VERIFY_EMAIL_EXPIRY } from '../../../../utils/config';
 import { VerifyEmailSchema } from '../../../../utils/schemas';
+import { stripUser } from '../../../../utils/user';
 
 export default api({
 	async POST({ ctx, req }) {
@@ -32,16 +32,6 @@ export default api({
 			}
 		});
 
-		try {
-			if (user.email) {
-				await sendWelcome({ user, toAddresses: [user.email] });
-			}
-		} catch {
-			// silent fail
-		}
-
-		const { password, ...rest } = user;
-
-		return rest;
+		return stripUser(user);
 	}
 });
