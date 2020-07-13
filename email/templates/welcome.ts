@@ -65,7 +65,7 @@ const text = convert(htmlOutput.html, {
 export const welcome: GenerateTemplateArgs = {
 	textPart: text,
 	htmlPart: htmlOutput.html,
-	subjectPart: 'Welcome to Evental, {{name}}!',
+	subjectPart: 'Welcome to Evental!',
 	templateName: 'Welcome'
 };
 
