@@ -55,7 +55,7 @@ const ViewSessionPage: NextPage = () => {
 						<Heading>{user ? `${user.name}'s Schedule` : <Skeleton className="w-64" />}</Heading>
 
 						{user ? (
-							<Link href={`/api/users/${user.slug}/schedule/generate`}>
+							<Link href={`/api/user/${user.slug}/schedule/generate`}>
 								<a className="text-gray-600">Download Schedule (Excel)</a>
 							</Link>
 						) : (

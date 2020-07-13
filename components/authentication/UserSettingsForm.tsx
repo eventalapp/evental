@@ -26,7 +26,7 @@ type Props = {
 export const UserSettingsForm: React.FC<Props> = (props) => {
 	const { user } = props;
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
-	const { userSettingsMutation } = useUserSettingsMutation(String(user?.id));
+	const { userSettingsMutation } = useUserSettingsMutation();
 	const {
 		register,
 		handleSubmit,

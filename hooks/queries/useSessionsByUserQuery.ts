@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
-import { SessionWithVenueEvent } from '../../pages/api/users/[uid]/sessions';
+import { SessionWithVenueEvent } from '../../pages/api/user/[uid]/sessions';
 
 export interface UseSessionsByUserData {
 	sessionsByUserData: SessionWithVenueEvent[] | undefined;
@@ -30,7 +30,7 @@ export const useSessionsByUserQuery = (
 		['user-sessions', uid],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<SessionWithVenueEvent[]>>(`/api/users/${uid}/sessions?${params}`)
+				.get<SuccessAPIResponse<SessionWithVenueEvent[]>>(`/api/user/${uid}/sessions?${params}`)
 				.then((res) => res.data.data);
 		},
 		{

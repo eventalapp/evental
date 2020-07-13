@@ -13,6 +13,9 @@ export const config = {
 };
 
 export default api({
+	async GET({ ctx }) {
+		return await ctx.getSelfFullUser();
+	},
 	async PUT({ ctx, req }) {
 		const user = await ctx.getSelfStrippedUser();
 
@@ -32,7 +35,7 @@ export default api({
 			throw new NextkitError(500, 'Image failed to upload.');
 		}
 
-		await prisma.user.update({
+		return await prisma.user.update({
 			where: {
 				id: user.id
 			},

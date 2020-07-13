@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import { SessionWithVenue } from '../pages/api/events/[eid]/sessions';
-import { SessionWithVenueEvent } from '../pages/api/users/[uid]/sessions';
+import { SessionWithVenueEvent } from '../pages/api/user/[uid]/sessions';
 import { AttendeeWithUser } from './user';
 
 export const sessionListReducer = (
