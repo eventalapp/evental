@@ -54,6 +54,15 @@ export default api({
 			throw new NextkitError(500, 'Failed to create user');
 		}
 
+		await prisma.notificationPreference.create({
+			data: {
+				userId: user.id,
+				event: true,
+				news: true,
+				marketing: true
+			}
+		});
+
 		const token = await ctx.getToken();
 
 		await ctx.redis.set(`session:${token}`, user.id, { ex: SESSION_EXPIRY });
