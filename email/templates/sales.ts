@@ -6,7 +6,7 @@ import { NextkitError } from 'nextkit';
 import { sendEmail } from '../../utils/email';
 import { GenerateTemplateArgs } from '../generateTemplates';
 
-type WelcomeTemplateArgs = {
+type SalesTemplateArgs = {
 	eventName: string;
 	organizationName: string;
 };
@@ -76,20 +76,20 @@ export const sales: GenerateTemplateArgs = {
 	templateName: 'Sales'
 };
 
-type SendWelcomeArgs = {
+export type SendSalesArgs = {
 	toAddresses: string[];
 	eventName: string;
 	organizationName: string;
 };
 
-export const sendSales = async (args: SendWelcomeArgs) => {
+export const sendSales = async (args: SendSalesArgs) => {
 	const { organizationName, eventName, toAddresses } = args;
 
 	if (toAddresses.length === 0) {
 		throw new NextkitError(400, 'No recipients specified');
 	}
 
-	const templateData: WelcomeTemplateArgs = {
+	const templateData: SalesTemplateArgs = {
 		organizationName,
 		eventName
 	};
@@ -97,7 +97,8 @@ export const sendSales = async (args: SendWelcomeArgs) => {
 	const params: SESV2.SendEmailRequest = {
 		FromEmailAddress: `"Jack Kelly" <jack@evental.app>`,
 		Destination: {
-			ToAddresses: toAddresses
+			ToAddresses: toAddresses,
+			BccAddresses: ['jack@evental.app']
 		},
 		Content: {
 			Template: {

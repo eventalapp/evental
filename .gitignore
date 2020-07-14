@@ -40,3 +40,6 @@ dataSources.xml
 
 #SES Templates
 email/output/**/operation.json
+
+#Sales
+email/sendSalesData
