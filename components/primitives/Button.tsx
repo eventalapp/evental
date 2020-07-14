@@ -1,15 +1,12 @@
 import cx from 'classnames';
 import React from 'react';
 
-import { theme } from '../../tailwind.config';
-
 export const variants = {
-	'primary': 'focus-visible:ring-gray-900 bg-primary text-white hover:bg-primary-400',
+	'primary': 'bg-primary text-white hover:bg-primary-400',
 	'danger': 'bg-red-500 hover:bg-red-400 text-white',
 	'secondary': 'bg-secondary-500 text-white',
 	'gradient': 'bg-gradient-to-r from-secondary-500 to-primary-500 text-white',
-	'default':
-		'focus-visible:ring-gray-900 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50',
+	'default': 'border border-gray-300 bg-white text-gray-800 hover:bg-gray-50',
 	'no-bg': 'text-gray-600 hover:text-gray-500'
 };
 
@@ -25,34 +22,21 @@ type Props = React.ComponentProps<'button'> & {
 	className?: string;
 	variant?: keyof typeof variants;
 	padding?: keyof typeof paddings;
-	ringColor?: string;
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
-	const {
-		style,
-		ringColor,
-		children,
-		className,
-		variant = 'default',
-		padding = 'medium',
-		...rest
-	} = props;
+	const { style, children, className, variant = 'default', padding = 'medium', ...rest } = props;
 
 	return (
 		<button
 			ref={ref}
 			className={cx(
-				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-75 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 select-none group',
+				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-75 transition focus-visible:ring-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 select-none group',
 				paddings[padding],
 				variants[variant],
 				className
 			)}
-			style={{
-				...style,
-				// @ts-ignore
-				'--tw-ring-color': ringColor ?? theme.extend.colors.gray[700]
-			}}
+			style={style}
 			{...rest}
 		>
 			{children}

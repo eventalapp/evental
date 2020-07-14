@@ -18,7 +18,7 @@ const Select = (props: Props) => {
 	return (
 		<SelectPrimitive.Root {...rest}>
 			<SelectPrimitive.Trigger className="w-full" asChild>
-				<Button className="w-full" ringColor={color}>
+				<Button className="w-full">
 					<SelectPrimitive.Value />
 					<SelectPrimitive.Icon className="ml-2">
 						<ChevronDownIcon />
