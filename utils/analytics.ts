@@ -1,8 +1,10 @@
 export const pageView = (url: URL) => {
-	// @ts-ignore
-	window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
-		page_path: url
-	});
+	if (process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID) {
+		// @ts-ignore
+		window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
+			page_path: url
+		});
+	}
 };
 
 type GTagEvent = {
