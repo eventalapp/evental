@@ -17,7 +17,6 @@
 - attach people -> create attendee -> create role dialog is under
 - railway redis migration
 - make events truly private
-- user not caching when unauthenticated (bc rc doesn't cache errors)
 - sort labels in dropdowns
 - Create event full form/multistep form (with skip functionality)
 - role member's can edit sessions?
