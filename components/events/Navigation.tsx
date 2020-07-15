@@ -105,7 +105,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 						{/* User Icon + Create Event (Desktop only) */}
 						<AuthContainer>
 							<div className="flex flex-row items-end">
-								{!isUserLoading && user === undefined && (
+								{!isUserLoading && !user && (
 									<LinkItem link={`/auth/signin`} label={'Sign in'} color={event?.color} />
 								)}
 							</div>

@@ -1,6 +1,6 @@
 import { Redis } from '@upstash/redis';
 import { randomBytes } from 'crypto';
-import createAPI, { NextkitError } from 'nextkit';
+import createAPI from 'nextkit';
 
 import { prisma } from '../prisma/client';
 import { FullUser, StrippedUser, fullUser, stripUser } from './user';
@@ -122,7 +122,7 @@ export const api = createAPI({
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 
 				if (!token) {
-					throw new NextkitError(401, "You're not logged in");
+					return null;
 				}
 
 				return getFullUser(token);
@@ -131,7 +131,7 @@ export const api = createAPI({
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 
 				if (!token) {
-					throw new NextkitError(401, "You're not logged in");
+					return null;
 				}
 
 				return getStrippedUser(token);
