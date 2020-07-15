@@ -15,7 +15,7 @@ export const LogoLinkItem: React.FC<Props> = (props) => {
 		<Link href={link} passHref>
 			<NavigationMenuPrimitive.Link className="h-full">
 				<NavigationMenuPrimitive.Item className="h-full">
-					<span className="flex flex-row items-center h-full">
+					<span className="flex h-full flex-row items-center">
 						<svg
 							className="h-12 w-12 pr-3"
 							viewBox="0 0 407 332"

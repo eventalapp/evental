@@ -64,7 +64,7 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 																>
 																	<div
 																		className={classNames(
-																			'mt-1 inline-flex bg-gray-50 px-1 rounded-md cursor-help flex-row items-center text-sm border border-gray-200',
+																			'mt-1 inline-flex cursor-help flex-row items-center rounded-md border border-gray-200 bg-gray-50 px-1 text-sm',
 																			session?.attendeeCount / session.maxAttendees <= 0.5 &&
 																				'text-green-700',
 																			session?.attendeeCount / session.maxAttendees > 0.5 &&

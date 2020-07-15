@@ -36,7 +36,7 @@ export const ViewSessionCategory: React.FC<Props> = (props) => {
 							style={{ backgroundColor: sessionCategory.color ?? '#888888' }}
 						/>
 					) : (
-						<Skeleton className="w-4 h-4 rounded-full mr-3" />
+						<Skeleton className="mr-3 h-4 w-4 rounded-full" />
 					)}
 
 					<div>
@@ -47,7 +47,7 @@ export const ViewSessionCategory: React.FC<Props> = (props) => {
 				</div>
 
 				{admin && (
-					<div className="space-x-4 flex flex-row">
+					<div className="flex flex-row space-x-4">
 						<IconLinkTooltip
 							message="Edit this session category"
 							href={`/events/${eid}/admin/sessions/categories/${cid}/edit`}

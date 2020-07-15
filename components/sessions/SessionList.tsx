@@ -18,13 +18,13 @@ type Props = {
 
 export const sessionListSkeleton = Array.apply(null, Array(12)).map((_, i) => (
 	<div className="mb-4" key={i}>
-		<Skeleton className="w-48 mb-2 h-5" />
-		<div className="flex flex-row mb-3">
-			<Skeleton className="w-24 mr-5 h-6" />
-			<div className="w-full flex-row flex flex-wrap">
-				<Skeleton className="w-48 mr-3 h-6 mb-2" />
-				<Skeleton className="w-48 mr-3 h-6 mb-2" />
-				<Skeleton className="w-48 mr-3 h-6 mb-2" />
+		<Skeleton className="mb-2 h-5 w-48" />
+		<div className="mb-3 flex flex-row">
+			<Skeleton className="mr-5 h-6 w-24" />
+			<div className="flex w-full flex-row flex-wrap">
+				<Skeleton className="mr-3 mb-2 h-6 w-48" />
+				<Skeleton className="mr-3 mb-2 h-6 w-48" />
+				<Skeleton className="mr-3 mb-2 h-6 w-48" />
 			</div>
 		</div>
 	</div>

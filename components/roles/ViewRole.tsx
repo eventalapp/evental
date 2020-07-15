@@ -41,7 +41,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 				</Heading>
 
 				{admin && (
-					<div className="space-x-4 flex flex-row">
+					<div className="flex flex-row space-x-4">
 						{role ? (
 							<IconLinkTooltip
 								message={`Create a ${role.name}`}

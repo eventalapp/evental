@@ -7,14 +7,14 @@ type Props = {
 	eid: string;
 };
 
-const separator = <div className="h-[1px] w-full my-3 bg-gray-300" />;
+const separator = <div className="my-3 h-[1px] w-full bg-gray-300" />;
 
 export const AdminSidebar: React.FC<Props> = (props) => {
 	const { eid } = props;
 	const { event } = useEventQuery(eid);
 
 	return (
-		<aside className="w-52 p-2.5 h-full py-7 md:py-14 flex flex-col">
+		<aside className="flex h-full w-52 flex-col p-2.5 py-7 md:py-14">
 			{event ? (
 				<SidebarLink href={`/events/${event.slug}`} className="font-medium">
 					{'<-'} Back to event
@@ -25,7 +25,7 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 
 			{separator}
 
-			<span className="px-2.5 font-bold text-xs text-gray-400">SCHEDULE</span>
+			<span className="px-2.5 text-xs font-bold text-gray-400">SCHEDULE</span>
 			{event ? (
 				<SidebarLink href={`/events/${event.slug}/admin/sessions`}>Sessions</SidebarLink>
 			) : (
@@ -48,7 +48,7 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 
 			{separator}
 
-			<span className="px-2.5 font-bold text-xs text-gray-400 ">COMMUNITY</span>
+			<span className="px-2.5 text-xs font-bold text-gray-400 ">COMMUNITY</span>
 
 			{event ? (
 				<SidebarLink href={`/events/${event.slug}/admin/attendees`}>Attendees</SidebarLink>
@@ -70,7 +70,7 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 
 			{separator}
 
-			<span className="px-2.5 font-bold text-xs text-gray-400">GENERAL</span>
+			<span className="px-2.5 text-xs font-bold text-gray-400">GENERAL</span>
 
 			{event ? (
 				<SidebarLink href={`/events/${event.slug}/admin`}>Profile</SidebarLink>

@@ -14,9 +14,9 @@ interface Props {
 }
 
 export const sidebarSkeleton = (
-	<div className="py-1 px-2.5 mt-1">
+	<div className="mt-1 py-1 px-2.5">
 		<Skeleton
-			className="w-full h-5 rounded-md"
+			className="h-5 w-full rounded-md"
 			baseColor={theme.extend.colors.gray[200]}
 			highlightColor={theme.extend.colors.gray[100]}
 		/>
@@ -32,7 +32,7 @@ export const SidebarLink = React.forwardRef<HTMLAnchorElement, Props>((props, re
 			<Link href={href} passHref>
 				<a
 					className={classNames(
-						'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 focus:bg-gray-200 text-gray-600 outline-none no-underline mt-1 transition-all duration-75 focus:outline-none focus-visible:ring focus-visible:ring-gray-900 focus-visible:ring-opacity-75',
+						'mt-1 block cursor-pointer rounded py-1 px-2.5 text-gray-600 no-underline outline-none transition-all duration-75 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-900 focus-visible:ring-opacity-75',
 						className,
 						router.asPath === href ? 'bg-gray-300' : ''
 					)}
@@ -48,7 +48,7 @@ export const SidebarLink = React.forwardRef<HTMLAnchorElement, Props>((props, re
 	return (
 		<a
 			className={classNames(
-				'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 focus:bg-gray-200 text-gray-600 outline-none no-underline mt-1 transition-all duration-75 focus:outline-none focus-visible:ring focus-visible:ring-gray-900 focus-visible:ring-opacity-75',
+				'mt-1 block cursor-pointer rounded py-1 px-2.5 text-gray-600 no-underline outline-none transition-all duration-75 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-900 focus-visible:ring-opacity-75',
 				className
 			)}
 			ref={ref}

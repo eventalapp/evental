@@ -38,7 +38,7 @@ const EventBillingPage: NextPage = () => {
 						</Head>
 						<Column variant="noMargin">
 							<Heading className="mb-3">Single Event Plans &amp; Pricing</Heading>
-							<Paragraph className="text-gray-600 mb-3">
+							<Paragraph className="mb-3 text-gray-600">
 								View pricing for single event plans for standard and nonprofit or educational
 								events.
 							</Paragraph>
@@ -47,10 +47,10 @@ const EventBillingPage: NextPage = () => {
 								<PurchaseProPlan eid={String(eid)} />
 							) : (
 								<>
-									<div className="flex flex-row items-center justify-start mb-3">
+									<div className="mb-3 flex flex-row items-center justify-start">
 										<Paragraph className="text-gray-800">Your current plan is</Paragraph>
 
-										<div className="flex flex-row items-center ml-2">
+										<div className="ml-2 flex flex-row items-center">
 											<strong className="mr-2 font-display text-2xl font-bold tracking-tight">
 												Evental
 											</strong>
@@ -70,7 +70,7 @@ const EventBillingPage: NextPage = () => {
 							)}
 						</Column>
 						<Column variant="noMargin">
-							<div className="flex justify-center items-center flex-col mb-5">
+							<div className="mb-5 flex flex-col items-center justify-center">
 								<EventalPro />
 
 								<Paragraph className="text-gray-600">Perks and features</Paragraph>
@@ -80,7 +80,7 @@ const EventBillingPage: NextPage = () => {
 						</Column>
 
 						<Column variant="noMargin">
-							<div className="flex justify-center items-center flex-col mb-5">
+							<div className="mb-5 flex flex-col items-center justify-center">
 								<Heading level={3} className="mb-3">
 									Frequently Asked Questions
 								</Heading>

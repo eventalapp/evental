@@ -53,7 +53,7 @@ const EventsPage: NextPage = () => {
 				<Navigation />
 
 				<Column>
-					<Heading className="text-center mb-4">Upcoming Events</Heading>
+					<Heading className="mb-4 text-center">Upcoming Events</Heading>
 
 					{user && <EventsPageNavigation />}
 
@@ -78,7 +78,7 @@ const EventsPage: NextPage = () => {
 
 			<PageWrapper>
 				<Column>
-					<Heading className="text-center mb-4">Upcoming Events</Heading>
+					<Heading className="mb-4 text-center">Upcoming Events</Heading>
 
 					{user && <EventsPageNavigation />}
 

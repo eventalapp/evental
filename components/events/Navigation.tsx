@@ -25,7 +25,7 @@ type Props = {
 	eid: string;
 };
 
-const LinkSkeleton = <Skeleton className="w-20 h-7 mb-2 mx-2" />;
+const LinkSkeleton = <Skeleton className="mx-2 mb-2 h-7 w-20" />;
 
 export const EventNavigation: React.FC<Props> = (props) => {
 	const { eid } = props;
@@ -42,7 +42,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 		<div>
 			<NavigationWrapper>
 				<NavigationMenuPrimitive.Root className="relative w-full">
-					<NavigationMenuPrimitive.List className="m-auto h-14 w-full max-w-7xl px-3 grid grid-cols-2 lg:grid-cols-9">
+					<NavigationMenuPrimitive.List className="m-auto grid h-14 w-full max-w-7xl grid-cols-2 px-3 lg:grid-cols-9">
 						{/* Logos (Desktop & Mobile) */}
 						<div className="col-span-1 lg:col-span-2">
 							<LogoLinkItem color={event?.color} />
