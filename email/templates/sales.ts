@@ -25,7 +25,7 @@ export const template = `
 
           I recently caught word of {{eventName}}, and wanted to reach out on behalf of <a style="color: #0066FF;" href="https://evental.app">Evental</a> and see if you had all of your current/future event management needs sorted out.<br /><br />
 
-          Here at Evental, we felt that event management software needed to be highly intuitive for organizers, attendees, speakers, etc. but the current event management solutions that exist are either overpriced, unintuitive and/or have poor user interface/experience.<br /><br />
+          Here at Evental, we felt that event management software needs to be highly intuitive for organizers, attendees, speakers, etc. but the current event management solutions that exist are either overpriced, unintuitive and/or have poor user interface/experience.<br /><br />
 
           So we decided to build Evental with all of those pain points in mind, and now we are looking for some great organizations to utilize our new platform.<br /><br />
 
