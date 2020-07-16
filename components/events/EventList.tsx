@@ -9,7 +9,7 @@ import { EventListItem } from './EventListItem';
 
 type Props = { events?: Prisma.Event[]; className?: string; hidePastEvents?: boolean };
 
-const eventListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
+const eventListSkeleton = Array.apply(null, Array(12)).map((_, i) => (
 	<div className="flex flex-row items-center py-3" key={i}>
 		<div className="flex w-12 flex-col justify-center text-center md:ml-5">
 			<span className="block text-center text-tiny text-gray-600">
