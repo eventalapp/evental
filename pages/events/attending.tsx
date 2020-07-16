@@ -59,7 +59,7 @@ const AttendingEventsPage: NextPage = () => {
 					<Column>
 						<Heading className="mb-4 text-center">Attending Events</Heading>
 
-						{user && <EventsPageNavigation />}
+						<EventsPageNavigation />
 
 						<span className="mt-5 block text-center text-base">
 							You are not attending any events.{' '}
