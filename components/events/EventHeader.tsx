@@ -43,8 +43,8 @@ export const EventHeader: React.FC<{
 	const { isAttendee } = useIsAttendeeQuery(String(eid));
 
 	return (
-		<div className="relative mb-7">
-			<div className="absolute top-0 right-0 flex flex-row space-x-4">
+		<div className="relative mb-7 pt-3 sm:pt-0">
+			<div className="absolute -top-5 sm:top-0 right-0 flex flex-row space-x-4">
 				{event
 					? isAttendee !== undefined &&
 					  !isAttendee && (
