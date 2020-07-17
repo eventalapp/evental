@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Image, ListView, Text, View } from 'react-native';
+import { FlatList, Image, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useUpcomingEventsQuery } from '../../../shared/useUpcomingEventsQuery';
