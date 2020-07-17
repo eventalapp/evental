@@ -1,12 +1,10 @@
 import { useSignInMutation } from '@eventalapp/shared/hooks/mutations/useSignInMutation';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { SignInPayload, SignInSchema } from '@eventalapp/shared/utils/schema';
-import { text } from '@fortawesome/fontawesome-svg-core';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export function SignInScreen() {
 	const {
@@ -18,7 +16,7 @@ export function SignInScreen() {
 	});
 
 	const { data: user } = useUser();
-	const { signInMutation } = useSignInMutation();
+	const { mutate: signIn } = useSignInMutation();
 
 	console.log(user);
 
@@ -79,7 +77,7 @@ export function SignInScreen() {
 			<Button
 				title="Submit"
 				onPress={handleSubmit((data) => {
-					signInMutation.mutate(data);
+					signIn(data);
 				})}
 			/>
 		</View>
