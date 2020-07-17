@@ -154,7 +154,8 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 			<ToastContainer className="pointer-events-auto" />
 
 			<ReactQueryDevtools />
-			<style jsx global>{`
+			
+			<style>{`
 				#__next {
 					height: 100%;
 				}
