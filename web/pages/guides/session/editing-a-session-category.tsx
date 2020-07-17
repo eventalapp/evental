@@ -51,7 +51,7 @@ const EditingASessionCategoryGuidePage: NextPage = () => {
 					}}
 				/>
 
-				<div className="dark-topography text-white">
+				<div className="bg-primary-700 text-white">
 					<Column className="flex flex-col items-center">
 						<Heading>Editing a session category</Heading>
 						<p className="mt-4 text-base text-gray-100">

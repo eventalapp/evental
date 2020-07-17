@@ -36,7 +36,7 @@ const ContactPage: NextPage = () => {
 			<Navigation />
 
 			<PageWrapper>
-				<div className="dark-topography text-white">
+				<div className="bg-primary-700 text-white">
 					<Column className="flex flex-col items-center">
 						<Heading>Contact Us</Heading>
 						<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
