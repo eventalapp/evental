@@ -2,11 +2,10 @@ import NetInfo from '@react-native-community/netinfo';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
-import { AppState, AppStateStatus, Platform } from 'react-native';
-import { StatusBar } from 'react-native';
-import { focusManager, onlineManager } from 'react-query';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { AppState, AppStateStatus, Platform, StatusBar } from 'react-native';
+import { focusManager, onlineManager, QueryClient, QueryClientProvider } from 'react-query';
 
+import { registerRootComponent } from 'expo';
 import { EventsScreen } from './src/screens/Events';
 import { SettingsScreen } from './src/screens/Settings';
 
@@ -26,9 +25,8 @@ onlineManager.setEventListener((setOnline) => {
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+	export function Main() {
 	const queryClient = new QueryClient();
-
 	React.useEffect(() => {
 		const subscription = AppState.addEventListener('change', onAppStateChange);
 
@@ -48,3 +46,5 @@ export default function App() {
 		</QueryClientProvider>
 	);
 }
+
+registerRootComponent(Main);

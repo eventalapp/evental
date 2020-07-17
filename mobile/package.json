@@ -2,6 +2,7 @@
 	"name": "@eventalapp/mobile",
 	"version": "0.1.0",
 	"private": true,
+	"main": "./Main.tsx",
 	"scripts": {
 		"start": "expo start",
 		"android": "expo start --android",
@@ -15,7 +16,7 @@
 		]
 	},
 	"dependencies": {
-		"@react-native-community/netinfo": "^9.3.0",
+		"@react-native-community/netinfo": "8.2.0",
 		"@react-navigation/bottom-tabs": "^6.3.2",
 		"@react-navigation/native": "^6.0.11",
 		"dotenv": "^16.0.1",
