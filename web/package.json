@@ -146,15 +146,5 @@
 		"react-dom": "^17.0.0",
 		"@types/react": "^17.0.0",
 		"@types/react-dom": "^17.0.0"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
-			"eslint --fix",
-			"npx prettier --write"
-		],
-		"*.{json,md,yaml,yml,scss,css}": [
-			"npx prettier --write"
-		],
-		"*.js": "eslint --cache --fix"
 	}
 }
