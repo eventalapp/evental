@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 // see https://github.com/martpie/next-transpile-modules#readme
-const withTM = require('next-transpile-modules')(['@eventalapp/shared'], { debug: true });
+const withTM = require('next-transpile-modules')(['@eventalapp/shared']);
 
 module.exports = withTM({
 	images: {
