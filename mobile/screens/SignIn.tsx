@@ -1,4 +1,5 @@
 import { useSignInMutation } from '@eventalapp/shared/hooks/mutations/useSignInMutation';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { SignInPayload, SignInSchema } from '@eventalapp/shared/utils/schema';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,7 +10,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export function SignInScreen() {
 	const {
-		register,
 		control,
 		handleSubmit,
 		formState: { errors }
@@ -17,7 +17,10 @@ export function SignInScreen() {
 		resolver: zodResolver(SignInSchema)
 	});
 
+	const { user } = useUser();
 	const { signInMutation } = useSignInMutation();
+
+	console.log(user);
 
 	return (
 		<View style={styles.container}>
