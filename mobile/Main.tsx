@@ -1,5 +1,4 @@
 import { faCalendar, faCog } from '@fortawesome/free-solid-svg-icons';
-import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import NetInfo from '@react-native-community/netinfo';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
