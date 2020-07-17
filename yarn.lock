@@ -3681,13 +3681,6 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
-babel-plugin-inline-dotenv@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-inline-dotenv/-/babel-plugin-inline-dotenv-1.7.0.tgz#c4b9f9752678be4b49a6b5d3d2b47def741a4d5f"
-  integrity sha512-FUrXEwY9R9ZO8l0NFHqXFBzHjjMvdIJlELrzJoE6imDsj6Vh7g9svm7iHPHVYPbHmt6BPB2eCAJkwvG6kr5byg==
-  dependencies:
-    dotenv "^16.0.0"
-
 babel-plugin-macros@^2.6.1:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-2.8.0.tgz#0f958a7cc6556b1e65344465d99111a1e5e10138"
