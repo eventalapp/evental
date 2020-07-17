@@ -7,7 +7,7 @@
 		"generate": "dotenv -e ./shared/.env -- yarn prisma generate --data-proxy --schema=\"./db/prisma/schema.prisma\"",
 		"push": "dotenv -e ./shared/.env -- yarn prisma db push --schema=\"./db/prisma/schema.prisma\"",
 		"seed": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
-		"format": "dotenv -e ./shared/.env -- yarn prisma format",
+		"format": "dotenv -e ./shared/.env -- yarn prisma format --schema=\"./db/prisma/schema.prisma\"",
 		"validate": "dotenv -e ./shared/.env -- yarn prisma validate --schema=\"./db/prisma/schema.prisma\""
 	},
 	"dependencies": {
