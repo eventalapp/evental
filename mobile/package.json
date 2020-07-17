@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"main": "./Main.tsx",
+	"slug": "EVENTAL",
 	"scripts": {
 		"start": "expo start",
 		"android": "expo start --android",
