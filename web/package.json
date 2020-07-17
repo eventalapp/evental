@@ -92,6 +92,7 @@
 		"mjml": "^4.12.0",
 		"next": "^12.2.2",
 		"next-seo": "^5.4.0",
+		"next-transpile-modules": "^9.0.0",
 		"nextkit": "^3.4.2",
 		"nprogress": "^0.2.0",
 		"react": "^17.0.0",
