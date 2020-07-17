@@ -34,6 +34,8 @@ export function SignInScreen() {
 				Sign In
 			</Text>
 
+			<Text>{JSON.stringify(user)}</Text>
+
 			<View style={styles.inputContainer}>
 				<Text>Email</Text>
 
