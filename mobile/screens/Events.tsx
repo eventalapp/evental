@@ -3,8 +3,11 @@ import React from 'react';
 import { FlatList, Image, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useRefreshOnFocus } from '../hooks/useRefreshOnFocus';
+
 export function EventsScreen() {
-	const { upcomingEvents } = useUpcomingEventsQuery();
+	const { data: upcomingEvents, refetch: refetchUpcomingEvents } = useUpcomingEventsQuery();
+	useRefreshOnFocus(refetchUpcomingEvents);
 	const safeAreaInsets = useSafeAreaInsets();
 
 	return (
