@@ -1,3 +1,5 @@
+import { faCalendar, faCog } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import NetInfo from '@react-native-community/netinfo';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -25,6 +27,7 @@ const Tab = createBottomTabNavigator();
 
 export function Main() {
 	const queryClient = new QueryClient();
+
 	React.useEffect(() => {
 		const subscription = AppState.addEventListener('change', onAppStateChange);
 
@@ -41,13 +44,30 @@ export function Main() {
 						headerShown: false
 					}}
 				>
-					<Tab.Screen name="Events" component={EventsScreen} />
-					<Tab.Screen name="Settings" component={SettingsScreen} />
+					<Tab.Screen
+						name="Events"
+						component={EventsScreen}
+						options={{
+							tabBarLabel: 'Events',
+							tabBarIcon: ({ color, size }) => (
+								<FontAwesomeIcon icon={faCalendar} size={size} color={color} />
+							)
+						}}
+					/>
+					<Tab.Screen
+						name="Settings"
+						component={SettingsScreen}
+						options={{
+							tabBarLabel: 'Settings',
+							tabBarIcon: ({ color, size }) => (
+								<FontAwesomeIcon icon={faCog} size={size} color={color} />
+							)
+						}}
+					/>
 				</Tab.Navigator>
 			</NavigationContainer>
 		</QueryClientProvider>
 	);
 }
-registerRootComponent(Main);
 
 registerRootComponent(Main);
