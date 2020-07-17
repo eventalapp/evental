@@ -1,9 +1,10 @@
 import type Prisma from '@prisma/client';
-import { api } from './api';
 import axios, { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
+
+import { api } from './api';
 
 export interface UseUpcomingEventsQueryData {
 	upcomingEvents: Prisma.Event[] | undefined;
