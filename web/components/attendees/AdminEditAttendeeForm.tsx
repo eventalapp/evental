@@ -1,5 +1,5 @@
+import Prisma from '@eventalapp/shared/db';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Prisma, { EventPermissionRole } from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -115,13 +115,13 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 				<div>
 					<Label htmlFor="permissionRole">Permission Role *</Label>
 
-					{EventPermissionRole && (
+					{Prisma.EventPermissionRole && (
 						<Controller
 							control={control}
 							name="permissionRole"
 							render={({ field }) => (
 								<Select
-									options={Object.values(EventPermissionRole).map((role) => ({
+									options={Object.values(Prisma.EventPermissionRole).map((role) => ({
 										label: capitalizeFirstLetter(role.toLowerCase()),
 										value: role
 									}))}

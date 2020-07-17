@@ -1,9 +1,9 @@
-import Prisma, { EventSessionAttendeeType } from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
+import { prisma } from '@eventalapp/shared/db/client';
 import { endOfDay, parseISO, startOfDay } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { NextkitError } from 'nextkit';
 
-import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
 import {
 	AttendeeWithUser,
@@ -33,7 +33,7 @@ export const sessionWithVenueInclude = {
 	attendees: {
 		include: attendeeWithUserInclude,
 		where: {
-			type: EventSessionAttendeeType['ROLE']
+			type: Prisma.EventSessionAttendeeType['ROLE']
 		}
 	}
 };

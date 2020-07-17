@@ -3,12 +3,19 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"prepare": "prisma generate --data-proxy",
-		"push": "prisma db push",
+		"prepare": "yarn generate",
+		"generate": "dotenv -e ./shared/.env -- yarn prisma generate --data-proxy --schema=\"./db/prisma/schema.prisma\"",
+		"push": "dotenv -e ./shared/.env -- yarn prisma db push --schema=\"./db/prisma/schema.prisma\"",
 		"seed": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
-		"format": "prisma format"
+		"format": "dotenv -e ./shared/.env -- yarn prisma format",
+		"validate": "dotenv -e ./shared/.env -- yarn prisma validate --schema=\"./db/prisma/schema.prisma\""
 	},
 	"dependencies": {
+		"@prisma/client": "^4.0.0",
 		"axios": "^0.27.2"
+	},
+	"devDependencies": {
+		"dotenv-cli": "^6.0.0",
+		"prisma": "^4.0.0"
 	}
 }

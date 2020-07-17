@@ -1,6 +1,6 @@
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 
-import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
 import { AcceptOrganizerInviteSchema } from '../../../../../utils/schemas';
 import { getDefaultRole } from '../roles';

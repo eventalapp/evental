@@ -1,7 +1,7 @@
-import Prisma from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 
-import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
 import { getEvent } from '../../index';
 

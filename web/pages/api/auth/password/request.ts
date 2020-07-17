@@ -1,7 +1,7 @@
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 
 import { sendResetPassword } from '../../../../email/templates/resetPassword';
-import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { PASSWORD_RESET_EXPIRY } from '../../../../utils/config';
 import { ChangePasswordRequestSchema } from '../../../../utils/schemas';

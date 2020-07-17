@@ -1,4 +1,4 @@
-import Prisma from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import React, { useState } from 'react';

@@ -1,7 +1,7 @@
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 
 import { sendClaimProfile } from '../../../../../../email/templates/claimProfile';
-import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../utils/attendee';
 import { CLAIM_PROFILE_EXPIRY } from '../../../../../../utils/config';

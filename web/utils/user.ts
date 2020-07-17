@@ -1,4 +1,4 @@
-import Prisma from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
 
 export type StrippedUser = Omit<Prisma.User, 'password' | 'email' | 'role'>;
 export type FullUser = Omit<Prisma.User, 'password'>;

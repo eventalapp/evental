@@ -1,8 +1,8 @@
-import { EventLevel } from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
 
-import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../utils/config';
 import { proAttendeePricing, sale } from '../../../../utils/price';
@@ -58,7 +58,9 @@ export default api({
 						id: eventFound.id
 					},
 					data: {
-						level: EventLevel[product.level as keyof typeof EventLevel] ?? EventLevel.PRO,
+						level:
+							Prisma.EventLevel[product.level as keyof typeof Prisma.EventLevel] ??
+							Prisma.EventLevel.PRO,
 						maxAttendees: Number(product.attendees) ?? 250
 					}
 				});

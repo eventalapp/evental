@@ -1,4 +1,4 @@
-import { EventCategory, EventMessageSendType, EventType, PrivacyLevel } from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
 import { htmlToText } from 'html-to-text';
 import { z } from 'zod';
 
@@ -14,13 +14,13 @@ const trimString = (u: unknown) => (typeof u === 'string' ? u.trim() : u);
 const noImageTag = (u: unknown) => (typeof u === 'string' ? !u.includes('<img') : u);
 const noEmptyString = (u: unknown) => ((u as string | undefined)?.length === 0 ? undefined : u);
 
-const eventMessageSendType = Object.values(EventMessageSendType);
+const eventMessageSendType = Object.values(Prisma.EventMessageSendType);
 const [firstEventMessageSendType, ...restEventMessageSendType] = eventMessageSendType;
-const eventTypes = Object.values(EventType);
+const eventTypes = Object.values(Prisma.EventType);
 const [firstEventTypes, ...restEventTypes] = eventTypes;
-const eventCategory = Object.values(EventCategory);
+const eventCategory = Object.values(Prisma.EventCategory);
 const [firstEventCategory, ...restEventCategory] = eventCategory;
-const eventPrivacy = Object.values(PrivacyLevel);
+const eventPrivacy = Object.values(Prisma.PrivacyLevel);
 const [firstPrivacyLevel, ...restPrivacyLevel] = eventPrivacy;
 const [firstTimeZone, ...restTimeZones] = timeZoneList;
 const timeZoneValidator = z.enum([firstTimeZone, ...restTimeZones]);

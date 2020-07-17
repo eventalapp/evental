@@ -1,3 +1,4 @@
+import Prisma from '@eventalapp/shared/db';
 import {
 	faCalendarDay,
 	faLocationDot,
@@ -7,7 +8,6 @@ import {
 	faTrashCan,
 	faUserGroup
 } from '@fortawesome/free-solid-svg-icons';
-import Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 import parse from 'html-react-parser';
 import { htmlToText } from 'html-to-text';

@@ -1,3 +1,4 @@
+import Prisma from '@eventalapp/shared/db';
 import {
 	faArrowRight,
 	faCalendarDay,
@@ -6,7 +7,6 @@ import {
 	faUserGroup
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Prisma from '@prisma/client';
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
 import cx from 'classnames';
 import dayjs from 'dayjs';

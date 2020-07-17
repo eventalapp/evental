@@ -1,8 +1,8 @@
+import { prisma } from '@eventalapp/shared/db/client';
 import { Redis } from '@upstash/redis';
 import { randomBytes } from 'crypto';
 import createAPI from 'nextkit';
 
-import { prisma } from '../prisma/client';
 import { FullUser, StrippedUser, fullUser, stripUser } from './user';
 
 const redis = new Redis({

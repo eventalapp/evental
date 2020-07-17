@@ -1,10 +1,10 @@
-import { EventLevel } from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
+import { prisma } from '@eventalapp/shared/db/client';
 import { buffer } from 'micro';
 import Cors from 'micro-cors';
 import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
 
-import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { getEvent } from '../../events/[eid]';
 
@@ -70,7 +70,8 @@ const handler = api({
 						id: eventFound.id
 					},
 					data: {
-						level: EventLevel[level as keyof typeof EventLevel] ?? EventLevel.PRO,
+						level:
+							Prisma.EventLevel[level as keyof typeof Prisma.EventLevel] ?? Prisma.EventLevel.PRO,
 						maxAttendees: Number(attendees) ?? 250
 					}
 				});

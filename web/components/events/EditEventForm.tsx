@@ -1,5 +1,5 @@
+import Prisma from '@eventalapp/shared/db';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
 import Color from 'color';
 import dayjs from 'dayjs';
 import Link from 'next/link';
@@ -59,7 +59,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			category: event?.category ?? undefined,
 			website: event?.website ?? undefined,
 			color: event?.color ?? undefined,
-			privacy: event?.privacy ?? PrivacyLevel.PRIVATE,
+			privacy: event?.privacy ?? Prisma.PrivacyLevel.PRIVATE,
 			timeZone: event?.timeZone ?? 'America/New_York',
 			slug: event?.slug ?? undefined,
 			endDate: dayjs(event?.endDate).toDate() ?? undefined,
@@ -122,7 +122,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						Category
 						<HelpTooltip message={copy.tooltip.eventCategory} />
 					</Label>
-					{EventCategory && (
+					{Prisma.EventCategory && (
 						<div>
 							<Controller
 								control={control}
@@ -130,13 +130,16 @@ export const EditEventForm: React.FC<Props> = (props) => {
 								render={({ field }) => (
 									<Select
 										color={colorWatcher}
-										options={Object.values(EventCategory).map((category) => ({
+										options={Object.values(Prisma.EventCategory).map((category) => ({
 											label: capitalizeFirstLetter(category.toLowerCase().replace('_', ' ')),
 											value: category
 										}))}
 										value={field.value}
 										onValueChange={(value) => {
-											setValue('category', EventCategory[value as keyof typeof EventCategory]);
+											setValue(
+												'category',
+												Prisma.EventCategory[value as keyof typeof Prisma.EventCategory]
+											);
 										}}
 									/>
 								)}
@@ -156,7 +159,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<Label htmlFor="type">
 						Type *<HelpTooltip message={copy.tooltip.eventType} />
 					</Label>
-					{EventType && (
+					{Prisma.EventType && (
 						<div>
 							<Controller
 								control={control}
@@ -164,13 +167,13 @@ export const EditEventForm: React.FC<Props> = (props) => {
 								render={({ field }) => (
 									<Select
 										color={colorWatcher}
-										options={Object.values(EventType).map((type) => ({
+										options={Object.values(Prisma.EventType).map((type) => ({
 											label: capitalizeFirstLetter(type.toLowerCase().replace('_', ' ')),
 											value: type
 										}))}
 										value={field.value}
 										onValueChange={(value) => {
-											setValue('type', EventType[value as keyof typeof EventType]);
+											setValue('type', Prisma.EventType[value as keyof typeof Prisma.EventType]);
 										}}
 									/>
 								)}
@@ -298,20 +301,23 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<Label htmlFor="privacy">
 						Privacy *<HelpTooltip message={copy.tooltip.eventPrivacy} />
 					</Label>
-					{PrivacyLevel && (
+					{Prisma.PrivacyLevel && (
 						<div>
 							<Controller
 								control={control}
 								name="privacy"
 								render={({ field }) => (
 									<Select
-										options={Object.values(PrivacyLevel).map((type) => ({
+										options={Object.values(Prisma.PrivacyLevel).map((type) => ({
 											label: capitalizeFirstLetter(type.toLowerCase()),
 											value: type
 										}))}
 										value={field.value}
 										onValueChange={(value) => {
-											setValue('privacy', PrivacyLevel[value as keyof typeof PrivacyLevel]);
+											setValue(
+												'privacy',
+												Prisma.PrivacyLevel[value as keyof typeof Prisma.PrivacyLevel]
+											);
 										}}
 										color={colorWatcher}
 									/>
