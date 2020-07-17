@@ -189,7 +189,7 @@
 }
 
 .bloom.medium {
-	@apply absolute h-32 w-32 sm:h-40 sm:w-40 md:w-44 md:w-44;
+	@apply absolute h-32 w-32 sm:h-40 sm:w-40 md:w-44;
 }
 
 .bloom.small {
