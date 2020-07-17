@@ -1,4 +1,4 @@
-import Prisma from '@eventalapp/shared/db';
+import * as Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useState } from 'react';

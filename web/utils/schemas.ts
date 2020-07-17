@@ -1,4 +1,4 @@
-import Prisma from '@eventalapp/shared/db';
+import * as Prisma from '@prisma/client';
 import { htmlToText } from 'html-to-text';
 import { z } from 'zod';
 

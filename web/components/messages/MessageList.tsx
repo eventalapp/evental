@@ -1,6 +1,6 @@
-import Prisma from '@eventalapp/shared/db';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as Prisma from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import Link from 'next/link';

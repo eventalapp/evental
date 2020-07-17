@@ -1,5 +1,5 @@
-import Prisma from '@eventalapp/shared/db';
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as Prisma from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';

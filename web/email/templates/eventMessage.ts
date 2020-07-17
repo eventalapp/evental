@@ -1,4 +1,4 @@
-import Prisma from '@eventalapp/shared/db';
+import * as Prisma from '@prisma/client';
 import { SESV2 } from 'aws-sdk';
 import { convert } from 'html-to-text';
 import mjml2html from 'mjml';

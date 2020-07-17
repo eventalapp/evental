@@ -1,4 +1,4 @@
-import Prisma from '@eventalapp/shared/db';
+import * as Prisma from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import Link from 'next/link';

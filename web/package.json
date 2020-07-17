@@ -5,7 +5,8 @@
 	"workspaces": {
 		"nohoist": [
 			"@types/react",
-			"@types/react-dom"
+			"@types/react-dom",
+			"next-transpile-modules"
 		]
 	},
 	"scripts": {
