@@ -1,3 +1,4 @@
+import { useUpcomingEventsQuery } from '@eventalapp/shared/hooks/queries/useUpcomingEventsQuery';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -11,11 +12,10 @@ import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
-import { useUpcomingEventsQuery } from '../../hooks/queries/useUpcomingEventsQuery';
 import { useUser } from '../../hooks/queries/useUser';
 
 const EventsPage: NextPage = () => {
-	const { upcomingEvents, upcomingEventsError } = useUpcomingEventsQuery();
+	const { data: upcomingEvents, error: upcomingEventsError } = useUpcomingEventsQuery();
 	const { user } = useUser();
 
 	if (upcomingEventsError) {
