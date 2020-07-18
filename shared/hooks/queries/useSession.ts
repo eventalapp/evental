@@ -5,12 +5,12 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { SessionWithVenue } from '../../types';
 
-export interface UseSessionsOptions {
+export interface UseSessionsArgs {
 	eid?: string;
 	sid?: string;
 }
 
-export const useSession = (args: UseSessionsOptions = {}) => {
+export const useSession = (args: UseSessionsArgs = {}) => {
 	const { eid, sid } = args;
 
 	return useQuery<SessionWithVenue, ErroredAPIResponse>(

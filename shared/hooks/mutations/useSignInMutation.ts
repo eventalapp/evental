@@ -2,18 +2,18 @@ import * as Prisma from '@prisma/client';
 import { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { Alert } from 'react-native';
-import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
 import { SignInPayload } from '../../utils/schema';
 
 export type StrippedUser = Omit<Prisma.User, 'password' | 'email' | 'role'>;
 
-interface UseSignInMutationOptions {
+interface UseSignInMutationArgs {
 	redirectUrl?: string;
 }
 
-export const useSignInMutation = (args: UseSignInMutationOptions = {}) => {
+export const useSignInMutation = (args: UseSignInMutationArgs = {}) => {
 	const { redirectUrl } = args;
 
 	const queryClient = useQueryClient();

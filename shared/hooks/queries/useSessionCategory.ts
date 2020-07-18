@@ -5,12 +5,12 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { SessionCategoryWithCount } from '../../types';
 
-export interface UseSessionsCategoryOptions {
+export interface UseSessionsCategoryArgs {
 	eid?: string;
 	cid?: string;
 }
 
-export const useSessionCategory = (args: UseSessionsCategoryOptions = {}) => {
+export const useSessionCategory = (args: UseSessionsCategoryArgs = {}) => {
 	const { eid, cid } = args;
 
 	return useQuery<SessionCategoryWithCount, ErroredAPIResponse>(

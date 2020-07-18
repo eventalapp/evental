@@ -5,12 +5,12 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { SessionWithVenue } from '../../types';
 
-export interface UseSessionsByCategoryOptions {
+export interface UseSessionsByCategoryArgs {
 	eid?: string;
 	cid?: string;
 }
 
-export const useSessionsByCategory = (args: UseSessionsByCategoryOptions = {}) => {
+export const useSessionsByCategory = (args: UseSessionsByCategoryArgs = {}) => {
 	const { eid, cid } = args;
 
 	let params = new URLSearchParams();
@@ -21,9 +21,7 @@ export const useSessionsByCategory = (args: UseSessionsByCategoryOptions = {}) =
 		['category-sessions', eid, cid],
 		async () => {
 			return await api
-				.get<SuccessAPIResponse<SessionWithVenue[]>>(
-					`/api/events/${eid}/sessions?${params.toString()}`
-				)
+				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/events/${eid}/sessions?${params.toString()}`)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
