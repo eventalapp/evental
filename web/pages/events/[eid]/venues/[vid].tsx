@@ -1,3 +1,8 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useSessionsByVenue } from '@eventalapp/shared/hooks/queries/useSessionsByVenue';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useVenue } from '@eventalapp/shared/hooks/queries/useVenue';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -11,20 +16,15 @@ import Column from '../../../../components/layout/Column';
 import { Footer } from '../../../../components/layout/Footer';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { ViewVenue } from '../../../../components/venues/ViewVenue';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
-import { useSessionsByVenueQuery } from '../../../../hooks/queries/useSessionsByVenueQuery';
-import { useUser } from '../../../../hooks/queries/useUser';
-import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { vid, eid } = router.query;
-	const { venue, venueError } = useVenueQuery(String(eid), String(vid));
-	const { event, eventError } = useEventQuery(String(eid));
-	const { user } = useUser();
-	const { sessionsByVenueData } = useSessionsByVenueQuery(String(eid), String(vid));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: venue, error: venueError } = useVenue({ eid: String(eid), vid: String(vid) });
+	const { data: user } = useUser();
+	const { data: sessionsByVenue } = useSessionsByVenue({ eid: String(eid), vid: String(vid) });
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 
 	if (venueError) {
 		return <NotFoundPage message="Venue not found." />;
@@ -77,7 +77,7 @@ const ViewAttendeePage: NextPage = () => {
 						eid={String(eid)}
 						vid={String(vid)}
 						event={event}
-						sessions={sessionsByVenueData}
+						sessions={sessionsByVenue}
 						user={user}
 						venue={venue}
 					/>

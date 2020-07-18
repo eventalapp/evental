@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -10,10 +11,9 @@ import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { useVerifyEmail } from '../../../hooks/mutations/useVerifyAccount';
-import { useUser } from '../../../hooks/queries/useUser';
 
 const VerifyEmailPage: NextPage = () => {
-	const { user } = useUser();
+	const { data: user } = useUser();
 	const router = useRouter();
 	const { verifyEmailMutation } = useVerifyEmail();
 	const { code } = router.query;

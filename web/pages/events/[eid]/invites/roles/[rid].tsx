@@ -1,3 +1,7 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -17,20 +21,16 @@ import { Button } from '../../../../../components/primitives/Button';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { LinkButton } from '../../../../../components/primitives/LinkButton';
 import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useAcceptRoleInviteMutation';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRoleQuery } from '../../../../../hooks/queries/useRoleAttendeesQuery';
-import { useUser } from '../../../../../hooks/queries/useUser';
 import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
 
 const RoleInvitePage: NextPage = () => {
 	const router = useRouter();
-	const { user } = useUser();
+	const { data: user } = useUser();
 	const { eid, rid, code } = router.query;
 	const { acceptRoleInviteMutation } = useAcceptRoleInviteMutation(String(eid), String(rid));
-	const { role, roleError } = useRoleQuery(String(eid), String(rid));
-	const { event, eventError } = useEventQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { data: role, error: roleError } = useRole({ eid: String(eid), rid: String(rid) });
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 
 	const Seo = role && event && (
 		<NextSeo

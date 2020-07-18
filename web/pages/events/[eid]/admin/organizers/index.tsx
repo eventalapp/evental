@@ -1,3 +1,4 @@
+import { useOrganizers } from '@eventalapp/shared/hooks/queries/useOrganizers';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -12,12 +13,11 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import InviteOrganizerDialog from '../../../../../components/organizer/InviteOrganizerDialog';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconButtonTooltip } from '../../../../../components/primitives/IconButtonTooltip';
-import { useOrganizersQuery } from '../../../../../hooks/queries/useOrganizersQuery';
 
 const EventOrganizersPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizersLoading, organizers } = useOrganizersQuery(String(eid));
+	const { isLoading: isOrganizersLoading, data: organizers } = useOrganizers({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper isLoading={isOrganizersLoading} eid={String(eid)}>

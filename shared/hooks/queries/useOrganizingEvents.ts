@@ -5,15 +5,9 @@ import { useQuery } from 'react-query';
 
 import { api } from '../../api';
 
-export interface UseOrganizingEventsArgs {
-	uid?: string;
-}
-
-export const useOrganizingEvents = (args: UseOrganizingEventsArgs = {}) => {
-	const { uid } = args;
-
+export const useOrganizingEvents = () => {
 	return useQuery<Prisma.Event[], ErroredAPIResponse>(
-		['organizing-events', uid],
+		['organizing-events'],
 		async () => {
 			return api
 				.get<SuccessAPIResponse<Prisma.Event[]>>(`/events/organizing`)
@@ -23,8 +17,7 @@ export const useOrganizingEvents = (args: UseOrganizingEventsArgs = {}) => {
 				});
 		},
 		{
-			retry: 0,
-			enabled: Boolean(uid)
+			retry: 0
 		}
 	);
 };

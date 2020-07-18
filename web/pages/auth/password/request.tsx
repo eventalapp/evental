@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
@@ -11,10 +12,9 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { useRequestPasswordReset } from '../../../hooks/mutations/useRequestPasswordReset';
-import { useUser } from '../../../hooks/queries/useUser';
 
 const RequestPasswordResetPage: NextPage = () => {
-	const { user, isUserLoading } = useUser();
+	const { data: user, isLoading: isUserLoading } = useUser();
 	const { requestPasswordResetMutation } = useRequestPasswordReset();
 
 	if (isUserLoading) {

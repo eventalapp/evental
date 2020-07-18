@@ -1,3 +1,4 @@
+import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Prisma from '@prisma/client';
 import { useRouter } from 'next/router';
@@ -6,7 +7,6 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useEditAttendeeMutation } from '../../hooks/mutations/useEditAttendeeMutation';
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
-import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import { copy } from '../../utils/const';
 import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter, slugify } from '../../utils/string';
@@ -63,9 +63,9 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 
 	const slugWatcher = watch('slug');
 
-	const { user: userSlugCheck, isUserLoading: isUserSlugCheckLoading } = useUserQuery(
-		String(slugWatcher)
-	);
+	const { data: userSlugCheck, isLoading: isUserSlugCheckLoading } = useUserById({
+		uid: String(slugWatcher)
+	});
 
 	useEffect(() => {
 		if (slugWatcher) {

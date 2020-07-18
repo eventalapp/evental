@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
@@ -7,7 +8,6 @@ import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
-import { useUser } from '../../hooks/queries/useUser';
 import { faBarsSquare } from '../../utils/icons';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
 import { LinkButton } from '../primitives/LinkButton';
@@ -31,7 +31,7 @@ const FreeEventalPro = (
 export const Navigation: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { signOutMutation } = useSignOutMutation();
-	const { user, isUserLoading } = useUser();
+	const { data: user, isLoading: isUserLoading } = useUser();
 
 	return (
 		<>

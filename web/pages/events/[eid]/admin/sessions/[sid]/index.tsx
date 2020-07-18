@@ -1,3 +1,9 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSessionAttendee';
+import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
+import { useSessionAttendees } from '@eventalapp/shared/hooks/queries/useSessionAttendees';
+import { useSessionRoleAttendees } from '@eventalapp/shared/hooks/queries/useSessionRoleAttendees';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -7,26 +13,34 @@ import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSi
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { ViewSession } from '../../../../../../components/sessions/ViewSession';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useSessionAttendeeQuery } from '../../../../../../hooks/queries/useSessionAttendeeQuery';
-import { useSessionAttendeesQuery } from '../../../../../../hooks/queries/useSessionAttendeesQuery';
-import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
-import { useSessionRoleAttendeesQuery } from '../../../../../../hooks/queries/useSessionRoleAttendeesQuery';
-import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const ViewSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { sid, eid } = router.query;
-	const { user } = useUser();
-	const { session, isSessionLoading, sessionError } = useSessionQuery(String(eid), String(sid));
-	const { sessionAttendeeQuery } = useSessionAttendeeQuery(
-		String(eid),
-		String(sid),
-		String(user?.id)
-	);
-	const { sessionAttendeesQuery } = useSessionAttendeesQuery(String(eid), String(sid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
+	const { data: user } = useUser();
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
+	const {
+		data: session,
+		error: sessionError,
+		isLoading: isSessionLoading
+	} = useSession({ eid: String(eid), sid: String(sid) });
+	const { data: sessionAttendees, isLoading: isSessionAttendeesLoading } = useSessionAttendees({
+		eid: String(eid),
+		sid: String(sid)
+	});
+	const { data: isSessionAttendee, isLoading: isSessionAttendeeLoading } = useIsSessionAttendee({
+		eid: String(eid),
+		sid: String(sid)
+	});
+	const { data: sessionRoleAttendees, isLoading: isSessionRoleAttendeesLoading } =
+		useSessionRoleAttendees({
+			eid: String(eid),
+			sid: String(sid)
+		});
 
 	return (
 		<AdminPageWrapper
@@ -34,9 +48,9 @@ const ViewSessionPage: NextPage = () => {
 			isLoading={
 				isSessionLoading ||
 				isEventLoading ||
-				sessionRoleAttendeesQuery.isLoading ||
-				sessionAttendeesQuery.isLoading ||
-				sessionAttendeeQuery.isLoading
+				isSessionRoleAttendeesLoading ||
+				isSessionAttendeesLoading ||
+				isSessionAttendeeLoading
 			}
 			eid={String(eid)}
 		>
@@ -50,9 +64,9 @@ const ViewSessionPage: NextPage = () => {
 						<ViewSession
 							admin
 							user={user}
-							roleAttendees={sessionRoleAttendeesQuery.data}
-							attendees={sessionAttendeesQuery.data}
-							isAttending={Boolean(sessionAttendeeQuery.data)}
+							roleAttendees={sessionRoleAttendees}
+							attendees={sessionAttendees}
+							isAttending={isSessionAttendee}
 							session={session}
 							eid={String(eid)}
 							sid={String(sid)}

@@ -1,3 +1,4 @@
+import { useAttendees } from '@eventalapp/shared/hooks/queries/useAttendees';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -11,12 +12,15 @@ import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween'
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
-import { useAttendeesQuery } from '../../../../../hooks/queries/useAttendeesQuery';
 
 const AttendeesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { attendeesData, isAttendeesLoading, attendeesError } = useAttendeesQuery(String(eid));
+	const {
+		data: attendees,
+		isLoading: isAttendeesLoading,
+		error: attendeesError
+	} = useAttendees({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper errors={[attendeesError]} isLoading={isAttendeesLoading} eid={String(eid)}>
@@ -37,7 +41,7 @@ const AttendeesAdminPage: NextPage = () => {
 							/>
 						</FlexRowBetween>
 
-						<AttendeeList admin eid={String(eid)} attendees={attendeesData} />
+						<AttendeeList admin eid={String(eid)} attendees={attendees} />
 					</Column>
 				</AdminSidebarWrapper>
 			</PageWrapper>

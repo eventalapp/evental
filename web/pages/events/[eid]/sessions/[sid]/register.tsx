@@ -1,3 +1,7 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -13,18 +17,14 @@ import { Footer } from '../../../../../components/layout/Footer';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { CreateSessionAttendeeForm } from '../../../../../components/sessions/CreateSessionAttendeeForm';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useSessionQuery } from '../../../../../hooks/queries/useSessionQuery';
-import { useUser } from '../../../../../hooks/queries/useUser';
 
 const SessionRegisterPage: NextPage = () => {
 	const router = useRouter();
 	const { eid, sid } = router.query;
-	const { session } = useSessionQuery(String(eid), String(sid));
-	const { user } = useUser();
-	const { event, eventError } = useEventQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { data: session } = useSession({ eid: String(eid), sid: String(sid) });
+	const { data: user } = useUser();
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;

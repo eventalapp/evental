@@ -1,3 +1,8 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsAttendee } from '@eventalapp/shared/hooks/queries/useIsAttendee';
+import { useIsFounder } from '@eventalapp/shared/hooks/queries/useIsFounder';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import {
 	faArrowUpRightFromSquare,
 	faCalendarDay,
@@ -16,11 +21,6 @@ import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useEventQuery } from '../../hooks/queries/useEventQuery';
-import { useFounderQuery } from '../../hooks/queries/useFounderQuery';
-import { useIsAttendeeQuery } from '../../hooks/queries/useIsAttendeeQuery';
-import { useIsOrganizerQuery } from '../../hooks/queries/useIsOrganizerQuery';
-import { useUser } from '../../hooks/queries/useUser';
 import { formatDateRange } from '../../utils/date';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { EventRegistrationDialog } from '../attendees/EventRegistrationDialog';
@@ -36,11 +36,11 @@ export const EventHeader: React.FC<{
 	adminLink?: string;
 }> = (props) => {
 	const { eid, adminLink = '/' } = props;
-	const { isOrganizer } = useIsOrganizerQuery(String(eid));
-	const { isFounder } = useFounderQuery(String(eid));
-	const { event } = useEventQuery(String(eid));
-	const { user } = useUser();
-	const { isAttendee } = useIsAttendeeQuery(String(eid));
+	const { data: isOrganizer } = useIsOrganizer({ eid: String(eid) });
+	const { data: isFounder } = useIsFounder({ eid: String(eid) });
+	const { data: event } = useEvent({ eid: String(eid) });
+	const { data: user } = useUser();
+	const { data: isAttendee } = useIsAttendee({ eid: String(eid) });
 
 	return (
 		<div className="relative mb-7 pt-3 sm:pt-0">

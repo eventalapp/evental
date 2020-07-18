@@ -1,3 +1,6 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
+import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -9,17 +12,25 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { Paragraph } from '../../../../../components/primitives/Paragraph';
 import { CreateSessionForm } from '../../../../../components/sessions/CreateSessionForm';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useSessionCategoriesQuery } from '../../../../../hooks/queries/useSessionCategoriesQuery';
-import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 
 const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { sessionCategories, isSessionCategoriesLoading, sessionCategoriesError } =
-		useSessionCategoriesQuery(String(eid));
+	const {
+		data: venues,
+		isLoading: isVenuesLoading,
+		error: venuesError
+	} = useVenues({ eid: String(eid) });
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
+	const {
+		data: sessionCategories,
+		isLoading: isSessionCategoriesLoading,
+		error: sessionCategoriesError
+	} = useSessionCategories({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper

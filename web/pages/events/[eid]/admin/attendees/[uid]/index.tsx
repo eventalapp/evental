@@ -1,3 +1,4 @@
+import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -7,12 +8,18 @@ import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageW
 import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { uid, eid } = router.query;
-	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
+	const {
+		data: attendee,
+		error: attendeeError,
+		isLoading: isAttendeeLoading
+	} = useAttendee({
+		eid: String(eid),
+		uid: String(uid)
+	});
 
 	return (
 		<AdminPageWrapper errors={[attendeeError]} isLoading={isAttendeeLoading} eid={String(eid)}>

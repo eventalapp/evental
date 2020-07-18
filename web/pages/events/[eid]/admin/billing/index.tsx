@@ -1,3 +1,4 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { Elements } from '@stripe/react-stripe-js';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -15,13 +16,16 @@ import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { Paragraph } from '../../../../../components/primitives/Paragraph';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { getStripe } from '../../../../../utils/stripe';
 
 const EventBillingPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper

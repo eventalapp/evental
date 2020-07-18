@@ -1,3 +1,7 @@
+import { useAttendeesByRole } from '@eventalapp/shared/hooks/queries/useAttendeesByRole';
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -12,18 +16,14 @@ import Column from '../../../../components/layout/Column';
 import { Footer } from '../../../../components/layout/Footer';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { ViewRole } from '../../../../components/roles/ViewRole';
-import { useAttendeesByRoleQuery } from '../../../../hooks/queries/useAttendeesByRoleQuery';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
-import { useRoleQuery } from '../../../../hooks/queries/useRoleAttendeesQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { rid, eid } = router.query;
-	const { role, roleError } = useRoleQuery(String(eid), String(rid));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { event, eventError } = useEventQuery(String(eid));
-	const { attendeesData } = useAttendeesByRoleQuery(String(eid), String(rid));
+	const { data: role, error: roleError } = useRole({ eid: String(eid), rid: String(rid) });
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: attendees } = useAttendeesByRole({ eid: String(eid), rid: String(rid) });
 
 	if (roleError) {
 		return <NotFoundPage message="Role not found." />;
@@ -74,7 +74,7 @@ const ViewAttendeePage: NextPage = () => {
 				<Column>
 					<EventHeader adminLink={`/roles/${rid}`} eid={String(eid)} />
 
-					<ViewRole attendees={attendeesData} eid={String(eid)} rid={String(rid)} role={role} />
+					<ViewRole attendees={attendees} eid={String(eid)} rid={String(rid)} role={role} />
 				</Column>
 			</PageWrapper>
 

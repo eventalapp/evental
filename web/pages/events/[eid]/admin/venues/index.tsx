@@ -1,3 +1,4 @@
+import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -12,12 +13,11 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { VenueList } from '../../../../../components/venues/VenueList';
-import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 
 const VenuesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { venues, venuesError } = useVenuesQuery(String(eid));
+	const { data: venues, error: venuesError } = useVenues({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper errors={[venuesError]} eid={String(eid)}>

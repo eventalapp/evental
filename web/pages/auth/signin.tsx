@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -11,10 +12,9 @@ import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
 import { useSignInMutation } from '../../hooks/mutations/useSignInMutation';
-import { useUser } from '../../hooks/queries/useUser';
 
 const SignInPage: NextPage = () => {
-	const { user } = useUser();
+	const { data: user } = useUser();
 	const router = useRouter();
 	let params = new URLSearchParams();
 

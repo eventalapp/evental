@@ -1,3 +1,6 @@
+import { useAttendees } from '@eventalapp/shared/hooks/queries/useAttendees';
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -13,16 +16,13 @@ import Column from '../../../../components/layout/Column';
 import { Footer } from '../../../../components/layout/Footer';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../components/primitives/Heading';
-import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { attendeesData } = useAttendeesQuery(String(eid));
-	const { event, eventError } = useEventQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { data: attendeesData } = useAttendees({ eid: String(eid) });
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 
 	if (eventError) {
 		return <ViewErrorPage errors={[eventError]} />;

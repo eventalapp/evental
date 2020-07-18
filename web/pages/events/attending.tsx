@@ -1,3 +1,5 @@
+import { useAttendingEvents } from '@eventalapp/shared/hooks/queries/useAttendingEvents';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -12,12 +14,10 @@ import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
-import { useAttendingEventsQuery } from '../../hooks/queries/useAttendingEventsQuery';
-import { useUser } from '../../hooks/queries/useUser';
 
 const AttendingEventsPage: NextPage = () => {
-	const { user, isUserLoading } = useUser();
-	const { attendingEventsError, attendingEvents } = useAttendingEventsQuery(String(user?.id));
+	const { data: user, isLoading: isUserLoading } = useUser();
+	const { error: attendingEventsError, data: attendingEvents } = useAttendingEvents();
 
 	if (attendingEventsError) {
 		return <ViewErrorPage errors={[attendingEventsError]} />;

@@ -1,3 +1,4 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -12,12 +13,15 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { Button } from '../../../../components/primitives/Button';
 import { Heading } from '../../../../components/primitives/Heading';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 
 const EditEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
 	const { editEventMutation } = useEditEventMutation(String(eid));
 
 	return (

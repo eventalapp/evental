@@ -1,3 +1,6 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useSessionsByDate } from '@eventalapp/shared/hooks/queries/useSessionsByDate';
 import dayjs from 'dayjs';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
@@ -14,16 +17,13 @@ import { Footer } from '../../../../../components/layout/Footer';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { SessionList } from '../../../../../components/sessions/SessionList';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useSessionsByDateQuery } from '../../../../../hooks/queries/useSessionsByDateQuery';
 
 const ViewSessionCategoryPage: NextPage = () => {
 	const router = useRouter();
 	const { date, eid } = router.query;
-	const { event, eventError } = useEventQuery(String(eid));
-	const { sessionsByDateData } = useSessionsByDateQuery(String(eid), String(date));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: sessionsByDate } = useSessionsByDate({ eid: String(eid), date: String(date) });
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 
 	if (eventError) {
 		return <ViewErrorPage errors={[eventError]} />;
@@ -88,7 +88,7 @@ const ViewSessionCategoryPage: NextPage = () => {
 						</Heading>
 					</FlexRowBetween>
 
-					<SessionList sessions={sessionsByDateData} event={event} />
+					<SessionList sessions={sessionsByDate} event={event} />
 				</Column>
 			</PageWrapper>
 

@@ -1,9 +1,9 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
-import { useUser } from '../../hooks/queries/useUser';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 
@@ -13,7 +13,7 @@ export const CreateSessionAttendeeForm: React.FC<Props> = (props) => {
 	const { eid, sid } = props;
 	const router = useRouter();
 	const { handleSubmit } = useForm();
-	const { user } = useUser();
+	const { data: user } = useUser();
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(eid, sid, user?.id, {
 		redirectUrl: `/events/${eid}/sessions/${sid}`
 	});

@@ -1,3 +1,8 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
+import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
+import { useSessionRoleAttendees } from '@eventalapp/shared/hooks/queries/useSessionRoleAttendees';
+import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -8,27 +13,45 @@ import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { EditSessionForm } from '../../../../../../components/sessions/EditSessionForm';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useSessionCategoriesQuery } from '../../../../../../hooks/queries/useSessionCategoriesQuery';
-import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
-import { useSessionRoleAttendeesQuery } from '../../../../../../hooks/queries/useSessionRoleAttendeesQuery';
-import { useVenuesQuery } from '../../../../../../hooks/queries/useVenuesQuery';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid, sid } = router.query;
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { session, isSessionLoading, sessionError } = useSessionQuery(String(eid), String(sid));
-	const { sessionCategories, isSessionCategoriesLoading, sessionCategoriesError } =
-		useSessionCategoriesQuery(String(eid));
-	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
+	const {
+		data: venues,
+		error: venuesError,
+		isLoading: isVenuesLoading
+	} = useVenues({ eid: String(eid) });
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
+	const {
+		data: session,
+		error: sessionError,
+		isLoading: isSessionLoading
+	} = useSession({ eid: String(eid), sid: String(sid) });
+	const {
+		data: sessionCategories,
+		isLoading: isSessionCategoriesLoading,
+		error: sessionCategoriesError
+	} = useSessionCategories({ eid: String(eid) });
+	const { data: sessionRoleAttendees, isLoading: isSessionRoleAttendeesLoading } =
+		useSessionRoleAttendees({
+			eid: String(eid),
+			sid: String(sid)
+		});
 
 	return (
 		<AdminPageWrapper
 			eid={String(eid)}
 			isLoading={
-				isSessionLoading || isVenuesLoading || isEventLoading || isSessionCategoriesLoading
+				isSessionLoading ||
+				isVenuesLoading ||
+				isEventLoading ||
+				isSessionCategoriesLoading ||
+				isSessionRoleAttendeesLoading
 			}
 			errors={[sessionError, venuesError, eventError, sessionCategoriesError]}
 		>
@@ -42,7 +65,7 @@ const EditSessionPage: NextPage = () => {
 
 						{venues && session && event && sessionCategories && (
 							<EditSessionForm
-								roleAttendees={sessionRoleAttendeesQuery.data ?? []}
+								roleAttendees={sessionRoleAttendees ?? []}
 								eid={String(eid)}
 								sid={String(sid)}
 								venues={venues}

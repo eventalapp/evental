@@ -1,3 +1,5 @@
+import { useAttendeesByRole } from '@eventalapp/shared/hooks/queries/useAttendeesByRole';
+import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -9,15 +11,19 @@ import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
-import { useAttendeesByRoleQuery } from '../../../../../../hooks/queries/useAttendeesByRoleQuery';
-import { useRoleQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 
 const EditRolePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, rid } = router.query;
-	const { roleError, role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
-
-	const { attendeesData, isAttendeesLoading } = useAttendeesByRoleQuery(String(eid), String(rid));
+	const {
+		data: role,
+		error: roleError,
+		isLoading: isRoleLoading
+	} = useRole({ eid: String(eid), rid: String(rid) });
+	const { data: attendees, isLoading: isAttendeesLoading } = useAttendeesByRole({
+		eid: String(eid),
+		rid: String(rid)
+	});
 
 	return (
 		<AdminPageWrapper
@@ -36,13 +42,8 @@ const EditRolePage: NextPage = () => {
 
 						{/*TODO: Skeletonize*/}
 
-						{attendeesData && role && (
-							<EditRoleForm
-								eid={String(eid)}
-								rid={String(rid)}
-								role={role}
-								attendees={attendeesData}
-							/>
+						{attendees && role && (
+							<EditRoleForm eid={String(eid)} rid={String(rid)} role={role} attendees={attendees} />
 						)}
 					</Column>
 				</AdminSidebarWrapper>

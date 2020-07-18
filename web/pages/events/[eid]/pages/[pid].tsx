@@ -1,3 +1,6 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { usePage } from '@eventalapp/shared/hooks/queries/usePage';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -12,17 +15,13 @@ import Column from '../../../../components/layout/Column';
 import { Footer } from '../../../../components/layout/Footer';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { ViewPage } from '../../../../components/pages/ViewPage';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
-import { usePageQuery } from '../../../../hooks/queries/usePageQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { pid, eid } = router.query;
-	const { page, pageError } = usePageQuery(String(eid), String(pid));
-	const { event, eventError } = useEventQuery(String(eid));
-
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { data: page, error: pageError } = usePage({ eid: String(eid), pid: String(pid) });
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 
 	if (pageError) {
 		return <NotFoundPage message="Page not found." />;

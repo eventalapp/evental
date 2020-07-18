@@ -13,7 +13,7 @@ export interface UseSessionRoleAttendeesArgs {
 export const useSessionRoleAttendees = (args: UseSessionRoleAttendeesArgs = {}) => {
 	const { eid, sid } = args;
 
-	return useQuery<AttendeeWithUser[] | undefined, ErroredAPIResponse>(
+	return useQuery<AttendeeWithUser[], ErroredAPIResponse>(
 		['role-attendees', eid, sid],
 		async () => {
 			return api

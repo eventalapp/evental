@@ -1,4 +1,5 @@
 import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -12,11 +13,10 @@ import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
-import { useUser } from '../../hooks/queries/useUser';
 
 const EventsPage: NextPage = () => {
 	const { data: upcomingEvents, error: upcomingEventsError } = useUpcomingEvents();
-	const { user } = useUser();
+	const { data: user } = useUser();
 
 	if (upcomingEventsError) {
 		return <NotFoundPage message="No Upcoming Events" />;

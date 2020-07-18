@@ -1,3 +1,5 @@
+import { useOrganizingEvents } from '@eventalapp/shared/hooks/queries/useOrganizingEvents';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
@@ -13,12 +15,10 @@ import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
-import { useOrganizingEventsQuery } from '../../hooks/queries/useOrganizingEventsQuery';
-import { useUser } from '../../hooks/queries/useUser';
 
 const OrganizingEventsPage: NextPage = () => {
-	const { user, isUserLoading } = useUser();
-	const { organizingEventsError, organizingEvents } = useOrganizingEventsQuery(String(user?.id));
+	const { data: user, isLoading: isUserLoading } = useUser();
+	const { error: organizingEventsError, data: organizingEvents } = useOrganizingEvents();
 	const { createEventMutation } = useCreateEventMutation();
 
 	if (organizingEventsError) {

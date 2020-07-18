@@ -1,3 +1,7 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
+import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
@@ -6,10 +10,6 @@ import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
-import { useEventQuery } from '../../hooks/queries/useEventQuery';
-import { usePagesQuery } from '../../hooks/queries/usePagesQuery';
-import { useRolesQuery } from '../../hooks/queries/useRolesQuery';
-import { useUser } from '../../hooks/queries/useUser';
 import { faBarsSquare } from '../../utils/icons';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
@@ -31,10 +31,10 @@ export const EventNavigation: React.FC<Props> = (props) => {
 	const { eid } = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const { signOutMutation } = useSignOutMutation();
-	const { user, isUserLoading } = useUser();
-	const { event, isEventLoading } = useEventQuery(String(eid));
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-	const { pages, isPagesLoading } = usePagesQuery(String(eid));
+	const { data: user, isLoading: isUserLoading } = useUser();
+	const { data: event, isLoading: isEventLoading } = useEvent({ eid: String(eid) });
+	const { data: roles, isLoading: isRolesLoading } = useRoles({ eid: String(eid) });
+	const { data: pages, isLoading: isPagesLoading } = usePages({ eid: String(eid) });
 
 	const isLoading = isPagesLoading || isEventLoading || isRolesLoading;
 

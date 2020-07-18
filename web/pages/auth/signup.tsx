@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -12,10 +13,9 @@ import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
 import { useSignUpMutation } from '../../hooks/mutations/useSignUpMutation';
-import { useUser } from '../../hooks/queries/useUser';
 
 const SignUpPage: NextPage = () => {
-	const { user, isUserLoading } = useUser();
+	const { data: user, isLoading: isUserLoading } = useUser();
 	const router = useRouter();
 	const { signUpMutation } = useSignUpMutation({
 		redirectUrl: router.query.redirectUrl ? String(router.query.redirectUrl) : undefined

@@ -1,10 +1,10 @@
+import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useUserSettingsMutation } from '../../hooks/mutations/useUserSettingsMutation';
-import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import { copy } from '../../utils/const';
 import { UserSettingsPayload, UserSettingsSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/string';
@@ -49,7 +49,9 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 
 	const slugWatcher = watch('slug');
 
-	const { user: userSlugCheck, isUserLoading: isUserSlugCheckLoading } = useUserQuery(slugWatcher);
+	const { data: userSlugCheck, isLoading: isUserSlugCheckLoading } = useUserById({
+		uid: slugWatcher
+	});
 
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));

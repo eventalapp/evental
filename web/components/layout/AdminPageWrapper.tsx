@@ -1,9 +1,9 @@
+import { useIsFounder } from '@eventalapp/shared/hooks/queries/useIsFounder';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { ErroredAPIResponse } from 'nextkit';
 import React from 'react';
 
-import { useFounderQuery } from '../../hooks/queries/useFounderQuery';
-import { useIsOrganizerQuery } from '../../hooks/queries/useIsOrganizerQuery';
-import { useUser } from '../../hooks/queries/useUser';
 import { NoAccessPage } from '../error/NoAccessPage';
 import { UnauthorizedPage } from '../error/UnauthorizedPage';
 import { ViewErrorPage } from '../error/ViewErrorPage';
@@ -17,9 +17,9 @@ type AdminPageWrapperProps = {
 
 export const AdminPageWrapper: React.FC<AdminPageWrapperProps> = (props) => {
 	const { children, isLoading, errors, eid, founderPage = false } = props;
-	const { user, isUserLoading } = useUser();
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { isFounderLoading, isFounder } = useFounderQuery(String(eid));
+	const { data: user, isLoading: isUserLoading } = useUser();
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
+	const { isLoading: isFounderLoading, data: isFounder } = useIsFounder({ eid: String(eid) });
 
 	const isLoadingMerged = isUserLoading || isOrganizerLoading || isLoading || isFounderLoading;
 

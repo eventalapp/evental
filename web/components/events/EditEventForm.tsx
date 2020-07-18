@@ -1,3 +1,4 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Prisma from '@prisma/client';
 import Color from 'color';
@@ -11,7 +12,7 @@ import { Controller, useForm } from 'react-hook-form';
 import ReactSelect from 'react-select';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
-import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
+import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
 import { formatDateRange } from '../../utils/date';
@@ -73,8 +74,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 	const endDateWatcher = watch('endDate');
 	const colorWatcher = watch('color');
 
-	const { event: eventSlugCheck, isEventLoading: isEventSlugCheckLoading } =
-		useEventQuery(slugWatcher);
+	const { data: eventSlugCheck, isLoading: isEventSlugCheckLoading } = useEvent({
+		eid: slugWatcher
+	});
 
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));

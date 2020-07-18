@@ -1,3 +1,4 @@
+import { useEventMessage } from '@eventalapp/shared/hooks/queries/useEventMessage';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -9,13 +10,18 @@ import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { EditMessageForm } from '../../../../../../components/messages/EditMessageForm';
 import { Heading } from '../../../../../../components/primitives/Heading';
-import { useMessage } from '../../../../../../hooks/queries/useMessage';
 
 const EditMessagePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, mid } = router.query;
-	const { messageError, message, isMessageLoading } = useMessage(String(eid), String(mid));
-
+	const {
+		data: message,
+		error: messageError,
+		isLoading: isMessageLoading
+	} = useEventMessage({
+		eid: String(eid),
+		mid: String(mid)
+	});
 	return (
 		<AdminPageWrapper errors={[messageError]} eid={String(eid)} isLoading={isMessageLoading}>
 			<PageWrapper>
