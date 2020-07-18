@@ -1,4 +1,4 @@
-import { useUpcomingEventsQuery } from '@eventalapp/shared/hooks/queries/useUpcomingEventsQuery';
+import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ import { Heading } from '../../components/primitives/Heading';
 import { useUser } from '../../hooks/queries/useUser';
 
 const EventsPage: NextPage = () => {
-	const { data: upcomingEvents, error: upcomingEventsError } = useUpcomingEventsQuery();
+	const { data: upcomingEvents, error: upcomingEventsError } = useUpcomingEvents();
 	const { user } = useUser();
 
 	if (upcomingEventsError) {

@@ -1,4 +1,4 @@
-import { useUpcomingEventsQuery } from '@eventalapp/shared/hooks/queries/useUpcomingEventsQuery';
+import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
 import React from 'react';
 import { FlatList, Image, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRefreshOnFocus } from '../hooks/useRefreshOnFocus';
 
 export function EventsScreen() {
-	const { data: upcomingEvents, refetch: refetchUpcomingEvents } = useUpcomingEventsQuery();
+	const { data: upcomingEvents, refetch: refetchUpcomingEvents } = useUpcomingEvents();
 	useRefreshOnFocus(refetchUpcomingEvents);
 	const safeAreaInsets = useSafeAreaInsets();
 
