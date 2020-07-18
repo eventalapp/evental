@@ -1,7 +1,8 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
+import { api } from '../../api';
 import { SessionWithVenue } from '../../types';
 
 export interface UseSessionsByVenueOptions {
@@ -16,12 +17,15 @@ export const useSessionsByVenue = (args: UseSessionsByVenueOptions = {}) => {
 
 	params.append('venue', String(vid));
 
-	return useQuery<SessionWithVenue[], AxiosError<ErroredAPIResponse>>(
+	return useQuery<SessionWithVenue[], ErroredAPIResponse>(
 		['venue-sessions', eid, vid],
 		async () => {
-			return await axios
-				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/api/events/${eid}/sessions?${params}`)
-				.then((res) => res.data.data);
+			return await api
+				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/events/${eid}/sessions?${params}`)
+				.then((res) => res.data.data)
+				.catch((err: AxiosError<ErroredAPIResponse>) => {
+					throw err.response?.data;
+				});
 		},
 		{
 			retry: 0,
