@@ -1,10 +1,10 @@
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as Prisma from '@prisma/client';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 
-import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { NotFound } from '../error/NotFound';
 import Tooltip from '../primitives/Tooltip';
@@ -12,7 +12,8 @@ import Tooltip from '../primitives/Tooltip';
 type Props = {
 	eid: string;
 	admin?: boolean;
-} & UseRolesQueryData;
+	roles: Prisma.EventRole[];
+};
 
 export const RoleList: React.FC<Props> = (props) => {
 	const { eid, roles, admin = false } = props;

@@ -43,13 +43,7 @@ const RolesAdminPage: NextPage = () => {
 								/>
 							</FlexRowBetween>
 
-							<RoleList
-								admin
-								eid={String(eid)}
-								roles={roles}
-								isRolesLoading={isRolesLoading}
-								rolesError={rolesError}
-							/>
+							<RoleList admin eid={String(eid)} roles={roles ?? []} />
 						</div>
 					</Column>
 				</AdminSidebarWrapper>

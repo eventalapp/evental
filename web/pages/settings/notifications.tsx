@@ -1,3 +1,4 @@
+import { useNotificationPreferences } from '@eventalapp/shared/hooks/queries/useNotificationPreferences';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
@@ -8,10 +9,9 @@ import { SettingsPageWrapper } from '../../components/layout/SettingsPageWrapper
 import { SettingsSidebarWrapper } from '../../components/layout/SettingsSidebarWrapper';
 import { Heading } from '../../components/primitives/Heading';
 import { Paragraph } from '../../components/primitives/Paragraph';
-import { useNotificationPreferences } from '../../hooks/queries/useNotificationPreferences';
 
 const NotificationsPage: NextPage = () => {
-	const { notificationPreferences } = useNotificationPreferences();
+	const { data: notificationPreferences } = useNotificationPreferences();
 
 	return (
 		<SettingsPageWrapper>

@@ -20,11 +20,7 @@ import { RoleList } from '../../../../components/roles/RoleList';
 const RolesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const {
-		data: roles,
-		isLoading: isRolesLoading,
-		error: rolesError
-	} = useRoles({ eid: String(eid) });
+	const { data: roles } = useRoles({ eid: String(eid) });
 	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
 
@@ -77,12 +73,7 @@ const RolesPage: NextPage = () => {
 						{event && roles ? 'Roles' : <Skeleton className="w-48" />}
 					</Heading>
 
-					<RoleList
-						eid={String(eid)}
-						roles={roles}
-						isRolesLoading={isRolesLoading}
-						rolesError={rolesError}
-					/>
+					<RoleList eid={String(eid)} roles={roles ?? []} />
 				</Column>
 			</PageWrapper>
 
