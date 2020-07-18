@@ -1,4 +1,4 @@
-import { useSignInMutation } from '@eventalapp/shared/hooks/mutations/useSignInMutation';
+import { useSignIn } from '@eventalapp/shared/hooks/mutations/useSignIn';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { SignInPayload, SignInSchema } from '@eventalapp/shared/utils/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,7 +16,7 @@ export function SignInScreen() {
 	});
 
 	const { data: user } = useUser();
-	const { mutate: signIn } = useSignInMutation();
+	const { mutate: signIn } = useSignIn();
 
 	console.log(user);
 
