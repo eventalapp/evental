@@ -35,7 +35,7 @@ export const ShareEventDropdown: React.FC<Props> = (props) => {
 				>
 					<a
 						href={twitterLink(
-							`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${event.slug}`,
+							`https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${event.slug}`,
 							{
 								title: `Checkout ${event.name} on Evental!`,
 								hashtags: ['evental', 'eventalapp'],
@@ -90,7 +90,7 @@ export const ShareEventDropdown: React.FC<Props> = (props) => {
 
 					<a
 						href={linkedinLink(
-							`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${event.slug}`,
+							`https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${event.slug}`,
 							{
 								source: 'Evental',
 								title: `Checkout ${event.name} on Evental!`,
@@ -117,7 +117,7 @@ export const ShareEventDropdown: React.FC<Props> = (props) => {
 					</a>
 					<a
 						href={emailLink(
-							`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${event.slug}`,
+							`https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${event.slug}`,
 							{
 								body: `Join me at ${event.name} on Evental!`,
 								separator: '\n',

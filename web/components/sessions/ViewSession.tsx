@@ -96,8 +96,8 @@ export const ViewSession: React.FC<Props> = (props) => {
 									location: session?.venue?.address || event.location || session?.venue?.name,
 									end: new Date(session.endDate).toISOString(),
 									start: new Date(session.startDate).toISOString(),
-									url: `${
-										process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+									url: `https://${
+										process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
 									}/events/${eid}/sessions/${sid}`,
 									guests: attendees?.map((attendee) => attendee.user.name) ?? undefined
 								}}

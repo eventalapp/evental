@@ -72,8 +72,8 @@ export const sendResetPassword = async (args: SendResetPasswordArgs) => {
 	}
 
 	const templateData: ResetPasswordTemplateArgs = {
-		resetPasswordLink: `${
-			process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+		resetPasswordLink: `https://${
+			process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
 		}/auth/password/reset?code=${resetCode}`
 	};
 
