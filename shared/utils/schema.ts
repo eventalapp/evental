@@ -1,5 +1,3 @@
-import * as Prisma from '@prisma/client';
-import { htmlToText } from 'html-to-text';
 import { z } from 'zod';
 
 const optionalTextInput = (schema: z.ZodString) =>
@@ -10,7 +8,6 @@ const optionalTextInput = (schema: z.ZodString) =>
 export const isBrowser = typeof window !== 'undefined';
 
 const trimString = (u: unknown) => (typeof u === 'string' ? u.trim() : u);
-const noImageTag = (u: unknown) => (typeof u === 'string' ? !u.includes('<img') : u);
 const noEmptyString = (u: unknown) => ((u as string | undefined)?.length === 0 ? undefined : u);
 
 const validator = {
