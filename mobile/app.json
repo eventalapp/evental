@@ -1,6 +1,7 @@
 {
 	"expo": {
 		"name": "Evental",
-		"slug": "evental"
+		"slug": "evental",
+		"scheme": "evental"
 	}
 }
