@@ -215,7 +215,7 @@ export const EditEventSchema = z.object({
 	slug: validator.slug,
 	name: validator.name,
 	timeZone: timeZoneValidator,
-	location: validator.location,
+	location: validator.location.optional(),
 	color: z.string(),
 	website: validator.url.optional(),
 	type: validator.eventType,
