@@ -1,12 +1,13 @@
 import React from 'react';
-import { FlatList, Image, Text, View } from 'react-native';
+import { Button, FlatList, Image, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
 
 import { useRefreshOnFocus } from '../hooks/useRefreshOnFocus';
 
-export function EventsScreen() {
+export function EventsScreen(props) {
+	const { navigation } = props;
 	const { data: upcomingEvents, refetch: refetchUpcomingEvents } = useUpcomingEvents();
 	useRefreshOnFocus(refetchUpcomingEvents);
 	const safeAreaInsets = useSafeAreaInsets();
@@ -96,6 +97,10 @@ export function EventsScreen() {
 							{item.name}
 						</Text>
 					</View>
+					<Button
+						title="view"
+						onPress={() => navigation.navigate('ViewEvent', { eid: item.slug })}
+					></Button>
 				</View>
 			)}
 		/>
