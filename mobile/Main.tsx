@@ -28,7 +28,6 @@ onlineManager.setEventListener((setOnline) => {
 });
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 const prefix = Linking.createURL('/');
 
 export function Main() {
@@ -67,6 +66,7 @@ export function Main() {
 					screenOptions={{
 						headerShown: false
 					}}
+					initialRouteName="Events"
 				>
 					<Tab.Screen
 						name="ViewEvent"
