@@ -38,7 +38,7 @@ export function ViewEventScreen({ route, navigation }) {
 							style={{
 								backgroundColor: '#dedede',
 								borderRadius: 8,
-								marginEnd: 8
+								marginRight: 10
 							}}
 						/>
 						<View style={{ display: 'flex', flexDirection: 'column' }}>
