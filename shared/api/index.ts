@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-const baseURL =
-	(process.env && process.env.API_HOST) ||
-	(process.env &&
-		process.env.NEXT_PUBLIC_VERCEL_URL &&
-		`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`) ||
-	'http://localhost:5555/api';
+let baseURL;
+
+if (process.env.API_HOST) {
+	baseURL = process.env.API_HOST;
+} else if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+	baseURL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`;
+} else {
+	baseURL = 'http://localhost:5555/api';
+}
 
 console.log({ baseURL });
 
