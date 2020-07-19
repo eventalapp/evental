@@ -1,7 +1,8 @@
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
+
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { RequestPasswordResetForm } from '../../../components/authentication/RequestPasswordResetForm';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';

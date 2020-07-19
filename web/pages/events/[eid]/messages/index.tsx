@@ -1,11 +1,12 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useEventMessages } from '@eventalapp/shared/hooks/queries/useEventMessages';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useEventMessages } from '@eventalapp/shared/hooks/queries/useEventMessages';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';

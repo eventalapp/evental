@@ -1,10 +1,11 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useEventMessage } from '@eventalapp/shared/hooks/queries/useEventMessage';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useEventMessage } from '@eventalapp/shared/hooks/queries/useEventMessage';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';

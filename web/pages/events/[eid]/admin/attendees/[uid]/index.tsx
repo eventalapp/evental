@@ -1,7 +1,8 @@
-import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+
+import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
 
 import { ViewAttendee } from '../../../../../../components/attendees/ViewAttendee';
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';

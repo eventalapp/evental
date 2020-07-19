@@ -1,7 +1,8 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import { hash } from 'argon2';
 import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { sendVerifyEmail } from '../../../email/templates/verifyEmail';
 import { sendWelcome } from '../../../email/templates/welcome';

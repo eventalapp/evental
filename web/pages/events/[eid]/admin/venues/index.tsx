@@ -1,9 +1,10 @@
-import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';

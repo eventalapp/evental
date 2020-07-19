@@ -1,9 +1,10 @@
-import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Prisma from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
+import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 
 import { useEditAttendeeMutation } from '../../hooks/mutations/useEditAttendeeMutation';
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';

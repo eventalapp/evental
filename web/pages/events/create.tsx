@@ -1,7 +1,8 @@
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
+
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { CreateEventForm } from '../../components/events/CreateEventForm';

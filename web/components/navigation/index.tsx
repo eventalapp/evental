@@ -1,4 +1,3 @@
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
@@ -6,6 +5,8 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
 import { faBarsSquare } from '../../utils/icons';

@@ -1,4 +1,3 @@
-import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 import {
 	faAddressBook,
 	faArrowUpRightFromSquare,
@@ -11,6 +10,8 @@ import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';

@@ -1,11 +1,12 @@
-import { useAttendeesByRole } from '@eventalapp/shared/hooks/queries/useAttendeesByRole';
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useAttendeesByRole } from '@eventalapp/shared/hooks/queries/useAttendeesByRole';
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';

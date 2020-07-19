@@ -1,8 +1,9 @@
-import { useEventMessages } from '@eventalapp/shared/hooks/queries/useEventMessages';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+
+import { useEventMessages } from '@eventalapp/shared/hooks/queries/useEventMessages';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';

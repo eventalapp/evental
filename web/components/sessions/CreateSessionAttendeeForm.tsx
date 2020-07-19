@@ -1,7 +1,8 @@
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { LoadingInner } from '../error/LoadingInner';

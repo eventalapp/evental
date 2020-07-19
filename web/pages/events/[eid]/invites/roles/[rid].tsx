@@ -1,13 +1,14 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';

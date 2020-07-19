@@ -1,5 +1,6 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import * as Prisma from '@prisma/client';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { api } from '../../../../../utils/api';
 

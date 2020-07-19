@@ -1,11 +1,12 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useSessionsByVenue } from '@eventalapp/shared/hooks/queries/useSessionsByVenue';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
-import { useVenue } from '@eventalapp/shared/hooks/queries/useVenue';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useSessionsByVenue } from '@eventalapp/shared/hooks/queries/useSessionsByVenue';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useVenue } from '@eventalapp/shared/hooks/queries/useVenue';
 
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';

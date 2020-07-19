@@ -1,13 +1,14 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
-import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { default as classNames } from 'classnames';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
+import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
 import { faBarsSquare } from '../../utils/icons';

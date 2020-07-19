@@ -1,7 +1,8 @@
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useEffect, useState } from 'react';
+
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { UserSettingsForm } from '../../components/authentication/UserSettingsForm';
 import { LoadingInner } from '../../components/error/LoadingInner';

@@ -1,5 +1,3 @@
-import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSessionAttendee';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import {
 	faArrowRight,
 	faCalendarDay,
@@ -17,6 +15,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSessionAttendee';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';

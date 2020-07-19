@@ -1,10 +1,11 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import Column from '../../../../components/layout/Column';

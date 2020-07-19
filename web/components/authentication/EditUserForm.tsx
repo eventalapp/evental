@@ -1,8 +1,9 @@
-import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
+import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 
 import { UseEditUserMutationData } from '../../hooks/mutations/useEditUserMutation';
 import { copy } from '../../utils/const';
