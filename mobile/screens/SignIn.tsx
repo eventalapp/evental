@@ -1,5 +1,8 @@
+import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
@@ -15,6 +18,8 @@ export function SignInScreen() {
 	} = useForm<SignInPayload>({
 		resolver: zodResolver(SignInSchema)
 	});
+
+	const [passwordHide, setPasswordHide] = useState(true);
 
 	const { data: user } = useUser();
 	const { mutate: signIn } = useSignIn();
@@ -57,17 +62,25 @@ export function SignInScreen() {
 
 			<View style={styles.inputContainer}>
 				<Text>Password</Text>
-
 				<Controller
 					control={control}
 					render={({ field: { onChange, onBlur, value } }) => (
-						<TextInput
-							style={styles.input}
-							onBlur={onBlur}
-							onChangeText={onChange}
-							value={value}
-							textContentType="password"
-						/>
+						<View style={styles.input}>
+							<TextInput
+								secureTextEntry={passwordHide}
+								onBlur={onBlur}
+								onChangeText={onChange}
+								value={value}
+								textContentType="password"
+								style={{ flex: 1 }}
+							/>
+							<Icon
+								style={{ marginTop: 10 }}
+								name={passwordHide ? 'eye-off' : 'eye'}
+								size={20}
+								onPress={() => setPasswordHide(!passwordHide)}
+							/>
+						</View>
 					)}
 					name="password"
 				/>
@@ -93,6 +106,7 @@ const styles = StyleSheet.create({
 		position: 'relative'
 	},
 	input: {
+		flexDirection: 'row',
 		height: 40,
 		width: 300,
 		paddingHorizontal: 5,
