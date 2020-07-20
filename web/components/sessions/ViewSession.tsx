@@ -42,6 +42,7 @@ type Props = {
 	admin?: boolean;
 	event?: Prisma.Event;
 	user?: StrippedUser | undefined;
+	isLoading?: boolean;
 };
 
 export const ViewSession: React.FC<Props> = (props) => {
@@ -54,8 +55,10 @@ export const ViewSession: React.FC<Props> = (props) => {
 		admin = false,
 		attendees,
 		event,
-		roleAttendees
+		roleAttendees,
+		isLoading
 	} = props;
+
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
 		String(eid),
 		String(sid),
@@ -78,40 +81,42 @@ export const ViewSession: React.FC<Props> = (props) => {
 				<Heading>{session ? session.name : <Skeleton className="w-64 max-w-xl" />}</Heading>
 
 				<div className="flex flex-row items-center space-x-4">
-					{event && session ? (
+					{isLoading && (
+						<>
+							<Skeleton className="h-5 w-5 m-1" />
+							<Skeleton className="h-5 w-5 m-1" />
+							<Skeleton className="h-5 w-5 m-1" />
+						</>
+					)}
+
+					{!isLoading && event && session && (
 						<ShareSessionDropdown event={event} session={session}>
 							<IconButtonTooltip icon={faShare} message="Share this session" color="gray" />
 						</ShareSessionDropdown>
-					) : (
-						<Skeleton className="h-5 w-5" />
 					)}
 
-					{session && event ? (
+					{!isLoading && session && event && !admin && user && isAttending && (
+						<AddToCalendar
+							event={{
+								title: session.name,
+								description: htmlToText(session.description || 'No description'),
+								location: session?.venue?.address || event.location || session?.venue?.name,
+								end: new Date(session.endDate).toISOString(),
+								start: new Date(session.startDate).toISOString(),
+								url: `https://${
+									process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
+								}/events/${eid}/sessions/${sid}`,
+								guests: attendees?.map((attendee) => attendee.user.name) ?? undefined
+							}}
+						/>
+					)}
+
+					{!isLoading &&
+						event &&
+						session &&
+						user &&
 						!admin &&
-						user &&
-						isAttending && (
-							<AddToCalendar
-								event={{
-									title: session.name,
-									description: htmlToText(session.description || 'No description'),
-									location: session?.venue?.address || event.location || session?.venue?.name,
-									end: new Date(session.endDate).toISOString(),
-									start: new Date(session.startDate).toISOString(),
-									url: `https://${
-										process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
-									}/events/${eid}/sessions/${sid}`,
-									guests: attendees?.map((attendee) => attendee.user.name) ?? undefined
-								}}
-							/>
-						)
-					) : (
-						<Skeleton className="h-5 w-5" />
-					)}
-
-					{event && session ? (
-						Boolean(isAttending) &&
-						user &&
-						!admin && (
+						(isAttending ? (
 							<LeaveSessionDialog
 								eventSlug={event.slug}
 								sessionSlug={session.slug}
@@ -123,25 +128,20 @@ export const ViewSession: React.FC<Props> = (props) => {
 									color="red"
 								/>
 							</LeaveSessionDialog>
-						)
-					) : (
-						<Skeleton className="h-5 w-5" />
-					)}
+						) : (
+							<IconButtonTooltip
+								message="Add this session to your schedule"
+								icon={faCalendarCirclePlus}
+								disabled={createSessionAttendeeMutation.isLoading}
+								isLoading={createSessionAttendeeMutation.isLoading}
+								color="gray"
+								onClick={() => {
+									createSessionAttendeeMutation.mutate();
+								}}
+							/>
+						))}
 
-					{user && !isAttending && !admin && (
-						<IconButtonTooltip
-							message="Add this session to your schedule"
-							icon={faCalendarCirclePlus}
-							disabled={createSessionAttendeeMutation.isLoading}
-							isLoading={createSessionAttendeeMutation.isLoading}
-							color="gray"
-							onClick={() => {
-								createSessionAttendeeMutation.mutate();
-							}}
-						/>
-					)}
-
-					{admin && (
+					{!isLoading && event && session && admin && (
 						<IconLinkTooltip
 							message="Edit this session"
 							color="gray"
@@ -150,7 +150,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 						/>
 					)}
 
-					{admin && (
+					{!isLoading && event && session && admin && (
 						<DeleteSessionDialog eid={String(eid)} sid={String(sid)}>
 							<IconButtonTooltip icon={faTrashCan} message="Delete this session" color="red" />
 						</DeleteSessionDialog>
