@@ -1,5 +1,14 @@
 import React from 'react';
-import { Button, FlatList, Image, RefreshControl, ScrollView, Text, View } from 'react-native';
+import {
+	Button,
+	FlatList,
+	Image,
+	Pressable,
+	RefreshControl,
+	ScrollView,
+	Text,
+	View
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
@@ -49,7 +58,7 @@ export function UpcomingEventsScreen(props) {
 			)}
 			data={upcomingEvents}
 			renderItem={({ item }) => (
-				<View
+				<Pressable
 					style={{
 						flexDirection: 'row',
 						justifyContent: 'flex-start',
@@ -62,6 +71,7 @@ export function UpcomingEventsScreen(props) {
 						flex: 1,
 						marginBottom: 12
 					}}
+					onPress={() => navigation.navigate('ViewEvent', { eid: item.slug })}
 				>
 					<Image
 						source={{ uri: `https://cdn.evental.app${item.image}`, width: 52, height: 52 }}
@@ -111,11 +121,7 @@ export function UpcomingEventsScreen(props) {
 							{item.name}
 						</Text>
 					</View>
-					<Button
-						title="view"
-						onPress={() => navigation.navigate('ViewEvent', { eid: item.slug })}
-					></Button>
-				</View>
+				</Pressable>
 			)}
 		/>
 	);

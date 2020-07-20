@@ -1,5 +1,14 @@
 import React from 'react';
-import { Button, FlatList, Image, RefreshControl, ScrollView, Text, View } from 'react-native';
+import {
+	Button,
+	FlatList,
+	Image,
+	Pressable,
+	RefreshControl,
+	ScrollView,
+	Text,
+	View
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
@@ -38,7 +47,6 @@ export function ViewEventScreen({ route, navigation }) {
 						flexDirection: 'column',
 						justifyContent: 'center',
 						paddingTop: safeAreaInsets.top + 28,
-						paddingBottom: 12,
 						paddingLeft: safeAreaInsets.left + 28,
 						paddingRight: safeAreaInsets.right + 28
 					}}
@@ -83,7 +91,6 @@ export function ViewEventScreen({ route, navigation }) {
 									</Text>
 								</View>
 							</View>
-							<Text>{JSON.stringify(event)}</Text>
 						</View>
 					)}
 				</View>
@@ -92,14 +99,14 @@ export function ViewEventScreen({ route, navigation }) {
 						contentContainerStyle={{
 							flexDirection: 'column',
 							justifyContent: 'center',
-							paddingTop: safeAreaInsets.top + 28,
+							paddingTop: 12,
 							paddingBottom: 12,
 							paddingLeft: safeAreaInsets.left + 28,
 							paddingRight: safeAreaInsets.right + 28
 						}}
 						data={sessions}
 						renderItem={({ item: session }) => (
-							<View
+							<Pressable
 								style={{
 									flexDirection: 'row',
 									justifyContent: 'flex-start',
@@ -112,6 +119,7 @@ export function ViewEventScreen({ route, navigation }) {
 									flex: 1,
 									marginBottom: 12
 								}}
+								onPress={() => navigation.navigate('ViewSession', { eid, sid: session.id })}
 							>
 								<View
 									style={{
@@ -146,13 +154,10 @@ export function ViewEventScreen({ route, navigation }) {
 										</Text>
 									)}
 								</View>
-								<Button
-									title="view"
-									onPress={() => navigation.navigate('ViewSession', { eid, sid: session.id })}
-								></Button>
-							</View>
+							</Pressable>
 						)}
 					/>
+					{event && <Text>{JSON.stringify(event)}</Text>}
 				</View>
 			</ScrollView>
 		</>
