@@ -114,6 +114,12 @@ export function ViewSessionScreen({ route, navigation }) {
 											padding: 12,
 											borderRadius: 8
 										}}
+										onPress={() =>
+											navigation.navigate('ViewAttendee', {
+												eid: eid,
+												uid: roleMember.attendee.user.slug
+											})
+										}
 									>
 										<Image
 											source={{
