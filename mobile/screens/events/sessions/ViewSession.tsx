@@ -13,9 +13,8 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
-import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
+import { formatDateRange } from '@eventalapp/shared/utils/date';
 
 export function ViewSessionScreen({ route, navigation }) {
 	const { eid, sid } = route.params || {};
@@ -80,21 +79,14 @@ export function ViewSessionScreen({ route, navigation }) {
 									<Text
 										style={{
 											fontSize: 24,
-											fontWeight: 'bold'
+											fontWeight: 'bold',
+											marginBottom: 4
 										}}
 									>
 										{session.name}
 									</Text>
 									<Text>
-										{new Date(session.startDate).toLocaleDateString([], {
-											month: 'short',
-											day: 'numeric'
-										})}{' '}
-										–{' '}
-										{new Date(session.endDate).toLocaleDateString([], {
-											month: 'short',
-											day: 'numeric'
-										})}
+										{formatDateRange(new Date(session.startDate), new Date(session.endDate))}
 									</Text>
 								</View>
 							</View>
