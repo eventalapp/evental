@@ -14,9 +14,10 @@ import { htmlToText } from 'html-to-text';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { formatDateRange } from '@eventalapp/shared/utils/date';
+
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { formatDateRange } from '../../utils/date';
 import { faCalendarCirclePlus } from '../../utils/icons';
 import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser, StrippedUser } from '../../utils/user';

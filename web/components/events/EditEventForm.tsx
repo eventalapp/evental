@@ -11,11 +11,11 @@ import { Controller, useForm } from 'react-hook-form';
 import ReactSelect from 'react-select';
 
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { formatDateRange } from '@eventalapp/shared/utils/date';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
-import { formatDateRange } from '../../utils/date';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter, slugify } from '../../utils/string';
 import { LoadingInner } from '../error/LoadingInner';
