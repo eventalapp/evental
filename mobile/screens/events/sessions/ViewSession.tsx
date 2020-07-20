@@ -90,6 +90,11 @@ export function ViewSessionScreen({ route, navigation }) {
 									</Text>
 								</View>
 							</View>
+
+							{session.description && session.description.length > 0 && (
+								<Text>{session.description}</Text>
+							)}
+
 							<Text>{JSON.stringify(session)}</Text>
 						</View>
 					)}
