@@ -55,14 +55,15 @@ export const rawToSessionWithVenue = (session: SessionWithVenueRaw) => {
 		venue,
 		category: categoryWithCount,
 		_count: { attendees: attendeeCount },
-		attendees
+		attendees,
+		...rest
 	} = session;
 
 	const roleMembers = attendees.map((sessionAttendee) => {
-		const { attendee } = sessionAttendee;
+		const { attendee, ...rest } = sessionAttendee;
 
 		return {
-			...sessionAttendee,
+			...rest,
 			attendee: stripAttendeeWithUser(attendee)
 		};
 	});
@@ -75,7 +76,7 @@ export const rawToSessionWithVenue = (session: SessionWithVenueRaw) => {
 		: null;
 
 	return {
-		...session,
+		...rest,
 		attendeeCount,
 		roleMembers,
 		category,
