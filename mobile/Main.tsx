@@ -1,7 +1,7 @@
 import NetInfo from '@react-native-community/netinfo';
 import { registerRootComponent } from 'expo';
 import * as React from 'react';
-import { AppState, AppStateStatus, Platform, StatusBar, Text } from 'react-native';
+import { AppState, AppStateStatus, Platform, StatusBar } from 'react-native';
 import { QueryClient, QueryClientProvider, focusManager, onlineManager } from 'react-query';
 
 import { Navigation } from './components/Navigation';
