@@ -23,16 +23,31 @@ import { ViewSession } from '../../../../../components/sessions/ViewSession';
 const ViewSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { sid, eid } = router.query;
-	const { data: user } = useUser();
-	const { data: session, error: sessionError } = useSession({ eid: String(eid), sid: String(sid) });
-	const { data: sessionAttendees } = useSessionAttendees({ eid: String(eid), sid: String(sid) });
-	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
 	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
-	const { data: isSessionAttendee } = useIsSessionAttendee({ eid: String(eid), sid: String(sid) });
-	const { data: sessionRoleAttendees } = useSessionRoleAttendees({
+	const { data: user, isLoading: isUserLoading } = useUser();
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
+	const {
+		data: session,
+		error: sessionError,
+		isLoading: isSessionLoading
+	} = useSession({ eid: String(eid), sid: String(sid) });
+	const { data: sessionAttendees, isLoading: isSessionAttendeesLoading } = useSessionAttendees({
 		eid: String(eid),
 		sid: String(sid)
 	});
+	const { data: isSessionAttendee, isLoading: isSessionAttendeeLoading } = useIsSessionAttendee({
+		eid: String(eid),
+		sid: String(sid)
+	});
+	const { data: sessionRoleAttendees, isLoading: isSessionRoleAttendeesLoading } =
+		useSessionRoleAttendees({
+			eid: String(eid),
+			sid: String(sid)
+		});
 
 	if (sessionError) {
 		return <NotFoundPage message="Session not found." />;
@@ -73,6 +88,15 @@ const ViewSessionPage: NextPage = () => {
 		/>
 	);
 
+	const isLoading =
+		isSessionLoading ||
+		isEventLoading ||
+		isSessionRoleAttendeesLoading ||
+		isSessionAttendeesLoading ||
+		isSessionAttendeeLoading ||
+		isUserLoading ||
+		isOrganizerLoading;
+
 	return (
 		<>
 			{Seo}
@@ -90,6 +114,7 @@ const ViewSessionPage: NextPage = () => {
 						eid={String(eid)}
 						sid={String(sid)}
 						event={event}
+						isLoading={isLoading}
 					/>
 				</Column>
 			</PageWrapper>

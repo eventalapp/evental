@@ -96,9 +96,7 @@ export const isSessionAttendee = async (args: IsSessionAttendeeArguments) => {
 		where: {
 			sessionId: session.id,
 			attendeeId: attendee.id,
-			event: {
-				id: event.id
-			}
+			eventId: event.id
 		}
 	});
 
