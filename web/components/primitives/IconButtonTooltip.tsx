@@ -46,7 +46,7 @@ export const IconButtonTooltip = React.forwardRef<HTMLButtonElement, Props>((pro
 					{...rest}
 				>
 					{isLoading ? (
-						<Skeleton className="h-5 w-5 p-1" />
+						<Skeleton className="h-5 w-5 m-1" />
 					) : (
 						<FontAwesomeIcon
 							fill="currentColor"

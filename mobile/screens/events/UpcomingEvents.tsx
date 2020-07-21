@@ -1,19 +1,42 @@
 import React from 'react';
-import { Button, FlatList, Image, Text, View } from 'react-native';
+import {
+	Button,
+	FlatList,
+	Image,
+	Pressable,
+	RefreshControl,
+	ScrollView,
+	Text,
+	View
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
 
-import { useRefreshOnFocus } from '../hooks/useRefreshOnFocus';
+import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 
-export function EventsScreen(props) {
+export function UpcomingEventsScreen(props) {
 	const { navigation } = props;
-	const { data: upcomingEvents, refetch: refetchUpcomingEvents } = useUpcomingEvents();
+	const {
+		data: upcomingEvents,
+		refetch: refetchUpcomingEvents,
+		isRefetching: isUpcomingEventsRefetching
+	} = useUpcomingEvents();
 	useRefreshOnFocus(refetchUpcomingEvents);
 	const safeAreaInsets = useSafeAreaInsets();
 
 	return (
 		<FlatList
+			refreshControl={
+				<RefreshControl
+					colors={['#000000']}
+					tintColor="#000000"
+					refreshing={isUpcomingEventsRefetching}
+					onRefresh={() => {
+						refetchUpcomingEvents();
+					}}
+				/>
+			}
 			contentContainerStyle={{
 				flexDirection: 'column',
 				justifyContent: 'center',
@@ -35,7 +58,7 @@ export function EventsScreen(props) {
 			)}
 			data={upcomingEvents}
 			renderItem={({ item }) => (
-				<View
+				<Pressable
 					style={{
 						flexDirection: 'row',
 						justifyContent: 'flex-start',
@@ -48,13 +71,14 @@ export function EventsScreen(props) {
 						flex: 1,
 						marginBottom: 12
 					}}
+					onPress={() => navigation.navigate('ViewEvent', { eid: item.slug })}
 				>
 					<Image
 						source={{ uri: `https://cdn.evental.app${item.image}`, width: 52, height: 52 }}
 						style={{
 							backgroundColor: '#dedede',
 							borderRadius: 8,
-							marginEnd: 8
+							marginEnd: 10
 						}}
 					/>
 
@@ -97,11 +121,7 @@ export function EventsScreen(props) {
 							{item.name}
 						</Text>
 					</View>
-					<Button
-						title="view"
-						onPress={() => navigation.navigate('ViewEvent', { eid: item.slug })}
-					></Button>
-				</View>
+				</Pressable>
 			)}
 		/>
 	);
