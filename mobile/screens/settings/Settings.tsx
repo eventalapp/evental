@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Button, RefreshControl, ScrollView, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';

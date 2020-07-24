@@ -1,21 +1,11 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
-import {
-	Button,
-	FlatList,
-	Image,
-	Pressable,
-	RefreshControl,
-	ScrollView,
-	Text,
-	View
-} from 'react-native';
+import { Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
 
 export function ViewAttendeeScreen({ route, navigation }) {
 	const { eid, uid } = route.params || {};
