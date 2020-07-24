@@ -153,6 +153,9 @@ module.exports = {
 				eventDesktopList: '80px 80px 1fr'
 			},
 			colors: {
+				white: {
+					DEFAULT: '#FFFFFF'
+				},
 				red: {
 					DEFAULT: '#EF4444',
 					50: '#FEF2F2',
