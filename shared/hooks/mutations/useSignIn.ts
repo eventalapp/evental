@@ -27,8 +27,9 @@ export const useSignIn = (args: UseSignInArgs = {}) => {
 		},
 		{
 			onSuccess: () => {
-				Alert.alert('Sign In', 'Successful', [{ text: 'OK' }]);
 				void queryClient.refetchQueries('user');
+
+				Alert.alert('Sign In', 'Successful', [{ text: 'OK' }]);
 			},
 			onError: (error) => {
 				Alert.alert('Error', error?.message, [{ text: 'OK' }]);
