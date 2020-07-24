@@ -19,7 +19,12 @@ export function SignInScreen() {
 
 	const [passwordHide, setPasswordHide] = useState(true);
 
-	const { data: user } = useUser();
+	const {
+		data: user,
+		refetch: refetchUser,
+		isRefetching: isUserRefetching,
+		isLoading: isUserLoading
+	} = useUser();
 	const { mutate: signIn } = useSignIn();
 
 	console.log(user);
