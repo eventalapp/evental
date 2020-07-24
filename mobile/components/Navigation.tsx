@@ -9,8 +9,8 @@ import { Text } from 'react-native';
 
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
-import { SettingsScreen } from '../screens/Settings';
 import { SignInScreen } from '../screens/SignIn';
+import { SettingsScreen } from '../screens/settings/Settings';
 import { EventStackNavigation } from './EventStackNavigation';
 import { SettingStackNavigation } from './SettingsStackNavigation';
 
