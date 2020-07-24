@@ -166,14 +166,23 @@ export function NotificationPreferencesScreen({ navigation }) {
 				)}
 			</View>
 
-			<Button
-				title="Submit"
+			<Pressable
 				onPress={handleSubmit((data) => {
 					editNotificationPreferences(data);
 				})}
-			/>
-
-			<Text>{preferences && JSON.stringify(preferences)}</Text>
+				style={{
+					flexDirection: 'row',
+					flexWrap: 'wrap',
+					alignSelf: 'flex-end',
+					marginBottom: 8,
+					paddingHorizontal: 20,
+					paddingVertical: 12,
+					borderRadius: 8,
+					backgroundColor: colors.primary[500]
+				}}
+			>
+				<Text style={{ fontSize: 18, color: '#FFFFFF', fontWeight: '700' }}>Save</Text>
+			</Pressable>
 		</ScrollView>
 	);
 }
