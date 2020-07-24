@@ -150,7 +150,8 @@ export function ViewEventScreen({ route, navigation }) {
 									<Text
 										style={{
 											fontSize: 18,
-											fontWeight: 'bold'
+											fontWeight: 'bold',
+											marginBottom: 4
 										}}
 									>
 										{session.name}
