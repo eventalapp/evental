@@ -2,15 +2,13 @@ import { faCalendar, faCog, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
 import { Text } from 'react-native';
 
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
-import { SignInScreen } from '../screens/SignIn';
-import { SettingsScreen } from '../screens/settings/Settings';
+import { SignInScreen } from '../../screens/SignIn';
 import { EventStackNavigation } from './EventStackNavigation';
 import { SettingStackNavigation } from './SettingsStackNavigation';
 
