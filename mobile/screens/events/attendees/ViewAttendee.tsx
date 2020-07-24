@@ -21,8 +21,6 @@ export function ViewAttendeeScreen({ route, navigation }) {
 	const { eid, uid } = route.params || {};
 	const safeAreaInsets = useSafeAreaInsets();
 
-	console.log(eid);
-
 	const {
 		data: event,
 		refetch: refetchEvent,

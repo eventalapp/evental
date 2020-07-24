@@ -10,8 +10,6 @@ export function ViewEventScreen({ route, navigation }) {
 	const { eid } = route.params || {};
 	const safeAreaInsets = useSafeAreaInsets();
 
-	console.log(eid);
-
 	const {
 		data: event,
 		refetch: refetchEvent,
