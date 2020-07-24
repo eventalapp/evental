@@ -56,7 +56,8 @@ export function NotificationPreferencesScreen({ navigation }) {
 		}
 	});
 
-	const { mutate: editNotificationPreferences } = useEditNotificationPreferences();
+	const { mutate: editNotificationPreferences, isLoading: isEditNotificationPreferencesLoading } =
+		useEditNotificationPreferences();
 
 	return (
 		<ScrollView
@@ -179,7 +180,11 @@ export function NotificationPreferencesScreen({ navigation }) {
 					backgroundColor: colors.primary[500]
 				}}
 			>
-				<Text style={{ fontSize: 18, color: '#FFFFFF', fontWeight: '700' }}>Save</Text>
+				{isEditNotificationPreferencesLoading ? (
+					<Text style={{ fontSize: 18, color: '#FFFFFF', fontWeight: '700' }}>Loading</Text>
+				) : (
+					<Text style={{ fontSize: 18, color: '#FFFFFF', fontWeight: '700' }}>Save</Text>
+				)}
 			</Pressable>
 		</ScrollView>
 	);
