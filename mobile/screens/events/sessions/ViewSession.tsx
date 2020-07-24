@@ -14,7 +14,8 @@ export function ViewSessionScreen({ route, navigation }) {
 	const {
 		data: session,
 		refetch: refetchSession,
-		isRefetching: isSessionRefetching
+		isRefetching: isSessionRefetching,
+		isLoading: isSessionLoading
 	} = useSession({ eid, sid });
 
 	return (
@@ -24,7 +25,7 @@ export function ViewSessionScreen({ route, navigation }) {
 					<RefreshControl
 						colors={['#000000']}
 						tintColor="#000000"
-						refreshing={isSessionRefetching}
+						refreshing={isSessionRefetching || isSessionLoading}
 						onRefresh={() => {
 							refetchSession();
 						}}
@@ -91,9 +92,8 @@ export function ViewSessionScreen({ route, navigation }) {
 									style={{
 										flexDirection: 'row',
 										justifyContent: 'space-between',
-										paddingTop: 12,
-										paddingBottom: 12,
-										flex: 4
+										marginTop: 12,
+										marginBottom: 12
 									}}
 								>
 									{session.roleMembers.map((roleMember) => (

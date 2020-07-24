@@ -1,3 +1,5 @@
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {
 	Button,
@@ -21,11 +23,17 @@ export function ViewAttendeeScreen({ route, navigation }) {
 
 	console.log(eid);
 
-	const { data: event, refetch: refetchEvent, isRefetching: isEventRefetching } = useEvent({ eid });
+	const {
+		data: event,
+		refetch: refetchEvent,
+		isRefetching: isEventRefetching,
+		isLoading: isEventLoading
+	} = useEvent({ eid });
 	const {
 		data: attendee,
 		refetch: refetchAttendee,
-		isRefetching: isAttendeeRefetching
+		isRefetching: isAttendeeRefetching,
+		isLoading: isAttendeeLoading
 	} = useAttendee({ eid, uid });
 
 	return (
@@ -35,7 +43,9 @@ export function ViewAttendeeScreen({ route, navigation }) {
 					<RefreshControl
 						colors={['#000000']}
 						tintColor="#000000"
-						refreshing={isEventRefetching || isAttendeeRefetching}
+						refreshing={
+							isEventRefetching || isAttendeeRefetching || isAttendeeLoading || isEventLoading
+						}
 						onRefresh={() => {
 							refetchEvent();
 							refetchAttendee();
@@ -52,6 +62,21 @@ export function ViewAttendeeScreen({ route, navigation }) {
 						paddingRight: safeAreaInsets.right + 28
 					}}
 				>
+					<Pressable
+						onPress={() => {
+							navigation.goBack();
+						}}
+						style={{
+							flexDirection: 'row',
+							alignItems: 'center',
+							justifyContent: 'flex-start',
+							marginBottom: 8
+						}}
+					>
+						<FontAwesomeIcon icon={faArrowLeft} style={{ marginRight: 6 }} />
+						<Text>Back</Text>
+					</Pressable>
+
 					{attendee && (
 						<View>
 							<View
@@ -87,13 +112,13 @@ export function ViewAttendeeScreen({ route, navigation }) {
 							</View>
 						</View>
 					)}
+
+					{attendee?.user?.description && attendee.user.description.length > 0 && (
+						<Text>{attendee.user.description}</Text>
+					)}
+
+					<View>{attendee && <Text>{JSON.stringify(attendee)}</Text>}</View>
 				</View>
-
-				{attendee?.user?.description && attendee.user.description.length > 0 && (
-					<Text>{attendee.user.description}</Text>
-				)}
-
-				<View>{attendee && <Text>{JSON.stringify(attendee)}</Text>}</View>
 			</ScrollView>
 		</>
 	);
