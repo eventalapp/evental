@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
+import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 
 export function ViewEventScreen({ route, navigation }) {
 	const { eid } = route.params || {};
@@ -17,6 +18,11 @@ export function ViewEventScreen({ route, navigation }) {
 		refetch: refetchSessions,
 		isRefetching: isSessionsRefetching
 	} = useSessions({ eid });
+	const {
+		data: venues,
+		refetch: refetchVenues,
+		isRefetching: isVenuesRefetching
+	} = useVenues({ eid });
 
 	return (
 		<>
@@ -148,6 +154,7 @@ export function ViewEventScreen({ route, navigation }) {
 							</Pressable>
 						)}
 					/>
+					{venues && <Text>{JSON.stringify(venues)}</Text>}
 					{event && <Text>{JSON.stringify(event)}</Text>}
 				</View>
 			</ScrollView>
