@@ -98,6 +98,7 @@ export function SignInScreen() {
 		</View>
 	);
 }
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
