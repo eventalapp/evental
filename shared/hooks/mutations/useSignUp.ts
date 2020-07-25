@@ -8,7 +8,7 @@ import { api } from '../../api';
 import { StrippedUser } from '../../types';
 import { SignUpPayload } from '../../utils/schema';
 
-interface UseSignUpMutationOptions {
+interface UseSignUpOptions {
 	onError?: (
 		error: ErroredAPIResponse | undefined,
 		variables: SignUpPayload,
@@ -17,7 +17,7 @@ interface UseSignUpMutationOptions {
 	onSuccess?: (data: StrippedUser, variables: SignUpPayload, context: unknown) => void;
 }
 
-export const useSignUpMutation = (args: UseSignUpMutationOptions = {}) => {
+export const useSignUp = (args: UseSignUpOptions = {}) => {
 	const { onError, onSuccess } = args;
 	const queryClient = useQueryClient();
 

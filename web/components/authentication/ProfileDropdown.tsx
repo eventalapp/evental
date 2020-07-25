@@ -13,15 +13,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
+import { useSignOut } from '@eventalapp/shared/hooks/mutations/useSignOut';
+
 import { StrippedUser } from '../../utils/user';
 
 type Props = {
 	user: StrippedUser | undefined;
-} & UseSignOutMutationData;
+};
 
 export const ProfileDropdown = (props: Props) => {
-	const { user, signOutMutation } = props;
+	const { user } = props;
+	const { mutate: signOut } = useSignOut();
 
 	return (
 		<DropdownMenuPrimitive.Root>
@@ -129,7 +131,7 @@ export const ProfileDropdown = (props: Props) => {
 
 				<button
 					onClick={() => {
-						signOutMutation.mutate();
+						signOut();
 					}}
 					className="w-full"
 				>

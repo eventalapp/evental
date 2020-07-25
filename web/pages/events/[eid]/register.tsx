@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { toast } from 'react-toastify';
 
+import { useEventRegister } from '@eventalapp/shared/hooks/mutations/useEventRegister';
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
@@ -21,13 +23,11 @@ import { Navigation } from '../../../components/navigation';
 import { Button } from '../../../components/primitives/Button';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
-import { useEventRegister } from '../../../hooks/mutations/useEventRegister';
 
 const EventRegisterPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { data: event, isLoading: isEventLoading } = useEvent({ eid: String(eid) });
-	const { eventRegistrationMutation } = useEventRegister(String(eid));
 	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 	const { data: user } = useUser();
 
@@ -144,12 +144,7 @@ const EventRegisterPage: NextPage = () => {
 						To attend this event, please click the register button below.
 					</p>
 
-					{event && (
-						<CreateAttendeeForm
-							event={event}
-							eventRegistrationMutation={eventRegistrationMutation}
-						/>
-					)}
+					{event && <CreateAttendeeForm event={event} eid={String(eid)} />}
 				</Column>
 			</PageWrapper>
 

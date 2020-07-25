@@ -1,7 +1,9 @@
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
+import { useRequestVerification } from '@eventalapp/shared/hooks/mutations/useRequestVerification';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { UserSettingsForm } from '../../components/authentication/UserSettingsForm';
@@ -13,19 +15,29 @@ import { SettingsPageWrapper } from '../../components/layout/SettingsPageWrapper
 import { SettingsSidebarWrapper } from '../../components/layout/SettingsSidebarWrapper';
 import { Heading } from '../../components/primitives/Heading';
 import { Paragraph } from '../../components/primitives/Paragraph';
-import { useRequestVerificationEmail } from '../../hooks/mutations/useRequestVerificationEmail';
 
 const SettingsPage: NextPage = () => {
 	const { data: user, isLoading: isUserLoading } = useUser();
 
-	const { requestVerificationEmailMutation } = useRequestVerificationEmail();
+	const {
+		mutate: requestVerification,
+		isSuccess: isVerificationSuccess,
+		isLoading: isVerificationLoading
+	} = useRequestVerification({
+		onSuccess: () => {
+			toast.success('Verification request successfully sent. Check your email.');
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'An error has occurred.');
+		}
+	});
 	const [canVerify, setCanVerify] = useState(true);
 
 	useEffect(() => {
-		if (requestVerificationEmailMutation.isSuccess) {
+		if (isVerificationSuccess) {
 			setCanVerify(false);
 		}
-	}, [requestVerificationEmailMutation.isSuccess]);
+	}, [isVerificationSuccess]);
 
 	if (isUserLoading) {
 		return <LoadingPage />;
@@ -58,12 +70,12 @@ const SettingsPage: NextPage = () => {
 						{canVerify && user && !user.emailVerified && (
 							<button
 								className="mb-4 block w-full rounded-md bg-primary py-3 px-5 font-medium text-white"
-								disabled={requestVerificationEmailMutation.isLoading}
+								disabled={isVerificationLoading}
 								onClick={() => {
-									requestVerificationEmailMutation.mutate();
+									requestVerification();
 								}}
 							>
-								{requestVerificationEmailMutation.isLoading ? (
+								{isVerificationLoading ? (
 									<LoadingInner />
 								) : (
 									'Your account is not verified. Click here to request a verification email.'

@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
+import { useVerifyEmail } from '@eventalapp/shared/hooks/mutations/useVerifyEmail';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { LoadingSpinner } from '../../../components/error/LoadingSpinner';
@@ -11,17 +12,16 @@ import Column from '../../../components/layout/Column';
 import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
-import { useVerifyEmail } from '../../../hooks/mutations/useVerifyAccount';
 
 const VerifyEmailPage: NextPage = () => {
 	const { data: user } = useUser();
 	const router = useRouter();
-	const { verifyEmailMutation } = useVerifyEmail();
+	const { mutate: verifyEmail } = useVerifyEmail();
 	const { code } = router.query;
 
 	useEffect(() => {
 		if (code && user && !user.emailVerified) {
-			verifyEmailMutation.mutate({ code: String(code) });
+			verifyEmail({ code: String(code) });
 		}
 	}, [user, code]);
 

@@ -5,12 +5,12 @@ import { default as classNames } from 'classnames';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { useSignOut } from '@eventalapp/shared/hooks/mutations/useSignOut';
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
 import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
-import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
 import { faBarsSquare } from '../../utils/icons';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
@@ -31,7 +31,6 @@ const LinkSkeleton = <Skeleton className="mx-2 mb-2 h-7 w-20" />;
 export const EventNavigation: React.FC<Props> = (props) => {
 	const { eid } = props;
 	const [isOpen, setIsOpen] = useState(false);
-	const { signOutMutation } = useSignOutMutation();
 	const { data: user, isLoading: isUserLoading } = useUser();
 	const { data: event, isLoading: isEventLoading } = useEvent({ eid: String(eid) });
 	const { data: roles, isLoading: isRolesLoading } = useRoles({ eid: String(eid) });
@@ -113,7 +112,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 							<div className="flex flex-row items-center">
 								{user ? (
 									<NavigationMenuPrimitive.Item className="flex">
-										<ProfileDropdown user={user} signOutMutation={signOutMutation} />
+										<ProfileDropdown user={user} />
 									</NavigationMenuPrimitive.Item>
 								) : (
 									isUserLoading && <Skeleton className="h-10 w-10" containerClassName="flex" />
@@ -133,7 +132,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 				<div className="relative h-full w-full">
 					<div className="absolute top-4 right-4">
 						{user ? (
-							<ProfileDropdown user={user} signOutMutation={signOutMutation} />
+							<ProfileDropdown user={user} />
 						) : (
 							isUserLoading && <Skeleton className="h-10 w-10" />
 						)}

@@ -5,6 +5,7 @@ import * as Prisma from '@prisma/client';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
+	Alert,
 	Pressable,
 	RefreshControl,
 	ScrollView,
@@ -49,7 +50,18 @@ export const NotificationPreferencesForm: React.FC<Props> = (props) => {
 	});
 
 	const { mutate: editNotificationPreferences, isLoading: isEditNotificationPreferencesLoading } =
-		useEditNotificationPreferences();
+		useEditNotificationPreferences({
+			onSuccess: () => {
+				Alert.alert(
+					'Preferences Updated',
+					'Your user notification preferences have succesfully been updated.',
+					[{ text: 'OK' }]
+				);
+			},
+			onError: (error) => {
+				Alert.alert('Error', error?.message, [{ text: 'OK' }]);
+			}
+		});
 
 	return (
 		<View>

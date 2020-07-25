@@ -75,7 +75,7 @@ export const EventHeader: React.FC<{
 					? user &&
 					  !isFounder &&
 					  Boolean(isAttendee) && (
-							<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
+							<LeaveEventDialog eid={event.slug}>
 								<IconButtonTooltip
 									icon={faRightFromBracket}
 									message="Leave this event"

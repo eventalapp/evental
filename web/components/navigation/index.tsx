@@ -6,9 +6,9 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { useSignOut } from '@eventalapp/shared/hooks/mutations/useSignOut';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
-import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
 import { faBarsSquare } from '../../utils/icons';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
 import { LinkButton } from '../primitives/LinkButton';
@@ -31,7 +31,7 @@ const FreeEventalPro = (
 
 export const Navigation: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
-	const { signOutMutation } = useSignOutMutation();
+
 	const { data: user, isLoading: isUserLoading } = useUser();
 
 	return (
@@ -82,7 +82,7 @@ export const Navigation: React.FC = () => {
 											</Link>
 										</NavigationMenuPrimitive.Item>
 										<NavigationMenuPrimitive.Item className="flex">
-											<ProfileDropdown user={user} signOutMutation={signOutMutation} />
+											<ProfileDropdown user={user} />
 										</NavigationMenuPrimitive.Item>
 									</>
 								) : (
@@ -103,7 +103,7 @@ export const Navigation: React.FC = () => {
 				<div className="relative h-full w-full">
 					<div className="absolute top-4 right-4">
 						{user ? (
-							<ProfileDropdown user={user} signOutMutation={signOutMutation} />
+							<ProfileDropdown user={user} />
 						) : (
 							isUserLoading && <Skeleton className="h-10 w-10" />
 						)}

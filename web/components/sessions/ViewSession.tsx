@@ -117,11 +117,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 						user &&
 						!admin &&
 						(isAttending ? (
-							<LeaveSessionDialog
-								eventSlug={event.slug}
-								sessionSlug={session.slug}
-								userSlug={String(user?.slug)}
-							>
+							<LeaveSessionDialog eid={event.slug} sid={session.slug}>
 								<IconButtonTooltip
 									icon={faRightFromBracket}
 									message="Leave this session"

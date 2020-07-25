@@ -21,7 +21,7 @@ export const useVerifyEmail = (args: UseVerifyEmailArgs = {}) => {
 
 	const queryClient = useQueryClient();
 
-	const verifyEmailMutation = useMutation<void, ErroredAPIResponse, VerifyEmailPayload>(
+	return useMutation<void, ErroredAPIResponse, VerifyEmailPayload>(
 		async (data) => {
 			return await api
 				.post<SuccessAPIResponse<void>>(`/auth/verify`, data)
@@ -39,6 +39,4 @@ export const useVerifyEmail = (args: UseVerifyEmailArgs = {}) => {
 			onError
 		}
 	);
-
-	return { verifyEmailMutation };
 };

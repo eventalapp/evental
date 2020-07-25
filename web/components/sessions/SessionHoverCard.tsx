@@ -79,12 +79,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 
 	if (user && isSessionAttendee) {
 		return (
-			<LeaveSessionDialog
-				eventSlug={event.slug}
-				sessionSlug={session.slug}
-				userSlug={String(user.slug)}
-				redirect={redirect}
-			>
+			<LeaveSessionDialog eid={event.slug} sid={session.slug} redirect={redirect}>
 				<div className="flex items-center justify-center">
 					<Tooltip side={'right'} message={'Leave this session'}>
 						<button type="button">

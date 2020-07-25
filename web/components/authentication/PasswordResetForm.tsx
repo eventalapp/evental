@@ -2,8 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
-import { UsePasswordResetData } from '../../hooks/mutations/usePasswordReset';
+import { useResetPassword } from '@eventalapp/shared/hooks/mutations/useResetPassword';
+
 import { ChangePasswordPayload, ChangePasswordSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -14,12 +16,10 @@ import { Label } from '../primitives/Label';
 type Props = { code: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
-> &
-	UsePasswordResetData;
-
+>;
 export const PasswordResetForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { passwordResetMutation, code } = props;
+	const { code } = props;
 	const {
 		register,
 		handleSubmit,
@@ -30,11 +30,19 @@ export const PasswordResetForm: React.FC<Props> = (props) => {
 		},
 		resolver: zodResolver(ChangePasswordSchema)
 	});
+	const { mutate: passwordReset, isLoading: isPasswordResetLoading } = useResetPassword({
+		onSuccess: () => {
+			toast.success('Password reset request successfully sent. Check your email.');
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'An error has occurred.');
+		}
+	});
 
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				passwordResetMutation.mutate(data);
+				passwordReset(data);
 			})}
 		>
 			<div className="my-5 flex w-full flex-col">
@@ -54,9 +62,9 @@ export const PasswordResetForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					variant="primary"
 					padding="medium"
-					disabled={passwordResetMutation.isLoading}
+					disabled={isPasswordResetLoading}
 				>
-					{passwordResetMutation.isLoading ? <LoadingInner /> : 'Change'}
+					{isPasswordResetLoading ? <LoadingInner /> : 'Change'}
 				</Button>
 			</div>
 		</form>
