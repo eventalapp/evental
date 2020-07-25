@@ -1,8 +1,6 @@
-import axios, { AxiosError } from 'axios';
-import router from 'next/router';
+import { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
+import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
 
@@ -29,14 +27,9 @@ export const useSignOut = (args: UseSignOutArgs = {}) => {
 			onSuccess: (...rest) => {
 				void queryClient.refetchQueries('user');
 
-				router.push('/').then(() => {
-					toast.success('You have been signed out');
-				});
 				onSuccess?.(...rest);
 			},
-			onError: (error) => {
-				toast.error(error.message ?? 'Failed to sign out.');
-			}
+			onError
 		}
 	);
 };
