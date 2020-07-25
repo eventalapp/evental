@@ -1,3 +1,4 @@
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import { Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -6,7 +7,12 @@ import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
 import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 
-export function ViewEventScreen({ route, navigation }) {
+import { EventsStackParamList } from '../../components/navigation/EventStackNavigation';
+
+type Props = StackScreenProps<EventsStackParamList, 'ViewEvent'>;
+
+export const ViewEventScreen = (props: Props) => {
+	const { route, navigation } = props;
 	const { eid } = route.params || {};
 	const safeAreaInsets = useSafeAreaInsets();
 
@@ -174,4 +180,4 @@ export function ViewEventScreen({ route, navigation }) {
 			</ScrollView>
 		</>
 	);
-}
+};

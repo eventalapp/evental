@@ -1,29 +1,12 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { zodResolver } from '@hookform/resolvers/zod';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import {
-	Pressable,
-	RefreshControl,
-	ScrollView,
-	StyleSheet,
-	Switch,
-	Text,
-	View
-} from 'react-native';
+import { Pressable, RefreshControl, ScrollView, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useEditNotificationPreferences } from '@eventalapp/shared/hooks/mutations/useEditNotificationPreferences';
 import { useNotificationPreferences } from '@eventalapp/shared/hooks/queries/useNotificationPreferences';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
-import { colors } from '@eventalapp/shared/utils/color';
-import {
-	NotificationPreferencePayload,
-	NotificationPreferenceSchema
-} from '@eventalapp/shared/utils/schema';
 
 import { NotificationPreferencesForm } from '../../components/form/NotificationPreferenceForm';
 import { SettingsStackParamList } from '../../components/navigation/SettingsStackNavigation';
@@ -31,7 +14,8 @@ import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 
 type Props = StackScreenProps<SettingsStackParamList, 'NotificationPreferences'>;
 
-export const NotificationPreferencesScreen = ({ navigation }: Props) => {
+export const NotificationPreferencesScreen = (props: Props) => {
+	const { navigation } = props;
 	const safeAreaInsets = useSafeAreaInsets();
 
 	const {

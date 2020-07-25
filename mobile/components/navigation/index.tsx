@@ -1,7 +1,7 @@
 import { faCalendar, faCog, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, NavigatorScreenParams } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
 import { Text } from 'react-native';
@@ -9,11 +9,18 @@ import { Text } from 'react-native';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { SignInScreen } from '../../screens/SignIn';
-import { EventStackNavigation } from './EventStackNavigation';
-import { SettingStackNavigation } from './SettingsStackNavigation';
+import { EventStackNavigation, EventsStackParamList } from './EventStackNavigation';
+import { SettingStackNavigation, SettingsStackParamList } from './SettingsStackNavigation';
 
 const Tab = createBottomTabNavigator();
 const prefix = Linking.createURL('/');
+
+export type RootStackParamList = {
+	Events: undefined;
+	SignIn: undefined;
+	EventsStack: NavigatorScreenParams<EventsStackParamList>;
+	SettingsStack: NavigatorScreenParams<SettingsStackParamList>;
+};
 
 export const Navigation = () => {
 	const config = {

@@ -9,7 +9,8 @@ import { SettingsStackParamList } from '../../components/navigation/SettingsStac
 
 type Props = StackScreenProps<SettingsStackParamList, 'Settings'>;
 
-export const SettingsScreen = ({ navigation }: Props) => {
+export const SettingsScreen = (props: Props) => {
+	const { navigation } = props;
 	const safeAreaInsets = useSafeAreaInsets();
 	const {
 		data: user,

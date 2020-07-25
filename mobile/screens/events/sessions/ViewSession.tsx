@@ -1,5 +1,6 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import { Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -7,7 +8,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
 import { formatDateRange } from '@eventalapp/shared/utils/date';
 
-export function ViewSessionScreen({ route, navigation }) {
+import { EventsStackParamList } from '../../../components/navigation/EventStackNavigation';
+
+type Props = StackScreenProps<EventsStackParamList, 'ViewSession'>;
+
+export const ViewSessionScreen = (props: Props) => {
+	const { route, navigation } = props;
 	const { eid, sid } = route.params || {};
 	const safeAreaInsets = useSafeAreaInsets();
 
@@ -147,4 +153,4 @@ export function ViewSessionScreen({ route, navigation }) {
 			</ScrollView>
 		</>
 	);
-}
+};
