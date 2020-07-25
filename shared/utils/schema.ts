@@ -301,13 +301,13 @@ export const UserSettingsSchema = z.object({
 
 export type UserSettingsPayload = z.infer<typeof UserSettingsSchema>;
 
-export const UserNotificationPreferenceSchema = z.object({
+export const NotificationPreferenceSchema = z.object({
 	event: z.boolean(),
 	marketing: z.boolean(),
 	news: z.boolean()
 });
 
-export type UserNotificationPreferencePayload = z.infer<typeof UserNotificationPreferenceSchema>;
+export type NotificationPreferencePayload = z.infer<typeof NotificationPreferenceSchema>;
 
 // Invites
 
