@@ -6,6 +6,11 @@ import { SettingsScreen } from '../../screens/settings/Settings';
 
 const Stack = createStackNavigator();
 
+export type SettingsStackParamList = {
+	Settings: undefined;
+	NotificationPreferences: undefined;
+};
+
 export const SettingStackNavigation = () => {
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Settings">

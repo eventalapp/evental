@@ -1,6 +1,8 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
@@ -24,9 +26,12 @@ import {
 } from '@eventalapp/shared/utils/schema';
 
 import { NotificationPreferencesForm } from '../../components/form/NotificationPreferenceForm';
+import { SettingsStackParamList } from '../../components/navigation/SettingsStackNavigation';
 import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 
-export function NotificationPreferencesScreen({ navigation }) {
+type Props = StackScreenProps<SettingsStackParamList, 'NotificationPreferences'>;
+
+export const NotificationPreferencesScreen = ({ navigation }: Props) => {
 	const safeAreaInsets = useSafeAreaInsets();
 
 	const {
@@ -94,4 +99,4 @@ export function NotificationPreferencesScreen({ navigation }) {
 			{preferences && user && <NotificationPreferencesForm preferences={preferences} user={user} />}
 		</ScrollView>
 	);
-}
+};

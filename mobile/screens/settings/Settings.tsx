@@ -1,10 +1,15 @@
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import { Button, RefreshControl, ScrollView, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
-export function SettingsScreen({ navigation }) {
+import { SettingsStackParamList } from '../../components/navigation/SettingsStackNavigation';
+
+type Props = StackScreenProps<SettingsStackParamList, 'Settings'>;
+
+export const SettingsScreen = ({ navigation }: Props) => {
 	const safeAreaInsets = useSafeAreaInsets();
 	const {
 		data: user,
@@ -53,4 +58,4 @@ export function SettingsScreen({ navigation }) {
 			></Button>
 		</ScrollView>
 	);
-}
+};

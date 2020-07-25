@@ -8,6 +8,13 @@ import { ViewSessionScreen } from '../../screens/events/sessions/ViewSession';
 
 const Stack = createStackNavigator();
 
+export type EventsStackParamList = {
+	Events: undefined;
+	ViewEvent: { eid: string };
+	ViewAttendee: { eid: string; uid: string };
+	ViewSession: { eid: string; sid: string };
+};
+
 export const EventStackNavigation = () => {
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Events">
