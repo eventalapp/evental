@@ -1,6 +1,5 @@
 import { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { Alert } from 'react-native';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
@@ -26,7 +25,7 @@ export const useSignIn = (args: UseSignInArgs = {}) => {
 			return await api
 				.post<SuccessAPIResponse<StrippedUser>>(`/auth/signin`, data)
 				.then((res) => res.data.data)
-				.catch((err: AxiosError<ErroredAPIResponse, any>) => {
+				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
 				});
 		},
