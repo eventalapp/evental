@@ -8,11 +8,16 @@ import { StrippedUser } from '../../types';
 import { SignInPayload } from '../../utils/schema';
 
 interface UseSignInArgs {
-	redirectUrl?: string;
+	onError?: (
+		error: ErroredAPIResponse | undefined,
+		variables: SignInPayload,
+		context: unknown
+	) => void;
+	onSuccess?: (data: StrippedUser, variables: SignInPayload, context: unknown) => void;
 }
 
 export const useSignIn = (args: UseSignInArgs = {}) => {
-	const { redirectUrl } = args;
+	const { onError, onSuccess } = args;
 
 	const queryClient = useQueryClient();
 
@@ -26,14 +31,12 @@ export const useSignIn = (args: UseSignInArgs = {}) => {
 				});
 		},
 		{
-			onSuccess: () => {
+			onSuccess: (...rest) => {
 				void queryClient.refetchQueries('user');
 
-				Alert.alert('Sign In', 'Successful', [{ text: 'OK' }]);
+				onSuccess?.(...rest);
 			},
-			onError: (error) => {
-				Alert.alert('Error', error?.message, [{ text: 'OK' }]);
-			}
+			onError
 		}
 	);
 };
