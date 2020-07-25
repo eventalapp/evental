@@ -14,14 +14,15 @@ import { useEvent } from '@eventalapp/shared/hooks';
 import {
 	EditEventPayload,
 	EditEventSchema,
+	capitalizeFirstLetter,
 	copy,
 	formatDateRange,
+	slugify,
 	timeZoneOptions
 } from '@eventalapp/shared/utils';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEvent';
 import { theme } from '../../tailwind.config';
-import { capitalizeFirstLetter, slugify } from '../../utils/string';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { renderCustomHeader } from '../form/DatePicker';

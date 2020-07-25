@@ -1,11 +1,10 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
-import { EditPageSchema } from '@eventalapp/shared/utils';
+import { EditPageSchema, generateSlug } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../../utils/attendee';
-import { generateSlug } from '../../../../../../../utils/string';
 
 export default api({
 	async PUT({ ctx, req }) {

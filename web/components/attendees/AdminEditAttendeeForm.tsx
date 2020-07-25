@@ -10,12 +10,13 @@ import {
 	AdminEditAttendeeSchema,
 	AttendeeWithUser,
 	FullUser,
-	copy
+	capitalizeFirstLetter,
+	copy,
+	slugify
 } from '@eventalapp/shared/utils';
 
 import { useEditAttendee } from '../../hooks/mutations/useEditAttendee';
 import { useImageUpload } from '../../hooks/mutations/useImageUpload';
-import { capitalizeFirstLetter, slugify } from '../../utils/string';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { StyledEditor } from '../form/Editor';

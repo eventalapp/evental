@@ -6,9 +6,9 @@ import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useEvent, usePages, useRoles, useUser } from '@eventalapp/shared/hooks';
+import { capitalizeFirstLetter } from '@eventalapp/shared/utils';
 import { faBarsSquare } from '@eventalapp/shared/utils/icons';
 
-import { capitalizeFirstLetter } from '../../utils/string';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
 import { AuthContainer } from '../navigation/AuthContainer';
 import { FullscreenLinkItem } from '../navigation/FullscreenLinkItem';

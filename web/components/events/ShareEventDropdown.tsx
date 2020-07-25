@@ -6,10 +6,7 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import cx from 'classnames';
 import React from 'react';
 
-import { emailLink } from '../../utils/sharing/email';
-import { facebookLink } from '../../utils/sharing/facebook';
-import { linkedinLink } from '../../utils/sharing/linkedin';
-import { twitterLink } from '../../utils/sharing/twitter';
+import { emailLink, facebookLink, linkedinLink, twitterLink } from '@eventalapp/shared/utils';
 
 interface Props {
 	event: Prisma.Event;
