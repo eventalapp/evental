@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
@@ -12,7 +13,6 @@ import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
-import { useSignInMutation } from '../../hooks/mutations/useSignInMutation';
 
 const SignInPage: NextPage = () => {
 	const { data: user } = useUser();
@@ -22,10 +22,6 @@ const SignInPage: NextPage = () => {
 	if (router.query.redirectUrl) {
 		params.append('redirectUrl', String(router.query.redirectUrl));
 	}
-
-	const { signInMutation } = useSignInMutation({
-		redirectUrl: router.query.redirectUrl ? String(router.query.redirectUrl) : undefined
-	});
 
 	if (user) {
 		return <AlreadySignedInPage />;
@@ -61,7 +57,7 @@ const SignInPage: NextPage = () => {
 						<Heading>Sign in</Heading>
 					</div>
 
-					<SignInForm signInMutation={signInMutation} params={params.toString()} />
+					<SignInForm params={params.toString()} />
 				</div>
 			</Column>
 

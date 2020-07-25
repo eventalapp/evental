@@ -1,9 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
-import { UseSignInMutationData } from '../../hooks/mutations/useSignInMutation';
+import { useSignIn } from '@eventalapp/shared/hooks/mutations/useSignIn';
+
 import { SignInPayload, SignInSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -14,11 +17,28 @@ import { Label } from '../primitives/Label';
 type Props = { params?: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
-> &
-	UseSignInMutationData;
+>;
 
 export const SignInForm: React.FC<Props> = (props) => {
-	const { signInMutation, params } = props;
+	const { params } = props;
+	const router = useRouter();
+
+	const { mutate: signIn, isLoading: isSignInLoading } = useSignIn({
+		onSuccess: () => {
+			const redirectUrl = router.query.redirectUrl ? String(router.query.redirectUrl) : undefined;
+
+			if (!redirectUrl) {
+				router.push('/events').then(() => {
+					toast.success('You have successfully signed in!');
+				});
+			} else {
+				router.push(redirectUrl).then(() => {
+					toast.success('You have successfully signed in!');
+				});
+			}
+		}
+	});
+
 	const {
 		register,
 		handleSubmit,
@@ -30,7 +50,7 @@ export const SignInForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				signInMutation.mutate(data);
+				signIn(data);
 			})}
 		>
 			<div className="mt-5 w-full">
@@ -64,9 +84,9 @@ export const SignInForm: React.FC<Props> = (props) => {
 					className="w-full"
 					variant="primary"
 					padding="medium"
-					disabled={signInMutation.isLoading}
+					disabled={isSignInLoading}
 				>
-					{signInMutation.isLoading ? <LoadingInner /> : 'Sign In'}
+					{isSignInLoading ? <LoadingInner /> : 'Sign In'}
 				</Button>
 			</div>
 			<span className="mt-3 block">
