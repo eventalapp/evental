@@ -108,7 +108,7 @@ const GuidesPage: NextPage = () => {
 						<GuideCategoryCard>
 							<span className="mb-1 block text-center text-xl font-bold md:text-2xl">Sessions</span>
 							<p className="text-sm text-gray-600">
-								Sessions are specific talks/events occuring at your event. Attendees can register
+								Sessions are specific talks/events occurring at your event. Attendees can register
 								for these sessions. Checkout the following guides for organizing sessions below.
 							</p>
 

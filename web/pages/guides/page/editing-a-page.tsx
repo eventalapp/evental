@@ -19,14 +19,14 @@ type Section = {
 
 const sections: Record<string, Section> = {
 	navigateDashboard: { anchor: 'navigate-to-the-dashboard', title: 'Navigate to the dashboard' },
-	navigatepages: {
+	navigatePages: {
 		anchor: 'navigate-to-the-pages-page',
 		title: 'Navigate to the pages page'
 	},
-	editpage: { anchor: 'edit-a-page', title: 'Edit a page' }
+	editPage: { anchor: 'edit-a-page', title: 'Edit a page' }
 };
 
-const EditingApageGuidePage: NextPage = () => {
+const EditingAPageGuidePage: NextPage = () => {
 	return (
 		<>
 			<Navigation />
@@ -68,12 +68,12 @@ const EditingApageGuidePage: NextPage = () => {
 								relativeLink: `/guides/page/editing-a-page#${sections.navigateDashboard.anchor}`
 							},
 							{
-								text: sections.navigatepages.title,
-								relativeLink: `/guides/page/editing-a-page#${sections.navigatepages.anchor}`
+								text: sections.navigatePages.title,
+								relativeLink: `/guides/page/editing-a-page#${sections.navigatePages.anchor}`
 							},
 							{
-								text: sections.editpage.title,
-								relativeLink: `/guides/page/editing-a-page#${sections.editpage.anchor}`
+								text: sections.editPage.title,
+								relativeLink: `/guides/page/editing-a-page#${sections.editPage.anchor}`
 							}
 						]}
 					/>
@@ -90,10 +90,10 @@ const EditingApageGuidePage: NextPage = () => {
 						</p>
 					</GuideSection>
 
-					<GuideSection id={sections.navigatepages.anchor}>
+					<GuideSection id={sections.navigatePages.anchor}>
 						<GuideSectionHeader
-							text={sections.navigatepages.title}
-							url={`/guides/page/editing-a-page#${sections.navigatepages.anchor}`}
+							text={sections.navigatePages.title}
+							url={`/guides/page/editing-a-page#${sections.navigatePages.anchor}`}
 						/>
 
 						<p className="mb-4 text-gray-700">
@@ -102,10 +102,10 @@ const EditingApageGuidePage: NextPage = () => {
 						</p>
 					</GuideSection>
 
-					<GuideSection id={sections.editpage.anchor}>
+					<GuideSection id={sections.editPage.anchor}>
 						<GuideSectionHeader
-							text={sections.editpage.title}
-							url={`/guides/page/editing-a-page#${sections.editpage.anchor}`}
+							text={sections.editPage.title}
+							url={`/guides/page/editing-a-page#${sections.editPage.anchor}`}
 						/>
 
 						<p className="mb-4 text-gray-700">
@@ -133,4 +133,4 @@ const EditingApageGuidePage: NextPage = () => {
 	);
 };
 
-export default EditingApageGuidePage;
+export default EditingAPageGuidePage;

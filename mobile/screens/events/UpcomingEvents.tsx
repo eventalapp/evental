@@ -34,7 +34,7 @@ export const UpcomingEventsScreen = (props: Props) => {
 					tintColor="#000000"
 					refreshing={isUpcomingEventsRefetching || isUpcomingEventsLoading}
 					onRefresh={() => {
-						refetchUpcomingEvents();
+						void refetchUpcomingEvents();
 					}}
 				/>
 			}

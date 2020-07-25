@@ -38,7 +38,7 @@ export const NotificationPreferencesForm: React.FC<Props> = (props) => {
 			onSuccess: () => {
 				Alert.alert(
 					'Preferences Updated',
-					'Your user notification preferences have succesfully been updated.',
+					'Your user notification preferences have successfully been updated.',
 					[{ text: 'OK' }]
 				);
 			},

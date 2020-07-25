@@ -128,7 +128,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						</p>
 
 						<p className="mb-4 text-gray-700">
-							After visting the edit session form. Select the{' '}
+							After visiting the edit session form. Select the{' '}
 							<span className="font-medium">"Attach People"</span> button
 						</p>
 

@@ -4,7 +4,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
-import { NotificationPreferencePayload } from '../../utils/schema';
+import { NotificationPreferencePayload } from '../../utils';
 
 interface UseUserSettingsArgs {
 	onError?: (
@@ -33,7 +33,7 @@ export const useEditNotificationPreferences = (args: UseUserSettingsArgs = {}) =
 			return await api
 				.put<SuccessAPIResponse<Prisma.NotificationPreference>>(`/user/notifications`, data)
 				.then((res) => res.data.data)
-				.catch((err: AxiosError<ErroredAPIResponse, any>) => {
+				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
 				});
 		},

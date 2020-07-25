@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation } from 'react-query';
 
 import { api } from '../../api';
-import { ChangePasswordRequestPayload } from '../../utils/schema';
+import { ChangePasswordRequestPayload } from '../../utils';
 
 interface UseRequestPasswordResetArgs {
 	onError?: (

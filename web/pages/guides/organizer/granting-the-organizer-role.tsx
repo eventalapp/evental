@@ -128,7 +128,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 						</p>
 
 						<p className="mb-4 text-gray-700">
-							After visting the edit attendee form. Select the{' '}
+							After visiting the edit attendee form. Select the{' '}
 							<span className="font-medium">"Permission Role"</span> dropdown, and select{' '}
 							<span className="font-medium">"Organizer"</span>
 						</p>
