@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useDeleteVenueMutation } from '../../hooks/mutations/useDeleteVenueMutation';
+import { useDeleteVenueMutation } from '../../hooks/mutations/useDeleteVenue';
 import { DeleteDataPayload, DeleteDataSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';

@@ -17,7 +17,7 @@ export interface UseEditUserMutationData {
 	>;
 }
 
-export const useEditUserMutation = (eid: string, uid: string): UseEditUserMutationData => {
+export const useEditUser = (eid: string, uid: string): UseEditUserMutationData => {
 	const queryClient = useQueryClient();
 
 	const editUserMutation = useMutation<

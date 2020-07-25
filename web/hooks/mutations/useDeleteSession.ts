@@ -8,10 +8,7 @@ export interface UseDeleteSessionMutationData {
 	deleteSessionMutation: UseMutationResult<void, AxiosError<ErroredAPIResponse, unknown>, void>;
 }
 
-export const useDeleteSessionMutation = (
-	eid: string,
-	sid: string
-): UseDeleteSessionMutationData => {
+export const useDeleteSession = (eid: string, sid: string): UseDeleteSessionMutationData => {
 	const queryClient = useQueryClient();
 
 	const deleteSessionMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(

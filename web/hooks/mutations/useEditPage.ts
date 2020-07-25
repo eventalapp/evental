@@ -5,36 +5,36 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { EditRolePayload } from '../../utils/schemas';
+import { EditPagePayload } from '../../utils/schemas';
 
-export interface UseEditRoleMutationData {
-	editRoleMutation: UseMutationResult<
-		Prisma.EventRole,
+export interface UseEditPageMutationData {
+	editPageMutation: UseMutationResult<
+		Prisma.EventPage,
 		AxiosError<ErroredAPIResponse, unknown>,
-		EditRolePayload
+		EditPagePayload
 	>;
 }
 
-export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutationData => {
+export const useEditPage = (eid: string, pid: string): UseEditPageMutationData => {
 	const queryClient = useQueryClient();
 
-	const editRoleMutation = useMutation<
-		Prisma.EventRole,
+	const editPageMutation = useMutation<
+		Prisma.EventPage,
 		AxiosError<ErroredAPIResponse, unknown>,
-		EditRolePayload
+		EditPagePayload
 	>(
 		async (data) => {
 			return await axios
-				.put<SuccessAPIResponse<Prisma.EventRole>>(`/api/events/${eid}/admin/roles/${rid}`, data)
+				.put<SuccessAPIResponse<Prisma.EventPage>>(`/api/events/${eid}/admin/pages/${pid}`, data)
 				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: (data) => {
-				toast.success('Role edited successfully');
+				toast.success('Page edited successfully');
 
-				router.push(`/events/${eid}/admin/roles/${data.slug}`).then(() => {
-					void queryClient.invalidateQueries(['role', eid, rid]);
-					void queryClient.invalidateQueries(['roles']);
+				router.push(`/events/${eid}/admin/pages/${data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['page', eid, pid]);
+					void queryClient.invalidateQueries(['pages']);
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
@@ -44,5 +44,5 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 		}
 	);
 
-	return { editRoleMutation };
+	return { editPageMutation };
 };

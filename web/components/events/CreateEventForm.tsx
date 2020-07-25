@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import { formatDateRange } from '@eventalapp/shared/utils/date';
 
-import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
+import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEvent';
 import { CreateEventPayload, CreateEventSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { renderCustomHeader } from '../form/DatePicker';

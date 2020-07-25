@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useSubmitSupportTicketMutation } from '../../hooks/mutations/useSubmitSupportTicketMutation';
+import { useSubmitSupportTicket } from '../../hooks/mutations/useSubmitSupportTicket';
 import { SubmitSupportTicketPayload, SubmitSupportTicketSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
@@ -43,7 +43,7 @@ export const SubmitSupportTicketForm = () => {
 		resolver: zodResolver(SubmitSupportTicketSchema)
 	});
 
-	const submitSupportTicketMutation = useSubmitSupportTicketMutation({ redirectUrl: '/' });
+	const submitSupportTicketMutation = useSubmitSupportTicket({ redirectUrl: '/' });
 
 	return (
 		<form

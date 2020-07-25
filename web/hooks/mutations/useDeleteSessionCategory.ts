@@ -12,7 +12,7 @@ export interface UseDeleteSessionCategoryMutationData {
 	>;
 }
 
-export const useDeleteSessionCategoryMutation = (
+export const useDeleteSessionCategory = (
 	eid: string,
 	cid: string
 ): UseDeleteSessionCategoryMutationData => {

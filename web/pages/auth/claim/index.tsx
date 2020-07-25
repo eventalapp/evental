@@ -14,13 +14,13 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
-import { useClaimProfileMutation } from '../../../hooks/mutations/useClaimProfileMutation';
+import { useClaimProfile } from '../../../hooks/mutations/useClaimProfile';
 import { CLAIM_PROFILE_EXPIRY } from '../../../utils/config';
 
 const ClaimProfilePage: NextPage = () => {
 	const router = useRouter();
 	const { data: user, isLoading: isUserLoading } = useUser();
-	const { claimProfileMutation } = useClaimProfileMutation();
+	const { claimProfileMutation } = useClaimProfile();
 	const { code } = router.query;
 
 	if (isUserLoading) {

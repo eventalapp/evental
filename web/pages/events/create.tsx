@@ -12,10 +12,10 @@ import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
 import { Paragraph } from '../../components/primitives/Paragraph';
-import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
+import { useCreateEvent } from '../../hooks/mutations/useCreateEvent';
 
 const CreateEventPage: NextPage = () => {
-	const { createEventMutation } = useCreateEventMutation();
+	const { createEventMutation } = useCreateEvent();
 	const { data: user } = useUser();
 
 	if (!user?.id) {

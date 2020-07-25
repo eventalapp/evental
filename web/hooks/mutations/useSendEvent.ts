@@ -5,35 +5,35 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { CreateEventPayload } from '../../utils/schemas';
+import { SendEventMessagePayload } from '../../utils/schemas';
 
-export interface UseCreateEventMutationData {
-	createEventMutation: UseMutationResult<
-		Prisma.Event,
+export interface UseSendEventMessageData {
+	sendEventMessage: UseMutationResult<
+		Prisma.EventMessage,
 		AxiosError<ErroredAPIResponse, unknown>,
-		CreateEventPayload
+		SendEventMessagePayload
 	>;
 }
 
-export const useCreateEventMutation = (): UseCreateEventMutationData => {
+export const useSendEvent = (eid: string): UseSendEventMessageData => {
 	const queryClient = useQueryClient();
 
-	const createEventMutation = useMutation<
-		Prisma.Event,
+	const sendEventMessage = useMutation<
+		Prisma.EventMessage,
 		AxiosError<ErroredAPIResponse, unknown>,
-		CreateEventPayload
+		SendEventMessagePayload
 	>(
 		async (data) => {
 			return await axios
-				.post<SuccessAPIResponse<Prisma.Event>>('/api/events/create', data)
+				.post<SuccessAPIResponse<Prisma.EventMessage>>(`/api/events/${eid}/admin/messages/`, data)
 				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: (data) => {
-				toast.success('Event created successfully');
+				toast.success('Message created successfully');
 
-				router.push(`/events/${data.slug}/`).then(() => {
-					void queryClient.invalidateQueries('events');
+				router.push(`/events/${eid}/admin/messages/${data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['messages', eid]);
 				});
 			},
 			onError: (error) => {
@@ -42,5 +42,5 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 		}
 	);
 
-	return { createEventMutation };
+	return { sendEventMessage };
 };

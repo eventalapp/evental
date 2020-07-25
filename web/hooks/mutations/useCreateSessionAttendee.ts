@@ -17,7 +17,7 @@ interface UseCreateSessionAttendeeOptions {
 	redirectUrl?: string;
 }
 
-export const useCreateSessionAttendeeMutation = (
+export const useCreateSessionAttendee = (
 	eid: string,
 	sid: string,
 	userId: string | undefined,

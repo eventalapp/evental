@@ -13,7 +13,7 @@ import ReactSelect from 'react-select';
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { formatDateRange } from '@eventalapp/shared/utils/date';
 
-import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
+import { UseEditEventMutationData } from '../../hooks/mutations/useEditEvent';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';

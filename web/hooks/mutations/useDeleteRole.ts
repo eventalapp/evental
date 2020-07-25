@@ -8,7 +8,7 @@ export interface UseDeleteRoleMutationData {
 	deleteRoleMutation: UseMutationResult<void, AxiosError<ErroredAPIResponse, unknown>, void>;
 }
 
-export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMutationData => {
+export const useDeleteRole = (eid: string, rid: string): UseDeleteRoleMutationData => {
 	const queryClient = useQueryClient();
 
 	const deleteRoleMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(

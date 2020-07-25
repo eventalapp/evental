@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useDeleteSessionMutation } from '../../hooks/mutations/useDeleteSessionMutation';
+import { useDeleteSession } from '../../hooks/mutations/useDeleteSession';
 import { DeleteDataPayload, DeleteDataSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -20,7 +20,7 @@ interface Props {
 const DeleteSessionDialog: React.FC<Props> = (props) => {
 	const { eid, sid, children } = props;
 	let [isOpen, setIsOpen] = useState(false);
-	const { deleteSessionMutation } = useDeleteSessionMutation(String(eid), String(sid));
+	const { deleteSessionMutation } = useDeleteSession(String(eid), String(sid));
 	const {
 		register,
 		handleSubmit,

@@ -15,7 +15,7 @@ export interface UseEditSessionCategoryMutationData {
 	>;
 }
 
-export const useEditSessionCategoryMutation = (
+export const useEditSessionCategory = (
 	eid: string,
 	cid: string
 ): UseEditSessionCategoryMutationData => {

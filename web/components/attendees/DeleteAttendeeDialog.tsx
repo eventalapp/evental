@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useAdminDeleteAttendeeMutation } from '../../hooks/mutations/useAdminDeleteAttendeeMutation';
+import { useAdminDeleteAttendee } from '../../hooks/mutations/useAdminDeleteAttendee';
 import { DeleteDataPayload, DeleteDataSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -20,7 +20,7 @@ interface Props {
 const DeleteAttendeeDialog: React.FC<Props> = (props) => {
 	const { eid, uid, children } = props;
 	let [isOpen, setIsOpen] = useState(false);
-	const { adminDeleteAttendeeMutation } = useAdminDeleteAttendeeMutation(String(eid), String(uid));
+	const { adminDeleteAttendeeMutation } = useAdminDeleteAttendee(String(eid), String(uid));
 	const {
 		register,
 		handleSubmit,

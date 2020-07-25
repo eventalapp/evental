@@ -5,7 +5,7 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useEditSessionCategoryMutation } from '../../hooks/mutations/useEditSessionCategoryMutation';
+import { useEditSessionCategory } from '../../hooks/mutations/useEditSessionCategory';
 import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { colors, copy } from '../../utils/const';
 import { EditSessionCategoryPayload, EditSessionCategorySchema } from '../../utils/schemas';
@@ -25,7 +25,7 @@ type Props = {
 export const EditSessionCategoryForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { sessionCategory, eid, cid } = props;
-	const { editSessionCategoryMutation } = useEditSessionCategoryMutation(String(eid), String(cid));
+	const { editSessionCategoryMutation } = useEditSessionCategory(String(eid), String(cid));
 	const {
 		register,
 		handleSubmit,

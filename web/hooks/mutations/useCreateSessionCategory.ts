@@ -19,7 +19,7 @@ interface UseCreateSessionCategoryOptions {
 	redirect?: boolean;
 }
 
-export const useCreateSessionCategoryMutation = (
+export const useCreateSessionCategory = (
 	eid: string,
 	args: UseCreateSessionCategoryOptions = {}
 ): UseCreateSessionCategoryMutationData => {

@@ -15,7 +15,7 @@ export interface UseCreateSessionMutationData {
 	>;
 }
 
-export const useCreateSessionMutation = (eid: string): UseCreateSessionMutationData => {
+export const useCreateSession = (eid: string): UseCreateSessionMutationData => {
 	const queryClient = useQueryClient();
 
 	const createSessionMutation = useMutation<

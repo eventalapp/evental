@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useEditPageMutation } from '../../hooks/mutations/useEditPageMutation';
+import { useEditPage } from '../../hooks/mutations/useEditPage';
 import { copy } from '../../utils/const';
 import { EditPagePayload, EditPageSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
@@ -24,7 +24,7 @@ type Props = { eid: string; pid: string; page: Prisma.EventPage } & DetailedHTML
 export const EditPageForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { page, eid, pid } = props;
-	const { editPageMutation } = useEditPageMutation(String(eid), String(pid));
+	const { editPageMutation } = useEditPage(String(eid), String(pid));
 
 	const {
 		register,

@@ -17,7 +17,7 @@ interface UseSubmitSupportTicketMutationOptions {
 	redirectUrl?: string;
 }
 
-export const useSubmitSupportTicketMutation = (
+export const useSubmitSupportTicket = (
 	args: UseSubmitSupportTicketMutationOptions = {}
 ): UseSubmitSupportTicketMutationData => {
 	const { redirectUrl } = args;

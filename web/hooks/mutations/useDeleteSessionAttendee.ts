@@ -3,38 +3,38 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { AddAttendeeToSessionPayload } from '../../utils/schemas';
+import { RemoveAttendeeFromSessionPayload } from '../../utils/schemas';
 
-export interface UseAddAttendeeToSessionMutationData {
-	addAttendeeToSessionMutation: UseMutationResult<
+export interface UseRemoveAttendeeToSessionMutationData {
+	removeAttendeeFromSessionMutation: UseMutationResult<
 		void,
 		AxiosError<ErroredAPIResponse, unknown>,
-		AddAttendeeToSessionPayload
+		RemoveAttendeeFromSessionPayload
 	>;
 }
 
-export const useAddAttendeeToSessionMutation = (
+export const useDeleteSessionAttendee = (
 	eid: string,
 	sid: string
-): UseAddAttendeeToSessionMutationData => {
+): UseRemoveAttendeeToSessionMutationData => {
 	const queryClient = useQueryClient();
 
-	const addAttendeeToSessionMutation = useMutation<
+	const removeAttendeeFromSessionMutation = useMutation<
 		void,
 		AxiosError<ErroredAPIResponse, unknown>,
-		AddAttendeeToSessionPayload
+		RemoveAttendeeFromSessionPayload
 	>(
 		async (data) => {
 			return await axios
 				.post<SuccessAPIResponse<void>>(
-					`/api/events/${eid}/admin/sessions/${sid}/attendees/add`,
+					`/api/events/${eid}/admin/sessions/${sid}/attendees/remove`,
 					data
 				)
 				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: () => {
-				toast.success('You have successfully added this user to this event.');
+				toast.success('You have successfully removed this user to this event.');
 
 				void queryClient.invalidateQueries(['role-attendees', eid, sid]);
 			},
@@ -44,5 +44,5 @@ export const useAddAttendeeToSessionMutation = (
 		}
 	);
 
-	return { addAttendeeToSessionMutation };
+	return { removeAttendeeFromSessionMutation };
 };

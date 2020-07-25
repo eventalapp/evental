@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useSendEventMessage } from '../../hooks/mutations/useSendEventMessage';
+import { useSendEvent } from '../../hooks/mutations/useSendEvent';
 import { copy } from '../../utils/const';
 import { SendEventMessagePayload, SendEventMessageSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
@@ -26,7 +26,7 @@ export const SendMessageForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 
 	const { eid, roles } = props;
-	const { sendEventMessage } = useSendEventMessage(String(eid));
+	const { sendEventMessage } = useSendEvent(String(eid));
 
 	const {
 		register,

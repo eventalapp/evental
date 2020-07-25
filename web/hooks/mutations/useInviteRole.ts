@@ -14,7 +14,7 @@ export interface UseInviteRoleData {
 	>;
 }
 
-export const useInviteRoleMutation = (eid: string, rid: string): UseInviteRoleData => {
+export const useInviteRole = (eid: string, rid: string): UseInviteRoleData => {
 	const inviteRoleMutation = useMutation<
 		Prisma.EventRole,
 		AxiosError<ErroredAPIResponse, unknown>,

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useAdminCreateAttendeeMutation } from '../../hooks/mutations/useAdminCreateAttendeeMutation';
+import { useAdminCreateAttendee } from '../../hooks/mutations/useAdminCreateAttendee';
 import { AdminCreateAttendeePayload, AdminCreateAttendeeSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
@@ -36,7 +36,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 	} = props;
 	const router = useRouter();
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
-	const { adminCreateAttendeeMutation } = useAdminCreateAttendeeMutation(String(eid), {
+	const { adminCreateAttendeeMutation } = useAdminCreateAttendee(String(eid), {
 		redirect
 	});
 	const {

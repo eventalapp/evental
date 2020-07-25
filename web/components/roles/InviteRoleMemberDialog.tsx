@@ -6,7 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 
-import { useInviteRoleMutation } from '../../hooks/mutations/useInviteRoleMutation';
+import { useInviteRole } from '../../hooks/mutations/useInviteRole';
 import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -23,7 +23,7 @@ interface Props {
 const InviteRoleMemberDialog: React.FC<Props> = (props) => {
 	const { eid, rid, children } = props;
 	let [isOpen, setIsOpen] = useState(false);
-	const { inviteRoleMutation } = useInviteRoleMutation(String(eid), String(rid));
+	const { inviteRoleMutation } = useInviteRole(String(eid), String(rid));
 	const { data: role } = useRole({ eid: String(eid), rid: String(rid) });
 
 	const {

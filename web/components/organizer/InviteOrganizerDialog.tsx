@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useInviteOrganizerMutation } from '../../hooks/mutations/useInviteOrganizerMutation';
+import { useInviteOrganizer } from '../../hooks/mutations/useInviteOrganizer';
 import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -19,7 +19,7 @@ interface Props {
 const InviteOrganizerDialog: React.FC<Props> = (props) => {
 	const { eid, children } = props;
 	let [isOpen, setIsOpen] = useState(false);
-	const { inviteOrganizerMutation } = useInviteOrganizerMutation(String(eid));
+	const { inviteOrganizerMutation } = useInviteOrganizer(String(eid));
 
 	const {
 		register,

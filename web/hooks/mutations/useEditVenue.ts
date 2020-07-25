@@ -15,7 +15,7 @@ export interface UseEditVenueMutationData {
 	>;
 }
 
-export const useEditVenueMutation = (eid: string, vid: string): UseEditVenueMutationData => {
+export const useEditVenue = (eid: string, vid: string): UseEditVenueMutationData => {
 	const queryClient = useQueryClient();
 
 	const editVenueMutation = useMutation<

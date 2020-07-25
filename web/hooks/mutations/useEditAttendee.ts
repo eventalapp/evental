@@ -17,7 +17,7 @@ export interface UseEditAttendeeMutationData {
 	>;
 }
 
-export const useEditAttendeeMutation = (eid: string, uid: string): UseEditAttendeeMutationData => {
+export const useEditAttendee = (eid: string, uid: string): UseEditAttendeeMutationData => {
 	const queryClient = useQueryClient();
 
 	const adminEditAttendeeMutation = useMutation<

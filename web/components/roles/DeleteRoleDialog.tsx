@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useDeleteRoleMutation } from '../../hooks/mutations/useDeleteRoleMutation';
+import { useDeleteRole } from '../../hooks/mutations/useDeleteRole';
 import { DeleteDataPayload, DeleteDataSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -20,7 +20,7 @@ interface Props {
 const DeleteRoleDialog: React.FC<Props> = (props) => {
 	const { eid, rid, children } = props;
 	let [isOpen, setIsOpen] = useState(false);
-	const { deleteRoleMutation } = useDeleteRoleMutation(String(eid), String(rid));
+	const { deleteRoleMutation } = useDeleteRole(String(eid), String(rid));
 	const {
 		register,
 		handleSubmit,

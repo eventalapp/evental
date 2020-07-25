@@ -8,7 +8,7 @@ export interface UseDeleteEventMutationData {
 	deleteEventMutation: UseMutationResult<void, AxiosError<ErroredAPIResponse, unknown>, void>;
 }
 
-export const useDeleteEventMutation = (eid: string): UseDeleteEventMutationData => {
+export const useDeleteEvent = (eid: string): UseDeleteEventMutationData => {
 	const queryClient = useQueryClient();
 
 	const deleteEventMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(

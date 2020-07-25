@@ -21,7 +21,7 @@ interface UseAdminCreateAttendeeMutationOptions {
 	redirect?: boolean;
 }
 
-export const useAdminCreateAttendeeMutation = (
+export const useAdminCreateAttendee = (
 	eid: string,
 	args: UseAdminCreateAttendeeMutationOptions = {}
 ): UseAdminCreateAttendeeMutationData => {

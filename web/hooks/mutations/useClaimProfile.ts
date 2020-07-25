@@ -14,7 +14,7 @@ export interface UseClaimProfileData {
 	>;
 }
 
-export const useClaimProfileMutation = (): UseClaimProfileData => {
+export const useClaimProfile = (): UseClaimProfileData => {
 	const queryClient = useQueryClient();
 
 	const claimProfileMutation = useMutation<

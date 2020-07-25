@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useDeleteEventMutation } from '../../hooks/mutations/useDeleteEventMutation';
+import { useDeleteEvent } from '../../hooks/mutations/useDeleteEvent';
 import { DeleteDataPayload, DeleteDataSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -19,7 +19,7 @@ interface Props {
 const DeleteEventDialog: React.FC<Props> = (props) => {
 	const { eid, children } = props;
 	let [isOpen, setIsOpen] = useState(false);
-	const { deleteEventMutation } = useDeleteEventMutation(String(eid));
+	const { deleteEventMutation } = useDeleteEvent(String(eid));
 	const {
 		register,
 		handleSubmit,

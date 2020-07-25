@@ -20,7 +20,7 @@ import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSess
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { formatDateRange } from '@eventalapp/shared/utils/date';
 
-import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
+import { useCreateSessionAttendee } from '../../hooks/mutations/useCreateSessionAttendee';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { faCalendarCirclePlus } from '../../utils/icons';
 import { StrippedUser } from '../../utils/user';
@@ -44,7 +44,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 		eid: event.slug,
 		sid: session.slug
 	});
-	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
+	const { createSessionAttendeeMutation } = useCreateSessionAttendee(
 		event.slug,
 		session.slug,
 		user?.id

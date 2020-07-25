@@ -13,7 +13,7 @@ export interface UseInviteOrganizerData {
 	>;
 }
 
-export const useInviteOrganizerMutation = (eid: string): UseInviteOrganizerData => {
+export const useInviteOrganizer = (eid: string): UseInviteOrganizerData => {
 	const inviteOrganizerMutation = useMutation<
 		void,
 		AxiosError<ErroredAPIResponse, unknown>,

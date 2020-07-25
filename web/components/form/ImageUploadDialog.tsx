@@ -3,7 +3,7 @@ import { Editor } from '@tiptap/react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
+import { useImageUpload } from '../../hooks/mutations/useImageUpload';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 import { DialogContent } from '../primitives/DialogContent';
@@ -20,7 +20,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 	const { children, onSubmit } = props;
 
 	const [isOpen, setIsOpen] = useState(false);
-	const { imageUploadResponse, imageUploadMutation } = useImageUploadMutation();
+	const { imageUploadResponse, imageUploadMutation } = useImageUpload();
 
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
 

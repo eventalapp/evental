@@ -16,7 +16,7 @@ export interface UseEditEventMutationData {
 	>;
 }
 
-export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
+export const useEditEvent = (eid: string): UseEditEventMutationData => {
 	const queryClient = useQueryClient();
 
 	const editEventMutation = useMutation<
