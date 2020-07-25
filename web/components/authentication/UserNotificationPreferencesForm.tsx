@@ -3,7 +3,7 @@ import * as Prisma from '@prisma/client';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useEditNotificationPreferences } from '@eventalapp/shared/hooks/mutations/useEditNotificationPreferences';
+import { useEditNotificationPreferences } from '@eventalapp/shared/hooks';
 
 import {
 	UserNotificationPreferencePayload,

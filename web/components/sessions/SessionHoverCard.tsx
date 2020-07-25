@@ -16,9 +16,8 @@ import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSessionAttendee';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
-import { formatDateRange } from '@eventalapp/shared/utils/date';
+import { useIsSessionAttendee, useUser } from '@eventalapp/shared/hooks';
+import { formatDateRange } from '@eventalapp/shared/utils';
 
 import { useCreateSessionAttendee } from '../../hooks/mutations/useCreateSessionAttendee';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 import { toast } from 'react-toastify';
 
-import { useEventRegister } from '@eventalapp/shared/hooks/mutations/useEventRegister';
+import { useEventRegister } from '@eventalapp/shared/hooks';
 
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';

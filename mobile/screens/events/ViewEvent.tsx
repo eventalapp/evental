@@ -3,9 +3,7 @@ import React from 'react';
 import { Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
-import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
+import { useEvent, useSessions, useVenues } from '@eventalapp/shared/hooks';
 
 import { EventsStackParamList } from '../../components/navigation/EventStackNavigation';
 

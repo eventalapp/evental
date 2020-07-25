@@ -3,9 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
+import { useEvent, useIsOrganizer, useSessionCategories } from '@eventalapp/shared/hooks';
 
 import { SessionCategoryList } from '../../../../../components/categories/SessionCategoryList';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';

@@ -2,12 +2,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSessionAttendee';
-import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
-import { useSessionAttendees } from '@eventalapp/shared/hooks/queries/useSessionAttendees';
-import { useSessionRoleAttendees } from '@eventalapp/shared/hooks/queries/useSessionRoleAttendees';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import {
+	useEvent,
+	useIsSessionAttendee,
+	useSession,
+	useSessionAttendees,
+	useSessionRoleAttendees,
+	useUser
+} from '@eventalapp/shared/hooks';
 
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';

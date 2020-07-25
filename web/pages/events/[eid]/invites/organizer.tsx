@@ -5,10 +5,8 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import { useAcceptOrganizerInvite } from '@eventalapp/shared/hooks/mutations/useAcceptOrganizerInvite';
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
-import { AcceptOrganizerInviteSchema } from '@eventalapp/shared/utils/schema';
+import { useAcceptOrganizerInvite, useEvent, useUser } from '@eventalapp/shared/hooks';
+import { AcceptOrganizerInviteSchema } from '@eventalapp/shared/utils';
 
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import Column from '../../../../components/layout/Column';

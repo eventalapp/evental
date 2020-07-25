@@ -3,8 +3,7 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 
-import { useAttendingEvents } from '@eventalapp/shared/hooks/queries/useAttendingEvents';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useAttendingEvents, useUser } from '@eventalapp/shared/hooks';
 
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../components/error/ViewErrorPage';

@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { useVenue } from '@eventalapp/shared/hooks/queries/useVenue';
+import { useVenue } from '@eventalapp/shared/hooks';
 
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';

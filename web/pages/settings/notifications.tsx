@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-import { useNotificationPreferences } from '@eventalapp/shared/hooks/queries/useNotificationPreferences';
+import { useNotificationPreferences } from '@eventalapp/shared/hooks';
 
 import { UserNotificationPreferencesForm } from '../../components/authentication/UserNotificationPreferencesForm';
 import Column from '../../components/layout/Column';

@@ -3,8 +3,7 @@ import { NextSeo } from 'next-seo';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { useRequestVerification } from '@eventalapp/shared/hooks/mutations/useRequestVerification';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useRequestVerification, useUser } from '@eventalapp/shared/hooks';
 
 import { UserSettingsForm } from '../../components/authentication/UserSettingsForm';
 import { LoadingInner } from '../../components/error/LoadingInner';

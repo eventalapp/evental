@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
+import { useRoles } from '@eventalapp/shared/hooks';
 
 import { AdminCreateAttendeeForm } from '../../../../../components/attendees/AdminCreateAttendeeForm';
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';

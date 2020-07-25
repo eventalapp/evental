@@ -6,12 +6,14 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { toast } from 'react-toastify';
 
-import { useAcceptRoleInvite } from '@eventalapp/shared/hooks/mutations/useAcceptRoleInvite';
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
-import { AcceptRoleInviteSchema } from '@eventalapp/shared/utils/schema';
+import {
+	useAcceptRoleInvite,
+	useEvent,
+	useIsOrganizer,
+	useRole,
+	useUser
+} from '@eventalapp/shared/hooks';
+import { AcceptRoleInviteSchema } from '@eventalapp/shared/utils';
 
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';

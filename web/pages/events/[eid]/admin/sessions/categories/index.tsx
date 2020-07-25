@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
+import { useSessionCategories } from '@eventalapp/shared/hooks';
 
 import { SessionCategoryList } from '../../../../../../components/categories/SessionCategoryList';
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';

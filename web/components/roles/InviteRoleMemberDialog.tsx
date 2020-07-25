@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 
-import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
+import { useRole } from '@eventalapp/shared/hooks';
 
 import { useInviteRole } from '../../hooks/mutations/useInviteRole';
 import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';

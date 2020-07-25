@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useUser } from '@eventalapp/shared/hooks';
 
 import { useCreateSessionAttendee } from '../../hooks/mutations/useCreateSessionAttendee';
 import { LoadingInner } from '../error/LoadingInner';

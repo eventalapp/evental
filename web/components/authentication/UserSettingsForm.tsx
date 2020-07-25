@@ -3,10 +3,8 @@ import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useEditUserSettings } from '@eventalapp/shared/hooks/mutations/useEditUserSettings';
-import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
-import { copy } from '@eventalapp/shared/utils/const';
-import { UserSettingsPayload, UserSettingsSchema } from '@eventalapp/shared/utils/schema';
+import { useEditUserSettings, useUserById } from '@eventalapp/shared/hooks';
+import { UserSettingsPayload, UserSettingsSchema, copy } from '@eventalapp/shared/utils';
 
 import { slugify } from '../../utils/string';
 import { FullUser } from '../../utils/user';

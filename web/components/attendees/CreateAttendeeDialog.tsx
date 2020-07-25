@@ -2,7 +2,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
+import { useRoles } from '@eventalapp/shared/hooks';
 
 import { DialogContent } from '../primitives/DialogContent';
 import { AdminCreateAttendeeForm } from './AdminCreateAttendeeForm';

@@ -6,9 +6,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useEvent, useIsOrganizer, useUser } from '@eventalapp/shared/hooks';
 
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';

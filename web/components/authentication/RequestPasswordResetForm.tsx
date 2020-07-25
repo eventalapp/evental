@@ -4,7 +4,7 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { useRequestPasswordReset } from '@eventalapp/shared/hooks/mutations/useRequestPasswordReset';
+import { useRequestPasswordReset } from '@eventalapp/shared/hooks';
 
 import { ChangePasswordRequestPayload, ChangePasswordRequestSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';

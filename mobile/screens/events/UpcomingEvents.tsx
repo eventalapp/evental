@@ -4,7 +4,7 @@ import React from 'react';
 import { FlatList, Image, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
+import { useUpcomingEvents } from '@eventalapp/shared/hooks';
 
 import { RootStackParamList } from '../../components/navigation';
 import { EventsStackParamList } from '../../components/navigation/EventStackNavigation';

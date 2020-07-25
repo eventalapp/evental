@@ -4,13 +4,13 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Alert, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 
-import { useEditNotificationPreferences } from '@eventalapp/shared/hooks/mutations/useEditNotificationPreferences';
+import { useEditNotificationPreferences } from '@eventalapp/shared/hooks';
 import { FullUser } from '@eventalapp/shared/types';
-import { colors } from '@eventalapp/shared/utils/color';
 import {
 	NotificationPreferencePayload,
-	NotificationPreferenceSchema
-} from '@eventalapp/shared/utils/schema';
+	NotificationPreferenceSchema,
+	colors
+} from '@eventalapp/shared/utils';
 
 type Props = {
 	preferences?: Prisma.NotificationPreference;

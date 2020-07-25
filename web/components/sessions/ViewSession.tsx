@@ -14,7 +14,7 @@ import { htmlToText } from 'html-to-text';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { formatDateRange } from '@eventalapp/shared/utils/date';
+import { formatDateRange } from '@eventalapp/shared/utils';
 
 import { useCreateSessionAttendee } from '../../hooks/mutations/useCreateSessionAttendee';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';

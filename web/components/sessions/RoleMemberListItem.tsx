@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
+import { useAttendee } from '@eventalapp/shared/hooks';
 
 import { capitalizeFirstLetter } from '../../utils/string';
 import Tooltip from '../primitives/Tooltip';

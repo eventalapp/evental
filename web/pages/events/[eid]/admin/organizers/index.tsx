@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { useOrganizers } from '@eventalapp/shared/hooks/queries/useOrganizers';
+import { useOrganizers } from '@eventalapp/shared/hooks';
 
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';

@@ -1,9 +1,7 @@
 import { ErroredAPIResponse } from 'nextkit';
 import React from 'react';
 
-import { useIsFounder } from '@eventalapp/shared/hooks/queries/useIsFounder';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useIsFounder, useIsOrganizer, useUser } from '@eventalapp/shared/hooks';
 
 import { NoAccessPage } from '../error/NoAccessPage';
 import { UnauthorizedPage } from '../error/UnauthorizedPage';
