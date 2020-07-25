@@ -1,7 +1,7 @@
 import { prisma } from '@eventalapp/shared/db/client';
+import { AttendeeWithUser, stripAttendeesWithUser } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../utils/api';
-import { AttendeeWithUser, stripAttendeesWithUser } from '../../../../../utils/user';
 import { getEvent } from '../index';
 import { getRole } from '../roles/[rid]';
 

@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
-import { StrippedUser } from '../../types';
+import { StrippedUser } from '../../utils';
 
 interface UseLeaveEventOptions {
 	eid?: string;

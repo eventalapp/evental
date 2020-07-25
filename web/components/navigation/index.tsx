@@ -7,8 +7,8 @@ import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useUser } from '@eventalapp/shared/hooks';
+import { faBarsSquare } from '@eventalapp/shared/utils/icons';
 
-import { faBarsSquare } from '../../utils/icons';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
 import { LinkButton } from '../primitives/LinkButton';
 import { AuthContainer } from './AuthContainer';

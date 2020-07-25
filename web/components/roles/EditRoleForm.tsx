@@ -4,10 +4,9 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { AttendeeWithUser, EditRolePayload, EditRoleSchema, copy } from '@eventalapp/shared/utils';
+
 import { useEditRole } from '../../hooks/mutations/useEditRole';
-import { copy } from '../../utils/const';
-import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
-import { AttendeeWithUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';

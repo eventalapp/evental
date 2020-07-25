@@ -14,8 +14,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { useSignOut } from '@eventalapp/shared/hooks';
-
-import { StrippedUser } from '../../utils/user';
+import { StrippedUser } from '@eventalapp/shared/utils';
 
 type Props = {
 	user: StrippedUser | undefined;

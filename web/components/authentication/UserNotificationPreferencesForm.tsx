@@ -4,11 +4,11 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useEditNotificationPreferences } from '@eventalapp/shared/hooks';
-
 import {
-	UserNotificationPreferencePayload,
-	UserNotificationPreferenceSchema
-} from '../../utils/schemas';
+	NotificationPreferencePayload,
+	NotificationPreferenceSchema
+} from '@eventalapp/shared/utils';
+
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';
@@ -29,13 +29,13 @@ export const UserNotificationPreferencesForm: React.FC<Props> = (props) => {
 		handleSubmit,
 		control,
 		formState: { errors }
-	} = useForm<UserNotificationPreferencePayload>({
+	} = useForm<NotificationPreferencePayload>({
 		defaultValues: {
 			news: notificationPreferences.news ?? true,
 			event: notificationPreferences.event ?? true,
 			marketing: notificationPreferences.marketing ?? true
 		},
-		resolver: zodResolver(UserNotificationPreferenceSchema)
+		resolver: zodResolver(NotificationPreferenceSchema)
 	});
 
 	//TODO: impl react skeleton

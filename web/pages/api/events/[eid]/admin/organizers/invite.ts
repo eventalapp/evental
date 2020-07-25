@@ -1,12 +1,11 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { InviteOrganizerSchema, ORGANIZER_INVITE_EXPIRY } from '@eventalapp/shared/utils';
 
 import { sendOrganizerInvite } from '../../../../../../email/templates/inviteOrganizer';
 import { api } from '../../../../../../utils/api';
 import { isFounder } from '../../../../../../utils/attendee';
-import { ORGANIZER_INVITE_EXPIRY } from '../../../../../../utils/config';
-import { InviteOrganizerSchema } from '../../../../../../utils/schemas';
 import { getEvent } from '../../index';
 
 export default api({

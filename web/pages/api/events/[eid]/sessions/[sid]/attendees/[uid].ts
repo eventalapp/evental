@@ -1,13 +1,13 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
-
-import { api } from '../../../../../../../utils/api';
 import {
 	AttendeeWithUser,
 	attendeeWithUserInclude,
 	stripAttendeeWithUser
-} from '../../../../../../../utils/user';
+} from '@eventalapp/shared/utils';
+
+import { api } from '../../../../../../../utils/api';
 import { getAttendee } from '../../../attendees/[uid]';
 import { getEvent } from '../../../index';
 import { getSession } from '../index';

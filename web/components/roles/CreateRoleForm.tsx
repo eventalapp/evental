@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { CreateRolePayload, CreateRoleSchema, copy } from '@eventalapp/shared/utils';
+
 import { useCreateRole } from '../../hooks/mutations/useCreateRole';
-import { copy } from '../../utils/const';
-import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';

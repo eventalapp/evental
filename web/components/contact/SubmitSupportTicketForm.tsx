@@ -2,8 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { SubmitSupportTicketPayload, SubmitSupportTicketSchema } from '@eventalapp/shared/utils';
+
 import { useSubmitSupportTicket } from '../../hooks/mutations/useSubmitSupportTicket';
-import { SubmitSupportTicketPayload, SubmitSupportTicketSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';

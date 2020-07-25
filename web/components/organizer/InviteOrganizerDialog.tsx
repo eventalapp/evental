@@ -3,8 +3,9 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { InviteOrganizerPayload, InviteOrganizerSchema } from '@eventalapp/shared/utils';
+
 import { useInviteOrganizer } from '../../hooks/mutations/useInviteOrganizer';
-import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';

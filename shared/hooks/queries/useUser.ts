@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
 import { api } from '../../api';
-import { FullUser } from '../../types';
+import { FullUser } from '../../utils';
 
 export const useUser = () => {
 	return useQuery<FullUser, ErroredAPIResponse>(['user'], async () => {

@@ -14,13 +14,16 @@ import { htmlToText } from 'html-to-text';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { formatDateRange } from '@eventalapp/shared/utils';
+import {
+	AttendeeWithUser,
+	SessionWithVenue,
+	StrippedUser,
+	formatDateRange
+} from '@eventalapp/shared/utils';
+import { faCalendarCirclePlus } from '@eventalapp/shared/utils/icons';
 
 import { useCreateSessionAttendee } from '../../hooks/mutations/useCreateSessionAttendee';
-import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { faCalendarCirclePlus } from '../../utils/icons';
 import { sessionAttendeeReducer } from '../../utils/reducer';
-import { AttendeeWithUser, StrippedUser } from '../../utils/user';
 import { AttendeeList, attendeeListSkeleton } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { AddToCalendar } from '../primitives/AddToCalendar';

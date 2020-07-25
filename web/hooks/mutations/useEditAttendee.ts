@@ -5,9 +5,9 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
+import { AdminEditAttendeePayload, AttendeeWithUser } from '@eventalapp/shared/utils';
+
 import { populateFormData } from '../../utils/form';
-import { AdminEditAttendeePayload } from '../../utils/schemas';
-import { AttendeeWithUser } from '../../utils/user';
 
 export interface UseEditAttendeeMutationData {
 	adminEditAttendeeMutation: UseMutationResult<

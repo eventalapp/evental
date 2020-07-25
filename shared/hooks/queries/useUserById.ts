@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
 import { api } from '../../api';
-import { StrippedUser } from '../../types';
+import { StrippedUser } from '../../utils';
 
 export interface UseUserByIdArgs {
 	uid?: string;

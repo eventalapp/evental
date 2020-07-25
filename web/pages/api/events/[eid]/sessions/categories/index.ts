@@ -1,31 +1,14 @@
-import * as Prisma from '@prisma/client';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import {
+	SessionCategoryWithCount,
+	rawToSessionCategoryWithCount,
+	sessionCategoryWithCountInclude
+} from '@eventalapp/shared/utils/session';
 
 import { api } from '../../../../../../utils/api';
 import { getEvent } from '../../index';
-
-export type SessionCategoryWithCount = {
-	sessionCount: number;
-} & Prisma.EventSessionCategory;
-
-export const sessionCategoryWithCountInclude = {
-	_count: {
-		select: { sessions: true }
-	}
-};
-
-export type SessionCategoryWithCountRaw = Prisma.EventSessionCategory & {
-	_count: { sessions: number };
-};
-
-export const rawToSessionCategoryWithCount = (sessionCategory: SessionCategoryWithCountRaw) => {
-	return {
-		sessionCount: sessionCategory._count.sessions,
-		...sessionCategory
-	};
-};
 
 export default api({
 	async GET({ req }) {

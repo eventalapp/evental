@@ -3,14 +3,17 @@ import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import {
+	SESSION_EXPIRY,
+	SignUpSchema,
+	VERIFY_EMAIL_EXPIRY,
+	stripUser
+} from '@eventalapp/shared/utils';
 
 import { sendVerifyEmail } from '../../../email/templates/verifyEmail';
 import { sendWelcome } from '../../../email/templates/welcome';
 import { api } from '../../../utils/api';
-import { SESSION_EXPIRY, VERIFY_EMAIL_EXPIRY } from '../../../utils/config';
-import { SignUpSchema } from '../../../utils/schemas';
 import { generateSlug } from '../../../utils/string';
-import { stripUser } from '../../../utils/user';
 
 export default api({
 	async POST({ ctx, req, res }) {

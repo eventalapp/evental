@@ -1,8 +1,10 @@
 import dayjs from 'dayjs';
 
-import { SessionWithVenue } from '../pages/api/events/[eid]/sessions';
-import { SessionWithVenueEvent } from '../pages/api/user/[uid]/sessions';
-import { AttendeeWithUser } from './user';
+import {
+	AttendeeWithUser,
+	SessionWithVenue,
+	SessionWithVenueEvent
+} from '@eventalapp/shared/utils';
 
 export const sessionListReducer = (
 	acc: Record<string, Record<string, SessionWithVenue[]>>,

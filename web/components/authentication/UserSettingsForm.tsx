@@ -4,10 +4,9 @@ import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useEditUserSettings, useUserById } from '@eventalapp/shared/hooks';
-import { UserSettingsPayload, UserSettingsSchema, copy } from '@eventalapp/shared/utils';
+import { FullUser, UserSettingsPayload, UserSettingsSchema, copy } from '@eventalapp/shared/utils';
 
 import { slugify } from '../../utils/string';
-import { FullUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { StyledEditor } from '../form/Editor';

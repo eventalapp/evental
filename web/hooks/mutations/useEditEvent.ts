@@ -5,8 +5,9 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
+import { EditEventPayload } from '@eventalapp/shared/utils';
+
 import { populateFormData } from '../../utils/form';
-import { EditEventPayload } from '../../utils/schemas';
 
 export interface UseEditEventMutationData {
 	editEventMutation: UseMutationResult<

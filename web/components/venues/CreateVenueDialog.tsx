@@ -3,8 +3,9 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { CreateVenuePayload, CreateVenueSchema } from '@eventalapp/shared/utils';
+
 import { useCreateVenue } from '../../hooks/mutations/useCreateVenue';
-import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';

@@ -3,11 +3,11 @@ import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { PurchaseProSchema } from '@eventalapp/shared/utils';
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '@eventalapp/shared/utils/config';
 
 import { api } from '../../../../utils/api';
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../utils/config';
 import { proAttendeePricing, sale } from '../../../../utils/price';
-import { PurchaseProSchema } from '../../../../utils/schemas';
 import { formatAmountForStripe } from '../../../../utils/stripe';
 import { getEvent } from '../../events/[eid]';
 

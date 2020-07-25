@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { StrippedUser, stripUser } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../utils/api';
-import { StrippedUser, stripUser } from '../../../../utils/user';
 
 export default api({
 	async GET({ req }) {

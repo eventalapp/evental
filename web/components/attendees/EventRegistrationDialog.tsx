@@ -7,8 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { useEventRegister } from '@eventalapp/shared/hooks';
+import { StrippedUser } from '@eventalapp/shared/utils';
 
-import { StrippedUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 import { DialogContent } from '../primitives/DialogContent';

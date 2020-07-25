@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { EditPagePayload, EditPageSchema, copy } from '@eventalapp/shared/utils';
+
 import { useEditPage } from '../../hooks/mutations/useEditPage';
-import { copy } from '../../utils/const';
-import { EditPagePayload, EditPageSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';

@@ -5,7 +5,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { CreatePagePayload } from '../../utils/schemas';
+import { CreatePagePayload } from '@eventalapp/shared/utils';
 
 export interface UseCreatePageMutationData {
 	createPageMutation: UseMutationResult<

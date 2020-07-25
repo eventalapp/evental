@@ -3,8 +3,9 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { DeleteDataPayload, DeleteDataSchema } from '@eventalapp/shared/utils';
+
 import { useDeleteEvent } from '../../hooks/mutations/useDeleteEvent';
-import { DeleteDataPayload, DeleteDataSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';

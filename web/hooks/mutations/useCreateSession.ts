@@ -5,7 +5,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { CreateSessionPayload } from '../../utils/schemas';
+import { CreateSessionPayload } from '@eventalapp/shared/utils';
 
 export interface UseCreateSessionMutationData {
 	createSessionMutation: UseMutationResult<

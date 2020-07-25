@@ -1,8 +1,9 @@
 import { NextkitError } from 'nextkit';
 
+import { SubmitSupportTicketSchema } from '@eventalapp/shared/utils';
+
 import { sendSupportTicket } from '../../../email/templates/supportTicket';
 import { api } from '../../../utils/api';
-import { SubmitSupportTicketSchema } from '../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req }) {

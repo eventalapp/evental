@@ -2,10 +2,10 @@ import dayjs from 'dayjs';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { CreateEventSchema } from '@eventalapp/shared/utils';
 
 import { theme } from '../../../tailwind.config';
 import { api } from '../../../utils/api';
-import { CreateEventSchema } from '../../../utils/schemas';
 import { generateSlug } from '../../../utils/string';
 
 export default api({

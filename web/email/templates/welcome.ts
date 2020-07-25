@@ -3,8 +3,9 @@ import { convert } from 'html-to-text';
 import mjml2html from 'mjml';
 import { NextkitError } from 'nextkit';
 
+import { StrippedUser } from '@eventalapp/shared/utils';
+
 import { sendEmail } from '../../utils/email';
-import { StrippedUser } from '../../utils/user';
 import { GenerateTemplateArgs } from '../generateTemplates';
 
 type WelcomeTemplateArgs = {

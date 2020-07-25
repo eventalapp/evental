@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { RemoveAttendeeFromSessionPayload } from '../../utils/schemas';
+import { RemoveAttendeeFromSessionPayload } from '@eventalapp/shared/utils';
 
 export interface UseRemoveAttendeeToSessionMutationData {
 	removeAttendeeFromSessionMutation: UseMutationResult<

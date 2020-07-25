@@ -8,15 +8,20 @@ import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import {
+	AttendeeWithUser,
+	EditSessionPayload,
+	EditSessionSchema,
+	FIFTEEN_MINUTES,
+	SessionCategoryWithCount,
+	SessionWithVenue,
+	copy
+} from '@eventalapp/shared/utils';
+import { NEAREST_MINUTE } from '@eventalapp/shared/utils/config';
+
 import { useAddAttendeeToSession } from '../../hooks/mutations/useAddAttendeeToSession';
 import { useDeleteSessionAttendee } from '../../hooks/mutations/useDeleteSessionAttendee';
 import { useEditSession } from '../../hooks/mutations/useEditSession';
-import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
-import { NEAREST_MINUTE } from '../../utils/config';
-import { FIFTEEN_MINUTES, copy } from '../../utils/const';
-import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
-import { AttendeeWithUser } from '../../utils/user';
 import CreateCategoryDialog from '../categories/CreateCategoryDialog';
 import { LoadingInner } from '../error/LoadingInner';
 import { DatePicker } from '../form/DatePicker';

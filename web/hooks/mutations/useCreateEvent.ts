@@ -5,7 +5,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { CreateEventPayload } from '../../utils/schemas';
+import { CreateEventPayload } from '@eventalapp/shared/utils';
 
 export interface UseCreateEventMutationData {
 	createEventMutation: UseMutationResult<

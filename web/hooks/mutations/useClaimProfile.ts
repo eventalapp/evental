@@ -4,7 +4,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { ClaimProfilePayload } from '../../utils/schemas';
+import { ClaimProfilePayload } from '@eventalapp/shared/utils';
 
 export interface UseClaimProfileData {
 	claimProfileMutation: UseMutationResult<

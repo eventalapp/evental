@@ -5,7 +5,8 @@ import { format } from 'date-fns';
 import React from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 
-import { NEAREST_MINUTE } from '../../utils/config';
+import { NEAREST_MINUTE } from '@eventalapp/shared/utils/config';
+
 import { SessionDatePickerButton } from './SessionDatePickerButton';
 
 type Props = { formatTime?: string } & ReactDatePickerProps;

@@ -3,12 +3,11 @@ import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { ClaimProfileSchema, stripUser } from '@eventalapp/shared/utils';
+import { CLAIM_PROFILE_EXPIRY, SESSION_EXPIRY } from '@eventalapp/shared/utils/config';
 
 import { sendWelcome } from '../../../../email/templates/welcome';
 import { api } from '../../../../utils/api';
-import { CLAIM_PROFILE_EXPIRY, SESSION_EXPIRY } from '../../../../utils/config';
-import { ClaimProfileSchema } from '../../../../utils/schemas';
-import { stripUser } from '../../../../utils/user';
 
 export default api({
 	async POST({ ctx, req, res }) {

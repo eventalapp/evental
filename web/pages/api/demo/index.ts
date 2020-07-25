@@ -1,8 +1,9 @@
 import { NextkitError } from 'nextkit';
 
+import { SubmitDemoRequestSchema } from '@eventalapp/shared/utils';
+
 import { sendDemoRequest } from '../../../email/templates/demoRequest';
 import { api } from '../../../utils/api';
-import { SubmitDemoRequestSchema } from '../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req }) {

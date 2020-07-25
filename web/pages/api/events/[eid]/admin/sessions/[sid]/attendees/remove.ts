@@ -1,10 +1,10 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { AddAttendeeToSessionSchema } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../../../utils/attendee';
-import { AddAttendeeToSessionSchema } from '../../../../../../../../utils/schemas';
 import { getAttendee } from '../../../../attendees/[uid]';
 import { getSession } from '../../../../sessions/[sid]';
 

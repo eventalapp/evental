@@ -3,8 +3,12 @@
  */
 
 export * from './color';
+export * from './config';
 export * from './const';
 export * from './date';
 export * from './form';
+export * from './icons';
 export * from './isBrowser';
 export * from './schema';
+export * from './session';
+export * from './user';

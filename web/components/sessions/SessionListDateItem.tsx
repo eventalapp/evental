@@ -2,7 +2,8 @@ import * as Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 import React from 'react';
 
-import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { SessionWithVenue } from '@eventalapp/shared/utils';
+
 import { SessionListHourItem } from './SessionListHourItem';
 
 type SessionListDateItemProps = {

@@ -5,8 +5,9 @@ import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import Stripe from 'stripe';
 
+import { PurchaseProPayload } from '@eventalapp/shared/utils';
+
 import { UpgradeResponse, UpgradeResponsePayload } from '../../pages/api/payment/sessions';
-import { PurchaseProPayload } from '../../utils/schemas';
 
 export interface UseUpgradeEventMutationData {
 	upgradeEventMutation: UseMutationResult<

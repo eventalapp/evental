@@ -1,7 +1,8 @@
 import { NextkitError } from 'nextkit';
 
+import { NotificationPreferenceSchema } from '@eventalapp/shared/utils';
+
 import { api } from '../../../utils/api';
-import { UserNotificationPreferenceSchema } from '../../../utils/schemas';
 
 export default api({
 	async GET({ ctx }) {
@@ -37,7 +38,7 @@ export default api({
 			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
 
-		const body = UserNotificationPreferenceSchema.parse(req.body);
+		const body = NotificationPreferenceSchema.parse(req.body);
 
 		let notificationPreferences = await ctx.prisma.notificationPreference.findFirst({
 			where: {

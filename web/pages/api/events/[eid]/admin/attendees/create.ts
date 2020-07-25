@@ -1,14 +1,14 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { AdminCreateAttendeeSchema } from '@eventalapp/shared/utils';
+import { CLAIM_PROFILE_EXPIRY } from '@eventalapp/shared/utils/config';
 
 import { sendClaimProfile } from '../../../../../../email/templates/claimProfile';
 import { api } from '../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../utils/attendee';
-import { CLAIM_PROFILE_EXPIRY } from '../../../../../../utils/config';
 import { busboyParseForm } from '../../../../../../utils/form';
 import { uploadAndProcessAvatar } from '../../../../../../utils/image';
-import { AdminCreateAttendeeSchema } from '../../../../../../utils/schemas';
 import { generateSlug } from '../../../../../../utils/string';
 import { getEvent } from '../../index';
 import { getRole } from '../../roles/[rid]';

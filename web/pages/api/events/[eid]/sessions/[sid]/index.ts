@@ -1,10 +1,14 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import {
+	SessionWithVenue,
+	rawToSessionWithVenue,
+	sessionWithVenueInclude
+} from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../utils/api';
 import { getEvent } from '../../index';
-import { SessionWithVenue, rawToSessionWithVenue, sessionWithVenueInclude } from '../index';
 
 export default api({
 	async GET({ req }) {

@@ -3,10 +3,10 @@ import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { ChangePasswordSchema } from '@eventalapp/shared/utils';
+import { PASSWORD_RESET_EXPIRY, SESSION_EXPIRY } from '@eventalapp/shared/utils/config';
 
 import { api } from '../../../../utils/api';
-import { PASSWORD_RESET_EXPIRY, SESSION_EXPIRY } from '../../../../utils/config';
-import { ChangePasswordSchema } from '../../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req, res }) {

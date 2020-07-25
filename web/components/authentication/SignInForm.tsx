@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { useSignIn } from '@eventalapp/shared/hooks';
+import { SignInPayload, SignInSchema } from '@eventalapp/shared/utils';
 
-import { SignInPayload, SignInSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';
