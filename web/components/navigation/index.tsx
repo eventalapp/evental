@@ -6,7 +6,6 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useSignOut } from '@eventalapp/shared/hooks/mutations/useSignOut';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { faBarsSquare } from '../../utils/icons';

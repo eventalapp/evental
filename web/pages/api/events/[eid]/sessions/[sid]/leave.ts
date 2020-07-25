@@ -4,7 +4,6 @@ import { getSession } from '.';
 import { getEvent } from '../..';
 import { api } from '../../../../../../utils/api';
 import { getAttendee } from '../../attendees/[uid]';
-import { getSessionAttendee } from './attendees/[uid]';
 
 export default api({
 	async DELETE({ ctx, req }) {

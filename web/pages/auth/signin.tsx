@@ -2,7 +2,6 @@ import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { toast } from 'react-toastify';
 
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 

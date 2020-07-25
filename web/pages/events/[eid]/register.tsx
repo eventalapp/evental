@@ -5,9 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { toast } from 'react-toastify';
 
-import { useEventRegister } from '@eventalapp/shared/hooks/mutations/useEventRegister';
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';

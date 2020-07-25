@@ -5,7 +5,6 @@ import { default as classNames } from 'classnames';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useSignOut } from '@eventalapp/shared/hooks/mutations/useSignOut';
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
 import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';

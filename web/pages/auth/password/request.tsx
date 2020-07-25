@@ -1,9 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
-import { toast } from 'react-toastify';
 
-import { useRequestPasswordReset } from '@eventalapp/shared/hooks/mutations/useRequestPasswordReset';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { RequestPasswordResetForm } from '../../../components/authentication/RequestPasswordResetForm';
