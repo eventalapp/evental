@@ -15,3 +15,5 @@ export const CURRENCY = 'usd';
 export const MIN_AMOUNT = 10.0;
 
 export const MAX_AMOUNT = 5000.0;
+
+export const SEED_USERS_TO_GENERATE = 50;

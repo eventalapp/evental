@@ -3,6 +3,5 @@
  */
 
 export * from './client';
-export * from './prisma/config';
 export * from './prisma/fake';
 export * from './prisma/seed';

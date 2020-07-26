@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-import { SEED_USERS_TO_GENERATE } from './config';
+import { SEED_USERS_TO_GENERATE } from '../../utils';
 import { fake } from './fake';
 
 const prisma = new PrismaClient();
