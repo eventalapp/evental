@@ -5,13 +5,13 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
 
-interface UseEventRegisterOptions {
+interface UseEventRegisterArgs {
 	eid?: string;
 	onError?: (error: ErroredAPIResponse | undefined, variables: void, context: unknown) => void;
 	onSuccess?: (data: Prisma.EventAttendee, variables: void, context: unknown) => void;
 }
 
-export const useEventRegister = (args: UseEventRegisterOptions = {}) => {
+export const useEventRegister = (args: UseEventRegisterArgs = {}) => {
 	const { eid, onError, onSuccess } = args;
 
 	const queryClient = useQueryClient();
