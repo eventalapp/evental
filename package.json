@@ -12,7 +12,8 @@
 		"mobile": "yarn workspace @eventalapp/mobile",
 		"shared": "yarn workspace @eventalapp/shared",
 		"format": "prettier --write \"./**/*.{js,jsx,md,ts,tsx,json,yml}\" && yarn shared format && yarn shared barrels",
-		"tsc": "yarn web tsc && yarn shared tsc && yarn mobile tsc"
+		"tsc": "yarn web tsc && yarn shared tsc && yarn mobile tsc",
+		"clean": "yarn global add rimraf && rimraf \"./**/**/{node_modules,.next,.expo}\""
 	},
 	"devDependencies": {
 		"@trivago/prettier-plugin-sort-imports": "^3.2.0",
