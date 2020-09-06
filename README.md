@@ -4,7 +4,7 @@ Evental is an open source event management platform.
 
 ### Technologies:
 
-Next.js, TypeScript, React, Prisma, Tailwind CSS, Radix UI, react-query, react-hook-form, mjml, Yarn
+Next.js, TypeScript, React, React Native, Prisma, Tailwind CSS, Radix UI, react-query, react-hook-form, mjml, Yarn
 
 ### Hosting/Services:
 - [AWS SES](https://aws.amazon.com/ses/), [AWS CloudFront](https://aws.amazon.com/cloudfront/), [AWS S3](https://aws.amazon.com/s3/), [AWS Route53](https://aws.amazon.com/route53/), [AWS ACM](https://aws.amazon.com/certificate-manager/)
