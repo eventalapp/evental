@@ -47,26 +47,28 @@ const EventsPage: NextPage = () => {
 
 	if (upcomingEvents && upcomingEvents.length === 0) {
 		return (
-			<PageWrapper>
+			<>
 				{Seo}
 
 				<Navigation />
 
-				<Column>
-					<Heading className="mb-4 text-center">Upcoming Events</Heading>
+				<PageWrapper>
+					<Column>
+						<Heading className="mb-4 text-center">Upcoming Events</Heading>
 
-					{user && <EventsPageNavigation />}
+						{user && <EventsPageNavigation />}
 
-					<span className="mt-5 block text-center text-base">
-						No events found.{' '}
-						<Link href="/events/create" passHref>
-							<a className="mt-3 font-medium text-primary">Create an Event</a>
-						</Link>
-					</span>
-				</Column>
+						<span className="mt-5 block text-center text-base">
+							No events found.{' '}
+							<Link href="/events/create" passHref>
+								<a className="mt-3 font-medium text-primary">Create an Event</a>
+							</Link>
+						</span>
+					</Column>
+				</PageWrapper>
 
 				<Footer />
-			</PageWrapper>
+			</>
 		);
 	}
 
