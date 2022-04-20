@@ -6,7 +6,7 @@ import Column from '../../../../components/Column';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
-	const { event } = router.query;
+	const { eid } = router.query;
 
 	return (
 		<Column className="py-10">
@@ -14,13 +14,13 @@ const ActivitiesPage: NextPage = () => {
 				<title>All Activities</title>
 			</Head>
 
-			<Link href={`/events/${event}`}>
+			<Link href={`/events/${eid}`}>
 				<a className="text-blue-900">Back to event</a>
 			</Link>
 
 			<h1 className="text-3xl">Activities Page</h1>
 
-			<Link href={`/events/${event}/activities/1`}>
+			<Link href={`/events/${eid}/activities/1`}>
 				<a className="text-blue-900 p-3">Activities #1</a>
 			</Link>
 

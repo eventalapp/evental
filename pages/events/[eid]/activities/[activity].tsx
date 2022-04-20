@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Column from '../../../../components/Column';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Column from '../../../../components/Column';
 
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();
-	const { activity, event } = router.query;
+	const { activity, eid } = router.query;
 
 	return (
 		<Column className="py-10">
@@ -14,7 +14,7 @@ const ViewActivityPage: NextPage = () => {
 				<title>Viewing Activity: {activity}</title>
 			</Head>
 
-			<Link href={`/events/${event}/activities`}>
+			<Link href={`/events/${eid}/activities`}>
 				<a className="text-blue-900">Back to activities</a>
 			</Link>
 
