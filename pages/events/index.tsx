@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useQuery } from 'react-query';
 import Column from '../../components/Column';
+import { Navigation } from '../../components/Navigation';
 
 const EventsPage: NextPage = () => {
 	const { data, isLoading } = useQuery<Prisma.Event[], Error>(['events'], async () => {
@@ -12,31 +13,34 @@ const EventsPage: NextPage = () => {
 	});
 
 	return (
-		<Column className="py-10">
+		<>
 			<Head>
 				<title>All Events</title>
 			</Head>
 
-			<h1 className="text-3xl">Event Page</h1>
+			<Navigation />
 
-			{isLoading ? (
-				<p>Loading...</p>
-			) : (
-				<ul>
-					{data?.map((event) => (
-						<li key={event.id}>
-							<Link href={`/events/${event.id}`}>
-								<a>
-									<div>
-										{event.name} - {event.description} - {event.startDate} - {event.endDate}
-									</div>
-								</a>
-							</Link>
-						</li>
-					))}
-				</ul>
-			)}
-		</Column>
+			<Column className="py-10">
+				<h1 className="text-3xl">Event Page</h1>
+				{isLoading ? (
+					<p>Loading...</p>
+				) : (
+					<ul>
+						{data?.map((event) => (
+							<li key={event.id}>
+								<Link href={`/events/${event.id}`}>
+									<a>
+										<div>
+											{event.name} - {event.description} - {event.startDate} - {event.endDate}
+										</div>
+									</a>
+								</Link>
+							</li>
+						))}
+					</ul>
+				)}
+			</Column>
+		</>
 	);
 };
 
