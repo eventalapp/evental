@@ -1696,6 +1696,11 @@ is-glob@^4.0.0, is-glob@^4.0.1, is-glob@^4.0.3, is-glob@~4.0.1:
   dependencies:
     is-extglob "^2.1.1"
 
+is-iso-date@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/is-iso-date/-/is-iso-date-0.0.1.tgz#d1727b0a4f40cf4dd0dbf95a56a58cc991bb76e2"
+  integrity sha1-0XJ7Ck9Az03Q2/laVqWMyZG7duI=
+
 is-negative-zero@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/is-negative-zero/-/is-negative-zero-2.0.2.tgz#7bf6f03a28003b8b3965de3ac26f664d765f3150"
