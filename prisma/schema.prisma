@@ -29,6 +29,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("account")
 }
 
 model Session {
@@ -36,7 +37,9 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("session")
 }
 
 model User {
@@ -45,10 +48,15 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  accounts      Account[]
-  sessions      Session[]
+  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime  @default(now())
+  role          Role      @default(USER)
 
-  role Role @default(USER)
+  accounts    Account[]
+  sessions    Session[]
+  eventMember EventMember[]
+
+  @@map("user")
 }
 
 model VerificationToken {
@@ -57,4 +65,37 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+enum EventRole {
+  FOUNDER
+  ORGANIZER
+  ATTENDEE
+}
+
+model Event {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  startDate DateTime
+  endDate   DateTime
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  eventMember EventMember[]
+
+  @@map("event")
+}
+
+model EventMember {
+  id      String    @id @default(cuid())
+  userId  String
+  eventId String
+  role    EventRole @default(ATTENDEE)
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("event_member")
 }
