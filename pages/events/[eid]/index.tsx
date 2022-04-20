@@ -11,7 +11,7 @@ import { Navigation } from '../../../components/Navigation';
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { data, isLoading } = useQuery<Prisma.Event, Error>(
+	const { data, isLoading } = useQuery<{ event: Prisma.Event; isOrganizer: boolean }, Error>(
 		['event', eid],
 		async () => {
 			return axios.get(`/api/events/${eid}`).then((res) => res.data);
@@ -24,7 +24,7 @@ const ViewEventPage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>{data?.location}</title>
+				<title>{data?.event.location}</title>
 			</Head>
 
 			<Navigation />
@@ -34,10 +34,18 @@ const ViewEventPage: NextPage = () => {
 					<p>Loading</p>
 				) : (
 					<div>
-						<p>{data?.id}</p>
-						<h1 className="text-3xl">{data?.name}</h1>
-						<p>{data?.location}</p>
-						<p>{data?.description}</p>
+						{data?.isOrganizer ? (
+							<Link href={`/events/${eid}/admin`}>
+								<a className="block bg-yellow-400 px-5 py-3 rounded-md mb-4">
+									You are an organizer for this event, click here to manage this event
+								</a>
+							</Link>
+						) : null}
+
+						<p>{data?.event.id}</p>
+						<h1 className="text-3xl">{data?.event.name}</h1>
+						<p>{data?.event.location}</p>
+						<p>{data?.event.description}</p>
 						<Link href={`/events/${eid}/attendees`}>
 							<a className="text-blue-900 p-3">View attendees</a>
 						</Link>
