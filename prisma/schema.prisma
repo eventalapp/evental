@@ -84,7 +84,8 @@ model Event {
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
-  eventMember EventMember[]
+  eventMember   EventMember[]
+  eventActivity EventActivity[]
 
   @@map("event")
 }
@@ -99,4 +100,19 @@ model EventMember {
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@map("event_member")
+}
+
+model EventActivity {
+  id          String   @id @default(cuid())
+  eventId     String
+  startDate   DateTime
+  endDate     DateTime
+  name        String
+  description String?
+  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("event_activity")
 }
