@@ -2,13 +2,24 @@ import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { FormEvent } from 'react';
 import Column from '../../components/Column';
 import { Navigation } from '../../components/Navigation';
 
 const CreateEventPage: NextPage = () => {
 	const router = useRouter();
 
-	const registerUser = async (event: any) => {
+	const registerUser = async (
+		event: FormEvent<HTMLFormElement> & {
+			target: {
+				name: { value: string };
+				location: { value: string };
+				startDate: { value: string };
+				endDate: { value: string };
+				description: { value: string };
+			};
+		}
+	) => {
 		event.preventDefault();
 
 		let createResponse = await axios.post('/api/events/create', {
