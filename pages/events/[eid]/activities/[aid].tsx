@@ -1,13 +1,25 @@
+import type Prisma from '@prisma/client';
+import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useQuery } from 'react-query';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
+	const { data, isLoading } = useQuery<Prisma.EventActivity, Error>(
+		['activity', eid, aid],
+		async () => {
+			return axios.get(`/api/events/${eid}/activities/${aid}`).then((res) => res.data);
+		},
+		{
+			enabled: eid !== undefined && aid !== undefined
+		}
+	);
 
 	return (
 		<>
@@ -22,9 +34,18 @@ const ViewActivityPage: NextPage = () => {
 					<a className="text-blue-900">Back to activities</a>
 				</Link>
 
-				<h1 className="text-3xl">View Activity Page id: {aid}</h1>
+				{isLoading ? (
+					<p>Loading</p>
+				) : (
+					<div>
+						<p>{data?.id}</p>
 
-				<p>With TypeScript, Next-Auth, Prisma, Postgres, Docker</p>
+						<h1 className="text-3xl">{data?.name}</h1>
+						<p>{data?.description}</p>
+						<p>{data?.startDate}</p>
+						<p>{data?.endDate}</p>
+					</div>
+				)}
 			</Column>
 		</>
 	);

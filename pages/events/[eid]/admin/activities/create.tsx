@@ -1,13 +1,16 @@
 import axios from 'axios';
 import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
 import Column from '../../../../../components/Column';
 import { Navigation } from '../../../../../components/Navigation';
+import Unauthorized from '../../../../../components/Unauthorized';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
+	const session = useSession();
 	const { eid } = router.query;
 
 	const registerActivity = async (
@@ -37,6 +40,10 @@ const CreateActivityPage: NextPage = () => {
 	};
 
 	//TODO: Use react query mutation
+
+	if (!session.data?.user?.id) {
+		return <Unauthorized />;
+	}
 
 	return (
 		<>

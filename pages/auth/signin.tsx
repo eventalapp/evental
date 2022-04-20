@@ -1,8 +1,9 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { BuiltInProviderType } from 'next-auth/providers';
 import { ClientSafeProvider, getProviders, signIn } from 'next-auth/react';
-import Column from '../../components/Column';
 import React from 'react';
+import Column from '../../components/Column';
+import { Navigation } from '../../components/Navigation';
 
 const Providers: React.FC<SignInPageProps> = (props) => {
 	const { providers } = props;
@@ -68,11 +69,15 @@ const SignInPage: NextPage<SignInPageProps> = (props) => {
 	const { providers } = props;
 
 	return (
-		<Column>
-			<div className="flex flex-col">
-				<Providers providers={providers} />
-			</div>
-		</Column>
+		<>
+			<Navigation />
+
+			<Column>
+				<div className="flex flex-col">
+					<Providers providers={providers} />
+				</div>
+			</Column>
+		</>
 	);
 };
 

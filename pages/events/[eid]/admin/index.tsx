@@ -1,13 +1,20 @@
 import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
+import Unauthorized from '../../../../components/Unauthorized';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();
+	const session = useSession();
 	const { eid } = router.query;
+
+	if (!session.data?.user?.id) {
+		return <Unauthorized />;
+	}
 
 	return (
 		<>
