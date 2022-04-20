@@ -22,6 +22,10 @@ const AdminPage: NextPage = () => {
 					<a className="text-blue-900">Back to event page</a>
 				</Link>
 				<h1 className="text-3xl">Admin Page</h1>
+
+				<Link href={`/events/${eid}/admin/activities/create`}>
+					<a className="text-blue-900 p-5">Create activity</a>
+				</Link>
 			</Column>
 		</>
 	);

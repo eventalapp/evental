@@ -3,13 +3,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
-import Column from '../../components/Column';
-import { Navigation } from '../../components/Navigation';
+import Column from '../../../../../components/Column';
+import { Navigation } from '../../../../../components/Navigation';
 
-const CreateEventPage: NextPage = () => {
+const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
+	const { eid } = router.query;
 
-	const createEvent = async (
+	const registerActivity = async (
 		event: FormEvent<HTMLFormElement> & {
 			target: {
 				name: { value: string };
@@ -22,7 +23,7 @@ const CreateEventPage: NextPage = () => {
 	) => {
 		event.preventDefault();
 
-		let createResponse = await axios.post('/api/events/create', {
+		let createActivityResponse = await axios.post(`/api/events/${eid}/admin/activities/create`, {
 			name: event.target.name.value,
 			location: event.target.location.value,
 			startDate: new Date(event.target.startDate.value).toISOString(),
@@ -30,8 +31,8 @@ const CreateEventPage: NextPage = () => {
 			description: event.target.description.value
 		});
 
-		if (createResponse.status === 200) {
-			router.push(`/events/${createResponse.data.id}`);
+		if (createActivityResponse.status === 200) {
+			router.push(`/events/${eid}/activities/${createActivityResponse.data.id}`);
 		}
 	};
 
@@ -46,11 +47,11 @@ const CreateEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
-				<h1 className="text-3xl">Create Event Page</h1>
-				<form onSubmit={createEvent}>
+				<h1 className="text-3xl">Create Activity Page</h1>
+				<form onSubmit={registerActivity}>
 					<label htmlFor="name">Name</label>
 					<input
-						defaultValue="Event Name"
+						defaultValue="Activity Name"
 						id="name"
 						name="name"
 						type="text"
@@ -59,7 +60,7 @@ const CreateEventPage: NextPage = () => {
 					/>
 					<label htmlFor="name">Location</label>
 					<input
-						defaultValue="Event Location"
+						defaultValue="Activity Location"
 						id="location"
 						name="location"
 						type="text"
@@ -68,7 +69,7 @@ const CreateEventPage: NextPage = () => {
 					/>
 					<label htmlFor="name">Description</label>
 					<input
-						defaultValue="Event Description"
+						defaultValue="Activity Description"
 						id="description"
 						name="description"
 						type="text"
@@ -92,11 +93,11 @@ const CreateEventPage: NextPage = () => {
 						required
 						className="border-2"
 					/>
-					<button type="submit">Register Event</button>
+					<button type="submit">Register Activity</button>
 				</form>
 			</Column>
 		</>
 	);
 };
 
-export default CreateEventPage;
+export default CreateActivityPage;
