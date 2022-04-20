@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-
 import Column from '../../components/Column';
 
 const EventsPage: NextPage = () => {
