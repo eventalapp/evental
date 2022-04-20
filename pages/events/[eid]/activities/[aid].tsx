@@ -7,12 +7,12 @@ import { Navigation } from '../../../../components/Navigation';
 
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();
-	const { activity, eid } = router.query;
+	const { aid, eid } = router.query;
 
 	return (
 		<>
 			<Head>
-				<title>Viewing Activity: {activity}</title>
+				<title>Viewing Activity: {aid}</title>
 			</Head>
 
 			<Navigation />
@@ -22,7 +22,7 @@ const ViewActivityPage: NextPage = () => {
 					<a className="text-blue-900">Back to activities</a>
 				</Link>
 
-				<h1 className="text-3xl">View Activity Page id: {activity}</h1>
+				<h1 className="text-3xl">View Activity Page id: {aid}</h1>
 
 				<p>With TypeScript, Next-Auth, Prisma, Postgres, Docker</p>
 			</Column>
