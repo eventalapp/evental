@@ -80,6 +80,9 @@ model Event {
   location    String
   startDate   DateTime
   endDate     DateTime
+  type        String   @default("Event")
+  image       String?  @default("https://www.gravatar.com/avatar/?d=identicon")
+  banner      String?
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
