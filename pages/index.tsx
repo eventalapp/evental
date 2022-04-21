@@ -25,10 +25,10 @@ const HomePage: NextPage = () => {
 			</section>
 			<Column className="py-10">
 				<Link href="/events/create" passHref>
-					<LinkButton>Create Event</LinkButton>
+					<LinkButton className="mr-3">Create Event</LinkButton>
 				</Link>
 				<Link href="/events" passHref>
-					<LinkButton>View Events</LinkButton>
+					<LinkButton className="mr-3">View Events</LinkButton>
 				</Link>
 				<Link href="/auth/signin" passHref>
 					<LinkButton>Sign in</LinkButton>

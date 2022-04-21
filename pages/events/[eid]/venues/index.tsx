@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
+import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
 import NoAccess from '../../../../components/NoAccess';
 import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
@@ -31,12 +33,18 @@ const ActivitiesPage: NextPage = () => {
 
 				<div className="flex flex-row justify-between">
 					<h1 className="text-3xl">Venues Page</h1>
-					{isVenuesLoading ? (
-						<p>Venues loading...</p>
-					) : (
-						venues && venues.map((venue) => <div key={venue.id}>{venue.name}</div>)
+					{!isOrganizerLoading && isOrganizer && (
+						<Link href={`/events/${eid}/admin/venues/create`} passHref>
+							<LinkButton className="mr-3">Create venue</LinkButton>
+						</Link>
 					)}
 				</div>
+
+				{isVenuesLoading ? (
+					<p>Venues loading...</p>
+				) : (
+					<div>{venues && venues.map((venue) => <div key={venue.id}>{venue.name}</div>)}</div>
+				)}
 			</Column>
 		</>
 	);

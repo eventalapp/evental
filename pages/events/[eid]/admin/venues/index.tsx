@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -7,14 +8,20 @@ import Column from '../../../../../components/Column';
 import { LinkButton } from '../../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../../components/Navigation';
 import NoAccess from '../../../../../components/NoAccess';
+import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../../hooks/useVenuesQuery';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
+	const session = useSession();
 	const { eid } = router.query;
 	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+
+	if (!session.data?.user?.id) {
+		return <Unauthorized />;
+	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
 		return <NoAccess />;

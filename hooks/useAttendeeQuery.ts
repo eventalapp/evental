@@ -9,7 +9,7 @@ export const useAttendeeQuery = (eid: string, aid: string) => {
 			return axios.get(`/api/events/${eid}/attendees/${aid}`).then((res) => res.data);
 		},
 		{
-			enabled: eid !== undefined && aid !== undefined
+			enabled: eid !== undefined && eid !== 'undefined' && aid !== undefined && aid !== 'undefined'
 		}
 	);
 

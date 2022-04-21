@@ -6,10 +6,10 @@ export const useEventQuery = (eid: string) => {
 	const { data: event, isLoading: isEventLoading } = useQuery<Prisma.Event, Error>(
 		['event', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}`).then((res) => res.data.event);
+			return axios.get(`/api/events/${eid}`).then((res) => res.data);
 		},
 		{
-			enabled: eid !== undefined
+			enabled: eid !== undefined && eid !== 'undefined'
 		}
 	);
 

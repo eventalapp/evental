@@ -25,7 +25,7 @@ const ViewEventPage: NextPage = () => {
 
 			<Column className="py-10">
 				{isEventLoading ? (
-					<p>Loading</p>
+					<p>Loading event...</p>
 				) : (
 					<div>
 						{!isOrganizerLoading && isOrganizer && (
