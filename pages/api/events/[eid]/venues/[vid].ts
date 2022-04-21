@@ -4,22 +4,22 @@ import prisma from '../../../../../prisma/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
-	const { eid, aid } = req.query;
+	const { eid, vid } = req.query;
 
 	if (!session?.user?.id) {
 		return res.status(401).send({ message: 'You must be logged in to do this.' });
 	}
 
 	try {
-		let activity = await prisma.eventActivity.findFirst({
-			where: { eventId: String(eid), id: String(aid) }
+		let venue = await prisma.eventVenue.findFirst({
+			where: { eventId: String(eid), id: String(vid) }
 		});
 
-		if (!activity) {
-			return res.status(404).send({ message: 'Activity not found.' });
+		if (!venue) {
+			return res.status(404).send({ message: 'Venue not found.' });
 		}
 
-		return res.status(200).send(activity);
+		return res.status(200).send(venue);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

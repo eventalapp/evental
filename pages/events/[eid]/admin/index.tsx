@@ -7,15 +7,22 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
+import NoAccess from '../../../../components/NoAccess';
 import Unauthorized from '../../../../components/Unauthorized';
+import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid } = router.query;
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
+	}
+
+	if (!isOrganizerLoading && !isOrganizer) {
+		return <NoAccess />;
 	}
 
 	return (
@@ -31,9 +38,13 @@ const AdminPage: NextPage = () => {
 
 				<div className="flex flex-row justify-between">
 					<h1 className="text-3xl">Admin Page</h1>
+
 					<div>
-						<Link href={`/events/${eid}/admin/activities/create`} passHref>
-							<LinkButton className="mr-3">Create activity</LinkButton>
+						<Link href={`/events/${eid}/admin/activities/`} passHref>
+							<LinkButton className="mr-3">Manage activities</LinkButton>
+						</Link>
+						<Link href={`/events/${eid}/admin/venues/`} passHref>
+							<LinkButton className="mr-3">Manage venues</LinkButton>
 						</Link>
 						<Link href={`/events/${eid}/admin/edit`} passHref>
 							<LinkButton>Edit event</LinkButton>

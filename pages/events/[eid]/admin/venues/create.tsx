@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
+import { ZodError } from 'zod';
 import { BackButton } from '../../../../../components/BackButton';
 import Column from '../../../../../components/Column';
 import { Button } from '../../../../../components/Form/Button';
@@ -14,6 +15,7 @@ import { Navigation } from '../../../../../components/Navigation';
 import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
+import { CreateVenueSchema } from '../../../../../utils/schemas';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -21,7 +23,7 @@ const CreateActivityPage: NextPage = () => {
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
-	const registerActivity = async (
+	const createVenue = async (
 		event: FormEvent<HTMLFormElement> & {
 			target: {
 				name: { value: string };
@@ -34,20 +36,34 @@ const CreateActivityPage: NextPage = () => {
 	) => {
 		event.preventDefault();
 
-		let createActivityResponse = await axios.post(`/api/events/${eid}/admin/activities/create`, {
-			name: event.target.name.value,
-			location: event.target.location.value,
-			startDate: new Date(event.target.startDate.value).toISOString(),
-			endDate: new Date(event.target.endDate.value).toISOString(),
-			description: event.target.description.value
+		const { target } = event;
+
+		let formattedObject: { [key: string]: string } = {};
+
+		Object.entries(target).forEach(([, value]) => {
+			if (value.tagName === 'INPUT' || value.tagName === 'TEXTAREA') {
+				formattedObject[value.name] = value.value;
+			}
 		});
 
-		if (createActivityResponse.status === 200) {
-			router.push(`/events/${eid}/activities/${createActivityResponse.data.id}`);
+		try {
+			let eventParsed = CreateVenueSchema.parse(formattedObject);
+
+			let createVenueResponse = await axios.post(`/api/events/${eid}/admin/venues/create`, {
+				name: eventParsed.name,
+				description: eventParsed.description
+			});
+
+			if (createVenueResponse.status === 200) {
+				router.push(`/events/${eid}/venues/${createVenueResponse.data.id}`);
+			}
+		} catch (error) {
+			if (error instanceof ZodError) {
+				alert('error');
+				console.error(error);
+			}
 		}
 	};
-
-	//TODO: Use react query mutation
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
@@ -68,65 +84,30 @@ const CreateActivityPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<h1 className="text-3xl">Create Activity Page</h1>
-				<form onSubmit={registerActivity}>
+				<h1 className="text-3xl">Create Venue Page (WIP)</h1>
+				<form onSubmit={createVenue}>
 					<div className="flex flex-col w-full mt-5">
 						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>
 								<Label htmlFor="name">Name</Label>
-								<Input defaultValue="Activity Name" id="name" name="name" type="text" required />
+								<Input defaultValue="Venue Name" id="name" name="name" type="text" required />
 							</div>
+						</div>
 
-							<div>
-								<Label htmlFor="location">Location</Label>
-								<Input
-									defaultValue="Activity Location"
-									id="location"
-									name="location"
-									type="text"
-									required
-								/>
-							</div>
-						</div>
-						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-							<p>TODO: Add venue input</p>
-						</div>
 						<div className="grid grid-cols-1 mb-5 gap-5">
 							<div>
 								<Label htmlFor="description">Description</Label>
 								<Textarea
-									defaultValue="Activity Description"
+									defaultValue="Venue Description"
 									id="description"
 									name="description"
 									type="text"
 								/>
 							</div>
 						</div>
-						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-							<div>
-								<Label htmlFor="startDate">Start Date</Label>
-								<Input
-									defaultValue={new Date().toISOString().slice(0, 10)}
-									id="startDate"
-									name="startDate"
-									type="date"
-									required
-								/>
-							</div>
-							<div>
-								<Label htmlFor="endDate">End Date</Label>
-								<Input
-									defaultValue={new Date().toISOString().slice(0, 10)}
-									id="endDate"
-									name="endDate"
-									type="date"
-									required
-								/>
-							</div>
-						</div>
 					</div>
 
-					<Button type="submit">Create Activity</Button>
+					<Button type="submit">Create Venue</Button>
 				</form>
 			</Column>
 		</>

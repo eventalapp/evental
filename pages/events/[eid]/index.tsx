@@ -45,7 +45,10 @@ const ViewEventPage: NextPage = () => {
 								<LinkButton className="mr-3">View attendees</LinkButton>
 							</Link>
 							<Link href={`/events/${eid}/activities`} passHref>
-								<LinkButton>View activities</LinkButton>
+								<LinkButton className="mr-3">View activities</LinkButton>
+							</Link>
+							<Link href={`/events/${eid}/venues`} passHref>
+								<LinkButton>View venues</LinkButton>
 							</Link>
 						</div>
 					</div>

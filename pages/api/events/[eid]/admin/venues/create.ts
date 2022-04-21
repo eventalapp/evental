@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import prisma from '../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../utils/isOrganizer';
-import { CreateActivitySchema } from '../../../../../../utils/schemas';
+import { CreateVenueSchema } from '../../../../../../utils/schemas';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
@@ -18,17 +18,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'POST') {
 		try {
-			console.log(req.body);
+			let bodyParsed = CreateVenueSchema.parse(req.body);
 
-			let bodyParsed = CreateActivitySchema.parse(req.body);
-
-			let createdActivity = await prisma.eventActivity.create({
+			let createdActivity = await prisma.eventVenue.create({
 				data: {
 					eventId: String(eid),
 					name: bodyParsed.name,
-					location: bodyParsed.location,
-					startDate: bodyParsed.startDate,
-					endDate: bodyParsed.endDate,
 					description: bodyParsed.description
 				}
 			});

@@ -145,7 +145,6 @@ model EventVenue {
   id          String   @id @default(cuid())
   eventId     String
   name        String
-  address     String?
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
