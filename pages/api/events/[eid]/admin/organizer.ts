@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../prisma/client';
-import { isOrganizer } from '../../../../utils/isOrganizer';
+import { isOrganizer } from '../../../../../utils/isOrganizer';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
@@ -12,11 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	}
 
 	try {
-		let eventFound = await prisma.event.findFirst({ where: { id: String(eid) } });
-
-		return res
-			.status(200)
-			.send({ event: eventFound, isOrganizer: isOrganizer(session.user.id, String(eid)) });
+		return res.status(200).send({ isOrganizer: isOrganizer(session.user.id, String(eid)) });
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

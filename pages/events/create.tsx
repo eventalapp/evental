@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
+import { BackButton } from '../../components/BackButton';
 import Column from '../../components/Column';
 import { Button } from '../../components/Form/Button';
 import { Input } from '../../components/Form/Input';
@@ -57,19 +58,22 @@ const CreateEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
+				<BackButton />
+
 				<h1 className="text-3xl">Create Event Page</h1>
+
 				<form onSubmit={createEvent}>
 					<div className="flex flex-col w-full mt-5">
 						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>
 								<Label htmlFor="name">Name</Label>
-								<Input defaultValue="Event Name" id="name" name="name" type="text" required />
+								<Input defaultValue="Activity Name" id="name" name="name" type="text" required />
 							</div>
 
 							<div>
-								<Label htmlFor="name">Location</Label>
+								<Label htmlFor="location">Location</Label>
 								<Input
-									defaultValue="Event Location"
+									defaultValue="Activity Location"
 									id="location"
 									name="location"
 									type="text"
@@ -79,9 +83,9 @@ const CreateEventPage: NextPage = () => {
 						</div>
 						<div className="grid grid-cols-1 mb-5 gap-5">
 							<div>
-								<Label htmlFor="name">Description</Label>
+								<Label htmlFor="description">Description</Label>
 								<Textarea
-									defaultValue="Event Description"
+									defaultValue="Activity Description"
 									id="description"
 									name="description"
 									type="text"
@@ -90,7 +94,7 @@ const CreateEventPage: NextPage = () => {
 						</div>
 						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>
-								<Label htmlFor="name">Start Date</Label>
+								<Label htmlFor="startDate">Start Date</Label>
 								<Input
 									defaultValue={new Date().toISOString().slice(0, 10)}
 									id="startDate"
@@ -100,7 +104,7 @@ const CreateEventPage: NextPage = () => {
 								/>
 							</div>
 							<div>
-								<Label htmlFor="name">End Date</Label>
+								<Label htmlFor="endDate">End Date</Label>
 								<Input
 									defaultValue={new Date().toISOString().slice(0, 10)}
 									id="endDate"

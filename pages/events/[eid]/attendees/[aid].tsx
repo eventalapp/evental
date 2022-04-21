@@ -2,9 +2,9 @@ import type Prisma from '@prisma/client';
 import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
+import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 
@@ -12,6 +12,8 @@ type EventMemberUser = Prisma.EventMember & {
 	user: {
 		name: string | null;
 		image: string | null;
+		company: string | null;
+		position: string | null;
 	};
 };
 
@@ -37,18 +39,17 @@ const ViewAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
-				<Link href={`/events/${eid}/attendees`}>
-					<a className="text-blue-900">Back to attendees</a>
-				</Link>
+				<BackButton />
 
 				{isLoading ? (
 					<p>Loading</p>
 				) : (
 					<div>
-						<p>{data?.id}</p>
 						<img alt={String(data?.user.name)} src={String(data?.user.image)} />
 						<h1 className="text-3xl">{data?.user.name}</h1>
 						<p>{data?.role}</p>
+						<span className="text-md text-gray-700 block">{data?.user.company}</span>
+						<span className="text-md text-gray-700 block">{data?.user.position}</span>
 					</div>
 				)}
 			</Column>

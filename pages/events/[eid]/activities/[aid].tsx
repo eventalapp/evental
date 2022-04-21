@@ -2,9 +2,9 @@ import type Prisma from '@prisma/client';
 import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
+import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 
@@ -30,9 +30,7 @@ const ViewActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
-				<Link href={`/events/${eid}/activities`}>
-					<a className="text-blue-900">Back to activities</a>
-				</Link>
+				<BackButton />
 
 				{isLoading ? (
 					<p>Loading</p>
