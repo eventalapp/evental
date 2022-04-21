@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FormEvent } from 'react';
 import { BackButton } from '../../../../../components/BackButton';
@@ -9,17 +10,20 @@ import Column from '../../../../../components/Column';
 import { Button } from '../../../../../components/Form/Button';
 import { Input } from '../../../../../components/Form/Input';
 import { Label } from '../../../../../components/Form/Label';
+import { Select } from '../../../../../components/Form/Select';
 import { Textarea } from '../../../../../components/Form/Textarea';
 import { Navigation } from '../../../../../components/Navigation';
 import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
+import { useVenuesQuery } from '../../../../../hooks/useVenuesQuery';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
 
 	const registerActivity = async (
 		event: FormEvent<HTMLFormElement> & {
@@ -78,19 +82,30 @@ const CreateActivityPage: NextPage = () => {
 							</div>
 
 							<div>
-								<Label htmlFor="location">Location</Label>
-								<Input
-									defaultValue="Activity Location"
-									id="location"
-									name="location"
-									type="text"
-									required
-								/>
+								{venues && venues.length <= 0 ? (
+									<Link href={`/events/${eid}/admin/venues/create`}>
+										<a className="text-blue-600">No Venues exist, please create a Venue</a>
+									</Link>
+								) : (
+									<>
+										<Label htmlFor="venue">Venue</Label>
+										<Select name="venue" id="venue" required>
+											{venues &&
+												venues.map((venue) => (
+													<option key={venue.id} value={venue.id}>
+														{venue.name}
+													</option>
+												))}
+										</Select>
+
+										<Link href={`/events/${eid}/admin/venues/create`}>
+											<a className="text-blue-600">Dont see your venue? Create a Venue</a>
+										</Link>
+									</>
+								)}
 							</div>
 						</div>
-						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-							<p>TODO: Add venue input</p>
-						</div>
+
 						<div className="grid grid-cols-1 mb-5 gap-5">
 							<div>
 								<Label htmlFor="description">Description</Label>
@@ -126,7 +141,9 @@ const CreateActivityPage: NextPage = () => {
 						</div>
 					</div>
 
-					<Button type="submit">Create Activity</Button>
+					<Button type="submit" disabled={Boolean(venues && venues.length <= 0)}>
+						Create Activity
+					</Button>
 				</form>
 			</Column>
 		</>
