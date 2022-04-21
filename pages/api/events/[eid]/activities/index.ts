@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 
 		if (activityList.length === 0) {
-			return res.status(404).send({ message: 'No attendees found.' });
+			return res.status(204).end();
 		}
 
 		return res.status(200).send(activityList);

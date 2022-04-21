@@ -47,16 +47,20 @@ const AttendeesPage: NextPage = () => {
 					<p>Loading...</p>
 				) : (
 					<ul>
-						{data?.map((eventMember) => (
-							<li key={eventMember.id}>
-								<Link href={`/events/${eid}/attendees/${eventMember.userId}`}>
-									<a>
-										<img alt={String(eventMember.user.name)} src={String(eventMember.user.image)} />
-										<span>{eventMember.user.name}</span>
-									</a>
-								</Link>
-							</li>
-						))}
+						{data &&
+							data.map((eventMember) => (
+								<li key={eventMember.id}>
+									<Link href={`/events/${eid}/attendees/${eventMember.userId}`}>
+										<a>
+											<img
+												alt={String(eventMember.user.name)}
+												src={String(eventMember.user.image)}
+											/>
+											<span>{eventMember.user.name}</span>
+										</a>
+									</Link>
+								</li>
+							))}
 					</ul>
 				)}
 			</Column>
