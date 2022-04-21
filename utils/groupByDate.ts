@@ -30,7 +30,5 @@ export const groupByDate = (arr: Prisma.EventActivity[]) => {
 			}
 		});
 
-	console.log(dateHashmap);
-
 	return dateHashmap;
 };

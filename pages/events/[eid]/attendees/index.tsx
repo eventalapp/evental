@@ -2,6 +2,7 @@ import type Prisma from '@prisma/client';
 import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
@@ -60,11 +61,14 @@ const AttendeesPage: NextPage = () => {
 											<Link href={`/events/${eid}/attendees/${eventMember.userId}`}>
 												<a>
 													<div className="flex flex-col items-center">
-														<img
-															alt={String(eventMember.user.name)}
-															src={String(eventMember.user.image)}
-															className="rounded-full h-32 w-32"
-														/>
+														<div className="h-32 w-32 relative">
+															<Image
+																alt={String(eventMember.user.name)}
+																src={String(eventMember.user.image)}
+																className="rounded-full"
+																layout="fill"
+															/>
+														</div>
 														<span className="text-lg">{eventMember.user.name}</span>
 														<span className="text-md text-gray-700">
 															{eventMember.user.company}
@@ -86,10 +90,14 @@ const AttendeesPage: NextPage = () => {
 										<li key={eventMember.id}>
 											<Link href={`/events/${eid}/attendees/${eventMember.userId}`}>
 												<a>
-													<img
-														alt={String(eventMember.user.name)}
-														src={String(eventMember.user.image)}
-													/>
+													<div className="h-16 w-16 relative">
+														<Image
+															alt={String(eventMember.user.name)}
+															src={String(eventMember.user.image)}
+															className="rounded-full"
+															layout="fill"
+														/>
+													</div>
 													<span>{eventMember.user.name}</span>
 												</a>
 											</Link>
