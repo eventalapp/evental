@@ -18,6 +18,7 @@ import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../../hooks/useVenuesQuery';
+import { getFormEntries } from '../../../../../utils/getFormEntries';
 import { CreateActivitySchema } from '../../../../../utils/schemas';
 
 const CreateActivityPage: NextPage = () => {
@@ -27,23 +28,13 @@ const CreateActivityPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
 
-	const registerActivity = async (
-		event: FormEvent<HTMLFormElement> & {
-			target: unknown;
-		}
-	) => {
+	const registerActivity = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		let formattedObject: { [key: string]: string } = {};
-
-		Object.entries(event.target).forEach(([, value]) => {
-			if (value.tagName === 'INPUT' || value.tagName === 'TEXTAREA' || value.tagName === 'SELECT') {
-				formattedObject[value.name] = value.value;
-			}
-		});
-
 		try {
-			let eventParsed = CreateActivitySchema.parse(formattedObject);
+			const formEntries = getFormEntries(event);
+
+			let eventParsed = CreateActivitySchema.parse(formEntries);
 
 			let createActivityResponse = await axios.post(`/api/events/${eid}/admin/activities/create`, {
 				name: eventParsed.name,

@@ -15,6 +15,7 @@ import { Navigation } from '../../../../../components/Navigation';
 import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
+import { getFormEntries } from '../../../../../utils/getFormEntries';
 import { CreateVenueSchema } from '../../../../../utils/schemas';
 
 const CreateActivityPage: NextPage = () => {
@@ -23,25 +24,15 @@ const CreateActivityPage: NextPage = () => {
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
-	const createVenue = async (
-		event: FormEvent<HTMLFormElement> & {
-			target: unknown;
-		}
-	) => {
+	const createVenue = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		let formattedObject: { [key: string]: string } = {};
-
-		Object.entries(event.target).forEach(([, value]) => {
-			if (value.tagName === 'INPUT' || value.tagName === 'TEXTAREA') {
-				formattedObject[value.name] = value.value;
-			}
-		});
-
 		try {
-			let eventParsed = CreateVenueSchema.parse(formattedObject);
+			const formEntries = getFormEntries(event);
 
-			let createVenueResponse = await axios.post(`/api/events/${eid}/admin/venues/create`, {
+			const eventParsed = CreateVenueSchema.parse(formEntries);
+
+			const createVenueResponse = await axios.post(`/api/events/${eid}/admin/venues/create`, {
 				name: eventParsed.name,
 				description: eventParsed.description
 			});
