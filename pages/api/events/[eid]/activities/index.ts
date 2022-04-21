@@ -1,14 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
 import prisma from '../../../../../prisma/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const session = await getSession({ req });
 	const { eid } = req.query;
-
-	if (!session?.user?.id) {
-		return res.status(401).send({ message: 'You must be logged in to do this.' });
-	}
 
 	try {
 		let activityList = await prisma.eventActivity.findMany({

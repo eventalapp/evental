@@ -44,6 +44,12 @@ const ActivitiesPage: NextPage = () => {
 						<LinkButton className="mr-3">Create venue</LinkButton>
 					</Link>
 				</div>
+
+				{isVenuesLoading ? (
+					<p>Venues loading...</p>
+				) : (
+					<div>{venues && venues.map((venue) => <div key={venue.id}>{venue.name}</div>)}</div>
+				)}
 			</Column>
 		</>
 	);
