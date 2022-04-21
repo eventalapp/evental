@@ -29,14 +29,18 @@ const AdminPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<h1 className="text-3xl">Admin Page</h1>
-
-				<Link href={`/events/${eid}/admin/activities/create`} passHref>
-					<LinkButton className="mr-3">Create activity</LinkButton>
-				</Link>
-				<Link href={`/events/${eid}/admin/edit`} passHref>
-					<LinkButton>Edit event</LinkButton>
-				</Link>
+				<div className="flex flex-row justify-between">
+					<h1 className="text-3xl">Admin Page</h1>
+					<div>
+						<Link href={`/events/${eid}/admin/activities/create`} passHref>
+							<LinkButton className="mr-3">Create activity</LinkButton>
+						</Link>
+						<Link href={`/events/${eid}/admin/edit`} passHref>
+							<LinkButton>Edit event</LinkButton>
+						</Link>
+					</div>
+				</div>
+				<span>Manage your event</span>
 			</Column>
 		</>
 	);
