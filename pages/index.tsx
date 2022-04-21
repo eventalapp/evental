@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Column from '../components/Column';
+import { LinkButton } from '../components/Form/LinkButton';
 import { Navigation } from '../components/Navigation';
 
 const HomePage: NextPage = () => {
@@ -23,14 +24,14 @@ const HomePage: NextPage = () => {
 				</Column>
 			</section>
 			<Column className="py-10">
-				<Link href="/events/create">
-					<a className="text-blue-600 p-3">Create Event</a>
+				<Link href="/events/create" passHref>
+					<LinkButton>Create Event</LinkButton>
 				</Link>
-				<Link href="/events">
-					<a className="text-blue-600 p-3">View Events</a>
+				<Link href="/events" passHref>
+					<LinkButton>View Events</LinkButton>
 				</Link>
-				<Link href="/auth/signin">
-					<a className="text-blue-600 p-3">Sign in</a>
+				<Link href="/auth/signin" passHref>
+					<LinkButton>Sign in</LinkButton>
 				</Link>
 			</Column>
 		</>

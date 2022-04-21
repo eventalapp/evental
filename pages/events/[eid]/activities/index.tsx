@@ -10,11 +10,12 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
+import { groupByDate } from '../../../../utils/groupByDate';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { data, isLoading } = useQuery<Prisma.EventActivity[], Error>(
+	const { data: activities, isLoading } = useQuery<Prisma.EventActivity[], Error>(
 		['activities', eid],
 		async () => {
 			return axios.get(`/api/events/${eid}/activities`).then((res) => res.data);
@@ -32,6 +33,10 @@ const ActivitiesPage: NextPage = () => {
 			enabled: eid !== undefined
 		}
 	);
+
+	if (activities) {
+		groupByDate(activities);
+	}
 
 	return (
 		<>
@@ -56,21 +61,37 @@ const ActivitiesPage: NextPage = () => {
 				{isLoading ? (
 					<p>Loading...</p>
 				) : (
-					<ul>
-						{data &&
-							data.map((activity) => (
-								<li key={activity.id}>
-									<Link href={`/events/${eid}/activities/${activity.id}`}>
-										<a>
-											<span>
-												{dayjs(activity.startDate).format('MMM DD h:mma')} {activity.name} -{' '}
-												{activity.description}
-											</span>
-										</a>
-									</Link>
-								</li>
-							))}
-					</ul>
+					<div>
+						{activities &&
+							Object.entries(groupByDate(activities)).map(([key, activityDate]) => {
+								return (
+									<div key={key}>
+										<h2 className="text-2xl">{dayjs(key).format('dddd, MMMM D')}</h2>
+										{Object.entries(activityDate).map(([key, activitiesByDate]) => {
+											return (
+												<li key={key}>
+													<h2 className="font-bold text-1xl">{dayjs(key).format('h:mma')}</h2>
+													<ul>
+														{activitiesByDate.map((activity) => (
+															<li key={activity.id}>
+																<Link href={`/events/${eid}/activities/${activity.id}`}>
+																	<a>
+																		<span>
+																			{dayjs(activity.startDate).format('h:mma')} {activity.name} -{' '}
+																			{activity.description}
+																		</span>
+																	</a>
+																</Link>
+															</li>
+														))}
+													</ul>
+												</li>
+											);
+										})}
+									</div>
+								);
+							})}
+					</div>
 				)}
 			</Column>
 		</>
