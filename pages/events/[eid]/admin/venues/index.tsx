@@ -48,7 +48,19 @@ const ActivitiesPage: NextPage = () => {
 				{isVenuesLoading ? (
 					<p>Venues loading...</p>
 				) : (
-					<div>{venues && venues.map((venue) => <div key={venue.id}>{venue.name}</div>)}</div>
+					<div>
+						{venues &&
+							venues.map((venue) => (
+								<div key={venue.id} className="py-3 border-b-2 border-gray-200">
+									<Link href={`/events/${eid}/venues/${venue.id}`}>
+										<a>
+											<span className="text-lg block">{venue.name}</span>
+											<span className="text-md block">{venue.description}</span>
+										</a>
+									</Link>
+								</div>
+							))}
+					</div>
 				)}
 			</Column>
 		</>
