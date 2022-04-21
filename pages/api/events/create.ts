@@ -33,11 +33,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}
 			});
 
+			let attendeeRole = await prisma.eventRole.create({
+				data: {
+					role: 'ATTENDEE',
+					eventId: String(createdEvent.id)
+				}
+			});
+
 			await prisma.eventMember.create({
 				data: {
 					eventId: createdEvent.id,
 					permissionRole: 'FOUNDER',
-					userId: session.user.id
+					userId: session.user.id,
+					eventRoleId: String(attendeeRole.id)
 				}
 			});
 

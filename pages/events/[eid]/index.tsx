@@ -13,10 +13,19 @@ import { Navigation } from '../../../components/Navigation';
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { data, isLoading } = useQuery<{ event: Prisma.Event; isOrganizer: boolean }, Error>(
+	const { data: event, isLoading } = useQuery<Prisma.Event, Error>(
 		['event', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}`).then((res) => res.data);
+			return axios.get(`/api/events/${eid}`).then((res) => res.data.event);
+		},
+		{
+			enabled: eid !== undefined
+		}
+	);
+	const { data: isOrganizer } = useQuery<boolean, Error>(
+		['isOrganizer', eid],
+		async () => {
+			return axios.get(`/api/events/${eid}/admin/organizer`).then((res) => res.data.isOrganizer);
 		},
 		{
 			enabled: eid !== undefined
@@ -26,7 +35,7 @@ const ViewEventPage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>{data?.event.location}</title>
+				<title>{event?.location}</title>
 			</Head>
 
 			<Navigation />
@@ -36,19 +45,18 @@ const ViewEventPage: NextPage = () => {
 					<p>Loading</p>
 				) : (
 					<div>
-						{data?.isOrganizer ? (
+						{isOrganizer && (
 							<Link href={`/events/${eid}/admin`}>
 								<a className="block bg-yellow-400 px-5 py-3 rounded-md mb-4">
 									You are an organizer for this event, click here to manage this event
 								</a>
 							</Link>
-						) : null}
-						<span className="text-gray-600 text-sm block">{data?.event.type}</span>
-						<h1 className="text-3xl">{data?.event.name}</h1>
-						<p>{data?.event.location}</p>
-						<p>{data?.event.description}</p>
-						{dayjs(data?.event.startDate).format('MMM DD')} -{' '}
-						{dayjs(data?.event.endDate).format('MMM DD')}
+						)}
+						<span className="text-gray-600 text-sm block">{event?.type}</span>
+						<h1 className="text-3xl">{event?.name}</h1>
+						<p>{event?.location}</p>
+						<p>{event?.description}</p>
+						{dayjs(event?.startDate).format('MMM DD')} - {dayjs(event?.endDate).format('MMM DD')}
 						<div className="mt-3">
 							<Link href={`/events/${eid}/attendees`} passHref>
 								<LinkButton className="mr-3">View attendees</LinkButton>
