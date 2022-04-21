@@ -1,39 +1,17 @@
-import type Prisma from '@prisma/client';
-import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
-
-type EventMemberUser = Prisma.EventMember & {
-	user: {
-		name: string | null;
-		image: string | null;
-		company: string | null;
-		position: string | null;
-	};
-};
+import { useAttendeesQuery } from '../../../../hooks/useAttendeesQuery';
 
 const AttendeesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { data, isLoading } = useQuery<
-		{ organizers: EventMemberUser[]; attendees: EventMemberUser[] },
-		Error
-	>(
-		['attendees', eid],
-		async () => {
-			return axios.get(`/api/events/${eid}/attendees`).then((res) => res.data);
-		},
-		{
-			enabled: eid !== undefined
-		}
-	);
+	const { attendees, isAttendeesLoading } = useAttendeesQuery(String(eid));
 
 	return (
 		<>
@@ -48,15 +26,15 @@ const AttendeesPage: NextPage = () => {
 
 				<h1 className="text-3xl">Attendees Page</h1>
 
-				{isLoading ? (
+				{isAttendeesLoading ? (
 					<p>Loading...</p>
 				) : (
-					data && (
+					attendees && (
 						<>
 							<div>
-								<h2 className="text-2xl my-3">Organizers ({data.organizers.length})</h2>
+								<h2 className="text-2xl my-3">Organizers ({attendees.organizers.length})</h2>
 								<ul>
-									{data.organizers.map((eventMember) => (
+									{attendees.organizers.map((eventMember) => (
 										<li key={eventMember.id} className="inline-block">
 											<Link href={`/events/${eid}/attendees/${eventMember.userId}`}>
 												<a>
@@ -84,9 +62,9 @@ const AttendeesPage: NextPage = () => {
 								</ul>
 							</div>
 							<div>
-								<h2 className="text-2xl my-3">Attendees ({data.attendees.length})</h2>
+								<h2 className="text-2xl my-3">Attendees ({attendees.attendees.length})</h2>
 								<ul>
-									{data.attendees.map((eventMember) => (
+									{attendees.attendees.map((eventMember) => (
 										<li key={eventMember.id}>
 											<Link href={`/events/${eid}/attendees/${eventMember.userId}`}>
 												<a>

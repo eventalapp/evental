@@ -81,6 +81,9 @@ const CreateActivityPage: NextPage = () => {
 								/>
 							</div>
 						</div>
+						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+							<p>TODO: Add venue input</p>
+						</div>
 						<div className="grid grid-cols-1 mb-5 gap-5">
 							<div>
 								<Label htmlFor="description">Description</Label>

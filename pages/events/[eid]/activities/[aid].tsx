@@ -1,25 +1,15 @@
-import type Prisma from '@prisma/client';
-import axios from 'axios';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
+import { useActivityQuery } from '../../../../hooks/useActivityQuery';
 
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
-	const { data, isLoading } = useQuery<Prisma.EventActivity, Error>(
-		['activity', eid, aid],
-		async () => {
-			return axios.get(`/api/events/${eid}/activities/${aid}`).then((res) => res.data);
-		},
-		{
-			enabled: eid !== undefined && aid !== undefined
-		}
-	);
+	const { activity, isActivityLoading } = useActivityQuery(String(eid), String(aid));
 
 	return (
 		<>
@@ -32,16 +22,16 @@ const ViewActivityPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				{isLoading ? (
+				{isActivityLoading ? (
 					<p>Loading</p>
 				) : (
 					<div>
-						<p>{data?.id}</p>
+						<p>{activity?.id}</p>
 
-						<h1 className="text-3xl">{data?.name}</h1>
-						<p>{data?.description}</p>
-						<p>{data?.startDate}</p>
-						<p>{data?.endDate}</p>
+						<h1 className="text-3xl">{activity?.name}</h1>
+						<p>{activity?.description}</p>
+						<p>{activity?.startDate}</p>
+						<p>{activity?.endDate}</p>
 					</div>
 				)}
 			</Column>

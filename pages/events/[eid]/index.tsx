@@ -1,36 +1,19 @@
-import type Prisma from '@prisma/client';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
 import Column from '../../../components/Column';
 import { LinkButton } from '../../../components/Form/LinkButton';
 import { Navigation } from '../../../components/Navigation';
+import { useEventQuery } from '../../../hooks/useEventQuery';
+import { useOrganizerQuery } from '../../../hooks/useOrganizerQuery';
 
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { data: event, isLoading } = useQuery<Prisma.Event, Error>(
-		['event', eid],
-		async () => {
-			return axios.get(`/api/events/${eid}`).then((res) => res.data.event);
-		},
-		{
-			enabled: eid !== undefined
-		}
-	);
-	const { data: isOrganizer } = useQuery<boolean, Error>(
-		['isOrganizer', eid],
-		async () => {
-			return axios.get(`/api/events/${eid}/admin/organizer`).then((res) => res.data.isOrganizer);
-		},
-		{
-			enabled: eid !== undefined
-		}
-	);
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	return (
 		<>
@@ -41,11 +24,11 @@ const ViewEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
-				{isLoading ? (
+				{isEventLoading ? (
 					<p>Loading</p>
 				) : (
 					<div>
-						{isOrganizer && (
+						{!isOrganizerLoading && isOrganizer && (
 							<Link href={`/events/${eid}/admin`}>
 								<a className="block bg-yellow-400 px-5 py-3 rounded-md mb-4">
 									You are an organizer for this event, click here to manage this event
