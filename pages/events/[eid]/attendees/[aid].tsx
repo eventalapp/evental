@@ -47,7 +47,7 @@ const ViewAttendeePage: NextPage = () => {
 					<div>
 						<img alt={String(data?.user.name)} src={String(data?.user.image)} />
 						<h1 className="text-3xl">{data?.user.name}</h1>
-						<p>{data?.role}</p>
+						<p>{data?.permissionRole}</p>
 						<span className="text-md text-gray-700 block">{data?.user.company}</span>
 						<span className="text-md text-gray-700 block">{data?.user.position}</span>
 					</div>

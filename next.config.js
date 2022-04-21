@@ -5,7 +5,8 @@ module.exports = {
 			'avatars.githubusercontent.com',
 			'cdn.discordapp.com',
 			'www.gravatar.com',
-			'cloudflare-ipfs.com'
+			'cloudflare-ipfs.com',
+			'lh3.googleusercontent.com'
 		]
 	},
 	eslint: {

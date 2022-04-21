@@ -58,6 +58,7 @@ model User {
   sessions    Session[]
   eventMember EventMember[]
 
+  EventRole EventRole[]
   @@map("user")
 }
 
@@ -70,7 +71,7 @@ model VerificationToken {
   @@map("verification_tokens")
 }
 
-enum EventRole {
+enum EventPermissionRole {
   FOUNDER
   ORGANIZER
   ATTENDEE
@@ -94,19 +95,32 @@ model Event {
   eventActivity EventActivity[]
 
   EventVenue EventVenue[]
+  EventRole  EventRole[]
   @@map("event")
 }
 
 model EventMember {
-  id      String    @id @default(cuid())
-  userId  String
-  eventId String
-  role    EventRole @default(ATTENDEE)
+  id             String              @id @default(cuid())
+  userId         String
+  eventId        String
+  permissionRole EventPermissionRole @default(ATTENDEE)
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@map("event_member")
+}
+
+model EventRole {
+  id      String @id @default(cuid())
+  userId  String
+  eventId String
+  role    String @unique
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("event_role")
 }
 
 model EventActivity {

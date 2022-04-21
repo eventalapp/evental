@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	try {
 		let attendees = await prisma.eventMember.findMany({
-			where: { eventId: String(eid), role: 'ATTENDEE' },
+			where: { eventId: String(eid), permissionRole: 'ATTENDEE' },
 			include: {
 				user: {
 					select: {
@@ -25,7 +25,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		});
 		let organizers = await prisma.eventMember.findMany({
-			where: { eventId: String(eid), OR: [{ role: 'FOUNDER' }, { role: 'ORGANIZER' }] },
+			where: {
+				eventId: String(eid),
+				OR: [{ permissionRole: 'FOUNDER' }, { permissionRole: 'ORGANIZER' }]
+			},
 			include: {
 				user: {
 					select: {
