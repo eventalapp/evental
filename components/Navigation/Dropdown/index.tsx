@@ -22,6 +22,11 @@ export const ProfileDropdown: React.FC = () => {
 				sideOffset={10}
 			>
 				<Item className="outline-none">
+					<Link href="/events" passHref>
+						<DropdownLink className="">Your Events</DropdownLink>
+					</Link>
+				</Item>
+				<Item className="outline-none">
 					<Link href="/dashboard" passHref>
 						<DropdownLink className="mt-1">Dashboard</DropdownLink>
 					</Link>
@@ -37,7 +42,7 @@ export const ProfileDropdown: React.FC = () => {
 						Sign out
 					</DropdownLink>
 				</Item>
-				<Arrow className="text-gray-500" fill="currentColor" offset={7.5} />
+				<Arrow className="text-gray-700" fill="currentColor" offset={7.5} />
 			</Content>
 		</Root>
 	);

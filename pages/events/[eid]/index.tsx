@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import Column from '../../../components/Column';
+import { LinkButton } from '../../../components/Form/LinkButton';
 import { Navigation } from '../../../components/Navigation';
 
 const ViewEventPage: NextPage = () => {
@@ -42,18 +43,20 @@ const ViewEventPage: NextPage = () => {
 								</a>
 							</Link>
 						) : null}
-						<p>{data?.event.id}</p>
+						<span className="text-gray-600 text-sm block">{data?.event.type}</span>
 						<h1 className="text-3xl">{data?.event.name}</h1>
 						<p>{data?.event.location}</p>
 						<p>{data?.event.description}</p>
 						{dayjs(data?.event.startDate).format('MMM DD')} -{' '}
 						{dayjs(data?.event.endDate).format('MMM DD')}
-						<Link href={`/events/${eid}/attendees`}>
-							<a className="text-blue-900 p-3">View attendees</a>
-						</Link>
-						<Link href={`/events/${eid}/activities`}>
-							<a className="text-blue-900 p-3">View activities</a>
-						</Link>
+						<div>
+							<Link href={`/events/${eid}/attendees`} passHref>
+								<LinkButton className="mr-3">View attendees</LinkButton>
+							</Link>
+							<Link href={`/events/${eid}/activities`} passHref>
+								<LinkButton>View activities</LinkButton>
+							</Link>
+						</div>
 					</div>
 				)}
 			</Column>
