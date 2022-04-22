@@ -33,7 +33,7 @@ export const CreateRoleForm: React.FC<CreateRoleFormProps> = (props) => {
 			const createVenueResponse = await axios.post(`/api/events/${eid}/admin/roles/create`, body);
 
 			if (createVenueResponse.status === 200) {
-				router.push(`/events/${eid}/venues/${createVenueResponse.data.id}`);
+				router.push(`/events/${eid}/roles/${createVenueResponse.data.id}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {

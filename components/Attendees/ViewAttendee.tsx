@@ -1,12 +1,12 @@
-import type Prisma from '@prisma/client';
+import { EventMemberUser } from '../../pages/api/events/[eid]/attendees';
 
 interface Props {
 	loading: boolean;
-	activity: Prisma.EventActivity | undefined;
+	attendee: EventMemberUser | undefined;
 }
 
-export const ViewActivity: React.FC<Props> = (props) => {
-	const { loading, activity } = props;
+export const ViewAttendee: React.FC<Props> = (props) => {
+	const { loading, attendee } = props;
 
 	if (loading) {
 		return (
@@ -18,12 +18,13 @@ export const ViewActivity: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			{activity && (
+			{attendee && (
 				<div>
-					<h1 className="text-3xl">{activity.name}</h1>
-					<p>{activity.description}</p>
-					<p>{activity.startDate}</p>
-					<p>{activity.endDate}</p>
+					<img alt={String(attendee.user.name)} src={String(attendee.user.image)} />
+					<h1 className="text-3xl">{attendee.user.name}</h1>
+					<p>{attendee.permissionRole}</p>
+					<span className="text-md text-gray-700 block">{attendee.user.company}</span>
+					<span className="text-md text-gray-700 block">{attendee.user.position}</span>
 				</div>
 			)}
 		</div>

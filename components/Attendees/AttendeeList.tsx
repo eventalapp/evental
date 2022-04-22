@@ -1,69 +1,58 @@
-import type Prisma from '@prisma/client';
-import dayjs from 'dayjs';
+import Image from 'next/image';
 import Link from 'next/link';
-import { groupByDate } from '../../utils/groupByDate';
+import { EventMemberUser } from '../../pages/api/events/[eid]/attendees';
 
 interface Props {
 	loading: boolean;
-	activities: Prisma.EventActivity[] | undefined;
+	attendees: EventMemberUser[] | undefined;
 	eid: string;
 }
 
-export const ActivityList: React.FC<Props> = (props) => {
-	const { eid, loading, activities } = props;
+export const AttendeeList: React.FC<Props> = (props) => {
+	const { eid, loading, attendees } = props;
 
 	if (loading) {
 		return (
 			<div>
-				<p>Activities loading...</p>
+				<p>Attendees loading...</p>
 			</div>
 		);
 	}
 
-	if (activities?.length === 0) {
+	if (attendees?.length === 0) {
 		return (
 			<div>
-				<p>No activities found.</p>
+				<p>No attendees found.</p>
 			</div>
 		);
 	}
 
 	return (
 		<div>
-			{activities &&
-				Object.entries(groupByDate(activities)).map(([key, activityDate]) => {
-					return (
-						<div key={key}>
-							<h2 className="text-2xl border-b-2 border-gray-200 mt-4 pb-2">
-								{dayjs(key).format('dddd, MMMM D')}
-							</h2>
-							{Object.entries(activityDate).map(([key, activitiesByDate]) => {
-								return (
-									<div key={key} className="flex flex-row">
-										<h2 className="font-bold text-1xl w-24 py-2 border-b-2 text-center">
-											{dayjs(key).format('h:mma')}
-										</h2>
-										<div className="border-l-2 border-gray-200 inline-block pl-3">
-											{activitiesByDate.map((activity) => (
-												<div key={activity.id}>
-													<Link href={`/events/${eid}/activities/${activity.id}`}>
-														<a className="py-2 flex flex-row items-center">
-															<div className="rounded-full mr-3 w-3 h-3 bg-red-300" />
-															<div>
-																<span className="text-xl">{activity.name}</span>
-																<span className="block text-md">{activity.description}</span>
-															</div>
-														</a>
-													</Link>
-												</div>
-											))}
+			{attendees && (
+				<div>
+					<h2 className="text-2xl my-3">Attendees ({attendees.length})</h2>
+					<ul>
+						{attendees.map((attendee) => (
+							<li key={attendee.id}>
+								<Link href={`/events/${eid}/attendees/user/${attendee.userId}`}>
+									<a>
+										<div className="h-16 w-16 relative">
+											<Image
+												alt={String(attendee.user.name)}
+												src={String(attendee.user.image)}
+												className="rounded-full"
+												layout="fill"
+											/>
 										</div>
-									</div>
-								);
-							})}
-						</div>
-					);
-				})}
+										<span>{attendee.user.name}</span>
+									</a>
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
 		</div>
 	);
 };
