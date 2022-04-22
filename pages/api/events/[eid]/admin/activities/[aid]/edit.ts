@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../../prisma/client';
-import { isOrganizer } from '../../../../../utils/isOrganizer';
-import { EditEventSchema } from '../../../../../utils/schemas';
+import prisma from '../../../../../../../prisma/client';
+import { isOrganizer } from '../../../../../../../utils/isOrganizer';
+import { EditActivitySchema } from '../../../../../../../utils/schemas';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
-	const { eid } = req.query;
+	const { eid, aid } = req.query;
 
 	if (!session?.user?.id) {
 		return res.status(401).send({ message: 'You must be logged in to do this.' });
@@ -18,7 +18,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'PUT') {
 		try {
-			let bodyParsed = EditEventSchema.parse(req.body);
+			let bodyParsed = EditActivitySchema.parse(req.body);
 
 			let event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -31,20 +31,35 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send('Event not found.');
 			}
 
-			let updatedEvent = await prisma.event.update({
-				data: {
-					name: bodyParsed.name,
-					description: bodyParsed.description,
-					location: bodyParsed.location,
-					startDate: bodyParsed.startDate,
-					endDate: bodyParsed.endDate
-				},
+			let activity = await prisma.eventActivity.findFirst({
 				where: {
-					id: event.id
+					eventId: event.id,
+					OR: [{ id: String(aid) }, { slug: String(aid) }]
+				},
+				select: {
+					id: true
 				}
 			});
 
-			return res.status(200).send(updatedEvent);
+			if (!activity) {
+				return res.status(404).send('Activity not found.');
+			}
+
+			let editedActivity = await prisma.eventActivity.update({
+				where: {
+					id: activity.id
+				},
+				data: {
+					eventId: event.id,
+					name: bodyParsed.name,
+					venueId: bodyParsed.venueId,
+					startDate: bodyParsed.startDate,
+					endDate: bodyParsed.endDate,
+					description: bodyParsed.description
+				}
+			});
+
+			return res.status(200).send(editedActivity);
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error);

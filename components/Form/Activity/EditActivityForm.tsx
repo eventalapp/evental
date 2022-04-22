@@ -5,7 +5,7 @@ import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
 import { useVenuesQuery } from '../../../hooks/useVenuesQuery';
 import { getFormEntries } from '../../../utils/getFormEntries';
-import { CreateActivityPayload, CreateActivitySchema } from '../../../utils/schemas';
+import { EditActivityPayload, EditActivitySchema } from '../../../utils/schemas';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
@@ -14,13 +14,14 @@ import { Textarea } from '../Textarea';
 
 interface Props {
 	eid: string;
+	aid: string;
 }
 
-type CreateActivityFormProps = Props &
+type EditActivityFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
-export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => {
-	const { eid, ...rest } = props;
+export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
+	const { eid, aid, ...rest } = props;
 	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
 
 	const registerActivity = async (event: FormEvent<HTMLFormElement>) => {
@@ -29,11 +30,11 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 		try {
 			const formEntries = getFormEntries(event);
 
-			let eventParsed = CreateActivitySchema.parse(formEntries);
+			let eventParsed = EditActivitySchema.parse(formEntries);
 
 			//TODO: Use react query mutation
 
-			const body: CreateActivityPayload = {
+			const body: EditActivityPayload = {
 				slug: eventParsed.slug,
 				name: eventParsed.name,
 				venueId: eventParsed.venueId,
@@ -42,13 +43,13 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 				description: eventParsed.description
 			};
 
-			let createActivityResponse = await axios.post(
-				`/api/events/${eid}/admin/activities/create`,
+			let editActivityResponse = await axios.put(
+				`/api/events/${eid}/admin/activities/${aid}/edit`,
 				body
 			);
 
-			if (createActivityResponse.status === 200) {
-				router.push(`/events/${eid}/activities/${createActivityResponse.data.slug}`);
+			if (editActivityResponse.status === 200) {
+				router.push(`/events/${eid}/activities/${editActivityResponse.data.slug}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {
@@ -72,8 +73,8 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 					) : (
 						<div>
 							{venues && venues.length <= 0 ? (
-								<Link href={`/events/${eid}/admin/venues/create`}>
-									<a className="text-red-600">No Venues exist, please create a Venue</a>
+								<Link href={`/events/${eid}/admin/venues/edit`}>
+									<a className="text-red-600">No Venues exist, please edit a Venue</a>
 								</Link>
 							) : (
 								<>
@@ -87,14 +88,15 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 											))}
 									</Select>
 
-									<Link href={`/events/${eid}/admin/venues/create`}>
-										<a className="text-blue-600">Dont see your venue? Create a Venue</a>
+									<Link href={`/events/${eid}/admin/venues/edit`}>
+										<a className="text-blue-600">Dont see your venue? Edit a Venue</a>
 									</Link>
 								</>
 							)}
 						</div>
 					)}
 				</div>
+
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="slug">Slug</Label>
@@ -138,7 +140,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 			</div>
 
 			<Button type="submit" disabled={Boolean(venues && venues.length <= 0)}>
-				Create Activity
+				Edit Activity
 			</Button>
 		</form>
 	);

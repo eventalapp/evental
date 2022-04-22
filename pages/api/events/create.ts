@@ -35,6 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 			await prisma.eventMember.create({
 				data: {
+					slug: String('founder-slug'),
 					eventId: createdEvent.id,
 					permissionRole: 'FOUNDER',
 					userId: session.user.id,

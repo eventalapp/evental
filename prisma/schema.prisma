@@ -101,6 +101,7 @@ model Event {
 
 model EventMember {
   id          String @id @default(cuid())
+  slug        String @unique
   userId      String
   eventId     String
   eventRoleId String
@@ -111,6 +112,7 @@ model EventMember {
   user  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
+  @@unique([eventId, slug])
   @@map("event_member")
 }
 
@@ -130,6 +132,7 @@ model EventRole {
 
 model EventActivity {
   id          String   @id @default(cuid())
+  slug        String
   eventId     String
   startDate   DateTime
   endDate     DateTime
@@ -142,6 +145,7 @@ model EventActivity {
   event Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
   venue EventVenue @relation(fields: [venueId], references: [id], onDelete: Cascade)
 
+  @@unique([eventId, slug])
   @@map("event_activity")
 }
 

@@ -22,6 +22,10 @@ export const CreateRoleSchema = z.object({
 export type CreateRolePayload = z.infer<typeof CreateRoleSchema>;
 
 export const CreateActivitySchema = z.object({
+	slug: z
+		.string()
+		.min(4, 'Slug must be at least 4 characters')
+		.max(40, 'Slug must be less than 40 characters'),
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
 	startDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
@@ -30,6 +34,20 @@ export const CreateActivitySchema = z.object({
 });
 
 export type CreateActivityPayload = z.infer<typeof CreateActivitySchema>;
+
+export const EditActivitySchema = z.object({
+	slug: z
+		.string()
+		.min(4, 'Slug must be at least 4 characters')
+		.max(40, 'Slug must be less than 40 characters'),
+	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
+	startDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
+	endDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
+	description: z.string().max(1000, 'Description is too long')
+});
+
+export type EditActivityPayload = z.infer<typeof EditActivitySchema>;
 
 export const CreateEventSchema = z.object({
 	slug: z
@@ -51,7 +69,7 @@ export const CreateEventSchema = z.object({
 
 export type CreateEventPayload = z.infer<typeof CreateEventSchema>;
 
-export const UpdateEventSchema = z.object({
+export const EditEventSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	location: z.string().min(1, 'Location must be specified').max(100, 'Location is too long'),
 	startDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
@@ -59,4 +77,4 @@ export const UpdateEventSchema = z.object({
 	description: z.string().max(1000, 'Description is too long')
 });
 
-export type UpdateEventPayload = z.infer<typeof UpdateEventSchema>;
+export type EditEventPayload = z.infer<typeof EditEventSchema>;
