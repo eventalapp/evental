@@ -3,20 +3,19 @@ import router from 'next/router';
 import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
 import { getFormEntries } from '../../../utils/getFormEntries';
-import { CreateVenuePayload, CreateVenueSchema } from '../../../utils/schemas';
+import { CreateRolePayload, CreateRoleSchema } from '../../../utils/schemas';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
-import { Textarea } from '../Textarea';
 
 interface Props {
 	eid: string;
 }
 
-type CreateActivityFormProps = Props &
+type CreateRoleFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
-export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
+export const CreateRoleForm: React.FC<CreateRoleFormProps> = (props) => {
 	const { eid, ...rest } = props;
 
 	const createVenue = async (event: FormEvent<HTMLFormElement>) => {
@@ -25,14 +24,13 @@ export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
 		try {
 			const formEntries = getFormEntries(event);
 
-			const eventParsed = CreateVenueSchema.parse(formEntries);
+			const eventParsed = CreateRoleSchema.parse(formEntries);
 
-			const body: CreateVenuePayload = {
-				name: eventParsed.name,
-				description: eventParsed.description
+			const body: CreateRolePayload = {
+				role: eventParsed.role
 			};
 
-			const createVenueResponse = await axios.post(`/api/events/${eid}/admin/venues/create`, body);
+			const createVenueResponse = await axios.post(`/api/events/${eid}/admin/roles/create`, body);
 
 			if (createVenueResponse.status === 200) {
 				router.push(`/events/${eid}/venues/${createVenueResponse.data.id}`);
@@ -50,25 +48,13 @@ export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="name">Name</Label>
-						<Input defaultValue="Venue Name" id="name" name="name" type="text" required />
-					</div>
-				</div>
-
-				<div className="grid grid-cols-1 mb-5 gap-5">
-					<div>
-						<Label htmlFor="description">Description</Label>
-						<Textarea
-							defaultValue="Venue Description"
-							id="description"
-							name="description"
-							type="text"
-						/>
+						<Label htmlFor="role">Role</Label>
+						<Input defaultValue="Role Name" id="role" name="role" type="text" required />
 					</div>
 				</div>
 			</div>
 
-			<Button type="submit">Create Venue</Button>
+			<Button type="submit">Create Role</Button>
 		</form>
 	);
 };

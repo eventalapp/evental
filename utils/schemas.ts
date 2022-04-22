@@ -8,6 +8,15 @@ export const CreateVenueSchema = z.object({
 
 export type CreateVenuePayload = z.infer<typeof CreateVenueSchema>;
 
+export const CreateRoleSchema = z.object({
+	role: z
+		.string()
+		.min(4, 'Role must be at least 4 characters')
+		.max(50, 'Role must be less than 50 characters')
+});
+
+export type CreateRolePayload = z.infer<typeof CreateRoleSchema>;
+
 export const CreateActivitySchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),

@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { ViewActivity } from '../../../../components/Activities/ViewActivity';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
@@ -22,18 +23,7 @@ const ViewActivityPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				{isActivityLoading ? (
-					<p>Loading</p>
-				) : (
-					<div>
-						<p>{activity?.id}</p>
-
-						<h1 className="text-3xl">{activity?.name}</h1>
-						<p>{activity?.description}</p>
-						<p>{activity?.startDate}</p>
-						<p>{activity?.endDate}</p>
-					</div>
-				)}
+				<ViewActivity activity={activity} loading={isActivityLoading} />
 			</Column>
 		</>
 	);
