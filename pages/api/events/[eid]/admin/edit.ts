@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../../../prisma/client';
-import { isOrganizer } from '../../../../../../utils/isOrganizer';
-import { CreateVenueSchema } from '../../../../../../utils/schemas';
+import prisma from '../../../../../prisma/client';
+import { isOrganizer } from '../../../../../utils/isOrganizer';
+import { UpdateEventSchema } from '../../../../../utils/schemas';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
@@ -16,19 +16,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		return res.status(403).send({ message: 'You must be an organizer to do this.' });
 	}
 
-	if (req.method === 'POST') {
+	if (req.method === 'PUT') {
 		try {
-			let bodyParsed = CreateVenueSchema.parse(req.body);
+			let bodyParsed = UpdateEventSchema.parse(req.body);
 
-			let createdActivity = await prisma.eventVenue.create({
+			let updatedEvent = await prisma.event.update({
 				data: {
-					eventId: String(eid),
 					name: bodyParsed.name,
-					description: bodyParsed.description
+					description: bodyParsed.description,
+					location: bodyParsed.location,
+					startDate: bodyParsed.startDate,
+					endDate: bodyParsed.endDate
+				},
+				where: {
+					id: String(eid)
 				}
 			});
 
-			return res.status(200).send(createdActivity);
+			return res.status(200).send(updatedEvent);
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error);
