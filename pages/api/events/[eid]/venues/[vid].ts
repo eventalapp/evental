@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 
 		if (!venue) {
-			return res.status(404).send({ message: 'Venue not found.' });
+			return res.status(404).send({ error: { message: 'Venue not found.' } });
 		}
 
 		return res.status(200).send(venue);

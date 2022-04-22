@@ -16,7 +16,7 @@ export const useEventsQuery = () => {
 			return axios.get(`/api/events`).then((res) => res.data);
 		},
 		{
-			retry: 1,
+			retry: 0,
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);
 			},

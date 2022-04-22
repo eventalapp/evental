@@ -6,6 +6,7 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
+import { ServerError } from '../../../../components/ServerError';
 import { VenueList } from '../../../../components/Venues/VenueList';
 import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../hooks/useVenuesQuery';
@@ -13,7 +14,7 @@ import { useVenuesQuery } from '../../../../hooks/useVenuesQuery';
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { venues, isVenuesLoading } = useVenuesQuery(String(eid));
+	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
@@ -36,7 +37,11 @@ const ActivitiesPage: NextPage = () => {
 					)}
 				</div>
 
-				<VenueList eid={String(eid)} venues={venues} loading={isVenuesLoading} />
+				{venuesError ? (
+					<ServerError error={venuesError} />
+				) : (
+					<VenueList eid={String(eid)} venues={venues} loading={isVenuesLoading} />
+				)}
 			</Column>
 		</>
 	);

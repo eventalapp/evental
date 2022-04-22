@@ -16,7 +16,7 @@ export const useAttendeesQuery = (eid: string) => {
 			return axios.get(`/api/events/${eid}/attendees`).then((res) => res.data);
 		},
 		{
-			retry: 1,
+			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined',
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);
