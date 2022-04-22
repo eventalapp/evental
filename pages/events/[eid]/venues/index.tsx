@@ -6,6 +6,7 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
+import { VenueList } from '../../../../components/Venues/VenueList';
 import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../hooks/useVenuesQuery';
 
@@ -35,23 +36,7 @@ const ActivitiesPage: NextPage = () => {
 					)}
 				</div>
 
-				{isVenuesLoading ? (
-					<p>Venues loading...</p>
-				) : (
-					<div>
-						{venues &&
-							venues.map((venue) => (
-								<div key={venue.id} className="py-3 border-b-2 border-gray-200">
-									<Link href={`/events/${eid}/venues/${venue.id}`}>
-										<a>
-											<span className="text-lg block">{venue.name}</span>
-											<span className="text-md block">{venue.description}</span>
-										</a>
-									</Link>
-								</div>
-							))}
-					</div>
-				)}
+				<VenueList eid={String(eid)} venues={venues} loading={isVenuesLoading} />
 			</Column>
 		</>
 	);

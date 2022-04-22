@@ -30,7 +30,7 @@ const AttendeesPage: NextPage = () => {
 					<p>Loading...</p>
 				) : (
 					attendees && (
-						<>
+						<div>
 							<div>
 								<h2 className="text-2xl my-3">Organizers ({attendees.organizers.length})</h2>
 								<ul>
@@ -83,7 +83,7 @@ const AttendeesPage: NextPage = () => {
 									))}
 								</ul>
 							</div>
-						</>
+						</div>
 					)
 				)}
 			</Column>

@@ -41,7 +41,7 @@ const ActivitiesPage: NextPage = () => {
 				<BackButton />
 
 				<div className="flex flex-row justify-between">
-					<h1 className="text-3xl">Actvities Admin Page</h1>
+					<h1 className="text-3xl">Activities Admin Page</h1>
 					<Link href={`/events/${eid}/admin/activities/create`} passHref>
 						<LinkButton className="mr-3">Create activity</LinkButton>
 					</Link>
