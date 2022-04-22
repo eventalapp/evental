@@ -11,6 +11,7 @@ import { useActivitiesQuery } from '../../../hooks/useActivitiesQuery';
 import { useEventQuery } from '../../../hooks/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/useOrganizerQuery';
 import { useRolesQuery } from '../../../hooks/useRolesQuery';
+import { capitalizeFirstLetter } from '../../../utils/string';
 
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
@@ -49,15 +50,14 @@ const ViewEventPage: NextPage = () => {
 							{roles &&
 								roles.map((role) => (
 									<Link href={`/events/${eid}/roles/${role.id}`} passHref key={role.id}>
-										<LinkButton className="mr-3">View {role.name.toLowerCase()}s</LinkButton>
+										<LinkButton className="mr-3">
+											{capitalizeFirstLetter(role.name.toLowerCase())}s
+										</LinkButton>
 									</Link>
 								))}
 
-							<Link href={`/events/${eid}/activities`} passHref>
-								<LinkButton className="mr-3">View activities</LinkButton>
-							</Link>
 							<Link href={`/events/${eid}/venues`} passHref>
-								<LinkButton>View venues</LinkButton>
+								<LinkButton>Venues</LinkButton>
 							</Link>
 						</div>
 						<ActivityList activities={activities} eid={String(eid)} loading={isActivitiesLoading} />
