@@ -2,13 +2,14 @@ import axios from 'axios';
 import router from 'next/router';
 import React, { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
-import { getFormEntries } from '../../../utils/getFormEntries';
-import { EditEventPayload, EditEventSchema } from '../../../utils/schemas';
-import { Button } from '../Button';
-import { Input } from '../Input';
-import { Label } from '../Label';
-import { Textarea } from '../Textarea';
-import { useEventQuery } from '../../../hooks/queries/useEventQuery';
+import { getFormEntries } from '../../utils/getFormEntries';
+import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
+import { Button } from '../Form/Button';
+import { Input } from '../Form/Input';
+import { Label } from '../Form/Label';
+import { Textarea } from '../Form/Textarea';
+import { useEventQuery } from '../../hooks/queries/useEventQuery';
+import { ServerError } from '../ServerError';
 
 interface Props {
 	eid: string;
@@ -42,7 +43,7 @@ export const EditEventForm: React.FC<EditEventFormProps> = (props) => {
 			const editEventResponse = await axios.put(`/api/events/${eid}/admin/edit`, body);
 
 			if (editEventResponse.status === 200) {
-				router.push(`/events/${editEventResponse.data.id}`);
+				void router.push(`/events/${editEventResponse.data.id}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {
@@ -69,9 +70,7 @@ export const EditEventForm: React.FC<EditEventFormProps> = (props) => {
 	}
 
 	if (eventError) {
-		<div>
-			<p className="text-red-500">{eventError}</p>
-		</div>;
+		return <ServerError error={eventError} />;
 	}
 
 	return (

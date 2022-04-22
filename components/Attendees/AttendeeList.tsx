@@ -4,16 +4,20 @@ import Link from 'next/link';
 import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 import { capitalizeFirstLetter } from '../../utils/string';
 import React from 'react';
+import { LinkButton } from '../Form/LinkButton';
+import { useOrganizerQuery } from '../../hooks/queries/useOrganizerQuery';
 
 interface Props {
 	loading: boolean;
 	attendees: EventMemberUser[] | undefined;
 	eid: string;
+	rid: string;
 	role: Prisma.EventRole | undefined;
 }
 
 export const AttendeeList: React.FC<Props> = (props) => {
-	const { eid, loading, attendees, role } = props;
+	const { eid, rid, loading, attendees, role } = props;
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	if (loading) {
 		return (
@@ -28,9 +32,17 @@ export const AttendeeList: React.FC<Props> = (props) => {
 			<div>
 				{role && (
 					<>
-						<h2 className="text-2xl my-3">
-							{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
-						</h2>
+						<div className="flex flex-row justify-between">
+							<h2 className="text-2xl mb-3">
+								{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
+							</h2>
+							{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
+									<LinkButton className="mr-3">Edit role</LinkButton>
+								</Link>
+							)}
+						</div>
+
 						<p>No {role.name.toLowerCase()}s found.</p>
 					</>
 				)}
@@ -42,9 +54,16 @@ export const AttendeeList: React.FC<Props> = (props) => {
 		<div>
 			{attendees && role && (
 				<div>
-					<h2 className="text-2xl my-3">
-						{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
-					</h2>
+					<div className="flex flex-row justify-between">
+						<h2 className="text-2xl my-3">
+							{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
+						</h2>
+						{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+							<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
+								<LinkButton className="mr-3">Edit role</LinkButton>
+							</Link>
+						)}
+					</div>
 					<ul>
 						{attendees.map((attendee) => (
 							<li key={attendee.id}>

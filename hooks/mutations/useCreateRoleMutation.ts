@@ -4,14 +4,14 @@ import router from 'next/router';
 import { FormEvent, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
-import { EditActivityPayload, EditActivitySchema } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 
-export const useEditActivityMutation = (eid: string, aid: string) => {
-	const queryClient = useQueryClient();
+export const useCreateRoleMutation = (eid: string) => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
+	const queryClient = useQueryClient();
 
-	const editActivityMutation = useMutation<
+	const createRoleMutation = useMutation<
 		AxiosResponse<Prisma.EventActivity, unknown>,
 		AxiosError<ServerError>,
 		FormEvent<HTMLFormElement>
@@ -21,26 +21,22 @@ export const useEditActivityMutation = (eid: string, aid: string) => {
 
 			const formEntries = getFormEntries(event);
 
-			const parsed = EditActivitySchema.parse(formEntries);
+			const eventParsed = CreateRoleSchema.parse(formEntries);
 
-			const body: EditActivityPayload = {
-				slug: parsed.slug,
-				name: parsed.name,
-				venueId: parsed.venueId,
-				startDate: new Date(parsed.startDate).toISOString(),
-				endDate: new Date(parsed.endDate).toISOString(),
-				description: parsed.description
+			const body: CreateRolePayload = {
+				name: eventParsed.name,
+				slug: eventParsed.slug
 			};
 
-			return await axios.put(`/api/events/${eid}/admin/activities/${aid}/edit`, body);
+			return await axios.post(`/api/events/${eid}/admin/roles/create`, body);
 		},
 		{
 			onSuccess: (response) => {
 				setError(null);
 
-				void queryClient.invalidateQueries(['venue', eid, aid]);
+				void queryClient.invalidateQueries(['roles', eid]);
 
-				void router.push(`/events/${eid}/activities/${response.data.slug}`);
+				void router.push(`/events/${eid}/roles/${response.data.slug}`);
 			},
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);
@@ -48,5 +44,5 @@ export const useEditActivityMutation = (eid: string, aid: string) => {
 		}
 	);
 
-	return { editActivityMutation, editActivityError: error };
+	return { createRoleMutation, createRoleError: error };
 };

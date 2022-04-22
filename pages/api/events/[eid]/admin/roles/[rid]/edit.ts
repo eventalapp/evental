@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../../../prisma/client';
-import { isOrganizer } from '../../../../../../utils/isOrganizer';
-import { CreateRoleSchema } from '../../../../../../utils/schemas';
+import prisma from '../../../../../../../prisma/client';
+import { isOrganizer } from '../../../../../../../utils/isOrganizer';
+import { EditRoleSchema } from '../../../../../../../utils/schemas';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
-	const { eid } = req.query;
+	const { eid, rid } = req.query;
 
 	if (!session?.user?.id) {
 		return res.status(401).send({ message: 'You must be logged in to do this.' });
@@ -16,9 +16,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		return res.status(403).send({ message: 'You must be an organizer to do this.' });
 	}
 
-	if (req.method === 'POST') {
+	if (req.method === 'PUT') {
 		try {
-			let bodyParsed = CreateRoleSchema.parse(req.body);
+			let bodyParsed = EditRoleSchema.parse(req.body);
 
 			let event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -28,18 +28,34 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			});
 
 			if (!event) {
-				return res.status(404).send({ error: { message: 'Event not found.' } });
+				return res.status(404).send('Event not found.');
 			}
 
-			let createdRole = await prisma.eventRole.create({
-				data: {
+			let role = await prisma.eventRole.findFirst({
+				where: {
 					eventId: event.id,
-					name: bodyParsed.name,
-					slug: bodyParsed.slug
+					OR: [{ id: String(rid) }, { slug: String(rid) }]
+				},
+				select: {
+					id: true
 				}
 			});
 
-			return res.status(200).send(createdRole);
+			if (!role) {
+				return res.status(404).send({ error: { message: 'Role not found.' } });
+			}
+
+			let editedRole = await prisma.eventRole.update({
+				where: {
+					id: role.id
+				},
+				data: {
+					slug: bodyParsed.slug,
+					name: bodyParsed.name
+				}
+			});
+
+			return res.status(200).send(editedRole);
 		} catch (error) {
 			if (error instanceof Error) {
 				console.error(error);

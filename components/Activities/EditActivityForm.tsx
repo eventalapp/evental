@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { Button } from '../Button';
-import { Input } from '../Input';
-import { Label } from '../Label';
-import { Select } from '../Select';
-import { Textarea } from '../Textarea';
-import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
-import { useActivityQuery } from '../../../hooks/queries/useActivityQuery';
-import { useEditActivityMutation } from '../../../hooks/mutations/useEditActivityMutation';
+import { Button } from '../Form/Button';
+import { Input } from '../Form/Input';
+import { Label } from '../Form/Label';
+import { Select } from '../Form/Select';
+import { Textarea } from '../Form/Textarea';
+import { useVenuesQuery } from '../../hooks/queries/useVenuesQuery';
+import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
+import { useEditActivityMutation } from '../../hooks/mutations/useEditActivityMutation';
+import { ServerError } from '../ServerError';
 
 interface Props {
 	eid: string;
@@ -24,7 +25,7 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 	const { editActivityError, editActivityMutation } = useEditActivityMutation(eid, aid);
 
 	if (isActivityLoading) {
-		<div>Activity Loading...</div>;
+		return <div>Activity Loading...</div>;
 	}
 
 	if (!activity) {
@@ -36,21 +37,15 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 	}
 
 	if (activityError) {
-		<div>
-			<p className="text-red-500">Activity: {activityError}</p>
-		</div>;
+		return <ServerError error={activityError} />;
 	}
 
 	if (venuesError) {
-		<div>
-			<p className="text-red-500">Venues: {venuesError}</p>
-		</div>;
+		return <ServerError error={venuesError} />;
 	}
 
 	if (editActivityError) {
-		<div>
-			<p className="text-red-500">Error editing activity: {editActivityError}</p>
-		</div>;
+		return <ServerError error={editActivityError} />;
 	}
 
 	return (

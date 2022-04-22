@@ -14,9 +14,11 @@ const ViewActivityPage: NextPage = () => {
 	const { activity, isActivityLoading, activityError } = useActivityQuery(String(eid), String(aid));
 
 	if (!activity) {
-		<div>
-			<p>Activity not found</p>
-		</div>;
+		return (
+			<div>
+				<p>Activity not found</p>
+			</div>
+		);
 	}
 
 	return (

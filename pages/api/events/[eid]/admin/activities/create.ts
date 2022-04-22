@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import prisma from '../../../../../../prisma/client';
-import { isOrganizer } from '../../../../../../utils/isOrganizer';
 import { CreateActivitySchema } from '../../../../../../utils/schemas';
+import { isOrganizer } from '../../../../../../utils/isOrganizer';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		return res.status(401).send({ message: 'You must be logged in to do this.' });
 	}
 
-	if (!isOrganizer(String(session?.user?.id), String(eid))) {
+	if (!(await isOrganizer(String(session?.user?.id), String(eid)))) {
 		return res.status(403).send({ message: 'You must be an organizer to do this.' });
 	}
 

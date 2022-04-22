@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../../components/BackButton';
 import Column from '../../../../../components/Column';
-import { CreateRoleForm } from '../../../../../components/Form/Role/CreateRoleForm';
+import { CreateRoleForm } from '../../../../../components/Roles/CreateRoleForm';
 import { Navigation } from '../../../../../components/Navigation';
 import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';

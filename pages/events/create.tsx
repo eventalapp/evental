@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { BackButton } from '../../components/BackButton';
 import Column from '../../components/Column';
-import { CreateEventForm } from '../../components/Form/Event/CreateEventForm';
+import { CreateEventForm } from '../../components/Events/CreateEventForm';
 import { Navigation } from '../../components/Navigation';
 import Unauthorized from '../../components/Unauthorized';
 

@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 
 		if (!role) {
-			return res.status(404).send('Role not found.');
+			return res.status(404).send({ error: { message: 'Role not found.' } });
 		}
 
 		const event = await prisma.event.findFirst({

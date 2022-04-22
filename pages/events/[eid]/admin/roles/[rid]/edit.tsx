@@ -4,16 +4,16 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../../../components/BackButton';
 import Column from '../../../../../../components/Column';
-import { EditActivityForm } from '../../../../../../components/Activities/EditActivityForm';
 import { Navigation } from '../../../../../../components/Navigation';
 import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { EditRoleForm } from '../../../../../../components/Roles/EditRoleForm';
 
 const EditActivityPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
-	const { eid, aid } = router.query;
+	const { eid, rid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	if (!session.data?.user?.id) {
@@ -27,7 +27,7 @@ const EditActivityPage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Edit Activity</title>
+				<title>Edit Rid</title>
 			</Head>
 
 			<Navigation />
@@ -35,9 +35,9 @@ const EditActivityPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<h1 className="text-3xl">Edit Activity Page</h1>
+				<h1 className="text-3xl">Edit Role Page</h1>
 
-				<EditActivityForm eid={String(eid)} aid={String(aid)} />
+				<EditRoleForm eid={String(eid)} rid={String(rid)} />
 			</Column>
 		</>
 	);
