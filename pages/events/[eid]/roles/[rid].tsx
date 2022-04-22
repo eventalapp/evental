@@ -10,7 +10,7 @@ import { useRoleQuery } from '../../../../hooks/useRoleQuery';
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { rid, eid } = router.query;
-	const { attendees, role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
+	const { attendees, role, isRoleLoading, roleError } = useRoleQuery(String(eid), String(rid));
 
 	return (
 		<>
@@ -23,7 +23,18 @@ const ViewAttendeePage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<AttendeeList eid={String(eid)} role={role} attendees={attendees} loading={isRoleLoading} />
+				{roleError ? (
+					<div>
+						<p className="text-red-500">{roleError}</p>
+					</div>
+				) : (
+					<AttendeeList
+						eid={String(eid)}
+						role={role}
+						attendees={attendees}
+						loading={isRoleLoading}
+					/>
+				)}
 			</Column>
 		</>
 	);

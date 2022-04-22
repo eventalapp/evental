@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		});
 
 		if (!activity) {
-			return res.status(404).send({ message: 'Activity not found.' });
+			return res.status(404).send({ error: { message: 'Activity not found.' } });
 		}
 
 		return res.status(200).send(activity);

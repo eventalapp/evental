@@ -10,7 +10,13 @@ import { useActivityQuery } from '../../../../hooks/useActivityQuery';
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
-	const { activity, isActivityLoading } = useActivityQuery(String(eid), String(aid));
+	const { activity, isActivityLoading, error } = useActivityQuery(String(eid), String(aid));
+
+	if (!activity) {
+		<div>
+			<p>Activity not found</p>
+		</div>;
+	}
 
 	return (
 		<>
@@ -23,7 +29,19 @@ const ViewActivityPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<ViewActivity activity={activity} loading={isActivityLoading} />
+				{error ? (
+					<div>
+						<h1 className="text-3xl mb-2">Error</h1>
+						<p>{error.message}</p>
+					</div>
+				) : (
+					<ViewActivity
+						activity={activity}
+						loading={isActivityLoading}
+						eid={String(eid)}
+						aid={String(aid)}
+					/>
+				)}
 			</Column>
 		</>
 	);

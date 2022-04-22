@@ -10,7 +10,7 @@ import { useAttendeeQuery } from '../../../../hooks/useAttendeeQuery';
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
-	const { attendee, isAttendeeLoading } = useAttendeeQuery(String(eid), String(aid));
+	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(aid));
 
 	return (
 		<>
@@ -23,7 +23,13 @@ const ViewAttendeePage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<ViewAttendee attendee={attendee} loading={isAttendeeLoading} />
+				{attendeeError ? (
+					<div>
+						<p className="text-red-500">{attendeeError}</p>
+					</div>
+				) : (
+					<ViewAttendee attendee={attendee} loading={isAttendeeLoading} />
+				)}
 			</Column>
 		</>
 	);

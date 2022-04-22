@@ -19,7 +19,7 @@ type EditEventFormProps = Props &
 
 export const EditEventForm: React.FC<EditEventFormProps> = (props) => {
 	const { eid, ...rest } = props;
-	const { event, isEventLoading } = useEventQuery(eid);
+	const { event, isEventLoading, eventError } = useEventQuery(eid);
 
 	const editEvent = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -66,6 +66,12 @@ export const EditEventForm: React.FC<EditEventFormProps> = (props) => {
 				<p>Event not found.</p>
 			</div>
 		);
+	}
+
+	if (eventError) {
+		<div>
+			<p className="text-red-500">{eventError}</p>
+		</div>;
 	}
 
 	return (

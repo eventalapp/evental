@@ -13,8 +13,8 @@ import { useRolesQuery } from '../../../../hooks/useRolesQuery';
 const RolesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
 		<>
@@ -30,14 +30,20 @@ const RolesPage: NextPage = () => {
 				<div className="flex flex-row justify-between">
 					<h1 className="text-3xl">Roles Page</h1>
 
-					{!isOrganizerLoading && isOrganizer && (
+					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/roles/create`} passHref>
 							<LinkButton className="mr-3">Create role</LinkButton>
 						</Link>
 					)}
 				</div>
 
-				<RoleList roles={roles} eid={String(eid)} loading={isRolesLoading} />
+				{rolesError ? (
+					<div>
+						<p className="text-red-500">{rolesError}</p>
+					</div>
+				) : (
+					<RoleList eid={String(eid)} roles={roles} loading={isRolesLoading} />
+				)}
 			</Column>
 		</>
 	);
