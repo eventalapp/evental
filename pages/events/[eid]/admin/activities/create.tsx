@@ -8,7 +8,7 @@ import { CreateActivityForm } from '../../../../../components/Form/Activity/Crea
 import { Navigation } from '../../../../../components/Navigation';
 import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
-import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();

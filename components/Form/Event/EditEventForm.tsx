@@ -1,14 +1,14 @@
 import axios from 'axios';
 import router from 'next/router';
-import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
-import { useEventQuery } from '../../../hooks/useEventQuery';
 import { getFormEntries } from '../../../utils/getFormEntries';
 import { EditEventPayload, EditEventSchema } from '../../../utils/schemas';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
 import { Textarea } from '../Textarea';
+import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 
 interface Props {
 	eid: string;

@@ -8,8 +8,8 @@ import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
 import { RoleList } from '../../../../components/Roles/RoleList';
 import { ServerError } from '../../../../components/ServerError';
-import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
-import { useRolesQuery } from '../../../../hooks/useRolesQuery';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 
 const RolesPage: NextPage = () => {
 	const router = useRouter();

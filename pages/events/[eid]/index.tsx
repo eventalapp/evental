@@ -7,19 +7,20 @@ import { ActivityList } from '../../../components/Activities/ActivityList';
 import Column from '../../../components/Column';
 import { LinkButton } from '../../../components/Form/LinkButton';
 import { Navigation } from '../../../components/Navigation';
-import { useActivitiesQuery } from '../../../hooks/useActivitiesQuery';
-import { useEventQuery } from '../../../hooks/useEventQuery';
-import { useOrganizerQuery } from '../../../hooks/useOrganizerQuery';
-import { useRolesQuery } from '../../../hooks/useRolesQuery';
+import { ServerError } from '../../../components/ServerError';
+import { useActivitiesQuery } from '../../../hooks/queries/useActivitiesQuery';
+import { useEventQuery } from '../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
 import { capitalizeFirstLetter } from '../../../utils/string';
 
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { event, isEventLoading } = useEventQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { activities, isActivitiesLoading } = useActivitiesQuery(String(eid));
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
+	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
+	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 
 	return (
 		<>
@@ -30,6 +31,11 @@ const ViewEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="py-10">
+				{eventError && <ServerError error={eventError} />}
+				{isOrganizerError && <ServerError error={isOrganizerError} />}
+				{activitiesError && <ServerError error={activitiesError} />}
+				{rolesError && <ServerError error={rolesError} />}
+
 				{isEventLoading ? (
 					<p>Loading event...</p>
 				) : (
@@ -47,7 +53,8 @@ const ViewEventPage: NextPage = () => {
 						<p>{event?.description}</p>
 						{dayjs(event?.startDate).format('MMM DD')} - {dayjs(event?.endDate).format('MMM DD')}
 						<div className="mt-3">
-							{roles &&
+							{!isRolesLoading &&
+								roles &&
 								roles.map((role) => (
 									<Link href={`/events/${eid}/roles/${role.id}`} passHref key={role.id}>
 										<LinkButton className="mr-3">

@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { EventMemberUser } from '../pages/api/events/[eid]/attendees/[aid]';
-import { ServerError, ServerErrorPayload } from '../typings/error';
+import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 
 export const useAttendeeQuery = (eid: string, aid: string) => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);

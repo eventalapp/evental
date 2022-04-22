@@ -8,8 +8,8 @@ import Column from '../../../../components/Column';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import { Navigation } from '../../../../components/Navigation';
 import { ServerError } from '../../../../components/ServerError';
-import { useActivitiesQuery } from '../../../../hooks/useActivitiesQuery';
-import { useOrganizerQuery } from '../../../../hooks/useOrganizerQuery';
+import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { groupByDate } from '../../../../utils/groupByDate';
 
 const ActivitiesPage: NextPage = () => {

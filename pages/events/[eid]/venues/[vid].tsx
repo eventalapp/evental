@@ -5,7 +5,7 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 import { ServerError } from '../../../../components/ServerError';
-import { useVenueQuery } from '../../../../hooks/useVenueQuery';
+import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();

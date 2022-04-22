@@ -8,7 +8,7 @@ import { CreateRoleForm } from '../../../../../components/Form/Role/CreateRoleFo
 import { Navigation } from '../../../../../components/Navigation';
 import NoAccess from '../../../../../components/NoAccess';
 import Unauthorized from '../../../../../components/Unauthorized';
-import { useOrganizerQuery } from '../../../../../hooks/useOrganizerQuery';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 
 const CreateRolePage: NextPage = () => {
 	const router = useRouter();

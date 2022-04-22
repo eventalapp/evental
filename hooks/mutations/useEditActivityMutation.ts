@@ -3,9 +3,9 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { FormEvent, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../typings/error';
-import { getFormEntries } from '../utils/getFormEntries';
-import { EditActivityPayload, EditActivitySchema } from '../utils/schemas';
+import { getFormEntries } from '../../utils/getFormEntries';
+import { EditActivityPayload, EditActivitySchema } from '../../utils/schemas';
+import { ServerError, ServerErrorPayload } from '../../typings/error';
 
 export const useEditActivityMutation = (eid: string, aid: string) => {
 	const queryClient = useQueryClient();
@@ -39,6 +39,8 @@ export const useEditActivityMutation = (eid: string, aid: string) => {
 		},
 		{
 			onSuccess: (response) => {
+				setError(null);
+
 				queryClient.invalidateQueries(['activity', eid, aid]);
 
 				router.push(`/events/${eid}/activities/${response.data.slug}`);

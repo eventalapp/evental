@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 
 interface Props {
 	loading: boolean;

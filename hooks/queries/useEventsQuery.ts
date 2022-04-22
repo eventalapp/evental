@@ -2,22 +2,21 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../typings/error';
+import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useEventQuery = (eid: string) => {
+export const useEventsQuery = () => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
-	const { data: event, isLoading: isEventLoading } = useQuery<
-		Prisma.Event,
+	const { data: events, isLoading: isEventsLoading } = useQuery<
+		Prisma.Event[],
 		AxiosError<ServerError>
 	>(
-		['event', eid],
+		['events'],
 		async () => {
-			return axios.get(`/api/events/${eid}`).then((res) => res.data);
+			return axios.get(`/api/events`).then((res) => res.data);
 		},
 		{
 			retry: 0,
-			enabled: eid !== undefined && eid !== 'undefined',
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);
 			},
@@ -27,5 +26,5 @@ export const useEventQuery = (eid: string) => {
 		}
 	);
 
-	return { event, isEventLoading, eventError: error };
+	return { events, isEventsLoading, eventsError: error };
 };

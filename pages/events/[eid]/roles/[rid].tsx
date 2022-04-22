@@ -6,7 +6,7 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 import { ServerError } from '../../../../components/ServerError';
-import { useRoleQuery } from '../../../../hooks/useRoleQuery';
+import { useRoleQuery } from '../../../../hooks/queries/useRoleQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();

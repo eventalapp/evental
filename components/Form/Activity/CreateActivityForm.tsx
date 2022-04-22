@@ -1,9 +1,9 @@
 import axios from 'axios';
 import Link from 'next/link';
 import router from 'next/router';
-import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
-import { useVenuesQuery } from '../../../hooks/useVenuesQuery';
+
 import { getFormEntries } from '../../../utils/getFormEntries';
 import { CreateActivityPayload, CreateActivitySchema } from '../../../utils/schemas';
 import { Button } from '../Button';
@@ -11,6 +11,7 @@ import { Input } from '../Input';
 import { Label } from '../Label';
 import { Select } from '../Select';
 import { Textarea } from '../Textarea';
+import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
 
 interface Props {
 	eid: string;

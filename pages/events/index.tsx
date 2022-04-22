@@ -5,7 +5,7 @@ import Column from '../../components/Column';
 import { EventList } from '../../components/Events/EventList';
 import { LinkButton } from '../../components/Form/LinkButton';
 import { Navigation } from '../../components/Navigation';
-import { useEventsQuery } from '../../hooks/useEventsQuery';
+import { useEventsQuery } from '../../hooks/queries/useEventsQuery';
 
 const EventsPage: NextPage = () => {
 	const { events, isEventsLoading } = useEventsQuery();

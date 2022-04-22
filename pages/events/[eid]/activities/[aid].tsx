@@ -6,7 +6,7 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 import { ServerError } from '../../../../components/ServerError';
-import { useActivityQuery } from '../../../../hooks/useActivityQuery';
+import { useActivityQuery } from '../../../../hooks/queries/useActivityQuery';
 
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();

@@ -8,7 +8,7 @@ import { EditActivityForm } from '../../../../../../components/Form/Activity/Edi
 import { Navigation } from '../../../../../../components/Navigation';
 import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
-import { useOrganizerQuery } from '../../../../../../hooks/useOrganizerQuery';
+import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 
 const EditActivityPage: NextPage = () => {
 	const router = useRouter();
