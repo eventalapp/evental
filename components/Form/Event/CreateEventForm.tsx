@@ -3,7 +3,7 @@ import router from 'next/router';
 import { DetailedHTMLProps, FormEvent, FormHTMLAttributes } from 'react';
 import { ZodError } from 'zod';
 import { getFormEntries } from '../../../utils/getFormEntries';
-import { CreateEventSchema } from '../../../utils/schemas';
+import { CreateEventPayload, CreateEventSchema } from '../../../utils/schemas';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Label } from '../Label';
@@ -24,13 +24,16 @@ export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 
 			//TODO: Use react query mutation
 
-			const createEventResponse = await axios.post('/api/events/create', {
+			const body: CreateEventPayload = {
 				name: eventParsed.name,
+				slug: eventParsed.slug,
 				location: eventParsed.location,
 				startDate: new Date(eventParsed.startDate).toISOString(),
 				endDate: new Date(eventParsed.endDate).toISOString(),
 				description: eventParsed.description
-			});
+			};
+
+			const createEventResponse = await axios.post('/api/events/create', body);
 
 			if (createEventResponse.status === 200) {
 				router.push(`/events/${createEventResponse.data.id}`);
@@ -65,8 +68,8 @@ export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="name">Slug</Label>
-						<Input defaultValue="event-slug" id="name" name="name" type="text" required />
+						<Label htmlFor="slug">Slug</Label>
+						<Input defaultValue="event-slug" id="slug" name="slug" type="text" required />
 					</div>
 				</div>
 				<div className="grid grid-cols-1 mb-5 gap-5">
