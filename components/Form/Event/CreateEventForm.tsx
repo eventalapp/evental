@@ -36,7 +36,7 @@ export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 			const createEventResponse = await axios.post('/api/events/create', body);
 
 			if (createEventResponse.status === 200) {
-				router.push(`/events/${createEventResponse.data.id}`);
+				router.push(`/events/${createEventResponse.data.slug}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {
