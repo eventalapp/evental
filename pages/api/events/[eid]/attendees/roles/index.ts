@@ -7,7 +7,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	// Get all roles for the event
 
 	try {
-		let roles = await prisma.eventRole.findMany();
+		let roles = await prisma.eventRole.findMany({
+			where: {
+				event: {
+					OR: [{ id: String(eid) }, { slug: String(eid) }]
+				}
+			}
+		});
 
 		// If no roles exist, crate a default role
 

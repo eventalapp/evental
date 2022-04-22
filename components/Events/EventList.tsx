@@ -39,7 +39,7 @@ export const EventList: React.FC<Props> = (props) => {
 							i + 1 !== events.length ? 'border-b-2' : null
 						)}
 					>
-						<Link href={`/events/${event.id}`}>
+						<Link href={`/events/${event.slug}`}>
 							<a className="px-3 py-3 block">
 								<div className="flex flex-row items-center">
 									<div className="flex flex-col align-center justify-center mr-5">

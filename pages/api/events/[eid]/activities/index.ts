@@ -6,7 +6,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	try {
 		let activityList = await prisma.eventActivity.findMany({
-			where: { eventId: String(eid) }
+			where: {
+				event: {
+					OR: [{ id: String(eid) }, { slug: String(eid) }]
+				}
+			}
 		});
 
 		if (activityList.length === 0) {

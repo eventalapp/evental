@@ -5,7 +5,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid } = req.query;
 
 	try {
-		let eventFound = await prisma.event.findFirst({ where: { id: String(eid) } });
+		let eventFound = await prisma.event.findFirst({
+			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] }
+		});
 
 		return res.status(200).send(eventFound);
 	} catch (error) {
