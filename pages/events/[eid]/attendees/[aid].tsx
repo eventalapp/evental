@@ -1,4 +1,3 @@
-import type Prisma from '@prisma/client';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -6,15 +5,6 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 import { useAttendeeQuery } from '../../../../hooks/useAttendeeQuery';
-
-type EventMemberUser = Prisma.EventMember & {
-	user: {
-		name: string | null;
-		image: string | null;
-		company: string | null;
-		position: string | null;
-	};
-};
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();

@@ -16,6 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 			let createdEvent = await prisma.event.create({
 				data: {
+					slug: bodyParsed.slug,
 					name: bodyParsed.name,
 					location: bodyParsed.location,
 					startDate: bodyParsed.startDate,
