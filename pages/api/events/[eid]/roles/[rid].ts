@@ -4,21 +4,47 @@ import prisma from '../../../../../prisma/client';
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid, rid } = req.query;
 
+	// Get all members of a role
+
 	try {
-		let role = await prisma.eventRole.findFirst({
+		const role = await prisma.eventRole.findFirst({
 			where: {
-				event: {
-					OR: [{ id: String(eid) }, { slug: String(eid) }]
-				},
-				id: String(rid)
+				OR: [{ id: String(rid) }, { slug: String(rid) }]
 			}
 		});
 
 		if (!role) {
-			return res.status(404).send({ message: 'Role not found.' });
+			return res.status(404).send('Role not found.');
 		}
 
-		return res.status(200).send(role);
+		const event = await prisma.event.findFirst({
+			where: {
+				OR: [{ id: String(eid) }, { slug: String(eid) }]
+			}
+		});
+
+		if (!event) {
+			return res.status(404).send('Event not found.');
+		}
+
+		const attendees = await prisma.eventMember.findMany({
+			where: {
+				eventRoleId: role.id,
+				eventId: event.id
+			},
+			include: {
+				user: {
+					select: {
+						name: true,
+						image: true,
+						company: true,
+						position: true
+					}
+				}
+			}
+		});
+
+		return res.status(200).send({ attendees, role });
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

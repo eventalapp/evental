@@ -18,15 +18,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		if (roles.length === 0) {
 			let role = prisma.eventRole.create({
 				data: {
-					role: 'ATTENDEE',
+					name: 'ATTENDEE',
+					slug: 'attendee',
 					eventId: String(eid)
 				}
 			});
 
-			return res.status(200).send({ roles: [role] });
+			return res.status(200).send([role]);
 		}
 
-		return res.status(200).send({ roles });
+		return res.status(200).send(roles);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

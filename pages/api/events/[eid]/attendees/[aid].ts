@@ -1,6 +1,16 @@
+import type Prisma from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../../../prisma/client';
+import prisma from '../../../../../prisma/client';
+
+export type EventMemberUser = Prisma.EventMember & {
+	user: {
+		name: string | null;
+		image: string | null;
+		company: string | null;
+		position: string | null;
+	};
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const session = await getSession({ req });
@@ -26,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		});
 
-		return res.status(200).send(attendee);
+		return res.status(200).send(attendee || {});
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

@@ -1,4 +1,4 @@
-import { EventMemberUser } from '../../pages/api/events/[eid]/attendees';
+import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 
 interface Props {
 	loading: boolean;

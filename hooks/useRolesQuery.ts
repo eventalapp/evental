@@ -6,7 +6,7 @@ export const useRolesQuery = (eid: string) => {
 	const { data: roles, isLoading: isRolesLoading } = useQuery<Prisma.EventRole[], Error>(
 		['roles', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}/roles`).then((res) => res.data.roles);
+			return axios.get(`/api/events/${eid}/roles`).then((res) => res.data);
 		},
 		{
 			enabled: eid !== undefined && eid !== 'undefined'

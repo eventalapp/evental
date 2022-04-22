@@ -9,10 +9,14 @@ export const CreateVenueSchema = z.object({
 export type CreateVenuePayload = z.infer<typeof CreateVenueSchema>;
 
 export const CreateRoleSchema = z.object({
-	role: z
+	name: z
 		.string()
 		.min(4, 'Role must be at least 4 characters')
-		.max(50, 'Role must be less than 50 characters')
+		.max(50, 'Role must be less than 50 characters'),
+	slug: z
+		.string()
+		.min(4, 'Slug must be at least 4 characters')
+		.max(40, 'Slug must be less than 40 characters')
 });
 
 export type CreateRolePayload = z.infer<typeof CreateRoleSchema>;

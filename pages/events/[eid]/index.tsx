@@ -48,8 +48,8 @@ const ViewEventPage: NextPage = () => {
 						<div className="mt-3">
 							{roles &&
 								roles.map((role) => (
-									<Link href={`/events/${eid}/attendees/${role.id}`} passHref key={role.id}>
-										<LinkButton className="mr-3">View {role.role.toLowerCase()}s</LinkButton>
+									<Link href={`/events/${eid}/roles/${role.id}`} passHref key={role.id}>
+										<LinkButton className="mr-3">View {role.name.toLowerCase()}s</LinkButton>
 									</Link>
 								))}
 
