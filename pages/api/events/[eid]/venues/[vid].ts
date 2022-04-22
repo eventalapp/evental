@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				event: {
 					OR: [{ id: String(eid) }, { slug: String(eid) }]
 				},
-				id: String(vid)
+				OR: [{ id: String(vid) }, { slug: String(vid) }]
 			}
 		});
 

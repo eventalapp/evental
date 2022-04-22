@@ -151,6 +151,7 @@ model EventActivity {
 
 model EventVenue {
   id          String   @id @default(cuid())
+  slug        String
   eventId     String
   name        String
   description String?
@@ -160,5 +161,7 @@ model EventVenue {
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   EventActivity EventActivity[]
+
+  @@unique([eventId, slug])
   @@map("event_venue")
 }

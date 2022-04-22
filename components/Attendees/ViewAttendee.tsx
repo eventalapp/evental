@@ -16,9 +16,17 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 		);
 	}
 
+	if (!attendee || !attendee.user) {
+		return (
+			<div>
+				<p>Attendee not found.</p>
+			</div>
+		);
+	}
+
 	return (
 		<div>
-			{attendee && (
+			{attendee && attendee.user && (
 				<div>
 					<img alt={String(attendee.user.name)} src={String(attendee.user.image)} />
 					<h1 className="text-3xl">{attendee.user.name}</h1>
