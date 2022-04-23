@@ -9,6 +9,25 @@ export type EventMemberUser = Prisma.EventMember & {
 		company: string | null;
 		position: string | null;
 	};
+	role: {
+		name: string | null;
+	};
+};
+
+export const eventMemberInclude = {
+	user: {
+		select: {
+			name: true,
+			image: true,
+			company: true,
+			position: true
+		}
+	},
+	role: {
+		select: {
+			name: true
+		}
+	}
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,14 +42,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				}
 			},
 			include: {
-				user: {
-					select: {
-						name: true,
-						image: true,
-						company: true,
-						position: true
-					}
-				}
+				...eventMemberInclude
 			}
 		});
 

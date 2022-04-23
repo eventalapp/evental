@@ -35,26 +35,24 @@ export const VenueList: React.FC<Props> = (props) => {
 			{venues &&
 				venues.map((venue) => (
 					<div key={venue.id} className="py-2 border-t-2 border-gray-200">
-						<Link href={`/events/${eid}/venues/${venue.slug}`}>
-							<a className="flex flex-row justify-between items-center">
-								<div>
-									<span className="text-lg block">{venue.name}</span>
-									<span className="text-md block">{venue.description}</span>
-								</div>
+						<div className="flex flex-row justify-between items-center">
+							<div>
+								<span className="text-lg block">{venue.name}</span>
+								<span className="text-md block">{venue.description}</span>
+							</div>
+							<div>
+								<Link href={`/events/${eid}/venues/${venue.slug}`} passHref>
+									<LinkButton variant={'secondary'} className="mr-3">
+										View
+									</LinkButton>
+								</Link>
 								{!isOrganizerLoading && isOrganizer && (
-									<div>
-										<Link href={`/events/${eid}/venues/${venue.slug}`} passHref>
-											<LinkButton variant={'secondary'} className="mr-3">
-												View
-											</LinkButton>
-										</Link>
-										<Link href={`/events/${eid}/admin/venues/${venue.slug}/edit`} passHref>
-											<LinkButton variant={'secondary'}>Edit</LinkButton>
-										</Link>
-									</div>
+									<Link href={`/events/${eid}/admin/venues/${venue.slug}/edit`} passHref>
+										<LinkButton variant={'secondary'}>Edit</LinkButton>
+									</Link>
 								)}
-							</a>
-						</Link>
+							</div>
+						</div>
 					</div>
 				))}
 		</div>
