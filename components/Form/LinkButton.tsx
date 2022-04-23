@@ -10,7 +10,9 @@ interface Props {
 
 const variants = {
 	primary:
-		'bg-blue-900 px-3 py-2 text-white disabled:cursor-not-allowed font-semibold inline-block rounded-lg disabled:opacity-20 pointer'
+		'bg-blue-900 px-3 py-2 text-white disabled:cursor-not-allowed font-semibold inline-block rounded-lg disabled:opacity-20 pointer',
+	secondary:
+		'bg-blue-100 px-3 py-2 text-black disabled:cursor-not-allowed font-semibold inline-block rounded-lg disabled:opacity-20 pointer'
 };
 
 type LinkButtonProps = Props &
