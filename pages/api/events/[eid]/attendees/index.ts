@@ -1,17 +1,27 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
-import { isOrganizer } from '../../../../utils/isOrganizer';
+import prisma from '../../../../../prisma/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const session = await getSession({ req });
 	const { eid } = req.query;
 
-	if (!session?.user?.id) {
-		return res.status(200).send({ isOrganizer: false });
-	}
-
 	try {
-		return res.status(200).send({ isOrganizer: isOrganizer(session.user.id, String(eid)) });
+		let event = await prisma.event.findFirst({
+			where: {
+				OR: [{ id: String(eid) }, { slug: String(eid) }]
+			}
+		});
+
+		if (!event) {
+			return res.status(404).send({ error: { message: 'Event not found.' } });
+		}
+
+		let attendees = await prisma.eventMember.findMany({
+			where: {
+				eventId: event.id
+			}
+		});
+
+		return res.status(200).send(attendees);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

@@ -17,9 +17,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);
-			return res.status(500).send(error.message);
+			return res.status(500).send({ error: { message: error.message } });
 		}
 
-		return res.status(500).send('An error occurred, please try again.');
+		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
 	}
 };

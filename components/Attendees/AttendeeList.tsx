@@ -33,23 +33,27 @@ export const AttendeeList: React.FC<Props> = (props) => {
 			{attendees && (
 				<div>
 					<ul>
-						{attendees.map((attendee) => (
-							<li key={attendee.id}>
-								<Link href={`/events/${eid}/attendees/${attendee.slug}`}>
-									<a>
-										<div className="h-16 w-16 relative">
-											<Image
-												alt={String(attendee.user.name)}
-												src={String(attendee.user.image)}
-												className="rounded-full"
-												layout="fill"
-											/>
-										</div>
-										<span>{attendee.user.name}</span>
-									</a>
-								</Link>
-							</li>
-						))}
+						{attendees.map(
+							(attendee) =>
+								attendee &&
+								attendee.user && (
+									<li key={attendee.id}>
+										<Link href={`/events/${eid}/attendees/${attendee.slug}`}>
+											<a>
+												<div className="h-16 w-16 relative">
+													<Image
+														alt={String(attendee.user.name)}
+														src={String(attendee.user.image)}
+														className="rounded-full"
+														layout="fill"
+													/>
+												</div>
+												<span>{attendee.user.name}</span>
+											</a>
+										</Link>
+									</li>
+								)
+						)}
 					</ul>
 				</div>
 			)}
