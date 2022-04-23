@@ -4,15 +4,15 @@ import router from 'next/router';
 import { FormEvent, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
+import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
-import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 
-export const useCreateVenueMutation = (eid: string) => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
+export const useEditEventMutation = (eid: string) => {
 	const queryClient = useQueryClient();
+	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
-	const createVenueMutation = useMutation<
-		AxiosResponse<Prisma.EventActivity, unknown>,
+	const editEventMutation = useMutation<
+		AxiosResponse<Prisma.Event, unknown>,
 		AxiosError<ServerError>,
 		FormEvent<HTMLFormElement>
 	>(
@@ -21,22 +21,24 @@ export const useCreateVenueMutation = (eid: string) => {
 
 			const formEntries = getFormEntries(event);
 
-			const eventParsed = CreateVenueSchema.parse(formEntries);
+			const parsed = EditEventSchema.parse(formEntries);
 
-			const body: CreateVenuePayload = {
-				name: eventParsed.name,
-				slug: eventParsed.slug,
-				description: eventParsed.description
+			const body: EditEventPayload = {
+				description: parsed.description,
+				endDate: parsed.endDate,
+				startDate: parsed.startDate,
+				location: parsed.location,
+				name: parsed.name
 			};
 
-			return await axios.post(`/api/events/${eid}/admin/venues/create`, body);
+			return await axios.put(`/api/events/${eid}/admin/edit`, body);
 		},
 		{
 			onSuccess: (response) => {
 				setError(null);
 
-				router.push(`/events/${eid}/venues/${response.data.slug}`).then(() => {
-					void queryClient.invalidateQueries(['venues', eid]);
+				router.push(`/events/${response.data.id}`).then(() => {
+					void queryClient.invalidateQueries(['event', eid]);
 				});
 			},
 			onError: (err) => {
@@ -45,5 +47,5 @@ export const useCreateVenueMutation = (eid: string) => {
 		}
 	);
 
-	return { createVenueMutation, createVenueError: error };
+	return { editEventMutation, editEventError: error };
 };

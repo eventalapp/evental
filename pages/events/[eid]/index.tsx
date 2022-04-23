@@ -56,7 +56,7 @@ const ViewEventPage: NextPage = () => {
 							{!isRolesLoading &&
 								roles &&
 								roles.map((role) => (
-									<Link href={`/events/${eid}/roles/${role.id}`} passHref key={role.id}>
+									<Link href={`/events/${eid}/roles/${role.slug}`} passHref key={role.id}>
 										<LinkButton className="mr-3">
 											{capitalizeFirstLetter(role.name.toLowerCase())}s
 										</LinkButton>

@@ -34,9 +34,9 @@ export const useCreateRoleMutation = (eid: string) => {
 			onSuccess: (response) => {
 				setError(null);
 
-				void queryClient.invalidateQueries(['roles', eid]);
-
-				void router.push(`/events/${eid}/roles/${response.data.slug}`);
+				router.push(`/events/${eid}/roles/${response.data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['roles', eid]);
+				});
 			},
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);

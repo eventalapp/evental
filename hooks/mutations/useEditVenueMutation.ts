@@ -4,15 +4,15 @@ import router from 'next/router';
 import { FormEvent, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
+import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
-import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 
-export const useCreateVenueMutation = (eid: string) => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
+export const useEditVenueMutation = (eid: string, vid: string) => {
 	const queryClient = useQueryClient();
+	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
-	const createVenueMutation = useMutation<
-		AxiosResponse<Prisma.EventActivity, unknown>,
+	const editVenueMutation = useMutation<
+		AxiosResponse<Prisma.EventVenue, unknown>,
 		AxiosError<ServerError>,
 		FormEvent<HTMLFormElement>
 	>(
@@ -21,22 +21,22 @@ export const useCreateVenueMutation = (eid: string) => {
 
 			const formEntries = getFormEntries(event);
 
-			const eventParsed = CreateVenueSchema.parse(formEntries);
+			const parsed = EditVenueSchema.parse(formEntries);
 
-			const body: CreateVenuePayload = {
-				name: eventParsed.name,
-				slug: eventParsed.slug,
-				description: eventParsed.description
+			const body: EditVenuePayload = {
+				slug: parsed.slug,
+				name: parsed.name,
+				description: parsed.description
 			};
 
-			return await axios.post(`/api/events/${eid}/admin/venues/create`, body);
+			return await axios.put(`/api/events/${eid}/admin/venues/${vid}/edit`, body);
 		},
 		{
 			onSuccess: (response) => {
 				setError(null);
 
 				router.push(`/events/${eid}/venues/${response.data.slug}`).then(() => {
-					void queryClient.invalidateQueries(['venues', eid]);
+					void queryClient.invalidateQueries(['venue', eid, vid]);
 				});
 			},
 			onError: (err) => {
@@ -45,5 +45,5 @@ export const useCreateVenueMutation = (eid: string) => {
 		}
 	);
 
-	return { createVenueMutation, createVenueError: error };
+	return { editVenueMutation, editVenueError: error };
 };

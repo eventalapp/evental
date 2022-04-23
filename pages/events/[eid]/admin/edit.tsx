@@ -28,7 +28,7 @@ const CreateEventPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<h1 className="text-3xl">Update Event Page</h1>
+				<h1 className="text-3xl">Edit Event</h1>
 
 				<EditEventForm eid={String(eid)} />
 			</Column>

@@ -38,9 +38,9 @@ export const useEditActivityMutation = (eid: string, aid: string) => {
 			onSuccess: (response) => {
 				setError(null);
 
-				void queryClient.invalidateQueries(['venue', eid, aid]);
-
-				void router.push(`/events/${eid}/activities/${response.data.slug}`);
+				router.push(`/events/${eid}/activities/${response.data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['venue', eid, aid]);
+				});
 			},
 			onError: (err) => {
 				setError(err.response?.data.error ?? null);

@@ -6,6 +6,7 @@ import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 import { ServerError } from '../../../../components/ServerError';
 import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
+import { ViewVenue } from '../../../../components/Venues/ViewVenue';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -23,22 +24,13 @@ const ViewAttendeePage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				{isVenueLoading ? (
-					<p>Loading Venue...</p>
-				) : (
-					<div>
-						{venueError ? (
-							<ServerError error={venueError} />
-						) : (
-							venue && (
-								<div>
-									<h1 className="text-3xl">{venue.name}</h1>
-									<p>{venue.description}</p>
-								</div>
-							)
-						)}
-					</div>
-				)}
+				<div>
+					{venueError ? (
+						<ServerError error={venueError} />
+					) : (
+						<ViewVenue venue={venue} eid={String(eid)} loading={isVenueLoading} vid={String(vid)} />
+					)}
+				</div>
 			</Column>
 		</>
 	);

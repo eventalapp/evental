@@ -8,12 +8,12 @@ import { Navigation } from '../../../../../../components/Navigation';
 import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { EditRoleForm } from '../../../../../../components/Roles/EditRoleForm';
+import { EditVenueForm } from '../../../../../../components/Venues/EditVenueForm';
 
-const EditRolePage: NextPage = () => {
+const EditVenuePage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
-	const { eid, rid } = router.query;
+	const { eid, vid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 
 	if (!session.data?.user?.id) {
@@ -27,7 +27,7 @@ const EditRolePage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Edit Rid</title>
+				<title>Edit Venue</title>
 			</Head>
 
 			<Navigation />
@@ -35,12 +35,12 @@ const EditRolePage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<h1 className="text-3xl">Edit Role Page</h1>
+				<h1 className="text-3xl">Edit Venue Page</h1>
 
-				<EditRoleForm eid={String(eid)} rid={String(rid)} />
+				<EditVenueForm eid={String(eid)} vid={String(vid)} />
 			</Column>
 		</>
 	);
 };
 
-export default EditRolePage;
+export default EditVenuePage;
