@@ -18,9 +18,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'PUT') {
 		try {
-			let bodyParsed = EditEventSchema.parse(req.body);
+			const bodyParsed = EditEventSchema.parse(req.body);
 
-			let event = await prisma.event.findFirst({
+			const event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
 				select: {
 					id: true
@@ -31,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Event not found.' } });
 			}
 
-			let updatedEvent = await prisma.event.update({
+			const updatedEvent = await prisma.event.update({
 				data: {
 					name: bodyParsed.name,
 					description: bodyParsed.description,

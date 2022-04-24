@@ -18,9 +18,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'POST') {
 		try {
-			let bodyParsed = CreateVenueSchema.parse(req.body);
+			const parsed = CreateVenueSchema.parse(req.body);
 
-			let event = await prisma.event.findFirst({
+			const event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
 				select: {
 					id: true
@@ -31,12 +31,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Event not found.' } });
 			}
 
-			let createdActivity = await prisma.eventVenue.create({
+			const createdActivity = await prisma.eventVenue.create({
 				data: {
 					eventId: event.id,
-					slug: bodyParsed.slug,
-					name: bodyParsed.name,
-					description: bodyParsed.description
+					slug: parsed.slug,
+					name: parsed.name,
+					description: parsed.description
 				}
 			});
 

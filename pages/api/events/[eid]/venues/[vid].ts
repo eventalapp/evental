@@ -5,7 +5,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid, vid } = req.query;
 
 	try {
-		let venue = await prisma.eventVenue.findFirst({
+		const venue = await prisma.eventVenue.findFirst({
 			where: {
 				event: {
 					OR: [{ id: String(eid) }, { slug: String(eid) }]

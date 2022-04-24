@@ -18,9 +18,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 	if (req.method === 'PUT') {
 		try {
-			let bodyParsed = EditVenueSchema.parse(req.body);
+			const parsed = EditVenueSchema.parse(req.body);
 
-			let event = await prisma.event.findFirst({
+			const event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
 				select: {
 					id: true
@@ -31,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Event not found.' } });
 			}
 
-			let venue = await prisma.eventVenue.findFirst({
+			const venue = await prisma.eventVenue.findFirst({
 				where: {
 					eventId: event.id,
 					OR: [{ id: String(vid) }, { slug: String(vid) }]
@@ -45,14 +45,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Venue not found.' } });
 			}
 
-			let editedVenue = await prisma.eventVenue.update({
+			const editedVenue = await prisma.eventVenue.update({
 				where: {
 					id: venue.id
 				},
 				data: {
-					slug: bodyParsed.slug,
-					name: bodyParsed.name,
-					description: bodyParsed.description
+					slug: parsed.slug,
+					name: parsed.name,
+					description: parsed.description
 				}
 			});
 

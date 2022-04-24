@@ -3,9 +3,9 @@ import prisma from '../../../prisma/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-		let eventsFound = await prisma.event.findMany({ take: 30 });
+		let events = await prisma.event.findMany();
 
-		return res.status(200).send(eventsFound);
+		return res.status(200).send(events);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

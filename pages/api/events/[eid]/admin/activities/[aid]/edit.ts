@@ -20,7 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		try {
 			let bodyParsed = EditActivitySchema.parse(req.body);
 
-			let event = await prisma.event.findFirst({
+			const event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
 				select: {
 					id: true
@@ -31,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Event not found.' } });
 			}
 
-			let activity = await prisma.eventActivity.findFirst({
+			const activity = await prisma.eventActivity.findFirst({
 				where: {
 					eventId: event.id,
 					OR: [{ id: String(aid) }, { slug: String(aid) }]
@@ -45,7 +45,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Activity not found.' } });
 			}
 
-			let editedActivity = await prisma.eventActivity.update({
+			const editedActivity = await prisma.eventActivity.update({
 				where: {
 					id: activity.id
 				},
