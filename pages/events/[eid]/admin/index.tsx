@@ -60,7 +60,7 @@ const AdminPage: NextPage = () => {
 					</div>
 				</div>
 				<span>Manage your event</span>
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-5">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-10">
 					<div>
 						<div className="flex flex-row justify-between mb-3">
 							<span className="text-3xl">Venues</span>
@@ -104,7 +104,7 @@ const AdminPage: NextPage = () => {
 						/>
 					</div>
 				</div>
-				<div className="my-5">
+				<div className="my-10">
 					<div>
 						<div className="flex flex-row justify-between mb-3">
 							<h1 className="text-3xl">Attendees</h1>
@@ -124,7 +124,7 @@ const AdminPage: NextPage = () => {
 						/>
 					</div>
 				</div>
-				<div className="my-5">
+				<div className="my-10">
 					<div>
 						<div className="flex flex-row justify-between">
 							<span className="text-3xl">Activities</span>
