@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import React from 'react';
 
-interface Props {
+type Props = {
 	className?: string;
 	variant?: keyof typeof variants;
 	[x: string]: unknown;
-}
+};
 
 const variants = {
 	primary: 'bg-white border-b-2 border-gray-200 placeholder-gray-400 text-md my-2 py-1 px-2 w-full'

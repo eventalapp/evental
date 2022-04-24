@@ -13,9 +13,9 @@ import { Select } from '../Form/Select';
 import { Textarea } from '../Form/Textarea';
 import { useVenuesQuery } from '../../hooks/queries/useVenuesQuery';
 
-interface Props {
+type Props = {
 	eid: string;
-}
+};
 
 type CreateActivityFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
@@ -49,7 +49,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 			);
 
 			if (createActivityResponse.status === 200) {
-				router.push(`/events/${eid}/activities/${createActivityResponse.data.slug}`);
+				await router.push(`/events/${eid}/activities/${createActivityResponse.data.slug}`);
 			}
 		} catch (error) {
 			if (error instanceof ZodError) {

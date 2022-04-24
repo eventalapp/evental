@@ -4,19 +4,20 @@ import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
-import { ServerError } from '../../../../components/ServerError';
 import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
 import { ViewVenue } from '../../../../components/Venues/ViewVenue';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { vid, eid } = router.query;
 	const { venue, isVenueLoading, venueError } = useVenueQuery(String(eid), String(vid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
-		<>
+		<div>
 			<Head>
-				<title>Viewing Venue: {vid}</title>
+				<title>Viewing Venue: {venue && venue.name}</title>
 			</Head>
 
 			<Navigation />
@@ -24,15 +25,18 @@ const ViewAttendeePage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<div>
-					{venueError ? (
-						<ServerError error={venueError} />
-					) : (
-						<ViewVenue venue={venue} eid={String(eid)} loading={isVenueLoading} vid={String(vid)} />
-					)}
-				</div>
+				<ViewVenue
+					eid={String(eid)}
+					vid={String(vid)}
+					venue={venue}
+					isOrganizerLoading={isOrganizerLoading}
+					isOrganizer={isOrganizer}
+					isOrganizerError={isOrganizerError}
+					isVenueLoading={isVenueLoading}
+					venueError={venueError}
+				/>
 			</Column>
-		</>
+		</div>
 	);
 };
 

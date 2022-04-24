@@ -2,18 +2,27 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { FormEvent, useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 
-export const useCreateRoleMutation = (eid: string) => {
+export interface UseCreateRoleMutationData {
+	createRoleMutation: UseMutationResult<
+		AxiosResponse<Prisma.EventActivity, unknown>,
+		AxiosError<ServerError, unknown>,
+		FormEvent<HTMLFormElement>
+	>;
+	createRoleError: ServerErrorPayload | null;
+}
+
+export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 	const queryClient = useQueryClient();
 
 	const createRoleMutation = useMutation<
 		AxiosResponse<Prisma.EventActivity, unknown>,
-		AxiosError<ServerError>,
+		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>(
 		async (event: FormEvent<HTMLFormElement>) => {
@@ -28,7 +37,7 @@ export const useCreateRoleMutation = (eid: string) => {
 				slug: eventParsed.slug
 			};
 
-			return await axios.post(`/api/events/${eid}/admin/roles/create`, body);
+			return await axios.post<Prisma.EventActivity>(`/api/events/${eid}/admin/roles/create`, body);
 		},
 		{
 			onSuccess: (response) => {

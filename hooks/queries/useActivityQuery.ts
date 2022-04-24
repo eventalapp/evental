@@ -1,19 +1,27 @@
 import type Prisma from '@prisma/client';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useActivityQuery = (eid: string, aid: string) => {
+export interface UseActivityQueryData {
+	activity: Prisma.EventActivity | undefined;
+	isActivityLoading: boolean;
+	activityError: ServerErrorPayload | null;
+}
+
+export const useActivityQuery = (eid: string, aid: string): UseActivityQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
-	const { data: activityResponse, isLoading: isActivityLoading } = useQuery<
-		AxiosResponse<Prisma.EventActivity, unknown>,
+	const { data: activity, isLoading: isActivityLoading } = useQuery<
+		Prisma.EventActivity,
 		AxiosError<ServerError>
 	>(
 		['activity', eid, aid],
 		async () => {
-			return await axios.get<Prisma.EventActivity>(`/api/events/${eid}/activities/${aid}`);
+			return await axios
+				.get<Prisma.EventActivity>(`/api/events/${eid}/activities/${aid}`)
+				.then((res) => res.data);
 		},
 		{
 			retry: 0,
@@ -28,7 +36,7 @@ export const useActivityQuery = (eid: string, aid: string) => {
 	);
 
 	return {
-		activity: activityResponse?.data,
+		activity,
 		isActivityLoading,
 		activityError: error
 	};

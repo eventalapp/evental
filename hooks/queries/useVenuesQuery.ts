@@ -4,7 +4,13 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useVenuesQuery = (eid: string) => {
+export interface UseVenuesQueryData {
+	venues: Prisma.EventVenue[] | undefined;
+	isVenuesLoading: boolean;
+	venuesError: ServerErrorPayload | null;
+}
+
+export const useVenuesQuery = (eid: string): UseVenuesQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: venues, isLoading: isVenuesLoading } = useQuery<
@@ -13,7 +19,7 @@ export const useVenuesQuery = (eid: string) => {
 	>(
 		['venues', eid],
 		async () => {
-			return axios.get(`/api/events/${eid}/venues`).then((res) => res.data);
+			return axios.get<Prisma.EventVenue[]>(`/api/events/${eid}/venues`).then((res) => res.data);
 		},
 		{
 			retry: 0,

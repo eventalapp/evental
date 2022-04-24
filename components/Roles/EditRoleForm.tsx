@@ -3,44 +3,42 @@ import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
 import { ServerError } from '../ServerError';
-import { useEditRoleMutation } from '../../hooks/mutations/useEditRoleMutation';
-import { useRoleQuery } from '../../hooks/queries/useRoleQuery';
+import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutation';
 
-interface Props {
+import { NotFound } from '../NotFound';
+import { Loading } from '../Loading';
+import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+
+type Props = {
 	eid: string;
 	rid: string;
-}
+} & UseRoleAttendeesQueryData &
+	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
+	UseEditRoleMutationData;
 
-type EditRoleFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
+export const EditRoleForm: React.FC<Props> = (props) => {
+	const {
+		eid,
+		rid,
+		editRoleMutation,
+		editRoleError,
+		role,
+		roleAttendeesError,
+		isRoleAttendeesLoading,
 
-export const EditRoleForm: React.FC<EditRoleFormProps> = (props) => {
-	const { eid, rid, ...rest } = props;
-	const { editRoleMutation, editRoleError } = useEditRoleMutation(String(eid), String(rid));
-	const { role, roleError, isRoleLoading } = useRoleQuery(eid, rid);
+		...rest
+	} = props;
 
-	if (editRoleError) {
-		return <ServerError error={editRoleError} />;
-	}
-
-	if (isRoleLoading) {
-		return (
-			<div>
-				<p>Role loading...</p>
-			</div>
-		);
+	if (isRoleAttendeesLoading) {
+		return <Loading />;
 	}
 
 	if (!role) {
-		return (
-			<div>
-				<p>Role not found.</p>
-			</div>
-		);
+		return <NotFound />;
 	}
 
-	if (roleError) {
-		return <ServerError error={roleError} />;
+	if (roleAttendeesError || editRoleError) {
+		return <ServerError errors={[roleAttendeesError, editRoleError]} />;
 	}
 
 	return (

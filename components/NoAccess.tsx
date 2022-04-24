@@ -4,9 +4,9 @@ import { BackButton } from './BackButton';
 import Column from './Column';
 import { Navigation } from './Navigation';
 
-const NoAccess: React.FC = (props) => {
+const NoAccess: React.FC = () => {
 	return (
-		<>
+		<div>
 			<Navigation />
 
 			<Column>
@@ -18,7 +18,7 @@ const NoAccess: React.FC = (props) => {
 					<BackButton />
 				</Link>
 			</Column>
-		</>
+		</div>
 	);
 };
 

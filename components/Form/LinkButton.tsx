@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import React from 'react';
 
-interface Props {
+type Props = {
 	children?: React.ReactNode;
 	className?: string;
 	variant?: keyof typeof variants;
 	[x: string]: unknown;
-}
+};
 
 const variants = {
 	primary:

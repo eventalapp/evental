@@ -6,9 +6,9 @@ import { Textarea } from '../Form/Textarea';
 import { useCreateVenueMutation } from '../../hooks/mutations/useCreateVenueMutation';
 import { ServerError } from '../ServerError';
 
-interface Props {
+type Props = {
 	eid: string;
-}
+};
 
 type CreateActivityFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
@@ -18,7 +18,7 @@ export const CreateVenueForm: React.FC<CreateActivityFormProps> = (props) => {
 	const { createVenueMutation, createVenueError } = useCreateVenueMutation(eid);
 
 	if (createVenueError) {
-		return <ServerError error={createVenueError} />;
+		return <ServerError errors={[createVenueError]} />;
 	}
 
 	return (

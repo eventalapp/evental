@@ -2,18 +2,29 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { RoleAttendeePayload } from '../../pages/api/events/[eid]/roles/[rid]';
 import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
+import Prisma from '@prisma/client';
 
-export const useRoleAttendeesQuery = (eid: string, rid: string) => {
+export interface UseRoleAttendeesQueryData {
+	attendees: EventMemberUser[] | undefined;
+	role: Prisma.EventRole | undefined;
+	isRoleAttendeesLoading: boolean;
+	roleAttendeesError: ServerErrorPayload | null;
+}
+
+export const useRoleAttendeesQuery = (eid: string, rid: string): UseRoleAttendeesQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
-	const { data: roleAttendees, isLoading: isRoleAttendeesLoading } = useQuery<
-		EventMemberUser[],
+	const { data, isLoading: isRoleAttendeesLoading } = useQuery<
+		RoleAttendeePayload,
 		AxiosError<ServerError>
 	>(
-		['roleAttendees', eid],
+		['role', eid, rid],
 		async () => {
-			return axios.get(`/api/events/${eid}/roles/${rid}`).then((res) => res.data.attendees);
+			return axios
+				.get<RoleAttendeePayload>(`/api/events/${eid}/roles/${rid}`)
+				.then((res) => res.data);
 		},
 		{
 			retry: 0,
@@ -27,5 +38,10 @@ export const useRoleAttendeesQuery = (eid: string, rid: string) => {
 		}
 	);
 
-	return { roleAttendees, isRoleAttendeesLoading, roleError: error };
+	return {
+		role: data?.role,
+		attendees: data?.attendees,
+		isRoleAttendeesLoading,
+		roleAttendeesError: error
+	};
 };

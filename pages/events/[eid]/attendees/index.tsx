@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
-import { ServerError } from '../../../../components/ServerError';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { AttendeeList } from '../../../../components/Attendees/AttendeeList';
 
@@ -28,11 +27,12 @@ const ViewAttendeePage: NextPage = () => {
 					<h1 className="text-3xl">Attendees</h1>
 				</div>
 
-				{attendeesError ? (
-					<ServerError error={attendeesError} />
-				) : (
-					<AttendeeList attendees={attendees} loading={isAttendeesLoading} eid={String(eid)} />
-				)}
+				<AttendeeList
+					attendees={attendees}
+					attendeesError={attendeesError}
+					isAttendeesLoading={isAttendeesLoading}
+					eid={String(eid)}
+				/>
 			</Column>
 		</>
 	);

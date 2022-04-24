@@ -3,47 +3,42 @@ import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
 import { ServerError } from '../ServerError';
-import { useEditVenueMutation } from '../../hooks/mutations/useEditVenueMutation';
-import { useVenueQuery } from '../../hooks/queries/useVenueQuery';
+import { UseEditVenueMutationData } from '../../hooks/mutations/useEditVenueMutation';
+import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { Textarea } from '../Form/Textarea';
+import { Loading } from '../Loading';
+import { NotFound } from '../NotFound';
 
-interface Props {
-	eid: string;
-	vid: string;
-}
+type Props = { eid: string; vid: string } & DetailedHTMLProps<
+	FormHTMLAttributes<HTMLFormElement>,
+	HTMLFormElement
+> &
+	UseVenueQueryData &
+	UseEditVenueMutationData;
 
-type EditVenueFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
-
-export const EditVenueForm: React.FC<EditVenueFormProps> = (props) => {
-	const { eid, vid, ...rest } = props;
-	const { editVenueMutation, editVenueError } = useEditVenueMutation(String(eid), String(vid));
-	const { venue, venueError, isVenueLoading } = useVenueQuery(eid, vid);
-
-	if (editVenueError) {
-		return <ServerError error={editVenueError} />;
-	}
+export const EditVenueForm: React.FC<Props> = (props) => {
+	const {
+		eid,
+		vid,
+		venue,
+		venueError,
+		isVenueLoading,
+		editVenueError,
+		editVenueMutation,
+		...rest
+	} = props;
 
 	if (isVenueLoading) {
-		return (
-			<div>
-				<p>Venue loading...</p>
-			</div>
-		);
+		return <Loading />;
+	}
+
+	if (venueError || editVenueError) {
+		return <ServerError errors={[editVenueError, venueError]} />;
 	}
 
 	if (!venue) {
-		return (
-			<div>
-				<p>Venue not found.</p>
-			</div>
-		);
+		return <NotFound />;
 	}
-
-	if (venueError) {
-		return <ServerError error={venueError} />;
-	}
-
 	return (
 		<form onSubmit={editVenueMutation.mutate} {...rest}>
 			<div className="flex flex-col w-full mt-5">

@@ -4,7 +4,13 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 
-export const useEventsQuery = () => {
+export interface UseEventsQueryData {
+	events: Prisma.Event[] | undefined;
+	isEventsLoading: boolean;
+	eventsError: ServerErrorPayload | null;
+}
+
+export const useEventsQuery = (): UseEventsQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: events, isLoading: isEventsLoading } = useQuery<
@@ -13,7 +19,7 @@ export const useEventsQuery = () => {
 	>(
 		['events'],
 		async () => {
-			return axios.get(`/api/events`).then((res) => res.data);
+			return axios.get<Prisma.Event[]>(`/api/events`).then((res) => res.data);
 		},
 		{
 			retry: 0,

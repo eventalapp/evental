@@ -1,6 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
-import { eventMemberInclude } from '../attendees/[aid]';
+import { eventMemberInclude, EventMemberUser } from '../attendees/[aid]';
+import Prisma from '@prisma/client';
+
+export type RoleAttendeePayload = {
+	attendees: EventMemberUser[] | undefined;
+	role: Prisma.EventRole | undefined;
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid, rid } = req.query;
@@ -38,7 +44,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		});
 
-		return res.status(200).send({ attendees, role });
+		const payload: RoleAttendeePayload = { attendees, role };
+
+		return res.status(200).send(payload);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.error(error);

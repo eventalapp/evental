@@ -13,7 +13,7 @@ export const CreateEventForm: React.FC<CreateEventFormProps> = (props) => {
 	const { createEventMutation, createEventError } = useCreateEventMutation();
 
 	if (createEventError) {
-		return <ServerError error={createEventError} />;
+		return <ServerError errors={[createEventError]} />;
 	}
 
 	return (

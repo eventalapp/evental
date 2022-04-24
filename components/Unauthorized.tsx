@@ -3,9 +3,9 @@ import React from 'react';
 import Column from './Column';
 import { Navigation } from './Navigation';
 
-const Unauthorized: React.FC = (props) => {
+const Unauthorized: React.FC = () => {
 	return (
-		<>
+		<div>
 			<Navigation />
 
 			<Column>
@@ -17,7 +17,7 @@ const Unauthorized: React.FC = (props) => {
 					<a className="mt-3 text-blue-900 block">Sign in</a>
 				</Link>
 			</Column>
-		</>
+		</div>
 	);
 };
 

@@ -1,30 +1,43 @@
-import type Prisma from '@prisma/client';
 import Link from 'next/link';
-import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 import { capitalizeFirstLetter } from '../../utils/string';
 import React from 'react';
 import { LinkButton } from '../Form/LinkButton';
-import { useOrganizerQuery } from '../../hooks/queries/useOrganizerQuery';
+import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { AttendeeList } from '../Attendees/AttendeeList';
+import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+import { NotFound } from '../NotFound';
+import { Loading } from '../Loading';
+import { ServerError } from '../ServerError';
 
-interface Props {
-	loading: boolean;
-	attendees: EventMemberUser[] | undefined;
+type Props = {
 	eid: string;
 	rid: string;
-	role: Prisma.EventRole | undefined;
-}
+} & UseRoleAttendeesQueryData &
+	UseOrganizerQueryData;
 
 export const RoleAttendeeList: React.FC<Props> = (props) => {
-	const { eid, rid, loading, attendees, role } = props;
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
+	const {
+		eid,
+		rid,
+		isRoleAttendeesLoading,
+		role,
+		roleAttendeesError,
+		isOrganizerLoading,
+		isOrganizerError,
+		isOrganizer,
+		attendees
+	} = props;
 
-	if (loading) {
-		return (
-			<div>
-				<p>Attendees loading...</p>
-			</div>
-		);
+	if (isOrganizerLoading || isRoleAttendeesLoading) {
+		return <Loading />;
+	}
+
+	if (isOrganizerError || roleAttendeesError) {
+		return <ServerError errors={[isOrganizerError, roleAttendeesError]} />;
+	}
+
+	if (!role || !attendees) {
+		return <NotFound />;
 	}
 
 	if (attendees?.length === 0) {
@@ -65,7 +78,12 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 						)}
 					</div>
 
-					<AttendeeList loading={loading} attendees={attendees} eid={eid} />
+					<AttendeeList
+						attendees={attendees}
+						attendeesError={roleAttendeesError}
+						isAttendeesLoading={isRoleAttendeesLoading}
+						eid={eid}
+					/>
 				</div>
 			)}
 		</div>
