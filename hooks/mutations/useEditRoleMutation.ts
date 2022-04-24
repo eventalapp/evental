@@ -45,6 +45,8 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 
 				router.push(`/events/${eid}/roles/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['role', eid, rid]);
+					void queryClient.invalidateQueries(['roles']);
+					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
 			onError: (err) => {

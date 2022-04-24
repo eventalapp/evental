@@ -1,27 +1,40 @@
 import Link from 'next/link';
 import { LinkButton } from '../Form/LinkButton';
 import React from 'react';
-import { useOrganizerQuery } from '../../hooks/queries/useOrganizerQuery';
+import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import dayjs from 'dayjs';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { ActivityList } from '../Activities/ActivityList';
-import { useEventQuery } from '../../hooks/queries/useEventQuery';
-import { useActivitiesQuery } from '../../hooks/queries/useActivitiesQuery';
-import { useRolesQuery } from '../../hooks/queries/useRolesQuery';
+import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
+import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { Loading } from '../Loading';
 import { ServerError } from '../ServerError';
 import { NotFound } from '../NotFound';
 
 type Props = {
 	eid: string;
-};
+} & UseOrganizerQueryData &
+	UseEventQueryData &
+	UseActivitiesQueryData &
+	UseRolesQueryData;
 
 export const ViewEvent: React.FC<Props> = (props) => {
-	const { eid } = props;
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
+	const {
+		eid,
+		event,
+		activities,
+		roles,
+		isOrganizer,
+		isOrganizerLoading,
+		eventError,
+		isEventLoading,
+		isActivitiesLoading,
+		activitiesError,
+		isOrganizerError,
+		rolesError,
+		isRolesLoading
+	} = props;
 
 	if (rolesError || isEventLoading || isOrganizerLoading || isActivitiesLoading || isRolesLoading) {
 		return <Loading />;
@@ -31,7 +44,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		return <ServerError errors={[isOrganizerError, rolesError, eventError, activitiesError]} />;
 	}
 
-	if (!roles || !event || !activities) {
+	if (!event) {
 		return <NotFound />;
 	}
 
@@ -50,13 +63,14 @@ export const ViewEvent: React.FC<Props> = (props) => {
 			<p>{event?.description}</p>
 			{dayjs(event?.startDate).format('MMM DD')} - {dayjs(event?.endDate).format('MMM DD')}
 			<div className="mt-3">
-				{roles.map((role) => (
-					<Link href={`/events/${eid}/roles/${role.slug}`} passHref key={role.id}>
-						<LinkButton className="mr-3">
-							{capitalizeFirstLetter(role.name.toLowerCase())}s
-						</LinkButton>
-					</Link>
-				))}
+				{roles &&
+					roles.map((role) => (
+						<Link href={`/events/${eid}/roles/${role.slug}`} passHref key={role.id}>
+							<LinkButton className="mr-3">
+								{capitalizeFirstLetter(role.name.toLowerCase())}s
+							</LinkButton>
+						</Link>
+					))}
 
 				<Link href={`/events/${eid}/venues`} passHref>
 					<LinkButton>Venues</LinkButton>
