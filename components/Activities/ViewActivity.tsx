@@ -43,11 +43,18 @@ export const ViewActivity: React.FC<Props> = (props) => {
 				<div className="flex flex-row justify-between">
 					<h1 className="text-3xl">{activity.name}</h1>
 
-					{!isOrganizerLoading && isOrganizer && (
-						<Link href={`/events/${eid}/admin/activities/${aid}/edit`} passHref>
-							<LinkButton className="mr-3">Edit activity</LinkButton>
-						</Link>
-					)}
+					<div>
+						{!isOrganizerLoading && isOrganizer && (
+							<Link href={`/events/${eid}/admin/activities/${aid}/edit`} passHref>
+								<LinkButton className="mr-3">Edit activity</LinkButton>
+							</Link>
+						)}
+						{!isOrganizerLoading && isOrganizer && (
+							<Link href={`/events/${eid}/admin/activities/${aid}/delete`} passHref>
+								<LinkButton className="mr-3">Delete activity</LinkButton>
+							</Link>
+						)}
+					</div>
 				</div>
 				<p>{activity.description}</p>
 				<p>{activity.startDate}</p>

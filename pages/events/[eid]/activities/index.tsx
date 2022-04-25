@@ -15,7 +15,7 @@ const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	if (activities) {
 		groupByDate(activities);
@@ -42,6 +42,9 @@ const ActivitiesPage: NextPage = () => {
 				</div>
 
 				<ActivityList
+					isOrganizer={isOrganizer}
+					isOrganizerLoading={isOrganizerLoading}
+					isOrganizerError={isOrganizerError}
 					activities={activities}
 					eid={String(eid)}
 					activitiesError={activitiesError}

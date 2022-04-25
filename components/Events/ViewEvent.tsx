@@ -77,6 +77,9 @@ export const ViewEvent: React.FC<Props> = (props) => {
 				</Link>
 			</div>
 			<ActivityList
+				isOrganizer={isOrganizer}
+				isOrganizerLoading={isOrganizerLoading}
+				isOrganizerError={isOrganizerError}
 				activities={activities}
 				eid={String(eid)}
 				activitiesError={activitiesError}
