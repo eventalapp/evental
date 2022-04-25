@@ -1,11 +1,11 @@
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { Button } from '../Form/Button';
-import { Input } from '../Form/Input';
-import { Label } from '../Form/Label';
+import { Button } from '../form/Button';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
 import { ServerError } from '../ServerError';
 import { UseEditVenueMutationData } from '../../hooks/mutations/useEditVenueMutation';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
-import { Textarea } from '../Form/Textarea';
+import { Textarea } from '../form/Textarea';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 

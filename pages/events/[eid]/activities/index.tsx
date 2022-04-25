@@ -2,15 +2,15 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ActivityList } from '../../../../components/Activities/ActivityList';
+import { ActivityList } from '../../../../components/activities/ActivityList';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
-import { LinkButton } from '../../../../components/Form/LinkButton';
-import { Navigation } from '../../../../components/Navigation';
+import { LinkButton } from '../../../../components/form/LinkButton';
+import { Navigation } from '../../../../components/navigation';
 import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { groupByDate } from '../../../../utils/groupByDate';
-import { FlexRowBetween } from '../../../../components/FlexRowBetween';
+import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();

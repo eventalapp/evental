@@ -6,7 +6,7 @@ import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
 import { Loading } from '../Loading';
 import { ServerError } from '../ServerError';
 import { NotFound } from '../NotFound';
-import { LinkButton } from '../Form/LinkButton';
+import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 
 type Props = {

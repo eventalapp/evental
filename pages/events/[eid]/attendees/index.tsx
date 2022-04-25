@@ -3,9 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
-import { Navigation } from '../../../../components/Navigation';
+import { Navigation } from '../../../../components/navigation';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
-import { AttendeeList } from '../../../../components/Attendees/AttendeeList';
+import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
 const ViewAttendeePage: NextPage = () => {

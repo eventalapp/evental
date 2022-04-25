@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ViewAttendee } from '../../../../components/Attendees/ViewAttendee';
+import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
-import { Navigation } from '../../../../components/Navigation';
+import { Navigation } from '../../../../components/navigation';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 

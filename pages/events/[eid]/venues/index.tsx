@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
-import { LinkButton } from '../../../../components/Form/LinkButton';
-import { Navigation } from '../../../../components/Navigation';
-import { VenueList } from '../../../../components/Venues/VenueList';
+import { LinkButton } from '../../../../components/form/LinkButton';
+import { Navigation } from '../../../../components/navigation';
+import { VenueList } from '../../../../components/venues/VenueList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { ServerError } from '../../../../components/ServerError';
 import React from 'react';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
-import { FlexRowBetween } from '../../../../components/FlexRowBetween';
+import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();

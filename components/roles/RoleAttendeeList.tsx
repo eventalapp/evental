@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import { capitalizeFirstLetter } from '../../utils/string';
 import React from 'react';
-import { LinkButton } from '../Form/LinkButton';
+import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
-import { AttendeeList } from '../Attendees/AttendeeList';
+import { AttendeeList } from '../attendees/AttendeeList';
 import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { ServerError } from '../ServerError';
-import { FlexRowBetween } from '../FlexRowBetween';
+import { FlexRowBetween } from '../layout/FlexRowBetween';
 
 type Props = {
 	eid: string;

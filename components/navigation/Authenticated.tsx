@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { Session } from 'next-auth';
 import Link from 'next/link';
 import React from 'react';
-import { ProfileDropdown } from './Dropdown';
+import { ProfileDropdown } from './dropdown';
 
 interface AuthenticatedProps {
 	className?: string;

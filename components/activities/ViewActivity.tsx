@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { LinkButton } from '../Form/LinkButton';
+import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import { UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
 import { Loading } from '../Loading';
 import { ServerError } from '../ServerError';
 import { NotFound } from '../NotFound';
-import { FlexRowBetween } from '../FlexRowBetween';
+import { FlexRowBetween } from '../layout/FlexRowBetween';
 
 type Props = {
 	eid: string;

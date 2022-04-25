@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { LinkButton } from '../Form/LinkButton';
+import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { ServerError } from '../ServerError';
