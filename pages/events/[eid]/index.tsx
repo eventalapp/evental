@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../components/Column';
-import { Navigation } from '../../../components/Navigation';
-import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { ViewEvent } from '../../../components/Events/ViewEvent';
-import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
+import { Navigation } from '../../../components/Navigation';
 import { useActivitiesQuery } from '../../../hooks/queries/useActivitiesQuery';
+import { useEventQuery } from '../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
 import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
 
 const ViewEventPage: NextPage = () => {
@@ -20,7 +20,7 @@ const ViewEventPage: NextPage = () => {
 	return (
 		<div>
 			<Head>
-				<title>{event && event.location}</title>
+				<title>{event && event.name}</title>
 			</Head>
 
 			<Navigation />
