@@ -21,15 +21,8 @@ type CreateActivityFormProps = Props &
 	UseCreateActivityMutationData;
 
 export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => {
-	const {
-		eid,
-		isVenuesLoading,
-		venuesError,
-		venues,
-		createActivityError,
-		createActivityMutation,
-		...rest
-	} = props;
+	const { eid, isVenuesLoading, venuesError, venues, createActivityError, createActivityMutation } =
+		props;
 
 	if (venuesError) {
 		return (
@@ -52,7 +45,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	}
 
 	return (
-		<form onSubmit={createActivityMutation.mutate} {...rest}>
+		<form onSubmit={createActivityMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>

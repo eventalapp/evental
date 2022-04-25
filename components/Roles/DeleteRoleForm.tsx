@@ -8,27 +8,18 @@ import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
 
-type Props = {
-	eid: string;
-	rid: string;
-};
-
-type DeleteRoleFormProps = Props &
-	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
+type Props = Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
 	UseDeleteRoleMutationData &
 	UseRoleAttendeesQueryData;
 
-export const DeleteRoleForm: React.FC<DeleteRoleFormProps> = (props) => {
+export const DeleteRoleForm: React.FC<Props> = (props) => {
 	const {
-		eid,
 		deleteRoleMutation,
 		deleteRoleError,
 		role,
-		rid,
 		attendees,
 		roleAttendeesError,
-		isRoleAttendeesLoading,
-		...rest
+		isRoleAttendeesLoading
 	} = props;
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
@@ -45,7 +36,7 @@ export const DeleteRoleForm: React.FC<DeleteRoleFormProps> = (props) => {
 	}
 
 	return (
-		<form onSubmit={deleteRoleMutation.mutate} {...rest}>
+		<form onSubmit={deleteRoleMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
 				<h1 className="text-2xl mb-3">Are you sure you would like to delete: {role.name}?</h1>
 

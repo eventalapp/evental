@@ -17,7 +17,7 @@ type DeleteActivityFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const DeleteActivityForm: React.FC<DeleteActivityFormProps> = (props) => {
-	const { eid, aid, ...rest } = props;
+	const { eid, aid } = props;
 	const { activity, isActivityLoading, activityError } = useActivityQuery(eid, aid);
 	const { deleteActivityError, deleteActivityMutation } = useDeleteActivityMutation(eid, aid);
 	const [canSubmit, setCanSubmit] = React.useState(false);
@@ -37,7 +37,7 @@ export const DeleteActivityForm: React.FC<DeleteActivityFormProps> = (props) => 
 	return (
 		<div>
 			{activity && (
-				<form onSubmit={deleteActivityMutation.mutate} {...rest}>
+				<form onSubmit={deleteActivityMutation.mutate}>
 					<div className="flex flex-col w-full mt-5">
 						<h1 className="text-2xl mb-3">
 							Are you sure you would like to delete: {activity.name}?

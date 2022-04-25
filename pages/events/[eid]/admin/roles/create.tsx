@@ -39,11 +39,7 @@ const CreateRolePage: NextPage = () => {
 
 				<h1 className="text-3xl">Create Role Page</h1>
 
-				<CreateRoleForm
-					eid={String(eid)}
-					createRoleError={createRoleError}
-					createRoleMutation={createRoleMutation}
-				/>
+				<CreateRoleForm createRoleError={createRoleError} createRoleMutation={createRoleMutation} />
 			</Column>
 		</>
 	);

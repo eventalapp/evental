@@ -21,7 +21,7 @@ type EditActivityFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
-	const { eid, aid, ...rest } = props;
+	const { eid, aid } = props;
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(eid);
 	const { activity, isActivityLoading, activityError } = useActivityQuery(eid, aid);
 	const { editActivityError, editActivityMutation } = useEditActivityMutation(eid, aid);
@@ -41,7 +41,7 @@ export const EditActivityForm: React.FC<EditActivityFormProps> = (props) => {
 	return (
 		<div>
 			{activity && (
-				<form onSubmit={editActivityMutation.mutate} {...rest}>
+				<form onSubmit={editActivityMutation.mutate}>
 					<div className="flex flex-col w-full mt-5">
 						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>

@@ -10,14 +10,14 @@ type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElem
 	UseCreateEventMutationData;
 
 export const CreateEventForm: React.FC<Props> = (props) => {
-	const { createEventMutation, createEventError, ...rest } = props;
+	const { createEventMutation, createEventError } = props;
 
 	if (createEventError) {
 		return <ServerError errors={[createEventError]} />;
 	}
 
 	return (
-		<form onSubmit={createEventMutation.mutate} {...rest}>
+		<form onSubmit={createEventMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>

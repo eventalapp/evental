@@ -6,20 +6,18 @@ import { Textarea } from '../Form/Textarea';
 import { UseCreateVenueMutationData } from '../../hooks/mutations/useCreateVenueMutation';
 import { ServerError } from '../ServerError';
 
-type Props = {
-	eid: string;
-} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateVenueMutationData;
 
 export const CreateVenueForm: React.FC<Props> = (props) => {
-	const { eid, createVenueMutation, createVenueError, ...rest } = props;
+	const { createVenueMutation, createVenueError } = props;
 
 	if (createVenueError) {
 		return <ServerError errors={[createVenueError]} />;
 	}
 
 	return (
-		<form onSubmit={createVenueMutation.mutate} {...rest}>
+		<form onSubmit={createVenueMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>

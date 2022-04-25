@@ -30,11 +30,12 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 
 			const formEntries = getFormEntries(event);
 
-			const eventParsed = CreateRoleSchema.parse(formEntries);
+			const parsed = CreateRoleSchema.parse(formEntries);
 
 			const body: CreateRolePayload = {
-				name: eventParsed.name,
-				slug: eventParsed.slug
+				name: parsed.name,
+				slug: parsed.slug,
+				defaultRole: parsed.defaultRole
 			};
 
 			return await axios.post<Prisma.EventActivity>(`/api/events/${eid}/admin/roles/create`, body);

@@ -9,26 +9,17 @@ import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { UseDeleteAttendeeMutationData } from '../../hooks/mutations/useDeleteAttendeeMutatation';
 
-type Props = {
-	eid: string;
-	aid: string;
-};
-
-type DeleteAttendeeFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseAttendeeQueryData &
 	UseDeleteAttendeeMutationData;
 
-export const DeleteAttendeeForm: React.FC<DeleteAttendeeFormProps> = (props) => {
+export const DeleteAttendeeForm: React.FC<Props> = (props) => {
 	const {
-		eid,
-		aid,
 		attendee,
 		isAttendeeLoading,
 		attendeeError,
 		deleteAttendeeError,
-		deleteAttendeeMutation,
-		...rest
+		deleteAttendeeMutation
 	} = props;
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
@@ -55,7 +46,7 @@ export const DeleteAttendeeForm: React.FC<DeleteAttendeeFormProps> = (props) => 
 	return (
 		<div>
 			{attendee && (
-				<form onSubmit={deleteAttendeeMutation.mutate} {...rest}>
+				<form onSubmit={deleteAttendeeMutation.mutate}>
 					<div className="flex flex-col w-full mt-5">
 						<h1 className="text-2xl mb-3">
 							Are you sure you would like to delete: {attendee.name}?
