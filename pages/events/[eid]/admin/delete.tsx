@@ -4,18 +4,18 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
-import { EditEventForm } from '../../../../components/Events/EditEventForm';
+import { DeleteEventForm } from '../../../../components/Events/DeleteEventForm';
 import { Navigation } from '../../../../components/Navigation';
 import Unauthorized from '../../../../components/Unauthorized';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
+import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
 
-const EditEventPage: NextPage = () => {
+const DeleteEventPage: NextPage = () => {
 	const router = useRouter();
 	const session = useSession();
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { editEventMutation, editEventError } = useEditEventMutation(String(eid));
+	const { deleteEventMutation, deleteEventError } = useDeleteEventMutation(String(eid));
 
 	if (!session.data?.user?.id) {
 		return <Unauthorized />;
@@ -24,7 +24,7 @@ const EditEventPage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Edit event</title>
+				<title>Delete event</title>
 			</Head>
 
 			<Navigation />
@@ -32,13 +32,13 @@ const EditEventPage: NextPage = () => {
 			<Column className="py-10">
 				<BackButton />
 
-				<h1 className="text-3xl">Edit Event</h1>
+				<h1 className="text-3xl">Delete Event</h1>
 
-				<EditEventForm
+				<DeleteEventForm
 					eid={String(eid)}
-					editEventError={editEventError}
+					deleteEventError={deleteEventError}
 					eventError={eventError}
-					editEventMutation={editEventMutation}
+					deleteEventMutation={deleteEventMutation}
 					event={event}
 					isEventLoading={isEventLoading}
 				/>
@@ -47,4 +47,4 @@ const EditEventPage: NextPage = () => {
 	);
 };
 
-export default EditEventPage;
+export default DeleteEventPage;

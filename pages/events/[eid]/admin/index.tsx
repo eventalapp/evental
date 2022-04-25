@@ -54,7 +54,11 @@ const AdminPage: NextPage = () => {
 
 					<div>
 						<Link href={`/events/${eid}/admin/edit`} passHref>
-							<LinkButton>Edit event</LinkButton>
+							<LinkButton className="mr-3">Edit event</LinkButton>
+						</Link>
+
+						<Link href={`/events/${eid}/admin/delete`} passHref>
+							<LinkButton>Delete event</LinkButton>
 						</Link>
 					</div>
 				</div>
