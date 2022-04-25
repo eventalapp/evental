@@ -6,13 +6,26 @@ import { UseAttendeesQueryData } from '../../hooks/queries/useAttendeesQuery';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 import { ServerError } from '../ServerError';
+import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
+import { LinkButton } from '../Form/LinkButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	eid: string;
-} & UseAttendeesQueryData;
+} & UseAttendeesQueryData &
+	UseOrganizerQueryData;
 
 export const AttendeeList: React.FC<Props> = (props) => {
-	const { eid, attendees, isAttendeesLoading, attendeesError } = props;
+	const {
+		eid,
+		attendees,
+		isAttendeesLoading,
+		attendeesError,
+		isOrganizerError,
+		isOrganizerLoading,
+		isOrganizer
+	} = props;
 
 	if (isAttendeesLoading) {
 		return <Loading />;
@@ -50,6 +63,16 @@ export const AttendeeList: React.FC<Props> = (props) => {
 											{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
 										</span>
 									</a>
+								</Link>
+								<Link href={`/events/${eid}/admin/attendees/${attendee.slug}/edit`} passHref>
+									<LinkButton className="mr-3">
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faCog} />
+									</LinkButton>
+								</Link>
+								<Link href={`/events/${eid}/admin/attendees/${attendee.slug}/delete`} passHref>
+									<LinkButton className="mr-3">
+										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faTrash} />
+									</LinkButton>
 								</Link>
 							</li>
 						)

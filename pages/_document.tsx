@@ -18,15 +18,15 @@ export default class Document extends NextDocument {
 			>
 				<Head>
 					<link rel="preconnect" href="https://fonts.googleapis.com" />
-					<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="x" />
+					<link rel="preconnect" href="https://fonts.gstatic.com" />
 					<link
-						href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Work+Sans:wght@600;700&display=swap"
+						href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&display=swap"
 						rel="stylesheet"
 					/>
 
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
-				<body className="h-full font-body">
+				<body className="h-full font-sans">
 					<Main />
 					<NextScript />
 				</body>
