@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
-import { eventMemberInclude, EventMemberUser } from '../attendees/[aid]';
+import { EventAttendeeUser } from '../attendees/[aid]';
 import Prisma from '@prisma/client';
 
 export type RoleAttendeePayload = {
-	attendees: EventMemberUser[] | undefined;
+	attendees: EventAttendeeUser[] | undefined;
 	role: Prisma.EventRole | undefined;
 };
 
@@ -34,13 +34,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 		if (!role) {
 			return res.status(404).send({ error: { message: 'Role not found.' } });
 		}
-		const attendees = await prisma.eventMember.findMany({
+		const attendees = await prisma.eventAttendee.findMany({
 			where: {
 				eventRoleId: role.id,
 				eventId: event.id
 			},
 			include: {
-				...eventMemberInclude
+				user: {
+					select: {
+						name: true,
+						image: true
+					}
+				},
+				role: {
+					select: {
+						name: true
+					}
+				}
 			}
 		});
 

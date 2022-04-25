@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { RoleAttendeePayload } from '../../pages/api/events/[eid]/roles/[rid]';
-import { EventMemberUser } from '../../pages/api/events/[eid]/attendees/[aid]';
+import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 import Prisma from '@prisma/client';
 
 export interface UseRoleAttendeesQueryData {
-	attendees: EventMemberUser[] | undefined;
+	attendees: EventAttendeeUser[] | undefined;
 	role: Prisma.EventRole | undefined;
 	isRoleAttendeesLoading: boolean;
 	roleAttendeesError: ServerErrorPayload | null;

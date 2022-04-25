@@ -2,7 +2,7 @@ import prisma from '../prisma/client';
 
 export const isOrganizer = async (userId: string, eventId: string) => {
 	return Boolean(
-		await prisma.eventMember.findFirst({
+		await prisma.eventAttendee.findFirst({
 			where: {
 				userId: userId,
 				event: {

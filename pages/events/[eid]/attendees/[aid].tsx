@@ -6,11 +6,13 @@ import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/Column';
 import { Navigation } from '../../../../components/Navigation';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { aid, eid } = router.query;
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(aid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
 		<div>
@@ -27,6 +29,11 @@ const ViewAttendeePage: NextPage = () => {
 					attendee={attendee}
 					attendeeError={attendeeError}
 					isAttendeeLoading={isAttendeeLoading}
+					isOrganizer={isOrganizer}
+					isOrganizerLoading={isOrganizerLoading}
+					isOrganizerError={isOrganizerError}
+					eid={String(eid)}
+					aid={String(aid)}
 				/>
 			</Column>
 		</div>
