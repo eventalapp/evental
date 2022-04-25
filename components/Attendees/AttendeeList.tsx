@@ -17,15 +17,7 @@ type Props = {
 	UseOrganizerQueryData;
 
 export const AttendeeList: React.FC<Props> = (props) => {
-	const {
-		eid,
-		attendees,
-		isAttendeesLoading,
-		attendeesError,
-		isOrganizerError,
-		isOrganizerLoading,
-		isOrganizer
-	} = props;
+	const { eid, attendees, isAttendeesLoading, attendeesError } = props;
 
 	if (isAttendeesLoading) {
 		return <Loading />;
