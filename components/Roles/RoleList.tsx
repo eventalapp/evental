@@ -40,7 +40,7 @@ export const RoleList: React.FC<Props> = (props) => {
 		<div>
 			{roles.map((role) => (
 				<div key={role.id} className="py-2 border-t-2 border-gray-200">
-					<div className="flex flex-row justify-between items-center">
+					<div className="flex flex-row justify-between items-center flex-wrap">
 						<span className="text-lg block">
 							{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
 							<span className="font-bold">{role.defaultRole && '(Default)'}</span>
