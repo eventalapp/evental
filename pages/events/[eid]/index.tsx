@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../components/Column';
+import Column from '../../../components/layout/Column';
 import { ViewEvent } from '../../../components/events/ViewEvent';
 import { Navigation } from '../../../components/navigation';
 import { useActivitiesQuery } from '../../../hooks/queries/useActivitiesQuery';

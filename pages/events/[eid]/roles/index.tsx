@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
-import Column from '../../../../components/Column';
+import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import { RoleList } from '../../../../components/roles/RoleList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';

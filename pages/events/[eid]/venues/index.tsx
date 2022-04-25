@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { BackButton } from '../../../../components/BackButton';
-import Column from '../../../../components/Column';
+import Column from '../../../../components/layout/Column';
 import { LinkButton } from '../../../../components/form/LinkButton';
 import { Navigation } from '../../../../components/navigation';
 import { VenueList } from '../../../../components/venues/VenueList';

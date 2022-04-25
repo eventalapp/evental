@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import Column from '../components/Column';
+import Column from '../components/layout/Column';
 import { LinkButton } from '../components/form/LinkButton';
 import { Navigation } from '../components/navigation';
 
