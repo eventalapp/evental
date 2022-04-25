@@ -34,13 +34,12 @@ const CreateActivityPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Create Venue Page</h1>
 
 				<CreateVenueForm
-					eid={String(eid)}
 					createVenueError={createVenueError}
 					createVenueMutation={createVenueMutation}
 				/>

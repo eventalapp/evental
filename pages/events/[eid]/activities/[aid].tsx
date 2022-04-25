@@ -23,7 +23,7 @@ const ViewActivityPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<ViewActivity

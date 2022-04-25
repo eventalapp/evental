@@ -47,8 +47,8 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 					/>
 				</div>
 
-				<div className="flex flex-row justify-between">
-					<h1 className="text-3xl">{attendee.name}</h1>
+				<div className="flex flex-row justify-between flex-wrap">
+					<h1 className="text-3xl mb-3">{attendee.name}</h1>
 
 					<div>
 						{!isOrganizerLoading && isOrganizer && (

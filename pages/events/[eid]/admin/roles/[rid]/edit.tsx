@@ -39,14 +39,12 @@ const EditRolePage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Edit Role Page</h1>
 
 				<EditRoleForm
-					eid={String(eid)}
-					rid={String(rid)}
 					role={role}
 					editRoleError={editRoleError}
 					roleAttendeesError={roleAttendeesError}

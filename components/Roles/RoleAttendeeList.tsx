@@ -45,21 +45,23 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 			<div>
 				{role && (
 					<>
-						<div className="flex flex-row justify-between">
+						<div className="flex flex-row justify-between flex-wrap items-center mb-3">
 							<h2 className="text-2xl mb-3">
 								{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
 							</h2>
 							<div>
-								{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
-									<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
-										<LinkButton className="mr-3">Edit role</LinkButton>
-									</Link>
-								)}
-								{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
-									<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
-										<LinkButton className="mr-3">Delete role</LinkButton>
-									</Link>
-								)}
+								<div className="flex items-center flex-row">
+									{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+										<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
+											<LinkButton>Edit role</LinkButton>
+										</Link>
+									)}
+									{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+										<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
+											<LinkButton className="ml-3">Delete role</LinkButton>
+										</Link>
+									)}
+								</div>
 							</div>
 						</div>
 
@@ -74,15 +76,22 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 		<div>
 			{attendees && role && (
 				<div>
-					<div className="flex flex-row justify-between">
+					<div className="flex flex-row justify-between flex-wrap items-center mb-3">
 						<h2 className="text-2xl my-3">
 							{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
 						</h2>
-						{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
-							<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
-								<LinkButton className="mr-3">Edit role</LinkButton>
-							</Link>
-						)}
+						<div className="flex items-center flex-row">
+							{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
+									<LinkButton>Edit role</LinkButton>
+								</Link>
+							)}
+							{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
+									<LinkButton className="ml-3">Delete role</LinkButton>
+								</Link>
+							)}
+						</div>
 					</div>
 
 					<AttendeeList

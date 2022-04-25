@@ -36,14 +36,12 @@ const EditVenuePage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Edit Venue Page</h1>
 
 				<EditVenueForm
-					eid={String(eid)}
-					vid={String(vid)}
 					venue={venue}
 					venueError={venueError}
 					editVenueMutation={editVenueMutation}

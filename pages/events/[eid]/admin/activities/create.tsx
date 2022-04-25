@@ -36,7 +36,7 @@ const CreateActivityPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Create Activity Page</h1>

@@ -29,7 +29,7 @@ const DeleteEventPage: NextPage = () => {
 
 			<Navigation />
 
-			<Column className="py-10">
+			<Column>
 				<BackButton />
 
 				<h1 className="text-3xl">Delete Event</h1>
