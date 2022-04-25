@@ -48,6 +48,7 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 
 				router.push(`/events/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['event', eid]);
+					void queryClient.invalidateQueries(['events', eid]);
 				});
 			},
 			onError: (err) => {

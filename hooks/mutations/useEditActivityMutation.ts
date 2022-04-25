@@ -51,7 +51,8 @@ export const useEditActivityMutation = (eid: string, aid: string): UseEditActivi
 				setError(null);
 
 				router.push(`/events/${eid}/activities/${response.data.slug}`).then(() => {
-					void queryClient.invalidateQueries(['venue', eid, aid]);
+					void queryClient.invalidateQueries(['activity', eid, aid]);
+					void queryClient.invalidateQueries(['activities', eid]);
 				});
 			},
 			onError: (err) => {

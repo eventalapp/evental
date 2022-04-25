@@ -46,13 +46,20 @@ export const VenueList: React.FC<Props> = (props) => {
 						</div>
 						<div>
 							<Link href={`/events/${eid}/venues/${venue.slug}`} passHref>
-								<LinkButton variant={'secondary'} className="mr-3">
-									View
-								</LinkButton>
+								<LinkButton variant={'secondary'}>View</LinkButton>
 							</Link>
 							{!isOrganizerLoading && isOrganizer && (
 								<Link href={`/events/${eid}/admin/venues/${venue.slug}/edit`} passHref>
-									<LinkButton variant={'secondary'}>Edit</LinkButton>
+									<LinkButton variant={'secondary'} className="ml-3">
+										Edit
+									</LinkButton>
+								</Link>
+							)}
+							{!isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/venues/${venue.slug}/delete`} passHref>
+									<LinkButton variant={'secondary'} className="ml-3">
+										Delete
+									</LinkButton>
 								</Link>
 							)}
 						</div>

@@ -43,11 +43,18 @@ export const ViewVenue: React.FC<Props> = (props) => {
 				<div className="flex flex-row justify-between">
 					<h1 className="text-3xl">{venue.name}</h1>
 
-					{!isOrganizerLoading && isOrganizer && (
-						<Link href={`/events/${eid}/admin/venues/${vid}/edit`} passHref>
-							<LinkButton className="mr-3">Edit venue</LinkButton>
-						</Link>
-					)}
+					<div>
+						{!isOrganizerLoading && isOrganizer && (
+							<Link href={`/events/${eid}/admin/venues/${vid}/edit`} passHref>
+								<LinkButton className="mr-3">Edit venue</LinkButton>
+							</Link>
+						)}
+						{!isOrganizerLoading && isOrganizer && (
+							<Link href={`/events/${eid}/admin/venues/${vid}/delete`} passHref>
+								<LinkButton className="mr-3">Delete venue</LinkButton>
+							</Link>
+						)}
+					</div>
 				</div>
 
 				<p>{venue.description}</p>

@@ -32,8 +32,9 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 				setError(null);
 
 				router.push(`/events/${eid}/roles`).then(() => {
-					void queryClient.invalidateQueries(['roles', eid, rid]);
+					void queryClient.invalidateQueries(['roles', eid]);
 					void queryClient.invalidateQueries(['role', eid, rid]);
+					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
 			onError: (err) => {
