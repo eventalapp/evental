@@ -11,6 +11,7 @@ import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { ServerError } from '../../../../components/ServerError';
 import React from 'react';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
+import { FlexRowBetween } from '../../../../components/FlexRowBetween';
 
 const ActivitiesPage: NextPage = () => {
 	const router = useRouter();
@@ -37,15 +38,15 @@ const ActivitiesPage: NextPage = () => {
 			<Column>
 				<BackButton />
 
-				<div className="flex flex-row justify-between mb-3">
+				<FlexRowBetween>
 					<h1 className="text-3xl">Venues Page</h1>
 
 					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/venues/create`} passHref>
-							<LinkButton className="mr-3">Create venue</LinkButton>
+							<LinkButton>Create venue</LinkButton>
 						</Link>
 					)}
-				</div>
+				</FlexRowBetween>
 
 				<VenueList
 					eid={String(eid)}

@@ -6,6 +6,7 @@ import { UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
 import { Loading } from '../Loading';
 import { ServerError } from '../ServerError';
 import { NotFound } from '../NotFound';
+import { FlexRowBetween } from '../FlexRowBetween';
 
 type Props = {
 	eid: string;
@@ -40,7 +41,7 @@ export const ViewActivity: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<div>
-				<div className="flex flex-row justify-between">
+				<FlexRowBetween>
 					<h1 className="text-3xl">{activity.name}</h1>
 
 					<div>
@@ -55,7 +56,7 @@ export const ViewActivity: React.FC<Props> = (props) => {
 							</Link>
 						)}
 					</div>
-				</div>
+				</FlexRowBetween>
 				<p>{activity.description}</p>
 				<p>{activity.startDate}</p>
 				<p>{activity.endDate}</p>

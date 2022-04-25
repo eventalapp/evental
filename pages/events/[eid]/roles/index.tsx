@@ -10,6 +10,7 @@ import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import Link from 'next/link';
 import { LinkButton } from '../../../../components/Form/LinkButton';
 import React from 'react';
+import { FlexRowBetween } from '../../../../components/FlexRowBetween';
 
 const RolesPage: NextPage = () => {
 	const router = useRouter();
@@ -28,7 +29,7 @@ const RolesPage: NextPage = () => {
 			<Column>
 				<BackButton />
 
-				<div className="flex flex-row justify-between mb-3">
+				<FlexRowBetween>
 					<h1 className="text-3xl">Roles Page</h1>
 
 					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
@@ -36,7 +37,7 @@ const RolesPage: NextPage = () => {
 							<LinkButton>Create role</LinkButton>
 						</Link>
 					)}
-				</div>
+				</FlexRowBetween>
 
 				<RoleList
 					eid={String(eid)}

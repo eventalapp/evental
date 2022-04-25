@@ -22,6 +22,7 @@ import { buildTitle } from '../../../../utils/buildTitle';
 import { faChevronRight, faCog, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { FlexRowBetween } from '../../../../components/FlexRowBetween';
 
 const AdminPage: NextPage = () => {
 	const router = useRouter();
@@ -52,8 +53,8 @@ const AdminPage: NextPage = () => {
 
 			<Column>
 				<BackButton />
-				<div className="flex flex-row justify-between flex-wrap">
-					<h1 className="text-3xl mb-3">Admin Page</h1>
+				<FlexRowBetween>
+					<h1 className="text-3xl mb-3 font-bold">Admin Page</h1>
 
 					<div>
 						<Link href={`/events/${eid}/admin/edit/`} passHref>
@@ -70,11 +71,11 @@ const AdminPage: NextPage = () => {
 							</LinkButton>
 						</Link>
 					</div>
-				</div>
+				</FlexRowBetween>
 				<span>Manage your event</span>
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 my-10">
 					<div>
-						<div className="flex flex-row justify-between mb-3">
+						<FlexRowBetween>
 							<span className="text-3xl">Venues</span>
 
 							<div>
@@ -89,7 +90,7 @@ const AdminPage: NextPage = () => {
 									</LinkButton>
 								</Link>
 							</div>
-						</div>
+						</FlexRowBetween>
 
 						<VenueList
 							eid={String(eid)}
@@ -102,7 +103,7 @@ const AdminPage: NextPage = () => {
 						/>
 					</div>
 					<div>
-						<div className="flex flex-row justify-between mb-3">
+						<FlexRowBetween>
 							<h1 className="text-3xl">Roles</h1>
 
 							<div>
@@ -117,7 +118,7 @@ const AdminPage: NextPage = () => {
 									</LinkButton>
 								</Link>
 							</div>
-						</div>
+						</FlexRowBetween>
 
 						<RoleList
 							eid={String(eid)}
@@ -132,7 +133,7 @@ const AdminPage: NextPage = () => {
 				</div>
 				<div className="my-10">
 					<div>
-						<div className="flex flex-row justify-between mb-3">
+						<FlexRowBetween>
 							<h1 className="text-3xl">Attendees</h1>
 
 							<div>
@@ -142,7 +143,7 @@ const AdminPage: NextPage = () => {
 									</LinkButton>
 								</Link>
 							</div>
-						</div>
+						</FlexRowBetween>
 
 						<AttendeeList
 							isOrganizer={isOrganizer}
@@ -157,7 +158,7 @@ const AdminPage: NextPage = () => {
 				</div>
 				<div className="my-10">
 					<div>
-						<div className="flex flex-row justify-between">
+						<FlexRowBetween>
 							<span className="text-3xl">Activities</span>
 
 							<div>
@@ -172,7 +173,7 @@ const AdminPage: NextPage = () => {
 									</LinkButton>
 								</Link>
 							</div>
-						</div>
+						</FlexRowBetween>
 
 						<ActivityList
 							isOrganizer={isOrganizer}

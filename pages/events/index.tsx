@@ -6,6 +6,7 @@ import { EventList } from '../../components/Events/EventList';
 import { LinkButton } from '../../components/Form/LinkButton';
 import { Navigation } from '../../components/Navigation';
 import { useEventsQuery } from '../../hooks/queries/useEventsQuery';
+import { FlexRowBetween } from '../../components/FlexRowBetween';
 
 const EventsPage: NextPage = () => {
 	const { events, isEventsLoading } = useEventsQuery();
@@ -19,13 +20,13 @@ const EventsPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<div className="flex flex-row justify-between w-full mb-3">
+				<FlexRowBetween>
 					<h1 className="text-3xl font-bold">Event Page</h1>
 
 					<Link href="/events/create" passHref>
 						<LinkButton>Create Event</LinkButton>
 					</Link>
-				</div>
+				</FlexRowBetween>
 
 				<EventList events={events} loading={isEventsLoading} />
 			</Column>
