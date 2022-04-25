@@ -28,35 +28,33 @@ export const AttendeeList: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<div>
-				<ul>
-					{attendees.map(
-						(attendee) =>
-							attendee &&
-							attendee.user &&
-							attendee.role && (
-								<li key={attendee.id}>
-									<Link href={`/events/${eid}/attendees/${attendee.slug}`}>
-										<a>
-											<div className="h-16 w-16 relative">
-												<Image
-													alt={String(attendee.user.name)}
-													src={String(attendee.user.image)}
-													className="rounded-full"
-													layout="fill"
-												/>
-											</div>
-											<span>{attendee.user.name}</span>
-											<span className="block text-gray-700">
-												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
-											</span>
-										</a>
-									</Link>
-								</li>
-							)
-					)}
-				</ul>
-			</div>
+			<ul className="flex flex-row flex-wrap flex-start items-center">
+				{attendees.map(
+					(attendee) =>
+						attendee &&
+						attendee.user &&
+						attendee.role && (
+							<li key={attendee.id} className="w-32">
+								<Link href={`/events/${eid}/attendees/${attendee.slug}`}>
+									<a className="flex items-center justify-center flex-col">
+										<div className="h-16 w-16 relative">
+											<Image
+												alt={String(attendee.name)}
+												src={String(attendee.user.image)}
+												className="rounded-full"
+												layout="fill"
+											/>
+										</div>
+										<span>{attendee.name}</span>
+										<span className="block text-gray-700">
+											{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
+										</span>
+									</a>
+								</Link>
+							</li>
+						)
+				)}
+			</ul>
 		</div>
 	);
 };

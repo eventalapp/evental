@@ -45,13 +45,73 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				return res.status(404).send({ error: { message: 'Role not found.' } });
 			}
 
+			if (parsed.defaultRole) {
+				//Make previous default roll non-default
+
+				const previousDefaultRole = await prisma.eventRole.findFirst({
+					where: {
+						eventId: event.id,
+						defaultRole: true
+					},
+					select: {
+						id: true
+					}
+				});
+
+				if (!previousDefaultRole) {
+					let editedRole = prisma.eventRole.update({
+						where: {
+							id: role.id
+						},
+						data: {
+							slug: parsed.slug,
+							name: parsed.name,
+							defaultRole: parsed.defaultRole
+						}
+					});
+
+					return res.status(200).send(editedRole);
+				}
+
+				await prisma.eventRole.update({
+					where: {
+						id: previousDefaultRole.id
+					},
+					data: {
+						defaultRole: false
+					}
+				});
+
+				//Make new default roll default
+				let editedRole = await prisma.eventRole.update({
+					where: {
+						id: role.id
+					},
+					data: {
+						slug: parsed.slug,
+						name: parsed.name,
+						defaultRole: parsed.defaultRole
+					}
+				});
+
+				return res.status(200).send(editedRole);
+			} else if (!parsed.defaultRole) {
+				return res.status(500).send({
+					error: {
+						message:
+							'There must be one default role. If you would like to make another role the default, set that role to default.'
+					}
+				});
+			}
+
 			let editedRole = await prisma.eventRole.update({
 				where: {
 					id: role.id
 				},
 				data: {
 					slug: parsed.slug,
-					name: parsed.name
+					name: parsed.name,
+					defaultRole: parsed.defaultRole
 				}
 			});
 

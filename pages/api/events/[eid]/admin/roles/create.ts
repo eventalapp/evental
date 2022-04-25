@@ -35,7 +35,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 				data: {
 					eventId: event.id,
 					name: bodyParsed.name,
-					slug: bodyParsed.slug
+					slug: bodyParsed.slug,
+					defaultRole: false
 				}
 			});
 

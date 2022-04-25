@@ -34,7 +34,8 @@ export const useEditRoleMutation = (eid: string, rid: string): UseEditRoleMutati
 
 			const body: EditRolePayload = {
 				slug: parsed.slug,
-				name: parsed.name
+				name: parsed.name,
+				defaultRole: parsed.defaultRole
 			};
 
 			return await axios.put<Prisma.EventRole>(`/api/events/${eid}/admin/roles/${rid}/edit`, body);

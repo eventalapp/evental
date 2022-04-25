@@ -4,7 +4,6 @@ import { Button } from '../Form/Button';
 import { Input } from '../Form/Input';
 import { Label } from '../Form/Label';
 import { Select } from '../Form/Select';
-import { Textarea } from '../Form/Textarea';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import { UseEditAttendeeMutationData } from '../../hooks/mutations/useEditAttendeeMutation';
 import { ServerError } from '../ServerError';
@@ -95,18 +94,16 @@ export const EditAttendeeForm: React.FC<EditAttendeeFormProps> = (props) => {
 								<Input defaultValue={attendee.slug} id="slug" name="slug" type="text" required />
 							</div>
 						</div>
-						<div className="grid grid-cols-1 mb-5 gap-5">
+						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>
 								<Label htmlFor="description">Position</Label>
-								<Textarea
+								<Input
 									defaultValue={String(attendee.position ?? '')}
 									id="position"
 									name="position"
 									type="text"
 								/>
 							</div>
-						</div>
-						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 							<div>
 								<Label htmlFor="company">Company</Label>
 								<Input
