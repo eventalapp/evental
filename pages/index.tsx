@@ -14,16 +14,15 @@ const HomePage: NextPage = () => {
 
 			<Navigation />
 
-			<section className="bg-yellow-300">
-				<Column>
-					<h1 className="text-3xl">Execute Excellent Events</h1>
-					<span className="inline-block">
-						Event management software that's quick to learn and easy to set up. Your attendees will
-						love using Evental for your in-person, hybrid, and virtual events.
-					</span>
-				</Column>
-			</section>
-			<Column>
+			<Column className="flex flex-col items-center">
+				<h1 className="px-2 mb-3 text-4xl font-black leading-tight text-center md:text-6xl">
+					Execute Excellent Events
+				</h1>
+				<p className="max-w-4xl mt-1 mb-8 text-center text-md lg:text-lg leading-2 lg:leading-8 text-gray-800">
+					Event management software that's quick to learn and easy to set up. Your attendees will
+					love using Evental for your in-person, hybrid, and virtual events.
+				</p>
+
 				<Link href="/events/create" passHref>
 					<LinkButton className="mr-3">Create Event</LinkButton>
 				</Link>
