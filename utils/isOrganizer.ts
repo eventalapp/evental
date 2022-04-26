@@ -25,5 +25,5 @@ export const isOrganizer = async (userId: string, eventId: string) => {
 		return false;
 	}
 
-	return Boolean();
+	return Boolean(attendee);
 };
