@@ -17,7 +17,15 @@ type Props = {
 	UseOrganizerQueryData;
 
 export const AttendeeList: React.FC<Props> = (props) => {
-	const { eid, attendees, isAttendeesLoading, attendeesError } = props;
+	const {
+		eid,
+		attendees,
+		isAttendeesLoading,
+		attendeesError,
+		isOrganizerError,
+		isOrganizerLoading,
+		isOrganizer
+	} = props;
 
 	if (isAttendeesLoading) {
 		return <Loading />;
@@ -27,8 +35,8 @@ export const AttendeeList: React.FC<Props> = (props) => {
 		return <NotFound />;
 	}
 
-	if (attendeesError) {
-		return <ServerError errors={[attendeesError]} />;
+	if (attendeesError || isOrganizerError) {
+		return <ServerError errors={[attendeesError, isOrganizerError]} />;
 	}
 
 	return (
@@ -56,16 +64,20 @@ export const AttendeeList: React.FC<Props> = (props) => {
 										</span>
 									</a>
 								</Link>
-								<Link href={`/events/${eid}/admin/attendees/${attendee.slug}/edit`} passHref>
-									<LinkButton className="mr-3">
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faCog} />
-									</LinkButton>
-								</Link>
-								<Link href={`/events/${eid}/admin/attendees/${attendee.slug}/delete`} passHref>
-									<LinkButton className="mr-3">
-										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faTrash} />
-									</LinkButton>
-								</Link>
+								{!isOrganizerLoading && isOrganizer && (
+									<Link href={`/events/${eid}/admin/attendees/${attendee.slug}/edit`} passHref>
+										<LinkButton className="mr-3">
+											<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faCog} />
+										</LinkButton>
+									</Link>
+								)}
+								{!isOrganizerLoading && isOrganizer && (
+									<Link href={`/events/${eid}/admin/attendees/${attendee.slug}/delete`} passHref>
+										<LinkButton className="mr-3">
+											<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faTrash} />
+										</LinkButton>
+									</Link>
+								)}
 							</li>
 						)
 				)}
