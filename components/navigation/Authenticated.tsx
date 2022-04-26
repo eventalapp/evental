@@ -23,10 +23,10 @@ export const Authenticated: React.FC<AuthenticatedProps> = (props) => {
 				className
 			)}
 		>
-			<Link href="/events">
+			<Link href="/">
 				<a>
 					<span className="flex flex-row items-center">
-						<img src="/logo.svg" className="w-12 h-12 pr-3" alt="logo" />
+						<img src="/images/logo.svg" className="w-12 h-12 pr-3" alt="logo" />
 						<strong
 							className="text-2xl tracking-tight font-bold font-display"
 							aria-label="evental homepage"
