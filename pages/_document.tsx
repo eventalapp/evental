@@ -55,7 +55,7 @@ export default class Document extends NextDocument {
 						href="/images/apple-touch-icon-180x180.png"
 					/>
 				</Head>
-				<body className="h-full font-sans">
+				<body className="h-full font-sans text-gray-900">
 					<Main />
 					<NextScript />
 				</body>

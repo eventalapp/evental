@@ -4,6 +4,9 @@ import Link from 'next/link';
 import Column from '../components/layout/Column';
 import { LinkButton } from '../components/form/LinkButton';
 import { Navigation } from '../components/navigation';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 
 const NotFoundPage: NextPage = () => {
 	return (
@@ -18,7 +21,10 @@ const NotFoundPage: NextPage = () => {
 				<h1 className="font-bold text-3xl mt-5">404 - Page not found</h1>
 
 				<Link href="/events" passHref>
-					<LinkButton className="mt-5">Go to events page</LinkButton>
+					<LinkButton className="mt-5" variant="gradient">
+						Go to events page
+						<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
+					</LinkButton>
 				</Link>
 			</Column>
 		</>

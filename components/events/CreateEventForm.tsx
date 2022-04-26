@@ -22,13 +22,13 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name</Label>
-						<Input defaultValue="Event Name" id="name" name="name" type="text" required />
+						<Input placeholder="Event Name" id="name" name="name" type="text" required />
 					</div>
 
 					<div>
 						<Label htmlFor="location">Location</Label>
 						<Input
-							defaultValue="Event Location"
+							placeholder="Event Location"
 							id="location"
 							name="location"
 							type="text"
@@ -40,7 +40,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="slug">Slug</Label>
-						<Input defaultValue="event-slug" id="slug" name="slug" type="text" required />
+						<Input placeholder="event-slug" id="slug" name="slug" type="text" required />
 					</div>
 				</div>
 
@@ -48,7 +48,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="description">Description</Label>
 						<Textarea
-							defaultValue="Event Description"
+							placeholder="Event Description"
 							id="description"
 							name="description"
 							type="text"
@@ -79,7 +79,11 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<Button type="submit">Register Event</Button>
+			<div className="flex flex-row justify-end">
+				<Button type="submit" variant="gradient">
+					Register Event
+				</Button>
+			</div>
 		</form>
 	);
 };

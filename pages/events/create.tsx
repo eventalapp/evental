@@ -27,7 +27,7 @@ const CreateEventPage: NextPage = () => {
 			<Column>
 				<BackButton />
 
-				<h1 className="text-3xl">Create Event Page</h1>
+				<h1 className="text-3xl font-bold">Create Event Page</h1>
 
 				<CreateEventForm
 					createEventError={createEventError}
