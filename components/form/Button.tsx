@@ -21,8 +21,8 @@ const variants = {
 
 const paddings = {
 	small: 'px-3 py-2',
-	medium: 'px-6 py-3',
-	large: 'px-8 py-4',
+	medium: 'px-6 py-2',
+	large: 'px-8 py-2',
 	none: 'p-0'
 };
 
