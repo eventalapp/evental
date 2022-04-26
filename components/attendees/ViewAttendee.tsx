@@ -49,20 +49,19 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				</div>
 
 				<FlexRowBetween>
-					<h1 className="text-3xl mb-3">{attendee.name}</h1>
+					<h1 className="text-3xl">{attendee.name}</h1>
 
-					<div>
-						{!isOrganizerLoading && isOrganizer && (
+					{!isOrganizerLoading && isOrganizer && (
+						<div>
 							<Link href={`/events/${eid}/admin/attendees/${aid}/edit`} passHref>
 								<LinkButton className="mr-3">Edit Attendee</LinkButton>
 							</Link>
-						)}
-						{!isOrganizerLoading && isOrganizer && (
+
 							<Link href={`/events/${eid}/admin/attendees/${aid}/delete`} passHref>
 								<LinkButton className="mr-3">Delete Attendee</LinkButton>
 							</Link>
-						)}
-					</div>
+						</div>
+					)}
 				</FlexRowBetween>
 
 				<p>{capitalizeFirstLetter(String(attendee.permissionRole).toLowerCase())}</p>

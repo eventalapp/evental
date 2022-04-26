@@ -10,9 +10,9 @@ type Props = {
 
 const variants = {
 	primary:
-		'bg-blue-900 px-3 py-2 text-white disabled:cursor-not-allowed inline-block rounded-lg disabled:opacity-20 pointer',
+		'bg-gray-800 px-4 py-1.5 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base',
 	secondary:
-		'bg-blue-100 px-3 py-2 text-black disabled:cursor-not-allowed inline-block rounded-lg disabled:opacity-20 pointer'
+		'bg-gray-200 px-3 py-1.5 text-black disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-base'
 };
 
 type LinkButtonProps = Props &

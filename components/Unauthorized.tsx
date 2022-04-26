@@ -14,7 +14,7 @@ const Unauthorized: React.FC = () => {
 				</h1>
 				<p className="mt-3">You must sign in to view this page</p>
 				<Link href="/auth/signin" passHref>
-					<a className="mt-3 text-blue-900 block">Sign in</a>
+					<a className="mt-3 text-gray-900 block">Sign in</a>
 				</Link>
 			</Column>
 		</div>

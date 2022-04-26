@@ -9,8 +9,8 @@ type Props = {
 
 const variants = {
 	primary:
-		'bg-blue-900 px-3 py-2 text-white disabled:cursor-not-allowed font-semibold inline-block rounded-lg disabled:opacity-20 pointer',
-	link: 'text-blue-900 disabled:cursor-not-allowed font-semibold inline-block disabled:opacity-20 pointer'
+		'bg-gray-900 px-3 py-2 text-white disabled:cursor-not-allowed font-semibold inline-block rounded-md disabled:opacity-20 pointer',
+	link: 'text-gray-900 disabled:cursor-not-allowed font-semibold inline-block disabled:opacity-20 pointer'
 };
 
 type ButtonProps = Props &
