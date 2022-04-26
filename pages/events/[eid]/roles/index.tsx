@@ -27,7 +27,6 @@ const RolesPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}`}>Event</BackButton>
 
 				<FlexRowBetween>
 					<h1 className="text-3xl">Roles Page</h1>

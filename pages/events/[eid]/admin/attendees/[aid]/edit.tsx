@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { BackButton } from '../../../../../../components/BackButton';
 import Column from '../../../../../../components/layout/Column';
 import { Navigation } from '../../../../../../components/navigation';
 import NoAccess from '../../../../../../components/NoAccess';
@@ -43,8 +42,6 @@ const EditAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
-
 				<h1 className="text-3xl">Edit Attendee Page</h1>
 
 				<EditAttendeeForm

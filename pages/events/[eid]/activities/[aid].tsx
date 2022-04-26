@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ViewActivity } from '../../../../components/activities/ViewActivity';
-import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/layout/Column';
 import { Navigation } from '../../../../components/navigation';
 import { useActivityQuery } from '../../../../hooks/queries/useActivityQuery';
@@ -24,8 +23,6 @@ const ViewActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}/activities`} />
-
 				<ViewActivity
 					activity={activity}
 					isActivityLoading={isActivityLoading}

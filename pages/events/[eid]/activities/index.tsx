@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ActivityList } from '../../../../components/activities/ActivityList';
-import { BackButton } from '../../../../components/BackButton';
 import Column from '../../../../components/layout/Column';
 import { LinkButton } from '../../../../components/form/LinkButton';
 import { Navigation } from '../../../../components/navigation';
@@ -32,8 +31,6 @@ const ActivitiesPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton href={`/events/${eid}`}>Event</BackButton>
-
 				<FlexRowBetween>
 					<h1 className="text-3xl">Activities Page</h1>
 
