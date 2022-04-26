@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
+import { LinkButton } from './form/LinkButton';
 import Column from './layout/Column';
 import { Navigation } from './navigation';
 
@@ -9,12 +10,10 @@ const Unauthorized: React.FC = () => {
 			<Navigation />
 
 			<Column>
-				<h1 className="mt-4 text-3xl font-bold text-center sm:text-4xl font-display">
-					Unauthorized
-				</h1>
-				<p className="mt-3">You must sign in to view this page</p>
+				<h1 className="text-3xl mb-2 font-bold">Unauthorized</h1>
+				<span className="mb-5 block">You must sign in to view this page.</span>
 				<Link href="/auth/signin" passHref>
-					<a className="mt-3 text-gray-900 block">Sign in</a>
+					<LinkButton variant="gradient">Sign in</LinkButton>
 				</Link>
 			</Column>
 		</div>
