@@ -17,7 +17,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 		<nav
 			{...restProps}
 			className={classNames(
-				'flex flex-row items-center justify-between w-full max-w-7xl m-auto h-14',
+				'flex flex-row items-center justify-between w-full max-w-7xl m-auto h-14 px-3',
 				className
 			)}
 		>
@@ -44,10 +44,10 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 				</Link>
 			</div>
 
-			<div className="flex-row flex space-x-8 font-medium sm:hidden pr-3">
+			<div className="flex-row flex space-x-8 font-medium sm:hidden">
 				<FontAwesomeIcon
-					className="p-2 cursor-pointer"
-					size="3x"
+					className="py-2 cursor-pointer"
+					size="2x"
 					icon={faBars}
 					onClick={() => {
 						setIsOpen(true);
