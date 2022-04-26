@@ -27,7 +27,7 @@ const ViewAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/roles`}>Roles</BackButton>
 
 				<RoleAttendeeList
 					eid={String(eid)}

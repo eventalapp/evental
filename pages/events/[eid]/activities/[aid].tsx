@@ -24,7 +24,7 @@ const ViewActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/activities`} />
 
 				<ViewActivity
 					activity={activity}

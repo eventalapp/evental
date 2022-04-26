@@ -11,6 +11,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { DeleteRoleForm } from '../../../../../../components/roles/DeleteRoleForm';
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useDeleteRoleMutation } from '../../../../../../hooks/mutations/useDeleteRoleMutation';
+import React from 'react';
 
 const DeleteRolePage: NextPage = () => {
 	const router = useRouter();
@@ -40,7 +41,7 @@ const DeleteRolePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Delete Role Page</h1>
 

@@ -12,20 +12,6 @@ export type EventAttendeeUser = Prisma.EventAttendee & {
 	};
 };
 
-export const eventAttendeeInclude = {
-	user: {
-		select: {
-			name: true,
-			image: true
-		}
-	},
-	role: {
-		select: {
-			name: true
-		}
-	}
-};
-
 export default async (req: NextApiRequest, res: NextApiResponse) => {
 	const { eid, aid } = req.query;
 

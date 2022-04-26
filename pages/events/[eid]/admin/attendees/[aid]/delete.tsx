@@ -12,6 +12,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutatation';
+import React from 'react';
 
 const DeleteAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -41,7 +42,7 @@ const DeleteAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Delete Attendee Page</h1>
 

@@ -11,6 +11,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { EditVenueForm } from '../../../../../../components/venues/EditVenueForm';
 import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditVenueMutation';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
+import React from 'react';
 
 const EditVenuePage: NextPage = () => {
 	const router = useRouter();
@@ -37,7 +38,7 @@ const EditVenuePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Edit Venue Page</h1>
 

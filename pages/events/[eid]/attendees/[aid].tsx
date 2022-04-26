@@ -23,7 +23,7 @@ const ViewAttendeePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/attendees`} />
 
 				<ViewAttendee
 					attendee={attendee}

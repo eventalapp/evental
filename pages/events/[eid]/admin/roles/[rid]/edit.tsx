@@ -11,6 +11,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useEditRoleMutation } from '../../../../../../hooks/mutations/useEditRoleMutation';
+import React from 'react';
 
 const EditRolePage: NextPage = () => {
 	const router = useRouter();
@@ -40,7 +41,7 @@ const EditRolePage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Edit Role Page</h1>
 

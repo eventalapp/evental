@@ -9,6 +9,7 @@ import { Navigation } from '../../../../components/navigation';
 import Unauthorized from '../../../../components/Unauthorized';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
+import React from 'react';
 
 const DeleteEventPage: NextPage = () => {
 	const router = useRouter();
@@ -30,7 +31,7 @@ const DeleteEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Delete Event</h1>
 

@@ -9,6 +9,7 @@ import { Navigation } from '../../../../components/navigation';
 import Unauthorized from '../../../../components/Unauthorized';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
+import React from 'react';
 
 const EditEventPage: NextPage = () => {
 	const router = useRouter();
@@ -30,7 +31,7 @@ const EditEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Edit Event</h1>
 

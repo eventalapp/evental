@@ -9,6 +9,7 @@ import { Navigation } from '../../../../../../components/navigation';
 import NoAccess from '../../../../../../components/NoAccess';
 import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import React from 'react';
 
 const EditActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -33,7 +34,7 @@ const EditActivityPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<BackButton />
+				<BackButton href={`/events/${eid}/admin`}>Admin Page</BackButton>
 
 				<h1 className="text-3xl">Edit Activity Page</h1>
 

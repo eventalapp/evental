@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
-import { BackButton } from './BackButton';
 import Column from './layout/Column';
 import { Navigation } from './navigation';
+import { LinkButton } from './form/LinkButton';
 
 const NoAccess: React.FC = () => {
 	return (
@@ -15,7 +15,7 @@ const NoAccess: React.FC = () => {
 				</h1>
 				<p className="mt-3">You do not have access to view this page</p>
 				<Link href="/auth/signin" passHref>
-					<BackButton />
+					<LinkButton variant="gradient" />
 				</Link>
 			</Column>
 		</div>
