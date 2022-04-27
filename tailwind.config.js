@@ -88,5 +88,10 @@ module.exports = {
 			backgroundColor: ['disabled'],
 			cursor: ['hover', 'focus', 'disabled']
 		}
-	}
+	},
+	plugins: [
+		require('@tailwindcss/forms')({
+			strategy: 'class'
+		})
+	]
 };

@@ -1,17 +1,16 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { getFormEntries } from '../../utils/getFormEntries';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
-import { CreateEventPayload, CreateEventSchema } from '../../utils/schemas';
+import { CreateEventFormValues } from '../../components/events/CreateEventForm';
 
 export interface UseCreateEventMutationData {
 	createEventMutation: UseMutationResult<
 		AxiosResponse<Prisma.Event, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		CreateEventFormValues
 	>;
 	createEventError: ServerErrorPayload | null;
 }
@@ -23,25 +22,10 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 	const createEventMutation = useMutation<
 		AxiosResponse<Prisma.Event, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		CreateEventFormValues
 	>(
-		async (event: FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
-
-			const formEntries = getFormEntries(event);
-
-			const eventParsed = CreateEventSchema.parse(formEntries);
-
-			const body: CreateEventPayload = {
-				name: eventParsed.name,
-				slug: eventParsed.slug,
-				location: eventParsed.location,
-				startDate: new Date(eventParsed.startDate).toISOString(),
-				endDate: new Date(eventParsed.endDate).toISOString(),
-				description: eventParsed.description
-			};
-
-			return await axios.post<Prisma.Event>('/api/events/create', body);
+		async (data) => {
+			return await axios.post<Prisma.Event>('/api/events/create', data);
 		},
 		{
 			onSuccess: (response) => {
