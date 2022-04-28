@@ -37,8 +37,6 @@ export const ActivityList: React.FC<Props> = (props) => {
 		return <NotFound />;
 	}
 
-	console.log(groupByDate(activities));
-
 	return (
 		<div>
 			{Object.entries(groupByDate(activities)).map(([key, activityDate]) => {
