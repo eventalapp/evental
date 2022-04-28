@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
@@ -8,12 +9,31 @@ import { ViewVenue } from '../../../../components/venues/ViewVenue';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { getSession } from 'next-auth/react';
+import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
+import Prisma from '@prisma/client';
+import { Session } from 'next-auth';
+import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
 
-const ViewAttendeePage: NextPage = () => {
+type Props = {
+	initialVenue: Prisma.EventVenue | undefined;
+	initialOrganizer: boolean;
+	session: Session | null;
+};
+
+const ViewAttendeePage: NextPage<Props> = (props) => {
 	const router = useRouter();
+	const { initialVenue, initialOrganizer } = props;
 	const { vid, eid } = router.query;
-	const { venue, isVenueLoading, venueError } = useVenueQuery(String(eid), String(vid));
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
+	const { venue, isVenueLoading, venueError } = useVenueQuery(
+		String(eid),
+		String(vid),
+		initialVenue
+	);
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
+		String(eid),
+		initialOrganizer
+	);
 
 	return (
 		<PageWrapper variant="gray">
@@ -37,6 +57,22 @@ const ViewAttendeePage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid, vid } = context.query;
+
+	const session = await getSession(context);
+	const initialVenue = (await getVenue(String(eid), String(vid))) ?? undefined;
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+
+	return {
+		props: {
+			session,
+			initialVenue,
+			initialOrganizer
+		}
+	};
 };
 
 export default ViewAttendeePage;

@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,12 +13,27 @@ import React from 'react';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { getSession } from 'next-auth/react';
+import Prisma from '@prisma/client';
+import { Session } from 'next-auth';
+import { getVenues } from '../../../api/events/[eid]/venues';
+import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 
-const ActivitiesPage: NextPage = () => {
+type Props = {
+	initialVenues: Prisma.EventVenue[] | undefined;
+	initialOrganizer: boolean;
+	session: Session | null;
+};
+
+const ActivitiesPage: NextPage<Props> = (props) => {
 	const router = useRouter();
+	const { initialVenues, initialOrganizer } = props;
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
+		String(eid),
+		initialOrganizer
+	);
+	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
 
 	if (isOrganizerError) {
 		return (
@@ -58,6 +74,22 @@ const ActivitiesPage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid } = context.query;
+
+	const session = await getSession(context);
+	const initialVenues = (await getVenues(String(eid))) ?? undefined;
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+
+	return {
+		props: {
+			session,
+			initialVenues,
+			initialOrganizer
+		}
+	};
 };
 
 export default ActivitiesPage;

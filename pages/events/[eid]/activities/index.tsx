@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -12,12 +13,30 @@ import { groupByDate } from '../../../../utils/groupByDate';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { getSession } from 'next-auth/react';
+import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
+import { Session } from 'next-auth';
+import type Prisma from '@prisma/client';
+import { getActivities } from '../../../api/events/[eid]/activities';
 
-const ActivitiesPage: NextPage = () => {
+type Props = {
+	initialActivities: Prisma.EventActivity[] | undefined;
+	initialOrganizer: boolean;
+	session: Session | null;
+};
+
+const ActivitiesPage: NextPage<Props> = (props) => {
+	const { initialActivities, initialOrganizer } = props;
 	const router = useRouter();
 	const { eid } = router.query;
-	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
+	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(
+		String(eid),
+		initialActivities
+	);
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
+		String(eid),
+		initialOrganizer
+	);
 
 	if (activities) {
 		groupByDate(activities);
@@ -54,6 +73,22 @@ const ActivitiesPage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid } = context.query;
+
+	const session = await getSession(context);
+	const initialActivities = (await getActivities(String(eid))) ?? undefined;
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+
+	return {
+		props: {
+			session,
+			initialActivities,
+			initialOrganizer
+		}
+	};
 };
 
 export default ActivitiesPage;
