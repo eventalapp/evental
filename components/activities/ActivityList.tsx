@@ -37,6 +37,8 @@ export const ActivityList: React.FC<Props> = (props) => {
 		return <NotFound />;
 	}
 
+	console.log(groupByDate(activities));
+
 	return (
 		<div>
 			{Object.entries(groupByDate(activities)).map(([key, activityDate]) => {
@@ -47,51 +49,53 @@ export const ActivityList: React.FC<Props> = (props) => {
 						</h2>
 						{Object.entries(activityDate).map(([key, activitiesByDate]) => {
 							return (
-								<div key={key} className="flex flex-row">
+								<div key={key} className="flex flex-row flex-wrap">
 									<span className="text-gray-700 text-sm w-20 p-2 pr-3 text-right">
 										{format(new Date(key), 'h:mma OOO')}
 									</span>
 
-									{activitiesByDate.map((activity) => (
-										<div
-											key={activity.id}
-											className="py-2 flex flex-row justify-between flex-grow border-l-2 border-gray-200 pl-3"
-										>
-											<div className="flex flex-row items-center justify-between">
-												<div className="rounded-full mr-3 w-3 h-3 bg-gradient-to-r from-secondary-500 to-primary-500" />
-												<div>
-													<span className="text-xl">{activity.name}</span>
-													<span className="block text-md">{activity.description}</span>
+									<div className="flex-grow">
+										{activitiesByDate.map((activity) => (
+											<div
+												key={activity.id}
+												className="py-2 flex flex-row justify-between flex-grow border-l-2 border-gray-200 pl-3"
+											>
+												<div className="flex flex-row items-center justify-between">
+													<div className="rounded-full mr-3 w-3 h-3 bg-gradient-to-r from-secondary-500 to-primary-500" />
+													<div>
+														<span className="text-xl">{activity.name}</span>
+														<span className="block text-md">{activity.description}</span>
+													</div>
+												</div>
+
+												<div className="flex flex-row items-center">
+													<Link href={`/events/${eid}/activities/${activity.slug}`} passHref>
+														<LinkButton variant="primary">View</LinkButton>
+													</Link>
+													{!isOrganizerLoading && isOrganizer && (
+														<Link
+															href={`/events/${eid}/admin/activities/${activity.slug}/edit`}
+															passHref
+														>
+															<LinkButton variant="primary" className="ml-3">
+																Edit
+															</LinkButton>
+														</Link>
+													)}
+													{!isOrganizerLoading && isOrganizer && (
+														<Link
+															href={`/events/${eid}/admin/activities/${activity.slug}/delete`}
+															passHref
+														>
+															<LinkButton variant="primary" className="ml-3">
+																Delete
+															</LinkButton>
+														</Link>
+													)}
 												</div>
 											</div>
-
-											<div className="flex flex-row items-center">
-												<Link href={`/events/${eid}/activities/${activity.slug}`} passHref>
-													<LinkButton variant="primary">View</LinkButton>
-												</Link>
-												{!isOrganizerLoading && isOrganizer && (
-													<Link
-														href={`/events/${eid}/admin/activities/${activity.slug}/edit`}
-														passHref
-													>
-														<LinkButton variant="primary" className="ml-3">
-															Edit
-														</LinkButton>
-													</Link>
-												)}
-												{!isOrganizerLoading && isOrganizer && (
-													<Link
-														href={`/events/${eid}/admin/activities/${activity.slug}/delete`}
-														passHref
-													>
-														<LinkButton variant="primary" className="ml-3">
-															Delete
-														</LinkButton>
-													</Link>
-												)}
-											</div>
-										</div>
-									))}
+										))}
+									</div>
 								</div>
 							);
 						})}

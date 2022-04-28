@@ -7,6 +7,9 @@ import { Loading } from '../Loading';
 import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { format } from 'date-fns';
 
 type Props = {
 	eid: string;
@@ -58,8 +61,29 @@ export const ViewActivity: React.FC<Props> = (props) => {
 					</div>
 				</FlexRowBetween>
 				<p>{activity.description}</p>
-				<p>{activity.startDate.toString()}</p>
 				<p>{activity.endDate.toString()}</p>
+				<div className="flex flex-row items-center mb-1">
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="w-5 h-5 mr-1.5"
+						size="1x"
+						icon={faLocationDot}
+					/>
+					<p>{activity?.venueId}</p>
+				</div>
+
+				<div className="flex flex-row items-center">
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="w-5 h-5 mr-1.5"
+						size="1x"
+						icon={faCalendarDay}
+					/>
+					<p>
+						{format(new Date(activity.startDate), 'MMMM dd')} -{' '}
+						{format(new Date(activity.endDate), 'MMMM dd')}
+					</p>
+				</div>
 			</div>
 		</div>
 	);
