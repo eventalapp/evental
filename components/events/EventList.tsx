@@ -1,34 +1,24 @@
-import type Prisma from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { UseEventsQueryData } from '../../hooks/queries/useEventsQuery';
+import { Loading } from '../Loading';
+import { ViewServerError } from '../ViewServerError';
 
-type Props = {
-	loading: boolean;
-	events: Prisma.Event[] | undefined;
-};
+type Props = UseEventsQueryData;
 
 export const EventList: React.FC<Props> = (props) => {
-	const { loading, events } = props;
+	const { events, isEventsLoading, eventsError } = props;
 
-	if (loading) {
-		return (
-			<div>
-				<p>Events loading...</p>
-			</div>
-		);
+	if (isEventsLoading) {
+		return <Loading />;
 	}
 
-	if (events?.length === 0) {
-		return (
-			<div>
-				<p>No events found.</p>
-			</div>
-		);
+	if (eventsError) {
+		return <ViewServerError errors={[eventsError]} />;
 	}
-
 	return (
 		<div>
 			{events &&

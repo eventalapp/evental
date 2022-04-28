@@ -9,7 +9,7 @@ import { Navigation } from '../../components/navigation';
 import { useEventsQuery } from '../../hooks/queries/useEventsQuery';
 
 const EventsPage: NextPage = () => {
-	const { events, isEventsLoading } = useEventsQuery();
+	const { events, isEventsLoading, eventsError } = useEventsQuery();
 
 	return (
 		<>
@@ -28,7 +28,7 @@ const EventsPage: NextPage = () => {
 					</Link>
 				</FlexRowBetween>
 
-				<EventList events={events} loading={isEventsLoading} />
+				<EventList events={events} eventsError={eventsError} isEventsLoading={isEventsLoading} />
 			</Column>
 		</>
 	);
