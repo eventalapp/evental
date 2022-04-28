@@ -120,9 +120,8 @@ export const ViewEvent: React.FC<Props> = (props) => {
 							icon={faCalendarDay}
 						/>
 						<p>
-							{format(new Date(event.startDate), 'MMM dd')}
-							<br />
-							{format(new Date(event.endDate), 'MMM dd')}
+							{format(new Date(event.startDate), 'MMMM dd')} -{' '}
+							{format(new Date(event.endDate), 'MMMM dd')}
 						</p>
 					</div>
 				</div>
