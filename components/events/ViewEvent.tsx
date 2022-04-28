@@ -80,7 +80,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 			{!Boolean(attendeeByUserId) && (
 				<Link href={`/events/${eid}/signup`}>
 					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-semibold">
-						Are you attending this event? Sign up here.
+						Are you attending this event? Register here.
 					</a>
 				</Link>
 			)}
