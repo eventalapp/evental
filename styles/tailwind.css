@@ -7,15 +7,15 @@
 }
 
 .react-datepicker-popper {
-	@apply z-40 w-72 text-sm bg-white shadow px-3 py-2 border-2 border-gray-200 rounded;
+	@apply z-40 text-sm bg-white shadow px-3 py-2 border-2 border-gray-200 rounded;
 }
 
 .react-datepicker-left {
-	@apply absolute left-0 right-auto top-11 transform-none !important;
+	@apply absolute left-1/2 top-11 -translate-x-1/2 !important;
 }
 
 .react-datepicker-right {
-	@apply absolute right-0 left-auto top-11 transform-none !important;
+	@apply absolute left-1/2 top-11 -translate-x-1/2 !important;
 }
 
 .react-datepicker__portal {
@@ -23,7 +23,7 @@
 }
 
 .react-datepicker__month-container {
-	@apply flex flex-col;
+	@apply flex flex-col w-64;
 }
 
 .react-datepicker__month {
@@ -100,4 +100,48 @@
 
 .Toastify__toast-container--top-right {
 	@apply top-14;
+}
+
+/*  HIDE Scrollbar
+    https://github.com/tailwindlabs/tailwindcss/discussions/2394
+    https://github.com/tailwindlabs/tailwindcss/pull/5732
+*/
+@layer utilities {
+	/* Chrome, Safari and Opera */
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+}
+
+.react-datepicker {
+	@apply flex justify-center w-full;
+}
+
+.react-datepicker__time-container {
+	@apply flex flex-col justify-center w-24 pl-2;
+}
+
+.react-datepicker__header--time {
+	@apply flex items-center justify-between p-2;
+}
+
+.react-datepicker-time__header {
+	@apply text-lg text-gray-700 font-bold;
+}
+
+.react-datepicker__time-list {
+	@apply no-scrollbar overflow-y-auto w-full h-40;
+}
+
+.react-datepicker__time-list-item {
+	@apply hover:bg-secondary-100 px-2 py-1.5 rounded-md cursor-pointer my-1;
+}
+
+.react-datepicker__time-list-item--selected {
+	@apply bg-secondary-500 text-white hover:bg-white hover:text-black border-2 border-secondary-500 transition;
 }

@@ -25,7 +25,7 @@ export const processImage = async (
 		height: 300,
 		width: 300,
 		background: '#e8e8e8',
-		toFormat: 'jpeg'
+		toFormat: 'jpg'
 	}
 ) => {
 	const { height, width, background, toFormat } = options;

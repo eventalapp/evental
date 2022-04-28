@@ -43,14 +43,16 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('startDate', endDateWatcher);
+			setValue('startDate', startDateWatcher);
+			setValue('endDate', startDateWatcher);
 			toast.warn('The start date cannot be later than the end date.');
 		}
 	}, [startDateWatcher]);
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('endDate', startDateWatcher);
+			setValue('startDate', endDateWatcher);
+			setValue('endDate', endDateWatcher);
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
@@ -120,6 +122,9 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 										startDate={field.value}
 										endDate={endDateWatcher}
 										selectsStart
+										dateFormat="MM/dd/yyyy h:mm aa"
+										showTimeSelect
+										timeIntervals={15}
 									/>
 								)}
 							/>
@@ -140,6 +145,8 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 										selectsEnd
 										startDate={startDateWatcher}
 										endDate={field.value}
+										showTimeSelect
+										timeIntervals={15}
 									/>
 								)}
 							/>
