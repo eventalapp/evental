@@ -4,13 +4,12 @@ import Link from 'next/link';
 import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
 import { Navigation } from '../components/navigation';
-import { faCalendarPlus, faListUl } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import PageWrapper from '../components/layout/PageWrapper';
 
 const HomePage: NextPage = () => {
 	return (
-		<>
+		<PageWrapper variant="white">
 			<Head>
 				<title>Evental</title>
 			</Head>
@@ -30,23 +29,16 @@ const HomePage: NextPage = () => {
 					<Link href="/events/create" passHref>
 						<LinkButton variant="primary" padding="large">
 							Host An Event
-							<FontAwesomeIcon
-								fill="currentColor"
-								className="ml-1.5"
-								size="1x"
-								icon={faCalendarPlus}
-							/>
 						</LinkButton>
 					</Link>
 					<Link href="/events" passHref>
 						<LinkButton variant="inversePrimary" padding="large">
 							View All Events
-							<FontAwesomeIcon fill="currentColor" className="ml-1.5" size="1x" icon={faListUl} />
 						</LinkButton>
 					</Link>
 				</div>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

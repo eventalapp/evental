@@ -7,10 +7,11 @@ import { Navigation } from '../components/navigation';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import PageWrapper from '../components/layout/PageWrapper';
 
 const NotFoundPage: NextPage = () => {
 	return (
-		<>
+		<PageWrapper>
 			<Head>
 				<title>Page not found</title>
 			</Head>
@@ -27,7 +28,7 @@ const NotFoundPage: NextPage = () => {
 					</LinkButton>
 				</Link>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

@@ -7,6 +7,7 @@ import { Navigation } from '../../../../components/navigation';
 import { useActivityQuery } from '../../../../hooks/queries/useActivityQuery';
 import React from 'react';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const ViewActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -15,7 +16,7 @@ const ViewActivityPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Viewing Activity: {aid}</title>
 			</Head>
@@ -34,7 +35,7 @@ const ViewActivityPage: NextPage = () => {
 					aid={String(aid)}
 				/>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 

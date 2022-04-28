@@ -11,13 +11,12 @@ type LayoutProps = Props &
 	React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 const variants = {
-	padding:
-		'w-11/12 lg:max-w-6xl md:w-4/6 sm:w-5/6 m-auto my-4 md:my-8 bg-white p-5 rounded-md min-h-[20rem]',
-	noPadding: 'w-11/12 lg:max-w-6xl md:w-4/6 sm:w-5/6 m-auto bg-white p-5 rounded-md'
+	white: 'bg-white h-full',
+	gray: 'bg-gray-100 h-full'
 };
 
-const Column: React.FC<LayoutProps> = (props) => {
-	const { children, className, variant = 'padding', ...rest } = props;
+const PageWrapper: React.FC<LayoutProps> = (props) => {
+	const { children, className, variant = 'gray', ...rest } = props;
 
 	return (
 		<div className={classNames(variants[variant], className)} {...rest}>
@@ -26,4 +25,4 @@ const Column: React.FC<LayoutProps> = (props) => {
 	);
 };
 
-export default Column;
+export default PageWrapper;

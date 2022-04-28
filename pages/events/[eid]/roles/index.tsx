@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { LinkButton } from '../../../../components/form/LinkButton';
 import React from 'react';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const RolesPage: NextPage = () => {
 	const router = useRouter();
@@ -18,7 +19,7 @@ const RolesPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Roles Page</title>
 			</Head>
@@ -46,7 +47,7 @@ const RolesPage: NextPage = () => {
 					rolesError={rolesError}
 				/>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 

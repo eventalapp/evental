@@ -11,6 +11,7 @@ import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useEditRoleMutation } from '../../../../../../hooks/mutations/useEditRoleMutation';
 import React from 'react';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
 
 const EditRolePage: NextPage = () => {
 	const router = useRouter();
@@ -24,15 +25,23 @@ const EditRolePage: NextPage = () => {
 	const { editRoleError, editRoleMutation } = useEditRoleMutation(String(eid), String(rid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Rid</title>
 			</Head>
@@ -51,7 +60,7 @@ const EditRolePage: NextPage = () => {
 					attendees={attendees}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

@@ -7,6 +7,7 @@ import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
 import { ViewVenue } from '../../../../components/venues/ViewVenue';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -15,7 +16,7 @@ const ViewAttendeePage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Viewing Venue: {venue && venue.name}</title>
 			</Head>
@@ -34,7 +35,7 @@ const ViewAttendeePage: NextPage = () => {
 					venueError={venueError}
 				/>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 

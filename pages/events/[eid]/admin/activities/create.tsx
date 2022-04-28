@@ -11,6 +11,7 @@ import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuer
 import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 import { useCreateActivityMutation } from '../../../../../hooks/mutations/useCreateActivityMutation';
 import React from 'react';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
 
 const CreateActivityPage: NextPage = () => {
 	const router = useRouter();
@@ -21,15 +22,23 @@ const CreateActivityPage: NextPage = () => {
 	const { createActivityError, createActivityMutation } = useCreateActivityMutation(String(eid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return <NoAccess />;
+		return (
+			<PageWrapper variant="gray">
+				<NoAccess />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Create Activity</title>
 			</Head>
@@ -48,7 +57,7 @@ const CreateActivityPage: NextPage = () => {
 					createActivityMutation={createActivityMutation}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

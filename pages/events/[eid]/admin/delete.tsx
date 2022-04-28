@@ -9,6 +9,7 @@ import Unauthorized from '../../../../components/Unauthorized';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
 import React from 'react';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const DeleteEventPage: NextPage = () => {
 	const router = useRouter();
@@ -18,11 +19,15 @@ const DeleteEventPage: NextPage = () => {
 	const { deleteEventMutation, deleteEventError } = useDeleteEventMutation(String(eid));
 
 	if (!session.data?.user?.id) {
-		return <Unauthorized />;
+		return (
+			<PageWrapper variant="gray">
+				<Unauthorized />
+			</PageWrapper>
+		);
 	}
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Delete event</title>
 			</Head>
@@ -40,7 +45,7 @@ const DeleteEventPage: NextPage = () => {
 					isEventLoading={isEventLoading}
 				/>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 

@@ -25,12 +25,12 @@ export const ProfileDropdown: React.FC = () => {
 			</Trigger>
 			<Content
 				align="end"
-				className="bg-gray-100 border border-gray-200 rounded-md py-2 px-2 text-gray-900 text-left"
+				className="bg-white border border-gray-200 rounded-md py-2 px-2 text-gray-900 text-left"
 				sideOffset={10}
 			>
 				<Item className="outline-none">
 					<Link href="/events" passHref>
-						<DropdownLink className="">Your Events</DropdownLink>
+						<DropdownLink>Events</DropdownLink>
 					</Link>
 				</Item>
 				<Item className="outline-none">

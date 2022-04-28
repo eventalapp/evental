@@ -7,6 +7,7 @@ import React from 'react';
 import { RoleAttendeeList } from '../../../../components/roles/RoleAttendeeList';
 import { useRoleAttendeesQuery } from '../../../../hooks/queries/useRoleAttendeesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import PageWrapper from '../../../../components/layout/PageWrapper';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
@@ -18,7 +19,7 @@ const ViewAttendeePage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
 
 	return (
-		<div>
+		<PageWrapper variant="gray">
 			<Head>
 				<title>Viewing Role: {rid}</title>
 			</Head>
@@ -38,7 +39,7 @@ const ViewAttendeePage: NextPage = () => {
 					isRoleAttendeesLoading={isRoleAttendeesLoading}
 				/>
 			</Column>
-		</div>
+		</PageWrapper>
 	);
 };
 
