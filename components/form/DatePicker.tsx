@@ -53,7 +53,7 @@ export const DatePicker: React.FC<ReactDatePickerProps> = (props) => {
 							type="button"
 							className={classNames(
 								prevMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex p-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-brand-500'
+								'inline-flex p-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-secondary-500'
 							)}
 						>
 							<FontAwesomeIcon
@@ -70,7 +70,7 @@ export const DatePicker: React.FC<ReactDatePickerProps> = (props) => {
 							type="button"
 							className={classNames(
 								nextMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex p-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-brand-500'
+								'inline-flex p-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-secondary-500'
 							)}
 						>
 							<FontAwesomeIcon

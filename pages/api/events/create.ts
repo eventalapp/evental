@@ -74,7 +74,7 @@ export default async (
 				return res.status(500).send({ error: { message: 'Could not create role.' } });
 			}
 
-			let eventAttendee = prisma.eventAttendee.create({
+			let eventAttendee = await prisma.eventAttendee.create({
 				data: {
 					slug: String('founder-slug'),
 					eventId: event.id,

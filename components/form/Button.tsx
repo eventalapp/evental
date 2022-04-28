@@ -10,9 +10,9 @@ type Props = {
 
 const variants = {
 	'primary':
-		'bg-gray-900 text-white font-semibold inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer',
+		'bg-primary text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-md',
 	'secondary':
-		'bg-gray-200 text-black inline-block rounded-md text-base disabled:cursor-not-allowed disabled:opacity-20 pointer',
+		'bg-secondary text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-md',
 	'gradient':
 		'bg-gradient-to-r from-primary-500 to-secondary-500 text-white inline-block rounded-md text-base font-bold disabled:cursor-not-allowed disabled:opacity-20 pointer',
 	'no-bg':
@@ -20,6 +20,7 @@ const variants = {
 };
 
 const paddings = {
+	tiny: 'px-1.5 py-1',
 	small: 'px-3 py-2',
 	medium: 'px-6 py-2',
 	large: 'px-8 py-2',
