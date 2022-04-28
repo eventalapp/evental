@@ -35,9 +35,9 @@ export const EventList: React.FC<Props> = (props) => {
 								<div className="flex flex-row items-center">
 									<div className="flex flex-col align-center justify-center w-12 md:ml-5">
 										<span className="text-gray-600 text-center block text-tiny">
-											{format(event.startDate, 'MMM dd')}
+											{format(new Date(event.startDate), 'MMM dd')}
 											<br />
-											{format(event.endDate, 'MMM dd')}
+											{format(new Date(event.endDate), 'MMM dd')}
 										</span>
 									</div>
 
