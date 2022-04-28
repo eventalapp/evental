@@ -51,8 +51,8 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 					void queryClient.invalidateQueries('events');
 				});
 			},
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			}
 		}
 	);

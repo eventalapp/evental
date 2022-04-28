@@ -37,8 +37,8 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			}
 		}
 	);

@@ -7,15 +7,15 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/tailwind.css';
 
-const App: React.FC<AppProps & { err?: Error }> = (props) => {
-	const { Component, pageProps, err } = props;
+const App: React.FC<AppProps & { error?: Error }> = (props) => {
+	const { Component, pageProps, error } = props;
 	const [queryClient] = useState(() => new QueryClient());
 
 	return (
 		<SessionProvider session={pageProps.session}>
 			<QueryClientProvider client={queryClient}>
 				<Hydrate state={pageProps.dehydratedState}>
-					<Component {...pageProps} err={err} />
+					<Component {...pageProps} error={error} />
 				</Hydrate>
 
 				<ToastContainer />

@@ -43,7 +43,7 @@ export const ProfileDropdown: React.FC = () => {
 					<DropdownLink
 						className="text-red-600"
 						onClick={() => {
-							signOut({ callbackUrl: '/auth/signin' }).catch((err) => console.error(err));
+							signOut({ callbackUrl: '/auth/signin' }).catch((error) => console.error(error));
 						}}
 					>
 						Sign out

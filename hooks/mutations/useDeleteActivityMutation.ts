@@ -39,8 +39,8 @@ export const useDeleteActivityMutation = (
 					void queryClient.invalidateQueries(['activities', eid]);
 				});
 			},
-			onError: (err) => {
-				setError(err.response?.data.error ?? null);
+			onError: (error) => {
+				setError(error.response?.data.error ?? null);
 			}
 		}
 	);

@@ -1,10 +1,8 @@
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
-import classNames from 'classnames';
-import { format } from 'date-fns';
-import React, { DetailedHTMLProps, FormHTMLAttributes, forwardRef, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
@@ -14,6 +12,7 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
+import { DatePicker } from '../form/DatePicker';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateEventMutationData;
@@ -83,7 +82,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		createEventError && toast.error(createEventError.message);
-		console.log('err', createEventError);
+		console.log('error', createEventError);
 	}, [createEventError]);
 
 	return (
@@ -116,66 +115,11 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 								name="startDate"
 								render={({ field }) => (
 									<DatePicker
-										className="input"
-										placeholderText="Select date"
 										onChange={(e) => field.onChange(e)}
 										selected={field.value}
-										selectsStart
-										nextMonthButtonLabel=">"
-										previousMonthButtonLabel="<"
-										popperClassName="react-datepicker-right"
-										customInput={<ButtonInput />}
 										startDate={field.value}
 										endDate={endDateWatcher}
-										renderCustomHeader={({
-											date,
-											decreaseMonth,
-											increaseMonth,
-											prevMonthButtonDisabled,
-											nextMonthButtonDisabled
-										}) => (
-											<div className="flex items-center justify-between px-2 py-2">
-												<span className="text-lg text-gray-700 font-bold">
-													{format(date, 'MMMM yyyy')}
-												</span>
-
-												<div className="space-x-2">
-													<button
-														onClick={decreaseMonth}
-														disabled={prevMonthButtonDisabled}
-														type="button"
-														className={classNames(
-															prevMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-															'inline-flex p-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-brand-500'
-														)}
-													>
-														<FontAwesomeIcon
-															fill="currentColor"
-															className="w-5 h-5 text-gray-600"
-															size="1x"
-															icon={faChevronLeft}
-														/>
-													</button>
-
-													<button
-														onClick={increaseMonth}
-														disabled={nextMonthButtonDisabled}
-														type="button"
-														className={classNames(
-															nextMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-															'inline-flex p-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-brand-500'
-														)}
-													>
-														<FontAwesomeIcon
-															fill="currentColor"
-															className="w-5 h-5 text-gray-600"
-															size="1x"
-															icon={faChevronRight}
-														/>
-													</button>
-												</div>
-											</div>
-										)}
+										selectsStart
 									/>
 								)}
 							/>
@@ -191,66 +135,11 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 								name="endDate"
 								render={({ field }) => (
 									<DatePicker
-										className="input"
-										placeholderText="Select date"
 										onChange={(e) => field.onChange(e)}
 										selected={field.value}
 										selectsEnd
-										nextMonthButtonLabel=">"
-										previousMonthButtonLabel="<"
-										popperClassName="react-datepicker-right"
-										customInput={<ButtonInput />}
 										startDate={startDateWatcher}
 										endDate={field.value}
-										renderCustomHeader={({
-											date,
-											decreaseMonth,
-											increaseMonth,
-											prevMonthButtonDisabled,
-											nextMonthButtonDisabled
-										}) => (
-											<div className="flex items-center justify-between px-2 py-2">
-												<span className="text-lg text-gray-700 font-bold">
-													{format(date, 'MMMM yyyy')}
-												</span>
-
-												<div className="space-x-2">
-													<button
-														onClick={decreaseMonth}
-														disabled={prevMonthButtonDisabled}
-														type="button"
-														className={classNames(
-															prevMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-															'inline-flex p-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-brand-500'
-														)}
-													>
-														<FontAwesomeIcon
-															fill="currentColor"
-															className="w-5 h-5 text-gray-900"
-															size="1x"
-															icon={faChevronLeft}
-														/>
-													</button>
-
-													<button
-														onClick={increaseMonth}
-														disabled={nextMonthButtonDisabled}
-														type="button"
-														className={classNames(
-															nextMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-															'inline-flex p-1 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-brand-500'
-														)}
-													>
-														<FontAwesomeIcon
-															fill="currentColor"
-															className="w-5 h-5 text-gray-900"
-															size="1x"
-															icon={faChevronRight}
-														/>
-													</button>
-												</div>
-											</div>
-										)}
 									/>
 								)}
 							/>
@@ -307,16 +196,3 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		</form>
 	);
 };
-
-const ButtonInput = forwardRef<HTMLButtonElement, { value?: Date; onClick?: () => void }>(
-	({ value, onClick }, ref) => (
-		<button
-			onClick={onClick}
-			ref={ref}
-			type="button"
-			className="inline-flex justify-start w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-primary"
-		>
-			{value && format(new Date(value), 'dd MMMM yyyy')}
-		</button>
-	)
-);
