@@ -20,14 +20,14 @@ export default async (
 	req: NextApiRequest,
 	res: NextApiResponse<ServerErrorResponse | Prisma.Event>
 ) => {
-	const session = await getSession({ req });
-
-	if (!session?.user?.id) {
-		return res.status(401).send({ error: { message: 'You must be logged in to do this.' } });
-	}
-
 	if (req.method === 'POST') {
 		try {
+			const session = await getSession({ req });
+
+			if (!session?.user?.id) {
+				return res.status(401).send({ error: { message: 'You must be logged in to do this.' } });
+			}
+
 			const { buffer, formData, mimeType } = await busboyParseForm(req);
 			const parsed = CreateEventSchema.parse(formData);
 			let fileLocation: string | undefined;

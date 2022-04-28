@@ -2,32 +2,22 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
 import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import type Prisma from '@prisma/client';
+import { getEvent } from '../index';
 
 export default async (
 	req: NextApiRequest,
 	res: NextApiResponse<ServerErrorResponse | Prisma.EventRole[]>
 ) => {
-	const { eid } = req.query;
-
 	try {
-		const event = await prisma.event.findFirst({
-			where: {
-				OR: [{ id: String(eid) }, { slug: String(eid) }]
-			},
-			select: {
-				id: true
-			}
-		});
+		const { eid } = req.query;
+
+		const event = await getEvent(String(eid));
 
 		if (!event) {
 			return res.status(404).send({ error: { message: 'Event not found.' } });
 		}
 
-		const roles = await prisma.eventRole.findMany({
-			where: {
-				eventId: event.id
-			}
-		});
+		const roles = await getRoles(event.id);
 
 		if (roles.length === 0) {
 			const role = await prisma.eventRole.create({
@@ -51,4 +41,12 @@ export default async (
 
 		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
 	}
+};
+
+export const getRoles = async (eventId: string): Promise<Prisma.EventRole[]> => {
+	return await prisma.eventRole.findMany({
+		where: {
+			eventId: eventId
+		}
+	});
 };
