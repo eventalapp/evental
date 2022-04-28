@@ -4,8 +4,8 @@ import { ServerError } from './ServerError';
 
 export const uploadToBucket = (params: S3.Types.PutObjectRequest): Promise<string> => {
 	const s3 = new AWS.S3({
-		accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-		secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+		accessKeyId: process.env.EVENTAL_AWS_ACCESS_KEY_ID,
+		secretAccessKey: process.env.EVENTAL_AWS_SECRET_ACCESS_KEY
 	});
 
 	return new Promise((resolve, reject) => {
@@ -13,8 +13,6 @@ export const uploadToBucket = (params: S3.Types.PutObjectRequest): Promise<strin
 			if (error) {
 				reject(new ServerError(error.message));
 			}
-
-			console.log(`File uploaded successfully. ${data?.Location}`);
 
 			let fileLocation = new URL(data?.Location);
 
