@@ -14,7 +14,9 @@ export const uploadToBucket = (params: S3.Types.PutObjectRequest): Promise<strin
 				reject(new ServerError(error.message));
 			}
 
-			let fileLocation = new URL(data.Location);
+			console.log(`File uploaded successfully. ${data?.Location}`);
+
+			let fileLocation = new URL(data?.Location);
 
 			resolve(fileLocation.pathname);
 		});
