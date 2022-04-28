@@ -141,6 +141,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 					<LinkButton variant="inversePrimary">Venues</LinkButton>
 				</Link>
 			</div>
+
 			<ActivityList
 				isOrganizer={isOrganizer}
 				isOrganizerLoading={isOrganizerLoading}

@@ -18,9 +18,7 @@ export const useOrganizerQuery = (eid: string, initialData?: boolean): UseOrgani
 	>(
 		['isOrganizer', eid],
 		async () => {
-			return axios
-				.get<{ isOrganizer: boolean }>(`/api/events/${eid}/organizer`)
-				.then((res) => res.data.isOrganizer);
+			return axios.get<boolean>(`/api/events/${eid}/organizer`).then((res) => res.data);
 		},
 		{
 			retry: 0,

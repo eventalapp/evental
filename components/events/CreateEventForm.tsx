@@ -86,7 +86,6 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		createEventError && toast.error(createEventError.message);
-		console.log('error', createEventError);
 	}, [createEventError]);
 
 	return (
