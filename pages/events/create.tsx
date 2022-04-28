@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
-import { BackButton } from '../../components/BackButton';
 import Column from '../../components/layout/Column';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { Navigation } from '../../components/navigation';
@@ -26,7 +25,6 @@ const CreateEventPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-
 				<h1 className="text-3xl font-bold">Create an Event</h1>
 
 				<CreateEventForm

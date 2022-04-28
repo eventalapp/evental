@@ -28,7 +28,7 @@ export default async (
 
 	if (req.method === 'POST') {
 		try {
-			const { buffer, formData, filename, mimeType } = await busboyParseForm(req);
+			const { buffer, formData, mimeType } = await busboyParseForm(req);
 			const parsed = CreateEventSchema.parse(formData);
 			let fileLocation: string | undefined;
 
