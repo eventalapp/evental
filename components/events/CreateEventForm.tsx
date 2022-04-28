@@ -162,6 +162,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				<div>
 					<Label htmlFor="description">Description</Label>
 					<Textarea
+						rows={5}
 						placeholder="Event description"
 						{...register('description', { required: true })}
 					/>
@@ -176,7 +177,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="slug">Slug</Label>
 						<div className="flex items-center">
-							<span className="mr-1 text-sm">evental.app/events/</span>
+							<span className="mr-1 text-md">evental.app/events/</span>
 							<Input placeholder="event-slug" {...register('slug', { required: true })} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
