@@ -7,7 +7,7 @@ import { AttendeeList } from '../attendees/AttendeeList';
 import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 
 type Props = {
@@ -34,7 +34,7 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 	}
 
 	if (isOrganizerError || roleAttendeesError) {
-		return <ServerError errors={[isOrganizerError, roleAttendeesError]} />;
+		return <ViewServerError errors={[isOrganizerError, roleAttendeesError]} />;
 	}
 
 	if (!role || !attendees) {

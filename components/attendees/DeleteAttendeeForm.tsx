@@ -4,7 +4,7 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { UseDeleteAttendeeMutationData } from '../../hooks/mutations/useDeleteAttendeeMutatation';
@@ -32,7 +32,7 @@ export const DeleteAttendeeForm: React.FC<Props> = (props) => {
 	}
 
 	if (attendeeError || deleteAttendeeError) {
-		return <ServerError errors={[attendeeError, deleteAttendeeError]} />;
+		return <ViewServerError errors={[attendeeError, deleteAttendeeError]} />;
 	}
 
 	if (attendee.permissionRole === 'FOUNDER') {

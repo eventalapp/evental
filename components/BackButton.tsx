@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { LinkButton } from './form/LinkButton';
 import Link from 'next/link';
-import { LinkProps } from 'next/dist/client/link';
 
-type Props = LinkProps;
+type Props = {
+	href: string;
+	children?: React.ReactNode;
+};
 
 export const BackButton: React.FC<Props> = (props) => {
 	const { children, href } = props;

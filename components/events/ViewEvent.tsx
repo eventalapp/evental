@@ -9,7 +9,7 @@ import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { Loading } from '../Loading';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 
 type Props = {
@@ -41,7 +41,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 	}
 
 	if (isOrganizerError || rolesError || eventError || activitiesError) {
-		return <ServerError errors={[isOrganizerError, rolesError, eventError, activitiesError]} />;
+		return <ViewServerError errors={[isOrganizerError, rolesError, eventError, activitiesError]} />;
 	}
 
 	if (!event) {

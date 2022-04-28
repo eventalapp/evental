@@ -2,7 +2,7 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutation';
 
 import { NotFound } from '../NotFound';
@@ -26,13 +26,13 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 	}
 
 	if (roleAttendeesError) {
-		return <ServerError errors={[roleAttendeesError]} />;
+		return <ViewServerError errors={[roleAttendeesError]} />;
 	}
 
 	return (
 		<form onSubmit={editRoleMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">
-				{editRoleError && <ServerError errors={[editRoleError]} />}
+				{editRoleError && <ViewServerError errors={[editRoleError]} />}
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Role Name</Label>

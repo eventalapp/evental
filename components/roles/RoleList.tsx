@@ -5,7 +5,7 @@ import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { Loading } from '../Loading';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 
 type Props = {
@@ -29,7 +29,7 @@ export const RoleList: React.FC<Props> = (props) => {
 	}
 
 	if (isOrganizerError || rolesError) {
-		return <ServerError errors={[isOrganizerError, rolesError]} />;
+		return <ViewServerError errors={[isOrganizerError, rolesError]} />;
 	}
 
 	if (!roles || roles?.length === 0) {

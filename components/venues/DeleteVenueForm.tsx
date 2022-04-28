@@ -2,7 +2,7 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
@@ -21,7 +21,7 @@ export const DeleteVenueForm: React.FC<Props> = (props) => {
 	}
 
 	if (venueError || deleteVenueError) {
-		return <ServerError errors={[deleteVenueError, venueError]} />;
+		return <ViewServerError errors={[deleteVenueError, venueError]} />;
 	}
 
 	if (!venue) {

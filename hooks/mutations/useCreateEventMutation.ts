@@ -4,13 +4,13 @@ import router from 'next/router';
 import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
-import { CreateEventFormValues } from '../../components/events/CreateEventForm';
+import { CreateEventPayload } from '../../utils/schemas';
 
 export interface UseCreateEventMutationData {
 	createEventMutation: UseMutationResult<
 		AxiosResponse<Prisma.Event, unknown>,
 		AxiosError<ServerError, unknown>,
-		CreateEventFormValues
+		CreateEventPayload
 	>;
 	createEventError: ServerErrorPayload | null;
 }
@@ -22,10 +22,26 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 	const createEventMutation = useMutation<
 		AxiosResponse<Prisma.Event, unknown>,
 		AxiosError<ServerError, unknown>,
-		CreateEventFormValues
+		CreateEventPayload
 	>(
 		async (data) => {
-			return await axios.post<Prisma.Event>('/api/events/create', data);
+			const formData = new FormData();
+
+			Object.entries(data).forEach(([key, value]) => {
+				if (value.length >= 1 && value instanceof FileList) {
+					formData.append(key, value[0], value[0]?.name);
+				} else if (value instanceof Date) {
+					formData.append(key, value.toISOString());
+				} else {
+					formData.append(key, value);
+				}
+			});
+
+			return await axios.post<Prisma.Event>('/api/events/create', formData, {
+				onUploadProgress: (progressEvent) => {
+					console.log(progressEvent);
+				}
+			});
 		},
 		{
 			onSuccess: (response) => {

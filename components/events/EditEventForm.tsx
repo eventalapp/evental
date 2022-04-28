@@ -4,7 +4,7 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
@@ -24,7 +24,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 	}
 
 	if (editEventError || eventError) {
-		return <ServerError errors={[editEventError, eventError]} />;
+		return <ViewServerError errors={[editEventError, eventError]} />;
 	}
 
 	if (!event) {

@@ -1,4 +1,4 @@
-import { faCalendarPlus, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames';
@@ -8,26 +8,16 @@ import DatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
-import { CreateEventSchema } from '../../utils/schemas';
+import { CreateEventPayload, CreateEventSchema } from '../../utils/schemas';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateEventMutationData;
-
-export type CreateEventFormValues = {
-	name: string;
-	description: string;
-	location: string;
-	slug: string;
-	image: FileList;
-	startDate: Date;
-	endDate: Date;
-};
 
 export const CreateEventForm: React.FC<Props> = (props) => {
 	const { createEventMutation, createEventError } = props;
@@ -38,11 +28,9 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		watch,
 		setValue,
 		trigger,
-
-		clearErrors,
 		control,
 		formState: { errors }
-	} = useForm<CreateEventFormValues>({
+	} = useForm<CreateEventPayload>({
 		defaultValues: {
 			startDate: new Date(),
 			endDate: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3)
@@ -80,7 +68,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		);
 
 		if (errors.name) {
-			trigger('slug');
+			void trigger('slug');
 		}
 	}, [nameWatcher]);
 
@@ -95,7 +83,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	}, [slugWatcher]);
 
 	if (createEventError) {
-		return <ServerError errors={[createEventError]} />;
+		return <ViewServerError errors={[createEventError]} />;
 	}
 
 	return (
@@ -289,14 +277,23 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
-					<Label htmlFor="slug">Slug</Label>
-					<Input placeholder="event-slug" {...register('slug', { required: true })} />
-					{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
+					<div>
+						<Label htmlFor="slug">Slug</Label>
+						<div className="flex items-center">
+							<span className="mr-2 text-sm">evental.app/events/</span>
+							<Input placeholder="event-slug" {...register('slug', { required: true })} />
+						</div>
+						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
+					</div>
 				</div>
 
 				<div>
 					<Label htmlFor="image">Image</Label>
-					<Input type="file" {...register('image', { required: true })} />
+					<Input
+						type="file"
+						accept="image/png, image/jpeg"
+						{...register('image', { required: true })}
+					/>
 					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 				</div>
 			</div>
@@ -304,7 +301,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			<div className="flex flex-row justify-end">
 				<Button type="submit" variant="gradient" padding="medium">
 					Register Event
-					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faCalendarPlus} />
+					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>
 			</div>
 		</form>

@@ -7,7 +7,7 @@ import { LinkButton } from '../../../../components/form/LinkButton';
 import { Navigation } from '../../../../components/navigation';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-import { ServerError } from '../../../../components/ServerError';
+import { ViewServerError } from '../../../../components/ViewServerError';
 import React from 'react';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
@@ -21,7 +21,7 @@ const ActivitiesPage: NextPage = () => {
 	if (isOrganizerError) {
 		return (
 			<div>
-				<ServerError errors={[isOrganizerError]} />
+				<ViewServerError errors={[isOrganizerError]} />
 			</div>
 		);
 	}

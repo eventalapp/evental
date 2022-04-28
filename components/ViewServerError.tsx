@@ -5,7 +5,7 @@ type Props = {
 	errors: Array<ServerErrorPayload | null>;
 };
 
-export const ServerError: React.FC<Props> = (props) => {
+export const ViewServerError: React.FC<Props> = (props) => {
 	const { errors } = props;
 
 	if (!errors) {

@@ -2,7 +2,7 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { UseEditVenueMutationData } from '../../hooks/mutations/useEditVenueMutation';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { Textarea } from '../form/Textarea';
@@ -21,7 +21,7 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 	}
 
 	if (venueError || editVenueError) {
-		return <ServerError errors={[editVenueError, venueError]} />;
+		return <ViewServerError errors={[editVenueError, venueError]} />;
 	}
 
 	if (!venue) {

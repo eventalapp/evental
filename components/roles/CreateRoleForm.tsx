@@ -3,7 +3,7 @@ import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseCreateRoleMutationData } from '../../hooks/mutations/useCreateRoleMutation';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateRoleMutationData;
@@ -12,7 +12,7 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 	const { createRoleMutation, createRoleError } = props;
 
 	if (createRoleError) {
-		return <ServerError errors={[createRoleError]} />;
+		return <ViewServerError errors={[createRoleError]} />;
 	}
 
 	return (

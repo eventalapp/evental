@@ -2,7 +2,7 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { ServerError } from '../ServerError';
+import { ViewServerError } from '../ViewServerError';
 import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
@@ -24,7 +24,7 @@ export const DeleteRoleForm: React.FC<Props> = (props) => {
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (deleteRoleError || roleAttendeesError) {
-		return <ServerError errors={[deleteRoleError, roleAttendeesError]} />;
+		return <ViewServerError errors={[deleteRoleError, roleAttendeesError]} />;
 	}
 
 	if (isRoleAttendeesLoading) {
