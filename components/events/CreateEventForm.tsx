@@ -13,13 +13,13 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { DatePicker } from '../form/DatePicker';
+import { useEventQuery } from '../../hooks/queries/useEventQuery';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateEventMutationData;
 
 export const CreateEventForm: React.FC<Props> = (props) => {
 	const { createEventMutation, createEventError } = props;
-
 	const {
 		register,
 		handleSubmit,
@@ -40,6 +40,8 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	const slugWatcher = watch('slug');
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
+
+	const { event, isEventLoading } = useEventQuery(slugWatcher);
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
@@ -122,9 +124,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 										startDate={field.value}
 										endDate={endDateWatcher}
 										selectsStart
-										dateFormat="MM/dd/yyyy h:mm aa"
-										showTimeSelect
-										timeIntervals={15}
+										dateFormat="MM/dd/yyyy"
 									/>
 								)}
 							/>
@@ -145,8 +145,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 										selectsEnd
 										startDate={startDateWatcher}
 										endDate={field.value}
-										showTimeSelect
-										timeIntervals={15}
+										dateFormat="MM/dd/yyyy"
 									/>
 								)}
 							/>
@@ -181,6 +180,9 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 							<Input placeholder="event-slug" {...register('slug', { required: true })} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
+						{event && (
+							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
+						)}
 					</div>
 				</div>
 
@@ -196,7 +198,12 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
-				<Button type="submit" variant="secondary" padding="medium">
+				<Button
+					type="submit"
+					variant="secondary"
+					padding="medium"
+					disabled={isEventLoading || Boolean(event)}
+				>
 					Register Event
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>

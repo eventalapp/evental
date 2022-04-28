@@ -29,6 +29,11 @@ const HomePage: NextPage = () => {
 							Host An Event
 						</LinkButton>
 					</Link>
+					<Link href="/events" passHref>
+						<LinkButton variant="primary" padding="large" className="ml-5">
+							View All Events
+						</LinkButton>
+					</Link>
 				</div>
 			</Column>
 		</>
