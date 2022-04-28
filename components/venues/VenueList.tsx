@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
-import { LinkButton } from '../form/LinkButton';
-import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
-import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { ViewServerError } from '../ViewServerError';
-import { Loading } from '../Loading';
-import { NotFound } from '../NotFound';
+import {LinkButton} from '../form/LinkButton';
+import {UseOrganizerQueryData} from '../../hooks/queries/useOrganizerQuery';
+import {UseVenuesQueryData} from '../../hooks/queries/useVenuesQuery';
+import {ViewServerError} from '../ViewServerError';
+import {Loading} from '../Loading';
+import {NotFound} from '../NotFound';
 
 type Props = {
 	eid: string;
@@ -46,18 +46,18 @@ export const VenueList: React.FC<Props> = (props) => {
 						</div>
 						<div className="pb-3">
 							<Link href={`/events/${eid}/venues/${venue.slug}`} passHref>
-								<LinkButton variant={'secondary'}>View</LinkButton>
+								<LinkButton variant={'primary'}>View</LinkButton>
 							</Link>
 							{!isOrganizerLoading && isOrganizer && (
 								<Link href={`/events/${eid}/admin/venues/${venue.slug}/edit`} passHref>
-									<LinkButton variant={'secondary'} className="ml-3">
+									<LinkButton variant={'primary'} className="ml-3">
 										Edit
 									</LinkButton>
 								</Link>
 							)}
 							{!isOrganizerLoading && isOrganizer && (
 								<Link href={`/events/${eid}/admin/venues/${venue.slug}/delete`} passHref>
-									<LinkButton variant={'secondary'} className="ml-3">
+									<LinkButton variant={'primary'} className="ml-3">
 										Delete
 									</LinkButton>
 								</Link>

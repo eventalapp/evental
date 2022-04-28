@@ -8,27 +8,29 @@ type Props = {
 	[x: string]: unknown;
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
-const variants = {
+export const variants = {
 	'primary':
-		'bg-primary text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-sm font-semibold',
+		'bg-primary-500 hover:bg-white hover:text-primary border-2 border-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all',
 	'secondary':
-		'bg-secondary text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-sm font-semibold',
+		'bg-secondary-500 hover:bg-white hover:text-secondary border-2 border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all',
 	'gradient':
-		'bg-gradient-to-r from-primary-500 to-secondary-500 text-white inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-sm font-semibold',
+		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all',
 	'no-bg':
-		'text-gray-900 font-semibold inline-block rounded-md disabled:cursor-not-allowed disabled:opacity-20 pointer text-sm font-semibold'
+		'text-gray-900 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all',
+	'inversePrimary':
+		'bg-white-500 hover:bg-primary hover:text-white border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition-all'
 };
 
-const paddings = {
-	tiny: 'px-1.5 py-1',
-	small: 'px-3 py-2',
-	medium: 'px-6 py-2',
-	large: 'px-8 py-2',
+export const paddings = {
+	tiny: 'px-1.5 py-1 hover:px-2',
+	small: 'px-3 py-2 hover:px-4',
+	medium: 'px-6 py-2 hover:px-8',
+	large: 'px-8 py-2 hover:px-10',
 	none: 'p-0'
 };
 
 export const Button: React.FC<Props> = (props) => {
-	const { className, children, variant = 'primary', padding = 'small', ...rest } = props;
+	const { className, children, variant = 'secondary', padding = 'small', ...rest } = props;
 
 	return (
 		<button className={classNames(paddings[padding], variants[variant], className)} {...rest}>

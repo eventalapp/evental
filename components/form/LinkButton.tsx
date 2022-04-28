@@ -1,23 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-
-const variants = {
-	'primary':
-		'bg-secondary-600 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold',
-	'secondary':
-		'bg-gray-200 text-black disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold',
-	'gradient':
-		'bg-gradient-to-r from-primary-500 to-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold',
-	'no-bg':
-		'text-gray-900 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold'
-};
-
-const paddings = {
-	small: ' px-2 py-2 md:px-3',
-	medium: 'px-3 py-2 md:px-6',
-	large: 'px-4 py-2 md:px-8',
-	none: 'p-0'
-};
+import { paddings, variants } from './Button';
 
 type Props = {
 	children?: React.ReactNode;

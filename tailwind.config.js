@@ -57,7 +57,7 @@ module.exports = {
 				'in-out-back': 'cubic-bezier(0.68, -0.6, 0.32, 1.6)'
 			},
 			colors: {
-				primary: {
+				secondary: {
 					DEFAULT: '#5C41FF',
 					50: '#FAF9FF',
 					100: '#E8E4FF',
@@ -70,7 +70,7 @@ module.exports = {
 					800: '#160098',
 					900: '#0E0060'
 				},
-				secondary: {
+				primary: {
 					DEFAULT: '#0066FF',
 					50: '#B8D4FF',
 					100: '#A3C8FF',

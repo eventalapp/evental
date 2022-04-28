@@ -47,18 +47,18 @@ export const RoleList: React.FC<Props> = (props) => {
 						</span>
 						<div>
 							<Link href={`/events/${eid}/roles/${role.slug}`} passHref>
-								<LinkButton variant="secondary">View</LinkButton>
+								<LinkButton variant="primary">View</LinkButton>
 							</Link>
 							{!isOrganizerLoading && isOrganizer && (
 								<Link href={`/events/${eid}/admin/roles/${role.slug}/edit`} passHref>
-									<LinkButton variant="secondary" className="ml-3">
+									<LinkButton variant="primary" className="ml-3">
 										Edit
 									</LinkButton>
 								</Link>
 							)}
 							{!isOrganizerLoading && isOrganizer && (
 								<Link href={`/events/${eid}/admin/roles/${role.slug}/delete`} passHref>
-									<LinkButton variant="secondary" className="ml-3">
+									<LinkButton variant="primary" className="ml-3">
 										Delete
 									</LinkButton>
 								</Link>

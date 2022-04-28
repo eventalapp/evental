@@ -7,6 +7,9 @@ import Column from '../../components/layout/Column';
 import { FlexRowBetween } from '../../components/layout/FlexRowBetween';
 import { Navigation } from '../../components/navigation';
 import { useEventsQuery } from '../../hooks/queries/useEventsQuery';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
 
 const EventsPage: NextPage = () => {
 	const { events, isEventsLoading, eventsError } = useEventsQuery();
@@ -24,7 +27,15 @@ const EventsPage: NextPage = () => {
 					<h1 className="text-3xl font-bold">Event Page</h1>
 
 					<Link href="/events/create" passHref>
-						<LinkButton variant="gradient">Create Event</LinkButton>
+						<LinkButton variant="primary" padding="small">
+							Create Event
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="ml-1.5"
+								size="1x"
+								icon={faCalendarPlus}
+							/>
+						</LinkButton>
 					</Link>
 				</FlexRowBetween>
 
