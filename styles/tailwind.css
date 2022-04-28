@@ -145,3 +145,11 @@
 .react-datepicker__time-list-item--selected {
 	@apply bg-secondary-500 text-white hover:bg-white hover:text-black border-2 border-secondary-500 transition;
 }
+
+#nprogress .bar {
+	@apply bg-primary-500 !important;
+}
+
+#nprogress .spinner-icon {
+	@apply border-t-primary-500 border-l-primary-500 !important;
+}
