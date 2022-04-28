@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -23,19 +24,54 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { getEvent } from '../../../api/events/[eid]';
+import { getActivities } from '../../../api/events/[eid]/activities';
+import { getRoles } from '../../../api/events/[eid]/roles';
+import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
+import type Prisma from '@prisma/client';
+import { Session } from 'next-auth';
+import { getVenues } from '../../../api/events/[eid]/venues';
+import { getAttendees } from '../../../api/events/[eid]/attendees';
+import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 
-const AdminPage: NextPage = () => {
+type Props = {
+	initialEvent: Prisma.Event | undefined;
+	initialActivities: Prisma.EventActivity[] | undefined;
+	initialAttendees: EventAttendeeUser[] | undefined;
+	initialRoles: Prisma.EventRole[] | undefined;
+	initialVenues: Prisma.EventVenue[] | undefined;
+	initialOrganizer: boolean;
+	session: Session | null;
+};
+
+const AdminPage: NextPage<Props> = (props) => {
 	const router = useRouter();
-	const session = useSession();
+	const {
+		session,
+		initialActivities,
+		initialAttendees,
+		initialVenues,
+		initialRoles,
+		initialOrganizer
+	} = props;
 
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(String(eid));
-	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
-	const { attendees, isAttendeesLoading, attendeesError } = useAttendeesQuery(String(eid));
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
-	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
+		String(eid),
+		initialOrganizer
+	);
+	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
+	const { attendees, isAttendeesLoading, attendeesError } = useAttendeesQuery(
+		String(eid),
+		initialAttendees
+	);
+	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
+	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(
+		String(eid),
+		initialActivities
+	);
 
-	if (!session.data?.user?.id) {
+	if (!session?.user?.id) {
 		return (
 			<PageWrapper variant="gray">
 				<Unauthorized />
@@ -196,6 +232,30 @@ const AdminPage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid } = context.query;
+
+	const session = await getSession(context);
+	const initialEvent = (await getEvent(String(eid))) ?? undefined;
+	const initialActivities = (await getActivities(String(eid))) ?? undefined;
+	const initialAttendees = (await getAttendees(String(eid))) ?? undefined;
+	const initialRoles = (await getRoles(String(eid))) ?? undefined;
+	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialVenues = (await getVenues(String(eid))) ?? undefined;
+
+	return {
+		props: {
+			initialEvent,
+			session,
+			initialOrganizer,
+			initialAttendees,
+			initialVenues,
+			initialRoles,
+			initialActivities
+		}
+	};
 };
 
 export default AdminPage;
