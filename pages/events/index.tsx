@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { EventList } from '../../components/events/EventList';
 import Column from '../../components/layout/Column';
@@ -6,9 +6,16 @@ import { Navigation } from '../../components/navigation';
 import { useEventsQuery } from '../../hooks/queries/useEventsQuery';
 import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
+import type Prisma from '@prisma/client';
+import { getEvents } from '../api/events';
 
-const EventsPage: NextPage = () => {
-	const { events, isEventsLoading, eventsError } = useEventsQuery();
+type Props = {
+	initialEvents: Prisma.Event[];
+};
+
+const EventsPage: NextPage<Props> = (props) => {
+	const { initialEvents } = props;
+	const { events, isEventsLoading, eventsError } = useEventsQuery(initialEvents);
 
 	return (
 		<PageWrapper variant="white">
@@ -25,6 +32,14 @@ const EventsPage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+	const initialEvents = await getEvents();
+
+	return {
+		props: { initialEvents }
+	};
 };
 
 export default EventsPage;

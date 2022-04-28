@@ -24,10 +24,8 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 				<Hydrate state={pageProps.dehydratedState}>
 					<Component {...pageProps} error={error} />
 				</Hydrate>
-
 				<ToastContainer />
 				<ReactQueryDevtools />
-
 				<style jsx global>{`
 					#__next {
 						height: 100%;

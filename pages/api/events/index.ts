@@ -8,13 +8,7 @@ export default async (
 	res: NextApiResponse<ServerErrorResponse | Prisma.Event[]>
 ) => {
 	try {
-		let events = await prisma.event.findMany({
-			orderBy: [
-				{
-					startDate: 'asc'
-				}
-			]
-		});
+		let events = await getEvents();
 
 		return res.status(200).send(events);
 	} catch (error) {
@@ -25,4 +19,14 @@ export default async (
 
 		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
 	}
+};
+
+export const getEvents = async (): Promise<Prisma.Event[]> => {
+	return await prisma.event.findMany({
+		orderBy: [
+			{
+				startDate: 'asc'
+			}
+		]
+	});
 };
