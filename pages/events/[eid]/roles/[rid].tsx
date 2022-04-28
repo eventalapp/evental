@@ -13,8 +13,7 @@ import { getSession } from 'next-auth/react';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
-import { getRole } from '../../../api/events/[eid]/roles/[rid]';
-import { getAttendees } from '../../../api/events/[eid]/attendees';
+import { getAttendeesByRole, getRole } from '../../../api/events/[eid]/roles/[rid]';
 import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 
 type Props = {
@@ -68,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const session = await getSession(context);
 	const initialRole = (await getRole(String(eid), String(rid))) ?? undefined;
-	const initialAttendees = await getAttendees(String(eid));
+	const initialAttendees = await getAttendeesByRole(String(eid), String(rid));
 	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
 
 	return {
