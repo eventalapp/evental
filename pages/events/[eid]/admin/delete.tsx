@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
@@ -10,15 +11,23 @@ import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import { getEvent } from '../../../api/events/[eid]';
+import type Prisma from '@prisma/client';
+import { Session } from 'next-auth';
 
-const DeleteEventPage: NextPage = () => {
+type Props = {
+	initialEvent: Prisma.Event | undefined;
+	session: Session | null;
+};
+
+const DeleteEventPage: NextPage<Props> = (props) => {
+	const { initialEvent, session } = props;
 	const router = useRouter();
-	const session = useSession();
 	const { eid } = router.query;
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { deleteEventMutation, deleteEventError } = useDeleteEventMutation(String(eid));
 
-	if (!session.data?.user?.id) {
+	if (!session?.user?.id) {
 		return (
 			<PageWrapper variant="gray">
 				<Unauthorized />
@@ -47,6 +56,20 @@ const DeleteEventPage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const { eid } = context.query;
+
+	const session = await getSession(context);
+	const initialEvent = (await getEvent(String(eid))) ?? undefined;
+
+	return {
+		props: {
+			session,
+			initialEvent
+		}
+	};
 };
 
 export default DeleteEventPage;

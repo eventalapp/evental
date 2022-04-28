@@ -97,7 +97,7 @@ const AdminPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<FlexRowBetween>
-					<h1 className="text-3xl mb-3 font-bold">Admin Page</h1>
+					<h1 className="text-3xl font-bold">Admin Page</h1>
 
 					<div>
 						<Link href={`/events/${eid}/admin/edit/`} passHref>

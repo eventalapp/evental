@@ -2,24 +2,25 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
-import { useDeleteActivityMutation } from '../../hooks/mutations/useDeleteActivityMutation';
+import { UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
+import { UseDeleteActivityMutationData } from '../../hooks/mutations/useDeleteActivityMutation';
 import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 
-type Props = {
-	eid: string;
-	aid: string;
-};
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
+	UseDeleteActivityMutationData &
+	UseActivityQueryData;
 
-type DeleteActivityFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
+export const DeleteActivityForm: React.FC<Props> = (props) => {
+	const {
+		activity,
+		isActivityLoading,
+		activityError,
+		deleteActivityError,
+		deleteActivityMutation
+	} = props;
 
-export const DeleteActivityForm: React.FC<DeleteActivityFormProps> = (props) => {
-	const { eid, aid } = props;
-	const { activity, isActivityLoading, activityError } = useActivityQuery(eid, aid);
-	const { deleteActivityError, deleteActivityMutation } = useDeleteActivityMutation(eid, aid);
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (isActivityLoading) {
