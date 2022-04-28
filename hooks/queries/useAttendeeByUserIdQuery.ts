@@ -12,7 +12,8 @@ export interface UseAttendeeByUserIdQueryData {
 
 export const useAttendeeByUserIdQuery = (
 	eid: string,
-	uid: string
+	uid: string,
+	initialData?: EventAttendeeUser | undefined
 ): UseAttendeeByUserIdQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
@@ -37,7 +38,8 @@ export const useAttendeeByUserIdQuery = (
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 

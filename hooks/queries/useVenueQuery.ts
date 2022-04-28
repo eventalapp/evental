@@ -10,7 +10,11 @@ export interface UseVenueQueryData {
 	venueError: ServerErrorPayload | null;
 }
 
-export const useVenueQuery = (eid: string, vid: string): UseVenueQueryData => {
+export const useVenueQuery = (
+	eid: string,
+	vid: string,
+	initialData?: Prisma.EventVenue | undefined
+): UseVenueQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: venue, isLoading: isVenueLoading } = useQuery<
@@ -31,7 +35,8 @@ export const useVenueQuery = (eid: string, vid: string): UseVenueQueryData => {
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 

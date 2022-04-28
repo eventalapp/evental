@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
-import { ServerErrorResponse } from '../../../../../utils/ServerError';
+import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
 import Prisma from '@prisma/client';
 import { getEvent } from '../index';
+import { handleServerError } from '../../../../../utils/handleServerError';
 
 export default async (
 	req: NextApiRequest,
@@ -11,13 +12,7 @@ export default async (
 	try {
 		const { eid, aid } = req.query;
 
-		const event = await getEvent(String(eid));
-
-		if (!event) {
-			return res.status(404).send({ error: { message: 'Event not found.' } });
-		}
-
-		const activity = await getActivity(event.id, String(aid));
+		const activity = await getActivity(String(eid), String(aid));
 
 		if (!activity) {
 			return res.status(404).send({ error: { message: 'Activity not found.' } });
@@ -25,23 +20,27 @@ export default async (
 
 		return res.status(200).send(activity);
 	} catch (error) {
-		if (error instanceof Error) {
-			console.error(error);
-			return res.status(500).send({ error: { message: error.message } });
-		}
-
-		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
+		return handleServerError(error, res);
 	}
 };
 
-export const getActivity = async (
-	eventId: string,
-	aid: string
-): Promise<Prisma.EventActivity | null> => {
-	return await prisma.eventActivity.findFirst({
+export const getActivity = async (eid: string, aid: string): Promise<Prisma.EventActivity> => {
+	const event = await getEvent(eid);
+
+	if (!event) {
+		throw new ServerError('Event not found.', 404);
+	}
+
+	const activity = await prisma.eventActivity.findFirst({
 		where: {
-			eventId: eventId,
+			eventId: event.id,
 			OR: [{ id: aid }, { slug: aid }]
 		}
 	});
+
+	if (!activity) {
+		throw new ServerError('Activity not found.', 404);
+	}
+
+	return activity;
 };

@@ -2,8 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
 import { EventAttendeeUser } from '../attendees/[aid]';
 import type Prisma from '@prisma/client';
-import { ServerErrorResponse } from '../../../../../utils/ServerError';
+import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
 import { getEvent } from '../index';
+import { handleServerError } from '../../../../../utils/handleServerError';
 
 export type RoleAttendeePayload = {
 	attendees: EventAttendeeUser[] | undefined;
@@ -17,50 +18,56 @@ export default async (
 	try {
 		const { eid, rid } = req.query;
 
-		const event = await getEvent(String(eid));
+		const role = await getRole(String(eid), String(rid));
 
-		if (!event) {
-			return res.status(404).send({ error: { message: 'Event not found.' } });
-		}
-
-		const role = await getRole(event.id, String(rid));
-
-		if (!role) {
-			return res.status(404).send({ error: { message: 'Role not found.' } });
-		}
-
-		const attendees = await getAttendees(event.id, role.id);
+		const attendees = await getAttendees(String(eid), String(rid));
 
 		const payload: RoleAttendeePayload = { attendees, role };
 
 		return res.status(200).send(payload);
 	} catch (error) {
-		if (error instanceof Error) {
-			console.error(error);
-			return res.status(500).send({ error: { message: error.message } });
-		}
-
-		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
+		return handleServerError(error, res);
 	}
 };
 
-export const getRole = async (eventId: string, rid: string): Promise<Prisma.EventRole | null> => {
-	return await prisma.eventRole.findFirst({
+export const getRole = async (eid: string, rid: string): Promise<Prisma.EventRole> => {
+	const event = await getEvent(eid);
+
+	if (!event) {
+		throw new ServerError('Event not found.', 404);
+	}
+
+	const role = await prisma.eventRole.findFirst({
 		where: {
-			eventId: eventId,
+			eventId: event.id,
 			OR: [{ id: String(rid) }, { slug: String(rid) }]
 		}
 	});
+
+	if (!role) {
+		throw new ServerError('Role not found.', 404);
+	}
+
+	return role;
 };
 
-export const getAttendees = async (
-	eventId: string,
-	roleId: string
-): Promise<EventAttendeeUser[]> => {
+export const getAttendees = async (eid: string, rid: string): Promise<EventAttendeeUser[]> => {
+	const event = await getEvent(eid);
+
+	if (!event) {
+		throw new ServerError('Event not found.', 404);
+	}
+
+	const role = await getRole(event.id, String(rid));
+
+	if (!role) {
+		throw new ServerError('Role not found.', 404);
+	}
+
 	return await prisma.eventAttendee.findMany({
 		where: {
-			eventRoleId: roleId,
-			eventId: eventId
+			eventRoleId: role.id,
+			eventId: event.id
 		},
 		include: {
 			user: {

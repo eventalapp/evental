@@ -10,7 +10,7 @@ export interface UseRolesQueryData {
 	rolesError: ServerErrorPayload | null;
 }
 
-export const useRolesQuery = (eid: string): UseRolesQueryData => {
+export const useRolesQuery = (eid: string, initialData?: Prisma.EventRole[]): UseRolesQueryData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const { data: roles, isLoading: isRolesLoading } = useQuery<
@@ -29,7 +29,8 @@ export const useRolesQuery = (eid: string): UseRolesQueryData => {
 			},
 			onSuccess: () => {
 				setError(null);
-			}
+			},
+			initialData
 		}
 	);
 

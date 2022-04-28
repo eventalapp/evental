@@ -3,12 +3,13 @@ import { getSession } from 'next-auth/react';
 import { S3 } from 'aws-sdk';
 import { CreateEventSchema } from '../../../utils/schemas';
 import prisma from '../../../prisma/client';
-import { ServerError, ServerErrorResponse } from '../../../utils/ServerError';
+import { ServerErrorResponse } from '../../../utils/ServerError';
 import crypto from 'crypto';
 import type Prisma from '@prisma/client';
 import { busboyParseForm } from '../../../utils/busboyParseForm';
 import { uploadToBucket } from '../../../utils/uploadToBucket';
 import { processImage } from '../../../utils/processImage';
+import { handleServerError } from '../../../utils/handleServerError';
 
 export const config = {
 	api: {
@@ -91,15 +92,7 @@ export default async (
 
 			res.status(200).send(event);
 		} catch (error) {
-			if (error instanceof ServerError) {
-				return res.status(error.statusCode).send({ error: { message: error.message } });
-			}
-
-			if (error instanceof Error && error.message) {
-				return res.status(500).send({ error: { message: error.message } });
-			}
-
-			return res.status(500).send({ error: { message: 'Something went wrong.' } });
+			return handleServerError(error, res);
 		}
 	} else {
 		return res.status(405).send({ error: { message: 'Method not allowed' } });

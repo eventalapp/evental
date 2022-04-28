@@ -1,7 +1,9 @@
 import type Prisma from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../../prisma/client';
-import { ServerErrorResponse } from '../../../../../../utils/ServerError';
+import { ServerError, ServerErrorResponse } from '../../../../../../utils/ServerError';
+import { getEvent } from '../../index';
+import { handleServerError } from '../../../../../../utils/handleServerError';
 
 export type EventAttendeeUser = Prisma.EventAttendee & {
 	user: {
@@ -17,38 +19,10 @@ export default async (
 	req: NextApiRequest,
 	res: NextApiResponse<ServerErrorResponse | Prisma.EventAttendee>
 ) => {
-	const { eid, uid } = req.query;
-
 	try {
-		const event = await prisma.event.findFirst({
-			where: {
-				OR: [{ id: String(eid) }, { slug: String(eid) }]
-			}
-		});
+		const { eid, uid } = req.query;
 
-		if (!event) {
-			return res.status(404).send({ error: { message: 'Event not found.' } });
-		}
-
-		const eventAttendee = await prisma.eventAttendee.findFirst({
-			where: {
-				userId: String(uid),
-				eventId: event.id
-			},
-			include: {
-				user: {
-					select: {
-						name: true,
-						image: true
-					}
-				},
-				role: {
-					select: {
-						name: true
-					}
-				}
-			}
-		});
+		const eventAttendee = await getAttendeeByUserId(String(eid), String(uid));
 
 		if (!eventAttendee) {
 			return res.status(200).end();
@@ -56,11 +30,43 @@ export default async (
 
 		return res.status(200).send(eventAttendee);
 	} catch (error) {
-		if (error instanceof Error) {
-			console.error(error);
-			return res.status(500).send({ error: { message: error.message } });
-		}
-
-		return res.status(500).send({ error: { message: 'An error occurred, please try again.' } });
+		return handleServerError(error, res);
 	}
+};
+
+export const getAttendeeByUserId = async (
+	eid: string,
+	uid: string
+): Promise<EventAttendeeUser | null> => {
+	const event = await getEvent(String(eid));
+
+	if (!event) {
+		throw new ServerError('Event not found.', 404);
+	}
+
+	const eventAttendee = await prisma.eventAttendee.findFirst({
+		where: {
+			userId: String(uid),
+			eventId: event.id
+		},
+		include: {
+			user: {
+				select: {
+					name: true,
+					image: true
+				}
+			},
+			role: {
+				select: {
+					name: true
+				}
+			}
+		}
+	});
+
+	if (!eventAttendee) {
+		return null;
+	}
+
+	return eventAttendee;
 };
