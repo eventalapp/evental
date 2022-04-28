@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Column from '../../components/layout/Column';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
@@ -8,12 +9,17 @@ import Unauthorized from '../../components/Unauthorized';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
+import { Session } from 'next-auth';
 
-const CreateEventPage: NextPage = () => {
-	const session = useSession();
+type Props = {
+	session: Session | null;
+};
+
+const CreateEventPage: NextPage<Props> = (props) => {
+	const { session } = props;
 	const { createEventMutation, createEventError } = useCreateEventMutation();
 
-	if (!session.data?.user?.id) {
+	if (!session?.user?.id) {
 		return <Unauthorized />;
 	}
 
@@ -35,6 +41,16 @@ const CreateEventPage: NextPage = () => {
 			</Column>
 		</PageWrapper>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+	const session = await getSession(context);
+
+	return {
+		props: {
+			session
+		}
+	};
 };
 
 export default CreateEventPage;
