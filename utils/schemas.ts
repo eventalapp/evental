@@ -1,5 +1,6 @@
 import isISODate from 'is-iso-date';
 import { z } from 'zod';
+import { isBrowser } from './isBrowser';
 
 // Venues
 
@@ -100,7 +101,7 @@ export const CreateEventSchema = z.object({
 		.string()
 		.min(4, 'Location must be at least 4 characters')
 		.max(100, 'Location must be less than 40 characters'),
-	image: typeof window === 'undefined' ? z.any() : z.instanceof(FileList),
+	image: isBrowser ? z.instanceof(FileList) : z.any(),
 	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
 	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
 	description: z.string().max(1000, 'Description is too long')

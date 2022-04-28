@@ -1,7 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
+import Prisma from '@prisma/client';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+	req: NextApiRequest,
+	res: NextApiResponse<ServerErrorResponse | Prisma.EventVenue>
+) => {
 	const { eid, vid } = req.query;
 
 	try {

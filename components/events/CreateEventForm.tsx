@@ -14,7 +14,6 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
-import { ViewServerError } from '../ViewServerError';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateEventMutationData;
@@ -82,9 +81,10 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		);
 	}, [slugWatcher]);
 
-	if (createEventError) {
-		return <ViewServerError errors={[createEventError]} />;
-	}
+	useEffect(() => {
+		createEventError && toast.error(createEventError.message);
+		console.log('err', createEventError);
+	}, [createEventError]);
 
 	return (
 		<form

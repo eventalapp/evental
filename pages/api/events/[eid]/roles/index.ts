@@ -1,7 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../../../prisma/client';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
+import type Prisma from '@prisma/client';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async (
+	req: NextApiRequest,
+	res: NextApiResponse<ServerErrorResponse | Prisma.EventRole[]>
+) => {
 	const { eid } = req.query;
 
 	try {
@@ -24,14 +29,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 			}
 		});
 
-		// If no roles exist, crate a default role
-
 		if (roles.length === 0) {
-			const role = prisma.eventRole.create({
+			const role = await prisma.eventRole.create({
 				data: {
 					name: 'ATTENDEE',
 					slug: 'attendee',
-					eventId: String(eid)
+					eventId: String(eid),
+					defaultRole: true
 				}
 			});
 

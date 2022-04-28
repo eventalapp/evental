@@ -1,11 +1,17 @@
 export type ServerErrorPayload = { message: string };
 
-export class ServerError extends Error {
+export type ServerErrorResponse = {
 	error: ServerErrorPayload;
+};
 
-	constructor(message: string) {
+export class ServerError extends Error {
+	statusCode: number;
+	message: string;
+
+	constructor(message: string, statusCode: number) {
 		super(message);
 
-		this.error = { message };
+		this.statusCode = statusCode;
+		this.message = message;
 	}
 }
