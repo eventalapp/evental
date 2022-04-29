@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
 
 export interface UseDeleteEventMutationData {
@@ -11,12 +11,10 @@ export interface UseDeleteEventMutationData {
 		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>;
-	deleteEventError: ServerErrorPayload | null;
 }
 
 export const useDeleteEventMutation = (eid: string): UseDeleteEventMutationData => {
 	const queryClient = useQueryClient();
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const deleteEventMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
@@ -30,8 +28,6 @@ export const useDeleteEventMutation = (eid: string): UseDeleteEventMutationData 
 		},
 		{
 			onSuccess: () => {
-				setError(null);
-
 				toast.success('Event deleted successfully');
 
 				router.push(`/events`).then(() => {
@@ -40,10 +36,10 @@ export const useDeleteEventMutation = (eid: string): UseDeleteEventMutationData 
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { deleteEventMutation, deleteEventError: error };
+	return { deleteEventMutation };
 };

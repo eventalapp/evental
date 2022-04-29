@@ -7,7 +7,7 @@ import Column from '../../../../../../components/layout/Column';
 import { EditActivityForm } from '../../../../../../components/activities/EditActivityForm';
 import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
@@ -20,7 +20,6 @@ import type Prisma from '@prisma/client';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { toast } from 'react-toastify';
 import Link from 'next/link';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
@@ -43,14 +42,7 @@ const EditActivityPage: NextPage<Props> = (props) => {
 		String(aid),
 		initialActivity
 	);
-	const { editActivityError, editActivityMutation } = useEditActivityMutation(
-		String(eid),
-		String(aid)
-	);
-
-	useEffect(() => {
-		editActivityError && toast.error(editActivityError.message);
-	}, [editActivityError]);
+	const { editActivityMutation } = useEditActivityMutation(String(eid), String(aid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -99,7 +91,6 @@ const EditActivityPage: NextPage<Props> = (props) => {
 					venues={venues}
 					activity={activity}
 					editActivityMutation={editActivityMutation}
-					editActivityError={editActivityError}
 					isActivityLoading={isActivityLoading}
 					isVenuesLoading={isVenuesLoading}
 					venuesError={venuesError}

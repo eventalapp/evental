@@ -1,9 +1,8 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { CreateEventPayload } from '../../utils/schemas';
 import { populateFormData } from '../../utils/populateFormData';
 import { toast } from 'react-toastify';
@@ -14,11 +13,9 @@ export interface UseCreateEventMutationData {
 		AxiosError<ServerError, unknown>,
 		CreateEventPayload
 	>;
-	createEventError: ServerErrorPayload | null;
 }
 
 export const useCreateEventMutation = (): UseCreateEventMutationData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 	const queryClient = useQueryClient();
 
 	const createEventMutation = useMutation<
@@ -33,8 +30,6 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 		},
 		{
 			onSuccess: (response) => {
-				setError(null);
-
 				toast.success('Event created successfully');
 
 				router.push(`/events/${response.data.slug}`).then(() => {
@@ -42,10 +37,10 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { createEventMutation, createEventError: error };
+	return { createEventMutation };
 };

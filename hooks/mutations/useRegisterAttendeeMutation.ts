@@ -1,9 +1,8 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { CreateAttendeePayload } from '../../utils/schemas';
 import { populateFormData } from '../../utils/populateFormData';
 import { toast } from 'react-toastify';
@@ -14,11 +13,9 @@ export interface UseRegisterAttendeeMutationData {
 		AxiosError<ServerError, unknown>,
 		CreateAttendeePayload
 	>;
-	registerAttendeeError: ServerErrorPayload | null;
 }
 
 export const useRegisterAttendeeMutation = (eid: string): UseRegisterAttendeeMutationData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 	const queryClient = useQueryClient();
 
 	const registerAttendeeMutation = useMutation<
@@ -33,8 +30,6 @@ export const useRegisterAttendeeMutation = (eid: string): UseRegisterAttendeeMut
 		},
 		{
 			onSuccess: () => {
-				setError(null);
-
 				toast.success('You have successfully registered for this event.');
 
 				router.push(`/events/${eid}/`).then(() => {
@@ -42,10 +37,10 @@ export const useRegisterAttendeeMutation = (eid: string): UseRegisterAttendeeMut
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { registerAttendeeMutation, registerAttendeeError: error };
+	return { registerAttendeeMutation };
 };

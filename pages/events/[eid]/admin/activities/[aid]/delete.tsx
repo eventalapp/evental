@@ -7,7 +7,7 @@ import Column from '../../../../../../components/layout/Column';
 import { DeleteActivityForm } from '../../../../../../components/activities/DeleteActivityForm';
 import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
@@ -20,7 +20,6 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { toast } from 'react-toastify';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -38,14 +37,7 @@ const DeleteActivityPage: NextPage<Props> = (props) => {
 		String(aid),
 		initialActivity
 	);
-	const { deleteActivityError, deleteActivityMutation } = useDeleteActivityMutation(
-		String(eid),
-		String(aid)
-	);
-
-	useEffect(() => {
-		deleteActivityError && toast.error(deleteActivityError.message);
-	}, [deleteActivityError]);
+	const { deleteActivityMutation } = useDeleteActivityMutation(String(eid), String(aid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -86,7 +78,6 @@ const DeleteActivityPage: NextPage<Props> = (props) => {
 					activity={activity}
 					isActivityLoading={isActivityLoading}
 					activityError={activityError}
-					deleteActivityError={deleteActivityError}
 					deleteActivityMutation={deleteActivityMutation}
 				/>
 			</Column>

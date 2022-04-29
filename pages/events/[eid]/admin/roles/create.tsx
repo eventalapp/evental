@@ -8,13 +8,12 @@ import { CreateRoleForm } from '../../../../../components/roles/CreateRoleForm';
 import { Navigation } from '../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useCreateRoleMutation } from '../../../../../hooks/mutations/useCreateRoleMutation';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { toast } from 'react-toastify';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -27,11 +26,7 @@ const CreateRolePage: NextPage<Props> = (props) => {
 
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { createRoleMutation, createRoleError } = useCreateRoleMutation(String(eid));
-
-	useEffect(() => {
-		toast.error(createRoleError?.message);
-	}, [createRoleError]);
+	const { createRoleMutation } = useCreateRoleMutation(String(eid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -52,7 +47,7 @@ const CreateRolePage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl">Create Role Page</h1>
 
-				<CreateRoleForm createRoleError={createRoleError} createRoleMutation={createRoleMutation} />
+				<CreateRoleForm createRoleMutation={createRoleMutation} />
 			</Column>
 		</PageWrapper>
 	);

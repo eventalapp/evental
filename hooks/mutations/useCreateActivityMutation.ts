@@ -1,9 +1,8 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { CreateActivityPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 
@@ -13,11 +12,9 @@ export interface UseCreateActivityMutationData {
 		AxiosError<ServerError, unknown>,
 		CreateActivityPayload
 	>;
-	createActivityError: ServerErrorPayload | null;
 }
 
 export const useCreateActivityMutation = (eid: string): UseCreateActivityMutationData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 	const queryClient = useQueryClient();
 
 	const createActivityMutation = useMutation<
@@ -33,8 +30,6 @@ export const useCreateActivityMutation = (eid: string): UseCreateActivityMutatio
 		},
 		{
 			onSuccess: (response) => {
-				setError(null);
-
 				toast.success('Activity created successfully');
 
 				router.push(`/events/${eid}/activities/${response.data.slug}`).then(() => {
@@ -42,10 +37,10 @@ export const useCreateActivityMutation = (eid: string): UseCreateActivityMutatio
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { createActivityMutation, createActivityError: error };
+	return { createActivityMutation };
 };

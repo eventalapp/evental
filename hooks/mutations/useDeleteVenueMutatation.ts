@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
 
 export interface UseDeleteVenueMutationData {
@@ -11,12 +11,10 @@ export interface UseDeleteVenueMutationData {
 		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>;
-	deleteVenueError: ServerErrorPayload | null;
 }
 
 export const useDeleteVenueMutation = (eid: string, vid: string): UseDeleteVenueMutationData => {
 	const queryClient = useQueryClient();
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const deleteVenueMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
@@ -30,8 +28,6 @@ export const useDeleteVenueMutation = (eid: string, vid: string): UseDeleteVenue
 		},
 		{
 			onSuccess: () => {
-				setError(null);
-
 				toast.success('Venue deleted successfully');
 
 				router.push(`/events/${eid}/venues/`).then(() => {
@@ -40,10 +36,10 @@ export const useDeleteVenueMutation = (eid: string, vid: string): UseDeleteVenue
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { deleteVenueMutation, deleteVenueError: error };
+	return { deleteVenueMutation };
 };

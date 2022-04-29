@@ -9,7 +9,7 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { EditVenueForm } from '../../../../../../components/venues/EditVenueForm';
 import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditVenueMutation';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
-import React, { useEffect } from 'react';
+import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { getVenue } from '../../../../../api/events/[eid]/venues/[vid]';
@@ -20,7 +20,6 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { toast } from 'react-toastify';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
 
 type Props = {
@@ -39,11 +38,7 @@ const EditVenuePage: NextPage<Props> = (props) => {
 		String(vid),
 		initialVenue
 	);
-	const { editVenueMutation, editVenueError } = useEditVenueMutation(String(eid), String(vid));
-
-	useEffect(() => {
-		toast.error(editVenueError?.message);
-	}, [editVenueError]);
+	const { editVenueMutation } = useEditVenueMutation(String(eid), String(vid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -80,7 +75,6 @@ const EditVenuePage: NextPage<Props> = (props) => {
 					venue={venue}
 					venueError={venueError}
 					editVenueMutation={editVenueMutation}
-					editVenueError={editVenueError}
 					isVenueLoading={isVenueLoading}
 				/>
 			</Column>

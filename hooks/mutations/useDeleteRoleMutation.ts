@@ -1,7 +1,7 @@
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
-import { FormEvent, useState } from 'react';
+import { ServerError } from '../../typings/error';
+import { FormEvent } from 'react';
 import router from 'next/router';
 import { toast } from 'react-toastify';
 
@@ -11,12 +11,10 @@ export interface UseDeleteRoleMutationData {
 		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>;
-	deleteRoleError: ServerErrorPayload | null;
 }
 
 export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMutationData => {
 	const queryClient = useQueryClient();
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const deleteRoleMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
@@ -30,8 +28,6 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 		},
 		{
 			onSuccess: () => {
-				setError(null);
-
 				toast.success('Role deleted successfully');
 
 				router.push(`/events/${eid}/roles`).then(() => {
@@ -41,10 +37,10 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { deleteRoleMutation, deleteRoleError: error };
+	return { deleteRoleMutation };
 };

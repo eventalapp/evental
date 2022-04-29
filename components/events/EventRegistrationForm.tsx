@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { CreateAttendeePayload, CreateAttendeeSchema } from '../../utils/schemas';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -21,7 +20,7 @@ type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElem
 	UseRegisterAttendeeMutationData;
 
 export const EventRegistrationForm: React.FC<Props> = (props) => {
-	const { registerAttendeeError, registerAttendeeMutation, event } = props;
+	const { registerAttendeeMutation, event } = props;
 	const {
 		register,
 		handleSubmit,
@@ -49,10 +48,6 @@ export const EventRegistrationForm: React.FC<Props> = (props) => {
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
-
-	useEffect(() => {
-		registerAttendeeError && toast.error(registerAttendeeError.message);
-	}, [registerAttendeeError]);
 
 	return (
 		<form

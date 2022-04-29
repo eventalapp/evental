@@ -27,9 +27,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
-	const { registerAttendeeError, registerAttendeeMutation } = useRegisterAttendeeMutation(
-		String(eid)
-	);
+	const { registerAttendeeMutation } = useRegisterAttendeeMutation(String(eid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -59,7 +57,6 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 					eventError={eventError}
 					isEventLoading={isEventLoading}
 					registerAttendeeMutation={registerAttendeeMutation}
-					registerAttendeeError={registerAttendeeError}
 				/>
 			</Column>
 		</PageWrapper>

@@ -1,11 +1,11 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { EditAttendeePayload, EditAttendeeSchema } from '../../utils/schemas';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
 import { processSlug } from '../../utils/slugify';
 
@@ -15,12 +15,10 @@ export interface UseEditAttendeeMutationData {
 		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>;
-	editAttendeeError: ServerErrorPayload | null;
 }
 
 export const useEditAttendeeMutation = (eid: string, aid: string): UseEditAttendeeMutationData => {
 	const queryClient = useQueryClient();
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const editAttendeeMutation = useMutation<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
@@ -52,8 +50,6 @@ export const useEditAttendeeMutation = (eid: string, aid: string): UseEditAttend
 		},
 		{
 			onSuccess: (response) => {
-				setError(null);
-
 				toast.success('Attendee edited successfully');
 
 				router.push(`/events/${eid}/attendees/${response.data.slug}`).then(() => {
@@ -62,10 +58,10 @@ export const useEditAttendeeMutation = (eid: string, aid: string): UseEditAttend
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { editAttendeeMutation, editAttendeeError: error };
+	return { editAttendeeMutation };
 };

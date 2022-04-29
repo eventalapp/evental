@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { ServerError } from '../../typings/error';
 import { toast } from 'react-toastify';
 
 export interface UseDeleteAttendeeMutationData {
@@ -11,7 +11,6 @@ export interface UseDeleteAttendeeMutationData {
 		AxiosError<ServerError, unknown>,
 		FormEvent<HTMLFormElement>
 	>;
-	deleteAttendeeError: ServerErrorPayload | null;
 }
 
 export const useDeleteAttendeeMutation = (
@@ -19,7 +18,6 @@ export const useDeleteAttendeeMutation = (
 	aid: string
 ): UseDeleteAttendeeMutationData => {
 	const queryClient = useQueryClient();
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
 
 	const deleteAttendeeMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
@@ -33,8 +31,6 @@ export const useDeleteAttendeeMutation = (
 		},
 		{
 			onSuccess: () => {
-				setError(null);
-
 				toast.success('Attendee deleted successfully');
 
 				router.push(`/events/${eid}/attendees/`).then(() => {
@@ -43,10 +39,10 @@ export const useDeleteAttendeeMutation = (
 				});
 			},
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
 			}
 		}
 	);
 
-	return { deleteAttendeeMutation, deleteAttendeeError: error };
+	return { deleteAttendeeMutation };
 };
