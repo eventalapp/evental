@@ -47,13 +47,13 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
-  image         String?
+  image         String @default("/images/default-avatar.jpg")
   updatedAt     DateTime  @updatedAt
   createdAt     DateTime  @default(now())
   role          Role      @default(USER)
 
-  accounts    Account[]
-  sessions    Session[]
+  accounts      Account[]
+  sessions      Session[]
   eventAttendee EventAttendee[]
 
   @@map("user")
@@ -83,13 +83,13 @@ model Event {
   startDate   DateTime
   endDate     DateTime
   type        String   @default("Event")
-  image       String?  @default("/images/default-event.jpg")
+  image       String  @default("/images/default-event.jpg")
   banner      String?
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
-  eventAttendee   EventAttendee[]
+  eventAttendee EventAttendee[]
   eventActivity EventActivity[]
   eventVenue    EventVenue[]
   eventRole     EventRole[]
@@ -98,14 +98,17 @@ model Event {
 }
 
 model EventAttendee {
-  id          String @id @default(cuid())
-  name String
+  id          String  @id @default(cuid())
+  name        String
   slug        String
   userId      String
   eventId     String
   eventRoleId String
-  company       String?
-  position      String?
+  location    String?
+  description String?
+  company     String?
+  position    String?
+  image           String @default("/images/default-avatar.jpg")
 
   permissionRole EventPermissionRole
 
@@ -118,10 +121,10 @@ model EventAttendee {
 }
 
 model EventRole {
-  id      String @id @default(cuid())
-  eventId String
-  slug    String
-  name    String
+  id          String  @id @default(cuid())
+  eventId     String
+  slug        String
+  name        String
   defaultRole Boolean @default(false)
 
   EventAttendee EventAttendee[]

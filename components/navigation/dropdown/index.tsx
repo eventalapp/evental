@@ -3,7 +3,7 @@ import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 import { DropdownLink } from './Link';
-import ImageWithFallback from '../../ImageWithFallback';
+import Image from 'next/image';
 
 export const ProfileDropdown: React.FC = () => {
 	const { data: session } = useSession();
@@ -11,15 +11,16 @@ export const ProfileDropdown: React.FC = () => {
 	return (
 		<Root>
 			<Trigger>
-				<div className="w-8 h-8 relative">
-					<ImageWithFallback
+				<div className="rounded-full w-8 h-8 relative border-2 border-gray-100">
+					<Image
 						className="rounded-full"
 						layout="fill"
-						src={session?.user?.image || ''}
+						src={
+							session?.user?.image
+								? `https://cdn.evental.app${session?.user?.image}`
+								: `https://cdn.evental.app/images/default-avatar.jpg`
+						}
 						alt={session?.user?.name || ''}
-						fallbackSrc={`https://api.adorable.io/avatars/285/${
-							session?.user?.name || 'unknown'
-						}.png`}
 					/>
 				</div>
 			</Trigger>

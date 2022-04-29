@@ -1,10 +1,10 @@
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import classNames from 'classnames';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
-import ReactDatePicker, {ReactDatePickerProps} from 'react-datepicker';
-import {DatePickerButton} from './DatePickerButton';
+import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
+import { DatePickerButton } from './DatePickerButton';
 
 type Props = { formatTime?: string } & ReactDatePickerProps;
 
