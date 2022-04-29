@@ -21,6 +21,7 @@ import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import Link from 'next/link';
 import { ViewServerErrorPage } from '../../../../../components/error/ViewServerErrorPage';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -35,6 +36,7 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
 	const { createActivityMutation } = useCreateActivityMutation(String(eid));
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -48,12 +50,12 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 		return <NotFoundPage />;
 	}
 
-	if (isVenuesLoading) {
+	if (isVenuesLoading || isEventLoading) {
 		return <LoadingPage />;
 	}
 
-	if (venuesError) {
-		return <ViewServerErrorPage errors={[venuesError]} />;
+	if (venuesError || eventError) {
+		return <ViewServerErrorPage errors={[venuesError, eventError]} />;
 	}
 
 	if (venues && venues.length === 0) {
@@ -83,6 +85,9 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 					venuesError={venuesError}
 					isVenuesLoading={isVenuesLoading}
 					createActivityMutation={createActivityMutation}
+					event={event}
+					eventError={eventError}
+					isEventLoading={isEventLoading}
 				/>
 			</Column>
 		</PageWrapper>
