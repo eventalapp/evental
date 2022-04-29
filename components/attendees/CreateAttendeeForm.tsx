@@ -1,9 +1,13 @@
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { CreateAttendeePayload, CreateAttendeeSchema } from '../../utils/schemas';
+import {
+	CreateAttendeePayload,
+	CreateAttendeeSchema,
+	ImageUploadSchema
+} from '../../utils/schemas';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
@@ -13,13 +17,16 @@ import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useAttendeeQuery } from '../../hooks/queries/useAttendeeQuery';
 import { slugify } from '../../utils/slugify';
 import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
+import Image from 'next/image';
+import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
-	UseCreateAttendeeMutationData;
+	UseCreateAttendeeMutationData &
+	UseImageUploadMutationData;
 
 export const CreateAttendeeForm: React.FC<Props> = (props) => {
-	const { createAttendeeMutation, event } = props;
+	const { createAttendeeMutation, event, imageUploadMutation, imageUploadResponse } = props;
 	const {
 		register,
 		handleSubmit,
@@ -28,11 +35,15 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 		trigger,
 		formState: { errors }
 	} = useForm<CreateAttendeePayload>({
+		defaultValues: {
+			image: '/images/default-event.jpg'
+		},
 		resolver: zodResolver(CreateAttendeeSchema)
 	});
 
 	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
+	const imageWatcher = watch('image');
 
 	const { attendee, isAttendeeLoading } = useAttendeeQuery(String(event?.id), slugWatcher);
 
@@ -47,6 +58,12 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
+
+	useEffect(() => {
+		if (imageUploadResponse) {
+			setValue('image', imageUploadResponse.pathName);
+		}
+	}, [imageUploadResponse]);
 
 	return (
 		<form
@@ -115,11 +132,32 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div>
+					<p>Current image:</p>
+
+					<div className="h-16 w-16 relative">
+						<Image
+							alt={'Event image'}
+							src={String(
+								imageWatcher
+									? `https://cdn.evental.app${imageWatcher}`
+									: `https://cdn.evental.app/images/default-avatar.jpg`
+							)}
+							className="rounded-md"
+							layout="fill"
+						/>
+					</div>
+
 					<Label htmlFor="image">Image</Label>
 					<Input
 						type="file"
 						accept="image/png, image/jpeg"
-						{...register('image', { required: true })}
+						onChange={(e: ChangeEvent<HTMLInputElement>) => {
+							const files = e?.target?.files;
+
+							const filesParsed = ImageUploadSchema.parse({ image: files });
+
+							imageUploadMutation.mutate(filesParsed);
+						}}
 					/>
 					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 				</div>
@@ -130,7 +168,7 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 					type="submit"
 					variant="primary"
 					padding="medium"
-					disabled={isAttendeeLoading || Boolean(attendee)}
+					disabled={imageUploadMutation.isLoading || isAttendeeLoading || Boolean(attendee)}
 				>
 					Register
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />

@@ -121,7 +121,7 @@ export const CreateAttendeeSchema = z.object({
 	slug: slugValidator,
 	company: z.string().max(40, 'Company must be less than 40 characters'),
 	position: z.string().max(40, 'Position must be less than 40 characters'),
-	description: z.string().max(40, 'Position must be less than 300 characters'),
+	description: descriptionValidator,
 	location: z.string().max(40, 'Position must be less than 40 characters'),
 	image: z.string()
 });

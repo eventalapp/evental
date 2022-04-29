@@ -17,6 +17,7 @@ import Prisma from '@prisma/client';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { Loading } from '../../../components/error/Loading';
 import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
+import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
 
 type Props = {
 	session: Session | null;
@@ -29,6 +30,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
+	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -58,6 +60,8 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 					eventError={eventError}
 					isEventLoading={isEventLoading}
 					createAttendeeMutation={createAttendeeMutation}
+					imageUploadMutation={imageUploadMutation}
+					imageUploadResponse={imageUploadResponse}
 				/>
 			</Column>
 		</PageWrapper>

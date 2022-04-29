@@ -223,7 +223,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					variant="primary"
 					padding="medium"
 					disabled={
-						isEventSlugCheckLoading || Boolean(slugWatcher !== event?.slug && eventSlugCheck)
+						imageUploadMutation.isLoading ||
+						isEventSlugCheckLoading ||
+						Boolean(slugWatcher !== event?.slug && eventSlugCheck)
 					}
 				>
 					Edit Event
