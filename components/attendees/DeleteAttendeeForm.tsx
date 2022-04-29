@@ -24,11 +24,7 @@ export const DeleteAttendeeForm: React.FC<Props> = (props) => {
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (isAttendeeLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (!attendee) {

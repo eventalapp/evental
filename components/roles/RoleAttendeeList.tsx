@@ -31,11 +31,7 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isOrganizerLoading || isRoleAttendeesLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (isOrganizerError || roleAttendeesError) {

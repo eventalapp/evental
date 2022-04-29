@@ -8,7 +8,6 @@ import { NotFound } from '../NotFound';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { format } from 'date-fns';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -27,11 +26,7 @@ export const ActivityList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isActivitiesLoading || isOrganizerLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (activitiesError || isOrganizerError) {
@@ -54,7 +49,7 @@ export const ActivityList: React.FC<Props> = (props) => {
 							return (
 								<div key={key} className="flex flex-row flex-wrap">
 									<span className="text-gray-700 text-sm w-20 p-2 pr-3 text-right">
-										{format(new Date(key), 'h:mma OOO')}
+										{format(new Date(key), 'h:mm a OOO')}
 									</span>
 
 									<div className="flex-grow">

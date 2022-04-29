@@ -29,11 +29,7 @@ export const DeleteRoleForm: React.FC<Props> = (props) => {
 	}
 
 	if (isRoleAttendeesLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (!role || !attendees) {

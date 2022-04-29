@@ -18,11 +18,7 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 	const { venue, venueError, isVenueLoading, editVenueError, editVenueMutation } = props;
 
 	if (isVenueLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (venueError || editVenueError) {

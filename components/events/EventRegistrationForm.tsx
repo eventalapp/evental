@@ -69,11 +69,7 @@ export const EventRegistrationForm: React.FC<Props> = (props) => {
 	}, [registerAttendeeError]);
 
 	if (isEventLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	return (

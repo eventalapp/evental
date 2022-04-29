@@ -34,11 +34,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	}
 
 	if (isVenuesLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (venuesError || createActivityError) {

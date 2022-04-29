@@ -21,11 +21,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 		props;
 
 	if (isEventLoading) {
-		return (
-			<PageWrapper>
-				<Loading />
-			</PageWrapper>
-		);
+		return <Loading />;
 	}
 
 	if (editEventError || eventError) {
