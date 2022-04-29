@@ -99,18 +99,17 @@ export const ViewEvent: React.FC<Props> = (props) => {
 			<p>{event?.description}</p>
 
 			<div className="overflow-auto whitespace-nowrap relative py-2 mt-6">
+				<Link href={`/events/${eid}/venues`} passHref>
+					<LinkButton variant="inversePrimary">Venues</LinkButton>
+				</Link>
 				{roles &&
 					roles.map((role) => (
 						<Link href={`/events/${eid}/roles/${role.slug}`} passHref key={role.id}>
-							<LinkButton className="mr-3" variant="inversePrimary">
+							<LinkButton className="ml-3" variant="inversePrimary">
 								{capitalizeFirstLetter(role.name.toLowerCase())}s
 							</LinkButton>
 						</Link>
 					))}
-
-				<Link href={`/events/${eid}/venues`} passHref>
-					<LinkButton variant="inversePrimary">Venues</LinkButton>
-				</Link>
 			</div>
 
 			<ActivityList

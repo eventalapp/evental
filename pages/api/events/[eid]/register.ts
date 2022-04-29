@@ -71,6 +71,7 @@ export default async (
 
 			const defaultRole = await prisma.eventRole.findFirst({
 				where: {
+					eventId: event.id,
 					defaultRole: true
 				}
 			});

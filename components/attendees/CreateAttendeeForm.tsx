@@ -2,7 +2,6 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
-
 import { useForm } from 'react-hook-form';
 import { CreateAttendeePayload, CreateAttendeeSchema } from '../../utils/schemas';
 import { Button } from '../form/Button';
@@ -12,15 +11,15 @@ import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useAttendeeQuery } from '../../hooks/queries/useAttendeeQuery';
-import { UseRegisterAttendeeMutationData } from '../../hooks/mutations/useRegisterAttendeeMutation';
 import { slugify } from '../../utils/slugify';
+import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
-	UseRegisterAttendeeMutationData;
+	UseCreateAttendeeMutationData;
 
-export const EventRegistrationForm: React.FC<Props> = (props) => {
-	const { registerAttendeeMutation, event } = props;
+export const CreateAttendeeForm: React.FC<Props> = (props) => {
+	const { createAttendeeMutation, event } = props;
 	const {
 		register,
 		handleSubmit,
@@ -52,7 +51,7 @@ export const EventRegistrationForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				registerAttendeeMutation.mutate(data);
+				createAttendeeMutation.mutate(data);
 			})}
 		>
 			<div className="flex flex-col w-full mt-5">

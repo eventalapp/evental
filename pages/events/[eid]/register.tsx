@@ -8,14 +8,15 @@ import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { getSession } from 'next-auth/react';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Session } from 'next-auth';
-import { EventRegistrationForm } from '../../../components/events/EventRegistrationForm';
-import { useRegisterAttendeeMutation } from '../../../hooks/mutations/useRegisterAttendeeMutation';
+import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
+
 import React from 'react';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
 import { getEvent } from '../../api/events/[eid]';
 import Prisma from '@prisma/client';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { Loading } from '../../../components/error/Loading';
+import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
 
 type Props = {
 	session: Session | null;
@@ -27,7 +28,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
-	const { registerAttendeeMutation } = useRegisterAttendeeMutation(String(eid));
+	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -52,11 +53,11 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Register for this event</h1>
 
-				<EventRegistrationForm
+				<CreateAttendeeForm
 					event={event}
 					eventError={eventError}
 					isEventLoading={isEventLoading}
-					registerAttendeeMutation={registerAttendeeMutation}
+					createAttendeeMutation={createAttendeeMutation}
 				/>
 			</Column>
 		</PageWrapper>

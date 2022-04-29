@@ -17,7 +17,7 @@ export default async (
 		if (roles && roles.length === 0) {
 			const role = await prisma.eventRole.create({
 				data: {
-					name: 'ATTENDEE',
+					name: 'Attendee',
 					slug: 'attendee',
 					eventId: String(eid),
 					defaultRole: true
