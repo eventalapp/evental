@@ -1,4 +1,3 @@
-import isISODate from 'is-iso-date';
 import { z } from 'zod';
 import { isBrowser } from './isBrowser';
 
@@ -98,10 +97,18 @@ export const CreateEventSchema = z.object({
 export type CreateEventPayload = z.infer<typeof CreateEventSchema>;
 
 export const EditEventSchema = z.object({
-	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
-	location: z.string().min(1, 'Location must be specified').max(100, 'Location is too long'),
-	startDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
-	endDate: z.string().refine(isISODate, { message: 'Not a valid ISO string date' }),
+	slug: slugValidator,
+	name: z
+		.string()
+		.min(4, 'Name must be at least 4 characters')
+		.max(100, 'Name must be less than 100 characters'),
+	location: z
+		.string()
+		.min(4, 'Location must be at least 4 characters')
+		.max(100, 'Location must be less than 40 characters'),
+	image: z.string(),
+	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
+	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
 	description: descriptionValidator
 });
 
@@ -116,7 +123,7 @@ export const CreateAttendeeSchema = z.object({
 	position: z.string().max(40, 'Position must be less than 40 characters'),
 	description: z.string().max(40, 'Position must be less than 300 characters'),
 	location: z.string().max(40, 'Position must be less than 40 characters'),
-	image: isBrowser ? z.instanceof(FileList) : z.any()
+	image: z.string()
 });
 
 export type CreateAttendeePayload = z.infer<typeof CreateAttendeeSchema>;
@@ -133,7 +140,7 @@ export const AdminEditAttendeeSchema = z.object({
 		.string()
 		.min(1, 'Permission Role is required')
 		.max(100, 'Permission Role is too long'),
-	image: isBrowser ? z.instanceof(FileList).or(z.string()) : z.any().or(z.string())
+	image: z.string()
 });
 
 export type AdminEditAttendeePayload = z.infer<typeof AdminEditAttendeeSchema>;

@@ -34,6 +34,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		formState: { errors }
 	} = useForm<CreateEventPayload>({
 		defaultValues: {
+			image: '/images/default-event.jpg',
 			startDate: new Date(),
 			endDate: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3)
 		},
@@ -75,7 +76,6 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	}, [slugWatcher]);
 
 	useEffect(() => {
-		console.log(imageUploadResponse);
 		if (imageUploadResponse) {
 			setValue('image', imageUploadResponse.pathName);
 		}
@@ -187,7 +187,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 									? `https://cdn.evental.app${imageWatcher}`
 									: `https://cdn.evental.app/images/default-avatar.jpg`
 							)}
-							className="rounded-full"
+							className="rounded-md"
 							layout="fill"
 						/>
 					</div>

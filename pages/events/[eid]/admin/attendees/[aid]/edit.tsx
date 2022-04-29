@@ -22,6 +22,7 @@ import Prisma from '@prisma/client';
 import { getRoles } from '../../../../../api/events/[eid]/roles';
 import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { useImageUploadMutation } from '../../../../../../hooks/mutations/useImageUploadMutation';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -42,6 +43,7 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 	);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { adminEditAttendeeMutation } = useAdminEditAttendeeMutation(String(eid), String(aid));
+	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
@@ -71,9 +73,11 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl font-bold">Edit Attendee Page</h1>
+				<h1 className="text-3xl font-bold">Edit Attendee</h1>
 
 				<AdminEditAttendeeForm
+					imageUploadMutation={imageUploadMutation}
+					imageUploadResponse={imageUploadResponse}
 					eid={String(eid)}
 					attendee={attendee}
 					isAttendeeLoading={isAttendeeLoading}

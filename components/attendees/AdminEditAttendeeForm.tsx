@@ -1,9 +1,13 @@
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
+import {
+	AdminEditAttendeePayload,
+	AdminEditAttendeeSchema,
+	ImageUploadSchema
+} from '../../utils/schemas';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
@@ -16,6 +20,8 @@ import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { Select } from '../form/Select';
 import Link from 'next/link';
 import { EventPermissionRole } from '@prisma/client';
+import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
+import Image from 'next/image';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -23,10 +29,19 @@ type Props = { eid: string } & DetailedHTMLProps<
 > &
 	UseEditAttendeeMutationData &
 	UseAttendeeQueryData &
-	UseRolesQueryData;
+	UseRolesQueryData &
+	UseImageUploadMutationData;
 
 export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
-	const { adminEditAttendeeMutation, attendee, roles, eid } = props;
+	const {
+		adminEditAttendeeMutation,
+		attendee,
+		roles,
+		eid,
+		imageUploadMutation,
+		imageUploadResponse
+	} = props;
+
 	const {
 		register,
 		handleSubmit,
@@ -39,7 +54,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 			name: attendee?.name ?? undefined,
 			description: attendee?.description ?? undefined,
 			company: attendee?.company ?? undefined,
-			image: attendee?.image ?? undefined,
+			image: attendee?.image ?? '/images/default-avatar.jpg',
 			position: attendee?.position ?? undefined,
 			location: attendee?.location ?? undefined,
 			slug: attendee?.slug ?? undefined,
@@ -51,6 +66,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 
 	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
+	const imageWatcher = watch('image');
 
 	const { attendee: attendeeSlugCheck, isAttendeeLoading: isAttendeeSlugCheckLoading } =
 		useAttendeeQuery(String(eid), slugWatcher);
@@ -66,6 +82,12 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
+
+	useEffect(() => {
+		if (imageUploadResponse) {
+			setValue('image', imageUploadResponse.pathName);
+		}
+	}, [imageUploadResponse]);
 
 	return (
 		<form
@@ -160,6 +182,37 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 								</option>
 							))}
 					</Select>
+				</div>
+
+				<div>
+					<p>Current image:</p>
+
+					<div className="h-16 w-16 relative">
+						<Image
+							alt={'Event image'}
+							src={String(
+								imageWatcher
+									? `https://cdn.evental.app${imageWatcher}`
+									: `https://cdn.evental.app/images/default-avatar.jpg`
+							)}
+							className="rounded-md"
+							layout="fill"
+						/>
+					</div>
+
+					<Label htmlFor="image">Image</Label>
+					<Input
+						type="file"
+						accept="image/png, image/jpeg"
+						onChange={(e: ChangeEvent<HTMLInputElement>) => {
+							const files = e?.target?.files;
+
+							const filesParsed = ImageUploadSchema.parse({ image: files });
+
+							imageUploadMutation.mutate(filesParsed);
+						}}
+					/>
+					{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 				</div>
 			</div>
 
