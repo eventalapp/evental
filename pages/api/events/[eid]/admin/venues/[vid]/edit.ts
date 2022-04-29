@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../../../../prisma/client';
+import { prisma } from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EditVenueSchema } from '../../../../../../../utils/schemas';
 import { ServerErrorResponse } from '../../../../../../../utils/ServerError';

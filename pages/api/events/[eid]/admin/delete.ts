@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../../prisma/client';
+import { prisma } from '../../../../../prisma/client';
 import { isFounder } from '../../../../../utils/isFounder';
 import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import { handleServerError } from '../../../../../utils/handleServerError';

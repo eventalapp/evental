@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { S3 } from 'aws-sdk';
 import { CreateEventSchema } from '../../../utils/schemas';
-import prisma from '../../../prisma/client';
+import { prisma } from '../../../prisma/client';
 import { ServerErrorResponse } from '../../../utils/ServerError';
 import crypto from 'crypto';
 import type Prisma from '@prisma/client';

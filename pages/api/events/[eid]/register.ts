@@ -9,7 +9,7 @@ import { processImage } from '../../../../utils/processImage';
 import { ServerErrorResponse } from '../../../../utils/ServerError';
 import { CreateEventSchema } from '../../../../utils/schemas';
 import { handleServerError } from '../../../../utils/handleServerError';
-import prisma from '../../../../prisma/client';
+import { prisma } from '../../../../prisma/client';
 
 export const config = {
 	api: {
