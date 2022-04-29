@@ -37,7 +37,10 @@ export const useEditAttendeeMutation = (eid: string, aid: string): UseEditAttend
 				name: parsed.name,
 				company: parsed.company,
 				position: parsed.position,
-				eventRoleId: parsed.eventRoleId
+				eventRoleId: parsed.eventRoleId,
+				image: parsed.image,
+				description: parsed.description,
+				location: parsed.location
 			};
 
 			return await axios.put<Prisma.EventAttendee>(
