@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
-import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import Prisma from '@prisma/client';
 import { getEvent } from '../index';
 import { handleServerError } from '../../../../../utils/handleServerError';
@@ -24,11 +24,14 @@ export default async (
 	}
 };
 
-export const getActivity = async (eid: string, aid: string): Promise<Prisma.EventActivity> => {
+export const getActivity = async (
+	eid: string,
+	aid: string
+): Promise<Prisma.EventActivity | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
-		throw new ServerError('Event not found.', 404);
+		return null;
 	}
 
 	const activity = await prisma.eventActivity.findFirst({
@@ -39,7 +42,7 @@ export const getActivity = async (eid: string, aid: string): Promise<Prisma.Even
 	});
 
 	if (!activity) {
-		throw new ServerError('Activity not found.', 404);
+		return null;
 	}
 
 	return activity;

@@ -7,6 +7,7 @@ import { ViewServerError } from '../ViewServerError';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -27,7 +28,11 @@ export const ViewVenue: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isVenueLoading || isOrganizerLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (isOrganizerError || venueError) {

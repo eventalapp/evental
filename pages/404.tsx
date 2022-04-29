@@ -19,11 +19,11 @@ const NotFoundPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<h1 className="font-bold text-3xl mt-5">404 - Page not found</h1>
+				<h1 className="font-bold text-3xl">404 - Page not found</h1>
 
 				<Link href="/events" passHref>
-					<LinkButton className="mt-5" variant="gradient">
-						Go to events page
+					<LinkButton className="mt-5" variant="primary">
+						Go home
 						<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 					</LinkButton>
 				</Link>

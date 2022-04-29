@@ -7,6 +7,7 @@ import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { UseDeleteAttendeeMutationData } from '../../hooks/mutations/useDeleteAttendeeMutatation';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseAttendeeQueryData &
@@ -23,7 +24,11 @@ export const DeleteAttendeeForm: React.FC<Props> = (props) => {
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (isAttendeeLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (!attendee) {

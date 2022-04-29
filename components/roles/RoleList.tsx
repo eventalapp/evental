@@ -7,6 +7,7 @@ import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { Loading } from '../Loading';
 import { ViewServerError } from '../ViewServerError';
 import { NotFound } from '../NotFound';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -25,7 +26,11 @@ export const RoleList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isOrganizerLoading || isRolesLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (isOrganizerError || rolesError) {

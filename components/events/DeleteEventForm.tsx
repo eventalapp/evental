@@ -7,6 +7,7 @@ import { ViewServerError } from '../ViewServerError';
 import { UseDeleteEventMutationData } from '../../hooks/mutations/useDeleteEventMutation';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
@@ -17,7 +18,11 @@ export const DeleteEventForm: React.FC<Props> = (props) => {
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (isEventLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (deleteEventError || eventError) {

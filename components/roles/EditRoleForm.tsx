@@ -8,6 +8,7 @@ import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutati
 import { NotFound } from '../NotFound';
 import { Loading } from '../Loading';
 import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = UseRoleAttendeesQueryData &
 	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
@@ -18,7 +19,11 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 		props;
 
 	if (isRoleAttendeesLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (!role) {

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
-import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import { EventAttendeeUser } from './[aid]';
 import { getEvent } from '../index';
 import { handleServerError } from '../../../../../utils/handleServerError';
@@ -14,17 +14,21 @@ export default async (
 
 		const attendees = await getAttendees(String(eid));
 
+		if (!attendees) {
+			return res.status(404).send({ error: { message: 'Attendees not found' } });
+		}
+
 		return res.status(200).send(attendees);
 	} catch (error) {
 		return handleServerError(error, res);
 	}
 };
 
-export const getAttendees = async (eid: string): Promise<EventAttendeeUser[]> => {
+export const getAttendees = async (eid: string): Promise<EventAttendeeUser[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
-		throw new ServerError('Event not found.', 404);
+		return null;
 	}
 
 	return await prisma.eventAttendee.findMany({

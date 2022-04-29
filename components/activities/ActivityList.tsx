@@ -8,6 +8,7 @@ import { NotFound } from '../NotFound';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { format } from 'date-fns';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -26,7 +27,11 @@ export const ActivityList: React.FC<Props> = (props) => {
 	} = props;
 
 	if (isActivitiesLoading || isOrganizerLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (activitiesError || isOrganizerError) {

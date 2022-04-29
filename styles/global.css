@@ -99,7 +99,7 @@
 }
 
 .Toastify__toast-container--top-right {
-	@apply top-14;
+	@apply top-20;
 }
 
 /*  HIDE Scrollbar

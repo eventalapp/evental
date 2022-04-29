@@ -8,6 +8,7 @@ import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { Textarea } from '../form/Textarea';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenueQueryData &
@@ -17,7 +18,11 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 	const { venue, venueError, isVenueLoading, editVenueError, editVenueMutation } = props;
 
 	if (isVenueLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (venueError || editVenueError) {

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
-import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import Prisma from '@prisma/client';
 import { handleServerError } from '../../../../../utils/handleServerError';
 
@@ -13,14 +13,18 @@ export default async (
 
 		const venue = await getVenue(String(eid), String(vid));
 
+		if (!venue) {
+			return res.status(404).send({ error: { message: 'Venue not found' } });
+		}
+
 		return res.status(200).send(venue);
 	} catch (error) {
 		return handleServerError(error, res);
 	}
 };
 
-export const getVenue = async (eid: string, vid: string): Promise<Prisma.EventVenue> => {
-	const venue = await prisma.eventVenue.findFirst({
+export const getVenue = async (eid: string, vid: string): Promise<Prisma.EventVenue | null> => {
+	return await prisma.eventVenue.findFirst({
 		where: {
 			event: {
 				OR: [{ id: String(eid) }, { slug: String(eid) }]
@@ -28,10 +32,4 @@ export const getVenue = async (eid: string, vid: string): Promise<Prisma.EventVe
 			OR: [{ id: String(vid) }, { slug: String(vid) }]
 		}
 	});
-
-	if (!venue) {
-		throw new ServerError('Venue not found.', 404);
-	}
-
-	return venue;
 };

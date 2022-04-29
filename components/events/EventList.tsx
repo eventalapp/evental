@@ -7,6 +7,7 @@ import { Loading } from '../Loading';
 import { ViewServerError } from '../ViewServerError';
 import { format } from 'date-fns';
 import { NotFound } from '../NotFound';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = UseEventsQueryData;
 
@@ -14,7 +15,11 @@ export const EventList: React.FC<Props> = (props) => {
 	const { events, isEventsLoading, eventsError } = props;
 
 	if (isEventsLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (eventsError) {

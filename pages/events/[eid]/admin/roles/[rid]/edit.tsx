@@ -21,8 +21,8 @@ import { Session } from 'next-auth';
 
 type Props = {
 	initialOrganizer: boolean;
-	initialRole: Prisma.EventRole;
-	initialAttendees: EventAttendeeUser[];
+	initialRole: Prisma.EventRole | undefined;
+	initialAttendees: EventAttendeeUser[] | undefined;
 	session: Session | null;
 };
 
@@ -83,9 +83,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const { eid, rid } = context.query;
 
 	const session = await getSession(context);
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
-	const initialAttendees = await getAttendeesByRole(String(eid), String(rid));
-	const initialRole = await getRole(String(eid), String(rid));
+	const initialOrganizer = (await getIsOrganizer(session?.user.id, String(eid))) ?? undefined;
+	const initialAttendees = (await getAttendeesByRole(String(eid), String(rid))) ?? undefined;
+	const initialRole = (await getRole(String(eid), String(rid))) ?? undefined;
 
 	return {
 		props: {

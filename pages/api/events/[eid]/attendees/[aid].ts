@@ -1,7 +1,7 @@
 import type Prisma from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
-import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import { getEvent } from '../index';
 import { handleServerError } from '../../../../../utils/handleServerError';
 
@@ -24,17 +24,21 @@ export default async (
 
 		const eventAttendee = await getAttendee(String(eid), String(aid));
 
+		if (!eventAttendee) {
+			return res.status(404).send({ error: { message: 'Attendee not found' } });
+		}
+
 		return res.status(200).send(eventAttendee);
 	} catch (error) {
 		return handleServerError(error, res);
 	}
 };
 
-export const getAttendee = async (eid: string, aid: string): Promise<EventAttendeeUser> => {
+export const getAttendee = async (eid: string, aid: string): Promise<EventAttendeeUser | null> => {
 	const event = await getEvent(String(eid));
 
 	if (!event) {
-		throw new ServerError('Event not found.', 404);
+		return null;
 	}
 
 	const eventAttendee = await prisma.eventAttendee.findFirst({
@@ -58,7 +62,7 @@ export const getAttendee = async (eid: string, aid: string): Promise<EventAttend
 	});
 
 	if (!eventAttendee) {
-		throw new ServerError('Attendee not found.', 404);
+		return null;
 	}
 
 	return eventAttendee;

@@ -7,6 +7,7 @@ import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
 import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutatation';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenueQueryData &
@@ -17,7 +18,11 @@ export const DeleteVenueForm: React.FC<Props> = (props) => {
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (isVenueLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (venueError || deleteVenueError) {

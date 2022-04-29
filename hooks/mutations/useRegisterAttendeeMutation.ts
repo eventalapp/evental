@@ -4,38 +4,38 @@ import router from 'next/router';
 import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
-import { CreateEventPayload } from '../../utils/schemas';
+import { CreateAttendeePayload } from '../../utils/schemas';
 import { populateFormData } from '../../utils/populateFormData';
 
-export interface UseCreateEventMutationData {
-	createEventMutation: UseMutationResult<
-		AxiosResponse<Prisma.Event, unknown>,
+export interface UseRegisterAttendeeMutationData {
+	registerAttendeeMutation: UseMutationResult<
+		AxiosResponse<Prisma.EventAttendee, unknown>,
 		AxiosError<ServerError, unknown>,
-		CreateEventPayload
+		CreateAttendeePayload
 	>;
-	createEventError: ServerErrorPayload | null;
+	registerAttendeeError: ServerErrorPayload | null;
 }
 
-export const useCreateEventMutation = (): UseCreateEventMutationData => {
+export const useRegisterAttendeeMutation = (eid: string): UseRegisterAttendeeMutationData => {
 	const [error, setError] = useState<ServerErrorPayload | null>(null);
 	const queryClient = useQueryClient();
 
-	const createEventMutation = useMutation<
-		AxiosResponse<Prisma.Event, unknown>,
+	const registerAttendeeMutation = useMutation<
+		AxiosResponse<Prisma.EventAttendee, unknown>,
 		AxiosError<ServerError, unknown>,
-		CreateEventPayload
+		CreateAttendeePayload
 	>(
 		async (data) => {
 			const formData = populateFormData(data);
 
-			return await axios.post<Prisma.Event>('/api/events/create', formData);
+			return await axios.post<Prisma.EventAttendee>(`/api/events/${eid}/register`, formData);
 		},
 		{
 			onSuccess: (response) => {
 				setError(null);
 
-				router.push(`/events/${response.data.slug}`).then(() => {
-					void queryClient.invalidateQueries('events');
+				router.push(`/events/${eid}/attendees/${response.data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
 			onError: (error) => {
@@ -44,5 +44,5 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 		}
 	);
 
-	return { createEventMutation, createEventError: error };
+	return { registerAttendeeMutation, registerAttendeeError: error };
 };

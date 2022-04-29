@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
 import { EventAttendeeUser } from '../attendees/[aid]';
 import type Prisma from '@prisma/client';
-import { ServerError, ServerErrorResponse } from '../../../../../utils/ServerError';
+import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import { getEvent } from '../index';
 import { handleServerError } from '../../../../../utils/handleServerError';
 
@@ -20,7 +20,15 @@ export default async (
 
 		const role = await getRole(String(eid), String(rid));
 
+		if (!role) {
+			return res.status(404).send({ error: { message: 'Role not found' } });
+		}
+
 		const attendees = await getAttendeesByRole(String(eid), String(rid));
+
+		if (!attendees) {
+			return res.status(404).send({ error: { message: 'Attendees not found' } });
+		}
 
 		const payload: RoleAttendeePayload = { attendees, role };
 
@@ -30,11 +38,11 @@ export default async (
 	}
 };
 
-export const getRole = async (eid: string, rid: string): Promise<Prisma.EventRole> => {
+export const getRole = async (eid: string, rid: string): Promise<Prisma.EventRole | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
-		throw new ServerError('Event not found.', 404);
+		return null;
 	}
 
 	const role = await prisma.eventRole.findFirst({
@@ -45,7 +53,7 @@ export const getRole = async (eid: string, rid: string): Promise<Prisma.EventRol
 	});
 
 	if (!role) {
-		throw new ServerError('Role not found.', 404);
+		return null;
 	}
 
 	return role;
@@ -54,17 +62,17 @@ export const getRole = async (eid: string, rid: string): Promise<Prisma.EventRol
 export const getAttendeesByRole = async (
 	eid: string,
 	rid: string
-): Promise<EventAttendeeUser[]> => {
+): Promise<EventAttendeeUser[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
-		throw new ServerError('Event not found.', 404);
+		return null;
 	}
 
 	const role = await getRole(event.id, String(rid));
 
 	if (!role) {
-		throw new ServerError('Role not found.', 404);
+		return null;
 	}
 
 	return await prisma.eventAttendee.findMany({

@@ -18,7 +18,7 @@ import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 
 type Props = {
 	initialRole: Prisma.EventRole | undefined;
-	initialAttendees: EventAttendeeUser[];
+	initialAttendees: EventAttendeeUser[] | undefined;
 	initialOrganizer: boolean;
 	session: Session | null;
 };
@@ -67,8 +67,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const session = await getSession(context);
 	const initialRole = (await getRole(String(eid), String(rid))) ?? undefined;
-	const initialAttendees = await getAttendeesByRole(String(eid), String(rid));
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialAttendees = (await getAttendeesByRole(String(eid), String(rid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(session?.user.id, String(eid))) ?? undefined;
 
 	return {
 		props: {

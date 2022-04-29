@@ -8,6 +8,7 @@ import { ViewServerError } from '../ViewServerError';
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { Loading } from '../Loading';
 import { NotFound } from '../NotFound';
+import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -20,7 +21,11 @@ export const EditEventForm: React.FC<Props> = (props) => {
 		props;
 
 	if (isEventLoading) {
-		return <Loading />;
+		return (
+			<PageWrapper>
+				<Loading />
+			</PageWrapper>
+		);
 	}
 
 	if (editEventError || eventError) {

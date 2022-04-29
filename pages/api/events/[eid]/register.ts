@@ -7,9 +7,10 @@ import { uploadToBucket } from '../../../../utils/uploadToBucket';
 import { busboyParseForm } from '../../../../utils/busboyParseForm';
 import { processImage } from '../../../../utils/processImage';
 import { ServerErrorResponse } from '../../../../utils/ServerError';
-import { CreateEventSchema } from '../../../../utils/schemas';
+import { CreateAttendeeSchema } from '../../../../utils/schemas';
 import { handleServerError } from '../../../../utils/handleServerError';
 import { prisma } from '../../../../prisma/client';
+import { getEvent } from './index';
 
 export const config = {
 	api: {
@@ -19,18 +20,39 @@ export const config = {
 
 export default async (
 	req: NextApiRequest,
-	res: NextApiResponse<ServerErrorResponse | Prisma.Event>
+	res: NextApiResponse<ServerErrorResponse | Prisma.EventAttendee>
 ) => {
 	if (req.method === 'POST') {
 		try {
+			const { eid } = req.query;
+
 			const session = await getSession({ req });
 
 			if (!session?.user?.id) {
 				return res.status(401).send({ error: { message: 'You must be logged in to do this.' } });
 			}
 
+			const event = await getEvent(String(eid));
+
+			if (!event) {
+				return res.status(404).send({ error: { message: 'Event not found.' } });
+			}
+
+			const isAttendeeAlready = await prisma.eventAttendee.findFirst({
+				where: {
+					eventId: event.id,
+					userId: String(session.user.id)
+				}
+			});
+
+			if (isAttendeeAlready) {
+				return res
+					.status(401)
+					.send({ error: { message: 'You are already attending this event.' } });
+			}
+
 			const { buffer, formData, mimeType } = await busboyParseForm(req);
-			const parsed = CreateEventSchema.parse(formData);
+			const parsed = CreateAttendeeSchema.parse(formData);
 			let fileLocation: string | undefined;
 
 			if (buffer.length >= 1) {
@@ -46,43 +68,28 @@ export default async (
 				fileLocation = await uploadToBucket(params);
 			}
 
-			const event = await prisma.event.create({
-				data: {
-					slug: parsed.slug,
-					name: parsed.name,
-					location: parsed.location,
-					startDate: parsed.startDate,
-					endDate: parsed.endDate,
-					description: parsed.description,
-					image: fileLocation
-				}
-			});
-
-			if (!event) {
-				return res.status(500).send({ error: { message: 'Could not create event.' } });
-			}
-
-			const eventRole = await prisma.eventRole.create({
-				data: {
-					name: 'ATTENDEE',
-					slug: 'attendee',
-					eventId: String(event.id),
+			const defaultRole = await prisma.eventRole.findFirst({
+				where: {
 					defaultRole: true
 				}
 			});
 
-			if (!eventRole) {
-				return res.status(500).send({ error: { message: 'Could not create role.' } });
+			if (!defaultRole) {
+				return res.status(404).send({ error: { message: 'Role not found.' } });
 			}
 
-			let eventAttendee = await prisma.eventAttendee.create({
+			const eventAttendee = await prisma.eventAttendee.create({
 				data: {
-					slug: String('founder-slug'),
-					eventId: event.id,
-					permissionRole: 'FOUNDER',
+					slug: parsed.slug,
+					name: parsed.name,
+					image: fileLocation,
+					company: parsed.company,
+					position: parsed.position,
+					description: parsed.description,
+					eventRoleId: defaultRole?.id,
 					userId: session.user.id,
-					eventRoleId: String(eventRole.id),
-					name: String(session.user.name)
+					eventId: event.id,
+					permissionRole: 'ATTENDEE'
 				}
 			});
 
@@ -90,7 +97,7 @@ export default async (
 				return res.status(500).send({ error: { message: 'Could not create attendee.' } });
 			}
 
-			res.status(200).send(event);
+			res.status(200).send(eventAttendee);
 		} catch (error) {
 			return handleServerError(error, res);
 		}
