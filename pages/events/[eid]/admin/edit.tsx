@@ -8,13 +8,16 @@ import { EditEventForm } from '../../../../components/events/EditEventForm';
 import { Navigation } from '../../../../components/navigation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getEvent } from '../../../api/events/[eid]';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
-import { UnauthorizedPage } from '../../../../components/UnauthorizedPage';
-import { NotFoundPage } from '../../../../components/NotFoundPage';
+import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { toast } from 'react-toastify';
+import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../../components/error/LoadingPage';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -28,12 +31,24 @@ const EditEventPage: NextPage<Props> = (props) => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { editEventMutation, editEventError } = useEditEventMutation(String(eid));
 
+	useEffect(() => {
+		toast.error(editEventError?.message);
+	}, [editEventError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!initialEvent) {
+	if (!initialEvent || !event) {
 		return <NotFoundPage />;
+	}
+
+	if (isEventLoading) {
+		return <LoadingPage />;
+	}
+
+	if (eventError) {
+		return <ViewServerErrorPage errors={[eventError]} />;
 	}
 
 	return (

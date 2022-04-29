@@ -10,16 +10,19 @@ import { EditAttendeeForm } from '../../../../../../components/attendees/EditAtt
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useEditAttendeeMutation } from '../../../../../../hooks/mutations/useEditAttendeeMutation';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
-import { NoAccessPage } from '../../../../../../components/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
-import { NotFoundPage } from '../../../../../../components/NotFoundPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import Prisma from '@prisma/client';
 import { getRoles } from '../../../../../api/events/[eid]/roles';
+import { toast } from 'react-toastify';
+import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -44,6 +47,10 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 		String(aid)
 	);
 
+	useEffect(() => {
+		toast.error(editAttendeeError?.message);
+	}, [editAttendeeError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -51,8 +58,16 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 	if (!isOrganizerLoading && !isOrganizer) {
 		return <NoAccessPage />;
 	}
-	if (!initialAttendee || !initialRoles) {
+	if (!initialAttendee || !initialRoles || !attendee || !roles) {
 		return <NotFoundPage />;
+	}
+
+	if (isAttendeeLoading || isRolesLoading) {
+		return <LoadingPage />;
+	}
+
+	if (attendeeError || rolesError) {
+		return <ViewServerErrorPage errors={[attendeeError, rolesError]} />;
 	}
 
 	return (

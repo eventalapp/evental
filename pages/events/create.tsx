@@ -5,11 +5,12 @@ import Head from 'next/head';
 import Column from '../../components/layout/Column';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { Navigation } from '../../components/navigation';
-import Unauthorized from '../../components/Unauthorized';
+import Unauthorized from '../../components/error/Unauthorized';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Session } from 'next-auth';
+import { toast } from 'react-toastify';
 
 type Props = {
 	session: Session | null;
@@ -18,6 +19,10 @@ type Props = {
 const CreateEventPage: NextPage<Props> = (props) => {
 	const { session } = props;
 	const { createEventMutation, createEventError } = useCreateEventMutation();
+
+	useEffect(() => {
+		toast.error(createEventError?.message);
+	}, [createEventError]);
 
 	if (!session?.user?.id) {
 		return <Unauthorized />;

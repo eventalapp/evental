@@ -3,31 +3,17 @@ import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
-import { ViewServerError } from '../ViewServerError';
 import { UseDeleteEventMutationData } from '../../hooks/mutations/useDeleteEventMutation';
-import { Loading } from '../Loading';
-import { NotFound } from '../NotFound';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
 	UseDeleteEventMutationData;
 
 export const DeleteEventForm: React.FC<Props> = (props) => {
-	const { deleteEventMutation, deleteEventError, event, eventError, isEventLoading } = props;
+	const { deleteEventMutation, event } = props;
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
-	if (isEventLoading) {
-		return <Loading />;
-	}
-
-	if (deleteEventError || eventError) {
-		return <ViewServerError errors={[deleteEventError, eventError]} />;
-	}
-
-	if (!event) {
-		return <NotFound />;
-	}
+	if (!event) return null;
 
 	return (
 		<form onSubmit={deleteEventMutation.mutate}>

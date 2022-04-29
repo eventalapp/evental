@@ -14,15 +14,13 @@ import { Textarea } from '../form/Textarea';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useAttendeeQuery } from '../../hooks/queries/useAttendeeQuery';
 import { UseRegisterAttendeeMutationData } from '../../hooks/mutations/useRegisterAttendeeMutation';
-import PageWrapper from '../layout/PageWrapper';
-import { Loading } from '../Loading';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
 	UseRegisterAttendeeMutationData;
 
 export const EventRegistrationForm: React.FC<Props> = (props) => {
-	const { registerAttendeeError, registerAttendeeMutation, event, isEventLoading } = props;
+	const { registerAttendeeError, registerAttendeeMutation, event } = props;
 	const {
 		register,
 		handleSubmit,
@@ -67,10 +65,6 @@ export const EventRegistrationForm: React.FC<Props> = (props) => {
 	useEffect(() => {
 		registerAttendeeError && toast.error(registerAttendeeError.message);
 	}, [registerAttendeeError]);
-
-	if (isEventLoading) {
-		return <Loading />;
-	}
 
 	return (
 		<form

@@ -8,12 +8,13 @@ import { CreateRoleForm } from '../../../../../components/roles/CreateRoleForm';
 import { Navigation } from '../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useCreateRoleMutation } from '../../../../../hooks/mutations/useCreateRoleMutation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
-import { UnauthorizedPage } from '../../../../../components/UnauthorizedPage';
-import { NoAccessPage } from '../../../../../components/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
+import { toast } from 'react-toastify';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -27,6 +28,10 @@ const CreateRolePage: NextPage<Props> = (props) => {
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { createRoleMutation, createRoleError } = useCreateRoleMutation(String(eid));
+
+	useEffect(() => {
+		toast.error(createRoleError?.message);
+	}, [createRoleError]);
 
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;

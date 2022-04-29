@@ -3,45 +3,15 @@ import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
-import { ViewServerError } from '../ViewServerError';
-import { NotFound } from '../NotFound';
-import { Loading } from '../Loading';
 import { UseDeleteAttendeeMutationData } from '../../hooks/mutations/useDeleteAttendeeMutatation';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseAttendeeQueryData &
 	UseDeleteAttendeeMutationData;
 
 export const DeleteAttendeeForm: React.FC<Props> = (props) => {
-	const {
-		attendee,
-		isAttendeeLoading,
-		attendeeError,
-		deleteAttendeeError,
-		deleteAttendeeMutation
-	} = props;
+	const { attendee, deleteAttendeeMutation } = props;
 	const [canSubmit, setCanSubmit] = React.useState(false);
-
-	if (isAttendeeLoading) {
-		return <Loading />;
-	}
-
-	if (!attendee) {
-		return <NotFound />;
-	}
-
-	if (attendeeError || deleteAttendeeError) {
-		return <ViewServerError errors={[attendeeError, deleteAttendeeError]} />;
-	}
-
-	if (attendee.permissionRole === 'FOUNDER') {
-		return (
-			<div>
-				<p>You cannot delete a founder</p>
-			</div>
-		);
-	}
 
 	return (
 		<div>

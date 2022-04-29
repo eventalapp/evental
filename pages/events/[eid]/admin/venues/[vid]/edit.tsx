@@ -9,15 +9,19 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { EditVenueForm } from '../../../../../../components/venues/EditVenueForm';
 import { useEditVenueMutation } from '../../../../../../hooks/mutations/useEditVenueMutation';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { getVenue } from '../../../../../api/events/[eid]/venues/[vid]';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
-import { NoAccessPage } from '../../../../../../components/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
-import { NotFoundPage } from '../../../../../../components/NotFoundPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { toast } from 'react-toastify';
+import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -37,6 +41,10 @@ const EditVenuePage: NextPage<Props> = (props) => {
 	);
 	const { editVenueMutation, editVenueError } = useEditVenueMutation(String(eid), String(vid));
 
+	useEffect(() => {
+		toast.error(editVenueError?.message);
+	}, [editVenueError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -45,8 +53,16 @@ const EditVenuePage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (!initialVenue) {
+	if (!initialVenue || !venue) {
 		return <NotFoundPage />;
+	}
+
+	if (isVenueLoading) {
+		return <LoadingPage />;
+	}
+
+	if (venueError) {
+		return <ViewServerErrorPage errors={[venueError]} />;
 	}
 
 	return (

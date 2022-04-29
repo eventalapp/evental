@@ -7,15 +7,11 @@ import { ActivityList } from '../activities/ActivityList';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseActivitiesQueryData } from '../../hooks/queries/useActivitiesQuery';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
-import { Loading } from '../Loading';
-import { ViewServerError } from '../ViewServerError';
-import { NotFound } from '../NotFound';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { UseAttendeeByUserIdQueryData } from '../../hooks/queries/useAttendeeByUserIdQuery';
 import { format } from 'date-fns';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = {
 	eid: string;
@@ -33,40 +29,13 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		roles,
 		isOrganizer,
 		isOrganizerLoading,
-		eventError,
-		isEventLoading,
 		isActivitiesLoading,
 		activitiesError,
 		isOrganizerError,
-		rolesError,
-		isRolesLoading,
-		attendeeByUserId,
-		isAttendeeByUserIdLoading,
-		attendeeByUserIdError
+		attendeeByUserId
 	} = props;
 
-	if (
-		rolesError ||
-		isEventLoading ||
-		isOrganizerLoading ||
-		isActivitiesLoading ||
-		isRolesLoading ||
-		isAttendeeByUserIdLoading
-	) {
-		return <Loading />;
-	}
-
-	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {
-		return (
-			<ViewServerError
-				errors={[isOrganizerError, rolesError, eventError, activitiesError, attendeeByUserIdError]}
-			/>
-		);
-	}
-
-	if (!event) {
-		return <NotFound />;
-	}
+	if (!event) return null;
 
 	return (
 		<div>

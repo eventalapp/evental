@@ -9,16 +9,19 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { DeleteRoleForm } from '../../../../../../components/roles/DeleteRoleForm';
 import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import { useDeleteRoleMutation } from '../../../../../../hooks/mutations/useDeleteRoleMutation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { getAttendeesByRole, getRole } from '../../../../../api/events/[eid]/roles/[rid]';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { EventAttendeeUser } from '../../../../../api/events/[eid]/attendees/[aid]';
-import { NoAccessPage } from '../../../../../../components/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
-import { NotFoundPage } from '../../../../../../components/NotFoundPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { toast } from 'react-toastify';
+import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -40,6 +43,10 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 	);
 	const { deleteRoleError, deleteRoleMutation } = useDeleteRoleMutation(String(eid), String(rid));
 
+	useEffect(() => {
+		toast.error(deleteRoleError?.message);
+	}, [deleteRoleError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -48,8 +55,16 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (!initialRole || !initialAttendees) {
+	if (!initialRole || !initialAttendees || !role || !attendees) {
 		return <NotFoundPage />;
+	}
+
+	if (roleAttendeesError) {
+		return <ViewServerErrorPage errors={[roleAttendeesError]} />;
+	}
+
+	if (isRoleAttendeesLoading) {
+		return <LoadingPage />;
 	}
 
 	return (

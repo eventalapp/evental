@@ -3,10 +3,7 @@ import React from 'react';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { ViewServerError } from '../ViewServerError';
-import { Loading } from '../Loading';
-import { NotFound } from '../NotFound';
-import PageWrapper from '../layout/PageWrapper';
+import { NotFound } from '../error/NotFound';
 
 type Props = {
 	eid: string;
@@ -14,27 +11,13 @@ type Props = {
 	UseVenuesQueryData;
 
 export const VenueList: React.FC<Props> = (props) => {
-	const {
-		eid,
-		venues,
-		isOrganizer,
-		isOrganizerLoading,
-		isOrganizerError,
-		isVenuesLoading,
-		venuesError
-	} = props;
+	const { eid, venues, isOrganizer, isOrganizerLoading } = props;
 
-	if (isVenuesLoading || isOrganizerLoading) {
-		return <Loading />;
+	if (venues && venues.length === 0) {
+		return <NotFound message="No venues found." />;
 	}
 
-	if (isOrganizerError || venuesError) {
-		return <ViewServerError errors={[isOrganizerError, venuesError]} />;
-	}
-
-	if (!venues || (venues && venues.length === 0)) {
-		return <NotFound />;
-	}
+	if (!venues) return null;
 
 	return (
 		<div>

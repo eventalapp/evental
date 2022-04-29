@@ -19,8 +19,10 @@ import { getActivities } from '../../api/events/[eid]/activities';
 import { EventAttendeeUser } from '../../api/events/[eid]/attendees/[aid]';
 import { getRoles } from '../../api/events/[eid]/roles';
 import { Session } from 'next-auth';
-import { NotFoundPage } from '../../../components/NotFoundPage';
+import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import React from 'react';
+import { ViewServerErrorPage } from '../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../components/error/LoadingPage';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -56,8 +58,35 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	const { attendeeByUserId, attendeeByUserIdError, isAttendeeByUserIdLoading } =
 		useAttendeeByUserIdQuery(String(eid), String(session?.user?.id), initialIsAttendeeByUserId);
 
-	if (!initialIsAttendeeByUserId || !initialRoles || !initialActivities || !initialEvent) {
+	if (
+		!initialIsAttendeeByUserId ||
+		!initialRoles ||
+		!initialActivities ||
+		!initialEvent ||
+		!event ||
+		!activities ||
+		!roles
+	) {
 		return <NotFoundPage />;
+	}
+
+	if (
+		rolesError ||
+		isEventLoading ||
+		isOrganizerLoading ||
+		isActivitiesLoading ||
+		isRolesLoading ||
+		isAttendeeByUserIdLoading
+	) {
+		return <LoadingPage />;
+	}
+
+	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {
+		return (
+			<ViewServerErrorPage
+				errors={[isOrganizerError, rolesError, eventError, activitiesError, attendeeByUserIdError]}
+			/>
+		);
 	}
 
 	return (

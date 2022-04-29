@@ -7,7 +7,7 @@ import Column from '../../../../../../components/layout/Column';
 import { EditActivityForm } from '../../../../../../components/activities/EditActivityForm';
 import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
@@ -17,9 +17,13 @@ import { useEditActivityMutation } from '../../../../../../hooks/mutations/useEd
 import { getActivity } from '../../../../../api/events/[eid]/activities/[aid]';
 import { getVenues } from '../../../../../api/events/[eid]/venues';
 import type Prisma from '@prisma/client';
-import { NotFoundPage } from '../../../../../../components/NotFoundPage';
-import { NoAccessPage } from '../../../../../../components/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { toast } from 'react-toastify';
+import Link from 'next/link';
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -44,6 +48,10 @@ const EditActivityPage: NextPage<Props> = (props) => {
 		String(aid)
 	);
 
+	useEffect(() => {
+		editActivityError && toast.error(editActivityError.message);
+	}, [editActivityError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -52,8 +60,26 @@ const EditActivityPage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (!initialActivity || !initialVenues) {
+	if (!initialActivity || !initialVenues || !venues || !activity) {
 		return <NotFoundPage />;
+	}
+
+	if (isVenuesLoading) {
+		return <LoadingPage />;
+	}
+
+	if (venuesError) {
+		return <ViewServerErrorPage errors={[venuesError]} />;
+	}
+
+	if (venues && venues.length === 0) {
+		return (
+			<PageWrapper>
+				<Link href={`/events/${eid}/admin/venues/edit`}>
+					<a className="text-red-600">Before creating an activity, you must create a venue.</a>
+				</Link>
+			</PageWrapper>
+		);
 	}
 
 	return (

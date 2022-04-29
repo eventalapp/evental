@@ -9,15 +9,18 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenueForm';
 import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutatation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getVenue } from '../../../../../api/events/[eid]/venues/[vid]';
-import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
-import { NoAccessPage } from '../../../../../../components/NoAccessPage';
-import { NotFoundPage } from '../../../../../../components/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
+import { toast } from 'react-toastify';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -40,6 +43,10 @@ const DeleteVenuePage: NextPage<Props> = (props) => {
 		String(vid)
 	);
 
+	useEffect(() => {
+		toast.error(deleteVenueError?.message);
+	}, [deleteVenueError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -50,6 +57,14 @@ const DeleteVenuePage: NextPage<Props> = (props) => {
 
 	if (!initialVenue) {
 		return <NotFoundPage />;
+	}
+
+	if (isVenueLoading) {
+		return <LoadingPage />;
+	}
+
+	if (venueError) {
+		return <ViewServerErrorPage errors={[venueError]} />;
 	}
 
 	return (

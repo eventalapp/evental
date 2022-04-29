@@ -5,9 +5,6 @@ import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { UseCreateActivityMutationData } from '../../hooks/mutations/useCreateActivityMutation';
-import { Loading } from '../Loading';
-import { ViewServerError } from '../ViewServerError';
-import { NotFound } from '../NotFound';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Controller, useForm } from 'react-hook-form';
 import { DatePicker } from '../form/DatePicker';
@@ -20,6 +17,7 @@ import Link from 'next/link';
 import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
+import { NotFound } from '../error/NotFound';
 
 type Props = {
 	eid: string;
@@ -31,8 +29,7 @@ type CreateActivityFormProps = Props &
 	UseCreateActivityMutationData;
 
 export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => {
-	const { eid, isVenuesLoading, venuesError, venues, createActivityError, createActivityMutation } =
-		props;
+	const { eid, venues, createActivityMutation } = props;
 	const {
 		register,
 		handleSubmit,
@@ -83,31 +80,11 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
 
-	useEffect(() => {
-		createActivityError && toast.error(createActivityError.message);
-	}, [createActivityError, venuesError]);
-
-	if (isVenuesLoading) {
-		return <Loading />;
-	}
-
-	if (venuesError) {
-		return <ViewServerError errors={[venuesError]} />;
-	}
-
-	if (!venues) {
+	if (venues && venues.length === 0) {
 		return <NotFound />;
 	}
 
-	if (venues && venues.length === 0) {
-		return (
-			<div>
-				<Link href={`/events/${eid}/admin/venues/create`}>
-					<a className="text-red-600">Before creating an activity, you must create a venue.</a>
-				</Link>
-			</div>
-		);
-	}
+	if (!venues) return null;
 
 	return (
 		<form

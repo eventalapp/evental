@@ -14,7 +14,9 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import type Prisma from '@prisma/client';
 import { getActivity } from '../../../api/events/[eid]/activities/[aid]';
-import { NotFoundPage } from '../../../../components/NotFoundPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { LoadingPage } from '../../../../components/error/LoadingPage';
 
 type Props = {
 	initialActivity: Prisma.EventActivity | undefined;
@@ -37,6 +39,18 @@ const ViewActivityPage: NextPage<Props> = (props) => {
 	);
 
 	if (!initialActivity) {
+		return <NotFoundPage />;
+	}
+
+	if (isOrganizerLoading || isActivityLoading) {
+		return <LoadingPage />;
+	}
+
+	if (isOrganizerError || activityError) {
+		return <ViewServerErrorPage errors={[isOrganizerError, activityError]} />;
+	}
+
+	if (!activity) {
 		return <NotFoundPage />;
 	}
 

@@ -2,32 +2,19 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { ViewServerError } from '../ViewServerError';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
-import { Loading } from '../Loading';
-import { NotFound } from '../NotFound';
 import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutatation';
-import PageWrapper from '../layout/PageWrapper';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenueQueryData &
 	UseDeleteVenueMutationData;
 
 export const DeleteVenueForm: React.FC<Props> = (props) => {
-	const { venue, venueError, isVenueLoading, deleteVenueError, deleteVenueMutation } = props;
+	const { venue, deleteVenueMutation } = props;
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
-	if (isVenueLoading) {
-		return <Loading />;
-	}
+	if (!venue) return null;
 
-	if (venueError || deleteVenueError) {
-		return <ViewServerError errors={[deleteVenueError, venueError]} />;
-	}
-
-	if (!venue) {
-		return <NotFound />;
-	}
 	return (
 		<form onSubmit={deleteVenueMutation.mutate}>
 			<div className="flex flex-col w-full mt-5">

@@ -2,9 +2,9 @@ import { faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React from 'react';
-import { LinkButton } from './form/LinkButton';
-import Column from './layout/Column';
-import { Navigation } from './navigation';
+import { LinkButton } from '../form/LinkButton';
+import Column from '../layout/Column';
+import { Navigation } from '../navigation';
 
 const Unauthorized: React.FC = () => {
 	return (

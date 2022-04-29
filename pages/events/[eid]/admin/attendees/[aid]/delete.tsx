@@ -10,14 +10,17 @@ import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQ
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutatation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
-import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
-import { NoAccessPage } from '../../../../../../components/NoAccessPage';
-import { NotFoundPage } from '../../../../../../components/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
+import { toast } from 'react-toastify';
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -40,6 +43,10 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 		String(aid)
 	);
 
+	useEffect(() => {
+		toast.error(deleteAttendeeError?.message);
+	}, [deleteAttendeeError]);
+
 	if (!session?.user?.id) {
 		return <UnauthorizedPage />;
 	}
@@ -48,8 +55,16 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (!initialAttendee) {
+	if (!initialAttendee || !attendee) {
 		return <NotFoundPage />;
+	}
+
+	if (isAttendeeLoading) {
+		return <LoadingPage />;
+	}
+
+	if (attendeeError) {
+		return <ViewServerErrorPage errors={[attendeeError]} />;
 	}
 
 	return (

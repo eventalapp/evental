@@ -8,7 +8,7 @@ import { LinkButton } from '../../../../components/form/LinkButton';
 import { Navigation } from '../../../../components/navigation';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-import { ViewServerError } from '../../../../components/ViewServerError';
+
 import React from 'react';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
@@ -18,7 +18,9 @@ import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getVenues } from '../../../api/events/[eid]/venues';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { NotFoundPage } from '../../../../components/NotFoundPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { LoadingPage } from '../../../../components/error/LoadingPage';
+import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
 
 type Props = {
 	initialVenues: Prisma.EventVenue[] | undefined;
@@ -40,12 +42,16 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 		return <NotFoundPage />;
 	}
 
-	if (isOrganizerError) {
-		return (
-			<PageWrapper variant="gray">
-				<ViewServerError errors={[isOrganizerError]} />
-			</PageWrapper>
-		);
+	if (isOrganizerError || venuesError) {
+		return <ViewServerErrorPage errors={[isOrganizerError]} />;
+	}
+
+	if (isVenuesLoading || isOrganizerLoading) {
+		return <LoadingPage />;
+	}
+
+	if (!venues) {
+		return <NotFoundPage />;
 	}
 
 	return (
