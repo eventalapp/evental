@@ -17,13 +17,13 @@ export const DeleteActivityForm: React.FC<Props> = (props) => {
 	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
-	if (!activity) return null;
-
 	const confirmDeleteWatcher = watch('confirmDelete');
 
 	useEffect(() => {
 		setCanSubmit(confirmDeleteWatcher === 'DELETE');
 	}, [confirmDeleteWatcher]);
+
+	if (!activity) return null;
 
 	return (
 		<form
