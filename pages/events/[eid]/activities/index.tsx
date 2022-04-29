@@ -18,6 +18,7 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import type Prisma from '@prisma/client';
 import { getActivities } from '../../../api/events/[eid]/activities';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
 
 type Props = {
 	initialActivities: Prisma.EventActivity[] | undefined;
@@ -37,6 +38,10 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 		String(eid),
 		initialOrganizer
 	);
+
+	if (!initialActivities) {
+		return <NotFoundPage />;
+	}
 
 	if (activities) {
 		groupByDate(activities);

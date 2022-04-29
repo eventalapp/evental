@@ -6,8 +6,6 @@ import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 
 import { Navigation } from '../../../../../../components/navigation';
-import NoAccess from '../../../../../../components/NoAccess';
-import Unauthorized from '../../../../../../components/Unauthorized';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
@@ -17,6 +15,9 @@ import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
+import { UnauthorizedPage } from '../../../../../../components/UnauthorizedPage';
+import { NoAccessPage } from '../../../../../../components/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/NotFoundPage';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -40,19 +41,15 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 	);
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
 	}
 
 	if (!isOrganizerLoading && !isOrganizer) {
-		return (
-			<PageWrapper variant="gray">
-				<NoAccess />
-			</PageWrapper>
-		);
+		return <NoAccessPage />;
+	}
+
+	if (!initialAttendee) {
+		return <NotFoundPage />;
 	}
 
 	return (

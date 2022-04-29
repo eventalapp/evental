@@ -12,6 +12,8 @@ import { getSession } from 'next-auth/react';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import { EventAttendeeUser, getAttendee } from '../../../api/events/[eid]/attendees/[aid]';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
+import React from 'react';
 
 type Props = {
 	initialAttendee: EventAttendeeUser | undefined;
@@ -32,6 +34,10 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		String(eid),
 		initialOrganizer
 	);
+
+	if (!initialAttendee) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<PageWrapper variant="gray">

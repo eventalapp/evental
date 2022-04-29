@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { DeleteEventForm } from '../../../../components/events/DeleteEventForm';
 import { Navigation } from '../../../../components/navigation';
-import Unauthorized from '../../../../components/Unauthorized';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
 import React from 'react';
@@ -14,6 +13,8 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getEvent } from '../../../api/events/[eid]';
 import type Prisma from '@prisma/client';
 import { Session } from 'next-auth';
+import { UnauthorizedPage } from '../../../../components/UnauthorizedPage';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -28,11 +29,11 @@ const DeleteEventPage: NextPage<Props> = (props) => {
 	const { deleteEventMutation, deleteEventError } = useDeleteEventMutation(String(eid));
 
 	if (!session?.user?.id) {
-		return (
-			<PageWrapper variant="gray">
-				<Unauthorized />
-			</PageWrapper>
-		);
+		return <UnauthorizedPage />;
+	}
+
+	if (!initialEvent) {
+		return <NotFoundPage />;
 	}
 
 	return (

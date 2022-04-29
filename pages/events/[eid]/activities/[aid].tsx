@@ -14,6 +14,7 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { Session } from 'next-auth';
 import type Prisma from '@prisma/client';
 import { getActivity } from '../../../api/events/[eid]/activities/[aid]';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
 
 type Props = {
 	initialActivity: Prisma.EventActivity | undefined;
@@ -34,6 +35,10 @@ const ViewActivityPage: NextPage<Props> = (props) => {
 		String(eid),
 		initialOrganizer
 	);
+
+	if (!initialActivity) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<PageWrapper variant="gray">

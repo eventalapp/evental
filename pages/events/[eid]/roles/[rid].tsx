@@ -15,6 +15,7 @@ import Prisma from '@prisma/client';
 import { Session } from 'next-auth';
 import { getAttendeesByRole, getRole } from '../../../api/events/[eid]/roles/[rid]';
 import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
+import { NotFoundPage } from '../../../../components/NotFoundPage';
 
 type Props = {
 	initialRole: Prisma.EventRole | undefined;
@@ -36,6 +37,10 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		String(eid),
 		initialOrganizer
 	);
+
+	if (!initialAttendees || !initialRole) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<PageWrapper variant="gray">
