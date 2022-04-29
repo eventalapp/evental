@@ -42,7 +42,11 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				<div className="h-32 w-32 relative">
 					<Image
 						alt={String(attendee.name)}
-						src={String(attendee.user.image)}
+						src={String(
+							attendee?.user?.image
+								? `https://cdn.evental.app${attendee?.user?.image}`
+								: `https://cdn.evental.app/images/default-avatar.jpg`
+						)}
 						className="rounded-full"
 						layout="fill"
 					/>
