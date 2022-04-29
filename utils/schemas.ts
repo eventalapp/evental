@@ -89,7 +89,7 @@ export const CreateEventSchema = z.object({
 		.string()
 		.min(4, 'Location must be at least 4 characters')
 		.max(100, 'Location must be less than 40 characters'),
-	image: isBrowser ? z.instanceof(FileList) : z.any(),
+	image: z.string(),
 	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
 	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
 	description: descriptionValidator
@@ -137,3 +137,11 @@ export const AdminEditAttendeeSchema = z.object({
 });
 
 export type AdminEditAttendeePayload = z.infer<typeof AdminEditAttendeeSchema>;
+
+// Image Upload
+
+export const ImageUploadSchema = z.object({
+	image: isBrowser ? z.instanceof(FileList) : z.any()
+});
+
+export type ImageUploadPayload = z.infer<typeof ImageUploadSchema>;

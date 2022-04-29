@@ -1,22 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import { S3 } from 'aws-sdk';
 import { CreateEventSchema } from '../../../utils/schemas';
 import { prisma } from '../../../prisma/client';
 import { ServerErrorResponse } from '../../../utils/ServerError';
-import crypto from 'crypto';
 import type Prisma from '@prisma/client';
-import { busboyParseForm } from '../../../utils/busboyParseForm';
-import { uploadToBucket } from '../../../utils/uploadToBucket';
-import { processImage } from '../../../utils/processImage';
 import { handleServerError } from '../../../utils/handleServerError';
 import { processSlug } from '../../../utils/slugify';
-
-export const config = {
-	api: {
-		bodyParser: false
-	}
-};
 
 export default async (
 	req: NextApiRequest,
@@ -30,22 +19,7 @@ export default async (
 				return res.status(401).send({ error: { message: 'You must be logged in to do this.' } });
 			}
 
-			const { buffer, formData, mimeType } = await busboyParseForm(req);
-			const parsed = CreateEventSchema.parse(formData);
-			let fileLocation: string | undefined;
-
-			if (buffer.length >= 1) {
-				const sharpImage = await processImage(buffer);
-
-				const params: S3.Types.PutObjectRequest = {
-					Bucket: 'evental/images',
-					Key: `${crypto.randomBytes(20).toString('hex')}.jpg`,
-					Body: sharpImage,
-					ContentType: mimeType
-				};
-
-				fileLocation = await uploadToBucket(params);
-			}
+			const parsed = CreateEventSchema.parse(req.body);
 
 			const event = await prisma.event.create({
 				data: {
@@ -55,7 +29,7 @@ export default async (
 					startDate: parsed.startDate,
 					endDate: parsed.endDate,
 					description: parsed.description,
-					image: fileLocation
+					image: parsed.image
 				}
 			});
 
