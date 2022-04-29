@@ -149,7 +149,7 @@ const AdminPage: NextPage<Props> = (props) => {
 					</div>
 					<div>
 						<FlexRowBetween>
-							<h1 className="text-3xl">Roles</h1>
+							<span className="text-3xl">Roles</span>
 
 							<div>
 								<Link href={`/events/${eid}/admin/roles/create`} passHref>
@@ -179,7 +179,7 @@ const AdminPage: NextPage<Props> = (props) => {
 				<div className="my-10">
 					<div>
 						<FlexRowBetween>
-							<h1 className="text-3xl">Attendees</h1>
+							<span className="text-3xl">Attendees</span>
 
 							<div>
 								<Link href={`/events/${eid}/attendees/`} passHref>

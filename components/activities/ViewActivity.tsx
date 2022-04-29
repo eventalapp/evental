@@ -22,7 +22,7 @@ export const ViewActivity: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween>
-				<h1 className="text-3xl">{activity.name}</h1>
+				<h1 className="text-3xl font-bold">{activity.name}</h1>
 
 				<div>
 					{!isOrganizerLoading && isOrganizer && (

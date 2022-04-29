@@ -10,7 +10,7 @@ const NoAccess: React.FC = () => {
 			<Navigation />
 
 			<Column>
-				<h1 className="mt-4 text-3xl font-bold text-center sm:text-4xl font-display">
+				<h1 className="text-3xl mt-4 font-bold text-center sm:text-4xl font-display">
 					Unauthorized
 				</h1>
 				<p className="mt-3">You do not have access to view this page</p>
