@@ -83,7 +83,7 @@ const EditActivityPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl">Edit Activity Page</h1>
+				<h1 className="text-3xl font-bold">Edit Activity</h1>
 
 				<EditActivityForm
 					eid={String(eid)}

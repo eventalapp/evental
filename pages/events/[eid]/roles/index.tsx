@@ -59,7 +59,7 @@ const RolesPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<FlexRowBetween>
-					<h1 className="text-3xl">Roles Page</h1>
+					<h1 className="text-3xl font-bold">Roles</h1>
 
 					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/roles/create`} passHref>

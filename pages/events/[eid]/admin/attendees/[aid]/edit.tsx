@@ -71,7 +71,7 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl">Edit Attendee Page</h1>
+				<h1 className="text-3xl font-bold">Edit Attendee Page</h1>
 
 				<EditAttendeeForm
 					eid={String(eid)}

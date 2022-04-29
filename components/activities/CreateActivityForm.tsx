@@ -18,6 +18,8 @@ import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useActivityQuery } from '../../hooks/queries/useActivityQuery';
 import { NotFound } from '../error/NotFound';
+import { roundToNearestMinutes } from 'date-fns';
+import { NEAREST_MINUTE } from '../../config';
 
 type Props = {
 	eid: string;
@@ -41,8 +43,10 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	} = useForm<CreateActivityPayload>({
 		defaultValues: {
 			venueId: venues && venues[0]?.id,
-			startDate: new Date(),
-			endDate: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3)
+			startDate: roundToNearestMinutes(new Date(), { nearestTo: NEAREST_MINUTE }),
+			endDate: roundToNearestMinutes(new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3), {
+				nearestTo: NEAREST_MINUTE
+			})
 		},
 		resolver: zodResolver(CreateActivitySchema)
 	});
@@ -133,7 +137,10 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 										startDate={field.value}
 										endDate={endDateWatcher}
 										selectsStart
-										dateFormat="MM/dd/yyyy"
+										timeIntervals={NEAREST_MINUTE}
+										dateFormat="MM/dd/yyyy h:mm a"
+										formatTime="MM/dd/yyyy h:mm a"
+										showTimeSelect
 									/>
 								)}
 							/>
@@ -153,8 +160,11 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 										selected={field.value}
 										selectsEnd
 										startDate={startDateWatcher}
+										timeIntervals={NEAREST_MINUTE}
 										endDate={field.value}
-										dateFormat="MM/dd/yyyy"
+										dateFormat="MM/dd/yyyy h:mm a"
+										formatTime="MM/dd/yyyy h:mm a"
+										showTimeSelect
 									/>
 								)}
 							/>
@@ -201,7 +211,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 					padding="medium"
 					disabled={isActivityLoading || Boolean(activity)}
 				>
-					Register Activity
+					Create Activity
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>
 			</div>

@@ -49,13 +49,17 @@ const DeleteEventPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Delete event</title>
+				<title>Delete Event</title>
 			</Head>
 
 			<Navigation />
 
-			<Column>
-				<h1 className="text-3xl">Delete Event</h1>
+			<Column variant="halfWidth">
+				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-semibold">
+					You are about to delete an event ("{event.name}")
+				</p>
+
+				<h1 className="text-3xl font-bold">Delete Event</h1>
 
 				<DeleteEventForm
 					eventError={eventError}

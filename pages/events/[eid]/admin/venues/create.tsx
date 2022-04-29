@@ -44,7 +44,7 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl">Create Venue Page</h1>
+				<h1 className="text-3xl font-bold">Create Venue Page</h1>
 
 				<CreateVenueForm createVenueMutation={createVenueMutation} />
 			</Column>

@@ -55,7 +55,7 @@ const EditEventPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl">Edit Event</h1>
+				<h1 className="text-3xl font-bold">Edit Event</h1>
 
 				<EditEventForm
 					eid={String(eid)}

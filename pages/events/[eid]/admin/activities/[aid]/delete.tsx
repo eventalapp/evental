@@ -62,7 +62,7 @@ const DeleteActivityPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Delete {activity.name}</title>
+				<title>Delete Activity</title>
 			</Head>
 
 			<Navigation />

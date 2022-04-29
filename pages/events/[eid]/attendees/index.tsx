@@ -59,7 +59,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 
 			<Column>
 				<div className="flex flex-row justify-between mb-3">
-					<h1 className="text-3xl">Attendees</h1>
+					<h1 className="text-3xl font-bold">Attendees</h1>
 				</div>
 
 				<AttendeeList

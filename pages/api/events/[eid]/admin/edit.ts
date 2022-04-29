@@ -24,7 +24,7 @@ export default async (
 
 	if (req.method === 'PUT') {
 		try {
-			const bodyParsed = EditEventSchema.parse(req.body);
+			const parsed = EditEventSchema.parse(req.body);
 
 			const event = await prisma.event.findFirst({
 				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -39,11 +39,11 @@ export default async (
 
 			const updatedEvent = await prisma.event.update({
 				data: {
-					name: bodyParsed.name,
-					description: bodyParsed.description,
-					location: bodyParsed.location,
-					startDate: bodyParsed.startDate,
-					endDate: bodyParsed.endDate
+					name: parsed.name,
+					description: parsed.description,
+					location: parsed.location,
+					startDate: parsed.startDate,
+					endDate: parsed.endDate
 				},
 				where: {
 					id: event.id

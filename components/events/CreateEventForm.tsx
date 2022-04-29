@@ -183,7 +183,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={isEventLoading || Boolean(event)}
 				>
-					Register Event
+					Create Event
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>
 			</div>
