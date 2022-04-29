@@ -1,48 +1,59 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
 import { UseDeleteActivityMutationData } from '../../hooks/mutations/useDeleteActivityMutation';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseDeleteActivityMutationData &
 	UseActivityQueryData;
 
 export const DeleteActivityForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const { activity, deleteActivityMutation } = props;
-
+	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
 	if (!activity) return null;
 
-	return (
-		<form onSubmit={deleteActivityMutation.mutate}>
-			<div className="flex flex-col w-full mt-5">
-				<h1 className="text-2xl mb-3">Are you sure you would like to delete: {activity.name}?</h1>
+	const confirmDeleteWatcher = watch('confirmDelete');
 
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+	useEffect(() => {
+		setCanSubmit(confirmDeleteWatcher === 'DELETE');
+	}, [confirmDeleteWatcher]);
+
+	return (
+		<form
+			onSubmit={handleSubmit(() => {
+				deleteActivityMutation.mutate();
+			})}
+		>
+			<div className="flex flex-col w-full mt-3">
+				<div className="mb-5">
 					<div>
-						<p className="font-bold mb-3">
-							Please retype the activity name below ({activity.name}).
+						<p className="mb-3">
+							All of the data regarding this activity will be permanantly deleted.
 						</p>
-						<Label htmlFor="name">Activity Name</Label>
-						<Input
-							id="name"
-							name="name"
-							type="text"
-							onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-								setCanSubmit(event.target.value === activity.name);
-							}}
-							required
-						/>
+
+						<Label htmlFor="confirmDelete">
+							Type <span className="font-bold">DELETE</span> to confirm
+						</Label>
+						<Input {...register('confirmDelete', { required: true })} />
 					</div>
 				</div>
 			</div>
 
-			<Button type="submit" disabled={!canSubmit}>
-				Delete Activity
-			</Button>
+			<div className="flex flex-row justify-end">
+				<Button variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
+				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+					Delete Activity
+				</Button>
+			</div>
 		</form>
 	);
 };

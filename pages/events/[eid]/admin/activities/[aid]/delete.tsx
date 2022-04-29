@@ -70,13 +70,17 @@ const DeleteActivityPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Delete Activity</title>
+				<title>Delete {activity.name}</title>
 			</Head>
 
 			<Navigation />
 
-			<Column>
-				<h1 className="text-3xl">Delete Activity Page</h1>
+			<Column variant="halfWidth">
+				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-semibold">
+					You are about to delete an activity ("{activity.name}")
+				</p>
+
+				<h1 className="text-3xl font-bold">Delete Activity</h1>
 
 				<DeleteActivityForm
 					activity={activity}

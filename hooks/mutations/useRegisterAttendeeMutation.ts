@@ -6,6 +6,7 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { CreateAttendeePayload } from '../../utils/schemas';
 import { populateFormData } from '../../utils/populateFormData';
+import { toast } from 'react-toastify';
 
 export interface UseRegisterAttendeeMutationData {
 	registerAttendeeMutation: UseMutationResult<
@@ -31,10 +32,12 @@ export const useRegisterAttendeeMutation = (eid: string): UseRegisterAttendeeMut
 			return await axios.post<Prisma.EventAttendee>(`/api/events/${eid}/register`, formData);
 		},
 		{
-			onSuccess: (response) => {
+			onSuccess: () => {
 				setError(null);
 
-				router.push(`/events/${eid}/attendees/${response.data.slug}`).then(() => {
+				toast.success('You have successfully registered for this event.');
+
+				router.push(`/events/${eid}/`).then(() => {
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},

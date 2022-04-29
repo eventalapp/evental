@@ -6,6 +6,7 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { CreateEventPayload } from '../../utils/schemas';
 import { populateFormData } from '../../utils/populateFormData';
+import { toast } from 'react-toastify';
 
 export interface UseCreateEventMutationData {
 	createEventMutation: UseMutationResult<
@@ -33,6 +34,8 @@ export const useCreateEventMutation = (): UseCreateEventMutationData => {
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Event created successfully');
 
 				router.push(`/events/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries('events');

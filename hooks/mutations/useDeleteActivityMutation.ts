@@ -1,14 +1,15 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { toast } from 'react-toastify';
 
 export interface UseDeleteActivityMutationData {
 	deleteActivityMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		void
 	>;
 	deleteActivityError: ServerErrorPayload | null;
 }
@@ -23,16 +24,16 @@ export const useDeleteActivityMutation = (
 	const deleteActivityMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		void
 	>(
-		async (event: FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
-
+		async () => {
 			return await axios.delete(`/api/events/${eid}/admin/activities/${aid}/delete`);
 		},
 		{
 			onSuccess: () => {
 				setError(null);
+
+				toast.success('Activity deleted successfully');
 
 				router.push(`/events/${eid}/activities/`).then(() => {
 					void queryClient.invalidateQueries(['activity', eid, aid]);

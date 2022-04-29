@@ -3,6 +3,7 @@ import router from 'next/router';
 import { FormEvent, useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { toast } from 'react-toastify';
 
 export interface UseDeleteEventMutationData {
 	deleteEventMutation: UseMutationResult<
@@ -30,6 +31,8 @@ export const useDeleteEventMutation = (eid: string): UseDeleteEventMutationData 
 		{
 			onSuccess: () => {
 				setError(null);
+
+				toast.success('Event deleted successfully');
 
 				router.push(`/events`).then(() => {
 					void queryClient.invalidateQueries(['event', eid]);

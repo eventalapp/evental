@@ -2,13 +2,17 @@ import isISODate from 'is-iso-date';
 import { z } from 'zod';
 import { isBrowser } from './isBrowser';
 
+const slugValidator = z
+	.string()
+	.min(4, 'Slug must be at least 4 characters')
+	.max(40, 'Slug must be less than 40 characters')
+	.regex(new RegExp(/^(?!-+)/), 'Slug cannot start with a hyphen.')
+	.regex(new RegExp(/(?!-+)$/), 'Slug cannot end with a hyphen.');
+
 // Venues
 
 export const CreateVenueSchema = z.object({
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	description: z.string().max(1000, 'Description is too long')
 });
@@ -16,10 +20,7 @@ export const CreateVenueSchema = z.object({
 export type CreateVenuePayload = z.infer<typeof CreateVenueSchema>;
 
 export const EditVenueSchema = z.object({
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	description: z.string().max(1000, 'Description is too long')
 });
@@ -33,10 +34,7 @@ export const CreateRoleSchema = z.object({
 		.string()
 		.min(4, 'Role must be at least 4 characters')
 		.max(50, 'Role must be less than 50 characters'),
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	defaultRole: z.boolean()
 });
 
@@ -47,10 +45,7 @@ export const EditRoleSchema = z.object({
 		.string()
 		.min(4, 'Role must be at least 4 characters')
 		.max(50, 'Role must be less than 50 characters'),
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	defaultRole: z.boolean()
 });
 
@@ -59,10 +54,7 @@ export type EditRolePayload = z.infer<typeof EditRoleSchema>;
 // Activity
 
 export const CreateActivitySchema = z.object({
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
 	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
@@ -73,10 +65,7 @@ export const CreateActivitySchema = z.object({
 export type CreateActivityPayload = z.infer<typeof CreateActivitySchema>;
 
 export const EditActivitySchema = z.object({
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
 	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
@@ -89,10 +78,7 @@ export type EditActivityPayload = z.infer<typeof EditActivitySchema>;
 // Event
 
 export const CreateEventSchema = z.object({
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	name: z
 		.string()
 		.min(4, 'Name must be at least 4 characters')
@@ -123,10 +109,7 @@ export type EditEventPayload = z.infer<typeof EditEventSchema>;
 
 export const CreateAttendeeSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	company: z.string().max(40, 'Company must be less than 40 characters'),
 	position: z.string().max(40, 'Position must be less than 40 characters'),
 	description: z.string().max(40, 'Position must be less than 300 characters'),
@@ -138,10 +121,7 @@ export type CreateAttendeePayload = z.infer<typeof CreateAttendeeSchema>;
 
 export const EditAttendeeSchema = z.object({
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
-	slug: z
-		.string()
-		.min(4, 'Slug must be at least 4 characters')
-		.max(40, 'Slug must be less than 40 characters'),
+	slug: slugValidator,
 	company: z.string().max(40, 'Company must be less than 40 characters'),
 	position: z.string().max(40, 'Position must be less than 40 characters'),
 	description: z.string().max(40, 'Position must be less than 300 characters'),

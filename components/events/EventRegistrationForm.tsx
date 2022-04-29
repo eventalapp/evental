@@ -14,6 +14,7 @@ import { Textarea } from '../form/Textarea';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useAttendeeQuery } from '../../hooks/queries/useAttendeeQuery';
 import { UseRegisterAttendeeMutationData } from '../../hooks/mutations/useRegisterAttendeeMutation';
+import { slugify } from '../../utils/slugify';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
@@ -38,14 +39,7 @@ export const EventRegistrationForm: React.FC<Props> = (props) => {
 	const { attendee, isAttendeeLoading } = useAttendeeQuery(String(event?.id), slugWatcher);
 
 	useEffect(() => {
-		setValue(
-			'slug',
-			nameWatcher
-				?.trim()
-				.replace(/[\])}[{(]/g, '')
-				.replace(/\s+/g, '-')
-				.toLowerCase()
-		);
+		setValue('slug', slugify(nameWatcher));
 
 		if (errors.name) {
 			void trigger('slug');
@@ -53,13 +47,7 @@ export const EventRegistrationForm: React.FC<Props> = (props) => {
 	}, [nameWatcher]);
 
 	useEffect(() => {
-		setValue(
-			'slug',
-			slugWatcher
-				?.replace(/[\])}[{(]/g, '')
-				.replace(/\s+/g, '-')
-				.toLowerCase()
-		);
+		setValue('slug', slugify(slugWatcher));
 	}, [slugWatcher]);
 
 	useEffect(() => {

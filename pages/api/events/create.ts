@@ -10,6 +10,7 @@ import { busboyParseForm } from '../../../utils/busboyParseForm';
 import { uploadToBucket } from '../../../utils/uploadToBucket';
 import { processImage } from '../../../utils/processImage';
 import { handleServerError } from '../../../utils/handleServerError';
+import { processSlug } from '../../../utils/slugify';
 
 export const config = {
 	api: {
@@ -48,7 +49,7 @@ export default async (
 
 			const event = await prisma.event.create({
 				data: {
-					slug: parsed.slug,
+					slug: processSlug(parsed.slug),
 					name: parsed.name,
 					location: parsed.location,
 					startDate: parsed.startDate,

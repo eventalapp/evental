@@ -3,6 +3,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { FormEvent, useState } from 'react';
 import router from 'next/router';
+import { toast } from 'react-toastify';
 
 export interface UseDeleteRoleMutationData {
 	deleteRoleMutation: UseMutationResult<
@@ -30,6 +31,8 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 		{
 			onSuccess: () => {
 				setError(null);
+
+				toast.success('Role deleted successfully');
 
 				router.push(`/events/${eid}/roles`).then(() => {
 					void queryClient.invalidateQueries(['roles', eid]);

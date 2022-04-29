@@ -6,6 +6,8 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
+import { toast } from 'react-toastify';
+import { processSlug } from '../../utils/slugify';
 
 export interface UseCreateRoleMutationData {
 	createRoleMutation: UseMutationResult<
@@ -34,7 +36,7 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 
 			const body: CreateRolePayload = {
 				name: parsed.name,
-				slug: parsed.slug,
+				slug: processSlug(parsed.slug),
 				defaultRole: parsed.defaultRole
 			};
 
@@ -43,6 +45,8 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Role created successfully');
 
 				router.push(`/events/${eid}/roles/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['roles', eid]);

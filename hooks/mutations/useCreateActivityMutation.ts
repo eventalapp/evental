@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
 import { CreateActivityPayload } from '../../utils/schemas';
+import { toast } from 'react-toastify';
 
 export interface UseCreateActivityMutationData {
 	createActivityMutation: UseMutationResult<
@@ -33,6 +34,8 @@ export const useCreateActivityMutation = (eid: string): UseCreateActivityMutatio
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Activity created successfully');
 
 				router.push(`/events/${eid}/activities/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries('activities');

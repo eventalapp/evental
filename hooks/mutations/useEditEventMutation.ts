@@ -6,6 +6,7 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { getFormEntries } from '../../utils/getFormEntries';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { toast } from 'react-toastify';
 
 export interface UseEditEventMutationData {
 	editEventMutation: UseMutationResult<
@@ -45,6 +46,8 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 		{
 			onSuccess: (response) => {
 				setError(null);
+
+				toast.success('Event edited successfully');
 
 				router.push(`/events/${response.data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['event', eid]);
