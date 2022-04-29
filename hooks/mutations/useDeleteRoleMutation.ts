@@ -1,7 +1,6 @@
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { ServerError } from '../../typings/error';
-import { FormEvent } from 'react';
 import router from 'next/router';
 import { toast } from 'react-toastify';
 
@@ -9,7 +8,7 @@ export interface UseDeleteRoleMutationData {
 	deleteRoleMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		void
 	>;
 }
 
@@ -19,11 +18,9 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 	const deleteRoleMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
 		AxiosError<ServerError, unknown>,
-		FormEvent<HTMLFormElement>
+		void
 	>(
-		async (event: FormEvent<HTMLFormElement>) => {
-			event.preventDefault();
-
+		async () => {
 			return await axios.delete(`/api/events/${eid}/admin/roles/${rid}/delete`);
 		},
 		{

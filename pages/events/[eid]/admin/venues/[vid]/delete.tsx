@@ -47,7 +47,7 @@ const DeleteVenuePage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (!initialVenue) {
+	if (!initialVenue || !venue) {
 		return <NotFoundPage />;
 	}
 
@@ -67,8 +67,12 @@ const DeleteVenuePage: NextPage<Props> = (props) => {
 
 			<Navigation />
 
-			<Column>
-				<h1 className="text-3xl">Delete Venue Page</h1>
+			<Column variant="halfWidth">
+				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-semibold">
+					You are about to delete a venue ("{venue.name}")
+				</p>
+
+				<h1 className="text-3xl font-bold">Delete Venue</h1>
 
 				<DeleteVenueForm
 					venue={venue}

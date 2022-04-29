@@ -1,49 +1,57 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
 import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 type Props = Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
 	UseDeleteRoleMutationData &
 	UseRoleAttendeesQueryData;
 
 export const DeleteRoleForm: React.FC<Props> = (props) => {
-	const {
-		deleteRoleMutation,
-
-		role
-	} = props;
+	const router = useRouter();
+	const { deleteRoleMutation, role } = props;
+	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
+
+	const confirmDeleteWatcher = watch('confirmDelete');
+
+	useEffect(() => {
+		setCanSubmit(confirmDeleteWatcher === 'DELETE');
+	}, [confirmDeleteWatcher]);
 
 	if (!role) return null;
 
 	return (
-		<form onSubmit={deleteRoleMutation.mutate}>
-			<div className="flex flex-col w-full mt-5">
-				<h1 className="text-2xl mb-3">Are you sure you would like to delete: {role.name}?</h1>
-
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+		<form
+			onSubmit={handleSubmit(() => {
+				deleteRoleMutation.mutate();
+			})}
+		>
+			<div className="flex flex-col w-full mt-3">
+				<div className="mb-5">
 					<div>
-						<p className="font-bold mb-3">Please retype the role name below ({role.name}).</p>
-						<Label htmlFor="name">Role Name</Label>
-						<Input
-							id="name"
-							name="name"
-							type="text"
-							onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-								setCanSubmit(event.target.value === role.name);
-							}}
-							required
-						/>
+						<p className="mb-3">All of the data regarding this role will be permanently deleted.</p>
+
+						<Label htmlFor="confirmDelete">
+							Type <span className="font-bold">DELETE</span> to confirm
+						</Label>
+						<Input {...register('confirmDelete', { required: true })} />
 					</div>
 				</div>
 			</div>
 
-			<Button type="submit" disabled={!canSubmit}>
-				Delete Role
-			</Button>
+			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
+				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+					Delete Role
+				</Button>
+			</div>
 		</form>
 	);
 };

@@ -1,47 +1,59 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { UseDeleteVenueMutationData } from '../../hooks/mutations/useDeleteVenueMutatation';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenueQueryData &
 	UseDeleteVenueMutationData;
 
 export const DeleteVenueForm: React.FC<Props> = (props) => {
-	const { venue, deleteVenueMutation } = props;
+	const router = useRouter();
+	const { deleteVenueMutation, venue } = props;
+	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
+
+	const confirmDeleteWatcher = watch('confirmDelete');
+
+	useEffect(() => {
+		setCanSubmit(confirmDeleteWatcher === 'DELETE');
+	}, [confirmDeleteWatcher]);
 
 	if (!venue) return null;
 
 	return (
-		<form onSubmit={deleteVenueMutation.mutate}>
-			<div className="flex flex-col w-full mt-5">
-				<h1 className="text-2xl mb-3">
-					Are you sure you would like to delete venue: {venue.name}?
-				</h1>
-
-				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+		<form
+			onSubmit={handleSubmit(() => {
+				deleteVenueMutation.mutate();
+			})}
+		>
+			<div className="flex flex-col w-full mt-3">
+				<div className="mb-5">
 					<div>
-						<p className="font-bold mb-3">Please retype the venue name below ({venue.name}).</p>
-						<Label htmlFor="name">Venue Name</Label>
-						<Input
-							id="name"
-							name="name"
-							type="text"
-							onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-								setCanSubmit(event.target.value === venue.name);
-							}}
-							required
-						/>
+						<p className="mb-3">
+							All of the data regarding this venue will be permanently deleted.
+						</p>
+
+						<Label htmlFor="confirmDelete">
+							Type <span className="font-bold">DELETE</span> to confirm
+						</Label>
+						<Input {...register('confirmDelete', { required: true })} />
 					</div>
 				</div>
 			</div>
 
-			<Button type="submit" disabled={!canSubmit}>
-				Delete Venue
-			</Button>
+			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
+				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+					Delete Venue
+				</Button>
+			</div>
 		</form>
 	);
 };

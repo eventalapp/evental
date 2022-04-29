@@ -46,7 +46,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<ServerErrorRespo
 			}
 
 			if (attendee.permissionRole === 'FOUNDER') {
-				return res.status(500).send({ error: { message: 'You cannot delete a founder.' } });
+				return res.status(500).send({ error: { message: 'You cannot delete the founder.' } });
 			}
 
 			await prisma.eventAttendee.delete({

@@ -65,12 +65,16 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Delete Rid</title>
+				<title>Delete Role</title>
 			</Head>
 
 			<Navigation />
 
-			<Column>
+			<Column variant="halfWidth">
+				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-semibold">
+					You are about to delete a role ("{role.name}")
+				</p>
+
 				<h1 className="text-3xl font-bold">Delete Role</h1>
 
 				<DeleteRoleForm

@@ -1,51 +1,59 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 import { UseDeleteAttendeeMutationData } from '../../hooks/mutations/useDeleteAttendeeMutatation';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseAttendeeQueryData &
 	UseDeleteAttendeeMutationData;
 
 export const DeleteAttendeeForm: React.FC<Props> = (props) => {
-	const { attendee, deleteAttendeeMutation } = props;
+	const router = useRouter();
+	const { deleteAttendeeMutation, attendee } = props;
+	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
+	const confirmDeleteWatcher = watch('confirmDelete');
+
+	useEffect(() => {
+		setCanSubmit(confirmDeleteWatcher === 'DELETE');
+	}, [confirmDeleteWatcher]);
+
+	if (!attendee) return null;
+
 	return (
-		<div>
-			{attendee && (
-				<form onSubmit={deleteAttendeeMutation.mutate}>
-					<div className="flex flex-col w-full mt-5">
-						<h1 className="text-2xl mb-3">
-							Are you sure you would like to delete: {attendee.name}?
-						</h1>
+		<form
+			onSubmit={handleSubmit(() => {
+				deleteAttendeeMutation.mutate();
+			})}
+		>
+			<div className="flex flex-col w-full mt-3">
+				<div className="mb-5">
+					<div>
+						<p className="mb-3">
+							All of the data regarding this attendee will be permanently deleted.
+						</p>
 
-						<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-							<div>
-								<p className="font-bold mb-3">
-									Please retype the role name below ({attendee.name}).
-								</p>
-								<Label htmlFor="name">Role Name</Label>
-								<Input
-									id="name"
-									name="name"
-									type="text"
-									onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-										setCanSubmit(event.target.value === attendee.name);
-									}}
-									required
-								/>
-							</div>
-						</div>
+						<Label htmlFor="confirmDelete">
+							Type <span className="font-bold">DELETE</span> to confirm
+						</Label>
+						<Input {...register('confirmDelete', { required: true })} />
 					</div>
+				</div>
+			</div>
 
-					<Button type="submit" disabled={!canSubmit}>
-						Delete Attendee
-					</Button>
-				</form>
-			)}
-		</div>
+			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
+				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+					Delete Attendee
+				</Button>
+			</div>
+		</form>
 	);
 };
