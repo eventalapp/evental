@@ -9,10 +9,7 @@ const slugValidator = z
 	.regex(new RegExp(/^(?!-+)/), 'Slug cannot start with a hyphen.')
 	.regex(new RegExp(/(?!-+)$/), 'Slug cannot end with a hyphen.');
 
-const descriptionValidator = z
-	.string()
-	.min(4, 'Description must be at least 4 characters')
-	.max(400, 'Description must be less than 400 characters');
+const descriptionValidator = z.string().max(400, 'Description must be less than 400 characters');
 
 // Venues
 
