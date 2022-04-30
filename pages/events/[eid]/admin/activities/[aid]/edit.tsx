@@ -55,8 +55,12 @@ const EditActivityPage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (!initialActivity || !initialVenues || !venues || !activity) {
-		return <NotFoundPage />;
+	if (!initialActivity || !activity) {
+		return <NotFoundPage message="Activity not found" />;
+	}
+
+	if (!initialVenues || !venues) {
+		return <NotFoundPage message="No venues found." />;
 	}
 
 	if (isVenuesLoading || isEventLoading) {

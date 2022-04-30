@@ -52,8 +52,13 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 	if (!isOrganizerLoading && !isOrganizer) {
 		return <NoAccessPage />;
 	}
-	if (!initialAttendee || !initialRoles || !attendee || !roles) {
-		return <NotFoundPage />;
+
+	if (!initialAttendee || !attendee) {
+		return <NotFoundPage message="Attendee not found." />;
+	}
+
+	if (!initialRoles || !roles) {
+		return <NotFoundPage message="No roles not found." />;
 	}
 
 	if (isAttendeeLoading || isRolesLoading) {

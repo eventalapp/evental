@@ -38,7 +38,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	);
 
 	if (!initialAttendees || !attendees) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="No attendees not found." />;
 	}
 
 	if (isAttendeesLoading) {

@@ -47,7 +47,7 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 	}
 
 	if (!initialVenues || !venues) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="No venues found." />;
 	}
 
 	if (isVenuesLoading || isEventLoading) {

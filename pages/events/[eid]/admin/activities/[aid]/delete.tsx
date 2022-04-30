@@ -48,7 +48,7 @@ const DeleteActivityPage: NextPage<Props> = (props) => {
 	}
 
 	if (!initialActivity || !activity) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="Activity not found" />;
 	}
 
 	if (isActivityLoading) {

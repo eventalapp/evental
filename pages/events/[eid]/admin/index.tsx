@@ -85,8 +85,16 @@ const AdminPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (!initialVenues || !initialActivities || !initialRoles || !venues || !activities || !roles) {
-		return <NotFoundPage />;
+	if (!initialActivities || !activities) {
+		return <NotFoundPage message="No activities not found." />;
+	}
+
+	if (!initialVenues || !venues) {
+		return <NotFoundPage message="No venues not found." />;
+	}
+
+	if (!initialRoles || !roles) {
+		return <NotFoundPage message="No roles not found." />;
 	}
 
 	return (

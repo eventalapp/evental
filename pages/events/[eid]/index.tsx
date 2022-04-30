@@ -59,7 +59,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		useAttendeeByUserIdQuery(String(eid), String(session?.user?.id), initialIsAttendeeByUserId);
 
 	if (!initialRoles || !initialActivities || !initialEvent || !event || !activities || !roles) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="Event not found." />;
 	}
 
 	if (

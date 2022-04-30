@@ -38,8 +38,8 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 	);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
 
-	if (!initialVenues) {
-		return <NotFoundPage />;
+	if (!initialVenues || !venues) {
+		return <NotFoundPage message="No venues found." />;
 	}
 
 	if (isOrganizerError || venuesError) {
@@ -50,8 +50,8 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (!venues) {
-		return <NotFoundPage />;
+	if (!venues || !initialVenues) {
+		return <NotFoundPage message="No venues found." />;
 	}
 
 	return (

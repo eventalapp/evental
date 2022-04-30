@@ -5,16 +5,20 @@ import { NotFound } from './NotFound';
 import PageWrapper from '../layout/PageWrapper';
 import React from 'react';
 
-export const NotFoundPage = () => (
-	<PageWrapper variant="gray">
-		<Head>
-			<title>Not Found</title>
-		</Head>
+export const NotFoundPage: React.FC<{ message?: string }> = (props) => {
+	const { message = 'Not found.' } = props;
 
-		<Navigation />
+	return (
+		<PageWrapper variant="gray">
+			<Head>
+				<title>Not Found</title>
+			</Head>
 
-		<Column>
-			<NotFound />
-		</Column>
-	</PageWrapper>
-);
+			<Navigation />
+
+			<Column>
+				<NotFound message={message} />
+			</Column>
+		</PageWrapper>
+	);
+};

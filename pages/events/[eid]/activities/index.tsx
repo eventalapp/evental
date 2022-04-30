@@ -42,7 +42,7 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 	);
 
 	if (!initialActivities || !activities) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="No activities not found." />;
 	}
 
 	if (isActivitiesLoading || isOrganizerLoading) {

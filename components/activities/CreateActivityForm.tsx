@@ -87,7 +87,7 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 	}, [slugWatcher]);
 
 	if (venues && venues.length === 0) {
-		return <NotFound />;
+		return <NotFound message="No venues found" />;
 	}
 
 	if (!venues || !event) return null;

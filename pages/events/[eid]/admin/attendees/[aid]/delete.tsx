@@ -48,7 +48,7 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (!initialAttendee || !attendee) {
-		return <NotFoundPage />;
+		return <NotFoundPage message="Attendee not found" />;
 	}
 
 	if (isAttendeeLoading) {
