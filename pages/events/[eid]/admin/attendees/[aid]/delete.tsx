@@ -18,7 +18,7 @@ import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import user from '../../../../../api/auth/user';
 import { PasswordlessUser } from '../../../../../../utils/api';
@@ -58,7 +58,7 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (attendeeError) {
-		return <ViewNextkitErrorPage errors={[attendeeError]} />;
+		return <ViewErrorPage errors={[attendeeError]} />;
 	}
 
 	return (

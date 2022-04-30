@@ -12,7 +12,7 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { EventAttendeeUser, getAttendee } from '../../../api/events/[eid]/attendees/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import React from 'react';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { PasswordlessUser } from '../../../../utils/api';
 
@@ -45,7 +45,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (attendeeError || isOrganizerError) {
-		return <ViewNextkitErrorPage errors={[attendeeError, isOrganizerError]} />;
+		return <ViewErrorPage errors={[attendeeError, isOrganizerError]} />;
 	}
 
 	if (!attendee || !attendee.user || !attendee.role) {

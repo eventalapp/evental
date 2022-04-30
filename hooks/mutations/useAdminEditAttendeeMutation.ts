@@ -4,12 +4,12 @@ import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { AdminEditAttendeePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseEditAttendeeMutationData {
 	adminEditAttendeeMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		AdminEditAttendeePayload
 	>;
 }
@@ -22,7 +22,7 @@ export const useAdminEditAttendeeMutation = (
 
 	const adminEditAttendeeMutation = useMutation<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		AdminEditAttendeePayload
 	>(
 		async (data) => {

@@ -1,13 +1,13 @@
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 
 export interface UseAttendeeByUserIdQueryData {
 	attendeeByUserId: EventAttendeeUser | undefined;
 	isAttendeeByUserIdLoading: boolean;
-	attendeeByUserIdError: NextkitError | null;
+	attendeeByUserIdError: ErroredAPIResponse | null;
 }
 
 export const useAttendeeByUserIdQuery = (
@@ -15,11 +15,11 @@ export const useAttendeeByUserIdQuery = (
 	uid: string,
 	initialData?: EventAttendeeUser | undefined
 ): UseAttendeeByUserIdQueryData => {
-	const [error, setError] = useState<NextkitError | null>(null);
+	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
 	const { data: attendeeByUserId, isLoading: isAttendeeByUserIdLoading } = useQuery<
 		EventAttendeeUser,
-		AxiosError<NextkitError>
+		AxiosError<ErroredAPIResponse>
 	>(
 		['attendeeByUserId', eid, uid],
 		async () => {

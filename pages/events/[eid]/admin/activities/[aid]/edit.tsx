@@ -22,7 +22,7 @@ import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import Link from 'next/link';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { ViewNextkitErrorPage } from '../../../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import user from '../../../../../api/auth/user';
 import { PasswordlessUser } from '../../../../../../utils/api';
@@ -70,7 +70,7 @@ const EditActivityPage: NextPage<Props> = (props) => {
 	}
 
 	if (venuesError || eventError) {
-		return <ViewNextkitErrorPage errors={[venuesError, eventError]} />;
+		return <ViewErrorPage errors={[venuesError, eventError]} />;
 	}
 
 	if (venues && venues.length === 0) {

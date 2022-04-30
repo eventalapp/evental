@@ -19,7 +19,7 @@ import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPa
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import Link from 'next/link';
-import { ViewNextkitErrorPage } from '../../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import user from '../../../../api/auth/user';
@@ -57,7 +57,7 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 	}
 
 	if (venuesError || eventError) {
-		return <ViewNextkitErrorPage errors={[venuesError, eventError]} />;
+		return <ViewErrorPage errors={[venuesError, eventError]} />;
 	}
 
 	if (venues && venues.length === 0) {

@@ -13,7 +13,7 @@ import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { PasswordlessUser } from '../../../../utils/api';
 
@@ -46,7 +46,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (isOrganizerError || venueError) {
-		return <ViewNextkitErrorPage errors={[isOrganizerError, venueError]} />;
+		return <ViewErrorPage errors={[isOrganizerError, venueError]} />;
 	}
 
 	return (

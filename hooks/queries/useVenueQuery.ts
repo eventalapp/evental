@@ -2,12 +2,12 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseVenueQueryData {
 	venue: Prisma.EventVenue | undefined;
 	isVenueLoading: boolean;
-	venueError: NextkitError | null;
+	venueError: ErroredAPIResponse | null;
 }
 
 export const useVenueQuery = (
@@ -15,11 +15,11 @@ export const useVenueQuery = (
 	vid: string,
 	initialData?: Prisma.EventVenue | undefined
 ): UseVenueQueryData => {
-	const [error, setError] = useState<NextkitError | null>(null);
+	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
 	const { data: venue, isLoading: isVenueLoading } = useQuery<
 		Prisma.EventVenue,
-		AxiosError<NextkitError>
+		AxiosError<ErroredAPIResponse>
 	>(
 		['venue', eid, vid],
 		async () => {

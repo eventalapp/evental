@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { useQuery } from 'react-query';
 import { PasswordlessUser } from '../../utils/api';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseUserData {
 	user: PasswordlessUser | undefined;
@@ -12,7 +12,7 @@ export interface UseUserData {
 export const useUser = (initialData?: PasswordlessUser | undefined): UseUserData => {
 	const { data: user, isLoading: isUserLoading } = useQuery<
 		PasswordlessUser,
-		AxiosError<NextkitError>
+		AxiosError<ErroredAPIResponse>
 	>(
 		['user'],
 		async () => {
@@ -21,7 +21,9 @@ export const useUser = (initialData?: PasswordlessUser | undefined): UseUserData
 		{
 			retry: 0,
 			onError: (error) => {
-				toast.error(error?.response?.data.message ?? 'An error has occurred.');
+				if (error?.response?.data?.status !== 401) {
+					toast.error(error?.response?.data.message ?? 'An error has occurred.');
+				}
 			},
 			initialData
 		}

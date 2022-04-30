@@ -14,7 +14,7 @@ import Prisma from '@prisma/client';
 import { getAttendeesByRole, getRole } from '../../../api/events/[eid]/roles/[rid]';
 import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { PasswordlessUser } from '../../../../utils/api';
 
@@ -48,7 +48,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (isOrganizerError || roleAttendeesError) {
-		return <ViewNextkitErrorPage errors={[isOrganizerError, roleAttendeesError]} />;
+		return <ViewErrorPage errors={[isOrganizerError, roleAttendeesError]} />;
 	}
 
 	return (

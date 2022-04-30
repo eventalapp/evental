@@ -4,12 +4,12 @@ import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { CreateAttendeePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseCreateAttendeeMutationData {
 	createAttendeeMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		CreateAttendeePayload
 	>;
 }
@@ -19,7 +19,7 @@ export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutatio
 
 	const createAttendeeMutation = useMutation<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		CreateAttendeePayload
 	>(
 		async (data) => {

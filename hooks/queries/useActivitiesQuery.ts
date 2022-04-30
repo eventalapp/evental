@@ -2,23 +2,23 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseActivitiesQueryData {
 	activities: Prisma.EventActivity[] | undefined;
 	isActivitiesLoading: boolean;
-	activitiesError: NextkitError | null;
+	activitiesError: ErroredAPIResponse | null;
 }
 
 export const useActivitiesQuery = (
 	eid: string,
 	initialData?: Prisma.EventActivity[] | undefined
 ): UseActivitiesQueryData => {
-	const [error, setError] = useState<NextkitError | null>(null);
+	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
 	const { data: activities, isLoading: isActivitiesLoading } = useQuery<
 		Prisma.EventActivity[],
-		AxiosError<NextkitError>
+		AxiosError<ErroredAPIResponse>
 	>(
 		['activities', eid],
 		async () => {

@@ -2,23 +2,23 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseAttendeesQueryData {
 	attendees: EventAttendeeUser[] | undefined;
 	isAttendeesLoading: boolean;
-	attendeesError: NextkitError | null;
+	attendeesError: ErroredAPIResponse | null;
 }
 
 export const useAttendeesQuery = (
 	eid: string,
 	initialData?: EventAttendeeUser[] | undefined
 ): UseAttendeesQueryData => {
-	const [error, setError] = useState<NextkitError | null>(null);
+	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
 	const { data: attendees, isLoading: isAttendeesLoading } = useQuery<
 		EventAttendeeUser[],
-		AxiosError<NextkitError>
+		AxiosError<ErroredAPIResponse>
 	>(
 		['attendees', eid],
 		async () => {

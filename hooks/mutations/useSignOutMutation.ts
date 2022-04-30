@@ -1,13 +1,13 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useMutation, UseMutationResult } from 'react-query';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 import router from 'next/router';
 
 export interface UseSignOutMutationData {
 	signOutMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		{ callbackUrl?: string } | void
 	>;
 }
@@ -15,7 +15,7 @@ export interface UseSignOutMutationData {
 export const useSignOutMutation = (): UseSignOutMutationData => {
 	const signOutMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		{ callbackUrl?: string } | void
 	>(
 		async (data) => {

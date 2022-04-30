@@ -2,20 +2,20 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseRolesQueryData {
 	roles: Prisma.EventRole[] | undefined;
 	isRolesLoading: boolean;
-	rolesError: NextkitError | null;
+	rolesError: ErroredAPIResponse | null;
 }
 
 export const useRolesQuery = (eid: string, initialData?: Prisma.EventRole[]): UseRolesQueryData => {
-	const [error, setError] = useState<NextkitError | null>(null);
+	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
 	const { data: roles, isLoading: isRolesLoading } = useQuery<
 		Prisma.EventRole[],
-		AxiosError<NextkitError>
+		AxiosError<ErroredAPIResponse>
 	>(
 		['roles', eid],
 		async () => {

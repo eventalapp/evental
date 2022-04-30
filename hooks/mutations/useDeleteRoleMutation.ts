@@ -2,12 +2,12 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { toast } from 'react-toastify';
-import { NextkitError } from 'nextkit';
+import { ErroredAPIResponse } from 'nextkit';
 
 export interface UseDeleteRoleMutationData {
 	deleteRoleMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		void
 	>;
 }
@@ -17,7 +17,7 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 
 	const deleteRoleMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<NextkitError, unknown>,
+		AxiosError<ErroredAPIResponse, unknown>,
 		void
 	>(
 		async () => {
