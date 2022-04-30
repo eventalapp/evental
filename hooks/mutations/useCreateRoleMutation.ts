@@ -34,7 +34,7 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 				});
 			},
 			onError: (error) => {
-				toast.error(error.message ?? 'An error has occurred.');
+				toast.error(error?.response?.data.message ?? 'An error has occurred.');
 			}
 		}
 	);

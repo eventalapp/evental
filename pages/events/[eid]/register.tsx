@@ -18,7 +18,7 @@ import { LoadingPage } from '../../../components/error/LoadingPage';
 import { PasswordlessUser } from '../../../utils/api';
 
 type Props = {
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 };
 

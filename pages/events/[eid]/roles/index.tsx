@@ -26,7 +26,7 @@ import { PasswordlessUser } from '../../../../utils/api';
 type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialOrganizer: boolean;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const RolesPage: NextPage<Props> = (props) => {

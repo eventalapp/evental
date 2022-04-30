@@ -31,7 +31,7 @@ type Props = {
 	initialOrganizer: boolean;
 	initialActivity: Prisma.EventActivity | undefined;
 	initialVenues: Prisma.EventVenue[];
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const EditActivityPage: NextPage<Props> = (props) => {

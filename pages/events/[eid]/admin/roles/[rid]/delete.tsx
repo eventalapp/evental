@@ -28,7 +28,7 @@ type Props = {
 	initialOrganizer: boolean;
 	initialRole: Prisma.EventRole | undefined;
 	initialAttendees: EventAttendeeUser[] | undefined;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const DeleteRolePage: NextPage<Props> = (props) => {

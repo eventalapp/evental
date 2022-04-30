@@ -21,7 +21,7 @@ import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const DeleteEventPage: NextPage<Props> = (props) => {

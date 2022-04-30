@@ -12,7 +12,7 @@ import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { getUser, PasswordlessUser } from '../../utils/api';
 
 type Props = {
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const CreateEventPage: NextPage<Props> = (props) => {

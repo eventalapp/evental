@@ -34,7 +34,7 @@ export const useCreateVenueMutation = (eid: string): UseCreateVenueMutationData 
 				});
 			},
 			onError: (error) => {
-				toast.error(error.message ?? 'An error has occurred.');
+				toast.error(error?.response?.data.message ?? 'An error has occurred.');
 			}
 		}
 	);

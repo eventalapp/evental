@@ -22,7 +22,7 @@ import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
-	user: PasswordlessUser | null;
+	initialUser: PasswordlessUser | undefined;
 };
 
 const EditEventPage: NextPage<Props> = (props) => {
