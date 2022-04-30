@@ -39,7 +39,7 @@ export const DeleteAttendeeForm: React.FC<Props> = (props) => {
 						</p>
 
 						<Label htmlFor="confirmDelete">
-							Type <span className="font-bold">DELETE</span> to confirm
+							Type <span className="font-bold">DELETE</span> to confirm *
 						</Label>
 						<Input {...register('confirmDelete', { required: true })} />
 					</div>

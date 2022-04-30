@@ -91,13 +91,13 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="name">Name</Label>
+						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Event name" {...register('name', { required: true })} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
 					<div>
-						<Label htmlFor="location">Location</Label>
+						<Label htmlFor="location">Location *</Label>
 						<Input placeholder="Event location" {...register('location', { required: true })} />
 						{errors.location?.message && <ErrorMessage>{errors.location?.message}</ErrorMessage>}
 					</div>
@@ -105,7 +105,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="startDate">Start Date</Label>
+						<Label htmlFor="startDate">Start Date *</Label>
 						<div className="relative">
 							<Controller
 								control={control}
@@ -116,6 +116,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 										selected={field.value}
 										startDate={field.value}
 										endDate={endDateWatcher}
+										required
 										selectsStart
 										dateFormat="MM/dd/yyyy"
 									/>
@@ -126,7 +127,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					</div>
 
 					<div>
-						<Label htmlFor="endDate">End Date</Label>
+						<Label htmlFor="endDate">End Date *</Label>
 						<div className="relative">
 							<Controller
 								control={control}
@@ -136,6 +137,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 										onChange={(e) => field.onChange(e)}
 										selected={field.value}
 										selectsEnd
+										required
 										startDate={startDateWatcher}
 										endDate={field.value}
 										dateFormat="MM/dd/yyyy"
@@ -151,11 +153,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 mb-5 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
-					<Textarea
-						rows={5}
-						placeholder="Event description"
-						{...register('description', { required: true })}
-					/>
+					<Textarea rows={5} placeholder="Event description" {...register('description')} />
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
@@ -165,7 +163,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
 					<div>
-						<Label htmlFor="slug">Slug</Label>
+						<Label htmlFor="slug">Slug *</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-md">evental.app/events/</span>
 							<Input placeholder="event-slug" {...register('slug', { required: true })} />

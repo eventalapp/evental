@@ -1,13 +1,22 @@
 import { z } from 'zod';
 import { isBrowser } from './isBrowser';
 
-// Reusables
+// Reusable
 
 const slugValidator = z
 	.string()
-	.regex(new RegExp(/^(?!-)(?!.*-$).+$/), 'Slug cannot start or end with a hyphen.')
+	.min(1, 'Slug is required.')
 	.min(4, 'Slug must be at least 4 characters')
-	.max(40, 'Slug must be less than 40 characters');
+	.max(40, 'Slug must be less than 40 characters')
+	.regex(new RegExp(/^(?!-)(?!.*-$).+$/), 'Slug cannot start or end with a hyphen.');
+
+const nameValidator = z
+	.string()
+	.min(1, 'Slug is required.')
+	.min(4, 'Slug must be at least 4 characters')
+	.max(40, 'Slug must be less than 100 characters');
+
+const dateValidator = z.preprocess((val) => new Date(val as string | Date), z.date());
 
 const descriptionValidator = z.string().max(400, 'Description must be less than 400 characters');
 
@@ -15,7 +24,7 @@ const descriptionValidator = z.string().max(400, 'Description must be less than 
 
 export const CreateVenueSchema = z.object({
 	slug: slugValidator,
-	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	name: nameValidator,
 	description: descriptionValidator
 });
 
@@ -23,7 +32,7 @@ export type CreateVenuePayload = z.infer<typeof CreateVenueSchema>;
 
 export const EditVenueSchema = z.object({
 	slug: slugValidator,
-	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	name: nameValidator,
 	description: descriptionValidator
 });
 
@@ -32,10 +41,7 @@ export type EditVenuePayload = z.infer<typeof EditVenueSchema>;
 // Role
 
 export const CreateRoleSchema = z.object({
-	name: z
-		.string()
-		.min(4, 'Role must be at least 4 characters')
-		.max(50, 'Role must be less than 50 characters'),
+	name: nameValidator,
 	slug: slugValidator,
 	defaultRole: z.boolean()
 });
@@ -43,10 +49,7 @@ export const CreateRoleSchema = z.object({
 export type CreateRolePayload = z.infer<typeof CreateRoleSchema>;
 
 export const EditRoleSchema = z.object({
-	name: z
-		.string()
-		.min(4, 'Role must be at least 4 characters')
-		.max(50, 'Role must be less than 50 characters'),
+	name: nameValidator,
 	slug: slugValidator,
 	defaultRole: z.boolean()
 });
@@ -57,10 +60,10 @@ export type EditRolePayload = z.infer<typeof EditRoleSchema>;
 
 export const CreateActivitySchema = z.object({
 	slug: slugValidator,
-	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	name: nameValidator,
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
-	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
-	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
+	startDate: dateValidator,
+	endDate: dateValidator,
 	description: descriptionValidator
 });
 
@@ -68,10 +71,10 @@ export type CreateActivityPayload = z.infer<typeof CreateActivitySchema>;
 
 export const EditActivitySchema = z.object({
 	slug: slugValidator,
-	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	name: nameValidator,
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
-	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
-	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
+	startDate: dateValidator,
+	endDate: dateValidator,
 	description: descriptionValidator
 });
 
@@ -81,17 +84,14 @@ export type EditActivityPayload = z.infer<typeof EditActivitySchema>;
 
 export const CreateEventSchema = z.object({
 	slug: slugValidator,
-	name: z
-		.string()
-		.min(4, 'Name must be at least 4 characters')
-		.max(100, 'Name must be less than 100 characters'),
+	name: nameValidator,
 	location: z
 		.string()
 		.min(4, 'Location must be at least 4 characters')
 		.max(100, 'Location must be less than 40 characters'),
 	image: z.string(),
-	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
-	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
+	startDate: dateValidator,
+	endDate: dateValidator,
 	description: descriptionValidator
 });
 
@@ -99,17 +99,14 @@ export type CreateEventPayload = z.infer<typeof CreateEventSchema>;
 
 export const EditEventSchema = z.object({
 	slug: slugValidator,
-	name: z
-		.string()
-		.min(4, 'Name must be at least 4 characters')
-		.max(100, 'Name must be less than 100 characters'),
+	name: nameValidator,
 	location: z
 		.string()
 		.min(4, 'Location must be at least 4 characters')
 		.max(100, 'Location must be less than 40 characters'),
 	image: z.string(),
-	startDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
-	endDate: z.preprocess((val) => new Date(val as string | Date), z.date()),
+	startDate: dateValidator,
+	endDate: dateValidator,
 	description: descriptionValidator
 });
 
@@ -118,7 +115,7 @@ export type EditEventPayload = z.infer<typeof EditEventSchema>;
 // Event Attendee
 
 export const CreateAttendeeSchema = z.object({
-	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	name: nameValidator,
 	slug: slugValidator,
 	company: z.string().max(40, 'Company must be less than 40 characters'),
 	position: z.string().max(40, 'Position must be less than 40 characters'),
@@ -130,7 +127,7 @@ export const CreateAttendeeSchema = z.object({
 export type CreateAttendeePayload = z.infer<typeof CreateAttendeeSchema>;
 
 export const AdminEditAttendeeSchema = z.object({
-	name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
+	name: nameValidator,
 	slug: slugValidator,
 	company: z.string().max(40, 'Company must be less than 40 characters'),
 	position: z.string().max(40, 'Position must be less than 40 characters'),
