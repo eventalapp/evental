@@ -7,6 +7,7 @@ import React from 'react';
 import { Button } from '../../components/form/Button';
 import Column from '../../components/layout/Column';
 import { Navigation } from '../../components/navigation';
+import PageWrapper from '../../components/layout/PageWrapper';
 
 const Providers: React.FC<SignInPageProps> = (props) => {
 	const { providers } = props;
@@ -44,7 +45,7 @@ const SignInPage: NextPage<SignInPageProps> = (props) => {
 	const { providers } = props;
 
 	return (
-		<>
+		<PageWrapper variant="gray">
 			<Navigation />
 
 			<Column>
@@ -52,7 +53,7 @@ const SignInPage: NextPage<SignInPageProps> = (props) => {
 					<Providers providers={providers} />
 				</div>
 			</Column>
-		</>
+		</PageWrapper>
 	);
 };
 
