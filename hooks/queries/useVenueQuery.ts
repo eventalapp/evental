@@ -29,7 +29,13 @@ export const useVenueQuery = (
 		},
 		{
 			retry: 0,
-			enabled: eid !== undefined && eid !== 'undefined' && vid !== undefined && vid !== 'undefined',
+			enabled:
+				eid !== undefined &&
+				eid !== 'undefined' &&
+				vid !== undefined &&
+				vid !== 'undefined' &&
+				vid !== '' &&
+				eid !== '',
 			onError: (error) => {
 				setError(error.response?.data.error ?? null);
 			},
