@@ -5,12 +5,12 @@ import Head from 'next/head';
 import Column from '../../components/layout/Column';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { Navigation } from '../../components/navigation';
-import Unauthorized from '../../components/error/Unauthorized';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Session } from 'next-auth';
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
+import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 
 type Props = {
 	session: Session | null;
@@ -22,7 +22,7 @@ const CreateEventPage: NextPage<Props> = (props) => {
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 
 	if (!session?.user?.id) {
-		return <Unauthorized />;
+		return <UnauthorizedPage />;
 	}
 
 	return (
