@@ -2,7 +2,6 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
-
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
@@ -17,12 +16,14 @@ import { useEventQuery } from '../../hooks/queries/useEventQuery';
 import { slugify } from '../../utils/slugify';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateEventMutationData &
 	UseImageUploadMutationData;
 
 export const CreateEventForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const { createEventMutation, imageUploadMutation, imageUploadResponse } = props;
 	const {
 		register,
@@ -209,8 +210,12 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
+					className="ml-4"
 					variant="primary"
 					padding="medium"
 					disabled={imageUploadMutation.isLoading || isEventLoading || Boolean(event)}

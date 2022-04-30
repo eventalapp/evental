@@ -21,6 +21,7 @@ import { NotFound } from '../error/NotFound';
 import { roundToNearestMinutes } from 'date-fns';
 import { NEAREST_MINUTE } from '../../config';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { useRouter } from 'next/router';
 
 type Props = {
 	eid: string;
@@ -33,6 +34,7 @@ type CreateActivityFormProps = Props &
 	UseEventQueryData;
 
 export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => {
+	const router = useRouter();
 	const { eid, venues, createActivityMutation, event } = props;
 	const {
 		register,
@@ -211,9 +213,13 @@ export const CreateActivityForm: React.FC<CreateActivityFormProps> = (props) => 
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
 					variant="primary"
+					className="ml-4"
 					padding="medium"
 					disabled={isActivityLoading || Boolean(activity)}
 				>

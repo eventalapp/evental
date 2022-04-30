@@ -4,12 +4,15 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutation';
 import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+import { useRouter } from 'next/router';
 
 type Props = UseRoleAttendeesQueryData &
 	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
 	UseEditRoleMutationData;
 
 export const EditRoleForm: React.FC<Props> = (props) => {
+	const router = useRouter();
+
 	const { editRoleMutation, role } = props;
 
 	if (!role) return null;
@@ -38,7 +41,14 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<Button type="submit">Edit Role</Button>
+			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
+				<Button type="submit" className="ml-4" variant="primary" padding="medium">
+					Edit Role
+				</Button>
+			</div>
 		</form>
 	);
 };

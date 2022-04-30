@@ -3,11 +3,13 @@ import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseCreateRoleMutationData } from '../../hooks/mutations/useCreateRoleMutation';
+import { useRouter } from 'next/router';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseCreateRoleMutationData;
 
 export const CreateRoleForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const { createRoleMutation } = props;
 
 	return (
@@ -29,7 +31,14 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<Button type="submit">Create Role</Button>
+			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
+				<Button type="submit" className="ml-4" variant="primary" padding="medium">
+					Create Role
+				</Button>
+			</div>
 		</form>
 	);
 };

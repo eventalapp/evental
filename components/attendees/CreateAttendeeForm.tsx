@@ -1,5 +1,3 @@
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -19,6 +17,7 @@ import { slugify } from '../../utils/slugify';
 import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
 import Image from 'next/image';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
+import { useRouter } from 'next/router';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
@@ -26,6 +25,7 @@ type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElem
 	UseImageUploadMutationData;
 
 export const CreateAttendeeForm: React.FC<Props> = (props) => {
+	const router = useRouter();
 	const { createAttendeeMutation, event, imageUploadMutation, imageUploadResponse } = props;
 	const {
 		register,
@@ -164,14 +164,17 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
+					className="ml-4"
 					variant="primary"
 					padding="medium"
 					disabled={imageUploadMutation.isLoading || isAttendeeLoading || Boolean(attendee)}
 				>
 					Register
-					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>
 			</div>
 		</form>
