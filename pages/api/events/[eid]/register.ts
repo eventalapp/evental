@@ -1,83 +1,69 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
-import type Prisma from '@prisma/client';
-import { ServerErrorResponse } from '../../../../utils/ServerError';
 import { CreateAttendeeSchema } from '../../../../utils/schemas';
-import { handleServerError } from '../../../../utils/handleServerError';
 import { prisma } from '../../../../prisma/client';
 import { getEvent } from './index';
 import { processSlug } from '../../../../utils/slugify';
+import { NextkitError } from 'nextkit';
+import { api } from '../../../../utils/api';
 
-export default async (
-	req: NextApiRequest,
-	res: NextApiResponse<ServerErrorResponse | Prisma.EventAttendee>
-) => {
-	if (req.method === 'POST') {
-		try {
-			const { eid } = req.query;
+export default api({
+	async POST({ ctx, req }) {
+		const { eid } = req.query;
 
-			const session = await getSession({ req });
+		const user = await ctx.getUser();
 
-			if (!session?.user?.id) {
-				return res.status(401).send({ error: { message: 'You must be logged in to do this.' } });
-			}
-
-			const event = await getEvent(String(eid));
-
-			if (!event) {
-				return res.status(404).send({ error: { message: 'Event not found.' } });
-			}
-
-			const isAttendeeAlready = await prisma.eventAttendee.findFirst({
-				where: {
-					eventId: event.id,
-					userId: String(session.user.id)
-				}
-			});
-
-			if (isAttendeeAlready) {
-				return res
-					.status(401)
-					.send({ error: { message: 'You are already attending this event.' } });
-			}
-
-			const parsed = CreateAttendeeSchema.parse(req.body);
-
-			const defaultRole = await prisma.eventRole.findFirst({
-				where: {
-					eventId: event.id,
-					defaultRole: true
-				}
-			});
-
-			if (!defaultRole) {
-				return res.status(404).send({ error: { message: 'Role not found.' } });
-			}
-
-			const eventAttendee = await prisma.eventAttendee.create({
-				data: {
-					slug: processSlug(parsed.slug),
-					name: parsed.name,
-					image: parsed.image,
-					company: parsed.company,
-					position: parsed.position,
-					description: parsed.description,
-					eventRoleId: defaultRole?.id,
-					userId: session.user.id,
-					eventId: event.id,
-					permissionRole: 'ATTENDEE'
-				}
-			});
-
-			if (!eventAttendee) {
-				return res.status(500).send({ error: { message: 'Could not create attendee.' } });
-			}
-
-			res.status(200).send(eventAttendee);
-		} catch (error) {
-			return handleServerError(error, res);
+		if (!user?.id) {
+			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
-	} else {
-		return res.status(405).send({ error: { message: 'Method not allowed' } });
+
+		const event = await getEvent(String(eid));
+
+		if (!event) {
+			throw new NextkitError(404, 'Event not found.');
+		}
+
+		const isAttendeeAlready = await prisma.eventAttendee.findFirst({
+			where: {
+				eventId: event.id,
+				userId: String(user.id)
+			}
+		});
+
+		if (isAttendeeAlready) {
+			throw new NextkitError(401, 'You are already attending this event.');
+		}
+
+		const parsed = CreateAttendeeSchema.parse(req.body);
+
+		const defaultRole = await prisma.eventRole.findFirst({
+			where: {
+				eventId: event.id,
+				defaultRole: true
+			}
+		});
+
+		if (!defaultRole) {
+			throw new NextkitError(404, 'Role not found.');
+		}
+
+		const eventAttendee = await prisma.eventAttendee.create({
+			data: {
+				slug: processSlug(parsed.slug),
+				name: parsed.name,
+				image: parsed.image,
+				company: parsed.company,
+				position: parsed.position,
+				description: parsed.description,
+				eventRoleId: defaultRole?.id,
+				userId: user.id,
+				eventId: event.id,
+				permissionRole: 'ATTENDEE'
+			}
+		});
+
+		if (!eventAttendee) {
+			throw new NextkitError(500, 'Could not create attendee.');
+		}
+
+		return eventAttendee;
 	}
-};
+});

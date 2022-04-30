@@ -9,7 +9,6 @@ import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
 import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
 import { useAttendeeByUserIdQuery } from '../../../hooks/queries/useAttendeeByUserIdQuery';
-import { getSession } from 'next-auth/react';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import Prisma from '@prisma/client';
 import { getEvent } from '../../api/events/[eid]';
@@ -18,11 +17,11 @@ import { getAttendeeByUserId } from '../../api/events/[eid]/attendees/user/[uid]
 import { getActivities } from '../../api/events/[eid]/activities';
 import { EventAttendeeUser } from '../../api/events/[eid]/attendees/[aid]';
 import { getRoles } from '../../api/events/[eid]/roles';
-import { Session } from 'next-auth';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import React from 'react';
-import { ViewServerErrorPage } from '../../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../../components/error/ViewNextkitErrorPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
+import { getUser, PasswordlessUser } from '../../../utils/api';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -30,14 +29,14 @@ type Props = {
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialIsAttendeeByUserId: EventAttendeeUser | undefined;
 	initialOrganizer: boolean;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const ViewEventPage: NextPage<Props> = (props) => {
 	const {
 		initialEvent,
 		initialOrganizer,
-		session,
+		user,
 		initialRoles,
 		initialActivities,
 		initialIsAttendeeByUserId
@@ -56,7 +55,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { attendeeByUserId, attendeeByUserIdError, isAttendeeByUserIdLoading } =
-		useAttendeeByUserIdQuery(String(eid), String(session?.user?.id), initialIsAttendeeByUserId);
+		useAttendeeByUserIdQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 
 	if (!initialRoles || !initialActivities || !initialEvent || !event || !activities || !roles) {
 		return <NotFoundPage message="Event not found." />;
@@ -75,7 +74,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {
 		return (
-			<ViewServerErrorPage
+			<ViewNextkitErrorPage
 				errors={[isOrganizerError, rolesError, eventError, activitiesError, attendeeByUserIdError]}
 			/>
 		);
@@ -116,18 +115,18 @@ const ViewEventPage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid } = context.query;
 
-	const session = await getSession(context);
+	const user = await getUser(context.req);
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialActivities = (await getActivities(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialOrganizer = await getIsOrganizer(String(user?.id), String(eid));
 	const initialIsAttendeeByUserId =
-		(await getAttendeeByUserId(String(eid), String(session?.user?.id))) ?? undefined;
+		(await getAttendeeByUserId(String(eid), String(user?.id))) ?? undefined;
 
 	return {
 		props: {
 			initialEvent,
-			session,
+			user,
 			initialOrganizer,
 			initialIsAttendeeByUserId,
 			initialRoles,

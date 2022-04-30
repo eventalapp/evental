@@ -5,11 +5,8 @@ import { useRouter } from 'next/router';
 import Column from '../../../components/layout/Column';
 import { Navigation } from '../../../components/navigation';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
-import { getSession } from 'next-auth/react';
 import PageWrapper from '../../../components/layout/PageWrapper';
-import { Session } from 'next-auth';
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
-
 import React from 'react';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
 import { getEvent } from '../../api/events/[eid]';
@@ -18,21 +15,22 @@ import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
 import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
 import { LoadingPage } from '../../../components/error/LoadingPage';
+import { PasswordlessUser } from '../../../utils/api';
 
 type Props = {
-	session: Session | null;
+	user: PasswordlessUser | null;
 	initialEvent: Prisma.Event | undefined;
 };
 
 const EventRegisterPage: NextPage<Props> = (props) => {
-	const { session, initialEvent } = props;
+	const { user, initialEvent } = props;
 	const router = useRouter();
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 
-	if (!session?.user?.id) {
+	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 

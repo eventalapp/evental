@@ -1,13 +1,13 @@
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { ServerError } from '../../typings/error';
 import router from 'next/router';
 import { toast } from 'react-toastify';
+import { NextkitError } from 'nextkit';
 
 export interface UseDeleteRoleMutationData {
 	deleteRoleMutation: UseMutationResult<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		void
 	>;
 }
@@ -17,7 +17,7 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 
 	const deleteRoleMutation = useMutation<
 		AxiosResponse<unknown, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		void
 	>(
 		async () => {
@@ -34,7 +34,7 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 				});
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);

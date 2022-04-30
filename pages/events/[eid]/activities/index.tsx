@@ -13,19 +13,21 @@ import { groupByDate } from '../../../../utils/groupByDate';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getSession } from 'next-auth/react';
+
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { Session } from 'next-auth';
+
 import type Prisma from '@prisma/client';
 import { getActivities } from '../../../api/events/[eid]/activities';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { ViewServerErrorPage } from '../../../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../../../components/error/ViewNextkitErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
+import user from '../../../api/auth/user';
+import { PasswordlessUser } from '../../../../utils/api';
 
 type Props = {
 	initialActivities: Prisma.EventActivity[] | undefined;
 	initialOrganizer: boolean;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const ActivitiesPage: NextPage<Props> = (props) => {
@@ -50,7 +52,7 @@ const ActivitiesPage: NextPage<Props> = (props) => {
 	}
 
 	if (activitiesError || isOrganizerError) {
-		return <ViewServerErrorPage errors={[activitiesError, isOrganizerError]} />;
+		return <ViewNextkitErrorPage errors={[activitiesError, isOrganizerError]} />;
 	}
 
 	if (activities) {
@@ -95,7 +97,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const session = await getSession(context);
 	const initialActivities = (await getActivities(String(eid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(session?.user.id, String(eid));
+	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
 
 	return {
 		props: {

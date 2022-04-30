@@ -2,12 +2,12 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { NextkitError } from 'nextkit';
 
 export interface UseActivityQueryData {
 	activity: Prisma.EventActivity | undefined;
 	isActivityLoading: boolean;
-	activityError: ServerErrorPayload | null;
+	activityError: NextkitError | null;
 }
 
 export const useActivityQuery = (
@@ -15,11 +15,11 @@ export const useActivityQuery = (
 	aid: string,
 	initialData?: Prisma.EventActivity | undefined
 ): UseActivityQueryData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
+	const [error, setError] = useState<NextkitError | null>(null);
 
 	const { data: activity, isLoading: isActivityLoading } = useQuery<
 		Prisma.EventActivity,
-		AxiosError<ServerError>
+		AxiosError<NextkitError>
 	>(
 		['activity', eid, aid],
 		async () => {
@@ -37,7 +37,7 @@ export const useActivityQuery = (
 				eid !== '' &&
 				aid !== '',
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				setError(error?.response?.data ?? null);
 			},
 			onSuccess: () => {
 				setError(null);

@@ -1,42 +1,36 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
 import { EventAttendeeUser } from '../attendees/[aid]';
 import type Prisma from '@prisma/client';
-import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import { getEvent } from '../index';
-import { handleServerError } from '../../../../../utils/handleServerError';
+import { api } from '../../../../../utils/api';
+import { NextkitError } from 'nextkit';
 
 export type RoleAttendeePayload = {
 	attendees: EventAttendeeUser[] | undefined;
 	role: Prisma.EventRole | undefined;
 };
 
-export default async (
-	req: NextApiRequest,
-	res: NextApiResponse<ServerErrorResponse | RoleAttendeePayload>
-) => {
-	try {
+export default api({
+	async GET({ req }) {
 		const { eid, rid } = req.query;
 
 		const role = await getRole(String(eid), String(rid));
 
 		if (!role) {
-			return res.status(404).send({ error: { message: 'Role not found' } });
+			throw new NextkitError(404, 'Role not found');
 		}
 
 		const attendees = await getAttendeesByRole(String(eid), String(rid));
 
 		if (!attendees) {
-			return res.status(404).send({ error: { message: 'Attendees not found' } });
+			throw new NextkitError(404, 'Attendees not found');
 		}
 
 		const payload: RoleAttendeePayload = { attendees, role };
 
-		return res.status(200).send(payload);
-	} catch (error) {
-		return handleServerError(error, res);
+		return payload;
 	}
-};
+});
 
 export const getRole = async (eid: string, rid: string): Promise<Prisma.EventRole | null> => {
 	const event = await getEvent(eid);

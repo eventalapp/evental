@@ -1,20 +1,20 @@
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ServerError, ServerErrorPayload } from '../../typings/error';
+import { NextkitError } from 'nextkit';
 
 export interface UseOrganizerQueryData {
 	isOrganizer: boolean | undefined;
 	isOrganizerLoading: boolean;
-	isOrganizerError: ServerErrorPayload | null;
+	isOrganizerError: NextkitError | null;
 }
 
 export const useOrganizerQuery = (eid: string, initialData?: boolean): UseOrganizerQueryData => {
-	const [error, setError] = useState<ServerErrorPayload | null>(null);
+	const [error, setError] = useState<NextkitError | null>(null);
 
 	const { data: isOrganizer, isLoading: isOrganizerLoading } = useQuery<
 		boolean,
-		AxiosError<ServerError>
+		AxiosError<NextkitError>
 	>(
 		['isOrganizer', eid],
 		async () => {
@@ -24,7 +24,7 @@ export const useOrganizerQuery = (eid: string, initialData?: boolean): UseOrgani
 			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined',
 			onError: (error) => {
-				setError(error.response?.data.error ?? null);
+				setError(error?.response?.data ?? null);
 			},
 			onSuccess: () => {
 				setError(null);

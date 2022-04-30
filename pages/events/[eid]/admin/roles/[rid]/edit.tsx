@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
+
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
@@ -15,22 +15,24 @@ import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { getAttendeesByRole, getRole } from '../../../../../api/events/[eid]/roles/[rid]';
 import Prisma from '@prisma/client';
 import { EventAttendeeUser } from '../../../../../api/events/[eid]/attendees/[aid]';
-import { Session } from 'next-auth';
+
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../../../../../components/error/ViewNextkitErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import user from '../../../../../api/auth/user';
+import { PasswordlessUser } from '../../../../../../utils/api';
 
 type Props = {
 	initialOrganizer: boolean;
 	initialRole: Prisma.EventRole | undefined;
 	initialAttendees: EventAttendeeUser[] | undefined;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const EditRolePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialRole, initialAttendees, session } = props;
+	const { initialOrganizer, initialRole, initialAttendees, user } = props;
 
 	const router = useRouter();
 	const { eid, rid } = router.query;
@@ -42,7 +44,7 @@ const EditRolePage: NextPage<Props> = (props) => {
 	);
 	const { editRoleMutation } = useEditRoleMutation(String(eid), String(rid));
 
-	if (!session?.user?.id) {
+	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
@@ -59,7 +61,7 @@ const EditRolePage: NextPage<Props> = (props) => {
 	}
 
 	if (roleAttendeesError) {
-		return <ViewServerErrorPage errors={[roleAttendeesError]} />;
+		return <ViewNextkitErrorPage errors={[roleAttendeesError]} />;
 	}
 
 	return (
@@ -74,6 +76,7 @@ const EditRolePage: NextPage<Props> = (props) => {
 				<h1 className="text-3xl font-bold">Edit Role</h1>
 
 				<EditRoleForm
+					eid={String(eid)}
 					role={role}
 					roleAttendeesError={roleAttendeesError}
 					editRoleMutation={editRoleMutation}
@@ -89,7 +92,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const { eid, rid } = context.query;
 
 	const session = await getSession(context);
-	const initialOrganizer = (await getIsOrganizer(session?.user.id, String(eid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(user.id, String(eid))) ?? undefined;
 	const initialAttendees = (await getAttendeesByRole(String(eid), String(rid))) ?? undefined;
 	const initialRole = (await getRole(String(eid), String(rid))) ?? undefined;
 

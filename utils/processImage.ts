@@ -1,5 +1,5 @@
 import sharp, { FormatEnum } from 'sharp';
-import { ServerError } from './ServerError';
+import { NextkitError } from 'nextkit';
 
 interface ProcessImageOptions {
 	width: number;
@@ -41,9 +41,9 @@ export const processImage = async (
 		.toBuffer()
 		.catch((error) => {
 			if (error instanceof Error) {
-				throw new ServerError(error.message);
+				throw new NextkitError(500, error.message);
 			}
 
-			throw new ServerError('An error has occurred while parsing the image.');
+			throw new NextkitError(500, 'An error has occurred while parsing the image.');
 		});
 };

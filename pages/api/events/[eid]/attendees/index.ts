@@ -1,28 +1,22 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '../../../../../prisma/client';
-import { ServerErrorResponse } from '../../../../../utils/ServerError';
 import { EventAttendeeUser } from './[aid]';
 import { getEvent } from '../index';
-import { handleServerError } from '../../../../../utils/handleServerError';
+import { api } from '../../../../../utils/api';
+import { NextkitError } from 'nextkit';
 
-export default async (
-	req: NextApiRequest,
-	res: NextApiResponse<ServerErrorResponse | EventAttendeeUser[]>
-) => {
-	try {
+export default api({
+	async GET({ req }) {
 		const { eid } = req.query;
 
 		const attendees = await getAttendees(String(eid));
 
 		if (!attendees) {
-			return res.status(404).send({ error: { message: 'Attendees not found' } });
+			throw new NextkitError(404, 'Attendees not found');
 		}
 
-		return res.status(200).send(attendees);
-	} catch (error) {
-		return handleServerError(error, res);
+		return attendees;
 	}
-};
+});
 
 export const getAttendees = async (eid: string): Promise<EventAttendeeUser[] | null> => {
 	const event = await getEvent(eid);

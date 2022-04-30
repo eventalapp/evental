@@ -2,14 +2,14 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError } from '../../typings/error';
 import { CreateAttendeePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
+import { NextkitError } from 'nextkit';
 
 export interface UseCreateAttendeeMutationData {
 	createAttendeeMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		CreateAttendeePayload
 	>;
 }
@@ -19,7 +19,7 @@ export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutatio
 
 	const createAttendeeMutation = useMutation<
 		AxiosResponse<Prisma.EventAttendee, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		CreateAttendeePayload
 	>(
 		async (data) => {
@@ -34,7 +34,7 @@ export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutatio
 				});
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);

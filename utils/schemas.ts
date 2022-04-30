@@ -150,3 +150,20 @@ export const ImageUploadSchema = z.object({
 });
 
 export type ImageUploadPayload = z.infer<typeof ImageUploadSchema>;
+
+// Authentication
+
+export const SignInSchema = z.object({
+	email: z.string().email('Invalid email address').min(1, 'Email is required'),
+	password: z.string().min(8, 'Password must be at least 8 characters')
+});
+
+export type SignInPayload = z.infer<typeof SignInSchema>;
+
+export const SignUpSchema = z.object({
+	email: z.string().email('Invalid email address').min(1, 'Email is required'),
+	password: z.string().min(8, 'Password must be at least 8 characters'),
+	name: nameValidator
+});
+
+export type SignUpPayload = z.infer<typeof SignUpSchema>;

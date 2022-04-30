@@ -1,65 +1,56 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
 import { prisma } from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
-import { ServerErrorResponse } from '../../../../../../../utils/ServerError';
-import { handleServerError } from '../../../../../../../utils/handleServerError';
+import { api } from '../../../../../../../utils/api';
+import { NextkitError } from 'nextkit';
 
-export default async (req: NextApiRequest, res: NextApiResponse<ServerErrorResponse | string>) => {
-	const session = await getSession({ req });
-	const { eid, aid } = req.query;
+export default api({
+	async DELETE({ ctx, req }) {
+		const user = await ctx.getUser();
+		const { eid, aid } = req.query;
 
-	if (!session?.user?.id) {
-		return res.status(401).send({ error: { message: 'You must be logged in to do this.' } });
-	}
-
-	if (!(await isOrganizer(String(session?.user?.id), String(eid)))) {
-		return res.status(403).send({ error: { message: 'You must be an organizer to do this.' } });
-	}
-
-	if (req.method === 'DELETE') {
-		try {
-			const event = await prisma.event.findFirst({
-				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
-				select: {
-					id: true
-				}
-			});
-
-			if (!event) {
-				return res.status(404).send({ error: { message: 'Event not found.' } });
-			}
-
-			const attendee = await prisma.eventAttendee.findFirst({
-				where: {
-					eventId: event.id,
-					OR: [{ id: String(aid) }, { slug: String(aid) }]
-				},
-				select: {
-					id: true,
-					permissionRole: true
-				}
-			});
-
-			if (!attendee) {
-				return res.status(404).send({ error: { message: 'Attendee not found.' } });
-			}
-
-			if (attendee.permissionRole === 'FOUNDER') {
-				return res.status(500).send({ error: { message: 'You cannot delete the founder.' } });
-			}
-
-			await prisma.eventAttendee.delete({
-				where: {
-					id: attendee.id
-				}
-			});
-
-			return res.status(200).send('Attendee deleted.');
-		} catch (error) {
-			return handleServerError(error, res);
+		if (!user?.id) {
+			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
-	}
 
-	return res.status(204).end();
-};
+		if (!(await isOrganizer(String(user?.id), String(eid)))) {
+			throw new NextkitError(403, 'You must be an organizer to do this.');
+		}
+		const event = await prisma.event.findFirst({
+			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
+			select: {
+				id: true
+			}
+		});
+
+		if (!event) {
+			throw new NextkitError(404, 'Event not found.');
+		}
+
+		const attendee = await prisma.eventAttendee.findFirst({
+			where: {
+				eventId: event.id,
+				OR: [{ id: String(aid) }, { slug: String(aid) }]
+			},
+			select: {
+				id: true,
+				permissionRole: true
+			}
+		});
+
+		if (!attendee) {
+			throw new NextkitError(404, 'Attendee not found.');
+		}
+
+		if (attendee.permissionRole === 'FOUNDER') {
+			throw new NextkitError(500, 'You cannot delete the founder.');
+		}
+
+		await prisma.eventAttendee.delete({
+			where: {
+				id: attendee.id
+			}
+		});
+
+		return 'Attendee deleted.';
+	}
+});

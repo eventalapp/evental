@@ -1,20 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { Session } from 'next-auth';
 import Link from 'next/link';
 import React from 'react';
 import { ProfileDropdown } from './dropdown';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { PasswordlessUser } from '../../utils/api';
+import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
 
-interface AuthenticatedProps {
+type Props = {
 	className?: string;
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	session: Session;
-}
+	user: PasswordlessUser;
+} & UseSignOutMutationData;
 
-export const Authenticated: React.FC<AuthenticatedProps> = (props) => {
-	const { session, className, isOpen, setIsOpen, ...restProps } = props;
+export const Authenticated: React.FC<Props> = (props) => {
+	const { signOutMutation, className, isOpen, setIsOpen, user, ...restProps } = props;
+
 	return (
 		<nav {...restProps} className="bg-white">
 			<div
@@ -45,7 +47,7 @@ export const Authenticated: React.FC<AuthenticatedProps> = (props) => {
 					<Link href="/events">
 						<a>Events</a>
 					</Link>
-					{session.user && <ProfileDropdown />}
+					{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
 				</div>
 
 				<div className="flex-row flex space-x-8 font-medium sm:hidden">

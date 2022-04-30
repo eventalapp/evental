@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
+
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
@@ -13,22 +13,24 @@ import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/use
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
-import { Session } from 'next-auth';
+
 import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewServerErrorPage } from '../../../../../../components/error/ViewServerErrorPage';
+import { ViewNextkitErrorPage } from '../../../../../../components/error/ViewNextkitErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import user from '../../../../../api/auth/user';
+import { PasswordlessUser } from '../../../../../../utils/api';
 
 type Props = {
 	initialOrganizer: boolean;
 	initialAttendee: EventAttendeeUser | undefined;
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const DeleteAttendeePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialAttendee, session } = props;
+	const { initialOrganizer, initialAttendee, user } = props;
 	const router = useRouter();
 	const { eid, aid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
@@ -39,7 +41,7 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 	);
 	const { deleteAttendeeMutation } = useDeleteAttendeeMutation(String(eid), String(aid));
 
-	if (!session?.user?.id) {
+	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
@@ -56,7 +58,7 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	if (attendeeError) {
-		return <ViewServerErrorPage errors={[attendeeError]} />;
+		return <ViewNextkitErrorPage errors={[attendeeError]} />;
 	}
 
 	return (
@@ -89,7 +91,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const { eid, aid } = context.query;
 
 	const session = await getSession(context);
-	const initialOrganizer = (await getIsOrganizer(session?.user.id, String(eid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(user.id, String(eid))) ?? undefined;
 	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
 
 	return {

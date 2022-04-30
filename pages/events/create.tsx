@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Column from '../../components/layout/Column';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
@@ -8,20 +7,20 @@ import { Navigation } from '../../components/navigation';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
-import { Session } from 'next-auth';
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
+import { getUser, PasswordlessUser } from '../../utils/api';
 
 type Props = {
-	session: Session | null;
+	user: PasswordlessUser | null;
 };
 
 const CreateEventPage: NextPage<Props> = (props) => {
-	const { session } = props;
+	const { user } = props;
 	const { createEventMutation } = useCreateEventMutation();
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 
-	if (!session?.user?.id) {
+	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
@@ -48,6 +47,9 @@ const CreateEventPage: NextPage<Props> = (props) => {
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const session = await getSession(context);
+	const user = await getUser(context.req);
+
+	console.log(user);
 
 	return {
 		props: {

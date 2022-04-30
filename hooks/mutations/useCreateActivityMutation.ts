@@ -2,14 +2,14 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { ServerError } from '../../typings/error';
 import { CreateActivityPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
+import { NextkitError } from 'nextkit';
 
 export interface UseCreateActivityMutationData {
 	createActivityMutation: UseMutationResult<
 		AxiosResponse<Prisma.EventActivity, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		CreateActivityPayload
 	>;
 }
@@ -19,7 +19,7 @@ export const useCreateActivityMutation = (eid: string): UseCreateActivityMutatio
 
 	const createActivityMutation = useMutation<
 		AxiosResponse<Prisma.EventActivity, unknown>,
-		AxiosError<ServerError, unknown>,
+		AxiosError<NextkitError, unknown>,
 		CreateActivityPayload
 	>(
 		async (data) => {
@@ -37,7 +37,7 @@ export const useCreateActivityMutation = (eid: string): UseCreateActivityMutatio
 				});
 			},
 			onError: (error) => {
-				toast.error(error.response?.data?.error?.message ?? 'An error has occured.');
+				toast.error(error.message ?? 'An error has occurred.');
 			}
 		}
 	);
