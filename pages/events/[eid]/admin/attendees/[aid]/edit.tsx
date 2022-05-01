@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
@@ -13,7 +12,6 @@ import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
-
 import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';

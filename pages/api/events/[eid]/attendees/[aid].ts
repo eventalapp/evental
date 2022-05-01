@@ -15,7 +15,7 @@ export type EventAttendeeUser = Prisma.EventAttendee & {
 };
 
 export default api({
-	async POST({ req }) {
+	async GET({ req }) {
 		const { eid, aid } = req.query;
 
 		const eventAttendee = await getAttendee(String(eid), String(aid));
