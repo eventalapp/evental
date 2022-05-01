@@ -22,8 +22,6 @@ const CreateEventPage: NextPage<Props> = (props) => {
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user } = useUser(initialUser);
 
-	console.log(user);
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}

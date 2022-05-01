@@ -3,20 +3,20 @@ import React from 'react';
 import Column from '../../components/layout/Column';
 import { Navigation } from '../../components/navigation';
 import PageWrapper from '../../components/layout/PageWrapper';
-import { SignInForm } from '../../components/authentication/SignInForm';
-import { useSignInMutation } from '../../hooks/mutations/useSignInMutation';
+import { useSignUpMutation } from '../../hooks/mutations/useSignUpMutation';
+import { SignUpForm } from '../../components/authentication/SignUpForm';
 import { PasswordlessUser, ssrGetUser } from '../../utils/api';
-import { useUser } from '../../hooks/queries/useUser';
 import { LoadingPage } from '../../components/error/LoadingPage';
+import { useUser } from '../../hooks/queries/useUser';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
 };
 
 const SignInPage: NextPage<Props> = (props) => {
+	const { signUpMutation } = useSignUpMutation();
 	const { initialUser } = props;
 	const { user, isUserLoading } = useUser(initialUser);
-	const { signInMutation } = useSignInMutation();
 
 	if (isUserLoading) {
 		return <LoadingPage />;
@@ -44,10 +44,10 @@ const SignInPage: NextPage<Props> = (props) => {
 
 			<Column variant="halfWidth">
 				<div className="flex flex-row justify-between mb-3">
-					<h1 className="text-3xl font-bold">Sign in</h1>
+					<h1 className="text-3xl font-bold">Sign up</h1>
 				</div>
 
-				<SignInForm signInMutation={signInMutation} />
+				<SignUpForm signUpMutation={signUpMutation} />
 			</Column>
 		</PageWrapper>
 	);

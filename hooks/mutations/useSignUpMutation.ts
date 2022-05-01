@@ -1,45 +1,45 @@
 import axios, { AxiosError } from 'axios';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { SignInPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { PasswordlessUser } from '../../utils/api';
 import router from 'next/router';
+import { PasswordlessUser } from '../../utils/api';
+import { SignUpPayload } from '../../utils/schemas';
 
-export interface UseSignInMutationData {
-	signInMutation: UseMutationResult<
+export interface UseSignUpMutationData {
+	signUpMutation: UseMutationResult<
 		PasswordlessUser,
 		AxiosError<ErroredAPIResponse, unknown>,
-		SignInPayload
+		SignUpPayload
 	>;
 }
 
-export const useSignInMutation = (): UseSignInMutationData => {
+export const useSignUpMutation = (): UseSignUpMutationData => {
 	const queryClient = useQueryClient();
 
-	const signInMutation = useMutation<
+	const signUpMutation = useMutation<
 		PasswordlessUser,
 		AxiosError<ErroredAPIResponse, unknown>,
-		SignInPayload
+		SignUpPayload
 	>(
 		async (data) => {
 			return await axios
-				.post<SuccessAPIResponse<PasswordlessUser>>(`/api/auth/signin`, data)
+				.post<SuccessAPIResponse<PasswordlessUser>>(`/api/auth/signup`, data)
 				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: () => {
 				void router.push('/events');
 
-				toast.success('Successfully signed in');
+				void queryClient.invalidateQueries('user');
 
-				void queryClient.refetchQueries('user');
+				toast.success('Successfully signed up!');
 			},
 			onError: (error) => {
-				toast.error(error?.response?.data.message ?? 'Failed to sign in.');
+				toast.error(error?.response?.data.message ?? 'Failed to sign up.');
 			}
 		}
 	);
 
-	return { signInMutation };
+	return { signUpMutation };
 };
