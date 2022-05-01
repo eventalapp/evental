@@ -58,6 +58,14 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	const { attendeeByUserId, attendeeByUserIdError, isAttendeeByUserIdLoading } =
 		useAttendeeByUserIdQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 
+	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {
+		return (
+			<ViewErrorPage
+				errors={[isOrganizerError, rolesError, eventError, activitiesError, attendeeByUserIdError]}
+			/>
+		);
+	}
+
 	if (!initialRoles || !initialActivities || !initialEvent || !event || !activities || !roles) {
 		return <NotFoundPage message="Event not found." />;
 	}
@@ -71,14 +79,6 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		isAttendeeByUserIdLoading
 	) {
 		return <LoadingPage />;
-	}
-
-	if (isOrganizerError || rolesError || eventError || activitiesError || attendeeByUserIdError) {
-		return (
-			<ViewErrorPage
-				errors={[isOrganizerError, rolesError, eventError, activitiesError, attendeeByUserIdError]}
-			/>
-		);
 	}
 
 	return (

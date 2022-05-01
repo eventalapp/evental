@@ -7,8 +7,8 @@ import React from 'react';
 import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
 
-export const NotFoundPage: React.FC<{ message?: string }> = (props) => {
-	const { message = 'Not found.' } = props;
+export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> = (props) => {
+	const { message = 'Not found.', renderLink = true } = props;
 
 	return (
 		<PageWrapper variant="gray">
@@ -21,9 +21,11 @@ export const NotFoundPage: React.FC<{ message?: string }> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Not Found</h1>
 				<NotFound message={message} />
-				<Link href="/events">
-					<LinkButton>Go to events</LinkButton>
-				</Link>
+				{renderLink && (
+					<Link href="/events">
+						<LinkButton>Go to events</LinkButton>
+					</Link>
+				)}
 			</Column>
 		</PageWrapper>
 	);
