@@ -6,7 +6,6 @@ TODO:
 - Forgot password
 - user settings
 - multi stage event creation
-- sessions -> sessions
 - marketing pages
 
 
