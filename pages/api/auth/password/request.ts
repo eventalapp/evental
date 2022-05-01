@@ -21,7 +21,6 @@ export default api({
 
 		const resetCode = await ctx.getPasswordResetCode();
 
-		//Reset code expires in 30 minutes
 		await ctx.redis.set(`reset:${resetCode}`, user.id, { ex: PASSWORD_RESET_EXPIRY });
 
 		await sendPasswordResetEmail(user.email, resetCode);

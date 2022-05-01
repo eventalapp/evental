@@ -4,7 +4,7 @@ import { NextkitError } from 'nextkit';
 import { prisma } from '../../../../prisma/client';
 import { hash } from 'argon2';
 import { serialize } from 'cookie';
-import { SESSION_EXPIRY } from '../../../../config';
+import { PASSWORD_RESET_EXPIRY, SESSION_EXPIRY } from '../../../../config';
 
 export default api({
 	async POST({ ctx, req, res }) {
@@ -13,7 +13,12 @@ export default api({
 		const userId = await ctx.redis.get<string>(`reset:${body.code}`);
 
 		if (!userId) {
-			throw new NextkitError(400, 'Invalid reset code');
+			throw new NextkitError(
+				400,
+				`Invalid reset code. Reset codes expire after ${
+					PASSWORD_RESET_EXPIRY / 60
+				} minutes. Please request another.`
+			);
 		}
 
 		await ctx.redis.del(`reset:${body.code}`);
