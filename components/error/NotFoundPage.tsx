@@ -22,7 +22,7 @@ export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> 
 				<h1 className="text-3xl font-bold">Not Found</h1>
 				<NotFound message={message} />
 				{renderLink && (
-					<Link href="/events">
+					<Link href="/events" passHref>
 						<LinkButton>Go to events</LinkButton>
 					</Link>
 				)}
