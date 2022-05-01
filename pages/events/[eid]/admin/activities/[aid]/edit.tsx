@@ -24,8 +24,8 @@ import Link from 'next/link';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import user from '../../../../../api/auth/user';
-import { PasswordlessUser } from '../../../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -35,19 +35,19 @@ type Props = {
 };
 
 const EditActivityPage: NextPage<Props> = (props) => {
-	const { initialOrganizer, user, initialVenues, initialActivity } = props;
+	const { initialOrganizer, initialUser, initialVenues, initialActivity } = props;
 	const router = useRouter();
 	const { eid, aid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-
 	const { activity, isActivityLoading, activityError } = useActivityQuery(
 		String(eid),
 		String(aid),
 		initialActivity
 	);
 	const { editActivityMutation } = useEditActivityMutation(String(eid), String(aid));
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -116,14 +116,14 @@ const EditActivityPage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid, aid } = context.query;
 
-	const session = await getSession(context);
-	const initialOrganizer = (await getIsOrganizer(user.id, String(eid))) ?? undefined;
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialActivity = (await getActivity(String(eid), String(aid))) ?? undefined;
 	const initialVenues = (await getVenues(String(eid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialOrganizer,
 			initialActivity,
 			initialVenues

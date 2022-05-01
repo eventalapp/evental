@@ -46,7 +46,5 @@ export default api({
 				id: venue.id
 			}
 		});
-
-		return 'Venue deleted.';
 	}
 });

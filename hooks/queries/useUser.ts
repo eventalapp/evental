@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { useQuery } from 'react-query';
 import { PasswordlessUser } from '../../utils/api';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseUserData {
 	user: PasswordlessUser | undefined;
@@ -11,12 +11,19 @@ export interface UseUserData {
 
 export const useUser = (initialData?: PasswordlessUser | undefined): UseUserData => {
 	const { data: user, isLoading: isUserLoading } = useQuery<
-		PasswordlessUser,
+		PasswordlessUser | undefined,
 		AxiosError<ErroredAPIResponse>
 	>(
 		['user'],
 		async () => {
-			return await axios.get<PasswordlessUser>(`/api/auth/user`).then((res) => res.data);
+			return await axios
+				.get<SuccessAPIResponse<PasswordlessUser>>(`/api/auth/user`)
+				.then((res) => res.data.data)
+				.catch((err: AxiosError<ErroredAPIResponse>) => {
+					if (err?.response?.status === 401) {
+						return err.response.data.data ?? undefined;
+					}
+				});
 		},
 		{
 			retry: 0,

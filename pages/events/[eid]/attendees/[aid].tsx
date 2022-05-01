@@ -14,7 +14,7 @@ import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import React from 'react';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser } from '../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
 
 type Props = {
 	initialAttendee: EventAttendeeUser | undefined;
@@ -79,13 +79,13 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { aid, eid } = context.query;
 
-	const session = await getSession(context);
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
-	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialAttendee,
 			initialOrganizer
 		}

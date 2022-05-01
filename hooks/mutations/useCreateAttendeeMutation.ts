@@ -1,14 +1,14 @@
 import type Prisma from '@prisma/client';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { CreateAttendeePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseCreateAttendeeMutationData {
 	createAttendeeMutation: UseMutationResult<
-		AxiosResponse<Prisma.EventAttendee, unknown>,
+		Prisma.EventAttendee,
 		AxiosError<ErroredAPIResponse, unknown>,
 		CreateAttendeePayload
 	>;
@@ -18,12 +18,14 @@ export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutatio
 	const queryClient = useQueryClient();
 
 	const createAttendeeMutation = useMutation<
-		AxiosResponse<Prisma.EventAttendee, unknown>,
+		Prisma.EventAttendee,
 		AxiosError<ErroredAPIResponse, unknown>,
 		CreateAttendeePayload
 	>(
 		async (data) => {
-			return await axios.post<Prisma.EventAttendee>(`/api/events/${eid}/register`, data);
+			return await axios
+				.post<SuccessAPIResponse<Prisma.EventAttendee>>(`/api/events/${eid}/register`, data)
+				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: () => {

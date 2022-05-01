@@ -2,7 +2,7 @@ import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseActivityQueryData {
 	activity: Prisma.EventActivity | undefined;
@@ -24,8 +24,8 @@ export const useActivityQuery = (
 		['activity', eid, aid],
 		async () => {
 			return await axios
-				.get<Prisma.EventActivity>(`/api/events/${eid}/activities/${aid}`)
-				.then((res) => res.data);
+				.get<SuccessAPIResponse<Prisma.EventActivity>>(`/api/events/${eid}/activities/${aid}`)
+				.then((res) => res.data.data);
 		},
 		{
 			retry: 0,

@@ -1,27 +1,21 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 
 export interface UseDeleteVenueMutationData {
-	deleteVenueMutation: UseMutationResult<
-		AxiosResponse<unknown, unknown>,
-		AxiosError<ErroredAPIResponse, unknown>,
-		void
-	>;
+	deleteVenueMutation: UseMutationResult<void, AxiosError<ErroredAPIResponse, unknown>, void>;
 }
 
 export const useDeleteVenueMutation = (eid: string, vid: string): UseDeleteVenueMutationData => {
 	const queryClient = useQueryClient();
 
-	const deleteVenueMutation = useMutation<
-		AxiosResponse<unknown, unknown>,
-		AxiosError<ErroredAPIResponse, unknown>,
-		void
-	>(
+	const deleteVenueMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
-			return await axios.delete(`/api/events/${eid}/admin/venues/${vid}/delete`);
+			return await axios
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/venues/${vid}/delete`)
+				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: () => {

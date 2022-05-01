@@ -22,8 +22,8 @@ import Link from 'next/link';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import user from '../../../../api/auth/user';
-import { PasswordlessUser } from '../../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../../utils/api';
+import { useUser } from '../../../../../hooks/queries/useUser';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -32,13 +32,14 @@ type Props = {
 };
 
 const CreateActivityPage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialVenues, user } = props;
+	const { initialOrganizer, initialVenues, initialUser } = props;
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
 	const { createActivityMutation } = useCreateActivityMutation(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -107,13 +108,13 @@ const CreateActivityPage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid } = context.query;
 
-	const session = await getSession(context);
-	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialVenues = await getVenues(String(eid));
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialOrganizer,
 			initialVenues
 		}

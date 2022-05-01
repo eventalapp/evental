@@ -14,8 +14,8 @@ import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import user from '../../../../api/auth/user';
-import { PasswordlessUser } from '../../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../../utils/api';
+import { useUser } from '../../../../../hooks/queries/useUser';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -23,12 +23,12 @@ type Props = {
 };
 
 const CreateRolePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, user } = props;
+	const { initialOrganizer, initialUser } = props;
 	const router = useRouter();
-
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { createRoleMutation } = useCreateRoleMutation(String(eid));
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -58,12 +58,12 @@ const CreateRolePage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid } = context.query;
 
-	const session = await getSession(context);
-	const initialOrganizer = await getIsOrganizer(user.id, String(eid));
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialOrganizer
 		}
 	};

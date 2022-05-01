@@ -50,7 +50,5 @@ export default api({
 				id: attendee.id
 			}
 		});
-
-		return 'Attendee deleted.';
 	}
 });

@@ -45,7 +45,5 @@ export default api({
 				id: activity.id
 			}
 		});
-
-		return 'Activity deleted.';
 	}
 });

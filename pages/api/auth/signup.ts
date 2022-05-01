@@ -48,7 +48,7 @@ export default api({
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
 			path: '/',
-			expires: new Date(+new Date() + 1000 * EXPIRY),
+			expires: new Date(new Date().getTime() + 1000 * EXPIRY),
 			sameSite: 'strict'
 		});
 

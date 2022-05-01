@@ -9,16 +9,20 @@ import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
-import { getUser, PasswordlessUser } from '../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../utils/api';
+import { useUser } from '../../hooks/queries/useUser';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
 };
 
 const CreateEventPage: NextPage<Props> = (props) => {
-	const { user } = props;
+	const { initialUser } = props;
 	const { createEventMutation } = useCreateEventMutation();
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
+	const { user } = useUser(initialUser);
+
+	console.log(user);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -46,14 +50,11 @@ const CreateEventPage: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const session = await getSession(context);
-	const user = await getUser(context.req);
-
-	console.log(user);
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 
 	return {
 		props: {
-			session
+			initialUser
 		}
 	};
 };

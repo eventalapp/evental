@@ -21,8 +21,8 @@ import { UnauthorizedPage } from '../../../../../../components/error/Unauthorize
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import user from '../../../../../api/auth/user';
-import { PasswordlessUser } from '../../../../../../utils/api';
+import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 type Props = {
 	initialOrganizer: boolean;
@@ -32,8 +32,7 @@ type Props = {
 };
 
 const DeleteRolePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialRole, initialAttendees, user } = props;
-
+	const { initialOrganizer, initialRole, initialAttendees, initialUser } = props;
 	const router = useRouter();
 	const { eid, rid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
@@ -43,6 +42,7 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 		{ attendees: initialAttendees, role: initialRole }
 	);
 	const { deleteRoleMutation } = useDeleteRoleMutation(String(eid), String(rid));
+	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -94,14 +94,14 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const { eid, rid } = context.query;
 
-	const session = await getSession(context);
-	const initialOrganizer = (await getIsOrganizer(user.id, String(eid))) ?? undefined;
+	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialAttendees = (await getAttendeesByRole(String(eid), String(rid))) ?? undefined;
 	const initialRole = (await getRole(String(eid), String(rid))) ?? undefined;
 
 	return {
 		props: {
-			session,
+			initialUser,
 			initialOrganizer,
 			initialAttendees,
 			initialRole

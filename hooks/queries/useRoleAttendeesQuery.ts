@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { ErroredAPIResponse } from 'nextkit';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { RoleAttendeePayload } from '../../pages/api/events/[eid]/roles/[rid]';
 import { EventAttendeeUser } from '../../pages/api/events/[eid]/attendees/[aid]';
 import Prisma from '@prisma/client';
@@ -27,8 +27,8 @@ export const useRoleAttendeesQuery = (
 		['role', eid, rid],
 		async () => {
 			return axios
-				.get<RoleAttendeePayload>(`/api/events/${eid}/roles/${rid}`)
-				.then((res) => res.data);
+				.get<SuccessAPIResponse<RoleAttendeePayload>>(`/api/events/${eid}/roles/${rid}`)
+				.then((res) => res.data.data);
 		},
 		{
 			retry: 0,
