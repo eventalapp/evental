@@ -27,11 +27,10 @@ export const useSignOutMutation = (): UseSignOutMutationData => {
 		},
 		{
 			onSuccess: (data, variables) => {
-				void router.push(variables?.callbackUrl || '/');
-
-				void queryClient.invalidateQueries('user');
-
-				toast.success('Successfully signed out');
+				router.push(variables?.callbackUrl || '/').then(() => {
+					toast.success('You have been signed out');
+					void queryClient.invalidateQueries('user');
+				});
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'Failed to sign out.');

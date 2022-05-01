@@ -29,11 +29,10 @@ export const useSignInMutation = (): UseSignInMutationData => {
 		},
 		{
 			onSuccess: () => {
-				void router.push('/events');
-
-				toast.success('Successfully signed in');
-
-				void queryClient.refetchQueries('user');
+				router.push('/events').then(() => {
+					toast.success('You have successfully signed in!');
+					void queryClient.refetchQueries('user');
+				});
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'Failed to sign in.');
