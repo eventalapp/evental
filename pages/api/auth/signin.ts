@@ -9,8 +9,6 @@ const EXPIRY = 60 * 60 * 24 * 7;
 
 export default api({
 	async POST({ ctx, req, res }) {
-		const token = await ctx.getToken();
-
 		const body = SignInSchema.parse(req.body);
 
 		const user = await prisma.user.findFirst({
@@ -28,6 +26,8 @@ export default api({
 		if (!passwordHashed) {
 			throw new NextkitError(400, 'Invalid email or password');
 		}
+
+		const token = await ctx.getToken();
 
 		await ctx.redis.set(`session:${token}`, user.id, { ex: EXPIRY });
 
