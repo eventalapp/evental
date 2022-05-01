@@ -29,7 +29,7 @@ type Props = {
 	initialUser: PasswordlessUser | undefined;
 };
 
-const ActivitiesPage: NextPage<Props> = (props) => {
+const SessionsPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { initialVenues, initialOrganizer } = props;
 	const { eid } = router.query;
@@ -104,4 +104,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	};
 };
 
-export default ActivitiesPage;
+export default SessionsPage;

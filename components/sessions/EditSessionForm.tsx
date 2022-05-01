@@ -4,19 +4,19 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { UseEditActivityMutationData } from '../../hooks/mutations/useEditActivityMutation';
+import { UseEditSessionMutationData } from '../../hooks/mutations/useEditSessionMutation';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Controller, useForm } from 'react-hook-form';
 import { DatePicker } from '../form/DatePicker';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { EditActivityPayload, EditActivitySchema } from '../../utils/schemas';
+import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { slugify } from '../../utils/slugify';
 import Link from 'next/link';
 import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useActivityQuery, UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
+import { useSessionQuery, UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { NotFound } from '../error/NotFound';
 import { NEAREST_MINUTE } from '../../config';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
@@ -24,16 +24,16 @@ import { useRouter } from 'next/router';
 
 type Props = {
 	eid: string;
-	aid: string;
+	sid: string;
 } & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenuesQueryData &
-	UseEditActivityMutationData &
-	UseActivityQueryData &
+	UseEditSessionMutationData &
+	UseSessionQueryData &
 	UseEventQueryData;
 
-export const EditActivityForm: React.FC<Props> = (props) => {
+export const EditSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { eid, venues, editActivityMutation, activity, event } = props;
+	const { eid, venues, editSessionMutation, session, event } = props;
 	const {
 		register,
 		handleSubmit,
@@ -42,16 +42,16 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 		trigger,
 		control,
 		formState: { errors }
-	} = useForm<EditActivityPayload>({
+	} = useForm<EditSessionPayload>({
 		defaultValues: {
-			name: String(activity?.name),
-			description: String(activity?.description),
-			venueId: activity?.venueId,
-			startDate: activity?.startDate ? new Date(String(activity?.startDate)) : new Date(),
-			endDate: activity?.endDate ? new Date(String(activity?.endDate)) : new Date(),
-			slug: activity?.slug
+			name: String(session?.name),
+			description: String(session?.description),
+			venueId: session?.venueId,
+			startDate: session?.startDate ? new Date(String(session?.startDate)) : new Date(),
+			endDate: session?.endDate ? new Date(String(session?.endDate)) : new Date(),
+			slug: session?.slug
 		},
-		resolver: zodResolver(EditActivitySchema)
+		resolver: zodResolver(EditSessionSchema)
 	});
 
 	const nameWatcher = watch('name');
@@ -59,8 +59,8 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
 
-	const { activity: activitySlugCheck, isActivityLoading: isActivitySlugCheckLoading } =
-		useActivityQuery(String(eid), slugWatcher);
+	const { session: sessionSlugCheck, isSessionLoading: isSessionSlugCheckLoading } =
+		useSessionQuery(String(eid), slugWatcher);
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
@@ -97,14 +97,14 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				editActivityMutation.mutate(data);
+				editSessionMutation.mutate(data);
 			})}
 		>
 			<div className="flex flex-col w-full mt-5">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="Activity name" {...register('name', { required: true })} />
+						<Input placeholder="Session name" {...register('name', { required: true })} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
@@ -187,7 +187,7 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 mb-5 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
-					<Textarea rows={5} placeholder="Activity description" {...register('description')} />
+					<Textarea rows={5} placeholder="Session description" {...register('description')} />
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}
@@ -199,11 +199,11 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="slug">Slug *</Label>
 						<div className="flex items-center">
-							<span className="mr-1 text-md">/activities/</span>
-							<Input placeholder="activity-slug" {...register('slug', { required: true })} />
+							<span className="mr-1 text-md">/sessions/</span>
+							<Input placeholder="session-slug" {...register('slug', { required: true })} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{slugWatcher !== activity?.slug && activitySlugCheck && (
+						{slugWatcher !== session?.slug && sessionSlugCheck && (
 							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
 						)}
 					</div>
@@ -220,11 +220,10 @@ export const EditActivityForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					padding="medium"
 					disabled={
-						isActivitySlugCheckLoading ||
-						Boolean(slugWatcher !== activity?.slug && activitySlugCheck)
+						isSessionSlugCheckLoading || Boolean(slugWatcher !== session?.slug && sessionSlugCheck)
 					}
 				>
-					Update Activity
+					Update Session
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>
 			</div>

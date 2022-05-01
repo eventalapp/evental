@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
 import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import React from 'react';
-import { UseActivityQueryData } from '../../hooks/queries/useActivityQuery';
+import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
@@ -10,35 +10,35 @@ import { format } from 'date-fns';
 
 type Props = {
 	eid: string;
-	aid: string;
-} & UseActivityQueryData &
+	sid: string;
+} & UseSessionQueryData &
 	UseOrganizerQueryData;
 
-export const ViewActivity: React.FC<Props> = (props) => {
-	const { activity, isOrganizerLoading, isOrganizer, aid, eid } = props;
+export const ViewSession: React.FC<Props> = (props) => {
+	const { session, isOrganizerLoading, isOrganizer, sid, eid } = props;
 
-	if (!activity) return null;
+	if (!session) return null;
 
 	return (
 		<div>
 			<FlexRowBetween>
-				<h1 className="text-3xl font-bold">{activity.name}</h1>
+				<h1 className="text-3xl font-bold">{session.name}</h1>
 
 				<div>
 					{!isOrganizerLoading && isOrganizer && (
-						<Link href={`/events/${eid}/admin/activities/${aid}/edit`} passHref>
-							<LinkButton className="mr-3">Edit activity</LinkButton>
+						<Link href={`/events/${eid}/admin/sessions/${sid}/edit`} passHref>
+							<LinkButton className="mr-3">Edit session</LinkButton>
 						</Link>
 					)}
 					{!isOrganizerLoading && isOrganizer && (
-						<Link href={`/events/${eid}/admin/activities/${aid}/delete`} passHref>
-							<LinkButton className="mr-3">Delete activity</LinkButton>
+						<Link href={`/events/${eid}/admin/sessions/${sid}/delete`} passHref>
+							<LinkButton className="mr-3">Delete session</LinkButton>
 						</Link>
 					)}
 				</div>
 			</FlexRowBetween>
-			<p>{activity.description}</p>
-			<p>{activity.endDate.toString()}</p>
+			<p>{session.description}</p>
+			<p>{session.endDate.toString()}</p>
 			<div className="flex flex-row items-center mb-1">
 				<FontAwesomeIcon
 					fill="currentColor"
@@ -46,7 +46,7 @@ export const ViewActivity: React.FC<Props> = (props) => {
 					size="1x"
 					icon={faLocationDot}
 				/>
-				<p>{activity?.venueId}</p>
+				<p>{session?.venueId}</p>
 			</div>
 
 			<div className="flex flex-row items-center">
@@ -57,8 +57,8 @@ export const ViewActivity: React.FC<Props> = (props) => {
 					icon={faCalendarDay}
 				/>
 				<p>
-					{format(new Date(activity.startDate), 'MMMM dd h:mm a')} -{' '}
-					{format(new Date(activity.endDate), 'MMMM dd h:mm a')}
+					{format(new Date(session.startDate), 'MMMM dd h:mm a')} -{' '}
+					{format(new Date(session.endDate), 'MMMM dd h:mm a')}
 				</p>
 			</div>
 		</div>

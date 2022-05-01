@@ -12,8 +12,8 @@ import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { RoleList } from '../../../../components/roles/RoleList';
-import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery';
-import { ActivityList } from '../../../../components/activities/ActivityList';
+import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
+import { SessionList } from '../../../../components/sessions/SessionList';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 import { buildTitle } from '../../../../utils/buildTitle';
@@ -23,7 +23,7 @@ import React from 'react';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getEvent } from '../../../api/events/[eid]';
-import { getActivities } from '../../../api/events/[eid]/activities';
+import { getSessions } from '../../../api/events/[eid]/sessions';
 import { getRoles } from '../../../api/events/[eid]/roles';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import type Prisma from '@prisma/client';
@@ -40,7 +40,7 @@ import { useUser } from '../../../../hooks/queries/useUser';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
-	initialActivities: Prisma.EventActivity[] | undefined;
+	initialSessions: Prisma.EventSession[] | undefined;
 	initialAttendees: EventAttendeeUser[] | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialVenues: Prisma.EventVenue[] | undefined;
@@ -52,7 +52,7 @@ const AdminPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const {
 		initialUser,
-		initialActivities,
+		initialSessions,
 		initialAttendees,
 		initialVenues,
 		initialRoles,
@@ -69,9 +69,9 @@ const AdminPage: NextPage<Props> = (props) => {
 		initialAttendees
 	);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(
+	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(
 		String(eid),
-		initialActivities
+		initialSessions
 	);
 	const { user } = useUser(initialUser);
 
@@ -83,12 +83,12 @@ const AdminPage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (isActivitiesLoading || isRolesLoading || isVenuesLoading || isAttendeesLoading) {
+	if (isSessionsLoading || isRolesLoading || isVenuesLoading || isAttendeesLoading) {
 		return <LoadingPage />;
 	}
 
-	if (!initialActivities || !activities) {
-		return <NotFoundPage message="No activities not found." />;
+	if (!initialSessions || !sessions) {
+		return <NotFoundPage message="No sessions not found." />;
 	}
 
 	if (!initialVenues || !venues) {
@@ -214,15 +214,15 @@ const AdminPage: NextPage<Props> = (props) => {
 				<div className="my-10">
 					<div>
 						<FlexRowBetween>
-							<span className="text-3xl">Activities</span>
+							<span className="text-3xl">Sessions</span>
 
 							<div>
-								<Link href={`/events/${eid}/admin/activities/create`} passHref>
+								<Link href={`/events/${eid}/admin/sessions/create`} passHref>
 									<LinkButton className="mr-3">
 										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
 									</LinkButton>
 								</Link>
-								<Link href={`/events/${eid}/activities/`} passHref>
+								<Link href={`/events/${eid}/sessions/`} passHref>
 									<LinkButton>
 										<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
 									</LinkButton>
@@ -230,14 +230,14 @@ const AdminPage: NextPage<Props> = (props) => {
 							</div>
 						</FlexRowBetween>
 
-						<ActivityList
+						<SessionList
 							isOrganizer={isOrganizer}
 							isOrganizerLoading={isOrganizerLoading}
 							isOrganizerError={isOrganizerError}
-							activities={activities}
+							sessions={sessions}
 							eid={String(eid)}
-							activitiesError={activitiesError}
-							isActivitiesLoading={isActivitiesLoading}
+							sessionsError={sessionsError}
+							isSessionsLoading={isSessionsLoading}
 						/>
 					</div>
 				</div>
@@ -251,7 +251,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
-	const initialActivities = (await getActivities(String(eid))) ?? undefined;
+	const initialSessions = (await getSessions(String(eid))) ?? undefined;
 	const initialAttendees = (await getAttendees(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
@@ -265,7 +265,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialAttendees,
 			initialVenues,
 			initialRoles,
-			initialActivities
+			initialSessions
 		}
 	};
 };

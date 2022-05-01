@@ -52,7 +52,7 @@ model Event {
   createdAt   DateTime @default(now())
 
   eventAttendee EventAttendee[]
-  eventActivity EventActivity[]
+  eventSession EventSession[]
   eventVenue    EventVenue[]
   eventRole     EventRole[]
 
@@ -97,7 +97,7 @@ model EventRole {
   @@map("event_role")
 }
 
-model EventActivity {
+model EventSession {
   id          String   @id @default(cuid())
   slug        String
   eventId     String
@@ -113,7 +113,7 @@ model EventActivity {
   venue EventVenue @relation(fields: [venueId], references: [id], onDelete: Cascade)
 
   @@unique([eventId, slug])
-  @@map("event_activity")
+  @@map("event_session")
 }
 
 model EventVenue {
@@ -127,7 +127,7 @@ model EventVenue {
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  EventActivity EventActivity[]
+  EventSession EventSession[]
 
   @@unique([eventId, slug])
   @@map("event_venue")

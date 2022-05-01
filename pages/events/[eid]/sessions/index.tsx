@@ -3,11 +3,11 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ActivityList } from '../../../../components/activities/ActivityList';
+import { SessionList } from '../../../../components/sessions/SessionList';
 import Column from '../../../../components/layout/Column';
 import { LinkButton } from '../../../../components/form/LinkButton';
 import { Navigation } from '../../../../components/navigation';
-import { useActivitiesQuery } from '../../../../hooks/queries/useActivitiesQuery';
+import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { groupByDate } from '../../../../utils/groupByDate';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
@@ -17,74 +17,74 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 
 import type Prisma from '@prisma/client';
-import { getActivities } from '../../../api/events/[eid]/activities';
+import { getSessions } from '../../../api/events/[eid]/sessions';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
 
 type Props = {
-	initialActivities: Prisma.EventActivity[] | undefined;
+	initialSessions: Prisma.EventSession[] | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 };
 
-const ActivitiesPage: NextPage<Props> = (props) => {
-	const { initialActivities, initialOrganizer } = props;
+const SessionsPage: NextPage<Props> = (props) => {
+	const { initialSessions, initialOrganizer } = props;
 	const router = useRouter();
 	const { eid } = router.query;
-	const { activities, isActivitiesLoading, activitiesError } = useActivitiesQuery(
+	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(
 		String(eid),
-		initialActivities
+		initialSessions
 	);
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
 		String(eid),
 		initialOrganizer
 	);
 
-	if (!initialActivities || !activities) {
-		return <NotFoundPage message="No activities not found." />;
+	if (!initialSessions || !sessions) {
+		return <NotFoundPage message="No sessions not found." />;
 	}
 
-	if (isActivitiesLoading || isOrganizerLoading) {
+	if (isSessionsLoading || isOrganizerLoading) {
 		return <LoadingPage />;
 	}
 
-	if (activitiesError || isOrganizerError) {
-		return <ViewErrorPage errors={[activitiesError, isOrganizerError]} />;
+	if (sessionsError || isOrganizerError) {
+		return <ViewErrorPage errors={[sessionsError, isOrganizerError]} />;
 	}
 
-	if (activities) {
-		groupByDate(activities);
+	if (sessions) {
+		groupByDate(sessions);
 	}
 
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>All Activities</title>
+				<title>All Sessions</title>
 			</Head>
 
 			<Navigation />
 
 			<Column>
 				<FlexRowBetween>
-					<h1 className="text-3xl font-bold">Activities</h1>
+					<h1 className="text-3xl font-bold">Sessions</h1>
 
 					{!isOrganizerLoading && isOrganizer && (
-						<Link href={`/events/${eid}/admin/activities/create`} passHref>
-							<LinkButton>Create Activity</LinkButton>
+						<Link href={`/events/${eid}/admin/sessions/create`} passHref>
+							<LinkButton>Create Session</LinkButton>
 						</Link>
 					)}
 				</FlexRowBetween>
 
-				<ActivityList
+				<SessionList
 					isOrganizer={isOrganizer}
 					isOrganizerLoading={isOrganizerLoading}
 					isOrganizerError={isOrganizerError}
-					activities={activities}
+					sessions={sessions}
 					eid={String(eid)}
-					activitiesError={activitiesError}
-					isActivitiesLoading={isActivitiesLoading}
+					sessionsError={sessionsError}
+					isSessionsLoading={isSessionsLoading}
 				/>
 			</Column>
 		</PageWrapper>
@@ -95,16 +95,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const { eid } = context.query;
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialActivities = (await getActivities(String(eid))) ?? undefined;
+	const initialSessions = (await getSessions(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
-			initialActivities,
+			initialSessions,
 			initialOrganizer
 		}
 	};
 };
 
-export default ActivitiesPage;
+export default SessionsPage;

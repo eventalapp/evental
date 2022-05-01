@@ -6,7 +6,7 @@ import { NextkitError } from 'nextkit';
 export default api({
 	async DELETE({ ctx, req }) {
 		const user = await ctx.getUser();
-		const { eid, aid } = req.query;
+		const { eid, sid } = req.query;
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
@@ -26,23 +26,23 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const activity = await prisma.eventActivity.findFirst({
+		const session = await prisma.eventSession.findFirst({
 			where: {
 				eventId: event.id,
-				OR: [{ id: String(aid) }, { slug: String(aid) }]
+				OR: [{ id: String(sid) }, { slug: String(sid) }]
 			},
 			select: {
 				id: true
 			}
 		});
 
-		if (!activity) {
-			throw new NextkitError(404, 'Activity not found.');
+		if (!session) {
+			throw new NextkitError(404, 'Session not found.');
 		}
 
-		await prisma.eventActivity.delete({
+		await prisma.eventSession.delete({
 			where: {
-				id: activity.id
+				id: session.id
 			}
 		});
 	}

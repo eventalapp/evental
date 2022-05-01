@@ -8,24 +8,24 @@ export default api({
 	async GET({ req }) {
 		const { eid } = req.query;
 
-		const activityList = await getActivities(String(eid));
+		const sessionList = await getSessions(String(eid));
 
-		if (!activityList) {
-			throw new NextkitError(404, 'Activities not found');
+		if (!sessionList) {
+			throw new NextkitError(404, 'Sessions not found');
 		}
 
-		return activityList;
+		return sessionList;
 	}
 });
 
-export const getActivities = async (eid: string): Promise<Prisma.EventActivity[] | null> => {
+export const getSessions = async (eid: string): Promise<Prisma.EventSession[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
 		return null;
 	}
 
-	return await prisma.eventActivity.findMany({
+	return await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id
 		}
