@@ -19,7 +19,7 @@ export default api({
 		});
 
 		if (existing) {
-			throw new NextkitError(409, 'Email already exists');
+			throw new NextkitError(409, 'Email already registered');
 		}
 
 		const passwordHashed = await hash(body.password);
