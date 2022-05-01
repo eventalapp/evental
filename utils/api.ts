@@ -25,6 +25,18 @@ const getToken = async (): Promise<string> => {
 	return token;
 };
 
+const getPasswordResetCode = async (): Promise<string> => {
+	const token = randomBytes(128).toString('hex');
+
+	const count = await redis.exists(`reset:${token}`);
+
+	if (count > 0) {
+		return getPasswordResetCode();
+	}
+
+	return token;
+};
+
 export const ssrGetUser = async (
 	req: IncomingMessage & { cookies: NextApiRequestCookies }
 ): Promise<PasswordlessUser | null> => {
@@ -52,6 +64,7 @@ export const api = createAPI({
 		return {
 			redis,
 			getToken,
+			getPasswordResetCode,
 			getUser: async () => {
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 

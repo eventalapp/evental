@@ -4,8 +4,7 @@ import { prisma } from '../../../prisma/client';
 import { hash } from 'argon2';
 import { SignUpSchema } from '../../../utils/schemas';
 import { NextkitError } from 'nextkit';
-
-const EXPIRY = 60 * 60 * 24 * 7;
+import { SESSION_EXPIRY } from '../../../config';
 
 export default api({
 	async POST({ ctx, req, res }) {
@@ -42,13 +41,13 @@ export default api({
 
 		const token = await ctx.getToken();
 
-		await ctx.redis.set(`session:${token}`, user.id, { ex: EXPIRY });
+		await ctx.redis.set(`session:${token}`, user.id, { ex: SESSION_EXPIRY });
 
 		const cookie = serialize('token', token, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
 			path: '/',
-			expires: new Date(new Date().getTime() + 1000 * EXPIRY),
+			expires: new Date(new Date().getTime() + 1000 * SESSION_EXPIRY),
 			sameSite: 'strict'
 		});
 

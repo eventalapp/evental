@@ -49,7 +49,14 @@ export const SignInForm: React.FC<Props> = (props) => {
 				<span className="mt-3 block">
 					Dont have an account?{' '}
 					<Link href="/auth/signup">
-						<a className="text-primary">Sign up here.</a>
+						<a className="text-primary">Sign up</a>
+					</Link>
+				</span>
+
+				<span className="mt-3 block">
+					Forgot your password?{' '}
+					<Link href="/auth/password/request">
+						<a className="text-primary">Request a password reset</a>
 					</Link>
 				</span>
 			</div>

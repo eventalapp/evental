@@ -32,6 +32,12 @@ const passwordValidator = z
 	.min(8, 'Password must be at least 8 characters')
 	.max(80, 'Password must be less than 80 characters');
 
+const codeValidator = z
+	.string()
+	.min(1, 'Code is required')
+	.min(10, 'Code must be at least 10 characters')
+	.max(300, 'Code must be less than 300 characters');
+
 // Venues
 
 export const CreateVenueSchema = z.object({
@@ -179,3 +185,16 @@ export const SignUpSchema = z.object({
 });
 
 export type SignUpPayload = z.infer<typeof SignUpSchema>;
+
+export const ChangePasswordRequestSchema = z.object({
+	email: emailValidator
+});
+
+export type ChangePasswordRequestPayload = z.infer<typeof ChangePasswordRequestSchema>;
+
+export const ChangePasswordSchema = z.object({
+	password: passwordValidator,
+	code: codeValidator
+});
+
+export type ChangePasswordPayload = z.infer<typeof ChangePasswordSchema>;
