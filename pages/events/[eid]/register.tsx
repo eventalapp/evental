@@ -55,6 +55,11 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Register for this event</h1>
 
+				<p className="text-gray-700 mt-1">
+					This attendee profile will be visible on the event page. This profile is separate from
+					your user profile.
+				</p>
+
 				<CreateAttendeeForm
 					event={event}
 					eventError={eventError}
