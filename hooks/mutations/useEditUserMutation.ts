@@ -31,7 +31,8 @@ export const useEditUserMutation = (uid: string): UseEditUserMutationData => {
 			onSuccess: () => {
 				toast.success('User edited successfully');
 
-				void queryClient.removeQueries(['user', uid]);
+				void queryClient.refetchQueries(['user', uid]);
+				void queryClient.refetchQueries(['user']);
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'An error has occurred.');
