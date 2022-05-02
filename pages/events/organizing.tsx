@@ -82,7 +82,11 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 
 				{user && <EventsNavigation />}
 
-				<EventList events={organizingEvents} />
+				<span className="block font-bold text-center text-lg mt-5">Organizing an event?</span>
+
+				<CreateEventForm createEventMutation={createEventMutation} />
+
+				<EventList events={organizingEvents} className="mt-5" />
 			</Column>
 		</PageWrapper>
 	);

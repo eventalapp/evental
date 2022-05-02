@@ -6,17 +6,17 @@ import { format } from 'date-fns';
 import { NotFound } from '../error/NotFound';
 import Prisma from '@prisma/client';
 
-type Props = { events: Prisma.Event[] };
+type Props = { events: Prisma.Event[]; className?: string };
 
 export const EventList: React.FC<Props> = (props) => {
-	const { events } = props;
+	const { events, className } = props;
 
 	if (events && events.length === 0) {
 		return <NotFound message="No events found." />;
 	}
 
 	return (
-		<div>
+		<div className={classNames(className)}>
 			{events &&
 				events.map((event, i) => (
 					<div
@@ -51,7 +51,7 @@ export const EventList: React.FC<Props> = (props) => {
 									</div>
 
 									<div className="flex flex-col justify-between">
-										<span className="text-gray-600 text-xs block">{event.category}</span>
+										<span className="text-gray-600 text-tiny block">{event.category}</span>
 										<span className="text-lg">{event.name}</span>
 									</div>
 								</div>
