@@ -39,6 +39,7 @@ export const sendPasswordResetEmail = async (sendToAddress: string, resetCode: s
 		Destination: {
 			ToAddresses: [sendToAddress]
 		},
+		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
 		FromEmailAddress: '"Evental" <no-reply@evental.app>'
 	};
 
