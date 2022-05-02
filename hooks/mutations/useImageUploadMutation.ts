@@ -10,7 +10,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 export interface UseImageUploadMutationData {
 	imageUploadMutation: UseMutationResult<
 		SuccessAPIResponse<ImageUploadResponse>,
-		AxiosError<ErroredAPIResponse, unknown>,
+		AxiosError<ErroredAPIResponse | Error, unknown>,
 		ImageUploadPayload
 	>;
 	imageUploadResponse: ImageUploadResponse | undefined;
@@ -21,7 +21,7 @@ export const useImageUploadMutation = (): UseImageUploadMutationData => {
 
 	const imageUploadMutation = useMutation<
 		SuccessAPIResponse<ImageUploadResponse>,
-		AxiosError<ErroredAPIResponse, unknown>,
+		AxiosError<ErroredAPIResponse | Error, unknown>,
 		ImageUploadPayload
 	>(
 		async (data) => {
@@ -37,7 +37,7 @@ export const useImageUploadMutation = (): UseImageUploadMutationData => {
 				toast.success('Image successfully uploaded');
 			},
 			onError: (error) => {
-				toast.error(error?.response?.data.message ?? 'An error has occurred.');
+				toast.error(error?.message || error?.response?.data.message || 'An error has occurred.');
 			}
 		}
 	);
