@@ -12,7 +12,7 @@ export default api({
 
 		const user = await prisma.user.findFirst({
 			where: {
-				email: body.email
+				email: body.email.toLowerCase()
 			}
 		});
 
