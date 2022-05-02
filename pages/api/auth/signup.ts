@@ -6,6 +6,7 @@ import { SignUpSchema } from '../../../utils/schemas';
 import { NextkitError } from 'nextkit';
 import { SESSION_EXPIRY } from '../../../config';
 import { generateSlug } from '../../../utils/generateSlug';
+import { sendWelcomeEmail } from '../../../email/sendWelcomeEmail';
 
 export default api({
 	async POST({ ctx, req, res }) {
@@ -50,6 +51,8 @@ export default api({
 		if (!user) {
 			throw new NextkitError(500, 'Failed to create user');
 		}
+
+		await sendWelcomeEmail(user.email, user.name);
 
 		const token = await ctx.getToken();
 
