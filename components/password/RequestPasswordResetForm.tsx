@@ -32,7 +32,7 @@ export const RequestPasswordResetForm: React.FC<Props> = (props) => {
 			<div className="my-5">
 				<div>
 					<Label htmlFor="name">Email *</Label>
-					<Input placeholder="Email" {...register('email', { required: true })} />
+					<Input placeholder="Email" type="email" {...register('email', { required: true })} />
 					{errors.email?.message && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
 				</div>
 			</div>
