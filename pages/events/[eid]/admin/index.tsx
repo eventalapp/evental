@@ -108,10 +108,10 @@ const AdminPage: NextPage<Props> = (props) => {
 					<h1 className="text-3xl font-bold">Admin Page</h1>
 
 					<div>
-						<Link href={`/events/${eid}/admin/edit/`} passHref>
+						<Link href={`/events/${eid}/admin/settings/`} passHref>
 							<LinkButton className="mr-3">
 								<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faCog} />
-								<span className="ml-2">Edit</span>
+								<span className="ml-2">Settings</span>
 							</LinkButton>
 						</Link>
 
