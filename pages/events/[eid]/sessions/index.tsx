@@ -9,7 +9,7 @@ import { LinkButton } from '../../../../components/form/LinkButton';
 import { Navigation } from '../../../../components/navigation';
 import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-import { groupByDate } from '../../../../utils/groupByDate';
+
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
@@ -52,10 +52,6 @@ const SessionsPage: NextPage<Props> = (props) => {
 
 	if (sessionsError || isOrganizerError) {
 		return <ViewErrorPage errors={[sessionsError, isOrganizerError]} />;
-	}
-
-	if (sessions) {
-		groupByDate(sessions);
 	}
 
 	return (
