@@ -10,6 +10,7 @@ import { useImageUploadMutation } from '../hooks/mutations/useImageUploadMutatio
 import { useEditUserMutation } from '../hooks/mutations/useEditUserMutation';
 import { ssrGetUser } from '../utils/api';
 import { PasswordlessUser } from '../utils/stripUserPassword';
+import { LoadingPage } from '../components/error/LoadingPage';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -20,6 +21,10 @@ const SettingsPage: NextPage<Props> = (props) => {
 	const { user, isUserLoading } = useUser(initialUser);
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { editUserMutation } = useEditUserMutation(String(user?.id));
+
+	if (isUserLoading) {
+		return <LoadingPage />;
+	}
 
 	return (
 		<PageWrapper>
@@ -32,13 +37,15 @@ const SettingsPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Settings Page</h1>
 
-				<UserSettingsForm
-					user={user}
-					imageUploadResponse={imageUploadResponse}
-					imageUploadMutation={imageUploadMutation}
-					editUserMutation={editUserMutation}
-					isUserLoading={isUserLoading}
-				/>
+				{user && (
+					<UserSettingsForm
+						user={user}
+						imageUploadResponse={imageUploadResponse}
+						imageUploadMutation={imageUploadMutation}
+						editUserMutation={editUserMutation}
+						isUserLoading={isUserLoading}
+					/>
+				)}
 			</Column>
 		</PageWrapper>
 	);
