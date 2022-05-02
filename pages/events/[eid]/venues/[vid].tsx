@@ -15,7 +15,8 @@ import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { ssrGetUser } from '../../../../utils/api';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;

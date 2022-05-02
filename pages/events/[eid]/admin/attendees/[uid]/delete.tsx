@@ -13,33 +13,33 @@ import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/use
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
-
-import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
+import { getAttendee } from '../../../../../api/events/[eid]/attendees/[uid]';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../../../utils/stripUserPassword';
 
 type Props = {
 	initialOrganizer: boolean;
-	initialAttendee: EventAttendeeUser | undefined;
+	initialAttendee: AttendeeWithUser | undefined;
 	initialUser: PasswordlessUser | undefined;
 };
 
 const DeleteAttendeePage: NextPage<Props> = (props) => {
 	const { initialOrganizer, initialAttendee, initialUser } = props;
 	const router = useRouter();
-	const { eid, aid } = router.query;
+	const { eid, uid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(
 		String(eid),
-		String(aid),
+		String(uid),
 		initialAttendee
 	);
-	const { deleteAttendeeMutation } = useDeleteAttendeeMutation(String(eid), String(aid));
+	const { deleteAttendeeMutation } = useDeleteAttendeeMutation(String(eid), String(uid));
 	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
@@ -72,7 +72,7 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 
 			<Column variant="halfWidth">
 				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-semibold">
-					You are about to delete an attendee ("{attendee.name}")
+					You are about to delete an attendee ("{attendee.user.name}")
 				</p>
 
 				<h1 className="text-3xl font-bold">Delete Attendee</h1>
@@ -89,11 +89,11 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid, aid } = context.query;
+	const { eid, uid } = context.query;
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
+	const initialAttendee = (await getAttendee(String(eid), String(uid))) ?? undefined;
 
 	return {
 		props: {

@@ -13,10 +13,10 @@ import { getEvent } from '../../api/events/[eid]';
 import Prisma from '@prisma/client';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
-import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
 import { LoadingPage } from '../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../utils/api';
+import { ssrGetUser } from '../../../utils/api';
 import { useUser } from '../../../hooks/queries/useUser';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -29,7 +29,6 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
-	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
@@ -52,12 +51,11 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 
 			<Navigation />
 
-			<Column>
-				<h1 className="text-3xl font-bold">Register for this event</h1>
+			<Column variant="halfWidth">
+				<h1 className="text-3xl font-bold">Register for {event.name}</h1>
 
-				<p className="text-gray-700 mt-1">
-					This attendee profile will be visible on the event page. This profile is separate from
-					your user profile.
+				<p className="text-gray-700 mt-2">
+					To attend this event, please click the register button below.
 				</p>
 
 				<CreateAttendeeForm
@@ -65,8 +63,6 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 					eventError={eventError}
 					isEventLoading={isEventLoading}
 					createAttendeeMutation={createAttendeeMutation}
-					imageUploadMutation={imageUploadMutation}
-					imageUploadResponse={imageUploadResponse}
 				/>
 			</Column>
 		</PageWrapper>

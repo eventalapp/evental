@@ -2,11 +2,12 @@ import { prisma } from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { getAttendee } from '../../../attendees/[uid]';
 
 export default api({
 	async DELETE({ ctx, req }) {
 		const user = await ctx.getUser();
-		const { eid, aid } = req.query;
+		const { eid, uid } = req.query;
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
@@ -26,16 +27,7 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const attendee = await prisma.eventAttendee.findFirst({
-			where: {
-				eventId: event.id,
-				OR: [{ id: String(aid) }, { slug: String(aid) }]
-			},
-			select: {
-				id: true,
-				permissionRole: true
-			}
-		});
+		const attendee = await getAttendee(event.id, String(uid));
 
 		if (!attendee) {
 			throw new NextkitError(404, 'Attendee not found.');

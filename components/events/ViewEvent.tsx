@@ -10,8 +10,8 @@ import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { UseAttendeeByUserIdQueryData } from '../../hooks/queries/useAttendeeByUserIdQuery';
 import { format } from 'date-fns';
+import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
 
 type Props = {
 	eid: string;
@@ -19,7 +19,7 @@ type Props = {
 	UseEventQueryData &
 	UseSessionsQueryData &
 	UseRolesQueryData &
-	UseAttendeeByUserIdQueryData;
+	UseAttendeeQueryData;
 
 export const ViewEvent: React.FC<Props> = (props) => {
 	const {
@@ -32,7 +32,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 		isSessionsLoading,
 		sessionsError,
 		isOrganizerError,
-		attendeeByUserId
+		attendee
 	} = props;
 
 	if (!event) return null;
@@ -47,7 +47,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 				</Link>
 			)}
 
-			{!Boolean(attendeeByUserId) && (
+			{!Boolean(attendee) && (
 				<Link href={`/events/${eid}/register`}>
 					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-semibold">
 						Are you attending this event? Register here.

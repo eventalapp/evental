@@ -1,8 +1,12 @@
 import { prisma } from '../../../../../prisma/client';
-import { EventAttendeeUser } from './[aid]';
+
 import { getEvent } from '../index';
 import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import {
+	AttendeeWithUser,
+	stripAttendeesWithUserPassword
+} from '../../../../../utils/stripUserPassword';
 
 export default api({
 	async GET({ req }) {
@@ -18,29 +22,22 @@ export default api({
 	}
 });
 
-export const getAttendees = async (eid: string): Promise<EventAttendeeUser[] | null> => {
+export const getAttendees = async (eid: string): Promise<AttendeeWithUser[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
 		return null;
 	}
 
-	return await prisma.eventAttendee.findMany({
+	const attendees = await prisma.eventAttendee.findMany({
 		where: {
 			eventId: event.id
 		},
 		include: {
-			user: {
-				select: {
-					name: true,
-					image: true
-				}
-			},
-			role: {
-				select: {
-					name: true
-				}
-			}
+			user: true,
+			role: true
 		}
 	});
+
+	return stripAttendeesWithUserPassword(attendees);
 };

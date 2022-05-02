@@ -1,15 +1,14 @@
-import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseEditVenueMutationData } from '../../hooks/mutations/useEditVenueMutation';
-import { useVenueQuery, UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
+import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { Textarea } from '../form/Textarea';
 import { useForm } from 'react-hook-form';
 import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { slugify } from '../../utils/slugify';
 import { useRouter } from 'next/router';
 
 type Props = { eid: string } & DetailedHTMLProps<
@@ -21,43 +20,19 @@ type Props = { eid: string } & DetailedHTMLProps<
 
 export const EditVenueForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { venue, editVenueMutation, eid } = props;
+	const { venue, editVenueMutation } = props;
 
 	const {
 		register,
 		handleSubmit,
-		watch,
-		setValue,
-		trigger,
 		formState: { errors }
 	} = useForm<EditVenuePayload>({
 		defaultValues: {
 			name: venue?.name ?? undefined,
-			description: venue?.description ?? undefined,
-			slug: venue?.slug ?? undefined
+			description: venue?.description ?? undefined
 		},
 		resolver: zodResolver(EditVenueSchema)
 	});
-
-	const nameWatcher = watch('name');
-	const slugWatcher = watch('slug');
-
-	const { venue: venueSlugCheck, isVenueLoading: isVenueSlugCheckLoading } = useVenueQuery(
-		String(eid),
-		slugWatcher
-	);
-
-	useEffect(() => {
-		setValue('slug', slugify(nameWatcher));
-
-		if (errors.name) {
-			void trigger('slug');
-		}
-	}, [nameWatcher]);
-
-	useEffect(() => {
-		setValue('slug', slugify(slugWatcher));
-	}, [slugWatcher]);
 
 	if (!venue) return null;
 
@@ -73,15 +48,6 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 						<Label htmlFor="name">Name</Label>
 						<Input placeholder="Venue name" {...register('name', { required: true })} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
-					</div>
-
-					<div>
-						<Label htmlFor="slug">Slug</Label>
-						<Input placeholder="venue-slug" {...register('slug', { required: true })} />
-						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{slugWatcher !== venue?.slug && venueSlugCheck && (
-							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
-						)}
 					</div>
 				</div>
 
@@ -104,15 +70,7 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button
-					className="ml-4"
-					type="submit"
-					variant="primary"
-					padding="medium"
-					disabled={
-						isVenueSlugCheckLoading || Boolean(slugWatcher !== venue?.slug && venueSlugCheck)
-					}
-				>
+				<Button className="ml-4" type="submit" variant="primary" padding="medium">
 					Edit Venue
 				</Button>
 			</div>

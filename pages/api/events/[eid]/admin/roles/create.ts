@@ -1,9 +1,9 @@
 import { prisma } from '../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../utils/isOrganizer';
 import { CreateRoleSchema } from '../../../../../../utils/schemas';
-import { processSlug } from '../../../../../../utils/slugify';
 import { api } from '../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { generateSlug } from '../../../../../../utils/generateSlug';
 
 export default api({
 	async POST({ ctx, req }) {
@@ -59,11 +59,22 @@ export default api({
 			}
 		}
 
+		const slug = await generateSlug(parsed.name, async (val) => {
+			return !Boolean(
+				await prisma.eventRole.findFirst({
+					where: {
+						eventId: event.id,
+						slug: val
+					}
+				})
+			);
+		});
+
 		const createdRole = await prisma.eventRole.create({
 			data: {
 				eventId: event.id,
 				name: parsed.name,
-				slug: processSlug(parsed.slug),
+				slug: slug,
 				defaultRole: parsed.defaultRole
 			}
 		});

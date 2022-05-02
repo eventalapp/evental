@@ -1,17 +1,20 @@
 import { prisma } from '../../../../../../../prisma/client';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EventPermissionRole } from '@prisma/client';
-import { processSlug } from '../../../../../../../utils/slugify';
 import { getEvent } from '../../../index';
-import { getAttendee } from '../../../attendees/[aid]';
+import { getAttendee } from '../../../attendees/[uid]';
 import { AdminEditAttendeeSchema } from '../../../../../../../utils/schemas';
 import { isFounder } from '../../../../../../../utils/isFounder';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import {
+	AttendeeWithUserInput,
+	stripAttendeeWithUserPassword
+} from '../../../../../../../utils/stripUserPassword';
 
 export default api({
 	async PUT({ ctx, req }) {
-		const { eid, aid } = req.query;
+		const { eid, uid } = req.query;
 
 		const user = await ctx.getUser();
 
@@ -31,7 +34,7 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const attendee = await getAttendee(String(eid), String(aid));
+		const attendee = await getAttendee(String(eid), String(uid));
 
 		if (!attendee) {
 			throw new NextkitError(404, 'Attendee not found.');
@@ -71,23 +74,21 @@ export default api({
 				id: attendee.id
 			},
 			data: {
-				slug: processSlug(parsed.slug),
-				name: parsed.name,
-				image: parsed.image,
-				location: parsed.location,
-				company: parsed.company,
-				position: parsed.position,
-				description: parsed.description,
 				eventRoleId: parsed.eventRoleId,
 				userId: attendee.userId,
 				eventId: attendee.eventId,
 				permissionRole: requestedPermissionRole
+			},
+			select: {
+				user: true
 			}
 		});
 
 		if (!editedEventAttendee) {
 			throw new NextkitError(500, 'Could not edit attendee.');
 		}
+
+		stripAttendeeWithUserPassword(editedEventAttendee as AttendeeWithUserInput);
 
 		return editedEventAttendee;
 	}

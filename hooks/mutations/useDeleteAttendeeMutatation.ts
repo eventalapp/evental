@@ -10,14 +10,14 @@ export interface UseDeleteAttendeeMutationData {
 
 export const useDeleteAttendeeMutation = (
 	eid: string,
-	aid: string
+	uid: string
 ): UseDeleteAttendeeMutationData => {
 	const queryClient = useQueryClient();
 
 	const deleteAttendeeMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/attendees/${aid}/delete`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/attendees/${uid}/delete`)
 				.then((res) => res.data.data);
 		},
 		{
@@ -25,7 +25,7 @@ export const useDeleteAttendeeMutation = (
 				toast.success('Attendee deleted successfully');
 
 				router.push(`/events/${eid}/attendees/`).then(() => {
-					void queryClient.invalidateQueries(['attendee', eid, aid]);
+					void queryClient.invalidateQueries(['attendee', eid, uid]);
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},

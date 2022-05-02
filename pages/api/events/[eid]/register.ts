@@ -1,7 +1,5 @@
-import { CreateAttendeeSchema } from '../../../../utils/schemas';
 import { prisma } from '../../../../prisma/client';
 import { getEvent } from './index';
-import { processSlug } from '../../../../utils/slugify';
 import { NextkitError } from 'nextkit';
 import { api } from '../../../../utils/api';
 
@@ -32,8 +30,6 @@ export default api({
 			throw new NextkitError(401, 'You are already attending this event.');
 		}
 
-		const parsed = CreateAttendeeSchema.parse(req.body);
-
 		const defaultRole = await prisma.eventRole.findFirst({
 			where: {
 				eventId: event.id,
@@ -47,12 +43,6 @@ export default api({
 
 		const eventAttendee = await prisma.eventAttendee.create({
 			data: {
-				slug: processSlug(parsed.slug),
-				name: parsed.name,
-				image: parsed.image,
-				company: parsed.company,
-				position: parsed.position,
-				description: parsed.description,
 				eventRoleId: defaultRole?.id,
 				userId: user.id,
 				eventId: event.id,

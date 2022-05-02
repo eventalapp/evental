@@ -12,11 +12,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { toast } from 'react-toastify';
-import { slugify } from '../../utils/slugify';
 import Link from 'next/link';
 import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useSessionQuery, UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
+import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { NotFound } from '../error/NotFound';
 import { NEAREST_MINUTE } from '../../config';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
@@ -39,7 +38,6 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 		handleSubmit,
 		watch,
 		setValue,
-		trigger,
 		control,
 		formState: { errors }
 	} = useForm<EditSessionPayload>({
@@ -48,19 +46,13 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 			description: String(session?.description),
 			venueId: session?.venueId,
 			startDate: session?.startDate ? new Date(String(session?.startDate)) : new Date(),
-			endDate: session?.endDate ? new Date(String(session?.endDate)) : new Date(),
-			slug: session?.slug
+			endDate: session?.endDate ? new Date(String(session?.endDate)) : new Date()
 		},
 		resolver: zodResolver(EditSessionSchema)
 	});
 
-	const nameWatcher = watch('name');
-	const slugWatcher = watch('slug');
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
-
-	const { session: sessionSlugCheck, isSessionLoading: isSessionSlugCheckLoading } =
-		useSessionQuery(String(eid), slugWatcher);
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
@@ -75,18 +67,6 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
-
-	useEffect(() => {
-		setValue('slug', slugify(nameWatcher));
-
-		if (errors.name) {
-			void trigger('slug');
-		}
-	}, [nameWatcher]);
-
-	useEffect(() => {
-		setValue('slug', slugify(slugWatcher));
-	}, [slugWatcher]);
 
 	if (venues && venues.length === 0) {
 		return <NotFound message="No venues found" />;
@@ -194,35 +174,11 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
-				<div>
-					<div>
-						<Label htmlFor="slug">Slug *</Label>
-						<div className="flex items-center">
-							<span className="mr-1 text-md">/sessions/</span>
-							<Input placeholder="session-slug" {...register('slug', { required: true })} />
-						</div>
-						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-						{slugWatcher !== session?.slug && sessionSlugCheck && (
-							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
-						)}
-					</div>
-				</div>
-			</div>
-
 			<div className="flex flex-row justify-end">
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button
-					type="submit"
-					variant="primary"
-					className="ml-4"
-					padding="medium"
-					disabled={
-						isSessionSlugCheckLoading || Boolean(slugWatcher !== session?.slug && sessionSlugCheck)
-					}
-				>
+				<Button type="submit" variant="primary" className="ml-4" padding="medium">
 					Update Session
 					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
 				</Button>

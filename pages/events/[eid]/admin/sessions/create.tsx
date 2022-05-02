@@ -20,8 +20,9 @@ import Link from 'next/link';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { PasswordlessUser, ssrGetUser } from '../../../../../utils/api';
+import { ssrGetUser } from '../../../../../utils/api';
 import { useUser } from '../../../../../hooks/queries/useUser';
+import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 
 type Props = {
 	initialOrganizer: boolean;

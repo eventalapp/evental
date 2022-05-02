@@ -41,7 +41,6 @@ const codeValidator = z
 // Venues
 
 export const CreateVenueSchema = z.object({
-	slug: slugValidator,
 	name: nameValidator,
 	description: descriptionValidator
 });
@@ -49,7 +48,6 @@ export const CreateVenueSchema = z.object({
 export type CreateVenuePayload = z.infer<typeof CreateVenueSchema>;
 
 export const EditVenueSchema = z.object({
-	slug: slugValidator,
 	name: nameValidator,
 	description: descriptionValidator
 });
@@ -60,7 +58,6 @@ export type EditVenuePayload = z.infer<typeof EditVenueSchema>;
 
 export const CreateRoleSchema = z.object({
 	name: nameValidator,
-	slug: slugValidator,
 	defaultRole: z.boolean()
 });
 
@@ -68,7 +65,6 @@ export type CreateRolePayload = z.infer<typeof CreateRoleSchema>;
 
 export const EditRoleSchema = z.object({
 	name: nameValidator,
-	slug: slugValidator,
 	defaultRole: z.boolean()
 });
 
@@ -77,7 +73,6 @@ export type EditRolePayload = z.infer<typeof EditRoleSchema>;
 // Session
 
 export const CreateSessionSchema = z.object({
-	slug: slugValidator,
 	name: nameValidator,
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
 	startDate: dateValidator,
@@ -88,7 +83,6 @@ export const CreateSessionSchema = z.object({
 export type CreateSessionPayload = z.infer<typeof CreateSessionSchema>;
 
 export const EditSessionSchema = z.object({
-	slug: slugValidator,
 	name: nameValidator,
 	venueId: z.string().min(1, 'Venue must be specified').max(100, 'Venue is too long'),
 	startDate: dateValidator,
@@ -132,31 +126,12 @@ export type EditEventPayload = z.infer<typeof EditEventSchema>;
 
 // Event Attendee
 
-export const CreateAttendeeSchema = z.object({
-	name: nameValidator,
-	slug: slugValidator,
-	company: z.string().max(40, 'Company must be less than 40 characters'),
-	position: z.string().max(40, 'Position must be less than 40 characters'),
-	description: descriptionValidator,
-	location: z.string().max(40, 'Position must be less than 40 characters'),
-	image: z.string()
-});
-
-export type CreateAttendeePayload = z.infer<typeof CreateAttendeeSchema>;
-
 export const AdminEditAttendeeSchema = z.object({
-	name: nameValidator,
-	slug: slugValidator,
-	company: z.string().max(40, 'Company must be less than 40 characters'),
-	position: z.string().max(40, 'Position must be less than 40 characters'),
-	description: descriptionValidator,
-	location: z.string().max(40, 'Position must be less than 40 characters'),
 	eventRoleId: z.string().min(1, 'Role is required').max(100, 'Role is too long'),
 	permissionRole: z
 		.string()
 		.min(1, 'Permission Role is required')
-		.max(100, 'Permission Role is too long'),
-	image: z.string()
+		.max(100, 'Permission Role is too long')
 });
 
 export type AdminEditAttendeePayload = z.infer<typeof AdminEditAttendeeSchema>;

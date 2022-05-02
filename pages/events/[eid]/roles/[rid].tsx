@@ -12,15 +12,15 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { getAttendeesByRole, getRole } from '../../../api/events/[eid]/roles/[rid]';
-import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { ssrGetUser } from '../../../../utils/api';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 
 type Props = {
 	initialRole: Prisma.EventRole | undefined;
-	initialAttendees: EventAttendeeUser[] | undefined;
+	initialAttendees: AttendeeWithUser[] | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 };

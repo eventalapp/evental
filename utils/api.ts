@@ -2,11 +2,9 @@ import createAPI, { NextkitError } from 'nextkit';
 import { randomBytes } from 'crypto';
 import { Redis } from '@upstash/redis';
 import { prisma } from '../prisma/client';
-import type Prisma from '@prisma/client';
 import { IncomingMessage } from 'http';
 import { NextApiRequestCookies } from 'next/dist/server/api-utils';
-
-export type PasswordlessUser = Omit<Prisma.User, 'password'>;
+import { PasswordlessUser, stripUserPassword } from './stripUserPassword';
 
 const redis = new Redis({
 	url: process.env.UPSTASH_URL!,
@@ -54,9 +52,7 @@ export const ssrGetUser = async (
 
 	if (!user) return null;
 
-	const { password, ...rest } = user;
-
-	return rest;
+	return stripUserPassword(user);
 };
 
 export const api = createAPI({

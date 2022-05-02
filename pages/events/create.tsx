@@ -9,8 +9,9 @@ import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
-import { PasswordlessUser, ssrGetUser } from '../../utils/api';
+import { ssrGetUser } from '../../utils/api';
 import { useUser } from '../../hooks/queries/useUser';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

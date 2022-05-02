@@ -5,6 +5,7 @@ import { hash } from 'argon2';
 import { SignUpSchema } from '../../../utils/schemas';
 import { NextkitError } from 'nextkit';
 import { SESSION_EXPIRY } from '../../../config';
+import { generateSlug } from '../../../utils/generateSlug';
 
 export default api({
 	async POST({ ctx, req, res }) {
@@ -27,8 +28,19 @@ export default api({
 			throw new NextkitError(500, 'Failed to create user');
 		}
 
+		const slug = await generateSlug(body.name, async (val) => {
+			return !Boolean(
+				await prisma.user.findFirst({
+					where: {
+						slug: val
+					}
+				})
+			);
+		});
+
 		const user = await prisma.user.create({
 			data: {
+				slug,
 				name: body.name,
 				email: body.email,
 				password: passwordHashed

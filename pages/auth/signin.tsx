@@ -5,11 +5,12 @@ import { Navigation } from '../../components/navigation';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { SignInForm } from '../../components/authentication/SignInForm';
 import { useSignInMutation } from '../../hooks/mutations/useSignInMutation';
-import { PasswordlessUser, ssrGetUser } from '../../utils/api';
+import { ssrGetUser } from '../../utils/api';
 import { useUser } from '../../hooks/queries/useUser';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import Head from 'next/head';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

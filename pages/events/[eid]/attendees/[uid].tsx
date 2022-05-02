@@ -9,15 +9,17 @@ import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { EventAttendeeUser, getAttendee } from '../../../api/events/[eid]/attendees/[aid]';
+
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import React from 'react';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { ssrGetUser } from '../../../../utils/api';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
 
 type Props = {
-	initialAttendee: EventAttendeeUser | undefined;
+	initialAttendee: AttendeeWithUser | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 };
@@ -25,10 +27,10 @@ type Props = {
 const ViewAttendeePage: NextPage<Props> = (props) => {
 	const { initialAttendee, initialOrganizer } = props;
 	const router = useRouter();
-	const { aid, eid } = router.query;
+	const { uid, eid } = router.query;
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(
 		String(eid),
-		String(aid),
+		String(uid),
 		initialAttendee
 	);
 	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
@@ -55,7 +57,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Viewing Attendee: {aid}</title>
+				<title>Viewing Attendee: {uid}</title>
 			</Head>
 
 			<Navigation />
@@ -69,7 +71,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					isOrganizerLoading={isOrganizerLoading}
 					isOrganizerError={isOrganizerError}
 					eid={String(eid)}
-					aid={String(aid)}
+					uid={String(uid)}
 				/>
 			</Column>
 		</PageWrapper>
@@ -77,10 +79,10 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { aid, eid } = context.query;
+	const { uid, eid } = context.query;
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
+	const initialAttendee = (await getAttendee(String(eid), String(uid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {

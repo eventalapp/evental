@@ -5,6 +5,7 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { AdminEditAttendeePayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
 export interface UseEditAttendeeMutationData {
 	adminEditAttendeeMutation: UseMutationResult<
@@ -16,19 +17,19 @@ export interface UseEditAttendeeMutationData {
 
 export const useAdminEditAttendeeMutation = (
 	eid: string,
-	aid: string
+	uid: string
 ): UseEditAttendeeMutationData => {
 	const queryClient = useQueryClient();
 
 	const adminEditAttendeeMutation = useMutation<
-		Prisma.EventAttendee,
+		AttendeeWithUser,
 		AxiosError<ErroredAPIResponse, unknown>,
 		AdminEditAttendeePayload
 	>(
 		async (data) => {
 			return await axios
-				.put<SuccessAPIResponse<Prisma.EventAttendee>>(
-					`/api/events/${eid}/admin/attendees/${aid}/edit`,
+				.put<SuccessAPIResponse<AttendeeWithUser>>(
+					`/api/events/${eid}/admin/attendees/${uid}/edit`,
 					data
 				)
 				.then((res) => res.data.data);
@@ -37,8 +38,8 @@ export const useAdminEditAttendeeMutation = (
 			onSuccess: (data) => {
 				toast.success('Attendee edited successfully');
 
-				router.push(`/events/${eid}/attendees/${data.slug}`).then(() => {
-					void queryClient.invalidateQueries(['attendee', eid, aid]);
+				router.push(`/events/${eid}/attendees/${data.user.slug}`).then(() => {
+					void queryClient.invalidateQueries(['attendee', eid, uid]);
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},

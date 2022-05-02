@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { useQuery } from 'react-query';
-import { PasswordlessUser } from '../../utils/api';
 import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 
 export interface UseUserData {
 	user: PasswordlessUser | undefined;

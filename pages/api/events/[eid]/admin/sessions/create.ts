@@ -1,9 +1,9 @@
 import { prisma } from '../../../../../../prisma/client';
 import { CreateSessionSchema } from '../../../../../../utils/schemas';
 import { isOrganizer } from '../../../../../../utils/isOrganizer';
-import { processSlug } from '../../../../../../utils/slugify';
 import { api } from '../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { generateSlug } from '../../../../../../utils/generateSlug';
 
 export default api({
 	async POST({ ctx, req }) {
@@ -30,10 +30,21 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
+		const slug = await generateSlug(parsed.name, async (val) => {
+			return !Boolean(
+				await prisma.eventSession.findFirst({
+					where: {
+						eventId: event.id,
+						slug: val
+					}
+				})
+			);
+		});
+
 		let createdSession = await prisma.eventSession.create({
 			data: {
 				eventId: event.id,
-				slug: processSlug(parsed.slug),
+				slug: slug,
 				name: parsed.name,
 				venueId: parsed.venueId,
 				startDate: parsed.startDate,

@@ -14,10 +14,16 @@ enum Role {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  slug          String @unique
+  name          String
   password      String
   email         String    @unique
   emailVerified DateTime?
+    location    String?
+    description String?
+    company     String?
+    position    String?
+
   image         String    @default("/images/default-avatar.jpg")
   updatedAt     DateTime  @updatedAt
   createdAt     DateTime  @default(now())
@@ -59,24 +65,16 @@ model Event {
 
 model EventAttendee {
   id          String  @id @default(cuid())
-  name        String
-  slug        String
   userId      String
   eventId     String
   eventRoleId String
-  location    String?
-  description String?
-  company     String?
-  position    String?
-  image       String  @default("/images/default-avatar.jpg")
-
   permissionRole EventPermissionRole
 
   role  EventRole @relation(fields: [eventRoleId], references: [id])
   user  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  @@unique([eventId, slug])
+  @@unique([eventId, userId])
   @@map("event_attendee")
 }
 

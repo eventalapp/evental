@@ -1,12 +1,15 @@
 import { prisma } from '../../../../../prisma/client';
-import { EventAttendeeUser } from '../attendees/[aid]';
 import type Prisma from '@prisma/client';
 import { getEvent } from '../index';
 import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import {
+	AttendeeWithUser,
+	stripAttendeesWithUserPassword
+} from '../../../../../utils/stripUserPassword';
 
 export type RoleAttendeePayload = {
-	attendees: EventAttendeeUser[] | undefined;
+	attendees: AttendeeWithUser[] | undefined;
 	role: Prisma.EventRole | undefined;
 };
 
@@ -56,7 +59,7 @@ export const getRole = async (eid: string, rid: string): Promise<Prisma.EventRol
 export const getAttendeesByRole = async (
 	eid: string,
 	rid: string
-): Promise<EventAttendeeUser[] | null> => {
+): Promise<AttendeeWithUser[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
@@ -69,23 +72,20 @@ export const getAttendeesByRole = async (
 		return null;
 	}
 
-	return await prisma.eventAttendee.findMany({
+	const attendees = await prisma.eventAttendee.findMany({
 		where: {
 			eventRoleId: role.id,
 			eventId: event.id
 		},
 		include: {
-			user: {
-				select: {
-					name: true,
-					image: true
-				}
-			},
-			role: {
-				select: {
-					name: true
-				}
-			}
+			user: true,
+			role: true
 		}
 	});
+
+	if (!attendees) {
+		return null;
+	}
+
+	return stripAttendeesWithUserPassword(attendees);
 };

@@ -12,7 +12,7 @@ import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
-import { EventAttendeeUser, getAttendee } from '../../../../../api/events/[eid]/attendees/[aid]';
+import { getAttendee } from '../../../../../api/events/[eid]/attendees/[uid]';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
@@ -21,12 +21,13 @@ import { getRoles } from '../../../../../api/events/[eid]/roles';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { useImageUploadMutation } from '../../../../../../hooks/mutations/useImageUploadMutation';
-import { PasswordlessUser, ssrGetUser } from '../../../../../../utils/api';
+import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../../../utils/stripUserPassword';
 
 type Props = {
 	initialOrganizer: boolean;
-	initialAttendee: EventAttendeeUser | undefined;
+	initialAttendee: AttendeeWithUser | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 };
@@ -34,15 +35,15 @@ type Props = {
 const EditAttendeePage: NextPage<Props> = (props) => {
 	const { initialOrganizer, initialAttendee, initialRoles, initialUser } = props;
 	const router = useRouter();
-	const { eid, aid } = router.query;
+	const { eid, uid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(
 		String(eid),
-		String(aid),
+		String(uid),
 		initialAttendee
 	);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { adminEditAttendeeMutation } = useAdminEditAttendeeMutation(String(eid), String(aid));
+	const { adminEditAttendeeMutation } = useAdminEditAttendeeMutation(String(eid), String(uid));
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user } = useUser(initialUser);
 
@@ -104,11 +105,11 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid, aid } = context.query;
+	const { eid, uid } = context.query;
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialAttendee = (await getAttendee(String(eid), String(aid))) ?? undefined;
+	const initialAttendee = (await getAttendee(String(eid), String(uid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 
 	return {

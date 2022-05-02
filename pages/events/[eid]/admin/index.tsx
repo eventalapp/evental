@@ -27,21 +27,20 @@ import { getSessions } from '../../../api/events/[eid]/sessions';
 import { getRoles } from '../../../api/events/[eid]/roles';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import type Prisma from '@prisma/client';
-
 import { getVenues } from '../../../api/events/[eid]/venues';
 import { getAttendees } from '../../../api/events/[eid]/attendees';
-import { EventAttendeeUser } from '../../../api/events/[eid]/attendees/[aid]';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { PasswordlessUser, ssrGetUser } from '../../../../utils/api';
+import { ssrGetUser } from '../../../../utils/api';
 import { useUser } from '../../../../hooks/queries/useUser';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
 	initialSessions: Prisma.EventSession[] | undefined;
-	initialAttendees: EventAttendeeUser[] | undefined;
+	initialAttendees: AttendeeWithUser[] | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialVenues: Prisma.EventVenue[] | undefined;
 	initialOrganizer: boolean;
