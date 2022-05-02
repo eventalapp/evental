@@ -14,21 +14,21 @@ enum Role {
 
 model User {
   id            String    @id @default(cuid())
-  slug          String @unique
+  slug          String    @unique
   name          String
   password      String
   email         String    @unique
   emailVerified DateTime?
-    location    String?
-    description String?
-    company     String?
-    position    String?
-    website    String?
+  location      String?
+  description   String?
+  company       String?
+  position      String?
+  website       String?
 
-  image         String    @default("/images/default-avatar.jpg")
-  updatedAt     DateTime  @updatedAt
-  createdAt     DateTime  @default(now())
-  role          Role      @default(USER)
+  image     String   @default("/images/default-avatar.jpg")
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  role      Role     @default(USER)
 
   eventAttendee EventAttendee[]
 
@@ -56,24 +56,27 @@ model Event {
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
-  eventAttendee EventAttendee[]
-  eventSession  EventSession[]
-  eventVenue    EventVenue[]
-  eventRole     EventRole[]
+  attendee        EventAttendee[]
+  session         EventSession[]
+  venue           EventVenue[]
+  role            EventRole[]
+  sessionAttendee EventSessionAttendee[]
 
   @@map("event")
 }
 
 model EventAttendee {
-  id          String  @id @default(cuid())
-  userId      String
-  eventId     String
-  eventRoleId String
+  id             String              @id @default(cuid())
+  userId         String
+  eventId        String
+  eventRoleId    String
   permissionRole EventPermissionRole
 
   role  EventRole @relation(fields: [eventRoleId], references: [id])
   user  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  sessionAttendee EventSessionAttendee[]
 
   @@unique([eventId, userId])
   @@map("event_attendee")
@@ -86,9 +89,9 @@ model EventRole {
   name        String
   defaultRole Boolean @default(false)
 
-  EventAttendee EventAttendee[]
-
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  attendee EventAttendee[]
 
   @@unique([eventId, slug])
   @@map("event_role")
@@ -109,8 +112,24 @@ model EventSession {
   event Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
   venue EventVenue @relation(fields: [venueId], references: [id], onDelete: Cascade)
 
+  sessionAttendee EventSessionAttendee[]
+
   @@unique([eventId, slug])
   @@map("event_session")
+}
+
+model EventSessionAttendee {
+  id         String @id @default(cuid())
+  sessionId  String
+  attendeeId String
+  eventId    String
+
+  event    Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  session  EventSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  attendee EventAttendee @relation(fields: [attendeeId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, sessionId, attendeeId])
+  @@map("event_session_attendee")
 }
 
 model EventVenue {
@@ -124,7 +143,7 @@ model EventVenue {
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
-  EventSession EventSession[]
+  session EventSession[]
 
   @@unique([eventId, slug])
   @@map("event_venue")
