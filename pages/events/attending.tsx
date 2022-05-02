@@ -6,58 +6,64 @@ import { Navigation } from '../../components/navigation';
 import React from 'react';
 import PageWrapper from '../../components/layout/PageWrapper';
 import type Prisma from '@prisma/client';
-import { getUpcomingEvents } from '../api/events';
+
 import { ViewErrorPage } from '../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../components/error/LoadingPage';
 import { ssrGetUser } from '../../utils/api';
-import { useUpcomingEventsQuery } from '../../hooks/queries/useUpcomingEventsQuery';
+import { useAttendingEventsQuery } from '../../hooks/queries/useAttendingEventsQuery';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
+import { getAttendingEvents } from '../api/events/attending';
 import { useUser } from '../../hooks/queries/useUser';
+import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { EventsNavigation } from '../../components/events/EventsNavigation';
 import Link from 'next/link';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
-	initialUpcomingEvents: Prisma.Event[];
+	initialAttendingEvents: Prisma.Event[];
 };
 
-const EventsPage: NextPage<Props> = (props) => {
-	const { initialUpcomingEvents, initialUser } = props;
-	const { upcomingEvents, upcomingEventsError, isUpcomingEventsLoading } =
-		useUpcomingEventsQuery(initialUpcomingEvents);
+const AttendingEventsPage: NextPage<Props> = (props) => {
+	const { initialAttendingEvents, initialUser } = props;
+	const { attendingEventsError, isAttendingEventsLoading, attendingEvents } =
+		useAttendingEventsQuery(String(initialUser?.id), initialAttendingEvents);
 	const { user } = useUser(initialUser);
 
-	if (isUpcomingEventsLoading) {
+	if (isAttendingEventsLoading) {
 		return <LoadingPage />;
 	}
 
-	if (upcomingEventsError) {
-		return <ViewErrorPage errors={[upcomingEventsError]} />;
+	if (attendingEventsError) {
+		return <ViewErrorPage errors={[attendingEventsError]} />;
 	}
 
-	if (!upcomingEvents) {
-		return <NotFoundPage message="No Upcoming Events" />;
+	if (!user) {
+		return <UnauthorizedPage />;
 	}
 
-	if (upcomingEvents.length === 0) {
+	if (!attendingEvents) {
+		return <NotFoundPage message="You are not attending any events" />;
+	}
+
+	if (attendingEvents.length === 0) {
 		return (
 			<PageWrapper variant="white">
 				<Head>
-					<title>Upcoming Events</title>
+					<title>Attending Events</title>
 				</Head>
 
 				<Navigation />
 
 				<Column>
-					<h1 className="text-3xl font-bold mb-3">Upcoming Events</h1>
+					<h1 className="text-3xl font-bold mb-3">Attending Events</h1>
 
 					{user && <EventsNavigation />}
 
 					<span className="block text-md mt-5">
-						No events found.{' '}
-						<Link href="/events/create" passHref>
-							<a className="mt-3 text-primary font-bold">Create an Event</a>
+						You are not attending any events.{' '}
+						<Link href="/events/upcoming" passHref>
+							<a className="mt-3 text-primary font-bold">Find Events</a>
 						</Link>
 					</span>
 				</Column>
@@ -68,17 +74,17 @@ const EventsPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="white">
 			<Head>
-				<title>Upcoming Events</title>
+				<title>Attending Events</title>
 			</Head>
 
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl font-bold mb-3">Upcoming Events</h1>
+				<h1 className="text-3xl font-bold mb-3">Attending Events</h1>
 
 				{user && <EventsNavigation />}
 
-				<EventList events={upcomingEvents} />
+				<EventList events={attendingEvents} />
 			</Column>
 		</PageWrapper>
 	);
@@ -86,11 +92,11 @@ const EventsPage: NextPage<Props> = (props) => {
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialUpcomingEvents = await getUpcomingEvents();
+	const initialAttendingEvents = await getAttendingEvents(String(initialUser?.id));
 
 	return {
-		props: { initialUpcomingEvents, initialUser }
+		props: { initialAttendingEvents, initialUser }
 	};
 };
 
-export default EventsPage;
+export default AttendingEventsPage;

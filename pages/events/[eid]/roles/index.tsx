@@ -32,10 +32,7 @@ const RolesPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
-		String(eid),
-		initialOrganizer
-	);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 
 	if (!initialRoles || !roles) {
 		return <NotFoundPage message="No roles found." />;
@@ -45,8 +42,8 @@ const RolesPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (isOrganizerError || rolesError) {
-		return <ViewErrorPage errors={[isOrganizerError, rolesError]} />;
+	if (rolesError) {
+		return <ViewErrorPage errors={[rolesError]} />;
 	}
 
 	return (
@@ -61,7 +58,7 @@ const RolesPage: NextPage<Props> = (props) => {
 				<FlexRowBetween>
 					<h1 className="text-3xl font-bold">Roles</h1>
 
-					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+					{!isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/roles/create`} passHref>
 							<LinkButton>Create role</LinkButton>
 						</Link>
@@ -71,7 +68,6 @@ const RolesPage: NextPage<Props> = (props) => {
 				<RoleList
 					eid={String(eid)}
 					roles={roles}
-					isOrganizerError={isOrganizerError}
 					isOrganizerLoading={isOrganizerLoading}
 					isOrganizer={isOrganizer}
 					isRolesLoading={isRolesLoading}

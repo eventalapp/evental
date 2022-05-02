@@ -41,20 +41,43 @@ enum EventPermissionRole {
   ATTENDEE
 }
 
+enum EventType {
+  VIRTUAL
+  IN_PERSON
+  HYBRID
+}
+
+enum TimeFormat {
+  TWELVE_HOURS
+  TWENTYFOUR_HOURS
+}
+
+enum EventCategory {
+  EVENT
+  ACADEMIC
+  BUSINESS
+  CONFERENCE
+  CONVENTION
+  FESTIVAL
+  OTHER
+}
+
 model Event {
-  id          String   @id @default(cuid())
-  slug        String   @unique
+  id          String        @id @default(cuid())
+  slug        String        @unique
   name        String
-  location    String
+  location    String?
   address     String?
+  timeFormat  TimeFormat    @default(TWELVE_HOURS)
   startDate   DateTime
   endDate     DateTime
-  type        String   @default("Event")
-  image       String   @default("/images/default-event.jpg")
+  type        EventType?
+  category    EventCategory @default(EVENT)
+  image       String        @default("/images/default-event.jpg")
   banner      String?
   description String?
-  updatedAt   DateTime @updatedAt
-  createdAt   DateTime @default(now())
+  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime      @default(now())
 
   attendee        EventAttendee[]
   session         EventSession[]

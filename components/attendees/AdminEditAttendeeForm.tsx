@@ -47,7 +47,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5 mt-3">
 				<div>
 					<Label htmlFor="eventRoleId">Role *</Label>
-					<Select {...register('eventRoleId', { required: true })}>
+					<Select {...register('eventRoleId')}>
 						{roles &&
 							roles.map((role) => (
 								<option key={role.id} value={role.id}>
@@ -64,7 +64,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 				</div>
 				<div>
 					<Label htmlFor="permissionRole">Permission Role *</Label>
-					<Select {...register('permissionRole', { required: true })}>
+					<Select {...register('permissionRole')}>
 						{EventPermissionRole &&
 							Object.values(EventPermissionRole).map((role) => (
 								<option key={role} value={role}>

@@ -33,11 +33,13 @@ const SignInPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<div className="flex flex-row justify-between mb-3">
-					<h1 className="text-3xl font-bold">Sign up</h1>
-				</div>
+				<div className="max-w-sm m-auto">
+					<div className="flex flex-row justify-between mb-3">
+						<h1 className="text-3xl font-bold">Sign up</h1>
+					</div>
 
-				<SignUpForm signUpMutation={signUpMutation} />
+					<SignUpForm signUpMutation={signUpMutation} />
+				</div>
 			</Column>
 		</PageWrapper>
 	);

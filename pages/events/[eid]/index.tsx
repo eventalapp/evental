@@ -44,10 +44,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	} = props;
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading, isOrganizerError } = useOrganizerQuery(
-		String(eid),
-		initialOrganizer
-	);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(
 		String(eid),
@@ -61,12 +58,8 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialIsAttendeeByUserId
 	);
 
-	if (isOrganizerError || rolesError || eventError || sessionsError || attendeeError) {
-		return (
-			<ViewErrorPage
-				errors={[isOrganizerError, rolesError, eventError, sessionsError, attendeeError]}
-			/>
-		);
+	if (rolesError || eventError || sessionsError) {
+		return <ViewErrorPage errors={[rolesError, eventError, sessionsError]} />;
 	}
 
 	if (!initialRoles || !initialSessions || !initialEvent || !event || !sessions || !roles) {
@@ -100,7 +93,6 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					isEventLoading={isEventLoading}
 					isOrganizer={isOrganizer}
 					isOrganizerLoading={isOrganizerLoading}
-					isOrganizerError={isOrganizerError}
 					sessions={sessions}
 					isSessionsLoading={isSessionsLoading}
 					sessionsError={sessionsError}

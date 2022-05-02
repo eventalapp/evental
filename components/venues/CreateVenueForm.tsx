@@ -39,7 +39,7 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name</Label>
-						<Input placeholder="Venue name" {...register('name', { required: true })} />
+						<Input placeholder="Venue name" {...register('name')} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 				</div>
@@ -47,11 +47,7 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 mb-5 gap-5">
 					<div>
 						<Label htmlFor="description">Description</Label>
-						<Textarea
-							rows={5}
-							placeholder="Venue description"
-							{...register('description', { required: true })}
-						/>
+						<Textarea rows={5} placeholder="Venue description" {...register('description')} />
 						{errors.description?.message && (
 							<ErrorMessage>{errors.description?.message}</ErrorMessage>
 						)}

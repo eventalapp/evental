@@ -31,7 +31,7 @@ export const SignInForm: React.FC<Props> = (props) => {
 			<div className="w-full mt-5">
 				<div>
 					<Label htmlFor="email">Email *</Label>
-					<Input placeholder="Email" {...register('email', { required: true })} />
+					<Input placeholder="Email" {...register('email')} />
 					{errors.email?.message && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
 				</div>
 			</div>
@@ -39,33 +39,31 @@ export const SignInForm: React.FC<Props> = (props) => {
 			<div className="w-full mt-5">
 				<div>
 					<Label htmlFor="password">Password *</Label>
-					<Input
-						type="password"
-						placeholder="Password"
-						{...register('password', { required: true })}
-					/>
+					<Input type="password" placeholder="Password" {...register('password')} />
 					{errors.password?.message && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
 				</div>
-				<span className="mt-3 block">
-					Dont have an account?{' '}
-					<Link href="/auth/signup">
-						<a className="text-primary">Sign up</a>
-					</Link>
-				</span>
+				<div className="flex flex-row justify-between mt-3">
+					<span className="block" />
 
-				<span className="mt-3 block">
-					Forgot your password?{' '}
-					<Link href="/auth/password/request">
-						<a className="text-primary">Request a password reset</a>
-					</Link>
-				</span>
+					<span className="block">
+						<Link href="/auth/password/request">
+							<a className="text-primary text-sm">Forgot Password?</a>
+						</Link>
+					</span>
+				</div>
 			</div>
 
-			<div className="flex flex-row justify-end mt-5">
-				<Button type="submit" className="ml-4" variant="primary" padding="medium">
+			<div className="flex flex-row justify-center mt-5">
+				<Button type="submit" className="w-full" variant="primary" padding="medium">
 					Sign In
 				</Button>
 			</div>
+			<span className="mt-3 block">
+				Dont have an account?{' '}
+				<Link href="/auth/signup">
+					<a className="text-primary text-sm">Sign up</a>
+				</Link>
+			</span>
 		</form>
 	);
 };

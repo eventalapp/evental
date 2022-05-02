@@ -38,11 +38,7 @@ export const PasswordResetForm: React.FC<Props> = (props) => {
 			<div className="flex flex-col w-full my-5">
 				<div>
 					<Label htmlFor="name">New Password *</Label>
-					<Input
-						type="password"
-						placeholder="Password"
-						{...register('password', { required: true })}
-					/>
+					<Input type="password" placeholder="Password" {...register('password')} />
 					{errors.password?.message && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
 				</div>
 			</div>

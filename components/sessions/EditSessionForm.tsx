@@ -84,16 +84,13 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="Session name" {...register('name', { required: true })} />
+						<Input placeholder="Session name" {...register('name')} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 
 					<div>
 						<Label htmlFor="venueId">Venue *</Label>
-						<Select
-							defaultValue={venues && venues[0].id}
-							{...register('venueId', { required: true })}
-						>
+						<Select defaultValue={venues && venues[0].id} {...register('venueId')}>
 							{venues.map((venue) => (
 								<option key={venue.id} value={venue.id}>
 									{venue.name}

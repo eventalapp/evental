@@ -21,7 +21,6 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 		role,
 		roleAttendeesError,
 		isOrganizerLoading,
-		isOrganizerError,
 		isOrganizer,
 		attendees
 	} = props;
@@ -37,12 +36,12 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 					</h2>
 					<div>
 						<div className="flex items-center flex-row">
-							{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+							{!isOrganizerLoading && isOrganizer && (
 								<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
 									<LinkButton>Edit role</LinkButton>
 								</Link>
 							)}
-							{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+							{!isOrganizerLoading && isOrganizer && (
 								<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
 									<LinkButton className="ml-3">Delete role</LinkButton>
 								</Link>
@@ -63,12 +62,12 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 					{capitalizeFirstLetter(role.name.toLowerCase())}s ({attendees.length})
 				</h2>
 				<div className="flex items-center flex-row">
-					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+					{!isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
 							<LinkButton>Edit role</LinkButton>
 						</Link>
 					)}
-					{!isOrganizerError && !isOrganizerLoading && isOrganizer && (
+					{!isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
 							<LinkButton className="ml-3">Delete role</LinkButton>
 						</Link>
@@ -77,7 +76,6 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 			</FlexRowBetween>
 
 			<AttendeeList
-				isOrganizerError={isOrganizerError}
 				isOrganizerLoading={isOrganizerLoading}
 				isOrganizer={isOrganizer}
 				attendees={attendees}

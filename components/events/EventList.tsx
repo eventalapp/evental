@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { UseEventsQueryData } from '../../hooks/queries/useEventsQuery';
 import { format } from 'date-fns';
 import { NotFound } from '../error/NotFound';
+import Prisma from '@prisma/client';
 
-type Props = UseEventsQueryData;
+type Props = { events: Prisma.Event[] };
 
 export const EventList: React.FC<Props> = (props) => {
 	const { events } = props;
@@ -51,7 +51,7 @@ export const EventList: React.FC<Props> = (props) => {
 									</div>
 
 									<div className="flex flex-col justify-between">
-										<span className="text-gray-600 text-xs block">{event.type}</span>
+										<span className="text-gray-600 text-xs block">{event.category}</span>
 										<span className="text-lg">{event.name}</span>
 									</div>
 								</div>
