@@ -11,6 +11,7 @@ import { useEditUserMutation } from '../hooks/mutations/useEditUserMutation';
 import { ssrGetUser } from '../utils/api';
 import { PasswordlessUser } from '../utils/stripUserPassword';
 import { LoadingPage } from '../components/error/LoadingPage';
+import { NotFoundPage } from '../components/error/NotFoundPage';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -26,6 +27,10 @@ const SettingsPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
+	if (!user) {
+		return <NotFoundPage />;
+	}
+
 	return (
 		<PageWrapper>
 			<Head>
@@ -37,15 +42,13 @@ const SettingsPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold">Settings Page</h1>
 
-				{user && (
-					<UserSettingsForm
-						user={user}
-						imageUploadResponse={imageUploadResponse}
-						imageUploadMutation={imageUploadMutation}
-						editUserMutation={editUserMutation}
-						isUserLoading={isUserLoading}
-					/>
-				)}
+				<UserSettingsForm
+					user={user}
+					imageUploadResponse={imageUploadResponse}
+					imageUploadMutation={imageUploadMutation}
+					editUserMutation={editUserMutation}
+					isUserLoading={isUserLoading}
+				/>
 			</Column>
 		</PageWrapper>
 	);
