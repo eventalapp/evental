@@ -23,6 +23,7 @@ model User {
     description String?
     company     String?
     position    String?
+    website    String?
 
   image         String    @default("/images/default-avatar.jpg")
   updatedAt     DateTime  @updatedAt
