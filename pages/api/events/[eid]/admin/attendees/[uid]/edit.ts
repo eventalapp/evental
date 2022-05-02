@@ -60,7 +60,7 @@ export default api({
 		// Allow founders to edit their self
 
 		if (requestedPermissionRole === 'FOUNDER' && attendee.permissionRole !== 'FOUNDER') {
-			throw new NextkitError(400, 'Cannot assign founder permission role.');
+			throw new NextkitError(400, 'Cannot assign the founder permission role.');
 		}
 
 		// Only founders can assign organizer permission role
