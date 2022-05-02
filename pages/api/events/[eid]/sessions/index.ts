@@ -28,6 +28,9 @@ export const getSessions = async (eid: string): Promise<Prisma.EventSession[] | 
 	return await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id
+		},
+		orderBy: {
+			startDate: 'asc'
 		}
 	});
 };
