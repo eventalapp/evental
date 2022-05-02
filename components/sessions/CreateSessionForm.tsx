@@ -45,7 +45,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		defaultValues: {
 			venueId: venues && venues[0]?.id,
 			startDate: roundToNearestMinutes(new Date(), { nearestTo: NEAREST_MINUTE }),
-			endDate: roundToNearestMinutes(new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3), {
+			endDate: roundToNearestMinutes(new Date(new Date().getTime() + 1000 * 60 * 60 * 4), {
 				nearestTo: NEAREST_MINUTE
 			})
 		},
