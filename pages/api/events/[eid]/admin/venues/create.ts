@@ -47,6 +47,7 @@ export default api({
 				eventId: event.id,
 				slug: slug,
 				name: parsed.name,
+				address: parsed.address,
 				description: parsed.description
 			}
 		});

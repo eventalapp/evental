@@ -62,12 +62,18 @@ enum EventCategory {
   OTHER
 }
 
+enum EventLevel {
+  TRIAL
+  PRO
+}
+
 model Event {
   id          String        @id @default(cuid())
   slug        String        @unique
   name        String
   location    String?
   address     String?
+  level       EventLevel    @default(TRIAL)
   timeFormat  TimeFormat    @default(TWELVE_HOURS)
   startDate   DateTime
   endDate     DateTime
@@ -126,14 +132,14 @@ model EventSession {
   eventId     String
   startDate   DateTime
   endDate     DateTime
-  venueId     String
+  venueId     String?
   name        String
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
   event Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  venue EventVenue @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  venue EventVenue? @relation(fields: [venueId], references: [id], onDelete: Cascade)
 
   sessionAttendee EventSessionAttendee[]
 
@@ -160,6 +166,7 @@ model EventVenue {
   slug        String
   eventId     String
   name        String
+  address String?
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
