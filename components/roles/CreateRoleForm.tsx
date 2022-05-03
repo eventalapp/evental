@@ -69,7 +69,13 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" className="ml-4" variant="primary" padding="medium">
+				<Button
+					type="submit"
+					className="ml-4"
+					variant="primary"
+					padding="medium"
+					disabled={createRoleMutation.isLoading}
+				>
 					{createRoleMutation.isLoading ? <LoadingInner /> : 'Create Role'}
 				</Button>
 			</div>

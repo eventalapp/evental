@@ -55,7 +55,13 @@ export const SignInForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-center mt-5">
-				<Button type="submit" className="w-full" variant="primary" padding="medium">
+				<Button
+					type="submit"
+					className="w-full"
+					variant="primary"
+					padding="medium"
+					disabled={signInMutation.isLoading}
+				>
 					{signInMutation.isLoading ? <LoadingInner /> : 'Sign In'}
 				</Button>
 			</div>

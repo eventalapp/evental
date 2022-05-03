@@ -79,7 +79,7 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 
 			<Navigation />
 
-			<Column>
+			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Edit Attendee</h1>
 
 				<p className="text-gray-700 mt-1">

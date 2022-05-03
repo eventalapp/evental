@@ -175,7 +175,13 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" variant="primary" className="ml-4" padding="medium">
+				<Button
+					type="submit"
+					variant="primary"
+					className="ml-4"
+					padding="medium"
+					disabled={createSessionMutation.isLoading}
+				>
 					{createSessionMutation.isLoading ? <LoadingInner /> : 'Create Session'}
 				</Button>
 			</div>

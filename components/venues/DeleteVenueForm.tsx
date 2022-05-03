@@ -51,7 +51,12 @@ export const DeleteVenueForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+				<Button
+					type="submit"
+					variant="danger"
+					className="ml-4"
+					disabled={!canSubmit || deleteVenueMutation.isLoading}
+				>
 					{deleteVenueMutation.isLoading ? <LoadingInner /> : 'Delete Venue'}
 				</Button>
 			</div>

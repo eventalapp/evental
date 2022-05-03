@@ -51,7 +51,12 @@ export const DeleteSessionForm: React.FC<Props> = (props) => {
 				<Button type="button" variant="no-bg" onClick={router.back}>
 					Cancel
 				</Button>
-				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
+				<Button
+					type="submit"
+					variant="danger"
+					className="ml-4"
+					disabled={!canSubmit || deleteSessionMutation.isLoading}
+				>
 					{deleteSessionMutation.isLoading ? <LoadingInner /> : 'Delete Session'}
 				</Button>
 			</div>
