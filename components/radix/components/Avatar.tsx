@@ -1,7 +1,6 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import cx from 'classnames';
 import React, { Fragment } from 'react';
-import { getRandomInitials } from '../../../../tailwindcss-radix/demo/utils/random';
 
 enum Variant {
 	Circle,
@@ -63,7 +62,7 @@ const Avatar = ({ variant, isOnline, renderInvalidUrls = false }: Props) => {
 						delayMs={600}
 					>
 						<span className="text-sm font-medium uppercase text-gray-700 dark:text-gray-400">
-							{getRandomInitials()}
+							{'fdsafdas'}
 						</span>
 					</AvatarPrimitive.Fallback>
 				</AvatarPrimitive.Root>
