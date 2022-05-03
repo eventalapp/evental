@@ -10,7 +10,6 @@ import { getEvent } from '../../../api/events/[eid]';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
 import { Navigation } from '../../../../components/navigation';
-import { useImageUploadMutation } from '../../../../hooks/mutations/useImageUploadMutation';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { ssrGetUser } from '../../../../utils/api';
@@ -34,7 +33,6 @@ const EditEventPage: NextPage<Props> = (props) => {
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { editEventMutation } = useEditEventMutation(String(eid));
-	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
 	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
@@ -67,8 +65,6 @@ const EditEventPage: NextPage<Props> = (props) => {
 				<h1 className="text-3xl font-bold">Event Settings</h1>
 
 				<EditEventForm
-					imageUploadMutation={imageUploadMutation}
-					imageUploadResponse={imageUploadResponse}
 					eid={String(eid)}
 					eventError={eventError}
 					editEventMutation={editEventMutation}
