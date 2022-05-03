@@ -29,7 +29,7 @@ export const RoleList: React.FC<Props> = (props) => {
 							{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
 							<span className="text-gray-500 font-normal">{role.defaultRole && '(Default)'}</span>
 						</span>
-						<div className="opacity-0 group-hover:opacity-100 transition-all">
+						<div className="opacity-0 group-hover:opacity-100 transition-all duration-100">
 							<Link href={`/events/${eid}/roles/${role.slug}`} passHref>
 								<LinkButton variant="primary">View</LinkButton>
 							</Link>
