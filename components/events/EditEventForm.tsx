@@ -214,7 +214,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 											}))}
 											value={field.value}
 											onValueChange={(value) => {
-												setValue('category', value);
+												setValue('category', EventCategory[value as keyof typeof EventCategory]);
 											}}
 										/>
 									)}
@@ -238,7 +238,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 											}))}
 											value={field.value}
 											onValueChange={(value) => {
-												setValue('type', value);
+												setValue('type', EventType[value as keyof typeof EventType]);
 											}}
 										/>
 									)}
