@@ -175,7 +175,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="slug">Slug *</Label>
 						<div className="flex items-center">
-							<span className="mr-1 text-md">evental.app/events/</span>
+							<span className="mr-1 text-base">evental.app/events/</span>
 							<Input placeholder="event-slug" {...register('slug')} />
 						</div>
 						{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}

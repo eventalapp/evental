@@ -2,17 +2,17 @@ import React, { ChangeEvent, DetailedHTMLProps, FormHTMLAttributes, useEffect } 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { slugify } from '../utils/slugify';
-import { EditUserPayload, EditUserSchema, ImageUploadSchema } from '../utils/schemas';
-import { Textarea } from './form/Textarea';
-import { UseUserData } from '../hooks/queries/useUser';
-import { ErrorMessage } from './form/ErrorMessage';
-import { UseEditUserMutationData } from '../hooks/mutations/useEditUserMutation';
-import { UseImageUploadMutationData } from '../hooks/mutations/useImageUploadMutation';
-import { Label } from './form/Label';
-import { Input } from './form/Input';
-import { Button } from './form/Button';
-import { useUserQuery } from '../hooks/queries/useUserQuery';
+import { slugify } from '../../utils/slugify';
+import { EditUserPayload, EditUserSchema, ImageUploadSchema } from '../../utils/schemas';
+import { Textarea } from '../form/Textarea';
+import { UseUserData } from '../../hooks/queries/useUser';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { UseEditUserMutationData } from '../../hooks/mutations/useEditUserMutation';
+import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
+import { Label } from '../form/Label';
+import { Input } from '../form/Input';
+import { Button } from '../form/Button';
+import { useUserQuery } from '../../hooks/queries/useUserQuery';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEditUserMutationData &

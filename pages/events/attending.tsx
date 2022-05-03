@@ -59,7 +59,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 
 					{user && <EventsNavigation />}
 
-					<span className="block text-md mt-5">
+					<span className="block text-base mt-5">
 						You are not attending any events.{' '}
 						<Link href="/events" passHref>
 							<a className="mt-3 text-primary font-bold">Find Events</a>

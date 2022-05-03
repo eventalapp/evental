@@ -13,7 +13,7 @@ export const UnauthorizedPage = () => (
 
 		<Navigation />
 
-		<Column>
+		<Column variant="halfWidth" className="flex flex-col items-center justify-center">
 			<Unauthorized />
 		</Column>
 	</PageWrapper>
