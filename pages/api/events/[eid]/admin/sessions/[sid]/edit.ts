@@ -3,6 +3,7 @@ import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EditSessionSchema } from '../../../../../../../utils/schemas';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { generateSlug } from '../../../../../../../utils/generateSlug';
 
 export default api({
 	async PUT({ ctx, req }) {
@@ -43,13 +44,24 @@ export default api({
 			throw new NextkitError(404, 'Session not found.');
 		}
 
+		const slug = await generateSlug(parsed.name, async (val) => {
+			return !Boolean(
+				await prisma.eventSession.findFirst({
+					where: {
+						eventId: event.id,
+						slug: val
+					}
+				})
+			);
+		});
+
 		const editedSession = await prisma.eventSession.update({
 			where: {
 				id: session.id
 			},
 			data: {
 				eventId: event.id,
-
+				slug,
 				name: parsed.name,
 				venueId: parsed.venueId,
 				startDate: parsed.startDate,

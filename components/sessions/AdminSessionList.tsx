@@ -3,6 +3,7 @@ import React from 'react';
 import { UseSessionsQueryData } from '../../hooks/queries/useSessionsQuery';
 import { NotFound } from '../error/NotFound';
 import { format } from 'date-fns';
+import classNames from 'classnames';
 
 type Props = {
 	eid: string;
@@ -19,11 +20,16 @@ export const AdminSessionList: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			{sessions.map((session) => {
+			{sessions.map((session, i) => {
 				return (
 					<Link href={`/events/${eid}/sessions/${session.slug}`} key={session.id} passHref>
 						<a>
-							<div className="flex flex-row p-3 mb-3 bg-white border border-gray-300 rounded-md">
+							<div
+								className={classNames(
+									'flex flex-row p-3 bg-white border-gray-200',
+									i !== sessions.length - 1 && 'border-b '
+								)}
+							>
 								<span className="text-gray-700 text-sm w-20 pr-3 text-right">
 									{format(new Date(session.startDate), 'h:mm a OOO')}
 								</span>

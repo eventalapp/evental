@@ -47,13 +47,13 @@ export const EditVenueForm: React.FC<Props> = (props) => {
 			<div className="flex flex-col w-full mt-5">
 				<div className="mb-5">
 					<Label htmlFor="name">Name *</Label>
-					<Input placeholder="Venue name" {...register('name')} />
+					<Input placeholder="Room 415" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
 				<div className="mb-5">
 					<Label htmlFor="address">Address</Label>
-					<Input placeholder="Venue Address" {...register('address')} />
+					<Input placeholder="12345 S Jane St." {...register('address')} />
 					{errors.address?.message && <ErrorMessage>{errors.address?.message}</ErrorMessage>}
 				</div>
 
