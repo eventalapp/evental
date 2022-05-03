@@ -45,7 +45,7 @@ const DemoCard = ({ variant = Variant.Default, isNew, children, data: { title, l
 							{title}
 						</a>
 						{isNew && (
-							<span className="px-1.5 py-0.5 rounded-full select-none text-[0.6rem] font-semibold text-gray-800 dark:text-white bg-white dark:bg-gray-800">
+							<span className="px-1.5 py-0.5 rounded-full select-none text-[0.6rem] font-medium text-gray-800 dark:text-white bg-white dark:bg-gray-800">
 								NEW
 							</span>
 						)}

@@ -23,7 +23,7 @@ export const AdminSessionList: React.FC<Props> = (props) => {
 				return (
 					<Link href={`/events/${eid}/sessions/${session.slug}`} key={session.id} passHref>
 						<a>
-							<div className="flex flex-row p-3 mb-3 bg-gray-100 rounded-md">
+							<div className="flex flex-row p-3 mb-3 bg-gray-75 rounded-md">
 								<span className="text-gray-700 text-sm w-20 pr-3 text-right">
 									{format(new Date(session.startDate), 'h:mm a OOO')}
 								</span>

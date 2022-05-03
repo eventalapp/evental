@@ -19,8 +19,8 @@ import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { EventSettingsNavigation } from '../../../../components/settings/EventSettingsNavigation';
 import { AdminSessionList } from '../../../../components/sessions/AdminSessionList';
+import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
 
 type Props = {
 	initialSessions: SessionWithVenue[] | undefined;
@@ -60,7 +60,7 @@ const SessionsAdminPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<EventSettingsNavigation eid={String(eid)} />
+				<EventNavigationMenu eid={String(eid)} />
 
 				<div>
 					<FlexRowBetween>

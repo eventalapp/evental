@@ -20,8 +20,8 @@ import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { EventSettingsNavigation } from '../../../../components/settings/EventSettingsNavigation';
 import { VenueList } from '../../../../components/venues/VenueList';
+import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
 
 type Props = {
 	initialVenues: Prisma.EventVenue[] | undefined;
@@ -58,7 +58,7 @@ const VenuesAdminPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<EventSettingsNavigation eid={String(eid)} />
+				<EventNavigationMenu eid={String(eid)} />
 
 				<div>
 					<FlexRowBetween>

@@ -21,7 +21,7 @@ export const VenueList: React.FC<Props> = (props) => {
 			{venues.map((venue) => (
 				<Link href={`/events/${eid}/venues/${venue.slug}`} key={venue.id} passHref>
 					<a>
-						<div className="p-3 mb-3 bg-gray-100 rounded-md">
+						<div className="p-3 mb-3 bg-gray-75 rounded-md">
 							<div className="flex flex-row justify-between items-center flex-wrap">
 								<span className="text-lg block font-medium">
 									{venue.name}
