@@ -47,7 +47,7 @@ const CreateRolePage: NextPage<Props> = (props) => {
 
 			<Navigation />
 
-			<Column>
+			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Create Role Page</h1>
 
 				<CreateRoleForm eid={String(eid)} createRoleMutation={createRoleMutation} />

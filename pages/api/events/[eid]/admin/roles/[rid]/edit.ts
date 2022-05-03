@@ -16,6 +16,7 @@ export default api({
 		if (!(await isOrganizer(String(user?.id), String(eid)))) {
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
+
 		const parsed = EditRoleSchema.parse(req.body);
 
 		const event = await prisma.event.findFirst({
@@ -70,6 +71,11 @@ export default api({
 					)
 				);
 			}
+		} else if (!parsed.defaultRole) {
+			throw new NextkitError(
+				400,
+				'If you with to make another role the default. Please edit that role.'
+			);
 		}
 
 		let editedRole = await prisma.eventRole.update({
