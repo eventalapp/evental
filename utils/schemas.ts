@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { isBrowser } from './isBrowser';
-import { EventType } from '@prisma/client';
+import { EventCategory, EventType } from '@prisma/client';
 
 // Reusable
 
@@ -37,13 +37,21 @@ const imageFileValidator = isBrowser ? z.instanceof(File) : z.any();
 const locationValidator = z.string().max(100, 'Location must be less than 70 characters');
 const companyValidator = z.string().max(100, 'Company must be less than 100 characters');
 const positionValidator = z.string().max(100, 'Position must be less than 70 characters');
-const urlValidator = z.string().max(200, 'URL must be less than 200 characters');
+const urlValidator = z
+	.string()
+	.url()
+	.max(200, 'URL must be less than 200 characters')
+	.or(z.literal(''));
 const venueIdValidator = z.preprocess((val) => {
 	if (val === 'none') {
 		return null;
 	}
 	return val;
 }, z.string().max(100, 'Venue is too long').nullable());
+const eventTypes = [...Object.values(EventType)] as const;
+const eventTypeValidator = z.enum(eventTypes as [string, ...string[]]);
+const eventCategory = [...Object.values(EventCategory)] as const;
+const eventCategoryValidator = z.enum(eventCategory as [string, ...string[]]);
 
 // Venues
 
@@ -111,13 +119,12 @@ export const CreateEventSchema = z.object({
 
 export type CreateEventPayload = z.infer<typeof CreateEventSchema>;
 
-const eventTypes = [...Object.values(EventType)] as const;
-
 export const EditEventSchema = z.object({
+	category: eventCategoryValidator,
 	slug: slugValidator,
 	name: nameValidator,
 	location: locationValidator,
-	type: z.enum(eventTypes as [string, ...string[]]),
+	type: eventTypeValidator,
 	image: imageFileValidator.optional(),
 	startDate: dateValidator,
 	endDate: dateValidator,

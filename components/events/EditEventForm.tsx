@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
 import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
 import Button from '../radix/components/shared/Button';
-import { EventType } from '@prisma/client';
+import { EventCategory, EventType } from '@prisma/client';
 import Select from '../radix/components/Select';
 import { capitalizeFirstLetter } from '../../utils/string';
 
@@ -45,6 +45,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			image: event?.image,
 			location: event?.location ?? undefined,
 			type: event?.type ?? undefined,
+			category: event?.category ?? undefined,
 			slug: event?.slug ?? undefined,
 			endDate: new Date(String(event?.endDate)) ?? undefined,
 			startDate: new Date(String(event?.startDate)) ?? undefined
@@ -197,7 +198,31 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						)}
 					</div>
 				</div>
-				<div>
+				<div className="grid grid-cols-2 mb-5 gap-5">
+					<div>
+						<Label htmlFor="category">Category</Label>
+						{EventCategory && (
+							<div>
+								<Controller
+									control={control}
+									name="category"
+									render={({ field }) => (
+										<Select
+											options={Object.values(EventCategory).map((category) => ({
+												label: capitalizeFirstLetter(category.toLowerCase().replace('_', ' ')),
+												value: category
+											}))}
+											value={field.value}
+											onValueChange={(value) => {
+												setValue('category', value);
+											}}
+										/>
+									)}
+								/>
+							</div>
+						)}
+						{errors.type?.message && <ErrorMessage>{errors.type?.message}</ErrorMessage>}
+					</div>
 					<div>
 						<Label htmlFor="type">Type *</Label>
 						{EventType && (
