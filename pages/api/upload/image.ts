@@ -1,10 +1,7 @@
-import { S3 } from 'aws-sdk';
-import crypto from 'crypto';
 import { busboyParseForm } from '../../../utils/busboyParseForm';
-import { uploadToBucket } from '../../../utils/uploadToBucket';
-import { processImage } from '../../../utils/processImage';
 import { api } from '../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { uploadAndProcessImage } from '../../../utils/uploadAndProcessImage';
 
 export const config = {
 	api: {
@@ -26,29 +23,16 @@ export default api({
 
 		const { buffer, mimeType } = await busboyParseForm(req);
 
-		let fileLocation: string | undefined;
+		let fileLocation = await uploadAndProcessImage(buffer, mimeType);
 
-		if (buffer.length >= 1) {
-			const sharpImage = await processImage(buffer);
-
-			const params: S3.Types.PutObjectRequest = {
-				Bucket: 'evental/images',
-				Key: `${crypto.randomBytes(20).toString('hex')}.jpg`,
-				Body: sharpImage,
-				ContentType: mimeType
+		if (fileLocation) {
+			const body: ImageUploadResponse = {
+				pathName: fileLocation
 			};
 
-			fileLocation = await uploadToBucket(params);
-		}
-
-		if (!fileLocation) {
+			return body;
+		} else if (!fileLocation && buffer.length >= 1) {
 			throw new NextkitError(500, 'Image failed to upload.');
 		}
-
-		const body: ImageUploadResponse = {
-			pathName: fileLocation
-		};
-
-		return body;
 	}
 });
