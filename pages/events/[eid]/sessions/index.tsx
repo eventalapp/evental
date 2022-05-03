@@ -14,8 +14,7 @@ import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import type Prisma from '@prisma/client';
-import { getSessions } from '../../../api/events/[eid]/sessions';
+import { getSessions, SessionWithVenue } from '../../../api/events/[eid]/sessions';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
@@ -23,7 +22,7 @@ import { ssrGetUser } from '../../../../utils/api';
 import { PasswordlessUser } from '../../../../utils/stripUserPassword';
 
 type Props = {
-	initialSessions: Prisma.EventSession[] | undefined;
+	initialSessions: SessionWithVenue[] | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 };

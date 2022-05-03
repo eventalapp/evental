@@ -78,8 +78,6 @@ const SessionsAdminPage: NextPage<Props> = (props) => {
 						sessions={sessions}
 						isSessionsLoading={isSessionsLoading}
 						sessionsError={sessionsError}
-						isOrganizer={isOrganizer}
-						isOrganizerLoading={isOrganizerLoading}
 					/>
 				</div>
 			</Column>
