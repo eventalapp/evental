@@ -8,8 +8,6 @@ import { UseEditSessionMutationData } from '../../hooks/mutations/useEditSession
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Controller, useForm } from 'react-hook-form';
 import { DatePicker } from '../form/DatePicker';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
@@ -20,6 +18,7 @@ import { NotFound } from '../error/NotFound';
 import { NEAREST_MINUTE } from '../../config';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useRouter } from 'next/router';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = {
 	eid: string;
@@ -176,8 +175,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" variant="primary" className="ml-4" padding="medium">
-					Update Session
-					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
+					{editSessionMutation.isLoading ? <LoadingInner /> : 'Edit Session'}
 				</Button>
 			</div>
 		</form>

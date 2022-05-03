@@ -9,6 +9,7 @@ import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { useRouter } from 'next/router';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -62,7 +63,7 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" className="ml-4" variant="primary" padding="medium">
-					Create Venue
+					{createVenueMutation.isLoading ? <LoadingInner /> : 'Create Venue'}
 				</Button>
 			</div>
 		</form>

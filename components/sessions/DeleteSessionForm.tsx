@@ -6,6 +6,7 @@ import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { UseDeleteSessionMutationData } from '../../hooks/mutations/useDeleteSessionMutation';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseDeleteSessionMutationData &
@@ -51,7 +52,7 @@ export const DeleteSessionForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
-					Delete Session
+					{deleteSessionMutation.isLoading ? <LoadingInner /> : 'Delete Session'}
 				</Button>
 			</div>
 		</form>

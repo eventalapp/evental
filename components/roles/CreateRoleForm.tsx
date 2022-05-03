@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -58,7 +59,7 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" className="ml-4" variant="primary" padding="medium">
-					Create Role
+					{createRoleMutation.isLoading ? <LoadingInner /> : 'Create Role'}
 				</Button>
 			</div>
 		</form>

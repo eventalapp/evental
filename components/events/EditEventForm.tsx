@@ -13,10 +13,9 @@ import { slugify } from '../../utils/slugify';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { DatePicker } from '../form/DatePicker';
 import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { UseImageUploadMutationData } from '../../hooks/mutations/useImageUploadMutation';
 import { useRouter } from 'next/router';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = {
 	eid: string;
@@ -232,8 +231,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						Boolean(slugWatcher !== event?.slug && eventSlugCheck)
 					}
 				>
-					Edit Event
-					<FontAwesomeIcon fill="currentColor" className="ml-2" size="1x" icon={faChevronRight} />
+					{editEventMutation.isLoading ? <LoadingInner /> : 'Edit Event'}
 				</Button>
 			</div>
 		</form>

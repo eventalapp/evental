@@ -6,6 +6,7 @@ import { UseRoleAttendeesQueryData } from '../../hooks/queries/useRoleAttendeesQ
 import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &
 	UseDeleteRoleMutationData &
@@ -49,7 +50,7 @@ export const DeleteRoleForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" variant="danger" className="ml-4" disabled={!canSubmit}>
-					Delete Role
+					{deleteRoleMutation.isLoading ? <LoadingInner /> : 'Delete Role'}
 				</Button>
 			</div>
 		</form>

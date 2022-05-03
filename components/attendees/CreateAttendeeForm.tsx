@@ -5,6 +5,7 @@ import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 
 import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
 import { useRouter } from 'next/router';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &
@@ -26,7 +27,7 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 					Cancel
 				</Button>
 				<Button type="submit" className="ml-4" variant="primary" padding="medium">
-					Register
+					{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
 				</Button>
 			</div>
 		</form>

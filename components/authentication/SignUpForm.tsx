@@ -7,6 +7,7 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { UseSignUpMutationData } from '../../hooks/mutations/useSignUpMutation';
+import { LoadingInner } from '../error/LoadingInner';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseSignUpMutationData;
@@ -53,7 +54,7 @@ export const SignUpForm: React.FC<Props> = (props) => {
 
 			<div className="mt-8">
 				<Button type="submit" className="w-full" variant="primary" padding="medium">
-					Sign Up
+					{signUpMutation.isLoading ? <LoadingInner /> : 'Sign Up'}
 				</Button>
 			</div>
 		</form>
