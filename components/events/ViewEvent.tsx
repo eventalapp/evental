@@ -98,7 +98,7 @@ export const ViewEvent: React.FC<Props> = (props) => {
 								size="1x"
 								icon={faPerson}
 							/>
-							<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
+							<p>{capitalizeOnlyFirstLetter(event?.type.replace('_', ' '))}</p>
 						</div>
 					)}
 
