@@ -3,41 +3,42 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
 import { faChevronRight, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { LinkButton } from '../../../../components/form/LinkButton';
 import { ssrGetUser } from '../../../../utils/api';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import Prisma from '@prisma/client';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { getRoles } from '../../../api/events/[eid]/roles';
+import { getAttendees } from '../../../api/events/[eid]/attendees';
 import { Navigation } from '../../../../components/navigation';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
-import { RoleList } from '../../../../components/roles/RoleList';
-import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
+import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { EventSettingsNavigation } from '../../../../components/settings/EventSettingsNavigation';
+import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 
 type Props = {
-	initialRoles: Prisma.EventRole[] | undefined;
+	initialAttendees: AttendeeWithUser[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialOrganizer: boolean;
 };
 
-const RolesAdminPage: NextPage<Props> = (props) => {
+const AttendeesAdminPage: NextPage<Props> = (props) => {
 	const router = useRouter();
-	const { initialUser, initialRoles, initialOrganizer } = props;
+	const { initialUser, initialAttendees, initialOrganizer } = props;
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
+	const { attendees, isAttendeesLoading, attendeesError } = useAttendeesQuery(
+		String(eid),
+		initialAttendees
+	);
 	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
@@ -48,14 +49,14 @@ const RolesAdminPage: NextPage<Props> = (props) => {
 		return <NoAccessPage />;
 	}
 
-	if (isRolesLoading) {
+	if (isAttendeesLoading) {
 		return <LoadingPage />;
 	}
 
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Edit Roles</title>
+				<title>Edit Attendees</title>
 			</Head>
 
 			<Navigation />
@@ -65,15 +66,15 @@ const RolesAdminPage: NextPage<Props> = (props) => {
 
 				<div>
 					<FlexRowBetween>
-						<span className="text-3xl font-bold">Roles</span>
+						<span className="text-3xl font-bold">Attendees</span>
 
 						<div>
-							<Link href={`/events/${eid}/admin/roles/create`} passHref>
+							<Link href={`/events/${eid}/admin/attendees/create`} passHref>
 								<LinkButton className="mr-3">
 									<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faPlus} />
 								</LinkButton>
 							</Link>
-							<Link href={`/events/${eid}/roles/`} passHref>
+							<Link href={`/events/${eid}/attendees/`} passHref>
 								<LinkButton>
 									<FontAwesomeIcon className="cursor-pointer" size="1x" icon={faChevronRight} />
 								</LinkButton>
@@ -81,13 +82,11 @@ const RolesAdminPage: NextPage<Props> = (props) => {
 						</div>
 					</FlexRowBetween>
 
-					<RoleList
+					<AttendeeList
 						eid={String(eid)}
-						roles={roles}
-						isRolesLoading={isRolesLoading}
-						rolesError={rolesError}
-						isOrganizer={isOrganizer}
-						isOrganizerLoading={isOrganizerLoading}
+						attendees={attendees}
+						isAttendeesLoading={isAttendeesLoading}
+						attendeesError={attendeesError}
 					/>
 				</div>
 			</Column>
@@ -99,16 +98,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const { eid } = context.query;
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialRoles = (await getRoles(String(eid))) ?? undefined;
+	const initialAttendees = (await getAttendees(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
 			initialOrganizer,
-			initialRoles
+			initialAttendees
 		}
 	};
 };
 
-export default RolesAdminPage;
+export default AttendeesAdminPage;
