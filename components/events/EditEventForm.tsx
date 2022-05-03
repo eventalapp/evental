@@ -1,5 +1,4 @@
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
-import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
@@ -15,6 +14,7 @@ import { DatePicker } from '../form/DatePicker';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
 import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
+import Button from '../radix/components/shared/Button';
 
 type Props = {
 	eid: string;
@@ -197,15 +197,14 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 			<div className="flex flex-row justify-end">
 				{canCancel && (
-					<Button type="button" variant="no-bg" onClick={router.back}>
+					<Button type="button" onClick={router.back}>
 						Cancel
 					</Button>
 				)}
 				<Button
 					type="submit"
-					variant="primary"
 					className="ml-4"
-					padding="medium"
+					variant="primary"
 					disabled={
 						editEventMutation.isLoading ||
 						isEventSlugCheckLoading ||

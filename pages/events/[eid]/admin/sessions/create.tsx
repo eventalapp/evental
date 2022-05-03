@@ -16,7 +16,6 @@ import type Prisma from '@prisma/client';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
-import Link from 'next/link';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
@@ -58,30 +57,6 @@ const CreateSessionPage: NextPage<Props> = (props) => {
 
 	if (venuesError || eventError) {
 		return <ViewErrorPage errors={[venuesError, eventError]} />;
-	}
-
-	if (venues && venues.length === 0) {
-		return (
-			<PageWrapper>
-				<Head>
-					<title>Not Found</title>
-				</Head>
-
-				<Navigation />
-
-				<Column>
-					<h1 className="text-3xl font-bold">Error</h1>
-
-					<p className="mt-2">
-						Before creating a session, you must{' '}
-						<Link href={`/events/${eid}/admin/venues/create`} passHref>
-							<a className="text-primary font-bold">create a venue</a>
-						</Link>
-						.
-					</p>
-				</Column>
-			</PageWrapper>
-		);
 	}
 
 	return (

@@ -14,7 +14,6 @@ import Link from 'next/link';
 import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
-import { NotFound } from '../error/NotFound';
 import { NEAREST_MINUTE } from '../../config';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useRouter } from 'next/router';
@@ -66,10 +65,6 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
-
-	if (venues && venues.length === 0) {
-		return <NotFound message="No venues found" />;
-	}
 
 	if (!venues || !event) return null;
 
