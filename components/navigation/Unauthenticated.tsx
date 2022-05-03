@@ -14,7 +14,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 	const { className, isOpen, setIsOpen, ...restProps } = props;
 
 	return (
-		<nav {...restProps} className="bg-white">
+		<nav {...restProps} className="bg-white border-b border-gray-200 shadow-sm">
 			<div
 				className={classNames(
 					'flex flex-row items-center justify-between w-full max-w-7xl m-auto h-14 px-3',

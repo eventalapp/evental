@@ -4,6 +4,10 @@ import { getEvent } from '../index';
 import { NextkitError } from 'nextkit';
 import { api } from '../../../../../utils/api';
 
+export type SessionWithVenue = {
+	venue: Prisma.EventVenue | null;
+} & Prisma.EventSession;
+
 export default api({
 	async GET({ req }) {
 		const { eid } = req.query;
@@ -18,7 +22,7 @@ export default api({
 	}
 });
 
-export const getSessions = async (eid: string): Promise<Prisma.EventSession[] | null> => {
+export const getSessions = async (eid: string): Promise<SessionWithVenue[] | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
@@ -28,6 +32,9 @@ export const getSessions = async (eid: string): Promise<Prisma.EventSession[] | 
 	return await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id
+		},
+		include: {
+			venue: true
 		},
 		orderBy: {
 			startDate: 'asc'

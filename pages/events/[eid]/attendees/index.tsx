@@ -54,12 +54,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					<h1 className="text-3xl font-bold">Attendees</h1>
 				</div>
 
-				<AttendeeList
-					attendees={attendees}
-					attendeesError={attendeesError}
-					isAttendeesLoading={isAttendeesLoading}
-					eid={String(eid)}
-				/>
+				<AttendeeList attendees={attendees} eid={String(eid)} />
 			</Column>
 		</PageWrapper>
 	);

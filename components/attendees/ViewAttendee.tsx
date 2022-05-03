@@ -51,43 +51,54 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 			</FlexRowBetween>
 			<h1 className="text-3xl font-bold">{attendee.user.name}</h1>
 
-			<div className="flex flex-row items-center mb-1">
-				<FontAwesomeIcon
-					fill="currentColor"
-					className="w-5 h-5 mr-1.5"
-					size="1x"
-					icon={faAddressCard}
-				/>
-				<p>{capitalizeFirstLetter(String(attendee.role.name))}</p>
-			</div>
+			{attendee.role.name && (
+				<div className="flex flex-row items-center mb-1">
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="w-5 h-5 mr-1.5"
+						size="1x"
+						icon={faAddressCard}
+					/>
+					<p>{capitalizeFirstLetter(String(attendee.role.name))}</p>
+				</div>
+			)}
 
-			<div className="flex flex-row items-center mb-1">
-				<FontAwesomeIcon
-					fill="currentColor"
-					className="w-5 h-5 mr-1.5"
-					size="1x"
-					icon={faLocationDot}
-				/>
-				<p>{attendee.user.location}</p>
-			</div>
-			<div className="flex flex-row items-center mb-1">
-				<FontAwesomeIcon
-					fill="currentColor"
-					className="w-5 h-5 mr-1.5"
-					size="1x"
-					icon={faBuilding}
-				/>
-				<p>{attendee.user.company}</p>
-			</div>
-			<div className="flex flex-row items-center mb-1">
-				<FontAwesomeIcon
-					fill="currentColor"
-					className="w-5 h-5 mr-1.5"
-					size="1x"
-					icon={faAddressBook}
-				/>
-				<p>{attendee.user.position}</p>
-			</div>
+			{attendee.user.location && (
+				<div className="flex flex-row items-center mb-1">
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="w-5 h-5 mr-1.5"
+						size="1x"
+						icon={faLocationDot}
+					/>
+					<p>{attendee.user.location}</p>
+				</div>
+			)}
+
+			{attendee.user.company && (
+				<div className="flex flex-row items-center mb-1">
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="w-5 h-5 mr-1.5"
+						size="1x"
+						icon={faBuilding}
+					/>
+					<p>{attendee.user.company}</p>
+				</div>
+			)}
+
+			{attendee.user.position && (
+				<div className="flex flex-row items-center mb-1">
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="w-5 h-5 mr-1.5"
+						size="1x"
+						icon={faAddressBook}
+					/>
+					<p>{attendee.user.position}</p>
+				</div>
+			)}
+
 			<span className="text-base text-gray-700 block mt-3">{attendee.user.description}</span>
 		</div>
 	);

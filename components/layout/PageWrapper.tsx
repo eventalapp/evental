@@ -12,7 +12,7 @@ type LayoutProps = Props &
 
 const variants = {
 	white: 'bg-white pb-10 min-h-full',
-	gray: 'bg-gray-100 pb-10 min-h-full'
+	gray: 'bg-white pb-10 min-h-full'
 };
 
 const PageWrapper: React.FC<LayoutProps> = (props) => {

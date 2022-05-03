@@ -39,3 +39,9 @@ export const stripAttendeesWithUserPassword = (
 ): AttendeeWithUser[] => {
 	return attendees.map((attendee) => stripAttendeeWithUserPassword(attendee));
 };
+
+export const stripSessionAttendeesWithUserPassword = (
+	attendees: Array<AttendeeWithUserInput>
+): AttendeeWithUser[] => {
+	return attendees.map((attendee) => stripAttendeeWithUserPassword(attendee));
+};

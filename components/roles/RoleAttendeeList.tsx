@@ -14,16 +14,7 @@ type Props = {
 	UseOrganizerQueryData;
 
 export const RoleAttendeeList: React.FC<Props> = (props) => {
-	const {
-		eid,
-		rid,
-		isRoleAttendeesLoading,
-		role,
-		roleAttendeesError,
-		isOrganizerLoading,
-		isOrganizer,
-		attendees
-	} = props;
+	const { eid, rid, role, isOrganizerLoading, isOrganizer, attendees } = props;
 
 	if (!role || !attendees) return null;
 
@@ -75,12 +66,7 @@ export const RoleAttendeeList: React.FC<Props> = (props) => {
 				</div>
 			</FlexRowBetween>
 
-			<AttendeeList
-				attendees={attendees}
-				attendeesError={roleAttendeesError}
-				isAttendeesLoading={isRoleAttendeesLoading}
-				eid={eid}
-			/>
+			<AttendeeList attendees={attendees} eid={eid} />
 		</div>
 	);
 };

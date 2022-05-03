@@ -1,17 +1,14 @@
 import Link from 'next/link';
 import React from 'react';
-import { LinkButton } from '../form/LinkButton';
-import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { NotFound } from '../error/NotFound';
 
 type Props = {
 	eid: string;
-} & UseOrganizerQueryData &
-	UseVenuesQueryData;
+} & UseVenuesQueryData;
 
 export const VenueList: React.FC<Props> = (props) => {
-	const { eid, venues, isOrganizer, isOrganizerLoading } = props;
+	const { eid, venues } = props;
 
 	if (venues && venues.length === 0) {
 		return <NotFound message="No venues found." />;
@@ -22,33 +19,18 @@ export const VenueList: React.FC<Props> = (props) => {
 	return (
 		<div>
 			{venues.map((venue) => (
-				<div key={venue.id} className="border-t-2 border-gray-200">
-					<div className="flex flex-row justify-between items-center flex-wrap pt-3">
-						<div className="pb-3">
-							<span className="text-lg block">{venue.name}</span>
-							<span className="text-base block">{venue.description}</span>
+				<Link href={`/events/${eid}/venues/${venue.slug}`} key={venue.id} passHref>
+					<a>
+						<div className="p-3 mb-3 bg-gray-100 rounded-md">
+							<div className="flex flex-row justify-between items-center flex-wrap">
+								<span className="text-lg block font-medium">
+									{venue.name}
+									<span className="text-base font-normal text-gray-500"> - {venue.address}</span>
+								</span>
+							</div>
 						</div>
-						<div className="pb-3">
-							<Link href={`/events/${eid}/venues/${venue.slug}`} passHref>
-								<LinkButton variant={'primary'}>View</LinkButton>
-							</Link>
-							{!isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/venues/${venue.slug}/edit`} passHref>
-									<LinkButton variant={'primary'} className="ml-3">
-										Edit
-									</LinkButton>
-								</Link>
-							)}
-							{!isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/venues/${venue.slug}/delete`} passHref>
-									<LinkButton variant={'primary'} className="ml-3">
-										Delete
-									</LinkButton>
-								</Link>
-							)}
-						</div>
-					</div>
-				</div>
+					</a>
+				</Link>
 			))}
 		</div>
 	);

@@ -11,8 +11,6 @@ import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
 import { useDeleteSessionMutation } from '../../../../../../hooks/mutations/useDeleteSessionMutation';
-import { getSession } from '../../../../../api/events/[eid]/sessions/[sid]';
-import type Prisma from '@prisma/client';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
@@ -21,10 +19,12 @@ import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 import { PasswordlessUser } from '../../../../../../utils/stripUserPassword';
+import { getSession } from '../../../../../api/events/[eid]/sessions/[sid]';
+import { SessionWithVenue } from '../../../../../api/events/[eid]/sessions';
 
 type Props = {
 	initialOrganizer: boolean;
-	initialSession: Prisma.EventSession | undefined;
+	initialSession: SessionWithVenue | undefined;
 	initialUser: PasswordlessUser | undefined;
 };
 

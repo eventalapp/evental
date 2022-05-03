@@ -12,7 +12,7 @@ import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
 import { useVenuesQuery } from '../../../../../../hooks/queries/useVenuesQuery';
 import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
 import { useEditSessionMutation } from '../../../../../../hooks/mutations/useEditSessionMutation';
-import { getSession } from '../../../../../api/events/[eid]/sessions/[sid]';
+
 import { getVenues } from '../../../../../api/events/[eid]/venues';
 import type Prisma from '@prisma/client';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
@@ -26,10 +26,12 @@ import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 import { PasswordlessUser } from '../../../../../../utils/stripUserPassword';
 import { LinkButton } from '../../../../../../components/form/LinkButton';
+import { getSession } from '../../../../../api/events/[eid]/sessions/[sid]';
+import { SessionWithVenue } from '../../../../../api/events/[eid]/sessions';
 
 type Props = {
 	initialOrganizer: boolean;
-	initialSession: Prisma.EventSession | undefined;
+	initialSession: SessionWithVenue | undefined;
 	initialVenues: Prisma.EventVenue[];
 	initialUser: PasswordlessUser | undefined;
 };

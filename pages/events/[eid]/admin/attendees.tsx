@@ -33,10 +33,7 @@ const AttendeesAdminPage: NextPage<Props> = (props) => {
 	const { initialUser, initialAttendees, initialOrganizer } = props;
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { attendees, isAttendeesLoading, attendeesError } = useAttendeesQuery(
-		String(eid),
-		initialAttendees
-	);
+	const { attendees, isAttendeesLoading } = useAttendeesQuery(String(eid), initialAttendees);
 	const { user } = useUser(initialUser);
 
 	if (!user?.id) {
@@ -73,12 +70,7 @@ const AttendeesAdminPage: NextPage<Props> = (props) => {
 						</div>
 					</FlexRowBetween>
 
-					<AttendeeList
-						eid={String(eid)}
-						attendees={attendees}
-						isAttendeesLoading={isAttendeesLoading}
-						attendeesError={attendeesError}
-					/>
+					{attendees && <AttendeeList eid={String(eid)} attendees={attendees} />}
 				</div>
 			</Column>
 		</PageWrapper>

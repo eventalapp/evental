@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
 import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	eid: string;
@@ -12,15 +14,7 @@ type Props = {
 	UseVenueQueryData;
 
 export const ViewVenue: React.FC<Props> = (props) => {
-	const {
-		eid,
-		vid,
-		venue,
-
-		isOrganizer,
-
-		isOrganizerLoading
-	} = props;
+	const { eid, vid, venue, isOrganizer, isOrganizerLoading } = props;
 
 	if (!venue) return null;
 
@@ -28,7 +22,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 		<div>
 			<div>
 				<FlexRowBetween>
-					<h1 className="text-3xl mb-3">{venue.name}</h1>
+					<h1 className="text-3xl">{venue.name}</h1>
 
 					<div>
 						{!isOrganizerLoading && isOrganizer && (
@@ -43,6 +37,18 @@ export const ViewVenue: React.FC<Props> = (props) => {
 						)}
 					</div>
 				</FlexRowBetween>
+
+				{venue.address && (
+					<div className="flex flex-row items-center mb-1">
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="w-5 h-5 mr-1.5"
+							size="1x"
+							icon={faLocationDot}
+						/>
+						<p>{venue.address}</p>
+					</div>
+				)}
 
 				<p>{venue.description}</p>
 			</div>
