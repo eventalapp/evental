@@ -62,7 +62,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 					<span className="block text-base mt-5">
 						You are not attending any events.{' '}
 						<Link href="/events" passHref>
-							<a className="mt-3 text-primary font-bold">Find Events</a>
+							<a className="mt-3 text-primary font-medium">Find Events</a>
 						</Link>
 					</span>
 				</Column>
