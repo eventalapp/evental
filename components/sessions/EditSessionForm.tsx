@@ -11,13 +11,13 @@ import { DatePicker } from '../form/DatePicker';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import Link from 'next/link';
-import { Select } from '../form/Select';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { NEAREST_MINUTE } from '../../config';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
+import Select from '../radix/components/Select';
 
 type Props = {
 	eid: string;
@@ -42,7 +42,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 		defaultValues: {
 			name: String(session?.name),
 			description: String(session?.description),
-			venueId: session?.venueId ?? undefined,
+			venueId: session?.venueId ?? 'none',
 			startDate: session?.startDate ? new Date(String(session?.startDate)) : new Date(),
 			endDate: session?.endDate ? new Date(String(session?.endDate)) : new Date()
 		},
@@ -84,17 +84,31 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 
 					<div>
 						<Label htmlFor="venueId">Venue *</Label>
-						<Select defaultValue={venues && venues[0].id} {...register('venueId')}>
-							{venues.map((venue) => (
-								<option key={venue.id} value={venue.id}>
-									{venue.name}
-								</option>
-							))}
-						</Select>
 
-						<Link href={`/events/${eid}/admin/venues/edit`}>
-							<a className="text-gray-600 text-sm mt-1">Dont see your venue? Edit a Venue</a>
+						<Controller
+							control={control}
+							name="venueId"
+							render={({ field }) => (
+								<Select
+									options={[
+										{ label: 'No Venue', value: 'none' },
+										...Object.values(venues).map((venue) => ({
+											label: venue.name,
+											value: venue.id
+										}))
+									]}
+									value={field.value as string}
+									onValueChange={(value) => {
+										setValue('venueId', value);
+									}}
+								/>
+							)}
+						/>
+						<Link href={`/events/${eid}/admin/venues/create`}>
+							<a className="text-gray-600 text-sm mt-1">Dont see your venue? Create a Venue</a>
 						</Link>
+
+						{errors.venueId?.message && <ErrorMessage>{errors.venueId?.message}</ErrorMessage>}
 					</div>
 				</div>
 
