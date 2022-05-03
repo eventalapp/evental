@@ -2,8 +2,8 @@ export const populateFormData = (data: Record<string, unknown>) => {
 	const formData = new FormData();
 
 	Object.entries(data).forEach(([key, value]) => {
-		if (value instanceof FileList && value.length >= 1) {
-			formData.append(key, value[0], value[0]?.name);
+		if (value instanceof File) {
+			formData.append(key, value, value.name);
 		} else if (value instanceof Date) {
 			formData.append(key, value.toISOString());
 		} else {
