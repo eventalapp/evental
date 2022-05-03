@@ -63,7 +63,6 @@ const AdminPage: NextPage<Props> = (props) => {
 			<Column>
 				<EventSettingsNavigation eid={String(eid)} />
 
-				<span>Manage your event</span>
 				<div>
 					<FlexRowBetween>
 						<span className="text-3xl">Roles</span>

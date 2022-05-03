@@ -10,17 +10,17 @@ type Props = {
 
 export const variants = {
 	'primary':
-		'bg-primary-500 hover:bg-primary-400 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center cursor-pointer',
+		'bg-primary-500 hover:bg-primary-400 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center cursor-pointer',
 	'danger':
-		'bg-red-500 hover:bg-red-400 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center cursor-pointer',
+		'bg-red-500 hover:bg-red-400 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center cursor-pointer',
 	'secondary':
-		'bg-secondary-500 hover:bg-secondary-400 border-2 border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center cursor-pointer',
+		'bg-secondary-500 hover:bg-secondary-400 border-2 border-secondary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center cursor-pointer',
 	'gradient':
-		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center cursor-pointer',
+		'bg-gradient-to-r from-secondary-500 to-primary-500 text-white disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center cursor-pointer',
 	'no-bg':
-		'text-gray-600 hover:text-gray-500 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center',
+		'text-gray-600 hover:text-gray-500 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center',
 	'inversePrimary':
-		'bg-white hover:bg-gray-100 border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-semibold transition text-center cursor-pointer'
+		'bg-white hover:bg-gray-100 border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-20 pointer text-sm font-medium transition text-center cursor-pointer'
 };
 
 export const paddings = {

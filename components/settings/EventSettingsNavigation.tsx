@@ -11,18 +11,30 @@ export const EventSettingsNavigation: React.FC<Props> = (props) => {
 	const { eid } = props;
 	const router = useRouter();
 
-	console.log(router.pathname);
-
 	return (
-		<div className="w-full border-b-2 border-gray-300">
+		<div className="w-full border-b border-gray-300 mb-3">
 			<Link href={`/events/${eid}/admin`} passHref>
 				<a
 					className={classNames(
-						'px-5 py-3 inline-block font-semibold text-gray-500',
-						router.pathname == `/events/${eid}/admin` && 'text-primary font-bold'
+						'px-3 py-2 inline-block font-medium',
+						router.asPath == `/events/${eid}/admin`
+							? 'text-primary border-b-2 border-primary'
+							: 'text-gray-500'
 					)}
 				>
 					General Settings
+				</a>
+			</Link>
+			<Link href={`/events/${eid}/admin/roles`} passHref>
+				<a
+					className={classNames(
+						'px-3 py-2 inline-block font-medium',
+						router.asPath == `/events/${eid}/admin/roles`
+							? 'text-primary border-b-2 border-primary'
+							: 'text-gray-500'
+					)}
+				>
+					Roles
 				</a>
 			</Link>
 		</div>

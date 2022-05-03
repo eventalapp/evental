@@ -31,7 +31,7 @@
 }
 
 .react-datepicker__current-month {
-	@apply ml-2.5 text-lg font-semibold text-gray-800;
+	@apply ml-2.5 text-lg font-medium text-gray-800;
 }
 
 .react-datepicker__week {
