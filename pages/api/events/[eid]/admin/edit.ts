@@ -5,6 +5,7 @@ import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { busboyParseForm } from '../../../../../utils/busboyParseForm';
 import { uploadAndProcessImage } from '../../../../../utils/uploadAndProcessImage';
+import { EventType } from '@prisma/client';
 
 export const config = {
 	api: {
@@ -35,40 +36,37 @@ export default api({
 			throw new NextkitError(500, 'Image failed to upload.');
 		}
 
-		if (fileLocation) {
-			const event = await prisma.event.findFirst({
-				where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
-				select: {
-					id: true
-				}
-			});
-
-			if (!event) {
-				throw new NextkitError(404, 'Event not found.');
+		const event = await prisma.event.findFirst({
+			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
+			select: {
+				id: true
 			}
+		});
 
-			const updatedEvent = await prisma.event.update({
-				data: {
-					name: body.name,
-					description: body.description,
-					location: body.location,
-					startDate: body.startDate,
-					endDate: body.endDate,
-					image: fileLocation,
-					slug: body.slug
-				},
-				where: {
-					id: event.id
-				}
-			});
-
-			if (!updatedEvent) {
-				throw new NextkitError(404, 'Event failed to update.');
-			}
-
-			return updatedEvent;
-		} else if (!fileLocation && buffer.length >= 1) {
-			throw new NextkitError(500, 'Image failed to upload.');
+		if (!event) {
+			throw new NextkitError(404, 'Event not found.');
 		}
+
+		const updatedEvent = await prisma.event.update({
+			data: {
+				name: body.name,
+				description: body.description,
+				location: body.location,
+				startDate: body.startDate,
+				endDate: body.endDate,
+				image: fileLocation,
+				slug: body.slug,
+				type: EventType[body.type as keyof typeof EventType] ?? EventType.HYBRID
+			},
+			where: {
+				id: event.id
+			}
+		});
+
+		if (!updatedEvent) {
+			throw new NextkitError(404, 'Event failed to update.');
+		}
+
+		return updatedEvent;
 	}
 });

@@ -15,6 +15,9 @@ import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
 import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
 import Button from '../radix/components/shared/Button';
+import { EventType } from '@prisma/client';
+import Select from '../radix/components/Select';
+import { capitalizeFirstLetter } from '../../utils/string';
 
 type Props = {
 	eid: string;
@@ -41,6 +44,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			description: event?.description ?? undefined,
 			image: event?.image,
 			location: event?.location ?? undefined,
+			type: event?.type ?? undefined,
 			slug: event?.slug ?? undefined,
 			endDate: new Date(String(event?.endDate)) ?? undefined,
 			startDate: new Date(String(event?.startDate)) ?? undefined
@@ -191,6 +195,32 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						{slugWatcher !== event?.slug && eventSlugCheck && (
 							<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
 						)}
+					</div>
+				</div>
+				<div>
+					<div>
+						<Label htmlFor="type">Type *</Label>
+						{EventType && (
+							<div>
+								<Controller
+									control={control}
+									name="type"
+									render={({ field }) => (
+										<Select
+											options={Object.values(EventType).map((type) => ({
+												label: capitalizeFirstLetter(type.toLowerCase().replace('_', ' ')),
+												value: type
+											}))}
+											value={field.value}
+											onValueChange={(value) => {
+												setValue('type', value);
+											}}
+										/>
+									)}
+								/>
+							</div>
+						)}
+						{errors.type?.message && <ErrorMessage>{errors.type?.message}</ErrorMessage>}
 					</div>
 				</div>
 			</div>

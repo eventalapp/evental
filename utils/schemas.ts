@@ -105,10 +105,13 @@ export const CreateEventSchema = z.object({
 
 export type CreateEventPayload = z.infer<typeof CreateEventSchema>;
 
+const eventTypes = [...Object.values(EventType)] as const;
+
 export const EditEventSchema = z.object({
 	slug: slugValidator,
 	name: nameValidator,
 	location: locationValidator,
+	type: z.enum(eventTypes as [string, ...string[]]),
 	image: imageFileValidator.optional(),
 	startDate: dateValidator,
 	endDate: dateValidator,

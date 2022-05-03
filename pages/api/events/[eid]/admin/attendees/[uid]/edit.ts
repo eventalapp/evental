@@ -43,7 +43,8 @@ export default api({
 		const parsed = AdminEditAttendeeSchema.parse(req.body);
 
 		const requestedPermissionRole =
-			EventPermissionRole[parsed.permissionRole as keyof typeof EventPermissionRole];
+			EventPermissionRole[parsed.permissionRole as keyof typeof EventPermissionRole] ??
+			EventPermissionRole.ATTENDEE;
 
 		if (!requestedPermissionRole) {
 			throw new NextkitError(400, 'Invalid permission role.');
