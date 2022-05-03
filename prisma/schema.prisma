@@ -77,7 +77,7 @@ model Event {
   timeFormat  TimeFormat    @default(TWELVE_HOURS)
   startDate   DateTime
   endDate     DateTime
-  type        EventType    @default(HYBRID)
+  type        EventType     @default(HYBRID)
   category    EventCategory @default(EVENT)
   image       String        @default("/images/default-event.jpg")
   banner      String?
@@ -138,7 +138,7 @@ model EventSession {
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
-  event Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  event Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
   venue EventVenue? @relation(fields: [venueId], references: [id], onDelete: Cascade)
 
   attendee EventSessionAttendee[]
@@ -166,7 +166,7 @@ model EventVenue {
   slug        String
   eventId     String
   name        String
-  address String?
+  address     String?
   description String?
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
