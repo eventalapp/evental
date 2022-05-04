@@ -103,7 +103,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<div className="grid grid-cols-12">
+				<div className="grid grid-cols-12 gap-4">
 					<div className="md:col-span-9 col-span-12">
 						<h1 className="text-2xl md:text-3xl font-bold leading-tight">Sessions</h1>
 						<SessionList
@@ -116,7 +116,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					<div className="md:col-span-3 col-span-12">
 						<span className="block font-medium border-b border-gray-200">Timezone</span>
 						<span className="block font-medium border-b border-gray-200">Filter by Venue</span>
-						<ul>{venues && venues.map((venue) => <p>{venue.name}</p>)}</ul>
+						<ul>{venues && venues.map((venue) => <p key={venue.id}>{venue.name}</p>)}</ul>
 						<span className="block font-medium border-b border-gray-200">Filter by Date</span>
 						<span className="block font-medium border-b border-gray-200">Filter by Type</span>
 					</div>
