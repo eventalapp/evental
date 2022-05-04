@@ -31,16 +31,16 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
 	const { user } = useUser(initialUser);
 
+	if (isEventLoading) {
+		return <LoadingPage />;
+	}
+
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
 	if (!initialEvent || !event) {
 		return <NotFoundPage message="Event not found." />;
-	}
-
-	if (isEventLoading) {
-		return <LoadingPage />;
 	}
 
 	return (

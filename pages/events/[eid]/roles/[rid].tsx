@@ -65,10 +65,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		isAttendeeLoading
 	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 
-	if (!initialAttendees || !initialRole || !role || !attendees) {
-		return <NotFoundPage message="Role not found." />;
-	}
-
 	if (
 		isOrganizerLoading ||
 		isRoleAttendeesLoading ||
@@ -77,6 +73,10 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		isAttendeeLoading
 	) {
 		return <LoadingPage />;
+	}
+
+	if (!initialAttendees || !initialRole || !role || !attendees) {
+		return <NotFoundPage message="Role not found." />;
 	}
 
 	if (roleAttendeesError || eventError || rolesError || attendeeError) {

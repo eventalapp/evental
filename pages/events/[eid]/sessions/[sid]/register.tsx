@@ -48,16 +48,16 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 
+	if (isSessionLoading || isEventLoading || isRolesLoading) {
+		return <LoadingPage />;
+	}
+
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
 	if (!session) {
 		return <NotFoundPage message="Session not found." />;
-	}
-
-	if (isSessionLoading || isEventLoading || isRolesLoading) {
-		return <LoadingPage />;
 	}
 
 	if (!event) {
