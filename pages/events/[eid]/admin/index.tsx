@@ -15,9 +15,9 @@ import { useUser } from '../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
-import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
 
 const EditEventPage: NextPage = () => {
 	const router = useRouter();

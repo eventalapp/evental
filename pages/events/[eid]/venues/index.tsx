@@ -22,31 +22,52 @@ import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { ssrGetUser } from '../../../../utils/api';
-import { PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { EventHeader } from '../../../../components/events/EventHeader';
+import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { getEvent } from '../../../api/events/[eid]';
+import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
+import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
+import { useUser } from '../../../../hooks/queries/useUser';
+import EventNavigationMenu from '../../../../components/events/EventNavigation';
+import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
+import { getRoles } from '../../../api/events/[eid]/roles';
 
 type Props = {
 	initialVenues: Prisma.EventVenue[] | undefined;
+	initialEvent: Prisma.Event | undefined;
+	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
+	initialRoles: Prisma.EventRole[] | undefined;
 };
 
 const SessionsPage: NextPage<Props> = (props) => {
 	const router = useRouter();
-	const { initialVenues, initialOrganizer } = props;
+	const { initialVenues, initialOrganizer, initialEvent, initialIsAttendeeByUserId, initialUser } =
+		props;
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid), initialVenues);
+	const { event, isEventLoading } = useEventQuery(String(eid), initialEvent);
+	const { user } = useUser(initialUser);
+	const { attendee, isAttendeeLoading } = useAttendeeQuery(
+		String(eid),
+		String(user?.id),
+		initialIsAttendeeByUserId
+	);
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+
+	if (isVenuesLoading || isOrganizerLoading || isEventLoading || isAttendeeLoading) {
+		return <LoadingPage />;
+	}
 
 	if (!initialVenues || !venues) {
 		return <NotFoundPage message="No venues found." />;
 	}
 
 	if (venuesError) {
-		return <ViewErrorPage errors={[]} />;
-	}
-
-	if (isVenuesLoading || isOrganizerLoading) {
-		return <LoadingPage />;
+		return <ViewErrorPage errors={[venuesError]} />;
 	}
 
 	if (!venues || !initialVenues) {
@@ -62,8 +83,19 @@ const SessionsPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
+				{event && (
+					<EventHeader
+						event={event}
+						eid={String(eid)}
+						isOrganizer={isOrganizer}
+						isAttendee={attendee}
+					/>
+				)}
+
+				{roles && <EventNavigationMenu eid={String(eid)} roles={roles} />}
+
 				<FlexRowBetween>
-					<h1 className="text-3xl font-bold">Venues</h1>
+					<h1 className="text-3xl font-medium leading-tight">Venues</h1>
 
 					{!isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/venues/create`} passHref>
@@ -88,13 +120,20 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialVenues = (await getVenues(String(eid))) ?? undefined;
+	const initialEvent = (await getEvent(String(eid))) ?? undefined;
+	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
+	const initialIsAttendeeByUserId =
+		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
 			initialVenues,
-			initialOrganizer
+			initialEvent,
+			initialOrganizer,
+			initialRoles,
+			initialIsAttendeeByUserId
 		}
 	};
 };
