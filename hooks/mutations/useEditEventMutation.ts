@@ -5,6 +5,7 @@ import { EditEventPayload } from '../../utils/schemas';
 import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { populateFormData } from '../../utils/populateFormData';
+import router from 'next/router';
 
 export interface UseEditEventMutationData {
 	editEventMutation: UseMutationResult<
@@ -30,11 +31,13 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 				.then((res) => res.data.data);
 		},
 		{
-			onSuccess: () => {
+			onSuccess: (data) => {
 				toast.success('Event edited successfully');
 
-				void queryClient.removeQueries(['event', eid]);
-				void queryClient.invalidateQueries(['upcoming-events']);
+				void router.push(`/events/${data.slug}`).then(() => {
+					void queryClient.removeQueries(['event', eid]);
+					void queryClient.invalidateQueries(['upcoming-events']);
+				});
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'An error has occurred.');

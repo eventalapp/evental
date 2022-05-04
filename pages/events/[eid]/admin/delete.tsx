@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -10,44 +9,41 @@ import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getEvent } from '../../../api/events/[eid]';
-import type Prisma from '@prisma/client';
 
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { Loading } from '../../../../components/error/Loading';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
-import { ssrGetUser } from '../../../../utils/api';
 import { useUser } from '../../../../hooks/queries/useUser';
-import { PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { NoAccessPage } from '../../../../components/error/NoAccessPage';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
-type Props = {
-	initialEvent: Prisma.Event | undefined;
-	initialUser: PasswordlessUser | undefined;
-};
-
-const DeleteEventPage: NextPage<Props> = (props) => {
-	const { initialEvent, initialUser } = props;
+const DeleteEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { deleteEventMutation } = useDeleteEventMutation(String(eid));
-	const { user } = useUser(initialUser);
+	const { user, isUserLoading } = useUser();
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+
+	if (isEventLoading || isOrganizerLoading || isUserLoading) {
+		return <Loading />;
+	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!initialEvent || !event) {
+	if (!event) {
 		return <NotFoundPage message="Event not found." />;
-	}
-
-	if (isEventLoading) {
-		return <Loading />;
 	}
 
 	if (eventError) {
 		return <ViewErrorPage errors={[eventError]} />;
+	}
+
+	if (!isOrganizer) {
+		return <NoAccessPage />;
 	}
 
 	return (
@@ -74,20 +70,6 @@ const DeleteEventPage: NextPage<Props> = (props) => {
 			</Column>
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialEvent = (await getEvent(String(eid))) ?? undefined;
-
-	return {
-		props: {
-			initialUser,
-			initialEvent
-		}
-	};
 };
 
 export default DeleteEventPage;

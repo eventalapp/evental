@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -12,50 +11,35 @@ import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQue
 import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutatation';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
-import { getAttendee } from '../../../../../api/events/[eid]/attendees/[uid]';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
-import { AttendeeWithUser, PasswordlessUser } from '../../../../../../utils/stripUserPassword';
 
-type Props = {
-	initialOrganizer: boolean;
-	initialAttendee: AttendeeWithUser | undefined;
-	initialUser: PasswordlessUser | undefined;
-};
-
-const DeleteAttendeePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialAttendee, initialUser } = props;
+const DeleteAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, uid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(
-		String(eid),
-		String(uid),
-		initialAttendee
-	);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
 	const { deleteAttendeeMutation } = useDeleteAttendeeMutation(String(eid), String(uid));
-	const { user } = useUser(initialUser);
+	const { user, isUserLoading } = useUser();
+
+	if (isOrganizerLoading || isAttendeeLoading || isUserLoading) {
+		return <LoadingPage />;
+	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!isOrganizerLoading && !isOrganizer) {
+	if (!isOrganizer) {
 		return <NoAccessPage />;
 	}
 
-	if (!initialAttendee || !attendee) {
+	if (!attendee) {
 		return <NotFoundPage message="Attendee not found" />;
-	}
-
-	if (isAttendeeLoading) {
-		return <LoadingPage />;
 	}
 
 	if (attendeeError) {
@@ -86,22 +70,6 @@ const DeleteAttendeePage: NextPage<Props> = (props) => {
 			</Column>
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid, uid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialAttendee = (await getAttendee(String(eid), String(uid))) ?? undefined;
-
-	return {
-		props: {
-			initialUser,
-			initialOrganizer,
-			initialAttendee
-		}
-	};
 };
 
 export default DeleteAttendeePage;

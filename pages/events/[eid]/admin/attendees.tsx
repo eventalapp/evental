@@ -1,51 +1,48 @@
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { LinkButton } from '../../../../components/form/LinkButton';
-import { ssrGetUser } from '../../../../utils/api';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { getAttendees } from '../../../api/events/[eid]/attendees';
 import { Navigation } from '../../../../components/navigation';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
+import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
 
-type Props = {
-	initialAttendees: AttendeeWithUser[] | undefined;
-	initialUser: PasswordlessUser | undefined;
-	initialOrganizer: boolean;
-};
-
-const AttendeesAdminPage: NextPage<Props> = (props) => {
+const AttendeesAdminPage: NextPage = () => {
 	const router = useRouter();
-	const { initialUser, initialAttendees, initialOrganizer } = props;
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { attendees, isAttendeesLoading } = useAttendeesQuery(String(eid), initialAttendees);
-	const { user } = useUser(initialUser);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { attendees, isAttendeesLoading } = useAttendeesQuery(String(eid));
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { user, isUserLoading } = useUser();
+
+	if (
+		isAttendeesLoading ||
+		isAttendeesLoading ||
+		isUserLoading ||
+		isOrganizerLoading ||
+		isEventLoading
+	) {
+		return <LoadingPage />;
+	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!isOrganizerLoading && !isOrganizer) {
+	if (!isOrganizer) {
 		return <NoAccessPage />;
-	}
-
-	if (isAttendeesLoading) {
-		return <LoadingPage />;
 	}
 
 	return (
@@ -57,6 +54,8 @@ const AttendeesAdminPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
+				{event && <EventSettingsHeader event={event} />}
+
 				<EventNavigationMenu eid={String(eid)} />
 
 				<div>
@@ -75,22 +74,6 @@ const AttendeesAdminPage: NextPage<Props> = (props) => {
 			</Column>
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialAttendees = (await getAttendees(String(eid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-
-	return {
-		props: {
-			initialUser,
-			initialOrganizer,
-			initialAttendees
-		}
-	};
 };
 
 export default AttendeesAdminPage;

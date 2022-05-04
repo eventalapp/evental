@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -11,56 +10,42 @@ import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAt
 import { useDeleteRoleMutation } from '../../../../../../hooks/mutations/useDeleteRoleMutation';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
-import { getAttendeesByRole, getRole } from '../../../../../api/events/[eid]/roles/[rid]';
-import Prisma from '@prisma/client';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
-import { AttendeeWithUser, PasswordlessUser } from '../../../../../../utils/stripUserPassword';
 
-type Props = {
-	initialOrganizer: boolean;
-	initialRole: Prisma.EventRole | undefined;
-	initialAttendees: AttendeeWithUser[] | undefined;
-	initialUser: PasswordlessUser | undefined;
-};
-
-const DeleteRolePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialRole, initialAttendees, initialUser } = props;
+const DeleteRolePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, rid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { roleAttendeesError, role, isRoleAttendeesLoading, attendees } = useRoleAttendeesQuery(
 		String(eid),
-		String(rid),
-		{ attendees: initialAttendees, role: initialRole }
+		String(rid)
 	);
 	const { deleteRoleMutation } = useDeleteRoleMutation(String(eid), String(rid));
-	const { user } = useUser(initialUser);
+	const { user, isUserLoading } = useUser();
+
+	if (isOrganizerLoading || isRoleAttendeesLoading || isUserLoading) {
+		return <LoadingPage />;
+	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!isOrganizerLoading && !isOrganizer) {
+	if (!isOrganizer) {
 		return <NoAccessPage />;
 	}
 
-	if (!initialRole || !initialAttendees || !role || !attendees) {
+	if (!role || !attendees) {
 		return <NotFoundPage message="Role not found." />;
 	}
 
 	if (roleAttendeesError) {
 		return <ViewErrorPage errors={[roleAttendeesError]} />;
-	}
-
-	if (isRoleAttendeesLoading) {
-		return <LoadingPage />;
 	}
 
 	return (
@@ -88,24 +73,6 @@ const DeleteRolePage: NextPage<Props> = (props) => {
 			</Column>
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid, rid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialAttendees = (await getAttendeesByRole(String(eid), String(rid))) ?? undefined;
-	const initialRole = (await getRole(String(eid), String(rid))) ?? undefined;
-
-	return {
-		props: {
-			initialUser,
-			initialOrganizer,
-			initialAttendees,
-			initialRole
-		}
-	};
 };
 
 export default DeleteRolePage;

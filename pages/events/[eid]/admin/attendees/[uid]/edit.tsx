@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
@@ -11,60 +10,42 @@ import { useAdminEditAttendeeMutation } from '../../../../../../hooks/mutations/
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { getIsOrganizer } from '../../../../../api/events/[eid]/organizer';
-import { getAttendee } from '../../../../../api/events/[eid]/attendees/[uid]';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import Prisma from '@prisma/client';
-import { getRoles } from '../../../../../api/events/[eid]/roles';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { useImageUploadMutation } from '../../../../../../hooks/mutations/useImageUploadMutation';
-import { ssrGetUser } from '../../../../../../utils/api';
 import { useUser } from '../../../../../../hooks/queries/useUser';
-import { AttendeeWithUser, PasswordlessUser } from '../../../../../../utils/stripUserPassword';
 
-type Props = {
-	initialOrganizer: boolean;
-	initialAttendee: AttendeeWithUser | undefined;
-	initialRoles: Prisma.EventRole[] | undefined;
-	initialUser: PasswordlessUser | undefined;
-};
-
-const EditAttendeePage: NextPage<Props> = (props) => {
-	const { initialOrganizer, initialAttendee, initialRoles, initialUser } = props;
+const EditAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, uid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(
-		String(eid),
-		String(uid),
-		initialAttendee
-	);
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
+	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { adminEditAttendeeMutation } = useAdminEditAttendeeMutation(String(eid), String(uid));
 	const { imageUploadMutation, imageUploadResponse } = useImageUploadMutation();
-	const { user } = useUser(initialUser);
+	const { user, isUserLoading } = useUser();
+
+	if (isOrganizerLoading || isAttendeeLoading || isRolesLoading || isUserLoading) {
+		return <LoadingPage />;
+	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!isOrganizerLoading && !isOrganizer) {
+	if (!isOrganizer) {
 		return <NoAccessPage />;
 	}
 
-	if (!initialAttendee || !attendee) {
+	if (!attendee) {
 		return <NotFoundPage message="Attendee not found." />;
 	}
 
-	if (!initialRoles || !roles) {
+	if (!roles) {
 		return <NotFoundPage message="No roles not found." />;
-	}
-
-	if (isAttendeeLoading || isRolesLoading) {
-		return <LoadingPage />;
 	}
 
 	if (attendeeError || rolesError) {
@@ -102,24 +83,6 @@ const EditAttendeePage: NextPage<Props> = (props) => {
 			</Column>
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid, uid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialAttendee = (await getAttendee(String(eid), String(uid))) ?? undefined;
-	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-
-	return {
-		props: {
-			initialUser,
-			initialOrganizer,
-			initialAttendee,
-			initialRoles
-		}
-	};
 };
 
 export default EditAttendeePage;

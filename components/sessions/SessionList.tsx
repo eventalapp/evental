@@ -21,7 +21,7 @@ export const SessionList: React.FC<Props> = (props) => {
 	if (!sessions) return null;
 
 	return (
-		<div>
+		<div className="mt-3">
 			{sessions.map((session) => {
 				return (
 					<div key={session.id} className="flex flex-row">

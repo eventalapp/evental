@@ -37,7 +37,8 @@ export default api({
 				OR: [{ id: String(vid) }, { slug: String(vid) }]
 			},
 			select: {
-				id: true
+				id: true,
+				name: true
 			}
 		});
 
@@ -45,16 +46,19 @@ export default api({
 			throw new NextkitError(404, 'Venue not found.');
 		}
 
-		const slug = await generateSlug(parsed.name, async (val) => {
-			return !Boolean(
-				await prisma.eventVenue.findFirst({
-					where: {
-						eventId: event.id,
-						slug: val
-					}
-				})
-			);
-		});
+		const slug: string | undefined =
+			parsed.name !== venue.name
+				? await generateSlug(parsed.name, async (val) => {
+						return !Boolean(
+							await prisma.eventVenue.findFirst({
+								where: {
+									eventId: event.id,
+									slug: val
+								}
+							})
+						);
+				  })
+				: undefined;
 
 		const editedVenue = await prisma.eventVenue.update({
 			where: {
