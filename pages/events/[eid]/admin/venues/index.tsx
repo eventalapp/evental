@@ -3,21 +3,21 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { LinkButton } from '../../../../components/form/LinkButton';
-import { NoAccessPage } from '../../../../components/error/NoAccessPage';
-import Column from '../../../../components/layout/Column';
-import PageWrapper from '../../../../components/layout/PageWrapper';
-import { useUser } from '../../../../hooks/queries/useUser';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
-import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
-import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { VenueList } from '../../../../components/venues/VenueList';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
-import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
-import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
+import { LinkButton } from '../../../../../components/form/LinkButton';
+import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
+import Column from '../../../../../components/layout/Column';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { useUser } from '../../../../../hooks/queries/useUser';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { LoadingPage } from '../../../../../components/error/LoadingPage';
+import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
+import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { VenueList } from '../../../../../components/venues/VenueList';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 
 const VenuesAdminPage: NextPage = () => {
 	const router = useRouter();
@@ -65,6 +65,7 @@ const VenuesAdminPage: NextPage = () => {
 					</FlexRowBetween>
 
 					<VenueList
+						admin
 						eid={String(eid)}
 						venues={venues}
 						isVenuesLoading={isVenuesLoading}

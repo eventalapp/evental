@@ -5,10 +5,8 @@ import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { useVenueQuery } from '../../../../hooks/queries/useVenueQuery';
 import { ViewVenue } from '../../../../components/venues/ViewVenue';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
 import { getVenue } from '../../../api/events/[eid]/venues/[vid]';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
@@ -22,13 +20,10 @@ import { getRoles } from '../../../api/events/[eid]/roles';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
-import Link from 'next/link';
-import { LinkButton } from '../../../../components/form/LinkButton';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
-	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
@@ -36,19 +31,18 @@ type Props = {
 
 const ViewAttendeePage: NextPage<Props> = (props) => {
 	const router = useRouter();
-	const { initialVenue, initialOrganizer, initialRoles, initialUser, initialEvent } = props;
+	const { initialVenue, initialRoles, initialUser, initialEvent } = props;
 	const { vid, eid } = router.query;
 	const { venue, isVenueLoading, venueError } = useVenueQuery(
 		String(eid),
 		String(vid),
 		initialVenue
 	);
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
 
-	if (isVenueLoading || isOrganizerLoading || isEventLoading || isRolesLoading) {
+	if (isVenueLoading || isEventLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -75,19 +69,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<Column>
 				<FlexRowBetween>
 					<h1 className="text-3xl font-bold">{venue.name}</h1>
-
-					<div>
-						{!isOrganizerLoading && isOrganizer && (
-							<Link href={`/events/${eid}/admin/venues/${vid}/edit`} passHref>
-								<LinkButton className="mr-3">Edit venue</LinkButton>
-							</Link>
-						)}
-						{!isOrganizerLoading && isOrganizer && (
-							<Link href={`/events/${eid}/admin/venues/${vid}/delete`} passHref>
-								<LinkButton className="mr-3">Delete venue</LinkButton>
-							</Link>
-						)}
-					</div>
 				</FlexRowBetween>
 
 				<ViewVenue
@@ -107,7 +88,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialVenue = (await getVenue(String(eid), String(vid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 
@@ -115,7 +95,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 		props: {
 			initialUser,
 			initialVenue,
-			initialOrganizer,
 			initialRoles,
 			initialEvent
 		}

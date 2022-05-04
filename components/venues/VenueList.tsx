@@ -8,10 +8,11 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	eid: string;
+	admin?: boolean;
 } & UseVenuesQueryData;
 
 export const VenueList: React.FC<Props> = (props) => {
-	const { eid, venues } = props;
+	const { eid, venues, admin = false } = props;
 
 	if (venues && venues.length === 0) {
 		return <NotFound message="No venues found." />;
@@ -22,7 +23,11 @@ export const VenueList: React.FC<Props> = (props) => {
 	return (
 		<div>
 			{venues.map((venue, i) => (
-				<Link href={`/events/${eid}/venues/${venue.slug}`} key={venue.id} passHref>
+				<Link
+					href={`/events/${eid}${admin ? '/admin' : ''}/venues/${venue.slug}`}
+					key={venue.id}
+					passHref
+				>
 					<a>
 						<div
 							className={classNames(

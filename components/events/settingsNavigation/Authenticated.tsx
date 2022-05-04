@@ -24,7 +24,7 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 	const router = useRouter();
 
 	return (
-		<Link href={link}>
+		<Link href={link} passHref>
 			<NavigationMenuPrimitive.Link
 				className={cx(
 					'cursor-pointer pb-1.5',
@@ -54,7 +54,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 				<NavigationMenuPrimitive.Root className="w-full">
 					<NavigationMenuPrimitive.List className="flex items-center justify-between w-full max-w-7xl m-auto h-14 px-3">
 						<div>
-							<Link href={`/events/${event.slug}`}>
+							<Link href={`/events/${event.slug}`} passHref>
 								<NavigationMenuPrimitive.Link>
 									<NavigationMenuPrimitive.Item>
 										<span className="flex flex-row items-center cursor-pointer">

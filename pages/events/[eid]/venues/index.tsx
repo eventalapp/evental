@@ -1,10 +1,8 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
-import { LinkButton } from '../../../../components/form/LinkButton';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
@@ -99,12 +97,6 @@ const SessionsPage: NextPage<Props> = (props) => {
 
 				<FlexRowBetween>
 					<h1 className="text-3xl font-bold leading-tight">Venues</h1>
-
-					{!isOrganizerLoading && isOrganizer && (
-						<Link href={`/events/${eid}/admin/venues/create`} passHref>
-							<LinkButton>Create venue</LinkButton>
-						</Link>
-					)}
 				</FlexRowBetween>
 
 				<VenueList

@@ -5,10 +5,7 @@ import { useRouter } from 'next/router';
 import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
 import Column from '../../../../components/layout/Column';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import React from 'react';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
@@ -26,14 +23,13 @@ import { getRoles } from '../../../api/events/[eid]/roles';
 
 type Props = {
 	initialAttendee: AttendeeWithUser | undefined;
-	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 };
 
 const ViewAttendeePage: NextPage<Props> = (props) => {
-	const { initialAttendee, initialOrganizer, initialRoles, initialUser, initialEvent } = props;
+	const { initialAttendee, initialRoles, initialUser, initialEvent } = props;
 	const router = useRouter();
 	const { uid, eid } = router.query;
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(
@@ -41,12 +37,11 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		String(uid),
 		initialAttendee
 	);
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
 
-	if (isAttendeeLoading || isOrganizerLoading || isEventLoading || isRolesLoading) {
+	if (isAttendeeLoading || isEventLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -71,15 +66,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<ViewAttendee
-					attendee={attendee}
-					attendeeError={attendeeError}
-					isAttendeeLoading={isAttendeeLoading}
-					isOrganizer={isOrganizer}
-					isOrganizerLoading={isOrganizerLoading}
-					eid={String(eid)}
-					uid={String(uid)}
-				/>
+				<ViewAttendee attendee={attendee} eid={String(eid)} uid={String(uid)} />
 			</Column>
 		</PageWrapper>
 	);
@@ -90,14 +77,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialAttendee = (await getAttendee(String(eid), String(uid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
+
 	return {
 		props: {
 			initialUser,
 			initialAttendee,
-			initialOrganizer,
 			initialEvent,
 			initialRoles
 		}

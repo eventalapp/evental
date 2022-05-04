@@ -1,34 +1,25 @@
 import Link from 'next/link';
 import { LinkButton } from '../form/LinkButton';
-import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import React from 'react';
-import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
-import { UseSessionAttendeeQueryData } from '../../hooks/queries/useSessionAttendeeQuery';
 import { AttendeeList } from '../attendees/AttendeeList';
-import { UseSessionAttendeesQueryData } from '../../hooks/queries/useSessionAttendeesQuery';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 
 type Props = {
 	eid: string;
 	sid: string;
-} & UseSessionQueryData &
-	UseOrganizerQueryData &
-	UseSessionAttendeeQueryData &
-	UseSessionAttendeesQueryData;
+	isAttending: boolean;
+	attendees: AttendeeWithUser[] | undefined;
+	session: SessionWithVenue;
+	admin?: boolean;
+};
 
 export const ViewSession: React.FC<Props> = (props) => {
-	const {
-		session,
-		isOrganizerLoading,
-		isOrganizer,
-		sid,
-		eid,
-		sessionAttendeeQuery,
-		sessionAttendeesQuery
-	} = props;
+	const { session, sid, eid, isAttending, admin = false, attendees } = props;
 
 	if (!session) return null;
 
@@ -38,17 +29,17 @@ export const ViewSession: React.FC<Props> = (props) => {
 				<h1 className="text-3xl font-bold">{session.name}</h1>
 
 				<div>
-					{!sessionAttendeeQuery.data && (
-						<Link href={`/events/${eid}/sessions/${sid}/register`}>
+					{!isAttending && (
+						<Link href={`/events/${eid}/sessions/${sid}/register`} passHref>
 							<LinkButton>Attend This Session</LinkButton>
 						</Link>
 					)}
-					{!isOrganizerLoading && isOrganizer && (
+					{admin && (
 						<Link href={`/events/${eid}/admin/sessions/${sid}/edit`} passHref>
 							<LinkButton className="ml-3">Edit session</LinkButton>
 						</Link>
 					)}
-					{!isOrganizerLoading && isOrganizer && (
+					{admin && (
 						<Link href={`/events/${eid}/admin/sessions/${sid}/delete`} passHref>
 							<LinkButton className="ml-3">Delete session</LinkButton>
 						</Link>
@@ -84,9 +75,8 @@ export const ViewSession: React.FC<Props> = (props) => {
 			<p>{session.description}</p>
 
 			<h3 className="text-2xl font-bold mt-3">Attendees</h3>
-			{sessionAttendeesQuery && sessionAttendeesQuery.data && (
-				<AttendeeList eid={eid} attendees={sessionAttendeesQuery.data} />
-			)}
+
+			{attendees && <AttendeeList admin eid={eid} attendees={attendees} />}
 		</div>
 	);
 };

@@ -6,9 +6,7 @@ import { ViewSession } from '../../../../../components/sessions/ViewSession';
 import Column from '../../../../../components/layout/Column';
 import { useSessionQuery } from '../../../../../hooks/queries/useSessionQuery';
 import React from 'react';
-import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
@@ -29,14 +27,13 @@ import Prisma from '@prisma/client';
 
 type Props = {
 	initialSession: SessionWithVenue | undefined;
-	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 };
 
 const ViewSessionPage: NextPage<Props> = (props) => {
-	const { initialSession, initialOrganizer, initialUser, initialRoles, initialEvent } = props;
+	const { initialSession, initialUser, initialRoles, initialEvent } = props;
 	const router = useRouter();
 	const { sid, eid } = router.query;
 	const { user } = useUser(initialUser);
@@ -45,7 +42,6 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 		String(sid),
 		initialSession
 	);
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { sessionAttendeeQuery } = useSessionAttendeeQuery(
 		String(eid),
 		String(sid),
@@ -55,7 +51,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 
-	if (isOrganizerLoading || isSessionLoading || isRolesLoading || isEventLoading) {
+	if (isSessionLoading || isRolesLoading || isEventLoading) {
 		return <LoadingPage />;
 	}
 
@@ -81,13 +77,9 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<ViewSession
-					sessionAttendeesQuery={sessionAttendeesQuery}
-					sessionAttendeeQuery={sessionAttendeeQuery}
+					attendees={sessionAttendeesQuery.data}
+					isAttending={Boolean(sessionAttendeeQuery.data)}
 					session={session}
-					isSessionLoading={isSessionLoading}
-					sessionError={sessionError}
-					isOrganizer={isOrganizer}
-					isOrganizerLoading={isOrganizerLoading}
 					eid={String(eid)}
 					sid={String(sid)}
 				/>
@@ -101,7 +93,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialSession = (await getSession(String(eid), String(sid))) ?? undefined;
-	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 
@@ -109,7 +100,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 		props: {
 			initialUser,
 			initialSession,
-			initialOrganizer,
 			initialEvent,
 			initialRoles
 		}

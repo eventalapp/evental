@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import React from 'react';
-import { RoleAttendeeList } from '../../../../components/roles/RoleAttendeeList';
 import { useRoleAttendeesQuery } from '../../../../hooks/queries/useRoleAttendeesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import PageWrapper from '../../../../components/layout/PageWrapper';
@@ -26,9 +25,8 @@ import { EventHeader } from '../../../../components/events/EventHeader';
 import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { capitalizeFirstLetter } from '../../../../utils/string';
-import Link from 'next/link';
-import { LinkButton } from '../../../../components/form/LinkButton';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
+import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 
 type Props = {
 	initialRole: Prisma.EventRole | undefined;
@@ -112,30 +110,13 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 						{capitalizeFirstLetter(role.name.toLowerCase())}s{' '}
 						<span className="font-normal text-gray-500">({attendees.length})</span>
 					</h2>
-					<div>
-						<div className="flex items-center flex-row">
-							{!isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
-									<LinkButton>Edit role</LinkButton>
-								</Link>
-							)}
-							{!isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
-									<LinkButton className="ml-3">Delete role</LinkButton>
-								</Link>
-							)}
-						</div>
-					</div>
 				</FlexRowBetween>
 
-				<RoleAttendeeList
-					eid={String(eid)}
-					rid={String(rid)}
-					role={role}
-					attendees={attendees}
-					roleAttendeesError={roleAttendeesError}
-					isRoleAttendeesLoading={isRoleAttendeesLoading}
-				/>
+				{attendees?.length === 0 ? (
+					<p>No {role.name.toLowerCase()}s found.</p>
+				) : (
+					<AttendeeList eid={String(eid)} attendees={attendees} />
+				)}
 			</Column>
 		</PageWrapper>
 	);
