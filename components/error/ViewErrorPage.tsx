@@ -25,7 +25,7 @@ export const ViewErrorPage: React.FC<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<h1 className="text-3xl font-bold mb-2">Error</h1>
+				<h1 className="text-2xl md:text-3xl font-bold mb-2">Error</h1>
 				<ul>
 					{errors
 						.filter((error) => error)

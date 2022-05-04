@@ -65,7 +65,7 @@ const DeleteSessionPage: NextPage = () => {
 					You are about to delete an session ("{session.name}")
 				</p>
 
-				<h1 className="text-3xl font-bold">Delete Session</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">Delete Session</h1>
 
 				<DeleteSessionForm
 					session={session}

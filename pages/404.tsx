@@ -19,7 +19,7 @@ const ErrorNotFoundPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl font-bold">404 - Page not found</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">404 - Page not found</h1>
 
 				<Link href="/events" passHref>
 					<LinkButton className="mt-5" variant="primary">

@@ -55,7 +55,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 				<Navigation />
 
 				<Column>
-					<h1 className="text-3xl font-bold mb-3">Attending Events</h1>
+					<h1 className="text-2xl md:text-3xl font-bold mb-3">Attending Events</h1>
 
 					{user && <EventsPageNavigation />}
 
@@ -79,7 +79,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-3xl font-bold mb-3">Attending Events</h1>
+				<h1 className="text-2xl md:text-3xl font-bold mb-3">Attending Events</h1>
 
 				<EventsPageNavigation />
 

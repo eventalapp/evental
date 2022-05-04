@@ -105,7 +105,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 				)}
 
 				<FlexRowBetween>
-					<h1 className="text-3xl font-bold">Sessions</h1>
+					<h1 className="text-2xl md:text-3xl font-bold">Sessions</h1>
 
 					{!isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/sessions/create`} passHref>

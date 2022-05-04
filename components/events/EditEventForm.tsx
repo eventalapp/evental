@@ -35,7 +35,6 @@ export const EditEventForm: React.FC<Props> = (props) => {
 		handleSubmit,
 		watch,
 		setValue,
-		trigger,
 		control,
 		formState: { errors }
 	} = useForm<EditEventPayload>({
@@ -53,7 +52,6 @@ export const EditEventForm: React.FC<Props> = (props) => {
 		resolver: zodResolver(EditEventSchema)
 	});
 
-	const nameWatcher = watch('name');
 	const slugWatcher = watch('slug');
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
@@ -74,14 +72,6 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
-
-	useEffect(() => {
-		setValue('slug', slugify(nameWatcher));
-
-		if (errors.name) {
-			void trigger('slug');
-		}
-	}, [nameWatcher]);
 
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));

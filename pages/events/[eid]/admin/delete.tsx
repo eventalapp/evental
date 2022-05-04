@@ -61,7 +61,7 @@ const DeleteEventPage: NextPage = () => {
 					You are about to delete an event ("{event.name}")
 				</p>
 
-				<h1 className="text-3xl font-bold">Delete Event</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">Delete Event</h1>
 
 				<DeleteEventForm
 					eventError={eventError}

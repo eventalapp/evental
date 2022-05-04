@@ -35,7 +35,7 @@ const SignInPage: NextPage<Props> = (props) => {
 			<Column variant="halfWidth">
 				<div className="max-w-sm m-auto">
 					<div className="flex flex-row justify-between mb-3">
-						<h1 className="text-3xl font-bold">Sign up</h1>
+						<h1 className="text-2xl md:text-3xl font-bold">Sign up</h1>
 					</div>
 
 					<SignUpForm signUpMutation={signUpMutation} />

@@ -39,7 +39,7 @@ const ResetPasswordPage: NextPage = () => {
 
 				<Column variant="halfWidth">
 					<div className="flex flex-row justify-between mb-3">
-						<h1 className="text-3xl font-bold">Reset Password</h1>
+						<h1 className="text-2xl md:text-3xl font-bold">Reset Password</h1>
 					</div>
 
 					<p>
@@ -65,7 +65,7 @@ const ResetPasswordPage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="flex flex-row justify-between mb-3">
-					<h1 className="text-3xl font-bold">Reset Password</h1>
+					<h1 className="text-2xl md:text-3xl font-bold">Reset Password</h1>
 				</div>
 
 				<PasswordResetForm passwordResetMutation={passwordResetMutation} code={String(code)} />

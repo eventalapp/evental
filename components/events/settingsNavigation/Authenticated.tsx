@@ -65,7 +65,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 											/>
 
 											<div>
-												<span className="text-gray-500 text-xs block">SETTINGS</span>{' '}
+												<span className="text-gray-500 text-xs md:block hidden">SETTINGS</span>{' '}
 												<strong
 													className="text-2xl leading-6 font-bold font-display"
 													aria-label="evental homepage"

@@ -95,7 +95,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<h1 className="text-3xl font-bold leading-tight">Sessions</h1>
+				<h1 className="text-2xl md:text-3xl font-bold leading-tight">Sessions</h1>
 
 				<SessionList
 					sessions={sessions}

@@ -65,7 +65,7 @@ const DeleteVenuePage: NextPage = () => {
 					You are about to delete a venue ("{venue.name}")
 				</p>
 
-				<h1 className="text-3xl font-bold">Delete Venue</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">Delete Venue</h1>
 
 				<DeleteVenueForm
 					venue={venue}

@@ -47,13 +47,18 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 	);
 };
 
-const FullscreenLinkItem: React.FC<{ link: string; label: string }> = (props) => {
-	const { link, label } = props;
+const FullscreenLinkItem: React.FC<{ link: string; label: string; onClick: () => void }> = (
+	props
+) => {
+	const { link, label, onClick } = props;
 	const router = useRouter();
 
 	return (
 		<Link href={link} passHref>
-			<a className={cx('cursor-pointer', router.asPath == link && 'border-b-2 border-primary')}>
+			<a
+				className={cx('cursor-pointer', router.asPath == link && 'border-b-2 border-primary')}
+				onClick={onClick}
+			>
 				<li
 					className={cx(
 						'px-3 my-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
@@ -224,14 +229,29 @@ export const Authenticated: React.FC<Props> = (props) => {
 								setIsOpen(false);
 							}}
 						/>
-						<FullscreenLinkItem link={`/events/${event.slug}`} label={'Sessions'} />
-						<FullscreenLinkItem link={`/events/${event.slug}/venues`} label={'Venues'} />
+						<FullscreenLinkItem
+							link={`/events/${event.slug}`}
+							label={'Sessions'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							link={`/events/${event.slug}/venues`}
+							label={'Venues'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
 
 						{roles.map((role) => (
 							<FullscreenLinkItem
 								key={role.id}
 								link={`/events/${event.slug}/roles/${role.slug}`}
 								label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
+								onClick={() => {
+									setIsOpen(false);
+								}}
 							/>
 						))}
 					</div>
