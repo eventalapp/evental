@@ -34,7 +34,7 @@ export const useCreateSessionMutation = (eid: string): UseCreateSessionMutationD
 			onSuccess: (data) => {
 				toast.success('Session created successfully');
 
-				router.push(`/events/${eid}/sessions/${data.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/sessions/${data.slug}`).then(() => {
 					void queryClient.invalidateQueries('sessions');
 				});
 			},

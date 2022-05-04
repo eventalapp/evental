@@ -5,7 +5,7 @@ import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/s
 import { Button } from '../form/Button';
 import { Label } from '../form/Label';
 import { UseAttendeeQueryData } from '../../hooks/queries/useAttendeeQuery';
-import { UseEditAttendeeMutationData } from '../../hooks/mutations/useAdminEditAttendeeMutation';
+import { UseEditAttendeeMutationData } from '../../hooks/mutations/useEditAttendeeMutation';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import Link from 'next/link';
 import { EventPermissionRole } from '@prisma/client';
@@ -29,7 +29,6 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { adminEditAttendeeMutation, attendee, roles, eid, imageUploadMutation } = props;
 	const {
-		register,
 		handleSubmit,
 		control,
 		setValue,

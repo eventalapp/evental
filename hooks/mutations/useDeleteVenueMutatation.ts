@@ -21,7 +21,7 @@ export const useDeleteVenueMutation = (eid: string, vid: string): UseDeleteVenue
 			onSuccess: () => {
 				toast.success('Venue deleted successfully');
 
-				router.push(`/events/${eid}/venues/`).then(() => {
+				router.push(`/events/${eid}/admin/venues/`).then(() => {
 					void queryClient.invalidateQueries(['venue', eid, vid]);
 					void queryClient.invalidateQueries(['venues', eid]);
 				});

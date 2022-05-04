@@ -31,7 +31,7 @@ export const useCreateRoleMutation = (eid: string): UseCreateRoleMutationData =>
 			onSuccess: (data) => {
 				toast.success('Role created successfully');
 
-				router.push(`/events/${eid}/roles/${data.slug}`).then(() => {
+				router.push(`/events/${eid}/admin/roles/${data.slug}`).then(() => {
 					void queryClient.invalidateQueries(['roles', eid]);
 				});
 			},

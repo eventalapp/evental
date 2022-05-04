@@ -21,7 +21,7 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 			onSuccess: () => {
 				toast.success('Role deleted successfully');
 
-				router.push(`/events/${eid}/roles`).then(() => {
+				router.push(`/events/${eid}/admin/roles`).then(() => {
 					void queryClient.invalidateQueries(['roles', eid]);
 					void queryClient.invalidateQueries(['role', eid, rid]);
 					void queryClient.invalidateQueries(['attendees', eid]);
