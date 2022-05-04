@@ -47,10 +47,13 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 	);
 };
 
-const FullscreenLinkItem: React.FC<{ link: string; label: string; onClick: () => void }> = (
-	props
-) => {
-	const { link, label, onClick } = props;
+const FullscreenLinkItem: React.FC<{
+	link: string;
+	label: string;
+	index: number;
+	onClick: () => void;
+}> = (props) => {
+	const { link, label, index, onClick } = props;
 	const router = useRouter();
 
 	return (
@@ -58,6 +61,9 @@ const FullscreenLinkItem: React.FC<{ link: string; label: string; onClick: () =>
 			<a
 				className={cx('cursor-pointer', router.asPath == link && 'border-b-2 border-primary')}
 				onClick={onClick}
+				onKeyDown={onClick}
+				role="button"
+				tabIndex={index}
 			>
 				<li
 					className={cx(
@@ -220,16 +226,20 @@ export const Authenticated: React.FC<Props> = (props) => {
 						{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
 					</div>
 					<div className="w-full h-full flex flex-col items-center justify-center">
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="w-5 h-5 mb-3 cursor-pointer"
-							size="2x"
-							icon={faXmark}
+						<button
 							onClick={() => {
 								setIsOpen(false);
 							}}
-						/>
+						>
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mb-3 cursor-pointer"
+								size="2x"
+								icon={faXmark}
+							/>
+						</button>
 						<FullscreenLinkItem
+							index={0}
 							link={`/events/${event.slug}`}
 							label={'Sessions'}
 							onClick={() => {
@@ -237,6 +247,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 							}}
 						/>
 						<FullscreenLinkItem
+							index={1}
 							link={`/events/${event.slug}/venues`}
 							label={'Venues'}
 							onClick={() => {
@@ -244,8 +255,9 @@ export const Authenticated: React.FC<Props> = (props) => {
 							}}
 						/>
 
-						{roles.map((role) => (
+						{roles.map((role, i) => (
 							<FullscreenLinkItem
+								index={i + 2}
 								key={role.id}
 								link={`/events/${event.slug}/roles/${role.slug}`}
 								label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
