@@ -1,17 +1,15 @@
 import Link from 'next/link';
 import React from 'react';
 import { UseSessionsQueryData } from '../../hooks/queries/useSessionsQuery';
-import { UseOrganizerQueryData } from '../../hooks/queries/useOrganizerQuery';
 import { NotFound } from '../error/NotFound';
 import { format } from 'date-fns';
 
 type Props = {
 	eid: string;
-} & UseSessionsQueryData &
-	UseOrganizerQueryData;
+} & UseSessionsQueryData;
 
 export const SessionList: React.FC<Props> = (props) => {
-	const { eid, sessions, isOrganizerLoading, isOrganizer } = props;
+	const { eid, sessions } = props;
 
 	if (sessions && sessions?.length === 0) {
 		return <NotFound message="No sessions found." />;
@@ -23,12 +21,9 @@ export const SessionList: React.FC<Props> = (props) => {
 		<div className="mt-3">
 			{sessions.map((session) => {
 				return (
-					<Link href={`/events/${eid}/sessions/${session.slug}`}>
+					<Link href={`/events/${eid}/sessions/${session.slug}`} key={session.id}>
 						<a>
-							<div
-								key={session.id}
-								className="flex flex-row hover:bg-gray-50 transition-all duration-100"
-							>
+							<div className="flex flex-row hover:bg-gray-50 transition-all duration-100">
 								<span className="text-gray-700 text-sm w-20 py-2 pr-3 text-right">
 									{format(new Date(session.startDate), 'h:mm a OOO')}
 								</span>

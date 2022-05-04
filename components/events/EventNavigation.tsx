@@ -46,6 +46,7 @@ const EventNavigationMenu = (props: Props) => {
 						<LinkItem link={`/events/${eid}/venues`} label={'Venues'} />
 						{roles.map((role) => (
 							<LinkItem
+								key={role.id}
 								link={`/events/${eid}/roles/${role.slug}`}
 								label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
 							/>
