@@ -16,23 +16,32 @@ export const EventNavigation: React.FC<Props> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { signOutMutation } = useSignOutMutation();
 
-	if (user) {
-		if (roles && event) {
-			return (
-				<Authenticated
-					event={event}
-					roles={roles}
-					signOutMutation={signOutMutation}
-					user={user}
-					isOpen={isOpen}
-					setIsOpen={setIsOpen}
-					{...restProps}
-				/>
-			);
-		}
-
-		return null;
+	if (user && roles && event) {
+		return (
+			<Authenticated
+				event={event}
+				roles={roles}
+				signOutMutation={signOutMutation}
+				user={user}
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				{...restProps}
+			/>
+		);
 	}
 
-	return <Unauthenticated isOpen={isOpen} setIsOpen={setIsOpen} {...restProps} />;
+	if (event && roles) {
+		return (
+			<Unauthenticated
+				event={event}
+				roles={roles}
+				signOutMutation={signOutMutation}
+				isOpen={isOpen}
+				setIsOpen={setIsOpen}
+				{...restProps}
+			/>
+		);
+	}
+
+	return null;
 };
