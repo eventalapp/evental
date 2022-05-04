@@ -10,14 +10,14 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { Navigation } from '../../../../components/navigation';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useVenuesQuery } from '../../../../hooks/queries/useVenuesQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { VenueList } from '../../../../components/venues/VenueList';
-import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
-import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
 
 const VenuesAdminPage: NextPage = () => {
 	const router = useRouter();
@@ -26,8 +26,9 @@ const VenuesAdminPage: NextPage = () => {
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isVenuesLoading || isUserLoading || isEventLoading || isOrganizerLoading) {
+	if (isVenuesLoading || isUserLoading || isEventLoading || isOrganizerLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -39,19 +40,19 @@ const VenuesAdminPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Venues</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				{event && <EventSettingsHeader event={event} />}
-
-				<EventNavigationMenu eid={String(eid)} />
-
 				<div>
 					<FlexRowBetween>
 						<span className="text-3xl font-bold">Venues</span>

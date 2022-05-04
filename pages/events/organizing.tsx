@@ -15,7 +15,7 @@ import { getOrganizingEvents } from '../api/events/organizing';
 import { useUser } from '../../hooks/queries/useUser';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { NotFoundPage } from '../../components/error/NotFoundPage';
-import { EventsNavigation } from '../../components/events/EventsNavigation';
+import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 
@@ -59,7 +59,7 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 				<Column>
 					<h1 className="text-3xl font-bold mb-3">Organizing Events</h1>
 
-					{user && <EventsNavigation />}
+					<EventsPageNavigation />
 
 					<span className="block font-bold text-center text-lg mt-5">Organizing an event?</span>
 
@@ -80,7 +80,7 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold mb-3">Organizing Events</h1>
 
-				{user && <EventsNavigation />}
+				{user && <EventsPageNavigation />}
 
 				<span className="block font-bold text-center text-lg mt-5">Organizing an event?</span>
 

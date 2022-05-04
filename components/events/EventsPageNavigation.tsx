@@ -3,7 +3,7 @@ import { LinkButton } from '../form/LinkButton';
 import React from 'react';
 import { useRouter } from 'next/router';
 
-export const EventsNavigation: React.FC = () => {
+export const EventsPageNavigation: React.FC = () => {
 	const router = useRouter();
 
 	return (

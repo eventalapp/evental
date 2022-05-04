@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../../components/layout/Column';
 import { DeleteSessionForm } from '../../../../../../components/sessions/DeleteSessionForm';
-import { Navigation } from '../../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -15,6 +14,9 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 
 const DeleteSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -23,8 +25,10 @@ const DeleteSessionPage: NextPage = () => {
 	const { session, isSessionLoading, sessionError } = useSessionQuery(String(eid), String(sid));
 	const { deleteSessionMutation } = useDeleteSessionMutation(String(eid), String(sid));
 	const { user, isUserLoading } = useUser();
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isSessionLoading || isUserLoading || isOrganizerLoading) {
+	if (isSessionLoading || isUserLoading || isOrganizerLoading || isEventLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -44,13 +48,17 @@ const DeleteSessionPage: NextPage = () => {
 		return <ViewErrorPage errors={[sessionError]} />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Delete Session</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
 				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-medium">

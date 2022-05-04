@@ -10,14 +10,14 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { Navigation } from '../../../../components/navigation';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { AdminSessionList } from '../../../../components/sessions/AdminSessionList';
-import EventNavigationMenu from '../../../../components/radix/components/EventNavigationMenu';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { EventSettingsHeader } from '../../../../components/settings/EventSettingsHeader';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
 
 const SessionsAdminPage: NextPage = () => {
 	const router = useRouter();
@@ -26,8 +26,15 @@ const SessionsAdminPage: NextPage = () => {
 	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { event } = useEventQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isSessionsLoading || isUserLoading || isOrganizerLoading || isOrganizerLoading) {
+	if (
+		isSessionsLoading ||
+		isUserLoading ||
+		isOrganizerLoading ||
+		isOrganizerLoading ||
+		isRolesLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -39,19 +46,19 @@ const SessionsAdminPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Edit Sessions</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				{event && <EventSettingsHeader event={event} />}
-
-				<EventNavigationMenu eid={String(eid)} />
-
 				<div>
 					<FlexRowBetween>
 						<span className="text-3xl font-bold">Sessions</span>

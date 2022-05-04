@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../../components/layout/Column';
 import { CreateSessionForm } from '../../../../../components/sessions/CreateSessionForm';
-import { Navigation } from '../../../../../components/navigation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useVenuesQuery } from '../../../../../hooks/queries/useVenuesQuery';
 import { useCreateSessionMutation } from '../../../../../hooks/mutations/useCreateSessionMutation';
@@ -16,6 +15,8 @@ import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 
 const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -25,8 +26,9 @@ const CreateSessionPage: NextPage = () => {
 	const { createSessionMutation } = useCreateSessionMutation(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { user, isUserLoading } = useUser();
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isVenuesLoading || isEventLoading || isUserLoading || isOrganizerLoading) {
+	if (isVenuesLoading || isEventLoading || isUserLoading || isOrganizerLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -46,13 +48,17 @@ const CreateSessionPage: NextPage = () => {
 		return <ViewErrorPage errors={[venuesError, eventError]} />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<Head>
 				<title>Create Session</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
 				<h1 className="text-3xl font-bold">Create Session</h1>

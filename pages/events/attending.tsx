@@ -15,7 +15,7 @@ import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { getAttendingEvents } from '../api/events/attending';
 import { useUser } from '../../hooks/queries/useUser';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
-import { EventsNavigation } from '../../components/events/EventsNavigation';
+import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
 import Link from 'next/link';
 
 type Props = {
@@ -57,7 +57,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 				<Column>
 					<h1 className="text-3xl font-bold mb-3">Attending Events</h1>
 
-					{user && <EventsNavigation />}
+					{user && <EventsPageNavigation />}
 
 					<span className="block text-base mt-5">
 						You are not attending any events.{' '}
@@ -81,7 +81,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-3xl font-bold mb-3">Attending Events</h1>
 
-				{user && <EventsNavigation />}
+				<EventsPageNavigation />
 
 				<EventList events={attendingEvents} />
 			</Column>

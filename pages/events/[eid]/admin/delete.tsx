@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { DeleteEventForm } from '../../../../components/events/DeleteEventForm';
-import { Navigation } from '../../../../components/navigation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
 import React from 'react';
@@ -17,6 +16,8 @@ import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
 
 const DeleteEventPage: NextPage = () => {
 	const router = useRouter();
@@ -25,8 +26,9 @@ const DeleteEventPage: NextPage = () => {
 	const { deleteEventMutation } = useDeleteEventMutation(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isEventLoading || isOrganizerLoading || isUserLoading) {
+	if (isEventLoading || isOrganizerLoading || isUserLoading || isRolesLoading) {
 		return <Loading />;
 	}
 
@@ -52,7 +54,7 @@ const DeleteEventPage: NextPage = () => {
 				<title>Delete Event</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
 				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-medium">

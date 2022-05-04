@@ -6,12 +6,15 @@ import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { Navigation } from '../../../../../components/navigation';
 import { CreateVenueForm } from '../../../../../components/venues/CreateVenueForm';
 import { useCreateVenueMutation } from '../../../../../hooks/mutations/useCreateVenueMutation';
 import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
+import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 
 const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -19,8 +22,10 @@ const CreateSessionPage: NextPage = () => {
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { createVenueMutation } = useCreateVenueMutation(String(eid));
 	const { user, isUserLoading } = useUser();
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isOrganizerLoading || isUserLoading) {
+	if (isOrganizerLoading || isUserLoading || isEventLoading || isRolesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -32,13 +37,17 @@ const CreateSessionPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
+	}
+
 	return (
 		<PageWrapper>
 			<Head>
 				<title>Create event</title>
 			</Head>
 
-			<Navigation />
+			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
 				<h1 className="text-3xl font-bold">Create Venue</h1>

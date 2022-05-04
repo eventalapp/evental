@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
 import { LinkButton } from '../../../../components/form/LinkButton';
-import { Navigation } from '../../../../components/navigation';
 import { VenueList } from '../../../../components/venues/VenueList';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
@@ -29,9 +28,9 @@ import { getEvent } from '../../../api/events/[eid]';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
 import { useUser } from '../../../../hooks/queries/useUser';
-import EventNavigationMenu from '../../../../components/events/EventNavigation';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { getRoles } from '../../../api/events/[eid]/roles';
+import { EventNavigation } from '../../../../components/events/navigation';
 
 type Props = {
 	initialVenues: Prisma.EventVenue[] | undefined;
@@ -58,11 +57,17 @@ const SessionsPage: NextPage<Props> = (props) => {
 	);
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
-	if (isVenuesLoading || isOrganizerLoading || isEventLoading || isAttendeeLoading) {
+	if (
+		isVenuesLoading ||
+		isOrganizerLoading ||
+		isEventLoading ||
+		isAttendeeLoading ||
+		isRolesLoading
+	) {
 		return <LoadingPage />;
 	}
 
-	if (!initialVenues || !venues) {
+	if (!venues) {
 		return <NotFoundPage message="No venues found." />;
 	}
 
@@ -70,8 +75,8 @@ const SessionsPage: NextPage<Props> = (props) => {
 		return <ViewErrorPage errors={[venuesError]} />;
 	}
 
-	if (!venues || !initialVenues) {
-		return <NotFoundPage message="No venues found." />;
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
 	}
 
 	return (
@@ -80,7 +85,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 				<title>All Venues</title>
 			</Head>
 
-			<Navigation />
+			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column>
 				{event && (
@@ -92,10 +97,8 @@ const SessionsPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				{roles && <EventNavigationMenu eid={String(eid)} roles={roles} />}
-
 				<FlexRowBetween>
-					<h1 className="text-3xl font-medium leading-tight">Venues</h1>
+					<h1 className="text-3xl font-bold leading-tight">Venues</h1>
 
 					{!isOrganizerLoading && isOrganizer && (
 						<Link href={`/events/${eid}/admin/venues/create`} passHref>

@@ -1,21 +1,17 @@
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React from 'react';
-import { ProfileDropdown } from './dropdown';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { NavigationWrapper } from './NavigationWrapper';
+import { NavigationWrapper } from '../../navigation/NavigationWrapper';
 
-type Props = {
+interface UnauthenticatedProps {
 	className?: string;
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	user: PasswordlessUser | undefined;
-} & UseSignOutMutationData;
+}
 
-export const Authenticated: React.FC<Props> = (props) => {
-	const { signOutMutation, className, isOpen, setIsOpen, user } = props;
+export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
+	const { className, isOpen, setIsOpen } = props;
 
 	return (
 		<NavigationWrapper>
@@ -37,11 +33,13 @@ export const Authenticated: React.FC<Props> = (props) => {
 				</a>
 			</Link>
 
-			<div className="flex-row hidden space-x-8 font-medium sm:flex items-center">
-				<Link href="/events/attending">
+			<div className="flex-row hidden space-x-8 font-medium sm:flex pr-7">
+				<Link href="/events">
 					<a>Events</a>
 				</Link>
-				{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
+				<Link href={`/auth/signin`}>
+					<a>Sign in</a>
+				</Link>
 			</div>
 
 			<div className="flex-row flex space-x-8 font-medium sm:hidden">

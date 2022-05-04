@@ -3,7 +3,6 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
-import { Navigation } from '../../../../components/navigation';
 import React from 'react';
 import { RoleAttendeeList } from '../../../../components/roles/RoleAttendeeList';
 import { useRoleAttendeesQuery } from '../../../../hooks/queries/useRoleAttendeesQuery';
@@ -17,16 +16,40 @@ import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { ssrGetUser } from '../../../../utils/api';
 import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
+import { EventNavigation } from '../../../../components/events/navigation';
+import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { getEvent } from '../../../api/events/[eid]';
+import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../hooks/queries/useUser';
+import { getRoles } from '../../../api/events/[eid]/roles';
+import { EventHeader } from '../../../../components/events/EventHeader';
+import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
+import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
+import { capitalizeFirstLetter } from '../../../../utils/string';
+import Link from 'next/link';
+import { LinkButton } from '../../../../components/form/LinkButton';
+import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 
 type Props = {
 	initialRole: Prisma.EventRole | undefined;
+	initialRoles: Prisma.EventRole[] | undefined;
 	initialAttendees: AttendeeWithUser[] | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
+	initialEvent: Prisma.Event | undefined;
+	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
 };
 
 const ViewAttendeePage: NextPage<Props> = (props) => {
-	const { initialAttendees, initialOrganizer, initialRole } = props;
+	const {
+		initialAttendees,
+		initialOrganizer,
+		initialRole,
+		initialUser,
+		initialEvent,
+		initialRoles,
+		initialIsAttendeeByUserId
+	} = props;
 	const router = useRouter();
 	const { rid, eid } = router.query;
 	const { attendees, role, isRoleAttendeesLoading, roleAttendeesError } = useRoleAttendeesQuery(
@@ -35,28 +58,76 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		{ attendees: initialAttendees, role: initialRole }
 	);
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
+	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
+	const { user } = useUser(initialUser);
+	const {
+		attendee: isAttendee,
+		attendeeError,
+		isAttendeeLoading
+	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 
 	if (!initialAttendees || !initialRole || !role || !attendees) {
 		return <NotFoundPage message="Role not found." />;
 	}
 
-	if (isOrganizerLoading || isRoleAttendeesLoading) {
+	if (
+		isOrganizerLoading ||
+		isRoleAttendeesLoading ||
+		isRolesLoading ||
+		isEventLoading ||
+		isAttendeeLoading
+	) {
 		return <LoadingPage />;
 	}
 
-	if (roleAttendeesError) {
-		return <ViewErrorPage errors={[roleAttendeesError]} />;
+	if (roleAttendeesError || eventError || rolesError || attendeeError) {
+		return <ViewErrorPage errors={[roleAttendeesError, rolesError, eventError]} />;
+	}
+
+	if (!event) {
+		return <NotFoundPage message="Event not found." />;
 	}
 
 	return (
 		<PageWrapper variant="gray">
 			<Head>
-				<title>Viewing Role: {rid}</title>
+				<title>Viewing Role</title>
 			</Head>
 
-			<Navigation />
+			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column>
+				{event && (
+					<EventHeader
+						event={event}
+						eid={String(eid)}
+						isOrganizer={isOrganizer}
+						isAttendee={isAttendee}
+					/>
+				)}
+
+				<FlexRowBetween>
+					<h2 className="text-3xl font-bold leading-tight">
+						{capitalizeFirstLetter(role.name.toLowerCase())}s{' '}
+						<span className="font-normal text-gray-500">({attendees.length})</span>
+					</h2>
+					<div>
+						<div className="flex items-center flex-row">
+							{!isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
+									<LinkButton>Edit role</LinkButton>
+								</Link>
+							)}
+							{!isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
+									<LinkButton className="ml-3">Delete role</LinkButton>
+								</Link>
+							)}
+						</div>
+					</div>
+				</FlexRowBetween>
+
 				<RoleAttendeeList
 					eid={String(eid)}
 					rid={String(rid)}
@@ -79,13 +150,20 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialRole = (await getRole(String(eid), String(rid))) ?? undefined;
 	const initialAttendees = (await getAttendeesByRole(String(eid), String(rid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
+	const initialEvent = (await getEvent(String(eid))) ?? undefined;
+	const initialRoles = (await getRoles(String(eid))) ?? undefined;
+	const initialIsAttendeeByUserId =
+		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
 			initialRole,
 			initialAttendees,
-			initialOrganizer
+			initialOrganizer,
+			initialEvent,
+			initialRoles,
+			initialIsAttendeeByUserId
 		}
 	};
 };
