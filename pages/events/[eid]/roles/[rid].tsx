@@ -134,8 +134,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					role={role}
 					attendees={attendees}
 					roleAttendeesError={roleAttendeesError}
-					isOrganizer={isOrganizer}
-					isOrganizerLoading={isOrganizerLoading}
 					isRoleAttendeesLoading={isRoleAttendeesLoading}
 				/>
 			</Column>
