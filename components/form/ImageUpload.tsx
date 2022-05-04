@@ -31,6 +31,7 @@ export const ImageUpload: React.FC<Props> = (props) => {
 		<div>
 			<Dropzone
 				maxFiles={1}
+				accept={{ 'image/*': ['.jpeg', '.png'] }}
 				onDropRejected={(errors) => {
 					toast.error(errors[0].errors[0].message);
 				}}
