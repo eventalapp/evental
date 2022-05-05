@@ -2,7 +2,7 @@
 
 Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/), [Prisma](https://www.prisma.io/), [Postgres](https://www.postgresql.org/), [TypeScript](https://www.typescriptlang.org/), [Tailwind](https://tailwindcss.com/), and [React Query](https://react-query.tanstack.com/)
 
-## Todo:
+## Todo for MVP:
 
 - add speakers to sessions
 - wysiwyg editor for sessions etc
@@ -10,6 +10,14 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - add event to calendar
 - make event navigation in the hamburger menu
 - marketing pages
+- billing (stripe or similar?)
+- Sort by date, type, venue
+- view/print your schedule
+- custom pages for map etc
+
+## todo post mvp
+- clean up queries/mutations(export whole mut/query)
+- 
 
 ## Installation 💾
 
