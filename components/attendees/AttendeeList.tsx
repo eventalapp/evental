@@ -32,7 +32,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 										href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${attendee.user.slug}`}
 									>
 										<a className="flex items-center justify-center flex-col">
-											<div className="h-16 w-16 relative">
+											<div className="h-16 w-16 relative mb-1">
 												<Image
 													alt={String(attendee.user.name)}
 													src={String(
@@ -44,8 +44,8 @@ export const AttendeeList: React.FC<Props> = (props) => {
 													layout="fill"
 												/>
 											</div>
-											<span>{attendee.user.name}</span>
-											<span className="block text-gray-700">
+											<span className="font-medium text-lg">{attendee.user.name}</span>
+											<span className="block text-gray-700 text-sm leading-none">
 												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
 											</span>
 										</a>

@@ -98,7 +98,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 												alt="logo"
 											/>
 											<strong
-												className="text-2xl tracking-tight leading-none font-bold font-display"
+												className="text-xl max-w-xs tracking-tight leading-none font-bold font-display"
 												aria-label="evental homepage"
 											>
 												{event.name}

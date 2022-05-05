@@ -64,15 +64,12 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 												alt="logo"
 											/>
 
-											<div>
-												<span className="text-gray-500 text-xs md:block hidden">SETTINGS</span>{' '}
-												<strong
-													className="text-2xl leading-6 font-bold font-display"
-													aria-label="evental homepage"
-												>
-													{event.name}
-												</strong>
-											</div>
+											<strong
+												className="text-xl max-w-xs tracking-tight leading-none font-bold font-display"
+												aria-label="evental homepage"
+											>
+												{event.name}
+											</strong>
 										</span>
 									</NavigationMenuPrimitive.Item>
 								</NavigationMenuPrimitive.Link>
