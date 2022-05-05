@@ -4,6 +4,7 @@ import { getEvent } from '../index';
 import { NextkitError } from 'nextkit';
 import { api } from '../../../../../utils/api';
 import { getVenue } from '../venues/[vid]';
+import { endOfDay, isAfter, isBefore, parseISO, startOfDay } from 'date-fns';
 
 export type SessionWithVenue = {
 	venue: Prisma.EventVenue | null;
@@ -11,16 +12,26 @@ export type SessionWithVenue = {
 
 export default api({
 	async GET({ req }) {
-		const { eid, venue } = req.query;
+		const { eid, venue, date } = req.query;
 
 		if (venue) {
-			const sessionByVenueList = getSessionsByVenue(String(eid), String(venue));
+			const sessionByVenueList = await getSessionsByVenue(String(eid), String(venue));
 
 			if (!sessionByVenueList) {
 				throw new NextkitError(404, 'Sessions by venue not found');
 			}
 
 			return sessionByVenueList;
+		}
+
+		if (date) {
+			const sessionByDateList = await getSessionsByDate(String(eid), String(date));
+
+			if (!sessionByDateList) {
+				throw new NextkitError(404, 'Sessions by date not found');
+			}
+
+			return sessionByDateList;
 		}
 
 		const sessionList = await getSessions(String(eid));
@@ -58,11 +69,12 @@ export const getSessionsByVenue = async (
 	vid: string
 ): Promise<SessionWithVenue[] | null> => {
 	const event = await getEvent(eid);
-	const venue = await getVenue(eid, vid);
 
 	if (!event) {
 		return null;
 	}
+
+	const venue = await getVenue(eid, vid);
 
 	if (!venue) {
 		return null;
@@ -72,6 +84,42 @@ export const getSessionsByVenue = async (
 		where: {
 			eventId: event.id,
 			venueId: venue.id
+		},
+		include: {
+			venue: true
+		},
+		orderBy: {
+			startDate: 'asc'
+		}
+	});
+};
+
+export const getSessionsByDate = async (
+	eid: string,
+	date: string
+): Promise<SessionWithVenue[] | null> => {
+	const event = await getEvent(eid);
+
+	if (!event) {
+		return null;
+	}
+
+	const dateParsed = startOfDay(parseISO(String(date)));
+
+	if (
+		isBefore(dateParsed, new Date(event.startDate)) ||
+		isAfter(dateParsed, new Date(event.endDate))
+	) {
+		return null;
+	}
+
+	return await prisma.eventSession.findMany({
+		where: {
+			eventId: event.id,
+			startDate: {
+				gte: startOfDay(dateParsed),
+				lte: endOfDay(dateParsed)
+			}
 		},
 		include: {
 			venue: true

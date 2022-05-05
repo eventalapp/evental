@@ -11,6 +11,7 @@ import { Label } from '../form/Label';
 import { DatePicker } from '../form/DatePicker';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
+import { endOfDay, startOfDay } from 'date-fns';
 
 type Props = { canCancel?: boolean } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -30,8 +31,8 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		formState: { errors }
 	} = useForm<CreateEventPayload>({
 		defaultValues: {
-			startDate: new Date(),
-			endDate: new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3)
+			startDate: startOfDay(new Date()),
+			endDate: endOfDay(new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3))
 		},
 		resolver: zodResolver(CreateEventSchema)
 	});
@@ -40,6 +41,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	const endDateWatcher = watch('endDate');
 
 	useEffect(() => {
+		console.log(endDateWatcher, startDateWatcher);
 		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
 			setValue('endDate', startDateWatcher);
 			toast.warn('The start date cannot be later than the end date.');

@@ -18,6 +18,7 @@ import Button from '../radix/components/shared/Button';
 import { EventCategory, EventType } from '@prisma/client';
 import Select from '../radix/components/Select';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { endOfDay, startOfDay } from 'date-fns';
 
 type Props = {
 	eid: string;
@@ -46,8 +47,8 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			type: event?.type ?? undefined,
 			category: event?.category ?? undefined,
 			slug: event?.slug ?? undefined,
-			endDate: new Date(String(event?.endDate)) ?? undefined,
-			startDate: new Date(String(event?.startDate)) ?? undefined
+			endDate: endOfDay(new Date(String(event?.endDate))) ?? undefined,
+			startDate: startOfDay(new Date(String(event?.startDate))) ?? undefined
 		},
 		resolver: zodResolver(EditEventSchema)
 	});
