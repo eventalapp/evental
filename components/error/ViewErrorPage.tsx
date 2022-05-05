@@ -6,7 +6,7 @@ import Column from '../layout/Column';
 import { ErroredAPIResponse } from 'nextkit';
 
 type Props = {
-	errors: Array<ErroredAPIResponse | null>;
+	errors: Array<ErroredAPIResponse | null | undefined>;
 };
 
 export const ViewErrorPage: React.FC<Props> = (props) => {
