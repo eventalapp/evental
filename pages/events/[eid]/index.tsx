@@ -174,9 +174,9 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						<div className="mb-3">
 							<span className="block font-medium border-b border-gray-200">Filter by Date</span>
-							{getDateRange(new Date(event.startDate), new Date(event.endDate)).map((date) => (
+							{getDateRange(new Date(event.startDate), new Date(event.endDate)).map((date, i) => (
 								<Link
-									key={date.getMilliseconds()}
+									key={`${date.toISOString()}-${i}`}
 									href={`/events/${eid}/sessions/dates/${format(date, 'yyyy-MM-dd')}`}
 								>
 									<a className="block">{format(date, 'yyyy-MM-dd')}</a>
