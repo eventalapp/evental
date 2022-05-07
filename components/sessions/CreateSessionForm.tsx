@@ -19,6 +19,7 @@ import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
 import Select from '../radix/components/Select';
+import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 
 type Props = {
 	eid: string;
@@ -28,11 +29,12 @@ type CreateSessionFormProps = Props &
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseVenuesQueryData &
 	UseCreateSessionMutationData &
-	UseEventQueryData;
+	UseEventQueryData &
+	UseSessionTypesQueryData;
 
 export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 	const router = useRouter();
-	const { eid, venues, createSessionMutation, event } = props;
+	const { eid, venues, createSessionMutation, event, sessionTypes } = props;
 	const {
 		register,
 		handleSubmit,
@@ -42,7 +44,8 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		formState: { errors }
 	} = useForm<CreateSessionPayload>({
 		defaultValues: {
-			venueId: venues?.[0].id ?? 'none',
+			venueId: 'none',
+			typeId: 'none',
 			startDate: roundToNearestMinutes(new Date(), { nearestTo: NEAREST_MINUTE }),
 			endDate: roundToNearestMinutes(new Date(new Date().getTime() + 1000 * 60 * 60 * 4), {
 				nearestTo: NEAREST_MINUTE
@@ -111,6 +114,37 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 						</Link>
 
 						{errors.venueId?.message && <ErrorMessage>{errors.venueId?.message}</ErrorMessage>}
+					</div>
+				</div>
+
+				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+					<div>
+						<Label htmlFor="venueId">Type *</Label>
+
+						<Controller
+							control={control}
+							name="typeId"
+							render={({ field }) => (
+								<Select
+									options={[
+										{ label: 'No Type', value: 'none' },
+										...Object.values(sessionTypes || []).map((sessionType) => ({
+											label: sessionType.name,
+											value: sessionType.id
+										}))
+									]}
+									value={field.value as string}
+									onValueChange={(value) => {
+										setValue('typeId', value);
+									}}
+								/>
+							)}
+						/>
+						<Link href={`/events/${eid}/admin/sessions/types/create`}>
+							<a className="text-gray-600 text-sm mt-1">Dont see your type? Create a Type</a>
+						</Link>
+
+						{errors.typeId?.message && <ErrorMessage>{errors.typeId?.message}</ErrorMessage>}
 					</div>
 				</div>
 

@@ -18,6 +18,7 @@ import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import { useSessionTypesQuery } from '../../../../../../hooks/queries/useSessionTypesQuery';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();
@@ -29,8 +30,17 @@ const EditSessionPage: NextPage = () => {
 	const { editSessionMutation } = useEditSessionMutation(String(eid), String(sid));
 	const { user, isUserLoading } = useUser();
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-
-	if (isRolesLoading || isVenuesLoading || isEventLoading || isUserLoading || isOrganizerLoading) {
+	const { sessionTypes, isSessionTypesLoading, sessionTypesError } = useSessionTypesQuery(
+		String(eid)
+	);
+	if (
+		isRolesLoading ||
+		isVenuesLoading ||
+		isEventLoading ||
+		isUserLoading ||
+		isOrganizerLoading ||
+		isSessionTypesLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -50,8 +60,8 @@ const EditSessionPage: NextPage = () => {
 		return <NotFoundPage message="No venues found." />;
 	}
 
-	if (venuesError || eventError) {
-		return <ViewErrorPage errors={[venuesError, eventError]} />;
+	if (venuesError || eventError || sessionTypesError) {
+		return <ViewErrorPage errors={[venuesError, eventError, sessionTypesError]} />;
 	}
 
 	if (!event) {
@@ -74,6 +84,9 @@ const EditSessionPage: NextPage = () => {
 					sid={String(sid)}
 					venues={venues}
 					session={session}
+					sessionTypes={sessionTypes}
+					isSessionTypesLoading={isSessionTypesLoading}
+					sessionTypesError={sessionTypesError}
 					editSessionMutation={editSessionMutation}
 					isSessionLoading={isSessionLoading}
 					isVenuesLoading={isVenuesLoading}

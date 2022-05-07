@@ -31,7 +31,8 @@ export const getSession = async (eid: string, sid: string): Promise<SessionWithV
 			OR: [{ id: sid }, { slug: sid }]
 		},
 		include: {
-			venue: true
+			venue: true,
+			type: true
 		}
 	});
 

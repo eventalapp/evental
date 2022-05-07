@@ -18,6 +18,7 @@ import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
 import Select from '../radix/components/Select';
+import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 
 type Props = {
 	eid: string;
@@ -26,11 +27,12 @@ type Props = {
 	UseVenuesQueryData &
 	UseEditSessionMutationData &
 	UseSessionQueryData &
-	UseEventQueryData;
+	UseEventQueryData &
+	UseSessionTypesQueryData;
 
 export const EditSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { eid, venues, editSessionMutation, session, event } = props;
+	const { eid, venues, editSessionMutation, session, event, sessionTypes } = props;
 	const {
 		register,
 		handleSubmit,
@@ -43,6 +45,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 			name: String(session?.name),
 			description: String(session?.description),
 			venueId: session?.venueId ?? 'none',
+			typeId: session?.typeId ?? 'none',
 			startDate: session?.startDate ? new Date(String(session?.startDate)) : new Date(),
 			endDate: session?.endDate ? new Date(String(session?.endDate)) : new Date()
 		},
@@ -66,7 +69,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 		}
 	}, [endDateWatcher]);
 
-	if (!venues || !event) return null;
+	if (!event) return null;
 
 	return (
 		<form
@@ -92,7 +95,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 								<Select
 									options={[
 										{ label: 'No Venue', value: 'none' },
-										...Object.values(venues).map((venue) => ({
+										...Object.values(venues || []).map((venue) => ({
 											label: venue.name,
 											value: venue.id
 										}))
@@ -109,6 +112,37 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 						</Link>
 
 						{errors.venueId?.message && <ErrorMessage>{errors.venueId?.message}</ErrorMessage>}
+					</div>
+				</div>
+
+				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
+					<div>
+						<Label htmlFor="venueId">Type *</Label>
+
+						<Controller
+							control={control}
+							name="typeId"
+							render={({ field }) => (
+								<Select
+									options={[
+										{ label: 'No Type', value: 'none' },
+										...Object.values(sessionTypes || []).map((sessionType) => ({
+											label: sessionType.name,
+											value: sessionType.id
+										}))
+									]}
+									value={field.value as string}
+									onValueChange={(value) => {
+										setValue('typeId', value);
+									}}
+								/>
+							)}
+						/>
+						<Link href={`/events/${eid}/admin/sessions/types/create`}>
+							<a className="text-gray-600 text-sm mt-1">Dont see your type? Create a Type</a>
+						</Link>
+
+						{errors.typeId?.message && <ErrorMessage>{errors.typeId?.message}</ErrorMessage>}
 					</div>
 				</div>
 
