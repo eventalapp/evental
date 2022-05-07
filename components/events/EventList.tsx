@@ -59,7 +59,7 @@ export const EventList: React.FC<Props> = (props) => {
 										/>
 									</div>
 
-									<div>
+									<div className="flex flex-col items-start">
 										<Tooltip
 											side={'top'}
 											message={`This is a ${event?.category?.toLowerCase()} event.`}
