@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { LinkButton } from '../../../../../components/form/LinkButton';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import Column from '../../../../../components/layout/Column';
@@ -18,12 +18,16 @@ import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import { SessionList } from '../../../../../components/sessions/SessionList';
+import { Pagination } from '../../../../../components/Pagination';
 
 const SessionsAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
+	const [page, setPage] = useState(1);
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { sessionsData, isSessionsLoading } = useSessionsQuery(String(eid), { page: 1 });
+	const { sessionsData, isSessionsLoading } = useSessionsQuery(String(eid), {
+		page
+	});
 	const { user, isUserLoading } = useUser();
 	const { event } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
@@ -46,7 +50,7 @@ const SessionsAdminPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!event) {
+	if (!event || !sessionsData) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -61,7 +65,14 @@ const SessionsAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl md:text-2xl font-medium">Sessions</h3>
+						<h3 className="text-xl md:text-2xl font-medium">
+							Sessions{' '}
+							{sessionsData?.pagination?.total > 0 && (
+								<span className="font-normal text-gray-500">
+									({sessionsData?.pagination?.from || 0}/{sessionsData?.pagination?.total || 0})
+								</span>
+							)}
+						</h3>
 
 						<div>
 							<Link href={`/events/${eid}/admin/sessions/create`} passHref>
@@ -72,6 +83,14 @@ const SessionsAdminPage: NextPage = () => {
 
 					{sessionsData?.sessions && (
 						<SessionList admin eid={String(eid)} sessions={sessionsData?.sessions} />
+					)}
+
+					{sessionsData.pagination.pageCount > 1 && (
+						<Pagination
+							page={page}
+							pageCount={sessionsData.pagination.pageCount}
+							setPage={setPage}
+						/>
 					)}
 				</div>
 			</Column>
