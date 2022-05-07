@@ -50,7 +50,7 @@ const CreateRolePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h1 className="text-2xl md:text-3xl font-bold">Create Role Page</h1>
+				<h3 className="text-xl md:text-2xl font-medium">Create Role Page</h3>
 
 				<CreateRoleForm eid={String(eid)} createRoleMutation={createRoleMutation} />
 			</Column>

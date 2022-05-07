@@ -101,9 +101,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<div className="flex flex-row justify-between mb-3">
-					<h1 className="text-2xl md:text-3xl font-bold">Attendees</h1>
-				</div>
+				<h3 className="text-xl md:text-2xl font-medium">Attendees</h3>
 
 				<AttendeeList attendees={attendees} eid={String(eid)} />
 			</Column>

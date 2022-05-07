@@ -71,7 +71,7 @@ const ViewVenuePage: NextPage = () => {
 
 			<Column>
 				<FlexRowBetween>
-					<h1 className="text-2xl md:text-3xl font-bold">{venue.name}</h1>
+					<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
 
 					<div>
 						{!isOrganizerLoading && isOrganizer && (

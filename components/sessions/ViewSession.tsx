@@ -35,7 +35,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 						/>
 					)}
 
-					<h1 className="text-2xl md:text-3xl font-bold">{session.name}</h1>
+					<h1 className="text-2xl md:text-3xl font-medium">{session.name}</h1>
 				</div>
 				<div>
 					{!isAttending && !admin && (

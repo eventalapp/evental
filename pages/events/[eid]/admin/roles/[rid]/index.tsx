@@ -62,10 +62,11 @@ const ViewAttendeePage: NextPage = () => {
 
 			<Column>
 				<FlexRowBetween>
-					<h2 className="text-2xl md:text-3xl font-bold leading-tight">
+					<h3 className="text-xl md:text-2xl font-medium">
 						{capitalizeFirstLetter(role.name.toLowerCase())}s{' '}
 						<span className="font-normal text-gray-500">({attendees.length})</span>
-					</h2>
+					</h3>
+
 					<div>
 						<div className="flex items-center flex-row">
 							{!isOrganizerLoading && isOrganizer && (

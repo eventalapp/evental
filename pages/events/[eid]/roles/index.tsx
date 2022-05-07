@@ -6,10 +6,7 @@ import Column from '../../../../components/layout/Column';
 import { RoleList } from '../../../../components/roles/RoleList';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-import Link from 'next/link';
-import { LinkButton } from '../../../../components/form/LinkButton';
 import React from 'react';
-import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import Prisma from '@prisma/client';
@@ -83,15 +80,7 @@ const RolesPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<FlexRowBetween>
-					<h1 className="text-2xl md:text-3xl font-bold">Roles</h1>
-
-					{!isOrganizerLoading && isOrganizer && (
-						<Link href={`/events/${eid}/admin/roles/create`} passHref>
-							<LinkButton>Create role</LinkButton>
-						</Link>
-					)}
-				</FlexRowBetween>
+				<h3 className="text-xl md:text-2xl font-medium">Roles</h3>
 
 				<RoleList
 					eid={String(eid)}

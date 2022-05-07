@@ -46,13 +46,11 @@ export const SessionList: React.FC<Props> = (props) => {
 												style={{ backgroundColor: session?.type?.color }}
 											/>
 											<div>
-												<span className="text-xl block font-medium">{session.name}</span>{' '}
+												<span className="text-lg block leading-tight">{session.name}</span>{' '}
 												{session.type?.name ? (
-													<span className="text-base font-normal text-gray-500">
-														{session.type?.name}
-													</span>
+													<span className="text-sm text-gray-500">{session.type?.name}</span>
 												) : (
-													<em className="text-base font-normal text-gray-500">{'No Type'}</em>
+													<em className="text-sm text-gray-500">{'No Type'}</em>
 												)}
 											</div>
 										</div>
@@ -86,13 +84,11 @@ export const SessionList: React.FC<Props> = (props) => {
 											style={{ backgroundColor: session?.type?.color }}
 										/>
 										<div>
-											<span className="text-xl block font-medium">{session.name}</span>{' '}
+											<span className="text-lg block leading-tight">{session.name}</span>{' '}
 											{session.type?.name ? (
-												<span className="text-base font-normal text-gray-500">
-													{session.type?.name}
-												</span>
+												<span className="text-sm text-gray-500">{session.type?.name}</span>
 											) : (
-												<em className="text-base font-normal text-gray-500">{'No Type'}</em>
+												<em className="text-sm text-gray-500">{'No Type'}</em>
 											)}
 										</div>
 									</div>

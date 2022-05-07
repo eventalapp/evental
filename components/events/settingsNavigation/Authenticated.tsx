@@ -52,7 +52,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 		<div>
 			<div className="w-full bg-gradient-to-r from-primary-500 to-secondary-500">
 				<Link href={`/events/${event.slug}`}>
-					<a className="m-auto block text-center text-white py-1">
+					<a className="m-auto block text-center text-white text-sm py-1">
 						You are in admin mode <span className="font-medium">(Click to exit)</span>
 					</a>
 				</Link>

@@ -1,15 +1,11 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SessionList } from '../../../../components/sessions/SessionList';
 import Column from '../../../../components/layout/Column';
-import { LinkButton } from '../../../../components/form/LinkButton';
 import { useSessionsQuery } from '../../../../hooks/queries/useSessionsQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
-
-import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
@@ -104,15 +100,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<FlexRowBetween>
-					<h1 className="text-2xl md:text-3xl font-bold">Sessions</h1>
-
-					{!isOrganizerLoading && isOrganizer && (
-						<Link href={`/events/${eid}/admin/sessions/create`} passHref>
-							<LinkButton>Create Session</LinkButton>
-						</Link>
-					)}
-				</FlexRowBetween>
+				<h3 className="text-xl md:text-2xl font-medium">Sessions</h3>
 
 				<SessionList sessions={sessions} eid={String(eid)} />
 			</Column>
