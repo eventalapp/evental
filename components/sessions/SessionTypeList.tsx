@@ -40,7 +40,7 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 										<div className="flex flex-row items-center justify-between">
 											<div
 												className="rounded-full mr-3 w-4 h-4"
-												style={{ backgroundColor: sessionType.color }}
+												style={{ backgroundColor: sessionType.color ?? '#888888' }}
 											/>
 											<div>
 												<span className="text-xl">{sessionType.name}</span>
@@ -73,7 +73,10 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 								</span>
 								<div className="py-2 flex flex-row justify-between flex-grow border-l-2 border-gray-200 pl-3 flex-wrap">
 									<div className="flex flex-row items-center justify-between">
-										<div className="rounded-full mr-3 w-4 h-4 bg-gradient-to-r from-secondary-500 to-primary-500" />
+										<div
+											className="rounded-full mr-3 w-4 h-4"
+											style={{ backgroundColor: sessionType.color ?? '#888888' }}
+										/>
 										<div>
 											<span className="text-xl">{sessionType.name}</span>
 										</div>

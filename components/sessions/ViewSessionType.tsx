@@ -25,7 +25,7 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 				<div className="flex flex-row items-center justify-between">
 					<div
 						className="rounded-full mr-3 w-4 h-4"
-						style={{ backgroundColor: sessionType.color }}
+						style={{ backgroundColor: sessionType.color ?? '#888888' }}
 					/>
 					<div>
 						<h3 className="text-xl md:text-2xl font-medium">{sessionType.name}</h3>

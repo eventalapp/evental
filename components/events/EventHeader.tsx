@@ -57,7 +57,7 @@ export const EventHeader: React.FC<{
 				</div>
 
 				<div>
-					<Tooltip message={`This is a ${event?.category?.toLowerCase()} event.`}>
+					<Tooltip side={'top'} message={`This is a ${event?.category?.toLowerCase()} event.`}>
 						<span className="text-gray-500 text-xs font-medium inline-block cursor-help">
 							{event?.category}
 						</span>

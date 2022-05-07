@@ -20,7 +20,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+			<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3">
 				{attendees &&
 					attendees.map(
 						(attendee) =>
@@ -31,8 +31,8 @@ export const AttendeeList: React.FC<Props> = (props) => {
 									<Link
 										href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${attendee.user.slug}`}
 									>
-										<a className="flex items-center justify-center flex-col">
-											<div className="h-16 w-16 relative mb-1">
+										<a className="flex items-center justify-between flex-col h-full">
+											<div className="h-16 w-16 relative mb-1 border-2 border-gray-100 rounded-full">
 												<Image
 													alt={String(attendee.user.name)}
 													src={String(
@@ -44,7 +44,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 													layout="fill"
 												/>
 											</div>
-											<span className="text-lg">{attendee.user.name}</span>
+											<span className="text-lg text-center">{attendee.user.name}</span>
 											<span className="block text-gray-700 text-sm leading-none">
 												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
 											</span>

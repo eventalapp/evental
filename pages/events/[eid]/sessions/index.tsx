@@ -9,7 +9,7 @@ import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { getSessions, SessionWithVenue } from '../../../api/events/[eid]/sessions';
+import { getSessions, PaginatedSessionsWithVenue } from '../../../api/events/[eid]/sessions';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
@@ -27,7 +27,7 @@ import { useUser } from '../../../../hooks/queries/useUser';
 import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 
 type Props = {
-	initialSessions: SessionWithVenue[] | undefined;
+	initialSessions: PaginatedSessionsWithVenue | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
@@ -46,10 +46,9 @@ const SessionsPage: NextPage<Props> = (props) => {
 	} = props;
 	const router = useRouter();
 	const { eid } = router.query;
-	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(
-		String(eid),
-		initialSessions
-	);
+	const { sessionsData, isSessionsLoading, sessionsError } = useSessionsQuery(String(eid), {
+		initialData: initialSessions
+	});
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
@@ -70,7 +69,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (!sessions) {
+	if (!sessionsData?.sessions) {
 		return <NotFoundPage message="No sessions not found." />;
 	}
 
@@ -103,7 +102,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 
 				<h3 className="text-xl md:text-2xl font-medium">Sessions</h3>
 
-				<SessionList sessions={sessions} eid={String(eid)} />
+				<SessionList sessions={sessionsData?.sessions} eid={String(eid)} />
 			</Column>
 		</PageWrapper>
 	);

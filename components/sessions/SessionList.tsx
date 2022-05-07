@@ -43,7 +43,7 @@ export const SessionList: React.FC<Props> = (props) => {
 										<div className="flex flex-row items-center justify-between">
 											<div
 												className="rounded-full mr-3 w-4 h-4"
-												style={{ backgroundColor: session?.type?.color }}
+												style={{ backgroundColor: session?.type?.color ?? '#888888' }}
 											/>
 											<div>
 												<span className="text-lg block leading-tight">{session.name}</span>{' '}
@@ -81,7 +81,7 @@ export const SessionList: React.FC<Props> = (props) => {
 									<div className="flex flex-row items-center justify-between">
 										<div
 											className="rounded-full mr-3 w-4 h-4"
-											style={{ backgroundColor: session?.type?.color }}
+											style={{ backgroundColor: session?.type?.color ?? '#888888' }}
 										/>
 										<div>
 											<span className="text-lg block leading-tight">{session.name}</span>{' '}

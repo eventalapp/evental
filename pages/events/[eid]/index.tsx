@@ -3,7 +3,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
@@ -25,16 +25,19 @@ import { getEvent } from '../../api/events/[eid]';
 import { getAttendee } from '../../api/events/[eid]/attendees/[uid]';
 import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 import { getRoles } from '../../api/events/[eid]/roles';
-import { getSessions, SessionWithVenue } from '../../api/events/[eid]/sessions';
+import { getSessions, PaginatedSessionsWithVenue } from '../../api/events/[eid]/sessions';
 import { getVenues } from '../../api/events/[eid]/venues';
 import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
 import { getDateRange } from '../../../utils/date';
 import { format } from 'date-fns';
+import { scrollTo } from '../../../utils/scroll';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
-	initialSessions: SessionWithVenue[] | undefined;
+	initialSessions: PaginatedSessionsWithVenue | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
 	initialOrganizer: boolean;
@@ -54,13 +57,14 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialVenues,
 		initialSessionTypes
 	} = props;
+	const [page, setPage] = useState(1);
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-	const { sessions, isSessionsLoading, sessionsError } = useSessionsQuery(
-		String(eid),
-		initialSessions
-	);
+	const { sessionsData, isSessionsLoading, sessionsError } = useSessionsQuery(String(eid), {
+		initialData: initialSessions,
+		page
+	});
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
@@ -109,7 +113,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		);
 	}
 
-	if (!event || !sessions || !roles) {
+	if (!event || !sessionsData?.sessions || !roles) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -135,9 +139,47 @@ const ViewEventPage: NextPage<Props> = (props) => {
 				<div className="grid grid-cols-12 gap-4">
 					<div className="md:col-span-9 col-span-12">
 						<h3 className="text-xl md:text-2xl font-medium">
-							Sessions <span className="font-normal text-gray-500">({sessions?.length || 0})</span>
+							Sessions{' '}
+							{sessionsData?.pagination?.total > 0 && (
+								<span className="font-normal text-gray-500">
+									({sessionsData?.pagination?.from || 0}/{sessionsData?.pagination?.total || 0})
+								</span>
+							)}
 						</h3>
-						<SessionList sessions={sessions} eid={String(eid)} />
+
+						<SessionList sessions={sessionsData.sessions} eid={String(eid)} />
+
+						{sessionsData.pagination.pageCount > 0 && (
+							<div className="flex flex-row justify-end items-center">
+								<button
+									onClick={() => {
+										if (page > 1) {
+											scrollTo(0);
+											setPage((oldPage) => oldPage - 1);
+										}
+									}}
+								>
+									<FontAwesomeIcon className="mr-1.5" fill="currentColor" icon={faChevronLeft} />
+									Prev
+								</button>
+								<span className="mx-4 text-lg font-medium">
+									Page {page}/{sessionsData.pagination.pageCount}
+								</span>
+								<button
+									disabled={!(page < sessionsData.pagination.pageCount)}
+									className="disabled:text-gray-300 disabled:cursor-not-allowed"
+									onClick={() => {
+										if (page < sessionsData.pagination.pageCount) {
+											scrollTo(0);
+											setPage((oldPage) => oldPage + 1);
+										}
+									}}
+								>
+									Next
+									<FontAwesomeIcon className="ml-1.5" fill="currentColor" icon={faChevronRight} />
+								</button>
+							</div>
+						)}
 					</div>
 					<div className="md:col-span-3 col-span-12">
 						<div className="mb-3">

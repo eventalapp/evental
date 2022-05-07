@@ -31,7 +31,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 					{session?.type && (
 						<div
 							className="rounded-full mr-3 w-4 h-4"
-							style={{ backgroundColor: session?.type?.color }}
+							style={{ backgroundColor: session?.type?.color ?? '#888888' }}
 						/>
 					)}
 
