@@ -50,11 +50,18 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 
 	return (
 		<div>
+			<div className="w-full bg-primary">
+				<Link href={`/events/${event.slug}`}>
+					<a className="m-auto block text-center text-white py-1">
+						You are in admin mode <span className="font-medium">(Click to exit)</span>
+					</a>
+				</Link>
+			</div>
 			<div className="bg-white border-b border-gray-200 shadow-sm">
 				<NavigationMenuPrimitive.Root className="w-full">
 					<NavigationMenuPrimitive.List className="flex items-center justify-between w-full max-w-7xl m-auto h-14 px-3">
 						<div>
-							<Link href={`/events/${event.slug}`} passHref>
+							<Link href={`/events/${event.slug}/admin`} passHref>
 								<NavigationMenuPrimitive.Link>
 									<NavigationMenuPrimitive.Item>
 										<span className="flex flex-row items-center cursor-pointer">
