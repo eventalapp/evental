@@ -84,6 +84,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 			<Column>
 				{event && (
 					<EventHeader
+						adminLink={'/venues'}
 						event={event}
 						eid={String(eid)}
 						isOrganizer={isOrganizer}

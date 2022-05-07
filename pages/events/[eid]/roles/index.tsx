@@ -73,6 +73,7 @@ const RolesPage: NextPage<Props> = (props) => {
 			<Column>
 				{event && (
 					<EventHeader
+						adminLink={'/roles'}
 						event={event}
 						eid={String(eid)}
 						isOrganizer={isOrganizer}

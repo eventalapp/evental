@@ -20,14 +20,14 @@ export const AttendeeList: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<ul className="flex flex-row flex-wrap flex-start items-center">
+			<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
 				{attendees &&
 					attendees.map(
 						(attendee) =>
 							attendee &&
 							attendee.user &&
 							attendee.role && (
-								<li key={attendee.id} className="w-32">
+								<li key={attendee.id}>
 									<Link
 										href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${attendee.user.slug}`}
 									>

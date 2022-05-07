@@ -20,13 +20,14 @@ export const EventHeader: React.FC<{
 	eid: string;
 	isOrganizer: boolean | undefined;
 	isAttendee: AttendeeWithUser | undefined;
+	adminLink?: string | undefined;
 }> = (props) => {
-	const { event, isOrganizer, eid, isAttendee } = props;
+	const { event, isOrganizer, eid, isAttendee, adminLink = '/' } = props;
 
 	return (
 		<div className="mb-7">
 			{isOrganizer && (
-				<Link href={`/events/${eid}/admin`}>
+				<Link href={`/events/${eid}/admin${adminLink}`}>
 					<a className="bg-gradient-to-r from-primary-500 to-secondary-500 block text-white px-5 py-3 rounded-md mb-4 font-medium">
 						You are an organizer for this event, click here to manage this event
 					</a>
@@ -84,8 +85,8 @@ export const EventHeader: React.FC<{
 						<Tooltip
 							message={`This is event is taking place from ${format(
 								new Date(event.startDate),
-								'MMMM d'
-							)} to ${format(new Date(event.endDate), 'MMMM d')}.`}
+								'MMMM do'
+							)} to ${format(new Date(event.endDate), 'MMMM do')}.`}
 						>
 							<div className="flex flex-row items-center mr-3 cursor-help">
 								<FontAwesomeIcon

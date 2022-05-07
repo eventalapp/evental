@@ -94,6 +94,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<Column>
 				{event && (
 					<EventHeader
+						adminLink={'/attendees'}
 						event={event}
 						eid={String(eid)}
 						isOrganizer={isOrganizer}
