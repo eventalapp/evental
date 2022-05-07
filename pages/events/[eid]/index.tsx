@@ -29,6 +29,8 @@ import { getSessions, SessionWithVenue } from '../../api/events/[eid]/sessions';
 import { getVenues } from '../../api/events/[eid]/venues';
 import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
+import { getDateRange } from '../../../utils/date';
+import { format } from 'date-fns';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -172,6 +174,14 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						<div className="mb-3">
 							<span className="block font-medium border-b border-gray-200">Filter by Date</span>
+							{getDateRange(new Date(event.startDate), new Date(event.endDate)).map((date) => (
+								<Link
+									key={date.getMilliseconds()}
+									href={`/events/${eid}/sessions/dates/${format(date, 'yyyy-MM-dd')}`}
+								>
+									<a className="block">{format(date, 'yyyy-MM-dd')}</a>
+								</Link>
+							))}
 						</div>
 					</div>
 				</div>
