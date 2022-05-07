@@ -32,7 +32,7 @@ export const VenueList: React.FC<Props> = (props) => {
 						<div
 							className={classNames(
 								'p-3 py-4 border-gray-200',
-								i !== venues.length - 1 && 'border-b '
+								i !== venues.length - 1 && 'border-b-2'
 							)}
 						>
 							<div className="flex flex-row justify-between items-center flex-wrap">

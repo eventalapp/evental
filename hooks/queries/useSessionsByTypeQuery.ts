@@ -3,21 +3,16 @@ import { useQuery, UseQueryResult } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 
-export type UseSessionsByVenueQuery = UseQueryResult<
-	SessionWithVenue[],
-	AxiosError<ErroredAPIResponse>
->;
-
-export const useSessionsByVenueQuery = (
+export const useSessionsByTypeQuery = (
 	eid: string,
-	vid: string,
+	tid: string,
 	initialData?: SessionWithVenue[] | undefined
-): UseSessionsByVenueQuery => {
+): UseQueryResult<SessionWithVenue[], AxiosError<ErroredAPIResponse>> => {
 	return useQuery<SessionWithVenue[], AxiosError<ErroredAPIResponse>>(
-		['venue-sessions', eid, vid],
+		['type-sessions', eid, tid],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/api/events/${eid}/sessions?venue=${vid}`)
+				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/api/events/${eid}/sessions?type=${tid}`)
 				.then((res) => res.data.data);
 		},
 		{

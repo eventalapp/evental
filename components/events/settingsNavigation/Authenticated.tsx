@@ -50,7 +50,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<div className="w-full bg-primary">
+			<div className="w-full bg-gradient-to-r from-primary-500 to-secondary-500">
 				<Link href={`/events/${event.slug}`}>
 					<a className="m-auto block text-center text-white py-1">
 						You are in admin mode <span className="font-medium">(Click to exit)</span>
@@ -61,21 +61,20 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 				<NavigationMenuPrimitive.Root className="w-full">
 					<NavigationMenuPrimitive.List className="flex items-center justify-between w-full max-w-7xl m-auto h-14 px-3">
 						<div>
-							<Link href={`/events/${event.slug}/admin`} passHref>
+							<Link href={`/`} passHref>
 								<NavigationMenuPrimitive.Link>
 									<NavigationMenuPrimitive.Item>
-										<span className="flex flex-row items-center cursor-pointer">
+										<span className="flex flex-row items-center">
 											<img
-												src={`https://cdn.evental.app${event.image}`}
-												className="w-11 h-11 mr-3 rounded-md"
+												src="https://cdn.evental.app/images/logo.svg"
+												className="w-12 h-12 pr-3"
 												alt="logo"
 											/>
-
 											<strong
-												className="text-xl max-w-xs tracking-tight leading-none font-bold font-display"
+												className="text-xl max-w-2xl tracking-tight font-bold font-display"
 												aria-label="evental homepage"
 											>
-												{event.name}
+												Evental
 											</strong>
 										</span>
 									</NavigationMenuPrimitive.Item>
@@ -124,7 +123,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 					</NavigationMenuPrimitive.List>
 
 					<div
-						className={cx('absolute flex justify-center z-30', 'w-[100%] left-[10.5%] top-[5.5%]')}
+						className={cx('absolute flex justify-center z-30', 'w-[100%] left-[45%] top-[5.5%]')}
 						style={{
 							perspective: '2000px'
 						}}

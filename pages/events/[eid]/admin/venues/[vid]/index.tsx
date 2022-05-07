@@ -18,10 +18,8 @@ import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { SessionList } from '../../../../../../components/sessions/SessionList';
 import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
+import { ViewVenue } from '../../../../../../components/venues/ViewVenue';
 
 const ViewVenuePage: NextPage = () => {
 	const router = useRouter();
@@ -89,23 +87,12 @@ const ViewVenuePage: NextPage = () => {
 					</div>
 				</FlexRowBetween>
 
-				{venue.address && (
-					<div className="flex flex-row items-center mb-1">
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="w-5 h-5 mr-1.5"
-							size="1x"
-							icon={faLocationDot}
-						/>
-						<p>{venue.address}</p>
-					</div>
-				)}
-
-				<p>{venue.description}</p>
-
-				{sessionsByVenueQuery.data && (
-					<SessionList eid={String(eid)} sessions={sessionsByVenueQuery.data} />
-				)}
+				<ViewVenue
+					venue={venue}
+					sessionsByVenueQuery={sessionsByVenueQuery}
+					eid={String(eid)}
+					admin
+				/>
 			</Column>
 		</PageWrapper>
 	);

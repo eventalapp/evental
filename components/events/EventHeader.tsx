@@ -24,10 +24,10 @@ export const EventHeader: React.FC<{
 	const { event, isOrganizer, eid, isAttendee } = props;
 
 	return (
-		<div className="mb-5">
+		<div className="mb-7">
 			{isOrganizer && (
 				<Link href={`/events/${eid}/admin`}>
-					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-medium">
+					<a className="bg-gradient-to-r from-primary-500 to-secondary-500 block text-white px-5 py-3 rounded-md mb-4 font-medium">
 						You are an organizer for this event, click here to manage this event
 					</a>
 				</Link>
@@ -35,13 +35,13 @@ export const EventHeader: React.FC<{
 
 			{!Boolean(isAttendee) && (
 				<Link href={`/events/${eid}/register`}>
-					<a className="block text-white bg-primary-400 px-5 py-3 rounded-md mb-4 font-medium">
+					<a className="bg-gradient-to-r from-primary-500 to-secondary-500 block text-white px-5 py-3 rounded-md mb-4 font-medium">
 						Are you attending this event? Register here.
 					</a>
 				</Link>
 			)}
 
-			<div className="flex flex-row items-center mb-1">
+			<div className="flex flex-row items-center">
 				<div className="flex-shrink-0 relative w-12 h-12 md:w-20 md:h-20 rounded-md mr-3 md:mr-5 border-2 border-gray-100">
 					<Image
 						alt={event.name}
@@ -57,7 +57,7 @@ export const EventHeader: React.FC<{
 
 				<div>
 					<Tooltip message={`This is a ${event?.category?.toLowerCase()} event.`}>
-						<span className="text-gray-500 text-xs inline-block cursor-help">
+						<span className="text-gray-500 text-xs font-medium inline-block cursor-help">
 							{event?.category}
 						</span>
 					</Tooltip>
@@ -66,7 +66,7 @@ export const EventHeader: React.FC<{
 						{event?.name}
 					</h1>
 
-					<div className="flex-row flex mb-1 items-center text-gray-600 flex-wrap">
+					<div className="flex-row flex items-center text-gray-600 flex-wrap">
 						{event?.location && (
 							<Tooltip message={`This is event is taking place at ${event?.location}.`}>
 								<div className="flex flex-row items-center mr-3 cursor-help">

@@ -5,6 +5,7 @@ import { NextkitError } from 'nextkit';
 import { api } from '../../../../../utils/api';
 import { getVenue } from '../venues/[vid]';
 import { endOfDay, isAfter, isBefore, parseISO, startOfDay } from 'date-fns';
+import { getSessionType } from './types/[tid]';
 
 export type SessionWithVenue = {
 	venue: Prisma.EventVenue | null;
@@ -13,7 +14,7 @@ export type SessionWithVenue = {
 
 export default api({
 	async GET({ req }) {
-		const { eid, venue, date } = req.query;
+		const { eid, venue, date, type } = req.query;
 
 		if (venue) {
 			const sessionByVenueList = await getSessionsByVenue(String(eid), String(venue));
@@ -33,6 +34,16 @@ export default api({
 			}
 
 			return sessionByDateList;
+		}
+
+		if (type) {
+			const sessionByTypeList = await getSessionsByType(String(eid), String(type));
+
+			if (!sessionByTypeList) {
+				throw new NextkitError(404, 'Sessions by type not found');
+			}
+
+			return sessionByTypeList;
 		}
 
 		const sessionList = await getSessions(String(eid));
@@ -123,6 +134,37 @@ export const getSessionsByDate = async (
 				gte: startOfDay(dateParsed),
 				lte: endOfDay(dateParsed)
 			}
+		},
+		include: {
+			venue: true,
+			type: true
+		},
+		orderBy: {
+			startDate: 'asc'
+		}
+	});
+};
+
+export const getSessionsByType = async (
+	eid: string,
+	tid: string
+): Promise<SessionWithVenue[] | null> => {
+	const event = await getEvent(eid);
+
+	if (!event) {
+		return null;
+	}
+
+	const type = await getSessionType(eid, tid);
+
+	if (!type) {
+		return null;
+	}
+
+	return await prisma.eventSession.findMany({
+		where: {
+			eventId: event.id,
+			typeId: type.id
 		},
 		include: {
 			venue: true,

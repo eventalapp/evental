@@ -21,10 +21,8 @@ import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { useSessionsByVenueQuery } from '../../../../hooks/queries/useSessionsByVenueQuery';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { SessionList } from '../../../../components/sessions/SessionList';
 import { getSessionsByVenue, SessionWithVenue } from '../../../api/events/[eid]/sessions';
+import { ViewVenue } from '../../../../components/venues/ViewVenue';
 
 type Props = {
 	initialVenue: Prisma.EventVenue | undefined;
@@ -85,28 +83,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					<h1 className="text-2xl md:text-3xl font-bold">{venue.name}</h1>
 				</FlexRowBetween>
 
-				{venue.address && (
-					<div className="flex flex-row items-center mb-1">
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="w-5 h-5 mr-1.5"
-							size="1x"
-							icon={faLocationDot}
-						/>
-						<p>{venue.address}</p>
-					</div>
-				)}
-
-				<p>{venue.description}</p>
-
-				<h1 className="text-xl md:text-2xl font-medium mt-5">
-					Sessions{' '}
-					<span className="font-normal text-gray-500">({sessionsByVenueQuery.data?.length})</span>
-				</h1>
-
-				{sessionsByVenueQuery.data && (
-					<SessionList eid={String(eid)} sessions={sessionsByVenueQuery.data} />
-				)}
+				<ViewVenue venue={venue} sessionsByVenueQuery={sessionsByVenueQuery} eid={String(eid)} />
 			</Column>
 		</PageWrapper>
 	);

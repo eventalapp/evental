@@ -15,22 +15,24 @@ import { useUser } from '../../../../../hooks/queries/useUser';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { EventNavigation } from '../../../../../components/events/navigation';
 import { ssrGetUser } from '../../../../../utils/api';
-import { getSessions } from '../../../../api/events/[eid]/sessions';
+import { getSessionsByType, SessionWithVenue } from '../../../../api/events/[eid]/sessions';
 import { getEvent } from '../../../../api/events/[eid]';
 import { getRoles } from '../../../../api/events/[eid]/roles';
 import Prisma from '@prisma/client';
 import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 import { getSessionType } from '../../../../api/events/[eid]/sessions/types/[tid]';
+import { useSessionsByTypeQuery } from '../../../../../hooks/queries/useSessionsByTypeQuery';
 
 type Props = {
 	initialSessionType: Prisma.EventSessionType | undefined;
+	initialSessions: SessionWithVenue[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 };
 
 const ViewSessionTypePage: NextPage<Props> = (props) => {
-	const { initialSessionType, initialEvent, initialRoles, initialUser } = props;
+	const { initialSessionType, initialEvent, initialRoles, initialUser, initialSessions } = props;
 
 	const router = useRouter();
 	const { tid, eid } = router.query;
@@ -42,6 +44,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 		String(tid),
 		initialSessionType
 	);
+	const sessionsByTypeQuery = useSessionsByTypeQuery(String(eid), String(tid), initialSessions);
 
 	if (isSessionTypeLoading || isRolesLoading || isEventLoading || isUserLoading) {
 		return <LoadingPage />;
@@ -53,6 +56,10 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 
 	if (!sessionType) {
 		return <NotFoundPage message="Session Type not found." />;
+	}
+
+	if (!sessionsByTypeQuery.data) {
+		return <NotFoundPage message="Sessions not found." />;
 	}
 
 	if (eventError) {
@@ -68,7 +75,12 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<ViewSessionType sessionType={sessionType} eid={String(eid)} tid={String(tid)} admin />
+				<ViewSessionType
+					sessionType={sessionType}
+					eid={String(eid)}
+					tid={String(tid)}
+					sessions={sessionsByTypeQuery.data}
+				/>
 			</Column>
 		</PageWrapper>
 	);
@@ -78,10 +90,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const { eid, tid } = context.query;
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialSessions = (await getSessions(String(eid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialSessionType = (await getSessionType(String(eid), String(tid))) ?? undefined;
+	const initialSessions = (await getSessionsByType(String(eid), String(tid))) ?? undefined;
 
 	return {
 		props: {
