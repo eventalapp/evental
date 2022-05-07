@@ -106,7 +106,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 				<div className="grid grid-cols-12 gap-4">
 					<div className="md:col-span-9 col-span-12">
-						<h1 className="text-2xl md:text-3xl font-bold leading-tight">Sessions</h1>
+						<h1 className="text-xl md:text-2xl font-bold leading-tight">Sessions</h1>
 						<SessionList sessions={sessions} eid={String(eid)} />
 					</div>
 					<div className="md:col-span-3 col-span-12">
