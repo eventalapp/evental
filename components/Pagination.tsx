@@ -13,7 +13,7 @@ export const Pagination: React.FC<Props> = (props) => {
 	const { page, pageCount, setPage } = props;
 
 	return (
-		<div className="flex flex-row justify-end items-center">
+		<div className="flex flex-row justify-end items-center mt-4">
 			<button
 				onClick={() => {
 					if (page > 1) {
@@ -25,7 +25,7 @@ export const Pagination: React.FC<Props> = (props) => {
 				<FontAwesomeIcon className="mr-1.5" fill="currentColor" icon={faChevronLeft} />
 				Prev
 			</button>
-			<span className="mx-4 text-lg font-medium">
+			<span className="mx-5 text-lg font-medium">
 				Page {page}/{pageCount}
 			</span>
 			<button
