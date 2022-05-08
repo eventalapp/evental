@@ -97,6 +97,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 					session={session}
 					eid={String(eid)}
 					sid={String(sid)}
+					event={event}
 				/>
 			</Column>
 		</PageWrapper>

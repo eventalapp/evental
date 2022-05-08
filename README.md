@@ -5,19 +5,20 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 ## Todo for MVP:
 
 - add speakers to sessions
-- wysiwyg editor for sessions etc
 - excel export for data
 - add event to calendar
 - make event navigation in the hamburger menu
 - marketing pages
 - billing (stripe or similar?)
-- Sort by date, type, venue
+- Sort sessions by date
 - view/print your schedule
+- customize react toast
+- 
 - custom pages for map etc
-
+- wysiwyg editor for sessions etc
+- 
 ## todo post mvp
 - clean up queries/mutations(export whole mut/query)
-- 
 
 ## Installation 💾
 

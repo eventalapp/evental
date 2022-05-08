@@ -9,6 +9,9 @@ import { AttendeeList } from '../attendees/AttendeeList';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import Tooltip from '../radix/components/Tooltip';
+import { AddToCalendar } from '../AddToCalendar';
+import { CalendarEvent } from 'calendar-link';
+import Prisma from '@prisma/client';
 
 type Props = {
 	eid: string;
@@ -17,12 +20,25 @@ type Props = {
 	attendees: AttendeeWithUser[] | undefined;
 	session: SessionWithVenue;
 	admin?: boolean;
+	event: Prisma.Event;
 };
 
 export const ViewSession: React.FC<Props> = (props) => {
-	const { session, sid, eid, isAttending, admin = false, attendees } = props;
+	const { session, sid, eid, isAttending, admin = false, attendees, event } = props;
 
 	if (!session) return null;
+
+	const SESSION_CALENDAR_EVENT: CalendarEvent = {
+		title: session.name,
+		description: session.description ?? undefined,
+		location: session?.venue?.address || event.location || session?.venue?.name,
+		end: new Date(session.endDate).toISOString(),
+		start: new Date(session.startDate).toISOString(),
+		url: `${
+			process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+		}/events/${eid}/sessions/${sid}`,
+		guests: attendees?.map((attendee) => attendee.user.name) ?? undefined
+	};
 
 	return (
 		<div>
@@ -38,6 +54,8 @@ export const ViewSession: React.FC<Props> = (props) => {
 					<h1 className="text-2xl md:text-3xl font-medium">{session.name}</h1>
 				</div>
 				<div>
+					<AddToCalendar event={SESSION_CALENDAR_EVENT} />
+
 					{!isAttending && !admin && (
 						<Link href={`/events/${eid}/sessions/${sid}/register`} passHref>
 							<LinkButton>Attend This Session</LinkButton>
@@ -62,7 +80,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 						href={`/events/${eid}${admin ? '/admin' : ''}/sessions/types/${session?.type?.slug}`}
 					>
 						<a>
-							<Tooltip message={`This session is a ${session?.type?.name} session.`}>
+							<Tooltip side={'top'} message={`This session is a ${session?.type?.name} session.`}>
 								<div className="inline-flex flex-row items-center mb-1">
 									<FontAwesomeIcon
 										fill="currentColor"
@@ -83,6 +101,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 					<Link href={`/events/${eid}/venues/${session?.venue?.slug}`}>
 						<a>
 							<Tooltip
+								side={'top'}
 								message={`This session is taking place at the ${session?.venue?.name} venue.`}
 							>
 								<div className="inline-flex flex-row items-center mb-1">
@@ -100,18 +119,26 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			)}
 
-			<div className="flex flex-row items-center">
-				<FontAwesomeIcon
-					fill="currentColor"
-					className="w-5 h-5 mr-1.5"
-					size="1x"
-					icon={faCalendarDay}
-				/>
-				<p>
-					{format(new Date(session.startDate), 'MMMM dd h:mm a')} -{' '}
-					{format(new Date(session.endDate), 'MMMM dd h:mm a')}
-				</p>
-			</div>
+			<Tooltip
+				side={'top'}
+				message={`This is event is taking place from ${format(
+					new Date(session.startDate),
+					'MMMM do h:mm a'
+				)} to ${format(new Date(session.endDate), 'MMMM do h:mm a')}.`}
+			>
+				<div className="inline-flex flex-row items-center mb-2 cursor-help">
+					<FontAwesomeIcon
+						fill="currentColor"
+						className="w-5 h-5 mr-1.5"
+						size="1x"
+						icon={faCalendarDay}
+					/>
+					<p>
+						{format(new Date(session.startDate), 'MMMM dd h:mm a')} -{' '}
+						{format(new Date(session.endDate), 'MMMM dd h:mm a')}
+					</p>
+				</div>
+			</Tooltip>
 
 			<p>{session.description}</p>
 

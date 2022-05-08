@@ -69,6 +69,7 @@ const ViewSessionPage: NextPage = () => {
 					session={session}
 					eid={String(eid)}
 					sid={String(sid)}
+					event={event}
 				/>
 			</Column>
 		</PageWrapper>
