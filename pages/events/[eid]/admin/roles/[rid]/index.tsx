@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { LinkButton } from '../../../../../../components/form/LinkButton';
 import { capitalizeFirstLetter } from '../../../../../../utils/string';
-import { useRoleAttendeesQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
+import { useRoleQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
 import Column from '../../../../../../components/layout/Column';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -16,14 +16,17 @@ import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetwe
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
-import React from 'react';
+import React, { useState } from 'react';
 import { AttendeeList } from '../../../../../../components/attendees/AttendeeList';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { useAttendeesByRoleQuery } from '../../../../../../hooks/queries/useAttendeesByRoleQuery';
+import { Pagination } from '../../../../../../components/Pagination';
 
 const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { rid, eid } = router.query;
-	const { attendees, role, isRoleAttendeesLoading, roleAttendeesError } = useRoleAttendeesQuery(
+	const [page, setPage] = useState(1);
+	const { role, isRoleAttendeesLoading, roleAttendeesError } = useRoleQuery(
 		String(eid),
 		String(rid)
 	);
@@ -31,12 +34,21 @@ const ViewAttendeePage: NextPage = () => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { user } = useUser();
+	const { attendeesData, isAttendeesLoading } = useAttendeesByRoleQuery(String(eid), String(rid), {
+		page
+	});
 
-	if (isOrganizerLoading || isRoleAttendeesLoading || isRolesLoading || isEventLoading) {
+	if (
+		isOrganizerLoading ||
+		isRoleAttendeesLoading ||
+		isRolesLoading ||
+		isEventLoading ||
+		isAttendeesLoading
+	) {
 		return <LoadingPage />;
 	}
 
-	if (!role || !attendees) {
+	if (!role || !attendeesData?.attendees) {
 		return <NotFoundPage message="Role not found." />;
 	}
 
@@ -64,7 +76,11 @@ const ViewAttendeePage: NextPage = () => {
 				<FlexRowBetween>
 					<h3 className="text-xl md:text-2xl font-medium">
 						{capitalizeFirstLetter(role.name.toLowerCase())}s{' '}
-						<span className="font-normal text-gray-500">({attendees.length})</span>
+						{attendeesData?.pagination?.total > 0 && (
+							<span className="font-normal text-gray-500">
+								({attendeesData?.pagination?.from || 0}/{attendeesData?.pagination?.total || 0})
+							</span>
+						)}
 					</h3>
 
 					<div>
@@ -83,10 +99,18 @@ const ViewAttendeePage: NextPage = () => {
 					</div>
 				</FlexRowBetween>
 
-				{attendees?.length === 0 ? (
+				{attendeesData?.attendees?.length === 0 ? (
 					<p>No {role.name.toLowerCase()}s found.</p>
 				) : (
-					<AttendeeList admin eid={String(eid)} attendees={attendees} />
+					<AttendeeList admin eid={String(eid)} attendees={attendeesData?.attendees} />
+				)}
+
+				{attendeesData.pagination.pageCount > 1 && (
+					<Pagination
+						page={page}
+						pageCount={attendeesData.pagination.pageCount}
+						setPage={setPage}
+					/>
 				)}
 			</Column>
 		</PageWrapper>

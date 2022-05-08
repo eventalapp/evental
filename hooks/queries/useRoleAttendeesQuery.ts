@@ -2,32 +2,29 @@ import axios, { AxiosError } from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { RoleAttendeePayload } from '../../pages/api/events/[eid]/roles/[rid]';
 import Prisma from '@prisma/client';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
-export interface UseRoleAttendeesQueryData {
-	attendees: AttendeeWithUser[] | undefined;
+export interface UseRoleQueryData {
 	role: Prisma.EventRole | undefined;
 	isRoleAttendeesLoading: boolean;
 	roleAttendeesError: ErroredAPIResponse | null;
 }
 
-export const useRoleAttendeesQuery = (
+export const useRoleQuery = (
 	eid: string,
 	rid: string,
-	initialData?: { attendees: AttendeeWithUser[] | undefined; role: Prisma.EventRole | undefined }
-): UseRoleAttendeesQueryData => {
+	initialData?: Prisma.EventRole | undefined
+): UseRoleQueryData => {
 	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
-	const { data, isLoading: isRoleAttendeesLoading } = useQuery<
-		RoleAttendeePayload,
+	const { data: role, isLoading: isRoleAttendeesLoading } = useQuery<
+		Prisma.EventRole,
 		AxiosError<ErroredAPIResponse>
 	>(
 		['role', eid, rid],
 		async () => {
 			return axios
-				.get<SuccessAPIResponse<RoleAttendeePayload>>(`/api/events/${eid}/roles/${rid}`)
+				.get<SuccessAPIResponse<Prisma.EventRole>>(`/api/events/${eid}/roles/${rid}`)
 				.then((res) => res.data.data);
 		},
 		{
@@ -44,8 +41,7 @@ export const useRoleAttendeesQuery = (
 	);
 
 	return {
-		role: data?.role,
-		attendees: data?.attendees,
+		role,
 		isRoleAttendeesLoading,
 		roleAttendeesError: error
 	};

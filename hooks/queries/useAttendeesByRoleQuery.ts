@@ -1,36 +1,34 @@
 import axios, { AxiosError } from 'axios';
-import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { PaginatedAttendeesWithUser } from '../../pages/api/events/[eid]/attendees';
 
-export interface UseAttendeesQueryData {
+export interface UseAttendeesByRoleQueryData {
 	attendeesData: PaginatedAttendeesWithUser | undefined;
 	isAttendeesLoading: boolean;
-	attendeesError: ErroredAPIResponse | null;
 }
 
-export interface UseAttendeesQueryOptions {
+export interface UseAttendeesByRoleQueryOptions {
 	initialData?: PaginatedAttendeesWithUser | undefined;
 	page?: number;
 }
 
-export const useAttendeesQuery = (
+export const useAttendeesByRoleQuery = (
 	eid: string,
-	args: UseAttendeesQueryOptions = {}
-): UseAttendeesQueryData => {
+	rid: string,
+	args: UseAttendeesByRoleQueryOptions = {}
+): UseAttendeesByRoleQueryData => {
 	const { initialData, page = 1 } = args;
 	let params = new URLSearchParams();
 
 	params.append('page', String(page));
-
-	const [error, setError] = useState<ErroredAPIResponse | null>(null);
+	params.append('role', String(rid));
 
 	const { data: attendeesData, isLoading: isAttendeesLoading } = useQuery<
 		PaginatedAttendeesWithUser,
 		AxiosError<ErroredAPIResponse>
 	>(
-		['attendees', eid, page],
+		['attendees', eid, rid, page],
 		async () => {
 			return axios
 				.get<SuccessAPIResponse<PaginatedAttendeesWithUser>>(
@@ -41,15 +39,9 @@ export const useAttendeesQuery = (
 		{
 			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined',
-			onError: (error) => {
-				setError(error?.response?.data ?? null);
-			},
-			onSuccess: () => {
-				setError(null);
-			},
 			initialData
 		}
 	);
 
-	return { attendeesData, isAttendeesLoading, attendeesError: error };
+	return { attendeesData, isAttendeesLoading };
 };
