@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { NotFoundPage } from '../../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../../components/error/ViewErrorPage';
 import { useRolesQuery } from '../../../../../../../hooks/queries/useRolesQuery';
@@ -16,9 +16,11 @@ import { LoadingPage } from '../../../../../../../components/error/LoadingPage';
 import { useSessionTypeQuery } from '../../../../../../../hooks/queries/useSessionTypeQuery';
 import { ViewSessionType } from '../../../../../../../components/sessions/ViewSessionType';
 import { useSessionsByTypeQuery } from '../../../../../../../hooks/queries/useSessionsByTypeQuery';
+import { Pagination } from '../../../../../../../components/Pagination';
 
 const ViewSessionTypePage: NextPage = () => {
 	const router = useRouter();
+	const [page, setPage] = useState(1);
 	const { tid, eid } = router.query;
 	const { user } = useUser();
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
@@ -28,9 +30,18 @@ const ViewSessionTypePage: NextPage = () => {
 		String(eid),
 		String(tid)
 	);
-	const sessionsByTypeQuery = useSessionsByTypeQuery(String(eid), String(tid));
+	const { sessionsByTypeData, isSessionsByTypeLoading } = useSessionsByTypeQuery(
+		String(eid),
+		String(tid)
+	);
 
-	if (isOrganizerLoading || isSessionTypeLoading || isRolesLoading || isEventLoading) {
+	if (
+		isOrganizerLoading ||
+		isSessionTypeLoading ||
+		isRolesLoading ||
+		isEventLoading ||
+		isSessionsByTypeLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -42,7 +53,7 @@ const ViewSessionTypePage: NextPage = () => {
 		return <NotFoundPage message="Session Type not found." />;
 	}
 
-	if (!sessionsByTypeQuery.data) {
+	if (!sessionsByTypeData?.sessions) {
 		return <NotFoundPage message="Sessions not found." />;
 	}
 
@@ -67,9 +78,16 @@ const ViewSessionTypePage: NextPage = () => {
 					sessionType={sessionType}
 					eid={String(eid)}
 					tid={String(tid)}
-					sessions={sessionsByTypeQuery.data}
+					sessions={sessionsByTypeData.sessions}
 					admin
 				/>
+				{sessionsByTypeData.pagination.pageCount > 1 && (
+					<Pagination
+						page={page}
+						pageCount={sessionsByTypeData.pagination.pageCount}
+						setPage={setPage}
+					/>
+				)}
 			</Column>
 		</PageWrapper>
 	);

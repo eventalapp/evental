@@ -15,6 +15,8 @@ export const Pagination: React.FC<Props> = (props) => {
 	return (
 		<div className="flex flex-row justify-end items-center mt-4">
 			<button
+				disabled={page <= 1}
+				className="disabled:text-gray-300 disabled:cursor-not-allowed"
 				onClick={() => {
 					if (page > 1) {
 						scrollTo(0);

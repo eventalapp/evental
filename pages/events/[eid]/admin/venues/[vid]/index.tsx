@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
@@ -19,38 +19,43 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
-import { ViewVenue } from '../../../../../../components/venues/ViewVenue';
+import { Pagination } from '../../../../../../components/Pagination';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { SessionList } from '../../../../../../components/sessions/SessionList';
+import Tooltip from '../../../../../../components/radix/components/Tooltip';
 
 const ViewVenuePage: NextPage = () => {
 	const router = useRouter();
 	const { vid, eid } = router.query;
+	const [page, setPage] = useState(1);
 	const { venue, isVenueLoading, venueError } = useVenueQuery(String(eid), String(vid));
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { user } = useUser();
-	const sessionsByVenueQuery = useSessionsByVenueQuery(String(eid), String(vid));
+	const { isSessionsByVenueLoading, sessionsByVenueData } = useSessionsByVenueQuery(
+		String(eid),
+		String(vid),
+		{ page: page }
+	);
 
 	if (
 		isVenueLoading ||
 		isOrganizerLoading ||
 		isEventLoading ||
 		isRolesLoading ||
-		sessionsByVenueQuery.isLoading
+		isSessionsByVenueLoading
 	) {
 		return <LoadingPage />;
 	}
 
-	if (!venue) {
+	if (!venue || !sessionsByVenueData?.sessions) {
 		return <NotFoundPage message="Venue not found." />;
 	}
 
-	if (venueError || eventError || rolesError || sessionsByVenueQuery.error?.response?.data) {
-		return (
-			<ViewErrorPage
-				errors={[venueError, eventError, rolesError, sessionsByVenueQuery.error?.response?.data]}
-			/>
-		);
+	if (venueError || eventError || rolesError) {
+		return <ViewErrorPage errors={[venueError, eventError, rolesError]} />;
 	}
 
 	if (!event) {
@@ -70,29 +75,64 @@ const ViewVenuePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
+				<div className="mb-3">
+					<FlexRowBetween className="mb-1">
+						<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
 
-					<div>
-						{!isOrganizerLoading && isOrganizer && (
-							<Link href={`/events/${eid}/admin/venues/${vid}/edit`} passHref>
-								<LinkButton className="mr-3">Edit venue</LinkButton>
-							</Link>
-						)}
-						{!isOrganizerLoading && isOrganizer && (
-							<Link href={`/events/${eid}/admin/venues/${vid}/delete`} passHref>
-								<LinkButton className="mr-3">Delete venue</LinkButton>
-							</Link>
-						)}
-					</div>
-				</FlexRowBetween>
+						<div>
+							{!isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/venues/${vid}/edit`} passHref>
+									<LinkButton className="mr-3">Edit venue</LinkButton>
+								</Link>
+							)}
+							{!isOrganizerLoading && isOrganizer && (
+								<Link href={`/events/${eid}/admin/venues/${vid}/delete`} passHref>
+									<LinkButton className="mr-3">Delete venue</LinkButton>
+								</Link>
+							)}
+						</div>
+					</FlexRowBetween>
 
-				<ViewVenue
-					venue={venue}
-					sessionsByVenueQuery={sessionsByVenueQuery}
-					eid={String(eid)}
-					admin
-				/>
+					<Tooltip
+						message={
+							venue.address
+								? `This is venue is located at ${venue?.address}.`
+								: 'This venue has not specified an address'
+						}
+					>
+						<div className="inline-flex flex-row items-center mb-1 cursor-help">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mr-1.5"
+								size="1x"
+								icon={faLocationDot}
+							/>
+							{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
+						</div>
+					</Tooltip>
+
+					<p>{venue.description}</p>
+				</div>
+
+				<h3 className="text-xl md:text-2xl font-medium">
+					Sessions{' '}
+					{sessionsByVenueData?.pagination?.total > 0 && (
+						<span className="font-normal text-gray-500">
+							({sessionsByVenueData?.pagination?.from || 0}/
+							{sessionsByVenueData?.pagination?.total || 0})
+						</span>
+					)}
+				</h3>
+				{sessionsByVenueData.sessions && (
+					<SessionList eid={String(eid)} sessions={sessionsByVenueData.sessions} admin />
+				)}
+				{sessionsByVenueData.pagination.pageCount > 1 && (
+					<Pagination
+						page={page}
+						pageCount={sessionsByVenueData.pagination.pageCount}
+						setPage={setPage}
+					/>
+				)}
 			</Column>
 		</PageWrapper>
 	);
