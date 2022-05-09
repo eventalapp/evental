@@ -14,7 +14,13 @@ export interface UseSignInMutationData {
 	>;
 }
 
-export const useSignInMutation = (): UseSignInMutationData => {
+interface UseSignInMutationOptions {
+	redirectUrl?: string;
+}
+
+export const useSignInMutation = (args: UseSignInMutationOptions = {}): UseSignInMutationData => {
+	const { redirectUrl } = args;
+
 	const queryClient = useQueryClient();
 
 	const signInMutation = useMutation<
@@ -29,10 +35,17 @@ export const useSignInMutation = (): UseSignInMutationData => {
 		},
 		{
 			onSuccess: () => {
-				router.push('/events').then(() => {
-					toast.success('You have successfully signed in!');
-					void queryClient.refetchQueries('user');
-				});
+				if (!redirectUrl) {
+					router.push('/events').then(() => {
+						toast.success('You have successfully signed in!');
+						void queryClient.refetchQueries('user');
+					});
+				} else {
+					router.push(redirectUrl).then(() => {
+						toast.success('You have successfully signed in!');
+						void queryClient.refetchQueries('user');
+					});
+				}
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'Failed to sign in.');

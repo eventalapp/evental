@@ -112,9 +112,11 @@ const ViewVenuePage: NextPage = () => {
 						</div>
 					</Tooltip>
 
-					<div className="prose focus:outline-none prose-a:text-primary mt-1">
-						{parse(String(venue.description))}
-					</div>
+					{venue.description && (
+						<div className="prose focus:outline-none prose-a:text-primary mt-1">
+							{parse(String(venue.description))}
+						</div>
+					)}
 				</div>
 
 				<h3 className="text-xl md:text-2xl font-medium">

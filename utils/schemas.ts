@@ -227,3 +227,12 @@ export const EditUserSchema = z.object({
 });
 
 export type EditUserPayload = z.infer<typeof EditUserSchema>;
+
+// Invites
+
+export const InvitePermissionRoleSchema = z.object({
+	email: emailValidator,
+	permissionRole: z.string()
+});
+
+export type InvitePermissionRolePaylod = z.infer<typeof InvitePermissionRoleSchema>;

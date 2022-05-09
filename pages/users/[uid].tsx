@@ -42,9 +42,11 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 			<Column>
 				<h3 className="text-xl md:text-2xl font-medium mb-3">{user.name}</h3>
 
-				<div className="prose focus:outline-none prose-a:text-primary">
-					{parse(String(user.description))}
-				</div>
+				{user.description && (
+					<div className="prose focus:outline-none prose-a:text-primary">
+						{parse(String(user.description))}
+					</div>
+				)}
 			</Column>
 		</PageWrapper>
 	);

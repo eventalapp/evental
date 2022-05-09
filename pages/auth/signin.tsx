@@ -11,6 +11,7 @@ import { LoadingPage } from '../../components/error/LoadingPage';
 import Head from 'next/head';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { useRouter } from 'next/router';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -19,7 +20,16 @@ type Props = {
 const SignInPage: NextPage<Props> = (props) => {
 	const { initialUser } = props;
 	const { user, isUserLoading } = useUser(initialUser);
-	const { signInMutation } = useSignInMutation();
+	const router = useRouter();
+	let params = new URLSearchParams();
+
+	if (router.query.redirectUrl) {
+		params.append('redirectUrl', String(router.query.redirectUrl));
+	}
+
+	const { signInMutation } = useSignInMutation({
+		redirectUrl: router.query.redirectUrl ? String(router.query.redirectUrl) : undefined
+	});
 
 	if (isUserLoading) {
 		return <LoadingPage />;
@@ -43,7 +53,7 @@ const SignInPage: NextPage<Props> = (props) => {
 						<h1 className="text-2xl md:text-3xl font-bold">Sign in</h1>
 					</div>
 
-					<SignInForm signInMutation={signInMutation} />
+					<SignInForm signInMutation={signInMutation} params={params.toString()} />
 				</div>
 			</Column>
 		</PageWrapper>
