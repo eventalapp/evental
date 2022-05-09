@@ -93,6 +93,7 @@ model Event {
   sessionType     EventSessionType[]
 
   @@map("event")
+  EventPage EventPage[]
 }
 
 model EventAttendee {
@@ -195,4 +196,20 @@ model EventVenue {
 
   @@unique([eventId, slug])
   @@map("event_venue")
+}
+
+model EventPage {
+  id        String   @id @default(cuid())
+  slug      String
+  eventId   String
+  name      String
+  body      String?
+  topLevel  Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, slug])
+  @@map("event_page")
 }

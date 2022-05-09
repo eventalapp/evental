@@ -12,9 +12,8 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - Sort sessions by date
 - view/print your schedule
 - invite roles to event
-- sign in/signup redirect link
 - next SEO
-- custom pages for map etc
+- image upload for top level page wysiwyg
 
 ## low importance
 - custom icons

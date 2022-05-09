@@ -6,7 +6,7 @@ import Column from '../../../../../../components/layout/Column';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
-import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutatation';
+import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutation';
 import React from 'react';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
