@@ -1,9 +1,8 @@
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { slugify } from '../../utils/slugify';
 import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
-import { Textarea } from '../form/Textarea';
 import { UseUserData } from '../../hooks/queries/useUser';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { UseEditUserMutationData } from '../../hooks/mutations/useEditUserMutation';
@@ -13,6 +12,7 @@ import { Button } from '../form/Button';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
 import { LoadingInner } from '../error/LoadingInner';
+import { StyledEditor } from '../form/Editor';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEditUserMutationData &
@@ -27,6 +27,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 		handleSubmit,
 		watch,
 		setValue,
+		control,
 		formState: { errors }
 	} = useForm<EditUserPayload>({
 		defaultValues: {
@@ -42,7 +43,8 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 	});
 
 	const slugWatcher = watch('slug');
-
+	const descriptionWatcher = watch('description');
+	console.log(descriptionWatcher);
 	const { user: userSlugCheck, isUserLoading: isUserSlugCheckLoading } = useUserQuery(slugWatcher);
 
 	useEffect(() => {
@@ -107,7 +109,19 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 mb-5 gap-5">
 				<div>
 					<Label htmlFor="description">Description</Label>
-					<Textarea rows={5} placeholder="User description" {...register('description')} />
+
+					<Controller
+						control={control}
+						name="description"
+						render={({ field }) => (
+							<StyledEditor
+								onChange={(value) => {
+									field.onChange(value);
+								}}
+								content={field.value || ''}
+							/>
+						)}
+					/>
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
 					)}

@@ -13,6 +13,8 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - view/print your schedule
 - customize react toast
 - invite organizers/roles to event
+- custom icon
+- sign in/signup redirect link
 - 
 - custom pages for map etc
 - wysiwyg editor for sessions etc
