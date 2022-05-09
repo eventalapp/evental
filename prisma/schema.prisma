@@ -84,6 +84,7 @@ model Event {
   description String?
   updatedAt   DateTime      @updatedAt
   createdAt   DateTime      @default(now())
+  timeZone    String        @default("America/New_York")
 
   attendee        EventAttendee[]
   session         EventSession[]

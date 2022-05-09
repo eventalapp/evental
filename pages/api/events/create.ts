@@ -30,7 +30,8 @@ export default api({
 				slug: slug,
 				name: parsed.name,
 				startDate: startOfDay(parsed.startDate),
-				endDate: endOfDay(parsed.endDate)
+				endDate: endOfDay(parsed.endDate),
+				timeZone: parsed.timeZone
 			}
 		});
 

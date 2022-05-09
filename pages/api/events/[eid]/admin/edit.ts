@@ -48,11 +48,14 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
+		console.log(body.timeZone);
+
 		const updatedEvent = await prisma.event.update({
 			data: {
 				name: body.name,
 				description: body.description,
 				location: body.location,
+				timeZone: body.timeZone,
 				startDate: startOfDay(body.startDate),
 				endDate: endOfDay(body.endDate),
 				image: fileLocation,

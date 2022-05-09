@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { isBrowser } from './isBrowser';
 import { EventCategory, EventType } from '@prisma/client';
+import { timeZoneList } from './const';
 
 // Reusable
 
@@ -54,6 +55,9 @@ const typeIdValidator = z.preprocess((val) => {
 	}
 	return val;
 }, z.string().max(100, 'Type is too long').nullable());
+
+const [firsttimeZone, ...resttimeZones] = timeZoneList;
+const timeZoneValidator = z.enum([firsttimeZone, ...resttimeZones]);
 
 const eventTypes = Object.values(EventType);
 const [firstEventTypes, ...restEventTypes] = eventTypes;
@@ -141,6 +145,7 @@ export type EditSessionTypePayload = z.infer<typeof EditSessionTypeSchema>;
 
 export const CreateEventSchema = z.object({
 	name: nameValidator,
+	timeZone: timeZoneValidator,
 	startDate: dateValidator,
 	endDate: dateValidator
 });
@@ -151,6 +156,7 @@ export const EditEventSchema = z.object({
 	category: eventCategoryValidator,
 	slug: slugValidator,
 	name: nameValidator,
+	timeZone: timeZoneValidator,
 	location: locationValidator,
 	type: eventTypeValidator,
 	image: imageFileValidator.optional(),

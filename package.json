@@ -85,6 +85,7 @@
 		"react-dropzone": "^14.1.1",
 		"react-hook-form": "^7.30.0",
 		"react-query": "^3.35.0",
+		"react-select": "^5.3.2",
 		"react-toastify": "^8.2.0",
 		"sharp": "^0.30.4",
 		"superjson": "^1.9.0",
