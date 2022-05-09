@@ -11,6 +11,18 @@ export default api({
 	async POST({ ctx, req }) {
 		const { eid } = req.query;
 
+		const requestingUser = await ctx.getUser();
+
+		if (!requestingUser) {
+			throw new NextkitError(401, 'Unauthorized');
+		}
+
+		const isFounderResponse = await isFounder(String(eid), String(requestingUser?.id));
+
+		if (!isFounderResponse) {
+			throw new NextkitError(403, 'You must be a founder to invite organizers');
+		}
+
 		const body = ChangePasswordRequestSchema.parse(req.body);
 
 		const event = await getEvent(String(eid));
@@ -32,28 +44,6 @@ export default api({
 			if (attendee.permissionRole === 'ORGANIZER' || attendee.permissionRole === 'FOUNDER') {
 				throw new NextkitError(400, 'You are already an organizer');
 			}
-		}
-
-		const requestingUser = await ctx.getUser();
-
-		if (!requestingUser) {
-			throw new NextkitError(401, 'Unauthorized');
-		}
-
-		const isFounderResponse = await isFounder(String(eid), String(requestingUser?.id));
-
-		let test = await prisma.eventAttendee.findFirst({
-			where: {
-				userId: requestingUser?.id,
-				event: {
-					OR: [{ id: String(eid) }, { slug: String(eid) }]
-				}
-			}
-		});
-		console.log(String(eid), String(requestingUser?.id), test);
-
-		if (!isFounderResponse) {
-			throw new NextkitError(403, 'You must be a founder to invite organizers');
 		}
 
 		const inviteCode = await ctx.getOrganizerInviteCode();
