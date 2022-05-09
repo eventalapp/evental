@@ -95,10 +95,10 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 
 						<div className="h-full flex-row justify-end hidden lg:flex">
 							<div className="flex flex-row items-end">
+								<LinkItem link={`/events/${event.slug}/admin/sessions`} label={'Sessions'} />
+								<LinkItem link={`/events/${event.slug}/admin/venues`} label={'Venues'} />
 								<LinkItem link={`/events/${event.slug}/admin/attendees`} label={'Attendees'} />
 								<LinkItem link={`/events/${event.slug}/admin/roles`} label={'Roles'} />
-								<LinkItem link={`/events/${event.slug}/admin/venues`} label={'Venues'} />
-								<LinkItem link={`/events/${event.slug}/admin/sessions`} label={'Sessions'} />
 								<LinkItem link={`/events/${event.slug}/admin`} label={'Settings'} />
 							</div>
 						</div>

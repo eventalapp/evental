@@ -13,12 +13,11 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - view/print your schedule
 - customize react toast
 - invite organizers/roles to event
-- custom icon
+- custom icons
 - sign in/signup redirect link
 - 
 - custom pages for map etc
-- wysiwyg editor for sessions etc
-- 
+
 ## todo post mvp
 - clean up queries/mutations(export whole mut/query)
 

@@ -17,7 +17,7 @@ const nameValidator = z
 	.max(100, 'Name must be less than 100 characters');
 const addressValidator = z.string().max(100, 'Address must be less than 100 characters');
 const dateValidator = z.preprocess((val) => new Date(val as string | Date), z.date());
-const descriptionValidator = z.string().max(400, 'Description must be less than 400 characters');
+const descriptionValidator = z.string().max(3000, 'Description must be less than 3000 characters');
 const emailValidator = z
 	.string()
 	.min(1, 'Email is required')

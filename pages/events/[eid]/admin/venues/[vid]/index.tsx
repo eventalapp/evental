@@ -24,6 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { SessionList } from '../../../../../../components/sessions/SessionList';
 import Tooltip from '../../../../../../components/radix/components/Tooltip';
+import parse from 'html-react-parser';
 
 const ViewVenuePage: NextPage = () => {
 	const router = useRouter();
@@ -75,7 +76,7 @@ const ViewVenuePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<div className="mb-3">
+				<div className="mb-5">
 					<FlexRowBetween className="mb-1">
 						<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
 
@@ -111,7 +112,9 @@ const ViewVenuePage: NextPage = () => {
 						</div>
 					</Tooltip>
 
-					<p>{venue.description}</p>
+					<div className="prose focus:outline-none prose-a:text-primary mt-1">
+						{parse(String(venue.description))}
+					</div>
 				</div>
 
 				<h3 className="text-xl md:text-2xl font-medium">

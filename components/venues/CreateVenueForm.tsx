@@ -2,14 +2,14 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { Textarea } from '../form/Textarea';
 import { UseCreateVenueMutationData } from '../../hooks/mutations/useCreateVenueMutation';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
+import { StyledEditor } from '../form/Editor';
 
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -25,6 +25,7 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 	const {
 		register,
 		handleSubmit,
+		control,
 		formState: { errors }
 	} = useForm<CreateVenuePayload>({
 		resolver: zodResolver(CreateVenueSchema)
@@ -51,10 +52,17 @@ export const CreateVenueForm: React.FC<Props> = (props) => {
 
 				<div className="mb-5">
 					<Label htmlFor="description">Description</Label>
-					<Textarea
-						rows={5}
-						placeholder="Located on the second floor of the building"
-						{...register('description')}
+					<Controller
+						control={control}
+						name="description"
+						render={({ field }) => (
+							<StyledEditor
+								onChange={(value) => {
+									field.onChange(value);
+								}}
+								content={field.value || ''}
+							/>
+						)}
 					/>
 					{errors.description?.message && (
 						<ErrorMessage>{errors.description?.message}</ErrorMessage>
