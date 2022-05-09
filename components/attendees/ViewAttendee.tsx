@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import Tooltip from '../radix/components/Tooltip';
+import parse from 'html-react-parser';
 
 type Props = { eid: string; uid: string; admin?: boolean; attendee: AttendeeWithUser };
 
@@ -142,7 +143,9 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				)}
 			</div>
 
-			<span className="text-base text-gray-700 block mt-3">{attendee.user.description}</span>
+			<div className="prose focus:outline-none prose-a:text-primary">
+				{parse(String(attendee.user.description))}
+			</div>
 		</div>
 	);
 };
