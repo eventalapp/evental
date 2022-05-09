@@ -26,10 +26,7 @@ const ViewAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { rid, eid } = router.query;
 	const [page, setPage] = useState(1);
-	const { role, isRoleAttendeesLoading, roleAttendeesError } = useRoleQuery(
-		String(eid),
-		String(rid)
-	);
+	const { role, roleError, isRoleLoading } = useRoleQuery(String(eid), String(rid));
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
@@ -40,7 +37,7 @@ const ViewAttendeePage: NextPage = () => {
 
 	if (
 		isOrganizerLoading ||
-		isRoleAttendeesLoading ||
+		isRoleLoading ||
 		isRolesLoading ||
 		isEventLoading ||
 		isAttendeesLoading
@@ -52,8 +49,8 @@ const ViewAttendeePage: NextPage = () => {
 		return <NotFoundPage message="Role not found." />;
 	}
 
-	if (roleAttendeesError || eventError || rolesError) {
-		return <ViewErrorPage errors={[roleAttendeesError, rolesError, eventError]} />;
+	if (roleError || eventError || rolesError) {
+		return <ViewErrorPage errors={[roleError, rolesError, eventError]} />;
 	}
 
 	if (!event) {
@@ -85,16 +82,17 @@ const ViewAttendeePage: NextPage = () => {
 
 					<div>
 						<div className="flex items-center flex-row">
-							{!isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
-									<LinkButton>Edit role</LinkButton>
-								</Link>
-							)}
-							{!isOrganizerLoading && isOrganizer && (
-								<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
-									<LinkButton className="ml-3">Delete role</LinkButton>
-								</Link>
-							)}
+							<Link href={`/events/${eid}/admin/roles/${rid}/invite`} passHref>
+								<LinkButton>Invite {role.name}</LinkButton>
+							</Link>
+
+							<Link href={`/events/${eid}/admin/roles/${rid}/edit`} passHref>
+								<LinkButton className="ml-3">Edit role</LinkButton>
+							</Link>
+
+							<Link href={`/events/${eid}/admin/roles/${rid}/delete`} passHref>
+								<LinkButton className="ml-3">Delete role</LinkButton>
+							</Link>
 						</div>
 					</div>
 				</FlexRowBetween>

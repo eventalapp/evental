@@ -24,10 +24,7 @@ const DeleteRolePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, rid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { roleAttendeesError, role, isRoleAttendeesLoading } = useRoleQuery(
-		String(eid),
-		String(rid)
-	);
+	const { roleError, role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
 	const { deleteRoleMutation } = useDeleteRoleMutation(String(eid), String(rid));
 	const { user, isUserLoading } = useUser();
 	const { event, isEventLoading } = useEventQuery(String(eid));
@@ -36,7 +33,7 @@ const DeleteRolePage: NextPage = () => {
 
 	if (
 		isOrganizerLoading ||
-		isRoleAttendeesLoading ||
+		isRoleLoading ||
 		isUserLoading ||
 		isEventLoading ||
 		isRolesLoading ||
@@ -57,8 +54,8 @@ const DeleteRolePage: NextPage = () => {
 		return <NotFoundPage message="Role not found." />;
 	}
 
-	if (roleAttendeesError) {
-		return <ViewErrorPage errors={[roleAttendeesError]} />;
+	if (roleError) {
+		return <ViewErrorPage errors={[roleError]} />;
 	}
 
 	if (!event) {
@@ -82,9 +79,9 @@ const DeleteRolePage: NextPage = () => {
 
 				<DeleteRoleForm
 					role={role}
-					roleAttendeesError={roleAttendeesError}
+					roleError={roleError}
 					deleteRoleMutation={deleteRoleMutation}
-					isRoleAttendeesLoading={isRoleAttendeesLoading}
+					isRoleLoading={isRoleLoading}
 					attendees={attendeesData?.attendees}
 				/>
 			</Column>

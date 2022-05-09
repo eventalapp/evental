@@ -99,6 +99,8 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
+						<div></div>
+
 						<NavigationMenuPrimitive.Indicator
 							className={cx(
 								'z-10',

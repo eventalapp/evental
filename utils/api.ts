@@ -35,6 +35,18 @@ const getPasswordResetCode = async (): Promise<string> => {
 	return token;
 };
 
+const getRoleInviteCode = async (): Promise<string> => {
+	const token = randomBytes(128).toString('hex');
+
+	const count = await redis.exists(`role:${token}`);
+
+	if (count > 0) {
+		return getRoleInviteCode();
+	}
+
+	return token;
+};
+
 const getOrganizerInviteCode = async (): Promise<string> => {
 	const token = randomBytes(128).toString('hex');
 
@@ -74,6 +86,7 @@ export const api = createAPI({
 			getToken,
 			getPasswordResetCode,
 			getOrganizerInviteCode,
+			getRoleInviteCode,
 			getUser: async () => {
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 

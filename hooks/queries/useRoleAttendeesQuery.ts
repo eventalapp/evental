@@ -6,8 +6,8 @@ import Prisma from '@prisma/client';
 
 export interface UseRoleQueryData {
 	role: Prisma.EventRole | undefined;
-	isRoleAttendeesLoading: boolean;
-	roleAttendeesError: ErroredAPIResponse | null;
+	isRoleLoading: boolean;
+	roleError: ErroredAPIResponse | null;
 }
 
 export const useRoleQuery = (
@@ -17,7 +17,7 @@ export const useRoleQuery = (
 ): UseRoleQueryData => {
 	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
-	const { data: role, isLoading: isRoleAttendeesLoading } = useQuery<
+	const { data: role, isLoading: isRoleLoading } = useQuery<
 		Prisma.EventRole,
 		AxiosError<ErroredAPIResponse>
 	>(
@@ -42,7 +42,7 @@ export const useRoleQuery = (
 
 	return {
 		role,
-		isRoleAttendeesLoading,
-		roleAttendeesError: error
+		isRoleLoading,
+		roleError: error
 	};
 };

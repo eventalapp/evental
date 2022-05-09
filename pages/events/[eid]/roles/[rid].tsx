@@ -57,11 +57,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	const [page, setPage] = useState(1);
 	const router = useRouter();
 	const { rid, eid } = router.query;
-	const { role, isRoleAttendeesLoading, roleAttendeesError } = useRoleQuery(
-		String(eid),
-		String(rid),
-		initialRole
-	);
+	const { role, isRoleLoading, roleError } = useRoleQuery(String(eid), String(rid), initialRole);
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
@@ -78,7 +74,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 
 	if (
 		isOrganizerLoading ||
-		isRoleAttendeesLoading ||
+		isRoleLoading ||
 		isRolesLoading ||
 		isEventLoading ||
 		isAttendeeLoading ||
@@ -91,8 +87,8 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		return <NotFoundPage message="Role not found." />;
 	}
 
-	if (roleAttendeesError || eventError || rolesError || attendeeError) {
-		return <ViewErrorPage errors={[roleAttendeesError, rolesError, eventError]} />;
+	if (roleError || eventError || rolesError || attendeeError) {
+		return <ViewErrorPage errors={[roleError, rolesError, eventError]} />;
 	}
 
 	if (!event) {
