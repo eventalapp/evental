@@ -1,4 +1,10 @@
-export const inviteOrganizerTemplate = (inviteLink: string) => `
+import Prisma from '@prisma/client';
+
+export const inviteOrganizerTemplate = (
+	inviteLink: string,
+	event: Prisma.Event,
+	inviterName: string
+) => `
  <mjml>
     <mj-head>
         <mj-font name="Inter"
@@ -21,10 +27,10 @@ export const inviteOrganizerTemplate = (inviteLink: string) => `
 
                 <mj-divider border-color="#CDCDCD" border-width='3px'/>
 
-                <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial">Organizer Invite
+                <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial">Organizer Invite for ${event.name}
                 </mj-text>
 
-                <mj-text padding-bottom="30px" font-size="16px" color="#111827" font-family="Inter, Roboto, Arial">You have recieved and organizer invite
+                <mj-text padding-bottom="30px" font-size="16px" color="#111827" font-family="Inter, Roboto, Arial">You have received an invitation to organize ${event.name} by ${inviterName}.
                 </mj-text>
 
                 <mj-text font-size="16px" color="#5C41FF" font-family="Inter, Roboto, Arial">

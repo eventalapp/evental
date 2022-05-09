@@ -3,13 +3,21 @@ import { convert } from 'html-to-text';
 import { sendEmail } from '../utils/sendEmail';
 import { SESV2 } from 'aws-sdk';
 import { inviteOrganizerTemplate } from './templates/inviteOrganizer';
+import Prisma from '@prisma/client';
 
-export const sendOrganizerInvite = async (sendToAddress: string, inviteCode: string) => {
+export const sendOrganizerInvite = async (
+	sendToAddress: string,
+	inviteCode: string,
+	event: Prisma.Event,
+	inviterName: string
+) => {
 	const htmlOutput = mjml2html(
 		inviteOrganizerTemplate(
-			`${
-				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-			}/auth/password/reset?code=${inviteCode}`
+			`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
+				event.slug
+			}/invites/organizer?code=${inviteCode}`,
+			event,
+			inviterName
 		)
 	);
 

@@ -4,7 +4,6 @@ import { EventPermissionRole } from '@prisma/client';
 import { getEvent } from '../../../index';
 import { getAttendee } from '../../../attendees/[uid]';
 import { AdminEditAttendeeSchema } from '../../../../../../../utils/schemas';
-import { isFounder } from '../../../../../../../utils/isFounder';
 import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 import {
@@ -50,24 +49,32 @@ export default api({
 			throw new NextkitError(400, 'Invalid permission role.');
 		}
 
-		const isRequesterFounder = await isFounder(String(user?.id), String(eid));
+		const requesterAttendee = await prisma.eventAttendee.findFirst({
+			where: {
+				eventId: event.id,
+				userId: user.id
+			}
+		});
 
-		// If current role is founder and trying to remove it, prevent it
+		if (!requesterAttendee) {
+			throw new NextkitError(403, 'Cannot find your attendee profile.');
+		}
 
 		if (attendee.permissionRole === 'FOUNDER' && requestedPermissionRole !== 'FOUNDER') {
 			throw new NextkitError(400, 'The founder role cannot be removed.');
 		}
 
-		// Allow founders to edit their self
-
 		if (requestedPermissionRole === 'FOUNDER' && attendee.permissionRole !== 'FOUNDER') {
 			throw new NextkitError(400, 'Cannot assign the founder permission role.');
 		}
 
-		// Only founders can assign organizer permission role
-
-		if (requestedPermissionRole === 'ORGANIZER' && !isRequesterFounder) {
-			throw new NextkitError(400, 'You must be the event founder to assign the organizer role.');
+		if (!(attendee.permissionRole === 'ORGANIZER' && requestedPermissionRole === 'ORGANIZER')) {
+			if (
+				requestedPermissionRole === 'ORGANIZER' &&
+				requesterAttendee.permissionRole !== 'FOUNDER'
+			) {
+				throw new NextkitError(400, 'You must be the event founder to assign the organizer role.');
+			}
 		}
 
 		const editedEventAttendee = await prisma.eventAttendee.update({
