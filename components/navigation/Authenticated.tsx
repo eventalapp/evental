@@ -23,23 +23,33 @@ export const Authenticated: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<NavigationWrapper>
-				<Link href="/">
-					<a>
-						<span className="flex flex-row items-center">
-							<img
-								src="https://cdn.evental.app/images/logo.svg"
-								className="w-12 h-12 pr-3"
-								alt="logo"
-							/>
-							<strong
-								className="text-xl max-w-2xl tracking-tight font-bold font-display"
-								aria-label="evental homepage"
-							>
-								Evental
-							</strong>
-						</span>
-					</a>
-				</Link>
+				<div className="flex-row flex items-center">
+					<Link href="/">
+						<a>
+							<span className="flex flex-row items-center">
+								<img
+									src="https://cdn.evental.app/images/logo.svg"
+									className="w-12 h-12 pr-3"
+									alt="logo"
+								/>
+								<strong
+									className="text-2xl tracking-tight font-bold font-display"
+									aria-label="evental homepage"
+								>
+									Evental
+								</strong>
+							</span>
+						</a>
+					</Link>
+					<div className="hidden sm:block ml-7 space-x-7">
+						<Link href={`/pricing`}>
+							<a>Pricing</a>
+						</Link>
+						<Link href={`/contact`}>
+							<a>Contact</a>
+						</Link>
+					</div>
+				</div>
 
 				<div className="flex-row hidden space-x-6 font-medium sm:flex items-center">
 					<Link href="/events/attending">
@@ -95,7 +105,23 @@ export const Authenticated: React.FC<Props> = (props) => {
 							}}
 						/>
 						<FullscreenLinkItem
-							index={0}
+							index={1}
+							link={`/pricing`}
+							label={'Pricing'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={2}
+							link={`/contact`}
+							label={'Contact'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={3}
 							link={`/`}
 							label={'Home'}
 							onClick={() => {
