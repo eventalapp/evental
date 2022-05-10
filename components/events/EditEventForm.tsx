@@ -17,10 +17,10 @@ import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
 import Button from '../radix/components/shared/Button';
 import { EventCategory, EventType } from '@prisma/client';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { endOfDay, startOfDay } from 'date-fns';
 import Select from '../radix/components/Select';
 import ReactSelect from 'react-select';
 import { timeZoneOptions } from '../../utils/const';
+import dayjs from 'dayjs';
 
 type Props = {
 	eid: string;
@@ -50,8 +50,8 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			category: event?.category ?? undefined,
 			timeZone: event?.timeZone ?? 'America/New_York',
 			slug: event?.slug ?? undefined,
-			endDate: endOfDay(new Date(String(event?.endDate))) ?? undefined,
-			startDate: startOfDay(new Date(String(event?.startDate))) ?? undefined
+			endDate: dayjs(event?.endDate).toDate() ?? undefined,
+			startDate: dayjs(event?.startDate).toDate() ?? undefined
 		},
 		resolver: zodResolver(EditEventSchema)
 	});
@@ -130,9 +130,11 @@ export const EditEventForm: React.FC<Props> = (props) => {
 								name="startDate"
 								render={({ field }) => (
 									<DatePicker
-										onChange={(e) => field.onChange(e)}
-										selected={field.value}
-										startDate={field.value}
+										onChange={(date) => {
+											field.onChange(dayjs(date).toDate());
+										}}
+										selected={dayjs(field.value).toDate()}
+										startDate={dayjs(field.value).toDate()}
 										endDate={endDateWatcher}
 										selectsStart
 										required
@@ -152,12 +154,14 @@ export const EditEventForm: React.FC<Props> = (props) => {
 								name="endDate"
 								render={({ field }) => (
 									<DatePicker
-										onChange={(e) => field.onChange(e)}
-										selected={field.value}
+										onChange={(date) => {
+											field.onChange(dayjs(date).toDate());
+										}}
+										selected={dayjs(field.value).toDate()}
 										selectsEnd
 										required
 										startDate={startDateWatcher}
-										endDate={field.value}
+										endDate={dayjs(field.value).toDate()}
 										dateFormat="MM/dd/yyyy"
 									/>
 								)}
