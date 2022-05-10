@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { NotFound } from '../error/NotFound';
 import Prisma from '@prisma/client';
 import Tooltip from '../radix/components/Tooltip';
+import { formatInTimeZone } from 'date-fns-tz';
 
 type Props = { events: Prisma.Event[]; className?: string };
 
@@ -36,12 +37,16 @@ export const EventList: React.FC<Props> = (props) => {
 											message={`This is event is taking place from ${format(
 												new Date(event.startDate),
 												'MMMM do'
-											)} to ${format(new Date(event.endDate), 'MMMM do')}.`}
+											)} to ${formatInTimeZone(
+												new Date(event.endDate),
+												event.timeZone,
+												'MMMM do'
+											)}.`}
 										>
 											<span className="text-gray-600 text-center block text-tiny">
-												{format(new Date(event.startDate), 'MMM dd')}
+												{formatInTimeZone(new Date(event.startDate), event.timeZone, 'MMM dd')}
 												<br />
-												{format(new Date(event.endDate), 'MMM dd')}
+												{formatInTimeZone(new Date(event.endDate), event.timeZone, 'MMM dd')}
 											</span>
 										</Tooltip>
 									</div>

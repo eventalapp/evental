@@ -14,6 +14,7 @@ import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import Prisma from '@prisma/client';
 import Tooltip from '../radix/components/Tooltip';
+import { formatInTimeZone } from 'date-fns-tz';
 
 export const EventHeader: React.FC<{
 	event: Prisma.Event;
@@ -86,7 +87,7 @@ export const EventHeader: React.FC<{
 							message={`This is event is taking place from ${format(
 								new Date(event.startDate),
 								'MMMM do'
-							)} to ${format(new Date(event.endDate), 'MMMM do')}.`}
+							)} to ${formatInTimeZone(new Date(event.endDate), event.timeZone, 'MMMM do')}.`}
 						>
 							<div className="flex flex-row items-center mr-3 cursor-help">
 								<FontAwesomeIcon
@@ -96,8 +97,8 @@ export const EventHeader: React.FC<{
 									icon={faCalendarDay}
 								/>
 								<p>
-									{format(new Date(event.startDate), 'MMMM dd')} -{' '}
-									{format(new Date(event.endDate), 'MMMM dd')}
+									{formatInTimeZone(new Date(event.startDate), event.timeZone, 'MMMM dd')} -{' '}
+									{formatInTimeZone(new Date(event.endDate), event.timeZone, 'MMMM dd')}
 								</p>
 							</div>
 						</Tooltip>

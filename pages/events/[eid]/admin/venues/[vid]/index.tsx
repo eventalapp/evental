@@ -129,7 +129,12 @@ const ViewVenuePage: NextPage = () => {
 					)}
 				</h3>
 				{sessionsByVenueData.sessions && (
-					<SessionList eid={String(eid)} sessions={sessionsByVenueData.sessions} admin />
+					<SessionList
+						eid={String(eid)}
+						sessions={sessionsByVenueData.sessions}
+						event={event}
+						admin
+					/>
 				)}
 				{sessionsByVenueData.pagination.pageCount > 1 && (
 					<Pagination

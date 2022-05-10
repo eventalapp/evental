@@ -1,18 +1,20 @@
 import Link from 'next/link';
 import React from 'react';
 import { NotFound } from '../error/NotFound';
-import { format } from 'date-fns';
 import classNames from 'classnames';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { formatInTimeZone } from 'date-fns-tz';
+import Prisma from '@prisma/client';
 
 type Props = {
 	eid: string;
 	admin?: boolean;
 	sessions: SessionWithVenue[];
+	event: Prisma.Event;
 };
 
 export const SessionList: React.FC<Props> = (props) => {
-	const { eid, sessions, admin = false } = props;
+	const { eid, sessions, event, admin = false } = props;
 
 	if (sessions && sessions?.length === 0) {
 		return <NotFound message="No sessions found." />;
@@ -34,7 +36,7 @@ export const SessionList: React.FC<Props> = (props) => {
 									)}
 								>
 									<span className="text-gray-700 text-sm w-20 pr-3 text-right">
-										{format(new Date(session.startDate), 'h:mm a OOO')}
+										{formatInTimeZone(new Date(session.startDate), event.timeZone, 'h:mm a OOO')}
 									</span>
 									<div
 										key={session.id}
@@ -72,7 +74,7 @@ export const SessionList: React.FC<Props> = (props) => {
 						<a>
 							<div className="flex flex-row hover:bg-gray-50 transition-all duration-100">
 								<span className="text-gray-700 text-sm w-20 py-2 pr-3 text-right">
-									{format(new Date(session.startDate), 'h:mm a OOO')}
+									{formatInTimeZone(new Date(session.startDate), event.timeZone, 'h:mm a OOO')}
 								</span>
 								<div
 									key={session.id}

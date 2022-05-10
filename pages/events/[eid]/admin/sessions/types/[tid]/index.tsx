@@ -79,6 +79,7 @@ const ViewSessionTypePage: NextPage = () => {
 					eid={String(eid)}
 					tid={String(tid)}
 					sessions={sessionsByTypeData.sessions}
+					event={event}
 					admin
 				/>
 				{sessionsByTypeData.pagination.pageCount > 1 && (
