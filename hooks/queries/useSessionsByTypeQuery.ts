@@ -39,7 +39,7 @@ export const useSessionsByTypeQuery = (
 		},
 		{
 			retry: 0,
-			enabled: eid !== undefined && eid !== 'undefined',
+			enabled: eid !== undefined && eid !== 'undefined' && tid !== undefined && tid !== 'undefined',
 			initialData,
 			keepPreviousData: true
 		}
