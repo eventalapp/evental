@@ -11,6 +11,7 @@ import { capitalizeFirstLetter } from '../../../utils/string';
 import Prisma from '@prisma/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FullscreenLinkItem } from './Unauthenticated';
 
 type Props = {
 	className?: string;
@@ -43,41 +44,6 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 					{label}
 				</NavigationMenuPrimitive.Item>
 			</NavigationMenuPrimitive.Link>
-		</Link>
-	);
-};
-
-const FullscreenLinkItem: React.FC<{
-	link: string;
-	label: string;
-	index: number;
-	onClick: () => void;
-}> = (props) => {
-	const { link, label, index, onClick } = props;
-	const router = useRouter();
-
-	return (
-		<Link href={link} passHref>
-			<a
-				className={cx(
-					'cursor-pointer pb-1.5 border-b-2',
-					router.asPath == link ? 'border-primary' : 'border-transparent'
-				)}
-				onClick={onClick}
-				onKeyDown={onClick}
-				role="button"
-				tabIndex={index}
-			>
-				<li
-					className={cx(
-						'px-3 my-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
-						'text-sm font-medium dark:text-gray-75 font-medium',
-						router.asPath == link ? 'text-primary' : 'text-gray-900'
-					)}
-				>
-					{label}
-				</li>
-			</a>
 		</Link>
 	);
 };

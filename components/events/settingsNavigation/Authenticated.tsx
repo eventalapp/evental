@@ -4,11 +4,13 @@ import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutat
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import cx from 'classnames';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { ProfileDropdown } from '../../navigation/dropdown';
 import Prisma from '@prisma/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FullscreenLinkItem } from '../navigation/Unauthenticated';
 
 type Props = {
 	className?: string;
@@ -46,7 +48,7 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 };
 
 export const SettingsAuthenticated: React.FC<Props> = (props) => {
-	const { signOutMutation, setIsOpen, user, event } = props;
+	const { signOutMutation, setIsOpen, user, event, isOpen, roles } = props;
 
 	return (
 		<div>
@@ -143,6 +145,85 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 					</div>
 				</NavigationMenuPrimitive.Root>
 			</div>
+			<ul
+				className={classNames(
+					'fixed top-0 bottom-0 bg-white w-full z-50 transition-all duration-100',
+					isOpen ? 'right-0' : '-right-full'
+				)}
+			>
+				<div className="relative w-full h-full">
+					<div className="w-full h-full flex flex-col items-center justify-center">
+						<button
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						>
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mb-3 cursor-pointer"
+								size="2x"
+								icon={faXmark}
+							/>
+						</button>
+						<FullscreenLinkItem
+							index={0}
+							link={`/events/${event.slug}/admin/sessions`}
+							label={'Sessions'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={1}
+							link={`/events/${event.slug}/admin/venues`}
+							label={'Venues'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={2}
+							link={`/events/${event.slug}/admin/attendees`}
+							label={'Attendees'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={3}
+							link={`/events/${event.slug}/admin/roles`}
+							label={'Roles'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={4}
+							link={`/events/${event.slug}/admin/organizers`}
+							label={'Organizers'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={5}
+							link={`/events/${event.slug}/admin/pages`}
+							label={'Pages'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={6}
+							link={`/events/${event.slug}/admin`}
+							label={'Settings'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+					</div>
+				</div>
+			</ul>
 		</div>
 	);
 };

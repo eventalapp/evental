@@ -3,11 +3,12 @@ import React from 'react';
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import cx from 'classnames';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { capitalizeFirstLetter } from '../../../utils/string';
 import Prisma from '@prisma/client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	className?: string;
@@ -16,6 +17,41 @@ type Props = {
 	event: Prisma.Event;
 	roles: Prisma.EventRole[];
 } & UseSignOutMutationData;
+
+export const FullscreenLinkItem: React.FC<{
+	link: string;
+	label: string;
+	index: number;
+	onClick: () => void;
+}> = (props) => {
+	const { link, label, index, onClick } = props;
+	const router = useRouter();
+
+	return (
+		<Link href={link} passHref>
+			<a
+				className={cx(
+					'cursor-pointer pb-1.5 border-b-2',
+					router.asPath == link ? 'border-primary' : 'border-transparent'
+				)}
+				onClick={onClick}
+				onKeyDown={onClick}
+				role="button"
+				tabIndex={index}
+			>
+				<li
+					className={cx(
+						'px-3 my-2 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
+						'text-sm font-medium dark:text-gray-75 font-medium',
+						router.asPath == link ? 'text-primary' : 'text-gray-900'
+					)}
+				>
+					{label}
+				</li>
+			</a>
+		</Link>
+	);
+};
 
 const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 	const { link, label } = props;
@@ -44,7 +80,7 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 };
 
 export const Unauthenticated: React.FC<Props> = (props) => {
-	const { setIsOpen, roles, event } = props;
+	const { setIsOpen, roles, event, isOpen, signOutMutation } = props;
 
 	return (
 		<div>
@@ -99,8 +135,6 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
-						<div></div>
-
 						<NavigationMenuPrimitive.Indicator
 							className={cx(
 								'z-10',
@@ -133,6 +167,57 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 					</div>
 				</NavigationMenuPrimitive.Root>
 			</div>
+			<ul
+				className={classNames(
+					'fixed top-0 bottom-0 bg-white w-full z-50 transition-all duration-100',
+					isOpen ? 'right-0' : '-right-full'
+				)}
+			>
+				<div className="relative w-full h-full">
+					<div className="w-full h-full flex flex-col items-center justify-center">
+						<button
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						>
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="w-5 h-5 mb-3 cursor-pointer"
+								size="2x"
+								icon={faXmark}
+							/>
+						</button>
+						<FullscreenLinkItem
+							index={0}
+							link={`/events/${event.slug}`}
+							label={'Sessions'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+						<FullscreenLinkItem
+							index={1}
+							link={`/events/${event.slug}/venues`}
+							label={'Venues'}
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						/>
+
+						{roles.map((role, i) => (
+							<FullscreenLinkItem
+								index={i + 2}
+								key={role.id}
+								link={`/events/${event.slug}/roles/${role.slug}`}
+								label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
+								onClick={() => {
+									setIsOpen(false);
+								}}
+							/>
+						))}
+					</div>
+				</div>
+			</ul>
 		</div>
 	);
 };
