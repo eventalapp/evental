@@ -101,10 +101,10 @@ const PricingPage: NextPage = () => {
 					</Link>
 				</div>
 			</Column>
-			<div className="bg-primary text-white">
+			<div className="bg-primary text-white my-6 md:my-0">
 				<Column className="flex items-center justify-center">
-					<div className="flex flex-row items-center justify-center space-x-4">
-						<p className="text-lg">
+					<div className="flex flex-row items-center justify-center space-x-4 py-5">
+						<p className="text-sm md:text-lg">
 							<span className="font-medium">Organizing multiple events?</span> Subscriptions are
 							available from $1000/year.
 						</p>
