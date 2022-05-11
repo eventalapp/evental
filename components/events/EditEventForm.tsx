@@ -21,6 +21,7 @@ import Select from '../radix/components/Select';
 import ReactSelect from 'react-select';
 import { timeZoneOptions } from '../../utils/const';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 
 type Props = {
 	eid: string;
@@ -217,6 +218,14 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						</div>
 					)}
 					{errors.privacy?.message && <ErrorMessage>{errors.privacy?.message}</ErrorMessage>}
+					{event.level === 'TRIAL' && (
+						<p className="text-gray-600 text-sm mt-1">
+							Want to make your event public?{' '}
+							<Link href={`/events/${event.slug}/admin/billing`}>
+								<a className="text-primary font-medium">Upgrade your plan</a>
+							</Link>
+						</p>
+					)}
 				</div>
 			</div>
 
