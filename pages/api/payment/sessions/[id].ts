@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { api } from '../../../../../../../utils/api';
+import { api } from '../../../../utils/api';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	// https://github.com/stripe/stripe-node#configuration

@@ -15,7 +15,7 @@ const CartSummary = () => {
 		event.preventDefault();
 		setLoading(true);
 
-		const response = await axios.post('/api/checkout_sessions/cart', cartDetails);
+		const response = await axios.post('/api/payment/sessions/cart', cartDetails);
 
 		if (response.status === 500) {
 			console.error(response.data);

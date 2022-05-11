@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CustomDonationInput from './CustomDonationInput';
 import StripeTestCards from './StripeTestCards';
-
 import { AMOUNT_STEP, CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../config';
 import { formatAmountForDisplay } from '../../utils/stripeHelpers';
 import { getStripe } from '../../utils/stripe';

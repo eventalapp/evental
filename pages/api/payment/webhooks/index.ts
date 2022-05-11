@@ -1,7 +1,7 @@
 import { buffer } from 'micro';
 import Cors from 'micro-cors';
 import Stripe from 'stripe';
-import { api } from '../../../../../../../utils/api';
+import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {

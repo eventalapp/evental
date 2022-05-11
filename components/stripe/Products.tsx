@@ -1,7 +1,6 @@
 import React from 'react';
-
-import products from '../../../nextjs-typescript-react-stripe-js/data/products.json';
 import { formatCurrencyString, useShoppingCart } from 'use-shopping-cart';
+import { products } from '../../utils/const';
 
 const Products = () => {
 	const { addItem, removeItem } = useShoppingCart();

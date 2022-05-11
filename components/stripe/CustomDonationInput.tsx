@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatAmountForDisplay } from '../../../nextjs-typescript-react-stripe-js/utils/stripe-helpers';
+import { formatAmountForDisplay } from '../../utils/stripeHelpers';
 
 type Props = {
 	name: string;
