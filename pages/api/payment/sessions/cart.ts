@@ -6,10 +6,11 @@
  * The important thing is that the product info is loaded from somewhere trusted
  * so you know the pricing information is accurate.
  */
-import { validateCartItems } from 'use-shopping-cart/src/serverUtil';
+
 import Stripe from 'stripe';
 import { api } from '../../../../utils/api';
-import { inventory } from '../../../../utils/const';
+import { validateCartItems } from 'use-shopping-cart/utilities/serverless';
+import { products } from '../../../../utils/const';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	// https://github.com/stripe/stripe-node#configuration
@@ -18,11 +19,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export default api({
 	async POST({ ctx, req }) {
-		const user = await ctx.getUser();
-
 		// Validate the cart details that were sent from the client.
 		const cartItems = req.body;
-		const line_items = validateCartItems(inventory, cartItems);
+		const line_items = validateCartItems(products, cartItems);
 		// Create Checkout Sessions from body params.
 		const params: Stripe.Checkout.SessionCreateParams = {
 			submit_type: 'pay',

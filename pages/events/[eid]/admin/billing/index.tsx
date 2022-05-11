@@ -18,6 +18,7 @@ import Slider from '../../../../../components/radix/components/Slider';
 import { Controller, useForm } from 'react-hook-form';
 import Link from 'next/link';
 import { LinkButton } from '../../../../../components/form/LinkButton';
+import { attendeesToPrice } from '../../../../../utils/price';
 
 const EventBillingPage: NextPage = () => {
 	const router = useRouter();
@@ -111,9 +112,7 @@ const EventBillingPage: NextPage = () => {
 						</p>
 
 						<div>
-							<p className="font-bold text-xl text-center">
-								${Math.round((attendees / 2 + 300) / 10) * 10}{' '}
-							</p>
+							<p className="font-bold text-xl text-center">${attendeesToPrice(attendees)}</p>
 							<p className="text-gray-600 text-sm text-center">Includes {attendees} attendees</p>
 						</div>
 

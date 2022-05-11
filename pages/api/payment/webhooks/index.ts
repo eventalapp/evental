@@ -47,6 +47,14 @@ const handler = api({
 		} else if (event.type === 'charge.succeeded') {
 			const charge = event.data.object as Stripe.Charge;
 			console.log(`💵 Charge id: ${charge.id}`);
+
+			const { metadata } = event.data.object as Record<string, unknown>;
+			const { eventId } = metadata as Record<string, string>;
+			console.log(eventId);
+
+			// $1 is 100
+
+			console.log(charge.amount);
 		} else {
 			console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
 		}

@@ -25,7 +25,7 @@ import { Pagination } from '../../../../../components/Pagination';
 import { useSessionsByDateQuery } from '../../../../../hooks/queries/useSessionsByDateQuery';
 import { SessionList } from '../../../../../components/sessions/SessionList';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
-import { formatInTimeZone } from 'date-fns-tz';
+import dayjs from 'dayjs';
 
 type Props = {
 	initialSessionsByDate: PaginatedSessionsWithVenue | undefined;
@@ -75,7 +75,8 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 			<Column>
 				<FlexRowBetween>
 					<h3 className="text-xl md:text-2xl font-medium">
-						Sessions for {formatInTimeZone(new Date(String(date)), event.timeZone, 'MM/dd/yyyy')}
+						Sessions for{' '}
+						{dayjs(String(date)).startOf('day').tz(event.timeZone).format('YYYY/MM/DD')}
 					</h3>
 				</FlexRowBetween>
 

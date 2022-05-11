@@ -9,9 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export default api({
 	async POST({ ctx, req }) {
-		const user = await ctx.getUser();
-
-		const { amount }: { amount: number } = req.body;
+		const { amount, metadata }: { amount: number; metadata: Record<string, string> } = req.body;
 
 		// Validate the amount that was passed from the client.
 		if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
@@ -21,7 +19,8 @@ export default api({
 		const params: Stripe.PaymentIntentCreateParams = {
 			payment_method_types: ['card'],
 			amount: formatAmountForStripe(amount, CURRENCY),
-			currency: CURRENCY
+			currency: CURRENCY,
+			metadata
 		};
 		const payment_intent: Stripe.PaymentIntent = await stripe.paymentIntents.create(params);
 

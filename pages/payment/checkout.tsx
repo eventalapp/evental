@@ -6,11 +6,13 @@ import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { useUser } from '../../hooks/queries/useUser';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
-import Products from '../../components/stripe/Products';
 import { Navigation } from '../../components/navigation';
 import { formatCurrencyString, useShoppingCart } from 'use-shopping-cart';
 import { CartActions, CartEntry as ICartEntry } from 'use-shopping-cart/core';
 import ElementsForm from '../../components/stripe/ElementsForm';
+import { Elements } from '@stripe/react-stripe-js';
+import { getStripe } from '../../utils/stripe';
+import { attendeesToPrice, priceToAttendees } from '../../utils/price';
 
 function CartEntry({
 	entry,
@@ -63,6 +65,8 @@ const EventBillingPage: NextPage = () => {
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
+	console.log(attendeesToPrice(5023));
+	console.log(priceToAttendees(attendeesToPrice(100)));
 
 	return (
 		<PageWrapper variant="gray">
@@ -88,9 +92,9 @@ const EventBillingPage: NextPage = () => {
 
 				<Cart />
 
-				<Products />
-
-				<ElementsForm />
+				<Elements stripe={getStripe()}>
+					<ElementsForm />
+				</Elements>
 			</Column>
 		</PageWrapper>
 	);
