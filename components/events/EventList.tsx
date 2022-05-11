@@ -23,7 +23,7 @@ export const EventList: React.FC<Props> = (props) => {
 					<div
 						key={event.id}
 						className={classNames(
-							'hover:bg-gray-75 border-gray-200 rounded-md',
+							'hover:bg-gray-75 border-gray-200',
 							i + 1 !== events.length ? 'border-b-2' : null
 						)}
 					>
