@@ -105,13 +105,13 @@ export const EventHeader: React.FC<{
 									{formatInTimeZone(
 										new Date(event.startDate),
 										Intl.DateTimeFormat().resolvedOptions().timeZone,
-										'MMMM dd'
+										'MMMM do'
 									)}{' '}
 									-{' '}
 									{formatInTimeZone(
 										new Date(event.endDate),
 										Intl.DateTimeFormat().resolvedOptions().timeZone,
-										'MMMM dd'
+										'MMMM do'
 									)}
 								</p>
 							</div>
