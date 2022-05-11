@@ -1,5 +1,3 @@
-import { Product } from 'use-shopping-cart/core';
-
 export const colors = [
 	'#ff3b91',
 	'#d74bff',
@@ -372,23 +370,3 @@ export const timeZoneOptions = timeZoneList.map((timeZone) => ({
 }));
 
 export const FIFTEEN_MINUTES = 15 * 60 * 1000;
-
-export const products: Product[] = [
-	{
-		name: 'Sunglasses',
-		id: 'price_1GwzfVCNNrtKkPVCh2MVxRkO',
-		price: 15_00,
-		image: 'https://files.stripe.com/links/fl_test_FR8EZTS7UDXE0uljMfT7hwmH',
-		currency: 'USD',
-		description: 'A pair of average black sunglasses.'
-	},
-	{
-		name: '3 Stripe Streak Scoop Neck Flowy T-Shirt',
-		id: 'price_OkRxVM2hCVPkKtrNNCVfzwG1',
-		price: 30_00,
-		image: 'https://static.musictoday.com/store/bands/4806/product_600/5QCTBL052.jpg',
-		description:
-			'A black scoop neck flowy t-shirt with 3 bright yellow strips behind the words Black Lives Matter.',
-		currency: 'USD'
-	}
-];
