@@ -3,6 +3,8 @@ import Cors from 'micro-cors';
 import Stripe from 'stripe';
 import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
+import { prisma } from '../../../../prisma/client';
+import { priceToAttendees } from '../../../../utils/price';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	apiVersion: '2020-08-27'
@@ -52,9 +54,17 @@ const handler = api({
 			const { eventId } = metadata as Record<string, string>;
 			console.log(eventId);
 
+			console.log(charge.amount, priceToAttendees(charge.amount / 100));
 			// $1 is 100
-
-			console.log(charge.amount);
+			await prisma.event.update({
+				where: {
+					id: eventId
+				},
+				data: {
+					level: 'PRO',
+					maxAttendees: priceToAttendees(charge.amount / 100)
+				}
+			});
 		} else {
 			console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`);
 		}

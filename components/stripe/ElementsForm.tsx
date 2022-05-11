@@ -83,9 +83,9 @@ const ElementsForm = () => {
 
 					// Create a PaymentIntent with the specified amount.
 					const response = await axios.post('/api/payment/intents', {
-						amount: data.attendees,
+						amount: attendeesToPrice(data.attendees),
 						metadata: {
-							eventId: 'test'
+							eventId: 'cl31xqyti12865ggomyydvi0j'
 						}
 					});
 					setPayment(response.data.data);

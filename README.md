@@ -1,7 +1,5 @@
 # Evental
 
-Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/), [Prisma](https://www.prisma.io/), [Postgres](https://www.postgresql.org/), [TypeScript](https://www.typescriptlang.org/), [Tailwind](https://tailwindcss.com/), and [React Query](https://react-query.tanstack.com/)
-
 ## Todo for MVP:
 
 - add speakers to sessions
@@ -20,7 +18,7 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - refactor navigations
 - refactor buttons
 - remove unused radix
-- clean up queries/mutations(export whole mut/query)
+- clean up queries/mutations(export whole mut/query?)
 
 ## Installation 💾
 
