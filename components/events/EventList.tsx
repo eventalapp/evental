@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { format } from 'date-fns';
 import { NotFound } from '../error/NotFound';
 import Prisma from '@prisma/client';
 import Tooltip from '../radix/components/Tooltip';
@@ -34,19 +33,28 @@ export const EventList: React.FC<Props> = (props) => {
 									<div className="flex flex-col align-center justify-center w-12 md:ml-5">
 										<Tooltip
 											side={'top'}
-											message={`This is event is taking place from ${format(
+											message={`This is event is taking place from ${formatInTimeZone(
 												new Date(event.startDate),
+												Intl.DateTimeFormat().resolvedOptions().timeZone,
 												'MMMM do'
 											)} to ${formatInTimeZone(
 												new Date(event.endDate),
-												event.timeZone,
-												'MMMM do'
+												Intl.DateTimeFormat().resolvedOptions().timeZone,
+												'MMMM do  zzz'
 											)}.`}
 										>
 											<span className="text-gray-600 text-center block text-tiny">
-												{formatInTimeZone(new Date(event.startDate), event.timeZone, 'MMM dd')}
+												{formatInTimeZone(
+													new Date(event.startDate),
+													Intl.DateTimeFormat().resolvedOptions().timeZone,
+													'MMM dd'
+												)}
 												<br />
-												{formatInTimeZone(new Date(event.endDate), event.timeZone, 'MMM dd')}
+												{formatInTimeZone(
+													new Date(event.endDate),
+													Intl.DateTimeFormat().resolvedOptions().timeZone,
+													'MMM dd'
+												)}
 											</span>
 										</Tooltip>
 									</div>

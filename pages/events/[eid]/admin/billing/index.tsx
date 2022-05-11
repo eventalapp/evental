@@ -60,10 +60,16 @@ const EventBillingPage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
+				<h3 className="text-xl md:text-2xl font-medium">Single Event Plans & Pricing</h3>
+
 				<div className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Single Event Plans & Pricing</h1>
-					<div className="flex flex-col items-center space-y-3 my-8">
-						<p className="text-lg">How many attendees do you expect?</p>
+					<p className="text-lg font-medium mb-3">How many attendees are you expecting?</p>
+
+					<div className="mb-3">
+						<span className="text-xl text-gray-600">
+							<strong className="text-2xl md:text-3xl text-gray-900">{attendees}</strong> Attendees
+						</span>
+
 						<Controller
 							control={control}
 							name="attendees"
