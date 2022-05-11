@@ -10,6 +10,9 @@ export default api({
 
 export const getUpcomingEvents = async (): Promise<Prisma.Event[]> => {
 	return await prisma.event.findMany({
+		where: {
+			OR: [{ privacy: 'PUBLIC' }, { privacy: 'PASSWORD' }]
+		},
 		orderBy: [
 			{
 				startDate: 'asc'
