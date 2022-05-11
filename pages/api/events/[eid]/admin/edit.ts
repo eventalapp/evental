@@ -40,12 +40,17 @@ export default api({
 		const event = await prisma.event.findFirst({
 			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
 			select: {
-				id: true
+				id: true,
+				level: true
 			}
 		});
 
 		if (!event) {
 			throw new NextkitError(404, 'Event not found.');
+		}
+
+		if (body.privacy !== 'PRIVATE' && event.level === 'TRIAL') {
+			throw new NextkitError(400, 'To make your event public, you must upgrade to a paid plan.');
 		}
 
 		const updatedEvent = await prisma.event.update({
@@ -54,6 +59,7 @@ export default api({
 				description: body.description,
 				location: body.location,
 				timeZone: body.timeZone,
+				privacy: body.privacy,
 				startDate: dayjs(body.startDate).tz(body.timeZone).startOf('day').toDate(),
 				endDate: dayjs(body.endDate).tz(body.timeZone).endOf('day').toDate(),
 				image: fileLocation,

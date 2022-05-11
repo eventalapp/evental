@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
 import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
 import Button from '../radix/components/shared/Button';
-import { EventCategory, EventType } from '@prisma/client';
+import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
 import { capitalizeFirstLetter } from '../../utils/string';
 import Select from '../radix/components/Select';
 import ReactSelect from 'react-select';
@@ -48,6 +48,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			location: event?.location ?? undefined,
 			type: event?.type ?? undefined,
 			category: event?.category ?? undefined,
+			privacy: event?.privacy ?? undefined,
 			timeZone: event?.timeZone ?? 'America/New_York',
 			slug: event?.slug ?? undefined,
 			endDate: dayjs(event?.endDate).toDate() ?? undefined,
@@ -192,6 +193,30 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					/>
 
 					{errors.timeZone?.message && <ErrorMessage>{errors.timeZone?.message}</ErrorMessage>}
+				</div>
+				<div>
+					<Label htmlFor="privacy">Privacy *</Label>
+					{PrivacyLevel && (
+						<div>
+							<Controller
+								control={control}
+								name="privacy"
+								render={({ field }) => (
+									<Select
+										options={Object.values(PrivacyLevel).map((type) => ({
+											label: capitalizeFirstLetter(type.toLowerCase()),
+											value: type
+										}))}
+										value={field.value}
+										onValueChange={(value) => {
+											setValue('privacy', PrivacyLevel[value as keyof typeof PrivacyLevel]);
+										}}
+									/>
+								)}
+							/>
+						</div>
+					)}
+					{errors.privacy?.message && <ErrorMessage>{errors.privacy?.message}</ErrorMessage>}
 				</div>
 			</div>
 

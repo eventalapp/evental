@@ -12,8 +12,10 @@ Using [Next.js](https://nextjs.org/) with [Next-Auth](https://next-auth.js.org/)
 - next SEO
 - image upload for top level page wysiwyg
 - event privacy
+- my schedule
 
 ## low importance
+- session card on hover
 - custom icons
 - customize react toast
 - refactor navigations

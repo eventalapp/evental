@@ -36,7 +36,11 @@ export const SessionList: React.FC<Props> = (props) => {
 									)}
 								>
 									<span className="text-gray-700 text-sm w-20 pr-3 text-right">
-										{formatInTimeZone(new Date(session.startDate), event.timeZone, 'h:mm a zzz')}
+										{formatInTimeZone(
+											new Date(session.startDate),
+											Intl.DateTimeFormat().resolvedOptions().timeZone,
+											'h:mm a zzz'
+										)}
 									</span>
 									<div
 										key={session.id}
