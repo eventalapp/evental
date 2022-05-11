@@ -29,8 +29,8 @@ const EventBillingPage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Checkout</h1>
-					<div className="flex flex-row items-center">
+					<span className="text-xl flex flex-row items-center">
+						<span className="mr-2">Purchase</span>
 						<strong
 							className="text-2xl tracking-tight font-bold font-display mr-2"
 							aria-label="evental homepage"
@@ -38,7 +38,7 @@ const EventBillingPage: NextPage = () => {
 							Evental
 						</strong>
 						<span className="bg-primary text-white px-2 py-1 font-medium text-xs rounded">PRO</span>
-					</div>
+					</span>
 				</div>
 
 				<Elements stripe={getStripe()}>

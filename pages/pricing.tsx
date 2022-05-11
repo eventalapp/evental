@@ -73,7 +73,7 @@ const PricingPage: NextPage = () => {
 					</p>
 
 					<div>
-						<p className="font-bold text-xl text-center">{attendeesToPrice(attendees)}</p>
+						<p className="font-bold text-xl text-center">${attendeesToPrice(attendees)}</p>
 						<p className="text-gray-600 text-sm text-center">Includes {attendees} attendees</p>
 					</div>
 
