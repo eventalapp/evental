@@ -90,7 +90,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-col w-full mt-5">
+			<div className="flex flex-col w-full">
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="position">Position</Label>

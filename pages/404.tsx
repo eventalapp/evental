@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
 import Column from '../components/layout/Column';
 import { LinkButton } from '../components/form/LinkButton';
@@ -8,13 +7,15 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import PageWrapper from '../components/layout/PageWrapper';
+import { NextSeo } from 'next-seo';
 
 const ErrorNotFoundPage: NextPage = () => {
 	return (
 		<PageWrapper>
-			<Head>
-				<title>Page not found</title>
-			</Head>
+			<NextSeo
+				title="Page Not Found"
+				description="This page has not been found. Please check the URL and try again."
+			/>
 
 			<Navigation />
 

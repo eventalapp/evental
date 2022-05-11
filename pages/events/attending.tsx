@@ -1,5 +1,4 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import Head from 'next/head';
 import { EventList } from '../../components/events/EventList';
 import Column from '../../components/layout/Column';
 import { Navigation } from '../../components/navigation';
@@ -17,6 +16,7 @@ import { useUser } from '../../hooks/queries/useUser';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
 import Link from 'next/link';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -48,9 +48,24 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 	if (attendingEvents.length === 0) {
 		return (
 			<PageWrapper variant="white">
-				<Head>
-					<title>Attending Events</title>
-				</Head>
+				<NextSeo
+					title="Attending Events"
+					description="View all of the events you are attending."
+					openGraph={{
+						url: 'https://evental.app/events/attending',
+						title: 'Attending Events',
+						description: 'View all of the events you are attending.',
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
+				/>
 
 				<Navigation />
 
@@ -72,9 +87,24 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="white">
-			<Head>
-				<title>Attending Events</title>
-			</Head>
+			<NextSeo
+				title="Attending Events"
+				description="View all of the events you are attending."
+				openGraph={{
+					url: 'https://evental.app/events/attending',
+					title: 'Attending Events',
+					description: 'View all of the events you are attending.',
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<Navigation />
 

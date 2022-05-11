@@ -1,5 +1,4 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import Head from 'next/head';
 import { EventList } from '../../components/events/EventList';
 import Column from '../../components/layout/Column';
 import { Navigation } from '../../components/navigation';
@@ -18,6 +17,7 @@ import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { EventsPageNavigation } from '../../components/events/EventsPageNavigation';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -50,9 +50,24 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 	if (organizingEvents.length === 0) {
 		return (
 			<PageWrapper variant="white">
-				<Head>
-					<title>Organizing Events</title>
-				</Head>
+				<NextSeo
+					title="Organizing Events"
+					description="View all of the events you are organizing."
+					openGraph={{
+						url: 'https://evental.app/events/organizing',
+						title: 'Organizing Events',
+						description: 'View all of the events you are organizing.',
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
+				/>
 
 				<Navigation />
 
@@ -71,9 +86,24 @@ const OrganizingEventsPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="white">
-			<Head>
-				<title>Organizing Events</title>
-			</Head>
+			<NextSeo
+				title="Organizing Events"
+				description="View all of the events you are organizing."
+				openGraph={{
+					url: 'https://evental.app/events/organizing',
+					title: 'Organizing Events',
+					description: 'View all of the events you are organizing.',
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<Navigation />
 
