@@ -36,8 +36,18 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 				sideOffset={10}
 			>
 				<Item className="outline-none">
+					<Link href={`/users/${user?.slug}`} passHref>
+						<DropdownLink>My Profile</DropdownLink>
+					</Link>
+				</Item>
+				<Item className="outline-none">
+					<Link href={`/users/${user?.slug}/schedule`} passHref>
+						<DropdownLink className="mt-1">My Schedule</DropdownLink>
+					</Link>
+				</Item>
+				<Item className="outline-none">
 					<Link href="/events/attending" passHref>
-						<DropdownLink>Events</DropdownLink>
+						<DropdownLink className="mt-1">My Events</DropdownLink>
 					</Link>
 				</Item>
 				<Item className="outline-none">
