@@ -106,7 +106,11 @@ export const Authenticated: React.FC<Props> = (props) => {
 								{pages
 									.filter((page) => page.topLevel)
 									.map((page) => (
-										<LinkItem link={`/events/${event.slug}/pages/${page.slug}`} label={page.name} />
+										<LinkItem
+											key={page.id}
+											link={`/events/${event.slug}/pages/${page.slug}`}
+											label={page.name}
+										/>
 									))}
 							</div>
 						</div>
