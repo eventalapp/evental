@@ -49,22 +49,22 @@ const handler = api({
 		} else if (event.type === 'charge.succeeded') {
 			const charge = event.data.object as Stripe.Charge;
 			console.log(`Charge id: ${charge.id}`);
-
 			const { metadata } = event.data.object as Record<string, unknown>;
 			const { eventId } = metadata as Record<string, string>;
-			console.log(eventId);
 
-			console.log(charge.amount, priceToAttendees(charge.amount / 100));
-			// $1 is 100
-			await prisma.event.update({
-				where: {
-					id: eventId
-				},
-				data: {
-					level: 'PRO',
-					maxAttendees: priceToAttendees(charge.amount / 100)
-				}
-			});
+			if (eventId) {
+				await prisma.event.update({
+					where: {
+						id: eventId
+					},
+					data: {
+						level: 'PRO',
+						maxAttendees: priceToAttendees(charge.amount / 100)
+					}
+				});
+			} else {
+				throw new NextkitError(400, 'Event id not found');
+			}
 		} else {
 			console.warn(`Unhandled event type: ${event.type}`);
 		}
