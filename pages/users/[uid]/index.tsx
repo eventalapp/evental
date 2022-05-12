@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
-import { getUser } from '../../api/users/[uid]';
+
 import { Navigation } from '../../../components/navigation';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
@@ -12,6 +12,7 @@ import { LoadingPage } from '../../../components/error/LoadingPage';
 import React from 'react';
 import parse from 'html-react-parser';
 import { NextSeo } from 'next-seo';
+import { getUser } from '../../api/users/[uid]';
 
 type Props = {
 	initialViewingUser: PasswordlessUser | undefined;
