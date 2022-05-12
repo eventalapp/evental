@@ -93,7 +93,7 @@ model Event {
   createdAt   DateTime      @default(now())
   timeZone    String        @default("America/New_York")
   maxAttendees Int          @default(5)
-
+  password   String?
 
   attendee        EventAttendee[]
   session         EventSession[]
