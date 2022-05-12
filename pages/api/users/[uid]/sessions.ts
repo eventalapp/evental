@@ -90,6 +90,9 @@ export const getSessionsByUser = async (
 					}
 				}
 			}
+		},
+		orderBy: {
+			startDate: 'asc'
 		}
 	});
 
