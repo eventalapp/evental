@@ -72,10 +72,10 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 					description: `View ${attendee.user.name} at ${event.name}.`,
 					images: [
 						{
-							url: `https://cdn.evental.app${event.image}`,
+							url: `https://cdn.evental.app${attendee.user.image}`,
 							width: 300,
 							height: 300,
-							alt: `${event.name} Logo Alt`,
+							alt: `${attendee.user.name} Avatar Alt`,
 							type: 'image/jpeg'
 						}
 					]
