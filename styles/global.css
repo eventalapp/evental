@@ -168,6 +168,10 @@
 	@apply my-0;
 }
 
+.prose img {
+	@apply m-auto;
+}
+
 .prose {
 	max-width: 100%;
 }
