@@ -26,16 +26,19 @@ import { useSessionsByDateQuery } from '../../../../../hooks/queries/useSessions
 import { SessionList } from '../../../../../components/sessions/SessionList';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import dayjs from 'dayjs';
+import { getPages } from '../../../../api/events/[eid]/pages';
+import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 
 type Props = {
 	initialSessionsByDate: PaginatedSessionsWithVenue | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
+	initialPages: Prisma.EventPage[] | undefined;
 };
 
 const ViewSessionTypePage: NextPage<Props> = (props) => {
-	const { initialEvent, initialRoles, initialUser, initialSessionsByDate } = props;
+	const { initialEvent, initialRoles, initialUser, initialSessionsByDate, initialPages } = props;
 	const router = useRouter();
 	const [page, setPage] = useState(1);
 	const { date, eid } = router.query;
@@ -47,8 +50,17 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 		String(date),
 		{ initialData: initialSessionsByDate, page }
 	);
+	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
+		initialData: initialPages
+	});
 
-	if (isRolesLoading || isEventLoading || isUserLoading || isSessionsByDateLoading) {
+	if (
+		isRolesLoading ||
+		isEventLoading ||
+		isUserLoading ||
+		isSessionsByDateLoading ||
+		isPagesLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -70,7 +82,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 				<title>Sessions By Date</title>
 			</Head>
 
-			<EventNavigation event={event} roles={roles} user={user} />
+			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
 				<FlexRowBetween>
@@ -113,13 +125,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialSessionsByDate = (await getSessionsByDate(String(eid), String(date))) ?? undefined;
+	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
 			initialSessionsByDate,
 			initialEvent,
-			initialRoles
+			initialRoles,
+			initialPages
 		}
 	};
 };

@@ -20,24 +20,31 @@ import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
 import { ViewPage } from '../../../../components/pages/ViewPage';
+import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
+import { getPages } from '../../../api/events/[eid]/pages';
 
 type Props = {
 	initialPage: Prisma.EventPage | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
+	initialPages: Prisma.EventPage[] | undefined;
 };
 
 const ViewAttendeePage: NextPage<Props> = (props) => {
 	const router = useRouter();
-	const { initialPage, initialRoles, initialUser, initialEvent } = props;
+	const { initialPage, initialRoles, initialUser, initialEvent, initialPages } = props;
 	const { pid, eid } = router.query;
 	const { page, isPageLoading, pageError } = usePageQuery(String(eid), String(pid), initialPage);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
 
-	if (isPageLoading || isEventLoading || isRolesLoading) {
+	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
+		initialData: initialPages
+	});
+
+	if (isPageLoading || isEventLoading || isRolesLoading || isPagesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -59,7 +66,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				<title>Viewing Page: {page && page.name}</title>
 			</Head>
 
-			<EventNavigation event={event} roles={roles} user={user} />
+			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
 				<ViewPage admin page={page} eid={String(eid)} pid={String(pid)} />
@@ -75,12 +82,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialPage = (await getPage(String(eid), String(pid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
+	const initialPages = (await getPages(String(eid))) ?? undefined;
+
 	return {
 		props: {
 			initialUser,
 			initialPage,
 			initialRoles,
-			initialEvent
+			initialEvent,
+			initialPages
 		}
 	};
 };

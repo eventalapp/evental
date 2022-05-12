@@ -20,16 +20,19 @@ import { getRoles } from '../../../../api/events/[eid]/roles';
 import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 import Prisma from '@prisma/client';
 import { getSessionTypes } from '../../../../api/events/[eid]/sessions/types';
+import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
+import { getPages } from '../../../../api/events/[eid]/pages';
 
 type Props = {
 	initialSessionTypes: Prisma.EventSessionType[] | undefined;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
+	initialPages: Prisma.EventPage[] | undefined;
 };
 
 const SessionTypesPage: NextPage<Props> = (props) => {
-	const { initialSessionTypes, initialEvent, initialRoles, initialUser } = props;
+	const { initialSessionTypes, initialEvent, initialRoles, initialUser, initialPages } = props;
 
 	const router = useRouter();
 	const { eid } = router.query;
@@ -40,8 +43,11 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 		String(eid),
 		initialSessionTypes
 	);
+	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
+		initialData: initialPages
+	});
 
-	if (isSessionTypesLoading || isUserLoading || isRolesLoading) {
+	if (isSessionTypesLoading || isUserLoading || isRolesLoading || isPagesLoading) {
 		return <LoadingPage />;
 	}
 
@@ -55,7 +61,7 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 				<title>Session Types</title>
 			</Head>
 
-			<EventNavigation event={event} roles={roles} user={user} />
+			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
 				<div>
@@ -76,12 +82,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialSessionTypes = (await getSessionTypes(String(eid))) ?? undefined;
+	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
 		props: {
 			initialUser,
 			initialSessions,
-
+			initialPages,
 			initialEvent,
 			initialRoles,
 			initialSessionTypes

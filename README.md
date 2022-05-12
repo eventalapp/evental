@@ -17,7 +17,7 @@
 - refactor navigations
 - refactor buttons
 - remove unused radix
-- clean up queries/mutations(export whole mut/query?)
+- clean up queries/mutations (export whole mut/query?)
 
 ## Installation 💾
 

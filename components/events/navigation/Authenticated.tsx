@@ -20,6 +20,7 @@ type Props = {
 	user: PasswordlessUser | undefined;
 	event: Prisma.Event;
 	roles: Prisma.EventRole[];
+	pages: Prisma.EventPage[];
 } & UseSignOutMutationData;
 
 const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
@@ -49,7 +50,7 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 };
 
 export const Authenticated: React.FC<Props> = (props) => {
-	const { signOutMutation, setIsOpen, isOpen, user, roles, event } = props;
+	const { signOutMutation, setIsOpen, isOpen, user, roles, event, pages } = props;
 
 	return (
 		<div>
@@ -101,6 +102,12 @@ export const Authenticated: React.FC<Props> = (props) => {
 										label={`${capitalizeFirstLetter(role.name.toLowerCase())}s`}
 									/>
 								))}
+
+								{pages
+									.filter((page) => page.topLevel)
+									.map((page) => (
+										<LinkItem link={`/events/${event.slug}/pages/${page.slug}`} label={page.name} />
+									))}
 							</div>
 						</div>
 

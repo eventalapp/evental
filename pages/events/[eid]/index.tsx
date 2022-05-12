@@ -32,6 +32,8 @@ import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
 import { getDateRange } from '../../../utils/date';
 import { format } from 'date-fns';
 import { Pagination } from '../../../components/Pagination';
+import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
+import { getPages } from '../../api/events/[eid]/pages';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -42,6 +44,7 @@ type Props = {
 	initialUser: PasswordlessUser | undefined;
 	initialVenues: Prisma.EventVenue[] | undefined;
 	initialSessionTypes: Prisma.EventSessionType[] | undefined;
+	initialPages: Prisma.EventPage[] | undefined;
 };
 
 const ViewEventPage: NextPage<Props> = (props) => {
@@ -53,7 +56,8 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialSessions,
 		initialIsAttendeeByUserId,
 		initialVenues,
-		initialSessionTypes
+		initialSessionTypes,
+		initialPages
 	} = props;
 	const [page, setPage] = useState(1);
 	const router = useRouter();
@@ -76,6 +80,9 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		String(eid),
 		initialSessionTypes
 	);
+	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
+		initialData: initialPages
+	});
 
 	if (
 		isEventLoading ||
@@ -84,7 +91,8 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		isRolesLoading ||
 		isAttendeeLoading ||
 		isVenuesLoading ||
-		isSessionTypesLoading
+		isSessionTypesLoading ||
+		isPagesLoading
 	) {
 		return <LoadingPage />;
 	}
@@ -121,7 +129,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 				<title>{event && event.name}</title>
 			</Head>
 
-			<EventNavigation event={event} roles={roles} user={user} />
+			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
 				{event && (
@@ -227,6 +235,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
 	const initialIsAttendeeByUserId =
 		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
+	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
 		props: {
@@ -237,7 +246,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialRoles,
 			initialSessions,
 			initialVenues,
-			initialSessionTypes
+			initialSessionTypes,
+			initialPages
 		}
 	};
 };
