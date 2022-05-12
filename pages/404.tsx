@@ -13,7 +13,7 @@ const ErrorNotFoundPage: NextPage = () => {
 	return (
 		<PageWrapper>
 			<NextSeo
-				title="Page Not Found"
+				title="Page Not Found — Evental"
 				description="This page has not been found. Please check the URL and try again."
 			/>
 

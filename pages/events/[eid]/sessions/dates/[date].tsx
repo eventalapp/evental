@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
@@ -28,6 +27,7 @@ import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween'
 import dayjs from 'dayjs';
 import { getPages } from '../../../../api/events/[eid]/pages';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialSessionsByDate: PaginatedSessionsWithVenue | undefined;
@@ -78,9 +78,34 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Sessions By Date</title>
-			</Head>
+			<NextSeo
+				title={`${dayjs(String(date)).startOf('day').tz(event.timeZone).format('YYYY/MM/DD')} — ${
+					event.name
+				}`}
+				description={`View all of the sessions for ${dayjs(String(date))
+					.startOf('day')
+					.tz(event.timeZone)
+					.format('YYYY/MM/DD')} at ${event.name}`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/sessions/dates/${date}`,
+					title: `${dayjs(String(date)).startOf('day').tz(event.timeZone).format('YYYY/MM/DD')} — ${
+						event.name
+					}`,
+					description: `View all of the sessions for ${dayjs(String(date))
+						.startOf('day')
+						.tz(event.timeZone)
+						.format('YYYY/MM/DD')} at ${event.name}`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 

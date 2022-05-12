@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Column from '../../../components/layout/Column';
 import { Navigation } from '../../../components/navigation';
@@ -17,6 +16,8 @@ import { LoadingPage } from '../../../components/error/LoadingPage';
 import { ssrGetUser } from '../../../utils/api';
 import { useUser } from '../../../hooks/queries/useUser';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { NextSeo } from 'next-seo';
+import { formatInTimeZone } from 'date-fns-tz';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -45,9 +46,36 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Event signup</title>
-			</Head>
+			<NextSeo
+				title={`Register for ${event.name} — Evental`}
+				description={`Fill out the form below to register for ${
+					event.name
+				} taking place from ${formatInTimeZone(
+					event.startDate,
+					event.timeZone,
+					'MMMM do'
+				)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/regsister`,
+					title: `Register for ${event.name} — Evental`,
+					description: `Fill out the form below to register for ${
+						event.name
+					} taking place from ${formatInTimeZone(
+						event.startDate,
+						event.timeZone,
+						'MMMM do'
+					)} to ${formatInTimeZone(event.endDate, event.timeZone, 'MMMM do')}.`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<Navigation />
 

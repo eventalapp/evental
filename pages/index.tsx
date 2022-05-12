@@ -11,11 +11,11 @@ const HomePage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
-				title="Evental"
+				title="Evental — Event management software from the future"
 				description="Event management software that's highly intuitive. Your attendees and organizers will love using Evental for your in-person, hybrid, and virtual events."
 				openGraph={{
 					url: 'https://evental.app',
-					title: 'Evental',
+					title: 'Evental — Event management software from the future',
 					description:
 						"Event management software that's highly intuitive. Your attendees and organizers will love using Evental for your in-person, hybrid, and virtual events.",
 					images: [

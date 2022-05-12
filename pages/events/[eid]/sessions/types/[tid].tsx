@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
@@ -28,6 +27,7 @@ import { useSessionsByTypeQuery } from '../../../../../hooks/queries/useSessions
 import { Pagination } from '../../../../../components/Pagination';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialSessionType: Prisma.EventSessionType | undefined;
@@ -96,9 +96,24 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>{sessionType.name}</title>
-			</Head>
+			<NextSeo
+				title={`${sessionType.name} — ${event.name}`}
+				description={`View all of the ${sessionType.name} sessions.`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/sessions/types/${sessionType.slug}`,
+					title: `${sessionType.name} — ${event.name}`,
+					description: `View all of the ${sessionType.name} sessions.`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 

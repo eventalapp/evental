@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useSessionQuery } from '../../../../../hooks/queries/useSessionQuery';
@@ -25,6 +24,7 @@ import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -76,9 +76,24 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Session signup</title>
-			</Head>
+			<NextSeo
+				title={`Register for ${session.name} — ${event.name}`}
+				description={`Register for the ${session.name} session at ${event.name}`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/sessions/${session.slug}/register`,
+					title: `Register for ${session.name} — ${event.name}`,
+					description: `Register for the ${session.name} session at ${event.name}`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 

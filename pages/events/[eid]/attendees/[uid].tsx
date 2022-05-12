@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
 import Column from '../../../../components/layout/Column';
@@ -22,6 +21,7 @@ import { getEvent } from '../../../api/events/[eid]';
 import { getRoles } from '../../../api/events/[eid]/roles';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
+import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialAttendee: AttendeeWithUser | undefined;
@@ -61,12 +61,26 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	if (!event) {
 		return <NotFoundPage message="Event not found." />;
 	}
-
 	return (
 		<PageWrapper variant="gray">
-			<Head>
-				<title>Viewing Attendee</title>
-			</Head>
+			<NextSeo
+				title={`${attendee.user.name} — ${event.name}`}
+				description={`View ${attendee.user.name} at ${event.name}.`}
+				openGraph={{
+					url: `https://evental.app/events/${event.slug}/attendees/${attendee.user.id}`,
+					title: `${attendee.user.name} — ${event.name}`,
+					description: `View ${attendee.user.name} at ${event.name}.`,
+					images: [
+						{
+							url: `https://cdn.evental.app${event.image}`,
+							width: 300,
+							height: 300,
+							alt: `${event.name} Logo Alt`,
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
