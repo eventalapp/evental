@@ -10,7 +10,7 @@ import { Label } from '../form/Label';
 import { Input } from '../form/Input';
 import { Button } from '../form/Button';
 import { useUserQuery } from '../../hooks/queries/useUserQuery';
-import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
+import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
 
@@ -67,7 +67,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					Image
 				</Label>
 
-				<ImageUpload
+				<AvatarUpload
 					files={files}
 					setFiles={setFiles}
 					placeholderImageUrl={`https://cdn.evental.app${user.image}`}

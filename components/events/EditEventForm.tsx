@@ -13,7 +13,7 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { DatePicker } from '../form/DatePicker';
 import { useRouter } from 'next/router';
 import { LoadingInner } from '../error/LoadingInner';
-import ImageUpload, { FileWithPreview } from '../form/ImageUpload';
+import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import Button from '../radix/components/shared/Button';
 import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
 import { capitalizeFirstLetter } from '../../utils/string';
@@ -100,7 +100,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					Image
 				</Label>
 
-				<ImageUpload
+				<AvatarUpload
 					files={files}
 					setFiles={setFiles}
 					placeholderImageUrl={`https://cdn.evental.app${event.image}`}
