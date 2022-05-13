@@ -7,7 +7,8 @@ import { Editor } from '@tiptap/react';
 import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
 import * as Portal from '@radix-ui/react-portal';
 import { Label } from '../../form/Label';
-import AvatarUpload, { FileWithPreview } from '../../form/AvatarUpload';
+import { FileWithPreview } from '../../form/AvatarUpload';
+import ImageUpload from '../../form/ImageUpload';
 
 interface Props {
 	onSubmit: (link?: string) => void;
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export const ImageUploadDialog: React.FC<Props> = (props) => {
-	const { children, onSubmit, editor } = props;
+	const { children, onSubmit } = props;
 
 	const [isOpen, setIsOpen] = useState(false);
 	const { imageUploadResponse, imageUploadMutation } = useImageUploadMutation();
@@ -81,17 +82,18 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 							<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
 								Make changes to your link here. Click save when you&apos;re done.
 							</DialogPrimitive.Description>
-							<div className="mt-2 space-y-2">
-								<div className="flex flex-col w-full mt-5 items-center justify-center">
+							<div className="mt-2 space-y-3">
+								<div className="flex flex-col w-full mt-5 items-center justify-center min-h-[250px]">
 									<Label htmlFor="image" className="hidden">
 										Image
 									</Label>
 
-									<AvatarUpload files={files} setFiles={setFiles} />
+									<ImageUpload files={files} setFiles={setFiles} />
 								</div>
 
 								<div className="mt-4 flex justify-end">
 									<DialogPrimitive.Close
+										disabled={imageUploadMutation.isLoading}
 										onClick={() => {
 											imageUploadMutation.mutate({ image: files[0] });
 										}}
@@ -102,7 +104,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 											'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 										)}
 									>
-										Save
+										Add Image
 									</DialogPrimitive.Close>
 								</div>
 							</div>
