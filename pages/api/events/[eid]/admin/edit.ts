@@ -4,7 +4,7 @@ import { EditEventSchema } from '../../../../../utils/schemas';
 import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { busboyParseForm } from '../../../../../utils/busboyParseForm';
-import { uploadAndProcessImage } from '../../../../../utils/uploadAndProcessImage';
+import { uploadAndProcessAvatar } from '../../../../../utils/uploadAndProcessImage';
 import { EventCategory, EventType } from '@prisma/client';
 import dayjs from 'dayjs';
 
@@ -31,7 +31,7 @@ export default api({
 
 		const body = EditEventSchema.parse(formData);
 
-		let fileLocation = await uploadAndProcessImage(buffer, mimeType);
+		let fileLocation = await uploadAndProcessAvatar(buffer, mimeType);
 
 		if (!fileLocation && buffer.length >= 1) {
 			throw new NextkitError(500, 'Image failed to upload.');

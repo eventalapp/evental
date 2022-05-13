@@ -2,7 +2,7 @@ import { NextkitError } from 'nextkit';
 import { api } from '../../../utils/api';
 import { EditUserSchema } from '../../../utils/schemas';
 import { busboyParseForm } from '../../../utils/busboyParseForm';
-import { uploadAndProcessImage } from '../../../utils/uploadAndProcessImage';
+import { uploadAndProcessAvatar, uploadAndProcessImage } from '../../../utils/uploadAndProcessImage';
 import { prisma } from '../../../prisma/client';
 
 export const config = {
@@ -23,7 +23,7 @@ export default api({
 
 		const body = EditUserSchema.parse(formData);
 
-		let fileLocation = await uploadAndProcessImage(buffer, mimeType);
+		let fileLocation = await uploadAndProcessAvatar(buffer, mimeType);
 
 		if (!fileLocation && buffer.length >= 1) {
 			throw new NextkitError(500, 'Image failed to upload.');
