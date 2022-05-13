@@ -169,7 +169,7 @@
 }
 
 .prose img {
-	@apply m-auto my-5;
+	@apply m-auto my-5 max-h-[600px];
 }
 
 .prose {
