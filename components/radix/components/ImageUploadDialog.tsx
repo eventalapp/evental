@@ -9,6 +9,7 @@ import * as Portal from '@radix-ui/react-portal';
 import { Label } from '../../form/Label';
 import { FileWithPreview } from '../../form/AvatarUpload';
 import ImageUpload from '../../form/ImageUpload';
+import { LoadingInner } from '../../error/LoadingInner';
 
 interface Props {
 	onSubmit: (link?: string) => void;
@@ -104,12 +105,15 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 											'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 										)}
 									>
-										Add Image
+										{imageUploadMutation.isLoading ? <LoadingInner /> : 'Add Image'}
 									</DialogPrimitive.Close>
 								</div>
 							</div>
 
 							<DialogPrimitive.Close
+								onClick={() => {
+									setIsOpen(false);
+								}}
 								className={cx(
 									'absolute top-3.5 right-3.5 inline-flex items-center justify-center rounded-full p-1',
 									'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
