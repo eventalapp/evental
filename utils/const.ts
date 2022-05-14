@@ -1,3 +1,5 @@
+import { attendeesToPrice } from './price';
+
 export const colors = [
 	'#ff3b91',
 	'#d74bff',
@@ -370,3 +372,32 @@ export const timeZoneOptions = timeZoneList.map((timeZone) => ({
 }));
 
 export const FIFTEEN_MINUTES = 15 * 60 * 1000;
+
+const MAX_ATTENDEES = 5000;
+
+export let proAttendeePricing: Record<
+	string,
+	{
+		id: string;
+		price: number;
+		description: string;
+		attendees: number;
+		perAttendeePrice: number;
+		name: string;
+		image: string;
+	}
+> = {};
+
+for (let i = 250; i <= MAX_ATTENDEES; i += 250) {
+	const priceForAttendees = attendeesToPrice(i);
+
+	proAttendeePricing[String(i)] = {
+		id: `evental-pro-${i}`,
+		price: priceForAttendees,
+		description: `Evental Pro (${i} Attendees)`,
+		name: `Evental Pro (${i} Attendees)`,
+		image: `https://cdn.evental.app/images/logo.jpg`,
+		attendees: i,
+		perAttendeePrice: Number((i / priceForAttendees).toFixed(2))
+	};
+}
