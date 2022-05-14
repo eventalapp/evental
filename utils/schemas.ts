@@ -284,3 +284,12 @@ export const AcceptRoleInviteSchema = z.object({
 });
 
 export type AcceptRoleInvitePayload = z.infer<typeof AcceptRoleInviteSchema>;
+
+// Invites
+
+export const PurchaseProSchema = z.object({
+	attendees: z.number().max(5000, 'Too many attendees'),
+	eventId: z.string().min(1, 'Event ID is required').max(200, 'Event ID is too long')
+});
+
+export type PurchaseProPayload = z.infer<typeof PurchaseProSchema>;
