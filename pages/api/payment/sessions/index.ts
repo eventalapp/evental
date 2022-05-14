@@ -2,6 +2,9 @@ import Stripe from 'stripe';
 import { api } from '../../../../utils/api';
 import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
 import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
+import { NextkitError } from 'nextkit';
+import { proAttendeePricing } from '../../../../utils/const';
+import { PurchaseProSchema } from '../../../../utils/schemas';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 	// https://github.com/stripe/stripe-node#configuration
@@ -10,27 +13,43 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export default api({
 	async POST({ ctx, req }) {
-		const user = await ctx.getUser();
-		const amount: number = req.body.amount;
+		const body = PurchaseProSchema.parse(req.body);
+		const product = proAttendeePricing[body.attendees];
 
-		// Validate the amount that was passed from the client.
-		if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {
-			throw new Error('Invalid amount.');
+		if (!product) {
+			throw new NextkitError(400, 'Invalid attendee amount');
 		}
-		// Create Checkout Sessions from body params.
+
+		if (!(product.price >= MIN_AMOUNT && product.price <= MAX_AMOUNT)) {
+			throw new NextkitError(400, 'Invalid amount.');
+		}
+
 		const params: Stripe.Checkout.SessionCreateParams = {
-			submit_type: 'donate',
 			payment_method_types: ['card'],
+			mode: 'payment',
+			success_url: `${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
+				body.eventId
+			}/admin`,
+			cancel_url: `${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
+				body.eventId
+			}/admin/billing`,
+			metadata: {
+				eventId: body.eventId
+			},
 			line_items: [
 				{
-					name: 'Custom amount donation',
-					amount: formatAmountForStripe(amount, CURRENCY),
-					currency: CURRENCY,
-					quantity: 1
+					quantity: 1,
+					price_data: {
+						product_data: {
+							images: [product.image],
+							name: product.name,
+							description: product.description
+						},
+						unit_amount: formatAmountForStripe(product.price, CURRENCY),
+						currency: CURRENCY
+					}
 				}
-			],
-			success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
-			cancel_url: `${req.headers.origin}/donate-with-checkout`
+			]
 		};
 		const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(params);
 
