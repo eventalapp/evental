@@ -7,8 +7,8 @@ import { Controller, useForm } from 'react-hook-form';
 import Slider from '../components/radix/components/Slider';
 import Link from 'next/link';
 import { LinkButton } from '../components/form/LinkButton';
-import { attendeesToPrice } from '../utils/price';
 import { NextSeo } from 'next-seo';
+import { proAttendeePricing } from '../utils/const';
 
 const PricingPage: NextPage = () => {
 	const { control, watch } = useForm({ defaultValues: { attendees: 250 } });
@@ -87,7 +87,7 @@ const PricingPage: NextPage = () => {
 					</p>
 
 					<div>
-						<p className="font-bold text-xl text-center">${attendeesToPrice(attendees)}</p>
+						<p className="font-bold text-xl text-center">${proAttendeePricing[attendees].price}</p>
 						<p className="text-gray-600 text-sm text-center">Includes {attendees} attendees</p>
 					</div>
 
