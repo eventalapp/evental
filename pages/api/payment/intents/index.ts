@@ -22,6 +22,7 @@ export default api({
 			currency: CURRENCY,
 			metadata
 		};
+
 		const payment_intent: Stripe.PaymentIntent = await stripe.paymentIntents.create(params);
 
 		return payment_intent;
