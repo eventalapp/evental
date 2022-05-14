@@ -34,7 +34,9 @@ export default api({
 				body.eventId
 			}/admin/billing`,
 			metadata: {
-				eventId: body.eventId
+				eventId: body.eventId,
+				level: product.level,
+				attendees: product.attendees
 			},
 			line_items: [
 				{
