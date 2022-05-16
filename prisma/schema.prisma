@@ -88,6 +88,7 @@ model Event {
   privacy      PrivacyLevel  @default(PRIVATE)
   image        String        @default("/images/default-event.jpg")
   banner       String?
+  website      String?
   description  String?
   updatedAt    DateTime      @updatedAt
   createdAt    DateTime      @default(now())
