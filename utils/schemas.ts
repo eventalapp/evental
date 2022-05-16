@@ -55,6 +55,9 @@ const typeIdValidator = z.preprocess((val) => {
 	}
 	return val;
 }, z.string().max(100, 'Type is too long').nullable());
+const noImageValidator = z
+	.string()
+	.refine((val) => !val.includes('<img'), 'Your description cannot include an image.');
 
 const [firsttimeZone, ...resttimeZones] = timeZoneList;
 const timeZoneValidator = z.enum([firsttimeZone, ...resttimeZones]);
@@ -232,7 +235,9 @@ export const EditUserSchema = z.object({
 	name: nameValidator,
 	image: imageFileValidator.optional(),
 	location: locationValidator.optional(),
-	description: descriptionValidator.optional(),
+	description: descriptionValidator
+		.refine((val) => !val.includes('<img'), 'Your description cannot include an image.')
+		.optional(),
 	company: companyValidator.optional(),
 	position: positionValidator.optional(),
 	website: urlValidator.optional()
