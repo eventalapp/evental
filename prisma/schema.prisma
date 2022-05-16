@@ -70,7 +70,7 @@ enum EventLevel {
 enum PrivacyLevel {
   PUBLIC
   PRIVATE
-  PASSWORD
+  UNLISTED
 }
 
 model Event {
