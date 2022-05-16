@@ -3,13 +3,16 @@
 ## Todo for MVP:
 
 - add speakers to sessions
-- excel export for data
 - marketing pages
-- image upload for top level page wysiwyg
-- event privacy (password protected)
-- create serverside products (dynamic pricing & implement schema validation there)
+- hide & show earlier sessions
 
 ## low importance
+- show earlier events
+- share to twitter
+- event favicon
+- featured role members
+- Excel export for event data
+- remove image upload on user profile
 - print your schedule
 - session card on hover
 - custom icons
@@ -18,6 +21,7 @@
 - refactor buttons
 - remove unused radix
 - clean up queries/mutations (export whole mut/query?)
+- filter by date formatting
 
 ## Installation 💾
 
