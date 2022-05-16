@@ -29,13 +29,14 @@ import { getVenues } from '../../api/events/[eid]/venues';
 import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
 import { getDateRange } from '../../../utils/date';
-import { format } from 'date-fns';
 import { Pagination } from '../../../components/Pagination';
 import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
 import { htmlToText } from 'html-to-text';
 import { PrivatePage } from '../../../components/error/PrivatePage';
+import { SocialShareDropdown } from '../../../components/radix/components/SocialShareDropdown';
+import dayjs from 'dayjs';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
@@ -185,6 +186,10 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						)}
 					</div>
 					<div className="md:col-span-3 col-span-12">
+						<div className="mb-3">
+							<SocialShareDropdown event={event} align={'end'} />
+						</div>
+
 						{venues && venues.length > 0 && (
 							<div className="mb-3">
 								<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
@@ -231,9 +236,9 @@ const ViewEventPage: NextPage<Props> = (props) => {
 							{getDateRange(new Date(event.startDate), new Date(event.endDate)).map((date, i) => (
 								<Link
 									key={`${date.toISOString()}-${i}`}
-									href={`/events/${eid}/sessions/dates/${format(date, 'yyyy-MM-dd')}`}
+									href={`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`}
 								>
-									<a className="block">{format(date, 'yyyy-MM-dd')}</a>
+									<a className="block">{dayjs(date).format('MMMM D')}</a>
 								</Link>
 							))}
 						</div>
