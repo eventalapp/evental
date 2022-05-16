@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+	faArrowUpRightFromSquare,
 	faCalendarDay,
 	faClock,
 	faHeadset,
@@ -68,10 +69,10 @@ export const EventHeader: React.FC<{
 						{event?.name}
 					</h1>
 
-					<div className="flex-row flex items-center text-gray-600 flex-wrap">
+					<div className="flex-row flex items-center text-gray-600 flex-wrap space-x-3">
 						{event?.location && (
 							<Tooltip message={`This is event is taking place at ${event?.location}.`}>
-								<div className="flex flex-row items-center mr-3 cursor-help">
+								<div className="flex flex-row items-center cursor-help">
 									<FontAwesomeIcon
 										fill="currentColor"
 										className="w-5 h-5 mr-1.5"
@@ -94,7 +95,7 @@ export const EventHeader: React.FC<{
 								'MMMM do zzz'
 							)}.`}
 						>
-							<div className="flex flex-row items-center mr-3 cursor-help">
+							<div className="flex flex-row items-center cursor-help">
 								<FontAwesomeIcon
 									fill="currentColor"
 									className="w-5 h-5 mr-1.5"
@@ -123,7 +124,7 @@ export const EventHeader: React.FC<{
 								' '
 							)} timezone.`}
 						>
-							<div className="flex flex-row items-center mr-3 cursor-help">
+							<div className="flex flex-row items-center cursor-help">
 								<FontAwesomeIcon
 									fill="currentColor"
 									className="w-5 h-5 mr-1.5"
@@ -173,6 +174,22 @@ export const EventHeader: React.FC<{
 									/>
 									<p>{capitalizeOnlyFirstLetter(event?.type)}</p>
 								</div>
+							</Tooltip>
+						)}
+
+						{event.website && (
+							<Tooltip message={`This is event's website is ${event.website}.`}>
+								<a href={event.website} target="_blank" rel="noopener noreferrer">
+									<div className="flex flex-row items-center cursor-pointer">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="w-5 h-5 mr-1.5"
+											size="1x"
+											icon={faArrowUpRightFromSquare}
+										/>
+										<p>{event.website}</p>
+									</div>
+								</a>
 							</Tooltip>
 						)}
 					</div>
