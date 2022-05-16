@@ -23,6 +23,8 @@ import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
+import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 
 type Props = {
 	initialAttendee: AttendeeWithUser | undefined;
@@ -30,10 +32,18 @@ type Props = {
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialPages: Prisma.EventPage[] | undefined;
+	initialOrganizer: boolean;
 };
 
 const ViewAttendeePage: NextPage<Props> = (props) => {
-	const { initialAttendee, initialRoles, initialUser, initialEvent, initialPages } = props;
+	const {
+		initialAttendee,
+		initialRoles,
+		initialUser,
+		initialEvent,
+		initialPages,
+		initialOrganizer
+	} = props;
 	const router = useRouter();
 	const { uid, eid } = router.query;
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(
@@ -47,7 +57,15 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
-	if (isAttendeeLoading || isEventLoading || isRolesLoading || isPagesLoading) {
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+
+	if (
+		isAttendeeLoading ||
+		isEventLoading ||
+		isRolesLoading ||
+		isPagesLoading ||
+		isOrganizerLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -102,6 +120,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
 	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
 	const initialAttendee = (await getAttendee(String(eid), String(uid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? false;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
@@ -112,7 +131,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialAttendee,
 			initialEvent,
 			initialRoles,
-			initialPages
+			initialPages,
+			initialOrganizer
 		}
 	};
 };
