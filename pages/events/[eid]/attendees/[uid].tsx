@@ -22,6 +22,7 @@ import { getRoles } from '../../../api/events/[eid]/roles';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
+import { PrivatePage } from '../../../../components/error/PrivatePage';
 
 type Props = {
 	initialAttendee: AttendeeWithUser | undefined;
@@ -61,6 +62,11 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	if (!event) {
 		return <NotFoundPage message="Event not found." />;
 	}
+
+	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+		return <PrivatePage />;
+	}
+
 	return (
 		<PageWrapper variant="gray">
 			<NextSeo
