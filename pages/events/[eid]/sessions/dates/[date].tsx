@@ -23,7 +23,6 @@ import { PasswordlessUser } from '../../../../../utils/stripUserPassword';
 import { Pagination } from '../../../../../components/Pagination';
 import { useSessionsByDateQuery } from '../../../../../hooks/queries/useSessionsByDateQuery';
 import { SessionList } from '../../../../../components/sessions/SessionList';
-import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import dayjs from 'dayjs';
 import { getPages } from '../../../../api/events/[eid]/pages';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
@@ -96,7 +95,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<NextSeo
-				title={`${dayjs(String(date)).startOf('day').tz(event.timeZone).format('YYYY/MM/DD')} — ${
+				title={`${dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')} — ${
 					event.name
 				}`}
 				description={`View all of the sessions for ${dayjs(String(date))
@@ -127,15 +126,8 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
-				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium">
-						Sessions for{' '}
-						{dayjs(String(date)).startOf('day').tz(event.timeZone).format('YYYY/MM/DD')}
-					</h3>
-				</FlexRowBetween>
-
 				<h3 className="text-xl md:text-2xl font-medium mt-5">
-					Sessions{' '}
+					Sessions for {dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')}{' '}
 					<span className="font-normal text-gray-500">
 						{sessionsByDateData?.pagination?.total > 0 && (
 							<span className="font-normal text-gray-500">
