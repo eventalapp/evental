@@ -135,6 +135,12 @@ const ViewEventPage: NextPage<Props> = (props) => {
 			<NextSeo
 				title={`${event.name} — Evental`}
 				description={htmlToText(event.description || '')}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
 				openGraph={{
 					url: `https://evental.app/events/${event.slug}`,
 					title: `${event.name} — Evental`,

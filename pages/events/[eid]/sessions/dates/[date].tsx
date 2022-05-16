@@ -102,6 +102,12 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 					.startOf('day')
 					.tz(event.timeZone)
 					.format('YYYY/MM/DD')} at ${event.name}`}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
 				openGraph={{
 					url: `https://evental.app/events/${event.slug}/sessions/dates/${date}`,
 					title: `${dayjs(String(date)).startOf('day').tz(event.timeZone).format('YYYY/MM/DD')} — ${

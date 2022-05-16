@@ -54,9 +54,7 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 		String(eid),
 		initialSessionTypes
 	);
-
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
-
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
@@ -84,6 +82,12 @@ const SessionTypesPage: NextPage<Props> = (props) => {
 			<NextSeo
 				title={`Sessions Types — ${event.name}`}
 				description={`View all of the sessions types for ${event.name}.`}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
 				openGraph={{
 					url: `https://evental.app/events/${event.slug}/sessions/types`,
 					title: `Session Types — ${event.name}`,

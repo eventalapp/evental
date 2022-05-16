@@ -90,6 +90,12 @@ const RolesPage: NextPage<Props> = (props) => {
 			<NextSeo
 				title={`Roles — ${event.name}`}
 				description={`View all of the roles at ${event.name}.`}
+				additionalLinkTags={[
+					{
+						rel: 'icon',
+						href: `https://cdn.evental.app${event.image}`
+					}
+				]}
 				openGraph={{
 					url: `https://evental.app/events/${event.slug}/roles`,
 					title: `Roles — ${event.name}`,
