@@ -28,6 +28,8 @@ import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 
 type Props = {
 	initialSession: SessionWithVenue | undefined;
@@ -37,6 +39,7 @@ type Props = {
 	initialSessionAttendees: AttendeeWithUser[] | undefined;
 	initialSessionAttendee: AttendeeWithUser | undefined;
 	initialPages: Prisma.EventPage[] | undefined;
+	initialOrganizer: boolean;
 };
 
 const ViewSessionPage: NextPage<Props> = (props) => {
@@ -47,7 +50,8 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 		initialEvent,
 		initialSessionAttendees,
 		initialSessionAttendee,
-		initialPages
+		initialPages,
+		initialOrganizer
 	} = props;
 	const router = useRouter();
 	const { sid, eid } = router.query;
@@ -70,11 +74,18 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 	);
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-
+	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
-	if (isSessionLoading || isRolesLoading || isEventLoading || isPagesLoading) {
+
+	if (
+		isSessionLoading ||
+		isRolesLoading ||
+		isEventLoading ||
+		isPagesLoading ||
+		isOrganizerLoading
+	) {
 		return <LoadingPage />;
 	}
 
@@ -138,6 +149,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialSession = (await getSession(String(eid), String(sid))) ?? undefined;
 	const initialEvent = (await getEvent(String(eid))) ?? undefined;
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
+	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? false;
 	const initialSessionAttendees =
 		(await getSessionAttendees(String(eid), String(sid))) ?? undefined;
 	const initialSessionAttendee =
@@ -152,7 +164,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialRoles,
 			initialSessionAttendees,
 			initialSessionAttendee,
-			initialPages
+			initialPages,
+			initialOrganizer
 		}
 	};
 };
