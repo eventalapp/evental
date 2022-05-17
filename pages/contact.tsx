@@ -5,7 +5,7 @@ import React from 'react';
 import PageWrapper from '../components/layout/PageWrapper';
 import { NextSeo } from 'next-seo';
 
-const PricingPage: NextPage = () => {
+const ContactPage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
@@ -13,7 +13,7 @@ const PricingPage: NextPage = () => {
 				description="Contact our team for support. We are here to help you with any questions you may have."
 				openGraph={{
 					url: 'https://evental.app/contact',
-					title: 'Contact',
+					title: 'Contact — Evental',
 					description:
 						'Contact our team for support. We are here to help you with any questions you may have.',
 					images: [
@@ -37,4 +37,4 @@ const PricingPage: NextPage = () => {
 	);
 };
 
-export default PricingPage;
+export default ContactPage;
