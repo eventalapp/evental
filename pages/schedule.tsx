@@ -29,13 +29,13 @@ const SchedulePage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper>
 			<Head>
-				<title>My Schedule</title>
+				<title>Schedule</title>
 			</Head>
 
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<h1 className="text-2xl md:text-3xl font-bold">My Schedule</h1>
+				<h1 className="text-2xl md:text-3xl font-bold">Schedule</h1>
 			</Column>
 		</PageWrapper>
 	);

@@ -53,7 +53,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 
 				<div className="flex-row hidden space-x-7 text-md sm:flex items-center">
 					<Link href="/events/attending">
-						<a>My Events</a>
+						<a>Events</a>
 					</Link>
 
 					<Link href="/events/create">
@@ -99,7 +99,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 						<FullscreenLinkItem
 							index={0}
 							link={`/events/attending`}
-							label={'My Events'}
+							label={'Events'}
 							onClick={() => {
 								setIsOpen(false);
 							}}
