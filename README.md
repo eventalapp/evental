@@ -19,7 +19,6 @@
 - remove unused radix
 - clean up queries/mutations (export whole mut/query?)
 - filter by date formatting
-- verify email before joining/creating event
 - rate limit request password reset & verify email request etc
 
 ## post mvp
