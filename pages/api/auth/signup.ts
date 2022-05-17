@@ -4,9 +4,9 @@ import { prisma } from '../../../prisma/client';
 import { hash } from 'argon2';
 import { SignUpSchema } from '../../../utils/schemas';
 import { NextkitError } from 'nextkit';
-import { SESSION_EXPIRY } from '../../../config';
+import { SESSION_EXPIRY, VERIFY_EMAIL_EXPIRY } from '../../../config';
 import { generateSlug } from '../../../utils/generateSlug';
-import { sendWelcomeEmail } from '../../../email/sendWelcomeEmail';
+import { sendVerifyEmail } from '../../../email/sendVerifyEmail';
 
 export default api({
 	async POST({ ctx, req, res }) {
@@ -67,7 +67,11 @@ export default api({
 		res.setHeader('Set-Cookie', cookie);
 
 		try {
-			await sendWelcomeEmail(user.email, user.name);
+			const verifyCode = await ctx.getVerifyEmailCode();
+
+			await ctx.redis.set(`verify:${verifyCode}`, user.id, { ex: VERIFY_EMAIL_EXPIRY });
+
+			await sendVerifyEmail({ verifyCode, sendToAddress: user.email });
 		} catch {
 			// silent fail
 		}
