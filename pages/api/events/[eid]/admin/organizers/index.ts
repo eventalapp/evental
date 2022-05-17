@@ -16,6 +16,13 @@ export default api({
 			return false;
 		}
 
+		if (!user.emailVerified) {
+			throw new NextkitError(
+				401,
+				'You must verify your account to do this. Request a verification email in your user settings by clicking on your profile in the top right.'
+			);
+		}
+
 		const organizers = await getOrganizers(String(eid));
 
 		if (!organizers) {

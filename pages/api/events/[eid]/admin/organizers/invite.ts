@@ -17,6 +17,13 @@ export default api({
 			throw new NextkitError(401, 'Unauthorized');
 		}
 
+		if (!requestingUser.emailVerified) {
+			throw new NextkitError(
+				401,
+				'You must verify your account to do this. Request a verification email in your user settings by clicking on your profile in the top right.'
+			);
+		}
+
 		const isFounderResponse = await isFounder(String(eid), String(requestingUser?.id));
 
 		if (!isFounderResponse) {

@@ -13,6 +13,13 @@ export default api({
 			throw new NextkitError(401, 'You must be logged in to do this.');
 		}
 
+		if (!user.emailVerified) {
+			throw new NextkitError(
+				401,
+				'You must verify your account to do this. Request a verification email in your user settings by clicking on your profile in the top right.'
+			);
+		}
+
 		const parsed = CreateEventSchema.parse(req.body);
 
 		const slug = await generateSlug(parsed.name, async (val) => {
