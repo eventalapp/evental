@@ -5,6 +5,7 @@
 - add speakers to sessions
 - marketing pages
 - hide & show earlier sessions
+- enforce max attendee limit
 
 ## low importance
 - featured role members
@@ -21,6 +22,7 @@
 
 ## post mvp
 - make events truly private
+- adjust session times when event date is moved
 
 ## Installation 💾
 
