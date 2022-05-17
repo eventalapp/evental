@@ -11,8 +11,9 @@ import { ssrGetUser } from '../utils/api';
 import { PasswordlessUser } from '../utils/stripUserPassword';
 import { LoadingPage } from '../components/error/LoadingPage';
 import { NotFoundPage } from '../components/error/NotFoundPage';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRequestVerificationEmail } from '../hooks/mutations/useRequestVerificationEmail';
+import { LoadingInner } from '../components/error/LoadingInner';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;
@@ -24,6 +25,12 @@ const SettingsPage: NextPage<Props> = (props) => {
 	const { editUserMutation } = useEditUserMutation(String(user?.id));
 	const { requestVerificationEmailMutation } = useRequestVerificationEmail();
 	const [canVerify, setCanVerify] = useState(true);
+
+	useEffect(() => {
+		if (requestVerificationEmailMutation.isSuccess) {
+			setCanVerify(false);
+		}
+	}, [requestVerificationEmailMutation.isSuccess]);
 
 	if (isUserLoading) {
 		return <LoadingPage />;
@@ -45,12 +52,16 @@ const SettingsPage: NextPage<Props> = (props) => {
 				{canVerify && !user.emailVerified && (
 					<button
 						className="block w-full bg-gradient-to-r from-primary-500 to-secondary-500 block text-white px-5 py-3 rounded-md mb-4 font-medium"
+						disabled={requestVerificationEmailMutation.isLoading}
 						onClick={() => {
 							requestVerificationEmailMutation.mutate();
-							setCanVerify(false);
 						}}
 					>
-						Your account is not verified. Click here to request a verification email.
+						{requestVerificationEmailMutation.isLoading ? (
+							<LoadingInner />
+						) : (
+							'Your account is not verified. Click here to request a verification email.'
+						)}
 					</button>
 				)}
 
