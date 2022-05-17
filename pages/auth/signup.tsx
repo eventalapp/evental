@@ -35,11 +35,11 @@ const SignUpPage: NextPage<Props> = (props) => {
 	return (
 		<PageWrapper variant="gray">
 			<NextSeo
-				title="Sign Up — EventalEvent"
+				title="Sign Up — Evental"
 				description="Create an account for Evental. Create, organize, or attend events with ease."
 				openGraph={{
 					url: 'https://evental.app/auth/signup',
-					title: 'Sign Up — EventalEvent',
+					title: 'Sign Up — Evental',
 					description:
 						'Create an account for Evental. Create, organize, or attend events with ease.',
 					images: [
