@@ -35,6 +35,7 @@ export const fake = (count: number) => {
 	fakeEvent = {
 		id: `faker-event-#${i}`,
 		privacy: 'PUBLIC',
+		website: faker.internet.url(),
 		maxAttendees: 500,
 		slug: faker.internet.userName().toLowerCase(),
 		name: `${faker.name.firstName()} ${faker.name.lastName()}'s Event`,
