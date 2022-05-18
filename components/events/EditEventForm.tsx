@@ -50,6 +50,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			type: event?.type ?? undefined,
 			category: event?.category ?? undefined,
 			website: event?.website ?? undefined,
+			color: event?.color ?? undefined,
 			privacy: event?.privacy ?? undefined,
 			timeZone: event?.timeZone ?? 'America/New_York',
 			slug: event?.slug ?? undefined,
@@ -321,7 +322,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				)}
 				<Button
 					type="submit"
-					className="ml-4"
+					className={`ml-4`}
 					variant="primary"
 					disabled={
 						editEventMutation.isLoading ||
