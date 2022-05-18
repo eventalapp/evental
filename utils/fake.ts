@@ -33,6 +33,7 @@ export const fake = (count: number) => {
 	let fakeEvent: Omit<Prisma.Event, 'createdAt' | 'updatedAt'>;
 
 	fakeEvent = {
+		color: '#f44336',
 		id: `faker-event-#${i}`,
 		privacy: 'PUBLIC',
 		website: faker.internet.url(),
