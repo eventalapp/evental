@@ -107,12 +107,16 @@ export default api({
 			ex: CLAIM_PROFILE_EXPIRY
 		});
 
-		await sendClaimProfileEmail({
-			sendToAddress: user.email,
-			inviterName: requestingUser.name,
-			event,
-			role,
-			claimCode
-		});
+		try {
+			await sendClaimProfileEmail({
+				sendToAddress: user.email,
+				inviterName: requestingUser.name,
+				event,
+				role,
+				claimCode
+			});
+		} catch {
+			// silent fail
+		}
 	}
 });
