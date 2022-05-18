@@ -17,6 +17,8 @@ import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import { Pagination } from '../../../../../components/Pagination';
+import Link from 'next/link';
+import { LinkButton } from '../../../../../components/form/LinkButton';
 
 const AttendeesAdminPage: NextPage = () => {
 	const router = useRouter();
@@ -74,6 +76,12 @@ const AttendeesAdminPage: NextPage = () => {
 								</span>
 							)}
 						</h3>
+
+						<div>
+							<Link href={`/events/${eid}/admin/attendees/create`} passHref>
+								<LinkButton className="mr-3">Create Attendee</LinkButton>
+							</Link>
+						</div>
 					</FlexRowBetween>
 
 					{attendeesData.attendees && (
