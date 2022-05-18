@@ -60,7 +60,6 @@ export const CreateSessionTypeForm: React.FC<Props> = (props) => {
 							/>
 						)}
 					/>
-
 					{errors.color?.message && <ErrorMessage>{errors.color?.message}</ErrorMessage>}
 				</div>
 			</div>
