@@ -34,7 +34,7 @@ const SuggestPage: NextPage = () => {
 				<iframe
 					title="Suggest a feature"
 					src="https://docs.google.com/forms/d/e/1FAIpQLSeXAr_Ij5eiYzGPl9v_rKVJgkoZq6m6jvLDStGoiq4SQGnSLQ/viewform?embedded=true"
-					className="w-full outline-none block h-full min-h-[800px]"
+					className="w-full outline-none block h-full min-h-[80vh]"
 					frameBorder="0"
 					marginHeight={0}
 					marginWidth={0}
