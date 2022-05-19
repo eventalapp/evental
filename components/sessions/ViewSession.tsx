@@ -19,6 +19,7 @@ type Props = {
 	eid: string;
 	sid: string;
 	isAttending: boolean;
+	roleAttendees: AttendeeWithUser[] | undefined;
 	attendees: AttendeeWithUser[] | undefined;
 	session: SessionWithVenue;
 	admin?: boolean;
@@ -26,7 +27,7 @@ type Props = {
 };
 
 export const ViewSession: React.FC<Props> = (props) => {
-	const { session, sid, eid, isAttending, admin = false, attendees, event } = props;
+	const { session, sid, eid, isAttending, admin = false, attendees, event, roleAttendees } = props;
 
 	if (!session) return null;
 
@@ -160,6 +161,25 @@ export const ViewSession: React.FC<Props> = (props) => {
 					{parse(String(session.description))}
 				</div>
 			)}
+
+			{roleAttendees &&
+				Object.entries(
+					roleAttendees.reduce((acc: Record<string, AttendeeWithUser[]>, attendee) => {
+						if (!acc[attendee.role.name]) {
+							acc[attendee.role.name] = [];
+						}
+						acc[attendee.role.name].push(attendee);
+						return acc;
+					}, {})
+				).map(([key, attendees]) => (
+					<div>
+						<h3 className="text-2xl font-medium my-3">
+							{key}s <span className="text-gray-500 font-normal">({attendees?.length || 0})</span>
+						</h3>
+
+						{attendees && <AttendeeList admin={admin} eid={eid} attendees={attendees} />}
+					</div>
+				))}
 
 			<h3 className="text-2xl font-medium my-3">
 				Attendees <span className="text-gray-500 font-normal">({attendees?.length || 0})</span>
