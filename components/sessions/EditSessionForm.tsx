@@ -24,6 +24,11 @@ import { TimeZoneNotice } from '../TimeZoneNotice';
 import { UseSessionRoleAttendeesQueryData } from '../../hooks/queries/useSessionRoleAttendeesQuery';
 import Image from 'next/image';
 import { capitalizeFirstLetter } from '../../utils/string';
+import AttachPeopleDialog from '../radix/components/AttachPeopleDialog';
+import { useRemoveAttendeeFromSessionMutation } from '../../hooks/mutations/useRemoveAttendeeFromSessionMutation';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -40,6 +45,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const {
 		eid,
+		sid,
 		venues,
 		editSessionMutation,
 		session,
@@ -65,6 +71,11 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 		},
 		resolver: zodResolver(EditSessionSchema)
 	});
+
+	const { removeAttendeeFromSessionMutation } = useRemoveAttendeeFromSessionMutation(
+		String(eid),
+		String(sid)
+	);
 
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
@@ -133,9 +144,14 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="venueId">Attach People *</Label>
 
-						<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3">
+						<AttachPeopleDialog eid={String(eid)} sid={String(sid)} />
+
+						<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 mt-3">
 							{sessionRoleAttendeesQuery?.data?.map((attendee) => (
-								<li key={attendee.id}>
+								<li
+									key={attendee.id}
+									className="block flex items-center justify-between flex-col h-full relative"
+								>
 									<Link href={`/events/${eid}/admin/attendees/${attendee.user.slug}`}>
 										<a className="flex items-center justify-between flex-col h-full">
 											<div className="h-16 w-16 relative mb-1 border-2 border-gray-100 rounded-full">
@@ -156,6 +172,23 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 											</span>
 										</a>
 									</Link>
+
+									<Tooltip side={'top'} message={`Remove this user from this session.`}>
+										<button
+											type="button"
+											className="absolute -top-1 -right-1 p-1"
+											onClick={() => {
+												removeAttendeeFromSessionMutation.mutate({ userId: attendee.user.id });
+											}}
+										>
+											<FontAwesomeIcon
+												fill="currentColor"
+												className="w-5 h-5 cursor-pointer text-gray-700"
+												size="lg"
+												icon={faXmark}
+											/>
+										</button>
+									</Tooltip>
 								</li>
 							))}
 						</ul>
