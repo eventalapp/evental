@@ -1,7 +1,6 @@
 # Evental
 
 ## Todo for MVP:
-- add speakers to sessions
 - marketing pages
 - hide & show earlier sessions
 
