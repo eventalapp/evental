@@ -51,6 +51,11 @@ const CreateEventPage: NextPage<Props> = (props) => {
 			<Column>
 				<h1 className="text-2xl md:text-3xl font-bold">Create an Event</h1>
 
+				<p className="mt-2">
+					Create and setup a private event, invite organizers, customize your event, create
+					sessions, attendees, pages, and more.
+				</p>
+
 				<CreateEventForm createEventMutation={createEventMutation} canCancel />
 			</Column>
 		</PageWrapper>
