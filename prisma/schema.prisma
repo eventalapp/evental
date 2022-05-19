@@ -89,7 +89,7 @@ model Event {
   image        String        @default("/images/default-event.jpg")
   banner       String?
   website      String?
-  color      String        @default("#0066FF")
+  color        String        @default("#0066FF")
   description  String?
   updatedAt    DateTime      @updatedAt
   createdAt    DateTime      @default(now())
@@ -178,11 +178,17 @@ model EventSessionType {
   @@map("event_session_type")
 }
 
+enum EventSessionAttendeeType {
+  ATTENDEE
+  ROLE
+}
+
 model EventSessionAttendee {
-  id         String @id @default(cuid())
+  id         String                   @id @default(cuid())
   sessionId  String
   attendeeId String
   eventId    String
+  type       EventSessionAttendeeType @default(ATTENDEE)
 
   event    Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
   session  EventSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
