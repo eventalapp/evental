@@ -37,6 +37,21 @@ export default api({
 			throw new NextkitError(401, 'You are already attending this event.');
 		}
 
+		const attendeeCount = await prisma.eventAttendee.count({
+			where: {
+				eventId: event.id
+			}
+		});
+
+		if (event.maxAttendees >= attendeeCount) {
+			throw new NextkitError(
+				500,
+				'This event is at maximum capacity, the owner has been notified.'
+			);
+
+			//TODO: Notify event founder
+		}
+
 		const defaultRole = await prisma.eventRole.findFirst({
 			where: {
 				eventId: event.id,
