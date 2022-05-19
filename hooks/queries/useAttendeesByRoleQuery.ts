@@ -28,7 +28,7 @@ export const useAttendeesByRoleQuery = (
 		PaginatedAttendeesWithUser,
 		AxiosError<ErroredAPIResponse>
 	>(
-		['attendees', eid, rid, page],
+		['attendees-role', eid, rid, page],
 		async () => {
 			return axios
 				.get<SuccessAPIResponse<PaginatedAttendeesWithUser>>(
