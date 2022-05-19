@@ -7,12 +7,23 @@ import {
 import { api } from '../../../../../../../utils/api';
 import { getSession } from '../index';
 import { prisma } from '../../../../../../../prisma/client';
+import { EventSessionAttendeeType } from '@prisma/client';
 
 export default api({
 	async GET({ req }) {
-		const { eid, sid } = req.query;
+		const { eid, sid, type } = req.query;
 
-		const attendees = await getSessionAttendees(String(eid), String(sid));
+		const typeParsed =
+			EventSessionAttendeeType[String(type) as keyof typeof EventSessionAttendeeType] ??
+			EventSessionAttendeeType.ATTENDEE;
+
+		if (!typeParsed) {
+			throw new NextkitError(400, 'Invalid attendee type');
+		}
+
+		const attendees = await getSessionAttendees(String(eid), String(sid), {
+			type: typeParsed
+		});
 
 		if (!attendees) {
 			throw new NextkitError(404, 'Attendees not found');
@@ -22,10 +33,17 @@ export default api({
 	}
 });
 
+export interface UseSessionAttendeesOptions {
+	type?: EventSessionAttendeeType;
+}
+
 export const getSessionAttendees = async (
 	eid: string,
-	sid: string
+	sid: string,
+	args: UseSessionAttendeesOptions = {}
 ): Promise<AttendeeWithUser[] | null> => {
+	const { type = EventSessionAttendeeType.ATTENDEE } = args;
+
 	const event = await getEvent(eid);
 
 	if (!event) {
@@ -41,7 +59,8 @@ export const getSessionAttendees = async (
 	const sessionAttendees = await prisma.eventSessionAttendee.findMany({
 		where: {
 			eventId: event.id,
-			sessionId: session.id
+			sessionId: session.id,
+			type
 		},
 		include: {
 			attendee: {
