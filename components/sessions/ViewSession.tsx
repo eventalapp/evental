@@ -172,7 +172,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 						return acc;
 					}, {})
 				).map(([key, attendees]) => (
-					<div>
+					<div key={key}>
 						<h3 className="text-2xl font-medium my-3">
 							{key}s <span className="text-gray-500 font-normal">({attendees?.length || 0})</span>
 						</h3>
