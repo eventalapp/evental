@@ -21,6 +21,9 @@ import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQue
 import { StyledEditor } from '../form/Editor';
 import { FIFTEEN_MINUTES } from '../../utils/const';
 import { TimeZoneNotice } from '../TimeZoneNotice';
+import { UseSessionRoleAttendeesQueryData } from '../../hooks/queries/useSessionRoleAttendeesQuery';
+import Image from 'next/image';
+import { capitalizeFirstLetter } from '../../utils/string';
 
 type Props = {
 	eid: string;
@@ -30,11 +33,20 @@ type Props = {
 	UseEditSessionMutationData &
 	UseSessionQueryData &
 	UseEventQueryData &
-	UseSessionTypesQueryData;
+	UseSessionTypesQueryData &
+	UseSessionRoleAttendeesQueryData;
 
 export const EditSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { eid, venues, editSessionMutation, session, event, sessionTypes } = props;
+	const {
+		eid,
+		venues,
+		editSessionMutation,
+		session,
+		event,
+		sessionTypes,
+		sessionRoleAttendeesQuery
+	} = props;
 	const {
 		register,
 		handleSubmit,
@@ -114,6 +126,39 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 						</Link>
 
 						{errors.venueId?.message && <ErrorMessage>{errors.venueId?.message}</ErrorMessage>}
+					</div>
+				</div>
+
+				<div className="mb-5">
+					<div>
+						<Label htmlFor="venueId">Attach People *</Label>
+
+						<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3">
+							{sessionRoleAttendeesQuery?.data?.map((attendee) => (
+								<li key={attendee.id}>
+									<Link href={`/events/${eid}/admin/attendees/${attendee.user.slug}`}>
+										<a className="flex items-center justify-between flex-col h-full">
+											<div className="h-16 w-16 relative mb-1 border-2 border-gray-100 rounded-full">
+												<Image
+													alt={String(attendee.user.name)}
+													src={String(
+														attendee?.user.image
+															? `https://cdn.evental.app${attendee?.user.image}`
+															: `https://cdn.evental.app/images/default-avatar.jpg`
+													)}
+													className="rounded-full"
+													layout="fill"
+												/>
+											</div>
+											<span className="text-lg text-center">{attendee.user.name}</span>
+											<span className="block text-gray-700 text-sm leading-none">
+												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
+											</span>
+										</a>
+									</Link>
+								</li>
+							))}
+						</ul>
 					</div>
 				</div>
 
