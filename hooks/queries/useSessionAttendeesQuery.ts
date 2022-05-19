@@ -23,7 +23,7 @@ export const useSessionAttendeesQuery = (
 		async () => {
 			return axios
 				.get<SuccessAPIResponse<AttendeeWithUser[]>>(
-					`/api/events/${eid}/sessions/${sid}/attendees/`
+					`/api/events/${eid}/sessions/${sid}/attendees?type=ATTENDEE`
 				)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
