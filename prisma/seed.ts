@@ -56,25 +56,15 @@ export const seed = async () => {
 	// Events
 
 	try {
-		await prisma.event.upsert({
-			where: {
-				id: fakeData.fakeEvent.id
-			},
-			create: {
-				id: fakeData.fakeEvent.id,
-				endDate: fakeData.fakeEvent.endDate,
-				name: fakeData.fakeEvent.name,
-				startDate: fakeData.fakeEvent.startDate,
-				type: fakeData.fakeEvent.type,
-				banner: fakeData.fakeEvent.banner,
-				level: fakeData.fakeEvent.level,
-				slug: fakeData.fakeEvent.slug,
-				timeFormat: fakeData.fakeEvent.timeFormat,
-				description: fakeData.fakeEvent.description,
-				location: fakeData.fakeEvent.location
-			},
-			update: {
-				id: fakeData.fakeEvent.id,
+		const event = await prisma.event.create({
+			data: {
+				maxAttendees: fakeData.fakeEvent.maxAttendees,
+				address: fakeData.fakeEvent.address,
+				timeZone: fakeData.fakeEvent.timeZone,
+				color: fakeData.fakeEvent.color,
+				password: fakeData.fakeEvent.password,
+				website: fakeData.fakeEvent.website,
+				privacy: fakeData.fakeEvent.privacy,
 				endDate: fakeData.fakeEvent.endDate,
 				name: fakeData.fakeEvent.name,
 				startDate: fakeData.fakeEvent.startDate,
@@ -90,11 +80,10 @@ export const seed = async () => {
 
 		await prisma.eventRole.createMany({
 			data: fakeData.fakeRoles.map((fakeRole) => {
-				const { id, eventId, slug, name, defaultRole } = fakeRole;
+				const { slug, name, defaultRole } = fakeRole;
 
 				return {
-					id,
-					eventId,
+					eventId: event.id,
 					slug,
 					name,
 					defaultRole
@@ -105,13 +94,12 @@ export const seed = async () => {
 
 		await prisma.eventAttendee.createMany({
 			data: fakeData.fakeAttendees.map((fakeAttendee) => {
-				const { id, userId, permissionRole, eventId } = fakeAttendee;
+				const { userId, permissionRole } = fakeAttendee;
 
 				return {
-					id,
 					userId,
 					permissionRole,
-					eventId,
+					eventId: event.id,
 					eventRoleId: String(fakeData.fakeRoles[0]?.id)
 				};
 			}),
@@ -120,16 +108,42 @@ export const seed = async () => {
 
 		await prisma.eventSession.createMany({
 			data: fakeData.fakeSessions.map((fakeSession) => {
-				const { id, name, endDate, startDate, slug, eventId, description } = fakeSession;
+				const { name, endDate, startDate, slug, description } = fakeSession;
 
 				return {
-					id,
 					name,
 					endDate,
 					startDate,
 					slug,
-					eventId,
+					eventId: event.id,
 					description
+				};
+			}),
+			skipDuplicates: true
+		});
+
+		const attendees = await prisma.eventAttendee.findMany({
+			where: {
+				eventId: event.id
+			}
+		});
+
+		const session = await prisma.eventSession.findFirst({
+			where: {
+				eventId: event.id
+			}
+		});
+
+		if (!session) {
+			throw new Error('Session not found');
+		}
+
+		await prisma.eventSessionAttendee.createMany({
+			data: attendees.map((attendee) => {
+				return {
+					eventId: event.id,
+					attendeeId: attendee.id,
+					sessionId: session.id
 				};
 			}),
 			skipDuplicates: true

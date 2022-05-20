@@ -1,8 +1,11 @@
 import { faker } from '@faker-js/faker';
 import Prisma from '@prisma/client';
+import dayjs from 'dayjs';
 
 export const fake = (count: number) => {
 	// Fake users
+
+	const randomNumber = Math.ceil(Math.random() * 1000);
 
 	let i = 1;
 
@@ -34,7 +37,7 @@ export const fake = (count: number) => {
 
 	fakeEvent = {
 		color: '#f44336',
-		id: `faker-event-#${i}`,
+		id: `faker-event-#${randomNumber}`,
 		privacy: 'PUBLIC',
 		website: faker.internet.url(),
 		maxAttendees: 500,
@@ -44,9 +47,9 @@ export const fake = (count: number) => {
 		location: faker.address.city(),
 		password: faker.internet.password(),
 		image: '/images/default-event.jpg',
-		startDate: new Date(),
+		startDate: dayjs(new Date()).add(20, 'day').toDate(),
 		timeZone: 'America/New_York',
-		endDate: new Date(),
+		endDate: dayjs(new Date()).add(40, 'day').toDate(),
 		category: 'EVENT',
 		type: 'HYBRID',
 		address: faker.address.streetAddress(),
@@ -81,7 +84,7 @@ export const fake = (count: number) => {
 
 	while (i <= count) {
 		fakeAttendees.push({
-			id: `faker-event-#${i}`,
+			id: `faker-attendee-#${i}`,
 			userId: fakeUsers[i - 1].id,
 			eventId: fakeEvent.id,
 			permissionRole: 'ATTENDEE',
@@ -100,13 +103,13 @@ export const fake = (count: number) => {
 
 	while (i <= count) {
 		fakeSessions.push({
-			id: `faker-event-#${i}`,
+			id: `faker-session-#${i}`,
 			eventId: fakeEvent.id,
 			name: `${faker.name.firstName()} ${faker.name.lastName()}`,
 			description: faker.lorem.sentence(),
-			startDate: new Date(),
+			startDate: dayjs(new Date()).add(25, 'day').toDate(),
 			slug: faker.internet.userName().toLowerCase(),
-			endDate: new Date()
+			endDate: dayjs(new Date()).add(26, 'day').toDate()
 		});
 		i++;
 	}
