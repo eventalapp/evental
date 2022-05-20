@@ -11,10 +11,12 @@ import { getRole } from '../roles/[rid]';
 
 export default api({
 	async GET({ req }) {
-		const { eid, role, name } = req.query;
+		const { eid, role, name, limit, type } = req.query;
 
-		if (name) {
-			const attendeesByName = await getAttendeesByName(String(eid), String(name));
+		if (type === 'name') {
+			const attendeesByName = await getAttendeesByName(String(eid), String(name), {
+				limit: Number(limit) || 10
+			});
 
 			if (!attendeesByName) {
 				throw new NextkitError(404, 'Attendees not found');
@@ -99,8 +101,11 @@ export const getAttendeesByRole = async (
 
 export const getAttendeesByName = async (
 	eid: string,
-	name: string
+	name: string,
+	args: { limit?: number } = {}
 ): Promise<AttendeeWithUser[] | null> => {
+	const { limit } = args;
+
 	const event = await getEvent(eid);
 
 	if (!event) {
@@ -108,7 +113,7 @@ export const getAttendeesByName = async (
 	}
 
 	const attendees = await prisma.eventAttendee.findMany({
-		take: 10,
+		take: limit,
 		where: {
 			user: {
 				name: { contains: name }

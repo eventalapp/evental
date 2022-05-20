@@ -24,7 +24,7 @@ const AttachPeopleDialog = (props: Props) => {
 	let [isOpen, setIsOpen] = useState(false);
 	const [name, setName] = useState('');
 
-	const attendeesByNameQuery = useAttendeesByNameQuery(eid, name);
+	const attendeesByNameQuery = useAttendeesByNameQuery(eid, name, { limit: 7 });
 
 	const { addAttendeeToSessionMutation } = useAddAttendeeToSessionMutation(
 		String(eid),
@@ -107,7 +107,7 @@ const AttachPeopleDialog = (props: Props) => {
 								Results{' '}
 								<span className="text-gray-500">({attendeesByNameQuery?.data?.length || 0})</span>
 							</p>
-							<div>
+							<div className="space-y-2">
 								{attendeesByNameQuery.isLoading ? (
 									<div>
 										<LoadingInner />
