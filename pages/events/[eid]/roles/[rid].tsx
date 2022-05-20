@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Column from '../../../../components/layout/Column';
-import React, { useState } from 'react';
+import React from 'react';
 import { useRoleQuery } from '../../../../hooks/queries/useRoleAttendeesQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import PageWrapper from '../../../../components/layout/PageWrapper';
@@ -27,11 +27,7 @@ import { capitalizeFirstLetter } from '../../../../utils/string';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
 import { AttendeeList } from '../../../../components/attendees/AttendeeList';
 import { useAttendeesByRoleQuery } from '../../../../hooks/queries/useAttendeesByRoleQuery';
-import {
-	getAttendeesByRole,
-	PaginatedAttendeesWithUser
-} from '../../../api/events/[eid]/attendees';
-import { Pagination } from '../../../../components/Pagination';
+import { getAttendeesByRole } from '../../../api/events/[eid]/attendees';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
@@ -40,7 +36,7 @@ import { PrivatePage } from '../../../../components/error/PrivatePage';
 type Props = {
 	initialRole: Prisma.EventRole | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
-	initialAttendees: PaginatedAttendeesWithUser | undefined;
+	initialAttendees: AttendeeWithUser[] | undefined;
 	initialOrganizer: boolean;
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
@@ -59,7 +55,6 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		initialIsAttendeeByUserId,
 		initialPages
 	} = props;
-	const [page, setPage] = useState(1);
 	const router = useRouter();
 	const { rid, eid } = router.query;
 	const { role, isRoleLoading, roleError } = useRoleQuery(String(eid), String(rid), initialRole);
@@ -73,8 +68,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		isAttendeeLoading
 	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
 	const { attendeesData, isAttendeesLoading } = useAttendeesByRoleQuery(String(eid), String(rid), {
-		initialData: initialAttendees,
-		page
+		initialData: initialAttendees
 	});
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
@@ -92,7 +86,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		return <LoadingPage />;
 	}
 
-	if (!role || !attendeesData?.attendees) {
+	if (!role || !attendeesData) {
 		return <NotFoundPage message="Role not found." />;
 	}
 
@@ -151,26 +145,14 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				<FlexRowBetween>
 					<h3 className="text-xl md:text-2xl font-medium">
 						{capitalizeFirstLetter(role.name.toLowerCase())}s{' '}
-						{attendeesData?.pagination?.total > 0 && (
-							<span className="font-normal text-gray-500">
-								({attendeesData?.pagination?.from || 0}/{attendeesData?.pagination?.total || 0})
-							</span>
-						)}
+						<span className="font-normal text-gray-500">({attendeesData?.length || 0})</span>
 					</h3>
 				</FlexRowBetween>
 
-				{attendeesData?.attendees?.length === 0 ? (
+				{attendeesData?.length === 0 ? (
 					<p>No {role.name.toLowerCase()}s found.</p>
 				) : (
-					<AttendeeList eid={String(eid)} attendees={attendeesData?.attendees} />
-				)}
-
-				{attendeesData.pagination.pageCount > 1 && (
-					<Pagination
-						page={page}
-						pageCount={attendeesData.pagination.pageCount}
-						setPage={setPage}
-					/>
+					<AttendeeList eid={String(eid)} attendees={attendeesData} />
 				)}
 			</Column>
 		</PageWrapper>

@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
@@ -19,7 +19,6 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
-import { Pagination } from '../../../../../../components/Pagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { SessionList } from '../../../../../../components/sessions/SessionList';
@@ -29,7 +28,6 @@ import parse from 'html-react-parser';
 const ViewVenuePage: NextPage = () => {
 	const router = useRouter();
 	const { vid, eid } = router.query;
-	const [page, setPage] = useState(1);
 	const { venue, isVenueLoading, venueError } = useVenueQuery(String(eid), String(vid));
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
@@ -37,8 +35,7 @@ const ViewVenuePage: NextPage = () => {
 	const { user } = useUser();
 	const { isSessionsByVenueLoading, sessionsByVenueData } = useSessionsByVenueQuery(
 		String(eid),
-		String(vid),
-		{ page: page }
+		String(vid)
 	);
 
 	if (
@@ -51,7 +48,7 @@ const ViewVenuePage: NextPage = () => {
 		return <LoadingPage />;
 	}
 
-	if (!venue || !sessionsByVenueData?.sessions) {
+	if (!venue || !sessionsByVenueData) {
 		return <NotFoundPage message="Venue not found." />;
 	}
 
@@ -121,28 +118,10 @@ const ViewVenuePage: NextPage = () => {
 
 				<h3 className="text-xl md:text-2xl font-medium">
 					Sessions{' '}
-					{sessionsByVenueData?.pagination?.total > 0 && (
-						<span className="font-normal text-gray-500">
-							({sessionsByVenueData?.pagination?.from || 0}/
-							{sessionsByVenueData?.pagination?.total || 0})
-						</span>
-					)}
+					<span className="font-normal text-gray-500">({sessionsByVenueData.length || 0})</span>
 				</h3>
-				{sessionsByVenueData.sessions && (
-					<SessionList
-						eid={String(eid)}
-						sessions={sessionsByVenueData.sessions}
-						event={event}
-						admin
-					/>
-				)}
-				{sessionsByVenueData.pagination.pageCount > 1 && (
-					<Pagination
-						page={page}
-						pageCount={sessionsByVenueData.pagination.pageCount}
-						setPage={setPage}
-					/>
-				)}
+
+				<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} admin />
 			</Column>
 		</PageWrapper>
 	);

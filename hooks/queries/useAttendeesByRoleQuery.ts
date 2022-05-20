@@ -1,16 +1,15 @@
 import axios, { AxiosError } from 'axios';
 import { useQuery } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { PaginatedAttendeesWithUser } from '../../pages/api/events/[eid]/attendees';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
 export interface UseAttendeesByRoleQueryData {
-	attendeesData: PaginatedAttendeesWithUser | undefined;
+	attendeesData: AttendeeWithUser[] | undefined;
 	isAttendeesLoading: boolean;
 }
 
 export interface UseAttendeesByRoleQueryOptions {
-	initialData?: PaginatedAttendeesWithUser | undefined;
-	page?: number;
+	initialData?: AttendeeWithUser[] | undefined;
 }
 
 export const useAttendeesByRoleQuery = (
@@ -18,20 +17,19 @@ export const useAttendeesByRoleQuery = (
 	rid: string,
 	args: UseAttendeesByRoleQueryOptions = {}
 ): UseAttendeesByRoleQueryData => {
-	const { initialData, page = 1 } = args;
+	const { initialData } = args;
 	let params = new URLSearchParams();
 
-	params.append('page', String(page));
 	params.append('role', String(rid));
 
 	const { data: attendeesData, isLoading: isAttendeesLoading } = useQuery<
-		PaginatedAttendeesWithUser,
+		AttendeeWithUser[],
 		AxiosError<ErroredAPIResponse>
 	>(
-		['attendees-role', eid, rid, page],
+		['attendees-role', eid, rid],
 		async () => {
 			return axios
-				.get<SuccessAPIResponse<PaginatedAttendeesWithUser>>(
+				.get<SuccessAPIResponse<AttendeeWithUser[]>>(
 					`/api/events/${eid}/attendees?${params.toString()}`
 				)
 				.then((res) => res.data.data);

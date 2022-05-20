@@ -2,7 +2,7 @@ import Prisma from '@prisma/client';
 import type { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
@@ -24,12 +24,11 @@ import { getEvent } from '../../api/events/[eid]';
 import { getAttendee } from '../../api/events/[eid]/attendees/[uid]';
 import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 import { getRoles } from '../../api/events/[eid]/roles';
-import { getSessions, PaginatedSessionsWithVenue } from '../../api/events/[eid]/sessions';
+import { getSessions, SessionWithVenue } from '../../api/events/[eid]/sessions';
 import { getVenues } from '../../api/events/[eid]/venues';
 import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
 import { getDateRange } from '../../../utils/date';
-import { Pagination } from '../../../components/Pagination';
 import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
 import { getPages } from '../../api/events/[eid]/pages';
 import { NextSeo } from 'next-seo';
@@ -40,7 +39,7 @@ import dayjs from 'dayjs';
 
 type Props = {
 	initialEvent: Prisma.Event | undefined;
-	initialSessions: PaginatedSessionsWithVenue | undefined;
+	initialSessions: SessionWithVenue[] | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
 	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
 	initialOrganizer: boolean;
@@ -62,13 +61,11 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialSessionTypes,
 		initialPages
 	} = props;
-	const [page, setPage] = useState(1);
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
 	const { sessionsData, isSessionsLoading, sessionsError } = useSessionsQuery(String(eid), {
-		initialData: initialSessions,
-		page
+		initialData: initialSessions
 	});
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
@@ -122,7 +119,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		);
 	}
 
-	if (!event || !sessionsData?.sessions || !roles) {
+	if (!event || !sessionsData || !roles) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -174,22 +171,10 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					<div className="md:col-span-9 col-span-12">
 						<h3 className="text-xl md:text-2xl font-medium">
 							Sessions{' '}
-							{sessionsData?.pagination?.total > 0 && (
-								<span className="font-normal text-gray-500">
-									({sessionsData?.pagination?.from || 0}/{sessionsData?.pagination?.total || 0})
-								</span>
-							)}
+							<span className="font-normal text-gray-500">({sessionsData.length || 0})</span>
 						</h3>
 
-						<SessionList sessions={sessionsData.sessions} eid={String(eid)} event={event} />
-
-						{sessionsData.pagination.pageCount > 1 && (
-							<Pagination
-								page={page}
-								pageCount={sessionsData.pagination.pageCount}
-								setPage={setPage}
-							/>
-						)}
+						<SessionList sessions={sessionsData} eid={String(eid)} event={event} />
 					</div>
 					<div className="md:col-span-3 col-span-12">
 						<div className="mb-3">

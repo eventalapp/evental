@@ -1,16 +1,15 @@
 import axios, { AxiosError } from 'axios';
 import { useQuery } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { PaginatedSessionsWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 
 export interface UseSessionsByVenueData {
-	sessionsByVenueData: PaginatedSessionsWithVenue | undefined;
+	sessionsByVenueData: SessionWithVenue[] | undefined;
 	isSessionsByVenueLoading: boolean;
 }
 
 export interface UseSessionsByVenueOptions {
-	initialData?: PaginatedSessionsWithVenue | undefined;
-	page?: number;
+	initialData?: SessionWithVenue[] | undefined;
 }
 
 export const useSessionsByVenueQuery = (
@@ -18,23 +17,20 @@ export const useSessionsByVenueQuery = (
 	vid: string,
 	args: UseSessionsByVenueOptions = {}
 ): UseSessionsByVenueData => {
-	const { initialData, page = 1 } = args;
+	const { initialData } = args;
 
 	let params = new URLSearchParams();
 
-	params.append('page', String(page));
 	params.append('venue', String(vid));
 
 	const { data: sessionsByVenueData, isLoading: isSessionsByVenueLoading } = useQuery<
-		PaginatedSessionsWithVenue,
+		SessionWithVenue[],
 		AxiosError<ErroredAPIResponse>
 	>(
-		['venue-sessions', eid, vid, page],
+		['venue-sessions', eid, vid],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<PaginatedSessionsWithVenue>>(
-					`/api/events/${eid}/sessions?${params}`
-				)
+				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/api/events/${eid}/sessions?${params}`)
 				.then((res) => res.data.data);
 		},
 		{

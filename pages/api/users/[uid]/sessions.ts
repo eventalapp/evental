@@ -3,14 +3,7 @@ import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
 import { getUser } from './index';
 import { prisma } from '../../../../prisma/client';
-import { PageOptions, PaginationData, SessionWithVenue } from '../../events/[eid]/sessions';
-
-export const SESSIONS_PER_PAGE = 24;
-
-export type PaginatedSessionsWithVenueEvent = {
-	sessions: SessionWithVenueEvent[];
-	pagination: PaginationData;
-};
+import { SessionWithVenue } from '../../events/[eid]/sessions';
 
 export type SessionWithVenueEvent = {
 	event: Prisma.Event | null;
@@ -18,12 +11,9 @@ export type SessionWithVenueEvent = {
 
 export default api({
 	async GET({ req }) {
-		const { uid, page } = req.query;
-		const pageParsed = page ? parseInt(String(page)) : 1;
+		const { uid } = req.query;
 
-		const sessionList = await getSessionsByUser(String(uid), {
-			page: pageParsed
-		});
+		const sessionList = await getSessionsByUser(String(uid));
 
 		if (!sessionList) {
 			throw new NextkitError(404, 'Sessions not found');
@@ -33,35 +23,14 @@ export default api({
 	}
 });
 
-export const getSessionsByUser = async (
-	uid: string,
-	args: PageOptions & { take?: number } = {}
-): Promise<PaginatedSessionsWithVenueEvent | null> => {
-	const { page = 1, take = SESSIONS_PER_PAGE } = args || {};
-
+export const getSessionsByUser = async (uid: string): Promise<SessionWithVenueEvent[] | null> => {
 	const user = await getUser(uid);
 
 	if (!user) {
 		return null;
 	}
 
-	const count = await prisma.eventSession.count({
-		where: {
-			attendees: {
-				some: {
-					attendee: {
-						user: {
-							id: user.id
-						}
-					}
-				}
-			}
-		}
-	});
-
-	const sessions = await prisma.eventSession.findMany({
-		take: take,
-		skip: (page - 1) * SESSIONS_PER_PAGE,
+	return await prisma.eventSession.findMany({
 		where: {
 			attendees: {
 				some: {
@@ -95,16 +64,4 @@ export const getSessionsByUser = async (
 			startDate: 'asc'
 		}
 	});
-
-	return {
-		sessions,
-		pagination: {
-			total: count,
-			pageCount: Math.ceil(count / SESSIONS_PER_PAGE),
-			currentPage: page,
-			perPage: SESSIONS_PER_PAGE,
-			from: (page - 1) * SESSIONS_PER_PAGE + 1,
-			to: (page - 1) * SESSIONS_PER_PAGE + sessions.length
-		}
-	};
 };

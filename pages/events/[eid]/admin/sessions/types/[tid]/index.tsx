@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import { NotFoundPage } from '../../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../../components/error/ViewErrorPage';
 import { useRolesQuery } from '../../../../../../../hooks/queries/useRolesQuery';
@@ -16,11 +16,9 @@ import { LoadingPage } from '../../../../../../../components/error/LoadingPage';
 import { useSessionTypeQuery } from '../../../../../../../hooks/queries/useSessionTypeQuery';
 import { ViewSessionType } from '../../../../../../../components/sessions/ViewSessionType';
 import { useSessionsByTypeQuery } from '../../../../../../../hooks/queries/useSessionsByTypeQuery';
-import { Pagination } from '../../../../../../../components/Pagination';
 
 const ViewSessionTypePage: NextPage = () => {
 	const router = useRouter();
-	const [page, setPage] = useState(1);
 	const { tid, eid } = router.query;
 	const { user } = useUser();
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
@@ -53,7 +51,7 @@ const ViewSessionTypePage: NextPage = () => {
 		return <NotFoundPage message="Session Type not found." />;
 	}
 
-	if (!sessionsByTypeData?.sessions) {
+	if (!sessionsByTypeData) {
 		return <NotFoundPage message="Sessions not found." />;
 	}
 
@@ -78,17 +76,10 @@ const ViewSessionTypePage: NextPage = () => {
 					sessionType={sessionType}
 					eid={String(eid)}
 					tid={String(tid)}
-					sessions={sessionsByTypeData.sessions}
+					sessions={sessionsByTypeData}
 					event={event}
 					admin
 				/>
-				{sessionsByTypeData.pagination.pageCount > 1 && (
-					<Pagination
-						page={page}
-						pageCount={sessionsByTypeData.pagination.pageCount}
-						setPage={setPage}
-					/>
-				)}
 			</Column>
 		</PageWrapper>
 	);

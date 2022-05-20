@@ -33,13 +33,13 @@ export default api.raw({
 			{ header: 'Session Venue Address', key: 'session_venue_address', width: 30 }
 		];
 
-		const sessionsResponse = await getSessionsByUser(user.id, { take: 1000 });
+		const sessionsResponse = await getSessionsByUser(user.id);
 
 		if (!sessionsResponse) {
 			throw new NextkitError(404, 'Sessions not found.');
 		}
 
-		sessionsResponse.sessions.forEach((session) => {
+		sessionsResponse.forEach((session) => {
 			worksheet.addRow({
 				name: session.name,
 				session_time: session.startDate,

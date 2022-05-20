@@ -50,7 +50,7 @@ const EditRolePage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!role || !attendeesData?.attendees) {
+	if (!role || !attendeesData) {
 		return <NotFoundPage message="Role not found." />;
 	}
 
@@ -79,7 +79,7 @@ const EditRolePage: NextPage = () => {
 					roleError={roleError}
 					editRoleMutation={editRoleMutation}
 					isRoleLoading={isRoleLoading}
-					attendees={attendeesData?.attendees}
+					attendees={attendeesData}
 				/>
 			</Column>
 		</PageWrapper>
