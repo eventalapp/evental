@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Editor, EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,6 +22,7 @@ import { Link } from '@tiptap/extension-link';
 import { LinkDialog } from '../radix/components/LinkDialog';
 import Image from '@tiptap/extension-image';
 import { ImageUploadDialog } from '../radix/components/ImageUploadDialog';
+import Tooltip from '../radix/components/Tooltip';
 
 const MenuBar: React.FC<{
 	editor: Editor | null;
@@ -30,6 +31,13 @@ const MenuBar: React.FC<{
 	imageUpload: boolean;
 }> = (props) => {
 	const { editor, setLink, addImage, imageUpload } = props;
+	const [isMac, setIsMac] = useState(false);
+
+	useEffect(() => {
+		if (navigator) {
+			setIsMac(navigator.userAgent.indexOf('Mac') > -1);
+		}
+	}, []);
 
 	if (!editor) {
 		return null;
@@ -37,94 +45,156 @@ const MenuBar: React.FC<{
 
 	return (
 		<div className="space-x-2 md:space-x-3.5 px-2 mb-2 pb-1 border-b border-gray-300 text-gray-700">
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().toggleBold().run()}
-				className={editor.isActive('bold') ? 'text-primary' : ''}
+			<Tooltip side={'top'} message={`Bold (${isMac ? 'Cmd + B' : 'Ctrl + B'})`}>
+				<button
+					type="button"
+					onClick={() => editor.chain().focus().toggleBold().run()}
+					className={editor.isActive('bold') ? 'text-primary' : ''}
+				>
+					<FontAwesomeIcon size="lg" icon={faBold} />
+				</button>
+			</Tooltip>
+
+			<Tooltip side={'top'} message={`Italicize (${isMac ? 'Cmd + I' : 'Ctrl + I'})`}>
+				<button
+					type="button"
+					onClick={() => editor.chain().focus().toggleItalic().run()}
+					className={editor.isActive('italic') ? 'text-primary' : ''}
+				>
+					<FontAwesomeIcon size="lg" icon={faItalic} />
+				</button>
+			</Tooltip>
+
+			<Tooltip
+				side={'top'}
+				message={`Strikethrough (${isMac ? 'Cmd + Shift + X' : 'Ctrl + Shift + X'})`}
 			>
-				<FontAwesomeIcon size="lg" icon={faBold} />
-			</button>
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().toggleItalic().run()}
-				className={editor.isActive('italic') ? 'text-primary' : ''}
+				<button
+					type="button"
+					onClick={() => editor.chain().focus().toggleStrike().run()}
+					className={editor.isActive('strike') ? 'text-primary' : ''}
+				>
+					<FontAwesomeIcon size="lg" icon={faStrikethrough} />
+				</button>
+			</Tooltip>
+
+			<Tooltip side={'top'} message={`Code (${isMac ? 'Cmd + E' : 'Ctrl + E'})`}>
+				<button
+					type="button"
+					onClick={() => editor.chain().focus().toggleCode().run()}
+					className={editor.isActive('code') ? 'text-primary' : ''}
+				>
+					<FontAwesomeIcon size="lg" icon={faCode} />
+				</button>
+			</Tooltip>
+
+			<Tooltip side={'top'} message={`Reset Selected Text`}>
+				<button type="button" onClick={() => editor.chain().focus().unsetAllMarks().run()}>
+					<FontAwesomeIcon size="lg" icon={faEraser} />
+				</button>
+			</Tooltip>
+
+			<Tooltip
+				side={'top'}
+				message={`Bullet List (${isMac ? 'Cmd + Shift + 8' : 'Control + Shift + 8'})`}
 			>
-				<FontAwesomeIcon size="lg" icon={faItalic} />
-			</button>
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().toggleStrike().run()}
-				className={editor.isActive('strike') ? 'text-primary' : ''}
+				<button
+					type="button"
+					onClick={() => editor.chain().focus().toggleBulletList().run()}
+					className={editor.isActive('bulletList') ? 'text-primary' : ''}
+				>
+					<FontAwesomeIcon size="lg" icon={faList} />
+				</button>
+			</Tooltip>
+
+			<Tooltip
+				side={'top'}
+				message={`Ordered List (${isMac ? 'Cmd + Shift + 7' : 'Control + Shift + 7'})`}
 			>
-				<FontAwesomeIcon size="lg" icon={faStrikethrough} />
-			</button>
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().toggleCode().run()}
-				className={editor.isActive('code') ? 'text-primary' : ''}
+				<button
+					type="button"
+					onClick={() => editor.chain().focus().toggleOrderedList().run()}
+					className={editor.isActive('orderedList') ? 'text-primary' : ''}
+				>
+					<FontAwesomeIcon size="lg" icon={faListOl} />
+				</button>
+			</Tooltip>
+
+			<Tooltip
+				side={'top'}
+				message={`Code Block (${isMac ? 'Cmd + Alt + C' : 'Control + Alt + C'})`}
 			>
-				<FontAwesomeIcon size="lg" icon={faCode} />
-			</button>
-			<button type="button" onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-				<FontAwesomeIcon size="lg" icon={faEraser} />
-			</button>
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().toggleBulletList().run()}
-				className={editor.isActive('bulletList') ? 'text-primary' : ''}
+				<button
+					type="button"
+					onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+					className={editor.isActive('codeBlock') ? 'text-primary' : ''}
+				>
+					<FontAwesomeIcon size="lg" icon={faCodeBlock} />
+				</button>
+			</Tooltip>
+
+			<Tooltip
+				side={'top'}
+				message={`Blockquote (${isMac ? 'Cmd + Shift + B' : 'Ctrl + Shift + B'})`}
 			>
-				<FontAwesomeIcon size="lg" icon={faList} />
-			</button>
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().toggleOrderedList().run()}
-				className={editor.isActive('orderedList') ? 'text-primary' : ''}
-			>
-				<FontAwesomeIcon size="lg" icon={faListOl} />
-			</button>
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-				className={editor.isActive('codeBlock') ? 'text-primary' : ''}
-			>
-				<FontAwesomeIcon size="lg" icon={faCodeBlock} />
-			</button>
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().toggleBlockquote().run()}
-				className={editor.isActive('blockquote') ? 'text-primary' : ''}
-			>
-				<FontAwesomeIcon size="lg" icon={faQuoteLeft} />
-			</button>
-			<button type="button" onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-				<FontAwesomeIcon size="lg" icon={faBar} />
-			</button>
-			<button type="button" onClick={() => editor.chain().focus().undo().run()}>
-				<FontAwesomeIcon size="lg" icon={faRotateLeft} />
-			</button>
-			<button type="button" onClick={() => editor.chain().focus().redo().run()}>
-				<FontAwesomeIcon size="lg" icon={faRotateRight} />
-			</button>
+				<button
+					type="button"
+					onClick={() => editor.chain().focus().toggleBlockquote().run()}
+					className={editor.isActive('blockquote') ? 'text-primary' : ''}
+				>
+					<FontAwesomeIcon size="lg" icon={faQuoteLeft} />
+				</button>
+			</Tooltip>
+
+			<Tooltip side={'top'} message={`Horizontal Rule`}>
+				<button type="button" onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+					<FontAwesomeIcon size="lg" icon={faBar} />
+				</button>
+			</Tooltip>
+
+			<Tooltip side={'top'} message={`Undo (${isMac ? 'Cmd + Z' : 'Ctrl + Z'})`}>
+				<button type="button" onClick={() => editor.chain().focus().undo().run()}>
+					<FontAwesomeIcon size="lg" icon={faRotateLeft} />
+				</button>
+			</Tooltip>
+
+			<Tooltip side={'top'} message={`Redo (${isMac ? 'Cmd + Shift + Z' : 'Control + Shift + Z'})`}>
+				<button type="button" onClick={() => editor.chain().focus().redo().run()}>
+					<FontAwesomeIcon size="lg" icon={faRotateRight} />
+				</button>
+			</Tooltip>
+
 			{imageUpload && (
-				<ImageUploadDialog onSubmit={addImage} editor={editor}>
-					<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
-						<FontAwesomeIcon size="lg" icon={faCamera} />
-					</button>
-				</ImageUploadDialog>
+				<Tooltip side={'top'} message={`Image`}>
+					<ImageUploadDialog onSubmit={addImage} editor={editor}>
+						<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
+							<FontAwesomeIcon size="lg" icon={faCamera} />
+						</button>
+					</ImageUploadDialog>
+				</Tooltip>
 			)}
 
-			<button
-				type="button"
-				onClick={() => editor.chain().focus().unsetLink().run()}
-				disabled={!editor.isActive('link')}
-				className={'cursor-pointer'}
-			>
-				<FontAwesomeIcon size="lg" icon={faLinkSlash} />
-			</button>
+			<Tooltip side={'top'} message={`Unlink`}>
+				<div className="inline-block">
+					<button
+						type="button"
+						onClick={() => editor.chain().focus().unsetLink().run()}
+						disabled={!editor.isActive('link')}
+						className={'cursor-pointer'}
+					>
+						<FontAwesomeIcon size="lg" icon={faLinkSlash} />
+					</button>
+				</div>
+			</Tooltip>
+
 			<LinkDialog onSubmit={setLink} editor={editor}>
-				<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
-					<FontAwesomeIcon size="lg" icon={faLink} />
-				</button>
+				<div className="inline-block">
+					<Tooltip side={'top'} message={`Link`}>
+						<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
+							<FontAwesomeIcon size="lg" icon={faLink} />
+						</button>
+					</Tooltip>
+				</div>
 			</LinkDialog>
 		</div>
 	);
