@@ -6,14 +6,12 @@
 
 ## low importance
 - featured role members
-- session hover card
 - adjust pricing (add education?)
 - leave session, event, etc
 - send email to all event attendees
 - event banner
 - Excel export for event data
 - print your schedule
-- session card on hover
 - custom icons
 - customize react toast
 - refactor navigations
