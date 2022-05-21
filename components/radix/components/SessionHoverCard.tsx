@@ -45,7 +45,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 								side={'top'}
 								message={`This session is taking place at the ${session.venue.name} venue`}
 							>
-								<div className="cursor-help">{session.venue.name}</div>
+								<div className="cursor-help inline-block">{session.venue.name}</div>
 							</Tooltip>
 						)}
 
@@ -54,7 +54,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 								side={'top'}
 								message={`This session is in the ${session.type.name} category`}
 							>
-								<div className="flex flex-row items-center cursor-help">
+								<div className="inline-flex flex-row items-center cursor-help">
 									<div
 										className="rounded-full mr-2 w-4 h-4"
 										style={{
