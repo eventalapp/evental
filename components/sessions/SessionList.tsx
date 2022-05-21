@@ -112,7 +112,7 @@ export const SessionList: React.FC<Props> = (props) => {
 																					<div>
 																						<span className="text-lg block leading-tight">
 																							{session.name}
-																						</span>{' '}
+																						</span>
 																						{session.type?.name ? (
 																							<span className="text-sm text-gray-500">
 																								{session.type?.name}
@@ -190,7 +190,7 @@ export const SessionList: React.FC<Props> = (props) => {
 																		<div>
 																			<span className="text-lg block leading-tight">
 																				{session.name}
-																			</span>{' '}
+																			</span>
 																			{session.type?.name ? (
 																				<span className="text-sm text-gray-500">
 																					{session.type?.name}
