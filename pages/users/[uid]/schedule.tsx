@@ -10,11 +10,12 @@ import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import React from 'react';
-import parse from 'html-react-parser';
 import { NextSeo } from 'next-seo';
 import { useSessionsByUserQuery } from '../../../hooks/queries/useSessionsByUserQuery';
 import { SessionWithEventList } from '../../../components/sessions/SessionWithEventList';
 import { getSessionsByUser, SessionWithVenueEvent } from '../../api/users/[uid]/sessions';
+import { FlexRowBetween } from '../../../components/layout/FlexRowBetween';
+import Link from 'next/link';
 
 type Props = {
 	initialViewingUser: PasswordlessUser | undefined;
@@ -67,18 +68,16 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h3 className="text-xl md:text-2xl font-medium mb-3">{user.name}</h3>
+				<FlexRowBetween>
+					<h3 className="text-xl md:text-2xl font-medium mt-3">
+						{user.name}'s Schedule{' '}
+						<span className="font-normal text-gray-500">({sessionsByUserData.length || 0})</span>
+					</h3>
 
-				{user.description && (
-					<div className="prose focus:outline-none prose-a:text-primary">
-						{parse(String(user.description))}
-					</div>
-				)}
-
-				<h3 className="text-xl md:text-2xl font-medium mt-3">
-					Schedule{' '}
-					<span className="font-normal text-gray-500">({sessionsByUserData.length || 0})</span>
-				</h3>
+					<Link href={`/api/users/${user.slug}/schedule/generate`}>
+						<a className="text-gray-600">Download Schedule (Excel)</a>
+					</Link>
+				</FlexRowBetween>
 
 				<SessionWithEventList sessions={sessionsByUserData} />
 			</Column>
