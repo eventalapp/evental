@@ -38,7 +38,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 
 				<div className="flex h-full w-full space-x-4">
 					<div>
-						<h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">{session.name}</h3>
+						<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{session.name}</h3>
 
 						{session.venue && (
 							<div>
@@ -59,7 +59,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 								>
 									<div className="inline-flex flex-row items-center cursor-help">
 										<div
-											className="rounded-full mr-2 w-4 h-4"
+											className="rounded-full mr-2 w-3 h-3"
 											style={{
 												backgroundColor: session?.type?.color ?? '#888888'
 											}}
