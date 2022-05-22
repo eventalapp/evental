@@ -7,6 +7,8 @@ import Tooltip from './Tooltip';
 import Button from './shared/Button';
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import Prisma from '@prisma/client';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface Props {
 	event: Prisma.Event;
@@ -46,7 +48,15 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 									side={'top'}
 									message={`This session is taking place at the ${session.venue.name} venue`}
 								>
-									<div className="cursor-help inline-block">{session.venue.name}</div>
+									<div className="inline-flex text-gray-800 flex-row items-center cursor-help">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="w-5 h-5 mr-1.5"
+											size="1x"
+											icon={faLocationDot}
+										/>
+										{session.venue.name}
+									</div>
 								</Tooltip>
 							</div>
 						)}
@@ -57,13 +67,15 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 									side={'top'}
 									message={`This session is in the ${session.type.name} category`}
 								>
-									<div className="inline-flex flex-row items-center cursor-help">
-										<div
-											className="rounded-full mr-2 w-3 h-3"
-											style={{
-												backgroundColor: session?.type?.color ?? '#888888'
-											}}
-										/>
+									<div className="inline-flex text-gray-800 flex-row items-center cursor-help">
+										<div className="w-5 h-5 flex items-center justify-center mr-1.5">
+											<div
+												className="rounded-full w-3 h-3"
+												style={{
+													backgroundColor: session?.type?.color ?? '#888888'
+												}}
+											/>
+										</div>
 										{session.type.name}
 									</div>
 								</Tooltip>
