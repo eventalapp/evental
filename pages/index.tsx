@@ -68,7 +68,7 @@ const HomePage: NextPage = () => {
 					<p className="text-lg text-gray-100 mt-1">
 						In 3 quick steps, you can get your event up and running
 					</p>
-					<div className="grid grid-cols-3 gap-5 mt-6 pt-6 border-t-2 border-primary-400">
+					<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6 pt-6 border-t-2 border-primary-400">
 						<div>
 							<span className="text-gray-300 text-sm font-bold">1.</span>
 							<h4 className="font-bold text-xl my-2">Create an event</h4>
@@ -103,7 +103,7 @@ const HomePage: NextPage = () => {
 				<p className="text-lg text-gray-700 mt-1">
 					See why Evental is perfect for your in-person, virtual, or hybrid event.
 				</p>
-				<div className="grid grid-cols-3 gap-5 mt-6">
+				<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6">
 					<div className="bg-gray-100 p-4 rounded-md">
 						<h4 className="font-bold text-xl text-center">
 							<FontAwesomeIcon
@@ -129,7 +129,7 @@ const HomePage: NextPage = () => {
 							For Conventions
 						</h4>
 						<p className="text-sm text-gray-700 mt-2">
-							See why Evental is the right tool for conventions.
+							See why Evental is the right tool for your convention.
 						</p>
 					</div>
 					<div className="bg-gray-100 p-4 rounded-md">
@@ -143,7 +143,7 @@ const HomePage: NextPage = () => {
 							For Festivals
 						</h4>
 						<p className="text-sm text-gray-700 mt-2">
-							See why Evental is the right tool for festivals.
+							See why Evental is the right tool for your festival.
 						</p>
 					</div>
 					<div className="bg-gray-100 p-4 rounded-md">
@@ -157,7 +157,7 @@ const HomePage: NextPage = () => {
 							For Conferences
 						</h4>
 						<p className="text-sm text-gray-700 mt-2">
-							See why Evental is the right tool for conferences.
+							See why Evental is the right tool for your conference.
 						</p>
 					</div>
 					<div className="bg-gray-100 p-4 rounded-md">
@@ -187,6 +187,54 @@ const HomePage: NextPage = () => {
 						<p className="text-sm text-gray-700 mt-2">
 							See why Evental is the right tool for your hybrid event.
 						</p>
+					</div>
+				</div>
+			</Column>
+
+			<Column>
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<div className="flex flex-col justify-center">
+						<h3 className="text-xl md:text-2xl font-bold">Organizer experience</h3>
+						<p className="mt-3 text-gray-700">
+							The Evental admin dashboard has been made with simplicity and ease-of-use in mind.
+						</p>
+						<ul className="list-disc pl-5 space-y-0.5 my-5 text-gray-600">
+							<li>Manager attendees/speakers</li>
+							<li>Create custom event pages</li>
+							<li>Create and customize sessions</li>
+						</ul>
+
+						<div>
+							<Link href="/events/create">
+								<LinkButton padding="large">Start Trial</LinkButton>
+							</Link>
+						</div>
+					</div>
+					<div>
+						<div className="bg-gray-200 h-72 rounded-md" />
+					</div>
+				</div>
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-24">
+					<div>
+						<div className="bg-gray-200 h-72 rounded-md" />
+					</div>
+					<div className="flex flex-col justify-center">
+						<h3 className="text-xl md:text-2xl font-bold">Attendee experience</h3>
+						<p className="mt-3 text-gray-700">
+							Allow attendees to easily attendee sessions, view venues, and learn more information
+							about your event.
+						</p>
+						<ul className="list-disc pl-5 space-y-0.5 my-5 text-gray-600">
+							<li>Signup for sessions</li>
+							<li>Create and export your schedule</li>
+							<li>View event pages, venues, sessions</li>
+						</ul>
+
+						<div>
+							<Link href="/events/create">
+								<LinkButton padding="large">Start Trial</LinkButton>
+							</Link>
+						</div>
 					</div>
 				</div>
 			</Column>
