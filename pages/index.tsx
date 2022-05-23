@@ -59,13 +59,13 @@ const HomePage: NextPage = () => {
 					</Link>
 				</div>
 
-				<div className="bg-gray-200 w-1/2 h-72 mt-8 rounded-md" />
+				<div className="bg-gray-200 w-3/4 h-96 mt-8 rounded-md" />
 			</Column>
 
 			<div className="bg-primary text-white">
 				<Column>
 					<h3 className="text-xl md:text-2xl font-bold">Creating events couldn't be easier</h3>
-					<p className="text-lg text-gray-100 mt-1">
+					<p className="text-md md:text-lg text-gray-100 mt-1">
 						In 3 quick steps, you can get your event up and running
 					</p>
 					<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6 pt-6 border-t-2 border-primary-400">
@@ -100,7 +100,7 @@ const HomePage: NextPage = () => {
 
 			<Column>
 				<h3 className="text-xl md:text-2xl font-bold">Is Evental for you?</h3>
-				<p className="text-lg text-gray-700 mt-1">
+				<p className="text-md md:text-lg text-gray-700 mt-1">
 					See why Evental is perfect for your in-person, virtual, or hybrid event.
 				</p>
 				<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6">
@@ -214,7 +214,10 @@ const HomePage: NextPage = () => {
 						<div className="bg-gray-200 h-72 rounded-md" />
 					</div>
 				</div>
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-24">
+			</Column>
+
+			<Column>
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 					<div>
 						<div className="bg-gray-200 h-72 rounded-md" />
 					</div>
@@ -235,6 +238,31 @@ const HomePage: NextPage = () => {
 								<LinkButton padding="large">Start Trial</LinkButton>
 							</Link>
 						</div>
+					</div>
+				</div>
+			</Column>
+
+			<Column>
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<div className="flex flex-col justify-center">
+						<h3 className="text-xl md:text-2xl font-bold">Speaker experience</h3>
+						<p className="mt-3 text-gray-700">
+							Speakers can easily create and manage their user profile and sessions
+						</p>
+						<ul className="list-disc pl-5 space-y-0.5 my-5 text-gray-600">
+							<li>Add speaker contact information</li>
+							<li>Build a custom profile to showcase yourself</li>
+							<li>Attach speakers/role members to sessions</li>
+						</ul>
+
+						<div>
+							<Link href="/events/create">
+								<LinkButton padding="large">Start Trial</LinkButton>
+							</Link>
+						</div>
+					</div>
+					<div>
+						<div className="bg-gray-200 h-72 rounded-md" />
 					</div>
 				</div>
 			</Column>
