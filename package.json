@@ -1,5 +1,5 @@
 {
-  "name": "next-template",
+  "name": "evental",
   "private": true,
   "scripts": {
     "prepare": "prisma generate",
