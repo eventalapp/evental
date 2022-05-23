@@ -32,7 +32,7 @@ export const PricingAccordion: React.FC<Props> = (props) => {
 								'group',
 								'radix-state-open:rounded-t-lg radix-state-closed:rounded-lg',
 								'focus:outline-none',
-								'inline-flex w-full items-center justify-between bg-white px-4 py-2 text-left dark:bg-gray-800'
+								'inline-flex w-full items-center justify-between bg-gray-100 px-4 py-2 text-left dark:bg-gray-800'
 							)}
 						>
 							<span className="text-sm font-medium text-gray-900 dark:text-gray-100">{header}</span>
@@ -44,7 +44,7 @@ export const PricingAccordion: React.FC<Props> = (props) => {
 							/>
 						</AccordionPrimitive.Trigger>
 					</AccordionPrimitive.Header>
-					<AccordionPrimitive.Content className="pt-r1 w-full rounded-b-lg bg-white px-4 pb-3 dark:bg-gray-800">
+					<AccordionPrimitive.Content className="pt-r1 w-full rounded-b-lg bg-gray-100 px-4 pb-3 dark:bg-gray-800">
 						<div className="text-sm text-gray-700 dark:text-gray-400">{content}</div>
 					</AccordionPrimitive.Content>
 				</AccordionPrimitive.Item>
