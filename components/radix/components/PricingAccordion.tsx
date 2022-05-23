@@ -15,11 +15,7 @@ interface Props {
 
 export const PricingAccordion: React.FC<Props> = (props) => {
 	return (
-		<AccordionPrimitive.Root
-			type="single"
-			defaultValue="item-1"
-			className={cx('space-y-4', props.className)}
-		>
+		<AccordionPrimitive.Root type="multiple" className={cx('space-y-4', props.className)}>
 			{props.items.map(({ header, content }, i) => (
 				<AccordionPrimitive.Item
 					key={`header-${i}`}
