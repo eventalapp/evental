@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
-import Column from '../components/layout/Column';
-import { Navigation } from '../components/navigation';
-import React from 'react';
-import PageWrapper from '../components/layout/PageWrapper';
 import { NextSeo } from 'next-seo';
+import React from 'react';
+
 import { Footer } from '../components/Footer';
+import Column from '../components/layout/Column';
+import PageWrapper from '../components/layout/PageWrapper';
+import { Navigation } from '../components/navigation';
 
 const SuggestPage: NextPage = () => {
 	return (

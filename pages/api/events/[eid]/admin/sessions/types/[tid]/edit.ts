@@ -1,11 +1,12 @@
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../../../../../../prisma/client';
+import { api } from '../../../../../../../../utils/api';
+import { generateSlug } from '../../../../../../../../utils/generateSlug';
+import { isOrganizer } from '../../../../../../../../utils/isOrganizer';
 import { EditSessionTypeSchema } from '../../../../../../../../utils/schemas';
 import { getEvent } from '../../../../index';
 import { getSessionType } from '../../../../sessions/types/[tid]';
-import { isOrganizer } from '../../../../../../../../utils/isOrganizer';
-import { api } from '../../../../../../../../utils/api';
-import { generateSlug } from '../../../../../../../../utils/generateSlug';
-import { prisma } from '../../../../../../../../prisma/client';
 
 export default api({
 	async PUT({ ctx, req }) {

@@ -1,15 +1,16 @@
-import { prisma } from '../../../../../../../prisma/client';
-import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EventPermissionRole } from '@prisma/client';
-import { getEvent } from '../../../index';
-import { getAttendee } from '../../../attendees/[uid]';
-import { AdminEditAttendeeSchema } from '../../../../../../../utils/schemas';
-import { api } from '../../../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../../../../../prisma/client';
+import { api } from '../../../../../../../utils/api';
+import { isOrganizer } from '../../../../../../../utils/isOrganizer';
+import { AdminEditAttendeeSchema } from '../../../../../../../utils/schemas';
 import {
 	AttendeeWithUserInput,
 	stripAttendeeWithUserPassword
 } from '../../../../../../../utils/stripUserPassword';
+import { getAttendee } from '../../../attendees/[uid]';
+import { getEvent } from '../../../index';
 
 export default api({
 	async PUT({ ctx, req }) {

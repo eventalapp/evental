@@ -1,10 +1,11 @@
+import dayjs from 'dayjs';
+import { NextkitError } from 'nextkit';
+
 import { prisma } from '../../../../../../../prisma/client';
+import { api } from '../../../../../../../utils/api';
+import { generateSlug } from '../../../../../../../utils/generateSlug';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { EditSessionSchema } from '../../../../../../../utils/schemas';
-import { api } from '../../../../../../../utils/api';
-import { NextkitError } from 'nextkit';
-import { generateSlug } from '../../../../../../../utils/generateSlug';
-import dayjs from 'dayjs';
 
 export default api({
 	async PUT({ ctx, req }) {

@@ -1,23 +1,22 @@
 import type { NextPage } from 'next';
-
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../components/layout/Column';
-import { DeleteEventForm } from '../../../../components/events/DeleteEventForm';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
 import React from 'react';
-import PageWrapper from '../../../../components/layout/PageWrapper';
 
-import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { Loading } from '../../../../components/error/Loading';
-import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
-import { useUser } from '../../../../hooks/queries/useUser';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
+import { DeleteEventForm } from '../../../../components/events/DeleteEventForm';
+import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
+import Column from '../../../../components/layout/Column';
+import PageWrapper from '../../../../components/layout/PageWrapper';
+import { useDeleteEventMutation } from '../../../../hooks/mutations/useDeleteEventMutation';
+import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
-import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
+import { useUser } from '../../../../hooks/queries/useUser';
 
 const DeleteEventPage: NextPage = () => {
 	const router = useRouter();

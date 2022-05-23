@@ -1,29 +1,29 @@
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import parse from 'html-react-parser';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-
-import React from 'react';
 import Link from 'next/link';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
-import { LinkButton } from '../../../../../../components/form/LinkButton';
-import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
-import Column from '../../../../../../components/layout/Column';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { useUser } from '../../../../../../hooks/queries/useUser';
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useRouter } from 'next/router';
+import React from 'react';
+
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
-import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { SessionList } from '../../../../../../components/sessions/SessionList';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import { LinkButton } from '../../../../../../components/form/LinkButton';
+import Column from '../../../../../../components/layout/Column';
+import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import Tooltip from '../../../../../../components/radix/components/Tooltip';
-import parse from 'html-react-parser';
+import { SessionList } from '../../../../../../components/sessions/SessionList';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 
 const ViewVenuePage: NextPage = () => {
 	const router = useRouter();

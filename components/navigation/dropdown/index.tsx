@@ -1,11 +1,11 @@
 import { Arrow, Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { DropdownLink } from './Link';
-import Image from 'next/image';
 
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { DropdownLink } from './Link';
 
 type Props = {
 	user: PasswordlessUser | undefined;

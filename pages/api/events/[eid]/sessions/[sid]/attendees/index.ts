@@ -1,13 +1,14 @@
+import { EventSessionAttendeeType } from '@prisma/client';
 import { NextkitError } from 'nextkit';
-import { getEvent } from '../../../index';
+
+import { prisma } from '../../../../../../../prisma/client';
+import { api } from '../../../../../../../utils/api';
 import {
 	AttendeeWithUser,
 	stripAttendeesWithUserPassword
 } from '../../../../../../../utils/stripUserPassword';
-import { api } from '../../../../../../../utils/api';
+import { getEvent } from '../../../index';
 import { getSession } from '../index';
-import { prisma } from '../../../../../../../prisma/client';
-import { EventSessionAttendeeType } from '@prisma/client';
 
 export default api({
 	async GET({ req }) {

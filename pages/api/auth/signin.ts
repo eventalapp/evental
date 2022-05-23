@@ -1,10 +1,11 @@
-import { serialize } from 'cookie';
-import { api } from '../../../utils/api';
-import { prisma } from '../../../prisma/client';
 import { verify } from 'argon2';
-import { SignInSchema } from '../../../utils/schemas';
+import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
+
 import { SESSION_EXPIRY } from '../../../config';
+import { prisma } from '../../../prisma/client';
+import { api } from '../../../utils/api';
+import { SignInSchema } from '../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req, res }) {

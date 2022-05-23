@@ -2,22 +2,23 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
-import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
-import Column from '../../../../../components/layout/Column';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { useUser } from '../../../../../hooks/queries/useUser';
+
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
-import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
-import { useOrganizersQuery } from '../../../../../hooks/queries/useOrganizersQuery';
+import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
+import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { InviteOrganizerForm } from '../../../../../components/organizer/InviteOrganizerForm';
 import { useInviteOrganizerMutation } from '../../../../../hooks/mutations/useInviteOrganizerMutation';
+import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { useOrganizersQuery } from '../../../../../hooks/queries/useOrganizersQuery';
+import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../../hooks/queries/useUser';
 
 const EventOrganizersPage: NextPage = () => {
 	const router = useRouter();

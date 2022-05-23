@@ -1,18 +1,19 @@
 import { NextPage } from 'next';
-import React from 'react';
-import Column from '../../../components/layout/Column';
-import { Navigation } from '../../../components/navigation';
-import PageWrapper from '../../../components/layout/PageWrapper';
-import { useUser } from '../../../hooks/queries/useUser';
-import { LoadingPage } from '../../../components/error/LoadingPage';
-import { LinkButton } from '../../../components/form/LinkButton';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { CLAIM_PROFILE_EXPIRY } from '../../../config';
-import Head from 'next/head';
-import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
+import React from 'react';
+
 import { ClaimProfileForm } from '../../../components/attendees/ClaimProfileForm';
+import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
+import { LoadingPage } from '../../../components/error/LoadingPage';
+import { LinkButton } from '../../../components/form/LinkButton';
+import Column from '../../../components/layout/Column';
+import PageWrapper from '../../../components/layout/PageWrapper';
+import { Navigation } from '../../../components/navigation';
+import { CLAIM_PROFILE_EXPIRY } from '../../../config';
 import { useClaimProfileMutation } from '../../../hooks/mutations/useClaimProfileMutation';
+import { useUser } from '../../../hooks/queries/useUser';
 
 const ClaimProfilePage: NextPage = () => {
 	const router = useRouter();

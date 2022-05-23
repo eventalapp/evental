@@ -1,24 +1,24 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../../../components/layout/Column';
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
-import { useRoleQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
-import { useEditRoleMutation } from '../../../../../../hooks/mutations/useEditRoleMutation';
 import React from 'react';
-import PageWrapper from '../../../../../../components/layout/PageWrapper';
 
-import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { useUser } from '../../../../../../hooks/queries/useUser';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import Column from '../../../../../../components/layout/Column';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
+import { useEditRoleMutation } from '../../../../../../hooks/mutations/useEditRoleMutation';
 import { useAttendeesByRoleQuery } from '../../../../../../hooks/queries/useAttendeesByRoleQuery';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useRoleQuery } from '../../../../../../hooks/queries/useRoleAttendeesQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const EditRolePage: NextPage = () => {
 	const router = useRouter();

@@ -1,9 +1,10 @@
+import { NextkitError } from 'nextkit';
+
 import { prisma } from '../../../../../../prisma/client';
+import { api } from '../../../../../../utils/api';
+import { generateSlug } from '../../../../../../utils/generateSlug';
 import { isOrganizer } from '../../../../../../utils/isOrganizer';
 import { CreateVenueSchema } from '../../../../../../utils/schemas';
-import { api } from '../../../../../../utils/api';
-import { NextkitError } from 'nextkit';
-import { generateSlug } from '../../../../../../utils/generateSlug';
 
 export default api({
 	async POST({ ctx, req }) {

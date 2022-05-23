@@ -1,5 +1,5 @@
-import { isFounder } from '../../../../utils/isFounder';
 import { api } from '../../../../utils/api';
+import { isFounder } from '../../../../utils/isFounder';
 
 export default api({
 	async GET({ ctx, req }) {

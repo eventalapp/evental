@@ -1,12 +1,13 @@
-import { prisma } from '../../../../../prisma/client';
-import { isOrganizer } from '../../../../../utils/isOrganizer';
-import { EditEventSchema } from '../../../../../utils/schemas';
-import { api } from '../../../../../utils/api';
-import { NextkitError } from 'nextkit';
-import { busboyParseForm } from '../../../../../utils/busboyParseForm';
-import { uploadAndProcessAvatar } from '../../../../../utils/uploadAndProcessImage';
 import { EventCategory, EventType } from '@prisma/client';
 import dayjs from 'dayjs';
+import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../../../prisma/client';
+import { api } from '../../../../../utils/api';
+import { busboyParseForm } from '../../../../../utils/busboyParseForm';
+import { isOrganizer } from '../../../../../utils/isOrganizer';
+import { EditEventSchema } from '../../../../../utils/schemas';
+import { uploadAndProcessAvatar } from '../../../../../utils/uploadAndProcessImage';
 
 export const config = {
 	api: {

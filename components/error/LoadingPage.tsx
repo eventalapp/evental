@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import { Navigation } from '../navigation';
+import React from 'react';
+
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
-import React from 'react';
+import { Navigation } from '../navigation';
 import { Loading } from './Loading';
 
 export const LoadingPage = () => (

@@ -1,14 +1,15 @@
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { NotFound } from '../error/NotFound';
-import classNames from 'classnames';
-import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import Prisma from '@prisma/client';
-import dayjs from 'dayjs';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from '../radix/components/shared/Button';
+import Prisma from '@prisma/client';
+import classNames from 'classnames';
+import dayjs from 'dayjs';
+import Link from 'next/link';
+import React, { useState } from 'react';
+
+import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { NotFound } from '../error/NotFound';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
+import Button from '../radix/components/shared/Button';
 
 type Props = {
 	eid: string;

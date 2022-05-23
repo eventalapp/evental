@@ -1,5 +1,5 @@
-import { prisma } from '../prisma/client';
 import { getEvent } from '../pages/api/events/[eid]';
+import { prisma } from '../prisma/client';
 
 export const isOrganizer = async (userId: string, eventId: string) => {
 	const event = await getEvent(String(eventId));

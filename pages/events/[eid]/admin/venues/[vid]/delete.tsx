@@ -1,22 +1,23 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../../../components/layout/Column';
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenueForm';
-import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
-import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutation';
 import React from 'react';
-import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { useUser } from '../../../../../../hooks/queries/useUser';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import Column from '../../../../../../components/layout/Column';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenueForm';
+import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutation';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 
 const DeleteVenuePage: NextPage = () => {
 	const router = useRouter();

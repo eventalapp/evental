@@ -1,17 +1,18 @@
 import type { NextPage } from 'next';
-import Column from '../components/layout/Column';
-import { Navigation } from '../components/navigation';
-import React from 'react';
-import PageWrapper from '../components/layout/PageWrapper';
-import { Controller, useForm } from 'react-hook-form';
-import Slider from '../components/radix/components/Slider';
-import Link from 'next/link';
-import { LinkButton } from '../components/form/LinkButton';
 import { NextSeo } from 'next-seo';
-import { proAttendeePricing } from '../utils/const';
-import { PricingAccordion } from '../components/radix/components/PricingAccordion';
-import Button from '../components/radix/components/shared/Button';
+import Link from 'next/link';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
 import { Footer } from '../components/Footer';
+import { LinkButton } from '../components/form/LinkButton';
+import Column from '../components/layout/Column';
+import PageWrapper from '../components/layout/PageWrapper';
+import { Navigation } from '../components/navigation';
+import { PricingAccordion } from '../components/radix/components/PricingAccordion';
+import Slider from '../components/radix/components/Slider';
+import Button from '../components/radix/components/shared/Button';
+import { proAttendeePricing } from '../utils/const';
 
 const PricingPage: NextPage = () => {
 	const { control, watch } = useForm({ defaultValues: { attendees: 250 } });

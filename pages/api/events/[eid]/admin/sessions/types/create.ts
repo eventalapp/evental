@@ -1,9 +1,10 @@
-import { isOrganizer } from '../../../../../../../utils/isOrganizer';
-import { api } from '../../../../../../../utils/api';
-import { CreateSessionTypeSchema } from '../../../../../../../utils/schemas';
-import { generateSlug } from '../../../../../../../utils/generateSlug';
 import { NextkitError } from 'nextkit';
+
 import { prisma } from '../../../../../../../prisma/client';
+import { api } from '../../../../../../../utils/api';
+import { generateSlug } from '../../../../../../../utils/generateSlug';
+import { isOrganizer } from '../../../../../../../utils/isOrganizer';
+import { CreateSessionTypeSchema } from '../../../../../../../utils/schemas';
 import { getEvent } from '../../../index';
 
 export default api({

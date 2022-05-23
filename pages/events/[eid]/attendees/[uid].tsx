@@ -1,30 +1,31 @@
+import Prisma from '@prisma/client';
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
-import Column from '../../../../components/layout/Column';
-import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
-import PageWrapper from '../../../../components/layout/PageWrapper';
-import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import React from 'react';
-import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
+
+import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
-import { ssrGetUser } from '../../../../utils/api';
-import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
-import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
+import { NotFoundPage } from '../../../../components/error/NotFoundPage';
+import { PrivatePage } from '../../../../components/error/PrivatePage';
+import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../components/events/navigation';
+import Column from '../../../../components/layout/Column';
+import PageWrapper from '../../../../components/layout/PageWrapper';
+import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../hooks/queries/useUser';
-import Prisma from '@prisma/client';
+import { ssrGetUser } from '../../../../utils/api';
+import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { getEvent } from '../../../api/events/[eid]';
-import { getRoles } from '../../../api/events/[eid]/roles';
-import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
-import { getPages } from '../../../api/events/[eid]/pages';
-import { NextSeo } from 'next-seo';
-import { PrivatePage } from '../../../../components/error/PrivatePage';
+import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { getPages } from '../../../api/events/[eid]/pages';
+import { getRoles } from '../../../api/events/[eid]/roles';
 
 type Props = {
 	initialAttendee: AttendeeWithUser | undefined;

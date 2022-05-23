@@ -1,13 +1,14 @@
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
+import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
-import { UseDeleteRoleMutationData } from '../../hooks/mutations/useDeleteRoleMutation';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { LoadingInner } from '../error/LoadingInner';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
 type Props = { attendees: AttendeeWithUser[] } & Omit<
 	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>,

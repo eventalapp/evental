@@ -1,15 +1,16 @@
-import Link from 'next/link';
-import React from 'react';
-import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Prisma from '@prisma/client';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import cx from 'classnames';
 import classNames from 'classnames';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
+
+import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { ProfileDropdown } from '../../navigation/dropdown';
-import Prisma from '@prisma/client';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FullscreenLinkItem } from '../navigation/Unauthenticated';
 
 type Props = {

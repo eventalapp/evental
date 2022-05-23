@@ -1,16 +1,17 @@
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import Column from '../../components/layout/Column';
+import { NextSeo } from 'next-seo';
+import React from 'react';
+
+import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
+import Column from '../../components/layout/Column';
+import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
-import React from 'react';
-import PageWrapper from '../../components/layout/PageWrapper';
-import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
-import { ssrGetUser } from '../../utils/api';
 import { useUser } from '../../hooks/queries/useUser';
+import { ssrGetUser } from '../../utils/api';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { NextSeo } from 'next-seo';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

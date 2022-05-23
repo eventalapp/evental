@@ -1,18 +1,18 @@
 import { GetServerSideProps, NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { useRouter } from 'next/router';
-import { NextSeo } from 'next-seo';
-import { Navigation } from '../../../components/navigation';
-import Column from '../../../components/layout/Column';
-import PageWrapper from '../../../components/layout/PageWrapper';
-import { useUser } from '../../../hooks/queries/useUser';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { LoadingPage } from '../../../components/error/LoadingPage';
-import { ssrGetUser } from '../../../utils/api';
-import { useVerifyEmail } from '../../../hooks/mutations/useVerifyAccount';
 import { LoadingSpinner } from '../../../components/error/LoadingSpinner';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
+import Column from '../../../components/layout/Column';
+import PageWrapper from '../../../components/layout/PageWrapper';
+import { Navigation } from '../../../components/navigation';
+import { useVerifyEmail } from '../../../hooks/mutations/useVerifyAccount';
+import { useUser } from '../../../hooks/queries/useUser';
+import { ssrGetUser } from '../../../utils/api';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

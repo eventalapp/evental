@@ -1,9 +1,10 @@
 import Prisma from '@prisma/client';
-import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
-import { getUser } from './index';
+
 import { prisma } from '../../../../prisma/client';
+import { api } from '../../../../utils/api';
 import { SessionWithVenue } from '../../events/[eid]/sessions';
+import { getUser } from './index';
 
 export type SessionWithVenueEvent = {
 	event: Prisma.Event | null;

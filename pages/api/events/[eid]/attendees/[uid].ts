@@ -1,11 +1,12 @@
-import { prisma } from '../../../../../prisma/client';
-import { getEvent } from '../index';
-import { api } from '../../../../../utils/api';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../../../prisma/client';
+import { api } from '../../../../../utils/api';
 import {
 	AttendeeWithUser,
 	stripAttendeeWithUserPassword
 } from '../../../../../utils/stripUserPassword';
+import { getEvent } from '../index';
 
 export default api({
 	async GET({ req }) {

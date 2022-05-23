@@ -1,17 +1,18 @@
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Transition } from '@headlessui/react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Cross1Icon } from '@radix-ui/react-icons';
-import cx from 'classnames';
-import React, { Fragment, useState } from 'react';
-import Button from './shared/Button';
-import { useAttendeesByNameQuery } from '../../../hooks/queries/useAttendeesByNameQuery';
-import { useAddAttendeeToSessionMutation } from '../../../hooks/mutations/useAddAttendeeToSessionMutation';
 import * as Portal from '@radix-ui/react-portal';
+import cx from 'classnames';
+import Image from 'next/image';
+import React, { Fragment, useState } from 'react';
+
+import { useAddAttendeeToSessionMutation } from '../../../hooks/mutations/useAddAttendeeToSessionMutation';
+import { useAttendeesByNameQuery } from '../../../hooks/queries/useAttendeesByNameQuery';
 import { LoadingInner } from '../../error/LoadingInner';
 import Tooltip from './Tooltip';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import Image from 'next/image';
+import Button from './shared/Button';
 
 interface Props {
 	eid: string;

@@ -1,14 +1,15 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+
+import { UseCreateRoleMutationData } from '../../hooks/mutations/useCreateRoleMutation';
+import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
+import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
+import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { UseCreateRoleMutationData } from '../../hooks/mutations/useCreateRoleMutation';
-import { useRouter } from 'next/router';
-import { Controller, useForm } from 'react-hook-form';
-import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { LoadingInner } from '../error/LoadingInner';
 import Switch from '../radix/components/Switch';
 
 type Props = { eid: string } & DetailedHTMLProps<

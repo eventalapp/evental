@@ -1,15 +1,16 @@
-import { AdminCreateAttendeeSchema } from '../../../../../../utils/schemas';
-import { busboyParseForm } from '../../../../../../utils/busboyParseForm';
-import { api } from '../../../../../../utils/api';
-import { uploadAndProcessAvatar } from '../../../../../../utils/uploadAndProcessImage';
 import { NextkitError } from 'nextkit';
-import { prisma } from '../../../../../../prisma/client';
-import { isOrganizer } from '../../../../../../utils/isOrganizer';
-import { getEvent } from '../../index';
-import { sendClaimProfileEmail } from '../../../../../../email/sendClaimProfileEmail';
-import { getRole } from '../../roles/[rid]';
+
 import { CLAIM_PROFILE_EXPIRY } from '../../../../../../config';
+import { sendClaimProfileEmail } from '../../../../../../email/sendClaimProfileEmail';
+import { prisma } from '../../../../../../prisma/client';
+import { api } from '../../../../../../utils/api';
+import { busboyParseForm } from '../../../../../../utils/busboyParseForm';
 import { generateSlug } from '../../../../../../utils/generateSlug';
+import { isOrganizer } from '../../../../../../utils/isOrganizer';
+import { AdminCreateAttendeeSchema } from '../../../../../../utils/schemas';
+import { uploadAndProcessAvatar } from '../../../../../../utils/uploadAndProcessImage';
+import { getEvent } from '../../index';
+import { getRole } from '../../roles/[rid]';
 
 export const config = {
 	api: {

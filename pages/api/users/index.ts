@@ -1,12 +1,13 @@
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
-import { EditUserSchema } from '../../../utils/schemas';
 import { busboyParseForm } from '../../../utils/busboyParseForm';
+import { EditUserSchema } from '../../../utils/schemas';
 import {
 	uploadAndProcessAvatar,
 	uploadAndProcessImage
 } from '../../../utils/uploadAndProcessImage';
-import { prisma } from '../../../prisma/client';
 
 export const config = {
 	api: {

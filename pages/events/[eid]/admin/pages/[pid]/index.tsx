@@ -2,19 +2,20 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { usePageQuery } from '../../../../../../hooks/queries/usePageQuery';
+
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { ViewPage } from '../../../../../../components/pages/ViewPage';
-import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
-import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { usePageQuery } from '../../../../../../hooks/queries/usePageQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const ViewPagePage: NextPage = () => {
 	const router = useRouter();

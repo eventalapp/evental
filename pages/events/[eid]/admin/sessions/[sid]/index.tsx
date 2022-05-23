@@ -2,22 +2,23 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
-import { useSessionAttendeesQuery } from '../../../../../../hooks/queries/useSessionAttendeesQuery';
+
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { useSessionAttendeeQuery } from '../../../../../../hooks/queries/useSessionAttendeeQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { ViewSession } from '../../../../../../components/sessions/ViewSession';
-import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
-import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useSessionAttendeeQuery } from '../../../../../../hooks/queries/useSessionAttendeeQuery';
+import { useSessionAttendeesQuery } from '../../../../../../hooks/queries/useSessionAttendeesQuery';
+import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
 import { useSessionRoleAttendeesQuery } from '../../../../../../hooks/queries/useSessionRoleAttendeesQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const ViewSessionPage: NextPage = () => {
 	const router = useRouter();

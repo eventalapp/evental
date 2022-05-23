@@ -1,17 +1,18 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { Button } from '../form/Button';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Controller, useForm } from 'react-hook-form';
+
 import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutation';
 import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
-import { useRouter } from 'next/router';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { Controller, useForm } from 'react-hook-form';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { LoadingInner } from '../error/LoadingInner';
-import Switch from '../radix/components/Switch';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
+import { ErrorMessage } from '../form/ErrorMessage';
+import { Input } from '../form/Input';
+import { Label } from '../form/Label';
+import Switch from '../radix/components/Switch';
 
 type Props = { eid: string; attendees: AttendeeWithUser[] } & UseRoleQueryData &
 	Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, 'role'> &

@@ -1,9 +1,10 @@
-import React from 'react';
-import PageWrapper from '../layout/PageWrapper';
 import Head from 'next/head';
-import { Navigation } from '../navigation';
-import Column from '../layout/Column';
 import { ErroredAPIResponse } from 'nextkit';
+import React from 'react';
+
+import Column from '../layout/Column';
+import PageWrapper from '../layout/PageWrapper';
+import { Navigation } from '../navigation';
 
 type Props = {
 	errors: Array<ErroredAPIResponse | null | undefined>;

@@ -1,8 +1,9 @@
+import Prisma from '@prisma/client';
+import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
+
 import { NotFound } from '../error/NotFound';
-import classNames from 'classnames';
-import Prisma from '@prisma/client';
 
 type Props = {
 	eid: string;

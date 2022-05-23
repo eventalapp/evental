@@ -1,11 +1,12 @@
+import Prisma from '@prisma/client';
 import classNames from 'classnames';
+import { formatInTimeZone } from 'date-fns-tz';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
 import { NotFound } from '../error/NotFound';
-import Prisma from '@prisma/client';
 import Tooltip from '../radix/components/Tooltip';
-import { formatInTimeZone } from 'date-fns-tz';
 
 type Props = { events: Prisma.Event[]; className?: string };
 

@@ -1,12 +1,13 @@
-import { serialize } from 'cookie';
-import { api } from '../../../utils/api';
-import { prisma } from '../../../prisma/client';
 import { hash } from 'argon2';
-import { SignUpSchema } from '../../../utils/schemas';
+import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
+
 import { SESSION_EXPIRY, VERIFY_EMAIL_EXPIRY } from '../../../config';
-import { generateSlug } from '../../../utils/generateSlug';
 import { sendVerifyEmail } from '../../../email/sendVerifyEmail';
+import { prisma } from '../../../prisma/client';
+import { api } from '../../../utils/api';
+import { generateSlug } from '../../../utils/generateSlug';
+import { SignUpSchema } from '../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req, res }) {

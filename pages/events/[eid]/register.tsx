@@ -1,26 +1,27 @@
+import Prisma from '@prisma/client';
+import { formatInTimeZone } from 'date-fns-tz';
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-import Column from '../../../components/layout/Column';
-import { Navigation } from '../../../components/navigation';
-import { useEventQuery } from '../../../hooks/queries/useEventQuery';
-import PageWrapper from '../../../components/layout/PageWrapper';
-import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
-import React from 'react';
-import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
-import { getEvent } from '../../api/events/[eid]';
-import Prisma from '@prisma/client';
-import { NotFoundPage } from '../../../components/error/NotFoundPage';
-import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
-import { LoadingPage } from '../../../components/error/LoadingPage';
-import { ssrGetUser } from '../../../utils/api';
-import { useUser } from '../../../hooks/queries/useUser';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { NextSeo } from 'next-seo';
-import { formatInTimeZone } from 'date-fns-tz';
+import { useRouter } from 'next/router';
+import React from 'react';
+
+import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
+import { LoadingPage } from '../../../components/error/LoadingPage';
+import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
-import { getIsOrganizer } from '../../api/events/[eid]/organizer';
+import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
+import Column from '../../../components/layout/Column';
+import PageWrapper from '../../../components/layout/PageWrapper';
+import { Navigation } from '../../../components/navigation';
+import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
+import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
+import { useUser } from '../../../hooks/queries/useUser';
+import { ssrGetUser } from '../../../utils/api';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { getEvent } from '../../api/events/[eid]';
+import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 
 type Props = {
 	initialUser: PasswordlessUser | undefined;

@@ -1,17 +1,17 @@
+import parse from 'html-react-parser';
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
+import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import React from 'react';
 
-import { Navigation } from '../../../components/navigation';
+import { LoadingPage } from '../../../components/error/LoadingPage';
+import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
+import { Navigation } from '../../../components/navigation';
 import { useUserQuery } from '../../../hooks/queries/useUserQuery';
-import { NotFoundPage } from '../../../components/error/NotFoundPage';
-import { LoadingPage } from '../../../components/error/LoadingPage';
-import React from 'react';
-import parse from 'html-react-parser';
-import { NextSeo } from 'next-seo';
+import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getUser } from '../../api/users/[uid]';
 
 type Props = {

@@ -1,11 +1,12 @@
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
-import { capitalizeFirstLetter } from '../../utils/string';
+
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
+import { capitalizeFirstLetter } from '../../utils/string';
 import { NotFound } from '../error/NotFound';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
 	eid: string;

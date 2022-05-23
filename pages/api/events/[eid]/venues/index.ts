@@ -1,5 +1,6 @@
-import { prisma } from '../../../../../prisma/client';
 import Prisma from '@prisma/client';
+
+import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
 
 export default api({

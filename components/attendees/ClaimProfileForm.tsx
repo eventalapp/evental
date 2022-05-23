@@ -1,14 +1,15 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { UseClaimProfileData } from '../../hooks/mutations/useClaimProfileMutation';
+import { ClaimProfilePayload, ClaimProfileSchema } from '../../utils/schemas';
+import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
+import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { ClaimProfilePayload, ClaimProfileSchema } from '../../utils/schemas';
-import { ErrorMessage } from '../form/ErrorMessage';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { UseClaimProfileData } from '../../hooks/mutations/useClaimProfileMutation';
-import { LoadingInner } from '../error/LoadingInner';
 
 type Props = { code: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

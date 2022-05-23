@@ -1,23 +1,23 @@
 import type { NextPage } from 'next';
-
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../../../components/layout/Column';
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
-import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
-import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
-import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutation';
 import React from 'react';
-import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+
+import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
+import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { useUser } from '../../../../../../hooks/queries/useUser';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import Column from '../../../../../../components/layout/Column';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { useDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useDeleteAttendeeMutation';
+import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const DeleteAttendeePage: NextPage = () => {
 	const router = useRouter();

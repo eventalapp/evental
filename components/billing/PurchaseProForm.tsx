@@ -1,14 +1,15 @@
+import { useStripe } from '@stripe/react-stripe-js';
+import axios from 'axios';
+import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { Button } from '../form/Button';
-import axios from 'axios';
-import { useStripe } from '@stripe/react-stripe-js';
-import Slider from '../radix/components/Slider';
-import Link from 'next/link';
+
+import { CURRENCY } from '../../config';
 import { attendeesToPrice } from '../../utils/price';
 import { formatAmountForDisplay } from '../../utils/stripeHelpers';
-import { CURRENCY } from '../../config';
+import { Button } from '../form/Button';
+import Slider from '../radix/components/Slider';
 
 type Props = { eid?: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

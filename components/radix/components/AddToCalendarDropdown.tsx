@@ -1,12 +1,13 @@
-import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import cx from 'classnames';
-import React from 'react';
-import Button from './shared/Button';
-import { CalendarEvent, google, ics, office365, outlook, yahoo } from 'calendar-link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faYahoo } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { CalendarEvent, google, ics, office365, outlook, yahoo } from 'calendar-link';
+import cx from 'classnames';
+import React from 'react';
+
 import { faOutlook } from '../../../icons/';
+import Button from './shared/Button';
 
 interface Props {
 	event: CalendarEvent;

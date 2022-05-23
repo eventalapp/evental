@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import React from 'react';
-import { LinkButton } from '../form/LinkButton';
 import { useRouter } from 'next/router';
+import React from 'react';
+
+import { LinkButton } from '../form/LinkButton';
 
 const Unauthorized: React.FC = () => {
 	const router = useRouter();

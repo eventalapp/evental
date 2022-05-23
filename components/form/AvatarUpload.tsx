@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import Dropzone from 'react-dropzone';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect } from 'react';
+import Dropzone from 'react-dropzone';
 import { toast } from 'react-toastify';
 
 type Props = {

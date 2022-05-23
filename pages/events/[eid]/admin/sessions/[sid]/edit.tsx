@@ -1,25 +1,26 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../../../components/layout/Column';
-import { EditSessionForm } from '../../../../../../components/sessions/EditSessionForm';
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
-import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { useVenuesQuery } from '../../../../../../hooks/queries/useVenuesQuery';
-import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
-import { useEditSessionMutation } from '../../../../../../hooks/mutations/useEditSessionMutation';
-import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useUser } from '../../../../../../hooks/queries/useUser';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
-import { useSessionTypesQuery } from '../../../../../../hooks/queries/useSessionTypesQuery';
+import Column from '../../../../../../components/layout/Column';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { EditSessionForm } from '../../../../../../components/sessions/EditSessionForm';
+import { useEditSessionMutation } from '../../../../../../hooks/mutations/useEditSessionMutation';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
 import { useSessionRoleAttendeesQuery } from '../../../../../../hooks/queries/useSessionRoleAttendeesQuery';
+import { useSessionTypesQuery } from '../../../../../../hooks/queries/useSessionTypesQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
+import { useVenuesQuery } from '../../../../../../hooks/queries/useVenuesQuery';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();

@@ -1,22 +1,23 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Column from '../../../../../../components/layout/Column';
-import { DeleteSessionForm } from '../../../../../../components/sessions/DeleteSessionForm';
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
 import React from 'react';
-import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
-import { useDeleteSessionMutation } from '../../../../../../hooks/mutations/useDeleteSessionMutation';
-import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
-import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
+
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
-import { useUser } from '../../../../../../hooks/queries/useUser';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
+import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
+import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import Column from '../../../../../../components/layout/Column';
+import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { DeleteSessionForm } from '../../../../../../components/sessions/DeleteSessionForm';
+import { useDeleteSessionMutation } from '../../../../../../hooks/mutations/useDeleteSessionMutation';
+import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
+import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
+import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
+import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const DeleteSessionPage: NextPage = () => {
 	const router = useRouter();

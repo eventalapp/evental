@@ -1,9 +1,10 @@
+import Prisma from '@prisma/client';
 import React, { useState } from 'react';
-import { Authenticated } from './Authenticated';
-import { Unauthenticated } from './Unauthenticated';
+
 import { useSignOutMutation } from '../../../hooks/mutations/useSignOutMutation';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
-import Prisma from '@prisma/client';
+import { Authenticated } from './Authenticated';
+import { Unauthenticated } from './Unauthenticated';
 
 type Props = {
 	event: Prisma.Event | undefined;

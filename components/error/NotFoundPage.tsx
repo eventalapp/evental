@@ -1,12 +1,13 @@
 import Head from 'next/head';
-import { Navigation } from '../navigation';
-import Column from '../layout/Column';
-import { NotFound } from './NotFound';
-import PageWrapper from '../layout/PageWrapper';
-import React from 'react';
 import Link from 'next/link';
-import { LinkButton } from '../form/LinkButton';
+import React from 'react';
+
 import { Footer } from '../Footer';
+import { LinkButton } from '../form/LinkButton';
+import Column from '../layout/Column';
+import PageWrapper from '../layout/PageWrapper';
+import { Navigation } from '../navigation';
+import { NotFound } from './NotFound';
 
 export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> = (props) => {
 	const { message = 'Not found.', renderLink = true } = props;

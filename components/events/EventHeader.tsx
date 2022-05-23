@@ -1,7 +1,3 @@
-import Image from 'next/image';
-import React from 'react';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faArrowUpRightFromSquare,
 	faCalendarDay,
@@ -11,11 +7,16 @@ import {
 	faPerson,
 	faStreetView
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Prisma from '@prisma/client';
+import { formatInTimeZone } from 'date-fns-tz';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
-import Prisma from '@prisma/client';
 import Tooltip from '../radix/components/Tooltip';
-import { formatInTimeZone } from 'date-fns-tz';
 
 export const EventHeader: React.FC<{
 	event: Prisma.Event;

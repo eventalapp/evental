@@ -1,10 +1,11 @@
-import { api } from '../../../../../utils/api';
-import { NextkitError } from 'nextkit';
-import { getUser } from '../index';
-import ExcelJS from 'exceljs';
-import { getSessionsByUser } from '../sessions';
-import { htmlToText } from 'html-to-text';
 import dayjs from 'dayjs';
+import ExcelJS from 'exceljs';
+import { htmlToText } from 'html-to-text';
+import { NextkitError } from 'nextkit';
+
+import { api } from '../../../../../utils/api';
+import { getUser } from '../index';
+import { getSessionsByUser } from '../sessions';
 
 export default api.raw({
 	async GET({ req, res }) {

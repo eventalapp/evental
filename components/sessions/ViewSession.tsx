@@ -1,19 +1,20 @@
-import Link from 'next/link';
-import { LinkButton } from '../form/LinkButton';
-import React from 'react';
-import { FlexRowBetween } from '../layout/FlexRowBetween';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarDay, faClipboardList, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { format } from 'date-fns';
-import { AttendeeList } from '../attendees/AttendeeList';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
-import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import Tooltip from '../radix/components/Tooltip';
-import { AddToCalendar } from '../AddToCalendar';
-import { CalendarEvent } from 'calendar-link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
-import parse from 'html-react-parser';
+import { CalendarEvent } from 'calendar-link';
+import { format } from 'date-fns';
 import { formatInTimeZone } from 'date-fns-tz';
+import parse from 'html-react-parser';
+import Link from 'next/link';
+import React from 'react';
+
+import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { AddToCalendar } from '../AddToCalendar';
+import { AttendeeList } from '../attendees/AttendeeList';
+import { LinkButton } from '../form/LinkButton';
+import { FlexRowBetween } from '../layout/FlexRowBetween';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;

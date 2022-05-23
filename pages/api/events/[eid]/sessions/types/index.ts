@@ -1,8 +1,9 @@
 import Prisma from '@prisma/client';
 import { NextkitError } from 'nextkit';
-import { getEvent } from '../../index';
-import { api } from '../../../../../../utils/api';
+
 import { prisma } from '../../../../../../prisma/client';
+import { api } from '../../../../../../utils/api';
+import { getEvent } from '../../index';
 
 export default api({
 	async GET({ req }) {

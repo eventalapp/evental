@@ -1,14 +1,15 @@
-import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
-import cx from 'classnames';
-import React from 'react';
-import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
-import { htmlToText } from 'html-to-text';
-import Tooltip from './Tooltip';
-import Button from './shared/Button';
-import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
-import Prisma from '@prisma/client';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Prisma from '@prisma/client';
+import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
+import cx from 'classnames';
+import { htmlToText } from 'html-to-text';
+import React from 'react';
+
+import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
+import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
+import Tooltip from './Tooltip';
+import Button from './shared/Button';
 
 interface Props {
 	event: Prisma.Event;

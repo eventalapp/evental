@@ -1,11 +1,12 @@
+import Head from 'next/head';
+import Link from 'next/link';
+import React from 'react';
+
+import { Footer } from '../Footer';
+import { LinkButton } from '../form/LinkButton';
+import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
-import Column from '../layout/Column';
-import React from 'react';
-import Head from 'next/head';
-import { LinkButton } from '../form/LinkButton';
-import Link from 'next/link';
-import { Footer } from '../Footer';
 
 export const AlreadySignedInPage = () => (
 	<PageWrapper variant="gray">

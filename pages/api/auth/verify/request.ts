@@ -1,7 +1,8 @@
-import { api } from '../../../../utils/api';
 import { NextkitError } from 'nextkit';
+
 import { VERIFY_EMAIL_EXPIRY } from '../../../../config';
 import { sendVerifyEmail } from '../../../../email/sendVerifyEmail';
+import { api } from '../../../../utils/api';
 
 export default api({
 	async POST({ ctx, req }) {

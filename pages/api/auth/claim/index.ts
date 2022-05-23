@@ -1,11 +1,12 @@
-import { ClaimProfileSchema } from '../../../../utils/schemas';
-import { api } from '../../../../utils/api';
-import { NextkitError } from 'nextkit';
-import { prisma } from '../../../../prisma/client';
 import { hash } from 'argon2';
 import { serialize } from 'cookie';
+import { NextkitError } from 'nextkit';
+
 import { CLAIM_PROFILE_EXPIRY, SESSION_EXPIRY } from '../../../../config';
 import { sendWelcomeEmail } from '../../../../email/sendWelcomeEmail';
+import { prisma } from '../../../../prisma/client';
+import { api } from '../../../../utils/api';
+import { ClaimProfileSchema } from '../../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req, res }) {
