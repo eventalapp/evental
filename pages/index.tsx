@@ -104,7 +104,7 @@ const HomePage: NextPage = () => {
 					See why Evental is perfect for your in-person, virtual, or hybrid event.
 				</p>
 				<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6">
-					<div className="bg-gray-100 p-4 rounded-md">
+					<div className="border border-gray-200 shadow-sm p-4 rounded-md">
 						<h4 className="font-bold text-xl text-center">
 							<FontAwesomeIcon
 								fill="currentColor"
@@ -118,7 +118,7 @@ const HomePage: NextPage = () => {
 							See why Evental is the right tool for your educational/academic events.
 						</p>
 					</div>
-					<div className="bg-gray-100 p-4 rounded-md">
+					<div className="border border-gray-200 shadow-sm p-4 rounded-md">
 						<h4 className="font-bold text-xl text-center">
 							<FontAwesomeIcon
 								fill="currentColor"
@@ -132,7 +132,7 @@ const HomePage: NextPage = () => {
 							See why Evental is the right tool for your convention.
 						</p>
 					</div>
-					<div className="bg-gray-100 p-4 rounded-md">
+					<div className="border border-gray-200 shadow-sm p-4 rounded-md">
 						<h4 className="font-bold text-xl text-center">
 							<FontAwesomeIcon
 								fill="currentColor"
@@ -146,7 +146,7 @@ const HomePage: NextPage = () => {
 							See why Evental is the right tool for your festival.
 						</p>
 					</div>
-					<div className="bg-gray-100 p-4 rounded-md">
+					<div className="border border-gray-200 shadow-sm p-4 rounded-md">
 						<h4 className="font-bold text-xl text-center">
 							<FontAwesomeIcon
 								fill="currentColor"
@@ -160,7 +160,7 @@ const HomePage: NextPage = () => {
 							See why Evental is the right tool for your conference.
 						</p>
 					</div>
-					<div className="bg-gray-100 p-4 rounded-md">
+					<div className="border border-gray-200 shadow-sm p-4 rounded-md">
 						<h4 className="font-bold text-xl text-center">
 							<FontAwesomeIcon
 								fill="currentColor"
@@ -174,7 +174,7 @@ const HomePage: NextPage = () => {
 							See why Evental is the right tool for your virtual event.
 						</p>
 					</div>
-					<div className="bg-gray-100 p-4 rounded-md">
+					<div className="border border-gray-200 shadow-sm p-4 rounded-md">
 						<h4 className="font-bold text-xl text-center">
 							<FontAwesomeIcon
 								fill="currentColor"
