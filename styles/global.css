@@ -179,3 +179,7 @@
 .ProseMirror.ProseMirror-focused {
 	@apply focus:outline-none;
 }
+
+::selection {
+	@apply bg-gray-800 text-white;
+}
