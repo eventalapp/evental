@@ -5,6 +5,7 @@ import React from 'react';
 import Head from 'next/head';
 import { LinkButton } from '../form/LinkButton';
 import Link from 'next/link';
+import { Footer } from '../Footer';
 
 export const AlreadySignedInPage = () => (
 	<PageWrapper variant="gray">
@@ -23,5 +24,7 @@ export const AlreadySignedInPage = () => (
 				<LinkButton className="mt-3">Return home</LinkButton>
 			</Link>
 		</Column>
+
+		<Footer />
 	</PageWrapper>
 );
