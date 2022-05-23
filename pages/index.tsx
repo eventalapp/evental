@@ -1,3 +1,5 @@
+import { faGraduationCap, faStreetView, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -8,6 +10,7 @@ import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
+import { faCameraWeb, faMicrophoneStand, faPodium } from '../icons';
 
 const HomePage: NextPage = () => {
 	return (
@@ -54,6 +57,137 @@ const HomePage: NextPage = () => {
 							View All Events
 						</LinkButton>
 					</Link>
+				</div>
+
+				<div className="bg-gray-200 w-1/2 h-72 mt-8 rounded-md" />
+			</Column>
+
+			<div className="bg-primary text-white">
+				<Column>
+					<h3 className="text-xl md:text-2xl font-bold">Creating events couldn't be easier</h3>
+					<p className="text-lg text-gray-100 mt-1">
+						In 3 quick steps, you can get your event up and running
+					</p>
+					<div className="grid grid-cols-3 gap-5 mt-6 pt-6 border-t-2 border-primary-400">
+						<div>
+							<span className="text-gray-300 text-sm font-bold">1.</span>
+							<h4 className="font-bold text-xl my-2">Create an event</h4>
+							<p className="text-gray-200">
+								Start by{' '}
+								<Link href="/events/create">
+									<a className="underline">creating an event</a>
+								</Link>
+								, implement your branding and configure your event.
+							</p>
+						</div>
+						<div>
+							<span className="text-gray-300 text-sm font-bold">2.</span>
+							<h4 className="font-bold text-xl my-2">Create a session</h4>
+							<p className="text-gray-200">
+								Then create a session, attach speakers, setup a venue, and add a session category.
+							</p>
+						</div>
+						<div>
+							<span className="text-gray-300 text-sm font-bold">3.</span>
+							<h4 className="font-bold text-xl my-2">Invite your attendees</h4>
+							<p className="text-gray-200">
+								Then invite organizers, attendees, and speakers/role members to your event.
+							</p>
+						</div>
+					</div>
+				</Column>
+			</div>
+
+			<Column>
+				<h3 className="text-xl md:text-2xl font-bold">Is Evental for you?</h3>
+				<p className="text-lg text-gray-700 mt-1">
+					See why Evental is perfect for your in-person, virtual, or hybrid event.
+				</p>
+				<div className="grid grid-cols-3 gap-5 mt-6">
+					<div className="bg-gray-100 p-4 rounded-md">
+						<h4 className="font-bold text-xl text-center">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="mr-2 h-5 w-5 text-primary"
+								size="1x"
+								icon={faGraduationCap}
+							/>
+							For Educational Events
+						</h4>
+						<p className="text-sm text-gray-700 mt-2">
+							See why Evental is the right tool for your educational/academic events.
+						</p>
+					</div>
+					<div className="bg-gray-100 p-4 rounded-md">
+						<h4 className="font-bold text-xl text-center">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="mr-2 h-5 w-5 text-primary"
+								size="1x"
+								icon={faPodium}
+							/>
+							For Conventions
+						</h4>
+						<p className="text-sm text-gray-700 mt-2">
+							See why Evental is the right tool for conventions.
+						</p>
+					</div>
+					<div className="bg-gray-100 p-4 rounded-md">
+						<h4 className="font-bold text-xl text-center">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="mr-2 h-5 w-5 text-primary"
+								size="1x"
+								icon={faMicrophoneStand}
+							/>
+							For Festivals
+						</h4>
+						<p className="text-sm text-gray-700 mt-2">
+							See why Evental is the right tool for festivals.
+						</p>
+					</div>
+					<div className="bg-gray-100 p-4 rounded-md">
+						<h4 className="font-bold text-xl text-center">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="mr-2 h-5 w-5 text-primary"
+								size="1x"
+								icon={faUsers}
+							/>
+							For Conferences
+						</h4>
+						<p className="text-sm text-gray-700 mt-2">
+							See why Evental is the right tool for conferences.
+						</p>
+					</div>
+					<div className="bg-gray-100 p-4 rounded-md">
+						<h4 className="font-bold text-xl text-center">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="mr-2 h-5 w-5 text-primary"
+								size="1x"
+								icon={faCameraWeb}
+							/>
+							For Virtual Events
+						</h4>
+						<p className="text-sm text-gray-700 mt-2">
+							See why Evental is the right tool for your virtual event.
+						</p>
+					</div>
+					<div className="bg-gray-100 p-4 rounded-md">
+						<h4 className="font-bold text-xl text-center">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="mr-2 h-5 w-5 text-primary"
+								size="1x"
+								icon={faStreetView}
+							/>
+							For Hybrid Events
+						</h4>
+						<p className="text-sm text-gray-700 mt-2">
+							See why Evental is the right tool for your hybrid event.
+						</p>
+					</div>
 				</div>
 			</Column>
 
