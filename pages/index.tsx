@@ -6,6 +6,7 @@ import { Navigation } from '../components/navigation';
 import React from 'react';
 import PageWrapper from '../components/layout/PageWrapper';
 import { NextSeo } from 'next-seo';
+import { Footer } from '../components/Footer';
 
 const HomePage: NextPage = () => {
 	return (
@@ -54,6 +55,8 @@ const HomePage: NextPage = () => {
 					</Link>
 				</div>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };
