@@ -20,7 +20,9 @@ export const variants = {
 	'no-bg':
 		'text-gray-600 hover:text-gray-500 disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center',
 	'inversePrimary':
-		'bg-white hover:bg-gray-75 border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center cursor-pointer'
+		'bg-white hover:bg-gray-75 border-2 border-primary-500 text-primary disabled:cursor-not-allowed inline-block rounded-md disabled:opacity-50 pointer text-sm font-medium transition text-center cursor-pointer',
+	'default':
+		'border inline-flex select-none items-center justify-center rounded-md text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-opacity-75 focus-visible:ring-primary-500 border-gray-300 bg-white text-gray-800 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-900'
 };
 
 export const paddings = {
