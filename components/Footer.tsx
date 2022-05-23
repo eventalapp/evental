@@ -60,7 +60,8 @@ export const Footer = () => {
 				</div>
 
 				<p className="text-center text-base text-gray-400">
-					&copy; {new Date().getFullYear()} Evental, Inc. All rights reserved.
+					&copy; {new Date().getFullYear()} <span className="font-bold">Evental, Inc.</span> All
+					rights reserved.
 				</p>
 			</div>
 		</footer>
