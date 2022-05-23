@@ -11,8 +11,8 @@ type LayoutProps = Props &
 	React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
 const variants = {
-	white: 'bg-white pb-10 min-h-full',
-	gray: 'bg-white pb-10 min-h-full'
+	white: 'bg-white min-h-full',
+	gray: 'bg-white min-h-full'
 };
 
 const PageWrapper: React.FC<LayoutProps> = (props) => {
