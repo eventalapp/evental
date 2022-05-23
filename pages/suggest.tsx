@@ -4,6 +4,7 @@ import { Navigation } from '../components/navigation';
 import React from 'react';
 import PageWrapper from '../components/layout/PageWrapper';
 import { NextSeo } from 'next-seo';
+import { Footer } from '../components/Footer';
 
 const SuggestPage: NextPage = () => {
 	return (
@@ -42,6 +43,8 @@ const SuggestPage: NextPage = () => {
 					Loading…
 				</iframe>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };
