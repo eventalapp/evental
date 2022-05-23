@@ -60,7 +60,7 @@ const PricingPage: NextPage = () => {
 					</div>
 
 					<p className="text-gray-700">
-						The pro plan allows event organizers to create unlimited events, sessions, venues, and
+						The pro plan allows event organizers to create unlimited roles, sessions, venues, and
 						pages. It also allows you to invite additional organizers to help you manage your event.
 					</p>
 
@@ -80,7 +80,7 @@ const PricingPage: NextPage = () => {
 				</div>
 
 				<div className="flex flex-col items-center space-y-3 mt-4">
-					<p className="text-lg font-medium text-gray-700">How many attendees do you expect?</p>
+					<p className="text-lg font-medium text-gray-700">How many attendees are you expecting?</p>
 					<Controller
 						control={control}
 						name="attendees"
@@ -98,7 +98,7 @@ const PricingPage: NextPage = () => {
 					/>
 					{attendees >= 5000 && (
 						<p className="text-gray-600">
-							More than 5,000 people?{' '}
+							Expecting more than 5,000 people?{' '}
 							<Link href="/contact">
 								<a className="text-primary font-medium">Ask us for a same-day quote.</a>
 							</Link>
@@ -115,12 +115,12 @@ const PricingPage: NextPage = () => {
 				<Column className="flex items-center justify-center">
 					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
 						<p className="text-sm md:text-lg text-center my-1.5 font-medium">
-							<span className="font-bold">Organizing multiple events?</span> Subscriptions are
-							available from $1000/year.
+							<span className="font-bold">Organizing several events?</span> We offer subscriptions
+							from $1000/year.
 						</p>
 						<Link href="/contact">
 							<LinkButton variant="inversePrimary" className="my-1.5">
-								Contact Sales
+								Contact Us
 							</LinkButton>
 						</Link>
 					</div>
@@ -149,10 +149,11 @@ const PricingPage: NextPage = () => {
 							Publish Features
 						</h3>
 						<ul className="list-disc pl-5 space-y-0.5">
-							<li>Event website</li>
+							<li>Responsive event website</li>
 							<li>Customizable event branding</li>
 							<li>Control event privacy & access</li>
-							<li>Unlimited sessions, venues, and roles</li>
+							<li>Unlimited sessions, venues, pages, types, and roles</li>
+							<li>Create custom top-level and standard pages</li>
 						</ul>
 					</div>
 					<div>
@@ -162,18 +163,18 @@ const PricingPage: NextPage = () => {
 						<ul className="list-disc pl-5 space-y-0.5">
 							<li>Use Evental with any webinar or video platform</li>
 							<li>Control access to webinar or video content</li>
-							<li>Allow attendees to update Eventalule to their time zone</li>
+							<li>Automatically display times in users timezone</li>
 							<li>Provide post-event access to session recordings</li>
 						</ul>
 					</div>
 					<div>
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
-							Speaker, Sponsor & Exhibitor Management
+							Role Management
 						</h3>
 						<ul className="list-disc pl-5 space-y-0.5">
-							<li>Speaker profiles</li>
-							<li>Speaker tools</li>
-							<li>Sponsor & exhibitor profiles</li>
+							<li>Create custom roles for speakers, artists, and exhibitors</li>
+							<li>Attach role members to sessions</li>
+							<li>Top level pages for role members</li>
 						</ul>
 					</div>
 					<div>
@@ -181,8 +182,9 @@ const PricingPage: NextPage = () => {
 							Communication
 						</h3>
 						<ul className="list-disc pl-5 space-y-0.5">
-							<li>Send emails to event participants</li>
-							<li>Automated schedule reminders</li>
+							<li>Custom email builder to develop responsive emails</li>
+							<li>Create a welcome email to automatically send to attendees</li>
+							<li>Notify attendees when they have an upcoming session</li>
 						</ul>
 					</div>
 					<div>
@@ -190,24 +192,11 @@ const PricingPage: NextPage = () => {
 							Attendee Experience
 						</h3>
 						<ul className="list-disc pl-5 space-y-0.5">
-							<li>Create personal schedule</li>
-							<li>Access event from any device</li>
-							<li>Sync schedule to calendar</li>
-							<li>Create customizable user profile</li>
-							<li>Browse attendee directory</li>
-							<li>Access event Twitter feed</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
-							Event Registration
-						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
-							<li>Sign up for event on Evental</li>
-							<li>Attendee registration form</li>
-							<li>Google & Facebook single sign-on</li>
-							<li>Email domain whitelisting</li>
-							<li>Import attendees via spreadsheet upload</li>
+							<li>Generate and export personal schedule</li>
+							<li>View event from any device</li>
+							<li>Sync personal schedule to calendar</li>
+							<li>Create customizable user profile using the profile builder</li>
+							<li>Browse attendee and role lists</li>
 						</ul>
 					</div>
 					<div>
@@ -216,10 +205,9 @@ const PricingPage: NextPage = () => {
 						</h3>
 						<ul className="list-disc pl-5 space-y-0.5">
 							<li>Attendees can register for sessions</li>
-							<li>Set session capacities and wait lists</li>
-							<li>Prevent double booking of concurrent sessions</li>
-							<li>Freeze attendee schedules</li>
-							<li>Import attendees via spreadsheet upload</li>
+							<li>Filter sessions by date, type, venue, etc.</li>
+							<li>Attach role members/speakers to sessions</li>
+							<li>Set session max attendee limits and wait lists</li>
 						</ul>
 					</div>
 					<div>
@@ -227,28 +215,19 @@ const PricingPage: NextPage = () => {
 							Administration
 						</h3>
 						<ul className="list-disc pl-5 space-y-0.5">
-							<li>Event data and reporting</li>
-							<li>Gather session feedback</li>
+							<li>Remove attendees from your event</li>
+							<li>Create organizers to assist you in running your event</li>
+							<li>Export event and session data</li>
 							<li>Access to Evental API</li>
-							<li>Session check-in data and reporting</li>
 						</ul>
 					</div>
 					<div>
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">Support</h3>
 						<ul className="list-disc pl-5 space-y-0.5">
-							<li>Support guides</li>
-							<li>Email support</li>
-							<li>Live chat support</li>
+							<li>Organizer and attendee support guides</li>
+							<li>24/7 Email support</li>
 							<li>Dedicated account manager</li>
 							<li>Post-event review session</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
-							Event Admins / Organizers
-						</h3>
-						<ul className="list-disc pl-5 space-y-0.5">
-							<li>Up to 5 admins / organizers</li>
 						</ul>
 					</div>
 				</div>
@@ -278,120 +257,119 @@ const PricingPage: NextPage = () => {
 					className="col-span-4 md:col-span-3"
 					items={[
 						{
-							header: 'Do you offer a nonprofit or education pricing?',
+							header: 'Do you offer a nonprofit or education plans?',
 							content: (
 								<p>
-									Yes, we offer nonprofit and educational pricing. You can view this here. Please
-									contact us if you would like to access this pricing.
+									Yes, we offer nonprofit and educational plans. Please{' '}
+									<Link href="/contact">
+										<a className="underline">Contact Us</a>
+									</Link>{' '}
+									if you are interested in learning more and accessing this plan.
 								</p>
 							)
 						},
 						{
-							header: 'Do you offer a 100% money-back guarantee?',
+							header: 'Is there any training/support offered?',
 							content: (
 								<p>
-									Yes, we offer a 60-day, 100% money-back guarantee if you and your event
-									administrators go through our support guides & video tutorials, view at least one
-									webinar recording, and set up your event.
+									Yes, we offer several training and learning opportunities to allow you to easily
+									setup and publish your event. Which includes administration, attendee, and speaker
+									guides at the{' '}
+									<Link href="/guides">
+										<a className="underline">Support Guides</a>
+									</Link>{' '}
+									page.
 								</p>
 							)
 						},
 						{
-							header: 'What training, development or support do you offer?',
+							header: 'What payment methods do you support?',
 							content: (
 								<p>
-									We offer a variety of training and development opportunities for you and your
-									team. This includes support guides, in-app. software tutorials, pre-recorded
-									training videos, live training/support sessions, and ongoing and on-demand
-									educational webinars.
+									We accept credit cards, debit cards, checks, wire transfers, ACH, and checks. If
+									you are unsure if your payment method is supported. Please{' '}
+									<Link href="/contact">
+										<a className="underline">Contact Us</a>
+									</Link>
+									.
 								</p>
 							)
 						},
 						{
-							header: 'What forms of payment do you accept?',
+							header: 'Do you offer any subscriptions plans?',
 							content: (
 								<p>
-									We accept credit cards, debit cards, ACH, wire transfers, purchase orders (POs),
-									and checks. POs/checks are only available for approved organizations. Payment
-									options are available after you sign up for a free trial.
+									Yes, we offer several subscription plans for and organizations/individuals who
+									plan to hold several events in a year.
 								</p>
 							)
 						},
 						{
-							header: 'Do you offer subscriptions?',
+							header: 'Do you provide quotes?',
 							content: (
 								<p>
-									Yes, we offer subscriptions for organizations and individuals holding multiple
-									events over time. Please contact us for questions about subscriptions.
+									Yes, we can provide a quote. Please{' '}
+									<Link href="/contact">
+										<a className="underline">Contact Us</a>
+									</Link>{' '}
+									to receive a quote.
 								</p>
 							)
 						},
 						{
-							header: 'Do you offer payment plans?',
+							header: 'How does plans priced?',
 							content: (
 								<p>
-									Yes, we offer payment plans for approved organizations and individuals. Payment
-									plans for approved organizations range from 30-90 days and typically require an
-									initial payment of at least 33% upon delivery of service.
+									Our pricing is based off of the plan level you choose, and the number of attendees
+									you are expecting. If you would like to learn more about our pricing, Please{' '}
+									<Link href="/contact">
+										<a className="underline">Contact Us</a>
+									</Link>
+									.
 								</p>
 							)
 						},
 						{
-							header: 'Are you able to provide a quote?',
-							content: <p>Yes, we can provide a quote. Please Contact Us to arrange this.</p>
-						},
-						{
-							header: 'How does your pricing work?',
+							header: 'How long of events can I host?',
 							content: (
 								<p>
-									Pricing is based on 1) the plan you choose and 2) the number of attendees you
-									expect at your event. On each plan we have single event and annual subscription
-									options available. Contact us if you would like to discuss your options.
+									Currently we have a 1 month length limit on events. The event will still be
+									viewable after the event end date for attendees, speakers, and organizers to view
+									after the event.
 								</p>
 							)
 						},
 						{
-							header: 'Are you GDPR and CCPA compliant?',
+							header: 'Is event setup assistance offered?',
 							content: (
 								<p>
-									Yes, we are compliant with these and other privacy and protection practices.
-									Please contact us with any specific questions or concerns.
+									Yes, we offer event setup assistance. You can first review our{' '}
+									<Link href="/guides">
+										<a className="underline">Support Guides</a>
+									</Link>
+									, if you still need help, please{' '}
+									<Link href="/contact">
+										<a className="underline">Contact Us</a>
+									</Link>
+									.
 								</p>
 							)
 						},
 						{
-							header: 'What is the maximum length of an event?',
+							header: 'Is a free trial offered?',
 							content: (
 								<p>
-									The only limitation we have on length of your event is that, on a single event
-									plan, an event can be no longer than 1 month. This relates only to the actual
-									dates of the event itself (ie. from first to last session). You can have your
-									event live as long as you would like before and after for your attendees to
-									browse, sign up, access content etc. Contact Us for quote if you are looking at
-									hosting a longer event.
-								</p>
-							)
-						},
-						{
-							header: 'Do you offer setup and implementation assistance?',
-							content: (
-								<p>
-									Yes, we offer setup and implementation assistance. You can review our Support
-									Guides, contact our Support Team, or view our webinar recordings. If you wanted
-									additional and dedicated help, you can arrange this through Evental Event
-									Services.
-								</p>
-							)
-						},
-						{
-							header: 'Do you offer a free trial?',
-							content: (
-								<p>
-									Yes, we offer a 30-day free trial if you would like to test out Evental before
-									purchasing. You can start creating your event here. You can also contact us if you
-									require a longer free trial period. Note: You won’t have full functionality and/or
-									a live event whilst you’re in the free trial mode but if you did want to test it
-									in this capacity, contact us and we can set your event live for a few days.
+									Yes, we offer a{' '}
+									<Link href="/events/create">
+										<a className="underline">Free Trial</a>
+									</Link>{' '}
+									so you can create roles, pages, sessions, invite organizers, and customize your
+									event before purchasing a premium plan. If you have any questions regarding the
+									free trial,{' '}
+									<Link href="/contact">
+										<a className="underline">Contact Us</a>
+									</Link>
+									.
 								</p>
 							)
 						}
