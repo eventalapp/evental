@@ -18,6 +18,7 @@
     "stripe:listen": "stripe listen --forward-to localhost:5555/api/payment/webhooks"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
