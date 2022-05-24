@@ -7,6 +7,7 @@ overrides:
 specifiers:
   '@babel/core': ^7.0.0
   '@faker-js/faker': ^6.3.1
+  '@fortawesome/fontawesome-common-types': ^6.1.1
   '@fortawesome/fontawesome-svg-core': ^6.1.1
   '@fortawesome/free-brands-svg-icons': ^6.1.1
   '@fortawesome/free-solid-svg-icons': ^6.1.1
@@ -212,6 +213,7 @@ dependencies:
 
 devDependencies:
   '@faker-js/faker': 6.3.1
+  '@fortawesome/fontawesome-common-types': 6.1.1
   '@trivago/prettier-plugin-sort-imports': 3.2.0_prettier@2.6.2
   '@types/busboy': 1.5.0
   '@types/html-to-text': 8.1.0
@@ -632,7 +634,6 @@ packages:
     resolution: {integrity: sha512-wVn5WJPirFTnzN6tR95abCx+ocH+3IFLXAgyavnf9hUmN0CfWoDjPT/BAWsUVwSlYYVBeCLJxaqi7ZGe4uSjBA==}
     engines: {node: '>=6'}
     requiresBuild: true
-    dev: false
 
   /@fortawesome/fontawesome-svg-core/6.1.1:
     resolution: {integrity: sha512-NCg0w2YIp81f4V6cMGD9iomfsIj7GWrqmsa0ZsPh59G7PKiGN1KymZNxmF00ssuAlo/VZmpK6xazsGOwzKYUMg==}
