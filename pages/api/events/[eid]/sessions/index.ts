@@ -5,6 +5,10 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
+import {
+	AttendeeWithUser,
+	stripAttendeeWithUserPassword
+} from '../../../../../utils/stripUserPassword';
 import { getEvent } from '../index';
 import { getVenue } from '../venues/[vid]';
 import { getSessionType } from './types/[tid]';
@@ -13,6 +17,7 @@ export type SessionWithVenue = {
 	venue: Prisma.EventVenue | null;
 	type: Prisma.EventSessionType | null;
 	attendeeCount: number;
+	roleMembers: Array<Prisma.EventSessionAttendee & { attendee: AttendeeWithUser }>;
 } & Prisma.EventSession;
 
 export default api({
@@ -75,6 +80,19 @@ export const getSessions = async (eid: string): Promise<SessionWithVenue[] | nul
 			type: true,
 			_count: {
 				select: { attendees: true }
+			},
+			attendees: {
+				include: {
+					attendee: {
+						include: {
+							user: true,
+							role: true
+						}
+					}
+				},
+				where: {
+					type: 'ROLE'
+				}
 			}
 		},
 		orderBy: {
@@ -82,7 +100,18 @@ export const getSessions = async (eid: string): Promise<SessionWithVenue[] | nul
 		}
 	});
 
-	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
+	return sessions.map((session) => ({
+		attendeeCount: session._count.attendees,
+		roleMembers: session.attendees.map((sessionAttendee) => {
+			const { attendee } = sessionAttendee;
+
+			return {
+				...sessionAttendee,
+				attendee: stripAttendeeWithUserPassword(attendee)
+			};
+		}),
+		...session
+	}));
 };
 
 export const getSessionsByVenue = async (
@@ -111,6 +140,19 @@ export const getSessionsByVenue = async (
 			type: true,
 			_count: {
 				select: { attendees: true }
+			},
+			attendees: {
+				include: {
+					attendee: {
+						include: {
+							user: true,
+							role: true
+						}
+					}
+				},
+				where: {
+					type: 'ROLE'
+				}
 			}
 		},
 		orderBy: {
@@ -118,7 +160,18 @@ export const getSessionsByVenue = async (
 		}
 	});
 
-	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
+	return sessions.map((session) => ({
+		attendeeCount: session._count.attendees,
+		roleMembers: session.attendees.map((sessionAttendee) => {
+			const { attendee } = sessionAttendee;
+
+			return {
+				...sessionAttendee,
+				attendee: stripAttendeeWithUserPassword(attendee)
+			};
+		}),
+		...session
+	}));
 };
 
 export const getSessionsByDate = async (
@@ -164,6 +217,19 @@ export const getSessionsByDate = async (
 			type: true,
 			_count: {
 				select: { attendees: true }
+			},
+			attendees: {
+				include: {
+					attendee: {
+						include: {
+							user: true,
+							role: true
+						}
+					}
+				},
+				where: {
+					type: 'ROLE'
+				}
 			}
 		},
 		orderBy: {
@@ -171,7 +237,18 @@ export const getSessionsByDate = async (
 		}
 	});
 
-	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
+	return sessions.map((session) => ({
+		attendeeCount: session._count.attendees,
+		roleMembers: session.attendees.map((sessionAttendee) => {
+			const { attendee } = sessionAttendee;
+
+			return {
+				...sessionAttendee,
+				attendee: stripAttendeeWithUserPassword(attendee)
+			};
+		}),
+		...session
+	}));
 };
 
 export const getSessionsByType = async (
@@ -200,6 +277,19 @@ export const getSessionsByType = async (
 			type: true,
 			_count: {
 				select: { attendees: true }
+			},
+			attendees: {
+				include: {
+					attendee: {
+						include: {
+							user: true,
+							role: true
+						}
+					}
+				},
+				where: {
+					type: 'ROLE'
+				}
 			}
 		},
 		orderBy: {
@@ -207,5 +297,16 @@ export const getSessionsByType = async (
 		}
 	});
 
-	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
+	return sessions.map((session) => ({
+		attendeeCount: session._count.attendees,
+		roleMembers: session.attendees.map((sessionAttendee) => {
+			const { attendee } = sessionAttendee;
+
+			return {
+				...sessionAttendee,
+				attendee: stripAttendeeWithUserPassword(attendee)
+			};
+		}),
+		...session
+	}));
 };
