@@ -67,6 +67,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 			description: session?.description ?? undefined,
 			venueId: session?.venueId ?? 'none',
 			typeId: session?.typeId ?? 'none',
+			maxAttendees: session?.maxAttendees ?? undefined,
 			startDate: session?.startDate ? new Date(String(session?.startDate)) : new Date(),
 			endDate: session?.endDate ? new Date(String(session?.endDate)) : new Date()
 		},
@@ -224,6 +225,18 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 						</Link>
 
 						{errors.typeId?.message && <ErrorMessage>{errors.typeId?.message}</ErrorMessage>}
+					</div>
+
+					<div>
+						<Label htmlFor="name">Max Attendees *</Label>
+						<Input
+							placeholder="No Limit"
+							type="number"
+							{...register('maxAttendees', { valueAsNumber: true })}
+						/>
+						{errors.maxAttendees?.message && (
+							<ErrorMessage>{errors.maxAttendees?.message}</ErrorMessage>
+						)}
 					</div>
 				</div>
 
