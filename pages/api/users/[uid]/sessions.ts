@@ -31,7 +31,7 @@ export const getSessionsByUser = async (uid: string): Promise<SessionWithVenueEv
 		return null;
 	}
 
-	return await prisma.eventSession.findMany({
+	const sessions = await prisma.eventSession.findMany({
 		where: {
 			attendees: {
 				some: {
@@ -47,6 +47,9 @@ export const getSessionsByUser = async (uid: string): Promise<SessionWithVenueEv
 			event: true,
 			venue: true,
 			type: true,
+			_count: {
+				select: { attendees: true }
+			},
 			attendees: {
 				include: {
 					attendee: {
@@ -65,4 +68,6 @@ export const getSessionsByUser = async (uid: string): Promise<SessionWithVenueEv
 			startDate: 'asc'
 		}
 	});
+
+	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
 };

@@ -12,6 +12,7 @@ import { getSessionType } from './types/[tid]';
 export type SessionWithVenue = {
 	venue: Prisma.EventVenue | null;
 	type: Prisma.EventSessionType | null;
+	attendeeCount: number;
 } & Prisma.EventSession;
 
 export default api({
@@ -65,18 +66,23 @@ export const getSessions = async (eid: string): Promise<SessionWithVenue[] | nul
 		return null;
 	}
 
-	return await prisma.eventSession.findMany({
+	const sessions = await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id
 		},
 		include: {
 			venue: true,
-			type: true
+			type: true,
+			_count: {
+				select: { attendees: true }
+			}
 		},
 		orderBy: {
 			startDate: 'asc'
 		}
 	});
+
+	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
 };
 
 export const getSessionsByVenue = async (
@@ -95,19 +101,24 @@ export const getSessionsByVenue = async (
 		return null;
 	}
 
-	return await prisma.eventSession.findMany({
+	const sessions = await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id,
 			venueId: venue.id
 		},
 		include: {
 			venue: true,
-			type: true
+			type: true,
+			_count: {
+				select: { attendees: true }
+			}
 		},
 		orderBy: {
 			startDate: 'asc'
 		}
 	});
+
+	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
 };
 
 export const getSessionsByDate = async (
@@ -124,7 +135,7 @@ export const getSessionsByDate = async (
 	const dateParsedStart = zonedTimeToUtc(startOfDay(dateParsed), event.timeZone);
 	const dateParsedEnd = zonedTimeToUtc(endOfDay(dateParsed), event.timeZone);
 
-	return await prisma.eventSession.findMany({
+	const sessions = await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id,
 			OR: [
@@ -150,12 +161,17 @@ export const getSessionsByDate = async (
 		},
 		include: {
 			venue: true,
-			type: true
+			type: true,
+			_count: {
+				select: { attendees: true }
+			}
 		},
 		orderBy: {
 			startDate: 'asc'
 		}
 	});
+
+	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
 };
 
 export const getSessionsByType = async (
@@ -174,17 +190,22 @@ export const getSessionsByType = async (
 		return null;
 	}
 
-	return await prisma.eventSession.findMany({
+	const sessions = await prisma.eventSession.findMany({
 		where: {
 			eventId: event.id,
 			typeId: type.id
 		},
 		include: {
 			venue: true,
-			type: true
+			type: true,
+			_count: {
+				select: { attendees: true }
+			}
 		},
 		orderBy: {
 			startDate: 'asc'
 		}
 	});
+
+	return sessions.map((session) => ({ attendeeCount: session._count.attendees, ...session }));
 };
