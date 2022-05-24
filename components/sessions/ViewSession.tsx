@@ -8,10 +8,13 @@ import parse from 'html-react-parser';
 import Link from 'next/link';
 import React from 'react';
 
+import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { AddToCalendar } from '../AddToCalendar';
 import { AttendeeList } from '../attendees/AttendeeList';
+import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../form/Button';
 import { LinkButton } from '../form/LinkButton';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import Tooltip from '../radix/components/Tooltip';
@@ -29,6 +32,11 @@ type Props = {
 
 export const ViewSession: React.FC<Props> = (props) => {
 	const { session, sid, eid, isAttending, admin = false, attendees, event, roleAttendees } = props;
+	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
+		String(eid),
+		String(sid),
+		{ redirectUrl: `/events/${eid}/sessions/${sid}` }
+	);
 
 	if (!session) return null;
 
@@ -61,9 +69,18 @@ export const ViewSession: React.FC<Props> = (props) => {
 					{isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
 
 					{!isAttending && !admin && (
-						<Link href={`/events/${eid}/sessions/${sid}/register`} passHref>
-							<LinkButton>Attend This Session</LinkButton>
-						</Link>
+						<Button
+							type="button"
+							className="ml-4"
+							variant="primary"
+							padding="medium"
+							onClick={() => {
+								createSessionAttendeeMutation.mutate();
+							}}
+							disabled={createSessionAttendeeMutation.isLoading}
+						>
+							{createSessionAttendeeMutation.isLoading ? <LoadingInner /> : 'Attend This Session'}
+						</Button>
 					)}
 					{admin && (
 						<Link href={`/events/${eid}/admin/sessions/${sid}/edit`} passHref>
