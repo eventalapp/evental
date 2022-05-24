@@ -26,7 +26,7 @@ export default api({
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
-		const parsed = EditRoleSchema.parse(req.body);
+		const body = EditRoleSchema.parse(req.body);
 
 		const event = await prisma.event.findFirst({
 			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -54,7 +54,7 @@ export default api({
 			throw new NextkitError(404, 'Role not found.');
 		}
 
-		if (parsed.defaultRole) {
+		if (body.defaultRole) {
 			//Find all roles that already have defaultRole set to true
 			const existingDefaultRoles = await prisma.eventRole.findMany({
 				where: {
@@ -81,7 +81,7 @@ export default api({
 					)
 				);
 			}
-		} else if (!parsed.defaultRole) {
+		} else if (!body.defaultRole) {
 			throw new NextkitError(
 				400,
 				'If you want to make another role the default. Please edit that role first.'
@@ -89,8 +89,8 @@ export default api({
 		}
 
 		const slug: string | undefined =
-			parsed.name !== role.name
-				? await generateSlug(parsed.name, async (val) => {
+			body.name !== role.name
+				? await generateSlug(body.name, async (val) => {
 						return !Boolean(
 							await prisma.eventRole.findFirst({
 								where: {
@@ -108,8 +108,8 @@ export default api({
 			},
 			data: {
 				slug: slug,
-				name: parsed.name,
-				defaultRole: parsed.defaultRole
+				name: body.name,
+				defaultRole: body.defaultRole
 			}
 		});
 

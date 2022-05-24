@@ -26,7 +26,7 @@ export default api({
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
-		const parsed = CreateSessionSchema.parse(req.body);
+		const body = CreateSessionSchema.parse(req.body);
 
 		const event = await prisma.event.findFirst({
 			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
@@ -39,7 +39,7 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const slug = await generateSlug(parsed.name, async (val) => {
+		const slug = await generateSlug(body.name, async (val) => {
 			return !Boolean(
 				await prisma.eventSession.findFirst({
 					where: {
@@ -54,12 +54,13 @@ export default api({
 			data: {
 				eventId: event.id,
 				slug: slug,
-				name: parsed.name,
-				venueId: parsed.venueId,
-				startDate: parsed.startDate,
-				endDate: parsed.endDate,
-				description: parsed.description,
-				typeId: parsed.typeId
+				name: body.name,
+				venueId: body.venueId,
+				maxAttendees: body.maxAttendees,
+				startDate: body.startDate,
+				endDate: body.endDate,
+				description: body.description,
+				typeId: body.typeId
 			}
 		});
 

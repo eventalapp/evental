@@ -167,11 +167,13 @@ const MenuBar: React.FC<{
 
 			{imageUpload && (
 				<Tooltip side={'top'} message={`Image`}>
-					<ImageUploadDialog onSubmit={addImage} editor={editor}>
-						<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
-							<FontAwesomeIcon size="lg" icon={faCamera} />
-						</button>
-					</ImageUploadDialog>
+					<div>
+						<ImageUploadDialog onSubmit={addImage} editor={editor}>
+							<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
+								<FontAwesomeIcon size="lg" icon={faCamera} />
+							</button>
+						</ImageUploadDialog>
+					</div>
 				</Tooltip>
 			)}
 
