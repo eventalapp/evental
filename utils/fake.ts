@@ -105,6 +105,7 @@ export const fake = (count: number) => {
 		fakeSessions.push({
 			id: `faker-session-#${i}`,
 			eventId: fakeEvent.id,
+			maxAttendees: null,
 			name: `${faker.name.firstName()} ${faker.name.lastName()}`,
 			description: faker.lorem.sentence(),
 			startDate: dayjs(new Date()).add(25, 'day').toDate(),
