@@ -54,6 +54,14 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 	return (
 		<div>
+			{!isAttending &&
+				session.maxAttendees !== null &&
+				session.attendeeCount >= session.maxAttendees && (
+					<div className="bg-red-500 block text-white px-5 py-3 rounded-md mb-4 font-medium">
+						This session is full
+					</div>
+				)}
+
 			<FlexRowBetween>
 				<div className="flex items-center">
 					{session?.type && (
@@ -65,6 +73,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 					<h1 className="text-2xl md:text-3xl font-medium">{session.name}</h1>
 				</div>
+
 				<div className="space-x-4">
 					{isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
 
