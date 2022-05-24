@@ -35,6 +35,17 @@ export default api({
 			throw new NextkitError(404, 'Session not found.');
 		}
 
+		const attendeeCount = await prisma.eventSessionAttendee.count({
+			where: {
+				sessionId: String(session.id),
+				eventId: event.id
+			}
+		});
+
+		if (session.maxAttendees !== null && attendeeCount + 1 >= session.maxAttendees) {
+			throw new NextkitError(403, 'This session is full. Please select another session.');
+		}
+
 		let attendee = await prisma.eventAttendee.findFirst({
 			where: {
 				eventId: event.id,
