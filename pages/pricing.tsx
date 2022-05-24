@@ -160,11 +160,22 @@ const PricingPage: NextPage = () => {
 					</div>
 					<div>
 						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
+							Attendee Experience
+						</h3>
+						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+							<li>Generate and export personal schedule</li>
+							<li>View event from any device</li>
+							<li>Sync personal schedule to calendar</li>
+							<li>Create customizable user profile using the profile builder</li>
+							<li>Browse attendee and role lists</li>
+						</ul>
+					</div>
+					<div>
+						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
 							Virtual & Hybrid Events
 						</h3>
 						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
 							<li>Use Evental with any webinar or video platform</li>
-							<li>Control access to webinar or video content</li>
 							<li>Automatically display times in users timezone</li>
 							<li>Provide post-event access to session recordings</li>
 						</ul>
@@ -187,18 +198,6 @@ const PricingPage: NextPage = () => {
 							<li>Custom email builder to develop responsive emails</li>
 							<li>Create a welcome email to automatically send to attendees</li>
 							<li>Notify attendees when they have an upcoming session</li>
-						</ul>
-					</div>
-					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
-							Attendee Experience
-						</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
-							<li>Generate and export personal schedule</li>
-							<li>View event from any device</li>
-							<li>Sync personal schedule to calendar</li>
-							<li>Create customizable user profile using the profile builder</li>
-							<li>Browse attendee and role lists</li>
 						</ul>
 					</div>
 					<div>
