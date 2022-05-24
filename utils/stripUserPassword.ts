@@ -1,15 +1,18 @@
 import Prisma from '@prisma/client';
 
 export type PasswordlessUser = Omit<Prisma.User, 'password'>;
-export type PasswordlessAttendee = PasswordlessUser & Prisma.EventAttendee;
+
 export type AttendeeWithUser = Prisma.EventAttendee & {
 	user: PasswordlessUser;
 	role: Prisma.EventRole;
 };
+
 export type AttendeeWithUserInput = Prisma.EventAttendee & {
 	user: Prisma.User;
 	role: Prisma.EventRole;
 };
+
+export type SessionAttendeeWithUser = Prisma.EventSessionAttendee & { attendee: AttendeeWithUser };
 
 export const stripUserPassword = (user: Prisma.User): PasswordlessUser => {
 	const { password, ...rest } = user;
