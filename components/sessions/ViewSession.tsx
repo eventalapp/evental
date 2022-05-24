@@ -153,9 +153,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 				<div className="block">
 					<Tooltip
 						side={'top'}
-						message={`This sessions is currently ${
-							Math.ceil(session?.attendeeCount / session?.maxAttendees) * 100
-						}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+						message={`This sessions is currently ${Math.ceil(
+							(session?.attendeeCount / session?.maxAttendees) * 100
+						)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
 					>
 						<div className="inline-flex flex-row items-center mb-1 cursor-help">
 							<FontAwesomeIcon
@@ -164,7 +164,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 								size="1x"
 								icon={faLocationDot}
 							/>
-							<p>{Math.ceil(session?.attendeeCount / session?.maxAttendees) * 100}% Full</p>
+							<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
 						</div>
 					</Tooltip>
 				</div>
