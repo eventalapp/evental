@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../components/Footer';
 import { SignUpForm } from '../../components/authentication/SignUpForm';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';
 import { LoadingPage } from '../../components/error/LoadingPage';
@@ -66,6 +67,8 @@ const SignUpPage: NextPage<Props> = (props) => {
 					<SignUpForm signUpMutation={signUpMutation} />
 				</div>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

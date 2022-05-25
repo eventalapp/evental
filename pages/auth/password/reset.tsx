@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../components/Footer';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { LinkButton } from '../../../components/form/LinkButton';
@@ -52,6 +53,8 @@ const ResetPasswordPage: NextPage = () => {
 						<LinkButton className="mt-3">Request new code</LinkButton>
 					</Link>
 				</Column>
+
+				<Footer />
 			</PageWrapper>
 		);
 	}
@@ -71,6 +74,8 @@ const ResetPasswordPage: NextPage = () => {
 
 				<PasswordResetForm passwordResetMutation={passwordResetMutation} code={String(code)} />
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

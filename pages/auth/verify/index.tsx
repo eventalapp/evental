@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
+import { Footer } from '../../../components/Footer';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { LoadingSpinner } from '../../../components/error/LoadingSpinner';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
@@ -110,6 +111,8 @@ const VerifyEmailPage: NextPage<Props> = (props) => {
 					)}
 				</div>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

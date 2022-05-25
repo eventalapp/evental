@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
 
+import { Footer } from '../../../components/Footer';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import Column from '../../../components/layout/Column';
@@ -38,6 +39,8 @@ const RequestPasswordResetPage: NextPage = () => {
 
 				<RequestPasswordResetForm requestPasswordResetMutation={requestPasswordResetMutation} />
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };
