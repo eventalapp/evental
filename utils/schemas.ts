@@ -1,4 +1,5 @@
 import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
+import { htmlToText } from 'html-to-text';
 import { z } from 'zod';
 
 import { timeZoneList } from './const';
@@ -352,3 +353,23 @@ export const RemoveAttendeeFromSessionSchema = z.object({
 });
 
 export type RemoveAttendeeFromSessionPayload = z.infer<typeof RemoveAttendeeFromSessionSchema>;
+
+// Support ticket
+
+export const SubmitSupportTicketSchema = z.object({
+	attendanceType: z
+		.string()
+		.min(1, 'Attendance Type is required')
+		.max(100, 'Attendance Type is too long'),
+	helpType: z.string().min(1, 'Help Type is required').max(100, 'Help Type is too long'),
+	body: z.preprocess(
+		(val) => htmlToText(String(val)),
+		z.string().min(1, 'Body is required').max(5000, 'Body is too long')
+	),
+	name: nameValidator,
+	email: emailValidator,
+	website: urlValidator.optional(),
+	phoneNumber: z.string().max(100, 'Phone Number is too long')
+});
+
+export type SubmitSupportTicketPayload = z.infer<typeof SubmitSupportTicketSchema>;
