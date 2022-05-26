@@ -6,7 +6,7 @@ import React from 'react';
 
 import Button from './shared/Button';
 
-type Option = {
+export type Option = {
 	label: string;
 	value: string;
 };
