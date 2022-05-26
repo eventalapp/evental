@@ -34,15 +34,18 @@ const ContactPage: NextPage = () => {
 
 			<Navigation />
 
+			<div className="dark-topography text-white">
+				<Column className="flex flex-col items-center">
+					<h1 className="text-2xl md:text-3xl font-bold">Contact Us</h1>
+					<p className="text-gray-100 text-md mt-4 max-w-2xl text-center">
+						Have some suggestions or feedback? Questions about Evental? Just want to have a chat?
+						We'd love to hear from you.
+					</p>
+				</Column>
+			</div>
+
 			<Column className="flex flex-col items-center">
-				<h1 className="text-2xl md:text-3xl font-bold">Contact Us</h1>
-
-				<p className="text-lg text-gray-600 max-w-2xl text-center mt-3">
-					Have some suggestions or feedback? Questions about Evental? Just want to have a chat? We'd
-					love to hear from you.
-				</p>
-
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-12 my-10 md:my-16">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10 md:mb-16">
 					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">
 							Questions/Support
