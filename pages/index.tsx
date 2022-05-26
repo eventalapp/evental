@@ -62,13 +62,13 @@ const HomePage: NextPage = () => {
 				<div className="bg-gray-200 w-3/4 h-96 mt-8 rounded-md" />
 			</Column>
 
-			<div className="bg-primary text-white">
+			<div className="dark-topography text-white">
 				<Column>
 					<h3 className="text-xl md:text-2xl font-bold">Creating events couldn't be easier</h3>
 					<p className="text-md md:text-lg text-gray-100 mt-1">
 						In 3 quick steps, you can get your event up and running
 					</p>
-					<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6 pt-6 border-t-2 border-primary-400">
+					<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6 pt-6 border-t-2 border-primary-500">
 						<div>
 							<span className="text-gray-300 text-sm font-bold">1.</span>
 							<h4 className="font-bold text-xl my-2">Create an event</h4>

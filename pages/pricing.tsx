@@ -41,10 +41,17 @@ const PricingPage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<Column className="flex flex-col items-center">
-				<h1 className="text-2xl md:text-3xl font-bold">Single Event Plans & Pricing</h1>
+			<div className="dark-topography text-white">
+				<Column className="flex flex-col items-center">
+					<h1 className="text-2xl md:text-3xl font-bold">Single Event Plans & Pricing</h1>
+					<p className="text-gray-100 text-md mt-4 max-w-2xl text-center">
+						View pricing for single event plans for standard and nonprofit or educational events.
+					</p>
+				</Column>
+			</div>
 
-				<div className="my-4 space-x-4">
+			<Column className="flex flex-col items-center">
+				<div className="mb-4 space-x-4">
 					<Button>Standard</Button>
 					<Button>Nonprofit/Education</Button>
 				</div>
@@ -113,7 +120,7 @@ const PricingPage: NextPage = () => {
 				</div>
 			</Column>
 
-			<div className="bg-primary text-white">
+			<div className="dark-topography text-white">
 				<Column className="flex items-center justify-center">
 					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
 						<p className="text-sm md:text-lg text-center my-1.5 font-medium">
@@ -121,7 +128,7 @@ const PricingPage: NextPage = () => {
 							from $1000/year.
 						</p>
 						<Link href="/contact">
-							<LinkButton variant="default" className="my-1.5 text-primary-500 border-0">
+							<LinkButton variant="default" className="my-1.5 text-primary-600 border-0">
 								Contact Us
 							</LinkButton>
 						</Link>
@@ -234,7 +241,7 @@ const PricingPage: NextPage = () => {
 				</div>
 			</Column>
 
-			<div className="bg-primary text-white">
+			<div className="dark-topography text-white">
 				<Column className="flex items-center justify-center">
 					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
 						<p className="text-sm md:text-lg text-center my-1.5 font-medium">
@@ -242,7 +249,7 @@ const PricingPage: NextPage = () => {
 							now!
 						</p>
 						<Link href="/events/create">
-							<LinkButton variant="default" className="my-1.5 text-primary-500 border-0">
+							<LinkButton variant="default" className="my-1.5 text-primary-600 border-0">
 								Start Trial
 							</LinkButton>
 						</Link>
