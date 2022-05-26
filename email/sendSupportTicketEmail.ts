@@ -36,7 +36,7 @@ export const sendSupportTicketEmail = async (args: SupportTicketEmailArgs) => {
 		Destination: {
 			ToAddresses: [args.sendToAddress]
 		},
-		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
+		ReplyToAddresses: [`${args.payload.name} <${args.payload.email}>`],
 		FromEmailAddress: '"Evental" <no-reply@evental.app>'
 	};
 
