@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { Footer } from '../components/Footer';
@@ -12,10 +12,11 @@ import { Navigation } from '../components/navigation';
 import { PricingAccordion } from '../components/radix/components/PricingAccordion';
 import Slider from '../components/radix/components/Slider';
 import Button from '../components/radix/components/shared/Button';
-import { proAttendeePricing } from '../utils/const';
+import { eduAttendeePricing, proAttendeePricing } from '../utils/const';
 
 const PricingPage: NextPage = () => {
 	const { control, watch } = useForm({ defaultValues: { attendees: 250 } });
+	const [isEducation, setIsEducation] = useState(false);
 
 	const attendees = watch('attendees');
 
@@ -52,8 +53,22 @@ const PricingPage: NextPage = () => {
 
 			<Column className="flex flex-col items-center">
 				<div className="mb-4 space-x-4">
-					<Button>Standard</Button>
-					<Button>Nonprofit/Education</Button>
+					<Button
+						variant={isEducation ? 'default' : 'primary'}
+						onClick={() => {
+							setIsEducation(false);
+						}}
+					>
+						Standard
+					</Button>
+					<Button
+						variant={isEducation ? 'primary' : 'default'}
+						onClick={() => {
+							setIsEducation(true);
+						}}
+					>
+						Nonprofit/Education
+					</Button>
 				</div>
 
 				<div className="bg-white border-gray-300 border rounded shadow-sm p-5 flex flex-col justify-between items-center space-y-4 max-w-[450px] min-h-[350px] my-3">
@@ -64,20 +79,35 @@ const PricingPage: NextPage = () => {
 						>
 							Evental
 						</strong>
-						<span className="bg-primary text-white px-2 py-1 font-medium text-xs rounded">PRO</span>
+						<span className="bg-primary text-white px-2 py-1 font-medium text-xs rounded">
+							{isEducation ? 'EDU' : 'PRO'}
+						</span>
 					</div>
 
 					<p className="text-gray-700">
-						The pro plan allows event organizers to create unlimited roles, sessions, venues, and
-						pages. It also allows you to invite additional organizers to help you manage your event.
+						The {isEducation ? 'education/non-profit' : 'pro'} plan allows event organizers to
+						create unlimited roles, sessions, venues, and pages. It also allows you to invite
+						additional organizers to help you manage your event.
 					</p>
 
 					<div>
 						<p className="font-bold text-2xl md:text-3xl text-center">
 							<span className="align-text-top text-lg text-gray-700 mr-0.5">$</span>
-							{proAttendeePricing[attendees].price}
+							{isEducation
+								? eduAttendeePricing[attendees].price
+								: proAttendeePricing[attendees].price}
 						</p>
-						<p className="text-gray-600 text-sm text-center">Includes {attendees} attendees</p>
+						<p className="text-gray-600 text-sm text-center">
+							Includes {attendees} attendees (
+							{isEducation
+								? eduAttendeePricing[attendees].perAttendeePrice < 1
+									? `${Math.ceil(eduAttendeePricing[attendees].perAttendeePrice * 100)}¢`
+									: `$${eduAttendeePricing[attendees].perAttendeePrice.toFixed(2)}`
+								: proAttendeePricing[attendees].perAttendeePrice < 1
+								? `${Math.ceil(proAttendeePricing[attendees].perAttendeePrice * 100)}¢`
+								: `$${proAttendeePricing[attendees].perAttendeePrice.toFixed(2)}`}
+							/per)
+						</p>
 					</div>
 
 					<Link href="/events/create">
