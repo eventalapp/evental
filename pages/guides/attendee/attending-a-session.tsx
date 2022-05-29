@@ -12,16 +12,16 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import Tooltip from '../../../components/radix/components/Tooltip';
 
-const AttendingAnEventGuidePage: NextPage = () => {
+const AttendingASessionGuidePage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
-				title="Attending an event — Evental"
-				description={`Learn how to get started as an attendee or a speaker.`}
+				title="Attending a session — Evental"
+				description={`Learn how to attend a session on evental.`}
 				openGraph={{
-					url: 'https://evental.app/guides/attendees/attending-an-event',
-					title: 'Attending an event — Evental',
-					description: `Learn how to get started as an attendee or a speaker.`,
+					url: 'https://evental.app/guides/attendee/attending-a-session',
+					title: 'Attending a session — Evental',
+					description: `Learn how to attend a session on evental.`,
 					images: [
 						{
 							url: 'https://cdn.evental.app/images/logo.jpg',
@@ -37,10 +37,8 @@ const AttendingAnEventGuidePage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Attending an event</h1>
-					<p className="text-gray-100 text-md mt-4">
-						Learn how to get started as an attendee or a speaker.
-					</p>
+					<h1 className="text-2xl md:text-3xl font-bold">Attending a session</h1>
+					<p className="text-gray-100 text-md mt-4">Learn how to attend a session on evental.</p>
 				</Column>
 			</div>
 
@@ -48,26 +46,26 @@ const AttendingAnEventGuidePage: NextPage = () => {
 				<h3 className="font-bold text-xl mb-2">Table of contents</h3>
 				<ul className="list-disc pl-5 space-y-0.5 text-gray-700">
 					<li>
-						<Link href="/guides/attendees/attending-an-event#create-an-account">
-							<a>Create an account</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/guides/attendees/attending-an-event#find-your-event">
+						<Link href="/guides/attendee/attending-a-session#find-an-event">
 							<a>Find an event</a>
 						</Link>
 					</li>
 					<li>
-						<Link href="/guides/attendees/attending-an-event#registering-for-an-event">
-							<a>Register for an event</a>
+						<Link href="/guides/attendee/attending-a-session#find-your-event">
+							<a>Find a session</a>
+						</Link>
+					</li>
+					<li>
+						<Link href="/guides/attendee/attending-a-session#register-for-a-session">
+							<a>Register for a session</a>
 						</Link>
 					</li>
 				</ul>
 
-				<div id="create-an-account" className="my-7">
-					<Link href="/guides/attendees/attending-an-event#create-an-account">
+				<div id="find-an-event" className="my-7">
+					<Link href="/guides/attendee/attending-a-session#find-an-event">
 						<a className="text-xl font-bold mb-2 block">
-							Create an account{' '}
+							Find an event{' '}
 							<Tooltip side={'top'} message={`Copy link to clipboard`}>
 								<span
 									className="text-primary font-bold cursor-pointer ml-1.5"
@@ -76,7 +74,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 											.writeText(
 												`${
 													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/attendees/attending-an-event#create-an-account`
+												}/guides/attendee/attending-a-session#find-an-event`
 											)
 											.then(() => {
 												toast.success('Link successfully copied to clipboard.');
@@ -90,54 +88,9 @@ const AttendingAnEventGuidePage: NextPage = () => {
 					</Link>
 
 					<p className="text-gray-700 mb-4">
-						Before registering for an event, you will need to{' '}
-						<Link href="/auth/signup">
-							<a className="underline text-gray-900">create an account</a>
-						</Link>
-						.
-					</p>
-
-					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1666 / 656}>
-							<Image
-								alt="Signup for evental"
-								src={'https://cdn.evental.app/images/evental-signup.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
-
-				<div id="find-your-event" className="my-7">
-					<Link href="/guides/attendees/attending-an-event#find-your-event">
-						<a className="text-xl font-bold mb-2 block">
-							Find your event{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/attendees/attending-an-event#find-your-event`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
-
-					<p className="text-gray-700 mb-4">
-						Reach out to the event organizer or find an event to attend at the{' '}
-						<Link href="/events">
-							<a className="underline text-gray-900">upcoming events page</a>
+						Before registering for a session, you will need to{' '}
+						<Link href="/guides/attendee/attending-an-event">
+							<a className="underline text-gray-900">find & register for an event</a>
 						</Link>
 						.
 					</p>
@@ -154,10 +107,10 @@ const AttendingAnEventGuidePage: NextPage = () => {
 					</div>
 				</div>
 
-				<div id="registering-for-an-event" className="my-7">
-					<Link href="/guides/attendees/attending-an-event#registering-for-an-event">
+				<div id="find-a-session" className="my-7">
+					<Link href="/guides/attendee/attending-a-session#find-a-session">
 						<a className="text-xl font-bold mb-2 block">
-							Registering for an event{' '}
+							Find a session{' '}
 							<Tooltip side={'top'} message={`Copy link to clipboard`}>
 								<span
 									className="text-primary font-bold cursor-pointer ml-1.5"
@@ -166,7 +119,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 											.writeText(
 												`${
 													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/attendees/attending-an-event#registering-for-an-event`
+												}/guides/attendee/attending-a-session#find-a-session`
 											)
 											.then(() => {
 												toast.success('Link successfully copied to clipboard.');
@@ -180,15 +133,14 @@ const AttendingAnEventGuidePage: NextPage = () => {
 					</Link>
 
 					<p className="text-gray-700 mb-4">
-						Once you have found an event, you can attend it by clicking the{' '}
-						<span className="font-medium">"Registering here" button</span>
+						After registering for the event, you can find a session on the events sessions page.
 					</p>
 
 					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1613 / 651}>
+						<AspectRatio.Root ratio={1602 / 753}>
 							<Image
-								alt="Attend this event"
-								src={'https://cdn.evental.app/images/attend-this-event.png'}
+								alt="Find a session"
+								src={'https://cdn.evental.app/images/find-a-session.png'}
 								className="rounded-md"
 								layout="fill"
 							/>
@@ -196,14 +148,62 @@ const AttendingAnEventGuidePage: NextPage = () => {
 					</div>
 				</div>
 
-				<div id="attending-a-session" className="my-7">
+				<div id="register-for-a-session" className="my-7">
+					<Link href="/guides/attendee/attending-a-session#register-for-a-session">
+						<a className="text-xl font-bold mb-2 block">
+							Registering for a session{' '}
+							<Tooltip side={'top'} message={`Copy link to clipboard`}>
+								<span
+									className="text-primary font-bold cursor-pointer ml-1.5"
+									onClick={() => {
+										navigator.clipboard
+											.writeText(
+												`${
+													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+												}/guides/attendee/attending-a-session#register-for-a-session`
+											)
+											.then(() => {
+												toast.success('Link successfully copied to clipboard.');
+											});
+									}}
+								>
+									#
+								</span>
+							</Tooltip>
+						</a>
+					</Link>
+
 					<p className="text-gray-700 mb-4">
-						After registering for the event{' '}
-						<Link href="/guides/attendees/attending-a-session">
-							<a className="underline text-gray-900">attend a session</a>
-						</Link>
-						.
+						Once you have found a session, you can attend it by hovering on the session you want to
+						attend, and clicking the <span className="font-medium">"Register"</span> button.
 					</p>
+
+					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
+						<AspectRatio.Root ratio={1594 / 730}>
+							<Image
+								alt="Attend this event"
+								src={'https://cdn.evental.app/images/register-for-a-session1.png'}
+								className="rounded-md"
+								layout="fill"
+							/>
+						</AspectRatio.Root>
+					</div>
+
+					<p className="text-gray-700 my-4">
+						Or you can click on the session you want to attend, and select the{' '}
+						<span className="font-medium">"Attend this session"</span> button.
+					</p>
+
+					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
+						<AspectRatio.Root ratio={1599 / 537}>
+							<Image
+								alt="Attend this event"
+								src={'https://cdn.evental.app/images/register-for-a-session2.png'}
+								className="rounded-md"
+								layout="fill"
+							/>
+						</AspectRatio.Root>
+					</div>
 				</div>
 			</Column>
 
@@ -212,4 +212,4 @@ const AttendingAnEventGuidePage: NextPage = () => {
 	);
 };
 
-export default AttendingAnEventGuidePage;
+export default AttendingASessionGuidePage;
