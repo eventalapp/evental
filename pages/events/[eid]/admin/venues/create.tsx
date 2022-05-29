@@ -21,7 +21,7 @@ const CreateSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
-	const { createVenueMutation } = useCreateVenueMutation(String(eid));
+	const { createVenueMutation } = useCreateVenueMutation(String(eid), { redirect: true });
 	const { user, isUserLoading } = useUser();
 	const { event, isEventLoading } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
