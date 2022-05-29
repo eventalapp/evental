@@ -1,4 +1,4 @@
-import { faBars, faFile } from '@fortawesome/free-solid-svg-icons';
+import { faFile } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
@@ -98,19 +98,19 @@ const GuidesPage: NextPage = () => {
 											size="1x"
 											icon={faFile}
 										/>
-										Viewing/Downloading your schedule
+										Viewing & Downloading your schedule
 									</a>
 								</Link>
 							</li>
 							<li>
-								<Link href="/guides/attendee/editing-your-profile">
+								<Link href="/guides/user/creating-an-account">
 									<a>
 										<FontAwesomeIcon
 											className="cursor-pointer pr-2 text-primary-400"
 											size="1x"
 											icon={faFile}
 										/>
-										Customizing your profile
+										Creating & Customizing your profile
 									</a>
 								</Link>
 							</li>
