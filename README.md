@@ -1,18 +1,12 @@
 # Evental
 
-## Todo for MVP:
-- marketing pages
-- contact page
-
 ## low importance
 - featured role members
-- adjust pricing (add education?)
 - leave session, event, etc
 - send email to all event attendees
 - event banner
 - Excel export for event data
 - print your schedule
-- custom icons
 - customize react toast
 - refactor navigations
 - refactor buttons
