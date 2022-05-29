@@ -117,7 +117,7 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 						<FullscreenLinkItem
 							index={3}
 							link={`/guides`}
-							label={'guides'}
+							label={'Guides'}
 							onClick={() => {
 								setIsOpen(false);
 							}}
