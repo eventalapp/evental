@@ -15,7 +15,7 @@ export const GuideSectionHeader: Props = (props) => {
 
 	return (
 		<Link href={url}>
-			<a className="text-xl font-bold mb-2 block" {...rest}>
+			<a className="text-xl font-bold block leading-none" {...rest}>
 				{text} <CopyToClipboard link={url} />
 			</a>
 		</Link>
