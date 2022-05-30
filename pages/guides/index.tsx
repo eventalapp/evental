@@ -121,7 +121,7 @@ const GuidesPage: NextPage = () => {
 							team by booking a call or demo below, or email us at{' '}
 							<a
 								href="mailto:sales@evental.app"
-								className="underline"
+								className="underline text-gray-900"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -137,6 +137,52 @@ const GuidesPage: NextPage = () => {
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Sessions</span>
 						<p className="text-gray-600 text-sm">
 							Checkout the following guides for organizing sessions below, if you are still in need
+							help, reach out to us at{' '}
+							<a
+								href="mailto:support@evental.app"
+								className="underline text-gray-900"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								support@evental.app
+							</a>{' '}
+							or by fill out a{' '}
+							<Link href="/support">
+								<a className="underline text-gray-900">support ticket</a>
+							</Link>
+							.
+						</p>
+						<ul className="pt-4 space-y-0.5">
+							<li>
+								<Link href="/guides/session/creating-a-session">
+									<a>
+										<FontAwesomeIcon
+											className="cursor-pointer pr-2 text-primary-400"
+											size="1x"
+											icon={faFile}
+										/>
+										Creating a session
+									</a>
+								</Link>
+							</li>
+							<li>
+								<Link href="/guides/session/creating-a-session-type">
+									<a>
+										<FontAwesomeIcon
+											className="cursor-pointer pr-2 text-primary-400"
+											size="1x"
+											icon={faFile}
+										/>
+										Creating a session type
+									</a>
+								</Link>
+							</li>
+						</ul>
+					</div>
+					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Organizers</span>
+						<p className="text-gray-600 text-sm">
+							Checkout the following guides for inviting organizers below, if you are still in need
 							help, reach out to us at{' '}
 							<a
 								href="mailto:support@evental.app"
