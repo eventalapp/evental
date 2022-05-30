@@ -28,6 +28,7 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import AttachPeopleDialog from '../radix/components/AttachPeopleDialog';
+import CreateTypeDialog from '../radix/components/CreateTypeDialog';
 import CreateVenueDialog from '../radix/components/CreateVenueDialog';
 import Select from '../radix/components/Select';
 import Tooltip from '../radix/components/Tooltip';
@@ -223,9 +224,11 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 								/>
 							)}
 						/>
-						<Link href={`/events/${eid}/admin/sessions/types/create`}>
-							<a className="text-gray-600 text-sm mt-1">Dont see your type? Create a Type</a>
-						</Link>
+						<CreateTypeDialog eid={String(eid)}>
+							<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+								Dont see your type? Create a Type
+							</span>
+						</CreateTypeDialog>
 
 						{errors.typeId?.message && <ErrorMessage>{errors.typeId?.message}</ErrorMessage>}
 					</div>
