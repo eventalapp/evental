@@ -15,13 +15,13 @@ export interface UseCreateVenueMutationData {
 	>;
 }
 
-interface UseCreateSessionOptions {
+interface UseCreateVenueOptions {
 	redirect?: boolean;
 }
 
 export const useCreateVenueMutation = (
 	eid: string,
-	args: UseCreateSessionOptions = {}
+	args: UseCreateVenueOptions = {}
 ): UseCreateVenueMutationData => {
 	const { redirect = true } = args;
 
