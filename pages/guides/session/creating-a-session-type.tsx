@@ -150,7 +150,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 				<div id="create-a-type" className="my-7">
 					<Link href="/guides/session/creating-a-session-type#create-a-type">
 						<a className="text-xl font-bold mb-2 block">
-							Create a type{' '}
+							Create a session type{' '}
 							<Tooltip side={'top'} message={`Copy link to clipboard`}>
 								<span
 									className="text-primary font-bold cursor-pointer ml-1.5"
