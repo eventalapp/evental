@@ -1,21 +1,17 @@
-import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react';
-import { toast } from 'react-toastify';
 
 import { Footer } from '../../../components/Footer';
+import { AspectImage } from '../../../components/guides/AspectImage';
+import { GuideSection } from '../../../components/guides/GuideSection';
+import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
+import { TableOfContents } from '../../../components/guides/TableOfContents';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
-import Tooltip from '../../../components/radix/components/Tooltip';
-import { useUser } from '../../../hooks/queries/useUser';
 
 const CreatingASessionGuidePage: NextPage = () => {
-	const { user } = useUser();
-
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
@@ -48,133 +44,70 @@ const CreatingASessionGuidePage: NextPage = () => {
 			</div>
 
 			<Column>
-				<h3 className="font-bold text-xl mb-2">Table of contents</h3>
-				<ul className="list-disc pl-5 space-y-0.5 text-gray-700">
-					<li>
-						<Link href="/guides/session/creating-a-session#navigate-to-the-dashboard">
-							<a>Navigate to the events dashboard</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/guides/session/creating-a-session#navigate-to-the-session-dashboard">
-							<a>Navigate to the session dashboard</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/guides/session/creating-a-session#create-a-session">
-							<a>Create a session</a>
-						</Link>
-					</li>
-				</ul>
+				<TableOfContents
+					items={[
+						{
+							text: 'Navigate to the events dashboard',
+							relativeLink: '/guides/session/creating-a-session-type#navigate-to-the-dashboard'
+						},
+						{
+							text: 'Navigate to the session dashboard',
+							relativeLink: '/guides/session/creating-a-session#navigate-to-the-session-dashboard'
+						},
+						{
+							text: 'Create a session',
+							relativeLink: '/guides/session/creating-a-session#create-a-session'
+						}
+					]}
+				/>
 
-				<div id="navigate-to-the-dashboard" className="my-7">
-					<Link href="/guides/session/creating-a-session#navigate-to-the-dashboard">
-						<a className="text-xl font-bold mb-2 block">
-							Navigate to the events dashboard{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/session/creating-a-session#navigate-to-the-dashboard`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="navigate-to-the-dashboard">
+					<GuideSectionHeader
+						text="Navigate to the events dashboard"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/session/creating-a-session#navigate-to-the-dashboard`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						To create a session, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
 
-					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1603 / 798}>
-							<Image
-								alt="Upcoming events page"
-								src={'https://cdn.evental.app/images/manage-this-event.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						ratio={1603 / 798}
+						imageUrl={'https://cdn.evental.app/images/manage-this-event.png'}
+						alt={'Manage this event'}
+					/>
+				</GuideSection>
 
-				<div id="navigate-to-the-session-dashboard" className="my-7">
-					<Link href="/guides/session/creating-a-session#navigate-to-the-session-dashboard">
-						<a className="text-xl font-bold mb-2 block">
-							Navigate to the session dashboard{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/session/creating-a-session#navigate-to-the-session-dashboard`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="navigate-to-the-session-dashboard">
+					<GuideSectionHeader
+						text="Navigate to the session dashboard"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/session/creating-a-session#navigate-to-the-session-dashboard`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Sessions"</span> page.
 					</p>
 
-					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1615 / 622}>
-							<Image
-								alt="Find a session"
-								src={'https://cdn.evental.app/images/session-dashboard.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						ratio={1615 / 622}
+						imageUrl={'https://cdn.evental.app/images/session-dashboard.png'}
+						alt={'Session dashboard'}
+					/>
+				</GuideSection>
 
-				<div id="create-a-session" className="my-7">
-					<Link href="/guides/session/creating-a-session#create-a-session">
-						<a className="text-xl font-bold mb-2 block">
-							Create a session{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/session/creating-a-session#create-a-session`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="create-a-session">
+					<GuideSectionHeader
+						text="Create a session"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/session/creating-a-session#create-a-session`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						After visiting the session dashboard page, click the{' '}
@@ -183,17 +116,23 @@ const CreatingASessionGuidePage: NextPage = () => {
 						create a session description including links, images, etc.
 					</p>
 
-					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1600 / 617}>
-							<Image
-								alt="Find a session"
-								src={'https://cdn.evental.app/images/create-a-session.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						ratio={1600 / 617}
+						imageUrl={'https://cdn.evental.app/images/create-a-session.png'}
+						alt={'Create a session'}
+					/>
+
+					<p className="text-gray-700 my-4">
+						Now that you are on the create a session form, fill out the form and click the{' '}
+						<span className="font-medium">"Create Session"</span> button.
+					</p>
+
+					<AspectImage
+						ratio={1598 / 904}
+						imageUrl={'https://cdn.evental.app/images/create-session-form.png'}
+						alt={'Create a session form'}
+					/>
+				</GuideSection>
 			</Column>
 
 			<Footer />
