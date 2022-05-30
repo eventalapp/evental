@@ -1,16 +1,17 @@
-import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { toast } from 'react-toastify';
 
 import { Footer } from '../../../components/Footer';
+import { AspectImage } from '../../../components/guides/AspectImage';
+import { GuideSection } from '../../../components/guides/GuideSection';
+import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
+import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
+import { TableOfContents } from '../../../components/guides/TableOfContents';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
-import Tooltip from '../../../components/radix/components/Tooltip';
 
 const AttendingAnEventGuidePage: NextPage = () => {
 	return (
@@ -45,49 +46,30 @@ const AttendingAnEventGuidePage: NextPage = () => {
 			</div>
 
 			<Column>
-				<h3 className="font-bold text-xl mb-2">Table of contents</h3>
-				<ul className="list-disc pl-5 space-y-0.5 text-gray-700">
-					<li>
-						<Link href="/guides/attendee/attending-an-event#create-an-account">
-							<a>Create an account</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/guides/attendee/attending-an-event#find-your-event">
-							<a>Find an event</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/guides/attendee/attending-an-event#registering-for-an-event">
-							<a>Register for an event</a>
-						</Link>
-					</li>
-				</ul>
+				<TableOfContents
+					items={[
+						{
+							text: 'Create an account',
+							relativeLink: '/guides/attendee/attending-an-event#create-an-account'
+						},
+						{
+							text: 'Find an event',
+							relativeLink: '/guides/attendee/attending-an-event#find-your-event'
+						},
+						{
+							text: 'Register for an event',
+							relativeLink: '/guides/attendee/attending-an-event#registering-for-an-event'
+						}
+					]}
+				/>
 
-				<div id="create-an-account" className="my-7">
-					<Link href="/guides/attendee/attending-an-event#create-an-account">
-						<a className="text-xl font-bold mb-2 block">
-							Create an account{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/attendee/attending-an-event#create-an-account`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="create-an-account">
+					<GuideSectionHeader
+						text="Create an account"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/attendee/attending-an-event#create-an-account`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						Before registering for an event, you will need to{' '}
@@ -102,42 +84,20 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						.
 					</p>
 
-					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1666 / 656}>
-							<Image
-								alt="Signup for evental"
-								src={'https://cdn.evental.app/images/evental-signup.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						ratio={1666 / 656}
+						imageUrl={'https://cdn.evental.app/images/evental-signup.png'}
+						alt={'Signup for evental'}
+					/>
+				</GuideSection>
 
-				<div id="find-your-event" className="my-7">
-					<Link href="/guides/attendee/attending-an-event#find-your-event">
-						<a className="text-xl font-bold mb-2 block">
-							Find your event{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/attendee/attending-an-event#find-your-event`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="find-your-event">
+					<GuideSectionHeader
+						text="Find your event"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/attendee/attending-an-event#find-your-event`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						Reach out to the event organizer or find an event to attend on the{' '}
@@ -147,61 +107,34 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						.
 					</p>
 
-					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1580 / 502}>
-							<Image
-								alt="Upcoming events page"
-								src={'https://cdn.evental.app/images/upcoming-events.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						ratio={1580 / 502}
+						imageUrl={'https://cdn.evental.app/images/upcoming-events.png'}
+						alt={'Attend this event'}
+					/>
+				</GuideSection>
 
-				<div id="registering-for-an-event" className="my-7">
-					<Link href="/guides/attendee/attending-an-event#registering-for-an-event">
-						<a className="text-xl font-bold mb-2 block">
-							Registering for an event{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/attendee/attending-an-event#registering-for-an-event`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="registering-for-an-event" className="my-7">
+					<GuideSectionHeader
+						text="Registering for an event"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/attendee/attending-an-event#registering-for-an-event`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						Once you have found an event, you can attend it by clicking the{' '}
 						<span className="font-medium">"Registering here"</span> button
 					</p>
 
-					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1613 / 651}>
-							<Image
-								alt="Attend this event"
-								src={'https://cdn.evental.app/images/attend-this-event.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						ratio={1613 / 651}
+						imageUrl={'https://cdn.evental.app/images/attend-this-event.png'}
+						alt={'Attend this event'}
+					/>
+				</GuideSection>
 
-				<div id="attending-a-session" className="my-7">
+				<GuideSection id="attending-a-session">
 					<p className="text-gray-700 mb-4">
 						After registering for the event, you can{' '}
 						<Link href="/guides/attendee/attending-a-session">
@@ -209,7 +142,11 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						</Link>
 						.
 					</p>
-				</div>
+				</GuideSection>
+
+				<GuideSection>
+					<StillNeedHelp />
+				</GuideSection>
 			</Column>
 
 			<Footer />

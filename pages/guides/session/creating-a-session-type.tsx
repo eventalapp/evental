@@ -6,6 +6,7 @@ import { Footer } from '../../../components/Footer';
 import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
+import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
 import { TableOfContents } from '../../../components/guides/TableOfContents';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
@@ -132,6 +133,10 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						imageUrl={'https://cdn.evental.app/images/create-type-form.png'}
 						alt={'Create a type form'}
 					/>
+				</GuideSection>
+
+				<GuideSection>
+					<StillNeedHelp />
 				</GuideSection>
 			</Column>
 

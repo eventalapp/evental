@@ -1,16 +1,17 @@
-import * as AspectRatio from '@radix-ui/react-aspect-ratio';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { toast } from 'react-toastify';
 
 import { Footer } from '../../../components/Footer';
+import { AspectImage } from '../../../components/guides/AspectImage';
+import { GuideSection } from '../../../components/guides/GuideSection';
+import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
+import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
+import { TableOfContents } from '../../../components/guides/TableOfContents';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
-import Tooltip from '../../../components/radix/components/Tooltip';
 
 const AttendingAnEventGuidePage: NextPage = () => {
 	return (
@@ -45,49 +46,30 @@ const AttendingAnEventGuidePage: NextPage = () => {
 			</div>
 
 			<Column>
-				<h3 className="font-bold text-xl mb-2">Table of contents</h3>
-				<ul className="list-disc pl-5 space-y-0.5 text-gray-700">
-					<li>
-						<Link href="/guides/user/creating-an-account#create-an-account">
-							<a>Create an account</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/guides/user/creating-an-account#verify-your-account">
-							<a>Verify your account</a>
-						</Link>
-					</li>
-					<li>
-						<Link href="/guides/user/creating-an-account#customize-your-profile">
-							<a>Customize your profile</a>
-						</Link>
-					</li>
-				</ul>
+				<TableOfContents
+					items={[
+						{
+							text: 'Create an account',
+							relativeLink: '/guides/user/creating-an-account#create-an-account'
+						},
+						{
+							text: 'Verify your account',
+							relativeLink: '/guides/user/creating-an-account#verify-your-account'
+						},
+						{
+							text: 'Customize your profile',
+							relativeLink: '/guides/user/creating-an-account#customize-your-profile'
+						}
+					]}
+				/>
 
-				<div id="create-an-account" className="my-7">
-					<Link href="/guides/user/creating-an-account#create-an-account">
-						<a className="text-xl font-bold mb-2 block">
-							Create an account{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/user/creating-an-account#create-an-account`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="create-an-account">
+					<GuideSectionHeader
+						text="Create an account"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/user/creating-an-account#create-an-account`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						Before registering for an event, you will need to{' '}
@@ -97,42 +79,20 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						.
 					</p>
 
-					<div className="w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={1666 / 656}>
-							<Image
-								alt="Signup for evental"
-								src={'https://cdn.evental.app/images/evental-signup.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						ratio={1666 / 656}
+						imageUrl={'https://cdn.evental.app/images/attend-this-event.png'}
+						alt={'Signup for evental'}
+					/>
+				</GuideSection>
 
-				<div id="verify-your-account" className="my-7">
-					<Link href="/guides/user/creating-an-account#verify-your-account">
-						<a className="text-xl font-bold mb-2 block">
-							Verify your account{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/user/creating-an-account#verify-your-account`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="verify-your-account">
+					<GuideSectionHeader
+						text="Verify your account"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/user/creating-an-account#verify-your-account`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						After creating an account, you will receive an email asking you to verify your account.
@@ -143,61 +103,36 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						.
 					</p>
 
-					<div className="lg:w-3/5 m-auto w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={855 / 482}>
-							<Image
-								alt="Upcoming events page"
-								src={'https://cdn.evental.app/images/verify-your-account.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						className={'lg:w-3/5 m-auto'}
+						ratio={855 / 482}
+						imageUrl={'https://cdn.evental.app/images/verify-your-account.png'}
+						alt={'Verify your account'}
+					/>
+				</GuideSection>
 
-				<div id="customize-your-profile" className="my-7">
-					<Link href="/guides/user/creating-an-account#customize-your-profile">
-						<a className="text-xl font-bold mb-2 block">
-							Customize your profile{' '}
-							<Tooltip side={'top'} message={`Copy link to clipboard`}>
-								<span
-									className="text-primary font-bold cursor-pointer ml-1.5"
-									onClick={() => {
-										navigator.clipboard
-											.writeText(
-												`${
-													process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-												}/guides/user/creating-an-account#customize-your-profile`
-											)
-											.then(() => {
-												toast.success('Link successfully copied to clipboard.');
-											});
-									}}
-								>
-									#
-								</span>
-							</Tooltip>
-						</a>
-					</Link>
+				<GuideSection id="customize-your-profile">
+					<GuideSectionHeader
+						text="Customize your profile"
+						url={`${
+							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+						}/guides/user/creating-an-account#customize-your-profile`}
+					/>
 
 					<p className="text-gray-700 mb-4">
 						After verifying your email, you can customize your profile to include your social
 						contacts and add more information about you.
 					</p>
 
-					<div className="lg:w-3/5 m-auto w-full relative border border-gray-200 shadow-sm rounded-md">
-						<AspectRatio.Root ratio={862 / 961}>
-							<Image
-								alt="Attend this event"
-								src={'https://cdn.evental.app/images/editing-your-profile.png'}
-								className="rounded-md"
-								layout="fill"
-							/>
-						</AspectRatio.Root>
-					</div>
-				</div>
+					<AspectImage
+						className={'lg:w-3/5 m-auto'}
+						ratio={862 / 961}
+						imageUrl={'https://cdn.evental.app/images/editing-your-profile.png'}
+						alt={'Editing your profile'}
+					/>
+				</GuideSection>
 
-				<div id="attending-a-session" className="my-7">
+				<GuideSection id="attending-a-session">
 					<p className="text-gray-700 mb-4">
 						After customizing your profile, you can{' '}
 						<Link href="/guides/attendee/attending-an-event">
@@ -205,7 +140,11 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						</Link>
 						.
 					</p>
-				</div>
+				</GuideSection>
+
+				<GuideSection>
+					<StillNeedHelp />
+				</GuideSection>
 			</Column>
 
 			<Footer />
