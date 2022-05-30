@@ -5,7 +5,6 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 import { Footer } from '../../components/Footer';
-import { LinkButton } from '../../components/form/LinkButton';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
@@ -117,7 +116,7 @@ const GuidesPage: NextPage = () => {
 					</div>
 					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
 						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Speakers</span>
-						<p className="text-gray-600 text-center">
+						<p className="text-gray-600 text-sm">
 							Considering using Evental? Not sure if Evental will meet your needs? Reach out to our
 							team by booking a call or demo below, or email us at{' '}
 							<a
@@ -129,11 +128,6 @@ const GuidesPage: NextPage = () => {
 								sales@evental.app
 							</a>
 						</p>
-						<div className="flex flex-col items-end mt-6">
-							<Link href="/demo">
-								<LinkButton>View All</LinkButton>
-							</Link>
-						</div>
 					</div>
 				</div>
 
