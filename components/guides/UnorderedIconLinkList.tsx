@@ -19,7 +19,7 @@ type Props = React.FC<
 	>
 >;
 
-export const UnorderedIconList: Props = (props) => {
+export const UnorderedIconLinkList: Props = (props) => {
 	const { children, items, ...rest } = props;
 
 	return (
