@@ -9,6 +9,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useCreateVenueMutation } from '../../../hooks/mutations/useCreateVenueMutation';
 import { CreateVenuePayload, CreateVenueSchema } from '../../../utils/schemas';
 import { LoadingInner } from '../../error/LoadingInner';
+import { Button } from '../../form/Button';
 import { StyledEditor } from '../../form/Editor';
 import { ErrorMessage } from '../../form/ErrorMessage';
 import { Input } from '../../form/Input';
@@ -111,7 +112,16 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
-						<div className="mt-4 flex justify-end">
+						<div className="mt-4 flex flex-row justify-end">
+							<Button
+								type="button"
+								variant="no-bg"
+								onClick={() => {
+									setIsOpen(false);
+								}}
+							>
+								Cancel
+							</Button>
 							<DialogPrimitive.Close
 								className={cx(
 									'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',
