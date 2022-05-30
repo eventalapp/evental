@@ -4,7 +4,6 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
-
 import { Footer } from '../../components/Footer';
 import { LinkButton } from '../../components/form/LinkButton';
 import Column from '../../components/layout/Column';
@@ -159,6 +158,32 @@ const GuidesPage: NextPage = () => {
 							</Link>
 							.
 						</p>
+						<ul className="pt-4 space-y-0.5">
+							<li>
+								<Link href="/guides/session/creating-a-session">
+									<a>
+										<FontAwesomeIcon
+											className="cursor-pointer pr-2 text-primary-400"
+											size="1x"
+											icon={faFile}
+										/>
+										Creating a session
+									</a>
+								</Link>
+							</li>
+							<li>
+								<Link href="/guides/session/creating-a-session-type">
+									<a>
+										<FontAwesomeIcon
+											className="cursor-pointer pr-2 text-primary-400"
+											size="1x"
+											icon={faFile}
+										/>
+										Creating a session type
+									</a>
+								</Link>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</Column>
