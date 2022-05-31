@@ -81,10 +81,11 @@ const CreateTypeDialog: React.FC<Props> = (props) => {
 						)}
 					>
 						<DialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
-							Create a Venue
+							Create a Type
 						</DialogPrimitive.Title>
 						<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
-							Fill out and submit the form below to create a venue.
+							Fill out and submit the form below to create a session type to categorize your
+							sessions.
 						</DialogPrimitive.Description>
 
 						<div className="flex flex-row w-full mt-5 flex-wrap">
