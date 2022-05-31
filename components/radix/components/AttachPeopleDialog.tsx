@@ -69,14 +69,16 @@ const AttachPeopleDialog = (props: Props) => {
 								'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 							)}
 						>
-							<DialogPrimitive.Title className="text-sm font-medium text-gray-900 dark:text-gray-100">
+							<DialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
 								Attach People
 							</DialogPrimitive.Title>
 							<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
 								Search for users in the field below to attach them to this session.
 							</DialogPrimitive.Description>
+							<div className="border-b border-gray-300 my-3" />
+
 							<form
-								className="mt-2 space-y-2 mb-3"
+								className=" space-y-2 mb-3"
 								onSubmit={() => {
 									setIsOpen(false);
 								}}
