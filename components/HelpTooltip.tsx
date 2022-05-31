@@ -17,7 +17,7 @@ export const HelpTooltip: Props = (props) => {
 
 	return (
 		<Tooltip message={message} side={'top'}>
-			<div className={classNames('inline ml-1.5 cursor-help', className)} {...rest}>
+			<div className={classNames('inline ml-1.5 cursor-help text-gray-500', className)} {...rest}>
 				<FontAwesomeIcon fill="currentColor" className="w-3.5 h-3.5" icon={faCircleQuestion} />
 			</div>
 		</Tooltip>
