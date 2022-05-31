@@ -73,6 +73,7 @@ const CreateAttendeePage: NextPage = () => {
 					adminCreateAttendeeMutation={adminCreateAttendeeMutation}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

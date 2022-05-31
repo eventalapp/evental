@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../components/Footer';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
@@ -71,6 +72,8 @@ const OrganizerInvitePage: NextPage = () => {
 					</Button>
 				</div>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

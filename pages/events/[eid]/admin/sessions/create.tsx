@@ -83,6 +83,7 @@ const CreateSessionPage: NextPage = () => {
 					isEventLoading={isEventLoading}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

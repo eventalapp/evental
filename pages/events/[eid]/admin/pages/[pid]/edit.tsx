@@ -79,6 +79,7 @@ const EditPagePage: NextPage = () => {
 					pageError={pageError}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

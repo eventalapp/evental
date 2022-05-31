@@ -83,6 +83,7 @@ const ViewSessionTypePage: NextPage = () => {
 					admin
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

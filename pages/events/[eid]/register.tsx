@@ -6,6 +6,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../components/Footer';
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
@@ -92,9 +93,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 					]
 				}}
 			/>
-
 			<Navigation />
-
 			<Column variant="halfWidth">
 				<h1 className="text-2xl md:text-3xl font-bold">Register for {event.name}</h1>
 
@@ -109,6 +108,8 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 					createAttendeeMutation={createAttendeeMutation}
 				/>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

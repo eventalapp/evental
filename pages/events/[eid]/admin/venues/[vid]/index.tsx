@@ -124,6 +124,7 @@ const ViewVenuePage: NextPage = () => {
 
 				<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} admin />
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

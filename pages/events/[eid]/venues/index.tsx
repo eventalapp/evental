@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../components/Footer';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
@@ -142,6 +143,8 @@ const SessionsPage: NextPage<Props> = (props) => {
 					venuesError={venuesError}
 				/>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

@@ -85,6 +85,7 @@ const DeleteSessionTypePage: NextPage = () => {
 					deleteSessionTypeMutation={deleteSessionTypeMutation}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

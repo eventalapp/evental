@@ -86,6 +86,7 @@ const DeleteRolePage: NextPage = () => {
 					attendees={attendeesData}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

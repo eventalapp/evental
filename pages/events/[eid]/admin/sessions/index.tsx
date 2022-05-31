@@ -78,6 +78,7 @@ const SessionsAdminPage: NextPage = () => {
 					<SessionList admin eid={String(eid)} sessions={sessionsData} event={event} />
 				</div>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

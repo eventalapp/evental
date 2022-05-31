@@ -56,6 +56,7 @@ const CreateRolePage: NextPage = () => {
 
 				<CreateRoleForm eid={String(eid)} createRoleMutation={createRoleMutation} />
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

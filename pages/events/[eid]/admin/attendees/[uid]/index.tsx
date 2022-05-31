@@ -58,6 +58,7 @@ const ViewAttendeePage: NextPage = () => {
 			<Column>
 				<ViewAttendee admin attendee={attendee} eid={String(eid)} uid={String(uid)} />
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

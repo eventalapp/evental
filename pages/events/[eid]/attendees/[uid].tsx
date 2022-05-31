@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../components/Footer';
 import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
@@ -118,6 +119,8 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<Column>
 				<ViewAttendee attendee={attendee} eid={String(eid)} uid={String(uid)} />
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

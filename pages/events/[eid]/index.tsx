@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../components/Footer';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
@@ -237,6 +238,8 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					</div>
 				</div>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

@@ -75,6 +75,7 @@ const VenuesAdminPage: NextPage = () => {
 					/>
 				</div>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);

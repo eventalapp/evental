@@ -83,6 +83,7 @@ const EditRolePage: NextPage = () => {
 					attendees={attendeesData}
 				/>
 			</Column>
+
 			<Footer />
 		</PageWrapper>
 	);
