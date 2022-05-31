@@ -129,7 +129,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="website">
-							Website *<HelpTooltip message={copy.eventWebsiteTooltip} />
+							Website *<HelpTooltip message={copy.tooltip.eventWebsite} />
 						</Label>
 						<Input placeholder="https://website.com" {...register('website')} />
 						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
@@ -190,7 +190,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
 					<Label htmlFor="slug">
-						Time Zone *<HelpTooltip message={copy.eventTimeZoneTooltip} />
+						Time Zone *<HelpTooltip message={copy.tooltip.eventTimeZone} />
 					</Label>
 
 					<Controller
@@ -212,7 +212,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				</div>
 				<div>
 					<Label htmlFor="privacy">
-						Privacy *<HelpTooltip message={copy.eventPrivacyTooltip} />
+						Privacy *<HelpTooltip message={copy.tooltip.eventPrivacy} />
 					</Label>
 					{PrivacyLevel && (
 						<div>
@@ -260,7 +260,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				<div>
 					<div>
 						<Label htmlFor="slug">
-							Slug *<HelpTooltip message={copy.eventSlugTooltip} />
+							Slug *<HelpTooltip message={copy.tooltip.eventSlug} />
 						</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-sm md:text-base">evental.app/events/</span>
@@ -276,7 +276,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="category">
 							Category
-							<HelpTooltip message={copy.eventCategoryTooltip} />
+							<HelpTooltip message={copy.tooltip.eventCategory} />
 						</Label>
 						{EventCategory && (
 							<div>
@@ -302,7 +302,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					</div>
 					<div>
 						<Label htmlFor="type">
-							Type *<HelpTooltip message={copy.eventTypeTooltip} />
+							Type *<HelpTooltip message={copy.tooltip.eventType} />
 						</Label>
 						{EventType && (
 							<div>

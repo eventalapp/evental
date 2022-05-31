@@ -102,7 +102,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					<div>
 						<Label htmlFor="venueId">
 							Venue
-							<HelpTooltip message={copy.venueTooltip} />
+							<HelpTooltip message={copy.tooltip.venue} />
 						</Label>
 
 						<Controller
@@ -138,7 +138,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					<div>
 						<Label htmlFor="typeId">
 							Type
-							<HelpTooltip message={copy.typeTooltip} />
+							<HelpTooltip message={copy.tooltip.type} />
 						</Label>
 
 						<Controller
@@ -172,7 +172,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 					<div>
 						<Label htmlFor="name">
 							Max Attendees *
-							<HelpTooltip message={copy.maxAttendeesTooltip} />
+							<HelpTooltip message={copy.tooltip.maxAttendees} />
 						</Label>
 						<Input
 							placeholder="No Limit"

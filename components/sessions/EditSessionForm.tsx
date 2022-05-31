@@ -117,7 +117,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 
 					<div>
 						<Label htmlFor="venueId">
-							Venue *<HelpTooltip message={copy.venueTooltip} />
+							Venue *<HelpTooltip message={copy.tooltip.venue} />
 						</Label>
 
 						<Controller
@@ -152,7 +152,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 				<div className="mb-5">
 					<div>
 						<Label htmlFor="venueId">
-							Attach People *<HelpTooltip message={copy.attachPeopleTooltip} />
+							Attach People *<HelpTooltip message={copy.tooltip.attachPeople} />
 						</Label>
 
 						<AttachPeopleDialog eid={String(eid)} sid={String(sid)} />
@@ -209,7 +209,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
 						<Label htmlFor="venueId">
-							Type *<HelpTooltip message={copy.typeTooltip} />
+							Type *<HelpTooltip message={copy.tooltip.type} />
 						</Label>
 
 						<Controller
@@ -243,7 +243,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 					<div>
 						<Label htmlFor="name">
 							Max Attendees *
-							<HelpTooltip message={copy.maxAttendeesTooltip} />
+							<HelpTooltip message={copy.tooltip.maxAttendees} />
 						</Label>
 						<Input
 							placeholder="No Limit"

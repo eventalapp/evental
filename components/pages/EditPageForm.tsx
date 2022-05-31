@@ -59,7 +59,7 @@ export const EditPageForm: React.FC<Props> = (props) => {
 				<div className="flex-initial ml-5">
 					<Label htmlFor="topLevel">
 						Top Level Page
-						<HelpTooltip message={copy.topLevelTooltip} />
+						<HelpTooltip message={copy.tooltip.topLevel} />
 					</Label>
 					<Controller
 						control={control}
