@@ -10,10 +10,11 @@ import { toast } from 'react-toastify';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
-import { timeZoneOptions } from '../../utils/const';
+import { copy, timeZoneOptions } from '../../utils/const';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { DatePicker } from '../form/DatePicker';
@@ -127,7 +128,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="website">Website *</Label>
+						<Label htmlFor="website">
+							Website *<HelpTooltip message={copy.eventWebsiteTooltip} />
+						</Label>
 						<Input placeholder="https://website.com" {...register('website')} />
 						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 					</div>
@@ -186,7 +189,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
-					<Label htmlFor="slug">Time Zone *</Label>
+					<Label htmlFor="slug">
+						Time Zone *<HelpTooltip message={copy.eventTimeZoneTooltip} />
+					</Label>
 
 					<Controller
 						control={control}
@@ -206,7 +211,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					{errors.timeZone?.message && <ErrorMessage>{errors.timeZone?.message}</ErrorMessage>}
 				</div>
 				<div>
-					<Label htmlFor="privacy">Privacy *</Label>
+					<Label htmlFor="privacy">
+						Privacy *<HelpTooltip message={copy.eventPrivacyTooltip} />
+					</Label>
 					{PrivacyLevel && (
 						<div>
 							<Controller
@@ -252,7 +259,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 				<div>
 					<div>
-						<Label htmlFor="slug">Slug *</Label>
+						<Label htmlFor="slug">
+							Slug *<HelpTooltip message={copy.eventSlugTooltip} />
+						</Label>
 						<div className="flex items-center">
 							<span className="mr-1 text-sm md:text-base">evental.app/events/</span>
 							<Input placeholder="event-slug" {...register('slug')} />
@@ -265,7 +274,10 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				</div>
 				<div className="grid grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="category">Category</Label>
+						<Label htmlFor="category">
+							Category
+							<HelpTooltip message={copy.eventCategoryTooltip} />
+						</Label>
 						{EventCategory && (
 							<div>
 								<Controller
@@ -289,7 +301,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						{errors.type?.message && <ErrorMessage>{errors.type?.message}</ErrorMessage>}
 					</div>
 					<div>
-						<Label htmlFor="type">Type *</Label>
+						<Label htmlFor="type">
+							Type *<HelpTooltip message={copy.eventTypeTooltip} />
+						</Label>
 						{EventType && (
 							<div>
 								<Controller
