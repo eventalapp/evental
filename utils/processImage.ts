@@ -46,7 +46,6 @@ export const processImage = async (
 interface ProcessAvatarOptions {
 	width: number;
 	height: number;
-	background: string;
 	toFormat: keyof FormatEnum;
 }
 
@@ -66,14 +65,13 @@ export const processAvatar = async (
 	options: ProcessAvatarOptions = {
 		height: 300,
 		width: 300,
-		background: '#e8e8e8',
 		toFormat: 'jpg'
 	}
 ) => {
-	const { height, width, background, toFormat } = options;
+	const { height, width, toFormat } = options;
 
 	return await sharp(input)
-		.flatten({ background })
+		.flatten()
 		.rotate()
 		.resize({
 			height,
