@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../../components/Footer';
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
@@ -94,6 +95,7 @@ const EditAttendeePage: NextPage = () => {
 					rolesError={rolesError}
 				/>
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };

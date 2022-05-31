@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../components/Footer';
 import { Loading } from '../../../../components/error/Loading';
 import { NoAccessPage } from '../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
@@ -69,6 +70,8 @@ const DeleteEventPage: NextPage = () => {
 					isEventLoading={isEventLoading}
 				/>
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../components/Footer';
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
@@ -84,6 +85,7 @@ const AttendeesAdminPage: NextPage = () => {
 					<AttendeeList admin eid={String(eid)} attendees={attendeesData} />
 				</div>
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };

@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../components/Footer';
 import { AdminCreateAttendeeForm } from '../../../../../components/attendees/AdminCreateAttendeeForm';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
@@ -72,6 +73,7 @@ const CreateAttendeePage: NextPage = () => {
 					adminCreateAttendeeMutation={adminCreateAttendeeMutation}
 				/>
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };

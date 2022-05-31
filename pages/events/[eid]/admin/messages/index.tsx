@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../components/Footer';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
@@ -55,6 +56,7 @@ const MessagePage: NextPage = () => {
 			<Column>
 				<h3 className="text-xl md:text-2xl font-medium">Messages</h3>
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };

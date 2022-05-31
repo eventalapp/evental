@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../components/Footer';
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
@@ -78,6 +79,7 @@ const EventOrganizersPage: NextPage = () => {
 
 				<AttendeeList attendees={organizers} eid={String(eid)} admin />
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };

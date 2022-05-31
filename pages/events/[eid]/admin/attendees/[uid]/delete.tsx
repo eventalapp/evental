@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { Footer } from '../../../../../../components/Footer';
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
@@ -81,6 +82,7 @@ const DeleteAttendeePage: NextPage = () => {
 					deleteAttendeeMutation={deleteAttendeeMutation}
 				/>
 			</Column>
+			<Footer />
 		</PageWrapper>
 	);
 };
