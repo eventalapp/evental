@@ -16,9 +16,10 @@ import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { UseSessionRoleAttendeesQueryData } from '../../hooks/queries/useSessionRoleAttendeesQuery';
 import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
-import { FIFTEEN_MINUTES } from '../../utils/const';
+import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { HelpTooltip } from '../HelpTooltip';
 import { TimeZoneNotice } from '../TimeZoneNotice';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
@@ -115,7 +116,9 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 					</div>
 
 					<div>
-						<Label htmlFor="venueId">Venue *</Label>
+						<Label htmlFor="venueId">
+							Venue *<HelpTooltip message={copy.venueTooltip} />
+						</Label>
 
 						<Controller
 							control={control}
@@ -148,7 +151,9 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 
 				<div className="mb-5">
 					<div>
-						<Label htmlFor="venueId">Attach People *</Label>
+						<Label htmlFor="venueId">
+							Attach People *<HelpTooltip message={copy.attachPeopleTooltip} />
+						</Label>
 
 						<AttachPeopleDialog eid={String(eid)} sid={String(sid)} />
 
@@ -203,7 +208,9 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
 					<div>
-						<Label htmlFor="venueId">Type *</Label>
+						<Label htmlFor="venueId">
+							Type *<HelpTooltip message={copy.typeTooltip} />
+						</Label>
 
 						<Controller
 							control={control}
@@ -234,7 +241,10 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 					</div>
 
 					<div>
-						<Label htmlFor="name">Max Attendees *</Label>
+						<Label htmlFor="name">
+							Max Attendees *
+							<HelpTooltip message={copy.maxAttendeesTooltip} />
+						</Label>
 						<Input
 							placeholder="No Limit"
 							type="number"
