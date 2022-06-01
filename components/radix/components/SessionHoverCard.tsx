@@ -16,10 +16,11 @@ import Button from './shared/Button';
 interface Props {
 	event: Prisma.Event;
 	session: SessionWithVenue;
+	admin?: boolean;
 }
 
 export const SessionHoverCard: React.FC<Props> = (props) => {
-	const { children, session, event } = props;
+	const { children, session, event, admin } = props;
 
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
 		event.slug,
@@ -99,7 +100,9 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 									className="block flex items-center justify-between flex-col h-full relative"
 								>
 									<Link
-										href={`/events/${event.slug}/admin/attendees/${roleMember.attendee.user.slug}`}
+										href={`/events/${event.slug}${admin ? '/admin' : ''}/attendees/${
+											roleMember.attendee.user.slug
+										}`}
 									>
 										<a className="flex items-center justify-start flex-col h-full">
 											<div className="h-10 w-10 relative mb-1 border-2 border-gray-100 rounded-full">
