@@ -10,6 +10,7 @@ import React from 'react';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { AddToCalendar } from '../AddToCalendar';
 import { AttendeeList } from '../attendees/AttendeeList';
@@ -211,15 +212,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 			)}
 
 			{roleAttendees &&
-				Object.entries(
-					roleAttendees.reduce((acc: Record<string, AttendeeWithUser[]>, attendee) => {
-						if (!acc[attendee.role.name]) {
-							acc[attendee.role.name] = [];
-						}
-						acc[attendee.role.name].push(attendee);
-						return acc;
-					}, {})
-				).map(([key, attendees]) => (
+				Object.entries(roleAttendees.reduce(sessionAttendeeReducer, {})).map(([key, attendees]) => (
 					<div key={key}>
 						<h3 className="text-2xl font-medium my-3">
 							{key}s <span className="text-gray-500 font-normal">({attendees?.length || 0})</span>
