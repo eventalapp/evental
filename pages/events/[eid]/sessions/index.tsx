@@ -137,7 +137,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<h3 className="text-xl md:text-2xl font-medium">
+				<h3 className="text-xl md:text-2xl font-medium mb-3">
 					Sessions <span className="font-normal text-gray-500">({sessionsData.length || 0})</span>
 				</h3>
 
