@@ -20,7 +20,6 @@ export const EventSettingsNavigation: React.FC<Props> = (props) => {
 		return (
 			<SettingsAuthenticated
 				event={event}
-				roles={roles}
 				signOutMutation={signOutMutation}
 				user={user}
 				isOpen={isOpen}

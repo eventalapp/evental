@@ -19,7 +19,6 @@ type Props = {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	user: PasswordlessUser | undefined;
 	event: Prisma.Event;
-	roles: Prisma.EventRole[];
 } & UseSignOutMutationData;
 
 const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
@@ -49,7 +48,7 @@ const LinkItem: React.FC<{ link: string; label: string }> = (props) => {
 };
 
 export const SettingsAuthenticated: React.FC<Props> = (props) => {
-	const { signOutMutation, setIsOpen, user, event, isOpen, roles } = props;
+	const { signOutMutation, setIsOpen, user, event, isOpen } = props;
 
 	return (
 		<div>

@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { SubmitDemoRequestPayload } from '../../utils/schemas';

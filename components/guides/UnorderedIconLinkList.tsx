@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React from 'react';
 
-import { TableOfContentsItem } from './TableOfContents';
-
 export type UnorderedIconListItem = {
 	text: string;
 	relativeLink: string;

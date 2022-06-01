@@ -26,7 +26,7 @@ const cors = Cors({
 });
 
 const handler = api({
-	async POST({ ctx, req }) {
+	async POST({ req }) {
 		const buf = await buffer(req);
 		const sig = req.headers['stripe-signature']!;
 

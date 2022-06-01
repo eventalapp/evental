@@ -10,7 +10,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 export default api({
-	async POST({ ctx, req }) {
+	async POST({ req }) {
 		const { amount, metadata }: { amount: number; metadata: Record<string, string> } = req.body;
 
 		if (!(amount >= MIN_AMOUNT && amount <= MAX_AMOUNT)) {

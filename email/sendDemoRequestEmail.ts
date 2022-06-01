@@ -1,11 +1,7 @@
 import { SESV2 } from 'aws-sdk';
 import { NextkitError } from 'nextkit';
 
-import {
-	SubmitDemoRequestPayload,
-	SubmitDemoRequestSchema,
-	SubmitSupportTicketPayload
-} from '../utils/schemas';
+import { SubmitDemoRequestPayload } from '../utils/schemas';
 import { sendEmail } from '../utils/sendEmail';
 
 type SupportTicketEmailArgs = {
