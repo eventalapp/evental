@@ -27,6 +27,8 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 		session.slug
 	);
 
+	const descriptionAsText = htmlToText(session.description ?? '');
+
 	return (
 		<HoverCardPrimitive.Root openDelay={150} closeDelay={150}>
 			<HoverCardPrimitive.Trigger asChild>{children}</HoverCardPrimitive.Trigger>
@@ -88,7 +90,8 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 
 					{session.description && (
 						<p className="mt-1 text-sm font-normal text-gray-700 dark:text-gray-400">
-							{htmlToText(session.description)}
+							{descriptionAsText.substring(0, 200)}
+							{descriptionAsText.length > 200 && '...'}
 						</p>
 					)}
 
