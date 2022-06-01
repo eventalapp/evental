@@ -77,7 +77,12 @@ export const SessionList: React.FC<Props> = (props) => {
 												<div className="w-full">
 													{sessions.map((session) => {
 														return (
-															<SessionHoverCard session={session} event={event} key={session.id}>
+															<SessionHoverCard
+																admin={admin}
+																session={session}
+																event={event}
+																key={session.id}
+															>
 																<div className="mr-2 mb-2 inline-block">
 																	<Link
 																		href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${
@@ -145,7 +150,12 @@ export const SessionList: React.FC<Props> = (props) => {
 									</span>
 									<div className="w-full">
 										{sessions.map((session) => (
-											<SessionHoverCard session={session} event={event} key={session.id}>
+											<SessionHoverCard
+												admin={admin}
+												session={session}
+												event={event}
+												key={session.id}
+											>
 												<div className="inline-block mr-2 mb-2">
 													<Link
 														href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${session.slug}`}
