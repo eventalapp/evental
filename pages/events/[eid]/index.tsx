@@ -174,7 +174,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						<SessionList sessions={sessionsData} eid={String(eid)} event={event} />
 					</div>
 					<div className="lg:col-span-3 col-span-12">
-						<div className="mb-4 max-w-[200px]">
+						<div className="mb-4 max-w-[160px]">
 							<SocialShare event={event} />
 						</div>
 
