@@ -55,9 +55,12 @@ const handler = api({
 			const { metadata } = event.data.object as Record<string, unknown>;
 			const { eventId, attendees, level } = metadata as Record<string, unknown>;
 
+			console.log(`Checkout session completed: ${eventId} ${attendees} ${level}`);
+
 			const eventFound = await getEvent(String(eventId));
 
 			if (!eventFound) {
+				console.error('Event not found');
 				throw new NextkitError(500, 'An error has occurred. Please email support@evental.app');
 			}
 
