@@ -134,6 +134,23 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						<Input placeholder="https://website.com" {...register('website')} />
 						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 					</div>
+
+					<div>
+						<Label htmlFor="maxAttendees">
+							Max Attendees *
+							<HelpTooltip
+								message={`Your events max attendee count is ${event.maxAttendees}. To increase this, please contact us.`}
+							/>
+						</Label>
+						<Input placeholder={event.maxAttendees} onChange={() => {}} value="" type="number" />
+						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
+						<p className="text-gray-600 text-sm mt-1">
+							Want to increase your max attendee count?{' '}
+							<Link href={`/contact`}>
+								<a className="text-primary font-medium">Contact Us</a>
+							</Link>
+						</p>
+					</div>
 				</div>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 mb-5 gap-5">
