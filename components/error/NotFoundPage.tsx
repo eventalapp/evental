@@ -13,7 +13,7 @@ export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> 
 	const { message = 'Not found.', renderLink = true } = props;
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Not Found</title>
 			</Head>

@@ -56,7 +56,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`Register for ${event.name} — Evental`}
 				description={`Fill out the form below to register for ${

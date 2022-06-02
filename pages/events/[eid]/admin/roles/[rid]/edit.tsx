@@ -64,7 +64,7 @@ const EditRolePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Edit Role</title>
 			</Head>

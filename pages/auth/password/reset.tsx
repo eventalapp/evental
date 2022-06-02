@@ -32,7 +32,7 @@ const ResetPasswordPage: NextPage = () => {
 
 	if (!code) {
 		return (
-			<PageWrapper variant="gray">
+			<PageWrapper>
 				<Head>
 					<title>Reset Password</title>
 				</Head>
@@ -60,7 +60,7 @@ const ResetPasswordPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Reset Password</title>
 			</Head>

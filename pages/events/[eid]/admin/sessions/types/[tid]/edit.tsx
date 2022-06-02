@@ -64,7 +64,7 @@ const EditSessionPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Edit Session</title>
 			</Head>

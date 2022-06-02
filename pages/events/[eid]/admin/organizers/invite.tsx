@@ -62,7 +62,7 @@ const EventOrganizersPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Invite Organizer</title>
 			</Head>

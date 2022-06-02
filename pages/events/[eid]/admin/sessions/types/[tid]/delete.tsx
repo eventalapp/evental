@@ -64,7 +64,7 @@ const DeleteSessionTypePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Delete SessionType</title>
 			</Head>

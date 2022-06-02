@@ -8,7 +8,7 @@ import { Navigation } from '../navigation';
 import NoAccess from './NoAccess';
 
 export const NoAccessPage = () => (
-	<PageWrapper variant="gray">
+	<PageWrapper>
 		<Head>
 			<title>No Access</title>
 		</Head>

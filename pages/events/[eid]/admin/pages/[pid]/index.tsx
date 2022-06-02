@@ -48,7 +48,7 @@ const ViewPagePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Viewing Page</title>
 			</Head>

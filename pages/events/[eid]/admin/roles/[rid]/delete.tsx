@@ -64,7 +64,7 @@ const DeleteRolePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Delete Role</title>
 			</Head>

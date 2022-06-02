@@ -52,7 +52,7 @@ const CreateAttendeePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Create Attendee</title>
 			</Head>

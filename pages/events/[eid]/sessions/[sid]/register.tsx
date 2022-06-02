@@ -100,7 +100,7 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`Register for ${session.name} — ${event.name}`}
 				description={`Register for the ${session.name} session at ${event.name}`}

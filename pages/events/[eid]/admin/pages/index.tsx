@@ -53,7 +53,7 @@ const PagesAdminPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Edit Pages</title>
 			</Head>

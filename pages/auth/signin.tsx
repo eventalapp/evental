@@ -42,7 +42,7 @@ const SignInPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title="Sign In — Evental"
 				description="Sign into your Evental account. Create, organize, or attend events with ease."

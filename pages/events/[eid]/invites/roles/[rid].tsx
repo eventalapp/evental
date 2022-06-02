@@ -49,7 +49,7 @@ const RoleInvitePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`Accept ${role.name} Invite`}
 				additionalLinkTags={[

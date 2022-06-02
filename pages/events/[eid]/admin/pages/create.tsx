@@ -44,7 +44,7 @@ const CreatePagePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Create Page</title>
 			</Head>

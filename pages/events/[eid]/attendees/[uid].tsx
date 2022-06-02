@@ -88,7 +88,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`${attendee.user.name} — ${event.name}`}
 				description={`View ${attendee.user.name} at ${event.name}.`}
