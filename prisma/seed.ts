@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
-import { fake } from '../utils/fake';
 import { SEED_USERS_TO_GENERATE } from '../config';
+import { fake } from '../utils/fake';
 
 const prisma = new PrismaClient();
 
@@ -80,13 +80,14 @@ export const seed = async () => {
 
 		await prisma.eventRole.createMany({
 			data: fakeData.fakeRoles.map((fakeRole) => {
-				const { slug, name, defaultRole } = fakeRole;
+				const { slug, name, defaultRole, id } = fakeRole;
 
 				return {
 					eventId: event.id,
 					slug,
 					name,
-					defaultRole
+					defaultRole,
+					id
 				};
 			}),
 			skipDuplicates: true

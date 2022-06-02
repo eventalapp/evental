@@ -1,8 +1,8 @@
 import { NextkitError } from 'nextkit';
-
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { getEvent } from './index';
+
 
 export default api({
 	async POST({ ctx, req }) {
@@ -44,7 +44,9 @@ export default api({
 			}
 		});
 
-		if (event.maxAttendees >= attendeeCount) {
+
+
+		if (attendeeCount >= event.maxAttendees) {
 			throw new NextkitError(
 				500,
 				'This event is at maximum capacity, the owner has been notified.'
