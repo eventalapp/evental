@@ -49,7 +49,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 
 	if (attendingEvents.length === 0) {
 		return (
-			<PageWrapper variant="white">
+			<PageWrapper>
 				<NextSeo
 					title="Attending Events — Evental"
 					description="View all of the events you are attending."
@@ -90,7 +90,7 @@ const AttendingEventsPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Attending Events — Evental"
 				description="View all of the events you are attending."

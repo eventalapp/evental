@@ -15,7 +15,7 @@ import { Navigation } from '../../../components/navigation';
 
 const AttendingASessionGuidePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Attending a session — Evental"
 				description={`Learn how to attend a session on evental.`}

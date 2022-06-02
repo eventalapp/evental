@@ -10,7 +10,7 @@ import { Navigation } from '../components/navigation';
 
 const DemoPage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Request Demo — Evental"
 				description={`Fill out the form below to submit a demo request.`}

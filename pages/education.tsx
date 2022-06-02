@@ -9,7 +9,7 @@ import { Navigation } from '../components/navigation';
 
 const PricingPage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Education — Evental"
 				description={`See why Evental is perfect for your next educational/academic event.`}

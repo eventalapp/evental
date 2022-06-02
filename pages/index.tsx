@@ -11,7 +11,7 @@ import { Navigation } from '../components/navigation';
 
 const HomePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Evental — Event management software from the future"
 				description="Event management software that's highly intuitive. Your attendees and organizers will love using Evental for your in-person, hybrid, and virtual events."

@@ -14,7 +14,7 @@ import { Navigation } from '../../../components/navigation';
 
 const CreatingASessionGuidePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Creating a session — Evental"
 				description={`Learn how to create a session for your event on Evental.`}

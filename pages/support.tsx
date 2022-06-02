@@ -10,7 +10,7 @@ import { Navigation } from '../components/navigation';
 
 const SupportPage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Support — Evental"
 				description={`Fill out the form below to submit a support ticket.`}

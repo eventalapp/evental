@@ -11,7 +11,7 @@ import { Navigation } from '../components/navigation';
 
 const ContactPage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Contact — Evental"
 				description="Contact our team for support. We are here to help you with any questions you may have."

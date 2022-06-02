@@ -18,7 +18,7 @@ const AttendingASessionGuidePage: NextPage = () => {
 	const { user } = useUser();
 
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Downloading your schedule — Evental"
 				description={`Learn how to view and download your schedule on evental.`}

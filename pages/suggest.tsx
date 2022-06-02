@@ -9,7 +9,7 @@ import { Navigation } from '../components/navigation';
 
 const SuggestPage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
+		<PageWrapper>
 			<NextSeo
 				title="Suggest a feature — Evental"
 				description="Suggest a feature that you would like to see implemented in evental.app"
