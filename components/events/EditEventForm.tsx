@@ -142,14 +142,23 @@ export const EditEventForm: React.FC<Props> = (props) => {
 								message={`Your events max attendee count is ${event.maxAttendees}. To increase this, please contact us.`}
 							/>
 						</Label>
-						<Input placeholder={event.maxAttendees} onChange={() => {}} value="" type="number" />
+						<Input onChange={() => {}} value={`${event.maxAttendees}`} type="number" />
 						{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
-						<p className="text-gray-600 text-sm mt-1">
-							Want to increase your max attendee count?{' '}
-							<Link href={`/contact`}>
-								<a className="text-primary font-medium">Contact Us</a>
-							</Link>
-						</p>
+						{event.level === 'TRIAL' ? (
+							<p className="text-gray-600 text-sm mt-1">
+								Want to increase your max attendee count?{' '}
+								<Link href={`/events/${event.slug}/admin/billing`}>
+									<a className="text-primary font-medium">Upgrade your plan</a>
+								</Link>
+							</p>
+						) : (
+							<p className="text-gray-600 text-sm mt-1">
+								Want to increase your max attendee count?{' '}
+								<Link href={`/contact`}>
+									<a className="text-primary font-medium">Contact Us</a>
+								</Link>
+							</p>
+						)}
 					</div>
 				</div>
 
