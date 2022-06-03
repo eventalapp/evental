@@ -28,11 +28,11 @@ const CreatingASessionGuidePage: NextPage = () => {
 		<PageWrapper variant="white">
 			<NextSeo
 				title="Inviting a speaker — Evental"
-				description={`Learn how to invite a speaker to your event on Evental.`}
+				description={`Learn how to invite a speaker or role member to your event on Evental.`}
 				openGraph={{
 					url: 'https://evental.app/guides/speaker/inviting-speakers',
 					title: 'Inviting a speaker — Evental',
-					description: `Learn how to invite a speaker to your event on Evental.`,
+					description: `Learn how to invite a speaker or role member to your event on Evental.`,
 					images: [
 						{
 							url: 'https://cdn.evental.app/images/logo.jpg',
@@ -50,7 +50,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 				<Column className="flex flex-col items-center">
 					<h1 className="text-2xl md:text-3xl font-bold">Inviting a speaker</h1>
 					<p className="text-gray-100 text-md mt-4">
-						Learn how to invite a speaker to your event on Evental.
+						Learn how to invite a speaker or role member to your event on Evental.
 					</p>
 				</Column>
 			</div>
@@ -86,8 +86,8 @@ const CreatingASessionGuidePage: NextPage = () => {
 					/>
 
 					<p className="text-gray-700 mb-4">
-						To create a session, navigate to the events admin dashboard by clicking the{' '}
-						<span className="font-medium">"manage this event"</span> button.
+						To invite a speaker or role member, navigate to the events admin dashboard by clicking
+						the <span className="font-medium">"manage this event"</span> button.
 					</p>
 
 					<AspectImage
@@ -132,7 +132,8 @@ const CreatingASessionGuidePage: NextPage = () => {
 					/>
 
 					<p className="text-gray-700 mb-4">
-						After visiting the roles dashboard page, select the role you wish to invite members to.
+						Select the <span className="font-medium">"Invite"</span> button, then enter the users
+						email and select invite.
 					</p>
 				</GuideSection>
 
