@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
-
 import { Footer } from '../../../components/Footer';
 import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
@@ -49,7 +48,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 					items={[
 						{
 							text: 'Navigate to the events dashboard',
-							relativeLink: '/guides/session/creating-a-session-type#navigate-to-the-dashboard'
+							relativeLink: '/guides/session/creating-a-session#navigate-to-the-dashboard'
 						},
 						{
 							text: 'Navigate to the session dashboard',
