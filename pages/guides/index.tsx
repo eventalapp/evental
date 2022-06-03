@@ -229,6 +229,30 @@ const GuidesPage: NextPage = () => {
 							]}
 						/>
 					</GuideCategoryCard>
+					<GuideCategoryCard>
+						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">Pages</span>
+						<p className="text-gray-600 text-sm">
+							Checkout the following organizer guides for pages below, if you are still in need
+							help, reach out to us at{' '}
+							<BlankLink href="mailto:support@evental.app" className="underline text-gray-900">
+								support@evental.app
+							</BlankLink>{' '}
+							or fill out a{' '}
+							<Link href="/support">
+								<a className="underline text-gray-900">support ticket</a>
+							</Link>
+							.
+						</p>
+
+						<UnorderedIconLinkList
+							items={[
+								{
+									text: 'Creating a page',
+									relativeLink: '/guides/page/creating-a-page'
+								}
+							]}
+						/>
+					</GuideCategoryCard>
 				</GuideCategoryCardWrapper>
 			</Column>
 
