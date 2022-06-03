@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
-
 import { BlankLink } from '../../components/BlankLink';
 import { Footer } from '../../components/Footer';
 import { GuideCategoryCard } from '../../components/guides/GuideCategoryCard';
@@ -91,6 +90,15 @@ const GuidesPage: NextPage = () => {
 								sales@evental.app
 							</BlankLink>
 						</p>
+
+						<UnorderedIconLinkList
+							items={[
+								{
+									text: 'Creating & Customizing your profile',
+									relativeLink: '/guides/user/creating-an-account'
+								}
+							]}
+						/>
 					</GuideCategoryCard>
 				</GuideCategoryCardWrapper>
 
@@ -144,6 +152,10 @@ const GuidesPage: NextPage = () => {
 								{
 									text: 'Inviting organizers',
 									relativeLink: '/guides/organizer/inviting-organizers'
+								},
+								{
+									text: 'Inviting speakers',
+									relativeLink: '/guides/speaker/inviting-speakers'
 								}
 							]}
 						/>
