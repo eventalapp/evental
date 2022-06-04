@@ -11,16 +11,27 @@ import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 
+type Section = {
+	anchor: string;
+	title: string;
+};
+
+const sections: Record<string, Section> = {
+	navigateDashboard: { anchor: 'navigate-to-the-dashboard', title: 'Navigate to the dashboard' },
+	navigateVenues: { anchor: 'navigate-to-the-venues-page', title: 'Navigate to the venues page' },
+	createVenue: { anchor: 'create-a-venue', title: 'Create a venue' }
+};
+
 const CreatingASessionGuidePage: NextPage = () => {
 	return (
-		<PageWrapper>
+		<PageWrapper variant="white">
 			<NextSeo
-				title="Creating a session — Evental"
-				description={`Learn how to create a session for your event on Evental.`}
+				title="Creating a venue — Evental"
+				description={`Learn how to create a venue for your event on Evental.`}
 				openGraph={{
-					url: 'https://evental.app/guides/session/creating-a-session',
-					title: 'Creating a session — Evental',
-					description: `Learn how to create a session for your event on Evental.`,
+					url: 'https://evental.app/guides/venue/creating-a-venue',
+					title: 'Creating a venue — Evental',
+					description: `Learn how to create a venue for your event on Evental.`,
 					images: [
 						{
 							url: 'https://cdn.evental.app/images/logo.jpg',
@@ -36,9 +47,9 @@ const CreatingASessionGuidePage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Creating a session</h1>
+					<h1 className="text-2xl md:text-3xl font-bold">Creating a venue</h1>
 					<p className="text-gray-100 text-md mt-4">
-						Learn how to create a session for your event on Evental.
+						Learn how to create a venue for your event on Evental.
 					</p>
 				</Column>
 			</div>
@@ -47,26 +58,26 @@ const CreatingASessionGuidePage: NextPage = () => {
 				<TableOfContents
 					items={[
 						{
-							text: 'Navigate to the events dashboard',
-							relativeLink: '/guides/session/creating-a-session#navigate-to-the-dashboard'
+							text: sections.navigateDashboard.title,
+							relativeLink: `/guides/venue/creating-a-venue#${sections.navigateDashboard.anchor}`
 						},
 						{
-							text: 'Navigate to the session dashboard',
-							relativeLink: '/guides/session/creating-a-session#navigate-to-the-session-dashboard'
+							text: sections.navigateVenues.title,
+							relativeLink: `/guides/venue/creating-a-venue#${sections.navigateVenues.anchor}`
 						},
 						{
-							text: 'Create a session',
-							relativeLink: '/guides/session/creating-a-session#create-a-session'
+							text: sections.createVenue.title,
+							relativeLink: `/guides/venue/creating-a-venue#${sections.createVenue.anchor}`
 						}
 					]}
 				/>
 
-				<GuideSection id="navigate-to-the-dashboard">
+				<GuideSection id={sections.navigateDashboard.anchor}>
 					<GuideSectionHeader
-						text="Navigate to the events dashboard"
+						text={sections.navigateDashboard.title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session#navigate-to-the-dashboard`}
+						}/guides/venue/creating-a-venue#${sections.navigateDashboard.anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
@@ -81,57 +92,37 @@ const CreatingASessionGuidePage: NextPage = () => {
 					/>
 				</GuideSection>
 
-				<GuideSection id="navigate-to-the-session-dashboard">
+				<GuideSection id={sections.navigateVenues.anchor}>
 					<GuideSectionHeader
-						text="Navigate to the session dashboard"
+						text={sections.navigateVenues.title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session#navigate-to-the-session-dashboard`}
+						}/guides/venue/creating-a-venue#${sections.navigateVenues.anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
 						After visiting the events dashboard, click the{' '}
-						<span className="font-medium">"Sessions"</span> page.
+						<span className="font-medium">"Venues"</span> link in the top navigation.
 					</p>
-
-					<AspectImage
-						ratio={1615 / 622}
-						imageUrl={'https://cdn.evental.app/images/session-dashboard.png'}
-						alt={'Session dashboard'}
-					/>
 				</GuideSection>
 
-				<GuideSection id="create-a-session">
+				<GuideSection id={sections.createVenue.anchor}>
 					<GuideSectionHeader
-						text="Create a session"
+						text={sections.createVenue.title}
 						url={`${
 							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session#create-a-session`}
+						}/guides/venue/creating-a-venue#${sections.createVenue.anchor}`}
 					/>
 
 					<p className="text-gray-700 mb-4">
-						After visiting the session dashboard page, click the{' '}
-						<span className="font-medium">"Create Session"</span> button. This will navigate you to
-						the create session page, where you can create venues, categories/types, attach speakers,
-						create a session description including links, images, etc.
+						After visiting the venues dashboard page, select the{' '}
+						<span className="font-medium">"Create"</span> button.
 					</p>
 
-					<AspectImage
-						ratio={1600 / 617}
-						imageUrl={'https://cdn.evental.app/images/create-a-session.png'}
-						alt={'Create a session'}
-					/>
-
-					<p className="text-gray-700 my-4">
-						Now that you are on the create a session form, fill out the form and click the{' '}
-						<span className="font-medium">"Create Session"</span> button.
+					<p className="text-gray-700 mb-4">
+						After selecting the "Create" button. You will be navigated to the create venue form.
+						Fill out the create venue form to create a venue.
 					</p>
-
-					<AspectImage
-						ratio={1598 / 904}
-						imageUrl={'https://cdn.evental.app/images/create-session-form.png'}
-						alt={'Create a session form'}
-					/>
 				</GuideSection>
 
 				<GuideSection>
