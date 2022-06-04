@@ -7,7 +7,7 @@ import { Navigation } from '../navigation';
 import { Loading } from './Loading';
 
 export const LoadingPage = () => (
-	<PageWrapper variant="gray">
+	<PageWrapper>
 		<Head>
 			<title>Loading</title>
 		</Head>

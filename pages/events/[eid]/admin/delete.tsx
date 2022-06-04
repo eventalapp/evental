@@ -49,7 +49,7 @@ const DeleteEventPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Delete Event</title>
 			</Head>

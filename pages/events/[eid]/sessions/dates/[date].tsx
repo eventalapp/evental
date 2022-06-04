@@ -90,7 +90,7 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`${dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')} — ${
 					event.name

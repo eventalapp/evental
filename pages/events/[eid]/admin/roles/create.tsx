@@ -44,7 +44,7 @@ const CreateRolePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Create Role</title>
 			</Head>

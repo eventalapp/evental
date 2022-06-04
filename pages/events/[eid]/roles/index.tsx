@@ -88,7 +88,7 @@ const RolesPage: NextPage<Props> = (props) => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<NextSeo
 				title={`Roles — ${event.name}`}
 				description={`View all of the roles at ${event.name}.`}

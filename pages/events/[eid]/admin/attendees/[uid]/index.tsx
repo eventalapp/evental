@@ -48,7 +48,7 @@ const ViewAttendeePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Viewing Attendee</title>
 			</Head>

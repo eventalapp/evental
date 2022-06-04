@@ -13,7 +13,7 @@ export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> 
 	const { message = 'Not found.', renderLink = true } = props;
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Not Found</title>
 			</Head>
@@ -22,7 +22,7 @@ export const NotFoundPage: React.FC<{ message?: string; renderLink?: boolean }> 
 
 			<Column variant="halfWidth" className="flex flex-col items-center justify-center">
 				<h1 className="text-2xl md:text-3xl font-bold">Not Found</h1>
-				<NotFound message={message} />
+				<NotFound message={message} className="my-3" />
 				{renderLink && (
 					<Link href="/events" passHref>
 						<LinkButton>Go to events</LinkButton>

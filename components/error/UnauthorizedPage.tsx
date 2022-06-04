@@ -8,7 +8,7 @@ import { Navigation } from '../navigation';
 import Unauthorized from './Unauthorized';
 
 export const UnauthorizedPage = () => (
-	<PageWrapper variant="gray">
+	<PageWrapper>
 		<Head>
 			<title>Unauthorized</title>
 		</Head>

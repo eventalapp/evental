@@ -31,7 +31,7 @@ const ClaimProfilePage: NextPage = () => {
 
 	if (!code) {
 		return (
-			<PageWrapper variant="gray">
+			<PageWrapper>
 				<Head>
 					<title>Claim Profile</title>
 				</Head>
@@ -57,7 +57,7 @@ const ClaimProfilePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Claim Profile</title>
 			</Head>

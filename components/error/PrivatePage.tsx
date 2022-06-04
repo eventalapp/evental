@@ -8,7 +8,7 @@ import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
 
 export const PrivatePage = () => (
-	<PageWrapper variant="gray">
+	<PageWrapper>
 		<Head>
 			<title>Private</title>
 		</Head>

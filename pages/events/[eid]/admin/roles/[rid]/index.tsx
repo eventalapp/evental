@@ -60,7 +60,7 @@ const ViewAttendeePage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Viewing Role</title>
 			</Head>

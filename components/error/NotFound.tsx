@@ -1,7 +1,8 @@
+import classNames from 'classnames';
 import React from 'react';
 
-export const NotFound: React.FC<{ message?: string }> = (props) => {
-	const { message = 'Not found.' } = props;
+export const NotFound: React.FC<{ message?: string; className?: string }> = (props) => {
+	const { message = 'Not found.', className } = props;
 
-	return <p className="my-3 text-gray-600">{message}</p>;
+	return <p className={classNames('text-gray-600', className)}>{message}</p>;
 };

@@ -49,7 +49,7 @@ const CreateSessionPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper variant="gray">
+		<PageWrapper>
 			<Head>
 				<title>Create Session Type</title>
 			</Head>
