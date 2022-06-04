@@ -1,5 +1,4 @@
 import { NextkitError } from 'nextkit';
-
 import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
 import {
@@ -19,6 +18,34 @@ export default api({
 		}
 
 		return eventAttendee;
+	},
+	async DELETE({ req }) {
+		const { eid, uid } = req.query;
+
+		const event = await getEvent(String(eid));
+
+		if (!event) {
+			throw new NextkitError(404, 'Event not found.');
+		}
+
+		const attendee = await getAttendee(event.id, String(uid));
+
+		if (!attendee) {
+			throw new NextkitError(404, 'Attendee not found.');
+		}
+
+		if (attendee.permissionRole === 'FOUNDER') {
+			throw new NextkitError(
+				500,
+				'You cannot leave the event as the founder. If you wish to delete the event. Please go to the event settings'
+			);
+		}
+
+		await prisma.eventAttendee.delete({
+			where: {
+				id: attendee.id
+			}
+		});
 	}
 });
 

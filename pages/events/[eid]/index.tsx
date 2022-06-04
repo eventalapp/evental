@@ -6,25 +6,24 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-import { Footer } from '../../../components/Footer';
-import { SocialShare } from '../../../components/SocialShare';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../components/events/EventHeader';
 import { EventNavigation } from '../../../components/events/navigation';
+import { Footer } from '../../../components/Footer';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { SessionList } from '../../../components/sessions/SessionList';
+import { SocialShare } from '../../../components/SocialShare';
 import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
 import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
-import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
+import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { useUser } from '../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
 import { ssrGetUser } from '../../../utils/api';
@@ -35,7 +34,7 @@ import { getAttendee } from '../../api/events/[eid]/attendees/[uid]';
 import { getIsOrganizer } from '../../api/events/[eid]/organizer';
 import { getPages } from '../../api/events/[eid]/pages';
 import { getRoles } from '../../api/events/[eid]/roles';
-import { SessionWithVenue, getSessions } from '../../api/events/[eid]/sessions';
+import { getSessions, SessionWithVenue } from '../../api/events/[eid]/sessions';
 import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
 import { getVenues } from '../../api/events/[eid]/venues';
 
@@ -166,6 +165,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						event={event}
 						isOrganizer={isOrganizer}
 						isAttendee={isAttendee}
+						user={user}
 					/>
 				)}
 
@@ -204,7 +204,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 											key={sessionType.id}
 											href={`/events/${eid}/sessions/types/${sessionType.slug}`}
 										>
-											<a className="block flex flex-row items-center">
+											<a className="flex flex-row items-center">
 												<div
 													className="rounded-full mr-2 w-3 h-3"
 													style={{ backgroundColor: sessionType.color ?? '#888888' }}
