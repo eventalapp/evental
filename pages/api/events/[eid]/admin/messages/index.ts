@@ -26,7 +26,7 @@ export default api({
 
 		await sendEventMessageEmail({
 			event,
-			sendToAddresses: ['f'],
+			sendToAddresses: [''],
 			body: body.body,
 			title: body.title,
 			sentBy: body.sentBy
