@@ -5,13 +5,12 @@ import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-import { Footer } from '../../../components/Footer';
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
+import { Footer } from '../../../components/Footer';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
@@ -47,7 +46,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 		return <UnauthorizedPage />;
 	}
 
-	if (!initialEvent || !event) {
+	if (!event) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
