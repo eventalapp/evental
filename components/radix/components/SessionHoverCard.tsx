@@ -7,11 +7,10 @@ import { htmlToText } from 'html-to-text';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
-import Tooltip from './Tooltip';
 import Button from './shared/Button';
+import Tooltip from './Tooltip';
 
 interface Props {
 	event: Prisma.Event;
@@ -38,9 +37,9 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				sideOffset={4}
 				className={cx(
 					'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
-					'max-w-md rounded-lg p-4 md:w-full',
+					'max-w-lg rounded-lg p-4 md:w-full',
 					'bg-white dark:bg-gray-800 border-gray-200 border shadow-sm',
-					'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75 min-w-[300px]'
+					'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75 min-w-[350px]'
 				)}
 			>
 				<HoverCardPrimitive.Arrow className="fill-current text-gray-200 dark:text-gray-800" />
@@ -90,8 +89,8 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 
 					{session.description && (
 						<p className="mt-1 text-sm font-normal text-gray-700 dark:text-gray-400">
-							{descriptionAsText.substring(0, 200)}
-							{descriptionAsText.length > 200 && '...'}
+							{descriptionAsText.substring(0, 150)}
+							{descriptionAsText.length > 150 && '...'}
 						</p>
 					)}
 
