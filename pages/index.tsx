@@ -2,9 +2,9 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
-
 import { Footer } from '../components/Footer';
 import { LinkButton } from '../components/form/LinkButton';
+import { AspectImage } from '../components/guides/AspectImage';
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
@@ -56,7 +56,13 @@ const HomePage: NextPage = () => {
 					</Link>
 				</div>
 
-				<div className="bg-gray-200 w-3/4 h-96 mt-8 rounded-md" />
+				<div className="bg-gray-200 w-3/4 mt-8 rounded-md">
+					<AspectImage
+						alt="Event Overview"
+						ratio={1734 / 1030}
+						imageUrl={'https://cdn.evental.app/images/event-showcase.png'}
+					/>
+				</div>
 			</Column>
 
 			<div className="dark-topography text-white">
