@@ -178,21 +178,6 @@ const ViewEventPage: NextPage<Props> = (props) => {
 							<SocialShare event={event} />
 						</div>
 
-						{venues && venues.length > 0 && (
-							<div className="mb-3">
-								<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
-									Filter by Venue
-								</span>
-								<ul>
-									{venues.map((venue) => (
-										<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
-											<a className="block">{venue.name}</a>
-										</Link>
-									))}
-								</ul>
-							</div>
-						)}
-
 						{sessionTypes && sessionTypes.length > 0 && (
 							<div className="mb-3">
 								<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
@@ -211,6 +196,21 @@ const ViewEventPage: NextPage<Props> = (props) => {
 												/>
 												{sessionType.name}
 											</a>
+										</Link>
+									))}
+								</ul>
+							</div>
+						)}
+
+						{venues && venues.length > 0 && (
+							<div className="mb-3">
+								<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
+									Filter by Venue
+								</span>
+								<ul>
+									{venues.map((venue) => (
+										<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
+											<a className="block">{venue.name}</a>
 										</Link>
 									))}
 								</ul>
