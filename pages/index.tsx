@@ -42,8 +42,7 @@ const HomePage: NextPage = () => {
 					Event management software that's highly intuitive. Your attendees and organizers will love
 					using Evental for your in-person, hybrid, and virtual events.
 				</p>
-
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-3 z-10">
 					<Link href="/events/create" passHref>
 						<LinkButton variant="primary" padding="large">
 							Host An Event
@@ -56,7 +55,15 @@ const HomePage: NextPage = () => {
 					</Link>
 				</div>
 
-				<div className="bg-gray-200 w-3/4 mt-8 rounded-md">
+				<div className="bg-white w-full mt-7 md:mt-14 rounded-md relative">
+					<div className="relative max-w-full sm:w-full sm:max-w-[1200px] mx-auto">
+						<div className="absolute w-full overflow-visible top-[100px] h-32">
+							<div className="left-0 bloom bloom-one" />
+							<div className="left-[34%] bloom bloom-three" />
+							<div className="right-0 invisible sm:visible bloom bloom-two" />
+						</div>
+					</div>
+
 					<AspectImage
 						alt="Event Overview"
 						ratio={1734 / 1030}
