@@ -57,7 +57,7 @@ const HomePage: NextPage = () => {
 
 				<div className="bg-white w-full mt-7 md:mt-14 rounded-md relative">
 					<div className="relative max-w-full sm:w-full sm:max-w-[1200px] mx-auto">
-						<div className="absolute w-full overflow-visible top-[100px] h-32">
+						<div className="absolute w-full overflow-visible top-[75px] h-32">
 							<div className="left-0 bloom bloom-one" />
 							<div className="left-[34%] bloom bloom-three" />
 							<div className="right-0 invisible sm:visible bloom bloom-two" />
