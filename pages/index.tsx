@@ -66,7 +66,7 @@ const HomePage: NextPage = () => {
 
 					<AspectImage
 						alt="Event Overview"
-						ratio={1591 / 818}
+						ratio={1632 / 858}
 						imageUrl={'https://cdn.evental.app/images/event-showcase.png'}
 					/>
 				</div>
