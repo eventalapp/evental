@@ -12,9 +12,11 @@ import { PrivatePage } from '../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../components/events/EventHeader';
 import { EventNavigation } from '../../../components/events/navigation';
+import { SessionDatePicker } from '../../../components/events/SessionDatePicker';
 import { Footer } from '../../../components/Footer';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
+import Tooltip from '../../../components/radix/components/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
 import { SocialShare } from '../../../components/SocialShare';
 import { useAttendeeQuery } from '../../../hooks/queries/useAttendeeQuery';
@@ -27,7 +29,6 @@ import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuer
 import { useUser } from '../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
 import { ssrGetUser } from '../../../utils/api';
-import { getDateRange } from '../../../utils/date';
 import { AttendeeWithUser, PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getEvent } from '../../api/events/[eid]';
 import { getAttendee } from '../../api/events/[eid]/attendees/[uid]';
@@ -128,6 +129,18 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		return <PrivatePage />;
 	}
 
+	const renderDayContents = (dayOfMonth: number, date?: Date | undefined) => {
+		return (
+			<Tooltip message={`View sessions for ${dayjs(date).format('MMMM D')}`}>
+				<div>
+					<Link href={`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`}>
+						<a className="block">{dayOfMonth}</a>
+					</Link>
+				</div>
+			</Tooltip>
+		);
+	};
+
 	return (
 		<PageWrapper>
 			<NextSeo
@@ -180,9 +193,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						{sessionTypes && sessionTypes.length > 0 && (
 							<div className="mb-3">
-								<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
-									Filter by Type
-								</span>
+								<span className="block font-bold mb-1">Filter by Type</span>
 								<ul>
 									{sessionTypes.map((sessionType) => (
 										<Link
@@ -204,9 +215,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 						{venues && venues.length > 0 && (
 							<div className="mb-3">
-								<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
-									Filter by Venue
-								</span>
+								<span className="block font-bold mb-1">Filter by Venue</span>
 								<ul>
 									{venues.map((venue) => (
 										<Link key={venue.id} href={`/events/${eid}/venues/${venue.slug}`}>
@@ -218,17 +227,17 @@ const ViewEventPage: NextPage<Props> = (props) => {
 						)}
 
 						<div className="mb-3">
-							<span className="block font-bold border-b border-gray-200 mb-1 pb-1">
-								Filter by Date
-							</span>
-							{getDateRange(new Date(event.startDate), new Date(event.endDate)).map((date, i) => (
-								<Link
-									key={`${date.toISOString()}-${i}`}
-									href={`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`}
-								>
-									<a className="block">{dayjs(date).format('MMMM D')}</a>
-								</Link>
-							))}
+							<span className="block font-bold mb-1">Filter by Date</span>
+							<div className="relative">
+								<SessionDatePicker
+									onChange={(date) => {
+										console.log(date);
+									}}
+									renderDayContents={renderDayContents}
+									maxDate={new Date(String(event.endDate))}
+									minDate={new Date(String(event.startDate))}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
