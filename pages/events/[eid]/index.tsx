@@ -136,7 +136,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 				.isBetween(dayjs(event.startDate).startOf('day'), dayjs(event.endDate).endOf('day'))
 		) {
 			return (
-				<Tooltip message={`View sessions for ${dayjs(date).format('MMMM D')}`}>
+				<Tooltip message={`View sessions for ${dayjs(date).format('MMMM D')}`} side="top">
 					<div>
 						<Link href={`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`}>
 							<a className="block">{dayOfMonth}</a>
