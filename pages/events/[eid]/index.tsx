@@ -130,15 +130,23 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	}
 
 	const renderDayContents = (dayOfMonth: number, date?: Date | undefined) => {
-		return (
-			<Tooltip message={`View sessions for ${dayjs(date).format('MMMM D')}`}>
-				<div>
-					<Link href={`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`}>
-						<a className="block">{dayOfMonth}</a>
-					</Link>
-				</div>
-			</Tooltip>
-		);
+		if (
+			dayjs(date)
+				.add(6, 'hour')
+				.isBetween(dayjs(event.startDate).startOf('day'), dayjs(event.endDate).endOf('day'))
+		) {
+			return (
+				<Tooltip message={`View sessions for ${dayjs(date).format('MMMM D')}`}>
+					<div>
+						<Link href={`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`}>
+							<a className="block">{dayOfMonth}</a>
+						</Link>
+					</div>
+				</Tooltip>
+			);
+		}
+
+		return <span>{dayOfMonth}</span>;
 	};
 
 	return (
