@@ -7,7 +7,6 @@ import { formatInTimeZone } from 'date-fns-tz';
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import React from 'react';
-
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { faWarehouseFull } from '../../icons';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
@@ -106,106 +105,104 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			</FlexRowBetween>
 
-			{session?.type?.name && (
-				<div className="block">
-					<Link
-						href={`/events/${eid}${admin ? '/admin' : ''}/sessions/types/${session?.type?.slug}`}
-					>
-						<a>
-							<Tooltip side={'top'} message={`This session is a ${session?.type?.name} session.`}>
-								<div className="inline-flex flex-row items-center mb-1">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="w-5 h-5 mr-1.5"
-										size="1x"
-										icon={faClipboardList}
-									/>
-									<p>{session?.type?.name}</p>
-								</div>
-							</Tooltip>
-						</a>
-					</Link>
-				</div>
-			)}
-
-			{session?.venue?.name && (
-				<div className="block">
-					<Link href={`/events/${eid}/venues/${session?.venue?.slug}`}>
-						<a>
-							<Tooltip
-								side={'top'}
-								message={`This session is taking place at the ${session?.venue?.name} venue.`}
-							>
-								<div className="inline-flex flex-row items-center mb-1">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="w-5 h-5 mr-1.5"
-										size="1x"
-										icon={faLocationDot}
-									/>
-									<p>{session?.venue?.name}</p>
-								</div>
-							</Tooltip>
-						</a>
-					</Link>
-				</div>
-			)}
-
-			{session?.maxAttendees !== null && (
-				<div className="block">
-					<Tooltip
-						side={'top'}
-						message={`This sessions is currently ${Math.ceil(
-							(session?.attendeeCount / session?.maxAttendees) * 100
-						)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
-					>
-						<div className="inline-flex flex-row items-center mb-1 cursor-help">
-							<FontAwesomeIcon
-								fill="currentColor"
-								className="w-5 h-5 mr-1.5"
-								size="1x"
-								icon={faWarehouseFull}
-							/>
-
-							<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
-						</div>
-					</Tooltip>
-				</div>
-			)}
-
-			<Tooltip
-				side={'top'}
-				message={`This is session is taking place from ${format(
-					new Date(session.startDate),
-					'MMMM do h:mm a'
-				)} to ${formatInTimeZone(
-					new Date(session.endDate),
-					Intl.DateTimeFormat().resolvedOptions().timeZone,
-					'MMMM do h:mm a zzz'
-				)}.`}
-			>
-				<div className="inline-flex flex-row items-center mb-2 cursor-help">
-					<FontAwesomeIcon
-						fill="currentColor"
-						className="w-5 h-5 mr-1.5"
-						size="1x"
-						icon={faCalendarDay}
-					/>
-					<p>
-						{formatInTimeZone(
-							new Date(session.startDate),
-							Intl.DateTimeFormat().resolvedOptions().timeZone,
-							'MMMM dd h:mm a'
-						)}{' '}
-						-{' '}
-						{formatInTimeZone(
-							new Date(session.endDate),
-							Intl.DateTimeFormat().resolvedOptions().timeZone,
-							'MMMM dd h:mm a'
-						)}
-					</p>
-				</div>
-			</Tooltip>
+			<div className="text-gray-600">
+				{session?.type?.name && (
+					<div className="block">
+						<Link
+							href={`/events/${eid}${admin ? '/admin' : ''}/sessions/types/${session?.type?.slug}`}
+						>
+							<a>
+								<Tooltip side={'top'} message={`This session is a ${session?.type?.name} session.`}>
+									<div className="inline-flex flex-row items-center mb-1">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="w-5 h-5 mr-1.5"
+											size="1x"
+											icon={faClipboardList}
+										/>
+										<p>{session?.type?.name}</p>
+									</div>
+								</Tooltip>
+							</a>
+						</Link>
+					</div>
+				)}
+				{session?.venue?.name && (
+					<div className="block">
+						<Link href={`/events/${eid}/venues/${session?.venue?.slug}`}>
+							<a>
+								<Tooltip
+									side={'top'}
+									message={`This session is taking place at the ${session?.venue?.name} venue.`}
+								>
+									<div className="inline-flex flex-row items-center mb-1">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="w-5 h-5 mr-1.5"
+											size="1x"
+											icon={faLocationDot}
+										/>
+										<p>{session?.venue?.name}</p>
+									</div>
+								</Tooltip>
+							</a>
+						</Link>
+					</div>
+				)}
+				{session?.maxAttendees !== null && (
+					<div className="block">
+						<Tooltip
+							side={'top'}
+							message={`This sessions is currently ${Math.ceil(
+								(session?.attendeeCount / session?.maxAttendees) * 100
+							)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+						>
+							<div className="inline-flex flex-row items-center mb-1 cursor-help">
+								<FontAwesomeIcon
+									fill="currentColor"
+									className="w-5 h-5 mr-1.5"
+									size="1x"
+									icon={faWarehouseFull}
+								/>
+								<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
+							</div>
+						</Tooltip>
+					</div>
+				)}
+				<Tooltip
+					side={'top'}
+					message={`This is session is taking place from ${format(
+						new Date(session.startDate),
+						'MMMM do h:mm a'
+					)} to ${formatInTimeZone(
+						new Date(session.endDate),
+						Intl.DateTimeFormat().resolvedOptions().timeZone,
+						'MMMM do h:mm a zzz'
+					)}.`}
+				>
+					<div className="inline-flex flex-row items-center mb-2 cursor-help">
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="w-5 h-5 mr-1.5"
+							size="1x"
+							icon={faCalendarDay}
+						/>
+						<p>
+							{formatInTimeZone(
+								new Date(session.startDate),
+								Intl.DateTimeFormat().resolvedOptions().timeZone,
+								'MMMM dd h:mm a'
+							)}{' '}
+							-{' '}
+							{formatInTimeZone(
+								new Date(session.endDate),
+								Intl.DateTimeFormat().resolvedOptions().timeZone,
+								'MMMM dd h:mm a'
+							)}
+						</p>
+					</div>
+				</Tooltip>
+			</div>
 
 			{session.description && (
 				<div className="prose focus:outline-none prose-a:text-primary mt-1">
