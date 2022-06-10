@@ -5,7 +5,6 @@ import * as Portal from '@radix-ui/react-portal';
 import { Editor } from '@tiptap/react';
 import cx from 'classnames';
 import React, { Fragment, useEffect, useState } from 'react';
-
 import { useImageUploadMutation } from '../../../hooks/mutations/useImageUploadMutation';
 import { LoadingInner } from '../../error/LoadingInner';
 import { FileWithPreview } from '../../form/AvatarUpload';
@@ -39,7 +38,6 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 	return (
 		<DialogPrimitive.Root open={isOpen}>
 			<DialogPrimitive.Trigger
-				asChild
 				onClick={() => {
 					setIsOpen(true);
 				}}

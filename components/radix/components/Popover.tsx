@@ -2,7 +2,6 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import cx from 'classnames';
 import React from 'react';
-
 import Button from './shared/Button';
 
 interface Props {}
@@ -34,7 +33,7 @@ const Popover = (props: Props) => {
 	return (
 		<div className="relative inline-block text-left">
 			<PopoverPrimitive.Root>
-				<PopoverPrimitive.Trigger asChild>
+				<PopoverPrimitive.Trigger>
 					<Button>Click</Button>
 				</PopoverPrimitive.Trigger>
 				<PopoverPrimitive.Content

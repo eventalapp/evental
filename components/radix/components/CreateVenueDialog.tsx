@@ -5,7 +5,6 @@ import { Cross1Icon } from '@radix-ui/react-icons';
 import cx from 'classnames';
 import React, { Fragment, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-
 import { useCreateVenueMutation } from '../../../hooks/mutations/useCreateVenueMutation';
 import { CreateVenuePayload, CreateVenueSchema } from '../../../utils/schemas';
 import { LoadingInner } from '../../error/LoadingInner';
@@ -38,7 +37,7 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-			<DialogPrimitive.Trigger asChild>{children}</DialogPrimitive.Trigger>
+			<DialogPrimitive.Trigger>{children}</DialogPrimitive.Trigger>
 
 			<Transition.Root show={isOpen}>
 				<Transition.Child
