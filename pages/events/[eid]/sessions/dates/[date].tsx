@@ -5,14 +5,14 @@ import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-import { Footer } from '../../../../../components/Footer';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/navigation';
+import { Footer } from '../../../../../components/Footer';
 import Column from '../../../../../components/layout/Column';
+import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { SessionList } from '../../../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
@@ -27,7 +27,7 @@ import { getEvent } from '../../../../api/events/[eid]';
 import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { getPages } from '../../../../api/events/[eid]/pages';
 import { getRoles } from '../../../../api/events/[eid]/roles';
-import { SessionWithVenue, getSessionsByDate } from '../../../../api/events/[eid]/sessions';
+import { getSessionsByDate, SessionWithVenue } from '../../../../api/events/[eid]/sessions';
 
 type Props = {
 	initialSessionsByDate: SessionWithVenue[] | undefined;
@@ -129,10 +129,11 @@ const ViewSessionTypePage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
-				<h3 className="text-xl md:text-2xl font-medium mt-5">
-					Sessions for {dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')}{' '}
-					<span className="font-normal text-gray-500">({sessionsByDateData.length || 0})</span>
-				</h3>
+				<FlexRowBetween>
+					<h3 className="text-xl md:text-2xl font-medium">
+						{dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')}
+					</h3>
+				</FlexRowBetween>
 
 				<SessionList sessions={sessionsByDateData} eid={String(eid)} event={event} />
 			</Column>
