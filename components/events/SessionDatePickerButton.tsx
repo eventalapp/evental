@@ -6,7 +6,7 @@ export const SessionDatePickerButton = forwardRef<
 	{ startDate: Date | null | undefined; endDate: Date | null | undefined; onClick?: () => void }
 >(({ startDate, endDate, onClick }, ref) => {
 	return (
-		<button onClick={onClick} ref={ref} type="button">
+		<button onClick={onClick} ref={ref} type="button" className="text-gray-600">
 			{dayjs(startDate).format('MMMM D')} - {dayjs(endDate).format('MMMM D')}
 		</button>
 	);
