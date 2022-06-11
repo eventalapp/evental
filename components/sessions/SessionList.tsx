@@ -38,7 +38,7 @@ export const SessionList: React.FC<Props> = (props) => {
 		<div className="relative min-h-[25px]">
 			{previousSessions && previousSessions.length >= 1 && (
 				<button
-					className="text-gray-500 cursor-pointer absolute top-0 right-0 z-20"
+					className="text-gray-500 cursor-pointer absolute top-0 right-0 z-20 text-sm"
 					onClick={() => {
 						setShowPastEvents(!showPastEvents);
 					}}
