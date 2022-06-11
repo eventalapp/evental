@@ -8,9 +8,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
-import { faWarehouseFull } from '../../../icons';
+import { faCalendarCirclePlus, faWarehouseFull } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
-import Button from './shared/Button';
 import Tooltip from './Tooltip';
 
 interface Props {
@@ -40,13 +39,32 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					'radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
 					'max-w-lg rounded-lg p-4 md:w-full',
 					'bg-white dark:bg-gray-800 border-gray-200 border shadow-sm',
-					'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75 min-w-[350px]'
+					'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75 min-w-[350px] relative'
 				)}
 			>
 				<HoverCardPrimitive.Arrow className="fill-current text-gray-200 dark:text-gray-800" />
 
 				<div className="h-full w-full">
-					<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{session.name}</h3>
+					<div className="flex flex-row justify-end w-full absolute top-2 right-2">
+						<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
+							<button
+								onClick={() => {
+									createSessionAttendeeMutation.mutate();
+								}}
+							>
+								<FontAwesomeIcon
+									fill="currentColor"
+									className="w-7 h-7 cursor-pointer text-gray-700"
+									size="lg"
+									icon={faCalendarCirclePlus}
+								/>
+							</button>
+						</Tooltip>
+					</div>
+
+					<h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-1">
+						{session.name}
+					</h3>
 
 					<div className="text-gray-600 flex flex-row flex-wrap items-center">
 						{session.type && (
@@ -150,19 +168,6 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 							))}
 						</ul>
 					)}
-
-					<div className="flex flex-row justify-end w-full">
-						<Tooltip side={'top'} message={`Add the ${session.name} session to your schedule`}>
-							<Button
-								className="mt-2"
-								onClick={() => {
-									createSessionAttendeeMutation.mutate();
-								}}
-							>
-								Register
-							</Button>
-						</Tooltip>
-					</div>
 				</div>
 			</HoverCardPrimitive.Content>
 		</HoverCardPrimitive.Root>
