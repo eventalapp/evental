@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
-import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { RemoveAttendeeFromSessionPayload } from '../../utils/schemas';
 
 export interface UseRemoveAttendeeToSessionMutationData {
@@ -33,7 +33,7 @@ export const useRemoveAttendeeFromSessionMutation = (
 		},
 		{
 			onSuccess: () => {
-				toast.success('You have successfully removeed this user to this event.');
+				toast.success('You have successfully removed this user to this event.');
 
 				void queryClient.invalidateQueries(['role-attendees', eid, sid]);
 			},
