@@ -10,7 +10,6 @@ import React, { Fragment, useState } from 'react';
 import { useAddAttendeeToSessionMutation } from '../../../hooks/mutations/useAddAttendeeToSessionMutation';
 import { useAttendeesByNameQuery } from '../../../hooks/queries/useAttendeesByNameQuery';
 import { LoadingInner } from '../../error/LoadingInner';
-import Button from './shared/Button';
 import Tooltip from './Tooltip';
 
 interface Props {
@@ -33,9 +32,19 @@ const AttachPeopleDialog = (props: Props) => {
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-			<DialogPrimitive.Trigger>
-				<Button type="button">Attach People</Button>
+			<DialogPrimitive.Trigger asChild>
+				<button className="flex items-center justify-center">
+					<div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center">
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="h-5 w-5 text-gray-800"
+							size="1x"
+							icon={faPlus}
+						/>
+					</div>
+				</button>
 			</DialogPrimitive.Trigger>
+
 			<Portal.Root>
 				<Transition.Root show={isOpen}>
 					<Transition.Child
