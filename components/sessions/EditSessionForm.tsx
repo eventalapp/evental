@@ -202,7 +202,9 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 								</li>
 							))}
 
-							<AttachPeopleDialog eid={String(eid)} sid={String(sid)} />
+							<div className="flex items-center justify-center w-full h-full">
+								<AttachPeopleDialog eid={String(eid)} sid={String(sid)} />
+							</div>
 						</ul>
 					</div>
 				</div>
