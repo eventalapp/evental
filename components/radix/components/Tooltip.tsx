@@ -13,7 +13,7 @@ const Tooltip: React.FC<Props> = (props) => {
 	return (
 		<TooltipPrimitive.Provider delayDuration={100}>
 			<TooltipPrimitive.Root>
-				<TooltipPrimitive.Trigger>{children}</TooltipPrimitive.Trigger>
+				<TooltipPrimitive.Trigger type="button">{children}</TooltipPrimitive.Trigger>
 				<TooltipPrimitive.Content
 					sideOffset={4}
 					side={side}
