@@ -35,7 +35,7 @@ export const SessionList: React.FC<Props> = (props) => {
 	const upcomingSessions = sessions.filter((session) => dayjs(session.endDate).isAfter(new Date()));
 
 	return (
-		<div className="relative">
+		<div className="relative min-h-[25px]">
 			{previousSessions && previousSessions.length >= 1 && (
 				<button
 					className="text-gray-500 cursor-pointer absolute top-0 right-0 z-20"
