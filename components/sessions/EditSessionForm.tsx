@@ -154,13 +154,11 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 							Attach People *<HelpTooltip message={copy.tooltip.attachPeople} />
 						</Label>
 
-						<AttachPeopleDialog eid={String(eid)} sid={String(sid)} />
-
 						<ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 mt-3">
 							{sessionRoleAttendeesQuery?.data?.map((attendee) => (
 								<li
 									key={attendee.id}
-									className="block flex items-center justify-between flex-col h-full relative"
+									className="flex items-center justify-between flex-col h-full relative"
 								>
 									<Link href={`/events/${eid}/admin/attendees/${attendee.user.slug}`}>
 										<a className="flex items-center justify-start flex-col h-full">
@@ -203,6 +201,8 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 									</div>
 								</li>
 							))}
+
+							<AttachPeopleDialog eid={String(eid)} sid={String(sid)} />
 						</ul>
 					</div>
 				</div>
