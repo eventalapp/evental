@@ -23,7 +23,7 @@ const Tooltip: React.FC<Props> = (props) => {
 						'radix-side-bottom:animate-slide-up-fade',
 						'radix-side-left:animate-slide-right-fade',
 						'inline-flex items-center rounded-md px-4 py-2.5 duration-75',
-						'bg-gray-800 dark:bg-gray-800 max-w-xl'
+						'bg-gray-800 dark:bg-gray-800 max-w-[240px]'
 					)}
 				>
 					<TooltipPrimitive.Arrow
