@@ -137,7 +137,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<SessionList sessions={sessionsData} eid={String(eid)} event={event} />
+				<SessionList sessions={sessionsData} eid={String(eid)} event={event} user={user} />
 			</Column>
 
 			<Footer />

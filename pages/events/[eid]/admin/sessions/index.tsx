@@ -3,13 +3,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-
-import { Footer } from '../../../../../components/Footer';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
+import { Footer } from '../../../../../components/Footer';
 import { LinkButton } from '../../../../../components/form/LinkButton';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
@@ -75,7 +74,7 @@ const SessionsAdminPage: NextPage = () => {
 						</div>
 					</FlexRowBetween>
 
-					<SessionList admin eid={String(eid)} sessions={sessionsData} event={event} />
+					<SessionList admin eid={String(eid)} sessions={sessionsData} event={event} user={user} />
 				</div>
 			</Column>
 

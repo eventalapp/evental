@@ -164,7 +164,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				</div>
 
 				{sessionsByVenueData && (
-					<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} />
+					<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} user={user} />
 				)}
 			</Column>
 

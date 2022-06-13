@@ -14,7 +14,7 @@ import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreat
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { sessionAttendeeReducer } from '../../utils/reducer';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
 import { AddToCalendar } from '../AddToCalendar';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { LoadingInner } from '../error/LoadingInner';
@@ -32,13 +32,25 @@ type Props = {
 	session: SessionWithVenue;
 	admin?: boolean;
 	event: Prisma.Event;
+	user: PasswordlessUser | undefined;
 };
 
 export const ViewSession: React.FC<Props> = (props) => {
-	const { session, sid, eid, isAttending, admin = false, attendees, event, roleAttendees } = props;
+	const {
+		user,
+		session,
+		sid,
+		eid,
+		isAttending,
+		admin = false,
+		attendees,
+		event,
+		roleAttendees
+	} = props;
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
 		String(eid),
 		String(sid),
+		user?.id,
 		{ redirectUrl: `/events/${eid}/sessions/${sid}` }
 	);
 
