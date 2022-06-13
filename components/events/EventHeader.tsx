@@ -1,11 +1,12 @@
 import {
-	faArrowRightFromBracket,
 	faArrowUpRightFromSquare,
 	faCalendarDay,
 	faClock,
 	faHeadset,
 	faLocationDot,
 	faPerson,
+	faRightFromBracket,
+	faShare,
 	faStreetView
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -51,8 +52,21 @@ export const EventHeader: React.FC<{
 			)}
 
 			<div className="relative">
-				{user && Boolean(isAttendee) && (
-					<div className="top-0 right-0 absolute">
+				<div className="top-0 right-0 absolute flex flex-row">
+					<div className="mr-4">
+						<Tooltip side={'top'} message={'Share this event.'}>
+							<button type="button" className="bg-white">
+								<FontAwesomeIcon
+									fill="currentColor"
+									className="h-5 w-5 text-primary"
+									size="1x"
+									icon={faShare}
+								/>
+							</button>
+						</Tooltip>
+					</div>
+
+					{user && Boolean(isAttendee) && (
 						<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
 							<div>
 								<Tooltip side={'top'} message={'Leave this event.'}>
@@ -61,14 +75,15 @@ export const EventHeader: React.FC<{
 											fill="currentColor"
 											className="h-5 w-5 text-red-500"
 											size="1x"
-											icon={faArrowRightFromBracket}
+											icon={faRightFromBracket}
 										/>
 									</button>
 								</Tooltip>
 							</div>
 						</LeaveEventDialog>
-					</div>
-				)}
+					)}
+				</div>
+
 				<div className="flex flex-row items-center">
 					<div className="flex-shrink-0 relative w-16 h-16 md:w-20 md:h-20 mr-3 md:mr-5 border border-gray-200 shadow-sm rounded-md">
 						<Image
