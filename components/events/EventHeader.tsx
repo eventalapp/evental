@@ -53,7 +53,7 @@ export const EventHeader: React.FC<{
 
 			<div className="relative">
 				<div className="top-0 right-0 absolute flex flex-row">
-					<div className="mr-4">
+					<div className="mr-5">
 						<Tooltip side={'top'} message={'Share this event.'}>
 							<button type="button" className="bg-white">
 								<FontAwesomeIcon
