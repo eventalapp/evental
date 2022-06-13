@@ -10,11 +10,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
-import { formatInTimeZone } from 'date-fns-tz';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useLeaveEvent } from '../../hooks/mutations/useLeaveEvent';
+import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
 import Tooltip from '../radix/components/Tooltip';
@@ -103,14 +103,12 @@ export const EventHeader: React.FC<{
 							)}
 
 							<Tooltip
-								message={`This is event is taking place from ${formatInTimeZone(
+								message={`This is event is taking place from ${formatDateRange(
 									new Date(event.startDate),
-									Intl.DateTimeFormat().resolvedOptions().timeZone,
-									'MMMM do'
-								)} to ${formatInTimeZone(
 									new Date(event.endDate),
-									Intl.DateTimeFormat().resolvedOptions().timeZone,
-									'MMMM do zzz'
+									{
+										showHour: false
+									}
 								)}.`}
 							>
 								<div className="flex flex-row items-center cursor-help mr-3 mb-1 text-sm md:text-base">
@@ -121,17 +119,9 @@ export const EventHeader: React.FC<{
 										icon={faCalendarDay}
 									/>
 									<p>
-										{formatInTimeZone(
-											new Date(event.startDate),
-											Intl.DateTimeFormat().resolvedOptions().timeZone,
-											'MMMM do'
-										)}{' '}
-										-{' '}
-										{formatInTimeZone(
-											new Date(event.endDate),
-											Intl.DateTimeFormat().resolvedOptions().timeZone,
-											'MMMM do'
-										)}
+										{formatDateRange(new Date(event.startDate), new Date(event.endDate), {
+											showHour: false
+										})}
 									</p>
 								</div>
 							</Tooltip>
