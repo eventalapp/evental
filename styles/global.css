@@ -7,7 +7,7 @@
 }
 
 .react-datepicker-popper {
-	@apply z-40 text-sm bg-white shadow px-3 py-2 border-2 border-gray-200 rounded;
+	@apply z-40 text-sm bg-white shadow-sm px-3 py-2 border border-gray-200 rounded;
 
 	inset: unset !important;
 }
