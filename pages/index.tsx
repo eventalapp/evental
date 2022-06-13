@@ -72,7 +72,7 @@ const HomePage: NextPage = () => {
 				</div>
 			</Column>
 
-			<div className="dark-topography text-white">
+			<div className="bg-primary-700 text-white">
 				<Column>
 					<h3 className="text-xl md:text-2xl font-bold">Creating events couldn't be easier</h3>
 					<p className="text-md md:text-lg text-gray-100 mt-1">
