@@ -38,7 +38,7 @@ const HomePage: NextPage = () => {
 				<h1 className="px-2 mb-3 text-4xl sm:text-5xl font-black leading-tight text-center lg:text-6xl tracking-tight">
 					Host Outstanding Events
 				</h1>
-				<p className="max-w-4xl mt-1 mb-6 text-center text-base text-base lg:text-xl leading-2 lg:leading-8 text-gray-600">
+				<p className="max-w-4xl mt-1 mb-6 text-center text-base lg:text-xl leading-2 lg:leading-8 text-gray-600">
 					Event management software that's highly intuitive. Your attendees and organizers will love
 					using Evental for your in-person, hybrid, and virtual events.
 				</p>
