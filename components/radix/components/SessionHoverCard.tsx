@@ -1,4 +1,4 @@
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card';
@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
-import { faCalendarCirclePlus, faWarehouseFull } from '../../../icons';
+import { faCalendarCirclePlus } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
 import Tooltip from './Tooltip';
 
@@ -123,7 +123,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 											fill="currentColor"
 											className="w-5 h-5 mr-1.5"
 											size="1x"
-											icon={faWarehouseFull}
+											icon={faUserGroup}
 										/>
 										<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
 									</div>
