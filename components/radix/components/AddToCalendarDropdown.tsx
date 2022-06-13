@@ -52,7 +52,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-gray-600"
+								className="mr-2 h-4 w-4 text-gray-600"
 								size="1x"
 								icon={faEnvelope}
 							/>
@@ -68,7 +68,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-[#DB4437]"
+								className="mr-2 h-4 w-4 text-[#DB4437]"
 								size="1x"
 								icon={faGoogle}
 							/>
@@ -85,7 +85,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-[#0072c6]"
+								className="mr-2 h-4 w-4 text-[#0072c6]"
 								size="1x"
 								icon={faOutlook}
 							/>
@@ -101,7 +101,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-[#0072c6]"
+								className="mr-2 h-4 w-4 text-[#0072c6]"
 								size="1x"
 								icon={faOutlook}
 							/>
@@ -117,7 +117,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-3.5 w-3.5 text-[#4a00a0]"
+								className="mr-2 h-4 w-4 text-[#4a00a0]"
 								size="1x"
 								icon={faYahoo}
 							/>
