@@ -1,4 +1,4 @@
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import classNames from 'classnames';
@@ -43,13 +43,22 @@ export const SessionList: React.FC<Props> = (props) => {
 						setShowPastEvents(!showPastEvents);
 					}}
 				>
-					{showPastEvents ? 'Hide' : 'Show'} past sessions{' '}
-					<FontAwesomeIcon
-						fill="currentColor"
-						className="ml-0.5 w-3.5 h-3.5"
-						style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
-						icon={faChevronUp}
-					/>
+					{showPastEvents ? (
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="mr-1.5 w-4 h-4"
+							style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
+							icon={faEyeSlash}
+						/>
+					) : (
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="mr-1.5 w-4 h-4"
+							style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
+							icon={faEye}
+						/>
+					)}
+					{showPastEvents ? 'Hide' : 'Show'} past sessions
 				</button>
 			)}
 
