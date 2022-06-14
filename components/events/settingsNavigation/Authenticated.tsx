@@ -27,7 +27,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<div className="w-full bg-primary">
+			<div className="w-full" style={{ backgroundColor: event.color }}>
 				<Link href={`/events/${event.slug}`}>
 					<a className="m-auto block text-center text-white text-sm py-1">
 						You are in admin mode <span className="font-medium">(Click to exit)</span>
@@ -43,14 +43,46 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 
 						<div className="h-full flex-row justify-end hidden lg:flex">
 							<div className="flex flex-row items-end">
-								<LinkItem link={`/events/${event.slug}/admin/sessions`} label={'Sessions'} />
-								<LinkItem link={`/events/${event.slug}/admin/sessions/types`} label={'Types'} />
-								<LinkItem link={`/events/${event.slug}/admin/venues`} label={'Venues'} />
-								<LinkItem link={`/events/${event.slug}/admin/attendees`} label={'Attendees'} />
-								<LinkItem link={`/events/${event.slug}/admin/roles`} label={'Roles'} />
-								<LinkItem link={`/events/${event.slug}/admin/organizers`} label={'Organizers'} />
-								<LinkItem link={`/events/${event.slug}/admin/pages`} label={'Pages'} />
-								<LinkItem link={`/events/${event.slug}/admin`} label={'Settings'} />
+								<LinkItem
+									link={`/events/${event.slug}/admin/sessions`}
+									label={'Sessions'}
+									color={event.color}
+								/>
+								<LinkItem
+									link={`/events/${event.slug}/admin/sessions/types`}
+									label={'Types'}
+									color={event.color}
+								/>
+								<LinkItem
+									link={`/events/${event.slug}/admin/venues`}
+									label={'Venues'}
+									color={event.color}
+								/>
+								<LinkItem
+									link={`/events/${event.slug}/admin/attendees`}
+									label={'Attendees'}
+									color={event.color}
+								/>
+								<LinkItem
+									link={`/events/${event.slug}/admin/roles`}
+									label={'Roles'}
+									color={event.color}
+								/>
+								<LinkItem
+									link={`/events/${event.slug}/admin/organizers`}
+									label={'Organizers'}
+									color={event.color}
+								/>
+								<LinkItem
+									link={`/events/${event.slug}/admin/pages`}
+									label={'Pages'}
+									color={event.color}
+								/>
+								<LinkItem
+									link={`/events/${event.slug}/admin`}
+									label={'Settings'}
+									color={event.color}
+								/>
 							</div>
 						</div>
 
