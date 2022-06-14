@@ -1,14 +1,13 @@
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
-import cx from 'classnames';
-import classNames from 'classnames';
+import { default as classNames, default as cx } from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
+import { faBarsSquare } from '../../../icons';
 import { capitalizeFirstLetter } from '../../../utils/string';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { ProfileDropdown } from '../../navigation/dropdown';
@@ -82,9 +81,10 @@ export const Authenticated: React.FC<Props> = (props) => {
 
 						<div className="flex-row space-x-8 font-medium flex lg:hidden">
 							<FontAwesomeIcon
-								className="py-2 cursor-pointer"
+								className="cursor-pointer text-gray-900"
 								size="2x"
-								icon={faBars}
+								fill="currentColor"
+								icon={faBarsSquare}
 								onClick={() => {
 									setIsOpen(true);
 								}}

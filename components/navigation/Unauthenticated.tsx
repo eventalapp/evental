@@ -1,9 +1,9 @@
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
-
+import { faBarsSquare } from '../../icons';
 import { FullscreenLinkItem } from '../events/navigation/Unauthenticated';
 import { NavigationWrapper } from './NavigationWrapper';
 
@@ -60,9 +60,10 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 
 				<div className="flex-row flex space-x-8 font-medium sm:hidden">
 					<FontAwesomeIcon
-						className="py-2 cursor-pointer"
+						className="cursor-pointer text-gray-900"
 						size="2x"
-						icon={faBars}
+						fill="currentColor"
+						icon={faBarsSquare}
 						onClick={() => {
 							setIsOpen(true);
 						}}

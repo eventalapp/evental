@@ -1,15 +1,15 @@
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
-
 import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation';
+import { faBarsSquare } from '../../icons';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { FullscreenLinkItem } from '../events/navigation/Unauthenticated';
 import { LinkButton } from '../form/LinkButton';
-import { NavigationWrapper } from './NavigationWrapper';
 import { ProfileDropdown } from './dropdown';
+import { NavigationWrapper } from './NavigationWrapper';
 
 type Props = {
 	isOpen: boolean;
@@ -65,11 +65,12 @@ export const Authenticated: React.FC<Props> = (props) => {
 					{user && <ProfileDropdown user={user} signOutMutation={signOutMutation} />}
 				</div>
 
-				<div className="flex-row flex space-x-8 font-medium sm:hidden">
+				<div className="flex-row flex space-x-8 font-medium sm:hidden text-gray-900">
 					<FontAwesomeIcon
-						className="py-2 cursor-pointer"
+						className="cursor-pointer text-gray-900"
 						size="2x"
-						icon={faBars}
+						fill="currentColor"
+						icon={faBarsSquare}
 						onClick={() => {
 							setIsOpen(true);
 						}}
