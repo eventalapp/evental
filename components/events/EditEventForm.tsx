@@ -9,12 +9,11 @@ import ReactSelect from 'react-select';
 import { toast } from 'react-toastify';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
-import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
+import { useEventQuery, UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { copy, timeZoneOptions } from '../../utils/const';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { DatePicker } from '../form/DatePicker';
@@ -22,6 +21,7 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
+import { HelpTooltip } from '../HelpTooltip';
 import Select from '../radix/components/Select';
 import Button from '../radix/components/shared/Button';
 
@@ -105,6 +105,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				</Label>
 
 				<AvatarUpload
+					rounded={false}
 					files={files}
 					setFiles={setFiles}
 					placeholderImageUrl={`https://cdn.evental.app${event.image}`}

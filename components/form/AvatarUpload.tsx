@@ -1,5 +1,6 @@
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import React, { useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import { toast } from 'react-toastify';
@@ -8,6 +9,7 @@ type Props = {
 	placeholderImageUrl?: string;
 	files: FileWithPreview[];
 	setFiles: React.Dispatch<React.SetStateAction<FileWithPreview[]>>;
+	rounded?: boolean;
 };
 
 export type FileWithPreview = {
@@ -18,7 +20,8 @@ export const AvatarUpload: React.FC<Props> = (props) => {
 	const {
 		placeholderImageUrl = 'https://cdn.evental.app/images/default-avatar.jpg',
 		files,
-		setFiles
+		setFiles,
+		rounded = true
 	} = props;
 
 	useEffect(() => {
@@ -55,7 +58,10 @@ export const AvatarUpload: React.FC<Props> = (props) => {
 							files.map((file, i) => (
 								<div className="inline-block relative" key={`${i}-${file.name}`}>
 									<img
-										className="object-cover object-center w-32 h-32 rounded-full border-2 border-gray-200 bg-gray-200"
+										className={classNames(
+											'object-cover object-center w-32 h-32 border shadow-sm border-gray-300 bg-gray-200',
+											rounded ? 'rounded-full' : 'rounded-md'
+										)}
 										src={file.preview}
 										alt="profile"
 									/>
@@ -68,7 +74,10 @@ export const AvatarUpload: React.FC<Props> = (props) => {
 							<div className="inline-block relative">
 								<img
 									alt="avatar"
-									className="object-cover object-center w-32 h-32 rounded-full border-2 border-gray-200 bg-gray-200"
+									className={classNames(
+										'object-cover object-center w-32 h-32 border shadow-sm border-gray-300 bg-gray-200',
+										rounded ? 'rounded-full' : 'rounded-md'
+									)}
 									src={placeholderImageUrl}
 								/>
 								<div className="bg-black/50 w-10 h-10 rounded-full cursor-pointer absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 flex items-center justify-center text-white">
