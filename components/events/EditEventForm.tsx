@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 import ReactSelect from 'react-select';
 import { toast } from 'react-toastify';
@@ -340,6 +341,26 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					{slugWatcher !== event?.slug && eventSlugCheck && (
 						<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
 					)}
+				</div>
+
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="slug">
+						Color *<HelpTooltip message={copy.tooltip.color} />
+					</Label>
+					<Controller
+						control={control}
+						name="color"
+						render={({ field }) => (
+							<ChromePicker
+								disableAlpha
+								color={field.value}
+								onChange={(val) => {
+									field.onChange(val.hex);
+								}}
+							/>
+						)}
+					/>
+					{errors.color?.message && <ErrorMessage>{errors.color?.message}</ErrorMessage>}
 				</div>
 			</div>
 
