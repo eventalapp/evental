@@ -62,17 +62,6 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		initialPages
 	} = props;
 
-	console.log({
-		initialEvent,
-		initialIsOrganizer,
-		initialUser,
-		initialRoles,
-		initialSessions,
-		initialIsAttendee,
-		initialVenues,
-		initialSessionTypes,
-		initialPages
-	});
 	const router = useRouter();
 	const { eid } = router.query;
 	const { user } = useUser(initialUser);
