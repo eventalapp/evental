@@ -14,7 +14,7 @@ import Prisma from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { useLeaveEvent } from '../../hooks/mutations/useLeaveEvent';
+import { theme } from '../../tailwind.config';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
@@ -32,13 +32,16 @@ export const EventHeader: React.FC<{
 }> = (props) => {
 	const { user, event, isOrganizer, eid, isAttendee, adminLink = '/' } = props;
 
-	const leaveEventMutation = useLeaveEvent(event.slug, String(user?.slug));
-
 	return (
 		<div className="mb-7">
 			{user && isOrganizer && (
 				<Link href={`/events/${eid}/admin${adminLink}`}>
-					<a className="bg-primary block text-white px-5 py-3 rounded-md mb-4 font-medium">
+					<a
+						className="block text-white px-5 py-3 rounded-md mb-4 font-medium"
+						style={{
+							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+						}}
+					>
 						You are an organizer for this event, click here to manage this event
 					</a>
 				</Link>
@@ -46,7 +49,12 @@ export const EventHeader: React.FC<{
 
 			{user && !Boolean(isAttendee) && (
 				<Link href={`/events/${eid}/register`}>
-					<a className="bg-primary block text-white px-5 py-3 rounded-md mb-4 font-medium">
+					<a
+						className="block text-white px-5 py-3 rounded-md mb-4 font-medium"
+						style={{
+							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+						}}
+					>
 						Are you attending this event? Register here.
 					</a>
 				</Link>
@@ -60,7 +68,10 @@ export const EventHeader: React.FC<{
 								<button type="button" className="bg-white">
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="h-5 w-5 text-primary"
+										className="h-5 w-5"
+										style={{
+											color: event.color ?? theme.extend.colors.primary.DEFAULT
+										}}
 										size="1x"
 										icon={faShare}
 									/>
