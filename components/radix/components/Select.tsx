@@ -2,7 +2,6 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { SelectProps } from '@radix-ui/react-select';
 import cx from 'classnames';
-import React from 'react';
 import Button from './shared/Button';
 
 export type Option = {
@@ -19,7 +18,7 @@ const Select = (props: Props) => {
 
 	return (
 		<SelectPrimitive.Root {...rest}>
-			<SelectPrimitive.Trigger className="w-full">
+			<SelectPrimitive.Trigger className="w-full" asChild>
 				<Button className="w-full">
 					<SelectPrimitive.Value />
 					<SelectPrimitive.Icon className="ml-2">

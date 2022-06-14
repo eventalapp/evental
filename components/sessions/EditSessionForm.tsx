@@ -1,4 +1,4 @@
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
@@ -203,7 +203,20 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 							))}
 
 							<div className="flex items-center justify-center w-full h-full">
-								<AttachPeopleDialog eid={String(eid)} sid={String(sid)} />
+								<AttachPeopleDialog eid={String(eid)} sid={String(sid)}>
+									<button type="button">
+										<Tooltip message="Click to attach people to this session">
+											<div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-800 hover:text-primary-500 transition-colors duration-200">
+												<FontAwesomeIcon
+													fill="currentColor"
+													className="h-5 w-5"
+													size="1x"
+													icon={faPlus}
+												/>
+											</div>
+										</Tooltip>
+									</button>
+								</AttachPeopleDialog>
 							</div>
 						</ul>
 					</div>
