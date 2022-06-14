@@ -4,7 +4,6 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
@@ -16,7 +15,7 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
 import { useUser } from '../../../hooks/queries/useUser';
 import { ssrGetUser } from '../../../utils/api';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
@@ -35,7 +34,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	const { eid } = router.query;
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
 	const { user } = useUser(initialUser);
 
 	if (isEventLoading || isOrganizerLoading) {

@@ -1,9 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
 
-import { Footer } from '../../../../../../components/Footer';
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
@@ -11,20 +9,21 @@ import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
+import { Footer } from '../../../../../../components/Footer';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { useEditAttendeeMutation } from '../../../../../../hooks/mutations/useEditAttendeeMutation';
 import { useImageUploadMutation } from '../../../../../../hooks/mutations/useImageUploadMutation';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const EditAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, uid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { adminEditAttendeeMutation } = useEditAttendeeMutation(String(eid), String(uid));

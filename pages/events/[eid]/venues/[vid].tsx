@@ -6,7 +6,6 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { LoadingPage } from '../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
@@ -18,7 +17,7 @@ import PageWrapper from '../../../../components/layout/PageWrapper';
 import Tooltip from '../../../../components/radix/components/Tooltip';
 import { SessionList } from '../../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
 import { useSessionsByVenueQuery } from '../../../../hooks/queries/useSessionsByVenueQuery';
@@ -70,7 +69,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			initialData: initialSessionsByVenue
 		}
 	);
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid), initialOrganizer);
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
 
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages

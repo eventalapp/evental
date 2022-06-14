@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
@@ -15,7 +14,7 @@ import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween'
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { SessionList } from '../../../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { useSessionsQuery } from '../../../../../hooks/queries/useSessionsQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
@@ -23,7 +22,7 @@ import { useUser } from '../../../../../hooks/queries/useUser';
 const SessionsAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { sessionsData, isSessionsLoading } = useSessionsQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { event } = useEventQuery(String(eid));

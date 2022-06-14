@@ -17,7 +17,7 @@ import React from 'react';
 import { theme } from '../../tailwind.config';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
-import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
+import { PasswordlessUser } from '../../utils/stripUserPassword';
 import LeaveEventDialog from '../radix/components/LeaveEventDialog';
 import { ShareDropdown } from '../radix/components/ShareDropdown';
 import Tooltip from '../radix/components/Tooltip';
@@ -26,7 +26,7 @@ export const EventHeader: React.FC<{
 	event: Prisma.Event;
 	eid: string;
 	isOrganizer: boolean | undefined;
-	isAttendee: AttendeeWithUser | undefined;
+	isAttendee: boolean | undefined;
 	adminLink?: string | undefined;
 	user: PasswordlessUser | undefined;
 }> = (props) => {

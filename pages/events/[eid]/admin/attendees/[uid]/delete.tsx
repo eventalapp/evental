@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
@@ -15,14 +14,14 @@ import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { useAdminDeleteAttendeeMutation } from '../../../../../../hooks/mutations/useAdminDeleteAttendeeMutation';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useOrganizerQuery } from '../../../../../../hooks/queries/useOrganizerQuery';
+import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 
 const DeleteAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, uid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useOrganizerQuery(String(eid));
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
 	const { adminDeleteAttendeeMutation } = useAdminDeleteAttendeeMutation(String(eid), String(uid));
 	const { user, isUserLoading } = useUser();
