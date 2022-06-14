@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { useEventQuery, UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
@@ -66,6 +67,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 	const slugWatcher = watch('slug');
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
+	const colorWatcher = watch('color');
 
 	const { event: eventSlugCheck, isEventLoading: isEventSlugCheckLoading } =
 		useEventQuery(slugWatcher);
@@ -374,6 +376,9 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					type="submit"
 					className={`ml-4`}
 					variant="primary"
+					style={{
+						backgroundColor: colorWatcher ?? theme.extend.colors.primary.DEFAULT
+					}}
 					disabled={
 						editEventMutation.isLoading ||
 						isEventSlugCheckLoading ||
