@@ -2,7 +2,6 @@ import { Arrow, Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-me
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-
 import { UseSignOutMutationData } from '../../../hooks/mutations/useSignOutMutation';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { DropdownLink } from './Link';
@@ -17,7 +16,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 	return (
 		<Root>
 			<Trigger>
-				<div className="rounded-full w-10 h-10 relative border-2 border-gray-100">
+				<div className="rounded-full w-10 h-10 relative border border-gray-200 shadow-sm">
 					<Image
 						className="rounded-full"
 						layout="fill"

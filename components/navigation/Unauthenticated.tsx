@@ -1,10 +1,12 @@
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import classNames from 'classnames';
-import Link from 'next/link';
 import React from 'react';
 import { faBarsSquare } from '../../icons';
-import { FullscreenLinkItem } from '../events/navigation/Unauthenticated';
+import { FullscreenLinkItem } from './FullscreenLinkItem';
+import { LinkItem } from './LinkItem';
+import { LogoLinkItem } from './LogoLinkItem';
 import { NavigationWrapper } from './NavigationWrapper';
 
 interface UnauthenticatedProps {
@@ -18,58 +20,42 @@ export const Unauthenticated: React.FC<UnauthenticatedProps> = (props) => {
 	return (
 		<div>
 			<NavigationWrapper>
-				<div className="flex-row flex items-center space-x-7">
-					<Link href="/">
-						<a>
-							<span className="flex flex-row items-center">
-								<img
-									src="https://cdn.evental.app/images/logo.svg"
-									className="w-12 h-12 pr-3"
-									alt="logo"
-								/>
-								<strong
-									className="text-2xl tracking-tight font-bold font-display"
-									aria-label="evental homepage"
-								>
-									Evental
-								</strong>
-							</span>
-						</a>
-					</Link>
-					<div className="hidden sm:block ml-7 space-x-7">
-						<Link href={`/pricing`}>
-							<a>Pricing</a>
-						</Link>
-						<Link href={`/contact`}>
-							<a>Contact</a>
-						</Link>
-						<Link href={`/guides`}>
-							<a>Guides</a>
-						</Link>
-					</div>
-				</div>
+				<NavigationMenuPrimitive.Root className="w-full relative">
+					<NavigationMenuPrimitive.List className="flex items-center justify-between w-full max-w-7xl m-auto h-14 px-3">
+						<div>
+							<LogoLinkItem />
+						</div>
 
-				<div className="flex-row hidden sm:flex space-x-8 pr-7">
-					<Link href="/events">
-						<a>Events</a>
-					</Link>
-					<Link href={`/auth/signin`}>
-						<a>Sign in</a>
-					</Link>
-				</div>
+						<div className="h-full flex-row justify-end hidden lg:flex">
+							<div className="flex flex-row items-end">
+								<LinkItem link={`/pricing`} label={'Pricing'} />
+								<LinkItem link={`/contact`} label={'Contact'} />
+								<LinkItem link={`/guides`} label={'Guides'} />
+								<LinkItem link={`/events`} label={'Events'} />
+							</div>
+						</div>
 
-				<div className="flex-row flex space-x-8 font-medium sm:hidden">
-					<FontAwesomeIcon
-						className="cursor-pointer text-gray-900"
-						size="2x"
-						fill="currentColor"
-						icon={faBarsSquare}
-						onClick={() => {
-							setIsOpen(true);
-						}}
-					/>
-				</div>
+						<div className="flex-row space-x-8 font-medium flex lg:hidden">
+							<FontAwesomeIcon
+								className="cursor-pointer text-gray-900"
+								size="2x"
+								fill="currentColor"
+								icon={faBarsSquare}
+								onClick={() => {
+									setIsOpen(true);
+								}}
+							/>
+						</div>
+
+						<div className="h-full flex-row justify-end hidden lg:flex">
+							<div className="flex flex-row items-end">
+								<LinkItem link={`/auth/signin`} label={'Sign in'} />
+							</div>
+						</div>
+					</NavigationMenuPrimitive.List>
+				</NavigationMenuPrimitive.Root>
 			</NavigationWrapper>
+
 			<ul
 				className={classNames(
 					'fixed top-0 bottom-0 bg-white w-full z-50 transition-all duration-100',
