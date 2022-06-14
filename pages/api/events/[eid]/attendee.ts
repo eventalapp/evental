@@ -10,10 +10,17 @@ export default api({
 			return false;
 		}
 
-		return await getIsAttendee(user?.id, String(eid));
+		return await getIsAttendee({ userId: user?.id, eid: String(eid) });
 	}
 });
 
-export const getIsAttendee = async (userId: string | undefined, eid: string): Promise<boolean> => {
+type IsAttendeeArguments = {
+	eid: string;
+	userId: string | undefined;
+};
+
+export const getIsAttendee = async (args: IsAttendeeArguments): Promise<boolean> => {
+	const { eid, userId } = args;
+
 	return userId ? await isAttendee(userId, String(eid)) : false;
 };

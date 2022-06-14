@@ -1,5 +1,8 @@
 import { api } from '../../../../../../utils/api';
-import { isSessionAttendee } from '../../../../../../utils/isSessionAttendee';
+import {
+	isSessionAttendee,
+	IsSessionAttendeeArguments
+} from '../../../../../../utils/isSessionAttendee';
 
 export default api({
 	async GET({ ctx, req }) {
@@ -14,16 +17,10 @@ export default api({
 	}
 });
 
-type GetIsSessionAttendeeArguments = {
-	eid: string;
-	sid: string;
-	userId: string | undefined;
-};
-
-export const getIsSessionAttendee = async (
-	args: GetIsSessionAttendeeArguments
-): Promise<boolean> => {
+export const getIsSessionAttendee = async (args: IsSessionAttendeeArguments): Promise<boolean> => {
 	const { eid, sid, userId } = args;
 
-	return userId ? await isSessionAttendee(userId, String(eid), String(sid)) : false;
+	return userId
+		? await isSessionAttendee({ eid: String(eid), userId: userId, sid: String(sid) })
+		: false;
 };

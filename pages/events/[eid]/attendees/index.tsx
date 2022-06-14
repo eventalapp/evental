@@ -13,9 +13,9 @@ import { EventNavigation } from '../../../../components/events/navigation';
 import { Footer } from '../../../../components/Footer';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { useAttendeeQuery } from '../../../../hooks/queries/useAttendeeQuery';
 import { useAttendeesQuery } from '../../../../hooks/queries/useAttendeesQuery';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
+import { useIsAttendeeQuery } from '../../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../../hooks/queries/useRolesQuery';
@@ -23,8 +23,8 @@ import { useUser } from '../../../../hooks/queries/useUser';
 import { ssrGetUser } from '../../../../utils/api';
 import { AttendeeWithUser, PasswordlessUser } from '../../../../utils/stripUserPassword';
 import { getEvent } from '../../../api/events/[eid]';
+import { getIsAttendee } from '../../../api/events/[eid]/attendee';
 import { getAttendees } from '../../../api/events/[eid]/attendees';
-import { getAttendee } from '../../../api/events/[eid]/attendees/[uid]';
 import { getIsOrganizer } from '../../../api/events/[eid]/organizer';
 import { getPages } from '../../../api/events/[eid]/pages';
 import { getRoles } from '../../../api/events/[eid]/roles';
@@ -35,7 +35,7 @@ type Props = {
 	initialUser: PasswordlessUser | undefined;
 	initialEvent: Prisma.Event | undefined;
 	initialRoles: Prisma.EventRole[] | undefined;
-	initialIsAttendeeByUserId: AttendeeWithUser | undefined;
+	initialIsAttendee: boolean;
 	initialOrganizer: boolean;
 	initialPages: Prisma.EventPage[] | undefined;
 };
@@ -43,7 +43,7 @@ type Props = {
 const ViewAttendeePage: NextPage<Props> = (props) => {
 	const {
 		initialAttendees,
-		initialIsAttendeeByUserId,
+		initialIsAttendee,
 		initialEvent,
 		initialOrganizer,
 		initialUser,
@@ -58,11 +58,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
 	const { user } = useUser(initialUser);
-	const {
-		attendee: isAttendee,
-		attendeeError,
-		isAttendeeLoading
-	} = useAttendeeQuery(String(eid), String(user?.id), initialIsAttendeeByUserId);
+	const { isAttendee, isAttendeeLoading } = useIsAttendeeQuery(String(eid), initialIsAttendee);
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
 	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
 		initialData: initialPages
@@ -83,8 +79,8 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 		return <NotFoundPage message="No attendees not found." />;
 	}
 
-	if (attendeesError || attendeeError || eventError || rolesError) {
-		return <ViewErrorPage errors={[attendeesError, attendeeError, eventError, rolesError]} />;
+	if (attendeesError || eventError || rolesError) {
+		return <ViewErrorPage errors={[attendeesError, eventError, rolesError]} />;
 	}
 
 	if (!event) {
@@ -157,8 +153,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 	const initialRoles = (await getRoles(String(eid))) ?? undefined;
 	const initialSessions = (await getSessions(String(eid))) ?? undefined;
 	const initialOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialIsAttendeeByUserId =
-		(await getAttendee(String(eid), String(initialUser?.id))) ?? undefined;
+	const initialIsAttendee =
+		(await getIsAttendee({ eid: String(eid), userId: String(initialUser?.id) })) ?? undefined;
 	const initialPages = (await getPages(String(eid))) ?? undefined;
 
 	return {
@@ -167,7 +163,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 			initialAttendees,
 			initialEvent,
 			initialOrganizer,
-			initialIsAttendeeByUserId,
+			initialIsAttendee,
 			initialRoles,
 			initialSessions,
 			initialPages
