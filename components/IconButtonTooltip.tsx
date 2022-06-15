@@ -22,7 +22,7 @@ export const IconButtonTooltip: Props = (props) => {
 		<Tooltip message={message} side={side}>
 			<div
 				className={classNames(
-					'p-1 -mr-1 inline-block disabled:text-gray-300 disabled:cursor-not-allowed',
+					'-mr-1 inline-block disabled:text-gray-300 disabled:cursor-not-allowed',
 					className
 				)}
 			>
@@ -30,12 +30,12 @@ export const IconButtonTooltip: Props = (props) => {
 					{isLoading ? (
 						<FontAwesomeIcon
 							fill="currentColor"
-							className="h-6 w-6 animate-spin"
+							className="h-6 w-6 animate-spin p-1"
 							size="1x"
 							icon={faSpinnerThird}
 						/>
 					) : (
-						<FontAwesomeIcon fill="currentColor" className="h-6 w-6" size="1x" icon={icon} />
+						<FontAwesomeIcon fill="currentColor" className="h-6 w-6 p-1" size="1x" icon={icon} />
 					)}
 				</button>
 			</div>
