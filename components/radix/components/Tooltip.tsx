@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Tooltip: React.FC<Props> = (props) => {
-	const { children, message, side } = props;
+	const { children, message, side = 'top' } = props;
 
 	return (
 		<TooltipPrimitive.Provider delayDuration={100}>
