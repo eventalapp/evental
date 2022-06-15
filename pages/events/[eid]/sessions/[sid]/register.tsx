@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
@@ -68,7 +67,6 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 		initialData: initialPages
 	});
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
-	const { handleSubmit } = useForm();
 
 	if (
 		isSessionLoading ||
