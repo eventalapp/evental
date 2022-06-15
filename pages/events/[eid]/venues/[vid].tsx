@@ -1,7 +1,4 @@
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
-import parse from 'html-react-parser';
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
@@ -14,8 +11,7 @@ import { EventNavigation } from '../../../../components/events/navigation';
 import { Footer } from '../../../../components/Footer';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import Tooltip from '../../../../components/radix/components/Tooltip';
-import { SessionList } from '../../../../components/sessions/SessionList';
+import { ViewVenue } from '../../../../components/venues/ViewVenue';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../hooks/queries/usePagesQuery';
@@ -132,39 +128,14 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
-				<div className="mb-5">
-					<h3 className="text-xl md:text-2xl font-medium mb-1">{venue.name}</h3>
-
-					<div className="text-gray-600">
-						<Tooltip
-							message={
-								venue.address
-									? `This is venue is located at ${venue?.address}.`
-									: 'This venue has not specified an address'
-							}
-						>
-							<div className="inline-flex flex-row items-center mb-1 cursor-help">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
-									size="1x"
-									icon={faLocationDot}
-								/>
-								{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
-							</div>
-						</Tooltip>
-					</div>
-
-					{venue.description && (
-						<div className="prose focus:outline-none prose-a:text-primary mt-1">
-							{parse(String(venue.description))}
-						</div>
-					)}
-				</div>
-
-				{sessionsByVenueData && (
-					<SessionList eid={String(eid)} sessions={sessionsByVenueData} event={event} user={user} />
-				)}
+				<ViewVenue
+					eid={String(eid)}
+					vid={String(vid)}
+					event={event}
+					sessions={sessionsByVenueData}
+					user={user}
+					venue={venue}
+				/>
 			</Column>
 
 			<Footer />
