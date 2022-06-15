@@ -78,13 +78,10 @@ export const EventHeader: React.FC<{
 					<ShareDropdown event={event}>
 						<div>
 							<Tooltip side={'top'} message={'Share this event.'}>
-								<button type="button" className="w-6 h-6">
+								<button type="button" className="w-6 h-6 text-gray-700">
 									<FontAwesomeIcon
 										fill="currentColor"
 										className="h-5 w-5"
-										style={{
-											color: event.color ?? theme.extend.colors.primary.DEFAULT
-										}}
 										size="1x"
 										icon={faShare}
 									/>
