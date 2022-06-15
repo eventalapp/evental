@@ -3,13 +3,16 @@ import { formatInTimeZone } from 'date-fns-tz';
 import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
+import { useForm } from 'react-hook-form';
+import { LoadingInner } from '../../../components/error/LoadingInner';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
-import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';
 import { Footer } from '../../../components/Footer';
+import { Button } from '../../../components/form/Button';
+import { LinkButton } from '../../../components/form/LinkButton';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
@@ -36,13 +39,53 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 	const { createAttendeeMutation } = useCreateAttendeeMutation(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
 	const { user } = useUser(initialUser);
+	const { handleSubmit } = useForm();
 
 	if (isEventLoading || isOrganizerLoading) {
 		return <LoadingPage />;
 	}
 
+	if (!event) {
+		return <NotFoundPage />;
+	}
+
 	if (!user?.id) {
-		return <UnauthorizedPage />;
+		let params = new URLSearchParams();
+
+		params.append('redirectUrl', String(router.asPath));
+
+		return (
+			<PageWrapper>
+				<Navigation />
+
+				<Column variant="halfWidth">
+					<div className="space-y-5">
+						<h1 className="text-2xl md:text-3xl font-bold">Create an account</h1>
+						<p className="text-gray-700">
+							To register for this event, please{' '}
+							<Link href={`/auth/signup?${params}`}>
+								<a className="underline text-gray-900">create an account</a>
+							</Link>{' '}
+							or{' '}
+							<Link href={`/auth/signin?${params}`}>
+								<a className="underline text-gray-900">sign in</a>
+							</Link>{' '}
+							with your existing account.
+						</p>
+						<div className="flex flex-row justify-end">
+							<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
+								Cancel
+							</Button>
+							<Link href={`/auth/signin?${params}`} passHref>
+								<LinkButton padding="large">Sign in</LinkButton>
+							</Link>
+						</div>
+					</div>
+				</Column>
+
+				<Footer />
+			</PageWrapper>
+		);
 	}
 
 	if (!event) {
@@ -92,19 +135,33 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 				}}
 			/>
 			<Navigation />
-			<Column variant="halfWidth">
+			<Column variant="halfWidth" className="space-y-5">
 				<h1 className="text-2xl md:text-3xl font-bold">Register for {event.name}</h1>
 
-				<p className="text-gray-700 mt-2">
+				<p className="text-gray-700">
 					To attend this event, please click the register button below.
 				</p>
 
-				<CreateAttendeeForm
-					event={event}
-					eventError={eventError}
-					isEventLoading={isEventLoading}
-					createAttendeeMutation={createAttendeeMutation}
-				/>
+				<form
+					onSubmit={() => {
+						createAttendeeMutation.mutate();
+					}}
+				>
+					<div className="flex flex-row justify-end">
+						<Button type="button" variant="no-bg" onClick={router.back}>
+							Cancel
+						</Button>
+						<Button
+							type="submit"
+							className="ml-4"
+							variant="primary"
+							padding="medium"
+							disabled={createAttendeeMutation.isLoading}
+						>
+							{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
+						</Button>
+					</div>
+				</form>
 			</Column>
 
 			<Footer />
