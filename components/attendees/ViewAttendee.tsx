@@ -41,7 +41,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				</div>
 
 				{admin && (
-					<div className="space-x-5">
+					<div className="space-x-4">
 						<IconLinkTooltip
 							message="Click to edit this attendee"
 							side="top"
