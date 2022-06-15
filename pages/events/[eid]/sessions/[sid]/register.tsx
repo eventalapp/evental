@@ -3,6 +3,8 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { LoadingInner } from '../../../../../components/error/LoadingInner';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
@@ -10,9 +12,9 @@ import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPa
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/navigation';
 import { Footer } from '../../../../../components/Footer';
+import { Button } from '../../../../../components/form/Button';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { CreateSessionAttendeeForm } from '../../../../../components/sessions/CreateSessionAttendeeForm';
 import { useCreateSessionAttendeeMutation } from '../../../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -67,6 +69,7 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 		initialData: initialPages
 	});
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialOrganizer);
+	const { handleSubmit } = useForm();
 
 	if (
 		isSessionLoading ||
@@ -127,19 +130,33 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
-			<Column variant="halfWidth">
+			<Column variant="halfWidth" className="space-y-5">
 				<h1 className="text-2xl md:text-3xl font-medium">Register for {session.name}</h1>
 
-				<p className="text-gray-700 mt-2">
+				<p className="text-gray-700">
 					To attend this session, please click the register button below.
 				</p>
 
-				<CreateSessionAttendeeForm
-					session={session}
-					sessionError={sessionError}
-					isSessionLoading={isSessionLoading}
-					createSessionAttendeeMutation={createSessionAttendeeMutation}
-				/>
+				<form
+					onSubmit={handleSubmit(() => {
+						createSessionAttendeeMutation.mutate();
+					})}
+				>
+					<div className="flex flex-row justify-end">
+						<Button type="button" variant="no-bg" onClick={router.back}>
+							Cancel
+						</Button>
+						<Button
+							type="submit"
+							className="ml-4"
+							variant="primary"
+							padding="medium"
+							disabled={createSessionAttendeeMutation.isLoading}
+						>
+							{createSessionAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
+						</Button>
+					</div>
+				</form>
 			</Column>
 
 			<Footer />
