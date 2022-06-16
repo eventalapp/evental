@@ -147,32 +147,34 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 					{session.roleMembers && session.roleMembers.length > 0 && (
 						<ul className="mt-4 grid grid-cols-4 gap-2">
 							{session.roleMembers.slice(0, 4).map((roleMember) => (
-								<li
+								<Tooltip
+									message={`Click to view ${roleMember.attendee.user.name}'s profile`}
 									key={roleMember.attendee.id}
-									className="relative flex h-full flex-col items-center justify-between"
 								>
-									<Link
-										href={`/events/${event.slug}${admin ? '/admin' : ''}/attendees/${
-											roleMember.attendee.user.slug
-										}`}
-									>
-										<a className="flex h-full flex-col items-center justify-start">
-											<div className="relative mb-1 h-14 w-14 rounded-md border border-gray-200 shadow-sm">
-												<Image
-													alt={String(roleMember.attendee.user.name)}
-													src={String(
-														roleMember.attendee?.user.image
-															? `https://cdn.evental.app${roleMember.attendee?.user.image}`
-															: `https://cdn.evental.app/images/default-avatar.jpg`
-													)}
-													className="rounded-md"
-													layout="fill"
-												/>
-											</div>
-											<span className="text-center text-sm">{roleMember.attendee.user.name}</span>
-										</a>
-									</Link>
-								</li>
+									<li className="relative flex h-full flex-col items-center justify-between">
+										<Link
+											href={`/events/${event.slug}${admin ? '/admin' : ''}/attendees/${
+												roleMember.attendee.user.slug
+											}`}
+										>
+											<a className="flex h-full flex-col items-center justify-start">
+												<div className="relative mb-1 h-14 w-14 rounded-md border border-gray-200 shadow-sm">
+													<Image
+														alt={String(roleMember.attendee.user.name)}
+														src={String(
+															roleMember.attendee?.user.image
+																? `https://cdn.evental.app${roleMember.attendee?.user.image}`
+																: `https://cdn.evental.app/images/default-avatar.jpg`
+														)}
+														className="rounded-md"
+														layout="fill"
+													/>
+												</div>
+												<span className="text-center text-sm">{roleMember.attendee.user.name}</span>
+											</a>
+										</Link>
+									</li>
+								</Tooltip>
 							))}
 						</ul>
 					)}
