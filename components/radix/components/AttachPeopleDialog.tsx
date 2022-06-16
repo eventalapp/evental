@@ -121,7 +121,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 											className="flex w-full flex-row flex-wrap items-center justify-between"
 										>
 											<div className="flex items-center">
-												<div className="relative h-12 w-12 rounded-full border border-gray-100">
+												<div className="relative h-12 w-12 rounded-md border border-gray-200 shadow-sm">
 													<Image
 														alt={String(attendee.user.name)}
 														src={String(
@@ -129,7 +129,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 																? `https://cdn.evental.app${attendee?.user.image}`
 																: `https://cdn.evental.app/images/default-avatar.jpg`
 														)}
-														className="rounded-full"
+														className="rounded-md"
 														layout="fill"
 													/>
 												</div>

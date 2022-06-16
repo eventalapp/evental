@@ -9,7 +9,6 @@ type Props = {
 	placeholderImageUrl?: string;
 	files: FileWithPreview[];
 	setFiles: React.Dispatch<React.SetStateAction<FileWithPreview[]>>;
-	rounded?: boolean;
 };
 
 export type FileWithPreview = {
@@ -20,8 +19,7 @@ export const AvatarUpload: React.FC<Props> = (props) => {
 	const {
 		placeholderImageUrl = 'https://cdn.evental.app/images/default-avatar.jpg',
 		files,
-		setFiles,
-		rounded = true
+		setFiles
 	} = props;
 
 	useEffect(() => {
@@ -59,8 +57,7 @@ export const AvatarUpload: React.FC<Props> = (props) => {
 								<div className="relative inline-block" key={`${i}-${file.name}`}>
 									<img
 										className={classNames(
-											'h-32 w-32 border border-gray-300 bg-gray-200 object-cover object-center shadow-sm',
-											rounded ? 'rounded-full' : 'rounded-md'
+											'h-32 w-32 rounded-md border border-gray-300 bg-gray-200 object-cover object-center shadow-sm'
 										)}
 										src={file.preview}
 										alt="profile"
@@ -75,8 +72,7 @@ export const AvatarUpload: React.FC<Props> = (props) => {
 								<img
 									alt="avatar"
 									className={classNames(
-										'h-32 w-32 border border-gray-300 bg-gray-200 object-cover object-center shadow-sm',
-										rounded ? 'rounded-full' : 'rounded-md'
+										'h-32 w-32 rounded-md border border-gray-300 bg-gray-200 object-cover object-center shadow-sm'
 									)}
 									src={placeholderImageUrl}
 								/>

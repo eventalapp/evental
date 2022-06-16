@@ -123,7 +123,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			</FlexRowBetween>
 
-			<div className="mb-5">
+			<div className="mb-4">
 				<div className="flex flex-row flex-wrap items-center text-gray-600">
 					{session?.type?.name && (
 						<div className="mr-3 block">
@@ -190,6 +190,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							</Link>
 						</div>
 					)}
+
 					{session?.maxAttendees !== null && (
 						<div className="mr-3 block">
 							<Tooltip
@@ -211,12 +212,13 @@ export const ViewSession: React.FC<Props> = (props) => {
 						</div>
 					)}
 				</div>
-				{session.description && (
-					<div className="prose mt-1 focus:outline-none prose-a:text-primary">
-						{parse(String(session.description))}
-					</div>
-				)}
 			</div>
+
+			{session.description && (
+				<div className="prose mt-1 focus:outline-none prose-a:text-primary">
+					{parse(String(session.description))}
+				</div>
+			)}
 
 			{roleAttendees &&
 				Object.entries(roleAttendees.reduce(sessionAttendeeReducer, {})).map(([key, attendees]) => (
@@ -233,7 +235,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				Attendees <span className="font-normal text-gray-500">({attendees?.length || 0})</span>
 			</h3>
 
-			{attendees && <AttendeeList admin={admin} eid={eid} attendees={attendees} />}
+			{attendees && <AttendeeList admin={admin} eid={eid} attendees={attendees} tiny />}
 		</div>
 	);
 };
