@@ -223,7 +223,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 			{roleAttendees &&
 				Object.entries(roleAttendees.reduce(sessionAttendeeReducer, {})).map(([key, attendees]) => (
 					<div key={key}>
-						<h3 className="my-3 text-2xl font-medium">
+						<h3 className="my-3 mt-5 text-2xl font-medium">
 							{key}s <span className="font-normal text-gray-500">({attendees?.length || 0})</span>
 						</h3>
 
@@ -231,7 +231,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 					</div>
 				))}
 
-			<h3 className="my-3 text-2xl font-medium">
+			<h3 className="my-3 mt-5 text-2xl font-medium">
 				Attendees <span className="font-normal text-gray-500">({attendees?.length || 0})</span>
 			</h3>
 
