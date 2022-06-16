@@ -23,8 +23,8 @@ export const ViewPage: React.FC<Props> = (props) => {
 		<div>
 			<FlexRowBetween>
 				<div>
-					<h1 className="text-2xl md:text-3xl font-medium">{page.name}</h1>
-					<span className="text-sm block text-gray-600">
+					<h1 className="text-2xl font-medium md:text-3xl">{page.name}</h1>
+					<span className="block text-sm text-gray-600">
 						Updated {formatDistance(new Date(page.updatedAt), new Date(), { addSuffix: true })}
 					</span>
 				</div>
@@ -50,7 +50,7 @@ export const ViewPage: React.FC<Props> = (props) => {
 			</FlexRowBetween>
 
 			{page.body && (
-				<div className="prose focus:outline-none prose-a:text-primary mt-1">
+				<div className="prose mt-1 focus:outline-none prose-a:text-primary">
 					{parse(String(page.body))}
 				</div>
 			)}

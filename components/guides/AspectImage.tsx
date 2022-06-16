@@ -17,7 +17,7 @@ export const AspectImage: Props = (props) => {
 		<div
 			className={classNames(
 				className,
-				'w-full relative border border-gray-200 shadow-sm rounded-md'
+				'relative w-full rounded-md border border-gray-200 shadow-sm'
 			)}
 			{...rest}
 		>

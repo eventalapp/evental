@@ -66,9 +66,9 @@ const SignInPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<div className="max-w-sm m-auto">
-					<div className="flex flex-row justify-between mb-3">
-						<h1 className="text-2xl md:text-3xl font-bold">Sign in</h1>
+				<div className="m-auto max-w-sm">
+					<div className="mb-3 flex flex-row justify-between">
+						<h1 className="text-2xl font-bold md:text-3xl">Sign in</h1>
 					</div>
 
 					<SignInForm signInMutation={signInMutation} params={params.toString()} />

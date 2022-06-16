@@ -63,14 +63,14 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				createEventMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full mt-5">
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+			<div className="mt-5 flex w-full flex-col">
+				<div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
 					<div>
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Event name" {...register('name')} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
-					<div className="grid grid-cols-1 lg:grid-cols-2 mb-5 gap-5">
+					<div className="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
 						<div>
 							<Label htmlFor="startDate">Start Date *</Label>
 							<div className="relative">

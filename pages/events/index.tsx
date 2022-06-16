@@ -69,14 +69,14 @@ const EventsPage: NextPage<Props> = (props) => {
 				<Navigation />
 
 				<Column>
-					<h1 className="text-2xl md:text-3xl font-bold mb-3 text-center">Upcoming Events</h1>
+					<h1 className="mb-3 text-center text-2xl font-bold md:text-3xl">Upcoming Events</h1>
 
 					{user && <EventsPageNavigation />}
 
-					<span className="block text-base mt-5 text-center">
+					<span className="mt-5 block text-center text-base">
 						No events found.{' '}
 						<Link href="/events/create" passHref>
-							<a className="mt-3 text-primary font-medium">Create an Event</a>
+							<a className="mt-3 font-medium text-primary">Create an Event</a>
 						</Link>
 					</span>
 				</Column>
@@ -110,7 +110,7 @@ const EventsPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-2xl md:text-3xl font-bold mb-3 text-center">Upcoming Events</h1>
+				<h1 className="mb-3 text-center text-2xl font-bold md:text-3xl">Upcoming Events</h1>
 
 				{user && <EventsPageNavigation />}
 

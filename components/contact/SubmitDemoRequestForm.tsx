@@ -30,7 +30,7 @@ export const SubmitDemoRequestForm = () => {
 			className="w-full"
 		>
 			<div className="space-y-6">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					<div>
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="John Doe" {...register('name')} />
@@ -44,7 +44,7 @@ export const SubmitDemoRequestForm = () => {
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<div className="grid grid-cols-1 gap-6 md:grid-cols-2">
 					<div>
 						<Label htmlFor="organizationName">Organization *</Label>
 						<Input placeholder="Organization Name" {...register('organizationName')} />

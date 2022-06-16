@@ -10,12 +10,13 @@ import ReactSelect from 'react-select';
 import { toast } from 'react-toastify';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
-import { useEventQuery, UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { DatePicker } from '../form/DatePicker';
@@ -23,7 +24,6 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
-import { HelpTooltip } from '../HelpTooltip';
 import Select from '../radix/components/Select';
 import Button from '../radix/components/shared/Button';
 
@@ -102,8 +102,8 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				editEventMutation.mutate(data);
 			})}
 		>
-			<div className="grid grid-cols-4 gap-5 grid-flow-row-dense my-5">
-				<div className="col-span-2 md:col-span-1 row-span-2">
+			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
+				<div className="col-span-2 row-span-2 md:col-span-1">
 					<Label htmlFor="image">Image</Label>
 
 					<AvatarUpload
@@ -202,7 +202,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						render={({ field }) => (
 							<ReactSelect
 								options={timeZoneOptions}
-								className="w-full block"
+								className="block w-full"
 								value={timeZoneOptions.find((val) => val.value === field.value)}
 								onChange={(val) => {
 									field.onChange(val?.value);
@@ -272,17 +272,17 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<Input onChange={() => {}} value={`${event.maxAttendees}`} type="number" />
 					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 					{event.level === 'TRIAL' ? (
-						<p className="text-gray-600 text-sm mt-1">
+						<p className="mt-1 text-sm text-gray-600">
 							Want to increase your max attendee count?{' '}
 							<Link href={`/events/${event.slug}/admin/billing`}>
-								<a className="text-primary font-medium">Upgrade your plan</a>
+								<a className="font-medium text-primary">Upgrade your plan</a>
 							</Link>
 						</p>
 					) : (
-						<p className="text-gray-600 text-sm mt-1">
+						<p className="mt-1 text-sm text-gray-600">
 							Want to increase your max attendee count?{' '}
 							<Link href={`/contact`}>
-								<a className="text-primary font-medium">Contact Us</a>
+								<a className="font-medium text-primary">Contact Us</a>
 							</Link>
 						</p>
 					)}
@@ -314,10 +314,10 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					)}
 					{errors.privacy?.message && <ErrorMessage>{errors.privacy?.message}</ErrorMessage>}
 					{event.level === 'TRIAL' && (
-						<p className="text-gray-600 text-sm mt-1">
+						<p className="mt-1 text-sm text-gray-600">
 							Want to make your event public?{' '}
 							<Link href={`/events/${event.slug}/admin/billing`}>
-								<a className="text-primary font-medium">Upgrade your plan</a>
+								<a className="font-medium text-primary">Upgrade your plan</a>
 							</Link>
 						</p>
 					)}

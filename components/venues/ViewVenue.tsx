@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import parse from 'html-react-parser';
 import React from 'react';
+
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
@@ -29,7 +30,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 		<div>
 			<div className="mb-5">
 				<FlexRowBetween className="mb-1">
-					<h3 className="text-xl md:text-2xl font-medium">{venue.name}</h3>
+					<h3 className="text-xl font-medium md:text-2xl">{venue.name}</h3>
 
 					{admin && (
 						<div className="space-x-4">
@@ -57,10 +58,10 @@ export const ViewVenue: React.FC<Props> = (props) => {
 							: 'This venue has not specified an address'
 					}
 				>
-					<div className="inline-flex flex-row items-center mb-1 cursor-help">
+					<div className="mb-1 inline-flex cursor-help flex-row items-center">
 						<FontAwesomeIcon
 							fill="currentColor"
-							className="w-5 h-5 mr-1.5"
+							className="mr-1.5 h-5 w-5"
 							size="1x"
 							icon={faLocationDot}
 						/>
@@ -68,13 +69,13 @@ export const ViewVenue: React.FC<Props> = (props) => {
 					</div>
 				</Tooltip>
 				{venue.description && (
-					<div className="prose focus:outline-none prose-a:text-primary mt-1">
+					<div className="prose mt-1 focus:outline-none prose-a:text-primary">
 						{parse(String(venue.description))}
 					</div>
 				)}
 			</div>
 
-			<h3 className="text-xl md:text-2xl font-medium mb-3">
+			<h3 className="mb-3 text-xl font-medium md:text-2xl">
 				Sessions <span className="font-normal text-gray-500">({sessions.length || 0})</span>
 			</h3>
 

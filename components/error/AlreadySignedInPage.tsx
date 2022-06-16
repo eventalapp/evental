@@ -17,8 +17,8 @@ export const AlreadySignedInPage = () => (
 		<Navigation />
 
 		<Column variant="halfWidth" className="flex flex-col items-center justify-center">
-			<div className="flex flex-row justify-between mb-3">
-				<h1 className="text-2xl md:text-3xl font-bold">Sign in</h1>
+			<div className="mb-3 flex flex-row justify-between">
+				<h1 className="text-2xl font-bold md:text-3xl">Sign in</h1>
 			</div>
 			<p>You are already signed in.</p>
 			<Link href="/" passHref>

@@ -45,15 +45,15 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 			})}
 		>
 			<div className="flex flex-col items-center">
-				<div className="bg-white border-gray-300 border rounded shadow-sm p-5 flex flex-col justify-between items-center space-y-4 max-w-[450px] min-h-[350px] my-3">
+				<div className="my-3 flex min-h-[350px] max-w-[450px] flex-col items-center justify-between space-y-4 rounded border border-gray-300 bg-white p-5 shadow-sm">
 					<div className="flex flex-row items-center">
 						<strong
-							className="text-2xl tracking-tight font-bold font-display mr-2"
+							className="mr-2 font-display text-2xl font-bold tracking-tight"
 							aria-label="evental homepage"
 						>
 							Evental
 						</strong>
-						<span className="bg-primary text-white px-2 py-1 font-medium text-xs rounded">PRO</span>
+						<span className="rounded bg-primary px-2 py-1 text-xs font-medium text-white">PRO</span>
 					</div>
 
 					<p className="text-gray-700">
@@ -62,11 +62,11 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 					</p>
 
 					<div>
-						<p className="font-bold text-2xl md:text-3xl text-center">
-							<span className="align-text-top text-lg text-gray-700 mr-0.5">$</span>
+						<p className="text-center text-2xl font-bold md:text-3xl">
+							<span className="mr-0.5 align-text-top text-lg text-gray-700">$</span>
 							{proAttendeePricing[attendees].price}
 						</p>
-						<p className="text-gray-600 text-sm text-center">
+						<p className="text-center text-sm text-gray-600">
 							Includes {attendees} attendees (
 							{proAttendeePricing[attendees].perAttendeePrice < 1
 								? `${Math.ceil(proAttendeePricing[attendees].perAttendeePrice * 100)}¢`
@@ -88,7 +88,7 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 					</Link>
 				</div>
 
-				<div className="flex flex-col items-center space-y-3 mt-4">
+				<div className="mt-4 flex flex-col items-center space-y-3">
 					<p className="text-lg font-medium">How many attendees are you expecting?</p>
 					<Controller
 						control={control}
@@ -110,7 +110,7 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 						<p className="text-gray-600">
 							Expecting more than 5,000 people?{' '}
 							<Link href="/contact">
-								<a className="text-primary font-medium">Ask us for a same-day quote.</a>
+								<a className="font-medium text-primary">Ask us for a same-day quote.</a>
 							</Link>
 						</p>
 					)}

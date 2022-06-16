@@ -1,6 +1,7 @@
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import Prisma from '@prisma/client';
 import React from 'react';
+
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
@@ -27,11 +28,11 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 			<FlexRowBetween>
 				<div className="flex flex-row items-center justify-between">
 					<div
-						className="rounded-full mr-3 w-4 h-4"
+						className="mr-3 h-4 w-4 rounded-full"
 						style={{ backgroundColor: sessionType.color ?? '#888888' }}
 					/>
 					<div>
-						<h3 className="text-xl md:text-2xl font-medium">{sessionType.name}</h3>
+						<h3 className="text-xl font-medium md:text-2xl">{sessionType.name}</h3>
 					</div>
 				</div>
 

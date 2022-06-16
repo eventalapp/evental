@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Prisma from '@prisma/client';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
 import { UseAdminCreateAttendeeMutationData } from '../../hooks/mutations/useAdminCreateAttendeeMutation';
 import { AdminCreateAttendeePayload, AdminCreateAttendeeSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
@@ -48,7 +49,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 				adminCreateAttendeeMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full items-center justify-center">
+			<div className="flex w-full flex-col items-center justify-center">
 				<Label htmlFor="image" className="hidden">
 					Image
 				</Label>
@@ -61,8 +62,8 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 
 				{errors.image?.message && <ErrorMessage>{errors.image?.message}</ErrorMessage>}
 			</div>
-			<div className="flex flex-col w-full">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+			<div className="flex w-full flex-col">
+				<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Name" {...register('name')} />
@@ -77,8 +78,8 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className="flex flex-col w-full">
-				<div className="grid grid-cols-1 md:grid-cols-2gap-5">
+			<div className="flex w-full flex-col">
+				<div className="md:grid-cols-2gap-5 grid grid-cols-1">
 					<div>
 						<Label htmlFor="name">Email *</Label>
 						<Input placeholder="john@email.com" {...register('email')} />
@@ -86,8 +87,8 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-col w-full">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+			<div className="flex w-full flex-col">
+				<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="position">Position</Label>
 						<Input placeholder="Position" {...register('position')} />
@@ -121,7 +122,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 					)}
 				</div>
 			</div>
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+			<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 				<div>
 					<Label htmlFor="website">Website</Label>
 					<Input placeholder="Website" {...register('website')} />
@@ -151,7 +152,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 					)}
 
 					<CreateRoleDialog eid={String(eid)}>
-						<span className="text-gray-600 text-sm mt-1 cursor-pointer">
+						<span className="mt-1 cursor-pointer text-sm text-gray-600">
 							Dont see your role? Create a role
 						</span>
 					</CreateRoleDialog>

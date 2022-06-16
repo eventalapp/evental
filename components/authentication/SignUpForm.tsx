@@ -29,7 +29,7 @@ export const SignUpForm: React.FC<Props> = (props) => {
 				signUpMutation.mutate(data);
 			})}
 		>
-			<div className="w-full mt-5">
+			<div className="mt-5 w-full">
 				<div>
 					<Label htmlFor="name">Name *</Label>
 					<Input placeholder="Name" {...register('name')} />
@@ -37,7 +37,7 @@ export const SignUpForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className="w-full mt-5">
+			<div className="mt-5 w-full">
 				<div>
 					<Label htmlFor="email">Email *</Label>
 					<Input placeholder="Email" {...register('email')} />
@@ -45,7 +45,7 @@ export const SignUpForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className="w-full mt-5">
+			<div className="mt-5 w-full">
 				<div>
 					<Label htmlFor="password">Password *</Label>
 					<Input type="password" placeholder="Password" {...register('password')} />

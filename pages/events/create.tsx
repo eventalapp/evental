@@ -2,9 +2,10 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
+
+import { Footer } from '../../components/Footer';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
-import { Footer } from '../../components/Footer';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
@@ -50,7 +51,7 @@ const CreateEventPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-2xl md:text-3xl font-bold">Create an event</h1>
+				<h1 className="text-2xl font-bold md:text-3xl">Create an event</h1>
 
 				<p className="mt-2">
 					Create and setup a private event, invite organizers, customize your event, create

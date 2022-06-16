@@ -32,13 +32,13 @@ export const VenueList: React.FC<Props> = (props) => {
 					<a>
 						<div
 							className={classNames(
-								'p-3 py-4 border-gray-200',
+								'border-gray-200 p-3 py-4',
 								i !== venues.length - 1 && 'border-b-2'
 							)}
 						>
-							<div className="flex flex-row justify-between items-center flex-wrap">
+							<div className="flex flex-row flex-wrap items-center justify-between">
 								<div>
-									<span className="text-lg block">{venue.name}</span>{' '}
+									<span className="block text-lg">{venue.name}</span>{' '}
 									{venue.address ? (
 										<span className="text-sm font-normal text-gray-500">{venue.address}</span>
 									) : (

@@ -18,8 +18,8 @@ export const TableOfContents: Props = (props) => {
 
 	return (
 		<>
-			<h3 className="font-bold text-xl mb-2">Table of contents</h3>
-			<ul className="list-disc pl-5 space-y-0.5 text-gray-700" {...rest}>
+			<h3 className="mb-2 text-xl font-bold">Table of contents</h3>
+			<ul className="list-disc space-y-0.5 pl-5 text-gray-700" {...rest}>
 				{items.map((item, i) => (
 					<li key={`${item.text}-${i}`}>
 						<Link href={item.relativeLink}>

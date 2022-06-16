@@ -45,7 +45,7 @@ const MenuBar: React.FC<{
 	}
 
 	return (
-		<div className="space-x-2 md:space-x-3.5 px-2 mb-2 pb-1 border-b border-gray-300 text-gray-700">
+		<div className="mb-2 space-x-2 border-b border-gray-300 px-2 pb-1 text-gray-700 md:space-x-3.5">
 			<Tooltip side={'top'} message={`Bold (${isMac ? 'Cmd + B' : 'Ctrl + B'})`}>
 				<button
 					type="button"
@@ -257,7 +257,7 @@ export const StyledEditor: React.FC<{
 	}
 
 	return (
-		<div className="px-3 py-2 rounded border border-gray-300 shadow-sm focus:outline-none">
+		<div className="rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none">
 			<MenuBar editor={editor} setLink={setLink} addImage={addImage} imageUpload={imageUpload} />
 			<article className="prose focus:outline-none prose-a:text-primary">
 				<EditorContent editor={editor} />

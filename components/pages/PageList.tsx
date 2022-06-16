@@ -33,14 +33,14 @@ export const PageList: React.FC<Props> = (props) => {
 					<a>
 						<div
 							className={classNames(
-								'p-3 py-4 border-gray-200',
+								'border-gray-200 p-3 py-4',
 								i !== pages.length - 1 && 'border-b-2'
 							)}
 						>
-							<div className="flex flex-row justify-between items-center flex-wrap">
+							<div className="flex flex-row flex-wrap items-center justify-between">
 								<div>
-									<span className="text-lg block">{page.name}</span>{' '}
-									<span className="text-sm block text-gray-600">
+									<span className="block text-lg">{page.name}</span>{' '}
+									<span className="block text-sm text-gray-600">
 										Updated{' '}
 										{formatDistance(new Date(page.updatedAt), new Date(), { addSuffix: true })}
 									</span>

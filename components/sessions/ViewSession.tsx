@@ -12,6 +12,7 @@ import { CalendarEvent } from 'calendar-link';
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import React from 'react';
+
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { faCalendarCirclePlus } from '../../icons';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
@@ -19,9 +20,9 @@ import { formatDateRange } from '../../utils/formatDateRange';
 import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
 import { AddToCalendar } from '../AddToCalendar';
-import { AttendeeList } from '../attendees/AttendeeList';
 import { IconButtonTooltip } from '../IconButtonTooltip';
 import { IconLinkTooltip } from '../IconLinkTooltip';
+import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import Tooltip from '../radix/components/Tooltip';
 
@@ -75,7 +76,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 			{!isAttending &&
 				session.maxAttendees !== null &&
 				session.attendeeCount >= session.maxAttendees && (
-					<div className="bg-red-500 block text-white px-5 py-3 rounded-md mb-4 font-medium">
+					<div className="mb-4 block rounded-md bg-red-500 px-5 py-3 font-medium text-white">
 						This session is full
 					</div>
 				)}
@@ -84,12 +85,12 @@ export const ViewSession: React.FC<Props> = (props) => {
 				<div className="flex items-center">
 					{session?.type && (
 						<div
-							className="rounded-full mr-3 w-4 h-4"
+							className="mr-3 h-4 w-4 rounded-full"
 							style={{ backgroundColor: session?.type?.color ?? '#888888' }}
 						/>
 					)}
 
-					<h1 className="text-xl md:text-2xl font-medium">{session.name}</h1>
+					<h1 className="text-xl font-medium md:text-2xl">{session.name}</h1>
 				</div>
 
 				<div className="space-x-4">
@@ -137,10 +138,10 @@ export const ViewSession: React.FC<Props> = (props) => {
 						new Date(session.endDate)
 					)}.`}
 				>
-					<div className="inline-flex flex-row items-center mb-2 cursor-help">
+					<div className="mb-2 inline-flex cursor-help flex-row items-center">
 						<FontAwesomeIcon
 							fill="currentColor"
-							className="w-5 h-5 mr-1.5"
+							className="mr-1.5 h-5 w-5"
 							size="1x"
 							icon={faCalendarDay}
 						/>
@@ -155,10 +156,10 @@ export const ViewSession: React.FC<Props> = (props) => {
 						>
 							<a>
 								<Tooltip side={'top'} message={`This session is a ${session?.type?.name} session.`}>
-									<div className="inline-flex flex-row items-center mb-1">
+									<div className="mb-1 inline-flex flex-row items-center">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="w-5 h-5 mr-1.5"
+											className="mr-1.5 h-5 w-5"
 											size="1x"
 											icon={faClipboardList}
 										/>
@@ -177,10 +178,10 @@ export const ViewSession: React.FC<Props> = (props) => {
 									side={'top'}
 									message={`This session is taking place at the ${session?.venue?.name} venue.`}
 								>
-									<div className="inline-flex flex-row items-center mb-1">
+									<div className="mb-1 inline-flex flex-row items-center">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="w-5 h-5 mr-1.5"
+											className="mr-1.5 h-5 w-5"
 											size="1x"
 											icon={faLocationDot}
 										/>
@@ -199,10 +200,10 @@ export const ViewSession: React.FC<Props> = (props) => {
 								(session?.attendeeCount / session?.maxAttendees) * 100
 							)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
 						>
-							<div className="inline-flex flex-row items-center mb-1 cursor-help">
+							<div className="mb-1 inline-flex cursor-help flex-row items-center">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="w-5 h-5 mr-1.5"
+									className="mr-1.5 h-5 w-5"
 									size="1x"
 									icon={faUserGroup}
 								/>
@@ -214,7 +215,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 			</div>
 
 			{session.description && (
-				<div className="prose focus:outline-none prose-a:text-primary mt-1">
+				<div className="prose mt-1 focus:outline-none prose-a:text-primary">
 					{parse(String(session.description))}
 				</div>
 			)}
@@ -222,16 +223,16 @@ export const ViewSession: React.FC<Props> = (props) => {
 			{roleAttendees &&
 				Object.entries(roleAttendees.reduce(sessionAttendeeReducer, {})).map(([key, attendees]) => (
 					<div key={key}>
-						<h3 className="text-2xl font-medium my-3">
-							{key}s <span className="text-gray-500 font-normal">({attendees?.length || 0})</span>
+						<h3 className="my-3 text-2xl font-medium">
+							{key}s <span className="font-normal text-gray-500">({attendees?.length || 0})</span>
 						</h3>
 
 						{attendees && <AttendeeList admin={admin} eid={eid} attendees={attendees} />}
 					</div>
 				))}
 
-			<h3 className="text-2xl font-medium my-3">
-				Attendees <span className="text-gray-500 font-normal">({attendees?.length || 0})</span>
+			<h3 className="my-3 text-2xl font-medium">
+				Attendees <span className="font-normal text-gray-500">({attendees?.length || 0})</span>
 			</h3>
 
 			{attendees && <AttendeeList admin={admin} eid={eid} attendees={attendees} />}

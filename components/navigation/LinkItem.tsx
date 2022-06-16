@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+
 import { theme } from '../../tailwind.config';
 
 export const LinkItem: React.FC<{ link: string; label: string; color?: string }> = (props) => {
@@ -12,7 +13,7 @@ export const LinkItem: React.FC<{ link: string; label: string; color?: string }>
 	return (
 		<Link href={link} passHref>
 			<NavigationMenuPrimitive.Link
-				className={classNames('cursor-pointer pb-1.5 border-b-2')}
+				className={classNames('cursor-pointer border-b-2 pb-1.5')}
 				style={{
 					borderColor:
 						router.asPath === link ? color ?? theme.extend.colors.primary.DEFAULT : 'transparent'
@@ -20,8 +21,8 @@ export const LinkItem: React.FC<{ link: string; label: string; color?: string }>
 			>
 				<NavigationMenuPrimitive.Item
 					className={classNames(
-						'px-3 py-1.5 text-sm rounded-md hover:bg-gray-75 dark:hover:bg-gray-900',
-						'text-sm font-medium dark:text-gray-75'
+						'hover:bg-gray-75 rounded-md px-3 py-1.5 text-sm dark:hover:bg-gray-900',
+						'dark:text-gray-75 text-sm font-medium'
 					)}
 					style={{
 						color:

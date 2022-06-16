@@ -33,7 +33,7 @@ export const DeleteSessionTypeForm: React.FC<Props> = (props) => {
 				deleteSessionTypeMutation.mutate();
 			})}
 		>
-			<div className="flex flex-col w-full mt-3">
+			<div className="mt-3 flex w-full flex-col">
 				<div className="mb-5">
 					<div>
 						<p className="mb-3">

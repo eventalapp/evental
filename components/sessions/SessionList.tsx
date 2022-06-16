@@ -5,11 +5,12 @@ import classNames from 'classnames';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { useState } from 'react';
+
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { sessionListReducer } from '../../utils/reducer';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { NotFound } from '../error/NotFound';
 import { HorizontalTextRule } from '../HorizontalTextRule';
+import { NotFound } from '../error/NotFound';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
 import Tooltip from '../radix/components/Tooltip';
 
@@ -40,7 +41,7 @@ export const SessionList: React.FC<Props> = (props) => {
 		<div className="relative min-h-[25px]">
 			{previousSessions && previousSessions.length >= 1 && (
 				<button
-					className="text-gray-500 cursor-pointer absolute top-0 right-0 z-20 text-sm"
+					className="absolute top-0 right-0 z-20 cursor-pointer text-sm text-gray-500"
 					onClick={() => {
 						setShowPastEvents(!showPastEvents);
 					}}
@@ -48,14 +49,14 @@ export const SessionList: React.FC<Props> = (props) => {
 					{showPastEvents ? (
 						<FontAwesomeIcon
 							fill="currentColor"
-							className="mr-1.5 w-4 h-4"
+							className="mr-1.5 h-4 w-4"
 							style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
 							icon={faEyeSlash}
 						/>
 					) : (
 						<FontAwesomeIcon
 							fill="currentColor"
-							className="mr-1.5 w-4 h-4"
+							className="mr-1.5 h-4 w-4"
 							style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
 							icon={faEye}
 						/>
@@ -67,7 +68,7 @@ export const SessionList: React.FC<Props> = (props) => {
 			{previousSessions && previousSessions.length >= 1 && (
 				<div
 					className={classNames(
-						'transition-all overflow-hidden',
+						'overflow-hidden transition-all',
 						showPastEvents ? 'h-auto' : 'h-0'
 					)}
 				>
@@ -75,14 +76,14 @@ export const SessionList: React.FC<Props> = (props) => {
 						([date, hourObject]) => {
 							return (
 								<div key={date}>
-									<p className="text-xl pb-0.5 inline-block text-gray-700">
+									<p className="inline-block pb-0.5 text-xl text-gray-700">
 										<span className="font-medium text-gray-900">{dayjs(date).format('dddd')}</span>,{' '}
 										{dayjs(date).format('MMMM D')}
 									</p>
 									{Object.entries(hourObject).map(([hour, sessions]) => {
 										return (
 											<div className="flex flex-row" key={hour}>
-												<span className="text-gray-700 text-sm w-24 py-2 pr-5 text-right">
+												<span className="w-24 py-2 pr-5 text-right text-sm text-gray-700">
 													{dayjs(hour).format('h:mm A z')}
 												</span>
 												<div className="w-full">
@@ -102,17 +103,17 @@ export const SessionList: React.FC<Props> = (props) => {
 																		}`}
 																	>
 																		<a className="inline-block">
-																			<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
-																				<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
+																			<div className="flex flex-row rounded-md transition-all duration-100 hover:bg-gray-50">
+																				<div className="flex flex-grow flex-row flex-wrap justify-between py-2 px-3">
 																					<div className="flex flex-row items-center justify-between">
 																						<div
-																							className="rounded-full mr-3 w-4 h-4"
+																							className="mr-3 h-4 w-4 rounded-full"
 																							style={{
 																								backgroundColor: session?.type?.color ?? '#888888'
 																							}}
 																						/>
 																						<div>
-																							<span className="text-lg block leading-tight">
+																							<span className="block text-lg leading-tight">
 																								{session.name}
 																							</span>
 
@@ -136,7 +137,7 @@ export const SessionList: React.FC<Props> = (props) => {
 																										session?.maxAttendees
 																									} attendees).`}
 																								>
-																									<div className="inline-flex flex-row items-center mb-1 cursor-help text-gray-500 text-sm ml-2">
+																									<div className="mb-1 ml-2 inline-flex cursor-help flex-row items-center text-sm text-gray-500">
 																										<p>
 																											{Math.ceil(
 																												(session?.attendeeCount /
@@ -176,14 +177,14 @@ export const SessionList: React.FC<Props> = (props) => {
 			{Object.entries(upcomingSessions.reduce(sessionListReducer, {})).map(([date, hourObject]) => {
 				return (
 					<div key={date}>
-						<p className="text-xl pb-0.5 inline-block text-gray-700">
+						<p className="inline-block pb-0.5 text-xl text-gray-700">
 							<span className="font-medium text-gray-900">{dayjs(date).format('dddd')}</span>,{' '}
 							{dayjs(date).format('MMMM D')}
 						</p>
 						{Object.entries(hourObject).map(([hour, sessions]) => {
 							return (
 								<div className="flex flex-row" key={hour}>
-									<span className="text-gray-700 text-sm w-24 py-2 pr-5 text-right">
+									<span className="w-24 py-2 pr-5 text-right text-sm text-gray-700">
 										{dayjs(hour).format('h:mm A z')}
 									</span>
 									<div className="w-full">
@@ -195,20 +196,20 @@ export const SessionList: React.FC<Props> = (props) => {
 												event={event}
 												key={session.id}
 											>
-												<div className="inline-block mr-2 mb-2">
+												<div className="mr-2 mb-2 inline-block">
 													<Link
 														href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${session.slug}`}
 													>
 														<a className="inline-block">
-															<div className="flex flex-row hover:bg-gray-50 transition-all duration-100 rounded-md">
-																<div className="py-2 flex flex-row justify-between flex-grow px-3 flex-wrap">
+															<div className="flex flex-row rounded-md transition-all duration-100 hover:bg-gray-50">
+																<div className="flex flex-grow flex-row flex-wrap justify-between py-2 px-3">
 																	<div className="flex flex-row items-center justify-between">
 																		<div
-																			className="rounded-full mr-3 w-4 h-4"
+																			className="mr-3 h-4 w-4 rounded-full"
 																			style={{ backgroundColor: session?.type?.color ?? '#888888' }}
 																		/>
 																		<div>
-																			<span className="text-lg block leading-tight">
+																			<span className="block text-lg leading-tight">
 																				{session.name}
 																			</span>
 
@@ -230,7 +231,7 @@ export const SessionList: React.FC<Props> = (props) => {
 																						session?.maxAttendees
 																					} attendees).`}
 																				>
-																					<div className="inline-flex flex-row items-center mb-1 cursor-help text-gray-500 text-sm">
+																					<div className="mb-1 inline-flex cursor-help flex-row items-center text-sm text-gray-500">
 																						<p>
 																							{Math.ceil(
 																								(session?.attendeeCount / session?.maxAttendees) *

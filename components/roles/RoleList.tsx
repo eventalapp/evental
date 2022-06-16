@@ -33,14 +33,14 @@ export const RoleList: React.FC<Props> = (props) => {
 					<a>
 						<div
 							className={classNames(
-								'p-3 py-4 border-gray-200',
+								'border-gray-200 p-3 py-4',
 								i !== roles.length - 1 && 'border-b-2'
 							)}
 						>
-							<div className="flex flex-row justify-between items-center flex-wrap">
-								<span className="text-lg block">
+							<div className="flex flex-row flex-wrap items-center justify-between">
+								<span className="block text-lg">
 									{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
-									<span className="text-gray-500 text-md">{role.defaultRole && '(Default)'}</span>
+									<span className="text-md text-gray-500">{role.defaultRole && '(Default)'}</span>
 								</span>
 
 								<FontAwesomeIcon fill="currentColor" size="lg" icon={faChevronRight} />

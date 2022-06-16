@@ -246,3 +246,15 @@ button,
 [type='submit'] {
 	-webkit-appearance: none;
 }
+
+.chrome-picker {
+	@apply rounded-md shadow-sm border border-gray-300 bg-white flex flex-row w-full min-h-[120px] !important;
+}
+
+.chrome-picker > div {
+	@apply w-1/2 pb-0 !important;
+}
+
+.chrome-picker .hue-horizontal {
+	@apply rounded-md !important;
+}

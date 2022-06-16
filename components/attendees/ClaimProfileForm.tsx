@@ -37,7 +37,7 @@ export const ClaimProfileForm: React.FC<Props> = (props) => {
 				claimProfileMutation.mutate(data);
 			})}
 		>
-			<div className="flex flex-col w-full my-5">
+			<div className="my-5 flex w-full flex-col">
 				<div>
 					<Label htmlFor="name">New Password *</Label>
 					<Input type="password" placeholder="Password" {...register('password')} />

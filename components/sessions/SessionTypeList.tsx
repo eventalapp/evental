@@ -33,14 +33,14 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 							<a>
 								<div
 									className={classNames(
-										'flex flex-row p-3 bg-white border-gray-200',
+										'flex flex-row border-gray-200 bg-white p-3',
 										i !== sessionTypes.length - 1 && 'border-b-2'
 									)}
 								>
-									<div className="flex flex-row justify-between flex-grow flex-wrap">
+									<div className="flex flex-grow flex-row flex-wrap justify-between">
 										<div className="flex flex-row items-center justify-between">
 											<div
-												className="rounded-full mr-3 w-4 h-4"
+												className="mr-3 h-4 w-4 rounded-full"
 												style={{ backgroundColor: sessionType.color ?? '#888888' }}
 											/>
 											<div>
@@ -65,17 +65,17 @@ export const SessionTypeList: React.FC<Props> = (props) => {
 						<a>
 							<div
 								className={classNames(
-									'flex flex-row p-3 bg-white border-gray-200',
+									'flex flex-row border-gray-200 bg-white p-3',
 									i !== sessionTypes.length - 1 && 'border-b-2'
 								)}
 							>
-								<span className="text-gray-700 text-sm w-20 py-2 pr-3 text-right">
+								<span className="w-20 py-2 pr-3 text-right text-sm text-gray-700">
 									{sessionType.color}
 								</span>
-								<div className="py-2 flex flex-row justify-between flex-grow border-l-2 border-gray-200 pl-3 flex-wrap">
+								<div className="flex flex-grow flex-row flex-wrap justify-between border-l-2 border-gray-200 py-2 pl-3">
 									<div className="flex flex-row items-center justify-between">
 										<div
-											className="rounded-full mr-3 w-4 h-4"
+											className="mr-3 h-4 w-4 rounded-full"
 											style={{ backgroundColor: sessionType.color ?? '#888888' }}
 										/>
 										<div>

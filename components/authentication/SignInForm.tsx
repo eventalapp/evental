@@ -33,7 +33,7 @@ export const SignInForm: React.FC<Props> = (props) => {
 				signInMutation.mutate(data);
 			})}
 		>
-			<div className="w-full mt-5">
+			<div className="mt-5 w-full">
 				<div>
 					<Label htmlFor="email">Email *</Label>
 					<Input placeholder="Email" {...register('email')} />
@@ -41,24 +41,24 @@ export const SignInForm: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className="w-full mt-5">
+			<div className="mt-5 w-full">
 				<div>
 					<Label htmlFor="password">Password *</Label>
 					<Input type="password" placeholder="Password" {...register('password')} />
 					{errors.password?.message && <ErrorMessage>{errors.password?.message}</ErrorMessage>}
 				</div>
-				<div className="flex flex-row justify-between mt-3">
+				<div className="mt-3 flex flex-row justify-between">
 					<span className="block" />
 
 					<span className="block">
 						<Link href="/auth/password/request">
-							<a className="text-primary text-sm">Forgot Password?</a>
+							<a className="text-sm text-primary">Forgot Password?</a>
 						</Link>
 					</span>
 				</div>
 			</div>
 
-			<div className="flex flex-row justify-center mt-5">
+			<div className="mt-5 flex flex-row justify-center">
 				<Button
 					type="submit"
 					className="w-full"
@@ -72,7 +72,7 @@ export const SignInForm: React.FC<Props> = (props) => {
 			<span className="mt-3 block">
 				Dont have an account?{' '}
 				<Link href={`/auth/signup?${params}`}>
-					<a className="text-primary text-sm">Sign up</a>
+					<a className="text-sm text-primary">Sign up</a>
 				</Link>
 			</span>
 		</form>

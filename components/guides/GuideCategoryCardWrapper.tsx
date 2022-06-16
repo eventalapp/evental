@@ -12,7 +12,7 @@ export const GuideCategoryCardWrapper: Props = (props) => {
 	const { children, className, ...rest } = props;
 
 	return (
-		<div className={classNames('grid grid-cols-1 md:grid-cols-2 gap-12', className)} {...rest}>
+		<div className={classNames('grid grid-cols-1 gap-12 md:grid-cols-2', className)} {...rest}>
 			{children}
 		</div>
 	);
