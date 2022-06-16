@@ -34,10 +34,10 @@ const ContactPage: NextPage = () => {
 
 			<Navigation />
 
-			<div className="text-white dark-topography">
+			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
 					<h1 className="text-2xl font-bold md:text-3xl">Contact Us</h1>
-					<p className="mt-4 max-w-2xl text-base text-center text-gray-100">
+					<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
 						Have some suggestions or feedback? Questions about Evental? Just want to have a chat?
 						We'd love to hear from you.
 					</p>
@@ -45,9 +45,9 @@ const ContactPage: NextPage = () => {
 			</div>
 
 			<Column className="flex flex-col items-center">
-				<div className="grid grid-cols-1 gap-12 mb-10 md:grid-cols-2 md:mb-16">
-					<div className="p-5 rounded-md border border-gray-200 shadow-sm">
-						<span className="block mb-1 text-xl font-bold text-center md:text-2xl">
+				<div className="mb-10 grid grid-cols-1 gap-12 md:mb-16 md:grid-cols-2">
+					<div className="rounded-md border border-gray-200 p-5 shadow-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">
 							Questions/Support
 						</span>
 						<p className="text-center text-gray-600">
@@ -62,7 +62,7 @@ const ContactPage: NextPage = () => {
 								support@evental.app
 							</a>
 						</p>
-						<div className="flex flex-col justify-center items-center mt-6 space-y-1">
+						<div className="mt-6 flex flex-col items-center justify-center space-y-1">
 							<Link href="/support">
 								<LinkButton>Create a ticket</LinkButton>
 							</Link>
@@ -80,8 +80,8 @@ const ContactPage: NextPage = () => {
 							</p>
 						</div>
 					</div>
-					<div className="p-5 rounded-md border border-gray-200 shadow-sm">
-						<span className="block mb-1 text-xl font-bold text-center md:text-2xl">
+					<div className="rounded-md border border-gray-200 p-5 shadow-sm">
+						<span className="mb-1 block text-center text-xl font-bold md:text-2xl">
 							Contact Sales
 						</span>
 						<p className="text-center text-gray-600">
@@ -96,7 +96,7 @@ const ContactPage: NextPage = () => {
 								sales@evental.app
 							</a>
 						</p>
-						<div className="flex flex-col justify-center items-center mt-6 space-y-1">
+						<div className="mt-6 flex flex-col items-center justify-center space-y-1">
 							<Link href="/demo">
 								<LinkButton>Book a call or demo</LinkButton>
 							</Link>
@@ -117,7 +117,7 @@ const ContactPage: NextPage = () => {
 				</div>
 
 				<div>
-					<h3 className="mb-1 text-xl font-bold text-center md:text-2xl">
+					<h3 className="mb-1 text-center text-xl font-bold md:text-2xl">
 						Not sure where to start?
 					</h3>
 					<p className="text-gray-700">

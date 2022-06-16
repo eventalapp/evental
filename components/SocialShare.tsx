@@ -29,11 +29,11 @@ export const SocialShareIcon: React.FC<{
 			<a target="_blank" rel="noopener noreferrer" href={href}>
 				<div
 					className={classNames(
-						`w-8 h-8 flex items-center justify-center rounded-md cursor-pointer`,
+						`flex h-8 w-8 cursor-pointer items-center justify-center rounded-md`,
 						className
 					)}
 				>
-					<FontAwesomeIcon fill="currentColor" className="w-5 h-5 " size="1x" icon={icon} />
+					<FontAwesomeIcon fill="currentColor" className="h-5 w-5 " size="1x" icon={icon} />
 				</div>
 			</a>
 		</Tooltip>

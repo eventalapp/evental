@@ -15,17 +15,17 @@ export const IsEventalForYou: Props = (props) => {
 	return (
 		<div {...rest}>
 			<h3 className="text-xl font-bold md:text-2xl">Is Evental for you?</h3>
-			<p className="mt-1 text-base text-gray-700 md:text-lg"> 
+			<p className="mt-1 text-base text-gray-700 md:text-lg">
 				See why Evental is perfect for your in-person, virtual, or hybrid event.
 			</p>
-			<div className="grid grid-cols-1 gap-5 mt-6 lg:grid-cols-2 xl:grid-cols-3">
+			<div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-3">
 				<Link href="/education">
 					<a>
-						<div className="p-4 hover:bg-gray-50 rounded-md border border-gray-200 shadow-sm transition-all duration-100">
-							<h4 className="text-xl font-bold text-center">
+						<div className="rounded-md border border-gray-200 p-4 shadow-sm transition-all duration-100 hover:bg-gray-50">
+							<h4 className="text-center text-xl font-bold">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="mr-2 w-5 h-5 text-primary"
+									className="mr-2 h-5 w-5 text-primary"
 									size="1x"
 									icon={faGraduationCap}
 								/>
@@ -40,11 +40,11 @@ export const IsEventalForYou: Props = (props) => {
 
 				<Link href="/convention">
 					<a>
-						<div className="p-4 hover:bg-gray-50 rounded-md border border-gray-200 shadow-sm transition-all duration-100">
-							<h4 className="text-xl font-bold text-center">
+						<div className="rounded-md border border-gray-200 p-4 shadow-sm transition-all duration-100 hover:bg-gray-50">
+							<h4 className="text-center text-xl font-bold">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="mr-2 w-5 h-5 text-primary"
+									className="mr-2 h-5 w-5 text-primary"
 									size="1x"
 									icon={faPodium}
 								/>
@@ -59,11 +59,11 @@ export const IsEventalForYou: Props = (props) => {
 
 				<Link href="/festival">
 					<a>
-						<div className="p-4 hover:bg-gray-50 rounded-md border border-gray-200 shadow-sm transition-all duration-100">
-							<h4 className="text-xl font-bold text-center">
+						<div className="rounded-md border border-gray-200 p-4 shadow-sm transition-all duration-100 hover:bg-gray-50">
+							<h4 className="text-center text-xl font-bold">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="mr-2 w-5 h-5 text-primary"
+									className="mr-2 h-5 w-5 text-primary"
 									size="1x"
 									icon={faMicrophoneStand}
 								/>
@@ -78,11 +78,11 @@ export const IsEventalForYou: Props = (props) => {
 
 				<Link href="/conference">
 					<a>
-						<div className="p-4 hover:bg-gray-50 rounded-md border border-gray-200 shadow-sm transition-all duration-100">
-							<h4 className="text-xl font-bold text-center">
+						<div className="rounded-md border border-gray-200 p-4 shadow-sm transition-all duration-100 hover:bg-gray-50">
+							<h4 className="text-center text-xl font-bold">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="mr-2 w-5 h-5 text-primary"
+									className="mr-2 h-5 w-5 text-primary"
 									size="1x"
 									icon={faUsers}
 								/>
@@ -97,11 +97,11 @@ export const IsEventalForYou: Props = (props) => {
 
 				<Link href="/virtual">
 					<a>
-						<div className="p-4 hover:bg-gray-50 rounded-md border border-gray-200 shadow-sm transition-all duration-100">
-							<h4 className="text-xl font-bold text-center">
+						<div className="rounded-md border border-gray-200 p-4 shadow-sm transition-all duration-100 hover:bg-gray-50">
+							<h4 className="text-center text-xl font-bold">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="mr-2 w-5 h-5 text-primary"
+									className="mr-2 h-5 w-5 text-primary"
 									size="1x"
 									icon={faCameraWeb}
 								/>
@@ -116,11 +116,11 @@ export const IsEventalForYou: Props = (props) => {
 
 				<Link href="/hybrid">
 					<a>
-						<div className="p-4 hover:bg-gray-50 rounded-md border border-gray-200 shadow-sm transition-all duration-100">
-							<h4 className="text-xl font-bold text-center">
+						<div className="rounded-md border border-gray-200 p-4 shadow-sm transition-all duration-100 hover:bg-gray-50">
+							<h4 className="text-center text-xl font-bold">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="mr-2 w-5 h-5 text-primary"
+									className="mr-2 h-5 w-5 text-primary"
 									size="1x"
 									icon={faStreetView}
 								/>

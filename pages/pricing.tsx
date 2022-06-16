@@ -41,10 +41,10 @@ const PricingPage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="text-white dark-topography">
+			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
 					<h1 className="text-2xl font-bold md:text-3xl">Single Event Plans &amp; Pricing</h1>
-					<p className="mt-4 max-w-2xl text-base text-center text-gray-100">
+					<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
 						View pricing for single event plans for standard and nonprofit or educational events.
 					</p>
 				</Column>
@@ -70,7 +70,7 @@ const PricingPage: NextPage = () => {
 					</Button>
 				</div>
 
-				<div className="flex flex-col justify-between items-center p-5 my-3 space-y-4 max-w-[450px] min-h-[350px] bg-white rounded border border-gray-300 shadow-sm">
+				<div className="my-3 flex min-h-[350px] max-w-[450px] flex-col items-center justify-between space-y-4 rounded border border-gray-300 bg-white p-5 shadow-sm">
 					<div className="flex flex-row items-center">
 						<strong
 							className="mr-2 font-display text-2xl font-bold tracking-tight"
@@ -78,7 +78,7 @@ const PricingPage: NextPage = () => {
 						>
 							Evental
 						</strong>
-						<span className="py-1 px-2 text-xs font-medium text-white bg-primary rounded">
+						<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">
 							{isEducation ? 'EDU' : 'PRO'}
 						</span>
 					</div>
@@ -90,13 +90,13 @@ const PricingPage: NextPage = () => {
 					</p>
 
 					<div>
-						<p className="text-2xl font-bold text-center md:text-3xl">
-							<span className="mr-0.5 text-lg text-gray-700 align-text-top">$</span>
+						<p className="text-center text-2xl font-bold md:text-3xl">
+							<span className="mr-0.5 align-text-top text-lg text-gray-700">$</span>
 							{isEducation
 								? eduAttendeePricing[attendees].price
 								: proAttendeePricing[attendees].price}
 						</p>
-						<p className="text-sm text-center text-gray-600">
+						<p className="text-center text-sm text-gray-600">
 							Includes {attendees} attendees (
 							{isEducation
 								? eduAttendeePricing[attendees].perAttendeePrice < 1
@@ -119,7 +119,7 @@ const PricingPage: NextPage = () => {
 					</Link>
 				</div>
 
-				<div className="flex flex-col items-center mt-4 space-y-3">
+				<div className="mt-4 flex flex-col items-center space-y-3">
 					<p className="text-lg font-medium">How many attendees are you expecting?</p>
 					<Controller
 						control={control}
@@ -152,15 +152,15 @@ const PricingPage: NextPage = () => {
 				</div>
 			</Column>
 
-			<div className="text-white dark-topography">
-				<Column className="flex justify-center items-center">
-					<div className="flex flex-row flex-wrap justify-center items-center space-x-4">
-						<p className="my-1.5 text-sm font-medium text-center md:text-lg">
+			<div className="dark-topography text-white">
+				<Column className="flex items-center justify-center">
+					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
+						<p className="my-1.5 text-center text-sm font-medium md:text-lg">
 							<span className="font-bold">Organizing several events?</span> We offer subscriptions
 							from ${isEducation ? '800' : '1000'}/year.
 						</p>
 						<Link href="/contact">
-							<LinkButton variant="default" className="my-1.5 text-primary-600 border-0">
+							<LinkButton variant="default" className="my-1.5 border-0 text-primary-600">
 								Contact Us
 							</LinkButton>
 						</Link>
@@ -169,7 +169,7 @@ const PricingPage: NextPage = () => {
 			</div>
 
 			<Column>
-				<div className="flex flex-col justify-center items-center mb-6">
+				<div className="mb-6 flex flex-col items-center justify-center">
 					<div className="flex flex-row items-center">
 						<strong
 							className="mr-2 font-display text-2xl font-bold tracking-tight lg:text-3xl"
@@ -177,19 +177,19 @@ const PricingPage: NextPage = () => {
 						>
 							Evental
 						</strong>
-						<span className="py-1 px-2 text-xs font-medium text-white bg-primary rounded lg:text-base">
+						<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white lg:text-base">
 							{isEducation ? 'EDU' : 'PRO'}
 						</span>
 					</div>
 					<p className="text-gray-600">Perks and features</p>
 				</div>
 
-				<div className="grid grid-cols-1 gap-8 gap-x-6 mt-3 lg:grid-cols-2">
+				<div className="mt-3 grid grid-cols-1 gap-8 gap-x-6 lg:grid-cols-2">
 					<div>
-						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
+						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
 							Publish Features
 						</h3>
-						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
+						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Responsive event website</li>
 							<li>Customizable event branding</li>
 							<li>Control event privacy &amp; access</li>
@@ -198,10 +198,10 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
+						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
 							Attendee Experience
 						</h3>
-						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
+						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Generate and export personal schedule</li>
 							<li>View event from any device</li>
 							<li>Sync personal schedule to calendar</li>
@@ -210,40 +210,40 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
+						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
 							Virtual &amp; Hybrid Events
 						</h3>
-						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
+						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Use Evental with any webinar or video platform</li>
 							<li>Automatically display times in users timezone</li>
 							<li>Provide post-event access to session recordings</li>
 						</ul>
 					</div>
 					<div>
-						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
+						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
 							Role Management
 						</h3>
-						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
+						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Create custom roles for speakers, artists, and exhibitors</li>
 							<li>Attach role members to sessions</li>
 							<li>Top level pages for role members</li>
 						</ul>
 					</div>
 					<div>
-						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
+						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
 							Communication
 						</h3>
-						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
+						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Custom email builder to develop responsive emails</li>
 							<li>Create a welcome email to automatically send to attendees</li>
 							<li>Notify attendees when they have an upcoming session</li>
 						</ul>
 					</div>
 					<div>
-						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
+						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
 							Session Registration
 						</h3>
-						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
+						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Attendees can register for sessions</li>
 							<li>Filter sessions by date, type, venue, etc.</li>
 							<li>Attach role members/speakers to sessions</li>
@@ -251,10 +251,10 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
+						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">
 							Administration
 						</h3>
-						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
+						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Remove attendees from your event</li>
 							<li>Create organizers to assist you in running your event</li>
 							<li>Export event and session data</li>
@@ -262,8 +262,8 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">Support</h3>
-						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
+						<h3 className="mb-2 border-b border-gray-300 pb-1 text-xl font-medium">Support</h3>
+						<ul className="list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Organizer and attendee support guides</li>
 							<li>24/7 Email support</li>
 							<li>Dedicated account manager</li>
@@ -273,15 +273,15 @@ const PricingPage: NextPage = () => {
 				</div>
 			</Column>
 
-			<div className="text-white dark-topography">
-				<Column className="flex justify-center items-center">
-					<div className="flex flex-row flex-wrap justify-center items-center space-x-4">
-						<p className="my-1.5 text-sm font-medium text-center md:text-lg">
+			<div className="dark-topography text-white">
+				<Column className="flex items-center justify-center">
+					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
+						<p className="my-1.5 text-center text-sm font-medium md:text-lg">
 							<span className="font-bold">Ready to start?</span> Get started building your event
 							now!
 						</p>
 						<Link href="/events/create">
-							<LinkButton variant="default" className="my-1.5 text-primary-600 border-0">
+							<LinkButton variant="default" className="my-1.5 border-0 text-primary-600">
 								Start Trial
 							</LinkButton>
 						</Link>
