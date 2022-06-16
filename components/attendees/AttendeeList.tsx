@@ -6,6 +6,7 @@ import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { NotFound } from '../error/NotFound';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -30,35 +31,42 @@ export const AttendeeList: React.FC<Props> = (props) => {
 							attendee &&
 							attendee.user &&
 							attendee.role && (
-								<li key={attendee.id}>
-									<Link
-										href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${attendee.user.slug}`}
-									>
-										<a className="flex h-full flex-col items-center justify-start">
-											<div
-												className={classNames(
-													'relative mb-1 rounded-md border border-gray-100 shadow-sm',
-													tiny ? 'h-16 w-16' : 'h-28 w-28'
-												)}
-											>
-												<Image
-													alt={String(attendee.user.name)}
-													src={String(
-														attendee?.user.image
-															? `https://cdn.evental.app${attendee?.user.image}`
-															: `https://cdn.evental.app/images/default-avatar.jpg`
+								<Tooltip
+									message={`Click to view ${attendee.user.name}'s profile`}
+									key={attendee.id}
+								>
+									<li>
+										<Link
+											href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${
+												attendee.user.slug
+											}`}
+										>
+											<a className="flex h-full flex-col items-center justify-start">
+												<div
+													className={classNames(
+														'relative mb-2 rounded-md border border-gray-100 shadow-sm',
+														tiny ? 'h-16 w-16' : 'h-28 w-28'
 													)}
-													className="rounded-md"
-													layout="fill"
-												/>
-											</div>
-											<span className="text-center text-lg">{attendee.user.name}</span>
-											<span className="block text-xs leading-none text-gray-700">
-												{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
-											</span>
-										</a>
-									</Link>
-								</li>
+												>
+													<Image
+														alt={String(attendee.user.name)}
+														src={String(
+															attendee?.user.image
+																? `https://cdn.evental.app${attendee?.user.image}`
+																: `https://cdn.evental.app/images/default-avatar.jpg`
+														)}
+														className="rounded-md"
+														layout="fill"
+													/>
+												</div>
+												<span className="text-center text-lg">{attendee.user.name}</span>
+												<span className="block text-xs leading-none text-gray-700">
+													{capitalizeFirstLetter(String(attendee.role.name).toLowerCase())}
+												</span>
+											</a>
+										</Link>
+									</li>
+								</Tooltip>
 							)
 					)}
 			</ul>
