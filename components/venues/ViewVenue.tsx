@@ -51,33 +51,33 @@ export const ViewVenue: React.FC<Props> = (props) => {
 						</div>
 					)}
 				</FlexRowBetween>
-				<Tooltip
-					message={
-						venue.address
-							? `This is venue is located at ${venue?.address}.`
-							: 'This venue has not specified an address'
-					}
-				>
-					<div className="mb-1 inline-flex cursor-help flex-row items-center">
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="mr-1.5 h-5 w-5"
-							size="1x"
-							icon={faLocationDot}
-						/>
-						{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
-					</div>
-				</Tooltip>
+
+				<div className="text-gray-600">
+					<Tooltip
+						message={
+							venue.address
+								? `This is venue is located at ${venue?.address}.`
+								: 'This venue has not specified an address'
+						}
+					>
+						<div className="mb-1 inline-flex cursor-help flex-row items-center">
+							<FontAwesomeIcon
+								fill="currentColor"
+								className="mr-1.5 h-5 w-5"
+								size="1x"
+								icon={faLocationDot}
+							/>
+							{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
+						</div>
+					</Tooltip>
+				</div>
+
 				{venue.description && (
 					<div className="prose mt-1 focus:outline-none prose-a:text-primary">
 						{parse(String(venue.description))}
 					</div>
 				)}
 			</div>
-
-			<h3 className="mb-3 text-xl font-medium md:text-2xl">
-				Sessions <span className="font-normal text-gray-500">({sessions.length || 0})</span>
-			</h3>
 
 			<SessionList eid={String(eid)} sessions={sessions} event={event} user={user} admin />
 		</div>
