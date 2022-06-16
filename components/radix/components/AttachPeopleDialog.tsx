@@ -118,10 +118,10 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 									Array.from(attendeesByNameQuery.data).map((attendee) => (
 										<div
 											key={attendee.id}
-											className="flex flex-row flex-wrap justify-between items-center w-full"
+											className="flex w-full flex-row flex-wrap items-center justify-between"
 										>
 											<div className="flex items-center">
-												<div className="relative w-12 h-12 rounded-full border-2 border-gray-100">
+												<div className="relative h-12 w-12 rounded-full border border-gray-100">
 													<Image
 														alt={String(attendee.user.name)}
 														src={String(
@@ -133,7 +133,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 														layout="fill"
 													/>
 												</div>
-												<div className="flex flex-col ml-3">
+												<div className="ml-3 flex flex-col">
 													<p className="leading-tight">{attendee.user.name}</p>
 													<p className="text-sm leading-tight text-gray-600">
 														{attendee.role.name}
@@ -150,7 +150,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 												>
 													<FontAwesomeIcon
 														fill="currentColor"
-														className="w-5 h-5 text-gray-700 cursor-pointer"
+														className="h-5 w-5 cursor-pointer text-gray-700"
 														size="lg"
 														icon={faPlus}
 													/>
@@ -163,7 +163,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 								)}
 							</div>
 
-							<div className="flex justify-end mt-4">
+							<div className="mt-4 flex justify-end">
 								<DialogPrimitive.Close
 									type="submit"
 									className={cx(
@@ -183,7 +183,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 									'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 								)}
 							>
-								<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+								<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 							</DialogPrimitive.Close>
 						</DialogPrimitive.Content>
 					</Transition.Child>

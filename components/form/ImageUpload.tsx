@@ -53,7 +53,7 @@ export const ImageUpload: React.FC<Props> = (props) => {
 							files.map((file, i) => (
 								<div className="relative inline-block" key={`${i}-${file.name}`}>
 									<img
-										className="max-h-[300px] w-full border-2 border-gray-200 bg-gray-200 object-cover object-center"
+										className="max-h-[300px] w-full border border-gray-200 bg-gray-200 object-cover object-center"
 										src={file.preview}
 										alt="File Preview"
 									/>
@@ -65,7 +65,7 @@ export const ImageUpload: React.FC<Props> = (props) => {
 						) : (
 							<div className="relative inline-block">
 								<img
-									className="max-h-[300px] w-full border-2 border-gray-200 bg-gray-200 object-cover object-center"
+									className="max-h-[300px] w-full border border-gray-200 bg-gray-200 object-cover object-center"
 									src={placeholderImageUrl}
 									alt=""
 								/>

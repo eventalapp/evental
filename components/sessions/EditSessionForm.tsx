@@ -163,7 +163,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 								>
 									<Link href={`/events/${eid}/admin/attendees/${attendee.user.slug}`}>
 										<a className="flex h-full flex-col items-center justify-start">
-											<div className="relative mb-1 h-16 w-16 rounded-full border-2 border-gray-100">
+											<div className="relative mb-1 h-16 w-16 rounded-full border border-gray-100">
 												<Image
 													alt={String(attendee.user.name)}
 													src={String(

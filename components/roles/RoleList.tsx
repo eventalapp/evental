@@ -7,6 +7,7 @@ import React from 'react';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { NotFound } from '../error/NotFound';
+import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -31,19 +32,23 @@ export const RoleList: React.FC<Props> = (props) => {
 					passHref
 				>
 					<a>
-						<div
-							className={classNames(
-								'border-gray-200 p-3 py-4',
-								i !== roles.length - 1 && 'border-b-2'
-							)}
-						>
-							<div className="flex flex-row flex-wrap items-center justify-between">
+						<div className={classNames('border-gray-200', i !== roles.length - 1 && 'border-b')}>
+							<div className="-mx-3 flex flex-row flex-wrap items-center justify-between p-3 hover:bg-gray-75">
 								<span className="block text-lg">
 									{capitalizeFirstLetter(role.name.toLowerCase())}{' '}
 									<span className="text-base text-gray-500">{role.defaultRole && '(Default)'}</span>
 								</span>
 
-								<FontAwesomeIcon fill="currentColor" size="lg" icon={faChevronRight} />
+								<Tooltip side={'top'} message={`Click to view the ${role.name} role`}>
+									<div className="-m-2 flex items-center justify-center p-2">
+										<FontAwesomeIcon
+											fill="currentColor"
+											size="1x"
+											className="h-5 w-5 text-gray-500"
+											icon={faChevronRight}
+										/>
+									</div>
+								</Tooltip>
 							</div>
 						</div>
 					</a>

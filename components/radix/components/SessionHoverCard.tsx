@@ -157,7 +157,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 										}`}
 									>
 										<a className="flex h-full flex-col items-center justify-start">
-											<div className="relative mb-1 h-10 w-10 rounded-full border-2 border-gray-100">
+											<div className="relative mb-1 h-10 w-10 rounded-full border border-gray-100">
 												<Image
 													alt={String(roleMember.attendee.user.name)}
 													src={String(
