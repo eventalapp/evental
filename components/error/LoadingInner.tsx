@@ -1,9 +1,16 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinnerThird } from '../../icons';
 import { LoadingSpinner } from './LoadingSpinner';
 
 export const LoadingInner = () => {
 	return (
 		<>
-			<LoadingSpinner />
+			<FontAwesomeIcon
+				fill="currentColor"
+				className="mr-2 h-3 w-3 animate-spin"
+				size="1x"
+				icon={faSpinnerThird}
+			/>
 			Loading...
 		</>
 	);
