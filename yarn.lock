@@ -4894,10 +4894,10 @@ next@^12.1.5:
     "@next/swc-win32-ia32-msvc" "12.1.6"
     "@next/swc-win32-x64-msvc" "12.1.6"
 
-nextkit@^3.3.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/nextkit/-/nextkit-3.4.1.tgz#dfdfcdfb8a4e30374921610525e0e46f9af28a34"
-  integrity sha512-TnedkOxV+nbAlDwQXd/DJnxPhE0AXkgmVY4k7fy8fCo5PCQRM3QwnVvzAtnAGQAPTwHk8VNRUKAuFxdW/m91mQ==
+nextkit@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/nextkit/-/nextkit-3.4.2.tgz#98f3ea28a5af901835b4ec9d25b78a146ebb1c17"
+  integrity sha512-P81dU+WwhK0s4PsNG7wOpu5zNwm9ZO6shjPHoQI78e4J1pqifxFN8F+6DDMY2bU3qsnC55w9jFx0hurt18c9+Q==
 
 no-case@^2.2.0:
   version "2.3.2"
