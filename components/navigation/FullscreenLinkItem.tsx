@@ -15,7 +15,7 @@ export const FullscreenLinkItem: React.FC<{
 		<Link href={link} passHref>
 			<a
 				className={classNames(
-					'mb-1.5 cursor-pointer border-b-2',
+					'mb-1.5 cursor-pointer border-b',
 					router.asPath == link ? 'border-primary' : 'border-transparent'
 				)}
 				onClick={onClick}
