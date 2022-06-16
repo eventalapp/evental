@@ -59,7 +59,7 @@ const CreateAttendeePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="text-xl md:text-2xl font-medium mb-2">Create Attendee Page</h3>
+				<h3 className="mb-2 text-xl font-medium md:text-2xl">Create Attendee Page</h3>
 
 				<p className="mb-5 text-gray-600">
 					Filling out the information below will create an placeholder account for this user. They

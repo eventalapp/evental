@@ -56,7 +56,7 @@ interface Props {}
 
 const Toolbar = (props: Props) => {
 	return (
-		<ToolbarPrimitive.Root className="flex space-x-4 rounded-lg bg-white px-2.5 py-2 dark:bg-gray-800">
+		<ToolbarPrimitive.Root className="flex py-2 px-2.5 space-x-4 bg-white dark:bg-gray-800 rounded-lg">
 			<ToolbarPrimitive.ToggleGroup type="multiple" aria-label="Font settings">
 				{fontSettings.map(({ value, label, icon }, i) => (
 					<ToolbarPrimitive.ToggleItem
@@ -99,7 +99,7 @@ const Toolbar = (props: Props) => {
 				))}
 			</ToolbarPrimitive.ToggleGroup>
 
-			<ToolbarPrimitive.Separator className="mx-4 my-0.5 hidden h-auto w-px dark:bg-gray-600 xl:flex" />
+			<ToolbarPrimitive.Separator className="hidden my-0.5 mx-4 w-px h-auto dark:bg-gray-600 xl:flex" />
 
 			<span className="hidden items-center pr-2 xl:flex">
 				<ToolbarPrimitive.Link

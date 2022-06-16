@@ -53,7 +53,7 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 						>
 							Evental
 						</strong>
-						<span className="rounded bg-primary px-2 py-1 text-xs font-medium text-white">PRO</span>
+						<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">PRO</span>
 					</div>
 
 					<p className="text-gray-700">
@@ -76,7 +76,7 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 					</div>
 
 					<div className="flex flex-row justify-end">
-						<Button className="elements-style-background" type="submit">
+						<Button type="submit">
 							Purchase ({formatAmountForDisplay(proAttendeesToPrice(attendees), CURRENCY)})
 						</Button>
 					</div>

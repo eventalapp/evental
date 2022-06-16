@@ -79,7 +79,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex w-full flex-col">
-				<div className="md:grid-cols-2gap-5 grid grid-cols-1">
+				<div className="grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="name">Email *</Label>
 						<Input placeholder="john@email.com" {...register('email')} />

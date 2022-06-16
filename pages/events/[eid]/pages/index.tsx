@@ -124,7 +124,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<h3 className="text-xl md:text-2xl font-medium">Pages</h3>
+				<h3 className="text-xl font-medium md:text-2xl">Pages</h3>
 
 				<PageList
 					eid={String(eid)}

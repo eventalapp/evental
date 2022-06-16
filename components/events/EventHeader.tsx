@@ -38,7 +38,7 @@ export const EventHeader: React.FC<{
 			{user && isOrganizer && (
 				<Link href={`/events/${eid}/admin${adminLink}`}>
 					<a
-						className="mb-4 block rounded-md px-5 py-3 font-medium text-white"
+						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
 						style={{
 							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
 						}}
@@ -51,7 +51,7 @@ export const EventHeader: React.FC<{
 			{!user && (
 				<Link href={`/events/${eid}/register`}>
 					<a
-						className="mb-4 block rounded-md px-5 py-3 font-medium text-white"
+						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
 						style={{
 							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
 						}}
@@ -64,7 +64,7 @@ export const EventHeader: React.FC<{
 			{user && !Boolean(isAttendee) && (
 				<Link href={`/events/${eid}/register`}>
 					<a
-						className="mb-4 block rounded-md px-5 py-3 font-medium text-white"
+						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
 						style={{
 							backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
 						}}
@@ -110,7 +110,7 @@ export const EventHeader: React.FC<{
 				</div>
 
 				<div className="flex flex-row items-center">
-					<div className="relative mr-3 h-16 w-16 flex-shrink-0 rounded-md border border-gray-200 shadow-sm md:mr-5 md:h-20 md:w-20">
+					<div className="relative mr-3 h-16 w-16 shrink-0 rounded-md border border-gray-200 shadow-sm md:mr-5 md:h-20 md:w-20">
 						<Image
 							alt={event.name}
 							src={

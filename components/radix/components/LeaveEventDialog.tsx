@@ -58,7 +58,7 @@ const LeaveEventDialog: React.FC<Props> = (props) => {
 							You may rejoin this event, but your session attendance and event permissions will be
 							removed.
 						</AlertDialogPrimitive.Description>
-						<div className="mt-4 flex justify-end space-x-2">
+						<div className="flex justify-end mt-4 space-x-2">
 							<AlertDialogPrimitive.Cancel
 								className={cx(
 									'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',

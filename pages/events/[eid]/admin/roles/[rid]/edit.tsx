@@ -71,7 +71,7 @@ const EditRolePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="text-xl md:text-2xl font-medium">Edit Role</h3>
+				<h3 className="text-xl font-medium md:text-2xl">Edit Role</h3>
 
 				<EditRoleForm
 					eid={String(eid)}

@@ -132,7 +132,7 @@ const SessionsPage: NextPage<Props> = (props) => {
 				)}
 
 				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium">Venues</h3>
+					<h3 className="text-xl font-medium md:text-2xl">Venues</h3>
 				</FlexRowBetween>
 
 				<VenueList

@@ -11,7 +11,7 @@ const Toggle = (props: Props) => {
 	return (
 		<TogglePrimitive.Root defaultPressed={starred} onPressedChange={setStarred}>
 			<Button>
-				{starred ? <StarFilledIcon className="h-4 w-4 text-yellow-400" /> : <StarIcon />}
+				{starred ? <StarFilledIcon className="w-4 h-4 text-yellow-400" /> : <StarIcon />}
 				<span className="ml-2 leading-5">{starred ? 'Starred' : 'Star'}</span>
 			</Button>
 		</TogglePrimitive.Root>

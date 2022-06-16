@@ -35,10 +35,10 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Inviting Organizers</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Inviting Organizers</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to invite additional organizers to assist you in setting up your event.
 					</p>
 				</Column>
@@ -72,11 +72,11 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						}/guides/organizer/inviting-organizers#navigate-to-the-dashboard`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						First navigate to your event and sign in (if required).
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						Then navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -96,7 +96,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						}/guides/organizer/inviting-organizers#navigate-to-the-organizer-dashboard`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Organizers"</span> page.
 					</p>
@@ -116,7 +116,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						}/guides/organizer/inviting-organizers#invite-an-organizer`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the organizer dashboard page, click the{' '}
 						<span className="font-medium">"Invite Organizer"</span> button. This will navigate you
 						to the organizer invite page, where you can fill out the form and invite an organizer to

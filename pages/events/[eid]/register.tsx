@@ -71,15 +71,15 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 
 				<Column variant="halfWidth">
 					<div className="space-y-5">
-						<h1 className="text-2xl md:text-3xl font-bold">Create an account</h1>
+						<h1 className="text-2xl font-bold md:text-3xl">Create an account</h1>
 						<p className="text-gray-700">
 							To register for this event, please{' '}
 							<Link href={`/auth/signup?${params}`}>
-								<a className="underline text-gray-900">create an account</a>
+								<a className="text-gray-900 underline">create an account</a>
 							</Link>{' '}
 							or{' '}
 							<Link href={`/auth/signin?${params}`}>
-								<a className="underline text-gray-900">sign in</a>
+								<a className="text-gray-900 underline">sign in</a>
 							</Link>{' '}
 							with your existing account.
 						</p>
@@ -149,7 +149,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column variant="halfWidth" className="space-y-5">
-				<h1 className="text-2xl md:text-3xl font-bold">Register for {event.name}</h1>
+				<h1 className="text-2xl font-bold md:text-3xl">Register for {event.name}</h1>
 
 				<p className="text-gray-700">
 					To attend this event, please click the register button below.

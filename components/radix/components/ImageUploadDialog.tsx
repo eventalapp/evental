@@ -84,7 +84,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 								Make changes to your link here. Click save when you&apos;re done.
 							</DialogPrimitive.Description>
 							<div className="mt-2 space-y-3">
-								<div className="flex flex-col w-full mt-5 items-center justify-center min-h-[250px]">
+								<div className="flex flex-col justify-center items-center mt-5 w-full min-h-[250px]">
 									<Label htmlFor="image" className="hidden">
 										Image
 									</Label>
@@ -92,7 +92,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 									<ImageUpload files={files} setFiles={setFiles} />
 								</div>
 
-								<div className="mt-4 flex justify-end">
+								<div className="flex justify-end mt-4">
 									<DialogPrimitive.Close
 										disabled={imageUploadMutation.isLoading}
 										onClick={() => {
@@ -119,7 +119,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 									'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 								)}
 							>
-								<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+								<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 							</DialogPrimitive.Close>
 						</DialogPrimitive.Content>
 					</Transition.Child>

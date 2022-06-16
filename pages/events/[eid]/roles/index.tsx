@@ -123,7 +123,7 @@ const RolesPage: NextPage<Props> = (props) => {
 					/>
 				)}
 
-				<h3 className="text-xl md:text-2xl font-medium">Roles</h3>
+				<h3 className="text-xl font-medium md:text-2xl">Roles</h3>
 
 				<RoleList
 					eid={String(eid)}

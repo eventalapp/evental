@@ -16,15 +16,15 @@ export const AddToCalendarDropdown = (props: Props) => {
 	const { event, align = 'end' } = props;
 
 	return (
-		<div className="relative inline-block text-left">
+		<div className="inline-block relative text-left">
 			<DropdownMenuPrimitive.Root>
 				<DropdownMenuPrimitive.Trigger asChild>
 					<div>
 						<Tooltip message="Add this session to your calendar" side="top">
-							<button className="flex items-center justify-center p-1.5 text-gray-600">
+							<button className="flex justify-center items-center p-1.5 text-gray-600">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="h-7 w-7"
+									className="w-7 h-7"
 									size="1x"
 									icon={faCalendarCirclePlus}
 								/>
@@ -51,11 +51,11 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-gray-600"
+								className="mr-2 w-4 h-4 text-gray-600"
 								size="1x"
 								icon={faEnvelope}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">ICS</span>
+							<span className="grow text-gray-700 dark:text-gray-300">ICS</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 					<a href={google(event)} target="_blank" rel="noopener noreferrer">
@@ -67,11 +67,11 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-[#DB4437]"
+								className="mr-2 w-4 h-4 text-[#DB4437]"
 								size="1x"
 								icon={faGoogle}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Google</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Google</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 
@@ -84,11 +84,11 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-[#0072c6]"
+								className="mr-2 w-4 h-4 text-[#0072c6]"
 								size="1x"
 								icon={faOutlook}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Outlook</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Outlook</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 					<a href={office365(event)} target="_blank" rel="noopener noreferrer">
@@ -100,11 +100,11 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-[#0072c6]"
+								className="mr-2 w-4 h-4 text-[#0072c6]"
 								size="1x"
 								icon={faOutlook}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Outlook 365</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Outlook 365</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 					<a href={yahoo(event)} target="_blank" rel="noopener noreferrer">
@@ -116,11 +116,11 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 h-4 w-4 text-[#4a00a0]"
+								className="mr-2 w-4 h-4 text-[#4a00a0]"
 								size="1x"
 								icon={faYahoo}
 							/>
-							<span className="flex-grow text-gray-700 dark:text-gray-300">Yahoo</span>
+							<span className="grow text-gray-700 dark:text-gray-300">Yahoo</span>
 						</DropdownMenuPrimitive.Item>
 					</a>
 				</DropdownMenuPrimitive.Content>

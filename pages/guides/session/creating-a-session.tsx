@@ -34,10 +34,10 @@ const CreatingASessionGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Creating a session</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Creating a session</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to create a session for your event on Evental.
 					</p>
 				</Column>
@@ -69,7 +69,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 						}/guides/session/creating-a-session#navigate-to-the-dashboard`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To create a session, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -89,7 +89,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 						}/guides/session/creating-a-session#navigate-to-the-session-dashboard`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Sessions"</span> page.
 					</p>
@@ -109,7 +109,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 						}/guides/session/creating-a-session#create-a-session`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the session dashboard page, click the{' '}
 						<span className="font-medium">"Create Session"</span> button. This will navigate you to
 						the create session page, where you can create venues, categories/types, attach speakers,
@@ -122,7 +122,7 @@ const CreatingASessionGuidePage: NextPage = () => {
 						alt={'Create a session'}
 					/>
 
-					<p className="text-gray-700 my-4">
+					<p className="my-4 text-gray-700">
 						Now that you are on the create a session form, fill out the form and click the{' '}
 						<span className="font-medium">"Create Session"</span> button.
 					</p>

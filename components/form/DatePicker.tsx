@@ -53,7 +53,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 				prevMonthButtonDisabled,
 				nextMonthButtonDisabled
 			}) => (
-				<div className="flex items-center justify-between px-2 py-2">
+				<div className="flex items-center justify-between p-2">
 					<span className="text-lg font-bold text-gray-700">{format(date, 'MMMM yyyy')}</span>
 
 					<div className="space-x-2">

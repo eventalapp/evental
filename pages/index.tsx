@@ -35,14 +35,14 @@ const HomePage: NextPage = () => {
 			<Navigation />
 
 			<Column className="flex flex-col items-center">
-				<h1 className="px-2 mb-3 text-4xl sm:text-5xl font-black leading-tight text-center lg:text-6xl tracking-tight">
+				<h1 className="mb-3 px-2 text-center text-4xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
 					Host Outstanding Events
 				</h1>
-				<p className="max-w-4xl mt-1 mb-6 text-center text-base lg:text-xl leading-2 lg:leading-8 text-gray-600">
+				<p className="mt-1 mb-6 max-w-4xl text-center text-base leading-3 text-gray-600 lg:text-xl lg:leading-8">
 					Event management software that's highly intuitive. Your attendees and organizers will love
 					using Evental for your in-person, hybrid, and virtual events.
 				</p>
-				<div className="grid grid-cols-2 gap-3 z-10">
+				<div className="z-10 grid grid-cols-2 gap-3">
 					<Link href="/events/create" passHref>
 						<LinkButton variant="primary" padding="large">
 							Host An Event
@@ -55,12 +55,12 @@ const HomePage: NextPage = () => {
 					</Link>
 				</div>
 
-				<div className="bg-white w-full mt-7 md:mt-14 rounded-md relative">
-					<div className="relative max-w-full sm:w-full sm:max-w-[1200px] mx-auto">
-						<div className="absolute w-full overflow-visible top-[30px] sm:top-[75px] h-32">
-							<div className="left-0 bloom bloom-one" />
-							<div className="left-[34%] bloom bloom-three" />
-							<div className="right-0 bloom bloom-two" />
+				<div className="relative mt-7 w-full rounded-md bg-white md:mt-14">
+					<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
+						<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[75px]">
+							<div className="bloom bloom-one left-0" />
+							<div className="bloom bloom-three left-[34%]" />
+							<div className="bloom bloom-two right-0" />
 						</div>
 					</div>
 
@@ -74,14 +74,14 @@ const HomePage: NextPage = () => {
 
 			<div className="bg-primary-600 text-white">
 				<Column>
-					<h3 className="text-xl md:text-2xl font-bold">Creating events couldn't be easier</h3>
-					<p className="text-md md:text-lg text-gray-100 mt-1">
+					<h3 className="text-xl font-bold md:text-2xl">Creating events couldn't be easier</h3>
+					<p className="mt-1 text-base text-gray-100 md:text-lg">
 						In 3 quick steps, you can get your event up and running
 					</p>
-					<div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 mt-6 pt-6 border-t-2 border-primary-500">
+					<div className="mt-6 grid grid-cols-1 gap-5 border-t-2 border-primary-500 pt-6 lg:grid-cols-2 xl:grid-cols-3">
 						<div>
-							<span className="text-gray-300 text-sm font-bold">1.</span>
-							<h4 className="font-bold text-xl my-2">Create an event</h4>
+							<span className="text-sm font-bold text-gray-300">1.</span>
+							<h4 className="my-2 text-xl font-bold">Create an event</h4>
 							<p className="text-gray-200">
 								Start by{' '}
 								<Link href="/events/create">
@@ -91,15 +91,15 @@ const HomePage: NextPage = () => {
 							</p>
 						</div>
 						<div>
-							<span className="text-gray-300 text-sm font-bold">2.</span>
-							<h4 className="font-bold text-xl my-2">Create a session</h4>
+							<span className="text-sm font-bold text-gray-300">2.</span>
+							<h4 className="my-2 text-xl font-bold">Create a session</h4>
 							<p className="text-gray-200">
 								Then create a session, attach speakers, setup a venue, and add a session category.
 							</p>
 						</div>
 						<div>
-							<span className="text-gray-300 text-sm font-bold">3.</span>
-							<h4 className="font-bold text-xl my-2">Invite your attendees</h4>
+							<span className="text-sm font-bold text-gray-300">3.</span>
+							<h4 className="my-2 text-xl font-bold">Invite your attendees</h4>
 							<p className="text-gray-200">
 								Then invite organizers, attendees, and speakers/role members to your event.
 							</p>
@@ -109,13 +109,13 @@ const HomePage: NextPage = () => {
 			</div>
 
 			<Column>
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 					<div className="flex flex-col justify-center">
-						<h3 className="text-xl md:text-2xl font-bold">Organizer experience</h3>
+						<h3 className="text-xl font-bold md:text-2xl">Organizer experience</h3>
 						<p className="mt-3 text-gray-700">
 							The Evental admin dashboard has been made with simplicity and ease-of-use in mind.
 						</p>
-						<ul className="list-disc pl-5 space-y-0.5 my-5 text-gray-600">
+						<ul className="my-5 list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Manager attendees/speakers</li>
 							<li>Create custom event pages</li>
 							<li>Create and customize sessions</li>
@@ -128,23 +128,23 @@ const HomePage: NextPage = () => {
 						</div>
 					</div>
 					<div>
-						<div className="bg-gray-200 h-72 rounded-md" />
+						<div className="h-72 rounded-md bg-gray-200" />
 					</div>
 				</div>
 			</Column>
 
 			<Column>
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 					<div>
-						<div className="bg-gray-200 h-72 rounded-md" />
+						<div className="h-72 rounded-md bg-gray-200" />
 					</div>
 					<div className="flex flex-col justify-center">
-						<h3 className="text-xl md:text-2xl font-bold">Attendee experience</h3>
+						<h3 className="text-xl font-bold md:text-2xl">Attendee experience</h3>
 						<p className="mt-3 text-gray-700">
 							Allow attendees to easily attendee sessions, view venues, and learn more information
 							about your event.
 						</p>
-						<ul className="list-disc pl-5 space-y-0.5 my-5 text-gray-600">
+						<ul className="my-5 list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Signup for sessions</li>
 							<li>Create and export your schedule</li>
 							<li>View event pages, venues, sessions</li>
@@ -160,13 +160,13 @@ const HomePage: NextPage = () => {
 			</Column>
 
 			<Column>
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
 					<div className="flex flex-col justify-center">
-						<h3 className="text-xl md:text-2xl font-bold">Speaker experience</h3>
+						<h3 className="text-xl font-bold md:text-2xl">Speaker experience</h3>
 						<p className="mt-3 text-gray-700">
 							Speakers can easily create and manage their user profile and sessions
 						</p>
-						<ul className="list-disc pl-5 space-y-0.5 my-5 text-gray-600">
+						<ul className="my-5 list-disc space-y-0.5 pl-5 text-gray-600">
 							<li>Add speaker contact information</li>
 							<li>Build a custom profile to showcase yourself</li>
 							<li>Attach speakers/role members to sessions</li>
@@ -179,7 +179,7 @@ const HomePage: NextPage = () => {
 						</div>
 					</div>
 					<div>
-						<div className="bg-gray-200 h-72 rounded-md" />
+						<div className="h-72 rounded-md bg-gray-200" />
 					</div>
 				</div>
 			</Column>

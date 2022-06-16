@@ -46,10 +46,10 @@ const InvitingRoleMemberGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Inviting a role member</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Inviting a role member</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to invite a role member to your event on Evental
 					</p>
 				</Column>
@@ -85,7 +85,7 @@ const InvitingRoleMemberGuidePage: NextPage = () => {
 						}/guides/role/inviting-a-role-member#${sections[0].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To invite a speaker or role member, navigate to the events admin dashboard by clicking
 						the <span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -105,7 +105,7 @@ const InvitingRoleMemberGuidePage: NextPage = () => {
 						}/guides/role/inviting-a-role-member#${sections[1].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Roles"</span> link in the top navigation.
 					</p>
@@ -119,7 +119,7 @@ const InvitingRoleMemberGuidePage: NextPage = () => {
 						}/guides/role/inviting-a-role-member#${sections[2].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the roles dashboard page, select the role you wish to invite members to.
 					</p>
 				</GuideSection>
@@ -131,7 +131,7 @@ const InvitingRoleMemberGuidePage: NextPage = () => {
 						}/guides/role/inviting-a-role-member#${sections[3].anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						Select the <span className="font-medium">"Invite"</span> button, then enter the users
 						email and select invite.
 					</p>

@@ -48,10 +48,10 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Editing a session type</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Editing a session type</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to edit a session type for your event on Evental.
 					</p>
 				</Column>
@@ -83,7 +83,7 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 						}/guides/session/editing-a-session-type#${sections.navigateDashboard.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To edit a session type, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -103,7 +103,7 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 						}/guides/session/editing-a-session-type#${sections.navigateSessionTypes.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Types"</span> link in the top navigation.
 					</p>
@@ -117,16 +117,16 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 						}/guides/session/editing-a-session-type#${sections.editSessionType.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the session types dashboard page, select the session type you wish to
 						edit by clicking the session type.
 					</p>
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting a session type, select the <span className="font-medium">"Edit"</span>{' '}
 						button.
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting the "Edit" button. You will be navigated to the edit session type form.
 						Fill out the edit session type form to edit a session type.
 					</p>

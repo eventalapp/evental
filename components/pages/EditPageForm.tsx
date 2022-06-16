@@ -49,7 +49,7 @@ export const EditPageForm: React.FC<Props> = (props) => {
 				editPageMutation.mutate(data);
 			})}
 		>
-			<div className="mt-5 mt-3 flex w-full flex-row">
+			<div className="mt-5 flex w-full flex-row">
 				<div className="mb-5 flex-1">
 					<Label htmlFor="name">Name *</Label>
 					<Input placeholder="Room 415" {...register('name')} />

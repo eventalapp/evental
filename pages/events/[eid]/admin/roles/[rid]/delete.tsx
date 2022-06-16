@@ -71,11 +71,11 @@ const DeleteRolePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<p className="block text-white bg-red-500 px-5 py-3 rounded-md mb-4 font-medium">
+				<p className="block py-3 px-5 mb-4 font-medium text-white bg-red-500 rounded-md">
 					You are about to delete a role ("{role.name}")
 				</p>
 
-				<h1 className="text-2xl md:text-3xl font-bold">Delete Role</h1>
+				<h1 className="text-2xl font-bold md:text-3xl">Delete Role</h1>
 
 				<DeleteRoleForm
 					role={role}

@@ -41,10 +41,10 @@ const PricingPage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Single Event Plans &amp; Pricing</h1>
-					<p className="text-gray-100 text-md mt-4 max-w-2xl text-center">
+					<h1 className="text-2xl font-bold md:text-3xl">Single Event Plans &amp; Pricing</h1>
+					<p className="mt-4 max-w-2xl text-base text-center text-gray-100">
 						View pricing for single event plans for standard and nonprofit or educational events.
 					</p>
 				</Column>
@@ -70,15 +70,15 @@ const PricingPage: NextPage = () => {
 					</Button>
 				</div>
 
-				<div className="bg-white border-gray-300 border rounded shadow-sm p-5 flex flex-col justify-between items-center space-y-4 max-w-[450px] min-h-[350px] my-3">
+				<div className="flex flex-col justify-between items-center p-5 my-3 space-y-4 max-w-[450px] min-h-[350px] bg-white rounded border border-gray-300 shadow-sm">
 					<div className="flex flex-row items-center">
 						<strong
-							className="text-2xl tracking-tight font-bold font-display mr-2"
+							className="mr-2 font-display text-2xl font-bold tracking-tight"
 							aria-label="evental homepage"
 						>
 							Evental
 						</strong>
-						<span className="bg-primary text-white px-2 py-1 font-medium text-xs rounded">
+						<span className="py-1 px-2 text-xs font-medium text-white bg-primary rounded">
 							{isEducation ? 'EDU' : 'PRO'}
 						</span>
 					</div>
@@ -90,13 +90,13 @@ const PricingPage: NextPage = () => {
 					</p>
 
 					<div>
-						<p className="font-bold text-2xl md:text-3xl text-center">
-							<span className="align-text-top text-lg text-gray-700 mr-0.5">$</span>
+						<p className="text-2xl font-bold text-center md:text-3xl">
+							<span className="mr-0.5 text-lg text-gray-700 align-text-top">$</span>
 							{isEducation
 								? eduAttendeePricing[attendees].price
 								: proAttendeePricing[attendees].price}
 						</p>
-						<p className="text-gray-600 text-sm text-center">
+						<p className="text-sm text-center text-gray-600">
 							Includes {attendees} attendees (
 							{isEducation
 								? eduAttendeePricing[attendees].perAttendeePrice < 1
@@ -119,7 +119,7 @@ const PricingPage: NextPage = () => {
 					</Link>
 				</div>
 
-				<div className="flex flex-col items-center space-y-3 mt-4">
+				<div className="flex flex-col items-center mt-4 space-y-3">
 					<p className="text-lg font-medium">How many attendees are you expecting?</p>
 					<Controller
 						control={control}
@@ -141,7 +141,7 @@ const PricingPage: NextPage = () => {
 						<p className="text-gray-600">
 							Expecting more than 5,000 people?{' '}
 							<Link href="/contact">
-								<a className="text-primary font-medium">Ask us for a same-day quote.</a>
+								<a className="font-medium text-primary">Ask us for a same-day quote.</a>
 							</Link>
 						</p>
 					)}
@@ -152,10 +152,10 @@ const PricingPage: NextPage = () => {
 				</div>
 			</Column>
 
-			<div className="dark-topography text-white">
-				<Column className="flex items-center justify-center">
-					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
-						<p className="text-sm md:text-lg text-center my-1.5 font-medium">
+			<div className="text-white dark-topography">
+				<Column className="flex justify-center items-center">
+					<div className="flex flex-row flex-wrap justify-center items-center space-x-4">
+						<p className="my-1.5 text-sm font-medium text-center md:text-lg">
 							<span className="font-bold">Organizing several events?</span> We offer subscriptions
 							from ${isEducation ? '800' : '1000'}/year.
 						</p>
@@ -169,27 +169,27 @@ const PricingPage: NextPage = () => {
 			</div>
 
 			<Column>
-				<div className="flex items-center justify-center flex-col mb-6">
+				<div className="flex flex-col justify-center items-center mb-6">
 					<div className="flex flex-row items-center">
 						<strong
-							className="text-2xl lg:text-3xl tracking-tight font-bold font-display mr-2"
+							className="mr-2 font-display text-2xl font-bold tracking-tight lg:text-3xl"
 							aria-label="evental homepage"
 						>
 							Evental
 						</strong>
-						<span className="bg-primary text-white px-2 py-1 font-medium text-xs lg:text-md rounded">
+						<span className="py-1 px-2 text-xs font-medium text-white bg-primary rounded lg:text-base">
 							{isEducation ? 'EDU' : 'PRO'}
 						</span>
 					</div>
 					<p className="text-gray-600">Perks and features</p>
 				</div>
 
-				<div className="mt-3 grid grid-cols-1 lg:grid-cols-2 gap-8 gap-x-6">
+				<div className="grid grid-cols-1 gap-8 gap-x-6 mt-3 lg:grid-cols-2">
 					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
+						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
 							Publish Features
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
 							<li>Responsive event website</li>
 							<li>Customizable event branding</li>
 							<li>Control event privacy &amp; access</li>
@@ -198,10 +198,10 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
+						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
 							Attendee Experience
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
 							<li>Generate and export personal schedule</li>
 							<li>View event from any device</li>
 							<li>Sync personal schedule to calendar</li>
@@ -210,40 +210,40 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
+						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
 							Virtual &amp; Hybrid Events
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
 							<li>Use Evental with any webinar or video platform</li>
 							<li>Automatically display times in users timezone</li>
 							<li>Provide post-event access to session recordings</li>
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
+						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
 							Role Management
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
 							<li>Create custom roles for speakers, artists, and exhibitors</li>
 							<li>Attach role members to sessions</li>
 							<li>Top level pages for role members</li>
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
+						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
 							Communication
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
 							<li>Custom email builder to develop responsive emails</li>
 							<li>Create a welcome email to automatically send to attendees</li>
 							<li>Notify attendees when they have an upcoming session</li>
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
+						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
 							Session Registration
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
 							<li>Attendees can register for sessions</li>
 							<li>Filter sessions by date, type, venue, etc.</li>
 							<li>Attach role members/speakers to sessions</li>
@@ -251,10 +251,10 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">
+						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">
 							Administration
 						</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
 							<li>Remove attendees from your event</li>
 							<li>Create organizers to assist you in running your event</li>
 							<li>Export event and session data</li>
@@ -262,8 +262,8 @@ const PricingPage: NextPage = () => {
 						</ul>
 					</div>
 					<div>
-						<h3 className="text-xl font-medium mb-2 pb-1 border-b border-gray-300">Support</h3>
-						<ul className="list-disc pl-5 space-y-0.5 text-gray-600">
+						<h3 className="pb-1 mb-2 text-xl font-medium border-b border-gray-300">Support</h3>
+						<ul className="pl-5 space-y-0.5 list-disc text-gray-600">
 							<li>Organizer and attendee support guides</li>
 							<li>24/7 Email support</li>
 							<li>Dedicated account manager</li>
@@ -273,10 +273,10 @@ const PricingPage: NextPage = () => {
 				</div>
 			</Column>
 
-			<div className="dark-topography text-white">
-				<Column className="flex items-center justify-center">
-					<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
-						<p className="text-sm md:text-lg text-center my-1.5 font-medium">
+			<div className="text-white dark-topography">
+				<Column className="flex justify-center items-center">
+					<div className="flex flex-row flex-wrap justify-center items-center space-x-4">
+						<p className="my-1.5 text-sm font-medium text-center md:text-lg">
 							<span className="font-bold">Ready to start?</span> Get started building your event
 							now!
 						</p>
@@ -290,7 +290,7 @@ const PricingPage: NextPage = () => {
 			</div>
 
 			<Column className="grid grid-cols-4 md:gap-6">
-				<h3 className="text-2xl tracking-tight font-bold font-display mb-3 col-span-4 md:col-span-1">
+				<h3 className="col-span-4 mb-3 font-display text-2xl font-bold tracking-tight md:col-span-1">
 					Frequently Asked Questions
 				</h3>
 

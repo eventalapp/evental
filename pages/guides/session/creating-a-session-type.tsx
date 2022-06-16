@@ -35,10 +35,10 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Creating a session type</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Creating a session type</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to create a session type for your event on Evental.
 					</p>
 				</Column>
@@ -71,7 +71,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						}/guides/session/creating-a-session-type#navigate-to-the-dashboard`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To create a session, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -91,7 +91,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						}/guides/session/creating-a-session-type#navigate-to-the-session-dashboard`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Types"</span> page.
 					</p>
@@ -111,7 +111,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						}/guides/session/creating-a-session-type#create-a-type`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the session type dashboard page, click the{' '}
 						<span className="font-medium">"Create Type"</span> button. This will navigate you to the
 						create session type page, where you can create a type/category to group sessions.
@@ -123,7 +123,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 						alt={'Create a type'}
 					/>
 
-					<p className="text-gray-700 my-4">
+					<p className="my-4 text-gray-700">
 						Now that you are on the create a type form, fill out the form and click the{' '}
 						<span className="font-medium">"Create Type"</span> button.
 					</p>

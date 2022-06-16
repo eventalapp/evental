@@ -34,10 +34,10 @@ const ContactPage: NextPage = () => {
 
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Contact Us</h1>
-					<p className="text-gray-100 text-md mt-4 max-w-2xl text-center">
+					<h1 className="text-2xl font-bold md:text-3xl">Contact Us</h1>
+					<p className="mt-4 max-w-2xl text-base text-center text-gray-100">
 						Have some suggestions or feedback? Questions about Evental? Just want to have a chat?
 						We'd love to hear from you.
 					</p>
@@ -45,12 +45,12 @@ const ContactPage: NextPage = () => {
 			</div>
 
 			<Column className="flex flex-col items-center">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-10 md:mb-16">
-					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">
+				<div className="grid grid-cols-1 gap-12 mb-10 md:grid-cols-2 md:mb-16">
+					<div className="p-5 rounded-md border border-gray-200 shadow-sm">
+						<span className="block mb-1 text-xl font-bold text-center md:text-2xl">
 							Questions/Support
 						</span>
-						<p className="text-gray-600 text-center">
+						<p className="text-center text-gray-600">
 							Have questions or need support regarding Evental? Reach out by filling out a support
 							ticket or emailing us at{' '}
 							<a
@@ -62,16 +62,16 @@ const ContactPage: NextPage = () => {
 								support@evental.app
 							</a>
 						</p>
-						<div className="flex flex-col items-center justify-center mt-6 space-y-1">
+						<div className="flex flex-col justify-center items-center mt-6 space-y-1">
 							<Link href="/support">
 								<LinkButton>Create a ticket</LinkButton>
 							</Link>
-							<span className="text-gray-500 text-sm">or</span>
+							<span className="text-sm text-gray-500">or</span>
 							<p className="text-gray-700">
 								Email us at{' '}
 								<a
 									href="mailto:support@evental.app"
-									className="underline text-gray-900"
+									className="text-gray-900 underline"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -80,11 +80,11 @@ const ContactPage: NextPage = () => {
 							</p>
 						</div>
 					</div>
-					<div className="border border-gray-200 p-5 rounded-md shadow-sm">
-						<span className="block text-xl md:text-2xl mb-1 font-bold text-center">
+					<div className="p-5 rounded-md border border-gray-200 shadow-sm">
+						<span className="block mb-1 text-xl font-bold text-center md:text-2xl">
 							Contact Sales
 						</span>
-						<p className="text-gray-600 text-center">
+						<p className="text-center text-gray-600">
 							Considering using Evental? Not sure if Evental will meet your needs? Reach out to our
 							team by booking a call or demo below, or email us at{' '}
 							<a
@@ -96,16 +96,16 @@ const ContactPage: NextPage = () => {
 								sales@evental.app
 							</a>
 						</p>
-						<div className="flex flex-col items-center justify-center mt-6 space-y-1">
+						<div className="flex flex-col justify-center items-center mt-6 space-y-1">
 							<Link href="/demo">
 								<LinkButton>Book a call or demo</LinkButton>
 							</Link>
-							<span className="text-gray-500 text-sm">or</span>
+							<span className="text-sm text-gray-500">or</span>
 							<p className="text-gray-700">
 								Email us at{' '}
 								<a
 									href="mailto:sales@evental.app"
-									className="underline text-gray-900"
+									className="text-gray-900 underline"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -117,14 +117,14 @@ const ContactPage: NextPage = () => {
 				</div>
 
 				<div>
-					<h3 className="text-xl md:text-2xl mb-1 font-bold text-center">
+					<h3 className="mb-1 text-xl font-bold text-center md:text-2xl">
 						Not sure where to start?
 					</h3>
 					<p className="text-gray-700">
 						Start by saying hello! For general inquiries, reach out to us at{' '}
 						<a
 							href="mailto:hello@evental.app"
-							className="underline text-gray-900"
+							className="text-gray-900 underline"
 							target="_blank"
 							rel="noopener noreferrer"
 						>

@@ -24,9 +24,9 @@ const ErrorNotFoundPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<div className="flex items-center flex-col">
-					<h1 className="text-2xl md:text-3xl font-bold">Page not found</h1>
-					<p className="text-gray-600 my-5">We could not find the page you were looking for...</p>
+				<div className="flex flex-col items-center">
+					<h1 className="text-2xl font-bold md:text-3xl">Page not found</h1>
+					<p className="my-5 text-gray-600">We could not find the page you were looking for...</p>
 					<div className="flex flex-row space-x-4">
 						<Button type="button" variant="primary" onClick={router.back}>
 							Go Back

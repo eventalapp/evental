@@ -62,7 +62,7 @@ const EditVenuePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl md:text-2xl font-medium">Edit Venue</h3>
+				<h3 className="text-xl font-medium md:text-2xl">Edit Venue</h3>
 
 				<EditVenueForm
 					eid={String(eid)}

@@ -48,10 +48,10 @@ const CreatingAPageGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Creating a page</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Creating a page</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to create a page for your event on Evental.
 					</p>
 				</Column>
@@ -83,7 +83,7 @@ const CreatingAPageGuidePage: NextPage = () => {
 						}/guides/page/creating-a-page#${sections.navigateDashboard.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To create a page, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -103,7 +103,7 @@ const CreatingAPageGuidePage: NextPage = () => {
 						}/guides/page/creating-a-page#${sections.navigatePages.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Pages"</span> link in the top navigation.
 					</p>
@@ -117,12 +117,12 @@ const CreatingAPageGuidePage: NextPage = () => {
 						}/guides/page/creating-a-page#${sections.createPage.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the pages dashboard page, select the{' '}
 						<span className="font-medium">"Create"</span> button.
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting the "Create" button. You will be navigated to a form. Fill out that form
 						to create a page.
 					</p>

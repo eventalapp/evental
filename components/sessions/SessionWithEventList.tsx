@@ -98,7 +98,7 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 																>
 																	<a className="inline-block">
 																		<div className="flex flex-row rounded-md transition-all duration-100 hover:bg-gray-50">
-																			<div className="flex flex-grow flex-row flex-wrap justify-between py-2 px-3">
+																			<div className="flex grow flex-row flex-wrap justify-between py-2 px-3">
 																				<div className="flex flex-row items-center justify-between">
 																					<div
 																						className="mr-3 h-4 w-4 rounded-full"
@@ -172,7 +172,7 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 															>
 																<a className="inline-block">
 																	<div className="flex flex-row rounded-md transition-all duration-100 hover:bg-gray-50">
-																		<div className="flex flex-grow flex-row flex-wrap justify-between py-2 px-3">
+																		<div className="flex grow flex-row flex-wrap justify-between py-2 px-3">
 																			<div className="flex flex-row items-center justify-between">
 																				<div
 																					className="mr-3 h-4 w-4 rounded-full"

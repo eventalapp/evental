@@ -48,10 +48,10 @@ const EditingApageGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Editing a page</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Editing a page</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to edit a page for your event on Evental.
 					</p>
 				</Column>
@@ -83,7 +83,7 @@ const EditingApageGuidePage: NextPage = () => {
 						}/guides/page/editing-a-page#${sections.navigateDashboard.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						To edit a page, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
@@ -103,7 +103,7 @@ const EditingApageGuidePage: NextPage = () => {
 						}/guides/page/editing-a-page#${sections.navigatepages.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"pages"</span> link in the top navigation.
 					</p>
@@ -117,15 +117,15 @@ const EditingApageGuidePage: NextPage = () => {
 						}/guides/page/editing-a-page#${sections.editpage.anchor}`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After visiting the pages dashboard page, select the page you wish to edit by clicking
 						the page.
 					</p>
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting a page, select the <span className="font-medium">"Edit"</span> button.
 					</p>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After selecting the "Edit" button. You will be navigated to the edit page form. Fill out
 						the edit page form to edit a page.
 					</p>

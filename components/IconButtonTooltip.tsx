@@ -30,12 +30,12 @@ export const IconButtonTooltip: Props = (props) => {
 					{isLoading ? (
 						<FontAwesomeIcon
 							fill="currentColor"
-							className="h-6 w-6 animate-spin p-1"
+							className="p-1 w-6 h-6 animate-spin"
 							size="1x"
 							icon={faSpinnerThird}
 						/>
 					) : (
-						<FontAwesomeIcon fill="currentColor" className="h-6 w-6 p-1" size="1x" icon={icon} />
+						<FontAwesomeIcon fill="currentColor" className="p-1 w-6 h-6" size="1x" icon={icon} />
 					)}
 				</button>
 			</div>

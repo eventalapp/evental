@@ -57,7 +57,7 @@ export const ImageUpload: React.FC<Props> = (props) => {
 										src={file.preview}
 										alt="File Preview"
 									/>
-									<div className="absolute bottom-1/2 right-1/2 flex h-10 w-10 translate-x-1/2 translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white">
+									<div className="absolute right-1/2 bottom-1/2 flex h-10 w-10 translate-x-1/2 translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white">
 										<FontAwesomeIcon size="lg" icon={faCamera} />
 									</div>
 								</div>
@@ -69,7 +69,7 @@ export const ImageUpload: React.FC<Props> = (props) => {
 									src={placeholderImageUrl}
 									alt=""
 								/>
-								<div className="absolute bottom-1/2 right-1/2 flex h-10 w-10 translate-x-1/2 translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white">
+								<div className="absolute right-1/2 bottom-1/2 flex h-10 w-10 translate-x-1/2 translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-black/50 text-white">
 									<FontAwesomeIcon size="lg" icon={faCamera} />
 								</div>
 							</div>

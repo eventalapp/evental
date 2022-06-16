@@ -36,10 +36,10 @@ const AttendingAnEventGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Creating an account</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Creating an account</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to create and customize your Evental account.
 					</p>
 				</Column>
@@ -71,10 +71,10 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						}/guides/user/creating-an-account#create-an-account`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						Before registering for an event, you will need to{' '}
 						<Link href="/auth/signup">
-							<a className="underline text-gray-900">create an account</a>
+							<a className="text-gray-900 underline">create an account</a>
 						</Link>
 						.
 					</p>
@@ -94,17 +94,17 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						}/guides/user/creating-an-account#verify-your-account`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After creating an account, you will receive an email asking you to verify your account.
 						If you need to request another verification email, do you this in the{' '}
 						<Link href="/settings">
-							<a className="underline text-gray-900">user settings page</a>
+							<a className="text-gray-900 underline">user settings page</a>
 						</Link>
 						.
 					</p>
 
 					<AspectImage
-						className={'lg:w-3/5 m-auto'}
+						className={'m-auto lg:w-3/5'}
 						ratio={855 / 482}
 						imageUrl={'https://cdn.evental.app/images/verify-your-account.png'}
 						alt={'Verify your account'}
@@ -119,13 +119,13 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						}/guides/user/creating-an-account#customize-your-profile`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After verifying your email, you can customize your profile to include your social
 						contacts and add more information about you.
 					</p>
 
 					<AspectImage
-						className={'lg:w-3/5 m-auto'}
+						className={'m-auto lg:w-3/5'}
 						ratio={862 / 961}
 						imageUrl={'https://cdn.evental.app/images/editing-your-profile.png'}
 						alt={'Editing your profile'}
@@ -133,10 +133,10 @@ const AttendingAnEventGuidePage: NextPage = () => {
 				</GuideSection>
 
 				<GuideSection id="attending-a-session">
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After customizing your profile, you can{' '}
 						<Link href="/guides/attendee/attending-an-event">
-							<a className="underline text-gray-900">attend an event</a>
+							<a className="text-gray-900 underline">attend an event</a>
 						</Link>
 						.
 					</p>

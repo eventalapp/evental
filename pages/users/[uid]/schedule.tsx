@@ -69,7 +69,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 
 			<Column>
 				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium mt-3">
+					<h3 className="mt-3 text-xl font-medium md:text-2xl">
 						{user.name}'s Schedule{' '}
 						<span className="font-normal text-gray-500">({sessionsByUserData.length || 0})</span>
 					</h3>

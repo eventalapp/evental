@@ -64,10 +64,10 @@ const InviteRolePage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<FlexRowBetween>
-					<h3 className="text-xl md:text-2xl font-medium">Invite {role.name}</h3>
+					<h3 className="text-xl font-medium md:text-2xl">Invite {role.name}</h3>
 				</FlexRowBetween>
 
-				<p className="text-md text-gray-700 mb-2">
+				<p className="mb-2 text-base text-gray-700">
 					Enter the users email that you wish to invite to the{' '}
 					<span className="font-medium">"{role.name}"</span> role. They will receive an email with
 					information on how to claim their role.

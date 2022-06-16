@@ -41,7 +41,7 @@ export const CreateSessionTypeForm: React.FC<Props> = (props) => {
 			})}
 		>
 			<div className="mt-5 flex w-full flex-row flex-wrap">
-				<div className="flex-1 flex-grow md:mr-5">
+				<div className="flex-1 grow md:mr-5">
 					<Label htmlFor="name">Name *</Label>
 					<Input placeholder="Session type name" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}

@@ -16,7 +16,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 	return (
 		<Root>
 			<Trigger>
-				<div className="rounded-full w-10 h-10 relative border border-gray-200 shadow-sm">
+				<div className="relative w-10 h-10 rounded-full border border-gray-200 shadow-sm">
 					<Image
 						className="rounded-full"
 						layout="fill"
@@ -31,7 +31,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 			</Trigger>
 			<Content
 				align="end"
-				className="bg-white border border-gray-200 rounded-md py-2 px-2 text-gray-900 text-left shadow-sm"
+				className="p-2 text-left text-gray-900 bg-white rounded-md border border-gray-200 shadow-sm"
 				sideOffset={10}
 			>
 				<Item className="outline-none">
@@ -54,7 +54,7 @@ export const ProfileDropdown: React.FC<Props> = (props) => {
 						<DropdownLink className="mt-1">Settings</DropdownLink>
 					</Link>
 				</Item>
-				<div className="h-0.5 w-full my-2 bg-gray-200" />
+				<div className="my-2 w-full h-0.5 bg-gray-200" />
 				<Item className="outline-none">
 					<DropdownLink
 						className="text-red-600"

@@ -36,10 +36,10 @@ const AttendingAnEventGuidePage: NextPage = () => {
 			/>
 			<Navigation />
 
-			<div className="dark-topography text-white">
+			<div className="text-white dark-topography">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl md:text-3xl font-bold">Attending an event</h1>
-					<p className="text-gray-100 text-md mt-4">
+					<h1 className="text-2xl font-bold md:text-3xl">Attending an event</h1>
+					<p className="mt-4 text-base text-gray-100">
 						Learn how to get started as an attendee or a speaker.
 					</p>
 				</Column>
@@ -71,15 +71,15 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						}/guides/attendee/attending-an-event#create-an-account`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						Before registering for an event, you will need to{' '}
 						<Link href="/auth/signup">
-							<a className="underline text-gray-900">create an account</a>
+							<a className="text-gray-900 underline">create an account</a>
 						</Link>
 						. If you need a more detailed guide on creating an account, verifying your account, or
 						customizing your account, visit the{' '}
 						<Link href="/guides/user/creating-an-account">
-							<a className="underline text-gray-900">creating an account guide</a>
+							<a className="text-gray-900 underline">creating an account guide</a>
 						</Link>
 						.
 					</p>
@@ -99,10 +99,10 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						}/guides/attendee/attending-an-event#find-your-event`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						Reach out to the event organizer or find an event to attend on the{' '}
 						<Link href="/events">
-							<a className="underline text-gray-900">upcoming events page</a>
+							<a className="text-gray-900 underline">upcoming events page</a>
 						</Link>
 						.
 					</p>
@@ -122,7 +122,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						}/guides/attendee/attending-an-event#registering-for-an-event`}
 					/>
 
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						Once you have found an event, you can attend it by clicking the{' '}
 						<span className="font-medium">"Registering here"</span> button
 					</p>
@@ -135,10 +135,10 @@ const AttendingAnEventGuidePage: NextPage = () => {
 				</GuideSection>
 
 				<GuideSection id="attending-a-session">
-					<p className="text-gray-700 mb-4">
+					<p className="mb-4 text-gray-700">
 						After registering for the event, you can{' '}
 						<Link href="/guides/attendee/attending-a-session">
-							<a className="underline text-gray-900">attend a session</a>
+							<a className="text-gray-900 underline">attend a session</a>
 						</Link>
 						.
 					</p>

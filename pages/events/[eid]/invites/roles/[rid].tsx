@@ -63,10 +63,10 @@ const RoleInvitePage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="flex flex-row justify-between mb-3">
-					<h1 className="text-2xl md:text-3xl font-bold">Accept {role.name} Invite</h1>
+					<h1 className="text-2xl font-bold md:text-3xl">Accept {role.name} Invite</h1>
 				</div>
 
-				<p className="text-md text-gray-700 mb-2">
+				<p className="mb-2 text-base text-gray-700">
 					Roles are used to separate users into different groups.
 				</p>
 

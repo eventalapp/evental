@@ -27,10 +27,10 @@ const Select = (props: Props) => {
 				</Button>
 			</SelectPrimitive.Trigger>
 			<SelectPrimitive.Content>
-				<SelectPrimitive.ScrollUpButton className="flex items-center justify-center text-gray-700 dark:text-gray-300">
+				<SelectPrimitive.ScrollUpButton className="flex justify-center items-center text-gray-700 dark:text-gray-300">
 					<ChevronUpIcon />
 				</SelectPrimitive.ScrollUpButton>
-				<SelectPrimitive.Viewport className="border border-gray-300 bg-white dark:bg-gray-800 p-2 rounded-lg">
+				<SelectPrimitive.Viewport className="p-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-300">
 					<SelectPrimitive.Group>
 						{options.map((f, i) => (
 							<SelectPrimitive.Item
@@ -43,14 +43,14 @@ const Select = (props: Props) => {
 								)}
 							>
 								<SelectPrimitive.ItemText>{f.label}</SelectPrimitive.ItemText>
-								<SelectPrimitive.ItemIndicator className="absolute left-2 inline-flex items-center">
+								<SelectPrimitive.ItemIndicator className="inline-flex absolute left-2 items-center">
 									<CheckIcon />
 								</SelectPrimitive.ItemIndicator>
 							</SelectPrimitive.Item>
 						))}
 					</SelectPrimitive.Group>
 				</SelectPrimitive.Viewport>
-				<SelectPrimitive.ScrollDownButton className="flex items-center justify-center text-gray-700 dark:text-gray-300">
+				<SelectPrimitive.ScrollDownButton className="flex justify-center items-center text-gray-700 dark:text-gray-300">
 					<ChevronDownIcon />
 				</SelectPrimitive.ScrollDownButton>
 			</SelectPrimitive.Content>
