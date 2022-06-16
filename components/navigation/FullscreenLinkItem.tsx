@@ -25,8 +25,8 @@ export const FullscreenLinkItem: React.FC<{
 			>
 				<li
 					className={classNames(
-						'hover:bg-gray-75 my-1 rounded-md px-3 py-1 text-sm dark:hover:bg-gray-900',
-						'dark:text-gray-75 text-sm font-medium',
+						'my-1 rounded-md px-3 py-1 text-sm hover:bg-gray-75 dark:hover:bg-gray-900',
+						'text-sm font-medium dark:text-gray-75',
 						router.asPath == link ? 'text-primary' : 'text-gray-900'
 					)}
 				>
