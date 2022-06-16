@@ -275,14 +275,28 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						<p className="mt-1 text-sm text-gray-600">
 							Want to increase your max attendee count?{' '}
 							<Link href={`/events/${event.slug}/admin/billing`}>
-								<a className="font-medium text-primary">Upgrade your plan</a>
+								<a
+									className="font-medium"
+									style={{
+										color: colorWatcher ?? theme.extend.colors.primary.DEFAULT
+									}}
+								>
+									Upgrade your plan
+								</a>
 							</Link>
 						</p>
 					) : (
 						<p className="mt-1 text-sm text-gray-600">
 							Want to increase your max attendee count?{' '}
 							<Link href={`/contact`}>
-								<a className="font-medium text-primary">Contact Us</a>
+								<a
+									className="font-medium"
+									style={{
+										color: colorWatcher ?? theme.extend.colors.primary.DEFAULT
+									}}
+								>
+									Contact Us
+								</a>
 							</Link>
 						</p>
 					)}
@@ -317,7 +331,14 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						<p className="mt-1 text-sm text-gray-600">
 							Want to make your event public?{' '}
 							<Link href={`/events/${event.slug}/admin/billing`}>
-								<a className="font-medium text-primary">Upgrade your plan</a>
+								<a
+									className="font-medium"
+									style={{
+										color: colorWatcher ?? theme.extend.colors.primary.DEFAULT
+									}}
+								>
+									Upgrade your plan
+								</a>
 							</Link>
 						</p>
 					)}
