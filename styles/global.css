@@ -169,7 +169,7 @@
 }
 
 .prose img {
-	@apply m-auto my-5 max-h-[600px];
+	@apply m-auto my-5 max-h-[600px] rounded-md border border-gray-200 shadow-sm;
 }
 
 .prose {
