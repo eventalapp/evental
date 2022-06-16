@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .react-datepicker__input-container input {
-	@apply block w-full text-base md:text-sm bg-white border border-gray-300 rounded shadow-sm form-input;
+	@apply form-input block w-full rounded border border-gray-300 bg-white text-base shadow-sm md:text-sm;
 }
 
 .react-datepicker-popper {
-	@apply z-40 text-sm bg-white shadow-sm px-3 py-2 border border-gray-200 rounded;
+	@apply z-40 rounded border border-gray-200 bg-white px-3 py-2 text-sm shadow-sm;
 
 	inset: unset !important;
 }
@@ -21,11 +21,11 @@
 }
 
 .react-datepicker__portal {
-	@apply absolute z-10 w-72 text-sm transform-none bg-white shadow px-3 py-2 top-12 right-0 border-2 border-gray-200 rounded;
+	@apply absolute top-12 right-0 z-10 w-72 transform-none rounded border-2 border-gray-200 bg-white px-3 py-2 text-sm shadow;
 }
 
 .react-datepicker__month-container {
-	@apply flex flex-col w-64;
+	@apply flex w-64 flex-col;
 }
 
 .react-datepicker__month {
@@ -41,11 +41,11 @@
 }
 
 .react-datepicker__day-names {
-	@apply flex justify-around text-gray-400 font-medium text-center text-xs;
+	@apply flex justify-around text-center text-xs font-medium text-gray-400;
 }
 
 .react-datepicker__day-name {
-	@apply w-8 h-8 flex items-center justify-center py-1 rounded-full;
+	@apply flex h-8 w-8 items-center justify-center rounded-full py-1;
 }
 
 .react-datepicker__navigation {
@@ -53,15 +53,15 @@
 }
 
 .react-datepicker__navigation--previous {
-	@apply right-12 w-8 h-8 rounded transition flex items-center justify-center hover:bg-gray-200;
+	@apply right-12 flex h-8 w-8 items-center justify-center rounded transition hover:bg-gray-200;
 }
 
 .react-datepicker__navigation--next {
-	@apply right-4 w-8 h-8 rounded transition flex items-center justify-center hover:bg-gray-200;
+	@apply right-4 flex h-8 w-8 items-center justify-center rounded transition hover:bg-gray-200;
 }
 
 .react-datepicker__day {
-	@apply mb-1 w-8 h-8 flex items-center justify-center py-1 text-sm leading-loose transition text-gray-700 rounded cursor-pointer;
+	@apply mb-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded py-1 text-sm leading-loose text-gray-700 transition;
 }
 
 .react-datepicker__day--disabled {
@@ -81,11 +81,11 @@
 }
 
 .react-datepicker__day--selecting-range-start {
-	@apply bg-white border-2 border-primary-500;
+	@apply border-2 border-primary-500 bg-white;
 }
 
 .react-datepicker__day--selecting-range-end {
-	@apply bg-white border-2 border-primary-500;
+	@apply border-2 border-primary-500 bg-white;
 }
 
 .react-datepicker__day--selected {
@@ -93,11 +93,11 @@
 }
 
 .react-datepicker__day--range-start {
-	@apply bg-primary-500 text-white hover:text-gray-700 hover:bg-white;
+	@apply bg-primary-500 text-white hover:bg-white hover:text-gray-700;
 }
 
 .react-datepicker__day--range-end {
-	@apply bg-primary-500 text-white hover:text-gray-700 hover:bg-white;
+	@apply bg-primary-500 text-white hover:bg-white hover:text-gray-700;
 }
 
 .Toastify__toast-container--top-right {
@@ -121,11 +121,11 @@
 }
 
 .react-datepicker {
-	@apply flex justify-center w-full;
+	@apply flex w-full justify-center;
 }
 
 .react-datepicker__time-container {
-	@apply flex flex-col justify-center w-24 pl-2;
+	@apply flex w-24 flex-col justify-center pl-2;
 }
 
 .react-datepicker__header--time {
@@ -133,19 +133,19 @@
 }
 
 .react-datepicker-time__header {
-	@apply text-lg text-gray-700 font-bold;
+	@apply text-lg font-bold text-gray-700;
 }
 
 .react-datepicker__time-list {
-	@apply no-scrollbar overflow-y-auto w-full h-40;
+	@apply no-scrollbar h-40 w-full overflow-y-auto;
 }
 
 .react-datepicker__time-list-item {
-	@apply hover:bg-primary-100 px-2 py-1.5 rounded-md cursor-pointer my-1;
+	@apply my-1 cursor-pointer rounded-md px-2 py-1.5 hover:bg-primary-100;
 }
 
 .react-datepicker__time-list-item--selected {
-	@apply bg-primary-500 text-white hover:bg-white hover:text-black border-2 border-primary-500 transition;
+	@apply border-2 border-primary-500 bg-primary-500 text-white transition hover:bg-white hover:text-black;
 }
 
 #nprogress .bar {
@@ -195,7 +195,7 @@
 }
 
 .bloom {
-	@apply absolute md:w-60 md:h-60 sm:w-48 sm:h-48 h-32 w-32;
+	@apply absolute h-32 w-32 sm:h-48 sm:w-48 md:h-60 md:w-60;
 	will-change: opacity;
 	opacity: 0;
 	filter: blur(80px);
@@ -248,11 +248,11 @@ button,
 }
 
 .chrome-picker {
-	@apply rounded-md shadow-sm border border-gray-300 bg-white flex flex-row w-full min-h-[120px] !important;
+	@apply flex min-h-[120px] w-full flex-row rounded-md border border-gray-300 bg-white shadow-sm !important;
 }
 
 .chrome-picker > div {
-	@apply w-1/2 pb-0 !important;
+	@apply w-1/2 rounded-md pb-0 !important;
 }
 
 .chrome-picker .hue-horizontal {
