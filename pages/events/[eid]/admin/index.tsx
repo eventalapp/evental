@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { LoadingPage } from '../../../../components/error/LoadingPage';
@@ -10,6 +11,7 @@ import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
 import { EventSettingsNavigation } from '../../../../components/events/settingsNavigation';
 import { Footer } from '../../../../components/Footer';
+import { LinkButton } from '../../../../components/form/LinkButton';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
@@ -65,6 +67,13 @@ const EditEventPage: NextPage = () => {
 					event={event}
 					isEventLoading={isEventLoading}
 				/>
+
+				<p className="mt-5 mb-3 text-lg font-bold text-red-500">Danger Zone</p>
+				<div className="rounded-md bg-red-100 p-4">
+					<LinkButton variant="danger">
+						<Link href={`/events/${eid}/admin/delete`}>Delete Event</Link>
+					</LinkButton>
+				</div>
 			</Column>
 
 			<Footer />
