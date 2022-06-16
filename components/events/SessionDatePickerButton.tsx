@@ -11,7 +11,7 @@ export const SessionDatePickerButton = forwardRef<
 	}
 
 	return (
-		<button onClick={onClick} ref={ref} type="button" className="text-gray-600">
+		<button onClick={onClick} ref={ref} type="button" className="text-left text-gray-600">
 			{formatDateRange(startDate, endDate, { showHour: false })}
 		</button>
 	);
