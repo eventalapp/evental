@@ -45,7 +45,7 @@ const MenuBar: React.FC<{
 	}
 
 	return (
-		<div className="mb-2 space-x-2 border-b border-gray-300 px-2 pb-1 text-gray-700 md:space-x-3.5">
+		<div className="mb-2 space-x-2 border-b border-gray-300 px-2 pb-2 text-gray-600 md:space-x-3.5">
 			<Tooltip side={'top'} message={`Bold (${isMac ? 'Cmd + B' : 'Ctrl + B'})`}>
 				<button
 					type="button"
