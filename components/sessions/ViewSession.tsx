@@ -83,20 +83,13 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 			<FlexRowBetween>
 				<div className="flex items-center">
-					{session?.type && (
-						<div
-							className="mr-3 h-4 w-4 rounded-full"
-							style={{ backgroundColor: session?.type?.color ?? '#888888' }}
-						/>
-					)}
-
 					<h1 className="text-xl font-medium md:text-2xl">{session.name}</h1>
 				</div>
 
 				<div className="space-x-4">
 					{isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
 
-					{!isAttending && !admin && (
+					{user && !isAttending && !admin && (
 						<IconButtonTooltip
 							message="Click to add this session to your schedule"
 							side="top"
@@ -130,95 +123,100 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			</FlexRowBetween>
 
-			<div className="text-gray-600">
-				<Tooltip
-					side={'top'}
-					message={`This is session is taking place on ${formatDateRange(
-						new Date(session.startDate),
-						new Date(session.endDate)
-					)}.`}
-				>
-					<div className="mb-2 inline-flex cursor-help flex-row items-center">
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="mr-1.5 h-5 w-5"
-							size="1x"
-							icon={faCalendarDay}
-						/>
-						<p>{formatDateRange(new Date(session.startDate), new Date(session.endDate))}</p>
-					</div>
-				</Tooltip>
+			<div className="mb-5">
+				<div className="flex flex-row flex-wrap items-center text-gray-600">
+					{session?.type?.name && (
+						<div className="mr-3 block">
+							<Link
+								href={`/events/${eid}${admin ? '/admin' : ''}/sessions/types/${session.type.slug}`}
+							>
+								<a>
+									<Tooltip
+										side={'top'}
+										message={`This session is a part of the ${session.type.name} category.`}
+									>
+										<div className="mb-1 inline-flex flex-row items-center">
+											<div
+												className="mr-1.5 h-4 w-4 rounded-full"
+												style={{ backgroundColor: session.type.color ?? '#888888' }}
+											/>
+											<p>{session.type.name}</p>
+										</div>
+									</Tooltip>
+								</a>
+							</Link>
+						</div>
+					)}
 
-				{session?.type?.name && (
-					<div className="block">
-						<Link
-							href={`/events/${eid}${admin ? '/admin' : ''}/sessions/types/${session?.type?.slug}`}
-						>
-							<a>
-								<Tooltip side={'top'} message={`This session is a ${session?.type?.name} session.`}>
-									<div className="mb-1 inline-flex flex-row items-center">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
-											size="1x"
-											icon={faClipboardList}
-										/>
-										<p>{session?.type?.name}</p>
-									</div>
-								</Tooltip>
-							</a>
-						</Link>
-					</div>
-				)}
-				{session?.venue?.name && (
-					<div className="block">
-						<Link href={`/events/${eid}/venues/${session?.venue?.slug}`}>
-							<a>
-								<Tooltip
-									side={'top'}
-									message={`This session is taking place at the ${session?.venue?.name} venue.`}
-								>
-									<div className="mb-1 inline-flex flex-row items-center">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
-											size="1x"
-											icon={faLocationDot}
-										/>
-										<p>{session?.venue?.name}</p>
-									</div>
-								</Tooltip>
-							</a>
-						</Link>
-					</div>
-				)}
-				{session?.maxAttendees !== null && (
-					<div className="block">
+					<div className="mr-3 block">
 						<Tooltip
 							side={'top'}
-							message={`This sessions is currently ${Math.ceil(
-								(session?.attendeeCount / session?.maxAttendees) * 100
-							)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+							message={`This is session is taking place on ${formatDateRange(
+								new Date(session.startDate),
+								new Date(session.endDate)
+							)}.`}
 						>
-							<div className="mb-1 inline-flex cursor-help flex-row items-center">
+							<div className="inline-flex cursor-help flex-row items-center">
 								<FontAwesomeIcon
 									fill="currentColor"
 									className="mr-1.5 h-5 w-5"
 									size="1x"
-									icon={faUserGroup}
+									icon={faCalendarDay}
 								/>
-								<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
+								<p>{formatDateRange(new Date(session.startDate), new Date(session.endDate))}</p>
 							</div>
 						</Tooltip>
 					</div>
+
+					{session?.venue?.name && (
+						<div className="mr-3 block">
+							<Link href={`/events/${eid}/venues/${session?.venue?.slug}`}>
+								<a>
+									<Tooltip
+										side={'top'}
+										message={`This session is taking place at the ${session?.venue?.name} venue.`}
+									>
+										<div className="mb-1 inline-flex flex-row items-center">
+											<FontAwesomeIcon
+												fill="currentColor"
+												className="mr-1.5 h-5 w-5"
+												size="1x"
+												icon={faLocationDot}
+											/>
+											<p>{session?.venue?.name}</p>
+										</div>
+									</Tooltip>
+								</a>
+							</Link>
+						</div>
+					)}
+					{session?.maxAttendees !== null && (
+						<div className="mr-3 block">
+							<Tooltip
+								side={'top'}
+								message={`This sessions is currently ${Math.ceil(
+									(session?.attendeeCount / session?.maxAttendees) * 100
+								)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+							>
+								<div className="mb-1 inline-flex cursor-help flex-row items-center">
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="mr-1.5 h-5 w-5"
+										size="1x"
+										icon={faUserGroup}
+									/>
+									<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
+								</div>
+							</Tooltip>
+						</div>
+					)}
+				</div>
+				{session.description && (
+					<div className="prose mt-1 focus:outline-none prose-a:text-primary">
+						{parse(String(session.description))}
+					</div>
 				)}
 			</div>
-
-			{session.description && (
-				<div className="prose mt-1 focus:outline-none prose-a:text-primary">
-					{parse(String(session.description))}
-				</div>
-			)}
 
 			{roleAttendees &&
 				Object.entries(roleAttendees.reduce(sessionAttendeeReducer, {})).map(([key, attendees]) => (
