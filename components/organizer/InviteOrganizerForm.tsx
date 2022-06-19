@@ -10,13 +10,15 @@ import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
+import Prisma from '@prisma/client';
+import { theme } from '../../tailwind.config';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseInviteOrganizerData;
+	UseInviteOrganizerData & { event: Prisma.Event };
 
 export const InviteOrganizerForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { inviteOrganizerMutation } = props;
+	const { inviteOrganizerMutation, event } = props;
 	const {
 		register,
 		handleSubmit,
@@ -34,7 +36,7 @@ export const InviteOrganizerForm: React.FC<Props> = (props) => {
 			<div className="my-5">
 				<div>
 					<Label htmlFor="name">Email *</Label>
-					<Input placeholder="Email" type="email" {...register('email')} />
+					<Input placeholder="Email" type="email" {...register('email')} color={event.color} />
 					{errors.email?.message && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
 				</div>
 			</div>
@@ -49,6 +51,9 @@ export const InviteOrganizerForm: React.FC<Props> = (props) => {
 					variant="primary"
 					padding="medium"
 					disabled={inviteOrganizerMutation.isLoading}
+					style={{
+						backgroundColor: event.color ?? theme.extend.colors.primary.DEFAULT
+					}}
 				>
 					{inviteOrganizerMutation.isLoading ? <LoadingInner /> : 'Invite Organizer'}
 				</Button>
