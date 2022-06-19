@@ -70,9 +70,9 @@ const EditEventPage: NextPage = () => {
 
 				<p className="mt-5 mb-3 text-lg font-bold text-red-500">Danger Zone</p>
 				<div className="rounded-md bg-red-100 p-4">
-					<LinkButton variant="danger">
-						<Link href={`/events/${eid}/admin/delete`}>Delete Event</Link>
-					</LinkButton>
+					<Link href={`/events/${eid}/admin/delete`}>
+						<LinkButton variant="danger">Delete Event</LinkButton>
+					</Link>
 				</div>
 			</Column>
 
