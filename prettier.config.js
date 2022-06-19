@@ -5,6 +5,7 @@ module.exports = {
 	trailingComma: 'none',
 	semi: true,
 	quoteProps: 'consistent',
+	endOfLine: 'crlf',
 	bracketSpacing: true,
 	arrowParens: 'always',
 	importOrder: ['^[./]'],

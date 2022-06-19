@@ -86,7 +86,7 @@ export const LinkDialog: React.FC<Props> = (props) => {
 							</fieldset>
 						</div>
 
-						<div className="flex justify-end mt-4">
+						<div className="mt-4 flex justify-end">
 							<DialogPrimitive.Close
 								onClick={() => {
 									onSubmit(link);
@@ -108,7 +108,7 @@ export const LinkDialog: React.FC<Props> = (props) => {
 								'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 							)}
 						>
-							<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+							<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 						</DialogPrimitive.Close>
 					</DialogPrimitive.Content>
 				</Transition.Child>

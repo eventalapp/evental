@@ -52,7 +52,7 @@ const AlertDialog = (props: Props) => {
 							This action cannot be undone. This will permanently delete your account and remove
 							your data from our servers.
 						</AlertDialogPrimitive.Description>
-						<div className="flex justify-end mt-4 space-x-2">
+						<div className="mt-4 flex justify-end space-x-2">
 							<AlertDialogPrimitive.Cancel
 								className={cx(
 									'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',

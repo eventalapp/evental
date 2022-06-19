@@ -77,7 +77,7 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 							Fill out and submit the form below to create a venue.
 						</DialogPrimitive.Description>
 
-						<div className="flex flex-col mt-5 w-full">
+						<div className="mt-5 flex w-full flex-col">
 							<div className="mb-5">
 								<Label htmlFor="name">Name *</Label>
 								<Input placeholder="Room 415" {...register('name')} />
@@ -111,7 +111,7 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
-						<div className="flex flex-row justify-end mt-4">
+						<div className="mt-4 flex flex-row justify-end">
 							<Button
 								type="button"
 								variant="no-bg"
@@ -145,7 +145,7 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 								'focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75'
 							)}
 						>
-							<Cross1Icon className="w-4 h-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
+							<Cross1Icon className="h-4 w-4 text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-400" />
 						</DialogPrimitive.Close>
 					</DialogPrimitive.Content>
 				</Transition.Child>

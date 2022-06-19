@@ -67,7 +67,7 @@ const DeleteAttendeePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<p className="block py-3 px-5 mb-4 font-medium text-white bg-red-500 rounded-md">
+				<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
 					You are about to delete an attendee ("{attendee.user.name}")
 				</p>
 

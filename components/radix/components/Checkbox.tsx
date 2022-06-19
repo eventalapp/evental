@@ -19,13 +19,13 @@ const Checkbox = (props: Props) => {
 				)}
 			>
 				<CheckboxPrimitive.Indicator>
-					<CheckIcon className="self-center w-4 h-4 text-white" />
+					<CheckIcon className="h-4 w-4 self-center text-white" />
 				</CheckboxPrimitive.Indicator>
 			</CheckboxPrimitive.Root>
 
 			<LabelPrimitive.Label
 				htmlFor="c1"
-				className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-100 select-none"
+				className="ml-3 select-none text-sm font-medium text-gray-900 dark:text-gray-100"
 			>
 				Accept terms and conditions
 			</LabelPrimitive.Label>

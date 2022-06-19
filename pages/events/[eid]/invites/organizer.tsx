@@ -49,7 +49,7 @@ const OrganizerInvitePage: NextPage = () => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<div className="flex flex-row justify-between mb-3">
+				<div className="mb-3 flex flex-row justify-between">
 					<h1 className="text-2xl font-bold md:text-3xl">Accept Organizer Invite</h1>
 				</div>
 

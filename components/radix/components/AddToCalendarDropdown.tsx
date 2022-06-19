@@ -16,15 +16,15 @@ export const AddToCalendarDropdown = (props: Props) => {
 	const { event, align = 'end' } = props;
 
 	return (
-		<div className="inline-block relative text-left">
+		<div className="relative inline-block text-left">
 			<DropdownMenuPrimitive.Root>
 				<DropdownMenuPrimitive.Trigger asChild>
 					<div>
 						<Tooltip message="Add this session to your calendar" side="top">
-							<button className="flex justify-center items-center p-1.5 text-gray-600">
+							<button className="flex items-center justify-center p-1.5 text-gray-600">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="w-7 h-7"
+									className="h-7 w-7"
 									size="1x"
 									icon={faCalendarCirclePlus}
 								/>
@@ -39,7 +39,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 					className={cx(
 						' radix-side-top:animate-slide-up radix-side-bottom:animate-slide-down',
 						'w-48 rounded-lg px-1.5 py-1 shadow-sm md:w-56',
-						'bg-white border border-gray-200 dark:bg-gray-800'
+						'border border-gray-200 bg-white dark:bg-gray-800'
 					)}
 				>
 					<a href={ics(event)} target="_blank" rel="noopener noreferrer" download="cal.ics">
@@ -51,7 +51,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-gray-600"
+								className="mr-2 h-4 w-4 text-gray-600"
 								size="1x"
 								icon={faEnvelope}
 							/>
@@ -67,7 +67,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-[#DB4437]"
+								className="mr-2 h-4 w-4 text-[#DB4437]"
 								size="1x"
 								icon={faGoogle}
 							/>
@@ -84,7 +84,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-[#0072c6]"
+								className="mr-2 h-4 w-4 text-[#0072c6]"
 								size="1x"
 								icon={faOutlook}
 							/>
@@ -100,7 +100,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-[#0072c6]"
+								className="mr-2 h-4 w-4 text-[#0072c6]"
 								size="1x"
 								icon={faOutlook}
 							/>
@@ -116,7 +116,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 						>
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="mr-2 w-4 h-4 text-[#4a00a0]"
+								className="mr-2 h-4 w-4 text-[#4a00a0]"
 								size="1x"
 								icon={faYahoo}
 							/>

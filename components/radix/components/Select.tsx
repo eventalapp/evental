@@ -27,30 +27,30 @@ const Select = (props: Props) => {
 				</Button>
 			</SelectPrimitive.Trigger>
 			<SelectPrimitive.Content>
-				<SelectPrimitive.ScrollUpButton className="flex justify-center items-center text-gray-700 dark:text-gray-300">
+				<SelectPrimitive.ScrollUpButton className="flex items-center justify-center text-gray-700 dark:text-gray-300">
 					<ChevronUpIcon />
 				</SelectPrimitive.ScrollUpButton>
-				<SelectPrimitive.Viewport className="p-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-300">
+				<SelectPrimitive.Viewport className="rounded-lg border border-gray-300 bg-white p-2 dark:bg-gray-800">
 					<SelectPrimitive.Group>
 						{options.map((f, i) => (
 							<SelectPrimitive.Item
 								key={`${f}-${i}`}
 								value={f.value}
 								className={cx(
-									'relative flex items-center px-8 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 font-medium focus:bg-gray-75 dark:focus:bg-gray-900',
+									'relative flex items-center rounded-md px-8 py-2 text-sm font-medium text-gray-700 focus:bg-gray-75 dark:text-gray-300 dark:focus:bg-gray-900',
 									'radix-disabled:opacity-50',
-									'focus:outline-none select-none'
+									'select-none focus:outline-none'
 								)}
 							>
 								<SelectPrimitive.ItemText>{f.label}</SelectPrimitive.ItemText>
-								<SelectPrimitive.ItemIndicator className="inline-flex absolute left-2 items-center">
+								<SelectPrimitive.ItemIndicator className="absolute left-2 inline-flex items-center">
 									<CheckIcon />
 								</SelectPrimitive.ItemIndicator>
 							</SelectPrimitive.Item>
 						))}
 					</SelectPrimitive.Group>
 				</SelectPrimitive.Viewport>
-				<SelectPrimitive.ScrollDownButton className="flex justify-center items-center text-gray-700 dark:text-gray-300">
+				<SelectPrimitive.ScrollDownButton className="flex items-center justify-center text-gray-700 dark:text-gray-300">
 					<ChevronDownIcon />
 				</SelectPrimitive.ScrollDownButton>
 			</SelectPrimitive.Content>

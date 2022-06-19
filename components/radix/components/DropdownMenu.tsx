@@ -31,12 +31,12 @@ interface User {
 const generalMenuItems: RadixMenuItem[] = [
 	{
 		label: 'New File',
-		icon: <FileIcon className="mr-2 w-3.5 h-3.5" />,
+		icon: <FileIcon className="mr-2 h-3.5 w-3.5" />,
 		shortcut: '⌘+N'
 	},
 	{
 		label: 'Settings',
-		icon: <MixerHorizontalIcon className="mr-2 w-3.5 h-3.5" />,
+		icon: <MixerHorizontalIcon className="mr-2 h-3.5 w-3.5" />,
 		shortcut: '⌘+,'
 	}
 ];
@@ -44,12 +44,12 @@ const generalMenuItems: RadixMenuItem[] = [
 const regionToolMenuItems: RadixMenuItem[] = [
 	{
 		label: 'Frame',
-		icon: <FrameIcon className="mr-2 w-3.5 h-3.5" />,
+		icon: <FrameIcon className="mr-2 h-3.5 w-3.5" />,
 		shortcut: '⌘+F'
 	},
 	{
 		label: 'Crop',
-		icon: <CropIcon className="mr-2 w-3.5 h-3.5" />,
+		icon: <CropIcon className="mr-2 h-3.5 w-3.5" />,
 		shortcut: '⌘+S'
 	}
 ];
@@ -76,7 +76,7 @@ const DropdownMenu = (props: Props) => {
 	const [showUi, setShowUi] = useState(false);
 
 	return (
-		<div className="inline-block relative text-left">
+		<div className="relative inline-block text-left">
 			<DropdownMenuPrimitive.Root>
 				<DropdownMenuPrimitive.Trigger>
 					<Button>Click</Button>
@@ -116,13 +116,13 @@ const DropdownMenu = (props: Props) => {
 						)}
 					>
 						{showGrid ? (
-							<GridIcon className="mr-2 w-4 h-4" />
+							<GridIcon className="mr-2 h-4 w-4" />
 						) : (
-							<TransparencyGridIcon className="mr-2 w-3.5 h-3.5 text-gray-700 dark:text-gray-300" />
+							<TransparencyGridIcon className="mr-2 h-3.5 w-3.5 text-gray-700 dark:text-gray-300" />
 						)}
 						<span className="grow text-gray-700 dark:text-gray-300">Show Grid</span>
 						<DropdownMenuPrimitive.ItemIndicator>
-							<CheckIcon className="w-3.5 h-3.5" />
+							<CheckIcon className="h-3.5 w-3.5" />
 						</DropdownMenuPrimitive.ItemIndicator>
 					</DropdownMenuPrimitive.CheckboxItem>
 
@@ -135,19 +135,19 @@ const DropdownMenu = (props: Props) => {
 						)}
 					>
 						{showUi ? (
-							<EyeOpenIcon className="mr-2 w-3.5 h-3.5" />
+							<EyeOpenIcon className="mr-2 h-3.5 w-3.5" />
 						) : (
-							<EyeClosedIcon className="mr-2 w-3.5 h-3.5" />
+							<EyeClosedIcon className="mr-2 h-3.5 w-3.5" />
 						)}
 						<span className="grow text-gray-700 dark:text-gray-300">Show UI</span>
 						<DropdownMenuPrimitive.ItemIndicator>
-							<CheckIcon className="w-3.5 h-3.5" />
+							<CheckIcon className="h-3.5 w-3.5" />
 						</DropdownMenuPrimitive.ItemIndicator>
 					</DropdownMenuPrimitive.CheckboxItem>
 
 					<DropdownMenuPrimitive.Separator className="my-1 h-px bg-gray-200 dark:bg-gray-700" />
 
-					<DropdownMenuPrimitive.Label className="p-2 text-xs text-gray-700 dark:text-gray-200 select-none">
+					<DropdownMenuPrimitive.Label className="select-none p-2 text-xs text-gray-700 dark:text-gray-200">
 						Region Tools
 					</DropdownMenuPrimitive.Label>
 
@@ -174,9 +174,9 @@ const DropdownMenu = (props: Props) => {
 								'text-gray-400 focus:bg-gray-50 dark:text-gray-500 dark:focus:bg-gray-900'
 							)}
 						>
-							<Link2Icon className="mr-2 w-3.5 h-3.5" />
+							<Link2Icon className="mr-2 h-3.5 w-3.5" />
 							<span className="grow text-gray-700 dark:text-gray-300">Share</span>
-							<CaretRightIcon className="w-3.5 h-3.5" />
+							<CaretRightIcon className="h-3.5 w-3.5" />
 						</DropdownMenuPrimitive.TriggerItem>
 						<DropdownMenuPrimitive.Content
 							className={cx(
@@ -194,9 +194,9 @@ const DropdownMenu = (props: Props) => {
 									)}
 								>
 									{url ? (
-										<img className="mr-2.5 w-6 h-6 rounded-full" src={url} />
+										<img className="mr-2.5 h-6 w-6 rounded-full" src={url} />
 									) : (
-										<PersonIcon className="mr-2.5 w-6 h-6" />
+										<PersonIcon className="mr-2.5 h-6 w-6" />
 									)}
 									<span className="text-gray-700 dark:text-gray-300">{name}</span>
 								</DropdownMenuPrimitive.Item>

@@ -15,7 +15,7 @@ export const DropdownLink = React.forwardRef<HTMLAnchorElement, Props>((props, r
 	return (
 		<a
 			className={classNames(
-				'cursor-pointer block py-1 px-5 rounded hover:bg-gray-100 outline-none no-underline',
+				'block cursor-pointer rounded py-1 px-5 no-underline outline-none hover:bg-gray-100',
 				className
 			)}
 			ref={ref}

@@ -24,11 +24,11 @@ const Progress = (props: Props) => {
 	return (
 		<ProgressPrimitive.Root
 			value={progress}
-			className="overflow-hidden w-full h-3 bg-white dark:bg-gray-900 rounded-full"
+			className="h-3 w-full overflow-hidden rounded-full bg-white dark:bg-gray-900"
 		>
 			<ProgressPrimitive.Indicator
 				style={{ width: `${progress}%` }}
-				className="h-full bg-primary-500 dark:bg-white duration-300 ease-in-out"
+				className="h-full bg-primary-500 duration-300 ease-in-out dark:bg-white"
 			/>
 		</ProgressPrimitive.Root>
 	);

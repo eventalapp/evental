@@ -23,14 +23,14 @@ const Tooltip: React.FC<Props> = (props) => {
 						'radix-side-bottom:animate-slide-up-fade',
 						'radix-side-left:animate-slide-right-fade',
 						'inline-flex items-center rounded-md px-4 py-2.5 duration-75',
-						'bg-gray-800 dark:bg-gray-800 max-w-[240px]'
+						'max-w-[240px] bg-gray-800 dark:bg-gray-800'
 					)}
 				>
 					<TooltipPrimitive.Arrow
-						className="text-gray-800 dark:text-gray-800 fill-current"
+						className="fill-current text-gray-800 dark:text-gray-800"
 						offset={10}
 					/>
-					<span className="block max-w-xs text-sm text-center text-white dark:text-gray-100">
+					<span className="block max-w-xs text-center text-sm text-white dark:text-gray-100">
 						{message}
 					</span>
 				</TooltipPrimitive.Content>
