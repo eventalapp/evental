@@ -56,7 +56,7 @@ export const Authenticated: React.FC<Props> = (props) => {
 
 						<div className="hidden items-center justify-end lg:flex">
 							<div className="mr-6">
-								<Link href="/events/create">
+								<Link href="/events/create" passHref>
 									<LinkButton>Create Event</LinkButton>
 								</Link>
 							</div>
