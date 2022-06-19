@@ -110,7 +110,7 @@ export const EventHeader: React.FC<{
 				</div>
 
 				<div className="flex flex-row items-center">
-					<div className="relative mr-3 h-16 w-16 shrink-0 rounded-md border border-gray-200 shadow-sm md:mr-5 md:h-20 md:w-20">
+					<div className="relative mr-3 h-16 w-16 shrink-0 rounded-md shadow-sm md:mr-5 md:h-20 md:w-20">
 						<Image
 							alt={event.name}
 							src={
