@@ -61,6 +61,8 @@ export const Unauthenticated: React.FC<Props> = (props) => {
 											color={event.color}
 										/>
 									))}
+
+								<LinkItem link={`/auth/signin`} label={'Sign in'} />
 							</div>
 
 							<div className="flex flex-row space-x-8 font-medium lg:hidden">
