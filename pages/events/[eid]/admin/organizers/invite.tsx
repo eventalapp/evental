@@ -77,7 +77,7 @@ const EventOrganizersPage: NextPage = () => {
 					Organizers are able to create, edit, and delete sessions, venues, and roles.
 				</p>
 
-				<InviteOrganizerForm inviteOrganizerMutation={inviteOrganizerMutation} />
+				<InviteOrganizerForm event={event} inviteOrganizerMutation={inviteOrganizerMutation} />
 			</Column>
 
 			<Footer />
