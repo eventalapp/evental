@@ -9,17 +9,15 @@ export type Option = {
 	value: string;
 };
 
-type Props = {
-	options: Option[];
-} & SelectProps;
+type Props = { color?: string; options: Option[] } & SelectProps;
 
 const Select = (props: Props) => {
-	const { options, ...rest } = props;
+	const { options, color, ...rest } = props;
 
 	return (
 		<SelectPrimitive.Root {...rest}>
 			<SelectPrimitive.Trigger className="w-full" asChild>
-				<Button className="w-full">
+				<Button className="w-full" ringColor={color}>
 					<SelectPrimitive.Value />
 					<SelectPrimitive.Icon className="ml-2">
 						<ChevronDownIcon />
