@@ -1,5 +1,6 @@
 import cx from 'classnames';
 import React from 'react';
+import { theme } from '../../../../tailwind.config';
 
 export const variants = {
 	primary: 'focus-visible:ring-primary-500 bg-primary text-white hover:bg-primary-400',
@@ -22,16 +23,20 @@ type Props = React.ComponentProps<'button'> & {
 	className?: string;
 	variant?: keyof typeof variants;
 	padding?: keyof typeof paddings;
+	ringColor?: string;
 };
 
 const Button = React.forwardRef<HTMLButtonElement, Props>(
-	({ children, className, variant = 'default', padding = 'medium', ...props }, ref) => (
+	(
+		{ style, ringColor, children, className, variant = 'default', padding = 'medium', ...props },
+		ref
+	) => (
 		<button
 			ref={ref}
 			{...props}
 			className={cx(
 				'inline-flex select-none items-center justify-center rounded-md border text-sm font-medium',
-				'focus:outline-none focus-visible:ring focus-visible:ring-opacity-75',
+				'focus:outline-none focus-visible:ring-2 focus-visible:ring focus-visible:ring-opacity-75',
 				// Register all radix states
 				'group',
 				'radix-state-open:bg-gray-50 dark:radix-state-open:bg-gray-900',
@@ -41,6 +46,11 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(
 				variants[variant],
 				className
 			)}
+			style={{
+				...style,
+				// @ts-ignore
+				'--tw-ring-color': ringColor ?? theme.extend.colors.primary.DEFAULT
+			}}
 		>
 			{children}
 		</button>
