@@ -179,18 +179,18 @@ const MenuBar: React.FC<{
 				</div>
 			)}
 
-			<Tooltip side={'top'} message={`Unlink`}>
-				<div className="inline-block">
+			<div className="inline-block">
+				<Tooltip side={'top'} message={`Unlink`}>
 					<button
 						type="button"
 						onClick={() => editor.chain().focus().unsetLink().run()}
 						disabled={!editor.isActive('link')}
-						className={'cursor-pointer'}
+						className={'cursor-pointer disabled:cursor-not-allowed disabled:text-gray-300'}
 					>
 						<FontAwesomeIcon size="lg" icon={faLinkSlash} />
 					</button>
-				</div>
-			</Tooltip>
+				</Tooltip>
+			</div>
 
 			<LinkDialog onSubmit={setLink} editor={editor}>
 				<div className="inline-block">
