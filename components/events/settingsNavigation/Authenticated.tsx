@@ -38,7 +38,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 				<NavigationMenuPrimitive.Root className="w-full">
 					<NavigationMenuPrimitive.List className="m-auto flex h-14 w-full max-w-7xl items-center justify-between px-3">
 						<div>
-							<LogoLinkItem />
+							<LogoLinkItem color={event.color} />
 						</div>
 
 						<div className="hidden h-full flex-row justify-end lg:flex">
