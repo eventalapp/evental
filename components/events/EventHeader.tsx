@@ -229,7 +229,7 @@ export const EventHeader: React.FC<{
 							{event.website && (
 								<Tooltip message={`This is event's website is ${event.website}.`}>
 									<a href={event.website} target="_blank" rel="noopener noreferrer">
-										<div className="flex cursor-pointer flex-row items-center text-sm md:text-base">
+										<div className="mb-1 flex cursor-pointer flex-row items-center text-sm md:text-base">
 											<FontAwesomeIcon
 												fill="currentColor"
 												className="mr-1.5 h-5 w-5 text-gray-500"
