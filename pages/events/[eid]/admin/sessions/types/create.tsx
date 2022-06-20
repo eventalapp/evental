@@ -61,7 +61,7 @@ const CreateSessionPage: NextPage = () => {
 				<CreateSessionTypeForm createSessionTypeMutation={createSessionTypeMutation} />
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

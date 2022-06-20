@@ -142,7 +142,7 @@ const SessionRegisterPage: NextPage<Props> = (props) => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

@@ -154,7 +154,7 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

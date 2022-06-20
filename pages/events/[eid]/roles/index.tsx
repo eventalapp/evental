@@ -132,7 +132,7 @@ const RolesPage: NextPage<Props> = (props) => {
 					rolesError={rolesError}
 				/>
 
-				<Footer />
+				<Footer color={event.color} />
 			</Column>
 		</PageWrapper>
 	);

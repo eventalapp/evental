@@ -76,7 +76,7 @@ const InviteRolePage: NextPage = () => {
 				<InviteRoleForm inviteRoleMutation={inviteRoleMutation} />
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

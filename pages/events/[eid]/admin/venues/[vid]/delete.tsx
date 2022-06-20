@@ -76,7 +76,7 @@ const DeleteVenuePage: NextPage = () => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

@@ -230,7 +230,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 				</div>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

@@ -138,7 +138,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

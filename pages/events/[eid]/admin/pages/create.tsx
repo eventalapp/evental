@@ -56,7 +56,7 @@ const CreatePagePage: NextPage = () => {
 				<CreatePageForm eid={String(eid)} createPageMutation={createPageMutation} />
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

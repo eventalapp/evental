@@ -73,7 +73,7 @@ const CreateAttendeePage: NextPage = () => {
 				/>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

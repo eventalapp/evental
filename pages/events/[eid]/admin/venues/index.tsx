@@ -77,7 +77,7 @@ const VenuesAdminPage: NextPage = () => {
 				</div>
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };

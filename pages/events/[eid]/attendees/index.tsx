@@ -139,7 +139,7 @@ const ViewAttendeePage: NextPage<Props> = (props) => {
 				<AttendeeList attendees={attendeesData} eid={String(eid)} />
 			</Column>
 
-			<Footer />
+			<Footer color={event.color} />
 		</PageWrapper>
 	);
 };
