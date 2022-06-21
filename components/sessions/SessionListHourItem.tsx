@@ -47,32 +47,36 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 												<div>
 													<span className="block text-lg leading-tight">{session.name}</span>
 
-													{session.roleMembers.length >= 1 && (
-														<span className="text-sm text-gray-500">
-															{session.roleMembers
-																.map((member) => member.attendee.user.name)
-																.splice(0, 3)
-																.join(', ')}
-														</span>
-													)}
+													<div className="flex flex-row flex-wrap space-x-3">
+														{session.roleMembers.length >= 1 && (
+															<span className="mt-1 text-sm text-gray-500">
+																{session.roleMembers
+																	.map((member) => member.attendee.user.name)
+																	.splice(0, 3)
+																	.join(', ')}
+															</span>
+														)}
 
-													{session?.maxAttendees !== null && (
-														<Tooltip
-															side={'bottom'}
-															message={`This sessions is currently ${Math.ceil(
-																(session?.attendeeCount / session.maxAttendees) * 100
-															)}% Full (${session.attendeeCount}/${
-																session.maxAttendees
-															} attendees).`}
-														>
-															<div className="mb-1 ml-2 inline-flex cursor-help flex-row items-center text-sm text-gray-500">
-																<p>
-																	{Math.ceil((session?.attendeeCount / session.maxAttendees) * 100)}
-																	% Full
-																</p>
-															</div>
-														</Tooltip>
-													)}
+														{session?.maxAttendees !== null && (
+															<Tooltip
+																side={'bottom'}
+																message={`This sessions is currently ${Math.ceil(
+																	(session?.attendeeCount / session.maxAttendees) * 100
+																)}% Full (${session.attendeeCount}/${
+																	session.maxAttendees
+																} attendees).`}
+															>
+																<div className="mt-1 inline-flex bg-gray-100 px-1 rounded-md cursor-help flex-row items-center text-sm text-gray-900 border border-gray-200">
+																	<span className="text-xs">
+																		{Math.ceil(
+																			(session?.attendeeCount / session.maxAttendees) * 100
+																		)}
+																		% Full
+																	</span>
+																</div>
+															</Tooltip>
+														)}
+													</div>
 												</div>
 											</div>
 										</div>
