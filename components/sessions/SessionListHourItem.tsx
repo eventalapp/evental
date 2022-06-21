@@ -66,7 +66,7 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 																	session.maxAttendees
 																} attendees).`}
 															>
-																<div className="mt-1 inline-flex bg-gray-100 px-1 rounded-md cursor-help flex-row items-center text-sm text-gray-900 border border-gray-200">
+																<div className="mt-1 inline-flex bg-gray-50 px-1 rounded-md cursor-help flex-row items-center text-sm text-gray-700 border border-gray-200">
 																	<span className="text-xs">
 																		{Math.ceil(
 																			(session?.attendeeCount / session.maxAttendees) * 100
