@@ -1,6 +1,8 @@
 import Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import React from 'react';
+
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
@@ -54,20 +56,18 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 														</span>
 													)}
 
-													{admin && session?.maxAttendees !== null && (
+													{session?.maxAttendees !== null && (
 														<Tooltip
 															side={'bottom'}
 															message={`This sessions is currently ${Math.ceil(
-																(session?.attendeeCount / session?.maxAttendees) * 100
-															)}% Full (${session?.attendeeCount}/${
-																session?.maxAttendees
+																(session?.attendeeCount / session.maxAttendees) * 100
+															)}% Full (${session.attendeeCount}/${
+																session.maxAttendees
 															} attendees).`}
 														>
 															<div className="mb-1 ml-2 inline-flex cursor-help flex-row items-center text-sm text-gray-500">
 																<p>
-																	{Math.ceil(
-																		(session?.attendeeCount / session?.maxAttendees) * 100
-																	)}
+																	{Math.ceil((session?.attendeeCount / session.maxAttendees) * 100)}
 																	% Full
 																</p>
 															</div>
