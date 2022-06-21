@@ -136,7 +136,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 									>
 										<div className="mb-1 inline-flex flex-row items-center">
 											<div
-												className="mr-1.5 h-4 w-4 rounded-full"
+												className="mr-1.5 h-3 w-3 rounded-full"
 												style={{ backgroundColor: session.type.color ?? '#888888' }}
 											/>
 											<p>{session.type.name}</p>
@@ -158,7 +158,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							<div className="inline-flex cursor-help flex-row items-center">
 								<FontAwesomeIcon
 									fill="currentColor"
-									className="mr-1.5 h-5 w-5 text-gray-500"
+									className="mr-1.5 h-4 w-4 text-gray-500"
 									size="1x"
 									icon={faCalendarDay}
 								/>
@@ -178,7 +178,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 										<div className="mb-1 inline-flex flex-row items-center">
 											<FontAwesomeIcon
 												fill="currentColor"
-												className="mr-1.5 h-5 w-5 text-gray-500"
+												className="mr-1.5 h-4 w-4 text-gray-500"
 												size="1x"
 												icon={faLocationDot}
 											/>
@@ -201,7 +201,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 								<div className="mb-1 inline-flex cursor-help flex-row items-center">
 									<FontAwesomeIcon
 										fill="currentColor"
-										className="mr-1.5 h-5 w-5 text-gray-500"
+										className="mr-1.5 h-4 w-4 text-gray-500"
 										size="1x"
 										icon={faUserGroup}
 									/>
