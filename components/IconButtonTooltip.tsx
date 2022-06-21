@@ -2,6 +2,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import React from 'react';
+
 import { faSpinnerThird } from '../icons';
 import Tooltip from './radix/components/Tooltip';
 

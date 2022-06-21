@@ -1,17 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import Prisma from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { UseInviteOrganizerData } from '../../hooks/mutations/useInviteOrganizerMutation';
+import { theme } from '../../tailwind.config';
 import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import Prisma from '@prisma/client';
-import { theme } from '../../tailwind.config';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseInviteOrganizerData & { event: Prisma.Event };

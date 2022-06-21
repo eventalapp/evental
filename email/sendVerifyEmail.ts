@@ -1,7 +1,8 @@
-import mjml2html from 'mjml';
-import { convert } from 'html-to-text';
-import { sendEmail } from '../utils/sendEmail';
 import { SESV2 } from 'aws-sdk';
+import { convert } from 'html-to-text';
+import mjml2html from 'mjml';
+
+import { sendEmail } from '../utils/sendEmail';
 import { verifyEmailTemplate } from './templates/verifyEmail';
 
 type VerifyEmailArgs = {

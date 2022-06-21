@@ -1,7 +1,8 @@
 import axios, { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
+
 import { RemoveAttendeeFromSessionPayload } from '../../utils/schemas';
 
 export interface UseRemoveAttendeeToSessionMutationData {

@@ -1,7 +1,8 @@
 import axios, { AxiosError } from 'axios';
-import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
+
 import { AddAttendeeToSessionPayload } from '../../utils/schemas';
 
 export interface UseAddAttendeeToSessionMutationData {

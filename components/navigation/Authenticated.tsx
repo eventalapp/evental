@@ -9,11 +9,11 @@ import { UseSignOutMutationData } from '../../hooks/mutations/useSignOutMutation
 import { faBarsSquare } from '../../icons';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { LinkButton } from '../form/LinkButton';
+import { ProfileDropdown } from '../radix/components/ProfileDropdown';
 import { FullscreenLinkItem } from './FullscreenLinkItem';
 import { LinkItem } from './LinkItem';
 import { LogoLinkItem } from './LogoLinkItem';
 import { NavigationWrapper } from './NavigationWrapper';
-import { ProfileDropdown } from '../radix/components/ProfileDropdown';
 
 type Props = {
 	isOpen: boolean;

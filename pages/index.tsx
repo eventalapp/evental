@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
+
 import { Footer } from '../components/Footer';
 import { LinkButton } from '../components/form/LinkButton';
 import { AspectImage } from '../components/guides/AspectImage';

@@ -4,6 +4,7 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import Column from '../../../components/layout/Column';
@@ -15,7 +16,7 @@ import { useSessionsByUserQuery } from '../../../hooks/queries/useSessionsByUser
 import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getUser } from '../../api/users/[uid]';
-import { getSessionsByUser, SessionWithVenueEvent } from '../../api/users/[uid]/sessions';
+import { SessionWithVenueEvent, getSessionsByUser } from '../../api/users/[uid]/sessions';
 
 type Props = {
 	initialViewingUser: PasswordlessUser | undefined;

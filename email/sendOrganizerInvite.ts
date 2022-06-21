@@ -1,9 +1,10 @@
-import mjml2html from 'mjml';
-import { convert } from 'html-to-text';
-import { sendEmail } from '../utils/sendEmail';
-import { SESV2 } from 'aws-sdk';
-import { inviteOrganizerTemplate } from './templates/inviteOrganizer';
 import Prisma from '@prisma/client';
+import { SESV2 } from 'aws-sdk';
+import { convert } from 'html-to-text';
+import mjml2html from 'mjml';
+
+import { sendEmail } from '../utils/sendEmail';
+import { inviteOrganizerTemplate } from './templates/inviteOrganizer';
 
 export const sendOrganizerInvite = async (
 	sendToAddress: string,

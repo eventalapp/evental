@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
-import { useQuery } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { useQuery } from 'react-query';
 
 export interface UseFounderQueryData {
 	isFounder: boolean | undefined;

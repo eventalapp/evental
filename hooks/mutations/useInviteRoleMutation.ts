@@ -1,9 +1,10 @@
-import axios, { AxiosError } from 'axios';
-import { useMutation, UseMutationResult } from 'react-query';
-import { toast } from 'react-toastify';
-import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { InviteRolePayload } from '../../utils/schemas';
 import Prisma from '@prisma/client';
+import axios, { AxiosError } from 'axios';
+import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { UseMutationResult, useMutation } from 'react-query';
+import { toast } from 'react-toastify';
+
+import { InviteRolePayload } from '../../utils/schemas';
 
 export interface UseInviteRoleData {
 	inviteRoleMutation: UseMutationResult<

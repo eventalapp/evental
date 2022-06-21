@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
-import { useMutation, UseMutationResult } from 'react-query';
-import { toast } from 'react-toastify';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { UseMutationResult, useMutation } from 'react-query';
+import { toast } from 'react-toastify';
 
 export interface UseRequestVerificationEmailData {
 	requestVerificationEmailMutation: UseMutationResult<

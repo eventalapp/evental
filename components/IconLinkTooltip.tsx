@@ -2,6 +2,7 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React from 'react';
+
 import Tooltip from './radix/components/Tooltip';
 
 type Props = React.FC<

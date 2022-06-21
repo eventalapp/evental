@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CalendarEvent, google, ics, office365, outlook, yahoo } from 'calendar-link';
 import cx from 'classnames';
+
 import { faCalendarCirclePlus, faOutlook } from '../../../icons/';
 import Tooltip from './Tooltip';
 

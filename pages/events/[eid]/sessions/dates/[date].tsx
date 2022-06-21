@@ -4,12 +4,13 @@ import type { NextPage } from 'next';
 import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
+
+import { Footer } from '../../../../../components/Footer';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/navigation';
-import { Footer } from '../../../../../components/Footer';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
@@ -26,7 +27,7 @@ import { getEvent } from '../../../../api/events/[eid]';
 import { getIsOrganizer } from '../../../../api/events/[eid]/organizer';
 import { getPages } from '../../../../api/events/[eid]/pages';
 import { getRoles } from '../../../../api/events/[eid]/roles';
-import { getSessionsByDate, SessionWithVenue } from '../../../../api/events/[eid]/sessions';
+import { SessionWithVenue, getSessionsByDate } from '../../../../api/events/[eid]/sessions';
 
 type Props = {
 	initialSessionsByDate: SessionWithVenue[] | undefined;

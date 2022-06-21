@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+
 import { SEED_USERS_TO_GENERATE } from '../config';
 import { fake } from '../utils/fake';
 

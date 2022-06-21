@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
-import { useQuery, UseQueryResult } from 'react-query';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
+import { UseQueryResult, useQuery } from 'react-query';
+
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 
 export interface UseSessionRoleAttendeesQueryData {

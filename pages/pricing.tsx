@@ -3,14 +3,15 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
 import { Footer } from '../components/Footer';
 import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
 import { PricingAccordion } from '../components/radix/components/PricingAccordion';
-import Button from '../components/radix/components/shared/Button';
 import Slider from '../components/radix/components/Slider';
+import Button from '../components/radix/components/shared/Button';
 import { eduAttendeePricing, proAttendeePricing } from '../utils/const';
 
 const PricingPage: NextPage = () => {

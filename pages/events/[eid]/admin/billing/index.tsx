@@ -3,6 +3,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { Footer } from '../../../../../components/Footer';
 import { PurchaseProPlan } from '../../../../../components/billing/PurchaseProForm';
 import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
@@ -10,7 +12,6 @@ import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
-import { Footer } from '../../../../../components/Footer';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';

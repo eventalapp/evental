@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
+
 import { Footer } from '../../../components/Footer';
 import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
