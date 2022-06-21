@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { formatDateRange } from '../../utils/formatDateRange';
+import Tooltip from '../radix/components/Tooltip';
 
 export const SessionDatePickerButton = forwardRef<
 	HTMLButtonElement,
@@ -11,8 +12,10 @@ export const SessionDatePickerButton = forwardRef<
 	}
 
 	return (
-		<button onClick={onClick} ref={ref} type="button" className="text-left text-gray-600">
-			{formatDateRange(startDate, endDate, { showHour: false })}
-		</button>
+		<Tooltip message={`Click to view all sessions occurring on a date`} side="left">
+			<button onClick={onClick} ref={ref} type="button" className="text-left text-gray-600">
+				{formatDateRange(startDate, endDate, { showHour: false })}
+			</button>
+		</Tooltip>
 	);
 });
