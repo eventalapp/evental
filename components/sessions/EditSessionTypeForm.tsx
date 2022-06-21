@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
-import { CirclePicker } from 'react-color';
+import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
 import { UseEditSessionTypeMutationData } from '../../hooks/mutations/useEditSessionTypeMutation';
@@ -44,14 +44,14 @@ export const EditSessionTypeForm: React.FC<Props> = (props) => {
 				editSessionTypeMutation.mutate(data);
 			})}
 		>
-			<div className="mt-5 flex w-full flex-row flex-wrap">
-				<div className="flex-1 grow md:mr-5">
+			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
+				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="name">Name *</Label>
 					<Input placeholder="Session type name" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
-				<div className="my-5 w-full flex-initial md:mt-0 md:w-auto">
+				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="color">
 						Color *<HelpTooltip message={copy.tooltip.typeColor} />
 					</Label>
@@ -59,8 +59,8 @@ export const EditSessionTypeForm: React.FC<Props> = (props) => {
 						control={control}
 						name="color"
 						render={({ field }) => (
-							<CirclePicker
-								colors={colors}
+							<ChromePicker
+								disableAlpha
 								color={field.value}
 								onChange={(val) => {
 									field.onChange(val.hex);
@@ -68,7 +68,6 @@ export const EditSessionTypeForm: React.FC<Props> = (props) => {
 							/>
 						)}
 					/>
-
 					{errors.color?.message && <ErrorMessage>{errors.color?.message}</ErrorMessage>}
 				</div>
 			</div>
