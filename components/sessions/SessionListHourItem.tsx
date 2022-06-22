@@ -71,13 +71,13 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 																	className={classNames(
 																		'mt-1 inline-flex bg-gray-50 px-1 rounded-md cursor-help flex-row items-center text-sm border border-gray-200',
 																		session?.attendeeCount / session.maxAttendees <= 0.5 &&
-																			'text-green-500',
+																			'text-green-700',
 																		session?.attendeeCount / session.maxAttendees > 0.5 &&
 																			session?.attendeeCount / session.maxAttendees <= 0.75 &&
-																			'text-orange-500',
+																			'text-orange-700',
 																		session?.attendeeCount / session.maxAttendees > 0.75 &&
 																			session?.attendeeCount / session.maxAttendees <= 1 &&
-																			'text-red-500'
+																			'text-red-700'
 																	)}
 																>
 																	<span className="text-xs">
