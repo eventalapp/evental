@@ -1,5 +1,4 @@
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import parse from 'html-react-parser';
 import React from 'react';
@@ -7,8 +6,7 @@ import React from 'react';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
-import { FlexRowBetween } from '../layout/FlexRowBetween';
-import Tooltip from '../radix/components/Tooltip';
+import { TooltipIcon } from '../TooltipIcon';
 import { SessionList } from '../sessions/SessionList';
 
 type Props = {
@@ -28,9 +26,9 @@ export const ViewVenue: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<div className="mb-5">
-				<FlexRowBetween className="mb-1">
-					<h3 className="text-xl font-medium md:text-2xl">{venue.name}</h3>
+			<div className="mb-3">
+				<div className="mb-1 flex flex-row justify-between items-center">
+					<h3 className="text-xl font-bold md:text-2xl">{venue.name}</h3>
 
 					{admin && (
 						<div className="space-x-4">
@@ -50,26 +48,18 @@ export const ViewVenue: React.FC<Props> = (props) => {
 							/>
 						</div>
 					)}
-				</FlexRowBetween>
+				</div>
 
-				<div className="text-gray-600">
-					<Tooltip
-						message={
+				<div className="flex flex-row flex-wrap items-center text-gray-600">
+					<TooltipIcon
+						icon={faLocationDot}
+						tooltipMessage={
 							venue.address
 								? `This is venue is located at ${venue?.address}.`
 								: 'This venue has not specified an address'
 						}
-					>
-						<div className="mb-1 inline-flex cursor-help flex-row items-center">
-							<FontAwesomeIcon
-								fill="currentColor"
-								className="mr-1.5 h-5 w-5"
-								size="1x"
-								icon={faLocationDot}
-							/>
-							{venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
-						</div>
-					</Tooltip>
+						labelComponent={venue.address ? <p>{venue.address}</p> : <em>No Address</em>}
+					/>
 				</div>
 
 				{venue.description && (
