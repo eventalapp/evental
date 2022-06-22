@@ -112,16 +112,20 @@ export const EventHeader: React.FC<{
 
 				<div className="flex flex-row items-center">
 					<div className="relative mr-3 h-16 w-16 shrink-0 rounded-md md:mr-5 md:h-20 md:w-20">
-						<Image
-							alt={event.name}
-							src={
-								event.image
-									? `https://cdn.evental.app${event.image}`
-									: `https://cdn.evental.app/images/default-event.jpg`
-							}
-							layout="fill"
-							className="rounded-md"
-						/>
+						<Link href={`/events/${event.slug}`}>
+							<a>
+								<Image
+									alt={event.name}
+									src={
+										event.image
+											? `https://cdn.evental.app${event.image}`
+											: `https://cdn.evental.app/images/default-event.jpg`
+									}
+									layout="fill"
+									className="rounded-md"
+								/>
+							</a>
+						</Link>
 					</div>
 
 					<div>
