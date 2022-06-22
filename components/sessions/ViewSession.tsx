@@ -5,11 +5,9 @@ import {
 	faTrashCan,
 	faUserGroup
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import { CalendarEvent } from 'calendar-link';
 import parse from 'html-react-parser';
-import Link from 'next/link';
 import React from 'react';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
@@ -21,9 +19,9 @@ import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPasswor
 import { AddToCalendar } from '../AddToCalendar';
 import { IconButtonTooltip } from '../IconButtonTooltip';
 import { IconLinkTooltip } from '../IconLinkTooltip';
+import { TooltipIcon } from '../TooltipIcon';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
-import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
 	eid: string;
@@ -125,90 +123,43 @@ export const ViewSession: React.FC<Props> = (props) => {
 			<div className="mb-4">
 				<div className="flex flex-row flex-wrap items-center text-gray-600">
 					{session?.type?.name && (
-						<div className="mr-3 block">
-							<Link
-								href={`/events/${eid}${admin ? '/admin' : ''}/sessions/types/${session.type.slug}`}
-							>
-								<a>
-									<Tooltip
-										side={'top'}
-										message={`This session is a part of the ${session.type.name} category.`}
-									>
-										<div className="mb-1 inline-flex flex-row items-center">
-											<div
-												className="mr-1.5 h-3 w-3 rounded-full"
-												style={{ backgroundColor: session.type.color ?? '#888888' }}
-											/>
-											<p>{session.type.name}</p>
-										</div>
-									</Tooltip>
-								</a>
-							</Link>
-						</div>
+						<TooltipIcon
+							customIcon={
+								<div
+									className="mr-1.5 h-3 w-3 rounded-full"
+									style={{ backgroundColor: session.type.color ?? '#888888' }}
+								/>
+							}
+							tooltipMessage={`This session is a part of the ${session.type.name} category.`}
+							label={session.type.name}
+						/>
 					)}
 
-					<div className="mr-3 block">
-						<Tooltip
-							side={'top'}
-							message={`This is session is taking place on ${formatDateRange(
-								new Date(session.startDate),
-								new Date(session.endDate)
-							)}.`}
-						>
-							<div className="inline-flex cursor-help flex-row items-center">
-								<FontAwesomeIcon
-									fill="currentColor"
-									className="mr-1.5 h-4 w-4 text-gray-500"
-									size="1x"
-									icon={faCalendarDay}
-								/>
-								<p>{formatDateRange(new Date(session.startDate), new Date(session.endDate))}</p>
-							</div>
-						</Tooltip>
-					</div>
+					<TooltipIcon
+						icon={faCalendarDay}
+						tooltipMessage={`This is session is taking place on ${formatDateRange(
+							new Date(session.startDate),
+							new Date(session.endDate)
+						)}.`}
+						label={formatDateRange(new Date(session.startDate), new Date(session.endDate))}
+					/>
 
 					{session?.venue?.name && (
-						<div className="mr-3 block">
-							<Link href={`/events/${eid}/venues/${session?.venue?.slug}`}>
-								<a>
-									<Tooltip
-										side={'top'}
-										message={`This session is taking place at the ${session?.venue?.name} venue.`}
-									>
-										<div className="mb-1 inline-flex flex-row items-center">
-											<FontAwesomeIcon
-												fill="currentColor"
-												className="mr-1.5 h-4 w-4 text-gray-500"
-												size="1x"
-												icon={faLocationDot}
-											/>
-											<p>{session?.venue?.name}</p>
-										</div>
-									</Tooltip>
-								</a>
-							</Link>
-						</div>
+						<TooltipIcon
+							icon={faLocationDot}
+							tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
+							label={session?.venue?.name}
+						/>
 					)}
 
 					{session?.maxAttendees !== null && (
-						<div className="mr-3 block">
-							<Tooltip
-								side={'top'}
-								message={`This sessions is currently ${Math.ceil(
-									(session?.attendeeCount / session?.maxAttendees) * 100
-								)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
-							>
-								<div className="mb-1 inline-flex cursor-help flex-row items-center">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="mr-1.5 h-4 w-4 text-gray-500"
-										size="1x"
-										icon={faUserGroup}
-									/>
-									<p>{Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full</p>
-								</div>
-							</Tooltip>
-						</div>
+						<TooltipIcon
+							icon={faUserGroup}
+							tooltipMessage={`This sessions is currently ${Math.ceil(
+								(session?.attendeeCount / session?.maxAttendees) * 100
+							)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+							label={`${Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full`}
+						/>
 					)}
 				</div>
 			</div>

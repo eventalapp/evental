@@ -7,7 +7,6 @@ import {
 	faPenToSquare,
 	faTrashCan
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import parse from 'html-react-parser';
 import Image from 'next/image';
 import React from 'react';
@@ -15,7 +14,7 @@ import React from 'react';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
-import Tooltip from '../radix/components/Tooltip';
+import { TooltipIcon } from '../TooltipIcon';
 
 type Props = { eid: string; uid: string; admin?: boolean; attendee: AttendeeWithUser };
 
@@ -67,95 +66,48 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 
 					<div className="flex flex-row flex-wrap items-center text-gray-600">
 						{attendee.role.name && (
-							<div className="mr-3">
-								<Tooltip side={'top'} message={`This user is attending as a ${attendee.role.name}`}>
-									<div className="mb-1 inline-flex cursor-help flex-row items-center">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
-											size="1x"
-											icon={faAddressCard}
-										/>
-										<p>{capitalizeFirstLetter(String(attendee.role.name))}</p>
-									</div>
-								</Tooltip>
-							</div>
+							<TooltipIcon
+								icon={faAddressCard}
+								tooltipMessage={`This user is attending as a ${attendee.role.name}`}
+								label={capitalizeFirstLetter(String(attendee.role.name))}
+							/>
 						)}
 
 						{attendee.user.location && (
-							<div className="mr-3">
-								<Tooltip side={'top'} message={`This user is located in ${attendee.user.location}`}>
-									<div className="mb-1 inline-flex cursor-help flex-row items-center">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
-											size="1x"
-											icon={faLocationDot}
-										/>
-										<p>{attendee.user.location}</p>
-									</div>
-								</Tooltip>
-							</div>
+							<TooltipIcon
+								icon={faLocationDot}
+								tooltipMessage={`This user is located in ${attendee.user.location}`}
+								label={attendee.user.location}
+							/>
 						)}
 
 						{attendee.user.company && (
-							<div className="mr-3">
-								<Tooltip side={'top'} message={`This user works for ${attendee.user.company}`}>
-									<div className="mb-1 inline-flex cursor-help flex-row items-center">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
-											size="1x"
-											icon={faBuilding}
-										/>
-										<p>{attendee.user.company}</p>
-									</div>
-								</Tooltip>
-							</div>
+							<TooltipIcon
+								icon={faBuilding}
+								tooltipMessage={`This user works for ${attendee.user.company}`}
+								label={attendee.user.company}
+							/>
 						)}
 
 						{attendee.user.position && (
-							<div className="mr-3">
-								<Tooltip
-									side={'top'}
-									message={
-										attendee.user.company
-											? `This user works for ${attendee.user.company} as a ${attendee.user.position}`
-											: `This user works as a ${attendee.user.position}`
-									}
-								>
-									<div className="mb-1 inline-flex cursor-help flex-row  items-center">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="mr-1.5 h-5 w-5"
-											size="1x"
-											icon={faAddressBook}
-										/>
-										<p>{attendee.user.position}</p>
-									</div>
-								</Tooltip>
-							</div>
+							<TooltipIcon
+								icon={faAddressBook}
+								tooltipMessage={
+									attendee.user.company
+										? `This user works for ${attendee.user.company} as a ${attendee.user.position}`
+										: `This user works as a ${attendee.user.position}`
+								}
+								label={attendee.user.position}
+							/>
 						)}
 
 						{attendee.user.website && (
-							<div className="mr-3">
-								<Tooltip
-									side={'top'}
-									message={`This user's website link is ${attendee.user.website}`}
-								>
-									<a href={attendee.user.website} target="_blank" rel="noopener noreferrer">
-										<div className="mb-1 inline-flex flex-row items-center">
-											<FontAwesomeIcon
-												fill="currentColor"
-												className="mr-1.5 h-5 w-5"
-												size="1x"
-												icon={faArrowUpRightFromSquare}
-											/>
-											<p>{attendee.user.website}</p>
-										</div>
-									</a>
-								</Tooltip>
-							</div>
+							<TooltipIcon
+								icon={faArrowUpRightFromSquare}
+								tooltipMessage={`This user's website link is ${attendee.user.website}`}
+								label={attendee.user.website}
+								externalLink={attendee.user.website}
+							/>
 						)}
 					</div>
 				</div>
