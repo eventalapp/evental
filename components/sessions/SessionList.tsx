@@ -39,25 +39,15 @@ export const SessionList: React.FC<Props> = (props) => {
 		<div className="relative min-h-[25px]">
 			{previousSessions && previousSessions.length >= 1 && (
 				<button
-					className="absolute top-0 right-0 z-20 cursor-pointer text-sm text-gray-500"
+					className="absolute top-0 right-0 z-20 cursor-pointer text-sm text-gray-500 flex flex-row items-center"
 					onClick={() => {
 						setShowPastEvents(!showPastEvents);
 					}}
 				>
 					{showPastEvents ? (
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="mr-1.5 h-4 w-4"
-							style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
-							icon={faEyeSlash}
-						/>
+						<FontAwesomeIcon fill="currentColor" className="mr-1.5 h-4 w-4" icon={faEyeSlash} />
 					) : (
-						<FontAwesomeIcon
-							fill="currentColor"
-							className="mr-1.5 h-4 w-4"
-							style={{ transform: showPastEvents ? '' : 'rotate(180deg)' }}
-							icon={faEye}
-						/>
+						<FontAwesomeIcon fill="currentColor" className="mr-1.5 h-4 w-4" icon={faEye} />
 					)}
 					{showPastEvents ? 'Hide' : 'Show'} past sessions
 				</button>
