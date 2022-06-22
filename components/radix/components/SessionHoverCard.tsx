@@ -85,6 +85,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 										style={{ backgroundColor: session.type.color ?? '#888888' }}
 									/>
 								}
+								link={`/events/${event.slug}/sessions/types/${session.type.slug}`}
 								tooltipMessage={`This session is a part of the ${session.type.name} category.`}
 								label={session.type.name}
 							/>
@@ -93,6 +94,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 						{session.venue && (
 							<TooltipIcon
 								icon={faLocationDot}
+								link={`/events/${event.slug}/venues/${session.venue.slug}`}
 								tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
 								label={session?.venue?.name}
 							/>

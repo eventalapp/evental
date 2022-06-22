@@ -2,6 +2,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import Link from 'next/link';
 import React from 'react';
 
 import Tooltip from './radix/components/Tooltip';
@@ -13,6 +14,7 @@ export const TooltipIcon: React.FC<{
 	iconClassName?: string;
 	wrapperClassName?: string;
 	externalLink?: string;
+	link?: string;
 	customIcon?: React.ReactNode;
 }> = (props) => {
 	const {
@@ -22,7 +24,8 @@ export const TooltipIcon: React.FC<{
 		iconClassName,
 		wrapperClassName,
 		externalLink,
-		customIcon
+		customIcon,
+		link
 	} = props;
 
 	const finalIcon = customIcon ? (
@@ -36,14 +39,34 @@ export const TooltipIcon: React.FC<{
 		/>
 	);
 
+	if (link) {
+		return (
+			<Link href={link} passHref>
+				<a>
+					<Tooltip message={tooltipMessage}>
+						<div
+							className={classNames(
+								'mr-3 mb-1 flex cursor-pointer flex-row items-center text-sm md:text-base',
+								wrapperClassName
+							)}
+						>
+							{finalIcon}
+
+							<p>{label}</p>
+						</div>
+					</Tooltip>
+				</a>
+			</Link>
+		);
+	}
+
 	if (externalLink) {
 		return (
 			<Tooltip message={tooltipMessage}>
 				<a href={externalLink} target="_blank" rel="noopener noreferrer">
 					<div
 						className={classNames(
-							externalLink ? 'cursor-pointer' : 'cursor-help',
-							'mr-3 mb-1 flex flex-row items-center text-sm md:text-base',
+							'mr-3 mb-1 flex flex-row cursor-pointer items-center text-sm md:text-base',
 							wrapperClassName
 						)}
 					>
