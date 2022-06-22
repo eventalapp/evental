@@ -76,7 +76,7 @@ export const EventHeader: React.FC<{
 			)}
 
 			<div className="relative">
-				<div className="absolute top-0 right-0 flex flex-row space-x-4">
+				<div className="absolute top-0 right-0 flex flex-row">
 					<ShareDropdown event={event}>
 						<div>
 							<Tooltip side={'top'} message={'Share this event.'}>
@@ -94,7 +94,7 @@ export const EventHeader: React.FC<{
 
 					{user && Boolean(isAttendee) && (
 						<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
-							<div>
+							<div className="ml-4">
 								<Tooltip side={'top'} message={'Leave this event.'}>
 									<button type="button" className="h-6 w-6">
 										<FontAwesomeIcon
