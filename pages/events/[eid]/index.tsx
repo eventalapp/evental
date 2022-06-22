@@ -178,7 +178,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 							<div className="relative">
 								<SessionDatePicker
 									onChange={(date) => {
-										router.push(
+										void router.push(
 											`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`
 										);
 									}}
