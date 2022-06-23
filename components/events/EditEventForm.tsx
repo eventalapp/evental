@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EventCategory, EventType, PrivacyLevel } from '@prisma/client';
+import Color from 'color';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -70,9 +71,6 @@ export const EditEventForm: React.FC<Props> = (props) => {
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
 	const colorWatcher = watch('color');
-
-	console.log(colorWatcher);
-	console.log(newShade(colorWatcher, 50));
 
 	const { event: eventSlugCheck, isEventLoading: isEventSlugCheckLoading } =
 		useEventQuery(slugWatcher);
@@ -452,7 +450,8 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					className={`ml-4`}
 					variant="primary"
 					style={{
-						backgroundColor: colorWatcher ?? theme.extend.colors.primary.DEFAULT
+						backgroundColor: colorWatcher ?? theme.extend.colors.primary.DEFAULT,
+						color: Color(colorWatcher).isLight() ? '#000' : '#FFF'
 					}}
 					disabled={
 						editEventMutation.isLoading ||
@@ -466,3 +465,4 @@ export const EditEventForm: React.FC<Props> = (props) => {
 		</form>
 	);
 };
+
