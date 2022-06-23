@@ -22,7 +22,7 @@ export const useIsSessionAttendeeQuery = (
 		boolean,
 		AxiosError<ErroredAPIResponse>
 	>(
-		['isSessionAttendee', eid],
+		['isSessionAttendee', eid, sid],
 		async () => {
 			return axios
 				.get<SuccessAPIResponse<boolean>>(`/api/events/${eid}/sessions/${sid}/attendee`)
