@@ -11,6 +11,7 @@ import Prisma from '@prisma/client';
 import { CalendarEvent } from 'calendar-link';
 import dayjs from 'dayjs';
 import parse from 'html-react-parser';
+import { htmlToText } from 'html-to-text';
 import React from 'react';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
@@ -63,7 +64,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 	const SESSION_CALENDAR_EVENT: CalendarEvent = {
 		title: session.name,
-		description: session.description ?? undefined,
+		description: htmlToText(session.description || 'No description'),
 		location: session?.venue?.address || event.location || session?.venue?.name,
 		end: new Date(session.endDate).toISOString(),
 		start: new Date(session.startDate).toISOString(),
@@ -216,3 +217,4 @@ export const ViewSession: React.FC<Props> = (props) => {
 		</div>
 	);
 };
+
