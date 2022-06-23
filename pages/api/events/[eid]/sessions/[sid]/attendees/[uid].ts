@@ -6,6 +6,7 @@ import {
 	AttendeeWithUser,
 	stripAttendeeWithUserPassword
 } from '../../../../../../../utils/stripUserPassword';
+import { getAttendee } from '../../../attendees/[uid]';
 import { getEvent } from '../../../index';
 import { getSession } from '../index';
 
@@ -20,6 +21,37 @@ export default api({
 		}
 
 		return eventSessionAttendee;
+	},
+	async DELETE({ req }) {
+		const { eid, uid, sid } = req.query;
+
+		const event = await getEvent(String(eid));
+
+		if (!event) {
+			throw new NextkitError(404, 'Event not found.');
+		}
+
+		const session = await getSession(String(eid), String(sid));
+
+		if (!session) {
+			throw new NextkitError(404, 'Session not found.');
+		}
+
+		const attendee = await getAttendee(event.id, String(uid));
+
+		if (!attendee) {
+			throw new NextkitError(404, 'Attendee not found.');
+		}
+
+		await prisma.eventSessionAttendee.delete({
+			where: {
+				eventId_sessionId_attendeeId: {
+					eventId: event.id,
+					sessionId: session.id,
+					attendeeId: attendee.id
+				}
+			}
+		});
 	}
 });
 
