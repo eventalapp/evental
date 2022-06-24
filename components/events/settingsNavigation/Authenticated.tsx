@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { default as classNames } from 'classnames';
+import Color from 'color';
 import Link from 'next/link';
 import React from 'react';
 
@@ -28,7 +29,13 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 
 	return (
 		<div>
-			<div className="w-full" style={{ backgroundColor: event.color }}>
+			<div
+				className="w-full"
+				style={{
+					backgroundColor: event.color,
+					color: Color(event.color).isLight() ? '#000' : '#FFF'
+				}}
+			>
 				<Link href={`/events/${event.slug}`}>
 					<a className="m-auto block py-1 text-center text-sm text-white">
 						You are in admin mode <span className="font-medium">(Click to exit)</span>
@@ -197,3 +204,4 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 		</div>
 	);
 };
+
