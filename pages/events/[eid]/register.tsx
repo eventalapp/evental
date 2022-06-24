@@ -24,7 +24,6 @@ import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery'
 import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../hooks/queries/useUser';
-import { theme } from '../../../tailwind.config';
 import { ssrGetUser } from '../../../utils/api';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { getEvent } from '../../api/events/[eid]';
