@@ -2,12 +2,14 @@ import {
 	faArrowUpRightFromSquare,
 	faCalendarDay,
 	faClock,
+	faCog,
 	faHeadset,
 	faLocationDot,
 	faPerson,
 	faRightFromBracket,
 	faShare,
-	faStreetView
+	faStreetView,
+	faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
@@ -37,52 +39,47 @@ export const EventHeader: React.FC<{
 
 	return (
 		<div className="mb-7">
-			{user && isOrganizer && (
-				<Link href={`/events/${eid}/admin${adminLink}`}>
-					<a
-						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
-						style={{
-							backgroundColor: event.color,
-							color: Color(event.color).isLight() ? '#000' : '#FFF'
-						}}
-					>
-						You are an organizer for this event, click here to manage this event
-					</a>
-				</Link>
-			)}
-
-			{!user && (
-				<Link href={`/events/${eid}/register`}>
-					<a
-						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
-						style={{
-							backgroundColor: event.color,
-							color: Color(event.color).isLight() ? '#000' : '#FFF'
-						}}
-					>
-						Are you attending this event? Create an account and register.
-					</a>
-				</Link>
-			)}
-
-			{user && !Boolean(isAttendee) && (
-				<Link href={`/events/${eid}/register`}>
-					<a
-						className="mb-4 block rounded-md py-3 px-5 font-medium text-white"
-						style={{
-							backgroundColor: event.color,
-							color: Color(event.color).isLight() ? '#000' : '#FFF'
-						}}
-					>
-						Are you attending this event? Register here.
-					</a>
-				</Link>
-			)}
-
 			<div className="relative">
 				<div className="absolute top-0 right-0 flex flex-row">
+					{!Boolean(isAttendee) && (
+						<Link href={`/events/${eid}/register`}>
+							<a className="ml-4">
+								<Tooltip side={'top'} message={'Are you attending this event? Click to register.'}>
+									<button type="button" className="h-6 w-6 text-gray-700">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-5 w-5"
+											size="1x"
+											icon={faUserPlus}
+										/>
+									</button>
+								</Tooltip>
+							</a>
+						</Link>
+					)}
+
+					{user && isOrganizer && (
+						<Link href={`/events/${eid}/admin${adminLink}`}>
+							<a className="ml-4">
+								<Tooltip
+									side={'top'}
+									message={'You are an organizer for this event, click here to manage this event.'}
+								>
+									<button type="button" className="h-6 w-6 text-gray-700">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-5 w-5"
+											size="1x"
+											icon={faCog}
+										/>
+									</button>
+								</Tooltip>
+							</a>
+						</Link>
+					)}
+
 					<ShareDropdown event={event}>
-						<div>
+						<div className="ml-4">
 							<Tooltip side={'top'} message={'Share this event.'}>
 								<button type="button" className="h-6 w-6 text-gray-700">
 									<FontAwesomeIcon
