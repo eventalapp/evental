@@ -13,7 +13,16 @@ export interface UseCreateAttendeeMutationData {
 	>;
 }
 
-export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutationData => {
+interface UseCreateAttendeeOptions {
+	redirect?: boolean;
+}
+
+export const useCreateAttendeeMutation = (
+	eid: string,
+	args: UseCreateAttendeeOptions = {}
+): UseCreateAttendeeMutationData => {
+	const { redirect = true } = args;
+
 	const queryClient = useQueryClient();
 
 	const createAttendeeMutation = useMutation<
@@ -30,9 +39,13 @@ export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutatio
 			onSuccess: () => {
 				toast.success('You have successfully registered for this event.');
 
-				router.push(`/events/${eid}`).then(() => {
+				if (redirect) {
+					router.push(`/events/${eid}`).then(() => {
+						void queryClient.invalidateQueries(['attendees', eid]);
+					});
+				} else {
 					void queryClient.invalidateQueries(['attendees', eid]);
-				});
+				}
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'An error has occurred.');
@@ -42,3 +55,4 @@ export const useCreateAttendeeMutation = (eid: string): UseCreateAttendeeMutatio
 
 	return { createAttendeeMutation };
 };
+
