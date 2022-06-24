@@ -23,6 +23,7 @@ import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { TooltipIcon } from '../TooltipIcon';
+import { CreateAttendeeDialog } from '../radix/components/CreateAttendeeDialog';
 import LeaveEventDialog from '../radix/components/LeaveEventDialog';
 import { ShareDropdown } from '../radix/components/ShareDropdown';
 import Tooltip from '../radix/components/Tooltip';
@@ -42,8 +43,8 @@ export const EventHeader: React.FC<{
 			<div className="relative">
 				<div className="absolute top-0 right-0 flex flex-row">
 					{!Boolean(isAttendee) && (
-						<Link href={`/events/${eid}/register`}>
-							<a className="ml-4">
+						<CreateAttendeeDialog event={event} user={user}>
+							<div className="ml-4">
 								<Tooltip side={'top'} message={'Are you attending this event? Click to register.'}>
 									<button type="button" className="h-6 w-6 text-gray-700">
 										<FontAwesomeIcon
@@ -54,8 +55,8 @@ export const EventHeader: React.FC<{
 										/>
 									</button>
 								</Tooltip>
-							</a>
-						</Link>
+							</div>
+						</CreateAttendeeDialog>
 					)}
 
 					{user && isOrganizer && (
