@@ -137,4 +137,3 @@ export const CreateAttendeeDialog: React.FC<Props> = (props) => {
 		</DialogPrimitive.Root>
 	);
 };
-

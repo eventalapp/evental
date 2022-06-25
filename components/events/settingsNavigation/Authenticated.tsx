@@ -204,4 +204,3 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 		</div>
 	);
 };
-

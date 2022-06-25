@@ -6,7 +6,6 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { UseInviteOrganizerData } from '../../hooks/mutations/useInviteOrganizerMutation';
-import { theme } from '../../tailwind.config';
 import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
@@ -63,4 +62,3 @@ export const InviteOrganizerForm: React.FC<Props> = (props) => {
 		</form>
 	);
 };
-
