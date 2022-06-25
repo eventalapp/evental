@@ -3,6 +3,7 @@ import {
 	faLocationDot,
 	faPenToSquare,
 	faRightFromBracket,
+	faShare,
 	faTrashCan,
 	faUserGroup
 } from '@fortawesome/free-solid-svg-icons';
@@ -27,6 +28,7 @@ import { TooltipIcon } from '../TooltipIcon';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { LeaveSessionDialog } from '../radix/components/LeaveSessionDialog';
+import { ShareSessionDropdown } from '../radix/components/ShareSessionDropdown';
 import Tooltip from '../radix/components/Tooltip';
 
 type Props = {
@@ -84,12 +86,27 @@ export const ViewSession: React.FC<Props> = (props) => {
 					</div>
 				)}
 
-			<FlexRowBetween variant="noWrap">
+			<FlexRowBetween variant="noWrapStart">
 				<h1 className="mb-1.5 text-2xl font-bold leading-[1.2] tracking-tight md:text-3xl">
 					{session.name}
 				</h1>
 
 				<div className="flex flex-row items-center">
+					<ShareSessionDropdown event={event} session={session}>
+						<div className="ml-4 flex items-center">
+							<Tooltip side={'top'} message={'Share this session.'}>
+								<button type="button" className="h-5 w-5 text-gray-600">
+									<FontAwesomeIcon
+										fill="currentColor"
+										className="h-5 w-5"
+										size="1x"
+										icon={faShare}
+									/>
+								</button>
+							</Tooltip>
+						</div>
+					</ShareSessionDropdown>
+
 					{user && isAttending && !admin && <AddToCalendar event={SESSION_CALENDAR_EVENT} />}
 
 					{user && Boolean(isAttending) && (
