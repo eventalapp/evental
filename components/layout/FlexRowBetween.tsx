@@ -4,7 +4,8 @@ import React from 'react';
 const variants = {
 	primary: 'flex flex-row justify-between items-center flex-wrap mb-3',
 	start: 'flex flex-row justify-between items-start flex-wrap mb-3',
-	noWrap: 'flex flex-row justify-between items-center mb-3'
+	noWrap: 'flex flex-row justify-between items-center mb-3',
+	noWrapStart: 'flex flex-row justify-between items-start mb-3'
 };
 
 type Props = {
