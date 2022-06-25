@@ -94,7 +94,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				<div className="flex flex-row items-center">
 					<ShareSessionDropdown event={event} session={session}>
 						<div className="ml-4 flex items-center">
-							<Tooltip side={'top'} message={'Share this session.'}>
+							<Tooltip side={'top'} message={'Share this session'}>
 								<button type="button" className="h-5 w-5 text-gray-600">
 									<FontAwesomeIcon
 										fill="currentColor"
@@ -116,7 +116,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							userSlug={String(user?.slug)}
 						>
 							<div className="flex items-center justify-center">
-								<Tooltip side={'top'} message={'Leave this session.'}>
+								<Tooltip side={'top'} message={'Leave this session'}>
 									<button type="button" className="ml-4">
 										<FontAwesomeIcon
 											fill="currentColor"
