@@ -34,7 +34,7 @@ export const CreateAttendeeDialog: React.FC<Props> = (props) => {
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
-			<DialogPrimitive.Trigger>{children}</DialogPrimitive.Trigger>
+			<DialogPrimitive.Trigger asChild>{children}</DialogPrimitive.Trigger>
 
 			<Transition.Root show={isOpen}>
 				<Transition.Child
