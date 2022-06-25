@@ -16,7 +16,7 @@ interface Props {
 	align?: 'start' | 'center' | 'end';
 }
 
-export const ShareDropdown: React.FC<Props> = (props) => {
+export const ShareEventDropdown: React.FC<Props> = (props) => {
 	const { event, align = 'end', children } = props;
 
 	return (
