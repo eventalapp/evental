@@ -128,7 +128,7 @@ export const EventHeader: React.FC<{
 						</Link>
 					</div>
 
-					<div>
+					<div className="-mb-1">
 						<h1 className="mb-1.5 max-w-lg text-2xl font-bold leading-[1.1] tracking-tight md:text-3xl">
 							{event?.name}
 						</h1>
