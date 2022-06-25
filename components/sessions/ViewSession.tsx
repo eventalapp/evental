@@ -87,7 +87,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				)}
 
 			<FlexRowBetween variant="noWrapStart">
-				<h1 className="mb-1.5 text-2xl font-bold leading-[1.2] tracking-tight md:text-3xl">
+				<h1 className="text-2xl font-bold leading-[1.2] tracking-tight md:text-3xl">
 					{session.name}
 				</h1>
 
@@ -164,7 +164,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				</div>
 			</FlexRowBetween>
 
-			<div className="mb-4">
+			<div className="mb-2">
 				<div className="flex flex-row flex-wrap items-center text-gray-600">
 					{session?.type?.name && (
 						<TooltipIcon
