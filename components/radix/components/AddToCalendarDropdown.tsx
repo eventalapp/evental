@@ -22,7 +22,7 @@ export const AddToCalendarDropdown = (props: Props) => {
 				<DropdownMenuPrimitive.Trigger asChild>
 					<div>
 						<Tooltip message="Add this session to your calendar" side="top">
-							<button className="flex items-center justify-center text-gray-600">
+							<button className="ml-4 flex items-center justify-center text-gray-600">
 								<FontAwesomeIcon
 									fill="currentColor"
 									className="h-6 w-6"
