@@ -5,17 +5,18 @@ import React from 'react';
 interface Props {
 	message: string;
 	side?: 'bottom' | 'top' | 'right' | 'left' | undefined;
+	sideOffset?: number;
 }
 
 const Tooltip: React.FC<Props> = (props) => {
-	const { children, message, side = 'top' } = props;
+	const { children, message, side = 'top', sideOffset = 4 } = props;
 
 	return (
 		<TooltipPrimitive.Provider delayDuration={100}>
 			<TooltipPrimitive.Root>
 				<TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 				<TooltipPrimitive.Content
-					sideOffset={4}
+					sideOffset={sideOffset}
 					side={side}
 					className={cx(
 						'radix-side-top:animate-slide-down-fade',
