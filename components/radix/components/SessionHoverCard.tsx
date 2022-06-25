@@ -131,7 +131,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				/>
 
 				<div className="h-full w-full">
-					<div className="absolute right-3.5 top-3.5 flex w-full flex-col justify-end items-end">
+					<div className="absolute right-3.5 top-3.5 flex flex-col justify-end items-end">
 						<AttendThisSession event={event} session={session} user={user} />
 
 						<Tooltip side={'right'} message={`View session`}>
