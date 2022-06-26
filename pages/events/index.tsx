@@ -70,7 +70,7 @@ const EventsPage: NextPage<Props> = (props) => {
 				<Navigation />
 
 				<Column>
-					<Heading>Upcoming Events</Heading>
+					<Heading className="text-center mb-4">Upcoming Events</Heading>
 
 					{user && <EventsPageNavigation />}
 
