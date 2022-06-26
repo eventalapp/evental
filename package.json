@@ -13,7 +13,7 @@
 		"format": "prettier --write ./{server,pages,utils,components,config,email,hooks,prisma,styles}/**/**/*.{js,jsx,md,ts,tsx} && prisma format",
 		"migrate:dev": "prisma migrate dev",
 		"migrate:reset": "prisma migrate reset",
-		"migrate:prod": "DATABASE_URL=\"$MIGRATE_DATABASE_URL\" prisma migrate deploy",
+		"migrate:prod": "prisma migrate deploy",
 		"email:forgotPassword": "ts-node --project tsconfig.json  --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/forgotPassword.ts",
 		"stripe:listen": "stripe listen --forward-to localhost:5555/api/payment/webhooks"
 	},
@@ -26,7 +26,7 @@
 		"@headlessui/react": "^1.6.0",
 		"@heroicons/react": "^1.0.6",
 		"@hookform/resolvers": "^2.8.8",
-		"@prisma/client": "^3.14.0",
+		"@prisma/client": "^3.15.2",
 		"@radix-ui/react-accordion": "^0.1.6",
 		"@radix-ui/react-alert-dialog": "^0.1.7",
 		"@radix-ui/react-aspect-ratio": "^0.1.4",
@@ -137,7 +137,7 @@
 		"postcss": "^8.4.13",
 		"prettier": "^2.6.2",
 		"prettier-plugin-tailwindcss": "^0.1.11",
-		"prisma": "^3.14.0",
+		"prisma": "^3.15.2",
 		"tailwindcss": "^3.0.24",
 		"ts-node": "^10.7.0",
 		"typescript": "^4.6.3"
