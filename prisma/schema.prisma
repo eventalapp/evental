@@ -1,11 +1,11 @@
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
@@ -125,6 +125,7 @@ model EventAttendee {
   sessionAttendees EventSessionAttendee[]
 
   @@unique([eventId, userId])
+  @@index([eventRoleId, userId, eventId])
   @@map("event_attendee")
 }
 
@@ -134,13 +135,14 @@ model EventRole {
   slug        String
   name        String
   defaultRole Boolean @default(false)
-  tinyImage Boolean @default(false)
+  tinyImage   Boolean @default(false)
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   attendees EventAttendee[]
 
   @@unique([eventId, slug])
+  @@index([eventId])
   @@map("event_role")
 }
 
@@ -165,6 +167,7 @@ model EventSession {
   attendees EventSessionAttendee[]
 
   @@unique([eventId, slug])
+  @@index([eventId, venueId, typeId])
   @@map("event_session")
 }
 
@@ -180,6 +183,7 @@ model EventSessionType {
   sessions EventSession[]
 
   @@unique([eventId, slug])
+  @@index([eventId])
   @@map("event_session_type")
 }
 
@@ -200,6 +204,7 @@ model EventSessionAttendee {
   attendee EventAttendee @relation(fields: [attendeeId], references: [id], onDelete: Cascade)
 
   @@unique([eventId, sessionId, attendeeId])
+  @@index([eventId, sessionId, attendeeId])
   @@map("event_session_attendee")
 }
 
@@ -218,6 +223,7 @@ model EventVenue {
   sessions EventSession[]
 
   @@unique([eventId, slug])
+  @@index([eventId])
   @@map("event_venue")
 }
 
@@ -234,6 +240,7 @@ model EventPage {
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@unique([eventId, slug])
+  @@index([eventId])
   @@map("event_page")
 }
 
@@ -247,5 +254,6 @@ model EventMessage {
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
+  @@index([eventId])
   @@map("event_message")
 }
