@@ -14,7 +14,6 @@ import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMuta
 import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
-import { newShade } from '../../utils/newShade';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
 import { capitalizeFirstLetter } from '../../utils/string';
@@ -211,43 +210,48 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<Controller
 						control={control}
 						name="timeZone"
-						render={({ field }) => (
-							<ReactSelect
-								theme={{
-									colors: {
-										primary: colorWatcher ?? theme.extend.colors.primary.DEFAULT,
-										primary25: newShade(colorWatcher, 140) ?? theme.extend.colors.primary[200],
-										primary50: newShade(colorWatcher, 75) ?? theme.extend.colors.primary[300],
-										primary75: newShade(colorWatcher, 45) ?? theme.extend.colors.primary[900],
-										danger: theme.extend.colors.red.DEFAULT,
-										dangerLight: theme.extend.colors.red[300],
-										neutral0: '#FFFFFF',
-										neutral5: theme.extend.colors.gray[50],
-										neutral10: theme.extend.colors.gray[100],
-										neutral20: theme.extend.colors.gray[200],
-										neutral30: theme.extend.colors.gray[300],
-										neutral40: theme.extend.colors.gray[400],
-										neutral50: theme.extend.colors.gray[500],
-										neutral60: theme.extend.colors.gray[600],
-										neutral70: theme.extend.colors.gray[700],
-										neutral80: theme.extend.colors.gray[800],
-										neutral90: theme.extend.colors.gray[900]
-									},
-									borderRadius: 4,
-									spacing: {
-										baseUnit: 4,
-										controlHeight: 36,
-										menuGutter: 0
-									}
-								}}
-								options={timeZoneOptions}
-								className="block w-full"
-								value={timeZoneOptions.find((val) => val.value === field.value)}
-								onChange={(val) => {
-									field.onChange(val?.value);
-								}}
-							/>
-						)}
+						render={({ field }) => {
+							return (
+								<ReactSelect
+									theme={{
+										colors: {
+											primary: colorWatcher ?? theme.extend.colors.primary.DEFAULT,
+											primary25:
+												Color(colorWatcher).lighten(0.75).hex() ?? theme.extend.colors.primary[200],
+											primary50:
+												Color(colorWatcher).lighten(0.5).hex() ?? theme.extend.colors.primary[300],
+											primary75:
+												Color(colorWatcher).lighten(0.25).hex() ?? theme.extend.colors.primary[900],
+											danger: theme.extend.colors.red.DEFAULT,
+											dangerLight: theme.extend.colors.red[300],
+											neutral0: '#FFFFFF',
+											neutral5: theme.extend.colors.gray[50],
+											neutral10: theme.extend.colors.gray[100],
+											neutral20: theme.extend.colors.gray[200],
+											neutral30: theme.extend.colors.gray[300],
+											neutral40: theme.extend.colors.gray[400],
+											neutral50: theme.extend.colors.gray[500],
+											neutral60: theme.extend.colors.gray[600],
+											neutral70: theme.extend.colors.gray[700],
+											neutral80: theme.extend.colors.gray[800],
+											neutral90: theme.extend.colors.gray[900]
+										},
+										borderRadius: 4,
+										spacing: {
+											baseUnit: 4,
+											controlHeight: 36,
+											menuGutter: 0
+										}
+									}}
+									options={timeZoneOptions}
+									className="block w-full"
+									value={timeZoneOptions.find((val) => val.value === field.value)}
+									onChange={(val) => {
+										field.onChange(val?.value);
+									}}
+								/>
+							);
+						}}
 					/>
 
 					{errors.timeZone?.message && <ErrorMessage>{errors.timeZone?.message}</ErrorMessage>}
