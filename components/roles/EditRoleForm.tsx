@@ -5,8 +5,10 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { UseEditRoleMutationData } from '../../hooks/mutations/useEditRoleMutation';
 import { UseRoleQueryData } from '../../hooks/queries/useRoleAttendeesQuery';
+import { copy } from '../../utils/const';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
 import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -30,7 +32,8 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 	} = useForm<EditRolePayload>({
 		defaultValues: {
 			name: role?.name ?? undefined,
-			defaultRole: role?.defaultRole ?? false
+			defaultRole: role?.defaultRole ?? false,
+			tinyImage: role?.tinyImage ?? false
 		},
 		resolver: zodResolver(EditRoleSchema)
 	});
@@ -49,9 +52,10 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 					<Input placeholder="Role name" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
-
 				<div className="ml-5 flex-initial">
-					<Label htmlFor="defaultRole">Default Role</Label>
+					<Label htmlFor="defaultRole">
+						Default Role <HelpTooltip message={copy.tooltip.defaultRole} />
+					</Label>
 					<Controller
 						control={control}
 						name="defaultRole"
@@ -67,6 +71,24 @@ export const EditRoleForm: React.FC<Props> = (props) => {
 					{errors.defaultRole?.message && (
 						<ErrorMessage>{errors.defaultRole?.message}</ErrorMessage>
 					)}
+				</div>
+				<div className="ml-5 flex-initial">
+					<Label htmlFor="tinyImage">
+						Tiny Image <HelpTooltip message={copy.tooltip.tinyImage} />
+					</Label>
+					<Controller
+						control={control}
+						name="tinyImage"
+						render={({ field }) => (
+							<Switch
+								checked={field.value}
+								onCheckedChange={(checked) => {
+									field.onChange(checked);
+								}}
+							/>
+						)}
+					/>
+					{errors.tinyImage?.message && <ErrorMessage>{errors.tinyImage?.message}</ErrorMessage>}
 				</div>
 			</div>
 
