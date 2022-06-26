@@ -9,6 +9,7 @@ export interface UseIsSessionAttendeeQueryData {
 
 export interface UseIsSessionAttendeeQueryOptions {
 	initialData?: boolean;
+	keepPreviousData?: boolean;
 }
 
 export const useIsSessionAttendeeQuery = (
@@ -16,7 +17,7 @@ export const useIsSessionAttendeeQuery = (
 	sid: string,
 	options: UseIsSessionAttendeeQueryOptions = {}
 ): UseIsSessionAttendeeQueryData => {
-	const { initialData } = options;
+	const { initialData, keepPreviousData = false } = options;
 
 	const { data: isSessionAttendee, isLoading: isSessionAttendeeLoading } = useQuery<
 		boolean,
@@ -34,7 +35,8 @@ export const useIsSessionAttendeeQuery = (
 		{
 			retry: 0,
 			enabled: eid !== undefined && eid !== 'undefined',
-			initialData
+			initialData,
+			keepPreviousData
 		}
 	);
 
