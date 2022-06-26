@@ -61,7 +61,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				</div>
 
 				<div>
-					<Heading>{attendee.user.name}</Heading>
+					<Heading className="mb-1">{attendee.user.name}</Heading>
 
 					<div className="flex flex-row flex-wrap items-center text-gray-600">
 						{attendee.role.name && (

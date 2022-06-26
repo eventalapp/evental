@@ -25,6 +25,7 @@ import { CreateAttendeeDialog } from '../radix/components/CreateAttendeeDialog';
 import LeaveEventDialog from '../radix/components/LeaveEventDialog';
 import { ShareEventDropdown } from '../radix/components/ShareEventDropdown';
 import Tooltip from '../radix/components/Tooltip';
+import { Heading } from '../typography/Heading';
 
 export const EventHeader: React.FC<{
 	event: Prisma.Event;
@@ -129,9 +130,7 @@ export const EventHeader: React.FC<{
 					</div>
 
 					<div className="-mb-1">
-						<h1 className="mb-1.5 max-w-lg text-2xl font-bold leading-[1.1] tracking-tight md:text-3xl">
-							{event?.name}
-						</h1>
+						<Heading className="mb-1">{event?.name}</Heading>
 
 						<div className="flex flex-row flex-wrap items-center text-gray-600">
 							{event?.location && (
