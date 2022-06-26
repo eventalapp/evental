@@ -116,7 +116,7 @@ export const getAttendeesByName = async (
 		take: limit,
 		where: {
 			user: {
-				name: { contains: name, mode: 'insensitive' }
+				name: { contains: name }
 			},
 			eventId: event.id
 		},
