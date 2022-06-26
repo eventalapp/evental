@@ -11,6 +11,7 @@ import { TableOfContents } from '../../../components/guides/TableOfContents';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
+import { Heading } from '../../../components/typography/Heading';
 
 const CreatingASessionTypeGuidePage: NextPage = () => {
 	return (
@@ -37,7 +38,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl font-bold md:text-3xl">Inviting Organizers</h1>
+					<Heading>Inviting Organizers</Heading>
 					<p className="mt-4 text-base text-gray-100">
 						Learn how to invite additional organizers to assist you in setting up your event.
 					</p>

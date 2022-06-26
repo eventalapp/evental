@@ -4,7 +4,9 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { UseCreateRoleMutationData } from '../../hooks/mutations/useCreateRoleMutation';
+import { copy } from '../../utils/const';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
+import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -28,7 +30,8 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 		formState: { errors }
 	} = useForm<CreateRolePayload>({
 		defaultValues: {
-			defaultRole: false
+			defaultRole: false,
+			tinyImage: false
 		},
 		resolver: zodResolver(CreateRoleSchema)
 	});
@@ -47,7 +50,9 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="ml-5 flex-initial">
-					<Label htmlFor="defaultRole">Default Role</Label>
+					<Label htmlFor="defaultRole">
+						Default Role <HelpTooltip message={copy.tooltip.defaultRole} />
+					</Label>
 					<Controller
 						control={control}
 						name="defaultRole"
@@ -63,6 +68,24 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 					{errors.defaultRole?.message && (
 						<ErrorMessage>{errors.defaultRole?.message}</ErrorMessage>
 					)}
+				</div>
+				<div className="ml-5 flex-initial">
+					<Label htmlFor="tinyImage">
+						Tiny Image <HelpTooltip message={copy.tooltip.tinyImage} />
+					</Label>
+					<Controller
+						control={control}
+						name="tinyImage"
+						render={({ field }) => (
+							<Switch
+								checked={field.value}
+								onCheckedChange={(checked) => {
+									field.onChange(checked);
+								}}
+							/>
+						)}
+					/>
+					{errors.tinyImage?.message && <ErrorMessage>{errors.tinyImage?.message}</ErrorMessage>}
 				</div>
 			</div>
 

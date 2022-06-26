@@ -7,6 +7,7 @@ import { SubmitDemoRequestForm } from '../components/contact/SubmitDemoRequestFo
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
+import { Heading } from '../components/typography/Heading';
 
 const DemoPage: NextPage = () => {
 	return (
@@ -33,7 +34,7 @@ const DemoPage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl font-bold md:text-3xl">Create a Demo Request</h1>
+					<Heading>Create a Demo Request</Heading>
 					<p className="mt-4 text-base text-gray-100">
 						Fill out the form below to submit a demo request.
 					</p>

@@ -9,6 +9,7 @@ import { CreateEventForm } from '../../components/events/CreateEventForm';
 import Column from '../../components/layout/Column';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
+import { Heading } from '../../components/typography/Heading';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import { useUser } from '../../hooks/queries/useUser';
 import { ssrGetUser } from '../../utils/api';
@@ -51,7 +52,7 @@ const CreateEventPage: NextPage<Props> = (props) => {
 			<Navigation />
 
 			<Column>
-				<h1 className="text-2xl font-bold md:text-3xl">Create an event</h1>
+				<Heading>Create an event</Heading>
 
 				<p className="mt-2">
 					Create and setup a private event, invite organizers, customize your event, create

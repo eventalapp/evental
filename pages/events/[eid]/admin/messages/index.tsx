@@ -11,6 +11,7 @@ import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
@@ -53,7 +54,7 @@ const MessagePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl font-medium md:text-2xl">Messages</h3>
+				<Heading>Messages</Heading>
 			</Column>
 
 			<Footer color={event.color} />

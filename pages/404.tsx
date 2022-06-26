@@ -1,5 +1,3 @@
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -12,6 +10,7 @@ import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
+import { Heading } from '../components/typography/Heading';
 
 const ErrorNotFoundPage: NextPage = () => {
 	return (
@@ -25,7 +24,7 @@ const ErrorNotFoundPage: NextPage = () => {
 
 			<Column>
 				<div className="flex flex-col items-center">
-					<h1 className="text-2xl font-bold md:text-3xl">Page not found</h1>
+					<Heading>Page not found</Heading>
 					<p className="my-5 text-gray-600">We could not find the page you were looking for...</p>
 					<div className="flex flex-row space-x-4">
 						<Button type="button" variant="primary" onClick={router.back}>

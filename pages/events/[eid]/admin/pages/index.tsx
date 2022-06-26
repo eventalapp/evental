@@ -14,6 +14,7 @@ import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { PageList } from '../../../../../components/pages/PageList';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
@@ -62,7 +63,7 @@ const PagesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl font-medium md:text-2xl">Pages</h3>
+						<Heading>Pages</Heading>
 
 						<IconLinkTooltip
 							message="Click to create a page"

@@ -12,6 +12,7 @@ import { EventSettingsNavigation } from '../../../../../components/events/settin
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { CreateSessionForm } from '../../../../../components/sessions/CreateSessionForm';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useCreateSessionMutation } from '../../../../../hooks/mutations/useCreateSessionMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -66,7 +67,7 @@ const CreateSessionPage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl font-medium md:text-2xl">Create Session</h3>
+				<Heading>Create Session</Heading>
 
 				<CreateSessionForm
 					sessionTypes={sessionTypes}

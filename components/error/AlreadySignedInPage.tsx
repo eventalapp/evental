@@ -7,6 +7,7 @@ import { LinkButton } from '../form/LinkButton';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
+import { Heading } from '../typography/Heading';
 
 export const AlreadySignedInPage = () => (
 	<PageWrapper>
@@ -18,7 +19,7 @@ export const AlreadySignedInPage = () => (
 
 		<Column variant="halfWidth" className="flex flex-col items-center justify-center">
 			<div className="mb-3 flex flex-row justify-between">
-				<h1 className="text-2xl font-bold md:text-3xl">Sign in</h1>
+				<Heading>Sign in</Heading>
 			</div>
 			<p>You are already signed in.</p>
 			<Link href="/" passHref>

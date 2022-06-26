@@ -30,6 +30,7 @@ import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { LeaveSessionDialog } from '../radix/components/LeaveSessionDialog';
 import { ShareSessionDropdown } from '../radix/components/ShareSessionDropdown';
 import Tooltip from '../radix/components/Tooltip';
+import { Heading } from '../typography/Heading';
 
 type Props = {
 	eid: string;
@@ -87,9 +88,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				)}
 
 			<FlexRowBetween variant="noWrapStart">
-				<h1 className="text-2xl font-bold leading-[1.2] tracking-tight md:text-3xl">
-					{session.name}
-				</h1>
+				<Heading>{session.name}</Heading>
 
 				<div className="flex flex-row items-center">
 					<ShareSessionDropdown event={event} session={session}>

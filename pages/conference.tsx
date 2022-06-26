@@ -6,6 +6,7 @@ import { Footer } from '../components/Footer';
 import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
+import { Heading } from '../components/typography/Heading';
 
 const PricingPage: NextPage = () => {
 	return (
@@ -31,7 +32,7 @@ const PricingPage: NextPage = () => {
 			<Navigation />
 
 			<Column className="flex flex-col items-center">
-				<h1 className="text-2xl font-bold md:text-3xl">Conference Events with Evental</h1>
+				<Heading>Conference Events with Evental</Heading>
 				<p className="mt-4 text-base text-gray-600">
 					See why Evental is perfect for your next conference event.
 				</p>

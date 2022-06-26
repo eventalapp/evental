@@ -12,6 +12,7 @@ import { TableOfContents } from '../../../components/guides/TableOfContents';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
+import { Heading } from '../../../components/typography/Heading';
 
 const AttendingAnEventGuidePage: NextPage = () => {
 	return (
@@ -38,7 +39,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl font-bold md:text-3xl">Creating an account</h1>
+					<Heading>Creating an account</Heading>
 					<p className="mt-4 text-base text-gray-100">
 						Learn how to create and customize your Evental account.
 					</p>

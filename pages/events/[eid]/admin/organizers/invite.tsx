@@ -13,6 +13,7 @@ import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { InviteOrganizerForm } from '../../../../../components/organizer/InviteOrganizerForm';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useInviteOrganizerMutation } from '../../../../../hooks/mutations/useInviteOrganizerMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -70,7 +71,7 @@ const EventOrganizersPage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<FlexRowBetween>
-					<h3 className="text-xl font-medium md:text-2xl">Invite Organizer</h3>
+					<Heading>Invite Organizer</Heading>
 				</FlexRowBetween>
 
 				<p className="mb-2 text-base text-gray-700">

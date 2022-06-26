@@ -10,6 +10,7 @@ import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPa
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../components/typography/Heading';
 import { CreateVenueForm } from '../../../../../components/venues/CreateVenueForm';
 import { useCreateVenueMutation } from '../../../../../hooks/mutations/useCreateVenueMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
@@ -51,7 +52,7 @@ const CreateSessionPage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="text-xl font-medium md:text-2xl">Create Venue</h3>
+				<Heading>Create Venue</Heading>
 
 				<CreateVenueForm createVenueMutation={createVenueMutation} eid={String(eid)} />
 			</Column>

@@ -12,6 +12,7 @@ import { EventSettingsNavigation } from '../../../../../../components/events/set
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { EditSessionForm } from '../../../../../../components/sessions/EditSessionForm';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useEditSessionMutation } from '../../../../../../hooks/mutations/useEditSessionMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
@@ -81,7 +82,7 @@ const EditSessionPage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl font-medium md:text-2xl">Edit Session</h3>
+				<Heading>Edit Session</Heading>
 
 				<EditSessionForm
 					sessionRoleAttendeesQuery={sessionRoleAttendeesQuery}

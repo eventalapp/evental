@@ -14,6 +14,7 @@ import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { RoleList } from '../../../../../components/roles/RoleList';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
@@ -54,7 +55,7 @@ const RolesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl font-medium md:text-2xl">Roles</h3>
+						<Heading>Roles</Heading>
 
 						<IconLinkTooltip
 							message="Click to create a role"

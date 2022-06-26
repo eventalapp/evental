@@ -11,6 +11,7 @@ import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage'
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { DeleteVenueForm } from '../../../../../../components/venues/DeleteVenueForm';
 import { useDeleteVenueMutation } from '../../../../../../hooks/mutations/useDeleteVenueMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
@@ -66,7 +67,7 @@ const DeleteVenuePage: NextPage = () => {
 					You are about to delete a venue ("{venue.name}")
 				</p>
 
-				<h3 className="text-xl font-medium md:text-2xl">Delete Venue</h3>
+				<Heading>Delete Venue</Heading>
 
 				<DeleteVenueForm
 					venue={venue}

@@ -11,6 +11,7 @@ import { EventSettingsNavigation } from '../../../../../components/events/settin
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { CreatePageForm } from '../../../../../components/pages/CreatePageForm';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useCreatePageMutation } from '../../../../../hooks/mutations/useCreatePageMutation';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -51,7 +52,7 @@ const CreatePagePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column>
-				<h3 className="text-xl font-medium md:text-2xl">Create Page</h3>
+				<Heading>Create Page</Heading>
 
 				<CreatePageForm eid={String(eid)} createPageMutation={createPageMutation} />
 			</Column>

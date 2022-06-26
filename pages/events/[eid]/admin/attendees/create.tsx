@@ -11,6 +11,7 @@ import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPa
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useAdminCreateAttendeeMutation } from '../../../../../hooks/mutations/useAdminCreateAttendeeMutation';
 import { useAttendeesQuery } from '../../../../../hooks/queries/useAttendeesQuery';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
@@ -59,7 +60,7 @@ const CreateAttendeePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="mb-2 text-xl font-medium md:text-2xl">Create Attendee Page</h3>
+				<Heading>Create Attendee Page</Heading>
 
 				<p className="mb-5 text-gray-600">
 					Filling out the information below will create an placeholder account for this user. They

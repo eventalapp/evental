@@ -6,6 +6,7 @@ import React from 'react';
 
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import { Heading } from '../typography/Heading';
 
 type Props = {
 	eid: string;
@@ -23,7 +24,7 @@ export const ViewPage: React.FC<Props> = (props) => {
 		<div>
 			<FlexRowBetween>
 				<div>
-					<h1 className="text-2xl font-medium md:text-3xl">{page.name}</h1>
+					<Heading>{page.name}</Heading>
 					<span className="block text-sm text-gray-600">
 						Updated {formatDistance(new Date(page.updatedAt), new Date(), { addSuffix: true })}
 					</span>

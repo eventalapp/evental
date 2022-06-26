@@ -13,6 +13,7 @@ import { EventSettingsNavigation } from '../../../../../components/events/settin
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../components/typography/Heading';
 import { VenueList } from '../../../../../components/venues/VenueList';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
@@ -56,7 +57,7 @@ const VenuesAdminPage: NextPage = () => {
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<h3 className="text-xl font-medium md:text-2xl">Venues</h3>
+						<Heading>Venues</Heading>
 
 						<IconLinkTooltip
 							message="Click to create a venue"

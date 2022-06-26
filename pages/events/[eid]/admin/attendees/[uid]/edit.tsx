@@ -13,6 +13,7 @@ import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage'
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useEditAttendeeMutation } from '../../../../../../hooks/mutations/useEditAttendeeMutation';
 import { useImageUploadMutation } from '../../../../../../hooks/mutations/useImageUploadMutation';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
@@ -76,7 +77,7 @@ const EditAttendeePage: NextPage = () => {
 
 			<Column variant="halfWidth">
 				<div className="mb-2">
-					<h3 className="text-xl font-medium md:text-2xl">Edit Attendee</h3>
+					<Heading>Edit Attendee</Heading>
 				</div>
 
 				<p className="mt-1 mb-8 text-sm text-gray-600">

@@ -6,6 +6,7 @@ import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import { Heading } from '../typography/Heading';
 import { SessionList } from './SessionList';
 
 type Props = {
@@ -32,7 +33,7 @@ export const ViewSessionType: React.FC<Props> = (props) => {
 						style={{ backgroundColor: sessionType.color ?? '#888888' }}
 					/>
 					<div>
-						<h3 className="text-xl font-medium md:text-2xl">{sessionType.name}</h3>
+						<Heading>{sessionType.name}</Heading>
 					</div>
 				</div>
 

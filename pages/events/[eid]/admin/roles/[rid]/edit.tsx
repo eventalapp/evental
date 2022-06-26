@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 import { Footer } from '../../../../../../components/Footer';
 import { LoadingPage } from '../../../../../../components/error/LoadingPage';
@@ -12,6 +13,7 @@ import { EventSettingsNavigation } from '../../../../../../components/events/set
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { EditRoleForm } from '../../../../../../components/roles/EditRoleForm';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useEditRoleMutation } from '../../../../../../hooks/mutations/useEditRoleMutation';
 import { useAttendeesByRoleQuery } from '../../../../../../hooks/queries/useAttendeesByRoleQuery';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
@@ -71,7 +73,7 @@ const EditRolePage: NextPage = () => {
 			<EventSettingsNavigation event={event} roles={roles} user={user} />
 
 			<Column variant="halfWidth">
-				<h3 className="text-xl font-medium md:text-2xl">Edit Role</h3>
+				<Heading>Edit Role</Heading>
 
 				<EditRoleForm
 					eid={String(eid)}

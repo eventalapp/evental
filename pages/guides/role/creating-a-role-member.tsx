@@ -11,6 +11,7 @@ import { TableOfContents } from '../../../components/guides/TableOfContents';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
+import { Heading } from '../../../components/typography/Heading';
 
 type Section = {
 	anchor: string;
@@ -49,7 +50,7 @@ const CreatingRoleMemberGuidePage: NextPage = () => {
 
 			<div className="dark-topography text-white">
 				<Column className="flex flex-col items-center">
-					<h1 className="text-2xl font-bold md:text-3xl">Creating a role member</h1>
+					<Heading>Creating a role member</Heading>
 					<p className="mt-4 text-base text-gray-100">
 						Learn how to create a role member to your event on Evental.
 					</p>

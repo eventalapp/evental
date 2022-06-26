@@ -18,6 +18,7 @@ import { LinkButton } from '../../../components/form/LinkButton';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
+import { Heading } from '../../../components/typography/Heading';
 import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
@@ -108,7 +109,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 
 				<Column variant="halfWidth">
 					<div className="space-y-5">
-						<h1 className="text-2xl font-bold md:text-3xl">Create an account</h1>
+						<Heading>Create an account</Heading>
 						<p className="text-gray-700">
 							To register for this event, please{' '}
 							<Link href={`/auth/signup?${params}`}>
@@ -194,7 +195,7 @@ const EventRegisterPage: NextPage<Props> = (props) => {
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column variant="halfWidth" className="space-y-5">
-				<h1 className="text-2xl font-bold md:text-3xl">Register for {event.name}</h1>
+				<Heading>Register for {event.name}</Heading>
 
 				<p className="text-gray-700">
 					To attend this event, please click the register button below.

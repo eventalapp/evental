@@ -12,6 +12,7 @@ import { EventSettingsNavigation } from '../../../../../../components/events/set
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { DeleteRoleForm } from '../../../../../../components/roles/DeleteRoleForm';
+import { Heading } from '../../../../../../components/typography/Heading';
 import { useDeleteRoleMutation } from '../../../../../../hooks/mutations/useDeleteRoleMutation';
 import { useAttendeesByRoleQuery } from '../../../../../../hooks/queries/useAttendeesByRoleQuery';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
@@ -75,7 +76,7 @@ const DeleteRolePage: NextPage = () => {
 					You are about to delete a role ("{role.name}")
 				</p>
 
-				<h1 className="text-2xl font-bold md:text-3xl">Delete Role</h1>
+				<Heading>Delete Role</Heading>
 
 				<DeleteRoleForm
 					role={role}

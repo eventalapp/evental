@@ -84,7 +84,8 @@ export default api({
 				eventId: event.id,
 				name: body.name,
 				slug: slug,
-				defaultRole: body.defaultRole
+				defaultRole: body.defaultRole,
+				tinyImage: body.tinyImage
 			}
 		});
 

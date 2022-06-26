@@ -15,6 +15,7 @@ import { EventSettingsNavigation } from '../../../../../components/events/settin
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useOrganizersQuery } from '../../../../../hooks/queries/useOrganizersQuery';
@@ -70,7 +71,7 @@ const EventOrganizersPage: NextPage = () => {
 
 			<Column>
 				<FlexRowBetween>
-					<h3 className="text-xl font-medium md:text-2xl">Organizers</h3>
+					<Heading>Organizers</Heading>
 
 					<IconLinkTooltip
 						message="Click to invite an organizer"
