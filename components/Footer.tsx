@@ -16,31 +16,41 @@ export const Footer: React.FC<Props> = (props) => {
 				<nav className="-my-2 -mx-5 flex flex-wrap justify-center" aria-label="Footer">
 					<div className="py-2 px-5">
 						<Link href="/about">
-							<a className="text-base text-gray-500 hover:text-gray-900">About</a>
+							<a className="text-base text-gray-500 hover:text-gray-900 transition-all duration-100">
+								About
+							</a>
 						</Link>
 					</div>
 
 					<div className="py-2 px-5">
 						<Link href="/pricing">
-							<a className="text-base text-gray-500 hover:text-gray-900">Pricing</a>
+							<a className="text-base text-gray-500 hover:text-gray-900 transition-all duration-100">
+								Pricing
+							</a>
 						</Link>
 					</div>
 
 					<div className="py-2 px-5">
 						<Link href="/contact">
-							<a className="text-base text-gray-500 hover:text-gray-900">Contact</a>
+							<a className="text-base text-gray-500 hover:text-gray-900 transition-all duration-100">
+								Contact
+							</a>
 						</Link>
 					</div>
 
 					<div className="py-2 px-5">
 						<Link href="/guides">
-							<a className="text-base text-gray-500 hover:text-gray-900">Guides</a>
+							<a className="text-base text-gray-500 hover:text-gray-900 transition-all duration-100">
+								Guides
+							</a>
 						</Link>
 					</div>
 
 					<div className="py-2 px-5">
 						<Link href="/events">
-							<a className="text-base text-gray-500 hover:text-gray-900">Events</a>
+							<a className="text-base text-gray-500 hover:text-gray-900 transition-all duration-100">
+								Events
+							</a>
 						</Link>
 					</div>
 				</nav>
