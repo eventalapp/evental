@@ -132,6 +132,7 @@ model EventRole {
   slug        String
   name        String
   defaultRole Boolean @default(false)
+  tinyImage Boolean @default(false)
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 

@@ -70,7 +70,8 @@ export const fake = (count: number) => {
 			slug: faker.internet.userName().toLowerCase(),
 			name: `${faker.name.firstName()} ${faker.name.lastName()}`,
 			defaultRole: i === 1,
-			eventId: fakeEvent.id
+			eventId: fakeEvent.id,
+			tinyImage: false
 		});
 
 		i++;
