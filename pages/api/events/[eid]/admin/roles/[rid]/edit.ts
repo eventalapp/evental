@@ -109,6 +109,7 @@ export default api({
 			data: {
 				slug: slug,
 				name: body.name,
+				tinyImage: body.tinyImage,
 				defaultRole: body.defaultRole
 			}
 		});
