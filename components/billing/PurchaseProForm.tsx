@@ -26,7 +26,6 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit(async (data) => {
-				console.log(data.attendees);
 				const response = await axios.post('/api/payment/sessions', {
 					attendees: data.attendees,
 					eventId: data.eid

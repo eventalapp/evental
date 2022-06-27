@@ -47,7 +47,6 @@ export default api({
 			}
 
 			if (eventFound && body.eventId) {
-				console.log('Updating event');
 				await prisma.event.update({
 					where: {
 						id: eventFound.id
