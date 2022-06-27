@@ -145,7 +145,8 @@ module.exports = {
 				'toast-hide': 'toast-hide 100ms ease-in forwards',
 				'toast-slide-in-right': 'toast-slide-in-right 150ms cubic-bezier(0.16, 1, 0.3, 1)',
 				'toast-slide-in-bottom': 'toast-slide-in-bottom 150ms cubic-bezier(0.16, 1, 0.3, 1)',
-				'toast-swipe-out': 'toast-swipe-out 100ms ease-out forwards'
+				'toast-swipe-out': 'toast-swipe-out 100ms ease-out forwards',
+				'spin-slow': 'spin 3s linear infinite'
 			},
 			gridTemplateColumns: {
 				eventList: '60px 60px 1fr',
