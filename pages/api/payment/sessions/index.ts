@@ -58,7 +58,7 @@ export default api({
 					}
 				});
 
-				return;
+				return { upgraded: true };
 			} else {
 				throw new NextkitError(500, 'An error has occurred. Please email support@evental.app');
 			}
@@ -98,4 +98,3 @@ export default api({
 		return checkoutSession;
 	}
 });
-
