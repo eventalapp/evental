@@ -412,6 +412,23 @@ export const FIFTEEN_MINUTES = 15 * 60 * 1000;
 
 const MAX_ATTENDEES = 5000;
 
+export const sale = {
+	flatAmount: 0,
+	percentage: 100
+};
+
+export const priceAfterSale = (price: number): number => {
+	if (sale.flatAmount > 0) {
+		return price - sale.flatAmount;
+	}
+
+	if (sale.percentage > 0) {
+		return price * (1 - sale.percentage / 100);
+	}
+
+	return price;
+};
+
 export let proAttendeePricing: Record<
 	string,
 	{
@@ -469,3 +486,4 @@ for (let i = 250; i <= MAX_ATTENDEES; i += 250) {
 		perAttendeePrice: Number((priceForAttendees / i).toFixed(2))
 	};
 }
+
