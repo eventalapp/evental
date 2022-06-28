@@ -37,7 +37,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 				}}
 			>
 				<Link href={`/events/${event.slug}`}>
-					<a className="m-auto block py-1 text-center text-sm text-white">
+					<a className="m-auto block py-1 text-center text-sm">
 						You are in admin mode <span className="font-medium">(Click to exit)</span>
 					</a>
 				</Link>
