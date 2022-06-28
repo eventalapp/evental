@@ -42,7 +42,7 @@ export const EventHeader: React.FC<{
 			<div className="relative">
 				<div className="absolute top-0 right-0 flex flex-row">
 					{event ? (
-						!Boolean(isAttendee) && (
+						!isAttendee && (
 							<CreateAttendeeDialog event={event} user={user}>
 								<div className="ml-4">
 									<Tooltip side={'top'} message={'Are you attending this event? Click to register'}>
