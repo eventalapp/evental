@@ -58,6 +58,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 		setValue('image', files[0]);
 	}, [files]);
 
+	//TODO: impl react skeleton
 	if (!user) return null;
 
 	return (

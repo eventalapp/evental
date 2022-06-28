@@ -26,7 +26,7 @@ const SessionRegisterPage: NextPage = () => {
 	const { event, eventError } = useEventQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
-	if (user && !user.id) {
+	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 

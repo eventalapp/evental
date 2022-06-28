@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -13,20 +13,14 @@ import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/typography/Heading';
 import { useSignUpMutation } from '../../hooks/mutations/useSignUpMutation';
 import { useUser } from '../../hooks/queries/useUser';
-import { ssrGetUser } from '../../utils/api';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
 
-type Props = {
-	initialUser: PasswordlessUser | undefined;
-};
-
-const SignUpPage: NextPage<Props> = (props) => {
-	const { initialUser } = props;
-	const { user, isUserLoading } = useUser(initialUser);
+const SignUpPage: NextPage = () => {
+	const { user, isUserLoading } = useUser();
 	const router = useRouter();
 	const { signUpMutation } = useSignUpMutation({
 		redirectUrl: router.query.redirectUrl ? String(router.query.redirectUrl) : undefined
 	});
+
 	if (isUserLoading) {
 		return <LoadingPage />;
 	}
@@ -72,16 +66,6 @@ const SignUpPage: NextPage<Props> = (props) => {
 			<Footer />
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-
-	return {
-		props: {
-			initialUser
-		}
-	};
 };
 
 export default SignUpPage;

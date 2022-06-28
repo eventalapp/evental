@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
@@ -12,17 +11,10 @@ import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/typography/Heading';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import { useUser } from '../../hooks/queries/useUser';
-import { ssrGetUser } from '../../utils/api';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
 
-type Props = {
-	initialUser: PasswordlessUser | undefined;
-};
-
-const CreateEventPage: NextPage<Props> = (props) => {
-	const { initialUser } = props;
+const CreateEventPage: NextPage = () => {
 	const { createEventMutation } = useCreateEventMutation();
-	const { user } = useUser(initialUser);
+	const { user } = useUser();
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -65,16 +57,6 @@ const CreateEventPage: NextPage<Props> = (props) => {
 			<Footer />
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-
-	return {
-		props: {
-			initialUser
-		}
-	};
 };
 
 export default CreateEventPage;
