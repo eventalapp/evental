@@ -7,18 +7,26 @@ import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
 import NoAccess from './NoAccess';
 
-export const NoAccessPage = () => (
-	<PageWrapper>
-		<Head>
-			<title>No Access</title>
-		</Head>
+type Props = {
+	navigation?: React.ReactNode;
+};
 
-		<Navigation />
+export const NoAccessPage: React.FC<Props> = (props) => {
+	const { navigation = <Navigation /> } = props;
 
-		<Column variant="halfWidth" className="flex flex-col items-center justify-center">
-			<NoAccess />
-		</Column>
+	return (
+		<PageWrapper>
+			<Head>
+				<title>No Access</title>
+			</Head>
 
-		<Footer />
-	</PageWrapper>
-);
+			{navigation}
+
+			<Column variant="halfWidth" className="flex flex-col items-center justify-center">
+				<NoAccess />
+			</Column>
+
+			<Footer />
+		</PageWrapper>
+	);
+};
