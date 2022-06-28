@@ -1,9 +1,19 @@
 {
 	"functions": {
-		"pages/api/auth": {},
-		"pages/api/{events,users}": {},
-		"pages/api/payment": {},
-		"pages/api/{support,upload,demo}": {},
-		"pages/events": {}
+		"pages/api/auth": {
+			"maxDuration": 10
+		},
+		"pages/api/{events,users}": {
+			"maxDuration": 10
+		},
+		"pages/api/payment": {
+			"maxDuration": 10
+		},
+		"pages/api/{support,upload,demo}": {
+			"maxDuration": 10
+		},
+		"pages/events": {
+			"maxDuration": 10
+		}
 	}
 }
