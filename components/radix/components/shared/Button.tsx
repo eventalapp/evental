@@ -37,7 +37,7 @@ const Button = React.forwardRef<HTMLButtonElement, Props>(
 			ref={ref}
 			{...props}
 			className={cx(
-				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium',
+				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50',
 				'duration-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring focus-visible:ring-opacity-75',
 				// Register all radix states
 				'group',
