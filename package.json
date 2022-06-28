@@ -23,7 +23,7 @@
 		"@headlessui/react": "^1.6.0",
 		"@heroicons/react": "^1.0.6",
 		"@hookform/resolvers": "^2.8.8",
-		"@prisma/client": "^3.15.2",
+		"@prisma/client": "4",
 		"@radix-ui/react-accordion": "^0.1.6",
 		"@radix-ui/react-alert-dialog": "^0.1.7",
 		"@radix-ui/react-aspect-ratio": "^0.1.4",
@@ -135,7 +135,7 @@
 		"postcss": "^8.4.13",
 		"prettier": "^2.6.2",
 		"prettier-plugin-tailwindcss": "^0.1.11",
-		"prisma": "^3.15.2",
+		"prisma": "4",
 		"tailwindcss": "^3.0.24",
 		"ts-node": "^10.7.0",
 		"typescript": "^4.6.3"
