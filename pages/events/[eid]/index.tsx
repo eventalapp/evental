@@ -8,10 +8,9 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { Footer } from '../../../components/Footer';
-import { LoadingPage } from '../../../components/error/LoadingPage';
-import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../components/events/EventHeader';
@@ -69,34 +68,21 @@ const ViewEventPage: NextPage<Props> = (props) => {
 	const router = useRouter();
 	const { eid } = router.query;
 	const { user } = useUser(initialUser);
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid), initialIsOrganizer);
-	const { isAttendee, isAttendeeLoading } = useIsAttendeeQuery(String(eid), initialIsAttendee);
-	const { sessionsData, isSessionsLoading, sessionsError } = useSessionsQuery(String(eid), {
+	const { isOrganizer } = useIsOrganizerQuery(String(eid), initialIsOrganizer);
+	const { isAttendee } = useIsAttendeeQuery(String(eid), initialIsAttendee);
+	const { sessionsData, sessionsError } = useSessionsQuery(String(eid), {
 		initialData: initialSessions
 	});
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid), initialEvent);
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { venues, venuesError, isVenuesLoading } = useVenuesQuery(String(eid), initialVenues);
-	const { sessionTypesError, isSessionTypesLoading, sessionTypes } = useSessionTypesQuery(
+	const { event, eventError } = useEventQuery(String(eid), initialEvent);
+	const { roles, rolesError } = useRolesQuery(String(eid), initialRoles);
+	const { venues, venuesError } = useVenuesQuery(String(eid), initialVenues);
+	const { sessionTypesError, sessionTypes } = useSessionTypesQuery(
 		String(eid),
 		initialSessionTypes
 	);
-	const { pages, isPagesLoading } = usePagesQuery(String(eid), {
+	const { pages } = usePagesQuery(String(eid), {
 		initialData: initialPages
 	});
-
-	if (
-		isEventLoading ||
-		isOrganizerLoading ||
-		isSessionsLoading ||
-		isRolesLoading ||
-		isAttendeeLoading ||
-		isVenuesLoading ||
-		isSessionTypesLoading ||
-		isPagesLoading
-	) {
-		return <LoadingPage />;
-	}
 
 	if (rolesError || eventError || sessionsError || venuesError || sessionTypesError) {
 		return (
@@ -106,16 +92,13 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		);
 	}
 
-	if (!event || !sessionsData || !roles) {
-		return <NotFoundPage message="Event not found." />;
-	}
-
-	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+	if (event?.privacy === 'PRIVATE' && !isOrganizer) {
 		return <PrivatePage />;
 	}
 
 	const renderDayContents = (dayOfMonth: number, date?: Date | undefined) => {
 		if (
+			event &&
 			dayjs(date)
 				.add(6, 'hour')
 				.isBetween(dayjs(event.startDate).startOf('day'), dayjs(event.endDate).endOf('day'))
@@ -132,44 +115,43 @@ const ViewEventPage: NextPage<Props> = (props) => {
 
 	return (
 		<PageWrapper>
-			<NextSeo
-				title={`${event.name} — Evental`}
-				description={htmlToText(event.description || '')}
-				additionalLinkTags={[
-					{
-						rel: 'icon',
-						href: `https://cdn.evental.app${event.image}`
-					}
-				]}
-				openGraph={{
-					url: `https://evental.app/events/${event.slug}`,
-					title: `${event.name} — Evental`,
-					description: htmlToText(event.description || ''),
-					images: [
+			{event && (
+				<NextSeo
+					title={`${event.name} — Evental`}
+					description={htmlToText(event.description || '')}
+					additionalLinkTags={[
 						{
-							url: `https://cdn.evental.app${event.image}`,
-							width: 300,
-							height: 300,
-							alt: `${event.name} Logo Alt`,
-							type: 'image/jpeg'
+							rel: 'icon',
+							href: `https://cdn.evental.app${event.image}`
 						}
-					]
-				}}
-			/>
+					]}
+					openGraph={{
+						url: `https://evental.app/events/${event.slug}`,
+						title: `${event.name} — Evental`,
+						description: htmlToText(event.description || ''),
+						images: [
+							{
+								url: `https://cdn.evental.app${event.image}`,
+								width: 300,
+								height: 300,
+								alt: `${event.name} Logo Alt`,
+								type: 'image/jpeg'
+							}
+						]
+					}}
+				/>
+			)}
 
 			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
 
 			<Column>
-				{event && (
-					<EventHeader
-						adminLink={'/sessions'}
-						eid={String(eid)}
-						event={event}
-						isOrganizer={isOrganizer}
-						isAttendee={isAttendee}
-						user={user}
-					/>
-				)}
+				<EventHeader
+					event={event}
+					adminLink={'/sessions'}
+					isOrganizer={isOrganizer}
+					isAttendee={isAttendee}
+					user={user}
+				/>
 
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-12 lg:col-span-9">
@@ -177,28 +159,40 @@ const ViewEventPage: NextPage<Props> = (props) => {
 					</div>
 
 					<div className="col-span-12 lg:col-span-3">
-						<div className="mb-3">
-							<span className="mb-1 block font-medium">Filter by Date</span>
-							<div className="relative">
-								<SessionDatePicker
-									onChange={(date) => {
-										void router.push(
-											`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`
-										);
-									}}
-									renderDayContents={renderDayContents}
-									maxDate={new Date(String(event.endDate))}
-									minDate={new Date(String(event.startDate))}
-								/>
-							</div>
+						<div className="mb-4">
+							<span className="mb-1 block font-medium">
+								{event ? 'Filter by Date' : <Skeleton className="w-3/4" />}
+							</span>
+							{event ? (
+								<div className="relative">
+									<SessionDatePicker
+										onChange={(date) => {
+											void router.push(
+												`/events/${eid}/sessions/dates/${dayjs(date).format('YYYY-MM-DD')}`
+											);
+										}}
+										renderDayContents={renderDayContents}
+										maxDate={new Date(String(event.endDate))}
+										minDate={new Date(String(event.startDate))}
+									/>
+								</div>
+							) : (
+								<Skeleton className="w-full" />
+							)}
 						</div>
 
-						{sessionTypes && sessionTypes.length > 0 && (
-							<div className="mb-3">
-								<span className="mb-1 block font-medium">Filter by Type</span>
-								<div className="text-gray-600">
-									<ul className="space-y-1">
-										{sessionTypes.map((sessionType) => (
+						<div className="mb-4">
+							<span className="mb-1 block font-medium">
+								{sessionTypes ? (
+									sessionTypes.length > 0 && 'Filter by Type'
+								) : (
+									<Skeleton className="w-3/4" />
+								)}
+							</span>
+							<div className="text-gray-600">
+								<ul className="space-y-1">
+									{event && sessionTypes ? (
+										sessionTypes.map((sessionType) => (
 											<li className="block group" key={sessionType.id}>
 												<Tooltip
 													message={`Click to view all sessions occurring with the ${sessionType.name} session category`}
@@ -206,7 +200,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 													sideOffset={6}
 												>
 													<div>
-														<Link href={`/events/${eid}/sessions/types/${sessionType.slug}`}>
+														<Link href={`/events/${event.slug}/sessions/types/${sessionType.slug}`}>
 															<a className="inline-flex justify-between w-full">
 																<div className="flex flex-row items-center justify-center">
 																	<div
@@ -228,18 +222,22 @@ const ViewEventPage: NextPage<Props> = (props) => {
 													</div>
 												</Tooltip>
 											</li>
-										))}
-									</ul>
-								</div>
+										))
+									) : (
+										<Skeleton count={5} className="w-full" containerClassName="space-y-1" />
+									)}
+								</ul>
 							</div>
-						)}
+						</div>
 
-						{venues && venues.length > 0 && (
-							<div className="mb-3">
-								<span className="mb-1 block font-medium">Filter by Venue</span>
-								<div className="text-gray-600">
-									<ul className="space-y-1">
-										{venues.map((venue) => (
+						<div className="mb-4">
+							<span className="mb-1 block font-medium">
+								{venues ? venues.length > 0 && 'Filter by Venue' : <Skeleton className="w-3/4" />}
+							</span>
+							<div className="text-gray-600">
+								<ul className="space-y-1">
+									{event && venues ? (
+										venues.map((venue) => (
 											<li className="block group" key={venue.id}>
 												<Tooltip
 													message={`Click to view all sessions occurring at the ${venue.name} venue`}
@@ -247,7 +245,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 													sideOffset={6}
 												>
 													<div>
-														<Link href={`/events/${eid}/venues/${venue.slug}`} passHref>
+														<Link href={`/events/${event.slug}/venues/${venue.slug}`} passHref>
 															<a className="inline-flex justify-between w-full">
 																<span className="transition-all duration-100 group-hover:text-gray-900">
 																	{venue.name}
@@ -263,16 +261,18 @@ const ViewEventPage: NextPage<Props> = (props) => {
 													</div>
 												</Tooltip>
 											</li>
-										))}
-									</ul>
-								</div>
+										))
+									) : (
+										<Skeleton count={5} className="w-full" containerClassName="space-y-1" />
+									)}
+								</ul>
 							</div>
-						)}
+						</div>
 					</div>
 				</div>
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

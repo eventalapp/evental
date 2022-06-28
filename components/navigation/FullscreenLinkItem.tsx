@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 export const FullscreenLinkItem: React.FC<{
 	link: string;
 	label: string;
-	index: number;
+	index?: number;
 	onClick: () => void;
 }> = (props) => {
 	const { link, label, index, onClick } = props;

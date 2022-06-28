@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 
 export interface UseEventQueryData {
-	event: Prisma.Event | null;
+	event: Prisma.Event | undefined;
 	isEventLoading: boolean;
 	eventError: ErroredAPIResponse | null;
 }
@@ -39,5 +39,5 @@ export const useEventQuery = (
 		}
 	);
 
-	return { event: event ?? null, isEventLoading, eventError: error };
+	return { event: event, isEventLoading, eventError: error };
 };

@@ -11,12 +11,14 @@ import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import React, { useState } from 'react';
+import { SkeletonTheme } from 'react-loading-skeleton';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import '../styles/global.css';
+import { theme } from '../tailwind.config';
 
 dayjs.extend(advancedFormat);
 dayjs.extend(utc);
@@ -123,7 +125,12 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 						cardType: 'summary'
 					}}
 				/>
-				<Component {...pageProps} error={error} />
+				<SkeletonTheme
+					baseColor={theme.extend.colors.gray[100]}
+					highlightColor={theme.extend.colors.gray[200]}
+				>
+					<Component {...pageProps} error={error} />
+				</SkeletonTheme>
 			</Hydrate>
 
 			<ToastContainer />

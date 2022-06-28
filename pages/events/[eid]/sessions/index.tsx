@@ -126,7 +126,6 @@ const SessionsPage: NextPage<Props> = (props) => {
 					<EventHeader
 						adminLink={'/sessions'}
 						event={event}
-						eid={String(eid)}
 						isOrganizer={isOrganizer}
 						isAttendee={isAttendee}
 						user={user}
