@@ -14,7 +14,7 @@ export const useDeleteRoleMutation = (eid: string, rid: string): UseDeleteRoleMu
 	const deleteRoleMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/roles/${rid}/delete`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/roles/${rid}`)
 				.then((res) => res.data.data);
 		},
 		{

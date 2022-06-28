@@ -14,7 +14,7 @@ export const useDeletePageMutation = (eid: string, pid: string): UseDeletePageMu
 	const deletePageMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/pages/${pid}/delete`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/pages/${pid}`)
 				.then((res) => res.data.data);
 		},
 		{

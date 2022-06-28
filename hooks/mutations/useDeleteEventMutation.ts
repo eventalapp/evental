@@ -14,7 +14,7 @@ export const useDeleteEventMutation = (eid: string): UseDeleteEventMutationData 
 	const deleteEventMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/delete`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin`)
 				.then((res) => res.data.data);
 		},
 		{

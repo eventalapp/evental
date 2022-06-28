@@ -14,7 +14,7 @@ export const useDeleteVenueMutation = (eid: string, vid: string): UseDeleteVenue
 	const deleteVenueMutation = useMutation<void, AxiosError<ErroredAPIResponse, unknown>, void>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/venues/${vid}/delete`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/venues/${vid}`)
 				.then((res) => res.data.data);
 		},
 		{

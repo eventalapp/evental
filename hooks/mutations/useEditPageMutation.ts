@@ -25,10 +25,7 @@ export const useEditPageMutation = (eid: string, pid: string): UseEditPageMutati
 	>(
 		async (data) => {
 			return await axios
-				.put<SuccessAPIResponse<Prisma.EventPage>>(
-					`/api/events/${eid}/admin/pages/${pid}/edit`,
-					data
-				)
+				.put<SuccessAPIResponse<Prisma.EventPage>>(`/api/events/${eid}/admin/pages/${pid}`, data)
 				.then((res) => res.data.data);
 		},
 		{

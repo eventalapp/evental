@@ -27,7 +27,7 @@ export const useEditAttendeeMutation = (eid: string, uid: string): UseEditAttend
 		async (data) => {
 			return await axios
 				.put<SuccessAPIResponse<AttendeeWithUser>>(
-					`/api/events/${eid}/admin/attendees/${uid}/edit`,
+					`/api/events/${eid}/admin/attendees/${uid}`,
 					data
 				)
 				.then((res) => res.data.data);

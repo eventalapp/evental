@@ -28,7 +28,7 @@ export const useEditEventMutation = (eid: string): UseEditEventMutationData => {
 			const formData = populateFormData(data);
 
 			return await axios
-				.put<SuccessAPIResponse<Prisma.Event>>(`/api/events/${eid}/admin/edit`, formData)
+				.put<SuccessAPIResponse<Prisma.Event>>(`/api/events/${eid}/admin`, formData)
 				.then((res) => res.data.data);
 		},
 		{
