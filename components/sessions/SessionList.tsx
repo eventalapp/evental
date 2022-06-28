@@ -124,7 +124,7 @@ export const SessionList: React.FC<Props> = (props) => {
 							<Skeleton className="w-48 mb-2 h-5" key={i} />
 							<div className="flex flex-row mb-3">
 								<Skeleton className="w-24 mr-5 h-6" />
-								<div className="w-full flex-row flex">
+								<div className="w-full flex-row flex flex-wrap">
 									<Skeleton className="w-48 mr-3 h-6 mb-2" />
 									<Skeleton className="w-48 mr-3 h-6 mb-2" />
 									<Skeleton className="w-48 mr-3 h-6 mb-2" />
