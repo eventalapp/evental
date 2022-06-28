@@ -14,7 +14,7 @@ const EventalProCardPrice: React.FC<EventalProCardProps> = (props) => {
 
 	if (sale.percentage > 0 || sale.flatAmount > 0) {
 		return (
-			<div className="flex flex-row justify-center items-end -ml-4">
+			<div className="flex flex-row justify-center items-end">
 				<p className="inline-block">
 					<span className="mr-2 line-through text-lg md:text-2xl text-gray-500 font-medium leading-[1.2] tracking-tight">
 						<span className="text-sm md:text-lg align-top">$</span>
@@ -36,7 +36,7 @@ const EventalProCardPrice: React.FC<EventalProCardProps> = (props) => {
 	}
 
 	return (
-		<div className="flex flex-row justify-center items-end -ml-4 mb-3">
+		<div className="flex flex-row justify-center items-end mb-3">
 			<p className="inline-block">
 				<span className="text-gray-700 text-3xl font-bold md:text-5xl leading-[1]">
 					<span className="text-xl md:text-2xl align-top">$</span>
