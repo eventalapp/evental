@@ -6,6 +6,7 @@ import React from 'react';
 import { Footer } from '../../../../components/Footer';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
+import { EventHeader } from '../../../../components/events/EventHeader';
 import { EventNavigation } from '../../../../components/events/navigation';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
@@ -66,6 +67,8 @@ const ViewAttendeePage: NextPage = () => {
 			<EventNavigation eid={String(eid)} />
 
 			<Column>
+				<EventHeader adminLink={`/pages/${pid}`} eid={String(eid)} />
+
 				<ViewPage page={page} eid={String(eid)} pid={String(pid)} />
 			</Column>
 

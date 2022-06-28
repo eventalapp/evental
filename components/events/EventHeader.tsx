@@ -12,15 +12,17 @@ import {
 	faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Prisma from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { useEventQuery } from '../../hooks/queries/useEventQuery';
+import { useIsAttendeeQuery } from '../../hooks/queries/useIsAttendeeQuery';
+import { useIsOrganizerQuery } from '../../hooks/queries/useIsOrganizerQuery';
+import { useUser } from '../../hooks/queries/useUser';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
 import { CreateAttendeeDialog } from '../radix/components/CreateAttendeeDialog';
 import LeaveEventDialog from '../radix/components/LeaveEventDialog';
@@ -29,13 +31,14 @@ import Tooltip from '../radix/components/Tooltip';
 import { Heading } from '../typography/Heading';
 
 export const EventHeader: React.FC<{
-	event?: Prisma.Event;
-	isOrganizer?: boolean;
-	isAttendee?: boolean;
+	eid: string;
 	adminLink?: string;
-	user?: PasswordlessUser;
 }> = (props) => {
-	const { user, event, isOrganizer, isAttendee, adminLink = '/' } = props;
+	const { eid, adminLink = '/' } = props;
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { event } = useEventQuery(String(eid));
+	const { user } = useUser();
+	const { isAttendee } = useIsAttendeeQuery(String(eid));
 
 	return (
 		<div className="mb-7">
