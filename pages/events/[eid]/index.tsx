@@ -1,9 +1,8 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 import { htmlToText } from 'html-to-text';
-import type { GetServerSideProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -29,60 +28,19 @@ import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuer
 import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
 import { useUser } from '../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
-import { ssrGetUser } from '../../../utils/api';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
-import { getEvent } from '../../api/events/[eid]';
-import { getIsAttendee } from '../../api/events/[eid]/attendee';
-import { getIsOrganizer } from '../../api/events/[eid]/organizer';
-import { getPages } from '../../api/events/[eid]/pages';
-import { getRoles } from '../../api/events/[eid]/roles';
-import { SessionWithVenue, getSessions } from '../../api/events/[eid]/sessions';
-import { getSessionTypes } from '../../api/events/[eid]/sessions/types';
-import { getVenues } from '../../api/events/[eid]/venues';
 
-type Props = {
-	initialEvent: Prisma.Event | undefined;
-	initialSessions: SessionWithVenue[] | undefined;
-	initialRoles: Prisma.EventRole[] | undefined;
-	initialIsAttendee: boolean;
-	initialIsOrganizer: boolean;
-	initialUser: PasswordlessUser | undefined;
-	initialVenues: Prisma.EventVenue[] | undefined;
-	initialSessionTypes: Prisma.EventSessionType[] | undefined;
-	initialPages: Prisma.EventPage[] | undefined;
-};
-
-const ViewEventPage: NextPage<Props> = (props) => {
-	const {
-		initialEvent,
-		initialIsOrganizer,
-		initialUser,
-		initialRoles,
-		initialSessions,
-		initialIsAttendee,
-		initialVenues,
-		initialSessionTypes,
-		initialPages
-	} = props;
-
+const ViewEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { user } = useUser(initialUser);
-	const { isOrganizer } = useIsOrganizerQuery(String(eid), initialIsOrganizer);
-	const { isAttendee } = useIsAttendeeQuery(String(eid), initialIsAttendee);
-	const { sessionsData, sessionsError } = useSessionsQuery(String(eid), {
-		initialData: initialSessions
-	});
-	const { event, eventError } = useEventQuery(String(eid), initialEvent);
-	const { roles, rolesError } = useRolesQuery(String(eid), initialRoles);
-	const { venues, venuesError } = useVenuesQuery(String(eid), initialVenues);
-	const { sessionTypesError, sessionTypes } = useSessionTypesQuery(
-		String(eid),
-		initialSessionTypes
-	);
-	const { pages } = usePagesQuery(String(eid), {
-		initialData: initialPages
-	});
+	const { user } = useUser();
+	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { isAttendee } = useIsAttendeeQuery(String(eid));
+	const { sessionsData, sessionsError } = useSessionsQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
+	const { roles, rolesError } = useRolesQuery(String(eid));
+	const { venues, venuesError } = useVenuesQuery(String(eid));
+	const { sessionTypesError, sessionTypes } = useSessionTypesQuery(String(eid));
+	const { pages } = usePagesQuery(String(eid));
 
 	if (rolesError || eventError || sessionsError || venuesError || sessionTypesError) {
 		return (
@@ -92,7 +50,7 @@ const ViewEventPage: NextPage<Props> = (props) => {
 		);
 	}
 
-	if (event?.privacy === 'PRIVATE' && !isOrganizer) {
+	if (event && user && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {
 		return <PrivatePage />;
 	}
 
@@ -275,35 +233,6 @@ const ViewEventPage: NextPage<Props> = (props) => {
 			<Footer color={event?.color} />
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { eid } = context.query;
-
-	const initialUser = (await ssrGetUser(context.req)) ?? undefined;
-	const initialEvent = (await getEvent(String(eid))) ?? undefined;
-	const initialSessions = (await getSessions(String(eid))) ?? undefined;
-	const initialSessionTypes = (await getSessionTypes(String(eid))) ?? undefined;
-	const initialRoles = (await getRoles(String(eid))) ?? undefined;
-	const initialVenues = (await getVenues(String(eid))) ?? undefined;
-	const initialIsOrganizer = (await getIsOrganizer(initialUser?.id, String(eid))) ?? undefined;
-	const initialIsAttendee =
-		(await getIsAttendee({ eid: String(eid), userId: String(initialUser?.id) })) ?? undefined;
-	const initialPages = (await getPages(String(eid))) ?? undefined;
-
-	return {
-		props: {
-			initialEvent,
-			initialUser,
-			initialIsOrganizer,
-			initialIsAttendee,
-			initialRoles,
-			initialSessions,
-			initialVenues,
-			initialSessionTypes,
-			initialPages
-		}
-	};
 };
 
 export default ViewEventPage;
