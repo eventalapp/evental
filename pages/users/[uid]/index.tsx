@@ -6,7 +6,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import parse from 'html-react-parser';
 import type { NextPage } from 'next';
-import { GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -20,19 +19,13 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/typography/Heading';
 import { useUserQuery } from '../../../hooks/queries/useUserQuery';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
-import { getUser } from '../../api/users/[uid]';
 
-type Props = {
-	initialViewingUser: PasswordlessUser | undefined;
-};
-
-const ViewSessionPage: NextPage<Props> = (props) => {
-	const { initialViewingUser } = props;
+const ViewSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { uid } = router.query;
-	const { user, isUserLoading } = useUserQuery(String(uid), initialViewingUser);
+	const { user, isUserLoading } = useUserQuery(String(uid));
 
+	// TODO: skeleton impl
 	if (isUserLoading) {
 		return <LoadingPage />;
 	}
@@ -132,18 +125,6 @@ const ViewSessionPage: NextPage<Props> = (props) => {
 			</Column>
 		</PageWrapper>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
-	const { uid } = context.query;
-
-	const initialViewingUser = (await getUser(String(uid))) ?? undefined;
-
-	return {
-		props: {
-			initialViewingUser
-		}
-	};
 };
 
 export default ViewSessionPage;
