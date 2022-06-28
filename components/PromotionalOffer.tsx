@@ -28,11 +28,13 @@ export const PromotionalOffer = () => {
 						Promotional Offer!
 					</p>
 					{sale.percentage > 0 && (
-						<p className="text-gray-700 text-sm">{sale.percentage}% off until August 31st, 2022.</p>
+						<p className="text-gray-700 text-sm">
+							{sale.percentage}% off until October 31st, 2022.
+						</p>
 					)}
 					{sale.flatAmount > 0 && (
 						<span className="text-gray-700 text-sm">
-							${sale.flatAmount} off until August 31st, 2022.
+							${sale.flatAmount} off until October 31st, 2022.
 						</span>
 					)}
 				</div>
