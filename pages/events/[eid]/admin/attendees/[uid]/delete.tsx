@@ -4,11 +4,9 @@ import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
 import { DeleteAttendeeForm } from '../../../../../../components/attendees/DeleteAttendeeForm';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -27,18 +25,8 @@ const DeleteAttendeePage: NextPage = () => {
 	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
 	const { adminDeleteAttendeeMutation } = useAdminDeleteAttendeeMutation(String(eid), String(uid));
 	const { user, isUserLoading } = useUser();
-	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-
-	if (
-		isOrganizerLoading ||
-		isAttendeeLoading ||
-		isUserLoading ||
-		isEventLoading ||
-		isRolesLoading
-	) {
-		return <LoadingPage />;
-	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -48,15 +36,11 @@ const DeleteAttendeePage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!attendee) {
+	if (attendeeError) {
 		return <NotFoundPage message="Attendee not found" />;
 	}
 
-	if (attendeeError) {
-		return <ViewErrorPage errors={[attendeeError]} />;
-	}
-
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -66,12 +50,14 @@ const DeleteAttendeePage: NextPage = () => {
 				<title>Delete Attendee</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
-				<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
-					You are about to delete an attendee ("{attendee.user.name}")
-				</p>
+				{attendee && (
+					<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
+						You are about to delete an attendee ("{attendee.user.name}")
+					</p>
+				)}
 
 				<Heading>Delete Attendee</Heading>
 

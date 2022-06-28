@@ -3,11 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
-import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -28,20 +26,9 @@ const DeleteRolePage: NextPage = () => {
 	const { roleError, role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
 	const { deleteRoleMutation } = useDeleteRoleMutation(String(eid), String(rid));
 	const { user, isUserLoading } = useUser();
-	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 	const { attendeesData, isAttendeesLoading } = useAttendeesByRoleQuery(String(eid), String(rid));
-
-	if (
-		isOrganizerLoading ||
-		isRoleLoading ||
-		isUserLoading ||
-		isEventLoading ||
-		isRolesLoading ||
-		isAttendeesLoading
-	) {
-		return <LoadingPage />;
-	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -51,15 +38,11 @@ const DeleteRolePage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!role || !attendeesData) {
+	if (roleError) {
 		return <NotFoundPage message="Role not found." />;
 	}
 
-	if (roleError) {
-		return <ViewErrorPage errors={[roleError]} />;
-	}
-
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -69,22 +52,27 @@ const DeleteRolePage: NextPage = () => {
 				<title>Delete Role</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
-				<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
-					You are about to delete a role ("{role.name}")
-				</p>
+				{role && (
+					<p className="mb-4 block rounded-md bg-red-500 py-3 px-5 font-medium text-white">
+						You are about to delete a role ("{role.name}")
+					</p>
+				)}
 
 				<Heading>Delete Role</Heading>
 
-				<DeleteRoleForm
-					role={role}
-					roleError={roleError}
-					deleteRoleMutation={deleteRoleMutation}
-					isRoleLoading={isRoleLoading}
-					attendees={attendeesData}
-				/>
+				{/*TODO: Skeletonize*/}
+				{attendeesData && (
+					<DeleteRoleForm
+						role={role}
+						roleError={roleError}
+						deleteRoleMutation={deleteRoleMutation}
+						isRoleLoading={isRoleLoading}
+						attendees={attendeesData}
+					/>
+				)}
 			</Column>
 
 			<Footer color={event?.color} />

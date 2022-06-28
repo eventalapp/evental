@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
 import { ViewAttendee } from '../../../../../../components/attendees/ViewAttendee';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
@@ -26,10 +25,6 @@ const ViewAttendeePage: NextPage = () => {
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { user } = useUser();
 
-	if (isAttendeeLoading || isOrganizerLoading || isEventLoading || isRolesLoading) {
-		return <LoadingPage />;
-	}
-
 	if (!isOrganizer) {
 		return <NoAccessPage />;
 	}
@@ -42,7 +37,7 @@ const ViewAttendeePage: NextPage = () => {
 		return <NotFoundPage />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -52,7 +47,7 @@ const ViewAttendeePage: NextPage = () => {
 				<title>Viewing Attendee</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<ViewAttendee admin attendee={attendee} eid={String(eid)} uid={String(uid)} />

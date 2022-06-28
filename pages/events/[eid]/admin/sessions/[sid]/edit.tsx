@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
@@ -16,7 +15,6 @@ import { Heading } from '../../../../../../components/typography/Heading';
 import { useEditSessionMutation } from '../../../../../../hooks/mutations/useEditSessionMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
 import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
 import { useSessionRoleAttendeesQuery } from '../../../../../../hooks/queries/useSessionRoleAttendeesQuery';
 import { useSessionTypesQuery } from '../../../../../../hooks/queries/useSessionTypesQuery';
@@ -32,22 +30,10 @@ const EditSessionPage: NextPage = () => {
 	const { session, isSessionLoading, sessionError } = useSessionQuery(String(eid), String(sid));
 	const { editSessionMutation } = useEditSessionMutation(String(eid), String(sid));
 	const { user, isUserLoading } = useUser();
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 	const { sessionTypes, isSessionTypesLoading, sessionTypesError } = useSessionTypesQuery(
 		String(eid)
 	);
 	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
-
-	if (
-		isRolesLoading ||
-		isVenuesLoading ||
-		isEventLoading ||
-		isUserLoading ||
-		isOrganizerLoading ||
-		isSessionTypesLoading
-	) {
-		return <LoadingPage />;
-	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -69,7 +55,7 @@ const EditSessionPage: NextPage = () => {
 		return <ViewErrorPage errors={[venuesError, eventError, sessionTypesError]} />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -79,7 +65,7 @@ const EditSessionPage: NextPage = () => {
 				<title>Edit Session</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<Heading>Edit Session</Heading>

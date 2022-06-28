@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 import { Footer } from '../../../../../components/Footer';
 import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
-import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
@@ -26,20 +25,9 @@ const AttendeesAdminPage: NextPage = () => {
 	const { eid } = router.query;
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { attendeesData, isAttendeesLoading } = useAttendeesQuery(String(eid));
-	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { event, eventError } = useEventQuery(String(eid));
 	const { user, isUserLoading } = useUser();
 	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-
-	if (
-		isAttendeesLoading ||
-		isAttendeesLoading ||
-		isUserLoading ||
-		isOrganizerLoading ||
-		isEventLoading ||
-		isRolesLoading
-	) {
-		return <LoadingPage />;
-	}
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -49,12 +37,8 @@ const AttendeesAdminPage: NextPage = () => {
 		return <NoAccessPage />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
-	}
-
-	if (!attendeesData) {
-		return <NotFoundPage message="Attendees not found." />;
 	}
 
 	return (
@@ -63,15 +47,12 @@ const AttendeesAdminPage: NextPage = () => {
 				<title>Edit Attendees</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<div>
 					<FlexRowBetween>
-						<Heading>
-							Attendees{' '}
-							<span className="font-normal text-gray-500">({attendeesData.length || 0})</span>
-						</Heading>
+						<Heading>Attendees</Heading>
 
 						<IconLinkTooltip
 							message="Click to create an attendee"

@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
@@ -36,10 +35,6 @@ const ViewSessionPage: NextPage = () => {
 	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
 	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
 
-	if (isOrganizerLoading || isSessionLoading || isRolesLoading || isEventLoading) {
-		return <LoadingPage />;
-	}
-
 	if (!session) {
 		return <NotFoundPage message="Session not found." />;
 	}
@@ -48,7 +43,7 @@ const ViewSessionPage: NextPage = () => {
 		return <ViewErrorPage errors={[sessionError, eventError, rolesError]} />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -62,7 +57,7 @@ const ViewSessionPage: NextPage = () => {
 				<title>Viewing Session</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
 				<ViewSession

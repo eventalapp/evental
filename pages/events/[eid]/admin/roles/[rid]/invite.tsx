@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../../components/Footer';
-import { LoadingPage } from '../../../../../../components/error/LoadingPage';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
@@ -31,15 +30,11 @@ const InviteRolePage: NextPage = () => {
 	const { inviteRoleMutation } = useInviteRoleMutation(String(eid), String(rid));
 	const { role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
 
-	if (isEventLoading || isUserLoading || isOrganizerLoading || isRolesLoading || isRoleLoading) {
-		return <LoadingPage />;
-	}
-
 	if (!user?.id) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
@@ -61,7 +56,7 @@ const InviteRolePage: NextPage = () => {
 				<title>Invite Role</title>
 			</Head>
 
-			<EventSettingsNavigation event={event} roles={roles} user={user} />
+			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column variant="halfWidth">
 				<FlexRowBetween>

@@ -1,18 +1,20 @@
-import Prisma from '@prisma/client';
 import React, { useState } from 'react';
 
 import { useSignOutMutation } from '../../../hooks/mutations/useSignOutMutation';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { useEventQuery } from '../../../hooks/queries/useEventQuery';
+import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../hooks/queries/useUser';
 import { SettingsAuthenticated } from './Authenticated';
 
 type Props = {
-	event: Prisma.Event | undefined;
-	roles: Prisma.EventRole[] | undefined;
-	user: PasswordlessUser | undefined;
+	eid: string;
 };
 
 export const EventSettingsNavigation: React.FC<Props> = (props) => {
-	const { roles, event, user, ...restProps } = props;
+	const { eid, ...restProps } = props;
+	const { user } = useUser();
+	const { event } = useEventQuery(eid);
+	const { roles } = useRolesQuery(eid);
 	const [isOpen, setIsOpen] = useState(false);
 	const { signOutMutation } = useSignOutMutation();
 
