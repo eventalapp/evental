@@ -86,7 +86,7 @@ const AttendeesAdminPage: NextPage = () => {
 				</div>
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

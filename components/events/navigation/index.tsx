@@ -1,15 +1,17 @@
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Prisma from '@prisma/client';
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu';
 import { default as classNames } from 'classnames';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useSignOutMutation } from '../../../hooks/mutations/useSignOutMutation';
+import { useEventQuery } from '../../../hooks/queries/useEventQuery';
+import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
+import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
+import { useUser } from '../../../hooks/queries/useUser';
 import { faBarsSquare } from '../../../icons';
 import { capitalizeFirstLetter } from '../../../utils/string';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
 import { FullscreenLinkItem } from '../../navigation/FullscreenLinkItem';
 import { LinkItem } from '../../navigation/LinkItem';
 import { LogoLinkItem } from '../../navigation/LogoLinkItem';
@@ -17,16 +19,17 @@ import { NavigationWrapper } from '../../navigation/NavigationWrapper';
 import { ProfileDropdown } from '../../radix/components/ProfileDropdown';
 
 type Props = {
-	event?: Prisma.Event;
-	roles?: Prisma.EventRole[];
-	pages?: Prisma.EventPage[];
-	user?: PasswordlessUser;
+	eid: string;
 };
 
 export const EventNavigation: React.FC<Props> = (props) => {
-	const { roles, event, user, pages } = props;
+	const { eid } = props;
 	const [isOpen, setIsOpen] = useState(false);
 	const { signOutMutation } = useSignOutMutation();
+	const { user, isUserLoading } = useUser();
+	const { event } = useEventQuery(String(eid));
+	const { roles } = useRolesQuery(String(eid));
+	const { pages } = usePagesQuery(String(eid));
 
 	return (
 		<div>
@@ -111,7 +114,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 								{user ? (
 									<ProfileDropdown user={user} signOutMutation={signOutMutation} />
 								) : (
-									<Skeleton className="h-10 w-10" />
+									isUserLoading && <Skeleton className="h-10 w-10" />
 								)}
 							</div>
 						</div>
@@ -202,7 +205,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 						{event && pages ? (
 							pages
 								.filter((page) => page.topLevel)
-								.map((page, i) => (
+								.map((page) => (
 									<FullscreenLinkItem
 										key={page.id}
 										link={`/events/${event.slug}/pages/${page.slug}`}

@@ -58,7 +58,7 @@ const ViewPagePage: NextPage = () => {
 				<ViewPage admin page={page} eid={String(eid)} pid={String(pid)} />
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

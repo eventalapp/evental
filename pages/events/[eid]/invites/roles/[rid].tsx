@@ -1,9 +1,10 @@
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
+import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { Footer } from '../../../../../components/Footer';
-import { LoadingPage } from '../../../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
@@ -22,50 +23,48 @@ import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
 
 const RoleInvitePage: NextPage = () => {
 	const router = useRouter();
-	const { user, isUserLoading } = useUser();
+	const { user } = useUser();
 	const { eid, rid, code } = router.query;
 	const { acceptRoleInviteMutation } = useAcceptRoleInviteMutation(String(eid), String(rid));
-	const { role, isRoleLoading } = useRoleQuery(String(eid), String(rid));
-	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { role, roleError } = useRoleQuery(String(eid), String(rid));
+	const { event, eventError } = useEventQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-
-	if (isUserLoading || isRoleLoading || isOrganizerLoading || isEventLoading) {
-		return <LoadingPage />;
-	}
 
 	if (!user) {
 		return <UnauthorizedPage />;
 	}
 
-	if (!role) {
+	if (roleError) {
 		return <NotFoundPage message="Role not found" />;
 	}
 
-	if (!event) {
+	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
 	}
 
-	if (event.privacy === 'PRIVATE' && !isOrganizer) {
+	if (event && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {
 		return <PrivatePage />;
 	}
 
 	return (
 		<PageWrapper>
-			<NextSeo
-				title={`Accept ${role.name} Invite`}
-				additionalLinkTags={[
-					{
-						rel: 'icon',
-						href: `https://cdn.evental.app${event.image}`
-					}
-				]}
-			/>
+			{role && event && (
+				<NextSeo
+					title={`Accept ${role.name} Invite`}
+					additionalLinkTags={[
+						{
+							rel: 'icon',
+							href: `https://cdn.evental.app${event.image}`
+						}
+					]}
+				/>
+			)}
 
 			<Navigation />
 
 			<Column variant="halfWidth">
 				<FlexRowBetween>
-					<Heading>Accept {role.name} Invite</Heading>
+					<Heading>{role ? `Accept ${role.name} Invite` : <Skeleton className="w-full" />}</Heading>
 				</FlexRowBetween>
 
 				<p className="mb-2 text-base text-gray-700">
@@ -88,7 +87,7 @@ const RoleInvitePage: NextPage = () => {
 				</div>
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

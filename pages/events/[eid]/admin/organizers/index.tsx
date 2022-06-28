@@ -85,7 +85,7 @@ const EventOrganizersPage: NextPage = () => {
 				<AttendeeList attendees={organizers} eid={String(eid)} admin />
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

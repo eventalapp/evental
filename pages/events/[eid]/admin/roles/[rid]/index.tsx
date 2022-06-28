@@ -66,7 +66,7 @@ const ViewAttendeePage: NextPage = () => {
 				<ViewRole attendees={attendeesData} eid={String(eid)} rid={String(rid)} role={role} admin />
 			</Column>
 
-			<Footer color={event.color} />
+			<Footer color={event?.color} />
 		</PageWrapper>
 	);
 };

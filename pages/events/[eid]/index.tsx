@@ -10,8 +10,8 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { Footer } from '../../../components/Footer';
+import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
-import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../components/events/EventHeader';
 import { SessionDatePicker } from '../../../components/events/SessionDatePicker';
 import { EventNavigation } from '../../../components/events/navigation';
@@ -22,8 +22,6 @@ import { SessionList } from '../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useIsAttendeeQuery } from '../../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
-import { usePagesQuery } from '../../../hooks/queries/usePagesQuery';
-import { useRolesQuery } from '../../../hooks/queries/useRolesQuery';
 import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
 import { useUser } from '../../../hooks/queries/useUser';
@@ -35,22 +33,16 @@ const ViewEventPage: NextPage = () => {
 	const { user } = useUser();
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { isAttendee } = useIsAttendeeQuery(String(eid));
-	const { sessionsData, sessionsError } = useSessionsQuery(String(eid));
+	const { sessionsData } = useSessionsQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
-	const { roles, rolesError } = useRolesQuery(String(eid));
-	const { venues, venuesError } = useVenuesQuery(String(eid));
-	const { sessionTypesError, sessionTypes } = useSessionTypesQuery(String(eid));
-	const { pages } = usePagesQuery(String(eid));
+	const { venues } = useVenuesQuery(String(eid));
+	const { sessionTypes } = useSessionTypesQuery(String(eid));
 
-	if (rolesError || eventError || sessionsError || venuesError || sessionTypesError) {
-		return (
-			<ViewErrorPage
-				errors={[rolesError, eventError, sessionsError, venuesError, sessionTypesError]}
-			/>
-		);
+	if (eventError) {
+		return <NotFoundPage message="Event not found." />;
 	}
 
-	if (event && user && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {
+	if (event && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {
 		return <PrivatePage />;
 	}
 
@@ -100,7 +92,7 @@ const ViewEventPage: NextPage = () => {
 				/>
 			)}
 
-			<EventNavigation event={event} roles={roles} user={user} pages={pages} />
+			<EventNavigation eid={String(eid)} />
 
 			<Column>
 				<EventHeader

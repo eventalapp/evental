@@ -1,20 +1,22 @@
 import { useRouter } from 'next/router';
-import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { UseCreateSessionAttendeeMutationData } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
-import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
+import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
+import { useUser } from '../../hooks/queries/useUser';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseSessionQueryData &
-	UseCreateSessionAttendeeMutationData;
+type Props = { eid: string; sid: string };
 
 export const CreateSessionAttendeeForm: React.FC<Props> = (props) => {
+	const { eid, sid } = props;
 	const router = useRouter();
-	const { createSessionAttendeeMutation } = props;
 	const { handleSubmit } = useForm();
+	const { user } = useUser();
+	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(eid, sid, user?.id, {
+		redirectUrl: `/events/${eid}/sessions/${sid}`
+	});
 
 	return (
 		<form
