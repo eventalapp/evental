@@ -80,7 +80,7 @@ const AttendingEventsPage: NextPage = () => {
 			<Navigation />
 
 			<Column>
-				<h1 className="mb-3 text-center text-2xl font-bold md:text-3xl">Attending Events</h1>
+				<Heading className="text-center mb-4">Attending Events</Heading>
 
 				<EventsPageNavigation />
 
