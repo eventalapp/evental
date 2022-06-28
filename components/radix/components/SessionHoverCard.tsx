@@ -14,10 +14,11 @@ import { htmlToText } from 'html-to-text';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { useIsSessionAttendeeQuery } from '../../../hooks/queries/useIsSessionAttendeeQuery';
-import { faCalendarCirclePlus, faSpinnerThird } from '../../../icons';
+import { faCalendarCirclePlus } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../../utils/formatDateRange';
 import { PasswordlessUser } from '../../../utils/stripUserPassword';
@@ -50,12 +51,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 	if (isSessionAttendeeLoading) {
 		return (
 			<div>
-				<FontAwesomeIcon
-					fill="currentColor"
-					className="h-6 w-6 animate-spin"
-					size="1x"
-					icon={faSpinnerThird}
-				/>
+				<Skeleton className="w-6 h-6" />
 			</div>
 		);
 	}
