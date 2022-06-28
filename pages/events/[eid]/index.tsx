@@ -1,5 +1,3 @@
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs from 'dayjs';
 import { htmlToText } from 'html-to-text';
 import type { NextPage } from 'next';
@@ -135,34 +133,28 @@ const ViewEventPage: NextPage = () => {
 								<ul className="space-y-1">
 									{event && sessionTypes ? (
 										sessionTypes.map((sessionType) => (
-											<li className="block group" key={sessionType.id}>
-												<Tooltip
-													message={`Click to view all sessions occurring with the ${sessionType.name} session category`}
-													side="left"
-													sideOffset={6}
-												>
-													<div>
-														<Link href={`/events/${event.slug}/sessions/types/${sessionType.slug}`}>
-															<a className="inline-flex justify-between w-full">
+											<li key={sessionType.id}>
+												<Link href={`/events/${event.slug}/sessions/types/${sessionType.slug}`}>
+													<a>
+														<Tooltip
+															message={`Click to view all sessions occurring with the ${sessionType.name} session category`}
+															side="left"
+															sideOffset={6}
+														>
+															<div className="inline-block">
 																<div className="flex flex-row items-center justify-center">
 																	<div
 																		className="mr-2 h-3 w-3 rounded-full"
 																		style={{ backgroundColor: sessionType.color ?? '#888888' }}
 																	/>
-																	<span className="transition-all duration-100 group-hover:text-gray-900">
+																	<span className="transition-all duration-100 hover:text-gray-900">
 																		{sessionType.name}
 																	</span>
 																</div>
-																<FontAwesomeIcon
-																	fill="currentColor"
-																	size="1x"
-																	className="h-5 w-5 text-gray-700 opacity-0 group-hover:opacity-100 -mr-5 group-hover:-mr-0 transition-all duration-100"
-																	icon={faArrowRight}
-																/>
-															</a>
-														</Link>
-													</div>
-												</Tooltip>
+															</div>
+														</Tooltip>
+													</a>
+												</Link>
 											</li>
 										))
 									) : (
@@ -184,28 +176,22 @@ const ViewEventPage: NextPage = () => {
 								<ul className="space-y-1">
 									{event && venues ? (
 										venues.map((venue) => (
-											<li className="block group" key={venue.id}>
-												<Tooltip
-													message={`Click to view all sessions occurring at the ${venue.name} venue`}
-													side="left"
-													sideOffset={6}
-												>
-													<div>
-														<Link href={`/events/${event.slug}/venues/${venue.slug}`} passHref>
-															<a className="inline-flex justify-between w-full">
-																<span className="transition-all duration-100 group-hover:text-gray-900">
+											<li key={venue.id}>
+												<Link href={`/events/${event.slug}/venues/${venue.slug}`} passHref>
+													<a>
+														<Tooltip
+															message={`Click to view all sessions occurring at the ${venue.name} venue`}
+															side="left"
+															sideOffset={6}
+														>
+															<div className="inline-block">
+																<span className="transition-all duration-100 hover:text-gray-900">
 																	{venue.name}
 																</span>
-																<FontAwesomeIcon
-																	fill="currentColor"
-																	size="1x"
-																	className="h-5 w-5 text-gray-700 opacity-0 group-hover:opacity-100 -mr-5 group-hover:-mr-0 transition-all duration-100"
-																	icon={faArrowRight}
-																/>
-															</a>
-														</Link>
-													</div>
-												</Tooltip>
+															</div>
+														</Tooltip>
+													</a>
+												</Link>
 											</li>
 										))
 									) : (
