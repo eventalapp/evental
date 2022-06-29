@@ -54,8 +54,7 @@ export default api({
 				name: 'Attendee',
 				slug: 'attendee',
 				eventId: String(event.id),
-				defaultRole: true,
-				tinyImage: true
+				defaultRole: true
 			}
 		});
 
