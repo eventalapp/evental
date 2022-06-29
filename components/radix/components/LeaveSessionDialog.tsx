@@ -10,13 +10,14 @@ interface Props {
 	eventSlug: string;
 	sessionSlug: string;
 	userSlug: string;
+	redirect?: boolean;
 }
 
 export const LeaveSessionDialog: React.FC<Props> = (props) => {
-	const { eventSlug, userSlug, sessionSlug, children } = props;
+	const { eventSlug, userSlug, sessionSlug, children, redirect } = props;
 	let [isOpen, setIsOpen] = useState(false);
 
-	const leaveSessionMutation = useLeaveSession(eventSlug, sessionSlug, userSlug);
+	const leaveSessionMutation = useLeaveSession(eventSlug, sessionSlug, userSlug, { redirect });
 
 	return (
 		<AlertDialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>

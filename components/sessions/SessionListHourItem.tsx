@@ -6,7 +6,6 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
 import { SessionHoverCard } from '../radix/components/SessionHoverCard';
 import Tooltip from '../radix/components/Tooltip';
 
@@ -15,12 +14,11 @@ type SessionListHourItemProps = {
 	admin?: boolean;
 	sessions: SessionWithVenue[];
 	event: Prisma.Event;
-	user: PasswordlessUser | undefined;
 	hour: string;
 };
 
 export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) => {
-	const { eid, sessions, event, admin = false, user, hour } = props;
+	const { eid, sessions, event, admin = false, hour } = props;
 
 	return (
 		<div className="flex flex-row">
@@ -30,13 +28,7 @@ export const SessionListHourItem: React.FC<SessionListHourItemProps> = (props) =
 			<div className="w-full">
 				{sessions && event ? (
 					sessions.map((session) => (
-						<SessionHoverCard
-							user={user}
-							admin={admin}
-							session={session}
-							event={event}
-							key={session.id}
-						>
+						<SessionHoverCard admin={admin} session={session} event={event} key={session.id}>
 							<div className="mr-2 mb-2 inline-block">
 								<Link href={`/events/${eid}${admin ? '/admin' : ''}/sessions/${session.slug}`}>
 									<a className="inline-block">

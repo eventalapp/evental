@@ -18,6 +18,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import { useCreateSessionAttendeeMutation } from '../../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { useIsSessionAttendeeQuery } from '../../../hooks/queries/useIsSessionAttendeeQuery';
+import { useUser } from '../../../hooks/queries/useUser';
 import { faCalendarCirclePlus } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../../utils/formatDateRange';
@@ -30,13 +31,13 @@ interface Props {
 	event: Prisma.Event;
 	session: SessionWithVenue;
 	admin?: boolean;
-	user: PasswordlessUser | undefined;
+	redirect?: boolean;
 }
 
-type AttendThisSessionProps = Props;
+type AttendThisSessionProps = Props & { user: PasswordlessUser | undefined };
 
 const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
-	const { event, session, user } = props;
+	const { event, session, redirect, user } = props;
 
 	const { isSessionAttendee, isSessionAttendeeLoading } = useIsSessionAttendeeQuery(
 		event.slug,
@@ -81,6 +82,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 				eventSlug={event.slug}
 				sessionSlug={session.slug}
 				userSlug={String(user.slug)}
+				redirect={redirect}
 			>
 				<div className="flex items-center justify-center">
 					<Tooltip side={'right'} message={'Leave this session'}>
@@ -102,7 +104,8 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 };
 
 export const SessionHoverCard: React.FC<Props> = (props) => {
-	const { children, session, event, admin, user } = props;
+	const { user } = useUser();
+	const { children, session, event, admin, redirect = true } = props;
 
 	const descriptionAsText = htmlToText(session.description ?? '');
 
@@ -142,7 +145,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 							</div>
 						</Tooltip>
 
-						<AttendThisSession event={event} session={session} user={user} />
+						<AttendThisSession event={event} session={session} user={user} redirect={redirect} />
 					</div>
 
 					<h3 className="text-lg font-bold leading-[1.3] tracking-tight md:text-xl">

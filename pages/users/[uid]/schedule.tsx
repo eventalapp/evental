@@ -59,7 +59,7 @@ const ViewSessionPage: NextPage = () => {
 					)}
 				</FlexRowBetween>
 
-				<SessionWithEventList sessions={sessionsByUserData} user={user} />
+				<SessionWithEventList sessions={sessionsByUserData} />
 			</Column>
 		</PageWrapper>
 	);
