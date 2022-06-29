@@ -30,8 +30,7 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 		formState: { errors }
 	} = useForm<CreateRolePayload>({
 		defaultValues: {
-			defaultRole: false,
-			tinyImage: false
+			defaultRole: false
 		},
 		resolver: zodResolver(CreateRoleSchema)
 	});
@@ -68,24 +67,6 @@ export const CreateRoleForm: React.FC<Props> = (props) => {
 					{errors.defaultRole?.message && (
 						<ErrorMessage>{errors.defaultRole?.message}</ErrorMessage>
 					)}
-				</div>
-				<div className="ml-5 flex-initial">
-					<Label htmlFor="tinyImage">
-						Tiny Image <HelpTooltip message={copy.tooltip.tinyImage} />
-					</Label>
-					<Controller
-						control={control}
-						name="tinyImage"
-						render={({ field }) => (
-							<Switch
-								checked={field.value}
-								onCheckedChange={(checked) => {
-									field.onChange(checked);
-								}}
-							/>
-						)}
-					/>
-					{errors.tinyImage?.message && <ErrorMessage>{errors.tinyImage?.message}</ErrorMessage>}
 				</div>
 			</div>
 

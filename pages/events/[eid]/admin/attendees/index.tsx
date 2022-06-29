@@ -17,17 +17,15 @@ import { Heading } from '../../../../../components/typography/Heading';
 import { useAttendeesQuery } from '../../../../../hooks/queries/useAttendeesQuery';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
 
 const AttendeesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { attendeesData, isAttendeesLoading } = useAttendeesQuery(String(eid));
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { attendeesData } = useAttendeesQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
-	const { user, isUserLoading } = useUser();
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { user } = useUser();
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -63,7 +61,7 @@ const AttendeesAdminPage: NextPage = () => {
 						/>
 					</FlexRowBetween>
 
-					<AttendeeList admin eid={String(eid)} attendees={attendeesData} tiny />
+					<AttendeeList admin eid={String(eid)} attendees={attendeesData} />
 				</div>
 			</Column>
 

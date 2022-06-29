@@ -100,16 +100,14 @@ export type EditVenuePayload = z.infer<typeof EditVenueSchema>;
 
 export const CreateRoleSchema = z.object({
 	name: nameValidator,
-	defaultRole: z.boolean(),
-	tinyImage: z.boolean()
+	defaultRole: z.boolean()
 });
 
 export type CreateRolePayload = z.infer<typeof CreateRoleSchema>;
 
 export const EditRoleSchema = z.object({
 	name: nameValidator,
-	defaultRole: z.boolean(),
-	tinyImage: z.boolean()
+	defaultRole: z.boolean()
 });
 
 export type EditRolePayload = z.infer<typeof EditRoleSchema>;
