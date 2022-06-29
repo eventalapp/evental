@@ -22,10 +22,7 @@ export const EventList: React.FC<Props> = (props) => {
 		<div className={classNames(className)}>
 			{events
 				? events.map((event, i) => (
-						<div
-							key={event.id}
-							className={classNames('border-gray-100', i + 1 !== events.length ? 'border-b' : null)}
-						>
+						<div key={event.id}>
 							<div className="-mx-1 rounded-md hover:bg-gray-75">
 								<Link href={`/events/${event.slug}`}>
 									<a className="block py-3">
