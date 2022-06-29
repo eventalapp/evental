@@ -48,9 +48,7 @@ const ViewSessionPage: NextPage = () => {
 
 			<Column>
 				<FlexRowBetween>
-					<Heading>
-						{user ? `${user.name}'s Schedule` : <Skeleton className="w-full max-w-xl" />}
-					</Heading>
+					<Heading>{user ? `${user.name}'s Schedule` : <Skeleton className="w-64" />}</Heading>
 
 					{user ? (
 						<Link href={`/api/users/${user.slug}/schedule/generate`}>
