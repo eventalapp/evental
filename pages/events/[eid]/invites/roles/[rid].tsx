@@ -23,14 +23,14 @@ import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
 
 const RoleInvitePage: NextPage = () => {
 	const router = useRouter();
-	const { user } = useUser();
+	const { user, isUserLoading } = useUser();
 	const { eid, rid, code } = router.query;
 	const { acceptRoleInviteMutation } = useAcceptRoleInviteMutation(String(eid), String(rid));
 	const { role, roleError } = useRoleQuery(String(eid), String(rid));
 	const { event, eventError } = useEventQuery(String(eid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
-	if (!user) {
+	if (!user && !isUserLoading) {
 		return <UnauthorizedPage />;
 	}
 

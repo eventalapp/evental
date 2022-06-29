@@ -16,14 +16,14 @@ import { useAttendingEventsQuery } from '../../hooks/queries/useAttendingEventsQ
 import { useUser } from '../../hooks/queries/useUser';
 
 const AttendingEventsPage: NextPage = () => {
-	const { user } = useUser();
+	const { user, isUserLoading } = useUser();
 	const { attendingEventsError, attendingEvents } = useAttendingEventsQuery(String(user?.id));
 
 	if (attendingEventsError) {
 		return <ViewErrorPage errors={[attendingEventsError]} />;
 	}
 
-	if (!user) {
+	if (!user && !isUserLoading) {
 		return <UnauthorizedPage />;
 	}
 
