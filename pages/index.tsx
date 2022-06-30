@@ -1,3 +1,4 @@
+import { faAddressCard, faBook, faPaintbrush, faTag } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -5,6 +6,8 @@ import React from 'react';
 
 import { EventalProCard } from '../components/EventalProCard';
 import { Footer } from '../components/Footer';
+import { Card } from '../components/cards/Card';
+import { CardGrid } from '../components/cards/CardGrid';
 import { LinkButton } from '../components/form/LinkButton';
 import { AspectImage } from '../components/guides/AspectImage';
 import Column from '../components/layout/Column';
@@ -147,8 +150,8 @@ const HomePage: NextPage = () => {
 					<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-600">
 						<span className="font-medium">Evental Pro plans</span> start at $
 						{proAttendeePricing[250].price}, and{' '}
-						<span className="font-medium">Evental Education plans</span> start at Evental Pro plans
-						start at ${eduAttendeePricing[250].price}. See the{' '}
+						<span className="font-medium">Evental Education plans</span> start at $
+						{eduAttendeePricing[250].price}. See the{' '}
 						<Link href="/pricing">
 							<a className="underline">pricing page</a>
 						</Link>{' '}
@@ -177,10 +180,10 @@ const HomePage: NextPage = () => {
 				<Column>
 					<div className="flex flex-col items-center text-white">
 						<Heading variant="sm" level={6} className="text-gray-200 mb-3">
-							BRANDING
+							EVENT MANAGEMENT
 						</Heading>
 						<Heading level={2} variant="3xl" className="mb-3">
-							Custom Event Branding
+							Transform Your Event
 						</Heading>
 						<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-200">
 							Use the Evental Organizer dashboard to customize your events branding to fit your
@@ -194,47 +197,114 @@ const HomePage: NextPage = () => {
 			<Column>
 				<div className="flex flex-col items-center">
 					<Heading variant="sm" level={6} className="text-primary mb-3">
-						ROLES
+						INTERACTIVE FEATURES
 					</Heading>
-					<Heading level={2} variant="3xl" className="mb-3">
-						Custom Attendee Roles
+					<Heading level={2} variant="3xl" className="mb-3 text-center">
+						Get the most out of your event
 					</Heading>
-					<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-600">
-						Create highly customizable roles for your attendees to categorize them into groups. You
-						are not restrained by "Speaker" or "Exhibitor" roles for your event. See{' '}
-						<Link href="/guides/role/creating-a-role">
-							<a className="underline">creating a role</a>
-						</Link>
+					<Paragraph variant="lg" className="mb-5 md:mb-10 max-w-3xl text-center text-gray-600">
+						Evental is the only platform you'll ever need to setup, manage, attend, and review
+						events. We've built a platform that's simple, easy to use, and powerful.
 					</Paragraph>
+					<CardGrid>
+						<div className="relative">
+							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
+								<div className="absolute top-[50px] h-32 w-full overflow-visible sm:top-[70px]">
+									<div className="bloom small bloom-one left-[10%]" />
+									<div className="bloom small bloom-two right-[10%]" />
+								</div>
+							</div>
+							<Card
+								header="Attendee Roles"
+								icon={faTag}
+								iconWrapperClassName="text-blue-600 bg-blue-200"
+								className="relative"
+								body={
+									<>
+										Create highly customizable roles for your attendees to categorize them into
+										groups. You are not restrained by "Speaker" or "Exhibitor" roles for your event.
+										See{' '}
+										<Link href="/guides/role/creating-a-role">
+											<a className="underline">creating a role</a>
+										</Link>
+									</>
+								}
+							/>
+						</div>
+						<div className="relative">
+							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
+								<div className="absolute top-[50px] h-32 w-full overflow-visible sm:top-[70px]">
+									<div className="bloom small bloom-one left-[10%]" />
+									<div className="bloom small bloom-two right-[10%]" />
+								</div>
+							</div>
+							<Card
+								header="Guides & Documentation"
+								icon={faBook}
+								iconWrapperClassName="text-green-600 bg-green-200"
+								className="relative"
+								body={
+									<>
+										If you are in need of assistance, first see{' '}
+										<Link href="/guides">
+											<a className="underline">our guides</a>
+										</Link>
+										. After reading the guides, If you are still in need of help you may{' '}
+										<Link href="/contact">
+											<a className="underline">contact us</a>
+										</Link>
+										. We are more than happy to help you setup your event or answer any questions
+										you may have.
+									</>
+								}
+							/>
+						</div>
+						<div className="relative">
+							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
+								<div className="absolute top-[50px] h-32 w-full overflow-visible sm:top-[70px]">
+									<div className="bloom small bloom-one left-[10%]" />
+									<div className="bloom small bloom-two right-[10%]" />
+								</div>
+							</div>
+							<Card
+								header="Event Branding"
+								icon={faPaintbrush}
+								iconWrapperClassName="text-purple-600 bg-purple-200"
+								className="relative"
+								body={
+									<>
+										Use the Evental Organizer dashboard to customize your events branding to fit
+										your organizations needs. You can customize your event color/branding, logo, and
+										more. Set links to your website, social media, and more for all of your
+										attendees to see.
+									</>
+								}
+							/>
+						</div>
+						<div className="relative">
+							<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
+								<div className="absolute top-[50px] h-32 w-full overflow-visible sm:top-[70px]">
+									<div className="bloom small bloom-one left-[10%]" />
+									<div className="bloom small bloom-two right-[10%]" />
+								</div>
+							</div>
+							<Card
+								header="Attendee Experience"
+								icon={faAddressCard}
+								iconWrapperClassName="text-orange-600 bg-orange-200"
+								className="relative"
+								body={
+									<>
+										Attendees will have access to a user settings dashboard, where they can build
+										out a customizable profile to include their location, job title, website, and a
+										custom biography.
+									</>
+								}
+							/>
+						</div>
+					</CardGrid>
 				</div>
 			</Column>
-
-			<div className="bg-primary-600">
-				<Column>
-					<div className="flex flex-col items-center text-white">
-						<Heading variant="sm" level={6} className="text-gray-200 mb-3">
-							SUPPORT
-						</Heading>
-						<Heading level={2} variant="3xl" className="mb-3">
-							Guides & Documentation
-						</Heading>
-						<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-200">
-							If you are in need of assistance, first see{' '}
-							<Link href="/guides">
-								<a className="underline">our guides</a>
-							</Link>
-							. We have a collection of guides that will help you navigate the Evental organizer
-							dashboard and manage your event. After reading the guides, If you are still in need of
-							help you may{' '}
-							<Link href="/contact">
-								<a className="underline">contact us</a>
-							</Link>
-							. We are more than happy to help you setup your event or answer any questions you may
-							have.
-						</Paragraph>
-					</div>
-				</Column>
-			</div>
 
 			<Footer />
 		</PageWrapper>
