@@ -144,7 +144,7 @@ const HomePage: NextPage = () => {
 						PRICING
 					</Heading>
 					<Heading level={2} variant="3xl" className="mb-3">
-						Competitive Pricing
+						Transparent Pricing
 					</Heading>
 
 					<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-600">
