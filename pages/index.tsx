@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 
+import { EventalProCard } from '../components/EventalProCard';
 import { Footer } from '../components/Footer';
 import { LinkButton } from '../components/form/LinkButton';
 import { AspectImage } from '../components/guides/AspectImage';
@@ -10,6 +11,8 @@ import Column from '../components/layout/Column';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
 import { Heading } from '../components/typography/Heading';
+import { Paragraph } from '../components/typography/Paragraph';
+import { eduAttendeePricing, proAttendeePricing } from '../utils/const';
 
 const HomePage: NextPage = () => {
 	return (
@@ -37,13 +40,16 @@ const HomePage: NextPage = () => {
 			<Navigation />
 
 			<Column className="flex flex-col items-center">
-				<Heading variant="4xl" className="mb-3 px-2 text-center">
+				<Heading variant="sm" level={6} className="text-primary text-center">
+					EVENT MANAGEMENT APP
+				</Heading>
+				<Heading variant="4xl" className="mb-3 mt-1 text-center">
 					Host Outstanding Events
 				</Heading>
-				<p className="mt-1 mb-6 max-w-4xl text-center text-base text-gray-600 lg:text-xl lg:leading-8">
+				<Paragraph className="mt-1 mb-6 text-center max-w-4xl text-gray-600" variant="xl">
 					Event management software that's highly intuitive. Your attendees and organizers will love
 					using Evental for your in-person, hybrid, and virtual events.
-				</p>
+				</Paragraph>
 				<div className="z-10 grid grid-cols-2 gap-3">
 					<Link href="/events/create" passHref>
 						<LinkButton variant="primary" padding="large">
@@ -77,115 +83,158 @@ const HomePage: NextPage = () => {
 
 			<div className="bg-primary-600 text-white">
 				<Column>
-					<Heading level={3}>Creating events couldn't be easier</Heading>
-					<p className="mt-3 text-base text-gray-100 md:text-lg">
+					<Heading variant="sm" level={6} className="text-gray-300 mb-3">
+						GETTING STARTED
+					</Heading>
+					<Heading level={3} className="mb-3 tracking-normal">
+						Creating events couldn't be easier
+					</Heading>
+					<Paragraph className="text-gray-100">
 						In 3 quick steps, you can get your event up and running
-					</p>
-					<div className="mt-6 grid grid-cols-1 gap-5 border-t-2 border-primary-500 pt-6 lg:grid-cols-2 xl:grid-cols-3">
+					</Paragraph>
+
+					<div className="mt-6 grid grid-cols-1 gap-7 border-t-2 border-primary-500 pt-6 lg:grid-cols-2 xl:grid-cols-3">
 						<div>
-							<span className="text-sm font-bold text-gray-300">1.</span>
-							<h4 className="my-2 text-xl font-bold">Create an event</h4>
-							<p className="text-gray-200">
+							<Heading level={5} variant="sm" className="text-gray-300">
+								1.
+							</Heading>
+							<Heading level={4} className="my-2" variant="xl">
+								Create an event
+							</Heading>
+							<Paragraph className="text-gray-200">
 								Start by{' '}
 								<Link href="/events/create">
 									<a className="underline">creating an event</a>
 								</Link>
 								, implement your branding and configure your event.
-							</p>
+							</Paragraph>
 						</div>
 						<div>
-							<span className="text-sm font-bold text-gray-300">2.</span>
-							<h4 className="my-2 text-xl font-bold">Create a session</h4>
-							<p className="text-gray-200">
+							<Heading level={5} variant="sm" className="text-gray-300">
+								2.
+							</Heading>
+							<Heading level={4} className="my-2" variant="xl">
+								Create a session
+							</Heading>
+							<Paragraph className="text-gray-200">
 								Then create a session, attach speakers, setup a venue, and add a session category.
-							</p>
+							</Paragraph>
 						</div>
 						<div>
-							<span className="text-sm font-bold text-gray-300">3.</span>
-							<h4 className="my-2 text-xl font-bold">Invite your attendees</h4>
-							<p className="text-gray-200">
+							<Heading level={5} variant="sm" className="text-gray-300">
+								3.
+							</Heading>
+							<Heading level={4} className="my-2" variant="xl">
+								Invite your attendees
+							</Heading>
+							<Paragraph className="text-gray-200">
 								Then invite organizers, attendees, and speakers/role members to your event.
-							</p>
+							</Paragraph>
 						</div>
 					</div>
 				</Column>
 			</div>
 
 			<Column>
-				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-					<div className="flex flex-col justify-center">
-						<Heading level={3}>Organizer experience</Heading>
-						<p className="mt-3 text-gray-700">
-							The Evental admin dashboard has been made with simplicity and ease-of-use in mind.
-						</p>
-						<ul className="my-5 list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Manager attendees/speakers</li>
-							<li>Create custom event pages</li>
-							<li>Create and customize sessions</li>
-						</ul>
+				<div className="flex flex-col items-center">
+					<Heading variant="sm" level={6} className="text-primary mb-3">
+						PRICING
+					</Heading>
+					<Heading level={2} variant="3xl" className="mb-3">
+						Competitive Pricing
+					</Heading>
 
-						<div>
-							<Link href="/events/create">
-								<LinkButton padding="large">Start Trial</LinkButton>
-							</Link>
+					<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-600">
+						<span className="font-medium">Evental Pro plans</span> start at $
+						{proAttendeePricing[250].price}, and{' '}
+						<span className="font-medium">Evental Education plans</span> start at Evental Pro plans
+						start at ${eduAttendeePricing[250].price}. See the{' '}
+						<Link href="/pricing">
+							<a className="underline">pricing page</a>
+						</Link>{' '}
+						for more information about our one-time and yearly event pricing and features.
+					</Paragraph>
+
+					<div className="relative">
+						<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
+							<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[100px]">
+								<div className="bloom small bloom-one left-0" />
+								<div className="bloom small bloom-three left-[34%] top-[150%]" />
+								<div className="bloom small bloom-two right-0" />
+							</div>
 						</div>
-					</div>
-					<div>
-						<div className="h-72 rounded-md bg-gray-200" />
+
+						<EventalProCard attendees={250} className="relative">
+							<Link href="/events/create">
+								<LinkButton>Start Free Trial</LinkButton>
+							</Link>
+						</EventalProCard>
 					</div>
 				</div>
 			</Column>
+
+			<div className="bg-primary-600">
+				<Column>
+					<div className="flex flex-col items-center text-white">
+						<Heading variant="sm" level={6} className="text-gray-200 mb-3">
+							BRANDING
+						</Heading>
+						<Heading level={2} variant="3xl" className="mb-3">
+							Custom Event Branding
+						</Heading>
+						<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-200">
+							Use the Evental Organizer dashboard to customize your events branding to fit your
+							organizations needs. You can customize your event color/branding, logo, and more. Set
+							links to your website, social media, and more for all of your attendees to see.
+						</Paragraph>
+					</div>
+				</Column>
+			</div>
 
 			<Column>
-				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-					<div>
-						<div className="h-72 rounded-md bg-gray-200" />
-					</div>
-					<div className="flex flex-col justify-center">
-						<Heading level={3}>Attendee experience</Heading>
-						<p className="mt-3 text-gray-700">
-							Allow attendees to easily attendee sessions, view venues, and learn more information
-							about your event.
-						</p>
-						<ul className="my-5 list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Signup for sessions</li>
-							<li>Create and export your schedule</li>
-							<li>View event pages, venues, sessions</li>
-						</ul>
-
-						<div>
-							<Link href="/events/create">
-								<LinkButton padding="large">Start Trial</LinkButton>
-							</Link>
-						</div>
-					</div>
+				<div className="flex flex-col items-center">
+					<Heading variant="sm" level={6} className="text-primary mb-3">
+						ROLES
+					</Heading>
+					<Heading level={2} variant="3xl" className="mb-3">
+						Custom Attendee Roles
+					</Heading>
+					<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-600">
+						Create highly customizable roles for your attendees to categorize them into groups. You
+						are not restrained by "Speaker" or "Exhibitor" roles for your event. See{' '}
+						<Link href="/guides/role/creating-a-role">
+							<a className="underline">creating a role</a>
+						</Link>
+					</Paragraph>
 				</div>
 			</Column>
 
-			<Column>
-				<div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-					<div className="flex flex-col justify-center">
-						<Heading level={3}>Speaker experience</Heading>
-						<p className="mt-3 text-gray-700">
-							Speakers can easily create and manage their user profile and sessions
-						</p>
-						<ul className="my-5 list-disc space-y-0.5 pl-5 text-gray-600">
-							<li>Add speaker contact information</li>
-							<li>Build a custom profile to showcase yourself</li>
-							<li>Attach speakers/role members to sessions</li>
-						</ul>
-
-						<div>
-							<Link href="/events/create">
-								<LinkButton padding="large">Start Trial</LinkButton>
+			<div className="bg-primary-600">
+				<Column>
+					<div className="flex flex-col items-center text-white">
+						<Heading variant="sm" level={6} className="text-gray-200 mb-3">
+							SUPPORT
+						</Heading>
+						<Heading level={2} variant="3xl" className="mb-3">
+							Guides & Documentation
+						</Heading>
+						<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-200">
+							If you are in need of assistance, first see{' '}
+							<Link href="/guides">
+								<a className="underline">our guides</a>
 							</Link>
-						</div>
+							. We have a collection of guides that will help you navigate the Evental organizer
+							dashboard and manage your event. After reading the guides, If you are still in need of
+							help you may{' '}
+							<Link href="/contact">
+								<a className="underline">contact us</a>
+							</Link>
+							. We are more than happy to help you setup your event or answer any questions you may
+							have.
+						</Paragraph>
 					</div>
-					<div>
-						<div className="h-72 rounded-md bg-gray-200" />
-					</div>
-				</div>
-			</Column>
+				</Column>
+			</div>
 
 			<Footer />
 		</PageWrapper>
