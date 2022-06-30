@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 
@@ -7,6 +8,7 @@ import { PromotionalOffer } from './PromotionalOffer';
 type EventalProCardProps = {
 	attendees: number;
 	isEducation?: boolean;
+	className?: string;
 };
 
 const EventalProCardPrice: React.FC<EventalProCardProps> = (props) => {
@@ -48,10 +50,15 @@ const EventalProCardPrice: React.FC<EventalProCardProps> = (props) => {
 };
 
 export const EventalProCard: React.FC<EventalProCardProps> = (props) => {
-	const { attendees, isEducation = false, children } = props;
+	const { attendees, isEducation = false, children, className } = props;
 
 	return (
-		<div className="my-3 flex min-h-[350px] max-w-[450px] flex-col items-center justify-between space-y-4 rounded border border-gray-300 bg-white p-5 shadow-sm">
+		<div
+			className={classNames(
+				'my-3 flex min-h-[350px] max-w-[450px] flex-col items-center justify-between space-y-4 rounded border border-gray-300 bg-white p-5 shadow-sm',
+				className
+			)}
+		>
 			<div className="flex flex-row items-center">
 				<strong
 					className="mr-2 font-display text-2xl font-bold tracking-tight"
