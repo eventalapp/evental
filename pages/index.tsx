@@ -93,7 +93,7 @@ const HomePage: NextPage = () => {
 						Creating events couldn't be easier
 					</Heading>
 					<Paragraph className="text-gray-100">
-						In 3 quick steps, you can get your event up and running
+						In 3 quick steps, you can get your event up and running.
 					</Paragraph>
 
 					<div className="mt-6 grid grid-cols-1 gap-7 border-t-2 border-primary-500 pt-6 lg:grid-cols-2 xl:grid-cols-3">
@@ -120,7 +120,7 @@ const HomePage: NextPage = () => {
 								Create a session
 							</Heading>
 							<Paragraph className="text-gray-200">
-								Then create a session, attach speakers, setup a venue, and add a session category.
+								Then create a venue, a session category, and attach speakers/role members.
 							</Paragraph>
 						</div>
 						<div>
@@ -131,7 +131,7 @@ const HomePage: NextPage = () => {
 								Invite your attendees
 							</Heading>
 							<Paragraph className="text-gray-200">
-								Then invite organizers, attendees, and speakers/role members to your event.
+								Then invite/create organizers, attendees, and speakers/role members to your event.
 							</Paragraph>
 						</div>
 					</div>
@@ -148,10 +148,10 @@ const HomePage: NextPage = () => {
 					</Heading>
 
 					<Paragraph variant="lg" className="mb-3 max-w-3xl text-center text-gray-600">
-						<span className="font-medium">Evental Pro plans</span> start at $
-						{proAttendeePricing[250].price}, and{' '}
-						<span className="font-medium">Evental Education plans</span> start at $
-						{eduAttendeePricing[250].price}. See the{' '}
+						<span className="font-medium">Evental Pro plans</span> start at{' '}
+						<span className="font-medium">${proAttendeePricing[250].price}</span>, and{' '}
+						<span className="font-medium">Evental Education plans</span> start at{' '}
+						<span className="font-medium">${eduAttendeePricing[250].price}</span>. See the{' '}
 						<Link href="/pricing">
 							<a className="underline">pricing page</a>
 						</Link>{' '}
