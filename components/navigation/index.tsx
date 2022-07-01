@@ -11,21 +11,12 @@ import { useUser } from '../../hooks/queries/useUser';
 import { faBarsSquare } from '../../icons';
 import { LinkButton } from '../form/LinkButton';
 import { ProfileDropdown } from '../radix/components/ProfileDropdown';
+import { AuthContainer } from './AuthContainer';
 import { FullscreenLinkItem } from './FullscreenLinkItem';
+import { HamburgerContainer } from './HamburgerContainer';
 import { LinkItem } from './LinkItem';
 import { LogoLinkItem } from './LogoLinkItem';
 import { NavigationWrapper } from './NavigationWrapper';
-
-type NavigationLink = {
-	link: string;
-	label: string;
-};
-
-type Props = {
-	className?: string;
-	links?: NavigationLink[];
-	logo?: string;
-};
 
 const FreeEventalPro = (
 	<div className="w-full bg-green-500">
@@ -37,8 +28,7 @@ const FreeEventalPro = (
 	</div>
 );
 
-export const Navigation: React.FC<Props> = (props) => {
-	const { className } = props;
+export const Navigation: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { signOutMutation } = useSignOutMutation();
 	const { user, isUserLoading } = useUser();
@@ -48,12 +38,14 @@ export const Navigation: React.FC<Props> = (props) => {
 			{FreeEventalPro}
 			<NavigationWrapper>
 				<NavigationMenuPrimitive.Root className="relative w-full">
-					<NavigationMenuPrimitive.List className="m-auto flex h-14 w-full max-w-7xl items-center justify-between px-3">
-						<div>
+					<NavigationMenuPrimitive.List className="m-auto h-14 w-full max-w-7xl px-3 grid grid-cols-2 lg:grid-cols-9">
+						{/* Logos (Desktop & Mobile) */}
+						<div className="col-span-1 lg:col-span-2">
 							<LogoLinkItem />
 						</div>
 
-						<div className="hidden h-full flex-row justify-end lg:flex">
+						{/* Links (Desktop only) */}
+						<div className="hidden h-full flex-row justify-center lg:flex col-span-5">
 							<div className="flex flex-row items-end">
 								<LinkItem link={`/pricing`} label={'Pricing'} />
 								<LinkItem link={`/contact`} label={'Contact'} />
@@ -62,7 +54,8 @@ export const Navigation: React.FC<Props> = (props) => {
 							</div>
 						</div>
 
-						<div className="flex flex-row space-x-8 font-medium lg:hidden">
+						{/* Hamburger (Mobile only)*/}
+						<HamburgerContainer>
 							<FontAwesomeIcon
 								className="cursor-pointer text-gray-900"
 								size="2x"
@@ -72,14 +65,14 @@ export const Navigation: React.FC<Props> = (props) => {
 									setIsOpen(true);
 								}}
 							/>
-						</div>
+						</HamburgerContainer>
 
-						<div className="hidden h-full flex-row justify-end lg:flex">
+						{/* User Icon + Create Event (Desktop only) */}
+						<AuthContainer>
 							<div className="flex flex-row items-end">
-								{isUserLoading
-									? // <Skeleton className="w-20 h-7 mb-2 mx-2" />
-									  null
-									: user === undefined && <LinkItem link={`/auth/signin`} label={'Sign in'} />}
+								{!isUserLoading && user === undefined && (
+									<LinkItem link={`/auth/signin`} label={'Sign in'} />
+								)}
 							</div>
 							<div className="flex flex-row items-center">
 								{user ? (
@@ -94,15 +87,10 @@ export const Navigation: React.FC<Props> = (props) => {
 										</NavigationMenuPrimitive.Item>
 									</>
 								) : (
-									isUserLoading && (
-										<>
-											{/*<Skeleton className="w-32 h-9 mb-2 mr-6" />*/}
-											<Skeleton className="h-10 w-10" containerClassName="flex" />
-										</>
-									)
+									isUserLoading && <Skeleton className="h-10 w-10" containerClassName="flex" />
 								)}
 							</div>
-						</div>
+						</AuthContainer>
 					</NavigationMenuPrimitive.List>
 				</NavigationMenuPrimitive.Root>
 			</NavigationWrapper>

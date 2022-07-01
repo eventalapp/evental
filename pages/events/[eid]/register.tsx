@@ -9,7 +9,7 @@ import { Footer } from '../../../components/Footer';
 import { CreateAttendeeForm } from '../../../components/attendees/CreateAttendeeForm';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
-import { EventNavigation } from '../../../components/events/navigation';
+import { EventNavigation } from '../../../components/events/Navigation';
 import { Button } from '../../../components/form/Button';
 import { LinkButton } from '../../../components/form/LinkButton';
 import Column from '../../../components/layout/Column';

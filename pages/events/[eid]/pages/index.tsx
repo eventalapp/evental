@@ -8,7 +8,7 @@ import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../../components/events/EventHeader';
-import { EventNavigation } from '../../../../components/events/navigation';
+import { EventNavigation } from '../../../../components/events/Navigation';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { PageList } from '../../../../components/pages/PageList';
