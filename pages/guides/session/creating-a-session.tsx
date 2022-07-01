@@ -3,7 +3,6 @@ import { NextSeo } from 'next-seo';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
 import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
@@ -75,12 +74,6 @@ const CreatingASessionGuidePage: NextPage = () => {
 						To create a session, navigate to the events admin dashboard by clicking the{' '}
 						<span className="font-medium">"manage this event"</span> button.
 					</p>
-
-					<AspectImage
-						ratio={1603 / 798}
-						imageUrl={'https://cdn.evental.app/images/manage-this-event.png'}
-						alt={'Manage this event'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="navigate-to-the-session-dashboard">
@@ -95,12 +88,6 @@ const CreatingASessionGuidePage: NextPage = () => {
 						After visiting the events dashboard, click the{' '}
 						<span className="font-medium">"Sessions"</span> page.
 					</p>
-
-					<AspectImage
-						ratio={1615 / 622}
-						imageUrl={'https://cdn.evental.app/images/session-dashboard.png'}
-						alt={'Session dashboard'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="create-a-session">
@@ -118,22 +105,10 @@ const CreatingASessionGuidePage: NextPage = () => {
 						create a session description including links, images, etc.
 					</p>
 
-					<AspectImage
-						ratio={1600 / 617}
-						imageUrl={'https://cdn.evental.app/images/create-a-session.png'}
-						alt={'Create a session'}
-					/>
-
 					<p className="my-4 text-gray-700">
 						Now that you are on the create a session form, fill out the form and click the{' '}
 						<span className="font-medium">"Create Session"</span> button.
 					</p>
-
-					<AspectImage
-						ratio={1598 / 904}
-						imageUrl={'https://cdn.evental.app/images/create-session-form.png'}
-						alt={'Create a session form'}
-					/>
 				</GuideSection>
 
 				<GuideSection>

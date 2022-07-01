@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
 import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
@@ -77,12 +76,6 @@ const AttendingASessionGuidePage: NextPage = () => {
 						</Link>
 						.
 					</p>
-
-					<AspectImage
-						ratio={1580 / 502}
-						imageUrl={'https://cdn.evental.app/images/upcoming-events.png'}
-						alt={'Upcoming events page'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="find-a-session">
@@ -96,12 +89,6 @@ const AttendingASessionGuidePage: NextPage = () => {
 					<p className="mb-4 text-gray-700">
 						After registering for the event, you can find a session on the events sessions page.
 					</p>
-
-					<AspectImage
-						ratio={1602 / 753}
-						imageUrl={'https://cdn.evental.app/images/find-a-session.png'}
-						alt={'Find a session'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="register-for-a-session">
@@ -117,22 +104,10 @@ const AttendingASessionGuidePage: NextPage = () => {
 						attend, and clicking the <span className="font-medium">"Register"</span> button.
 					</p>
 
-					<AspectImage
-						ratio={1594 / 730}
-						imageUrl={'https://cdn.evental.app/images/register-for-a-session1.png'}
-						alt={'Register for a session 1'}
-					/>
-
 					<p className="my-4 text-gray-700">
 						Or you can click on the session you want to attend, and select the{' '}
 						<span className="font-medium">"Attend this session"</span> button.
 					</p>
-
-					<AspectImage
-						ratio={1599 / 537}
-						imageUrl={'https://cdn.evental.app/images/register-for-a-session2.png'}
-						alt={'Register for a session 2'}
-					/>
 				</GuideSection>
 
 				<GuideSection>

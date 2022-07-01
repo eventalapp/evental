@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Footer } from '../../../components/Footer';
-import { AspectImage } from '../../../components/guides/AspectImage';
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';
 import { StillNeedHelp } from '../../../components/guides/StillNeedHelp';
@@ -79,12 +78,6 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						</Link>
 						.
 					</p>
-
-					<AspectImage
-						ratio={1666 / 656}
-						imageUrl={'https://cdn.evental.app/images/attend-this-event.png'}
-						alt={'Signup for evental'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="verify-your-account">
@@ -103,13 +96,6 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						</Link>
 						.
 					</p>
-
-					<AspectImage
-						className={'m-auto lg:w-3/5'}
-						ratio={855 / 482}
-						imageUrl={'https://cdn.evental.app/images/verify-your-account.png'}
-						alt={'Verify your account'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="customize-your-profile">
@@ -124,13 +110,6 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						After verifying your email, you can customize your profile to include your social
 						contacts and add more information about you.
 					</p>
-
-					<AspectImage
-						className={'m-auto lg:w-3/5'}
-						ratio={862 / 961}
-						imageUrl={'https://cdn.evental.app/images/editing-your-profile.png'}
-						alt={'Editing your profile'}
-					/>
 				</GuideSection>
 
 				<GuideSection id="attending-a-session">
