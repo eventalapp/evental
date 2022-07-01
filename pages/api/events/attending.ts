@@ -24,9 +24,6 @@ export const getAttendingEvents = async (uid: string): Promise<Prisma.Event[]> =
 			}
 		],
 		where: {
-			endDate: {
-				gte: new Date()
-			},
 			attendees: {
 				some: {
 					userId: uid,
