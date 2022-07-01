@@ -81,7 +81,7 @@ const EventsPage: NextPage = () => {
 
 				{user && <EventsPageNavigation />}
 
-				<EventList events={upcomingEvents} />
+				<EventList events={upcomingEvents} hidePastEvents />
 			</Column>
 
 			<Footer />
