@@ -25,6 +25,8 @@ type Props = {
 	eid: string;
 };
 
+const LinkSkeleton = <Skeleton className="w-20 h-7 mb-2 mx-2" />;
+
 export const EventNavigation: React.FC<Props> = (props) => {
 	const { eid } = props;
 	const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +52,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 								{event ? (
 									<LinkItem link={`/events/${event.slug}`} label={'Sessions'} color={event.color} />
 								) : (
-									<Skeleton className="w-20 h-7 mb-2 mx-2" />
+									LinkSkeleton
 								)}
 
 								{event ? (
@@ -60,7 +62,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 										color={event.color}
 									/>
 								) : (
-									<Skeleton className="w-20 h-7 mb-2 mx-2" />
+									LinkSkeleton
 								)}
 
 								{event && roles ? (
@@ -74,26 +76,24 @@ export const EventNavigation: React.FC<Props> = (props) => {
 									))
 								) : (
 									<>
-										<Skeleton className="w-20 h-7 mb-2 mx-2" />
-										<Skeleton className="w-20 h-7 mb-2 mx-2" />
-										<Skeleton className="w-20 h-7 mb-2 mx-2" />
+										{LinkSkeleton}
+										{LinkSkeleton}
+										{LinkSkeleton}
 									</>
 								)}
 
-								{event && pages ? (
-									pages
-										.filter((page) => page.topLevel)
-										.map((page) => (
-											<LinkItem
-												key={page.id}
-												link={`/events/${event.slug}/pages/${page.slug}`}
-												label={page.name}
-												color={event.color}
-											/>
-										))
-								) : (
-									<Skeleton className="w-20 h-7 mb-2 mx-2" />
-								)}
+								{event && pages
+									? pages
+											.filter((page) => page.topLevel)
+											.map((page) => (
+												<LinkItem
+													key={page.id}
+													link={`/events/${event.slug}/pages/${page.slug}`}
+													label={page.name}
+													color={event.color}
+												/>
+											))
+									: LinkSkeleton}
 							</div>
 						</LinkContainer>
 
