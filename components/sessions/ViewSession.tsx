@@ -97,79 +97,93 @@ export const ViewSession: React.FC<Props> = (props) => {
 						<Skeleton className="w-5 h-5 ml-4" />
 					)}
 
-					{user && session && event && isAttending && !admin ? (
-						<AddToCalendar
-							event={{
-								title: session.name,
-								description: htmlToText(session.description || 'No description'),
-								location: session?.venue?.address || event.location || session?.venue?.name,
-								end: new Date(session.endDate).toISOString(),
-								start: new Date(session.startDate).toISOString(),
-								url: `${
-									process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-								}/events/${eid}/sessions/${sid}`,
-								guests: attendees?.map((attendee) => attendee.user.name) ?? undefined
-							}}
-						/>
+					{user && session && event ? (
+						!admin &&
+						isAttending && (
+							<AddToCalendar
+								event={{
+									title: session.name,
+									description: htmlToText(session.description || 'No description'),
+									location: session?.venue?.address || event.location || session?.venue?.name,
+									end: new Date(session.endDate).toISOString(),
+									start: new Date(session.startDate).toISOString(),
+									url: `${
+										process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+									}/events/${eid}/sessions/${sid}`,
+									guests: attendees?.map((attendee) => attendee.user.name) ?? undefined
+								}}
+							/>
+						)
 					) : (
 						<Skeleton className="w-5 h-5 ml-4" />
 					)}
 
-					{user && Boolean(isAttending) && event && session ? (
-						<LeaveSessionDialog
-							eventSlug={event.slug}
-							sessionSlug={session.slug}
-							userSlug={String(user?.slug)}
-						>
-							<div className="flex items-center justify-center">
-								<Tooltip side={'top'} message={'Leave this session'}>
-									<button type="button" className="ml-4">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="h-5 w-5 text-red-500 block"
-											size="1x"
-											icon={faRightFromBracket}
-										/>
-									</button>
-								</Tooltip>
+					{user && event && session ? (
+						Boolean(isAttending) && (
+							<LeaveSessionDialog
+								eventSlug={event.slug}
+								sessionSlug={session.slug}
+								userSlug={String(user?.slug)}
+							>
+								<div className="flex items-center justify-center ml-4">
+									<Tooltip side={'top'} message={'Leave this session'}>
+										<button type="button" className="ml-4">
+											<FontAwesomeIcon
+												fill="currentColor"
+												className="h-5 w-5 text-red-500 block"
+												size="1x"
+												icon={faRightFromBracket}
+											/>
+										</button>
+									</Tooltip>
+								</div>
+							</LeaveSessionDialog>
+						)
+					) : (
+						<Skeleton className="w-5 h-5 ml-4" />
+					)}
+
+					{user ? (
+						!isAttending &&
+						!admin && (
+							<div className="ml-4">
+								<IconButtonTooltip
+									message="Click to add this session to your schedule"
+									side="top"
+									icon={faCalendarCirclePlus}
+									disabled={createSessionAttendeeMutation.isLoading}
+									isLoading={createSessionAttendeeMutation.isLoading}
+									className="text-gray-600"
+									onClick={() => {
+										createSessionAttendeeMutation.mutate();
+									}}
+								/>
 							</div>
-						</LeaveSessionDialog>
-					) : (
-						<Skeleton className="w-5 h-5 ml-4" />
-					)}
-
-					{user && !isAttending && !admin ? (
-						<IconButtonTooltip
-							message="Click to add this session to your schedule"
-							side="top"
-							icon={faCalendarCirclePlus}
-							disabled={createSessionAttendeeMutation.isLoading}
-							isLoading={createSessionAttendeeMutation.isLoading}
-							className="text-gray-600"
-							onClick={() => {
-								createSessionAttendeeMutation.mutate();
-							}}
-						/>
+						)
 					) : (
 						<Skeleton className="w-5 h-5 ml-4" />
 					)}
 					{admin && (
-						<IconLinkTooltip
-							message="Click to edit this session"
-							side="top"
-							href={`/events/${eid}/admin/sessions/${sid}/edit`}
-							icon={faPenToSquare}
-							className="text-gray-700 hover:text-gray-600"
-						/>
+						<div className="ml-4">
+							<IconLinkTooltip
+								message="Click to edit this session"
+								side="top"
+								href={`/events/${eid}/admin/sessions/${sid}/edit`}
+								icon={faPenToSquare}
+								className="text-gray-700 hover:text-gray-600"
+							/>
+						</div>
 					)}
 					{admin && (
-						<IconLinkTooltip
-							message="Click to delete this session"
-							side="top"
-							href={`/events/${eid}/admin/sessions/${sid}/delete`}
-							icon={faTrashCan}
-							className="text-red-500 hover:text-red-400"
-						/>
+						<div className="ml-4">
+							<IconLinkTooltip
+								message="Click to delete this session"
+								side="top"
+								href={`/events/${eid}/admin/sessions/${sid}/delete`}
+								icon={faTrashCan}
+								className="text-red-500 hover:text-red-400"
+							/>
+						</div>
 					)}
 				</div>
 			</FlexRowBetween>
@@ -217,24 +231,28 @@ export const ViewSession: React.FC<Props> = (props) => {
 						<TooltipIconSkeleton />
 					)}
 
-					{session && session?.maxAttendees !== null ? (
-						<TooltipIcon
-							icon={faUserGroup}
-							tooltipMessage={`This sessions is currently ${Math.ceil(
-								(session?.attendeeCount / session?.maxAttendees) * 100
-							)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
-							label={`${Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full`}
-						/>
+					{session ? (
+						session?.maxAttendees !== null && (
+							<TooltipIcon
+								icon={faUserGroup}
+								tooltipMessage={`This sessions is currently ${Math.ceil(
+									(session?.attendeeCount / session?.maxAttendees) * 100
+								)}% Full (${session?.attendeeCount}/${session?.maxAttendees} attendees).`}
+								label={`${Math.ceil((session?.attendeeCount / session?.maxAttendees) * 100)}% Full`}
+							/>
+						)
 					) : (
 						<TooltipIconSkeleton />
 					)}
 				</div>
 			</div>
 
-			{session && session.description ? (
-				<div className="prose mt-1 focus:outline-none prose-a:text-primary">
-					{parse(String(session.description))}
-				</div>
+			{session ? (
+				session.description && (
+					<div className="prose mt-1 focus:outline-none prose-a:text-primary">
+						{parse(String(session.description))}
+					</div>
+				)
 			) : (
 				<Skeleton className="w-full" count={5} />
 			)}
