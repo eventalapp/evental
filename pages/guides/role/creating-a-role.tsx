@@ -76,9 +76,7 @@ const CreatingARoleGuidePage: NextPage = () => {
 				<GuideSection id={sections.navigateDashboard.anchor}>
 					<GuideSectionHeader
 						text={sections.navigateDashboard.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/role/creating-a-role#${sections.navigateDashboard.anchor}`}
+						url={`/guides/role/creating-a-role#${sections.navigateDashboard.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -90,9 +88,7 @@ const CreatingARoleGuidePage: NextPage = () => {
 				<GuideSection id={sections.navigateRoles.anchor}>
 					<GuideSectionHeader
 						text={sections.navigateRoles.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/role/creating-a-role#${sections.navigateRoles.anchor}`}
+						url={`/guides/role/creating-a-role#${sections.navigateRoles.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -104,9 +100,7 @@ const CreatingARoleGuidePage: NextPage = () => {
 				<GuideSection id={sections.createRole.anchor}>
 					<GuideSectionHeader
 						text={sections.createRole.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/role/creating-a-role#${sections.createRole.anchor}`}
+						url={`/guides/role/creating-a-role#${sections.createRole.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">

@@ -69,9 +69,7 @@ const AttendingASessionGuidePage: NextPage = () => {
 				<GuideSection id="view-your-schedule">
 					<GuideSectionHeader
 						text="View your schedule"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/attendee/downloading-your-schedule#view-your-schedule`}
+						url={`/guides/attendee/downloading-your-schedule#view-your-schedule`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -90,9 +88,7 @@ const AttendingASessionGuidePage: NextPage = () => {
 				<GuideSection id="download-your-schedule">
 					<GuideSectionHeader
 						text="Download your schedule"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/attendee/downloading-your-schedule#download-your-schedule`}
+						url={`/guides/attendee/downloading-your-schedule#download-your-schedule`}
 					/>
 
 					<p className="mb-4 text-gray-700">

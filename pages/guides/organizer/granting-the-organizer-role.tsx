@@ -81,9 +81,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 				<GuideSection id={sections[0].anchor}>
 					<GuideSectionHeader
 						text={sections[0].title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/organizer/granting-the-organizer-role#${sections[0].anchor}`}
+						url={`/guides/organizer/granting-the-organizer-role#${sections[0].anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -96,9 +94,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 				<GuideSection id={sections[1].anchor}>
 					<GuideSectionHeader
 						text={sections[1].title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/organizer/granting-the-organizer-role#${sections[1].anchor}`}
+						url={`/guides/organizer/granting-the-organizer-role#${sections[1].anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -110,9 +106,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 				<GuideSection id={sections[2].anchor}>
 					<GuideSectionHeader
 						text={sections[2].title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/organizer/granting-the-organizer-role#${sections[2].anchor}`}
+						url={`/guides/organizer/granting-the-organizer-role#${sections[2].anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -123,9 +117,7 @@ const InvitingSessionMemberGuidePage: NextPage = () => {
 				<GuideSection id={sections[3].anchor}>
 					<GuideSectionHeader
 						text={sections[3].title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/organizer/granting-the-organizer-role#${sections[3].anchor}`}
+						url={`/guides/organizer/granting-the-organizer-role#${sections[3].anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">

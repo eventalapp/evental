@@ -66,9 +66,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 				<GuideSection id="navigate-to-the-dashboard">
 					<GuideSectionHeader
 						text="Navigate to the dashboard"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session-type#navigate-to-the-dashboard`}
+						url={`/guides/session/creating-a-session-type#navigate-to-the-dashboard`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -80,9 +78,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 				<GuideSection id="navigate-to-the-session-dashboard">
 					<GuideSectionHeader
 						text="Navigate to the session types dashboard"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session-type#navigate-to-the-session-dashboard`}
+						url={`/guides/session/creating-a-session-type#navigate-to-the-session-dashboard`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -94,9 +90,7 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 				<GuideSection id="create-a-type">
 					<GuideSectionHeader
 						text="Create a session type"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/creating-a-session-type#create-a-type`}
+						url={`/guides/session/creating-a-session-type#create-a-type`}
 					/>
 
 					<p className="mb-4 text-gray-700">

@@ -79,9 +79,7 @@ const EditingASessionGuidePage: NextPage = () => {
 				<GuideSection id={sections.navigateDashboard.anchor}>
 					<GuideSectionHeader
 						text={sections.navigateDashboard.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/editing-a-session#${sections.navigateDashboard.anchor}`}
+						url={`/guides/session/editing-a-session#${sections.navigateDashboard.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -93,9 +91,7 @@ const EditingASessionGuidePage: NextPage = () => {
 				<GuideSection id={sections.navigateSessions.anchor}>
 					<GuideSectionHeader
 						text={sections.navigateSessions.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/editing-a-session#${sections.navigateSessions.anchor}`}
+						url={`/guides/session/editing-a-session#${sections.navigateSessions.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -107,9 +103,7 @@ const EditingASessionGuidePage: NextPage = () => {
 				<GuideSection id={sections.editSession.anchor}>
 					<GuideSectionHeader
 						text={sections.editSession.title}
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/session/editing-a-session#${sections.editSession.anchor}`}
+						url={`/guides/session/editing-a-session#${sections.editSession.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">

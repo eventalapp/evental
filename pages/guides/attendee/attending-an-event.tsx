@@ -66,9 +66,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 				<GuideSection id="create-an-account">
 					<GuideSectionHeader
 						text="Create an account"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/attendee/attending-an-event#create-an-account`}
+						url={`/guides/attendee/attending-an-event#create-an-account`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -88,9 +86,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 				<GuideSection id="find-your-event">
 					<GuideSectionHeader
 						text="Find your event"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/attendee/attending-an-event#find-your-event`}
+						url={`/guides/attendee/attending-an-event#find-your-event`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -105,9 +101,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 				<GuideSection id="registering-for-an-event" className="my-7">
 					<GuideSectionHeader
 						text="Registering for an event"
-						url={`${
-							process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-						}/guides/attendee/attending-an-event#registering-for-an-event`}
+						url={`/guides/attendee/attending-an-event#registering-for-an-event`}
 					/>
 
 					<p className="mb-4 text-gray-700">
