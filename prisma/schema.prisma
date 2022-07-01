@@ -92,7 +92,7 @@ model Event {
   banner       String?
   website      String?
   color        String        @default("#0066FF")
-  description  String?
+  description  String?       @db.VarChar(2000)
   updatedAt    DateTime      @updatedAt
   createdAt    DateTime      @default(now())
   timeZone     String        @default("America/New_York")
@@ -106,8 +106,8 @@ model Event {
   sessionAttendees EventSessionAttendee[]
   sessionTypes     EventSessionType[]
   pages            EventPage[]
+  message          EventMessage[]
 
-  EventMessage EventMessage[]
   @@map("event")
 }
 
@@ -155,7 +155,7 @@ model EventSession {
   typeId       String?
   name         String
   maxAttendees Int?
-  description  String?
+  description  String?  @db.VarChar(2000)
   updatedAt    DateTime @updatedAt
   createdAt    DateTime @default(now())
 
@@ -213,7 +213,7 @@ model EventVenue {
   eventId     String
   name        String
   address     String?
-  description String?
+  description String?  @db.VarChar(2000)
   updatedAt   DateTime @updatedAt
   createdAt   DateTime @default(now())
 
@@ -231,7 +231,7 @@ model EventPage {
   slug      String
   eventId   String
   name      String
-  body      String?
+  body      String?  @db.VarChar(2000)
   topLevel  Boolean  @default(false)
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
@@ -248,7 +248,7 @@ model EventMessage {
   sentBy    String?
   title     String
   eventId   String
-  body      String
+  body      String   @db.VarChar(2000)
   createdAt DateTime @default(now())
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
