@@ -1,13 +1,14 @@
 import Prisma from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { NotFound } from '../error/NotFound';
+import Tooltip from '../radix/components/Tooltip';
 import { EventListItem } from './EventListItem';
 
-type Props = { events?: Prisma.Event[]; className?: string };
+type Props = { events?: Prisma.Event[]; className?: string; hidePastEvents?: boolean };
 
 const eventListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
 	<div className="flex flex-row items-center py-3" key={i}>
@@ -30,7 +31,9 @@ const eventListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
 ));
 
 export const EventList: React.FC<Props> = (props) => {
-	const { events, className } = props;
+	const [showPastEvents, setShowPastEvents] = useState(false);
+
+	const { events, className, hidePastEvents } = props;
 
 	if (events && events.length === 0) {
 		return <NotFound message="No events found." />;
@@ -41,11 +44,45 @@ export const EventList: React.FC<Props> = (props) => {
 
 	return (
 		<div className={classNames(className)}>
-			{previousEvents &&
-				previousEvents.map((event) => <EventListItem event={event} key={event.id} />)}
-			{upcomingEvents
-				? upcomingEvents.map((event) => <EventListItem event={event} key={event.id} />)
-				: eventListSkeleton}
+			{events ? (
+				<>
+					{showPastEvents &&
+						!hidePastEvents &&
+						previousEvents &&
+						previousEvents.map((event) => <EventListItem event={event} key={event.id} />)}
+
+					{previousEvents && previousEvents.length >= 1 && !hidePastEvents && (
+						<div
+							className={classNames(
+								'relative flex items-center',
+								showPastEvents ? 'py-1.5' : 'pb-1.5'
+							)}
+						>
+							<Tooltip
+								side="top"
+								message={`Click to ${showPastEvents ? 'hide' : 'show'} past events`}
+							>
+								<button
+									className="mr-4 shrink text-gray-400"
+									onClick={() => {
+										setShowPastEvents(!showPastEvents);
+									}}
+								>
+									{showPastEvents ? 'Hide' : 'Show'} Past Events
+								</button>
+							</Tooltip>
+							<div className="grow border-t border-gray-300" />
+							<span className="mx-4 shrink text-gray-400">Upcoming Events</span>
+							<div className="grow border-t border-gray-300" />
+						</div>
+					)}
+
+					{upcomingEvents &&
+						upcomingEvents.map((event) => <EventListItem event={event} key={event.id} />)}
+				</>
+			) : (
+				eventListSkeleton
+			)}
 		</div>
 	);
 };
