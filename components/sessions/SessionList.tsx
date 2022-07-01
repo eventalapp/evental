@@ -1,5 +1,3 @@
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
@@ -8,17 +6,14 @@ import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { sessionListReducer } from '../../utils/reducer';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
-import { HorizontalTextRule } from '../HorizontalTextRule';
 import { NotFound } from '../error/NotFound';
-import { SessionListHourItem } from './SessionListHourItem';
+import Tooltip from '../radix/components/Tooltip';
+import { SessionListDateItem } from './SessionListDateItem';
 
 type Props = {
-	eid: string;
 	admin?: boolean;
 	sessions?: SessionWithVenue[];
 	event?: Prisma.Event;
-	user: PasswordlessUser | undefined;
 };
 
 const sessionListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
@@ -36,7 +31,7 @@ const sessionListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
 ));
 
 export const SessionList: React.FC<Props> = (props) => {
-	const { eid, sessions, event, admin = false, user } = props;
+	const { sessions, event, admin = false } = props;
 	const [showPastEvents, setShowPastEvents] = useState(false);
 
 	const previousSessions = sessions?.filter((session) =>
@@ -52,22 +47,6 @@ export const SessionList: React.FC<Props> = (props) => {
 
 	return (
 		<div className="relative min-h-[25px]">
-			{previousSessions && previousSessions.length >= 1 && (
-				<button
-					className="absolute top-0 right-0 z-20 cursor-pointer text-sm text-gray-500 flex flex-row items-center"
-					onClick={() => {
-						setShowPastEvents(!showPastEvents);
-					}}
-				>
-					{showPastEvents ? (
-						<FontAwesomeIcon fill="currentColor" className="mr-1.5 h-4 w-4" icon={faEyeSlash} />
-					) : (
-						<FontAwesomeIcon fill="currentColor" className="mr-1.5 h-4 w-4" icon={faEye} />
-					)}
-					{showPastEvents ? 'Hide' : 'Show'} past sessions
-				</button>
-			)}
-
 			{previousSessions && event && previousSessions.length >= 1 && (
 				<div
 					className={classNames(
@@ -76,58 +55,55 @@ export const SessionList: React.FC<Props> = (props) => {
 					)}
 				>
 					{Object.entries(previousSessions.reduce(sessionListReducer, {})).map(
-						([date, hourObject]) => {
+						([date, sessionsByHour]) => {
 							return (
-								<div key={date}>
-									<p className="inline-block pb-0.5 text-xl text-gray-700">
-										<span className="font-medium text-gray-900">{dayjs(date).format('dddd')}</span>,{' '}
-										{dayjs(date).format('MMMM D')}
-									</p>
-									{Object.entries(hourObject).map(([hour, sessions]) => {
-										return (
-											<SessionListHourItem
-												key={hour}
-												eid={String(eid)}
-												sessions={sessions}
-												admin={admin}
-												event={event}
-												hour={hour}
-											/>
-										);
-									})}
-								</div>
+								<SessionListDateItem
+									date={date}
+									sessionsByHour={sessionsByHour}
+									event={event}
+									key={date}
+									admin={admin}
+								/>
 							);
 						}
 					)}
 				</div>
 			)}
 
-			{showPastEvents && upcomingSessions && upcomingSessions.length >= 1 && (
-				<HorizontalTextRule text="Upcoming Sessions" />
+			{previousSessions && previousSessions.length >= 1 && (
+				<div
+					className={classNames('relative flex items-center', showPastEvents ? 'py-1.5' : 'pb-1.5')}
+				>
+					<Tooltip
+						side="top"
+						message={`Click to ${showPastEvents ? 'hide' : 'show'} past sessions`}
+					>
+						<button
+							className="mr-4 shrink text-gray-400"
+							onClick={() => {
+								setShowPastEvents(!showPastEvents);
+							}}
+						>
+							{showPastEvents ? 'Hide' : 'Show'} Past Sessions
+						</button>
+					</Tooltip>
+					<div className="grow border-t border-gray-300" />
+					<span className="mx-4 shrink text-gray-400">Upcoming Sessions</span>
+					<div className="grow border-t border-gray-300" />
+				</div>
 			)}
 
 			{upcomingSessions && event
 				? Object.entries(upcomingSessions.reduce(sessionListReducer, {})).map(
-						([date, hourObject]) => {
+						([date, sessionsByHour]) => {
 							return (
-								<div key={date}>
-									<p className="inline-block pb-0.5 text-xl text-gray-700">
-										<span className="font-medium text-gray-900">{dayjs(date).format('dddd')}</span>,{' '}
-										{dayjs(date).format('MMMM D')}
-									</p>
-									{Object.entries(hourObject).map(([hour, sessions]) => {
-										return (
-											<SessionListHourItem
-												key={hour}
-												eid={String(eid)}
-												sessions={sessions}
-												admin={admin}
-												event={event}
-												hour={hour}
-											/>
-										);
-									})}
-								</div>
+								<SessionListDateItem
+									date={date}
+									sessionsByHour={sessionsByHour}
+									event={event}
+									key={date}
+									admin={admin}
+								/>
 							);
 						}
 				  )
