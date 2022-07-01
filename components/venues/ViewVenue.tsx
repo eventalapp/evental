@@ -22,7 +22,7 @@ type Props = {
 };
 
 export const ViewVenue: React.FC<Props> = (props) => {
-	const { eid, vid, venue, admin = false, sessions, event, user } = props;
+	const { eid, vid, venue, admin = false, sessions, event } = props;
 
 	return (
 		<div>
@@ -77,7 +77,7 @@ export const ViewVenue: React.FC<Props> = (props) => {
 				)}
 			</div>
 
-			<SessionList eid={String(eid)} sessions={sessions} event={event} user={user} admin />
+			<SessionList sessions={sessions} event={event} admin />
 		</div>
 	);
 };

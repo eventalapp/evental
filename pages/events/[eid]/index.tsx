@@ -21,13 +21,11 @@ import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
 import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
-import { useUser } from '../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
 
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { user } = useUser();
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 	const { sessionsData } = useSessionsQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
@@ -95,7 +93,7 @@ const ViewEventPage: NextPage = () => {
 
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-12 lg:col-span-9">
-						<SessionList sessions={sessionsData} eid={String(eid)} event={event} user={user} />
+						<SessionList sessions={sessionsData} event={event} />
 					</div>
 
 					<div className="col-span-12 lg:col-span-3">

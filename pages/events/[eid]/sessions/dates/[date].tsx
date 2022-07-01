@@ -17,12 +17,10 @@ import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionsByDateQuery } from '../../../../../hooks/queries/useSessionsByDateQuery';
-import { useUser } from '../../../../../hooks/queries/useUser';
 
 const ViewSessionTypePage: NextPage = () => {
 	const router = useRouter();
 	const { date, eid } = router.query;
-	const { user } = useUser();
 	const { event, eventError } = useEventQuery(String(eid));
 	const { sessionsByDateData } = useSessionsByDateQuery(String(eid), String(date));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
@@ -88,7 +86,7 @@ const ViewSessionTypePage: NextPage = () => {
 					</Heading>
 				</FlexRowBetween>
 
-				<SessionList sessions={sessionsByDateData} eid={String(eid)} event={event} user={user} />
+				<SessionList sessions={sessionsByDateData} event={event} />
 			</Column>
 
 			<Footer color={event?.color} />

@@ -16,18 +16,16 @@ import { SessionList } from '../../../../../components/sessions/SessionList';
 import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 import { useSessionsQuery } from '../../../../../hooks/queries/useSessionsQuery';
 import { useUser } from '../../../../../hooks/queries/useUser';
 
 const SessionsAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { sessionsData, isSessionsLoading } = useSessionsQuery(String(eid));
-	const { user, isUserLoading } = useUser();
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { sessionsData } = useSessionsQuery(String(eid));
+	const { user } = useUser();
 	const { event } = useEventQuery(String(eid));
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -66,7 +64,7 @@ const SessionsAdminPage: NextPage = () => {
 						/>
 					</FlexRowBetween>
 
-					<SessionList admin eid={String(eid)} sessions={sessionsData} event={event} user={user} />
+					<SessionList admin sessions={sessionsData} event={event} />
 				</div>
 			</Column>
 
