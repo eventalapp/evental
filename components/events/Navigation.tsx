@@ -12,7 +12,10 @@ import { useRolesQuery } from '../../hooks/queries/useRolesQuery';
 import { useUser } from '../../hooks/queries/useUser';
 import { faBarsSquare } from '../../icons';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { AuthContainer } from '../navigation/AuthContainer';
 import { FullscreenLinkItem } from '../navigation/FullscreenLinkItem';
+import { HamburgerContainer } from '../navigation/HamburgerContainer';
+import { LinkContainer } from '../navigation/LinkContainer';
 import { LinkItem } from '../navigation/LinkItem';
 import { LogoLinkItem } from '../navigation/LogoLinkItem';
 import { NavigationWrapper } from '../navigation/NavigationWrapper';
@@ -35,12 +38,14 @@ export const EventNavigation: React.FC<Props> = (props) => {
 		<div>
 			<NavigationWrapper>
 				<NavigationMenuPrimitive.Root className="relative w-full">
-					<NavigationMenuPrimitive.List className="m-auto flex h-14 w-full max-w-7xl items-center justify-between px-3">
-						<div>
+					<NavigationMenuPrimitive.List className="m-auto h-14 w-full max-w-7xl px-3 grid grid-cols-2 lg:grid-cols-9">
+						{/* Logos (Desktop & Mobile) */}
+						<div className="col-span-1 lg:col-span-2">
 							<LogoLinkItem color={event?.color} />
 						</div>
 
-						<div className="hidden h-full flex-row justify-end lg:flex">
+						{/* Links (Desktop only) */}
+						<LinkContainer>
 							<div className="flex flex-row items-end">
 								{event ? (
 									<LinkItem link={`/events/${event.slug}`} label={'Sessions'} color={event.color} />
@@ -90,9 +95,10 @@ export const EventNavigation: React.FC<Props> = (props) => {
 									<Skeleton className="w-20 h-7 mb-2 mx-2" />
 								)}
 							</div>
-						</div>
+						</LinkContainer>
 
-						<div className="flex flex-row space-x-8 font-medium lg:hidden">
+						{/* Hamburger (Mobile only)*/}
+						<HamburgerContainer>
 							<FontAwesomeIcon
 								className="cursor-pointer text-gray-900"
 								size="2x"
@@ -102,16 +108,13 @@ export const EventNavigation: React.FC<Props> = (props) => {
 									setIsOpen(true);
 								}}
 							/>
-						</div>
+						</HamburgerContainer>
 
-						<div className="hidden h-full flex-row justify-end lg:flex">
+						{/* User Icon + Create Event (Desktop only) */}
+						<AuthContainer>
 							<div className="flex flex-row items-end">
-								{isUserLoading ? (
-									<Skeleton className="w-20 h-7 mb-2 mx-2" />
-								) : (
-									user === undefined && (
-										<LinkItem link={`/auth/signin`} label={'Sign in'} color={event?.color} />
-									)
+								{!isUserLoading && user === undefined && (
+									<LinkItem link={`/auth/signin`} label={'Sign in'} color={event?.color} />
 								)}
 							</div>
 							<div className="flex flex-row items-center">
@@ -123,7 +126,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 									isUserLoading && <Skeleton className="h-10 w-10" containerClassName="flex" />
 								)}
 							</div>
-						</div>
+						</AuthContainer>
 					</NavigationMenuPrimitive.List>
 				</NavigationMenuPrimitive.Root>
 			</NavigationWrapper>
