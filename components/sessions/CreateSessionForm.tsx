@@ -48,8 +48,8 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		formState: { errors }
 	} = useForm<CreateSessionPayload>({
 		defaultValues: {
-			venueId: 'none',
-			categoryId: 'none',
+			venueId: venues?.[0]?.id ?? 'none',
+			categoryId: sessionCategories?.[0]?.id ?? 'none',
 			startDate: roundToNearestMinutes(
 				new Date(event?.startDate ?? '').getTime() + 1000 * 60 * 60 * 12,
 				{
