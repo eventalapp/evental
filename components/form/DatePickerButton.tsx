@@ -1,12 +1,11 @@
-import { format } from 'date-fns';
 import React, { forwardRef } from 'react';
 
 import { theme } from '../../tailwind.config';
 
 export const DatePickerButton = forwardRef<
 	HTMLButtonElement,
-	{ value: Date | null | undefined; formatTime?: string; onClick?: () => void; color?: string }
->(({ value, formatTime = 'MM/dd/yyyy', onClick, color }, ref) => {
+	{ children?: React.ReactNode; onClick?: () => void; color?: string }
+>(({ children, onClick, color }, ref) => {
 	return (
 		<button
 			onClick={onClick}
@@ -18,7 +17,7 @@ export const DatePickerButton = forwardRef<
 				'--tw-ring-color': color ?? theme.extend.colors.primary.DEFAULT
 			}}
 		>
-			{value && format(new Date(value), formatTime)}
+			{children}
 		</button>
 	);
 });
