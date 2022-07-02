@@ -61,9 +61,7 @@ const SessionCategoriesAdminPage: NextPage = () => {
 						/>
 					</FlexRowBetween>
 
-					{sessionCategories && (
-						<SessionCategoryList eid={String(eid)} sessionCategories={sessionCategories} admin />
-					)}
+					<SessionCategoryList eid={String(eid)} sessionCategories={sessionCategories} admin />
 				</div>
 			</Column>
 
