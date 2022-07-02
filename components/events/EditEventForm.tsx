@@ -248,28 +248,24 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="col-span-4 md:col-span-2">
-					<Label htmlFor="startDate">Date *</Label>
+					<Label>Date *</Label>
 					<div className="relative">
 						<ReactDatePicker
 							selected={startDateWatcher}
-							onChange={(dates) => {
+							onChange={(dates: any) => {
 								const [start, end] = dates;
 
-								if (start) {
-									setValue('endDate', start);
-								}
+								setValue('startDate', start);
 
-								if (end) {
-									setValue('endDate', end);
-								}
+								setValue('endDate', end);
 							}}
 							startDate={startDateWatcher}
 							endDate={endDateWatcher}
 							selectsRange
+							minDate={new Date()}
 							required
 							popperPlacement="bottom"
 							placeholderText="Select date"
-							minDate={new Date()}
 							nextMonthButtonLabel=">"
 							previousMonthButtonLabel="<"
 							popperClassName="react-datepicker-right"

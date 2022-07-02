@@ -1,16 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { endOfDay, startOfDay } from 'date-fns';
-import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import ReactDatePicker from 'react-datepicker';
+import { useForm } from 'react-hook-form';
 
 import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEventMutation';
+import { formatDateRange } from '../../utils/formatDateRange';
 import { CreateEventPayload, CreateEventSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
-import { DatePicker } from '../form/DatePicker';
+import { renderCustomHeader } from '../form/DatePicker';
+import { DatePickerButton } from '../form/DatePickerButton';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
@@ -29,7 +30,6 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		handleSubmit,
 		watch,
 		setValue,
-		control,
 		formState: { errors }
 	} = useForm<CreateEventPayload>({
 		defaultValues: {
@@ -43,83 +43,54 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 	const startDateWatcher = watch('startDate');
 	const endDateWatcher = watch('endDate');
 
-	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('endDate', startDateWatcher);
-			toast.warn('The start date cannot be later than the end date.');
-		}
-	}, [startDateWatcher]);
-
-	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('startDate', endDateWatcher);
-			toast.warn('The end date cannot be earlier than the start date.');
-		}
-	}, [endDateWatcher]);
-
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
 				createEventMutation.mutate(data);
 			})}
 		>
-			<div className="mt-5 flex w-full flex-col">
-				<div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-					<div>
+			<div className="my-5 flex w-full flex-col">
+				<div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+					<div className="col-span-1 lg:col-span-2">
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Event name" {...register('name')} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
-					<div className="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
-						<div>
-							<Label htmlFor="startDate">Start Date *</Label>
-							<div className="relative">
-								<Controller
-									control={control}
-									name="startDate"
-									render={({ field }) => (
-										<DatePicker
-											onChange={(date) => {
-												field.onChange(dayjs(date).hour(0).toDate());
-											}}
-											selected={dayjs(field.value).hour(0).toDate()}
-											startDate={dayjs(field.value).hour(0).toDate()}
-											endDate={endDateWatcher}
-											required
-											selectsStart
-											dateFormat="MM/dd/yyyy"
-										/>
-									)}
-								/>
-							</div>
-							{errors.startDate?.message && (
-								<ErrorMessage>{errors.startDate?.message}</ErrorMessage>
-							)}
-						</div>
 
-						<div>
-							<Label htmlFor="endDate">End Date *</Label>
-							<div className="relative">
-								<Controller
-									control={control}
-									name="endDate"
-									render={({ field }) => (
-										<DatePicker
-											onChange={(date) => {
-												field.onChange(dayjs(date).hour(23).minute(59).second(59).toDate());
-											}}
-											selected={dayjs(field.value).hour(23).minute(59).second(59).toDate()}
-											endDate={dayjs(field.value).hour(23).minute(59).second(59).toDate()}
-											selectsEnd
-											required
-											startDate={startDateWatcher}
-											dateFormat="MM/dd/yyyy"
-										/>
-									)}
-								/>
-							</div>
-							{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
+					<div className="col-span-1">
+						<Label>Date *</Label>
+						<div className="relative">
+							<ReactDatePicker
+								selected={startDateWatcher}
+								onChange={(dates: any) => {
+									const [start, end] = dates;
+
+									setValue('startDate', start);
+
+									setValue('endDate', end);
+								}}
+								startDate={startDateWatcher}
+								endDate={endDateWatcher}
+								selectsRange
+								minDate={new Date()}
+								required
+								popperPlacement="bottom"
+								placeholderText="Select date"
+								nextMonthButtonLabel=">"
+								previousMonthButtonLabel="<"
+								popperClassName="react-datepicker-right"
+								customInput={
+									<DatePickerButton>
+										{startDateWatcher && endDateWatcher
+											? formatDateRange(startDateWatcher, endDateWatcher, { showHour: false })
+											: 'Select date'}
+									</DatePickerButton>
+								}
+								renderCustomHeader={renderCustomHeader}
+							/>
 						</div>
+						{errors.startDate?.message && <ErrorMessage>{errors.startDate?.message}</ErrorMessage>}
+						{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
 					</div>
 				</div>
 			</div>
