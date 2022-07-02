@@ -2,6 +2,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { format } from 'date-fns';
+import dayjs from 'dayjs';
 import React from 'react';
 import ReactDatePicker, {
 	ReactDatePickerCustomHeaderProps,
@@ -103,6 +104,8 @@ export const DatePicker: React.FC<Props> = (props) => {
 		color
 	} = props;
 
+	console.log(selected);
+
 	return (
 		<ReactDatePicker
 			popperPlacement={'bottom'}
@@ -120,7 +123,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 			popperClassName="react-datepicker-right"
 			customInput={
 				<DatePickerButton color={color}>
-					{selected && format(new Date(selected), formatTime)}
+					{selected && dayjs(selected).format(formatTime)}
 				</DatePickerButton>
 			}
 			startDate={startDate}

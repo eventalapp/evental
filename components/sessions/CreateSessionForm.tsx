@@ -1,12 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { roundToNearestMinutes } from 'date-fns';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { NEAREST_MINUTE } from '../../config';
-import { UseCreateSessionMutationData } from '../../hooks/mutations/useCreateSessionMutation';
+import { useCreateSessionMutation } from '../../hooks/mutations/useCreateSessionMutation';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseSessionCategoriesQueryData } from '../../hooks/queries/useSessionCategoriesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
@@ -27,18 +26,15 @@ import Select from '../radix/components/Select';
 
 type Props = {
 	eid: string;
-};
+	venues: UseVenuesQueryData['venues'];
+	sessionCategories: UseSessionCategoriesQueryData['sessionCategories'];
+	event: UseEventQueryData['event'];
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
-type CreateSessionFormProps = Props &
-	DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseVenuesQueryData &
-	UseCreateSessionMutationData &
-	UseEventQueryData &
-	UseSessionCategoriesQueryData;
-
-export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
+export const CreateSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { eid, venues, createSessionMutation, event, sessionCategories } = props;
+	const { eid, venues, event, sessionCategories } = props;
+	const { createSessionMutation } = useCreateSessionMutation(String(eid));
 	const {
 		register,
 		handleSubmit,
@@ -50,18 +46,8 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 		defaultValues: {
 			venueId: venues?.[0]?.id ?? 'none',
 			categoryId: sessionCategories?.[0]?.id ?? 'none',
-			startDate: roundToNearestMinutes(
-				new Date(event?.startDate ?? '').getTime() + 1000 * 60 * 60 * 12,
-				{
-					nearestTo: NEAREST_MINUTE
-				}
-			),
-			endDate: roundToNearestMinutes(
-				new Date(new Date(event?.startDate ?? '').getTime() + 1000 * 60 * 60 * 16),
-				{
-					nearestTo: NEAREST_MINUTE
-				}
-			)
+			startDate: new Date(),
+			endDate: new Date()
 		},
 		resolver: zodResolver(CreateSessionSchema)
 	});

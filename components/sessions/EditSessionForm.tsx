@@ -4,21 +4,21 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { NEAREST_MINUTE } from '../../config';
-import { UseEditSessionMutationData } from '../../hooks/mutations/useEditSessionMutation';
+import { useEditSessionMutation } from '../../hooks/mutations/useEditSessionMutation';
 import { useRemoveAttendeeFromSessionMutation } from '../../hooks/mutations/useRemoveAttendeeFromSessionMutation';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { UseSessionCategoriesQueryData } from '../../hooks/queries/useSessionCategoriesQuery';
 import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
-import { UseSessionRoleAttendeesQueryData } from '../../hooks/queries/useSessionRoleAttendeesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
+import { AttendeeWithUser } from '../../utils/stripUser';
 import { HelpTooltip } from '../HelpTooltip';
 import { TimeZoneNotice } from '../TimeZoneNotice';
 import { LoadingInner } from '../error/LoadingInner';
@@ -37,26 +37,17 @@ import Tooltip from '../radix/components/Tooltip';
 type Props = {
 	eid: string;
 	sid: string;
-} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseVenuesQueryData &
-	UseEditSessionMutationData &
-	UseSessionQueryData &
-	UseEventQueryData &
-	UseSessionCategoriesQueryData &
-	UseSessionRoleAttendeesQueryData;
+	venues: UseVenuesQueryData['venues'];
+	session: UseSessionQueryData['session'];
+	sessionCategories: UseSessionCategoriesQueryData['sessionCategories'];
+	event: UseEventQueryData['event'];
+	roleAttendees: AttendeeWithUser[] | undefined;
+};
 
 export const EditSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const {
-		eid,
-		sid,
-		venues,
-		editSessionMutation,
-		session,
-		event,
-		sessionCategories,
-		sessionRoleAttendeesQuery
-	} = props;
+	const { eid, sid, venues, session, event, sessionCategories, roleAttendees } = props;
+	const { editSessionMutation } = useEditSessionMutation(String(eid), String(sid));
 	const {
 		register,
 		handleSubmit,
@@ -156,7 +147,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 						</Label>
 
 						<ul className="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
-							{sessionRoleAttendeesQuery?.data?.map((attendee) => (
+							{roleAttendees?.map((attendee) => (
 								<li
 									key={attendee.id}
 									className="relative flex h-full flex-col items-center justify-between"

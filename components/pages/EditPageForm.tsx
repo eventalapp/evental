@@ -1,10 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import Prisma from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseEditPageMutationData } from '../../hooks/mutations/useEditPageMutation';
-import { UsePageQueryData } from '../../hooks/queries/usePageQuery';
+import { useEditPageMutation } from '../../hooks/mutations/useEditPageMutation';
 import { copy } from '../../utils/const';
 import { EditPagePayload, EditPageSchema } from '../../utils/schemas';
 import { HelpTooltip } from '../HelpTooltip';
@@ -16,16 +16,15 @@ import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import Switch from '../radix/components/Switch';
 
-type Props = { eid: string } & DetailedHTMLProps<
+type Props = { eid: string; pid: string; page: Prisma.EventPage } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
-> &
-	UsePageQueryData &
-	UseEditPageMutationData;
+>;
 
 export const EditPageForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { page, editPageMutation } = props;
+	const { page, eid, pid } = props;
+	const { editPageMutation } = useEditPageMutation(String(eid), String(pid));
 
 	const {
 		register,

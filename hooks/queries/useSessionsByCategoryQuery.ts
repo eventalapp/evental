@@ -4,27 +4,27 @@ import { useQuery } from 'react-query';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 
-export interface UseSessionsByTypeData {
-	sessionsByTypeData: SessionWithVenue[] | undefined;
-	isSessionsByTypeLoading: boolean;
+export interface UseSessionsByCategoryData {
+	sessionsByCategoryData: SessionWithVenue[] | undefined;
+	isSessionsByCategoryLoading: boolean;
 }
 
-export interface UseSessionsByTypeOptions {
+export interface UseSessionsByCategoryOptions {
 	initialData?: SessionWithVenue[] | undefined;
 }
 
 export const useSessionsByCategoryQuery = (
 	eid: string,
 	cid: string,
-	args: UseSessionsByTypeOptions = {}
-): UseSessionsByTypeData => {
+	args: UseSessionsByCategoryOptions = {}
+): UseSessionsByCategoryData => {
 	const { initialData } = args;
 
 	let params = new URLSearchParams();
 
 	params.append('category', String(cid));
 
-	const { data: sessionsByTypeData, isLoading: isSessionsByTypeLoading } = useQuery<
+	const { data: sessionsByCategoryData, isLoading: isSessionsByCategoryLoading } = useQuery<
 		SessionWithVenue[],
 		AxiosError<ErroredAPIResponse>
 	>(
@@ -44,5 +44,5 @@ export const useSessionsByCategoryQuery = (
 		}
 	);
 
-	return { sessionsByTypeData, isSessionsByTypeLoading };
+	return { sessionsByCategoryData, isSessionsByCategoryLoading };
 };

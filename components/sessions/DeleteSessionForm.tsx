@@ -2,23 +2,24 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { UseDeleteSessionMutationData } from '../../hooks/mutations/useDeleteSessionMutation';
-import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
+import { useDeleteSessionMutation } from '../../hooks/mutations/useDeleteSessionMutation';
+import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseDeleteSessionMutationData &
-	UseSessionQueryData;
+type Props = { session: SessionWithVenue; eid: string; sid: string } & DetailedHTMLProps<
+	FormHTMLAttributes<HTMLFormElement>,
+	HTMLFormElement
+>;
 
 export const DeleteSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { session, deleteSessionMutation } = props;
+	const { session, eid, sid } = props;
 	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
-
+	const { deleteSessionMutation } = useDeleteSessionMutation(String(eid), String(sid));
 	const confirmDeleteWatcher = watch('confirmDelete');
 
 	useEffect(() => {

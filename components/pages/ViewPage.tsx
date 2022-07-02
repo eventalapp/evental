@@ -36,7 +36,7 @@ export const ViewPage: React.FC<Props> = (props) => {
 				</div>
 
 				{admin && (
-					<div className="space-x-4">
+					<div className="space-x-4 flex flex-row">
 						<IconLinkTooltip
 							message="Click to edit this page"
 							side="top"

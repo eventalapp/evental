@@ -1,10 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import Prisma from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseEditVenueMutationData } from '../../hooks/mutations/useEditVenueMutation';
-import { UseVenueQueryData } from '../../hooks/queries/useVenueQuery';
+import { useEditVenueMutation } from '../../hooks/mutations/useEditVenueMutation';
 import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
@@ -13,17 +13,14 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 
-type Props = { eid: string } & DetailedHTMLProps<
+type Props = { eid: string; vid: string; venue: Prisma.EventVenue } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
-> &
-	UseVenueQueryData &
-	UseEditVenueMutationData;
-
+>;
 export const EditVenueForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { venue, editVenueMutation } = props;
-
+	const { venue, eid, vid } = props;
+	const { editVenueMutation } = useEditVenueMutation(String(eid), String(vid));
 	const {
 		register,
 		handleSubmit,

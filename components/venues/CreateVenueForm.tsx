@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseCreateVenueMutationData } from '../../hooks/mutations/useCreateVenueMutation';
+import { useCreateVenueMutation } from '../../hooks/mutations/useCreateVenueMutation';
 import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
@@ -15,14 +15,12 @@ import { Label } from '../form/Label';
 type Props = { eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
-> &
-	UseCreateVenueMutationData;
+>;
 
 export const CreateVenueForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-
-	const { createVenueMutation } = props;
-
+	const { eid } = props;
+	const { createVenueMutation } = useCreateVenueMutation(String(eid), { redirect: true });
 	const {
 		register,
 		handleSubmit,

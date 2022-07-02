@@ -26,7 +26,7 @@ export const SidebarLink = React.forwardRef<HTMLAnchorElement, Props>((props, re
 	return (
 		<a
 			className={classNames(
-				'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 outline-none no-underline mt-1',
+				'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 text-gray-600 outline-none no-underline mt-1',
 				className
 			)}
 			ref={ref}

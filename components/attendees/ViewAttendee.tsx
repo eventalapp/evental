@@ -27,7 +27,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 		<div>
 			<div className="relative mb-7 flex flex-row items-center">
 				{admin && (
-					<div className="absolute top-0 right-0 space-x-4">
+					<div className="absolute top-0 right-0 space-x-4 flex flex-row">
 						<IconLinkTooltip
 							message="Click to edit this attendee"
 							side="top"

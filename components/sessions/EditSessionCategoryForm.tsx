@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import Prisma from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseEditSessionCategoryMutationData } from '../../hooks/mutations/useEditSessionCategoryMutation';
-import { UseSessionCategoryQueryData } from '../../hooks/queries/useSessionCategoryQuery';
+import { useEditSessionCategoryMutation } from '../../hooks/mutations/useEditSessionCategoryMutation';
 import { colors, copy } from '../../utils/const';
 import { EditSessionCategoryPayload, EditSessionCategorySchema } from '../../utils/schemas';
 import { HelpTooltip } from '../HelpTooltip';
@@ -15,13 +15,16 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseEditSessionCategoryMutationData &
-	UseSessionCategoryQueryData;
+type Props = {
+	eid: string;
+	cid: string;
+	sessionCategory: Prisma.EventSessionCategory;
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const EditSessionCategoryForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { editSessionCategoryMutation, sessionCategory } = props;
+	const { sessionCategory, eid, cid } = props;
+	const { editSessionCategoryMutation } = useEditSessionCategoryMutation(String(eid), String(cid));
 	const {
 		register,
 		handleSubmit,
