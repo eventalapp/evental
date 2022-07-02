@@ -13,6 +13,25 @@ import { DatePickerButton } from './DatePickerButton';
 
 type Props = { formatTime?: string; color?: string } & ReactDatePickerProps;
 
+export const renderCustomHeader = ({
+	date,
+	decreaseMonth,
+	increaseMonth,
+	prevMonthButtonDisabled,
+	nextMonthButtonDisabled
+}: Pick<
+	ReactDatePickerCustomHeaderProps,
+	'date' | 'increaseMonth' | 'decreaseMonth' | 'nextMonthButtonDisabled' | 'prevMonthButtonDisabled'
+>) => (
+	<CustomDatePickerHeader
+		date={date}
+		decreaseMonth={decreaseMonth}
+		increaseMonth={increaseMonth}
+		prevMonthButtonDisabled={prevMonthButtonDisabled}
+		nextMonthButtonDisabled={nextMonthButtonDisabled}
+	/>
+);
+
 export const CustomDatePickerHeader: React.FC<
 	Pick<
 		ReactDatePickerCustomHeaderProps,
@@ -108,21 +127,7 @@ export const DatePicker: React.FC<Props> = (props) => {
 			endDate={endDate}
 			showTimeSelect={showTimeSelect}
 			timeIntervals={timeIntervals}
-			renderCustomHeader={({
-				date,
-				decreaseMonth,
-				increaseMonth,
-				prevMonthButtonDisabled,
-				nextMonthButtonDisabled
-			}) => (
-				<CustomDatePickerHeader
-					date={date}
-					decreaseMonth={decreaseMonth}
-					increaseMonth={increaseMonth}
-					prevMonthButtonDisabled={prevMonthButtonDisabled}
-					nextMonthButtonDisabled={nextMonthButtonDisabled}
-				/>
-			)}
+			renderCustomHeader={renderCustomHeader}
 		/>
 	);
 };
