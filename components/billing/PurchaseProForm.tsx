@@ -6,6 +6,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { CURRENCY } from '../../config';
+import { priceAfterSale } from '../../utils/const';
 import { proAttendeesToPrice } from '../../utils/price';
 import { formatAmountForDisplay } from '../../utils/stripeHelpers';
 import { EventalProCard } from '../EventalProCard';
@@ -53,7 +54,8 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 				<EventalProCard attendees={attendees}>
 					<div className="flex flex-row justify-end">
 						<Button type="submit">
-							Purchase ({formatAmountForDisplay(proAttendeesToPrice(attendees), CURRENCY)})
+							Purchase (
+							{formatAmountForDisplay(priceAfterSale(proAttendeesToPrice(attendees)), CURRENCY)})
 						</Button>
 					</div>
 				</EventalProCard>
