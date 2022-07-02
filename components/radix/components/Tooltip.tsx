@@ -12,7 +12,7 @@ const Tooltip: React.FC<Props> = (props) => {
 	const { children, message, side = 'top', sideOffset = 4 } = props;
 
 	return (
-		<TooltipPrimitive.Provider delayDuration={100}>
+		<TooltipPrimitive.Provider delayDuration={0}>
 			<TooltipPrimitive.Root>
 				<TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
 				<TooltipPrimitive.Content
@@ -23,7 +23,7 @@ const Tooltip: React.FC<Props> = (props) => {
 						'radix-side-right:animate-slide-left-fade',
 						'radix-side-bottom:animate-slide-up-fade',
 						'radix-side-left:animate-slide-right-fade',
-						'inline-flex items-center rounded-md px-4 py-2.5 duration-75',
+						'inline-flex items-center rounded-md px-4 py-2.5 duration-[50ms]',
 						'max-w-[240px] bg-gray-800 dark:bg-gray-800'
 					)}
 				>
