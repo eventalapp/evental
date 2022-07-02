@@ -8,8 +8,8 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { Footer } from '../../../components/Footer';
-import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../components/error/PrivatePage';
+import { ViewErrorPage } from '../../../components/error/ViewErrorPage';
 import { EventHeader } from '../../../components/events/EventHeader';
 import { EventNavigation } from '../../../components/events/Navigation';
 import { SessionDatePicker } from '../../../components/events/SessionDatePicker';
@@ -33,7 +33,7 @@ const ViewEventPage: NextPage = () => {
 	const { sessionCategories } = useSessionCategoriesQuery(String(eid));
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (event && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {

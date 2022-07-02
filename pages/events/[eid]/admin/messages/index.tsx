@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { Footer } from '../../../../../components/Footer';
 import { NoAccessPage } from '../../../../../components/error/NoAccessPage';
-import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../components/events/settingsNavigation';
@@ -29,7 +28,7 @@ const MessagePage: NextPage = () => {
 	}
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (eventError) {

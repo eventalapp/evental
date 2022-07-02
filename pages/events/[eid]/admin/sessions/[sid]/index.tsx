@@ -44,7 +44,7 @@ const ViewSessionPage: NextPage = () => {
 	}
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (!isOrganizer) {

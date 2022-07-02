@@ -6,6 +6,7 @@ import { Footer } from '../../../../../../components/Footer';
 import { NoAccessPage } from '../../../../../../components/error/NoAccessPage';
 import { NotFoundPage } from '../../../../../../components/error/NotFoundPage';
 import { UnauthorizedPage } from '../../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../../components/error/ViewErrorPage';
 import { EventSettingsNavigation } from '../../../../../../components/events/settingsNavigation';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
@@ -43,7 +44,7 @@ const DeleteRolePage: NextPage = () => {
 	}
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	return (

@@ -8,6 +8,7 @@ import { Footer } from '../../../../../components/Footer';
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { Button } from '../../../../../components/form/Button';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
@@ -39,7 +40,7 @@ const RoleInvitePage: NextPage = () => {
 	}
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (event && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {

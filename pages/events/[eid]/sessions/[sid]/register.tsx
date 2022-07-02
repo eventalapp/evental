@@ -5,9 +5,9 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { Footer } from '../../../../../components/Footer';
-import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
+import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/Navigation';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
@@ -31,7 +31,7 @@ const SessionRegisterPage: NextPage = () => {
 	}
 
 	if (eventError) {
-		return <NotFoundPage message="Event not found." />;
+		return <ViewErrorPage errors={[eventError]} />;
 	}
 
 	if (event && event.privacy === 'PRIVATE' && !isOrganizer && !isOrganizerLoading) {
