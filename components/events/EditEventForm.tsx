@@ -6,21 +6,23 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { ChromePicker } from 'react-color';
+import ReactDatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import ReactSelect from 'react-select';
-import { toast } from 'react-toastify';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { UseEventQueryData, useEventQuery } from '../../hooks/queries/useEventQuery';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
+import { formatDateRange } from '../../utils/formatDateRange';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
-import { DatePicker } from '../form/DatePicker';
+import { renderCustomHeader } from '../form/DatePicker';
+import { DatePickerButton } from '../form/DatePickerButton';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
@@ -40,6 +42,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { editEventMutation, event, canCancel = false } = props;
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
+
 	const {
 		register,
 		handleSubmit,
@@ -73,20 +76,6 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 	const { event: eventSlugCheck, isEventLoading: isEventSlugCheckLoading } =
 		useEventQuery(slugWatcher);
-
-	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('endDate', startDateWatcher);
-			toast.warn('The start date cannot be later than the end date.');
-		}
-	}, [startDateWatcher]);
-
-	useEffect(() => {
-		if (startDateWatcher.getTime() > endDateWatcher.getTime()) {
-			setValue('startDate', endDateWatcher);
-			toast.warn('The end date cannot be earlier than the start date.');
-		}
-	}, [endDateWatcher]);
 
 	useEffect(() => {
 		setValue('slug', slugify(slugWatcher));
@@ -259,52 +248,42 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="col-span-4 md:col-span-2">
-					<Label htmlFor="startDate">Start Date *</Label>
+					<Label htmlFor="startDate">Date *</Label>
 					<div className="relative">
-						<Controller
-							control={control}
-							name="startDate"
-							render={({ field }) => (
-								<DatePicker
-									onChange={(date) => {
-										field.onChange(dayjs(date).toDate());
-									}}
-									color={colorWatcher}
-									selected={dayjs(field.value).toDate()}
-									startDate={dayjs(field.value).toDate()}
-									endDate={endDateWatcher}
-									selectsStart
-									required
-									dateFormat="MM/dd/yyyy"
-								/>
-							)}
+						<ReactDatePicker
+							selected={startDateWatcher}
+							onChange={(dates) => {
+								const [start, end] = dates;
+
+								if (start) {
+									setValue('endDate', start);
+								}
+
+								if (end) {
+									setValue('endDate', end);
+								}
+							}}
+							startDate={startDateWatcher}
+							endDate={endDateWatcher}
+							selectsRange
+							required
+							popperPlacement="bottom"
+							placeholderText="Select date"
+							minDate={new Date()}
+							nextMonthButtonLabel=">"
+							previousMonthButtonLabel="<"
+							popperClassName="react-datepicker-right"
+							customInput={
+								<DatePickerButton>
+									{startDateWatcher && endDateWatcher
+										? formatDateRange(startDateWatcher, endDateWatcher, { showHour: false })
+										: 'Select date'}
+								</DatePickerButton>
+							}
+							renderCustomHeader={renderCustomHeader}
 						/>
 					</div>
 					{errors.startDate?.message && <ErrorMessage>{errors.startDate?.message}</ErrorMessage>}
-				</div>
-
-				<div className="col-span-4 md:col-span-2">
-					<Label htmlFor="endDate">End Date *</Label>
-					<div className="relative">
-						<Controller
-							control={control}
-							name="endDate"
-							render={({ field }) => (
-								<DatePicker
-									onChange={(date) => {
-										field.onChange(dayjs(date).toDate());
-									}}
-									color={colorWatcher}
-									selected={dayjs(field.value).toDate()}
-									selectsEnd
-									required
-									startDate={startDateWatcher}
-									endDate={dayjs(field.value).toDate()}
-									dateFormat="MM/dd/yyyy"
-								/>
-							)}
-						/>
-					</div>
 					{errors.endDate?.message && <ErrorMessage>{errors.endDate?.message}</ErrorMessage>}
 				</div>
 
