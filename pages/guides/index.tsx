@@ -114,16 +114,16 @@ const GuidesPage: NextPage = () => {
 									relativeLink: '/guides/session/creating-a-session'
 								},
 								{
-									text: 'Creating a session type',
-									relativeLink: '/guides/session/creating-a-session-type'
+									text: 'Creating a session category',
+									relativeLink: '/guides/session/creating-a-session-category'
 								},
 								{
 									text: 'Editing a session',
 									relativeLink: '/guides/session/editing-a-session'
 								},
 								{
-									text: 'Editing a session type',
-									relativeLink: '/guides/session/editing-a-session-type'
+									text: 'Editing a session category',
+									relativeLink: '/guides/session/editing-a-session-category'
 								},
 								{
 									text: 'Attaching role members to a session',

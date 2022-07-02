@@ -33,7 +33,7 @@ const ViewSessionCategoryPage: NextPage = () => {
 	}
 
 	if (!sessionCategory) {
-		return <NotFoundPage message="Session Type not found." />;
+		return <NotFoundPage message="Session category not found." />;
 	}
 
 	if (!sessionsByTypeData) {

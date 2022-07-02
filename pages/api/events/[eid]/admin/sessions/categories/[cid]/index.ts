@@ -84,7 +84,7 @@ export default api({
 		const sessionCategory = await getSessionCategory(String(eid), String(cid));
 
 		if (!sessionCategory) {
-			throw new NextkitError(404, 'Session Type not found.');
+			throw new NextkitError(404, 'Session category not found.');
 		}
 
 		const slug: string | undefined =
@@ -114,7 +114,7 @@ export default api({
 		});
 
 		if (!editedSession) {
-			throw new NextkitError(500, 'Error editing session type.');
+			throw new NextkitError(500, 'Error editing session category.');
 		}
 
 		return editedSession;

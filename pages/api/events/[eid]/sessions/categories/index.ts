@@ -12,7 +12,7 @@ export default api({
 		const sessionCategoryList = await getSessionCategories(String(eid));
 
 		if (!sessionCategoryList) {
-			throw new NextkitError(404, 'Session types not found');
+			throw new NextkitError(404, 'Session Categories not found');
 		}
 
 		return sessionCategoryList;

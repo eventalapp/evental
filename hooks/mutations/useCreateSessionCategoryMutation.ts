@@ -42,7 +42,7 @@ export const useCreateSessionCategoryMutation = (
 		},
 		{
 			onSuccess: () => {
-				toast.success('Session type created successfully');
+				toast.success('Session category created successfully');
 
 				if (redirect) {
 					router.push(`/events/${eid}/admin/sessions/categories`).then(() => {

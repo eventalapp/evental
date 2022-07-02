@@ -24,7 +24,7 @@
 - attach people on session creation
 - attach people -> create attendee (new modal)
 - undefined user description
-- rename session type to category
+- rename session category to category
 - make event placeholder with year
 - make default avatar more neutral
 - hide leave button as founder

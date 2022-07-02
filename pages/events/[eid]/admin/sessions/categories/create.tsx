@@ -44,13 +44,13 @@ const CreateSessionPage: NextPage = () => {
 	return (
 		<PageWrapper>
 			<Head>
-				<title>Create Session Type</title>
+				<title>Create Session Category</title>
 			</Head>
 
 			<EventSettingsNavigation eid={String(eid)} />
 
 			<Column>
-				<Heading>Create Session Types</Heading>
+				<Heading>Create Session Category</Heading>
 
 				<CreateSessionCategoryForm createSessionCategoryMutation={createSessionCategoryMutation} />
 			</Column>

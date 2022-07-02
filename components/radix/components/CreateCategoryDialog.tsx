@@ -85,14 +85,14 @@ const CreateCategoryDialog: React.FC<Props> = (props) => {
 							Create a Type
 						</DialogPrimitive.Title>
 						<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
-							Fill out and submit the form below to create a session type to categorize your
+							Fill out and submit the form below to create a session category to categorize your
 							sessions.
 						</DialogPrimitive.Description>
 
 						<div className="mt-5 flex w-full flex-row flex-wrap">
 							<div className="flex-1 grow md:mr-5">
 								<Label htmlFor="name">Name *</Label>
-								<Input placeholder="Session type name" {...register('name')} />
+								<Input placeholder="Session category name" {...register('name')} />
 								{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 							</div>
 

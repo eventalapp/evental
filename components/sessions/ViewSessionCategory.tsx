@@ -46,7 +46,7 @@ export const ViewSessionCategory: React.FC<Props> = (props) => {
 				{admin && (
 					<div className="space-x-4">
 						<IconLinkTooltip
-							message="Click to edit this session type"
+							message="Click to edit this session category"
 							side="top"
 							href={`/events/${eid}/admin/sessions/categories/${cid}/edit`}
 							icon={faPenToSquare}
@@ -54,7 +54,7 @@ export const ViewSessionCategory: React.FC<Props> = (props) => {
 						/>
 
 						<IconLinkTooltip
-							message="Click to delete this session type"
+							message="Click to delete this session category"
 							side="top"
 							href={`/events/${eid}/admin/sessions/categories/${cid}/delete`}
 							icon={faTrashCan}

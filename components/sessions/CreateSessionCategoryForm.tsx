@@ -43,7 +43,7 @@ export const CreateSessionCategoryForm: React.FC<Props> = (props) => {
 			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
 				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="name">Name *</Label>
-					<Input placeholder="Session type name" {...register('name')} />
+					<Input placeholder="Session category name" {...register('name')} />
 					{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 				</div>
 
@@ -80,7 +80,7 @@ export const CreateSessionCategoryForm: React.FC<Props> = (props) => {
 					disabled={createSessionCategoryMutation.isLoading}
 					style={{ backgroundColor: colorWatcher, color: '#000000' }}
 				>
-					{createSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Create Session Type'}
+					{createSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Create Session Category'}
 				</Button>
 			</div>
 		</form>

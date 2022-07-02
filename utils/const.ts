@@ -4,7 +4,7 @@ export const copy = {
 	tooltip: {
 		defaultRole:
 			'You can set this role to the default role. When new members join your event, they will be given this role.',
-		type: 'A session type is used to categorize sessions.',
+		category: 'A session category is used to categorize sessions.',
 		color: 'Pick a color for your event to push your brand. We recommend you pick a darker color.',
 		venue: 'A venue is used to group sessions by location.',
 		maxAttendees:
@@ -12,7 +12,7 @@ export const copy = {
 		topLevel: 'A top level page is displayed on the main navigation for the event.',
 		attachPeople:
 			'You can attach people to a session, they will be listed under their role. If a user has the Speaker role, they will show as a Speaker for this session.',
-		typeColor: 'A color is used to identify a session type.',
+		typeColor: 'A color is used to identify a session category.',
 		eventType: 'You can specify whether your event is In-Person, Hybrid, or Virtual.',
 		eventPrivacy:
 			'If your event is Public, it will be displayed on the public events page. If your event is Unlisted, only users with the link to the event will be able to view it. And if it is Private, only organizers can view your event.',
