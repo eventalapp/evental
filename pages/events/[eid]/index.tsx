@@ -122,7 +122,7 @@ const ViewEventPage: NextPage = () => {
 						<div className="mb-4">
 							<span className="mb-1 block font-medium">
 								{event && sessionCategories ? (
-									sessionCategories.length > 0 && 'Filter by Type'
+									sessionCategories.length > 0 && 'Filter by Category'
 								) : (
 									<Skeleton className="w-3/4" />
 								)}
