@@ -4,32 +4,36 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-export interface UseDeleteSessionTypeMutationData {
-	deleteSessionTypeMutation: UseMutationResult<void, AxiosError<ErroredAPIResponse, unknown>, void>;
+export interface UseDeleteSessionCategoryMutationData {
+	deleteSessionCategoryMutation: UseMutationResult<
+		void,
+		AxiosError<ErroredAPIResponse, unknown>,
+		void
+	>;
 }
 
-export const useDeleteSessionTypeMutation = (
+export const useDeleteSessionCategoryMutation = (
 	eid: string,
-	tid: string
-): UseDeleteSessionTypeMutationData => {
+	cid: string
+): UseDeleteSessionCategoryMutationData => {
 	const queryClient = useQueryClient();
 
-	const deleteSessionTypeMutation = useMutation<
+	const deleteSessionCategoryMutation = useMutation<
 		void,
 		AxiosError<ErroredAPIResponse, unknown>,
 		void
 	>(
 		async () => {
 			return await axios
-				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/sessions/types/${tid}`)
+				.delete<SuccessAPIResponse<void>>(`/api/events/${eid}/admin/sessions/categories/${cid}`)
 				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: () => {
 				toast.success('Session deleted successfully');
 
-				router.push(`/events/${eid}/admin/sessions/types`).then(() => {
-					void queryClient.invalidateQueries(['type', eid, tid]);
+				router.push(`/events/${eid}/admin/sessions/categories`).then(() => {
+					void queryClient.invalidateQueries(['type', eid, cid]);
 					void queryClient.invalidateQueries(['types', eid]);
 				});
 			},
@@ -39,5 +43,5 @@ export const useDeleteSessionTypeMutation = (
 		}
 	);
 
-	return { deleteSessionTypeMutation };
+	return { deleteSessionCategoryMutation };
 };

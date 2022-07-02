@@ -4,14 +4,14 @@ import { prisma } from '../../../../../../../../prisma/client';
 import { api } from '../../../../../../../../utils/api';
 import { generateSlug } from '../../../../../../../../utils/generateSlug';
 import { isOrganizer } from '../../../../../../../../utils/isOrganizer';
-import { EditSessionTypeSchema } from '../../../../../../../../utils/schemas';
+import { EditSessionCategorySchema } from '../../../../../../../../utils/schemas';
 import { getEvent } from '../../../../index';
-import { getSessionType } from '../../../../sessions/types/[tid]';
+import { getSessionCategory } from '../../../../sessions/categories/[cid]';
 
 export default api({
 	async DELETE({ ctx, req }) {
 		const user = await ctx.getUser();
-		const { eid, tid } = req.query;
+		const { eid, cid } = req.query;
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
@@ -34,29 +34,29 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const sessionType = await prisma.eventSessionType.findFirst({
+		const sessionCategory = await prisma.eventSessionCategory.findFirst({
 			where: {
 				eventId: event.id,
-				OR: [{ id: String(tid) }, { slug: String(tid) }]
+				OR: [{ id: String(cid) }, { slug: String(cid) }]
 			},
 			select: {
 				id: true
 			}
 		});
 
-		if (!sessionType) {
+		if (!sessionCategory) {
 			throw new NextkitError(404, 'Session not found.');
 		}
 
-		await prisma.eventSessionType.delete({
+		await prisma.eventSessionCategory.delete({
 			where: {
-				id: sessionType.id
+				id: sessionCategory.id
 			}
 		});
 	},
 	async PUT({ ctx, req }) {
 		const user = await ctx.getUser();
-		const { eid, tid } = req.query;
+		const { eid, cid } = req.query;
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
@@ -73,7 +73,7 @@ export default api({
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
-		const body = EditSessionTypeSchema.parse(req.body);
+		const body = EditSessionCategorySchema.parse(req.body);
 
 		const event = await getEvent(String(eid));
 
@@ -81,14 +81,14 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const sessionType = await getSessionType(String(eid), String(tid));
+		const sessionCategory = await getSessionCategory(String(eid), String(cid));
 
-		if (!sessionType) {
+		if (!sessionCategory) {
 			throw new NextkitError(404, 'Session Type not found.');
 		}
 
 		const slug: string | undefined =
-			body.name !== sessionType.name
+			body.name !== sessionCategory.name
 				? await generateSlug(body.name, async (val) => {
 						return !Boolean(
 							await prisma.eventSession.findFirst({
@@ -101,9 +101,9 @@ export default api({
 				  })
 				: undefined;
 
-		const editedSession = await prisma.eventSessionType.update({
+		const editedSession = await prisma.eventSessionCategory.update({
 			where: {
-				id: sessionType.id
+				id: sessionCategory.id
 			},
 			data: {
 				eventId: event.id,

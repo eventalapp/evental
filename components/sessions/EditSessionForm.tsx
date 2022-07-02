@@ -12,9 +12,9 @@ import { NEAREST_MINUTE } from '../../config';
 import { UseEditSessionMutationData } from '../../hooks/mutations/useEditSessionMutation';
 import { useRemoveAttendeeFromSessionMutation } from '../../hooks/mutations/useRemoveAttendeeFromSessionMutation';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
+import { UseSessionCategoriesQueryData } from '../../hooks/queries/useSessionCategoriesQuery';
 import { UseSessionQueryData } from '../../hooks/queries/useSessionQuery';
 import { UseSessionRoleAttendeesQueryData } from '../../hooks/queries/useSessionRoleAttendeesQuery';
-import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
@@ -29,7 +29,7 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import AttachPeopleDialog from '../radix/components/AttachPeopleDialog';
-import CreateTypeDialog from '../radix/components/CreateTypeDialog';
+import CreateCategoryDialog from '../radix/components/CreateCategoryDialog';
 import CreateVenueDialog from '../radix/components/CreateVenueDialog';
 import Select from '../radix/components/Select';
 import Tooltip from '../radix/components/Tooltip';
@@ -42,7 +42,7 @@ type Props = {
 	UseEditSessionMutationData &
 	UseSessionQueryData &
 	UseEventQueryData &
-	UseSessionTypesQueryData &
+	UseSessionCategoriesQueryData &
 	UseSessionRoleAttendeesQueryData;
 
 export const EditSessionForm: React.FC<Props> = (props) => {
@@ -54,7 +54,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 		editSessionMutation,
 		session,
 		event,
-		sessionTypes,
+		sessionCategories,
 		sessionRoleAttendeesQuery
 	} = props;
 	const {
@@ -69,7 +69,7 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 			name: String(session?.name),
 			description: session?.description ?? undefined,
 			venueId: session?.venueId ?? 'none',
-			typeId: session?.typeId ?? 'none',
+			categoryId: session?.categoryId ?? 'none',
 			maxAttendees: session?.maxAttendees ?? undefined,
 			startDate: session?.startDate ? new Date(String(session?.startDate)) : new Date(),
 			endDate: session?.endDate ? new Date(String(session?.endDate)) : new Date()
@@ -231,30 +231,32 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 
 						<Controller
 							control={control}
-							name="typeId"
+							name="categoryId"
 							render={({ field }) => (
 								<Select
 									options={[
 										{ label: 'No Type', value: 'none' },
-										...Object.values(sessionTypes || []).map((sessionType) => ({
-											label: sessionType.name,
-											value: sessionType.id
+										...Object.values(sessionCategories || []).map((sessionCategory) => ({
+											label: sessionCategory.name,
+											value: sessionCategory.id
 										}))
 									]}
 									value={field.value as string}
 									onValueChange={(value) => {
-										setValue('typeId', value);
+										setValue('categoryId', value);
 									}}
 								/>
 							)}
 						/>
-						<CreateTypeDialog eid={String(eid)}>
+						<CreateCategoryDialog eid={String(eid)}>
 							<span className="mt-1 cursor-pointer text-sm text-gray-600">
 								Dont see your type? Create a Type
 							</span>
-						</CreateTypeDialog>
+						</CreateCategoryDialog>
 
-						{errors.typeId?.message && <ErrorMessage>{errors.typeId?.message}</ErrorMessage>}
+						{errors.categoryId?.message && (
+							<ErrorMessage>{errors.categoryId?.message}</ErrorMessage>
+						)}
 					</div>
 
 					<div>

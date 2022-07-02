@@ -15,24 +15,23 @@ import { Heading } from '../../../../../../components/typography/Heading';
 import { useEditSessionMutation } from '../../../../../../hooks/mutations/useEditSessionMutation';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
+import { useSessionCategoriesQuery } from '../../../../../../hooks/queries/useSessionCategoriesQuery';
 import { useSessionQuery } from '../../../../../../hooks/queries/useSessionQuery';
 import { useSessionRoleAttendeesQuery } from '../../../../../../hooks/queries/useSessionRoleAttendeesQuery';
-import { useSessionTypesQuery } from '../../../../../../hooks/queries/useSessionTypesQuery';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 import { useVenuesQuery } from '../../../../../../hooks/queries/useVenuesQuery';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid, sid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
 	const { venues, isVenuesLoading, venuesError } = useVenuesQuery(String(eid));
 	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
 	const { session, isSessionLoading, sessionError } = useSessionQuery(String(eid), String(sid));
 	const { editSessionMutation } = useEditSessionMutation(String(eid), String(sid));
-	const { user, isUserLoading } = useUser();
-	const { sessionTypes, isSessionTypesLoading, sessionTypesError } = useSessionTypesQuery(
-		String(eid)
-	);
+	const { user } = useUser();
+	const { sessionCategories, isSessionCategoriesLoading, sessionCategoriesError } =
+		useSessionCategoriesQuery(String(eid));
 	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
 
 	if (!user?.id) {
@@ -51,8 +50,8 @@ const EditSessionPage: NextPage = () => {
 		return <NotFoundPage message="No venues found." />;
 	}
 
-	if (venuesError || eventError || sessionTypesError) {
-		return <ViewErrorPage errors={[venuesError, eventError, sessionTypesError]} />;
+	if (venuesError || eventError || sessionCategoriesError) {
+		return <ViewErrorPage errors={[venuesError, eventError, sessionCategoriesError]} />;
 	}
 
 	if (eventError) {
@@ -76,9 +75,9 @@ const EditSessionPage: NextPage = () => {
 					sid={String(sid)}
 					venues={venues}
 					session={session}
-					sessionTypes={sessionTypes}
-					isSessionTypesLoading={isSessionTypesLoading}
-					sessionTypesError={sessionTypesError}
+					sessionCategories={sessionCategories}
+					isSessionCategoriesLoading={isSessionCategoriesLoading}
+					sessionCategoriesError={sessionCategoriesError}
 					editSessionMutation={editSessionMutation}
 					isSessionLoading={isSessionLoading}
 					isVenuesLoading={isVenuesLoading}

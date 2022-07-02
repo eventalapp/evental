@@ -190,17 +190,17 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 			<div className="mb-2">
 				<div className="flex flex-row flex-wrap items-center text-gray-600">
-					{session?.type?.name && (
+					{session?.category?.name && (
 						<TooltipIcon
 							customIcon={
 								<div
 									className="mr-1.5 h-3 w-3 rounded-full"
-									style={{ backgroundColor: session.type.color }}
+									style={{ backgroundColor: session.category.color }}
 								/>
 							}
-							link={`/events/${eid}/sessions/types/${session.type.slug}`}
-							tooltipMessage={`This session is a part of the ${session.type.name} category.`}
-							label={session.type.name}
+							link={`/events/${eid}/sessions/categories/${session.category.slug}`}
+							tooltipMessage={`This session is a part of the ${session.category.name} category.`}
+							label={session.category.name}
 						/>
 					)}
 

@@ -34,7 +34,7 @@ export const getSession = async (eid: string, sid: string): Promise<SessionWithV
 		},
 		include: {
 			venue: true,
-			type: true,
+			category: true,
 			_count: {
 				select: { attendees: true }
 			},

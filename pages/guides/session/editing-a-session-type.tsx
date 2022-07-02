@@ -19,14 +19,14 @@ type Section = {
 
 const sections: Record<string, Section> = {
 	navigateDashboard: { anchor: 'navigate-to-the-dashboard', title: 'Navigate to the dashboard' },
-	navigateSessionTypes: {
-		anchor: 'navigate-to-the-session-types-page',
-		title: 'Navigate to the session types page'
+	navigateSessionCategories: {
+		anchor: 'navigate-to-the-session-categories-page',
+		title: 'Navigate to the session categories page'
 	},
-	editSessionType: { anchor: 'edit-a-session-type', title: 'Edit a session type' }
+	editSessionCategory: { anchor: 'edit-a-session-type', title: 'Edit a session type' }
 };
 
-const EditingASessionTypeGuidePage: NextPage = () => {
+const EditingASessionCategoryGuidePage: NextPage = () => {
 	return (
 		<PageWrapper variant="white">
 			<NextSeo
@@ -66,12 +66,12 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 							relativeLink: `/guides/session/editing-a-session-type#${sections.navigateDashboard.anchor}`
 						},
 						{
-							text: sections.navigateSessionTypes.title,
-							relativeLink: `/guides/session/editing-a-session-type#${sections.navigateSessionTypes.anchor}`
+							text: sections.navigateSessionCategories.title,
+							relativeLink: `/guides/session/editing-a-session-type#${sections.navigateSessionCategories.anchor}`
 						},
 						{
-							text: sections.editSessionType.title,
-							relativeLink: `/guides/session/editing-a-session-type#${sections.editSessionType.anchor}`
+							text: sections.editSessionCategory.title,
+							relativeLink: `/guides/session/editing-a-session-type#${sections.editSessionCategory.anchor}`
 						}
 					]}
 				/>
@@ -88,10 +88,10 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 					</p>
 				</GuideSection>
 
-				<GuideSection id={sections.navigateSessionTypes.anchor}>
+				<GuideSection id={sections.navigateSessionCategories.anchor}>
 					<GuideSectionHeader
-						text={sections.navigateSessionTypes.title}
-						url={`/guides/session/editing-a-session-type#${sections.navigateSessionTypes.anchor}`}
+						text={sections.navigateSessionCategories.title}
+						url={`/guides/session/editing-a-session-type#${sections.navigateSessionCategories.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -100,10 +100,10 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 					</p>
 				</GuideSection>
 
-				<GuideSection id={sections.editSessionType.anchor}>
+				<GuideSection id={sections.editSessionCategory.anchor}>
 					<GuideSectionHeader
-						text={sections.editSessionType.title}
-						url={`/guides/session/editing-a-session-type#${sections.editSessionType.anchor}`}
+						text={sections.editSessionCategory.title}
+						url={`/guides/session/editing-a-session-type#${sections.editSessionCategory.anchor}`}
 					/>
 
 					<p className="mb-4 text-gray-700">
@@ -131,4 +131,4 @@ const EditingASessionTypeGuidePage: NextPage = () => {
 	);
 };
 
-export default EditingASessionTypeGuidePage;
+export default EditingASessionCategoryGuidePage;

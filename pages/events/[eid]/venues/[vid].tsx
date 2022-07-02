@@ -25,7 +25,7 @@ const ViewAttendeePage: NextPage = () => {
 	const { sessionsByVenueData } = useSessionsByVenueQuery(String(eid), String(vid));
 	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
 
-	if (!venueError) {
+	if (venueError) {
 		return <NotFoundPage message="Venue not found." />;
 	}
 

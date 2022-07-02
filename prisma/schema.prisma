@@ -99,14 +99,14 @@ model Event {
   maxAttendees Int           @default(5)
   password     String?
 
-  attendees        EventAttendee[]
-  sessions         EventSession[]
-  venues           EventVenue[]
-  roles            EventRole[]
-  sessionAttendees EventSessionAttendee[]
-  sessionTypes     EventSessionType[]
-  pages            EventPage[]
-  message          EventMessage[]
+  attendees         EventAttendee[]
+  sessions          EventSession[]
+  venues            EventVenue[]
+  roles             EventRole[]
+  sessionAttendees  EventSessionAttendee[]
+  sessionCategories EventSessionCategory[]
+  pages             EventPage[]
+  message           EventMessage[]
 
   @@map("event")
 }
@@ -152,25 +152,25 @@ model EventSession {
   startDate    DateTime
   endDate      DateTime
   venueId      String?
-  typeId       String?
+  categoryId   String?
   name         String
   maxAttendees Int?
   description  String?  @db.VarChar(2000)
   updatedAt    DateTime @updatedAt
   createdAt    DateTime @default(now())
 
-  event Event             @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  venue EventVenue?       @relation(fields: [venueId], references: [id], onDelete: Cascade)
-  type  EventSessionType? @relation(fields: [typeId], references: [id], onDelete: Cascade)
+  event    Event                 @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  venue    EventVenue?           @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  category EventSessionCategory? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   attendees EventSessionAttendee[]
 
   @@unique([eventId, slug])
-  @@index([eventId, venueId, typeId])
+  @@index([eventId, venueId, categoryId])
   @@map("event_session")
 }
 
-model EventSessionType {
+model EventSessionCategory {
   id      String @id @default(cuid())
   eventId String
   slug    String

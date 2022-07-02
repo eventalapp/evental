@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { NEAREST_MINUTE } from '../../config';
 import { UseCreateSessionMutationData } from '../../hooks/mutations/useCreateSessionMutation';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
-import { UseSessionTypesQueryData } from '../../hooks/queries/useSessionTypesQuery';
+import { UseSessionCategoriesQueryData } from '../../hooks/queries/useSessionCategoriesQuery';
 import { UseVenuesQueryData } from '../../hooks/queries/useVenuesQuery';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
@@ -21,7 +21,7 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import CreateTypeDialog from '../radix/components/CreateTypeDialog';
+import CreateCategoryDialog from '../radix/components/CreateCategoryDialog';
 import CreateVenueDialog from '../radix/components/CreateVenueDialog';
 import Select from '../radix/components/Select';
 
@@ -34,11 +34,11 @@ type CreateSessionFormProps = Props &
 	UseVenuesQueryData &
 	UseCreateSessionMutationData &
 	UseEventQueryData &
-	UseSessionTypesQueryData;
+	UseSessionCategoriesQueryData;
 
 export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 	const router = useRouter();
-	const { eid, venues, createSessionMutation, event, sessionTypes } = props;
+	const { eid, venues, createSessionMutation, event, sessionCategories } = props;
 	const {
 		register,
 		handleSubmit,
@@ -49,7 +49,7 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 	} = useForm<CreateSessionPayload>({
 		defaultValues: {
 			venueId: 'none',
-			typeId: 'none',
+			categoryId: 'none',
 			startDate: roundToNearestMinutes(
 				new Date(event?.startDate ?? '').getTime() + 1000 * 60 * 60 * 12,
 				{
@@ -136,37 +136,39 @@ export const CreateSessionForm: React.FC<CreateSessionFormProps> = (props) => {
 
 				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
-						<Label htmlFor="typeId">
+						<Label htmlFor="categoryId">
 							Type
 							<HelpTooltip message={copy.tooltip.type} />
 						</Label>
 
 						<Controller
 							control={control}
-							name="typeId"
+							name="categoryId"
 							render={({ field }) => (
 								<Select
 									options={[
 										{ label: 'No Type', value: 'none' },
-										...Object.values(sessionTypes || []).map((sessionType) => ({
-											label: sessionType.name,
-											value: sessionType.id
+										...Object.values(sessionCategories || []).map((sessionCategory) => ({
+											label: sessionCategory.name,
+											value: sessionCategory.id
 										}))
 									]}
 									value={field.value as string}
 									onValueChange={(value) => {
-										setValue('typeId', value);
+										setValue('categoryId', value);
 									}}
 								/>
 							)}
 						/>
-						<CreateTypeDialog eid={String(eid)}>
+						<CreateCategoryDialog eid={String(eid)}>
 							<span className="mt-1 cursor-pointer text-sm text-gray-600">
 								Dont see your type? Create a Type
 							</span>
-						</CreateTypeDialog>
+						</CreateCategoryDialog>
 
-						{errors.typeId?.message && <ErrorMessage>{errors.typeId?.message}</ErrorMessage>}
+						{errors.categoryId?.message && (
+							<ErrorMessage>{errors.categoryId?.message}</ErrorMessage>
+						)}
 					</div>
 
 					<div>

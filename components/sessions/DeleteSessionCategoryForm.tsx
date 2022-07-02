@@ -2,20 +2,20 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { UseDeleteSessionTypeMutationData } from '../../hooks/mutations/useDeleteSessionTypeMutation';
-import { UseSessionTypeQueryData } from '../../hooks/queries/useSessionTypeQuery';
+import { UseDeleteSessionCategoryMutationData } from '../../hooks/mutations/useDeleteSessionCategoryMutation';
+import { UseSessionCategoryQueryData } from '../../hooks/queries/useSessionCategoryQuery';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseDeleteSessionTypeMutationData &
-	UseSessionTypeQueryData;
+	UseDeleteSessionCategoryMutationData &
+	UseSessionCategoryQueryData;
 
-export const DeleteSessionTypeForm: React.FC<Props> = (props) => {
+export const DeleteSessionCategoryForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { sessionType, deleteSessionTypeMutation } = props;
+	const { sessionCategory, deleteSessionCategoryMutation } = props;
 	const { register, handleSubmit, watch } = useForm<{ confirmDelete: string }>();
 	const [canSubmit, setCanSubmit] = React.useState(false);
 
@@ -25,12 +25,12 @@ export const DeleteSessionTypeForm: React.FC<Props> = (props) => {
 		setCanSubmit(confirmDeleteWatcher === 'DELETE');
 	}, [confirmDeleteWatcher]);
 
-	if (!sessionType) return null;
+	if (!sessionCategory) return null;
 
 	return (
 		<form
 			onSubmit={handleSubmit(() => {
-				deleteSessionTypeMutation.mutate();
+				deleteSessionCategoryMutation.mutate();
 			})}
 		>
 			<div className="mt-3 flex w-full flex-col">
@@ -56,9 +56,9 @@ export const DeleteSessionTypeForm: React.FC<Props> = (props) => {
 					type="submit"
 					variant="danger"
 					className="ml-4"
-					disabled={!canSubmit || deleteSessionTypeMutation.isLoading}
+					disabled={!canSubmit || deleteSessionCategoryMutation.isLoading}
 				>
-					{deleteSessionTypeMutation.isLoading ? <LoadingInner /> : 'Delete SessionType'}
+					{deleteSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Delete SessionCategory'}
 				</Button>
 			</div>
 		</form>

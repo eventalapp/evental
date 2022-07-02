@@ -48,7 +48,7 @@ export default api.raw({
 				).format('dddd, MMM D h:mm A z')}`,
 				session_name: session.name,
 				session_description: htmlToText(session.description ?? ''),
-				session_category: session?.type?.name,
+				session_category: session?.category?.name,
 				session_venue: session?.venue?.name,
 				session_venue_address: session?.venue?.address
 			});

@@ -60,7 +60,7 @@ export default api({
 				startDate: body.startDate,
 				endDate: body.endDate,
 				description: body.description,
-				typeId: body.typeId
+				categoryId: body.categoryId
 			}
 		});
 

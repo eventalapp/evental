@@ -172,17 +172,17 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 							label={formatDateRange(new Date(session.startDate), new Date(session.endDate))}
 						/>
 
-						{session.type && (
+						{session.category && (
 							<TooltipIcon
 								customIcon={
 									<div
 										className="mr-1.5 h-3 w-3 rounded-full"
-										style={{ backgroundColor: session.type.color ?? '#888888' }}
+										style={{ backgroundColor: session.category.color ?? '#888888' }}
 									/>
 								}
-								link={`/events/${event.slug}/sessions/types/${session.type.slug}`}
-								tooltipMessage={`This session is a part of the ${session.type.name} category.`}
-								label={session.type.name}
+								link={`/events/${event.slug}/sessions/categories/${session.category.slug}`}
+								tooltipMessage={`This session is a part of the ${session.category.name} category.`}
+								label={session.category.name}
 							/>
 						)}
 

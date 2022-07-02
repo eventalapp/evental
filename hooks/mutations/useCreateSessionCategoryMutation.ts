@@ -5,37 +5,37 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { CreateSessionTypePayload } from '../../utils/schemas';
+import { CreateSessionCategoryPayload } from '../../utils/schemas';
 
-export interface UseCreateSessionTypeMutationData {
-	createSessionTypeMutation: UseMutationResult<
-		Prisma.EventSessionType,
+export interface UseCreateSessionCategoryMutationData {
+	createSessionCategoryMutation: UseMutationResult<
+		Prisma.EventSessionCategory,
 		AxiosError<ErroredAPIResponse, unknown>,
-		CreateSessionTypePayload
+		CreateSessionCategoryPayload
 	>;
 }
 
-interface UseCreateSessionTypeOptions {
+interface UseCreateSessionCategoryOptions {
 	redirect?: boolean;
 }
 
-export const useCreateSessionTypeMutation = (
+export const useCreateSessionCategoryMutation = (
 	eid: string,
-	args: UseCreateSessionTypeOptions = {}
-): UseCreateSessionTypeMutationData => {
+	args: UseCreateSessionCategoryOptions = {}
+): UseCreateSessionCategoryMutationData => {
 	const { redirect = true } = args;
 
 	const queryClient = useQueryClient();
 
-	const createSessionTypeMutation = useMutation<
-		Prisma.EventSessionType,
+	const createSessionCategoryMutation = useMutation<
+		Prisma.EventSessionCategory,
 		AxiosError<ErroredAPIResponse, unknown>,
-		CreateSessionTypePayload
+		CreateSessionCategoryPayload
 	>(
 		async (data) => {
 			return await axios
-				.post<SuccessAPIResponse<Prisma.EventSessionType>>(
-					`/api/events/${eid}/admin/sessions/types/create`,
+				.post<SuccessAPIResponse<Prisma.EventSessionCategory>>(
+					`/api/events/${eid}/admin/sessions/categories/create`,
 					data
 				)
 				.then((res) => res.data.data);
@@ -45,7 +45,7 @@ export const useCreateSessionTypeMutation = (
 				toast.success('Session type created successfully');
 
 				if (redirect) {
-					router.push(`/events/${eid}/admin/sessions/types`).then(() => {
+					router.push(`/events/${eid}/admin/sessions/categories`).then(() => {
 						void queryClient.invalidateQueries(['types', eid]);
 					});
 				} else {
@@ -58,5 +58,5 @@ export const useCreateSessionTypeMutation = (
 		}
 	);
 
-	return { createSessionTypeMutation };
+	return { createSessionCategoryMutation };
 };

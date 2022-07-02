@@ -7,38 +7,38 @@ import { getEvent } from '../../index';
 
 export default api({
 	async GET({ req }) {
-		const { eid, tid } = req.query;
+		const { eid, cid } = req.query;
 
-		const sessionType = await getSessionType(String(eid), String(tid));
+		const sessionCategory = await getSessionCategory(String(eid), String(cid));
 
-		if (!sessionType) {
+		if (!sessionCategory) {
 			throw new NextkitError(404, 'Session Type not found.');
 		}
 
-		return sessionType;
+		return sessionCategory;
 	}
 });
 
-export const getSessionType = async (
+export const getSessionCategory = async (
 	eid: string,
-	tid: string
-): Promise<Prisma.EventSessionType | null> => {
+	cid: string
+): Promise<Prisma.EventSessionCategory | null> => {
 	const event = await getEvent(eid);
 
 	if (!event) {
 		return null;
 	}
 
-	const sessionType = await prisma.eventSessionType.findFirst({
+	const sessionCategory = await prisma.eventSessionCategory.findFirst({
 		where: {
 			eventId: event.id,
-			OR: [{ id: tid }, { slug: tid }]
+			OR: [{ id: cid }, { slug: cid }]
 		}
 	});
 
-	if (!sessionType) {
+	if (!sessionCategory) {
 		return null;
 	}
 
-	return sessionType;
+	return sessionCategory;
 };

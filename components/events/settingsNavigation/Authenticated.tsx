@@ -57,8 +57,8 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 									color={event.color}
 								/>
 								<LinkItem
-									link={`/events/${event.slug}/admin/sessions/types`}
-									label={'Types'}
+									link={`/events/${event.slug}/admin/sessions/categories`}
+									label={'Categories'}
 									color={event.color}
 								/>
 								<LinkItem
@@ -144,7 +144,7 @@ export const SettingsAuthenticated: React.FC<Props> = (props) => {
 						/>
 						<FullscreenLinkItem
 							index={0}
-							link={`/events/${event.slug}/admin/sessions/types`}
+							link={`/events/${event.slug}/admin/sessions/categories`}
 							label={'Types'}
 							onClick={() => {
 								setIsOpen(false);

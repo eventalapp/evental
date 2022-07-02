@@ -12,22 +12,20 @@ import { EventSettingsNavigation } from '../../../../../../components/events/set
 import Column from '../../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SessionTypeList } from '../../../../../../components/sessions/SessionTypeList';
+import { SessionCategoryList } from '../../../../../../components/sessions/SessionCategoryList';
 import { Heading } from '../../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../../hooks/queries/useIsOrganizerQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
-import { useSessionTypesQuery } from '../../../../../../hooks/queries/useSessionTypesQuery';
+import { useSessionCategoriesQuery } from '../../../../../../hooks/queries/useSessionCategoriesQuery';
 import { useUser } from '../../../../../../hooks/queries/useUser';
 
-const SessionTypesAdminPage: NextPage = () => {
+const SessionCategoriesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { user, isUserLoading } = useUser();
+	const { isOrganizer } = useIsOrganizerQuery(String(eid));
+	const { user } = useUser();
 	const { event, eventError } = useEventQuery(String(eid));
-	const { roles, isRolesLoading } = useRolesQuery(String(eid));
-	const { isSessionTypesLoading, sessionTypes } = useSessionTypesQuery(String(eid));
+	const { sessionCategories } = useSessionCategoriesQuery(String(eid));
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;
@@ -57,13 +55,15 @@ const SessionTypesAdminPage: NextPage = () => {
 						<IconLinkTooltip
 							message="Click to create a session type"
 							side="top"
-							href={`/events/${eid}/admin/sessions/types/create`}
+							href={`/events/${eid}/admin/sessions/categories/create`}
 							icon={faSquarePlus}
 							className="text-gray-700 hover:text-gray-600"
 						/>
 					</FlexRowBetween>
 
-					{sessionTypes && <SessionTypeList eid={String(eid)} sessionTypes={sessionTypes} admin />}
+					{sessionCategories && (
+						<SessionCategoryList eid={String(eid)} sessionCategories={sessionCategories} admin />
+					)}
 				</div>
 			</Column>
 
@@ -72,4 +72,4 @@ const SessionTypesAdminPage: NextPage = () => {
 	);
 };
 
-export default SessionTypesAdminPage;
+export default SessionCategoriesAdminPage;

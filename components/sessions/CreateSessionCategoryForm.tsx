@@ -1,13 +1,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
-import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import React from 'react';
 import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
-import { UseEditSessionTypeMutationData } from '../../hooks/mutations/useEditSessionTypeMutation';
-import { UseSessionTypeQueryData } from '../../hooks/queries/useSessionTypeQuery';
+import { UseCreateSessionCategoryMutationData } from '../../hooks/mutations/useCreateSessionCategoryMutation';
 import { colors, copy } from '../../utils/const';
-import { EditSessionTypePayload, EditSessionTypeSchema } from '../../utils/schemas';
+import { CreateSessionCategoryPayload, CreateSessionCategorySchema } from '../../utils/schemas';
 import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
@@ -15,25 +14,22 @@ import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseEditSessionTypeMutationData &
-	UseSessionTypeQueryData;
+type Props = UseCreateSessionCategoryMutationData;
 
-export const EditSessionTypeForm: React.FC<Props> = (props) => {
+export const CreateSessionCategoryForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { editSessionTypeMutation, sessionType } = props;
+	const { createSessionCategoryMutation } = props;
 	const {
 		register,
 		handleSubmit,
 		control,
 		watch,
 		formState: { errors }
-	} = useForm<EditSessionTypePayload>({
+	} = useForm<CreateSessionCategoryPayload>({
 		defaultValues: {
-			name: String(sessionType?.name),
-			color: String(sessionType?.color) ?? colors[0]
+			color: colors[0]
 		},
-		resolver: zodResolver(EditSessionTypeSchema)
+		resolver: zodResolver(CreateSessionCategorySchema)
 	});
 
 	const colorWatcher = watch('color');
@@ -41,7 +37,7 @@ export const EditSessionTypeForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				editSessionTypeMutation.mutate(data);
+				createSessionCategoryMutation.mutate(data);
 			})}
 		>
 			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
@@ -81,10 +77,10 @@ export const EditSessionTypeForm: React.FC<Props> = (props) => {
 					variant="primary"
 					className="ml-4"
 					padding="medium"
-					disabled={editSessionTypeMutation.isLoading}
+					disabled={createSessionCategoryMutation.isLoading}
 					style={{ backgroundColor: colorWatcher, color: '#000000' }}
 				>
-					{editSessionTypeMutation.isLoading ? <LoadingInner /> : 'Edit Session Type'}
+					{createSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Create Session Type'}
 				</Button>
 			</div>
 		</form>

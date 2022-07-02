@@ -13,22 +13,22 @@ export interface UseSessionsByTypeOptions {
 	initialData?: SessionWithVenue[] | undefined;
 }
 
-export const useSessionsByTypeQuery = (
+export const useSessionsByCategoryQuery = (
 	eid: string,
-	tid: string,
+	cid: string,
 	args: UseSessionsByTypeOptions = {}
 ): UseSessionsByTypeData => {
 	const { initialData } = args;
 
 	let params = new URLSearchParams();
 
-	params.append('type', String(tid));
+	params.append('category', String(cid));
 
 	const { data: sessionsByTypeData, isLoading: isSessionsByTypeLoading } = useQuery<
 		SessionWithVenue[],
 		AxiosError<ErroredAPIResponse>
 	>(
-		['type-sessions', eid, tid],
+		['category-sessions', eid, cid],
 		async () => {
 			return await axios
 				.get<SuccessAPIResponse<SessionWithVenue[]>>(
@@ -38,7 +38,7 @@ export const useSessionsByTypeQuery = (
 		},
 		{
 			retry: 0,
-			enabled: eid !== undefined && eid !== 'undefined' && tid !== undefined && tid !== 'undefined',
+			enabled: eid !== undefined && eid !== 'undefined' && cid !== undefined && cid !== 'undefined',
 			initialData,
 			keepPreviousData: true
 		}

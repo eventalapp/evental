@@ -12,7 +12,7 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/typography/Heading';
 
-const CreatingASessionTypeGuidePage: NextPage = () => {
+const CreatingASessionCategoryGuidePage: NextPage = () => {
 	return (
 		<PageWrapper>
 			<NextSeo
@@ -115,4 +115,4 @@ const CreatingASessionTypeGuidePage: NextPage = () => {
 	);
 };
 
-export default CreatingASessionTypeGuidePage;
+export default CreatingASessionCategoryGuidePage;

@@ -19,7 +19,7 @@ import Tooltip from '../../../components/radix/components/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
-import { useSessionTypesQuery } from '../../../hooks/queries/useSessionTypesQuery';
+import { useSessionCategoriesQuery } from '../../../hooks/queries/useSessionCategoriesQuery';
 import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
 import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
 
@@ -30,7 +30,7 @@ const ViewEventPage: NextPage = () => {
 	const { sessionsData } = useSessionsQuery(String(eid));
 	const { event, eventError } = useEventQuery(String(eid));
 	const { venues } = useVenuesQuery(String(eid));
-	const { sessionTypes } = useSessionTypesQuery(String(eid));
+	const { sessionCategories } = useSessionCategoriesQuery(String(eid));
 
 	if (eventError) {
 		return <NotFoundPage message="Event not found." />;
@@ -121,21 +121,23 @@ const ViewEventPage: NextPage = () => {
 
 						<div className="mb-4">
 							<span className="mb-1 block font-medium">
-								{event && sessionTypes ? (
-									sessionTypes.length > 0 && 'Filter by Type'
+								{event && sessionCategories ? (
+									sessionCategories.length > 0 && 'Filter by Type'
 								) : (
 									<Skeleton className="w-3/4" />
 								)}
 							</span>
 							<div className="text-gray-600">
 								<ul className="space-y-1">
-									{event && sessionTypes ? (
-										sessionTypes.map((sessionType) => (
-											<li key={sessionType.id}>
-												<Link href={`/events/${event.slug}/sessions/types/${sessionType.slug}`}>
+									{event && sessionCategories ? (
+										sessionCategories.map((sessionCategory) => (
+											<li key={sessionCategory.id}>
+												<Link
+													href={`/events/${event.slug}/sessions/categories/${sessionCategory.slug}`}
+												>
 													<a>
 														<Tooltip
-															message={`Click to view all sessions occurring with the ${sessionType.name} session category`}
+															message={`Click to view all sessions occurring with the ${sessionCategory.name} session category`}
 															side="left"
 															sideOffset={6}
 														>
@@ -143,10 +145,10 @@ const ViewEventPage: NextPage = () => {
 																<div className="flex flex-row items-center justify-center">
 																	<div
 																		className="mr-2 h-3 w-3 rounded-full"
-																		style={{ backgroundColor: sessionType.color ?? '#888888' }}
+																		style={{ backgroundColor: sessionCategory.color ?? '#888888' }}
 																	/>
 																	<span className="transition-all duration-100 hover:text-gray-900">
-																		{sessionType.name}
+																		{sessionCategory.name}
 																	</span>
 																</div>
 															</div>

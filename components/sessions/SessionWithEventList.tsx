@@ -92,16 +92,16 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 																					<div
 																						className="mr-3 h-4 w-4 rounded-full"
 																						style={{
-																							backgroundColor: session?.type?.color ?? '#888888'
+																							backgroundColor: session?.category?.color ?? '#888888'
 																						}}
 																					/>
 																					<div>
 																						<span className="block text-lg leading-tight">
 																							{session.name}
 																						</span>{' '}
-																						{session.type?.name ? (
+																						{session.category?.name ? (
 																							<span className="text-sm text-gray-500">
-																								{session.type?.name}
+																								{session.category?.name}
 																							</span>
 																						) : (
 																							<em className="text-sm text-gray-500">{'No Type'}</em>
@@ -165,7 +165,7 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 																				<div
 																					className="mr-3 h-4 w-4 rounded-full"
 																					style={{
-																						backgroundColor: session?.type?.color ?? '#888888'
+																						backgroundColor: session?.category?.color ?? '#888888'
 																					}}
 																				/>
 																				<div>
@@ -173,9 +173,9 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 																						{session.name}
 																					</span>
 
-																					{session.type?.name ? (
+																					{session.category?.name ? (
 																						<span className="text-sm text-gray-500">
-																							{session.type?.name}
+																							{session.category?.name}
 																						</span>
 																					) : (
 																						<em className="text-sm text-gray-500">{'No Type'}</em>

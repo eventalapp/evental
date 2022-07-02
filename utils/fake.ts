@@ -98,7 +98,7 @@ export const fake = (count: number) => {
 	i = 1;
 
 	let fakeSessions: Array<
-		Omit<Prisma.EventSession, 'createdAt' | 'updatedAt' | 'typeId' | 'venueId'>
+		Omit<Prisma.EventSession, 'createdAt' | 'updatedAt' | 'categoryId' | 'venueId'>
 	> = [];
 
 	while (i <= count) {
