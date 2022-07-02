@@ -114,7 +114,7 @@ export const api = createAPI({
 			getVerifyEmailCode,
 			getRoleInviteCode,
 			getClaimProfileCode,
-			getUser: async () => {
+			getUser: async (): Promise<PasswordlessUser | null> => {
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 
 				if (!token) {
