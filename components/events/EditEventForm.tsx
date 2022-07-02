@@ -196,7 +196,8 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4 md:col-span-2">
 					<Label htmlFor="website">
-						Website *<HelpTooltip message={copy.tooltip.eventWebsite} />
+						Website
+						<HelpTooltip message={copy.tooltip.eventWebsite} />
 					</Label>
 					<Input placeholder="https://website.com" {...register('website')} color={colorWatcher} />
 					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
