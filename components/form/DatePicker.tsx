@@ -98,13 +98,11 @@ export const DatePicker: React.FC<Props> = (props) => {
 		showTimeSelect,
 		selectsRange,
 		timeIntervals = NEAREST_MINUTE,
-		formatTime = 'MM/dd/yyyy',
+		formatTime = 'DD/MM/YYYY',
 		minDate,
 		maxDate,
 		color
 	} = props;
-
-	console.log(selected);
 
 	return (
 		<ReactDatePicker
