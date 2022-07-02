@@ -38,7 +38,7 @@ export const useAdminCreateAttendeeMutation = (eid: string): UseAdminCreateAtten
 			onSuccess: () => {
 				toast.success('You have successfully created the users profile.');
 
-				router.push(`/events/${eid}`).then(() => {
+				router.push(`/events/${eid}/attendees`).then(() => {
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
