@@ -123,7 +123,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 				<div className="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div>
 						<Label htmlFor="categoryId">
-							Type
+							Category
 							<HelpTooltip message={copy.tooltip.category} />
 						</Label>
 
@@ -133,7 +133,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 							render={({ field }) => (
 								<Select
 									options={[
-										{ label: 'No Type', value: 'none' },
+										{ label: 'No Category', value: 'none' },
 										...Object.values(sessionCategories || []).map((sessionCategory) => ({
 											label: sessionCategory.name,
 											value: sessionCategory.id
@@ -148,7 +148,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 						/>
 						<CreateCategoryDialog eid={String(eid)}>
 							<span className="mt-1 cursor-pointer text-sm text-gray-600">
-								Dont see your type? Create a Type
+								Dont see your category? Create a category
 							</span>
 						</CreateCategoryDialog>
 
@@ -192,7 +192,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 										selectsStart
 										timeIntervals={NEAREST_MINUTE}
 										dateFormat="MM/dd/yyyy h:mm a"
-										formatTime="MM/dd/yyyy h:mm a"
+										formatTime="DD/MM/YYYY h:mm a"
 										showTimeSelect
 										maxDate={new Date(String(event.endDate))}
 										minDate={new Date(String(event.startDate))}
@@ -220,7 +220,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 										timeIntervals={NEAREST_MINUTE}
 										endDate={field.value}
 										dateFormat="MM/dd/yyyy h:mm a"
-										formatTime="MM/dd/yyyy h:mm a"
+										formatTime="DD/MM/YYYY h:mm a"
 										showTimeSelect
 										maxDate={new Date(String(event.endDate))}
 										minDate={new Date(String(event.startDate))}
