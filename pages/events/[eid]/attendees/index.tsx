@@ -65,7 +65,7 @@ const ViewAttendeePage: NextPage = () => {
 			<Column>
 				<EventHeader adminLink={'/attendees'} eid={String(eid)} />
 
-				<Heading>
+				<Heading className="mb-3">
 					Attendees{' '}
 					{attendeesData && (
 						<span className="font-normal text-gray-500">({attendeesData.length || 0})</span>
