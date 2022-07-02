@@ -20,7 +20,7 @@ import { faCalendarCirclePlus } from '../../icons';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { sessionAttendeeReducer } from '../../utils/reducer';
-import { AttendeeWithUser, PasswordlessUser } from '../../utils/stripUserPassword';
+import { AttendeeWithUser, StrippedUser } from '../../utils/stripUser';
 import { AddToCalendar } from '../AddToCalendar';
 import { IconButtonTooltip } from '../IconButtonTooltip';
 import { IconLinkTooltip } from '../IconLinkTooltip';
@@ -41,7 +41,7 @@ type Props = {
 	session?: SessionWithVenue;
 	admin?: boolean;
 	event?: Prisma.Event;
-	user?: PasswordlessUser | undefined;
+	user?: StrippedUser | undefined;
 };
 
 export const ViewSession: React.FC<Props> = (props) => {

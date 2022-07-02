@@ -13,7 +13,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { capitalizeFirstLetter } from '../../utils/string';
-import { AttendeeWithUser } from '../../utils/stripUserPassword';
+import { AttendeeWithUser } from '../../utils/stripUser';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
 import { Heading } from '../typography/Heading';

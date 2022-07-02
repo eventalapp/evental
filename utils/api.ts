@@ -1,11 +1,9 @@
 import { Redis } from '@upstash/redis';
 import { randomBytes } from 'crypto';
-import { IncomingMessage } from 'http';
-import { NextApiRequestCookies } from 'next/dist/server/api-utils';
 import createAPI, { NextkitError } from 'nextkit';
 
 import { prisma } from '../prisma/client';
-import { PasswordlessUser, stripUserPassword } from './stripUserPassword';
+import { FullUser, StrippedUser, fullUser, stripUser } from './stripUser';
 
 const redis = new Redis({
 	url: process.env.UPSTASH_URL!,
@@ -84,26 +82,6 @@ const getOrganizerInviteCode = async (): Promise<string> => {
 	return token;
 };
 
-export const ssrGetUser = async (
-	req: IncomingMessage & { cookies: NextApiRequestCookies }
-): Promise<PasswordlessUser | null> => {
-	const token = await redis.get<string>(`session:${req.cookies.token}`);
-
-	if (!token) {
-		return null;
-	}
-
-	const user = await prisma.user.findFirst({
-		where: {
-			id: token
-		}
-	});
-
-	if (!user) return null;
-
-	return stripUserPassword(user);
-};
-
 export const api = createAPI({
 	async getContext(req) {
 		return {
@@ -114,7 +92,7 @@ export const api = createAPI({
 			getVerifyEmailCode,
 			getRoleInviteCode,
 			getClaimProfileCode,
-			getUser: async (): Promise<PasswordlessUser | null> => {
+			getFullUser: async (): Promise<FullUser | null> => {
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 
 				if (!token) {
@@ -129,9 +107,24 @@ export const api = createAPI({
 
 				if (!user) return null;
 
-				const { password, ...rest } = user;
+				return fullUser(user);
+			},
+			getStrippedUser: async (): Promise<StrippedUser | null> => {
+				const token = await redis.get<string>(`session:${req.cookies.token}`);
 
-				return rest;
+				if (!token) {
+					throw new NextkitError(401, "You're not logged in");
+				}
+
+				const user = await prisma.user.findFirst({
+					where: {
+						id: token
+					}
+				});
+
+				if (!user) return null;
+
+				return stripUser(user);
 			}
 		};
 	},

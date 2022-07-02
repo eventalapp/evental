@@ -16,7 +16,7 @@ export type ImageUploadResponse = {
 
 export default api({
 	async POST({ ctx, req }) {
-		const user = await ctx.getUser();
+		const user = await ctx.getStrippedUser();
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');

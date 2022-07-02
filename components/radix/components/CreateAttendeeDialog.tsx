@@ -9,14 +9,14 @@ import { useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 
 import { useCreateAttendeeMutation } from '../../../hooks/mutations/useCreateAttendeeMutation';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { StrippedUser } from '../../../utils/stripUser';
 import { LoadingInner } from '../../error/LoadingInner';
 import { Button } from '../../form/Button';
 import { LinkButton } from '../../form/LinkButton';
 
 interface Props {
 	event: Prisma.Event;
-	user: PasswordlessUser | undefined;
+	user: StrippedUser | undefined;
 }
 
 export const CreateAttendeeDialog: React.FC<Props> = (props) => {

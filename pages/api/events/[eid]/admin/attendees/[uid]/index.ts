@@ -5,16 +5,13 @@ import { prisma } from '../../../../../../../prisma/client';
 import { api } from '../../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../../utils/isOrganizer';
 import { AdminEditAttendeeSchema } from '../../../../../../../utils/schemas';
-import {
-	AttendeeWithUserInput,
-	stripAttendeeWithUserPassword
-} from '../../../../../../../utils/stripUserPassword';
+import { AttendeeWithUserInput, stripAttendeeWithUser } from '../../../../../../../utils/stripUser';
 import { getAttendee } from '../../../attendees/[uid]';
 import { getEvent } from '../../../index';
 
 export default api({
 	async DELETE({ ctx, req }) {
-		const user = await ctx.getUser();
+		const user = await ctx.getStrippedUser();
 		const { eid, uid } = req.query;
 
 		if (!user?.id) {
@@ -62,7 +59,7 @@ export default api({
 	async PUT({ ctx, req }) {
 		const { eid, uid } = req.query;
 
-		const user = await ctx.getUser();
+		const user = await ctx.getStrippedUser();
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
@@ -150,7 +147,7 @@ export default api({
 			throw new NextkitError(500, 'Could not edit attendee.');
 		}
 
-		stripAttendeeWithUserPassword(editedEventAttendee as AttendeeWithUserInput);
+		stripAttendeeWithUser(editedEventAttendee as AttendeeWithUserInput);
 
 		return editedEventAttendee;
 	}

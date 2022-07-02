@@ -4,10 +4,7 @@ import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
 import { busboyParseForm } from '../../../utils/busboyParseForm';
 import { EditUserSchema } from '../../../utils/schemas';
-import {
-	uploadAndProcessAvatar,
-	uploadAndProcessImage
-} from '../../../utils/uploadAndProcessImage';
+import { uploadAndProcessAvatar } from '../../../utils/uploadAndProcessImage';
 
 export const config = {
 	api: {
@@ -17,7 +14,7 @@ export const config = {
 
 export default api({
 	async PUT({ ctx, req }) {
-		const user = await ctx.getUser();
+		const user = await ctx.getStrippedUser();
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');

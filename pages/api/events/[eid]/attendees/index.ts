@@ -2,10 +2,7 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
-import {
-	AttendeeWithUser,
-	stripAttendeesWithUserPassword
-} from '../../../../../utils/stripUserPassword';
+import { AttendeeWithUser, stripAttendeesWithUser } from '../../../../../utils/stripUser';
 import { getEvent } from '../index';
 import { getRole } from '../roles/[rid]';
 
@@ -62,7 +59,7 @@ export const getAttendees = async (eid: string): Promise<AttendeeWithUser[] | nu
 		}
 	});
 
-	return stripAttendeesWithUserPassword(attendees);
+	return stripAttendeesWithUser(attendees);
 };
 
 export const getAttendeesByRole = async (
@@ -96,7 +93,7 @@ export const getAttendeesByRole = async (
 		return null;
 	}
 
-	return stripAttendeesWithUserPassword(attendees);
+	return stripAttendeesWithUser(attendees);
 };
 
 export const getAttendeesByName = async (
@@ -130,5 +127,5 @@ export const getAttendeesByName = async (
 		return null;
 	}
 
-	return stripAttendeesWithUserPassword(attendees);
+	return stripAttendeesWithUser(attendees);
 };

@@ -5,10 +5,10 @@ import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { SubmitDemoRequestPayload } from '../../utils/schemas';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { StrippedUser } from '../../utils/stripUser';
 
 export type UseSubmitDemoRequestMutationData = UseMutationResult<
-	PasswordlessUser,
+	StrippedUser,
 	AxiosError<ErroredAPIResponse, unknown>,
 	SubmitDemoRequestPayload
 >;
@@ -23,13 +23,13 @@ export const useSubmitDemoRequestMutation = (
 	const { redirectUrl } = args;
 
 	return useMutation<
-		PasswordlessUser,
+		StrippedUser,
 		AxiosError<ErroredAPIResponse, unknown>,
 		SubmitDemoRequestPayload
 	>(
 		async (data) => {
 			return await axios
-				.post<SuccessAPIResponse<PasswordlessUser>>(`/api/demo`, data)
+				.post<SuccessAPIResponse<StrippedUser>>(`/api/demo`, data)
 				.then((res) => res.data.data);
 		},
 		{

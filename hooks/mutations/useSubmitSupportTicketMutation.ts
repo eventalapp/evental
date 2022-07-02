@@ -5,10 +5,10 @@ import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { SubmitSupportTicketPayload } from '../../utils/schemas';
-import { PasswordlessUser } from '../../utils/stripUserPassword';
+import { StrippedUser } from '../../utils/stripUser';
 
 export type UseSubmitSupportTicketMutationData = UseMutationResult<
-	PasswordlessUser,
+	StrippedUser,
 	AxiosError<ErroredAPIResponse, unknown>,
 	SubmitSupportTicketPayload
 >;
@@ -23,13 +23,13 @@ export const useSubmitSupportTicketMutation = (
 	const { redirectUrl } = args;
 
 	return useMutation<
-		PasswordlessUser,
+		StrippedUser,
 		AxiosError<ErroredAPIResponse, unknown>,
 		SubmitSupportTicketPayload
 	>(
 		async (data) => {
 			return await axios
-				.post<SuccessAPIResponse<PasswordlessUser>>(`/api/support`, data)
+				.post<SuccessAPIResponse<StrippedUser>>(`/api/support`, data)
 				.then((res) => res.data.data);
 		},
 		{

@@ -2,10 +2,7 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../../../prisma/client';
 import { api } from '../../../../../../../utils/api';
-import {
-	AttendeeWithUser,
-	stripAttendeeWithUserPassword
-} from '../../../../../../../utils/stripUserPassword';
+import { AttendeeWithUser, stripAttendeeWithUser } from '../../../../../../../utils/stripUser';
 import { getAttendee } from '../../../attendees/[uid]';
 import { getEvent } from '../../../index';
 import { getSession } from '../index';
@@ -108,5 +105,5 @@ export const getSessionAttendee = async (
 		return null;
 	}
 
-	return stripAttendeeWithUserPassword(sessionAttendee.attendee);
+	return stripAttendeeWithUser(sessionAttendee.attendee);
 };

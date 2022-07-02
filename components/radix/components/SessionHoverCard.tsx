@@ -22,7 +22,7 @@ import { useUser } from '../../../hooks/queries/useUser';
 import { faCalendarCirclePlus } from '../../../icons';
 import { SessionWithVenue } from '../../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../../utils/formatDateRange';
-import { PasswordlessUser } from '../../../utils/stripUserPassword';
+import { StrippedUser } from '../../../utils/stripUser';
 import { TooltipIcon } from '../../TooltipIcon';
 import { LeaveSessionDialog } from './LeaveSessionDialog';
 import Tooltip from './Tooltip';
@@ -34,7 +34,7 @@ interface Props {
 	redirect?: boolean;
 }
 
-type AttendThisSessionProps = Props & { user: PasswordlessUser | undefined };
+type AttendThisSessionProps = Props & { user: StrippedUser | undefined };
 
 const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 	const { event, session, redirect, user } = props;

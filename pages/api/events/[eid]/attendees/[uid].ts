@@ -2,10 +2,7 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
-import {
-	AttendeeWithUser,
-	stripAttendeeWithUserPassword
-} from '../../../../../utils/stripUserPassword';
+import { AttendeeWithUser, stripAttendeeWithUser } from '../../../../../utils/stripUser';
 import { getEvent } from '../index';
 
 export default api({
@@ -74,5 +71,5 @@ export const getAttendee = async (eid: string, uid: string): Promise<AttendeeWit
 		return null;
 	}
 
-	return stripAttendeeWithUserPassword(eventAttendee);
+	return stripAttendeeWithUser(eventAttendee);
 };
