@@ -5,6 +5,7 @@ import React from 'react';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
+import { Heading } from '../typography/Heading';
 
 type Props = {
 	errors: Array<ErroredAPIResponse | null | undefined>;
@@ -26,12 +27,13 @@ export const ViewErrorPage: React.FC<Props> = (props) => {
 			<Navigation />
 
 			<Column variant="halfWidth">
-				<h1 className="mb-2 text-2xl font-bold md:text-3xl">Error</h1>
+				<Heading>Error</Heading>
+
 				<ul>
 					{errors
 						.filter((error) => error)
 						.map((error, i) => (
-							<li key={i} className="text-red-700">
+							<li key={i} className="text-gray-600">
 								{error!.message}
 							</li>
 						))}
