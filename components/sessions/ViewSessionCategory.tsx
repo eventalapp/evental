@@ -44,7 +44,7 @@ export const ViewSessionCategory: React.FC<Props> = (props) => {
 				</div>
 
 				{admin && (
-					<div className="space-x-4">
+					<div className="space-x-4 flex flex-row">
 						<IconLinkTooltip
 							message="Click to edit this session category"
 							side="top"

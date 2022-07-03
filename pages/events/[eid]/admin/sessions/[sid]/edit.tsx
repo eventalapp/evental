@@ -40,18 +40,19 @@ const EditSessionPage: NextPage = () => {
 					<Column variant="noMargin">
 						<Heading>Edit Session</Heading>
 
-						<EditSessionForm
-							roleAttendees={sessionRoleAttendeesQuery.data}
-							eid={String(eid)}
-							sid={String(sid)}
-							venues={venues}
-							session={session}
-							sessionCategories={sessionCategories}
-							event={event}
-						/>
+						{venues && session && event && sessionCategories && (
+							<EditSessionForm
+								roleAttendees={sessionRoleAttendeesQuery.data ?? []}
+								eid={String(eid)}
+								sid={String(sid)}
+								venues={venues}
+								session={session}
+								sessionCategories={sessionCategories}
+								event={event}
+							/>
+						)}
 					</Column>
 				</SidebarWrapper>
-				\
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

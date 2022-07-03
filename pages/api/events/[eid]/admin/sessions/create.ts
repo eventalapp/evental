@@ -71,7 +71,7 @@ export default api({
 
 		if (body.roleMembers && body.roleMembers.length > 0) {
 			const roleMemberAttendees = await prisma.$transaction(
-				body.roleMembers.map(({ userId }) => {
+				body.roleMembers.map((userId) => {
 					return prisma.eventAttendee.findFirst({
 						where: {
 							eventId: event.id,

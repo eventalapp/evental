@@ -163,6 +163,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 					) : (
 						<Skeleton className="w-5 h-5 ml-4" />
 					)}
+
 					{admin && (
 						<div className="ml-4">
 							<IconLinkTooltip
@@ -174,6 +175,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							/>
 						</div>
 					)}
+
 					{admin && (
 						<div className="ml-4">
 							<IconLinkTooltip
