@@ -38,12 +38,14 @@ const CreateSessionPage: NextPage = () => {
 
 						<Paragraph>A session is an event session that occurs during an event.</Paragraph>
 
-						<CreateSessionForm
-							sessionCategories={sessionCategories}
-							eid={String(eid)}
-							venues={venues}
-							event={event}
-						/>
+						{venues && event && sessionCategories && (
+							<CreateSessionForm
+								eid={String(eid)}
+								venues={venues}
+								event={event}
+								sessionCategories={sessionCategories}
+							/>
+						)}
 					</Column>
 				</SidebarWrapper>
 			</PageWrapper>

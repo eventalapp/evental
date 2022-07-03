@@ -1,3 +1,4 @@
+import Prisma from '@prisma/client';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../../prisma/client';
@@ -66,6 +67,51 @@ export default api({
 
 		if (!createdSession) {
 			throw new NextkitError(500, 'Error creating session.');
+		}
+
+		if (body.roleMembers && body.roleMembers.length > 0) {
+			const roleMemberAttendees = await prisma.$transaction(
+				body.roleMembers.map(({ userId }) => {
+					return prisma.eventAttendee.findFirst({
+						where: {
+							eventId: event.id,
+							user: {
+								id: userId
+							}
+						}
+					});
+				})
+			);
+
+			const roleMemberAttendeesFiltered = roleMemberAttendees.filter(
+				(val) => val !== null
+			) as Prisma.EventAttendee[];
+
+			await prisma.$transaction(
+				roleMemberAttendeesFiltered.map((attendee) => {
+					return prisma.eventSessionAttendee.upsert({
+						where: {
+							eventId_sessionId_attendeeId: {
+								eventId: event.id,
+								sessionId: createdSession.id,
+								attendeeId: attendee.id
+							}
+						},
+						create: {
+							eventId: event.id,
+							sessionId: createdSession.id,
+							attendeeId: attendee.id,
+							type: 'ROLE'
+						},
+						update: {
+							eventId: event.id,
+							sessionId: createdSession.id,
+							attendeeId: attendee.id,
+							type: 'ROLE'
+						}
+					});
+				})
+			);
 		}
 
 		return createdSession;

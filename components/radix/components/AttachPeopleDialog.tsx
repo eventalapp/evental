@@ -8,28 +8,22 @@ import cx from 'classnames';
 import Image from 'next/image';
 import React, { Fragment, useState } from 'react';
 
-import { useAddAttendeeToSessionMutation } from '../../../hooks/mutations/useAddAttendeeToSessionMutation';
 import { useAttendeesByNameQuery } from '../../../hooks/queries/useAttendeesByNameQuery';
 import { LoadingInner } from '../../error/LoadingInner';
 import Tooltip from './Tooltip';
 
 interface Props {
 	eid: string;
-	sid: string;
+	addAttendeeToSession: (userId: string) => void;
 }
 
 const AttachPeopleDialog: React.FC<Props> = (props) => {
-	const { eid, sid, children } = props;
+	const { eid, children, addAttendeeToSession } = props;
 
 	let [isOpen, setIsOpen] = useState(false);
 	const [name, setName] = useState('');
 
 	const attendeesByNameQuery = useAttendeesByNameQuery(eid, name, { limit: 7 });
-
-	const { addAttendeeToSessionMutation } = useAddAttendeeToSessionMutation(
-		String(eid),
-		String(sid)
-	);
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -146,7 +140,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 													type="button"
 													className="p-1"
 													onClick={() => {
-														addAttendeeToSessionMutation.mutate({ userId: attendee.user.id });
+														addAttendeeToSession(attendee.user.id);
 													}}
 												>
 													<FontAwesomeIcon
