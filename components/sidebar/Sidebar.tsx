@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 
 import { useEventQuery } from '../../hooks/queries/useEventQuery';
@@ -18,66 +17,45 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 		<aside className="w-52 p-2.5 h-full py-7 md:py-14 flex flex-col">
 			<span className="px-2.5 font-bold text-xs text-gray-400">DATA</span>
 			{event ? (
-				<Link href={`/events/${event.slug}/admin/sessions`} passHref>
-					<SidebarLink>Sessions</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin/sessions`}>Sessions</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
 
 			{event ? (
-				<Link href={`/events/${event.slug}/admin/sessions/categories`} passHref>
-					<SidebarLink>Categories</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin/sessions/categories`}>
+					Categories
+				</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
+
 			{event ? (
-				<Link href={`/events/${event.slug}/admin/venues`} passHref>
-					<SidebarLink>Venues</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin/venues`}>Venues</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
+
 			{event ? (
-				<Link href={`/events/${event.slug}/admin/attendees`} passHref>
-					<SidebarLink>Attendees</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin/attendees`}>Attendees</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
+
 			{event ? (
-				<Link href={`/events/${event.slug}/admin/roles`} passHref>
-					<SidebarLink>Roles</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin/roles`}>Roles</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
+
 			{event ? (
-				<Link href={`/events/${event.slug}/admin/organizers`} passHref>
-					<SidebarLink>Organizers</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin/organizers`}>Organizers</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
+
 			{event ? (
-				<Link href={`/events/${event.slug}/admin/pages`} passHref>
-					<SidebarLink>Pages</SidebarLink>
-				</Link>
-			) : (
-				sidebarSkeleton
-			)}
-			{event ? (
-				<Link href={`/events/${event.slug}/admin/roles`} passHref>
-					<SidebarLink>Roles</SidebarLink>
-				</Link>
-			) : (
-				sidebarSkeleton
-			)}
-			{event ? (
-				<Link href={`/events/${event.slug}/admin/pages`} passHref>
-					<SidebarLink>Pages</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin/pages`}>Pages</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
@@ -86,17 +64,13 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 
 			<span className="px-2.5 font-bold text-xs text-gray-400">EVENT SETTINGS</span>
 			{event ? (
-				<Link href={`/events/${event.slug}/admin`} passHref>
-					<SidebarLink>General</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin`}>General</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
 
 			{event ? (
-				<Link href={`/events/${event.slug}/admin`} passHref>
-					<SidebarLink>Branding</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin`}>Branding</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
@@ -106,9 +80,7 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 			<span className="px-2.5 font-bold text-xs text-gray-400">BILLING SETTINGS</span>
 
 			{event ? (
-				<Link href={`/events/${event.slug}/admin/billing`} passHref>
-					<SidebarLink>Billing</SidebarLink>
-				</Link>
+				<SidebarLink href={`/events/${event.slug}/admin/billing`}>Billing</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}

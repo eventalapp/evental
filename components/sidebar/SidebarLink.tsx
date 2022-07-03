@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
@@ -7,6 +9,7 @@ import { theme } from '../../tailwind.config';
 interface Props {
 	children?: React.ReactNode;
 	className?: string;
+	href: string;
 	[x: string]: unknown;
 }
 
@@ -21,18 +24,22 @@ export const sidebarSkeleton = (
 );
 
 export const SidebarLink = React.forwardRef<HTMLAnchorElement, Props>((props, ref) => {
-	const { className, children, ...rest } = props;
+	const router = useRouter();
+	const { className, children, href, ...rest } = props;
 
 	return (
-		<a
-			className={classNames(
-				'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 text-gray-600 outline-none no-underline mt-1',
-				className
-			)}
-			ref={ref}
-			{...rest}
-		>
-			{children}
-		</a>
+		<Link href={href} passHref>
+			<a
+				className={classNames(
+					'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 text-gray-600 outline-none no-underline mt-1 transition-all duration-50',
+					className,
+					router.asPath === href ? 'bg-gray-300' : ''
+				)}
+				ref={ref}
+				{...rest}
+			>
+				{children}
+			</a>
+		</Link>
 	);
 });
