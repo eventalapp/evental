@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -46,8 +47,12 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 		defaultValues: {
 			venueId: venues?.[0]?.id ?? 'none',
 			categoryId: sessionCategories?.[0]?.id ?? 'none',
-			startDate: new Date(),
-			endDate: new Date()
+			startDate: dayjs(new Date(event?.startDate ?? '').getTime() + 1000 * 60 * 60 * 12)
+				.startOf('hour')
+				.toDate(),
+			endDate: dayjs(new Date(event?.startDate ?? '').getTime() + 1000 * 60 * 60 * 16)
+				.startOf('hour')
+				.toDate()
 		},
 		resolver: zodResolver(CreateSessionSchema)
 	});
