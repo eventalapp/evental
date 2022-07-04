@@ -57,6 +57,7 @@ const DeleteSessionDialog: React.FC<Props> = (props) => {
 					<div className="mt-4">
 						<Label htmlFor="confirmDelete">Confirm *</Label>
 						<Input
+							autoComplete="off"
 							placeholder={`Type "Delete" to confirm`}
 							{...register('confirm')}
 							autoFocus={true}
