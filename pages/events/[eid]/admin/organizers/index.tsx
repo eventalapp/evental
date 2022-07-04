@@ -4,11 +4,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { AdminPageWrapper } from '../../../../../components/AdminPageWrapper';
-import { IconLinkTooltip } from '../../../../../components/IconLinkTooltip';
+import { IconButtonTooltip } from '../../../../../components/IconButtonTooltip';
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import InviteOrganizerDialog from '../../../../../components/radix/components/InviteOrganizerDialog';
 import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../../components/typography/Heading';
 import { useOrganizersQuery } from '../../../../../hooks/queries/useOrganizersQuery';
@@ -30,12 +31,9 @@ const EventOrganizersPage: NextPage = () => {
 						<FlexRowBetween>
 							<Heading>Organizers</Heading>
 
-							<IconLinkTooltip
-								message="Invite an organizer"
-								href={`/events/${eid}/admin/organizers/invite`}
-								icon={faPaperPlane}
-								color="gray"
-							/>
+							<InviteOrganizerDialog eid={String(eid)}>
+								<IconButtonTooltip message="Invite an organizer" icon={faPaperPlane} color="gray" />
+							</InviteOrganizerDialog>
 						</FlexRowBetween>
 
 						<AttendeeList attendees={organizers} eid={String(eid)} admin />
