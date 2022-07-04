@@ -5,8 +5,10 @@ import parse from 'html-react-parser';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { IconButtonTooltip } from '../IconButtonTooltip';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import DeletePageDialog from '../radix/components/DeletePageDialog';
 import { Heading } from '../typography/Heading';
 
 type Props = {
@@ -43,12 +45,10 @@ export const ViewPage: React.FC<Props> = (props) => {
 							icon={faPenToSquare}
 							color="gray"
 						/>
-						<IconLinkTooltip
-							message="Delete this page"
-							href={`/events/${eid}/admin/pages/${pid}/delete`}
-							icon={faTrashCan}
-							color="red"
-						/>
+
+						<DeletePageDialog eid={String(eid)} pid={String(pid)}>
+							<IconButtonTooltip message="Delete this page" icon={faTrashCan} color="red" />
+						</DeletePageDialog>
 					</div>
 				)}
 			</FlexRowBetween>
