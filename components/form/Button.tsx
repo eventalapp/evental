@@ -33,12 +33,16 @@ export const paddings = {
 	none: 'p-0'
 };
 
-export const Button: React.FC<Props> = (props) => {
+export const Button = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
 	const { className, children, variant = 'primary', padding = 'small', ...rest } = props;
 
 	return (
-		<button className={classNames(paddings[padding], variants[variant], className)} {...rest}>
+		<button
+			className={classNames(paddings[padding], variants[variant], className)}
+			ref={ref}
+			{...rest}
+		>
 			{children}
 		</button>
 	);
-};
+});
