@@ -34,9 +34,12 @@ const CreateSessionPage: NextPage = () => {
 
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
-						<Heading>Create Session</Heading>
+						<Heading className="mb-3">Create Session</Heading>
 
-						<Paragraph>A session is an event session that occurs during an event.</Paragraph>
+						<Paragraph className="text-gray-600">
+							A session is an event session that occurs during an event. For example, a session
+							could be a talk, a workshop, or a panel.
+						</Paragraph>
 
 						{venues && event && sessionCategories && (
 							<CreateSessionForm
