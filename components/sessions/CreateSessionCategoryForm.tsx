@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import Color from 'color';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { ChromePicker } from 'react-color';
@@ -80,9 +81,12 @@ export const CreateSessionCategoryForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					padding="medium"
 					disabled={createSessionCategoryMutation.isLoading}
-					style={{ backgroundColor: colorWatcher, color: '#000000' }}
+					style={{
+						backgroundColor: colorWatcher,
+						color: Color(colorWatcher).isLight() ? '#000' : '#FFF'
+					}}
 				>
-					{createSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Create Session Category'}
+					{createSessionCategoryMutation.isLoading ? <LoadingInner /> : 'Create'}
 				</Button>
 			</div>
 		</form>
