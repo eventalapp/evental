@@ -15,6 +15,7 @@ import { IconLinkTooltip, iconLinkTooltipSkeleton } from '../IconLinkTooltip';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import DeleteRoleDialog from '../radix/components/DeleteRoleDialog';
+import InviteRoleMemberDialog from '../radix/components/InviteRoleMemberDialog';
 import { Heading } from '../typography/Heading';
 
 type Props = {
@@ -53,12 +54,13 @@ export const ViewRole: React.FC<Props> = (props) => {
 						)}
 
 						{role ? (
-							<IconLinkTooltip
-								message={`Invite a ${role.name}`}
-								href={`/events/${eid}/admin/roles/${rid}/invite`}
-								icon={faPaperPlane}
-								color="gray"
-							/>
+							<InviteRoleMemberDialog eid={String(eid)} rid={String(rid)}>
+								<IconButtonTooltip
+									message={`Invite a ${role.name}`}
+									icon={faPaperPlane}
+									color="gray"
+								/>
+							</InviteRoleMemberDialog>
 						) : (
 							iconLinkTooltipSkeleton
 						)}
