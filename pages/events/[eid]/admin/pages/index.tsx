@@ -32,10 +32,9 @@ const PagesAdminPage: NextPage = () => {
 
 							<IconLinkTooltip
 								message="Create a page"
-								side="top"
 								href={`/events/${eid}/admin/pages/create`}
 								icon={faSquarePlus}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
 						</FlexRowBetween>
 

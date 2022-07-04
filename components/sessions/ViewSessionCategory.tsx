@@ -1,15 +1,14 @@
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Prisma from '@prisma/client';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { StrippedUser } from '../../utils/stripUser';
+import { IconButtonTooltip } from '../IconButtonTooltip';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import DeleteSessionCategoryDialog from '../radix/components/DeleteSessionCategoryDialog';
-import Tooltip from '../radix/components/Tooltip';
 import { Heading } from '../typography/Heading';
 import { SessionList } from './SessionList';
 
@@ -50,25 +49,17 @@ export const ViewSessionCategory: React.FC<Props> = (props) => {
 					<div className="space-x-4 flex flex-row">
 						<IconLinkTooltip
 							message="Edit this session category"
-							side="top"
 							href={`/events/${eid}/admin/sessions/categories/${cid}/edit`}
 							icon={faPenToSquare}
-							className="text-gray-700 hover:text-gray-600"
+							color="gray"
 						/>
 
 						<DeleteSessionCategoryDialog eid={String(eid)} cid={String(cid)}>
-							<div className="flex items-center justify-center">
-								<Tooltip side={'top'} message={'Delete this session category'}>
-									<button type="button">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="h-5 w-5 text-red-500 block"
-											size="1x"
-											icon={faTrashCan}
-										/>
-									</button>
-								</Tooltip>
-							</div>
+							<IconButtonTooltip
+								icon={faTrashCan}
+								message="Delete this session category"
+								color="red"
+							/>
 						</DeleteSessionCategoryDialog>
 					</div>
 				)}

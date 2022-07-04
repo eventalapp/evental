@@ -33,10 +33,9 @@ const VenuesAdminPage: NextPage = () => {
 
 							<IconLinkTooltip
 								message="Create a venue"
-								side="top"
 								href={`/events/${eid}/admin/venues/create`}
 								icon={faSquarePlus}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
 						</FlexRowBetween>
 

@@ -33,10 +33,9 @@ const RolesAdminPage: NextPage = () => {
 
 								<IconLinkTooltip
 									message="Create a role"
-									side="top"
 									href={`/events/${eid}/admin/roles/create`}
 									icon={faSquarePlus}
-									className="text-gray-700 hover:text-gray-600"
+									color="gray"
 								/>
 							</FlexRowBetween>
 

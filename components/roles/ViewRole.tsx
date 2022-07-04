@@ -10,9 +10,11 @@ import Skeleton from 'react-loading-skeleton';
 
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUser';
-import { IconLinkTooltip } from '../IconLinkTooltip';
+import { IconButtonTooltip } from '../IconButtonTooltip';
+import { IconLinkTooltip, iconLinkTooltipSkeleton } from '../IconLinkTooltip';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
+import DeleteRoleDialog from '../radix/components/DeleteRoleDialog';
 import { Heading } from '../typography/Heading';
 
 type Props = {
@@ -42,49 +44,46 @@ export const ViewRole: React.FC<Props> = (props) => {
 						{role ? (
 							<IconLinkTooltip
 								message={`Create a ${role.name}`}
-								side="top"
 								href={`/events/${eid}/admin/attendees/create`}
 								icon={faSquarePlus}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
 						) : (
-							<Skeleton className="h-5 w-5" />
+							iconLinkTooltipSkeleton
 						)}
 
 						{role ? (
 							<IconLinkTooltip
 								message={`Invite a ${role.name}`}
-								side="top"
 								href={`/events/${eid}/admin/roles/${rid}/invite`}
 								icon={faPaperPlane}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
 						) : (
-							<Skeleton className="h-5 w-5" />
+							iconLinkTooltipSkeleton
 						)}
 
 						{role ? (
 							<IconLinkTooltip
 								message={`Edit the ${role.name} role`}
-								side="top"
 								href={`/events/${eid}/admin/roles/${rid}/edit`}
 								icon={faPenToSquare}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
 						) : (
-							<Skeleton className="h-5 w-5" />
+							iconLinkTooltipSkeleton
 						)}
 
 						{role ? (
-							<IconLinkTooltip
-								message={`Delete the ${role.name} role`}
-								side="top"
-								href={`/events/${eid}/admin/roles/${rid}/delete`}
-								icon={faTrashCan}
-								className="text-red-500 hover:text-red-400"
-							/>
+							<DeleteRoleDialog eid={String(eid)} rid={String(rid)}>
+								<IconButtonTooltip
+									message={`Delete the ${role.name} role`}
+									icon={faTrashCan}
+									color="red"
+								/>
+							</DeleteRoleDialog>
 						) : (
-							<Skeleton className="h-5 w-5" />
+							iconLinkTooltipSkeleton
 						)}
 					</div>
 				)}

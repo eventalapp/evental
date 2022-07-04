@@ -40,10 +40,9 @@ const SessionsAdminPage: NextPage = () => {
 
 							<IconLinkTooltip
 								message="Create a session"
-								side="top"
 								href={`/events/${eid}/admin/sessions/create`}
 								icon={faSquarePlus}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
 						</FlexRowBetween>
 

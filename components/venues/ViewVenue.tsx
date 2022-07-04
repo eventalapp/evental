@@ -6,8 +6,10 @@ import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { StrippedUser } from '../../utils/stripUser';
+import { IconButtonTooltip } from '../IconButtonTooltip';
 import { IconLinkTooltip } from '../IconLinkTooltip';
 import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
+import DeleteVenueDialog from '../radix/components/DeleteVenueDialog';
 import { SessionList } from '../sessions/SessionList';
 import { Heading } from '../typography/Heading';
 
@@ -30,22 +32,18 @@ export const ViewVenue: React.FC<Props> = (props) => {
 				<div className="mb-1 flex flex-row justify-between items-center">
 					<Heading>{venue ? venue.name : <Skeleton className="w-full max-w-2xl" />}</Heading>
 
-					{admin && (
-						<div className="space-x-4">
+					{venue && admin && (
+						<div className="space-x-4 flex flex-row">
 							<IconLinkTooltip
-								message="Edit this attendee"
-								side="top"
+								message="Edit this venue"
 								href={`/events/${eid}/admin/venues/${vid}/edit`}
 								icon={faPenToSquare}
-								className="text-gray-700 hover:text-gray-600"
+								color="gray"
 							/>
-							<IconLinkTooltip
-								message="Delete this attendee"
-								side="top"
-								href={`/events/${eid}/admin/venues/${vid}/delete`}
-								icon={faTrashCan}
-								className="text-red-500 hover:text-red-400"
-							/>
+
+							<DeleteVenueDialog eid={String(eid)} vid={String(vid)}>
+								<IconButtonTooltip icon={faTrashCan} message="Delete this venue" color="red" />
+							</DeleteVenueDialog>
 						</div>
 					)}
 				</div>
