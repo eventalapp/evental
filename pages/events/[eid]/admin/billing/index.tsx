@@ -35,14 +35,18 @@ const EventBillingPage: NextPage = () => {
 
 						<Column variant="noMargin">
 							<Heading className="mb-3">Single Event Plans &amp; Pricing</Heading>
-							<Paragraph className="text-gray-600 mb-3">
+							<Paragraph className="text-gray-600">
 								View pricing for single event plans for standard and nonprofit or educational
 								events.
 							</Paragraph>
 
-							<Paragraph>Your current plan {event?.level}</Paragraph>
-
-							<PurchaseProPlan eid={String(eid)} />
+							{event?.level === 'TRIAL' ? (
+								<PurchaseProPlan eid={String(eid)} />
+							) : (
+								<Paragraph>
+									Your current plan is <span className="font-medium">{event?.level}</span>
+								</Paragraph>
+							)}
 						</Column>
 					</SidebarWrapper>
 				</Elements>
