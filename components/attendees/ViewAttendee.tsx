@@ -29,7 +29,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 				{admin && (
 					<div className="absolute top-0 right-0 space-x-4 flex flex-row">
 						<IconLinkTooltip
-							message="Click to edit this attendee"
+							message="Edit this attendee"
 							side="top"
 							href={`/events/${eid}/admin/attendees/${uid}/edit`}
 							icon={faPenToSquare}
@@ -37,7 +37,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 						/>
 
 						<IconLinkTooltip
-							message="Click to delete this attendee"
+							message="Delete this attendee"
 							side="top"
 							href={`/events/${eid}/admin/attendees/${uid}/delete`}
 							icon={faTrashCan}

@@ -99,7 +99,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 
 					<Tooltip
 						message={
-							'Click to upload an image for your event. You can use an event logo or icon here.'
+							'Upload an image for your event. You can use an event logo or icon here.'
 						}
 					>
 						<div className="inline-block">

@@ -32,7 +32,7 @@ const RolesAdminPage: NextPage = () => {
 								<Heading>Roles</Heading>
 
 								<IconLinkTooltip
-									message="Click to create a role"
+									message="Create a role"
 									side="top"
 									href={`/events/${eid}/admin/roles/create`}
 									icon={faSquarePlus}

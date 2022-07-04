@@ -31,7 +31,7 @@ const PagesAdminPage: NextPage = () => {
 							<Heading>Pages</Heading>
 
 							<IconLinkTooltip
-								message="Click to create a page"
+								message="Create a page"
 								side="top"
 								href={`/events/${eid}/admin/pages/create`}
 								icon={faSquarePlus}

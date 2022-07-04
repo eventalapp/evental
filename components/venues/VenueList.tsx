@@ -45,7 +45,7 @@ export const VenueList: React.FC<Props> = (props) => {
 											)}
 										</div>
 
-										<Tooltip side={'top'} message={`Click to view the ${venue.name} venue`}>
+										<Tooltip side={'top'} message={`View the ${venue.name} venue`}>
 											<div className="-m-2 flex items-center justify-center p-2">
 												<FontAwesomeIcon
 													fill="currentColor"

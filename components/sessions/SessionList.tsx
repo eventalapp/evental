@@ -79,10 +79,7 @@ export const SessionList: React.FC<Props> = (props) => {
 								showPastSessions ? 'py-1.5' : 'pb-1.5'
 							)}
 						>
-							<Tooltip
-								side="top"
-								message={`Click to ${showPastSessions ? 'hide' : 'show'} past sessions`}
-							>
+							<Tooltip side="top" message={`${showPastSessions ? 'Hide' : 'Show'} past sessions`}>
 								<button
 									className="mr-4 shrink text-gray-400"
 									onClick={() => {

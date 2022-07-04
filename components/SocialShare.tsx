@@ -58,7 +58,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 					}
 				)}
 				className="text-[#1DA1F2]"
-				tooltipMessage="Click to share this event to Twitter."
+				tooltipMessage="Share this event to Twitter."
 			/>
 
 			<SocialShareIcon
@@ -71,7 +71,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 					}
 				)}
 				className="text-[#4267B2]"
-				tooltipMessage="Click to share this event to Facebook."
+				tooltipMessage="Share this event to Facebook."
 			/>
 
 			<SocialShareIcon
@@ -85,7 +85,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 					}
 				)}
 				className="text-[#0077B5]"
-				tooltipMessage="Click to share this event to LinkedIn."
+				tooltipMessage="Share this event to LinkedIn."
 			/>
 
 			<SocialShareIcon
@@ -99,7 +99,7 @@ export const SocialShare: React.FC<Props> = (props) => {
 					}
 				)}
 				className="text-primary-500"
-				tooltipMessage="Click to share this event via email."
+				tooltipMessage="Share this event via email."
 			/>
 		</div>
 	);

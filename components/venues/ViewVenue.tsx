@@ -33,14 +33,14 @@ export const ViewVenue: React.FC<Props> = (props) => {
 					{admin && (
 						<div className="space-x-4">
 							<IconLinkTooltip
-								message="Click to edit this attendee"
+								message="Edit this attendee"
 								side="top"
 								href={`/events/${eid}/admin/venues/${vid}/edit`}
 								icon={faPenToSquare}
 								className="text-gray-700 hover:text-gray-600"
 							/>
 							<IconLinkTooltip
-								message="Click to delete this attendee"
+								message="Delete this attendee"
 								side="top"
 								href={`/events/${eid}/admin/venues/${vid}/delete`}
 								icon={faTrashCan}

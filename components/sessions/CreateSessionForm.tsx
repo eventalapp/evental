@@ -280,7 +280,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 								}}
 							>
 								<button type="button">
-									<Tooltip message="Click to attach people to this session">
+									<Tooltip message="Attach people to this session">
 										<div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-gray-800 transition-colors duration-200 hover:text-primary-500">
 											<FontAwesomeIcon
 												fill="currentColor"

@@ -137,7 +137,7 @@ const ViewEventPage: NextPage = () => {
 												>
 													<a>
 														<Tooltip
-															message={`Click to view all sessions occurring with the ${sessionCategory.name} session category`}
+															message={`View all sessions occurring with the ${sessionCategory.name} session category`}
 															side="left"
 															sideOffset={6}
 														>
@@ -180,7 +180,7 @@ const ViewEventPage: NextPage = () => {
 												<Link href={`/events/${event.slug}/venues/${venue.slug}`} passHref>
 													<a>
 														<Tooltip
-															message={`Click to view all sessions occurring at the ${venue.name} venue`}
+															message={`View all sessions occurring at the ${venue.name} venue`}
 															side="left"
 															sideOffset={6}
 														>
