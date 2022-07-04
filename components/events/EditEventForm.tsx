@@ -98,9 +98,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					<Label htmlFor="image">Image</Label>
 
 					<Tooltip
-						message={
-							'Upload an image for your event. You can use an event logo or icon here.'
-						}
+						message={'Upload an image for your event. You can use an event logo or icon here.'}
 					>
 						<div className="inline-block">
 							<AvatarUpload

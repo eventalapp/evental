@@ -51,10 +51,7 @@ export const SessionCategoryList: React.FC<Props> = (props) => {
 												</div>
 											</div>
 
-											<Tooltip
-												side={'top'}
-												message={`View the ${sessionCategory.name} type`}
-											>
+											<Tooltip side={'top'} message={`View the ${sessionCategory.name} type`}>
 												<div className="-m-2 flex items-center justify-center p-2">
 													<FontAwesomeIcon
 														fill="currentColor"
