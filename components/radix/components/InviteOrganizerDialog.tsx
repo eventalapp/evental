@@ -65,7 +65,7 @@ const InviteOrganizerDialog: React.FC<Props> = (props) => {
 							<Button variant="no-bg">Cancel</Button>
 						</DialogPrimitive.Cancel>
 
-						<Button variant="danger" disabled={inviteOrganizerMutation.isLoading}>
+						<Button variant="primary" disabled={inviteOrganizerMutation.isLoading}>
 							{inviteOrganizerMutation.isLoading ? <LoadingInner /> : 'Invite'}
 						</Button>
 					</div>
