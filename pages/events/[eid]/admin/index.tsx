@@ -1,14 +1,14 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
 import { AdminPageWrapper } from '../../../../components/AdminPageWrapper';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
-import { LinkButton } from '../../../../components/form/LinkButton';
+import { Button } from '../../../../components/form/Button';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
+import DeleteEventDialog from '../../../../components/radix/components/DeleteEventDialog';
 import { SidebarWrapper } from '../../../../components/sidebar/SidebarWrapper';
 import { Heading } from '../../../../components/typography/Heading';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
@@ -44,9 +44,9 @@ const EditEventPage: NextPage = () => {
 						<p className="mt-5 mb-3 text-lg font-bold text-red-600">Danger Zone</p>
 
 						<div className="rounded-md border shadow-sm p-4">
-							<Link href={`/events/${eid}/admin/delete`} passHref>
-								<LinkButton variant="danger">Delete Event</LinkButton>
-							</Link>
+							<DeleteEventDialog eid={String(eid)}>
+								<Button variant="danger">Delete Event</Button>
+							</DeleteEventDialog>
 						</div>
 					</Column>
 				</SidebarWrapper>
