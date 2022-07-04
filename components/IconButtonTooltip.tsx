@@ -49,7 +49,12 @@ export const IconButtonTooltip: Props = (props) => {
 					{isLoading ? (
 						<Skeleton className="w-5 h-5 p-1" />
 					) : (
-						<FontAwesomeIcon fill="currentColor" className="h-5 w-5 p-1" size="1x" icon={icon} />
+						<FontAwesomeIcon
+							fill="currentColor"
+							className="h-5 w-5 p-1 transition-colors duration-100"
+							size="1x"
+							icon={icon}
+						/>
 					)}
 				</button>
 			</div>
