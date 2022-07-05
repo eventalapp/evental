@@ -12,18 +12,16 @@ export const iconColors = {
 	none: ''
 };
 
-type Props = React.FC<
-	{
-		icon: IconDefinition;
-		message: string;
-		side?: 'bottom' | 'top' | 'right' | 'left' | undefined;
-		LoadingComponent?: JSX.Element;
-		isLoading?: boolean;
-		color?: keyof typeof iconColors;
-	} & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
->;
+type Props = {
+	icon: IconDefinition;
+	message: string;
+	side?: 'bottom' | 'top' | 'right' | 'left' | undefined;
+	LoadingComponent?: JSX.Element;
+	isLoading?: boolean;
+	color?: keyof typeof iconColors;
+} & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
-export const IconButtonTooltip: Props = (props) => {
+export const IconButtonTooltip = React.forwardRef<HTMLButtonElement, Props>((props, ref) => {
 	const {
 		children,
 		icon,
@@ -39,6 +37,7 @@ export const IconButtonTooltip: Props = (props) => {
 		<Tooltip message={message} side={side}>
 			<div>
 				<button
+					ref={ref}
 					className={classNames(
 						'flex items-center disabled:cursor-not-allowed disabled:opacity-50 justify-center',
 						iconColors[color],
@@ -60,4 +59,4 @@ export const IconButtonTooltip: Props = (props) => {
 			</div>
 		</Tooltip>
 	);
-};
+});
