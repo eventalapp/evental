@@ -69,12 +69,6 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 				sidebarSkeleton
 			)}
 
-			{event ? (
-				<SidebarLink href={`/events/${event.slug}/admin`}>Branding</SidebarLink>
-			) : (
-				sidebarSkeleton
-			)}
-
 			{separator}
 
 			<span className="px-2.5 font-bold text-xs text-gray-400">BILLING SETTINGS</span>
