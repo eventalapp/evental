@@ -23,7 +23,9 @@ export const PrivatePage = () => (
 				them make you an organizer.
 			</span>
 			<Link href={`/events`} passHref>
-				<LinkButton padding="large">View Events</LinkButton>
+				<LinkButton padding="large" variant="primary">
+					View Events
+				</LinkButton>
 			</Link>
 		</Column>
 	</PageWrapper>

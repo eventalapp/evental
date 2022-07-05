@@ -169,7 +169,7 @@ const HomePage: NextPage = () => {
 
 						<EventalProCard attendees={250} className="relative">
 							<Link href="/events/create">
-								<LinkButton>Start Free Trial</LinkButton>
+								<LinkButton variant="primary">Start Free Trial</LinkButton>
 							</Link>
 						</EventalProCard>
 					</div>

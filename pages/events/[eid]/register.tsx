@@ -97,7 +97,9 @@ const EventRegisterPage: NextPage = () => {
 							</Button>
 
 							<Link href={`/auth/signin?${params}`} passHref>
-								<LinkButton padding="large">Sign in</LinkButton>
+								<LinkButton padding="large" variant="primary">
+									Sign in
+								</LinkButton>
 							</Link>
 						</div>
 					</div>

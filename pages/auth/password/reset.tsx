@@ -51,7 +51,9 @@ const ResetPasswordPage: NextPage = () => {
 					</p>
 
 					<Link href="/auth/password/request" passHref>
-						<LinkButton className="mt-3">Request new code</LinkButton>
+						<LinkButton className="mt-3" variant="primary">
+							Request new code
+						</LinkButton>
 					</Link>
 				</Column>
 

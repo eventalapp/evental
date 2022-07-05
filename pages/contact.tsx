@@ -65,7 +65,7 @@ const ContactPage: NextPage = () => {
 						</p>
 						<div className="mt-6 flex flex-col items-center justify-center space-y-1">
 							<Link href="/support">
-								<LinkButton>Create a ticket</LinkButton>
+								<LinkButton variant="primary">Create a ticket</LinkButton>
 							</Link>
 							<span className="text-sm text-gray-500">or</span>
 							<p className="text-gray-700">
@@ -99,7 +99,7 @@ const ContactPage: NextPage = () => {
 						</p>
 						<div className="mt-6 flex flex-col items-center justify-center space-y-1">
 							<Link href="/demo">
-								<LinkButton>Book a call or demo</LinkButton>
+								<LinkButton variant="primary">Book a call or demo</LinkButton>
 							</Link>
 							<span className="text-sm text-gray-500">or</span>
 							<p className="text-gray-700">

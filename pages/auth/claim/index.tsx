@@ -50,7 +50,9 @@ const ClaimProfilePage: NextPage = () => {
 					</p>
 
 					<Link href="/auth/signup" passHref>
-						<LinkButton className="mt-3">Create an account</LinkButton>
+						<LinkButton className="mt-3" variant="primary">
+							Create an account
+						</LinkButton>
 					</Link>
 				</Column>
 			</PageWrapper>
