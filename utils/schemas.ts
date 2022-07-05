@@ -332,7 +332,7 @@ export const AdminCreateAttendeeSchema = z.object({
 	company: companyValidator.optional(),
 	position: positionValidator.optional(),
 	website: urlValidator.optional(),
-	email: emailValidator,
+	email: emailValidator.optional(),
 	eventRoleId: z.string().min(1, 'Event Role ID is required').max(200, 'Event Role ID is too long')
 });
 

@@ -25,11 +25,12 @@ const CreateAttendeePage: NextPage = () => {
 
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
-						<Heading className="mb-3">Create Attendee Page</Heading>
+						<Heading className="mb-3">Create Attendee</Heading>
 
 						<Paragraph className="text-gray-600">
-							Filling out the information below will create an placeholder account for this user.
-							They will receive an email with instructions on how to claim their account.
+							Filling out the information below will create an placeholder account for this user. If
+							you enter their email, they will receive an email with instructions on how to claim
+							their account.
 						</Paragraph>
 
 						{roles && <AdminCreateAttendeeForm eid={String(eid)} roles={roles} />}

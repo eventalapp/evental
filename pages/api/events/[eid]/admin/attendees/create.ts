@@ -116,13 +116,15 @@ export default api({
 		});
 
 		try {
-			await sendClaimProfileEmail({
-				sendToAddress: user.email,
-				inviterName: requestingUser.name,
-				event,
-				role,
-				claimCode
-			});
+			if (user.email) {
+				await sendClaimProfileEmail({
+					sendToAddress: user.email,
+					inviterName: requestingUser.name,
+					event,
+					role,
+					claimCode
+				});
+			}
 		} catch {
 			// silent fail
 		}
