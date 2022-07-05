@@ -174,7 +174,9 @@ export const ViewSession: React.FC<Props> = (props) => {
 									style={{ backgroundColor: session.category.color }}
 								/>
 							}
-							link={`/events/${eid}/sessions/categories/${session.category.slug}`}
+							link={`/events/${eid}${admin ? '/admin' : ''}/sessions/categories/${
+								session.category.slug
+							}`}
 							tooltipMessage={`This session is a part of the ${session.category.name} category.`}
 							label={session.category.name}
 						/>
@@ -200,7 +202,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 						session.venue?.name && (
 							<TooltipIcon
 								icon={faLocationDot}
-								link={`/events/${eid}/venues/${session.venue.slug}`}
+								link={`/events/${eid}${admin ? '/admin' : ''}/venues/${session.venue.slug}`}
 								tooltipMessage={`This session is taking place at the ${session?.venue?.name} venue.`}
 								label={session?.venue?.name}
 							/>
