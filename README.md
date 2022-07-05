@@ -1,18 +1,12 @@
 # Evental
 
-## pre mvp
-
+## Todo List
 - send email to all event attendees
-
-## low importance
-
 - featured role members
 - event banner
 - Excel export for event data
 - print your schedule
 - customize react toast
-- refactor buttons
-- remove unused radix
 - clean up queries/mutations (export whole mut/query?)
 - rate limit request password reset & verify email request etc
 - session file upload
@@ -25,13 +19,10 @@
 - hide leave button as founder
 - varchar match schema
 - user not caching when unauthed (bc rc doesn't cache errors)
-
-try to make your own event, be a user
-
-## post mvp
-
+- suggest a feature form refactor
 - make events truly private
 - adjust session times when event date is moved
+try to make your own event, be a user
 
 ## DB Pushing
 
