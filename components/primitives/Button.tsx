@@ -14,7 +14,7 @@ export const variants = {
 };
 
 export const paddings = {
-	tiny: 'px-2 py-2',
+	tiny: 'px-3 py-1',
 	small: 'px-3 py-2',
 	medium: 'px-4 py-2',
 	large: 'px-6 py-2',

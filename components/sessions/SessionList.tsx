@@ -1,19 +1,19 @@
 import Prisma from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { sessionListReducer } from '../../utils/reducer';
 import { NotFound } from '../error/NotFound';
+import { Button } from '../primitives/Button';
 import { SessionListDateItem } from './SessionListDateItem';
 
 type Props = {
 	admin?: boolean;
 	sessions?: SessionWithVenue[];
 	event?: Prisma.Event;
-	showPastSessions?: boolean;
 };
 
 const sessionListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
@@ -31,7 +31,8 @@ const sessionListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
 ));
 
 export const SessionList: React.FC<Props> = (props) => {
-	const { sessions, event, admin = false, showPastSessions = true } = props;
+	const { sessions, event, admin = false } = props;
+	const [showPastSessions, setShowPastSessions] = useState(false);
 
 	const previousSessions = sessions?.filter((session) =>
 		dayjs(session.endDate).isBefore(new Date())
@@ -48,6 +49,18 @@ export const SessionList: React.FC<Props> = (props) => {
 		<div className="relative min-h-[25px]">
 			{event && sessions ? (
 				<>
+					{previousSessions && previousSessions.length >= 1 && (
+						<Button
+							className="mb-3"
+							padding="tiny"
+							onClick={() => {
+								setShowPastSessions(!showPastSessions);
+							}}
+						>
+							{showPastSessions ? 'Hide' : 'Show'} Past Sessions
+						</Button>
+					)}
+
 					{previousSessions && previousSessions.length >= 1 && (
 						<div
 							className={classNames(

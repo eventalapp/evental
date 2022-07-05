@@ -1,11 +1,10 @@
 import Prisma from '@prisma/client';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { NotFound } from '../error/NotFound';
-import Tooltip from '../primitives/Tooltip';
 import { EventListItem } from './EventListItem';
 
 type Props = { events?: Prisma.Event[]; className?: string; hidePastEvents?: boolean };
@@ -31,9 +30,7 @@ const eventListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
 ));
 
 export const EventList: React.FC<Props> = (props) => {
-	const [showPastEvents, setShowPastEvents] = useState(false);
-
-	const { events, className, hidePastEvents } = props;
+	const { events, className, hidePastEvents = false } = props;
 
 	if (events && events.length === 0) {
 		return <NotFound message="No events found." />;
@@ -43,34 +40,15 @@ export const EventList: React.FC<Props> = (props) => {
 	const upcomingEvents = events?.filter((event) => dayjs(event.endDate).isAfter(new Date()));
 
 	return (
-		<div className={classNames(className)}>
+		<div className={classNames('relative', className)}>
 			{events ? (
 				<>
-					{showPastEvents &&
+					{previousEvents &&
 						!hidePastEvents &&
-						previousEvents &&
 						previousEvents.map((event) => <EventListItem event={event} key={event.id} />)}
 
-					{previousEvents && previousEvents.length >= 1 && !hidePastEvents && (
-						<div
-							className={classNames(
-								'relative flex items-center',
-								showPastEvents ? 'py-1.5' : 'pb-1.5'
-							)}
-						>
-							<Tooltip
-								side="top"
-								message={`Click to ${showPastEvents ? 'hide' : 'show'} past events`}
-							>
-								<button
-									className="mr-4 shrink text-gray-400"
-									onClick={() => {
-										setShowPastEvents(!showPastEvents);
-									}}
-								>
-									{showPastEvents ? 'Hide' : 'Show'} Past Events
-								</button>
-							</Tooltip>
+					{previousEvents && previousEvents.length >= 1 && (
+						<div className={classNames('relative flex items-center py-1.5')}>
 							<div className="grow border-t border-gray-300" />
 							<span className="mx-4 shrink text-gray-400">Upcoming Events</span>
 							<div className="grow border-t border-gray-300" />
