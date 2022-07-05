@@ -9,8 +9,8 @@ import Column from '../../../components/layout/Column';
 import { FlexRowBetween } from '../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
+import { Heading } from '../../../components/primitives/Heading';
 import { SessionWithEventList } from '../../../components/sessions/SessionWithEventList';
-import { Heading } from '../../../components/typography/Heading';
 import { useSessionsByUserQuery } from '../../../hooks/queries/useSessionsByUserQuery';
 import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 

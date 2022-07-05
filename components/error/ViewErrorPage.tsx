@@ -5,7 +5,7 @@ import React from 'react';
 import Column from '../layout/Column';
 import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
-import { Heading } from '../typography/Heading';
+import { Heading } from '../primitives/Heading';
 
 type Props = {
 	errors: Array<ErroredAPIResponse | null | undefined>;

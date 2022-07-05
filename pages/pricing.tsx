@@ -4,16 +4,16 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { EventalProCard } from '../components/EventalProCard';
-import { Footer } from '../components/Footer';
+import { EventalProCard } from '../components/billing/EventalProCard';
+import { PricingAccordion } from '../components/billing/PricingAccordion';
+import { Button } from '../components/form/Button';
 import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
+import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
-import { PricingAccordion } from '../components/radix/components/PricingAccordion';
-import Slider from '../components/radix/components/Slider';
-import Button from '../components/radix/components/shared/Button';
-import { Heading } from '../components/typography/Heading';
+import { Heading } from '../components/primitives/Heading';
+import Slider from '../components/primitives/Slider';
 import { proAttendeePricing } from '../utils/const';
 
 const PricingPage: NextPage = () => {

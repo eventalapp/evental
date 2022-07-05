@@ -14,11 +14,11 @@ import Skeleton from 'react-loading-skeleton';
 
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUser';
-import { IconButtonTooltip } from '../IconButtonTooltip';
-import { IconLinkTooltip } from '../IconLinkTooltip';
-import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
-import DeleteAttendeeDialog from '../radix/components/DeleteAttendeeDialog';
-import { Heading } from '../typography/Heading';
+import { Heading } from '../primitives/Heading';
+import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
+import { IconLinkTooltip } from '../primitives/IconLinkTooltip';
+import { TooltipIcon, TooltipIconSkeleton } from '../primitives/TooltipIcon';
+import DeleteAttendeeDialog from './DeleteAttendeeDialog';
 
 type Props = { eid: string; uid: string; admin?: boolean; attendee?: AttendeeWithUser };
 

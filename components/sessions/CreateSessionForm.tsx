@@ -12,8 +12,7 @@ import { NEAREST_MINUTE } from '../../config';
 import { useCreateSessionMutation } from '../../hooks/mutations/useCreateSessionMutation';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
-import { HelpTooltip } from '../HelpTooltip';
-import { TimeZoneNotice } from '../TimeZoneNotice';
+import CreateCategoryDialog from '../categories/CreateCategoryDialog';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { DatePicker } from '../form/DatePicker';
@@ -21,11 +20,12 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import AttachPeopleDialog from '../radix/components/AttachPeopleDialog';
-import CreateCategoryDialog from '../radix/components/CreateCategoryDialog';
-import CreateVenueDialog from '../radix/components/CreateVenueDialog';
-import Select from '../radix/components/Select';
-import Tooltip from '../radix/components/Tooltip';
+import { TimeZoneNotice } from '../form/TimeZoneNotice';
+import { HelpTooltip } from '../primitives/HelpTooltip';
+import Select from '../primitives/Select';
+import Tooltip from '../primitives/Tooltip';
+import CreateVenueDialog from '../venues/CreateVenueDialog';
+import AttachPeopleDialog from './AttachPeopleDialog';
 import { RoleMemberListItem } from './RoleMemberListItem';
 
 type Props = {

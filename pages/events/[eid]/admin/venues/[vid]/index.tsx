@@ -3,10 +3,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { AdminPageWrapper } from '../../../../../../components/AdminPageWrapper';
+import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../components/sidebar/SidebarWrapper';
+import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { ViewVenue } from '../../../../../../components/venues/ViewVenue';
 import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
 import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';

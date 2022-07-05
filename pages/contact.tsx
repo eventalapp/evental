@@ -3,12 +3,12 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 
-import { Footer } from '../components/Footer';
 import { LinkButton } from '../components/form/LinkButton';
 import Column from '../components/layout/Column';
+import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
-import { Heading } from '../components/typography/Heading';
+import { Heading } from '../components/primitives/Heading';
 
 const ContactPage: NextPage = () => {
 	return (

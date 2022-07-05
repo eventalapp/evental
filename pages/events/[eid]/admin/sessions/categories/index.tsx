@@ -3,14 +3,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { AdminPageWrapper } from '../../../../../../components/AdminPageWrapper';
-import { IconLinkTooltip } from '../../../../../../components/IconLinkTooltip';
+import { SessionCategoryList } from '../../../../../../components/categories/SessionCategoryList';
+import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SessionCategoryList } from '../../../../../../components/sessions/SessionCategoryList';
-import { SidebarWrapper } from '../../../../../../components/sidebar/SidebarWrapper';
-import { Heading } from '../../../../../../components/typography/Heading';
+import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
+import { Heading } from '../../../../../../components/primitives/Heading';
+import { IconLinkTooltip } from '../../../../../../components/primitives/IconLinkTooltip';
 import { useSessionCategoriesQuery } from '../../../../../../hooks/queries/useSessionCategoriesQuery';
 
 const SessionCategoriesAdminPage: NextPage = () => {

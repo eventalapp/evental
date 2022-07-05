@@ -2,14 +2,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 
-import { Footer } from '../components/Footer';
+import { UserSettingsForm } from '../components/authentication/UserSettingsForm';
 import { LoadingInner } from '../components/error/LoadingInner';
 import { LoadingPage } from '../components/error/LoadingPage';
 import Column from '../components/layout/Column';
+import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
-import { UserSettingsForm } from '../components/settings/UserSettingsForm';
-import { Heading } from '../components/typography/Heading';
+import { Heading } from '../components/primitives/Heading';
 import { useEditUserMutation } from '../hooks/mutations/useEditUserMutation';
 import { useRequestVerificationEmail } from '../hooks/mutations/useRequestVerificationEmail';
 import { useUser } from '../hooks/queries/useUser';

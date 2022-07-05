@@ -10,13 +10,13 @@ import Skeleton from 'react-loading-skeleton';
 
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUser';
-import { IconButtonTooltip } from '../IconButtonTooltip';
-import { IconLinkTooltip, iconLinkTooltipSkeleton } from '../IconLinkTooltip';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
-import DeleteRoleDialog from '../radix/components/DeleteRoleDialog';
-import InviteRoleMemberDialog from '../radix/components/InviteRoleMemberDialog';
-import { Heading } from '../typography/Heading';
+import { Heading } from '../primitives/Heading';
+import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
+import { IconLinkTooltip, iconLinkTooltipSkeleton } from '../primitives/IconLinkTooltip';
+import DeleteRoleDialog from './DeleteRoleDialog';
+import InviteRoleMemberDialog from './InviteRoleMemberDialog';
 
 type Props = {
 	eid: string;

@@ -2,14 +2,14 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-import { Footer } from '../../components/Footer';
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { CreateEventForm } from '../../components/events/CreateEventForm';
 import Column from '../../components/layout/Column';
+import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
-import { Heading } from '../../components/typography/Heading';
-import { Paragraph } from '../../components/typography/Paragraph';
+import { Heading } from '../../components/primitives/Heading';
+import { Paragraph } from '../../components/primitives/Paragraph';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
 import { useUser } from '../../hooks/queries/useUser';
 

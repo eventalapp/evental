@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-import { Footer } from '../components/Footer';
 import Column from '../components/layout/Column';
+import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
-import { Heading } from '../components/typography/Heading';
+import { Heading } from '../components/primitives/Heading';
 
 const SuggestPage: NextPage = () => {
 	return (
@@ -38,9 +38,6 @@ const SuggestPage: NextPage = () => {
 					title="Suggest a feature"
 					src="https://docs.google.com/forms/d/e/1FAIpQLSeXAr_Ij5eiYzGPl9v_rKVJgkoZq6m6jvLDStGoiq4SQGnSLQ/viewform?embedded=true"
 					className="block h-full min-h-[80vh] w-full outline-none"
-					frameBorder="0"
-					marginHeight={0}
-					marginWidth={0}
 				>
 					Loading…
 				</iframe>

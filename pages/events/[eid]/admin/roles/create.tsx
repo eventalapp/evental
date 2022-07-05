@@ -2,13 +2,13 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { AdminPageWrapper } from '../../../../../components/AdminPageWrapper';
+import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
+import { Heading } from '../../../../../components/primitives/Heading';
+import { Paragraph } from '../../../../../components/primitives/Paragraph';
 import { CreateRoleForm } from '../../../../../components/roles/CreateRoleForm';
-import { SidebarWrapper } from '../../../../../components/sidebar/SidebarWrapper';
-import { Heading } from '../../../../../components/typography/Heading';
-import { Paragraph } from '../../../../../components/typography/Paragraph';
 
 const CreateRolePage: NextPage = () => {
 	const router = useRouter();

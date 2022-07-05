@@ -2,11 +2,11 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { AdminPageWrapper } from '../../../../../../../components/AdminPageWrapper';
+import { ViewSessionCategory } from '../../../../../../../components/categories/ViewSessionCategory';
+import { AdminPageWrapper } from '../../../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
-import { ViewSessionCategory } from '../../../../../../../components/sessions/ViewSessionCategory';
-import { SidebarWrapper } from '../../../../../../../components/sidebar/SidebarWrapper';
+import { SidebarWrapper } from '../../../../../../../components/layout/SidebarWrapper';
 import { useEventQuery } from '../../../../../../../hooks/queries/useEventQuery';
 import { useSessionCategoryQuery } from '../../../../../../../hooks/queries/useSessionCategoryQuery';
 import { useSessionsByCategoryQuery } from '../../../../../../../hooks/queries/useSessionsByCategoryQuery';

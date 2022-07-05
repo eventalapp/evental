@@ -3,14 +3,14 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { AdminPageWrapper } from '../../../../components/AdminPageWrapper';
+import DeleteEventDialog from '../../../../components/events/DeleteEventDialog';
 import { EditEventForm } from '../../../../components/events/EditEventForm';
 import { Button } from '../../../../components/form/Button';
+import { AdminPageWrapper } from '../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import DeleteEventDialog from '../../../../components/radix/components/DeleteEventDialog';
-import { SidebarWrapper } from '../../../../components/sidebar/SidebarWrapper';
-import { Heading } from '../../../../components/typography/Heading';
+import { SidebarWrapper } from '../../../../components/layout/SidebarWrapper';
+import { Heading } from '../../../../components/primitives/Heading';
 import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
 
 type EventListItemProps = { event: Prisma.Event };
 

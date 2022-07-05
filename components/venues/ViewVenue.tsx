@@ -6,12 +6,12 @@ import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { StrippedUser } from '../../utils/stripUser';
-import { IconButtonTooltip } from '../IconButtonTooltip';
-import { IconLinkTooltip } from '../IconLinkTooltip';
-import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
-import DeleteVenueDialog from '../radix/components/DeleteVenueDialog';
+import { Heading } from '../primitives/Heading';
+import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
+import { IconLinkTooltip } from '../primitives/IconLinkTooltip';
+import { TooltipIcon, TooltipIconSkeleton } from '../primitives/TooltipIcon';
 import { SessionList } from '../sessions/SessionList';
-import { Heading } from '../typography/Heading';
+import DeleteVenueDialog from './DeleteVenueDialog';
 
 type Props = {
 	eid: string;

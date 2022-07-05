@@ -23,12 +23,12 @@ import { useIsOrganizerQuery } from '../../hooks/queries/useIsOrganizerQuery';
 import { useUser } from '../../hooks/queries/useUser';
 import { formatDateRange } from '../../utils/formatDateRange';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
-import { TooltipIcon, TooltipIconSkeleton } from '../TooltipIcon';
-import { CreateAttendeeDialog } from '../radix/components/CreateAttendeeDialog';
-import LeaveEventDialog from '../radix/components/LeaveEventDialog';
-import { ShareEventDropdown } from '../radix/components/ShareEventDropdown';
-import Tooltip from '../radix/components/Tooltip';
-import { Heading } from '../typography/Heading';
+import { CreateAttendeeDialog } from '../attendees/CreateAttendeeDialog';
+import { Heading } from '../primitives/Heading';
+import Tooltip from '../primitives/Tooltip';
+import { TooltipIcon, TooltipIconSkeleton } from '../primitives/TooltipIcon';
+import LeaveEventDialog from './LeaveEventDialog';
+import { ShareEventDropdown } from './ShareEventDropdown';
 
 export const EventHeader: React.FC<{
 	eid: string;

@@ -8,13 +8,13 @@ import { useEditRoleMutation } from '../../hooks/mutations/useEditRoleMutation';
 import { copy } from '../../utils/const';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
 import { AttendeeWithUser } from '../../utils/stripUser';
-import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import Switch from '../radix/components/Switch';
+import { HelpTooltip } from '../primitives/HelpTooltip';
+import Switch from '../primitives/Switch';
 
 type Props = {
 	eid: string;

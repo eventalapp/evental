@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { SessionWithVenueEvent } from '../../pages/api/users/[uid]/sessions';
 import { sessionWithEventListReducer } from '../../utils/reducer';
 import { NotFound } from '../error/NotFound';
-import { SessionHoverCard } from '../radix/components/SessionHoverCard';
+import { SessionHoverCard } from './SessionHoverCard';
 
 type Props = {
 	admin?: boolean;

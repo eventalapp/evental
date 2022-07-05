@@ -3,12 +3,12 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Footer } from '../../../../components/Footer';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../components/events/Navigation';
 import Column from '../../../../components/layout/Column';
+import { Footer } from '../../../../components/layout/Footer';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { ViewVenue } from '../../../../components/venues/ViewVenue';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';

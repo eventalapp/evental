@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 
 import { formatDateRange } from '../../utils/formatDateRange';
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
 
 export const SessionDatePickerButton = forwardRef<
 	HTMLButtonElement,

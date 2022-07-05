@@ -6,8 +6,8 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { SessionHoverCard } from '../radix/components/SessionHoverCard';
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
+import { SessionHoverCard } from './SessionHoverCard';
 
 type SessionListHourItemProps = {
 	admin?: boolean;

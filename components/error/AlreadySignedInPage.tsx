@@ -2,12 +2,12 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 
-import { Footer } from '../Footer';
 import { LinkButton } from '../form/LinkButton';
 import Column from '../layout/Column';
+import { Footer } from '../layout/Footer';
 import PageWrapper from '../layout/PageWrapper';
 import { Navigation } from '../navigation';
-import { Heading } from '../typography/Heading';
+import { Heading } from '../primitives/Heading';
 
 export const AlreadySignedInPage = () => (
 	<PageWrapper>

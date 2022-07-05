@@ -11,13 +11,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { TooltipIcon } from '../../../components/TooltipIcon';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
-import { Heading } from '../../../components/typography/Heading';
+import { Heading } from '../../../components/primitives/Heading';
+import { TooltipIcon } from '../../../components/primitives/TooltipIcon';
 import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 
 const ViewSessionPage: NextPage = () => {

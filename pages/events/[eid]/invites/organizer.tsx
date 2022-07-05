@@ -3,15 +3,15 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { Footer } from '../../../../components/Footer';
 import { UnauthorizedPage } from '../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import { Button } from '../../../../components/form/Button';
 import Column from '../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../components/layout/FlexRowBetween';
+import { Footer } from '../../../../components/layout/Footer';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { Navigation } from '../../../../components/navigation';
-import { Heading } from '../../../../components/typography/Heading';
+import { Heading } from '../../../../components/primitives/Heading';
 import { useAcceptOrganizerInviteMutation } from '../../../../hooks/mutations/useAcceptOrganizerInviteMutation';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useUser } from '../../../../hooks/queries/useUser';

@@ -13,8 +13,8 @@ import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
-import CreateRoleDialog from '../radix/components/CreateRoleDialog';
-import Select from '../radix/components/Select';
+import Select from '../primitives/Select';
+import CreateRoleDialog from '../roles/CreateRoleDialog';
 
 type Props = { eid: string; roles: Prisma.EventRole[] } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,

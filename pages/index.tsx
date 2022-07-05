@@ -4,17 +4,17 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 
-import { EventalProCard } from '../components/EventalProCard';
-import { Footer } from '../components/Footer';
-import { Card } from '../components/cards/Card';
-import { CardGrid } from '../components/cards/CardGrid';
+import { EventalProCard } from '../components/billing/EventalProCard';
 import { LinkButton } from '../components/form/LinkButton';
 import { AspectImage } from '../components/guides/AspectImage';
+import { Card } from '../components/layout/Card';
+import { CardGrid } from '../components/layout/CardGrid';
 import Column from '../components/layout/Column';
+import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
-import { Heading } from '../components/typography/Heading';
-import { Paragraph } from '../components/typography/Paragraph';
+import { Heading } from '../components/primitives/Heading';
+import { Paragraph } from '../components/primitives/Paragraph';
 import { eduAttendeePricing, proAttendeePricing } from '../utils/const';
 
 const HomePage: NextPage = () => {

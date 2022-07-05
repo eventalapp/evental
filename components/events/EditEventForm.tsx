@@ -18,18 +18,18 @@ import { formatDateRange } from '../../utils/formatDateRange';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/slugify';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { HelpTooltip } from '../HelpTooltip';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
+import { Button } from '../form/Button';
 import { renderCustomHeader } from '../form/DatePicker';
 import { DatePickerButton } from '../form/DatePickerButton';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Input } from '../form/Input';
 import { Label } from '../form/Label';
 import { Textarea } from '../form/Textarea';
-import Select from '../radix/components/Select';
-import Tooltip from '../radix/components/Tooltip';
-import Button from '../radix/components/shared/Button';
+import { HelpTooltip } from '../primitives/HelpTooltip';
+import Select from '../primitives/Select';
+import Tooltip from '../primitives/Tooltip';
 
 type Props = {
 	eid: string;

@@ -4,15 +4,15 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { Footer } from '../../../../../components/Footer';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/Navigation';
 import Column from '../../../../../components/layout/Column';
+import { Footer } from '../../../../../components/layout/Footer';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../components/primitives/Heading';
 import { CreateSessionAttendeeForm } from '../../../../../components/sessions/CreateSessionAttendeeForm';
-import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionQuery } from '../../../../../hooks/queries/useSessionQuery';

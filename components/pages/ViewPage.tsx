@@ -5,11 +5,11 @@ import parse from 'html-react-parser';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { IconButtonTooltip } from '../IconButtonTooltip';
-import { IconLinkTooltip } from '../IconLinkTooltip';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
-import DeletePageDialog from '../radix/components/DeletePageDialog';
-import { Heading } from '../typography/Heading';
+import { Heading } from '../primitives/Heading';
+import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
+import { IconLinkTooltip } from '../primitives/IconLinkTooltip';
+import DeletePageDialog from './DeletePageDialog';
 
 type Props = {
 	eid: string;

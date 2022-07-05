@@ -5,15 +5,15 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { Footer } from '../../../../../components/Footer';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../../components/error/ViewErrorPage';
 import { EventNavigation } from '../../../../../components/events/Navigation';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
+import { Footer } from '../../../../../components/layout/Footer';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
+import { Heading } from '../../../../../components/primitives/Heading';
 import { SessionList } from '../../../../../components/sessions/SessionList';
-import { Heading } from '../../../../../components/typography/Heading';
 import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
 import { useSessionsByDateQuery } from '../../../../../hooks/queries/useSessionsByDateQuery';

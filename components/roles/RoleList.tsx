@@ -7,7 +7,7 @@ import React from 'react';
 import { UseRolesQueryData } from '../../hooks/queries/useRolesQuery';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { NotFound } from '../error/NotFound';
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
 
 type Props = {
 	eid: string;

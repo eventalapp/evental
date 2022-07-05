@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { ClaimProfileForm } from '../../../components/attendees/ClaimProfileForm';
+import { ClaimProfileForm } from '../../../components/authentication/ClaimProfileForm';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { LinkButton } from '../../../components/form/LinkButton';
 import Column from '../../../components/layout/Column';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
-import { Heading } from '../../../components/typography/Heading';
+import { Heading } from '../../../components/primitives/Heading';
 import { CLAIM_PROFILE_EXPIRY } from '../../../config';
 import { useClaimProfileMutation } from '../../../hooks/mutations/useClaimProfileMutation';
 import { useUser } from '../../../hooks/queries/useUser';

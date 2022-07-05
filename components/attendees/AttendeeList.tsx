@@ -7,7 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/stripUser';
 import { NotFound } from '../error/NotFound';
-import Tooltip from '../radix/components/Tooltip';
+import Tooltip from '../primitives/Tooltip';
 
 type Props = {
 	eid: string;
