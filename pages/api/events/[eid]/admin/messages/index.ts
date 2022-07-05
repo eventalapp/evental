@@ -7,7 +7,7 @@ import { api } from '../../../../../../utils/api';
 import { SendEventMessageSchema } from '../../../../../../utils/schemas';
 
 export default api({
-	async POST({ ctx, req }) {
+	async POST({ req }) {
 		const body = SendEventMessageSchema.parse(req.body);
 
 		const event = await getEvent(String(body.eventId));

@@ -1,3 +1,4 @@
+// noinspection ES6ConvertVarToLetConst
 import { PrismaClient } from '@prisma/client/edge';
 
 declare global {

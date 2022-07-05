@@ -1,3 +1,4 @@
+// noinspection JSUnusedGlobalSymbols
 import { IconDefinition, IconName, IconPrefix } from '@fortawesome/fontawesome-common-types';
 
 export let faListOldStyle: IconDefinition = {

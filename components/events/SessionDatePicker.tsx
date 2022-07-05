@@ -21,7 +21,6 @@ export const SessionDatePicker: React.FC<Props> = (props) => {
 		selectsEnd,
 		showTimeSelect,
 		timeIntervals = NEAREST_MINUTE,
-		formatTime = 'MM/dd/yyyy',
 		minDate,
 		maxDate,
 		renderDayContents
