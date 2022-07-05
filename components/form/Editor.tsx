@@ -170,7 +170,7 @@ const MenuBar: React.FC<{
 					<ImageUploadDialog onSubmit={addImage} editor={editor}>
 						<div>
 							<Tooltip side={'top'} message={`Image`}>
-								<button type="button" className={editor.isActive('link') ? 'text-primary' : ''}>
+								<button type="button">
 									<FontAwesomeIcon size="lg" icon={faCamera} />
 								</button>
 							</Tooltip>
