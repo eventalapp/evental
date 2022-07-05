@@ -60,12 +60,7 @@ export const EventalProCard: React.FC<EventalProCardProps> = (props) => {
 			)}
 		>
 			<div className="flex flex-row items-center">
-				<strong
-					className="mr-2 font-display text-2xl font-bold tracking-tight"
-					aria-label="evental homepage"
-				>
-					Evental
-				</strong>
+				<strong className="mr-2 font-display text-2xl font-bold tracking-tight">Evental</strong>
 				<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">
 					{isEducation ? 'EDU' : 'PRO'}
 				</span>
