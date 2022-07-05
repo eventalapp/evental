@@ -3,7 +3,7 @@ import { convert } from 'html-to-text';
 import mjml2html from 'mjml';
 import { NextkitError } from 'nextkit';
 
-import { sendEmail } from '../email';
+import { sendEmail } from './';
 import { welcomeTemplate } from './templates/welcome';
 
 export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {

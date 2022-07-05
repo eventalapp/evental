@@ -1,6 +1,6 @@
 import { SESV2 } from 'aws-sdk';
 
-import { SES } from './client';
+import { SES } from '../client';
 
 export const sendEmail = (params: SESV2.SendEmailRequest): Promise<void> => {
 	return new Promise((resolve, reject) => {
