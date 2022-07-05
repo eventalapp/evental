@@ -27,16 +27,16 @@ export const SidebarWrapper: React.FC<SidebarWrapperProps> = (props) => {
 					<div className="relative mr-10">
 						<div className="py-7 md:py-14 fixed">
 							<Link href={`/events/${eid}`}>
-								<a className="flex items-center flex-col">
-									<div className="rounded-full border-2 border-gray-500 p-2 flex items-center justify-center">
+								<a className="flex items-center flex-col group text-gray-500 hover:text-gray-700">
+									<div className="rounded-full border-2 group-hover:border-gray-700 border-gray-500 p-2 flex items-center justify-center transition duration-100">
 										<FontAwesomeIcon
 											fill="currentColor"
-											className="h-5 w-5 text-gray-500"
+											className="h-5 w-5 transition duration-100"
 											size="1x"
 											icon={faXmark}
 										/>
 									</div>
-									<span className="text-tiny font-bold mt-1 text-gray-500">ESC</span>
+									<span className="text-tiny font-bold mt-1 transition duration-100">ESC</span>
 								</a>
 							</Link>
 						</div>
