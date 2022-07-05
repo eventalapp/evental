@@ -4,9 +4,9 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { populateFormData } from '../../utils/populateFormData';
+import { populateFormData } from '../../utils/form';
 import { EditUserPayload } from '../../utils/schemas';
-import { StrippedUser } from '../../utils/stripUser';
+import { StrippedUser } from '../../utils/user';
 
 export interface UseEditUserMutationData {
 	editUserMutation: UseMutationResult<

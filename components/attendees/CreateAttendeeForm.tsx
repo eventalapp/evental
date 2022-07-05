@@ -7,7 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 import { UseCreateAttendeeMutationData } from '../../hooks/mutations/useCreateAttendeeMutation';
 import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
+import { Button } from '../primitives/Button';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEventQueryData &

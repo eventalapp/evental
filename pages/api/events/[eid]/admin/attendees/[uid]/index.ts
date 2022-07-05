@@ -3,9 +3,9 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../../../prisma/client';
 import { api } from '../../../../../../../utils/api';
-import { isOrganizer } from '../../../../../../../utils/isOrganizer';
+import { isOrganizer } from '../../../../../../../utils/attendee';
 import { AdminEditAttendeeSchema } from '../../../../../../../utils/schemas';
-import { AttendeeWithUserInput, stripAttendeeWithUser } from '../../../../../../../utils/stripUser';
+import { AttendeeWithUserInput, stripAttendeeWithUser } from '../../../../../../../utils/user';
 import { getAttendee } from '../../../attendees/[uid]';
 import { getEvent } from '../../../index';
 

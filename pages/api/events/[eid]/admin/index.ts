@@ -4,11 +4,10 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
-import { busboyParseForm } from '../../../../../utils/busboyParseForm';
-import { isFounder } from '../../../../../utils/isFounder';
-import { isOrganizer } from '../../../../../utils/isOrganizer';
+import { isFounder, isOrganizer } from '../../../../../utils/attendee';
+import { busboyParseForm } from '../../../../../utils/form';
+import { uploadAndProcessAvatar } from '../../../../../utils/image';
 import { EditEventSchema } from '../../../../../utils/schemas';
-import { uploadAndProcessAvatar } from '../../../../../utils/uploadAndProcessImage';
 
 export const config = {
 	api: {

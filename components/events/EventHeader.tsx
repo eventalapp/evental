@@ -21,7 +21,7 @@ import { useEventQuery } from '../../hooks/queries/useEventQuery';
 import { useIsAttendeeQuery } from '../../hooks/queries/useIsAttendeeQuery';
 import { useIsOrganizerQuery } from '../../hooks/queries/useIsOrganizerQuery';
 import { useUser } from '../../hooks/queries/useUser';
-import { formatDateRange } from '../../utils/formatDateRange';
+import { formatDateRange } from '../../utils/date';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { CreateAttendeeDialog } from '../attendees/CreateAttendeeDialog';
 import { Heading } from '../primitives/Heading';

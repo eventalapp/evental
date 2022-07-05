@@ -3,7 +3,7 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import { SelectProps } from '@radix-ui/react-select';
 import cx from 'classnames';
 
-import { Button } from '../form/Button';
+import { Button } from './Button';
 
 export type Option = {
 	label: string;

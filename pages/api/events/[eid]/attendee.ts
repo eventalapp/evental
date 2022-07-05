@@ -1,5 +1,5 @@
 import { api } from '../../../../utils/api';
-import { isAttendee } from '../../../../utils/isAttendee';
+import { isAttendee } from '../../../../utils/attendee';
 
 export default api({
 	async GET({ ctx, req }) {

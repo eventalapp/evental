@@ -1,8 +1,8 @@
 import { NextkitError } from 'nextkit';
 
 import { api } from '../../../utils/api';
-import { busboyParseForm } from '../../../utils/busboyParseForm';
-import { uploadAndProcessImage } from '../../../utils/uploadAndProcessImage';
+import { busboyParseForm } from '../../../utils/form';
+import { uploadAndProcessImage } from '../../../utils/image';
 
 export const config = {
 	api: {

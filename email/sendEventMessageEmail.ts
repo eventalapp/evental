@@ -3,7 +3,7 @@ import { SESV2 } from 'aws-sdk';
 import { convert } from 'html-to-text';
 import mjml2html from 'mjml';
 
-import { sendEmail } from '../utils/sendEmail';
+import { sendEmail } from '../utils/email';
 import { eventMessageTemplate } from './templates/eventMessageTemplate';
 
 type EventMessageArgs = {

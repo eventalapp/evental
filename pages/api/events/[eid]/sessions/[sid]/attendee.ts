@@ -1,8 +1,5 @@
 import { api } from '../../../../../../utils/api';
-import {
-	IsSessionAttendeeArguments,
-	isSessionAttendee
-} from '../../../../../../utils/isSessionAttendee';
+import { IsSessionAttendeeArguments, isSessionAttendee } from '../../../../../../utils/attendee';
 
 export default api({
 	async GET({ ctx, req }) {

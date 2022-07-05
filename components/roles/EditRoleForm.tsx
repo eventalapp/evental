@@ -7,13 +7,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { useEditRoleMutation } from '../../hooks/mutations/useEditRoleMutation';
 import { copy } from '../../utils/const';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
-import { AttendeeWithUser } from '../../utils/stripUser';
+import { AttendeeWithUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
 import { HelpTooltip } from '../primitives/HelpTooltip';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 import Switch from '../primitives/Switch';
 
 type Props = {

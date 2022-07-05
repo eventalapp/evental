@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import { LinkButton } from '../form/LinkButton';
+import { LinkButton } from '../primitives/LinkButton';
 
 type Props = {
 	message?: string | undefined;

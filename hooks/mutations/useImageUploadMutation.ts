@@ -5,7 +5,7 @@ import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { ImageUploadResponse } from '../../pages/api/upload/image';
-import { populateFormData } from '../../utils/populateFormData';
+import { populateFormData } from '../../utils/form';
 import { ImageUploadPayload } from '../../utils/schemas';
 
 export interface UseImageUploadMutationData {

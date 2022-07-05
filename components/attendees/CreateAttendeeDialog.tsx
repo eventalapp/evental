@@ -9,10 +9,10 @@ import { useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 
 import { useCreateAttendeeMutation } from '../../hooks/mutations/useCreateAttendeeMutation';
-import { StrippedUser } from '../../utils/stripUser';
+import { StrippedUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
-import { LinkButton } from '../form/LinkButton';
+import { Button } from '../primitives/Button';
+import { LinkButton } from '../primitives/LinkButton';
 
 interface Props {
 	event: Prisma.Event;

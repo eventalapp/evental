@@ -7,11 +7,11 @@ import { useCreateRoleMutation } from '../../hooks/mutations/useCreateRoleMutati
 import { copy } from '../../utils/const';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Input } from '../form/Input';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
 import { HelpTooltip } from '../primitives/HelpTooltip';
+import { Input } from '../primitives/Input';
+import { Label } from '../primitives/Label';
 import Switch from '../primitives/Switch';
 
 type Props = { eid: string } & DetailedHTMLProps<

@@ -4,11 +4,11 @@ import { CLAIM_PROFILE_EXPIRY } from '../../../../../../config';
 import { sendClaimProfileEmail } from '../../../../../../email/sendClaimProfileEmail';
 import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
-import { busboyParseForm } from '../../../../../../utils/busboyParseForm';
-import { generateSlug } from '../../../../../../utils/generateSlug';
-import { isOrganizer } from '../../../../../../utils/isOrganizer';
+import { isOrganizer } from '../../../../../../utils/attendee';
+import { busboyParseForm } from '../../../../../../utils/form';
+import { uploadAndProcessAvatar } from '../../../../../../utils/image';
 import { AdminCreateAttendeeSchema } from '../../../../../../utils/schemas';
-import { uploadAndProcessAvatar } from '../../../../../../utils/uploadAndProcessImage';
+import { generateSlug } from '../../../../../../utils/string';
 import { getEvent } from '../../index';
 import { getRole } from '../../roles/[rid]';
 

@@ -5,9 +5,9 @@ import Stripe from 'stripe';
 import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
-import { proAttendeePricing, sale } from '../../../../utils/const';
+import { proAttendeePricing, sale } from '../../../../utils/price';
 import { PurchaseProSchema } from '../../../../utils/schemas';
-import { formatAmountForStripe } from '../../../../utils/stripeHelpers';
+import { formatAmountForStripe } from '../../../../utils/stripe';
 import { getEvent } from '../../events/[eid]';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -18,6 +18,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export type UpgradeResponsePayload = {
 	upgraded: boolean;
 };
+
 export type UpgradeResponse = UpgradeResponsePayload | Stripe.Checkout.Session;
 
 export default api({
@@ -99,6 +100,7 @@ export default api({
 				}
 			]
 		};
+
 		const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(params);
 
 		return checkoutSession;

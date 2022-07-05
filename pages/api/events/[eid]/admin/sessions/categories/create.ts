@@ -2,9 +2,9 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../../../prisma/client';
 import { api } from '../../../../../../../utils/api';
-import { generateSlug } from '../../../../../../../utils/generateSlug';
-import { isOrganizer } from '../../../../../../../utils/isOrganizer';
+import { isOrganizer } from '../../../../../../../utils/attendee';
 import { CreateSessionCategorySchema } from '../../../../../../../utils/schemas';
+import { generateSlug } from '../../../../../../../utils/string';
 import { getEvent } from '../../../index';
 
 export default api({

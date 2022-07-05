@@ -2,7 +2,7 @@ import { NextkitError } from 'nextkit';
 
 import { prisma } from '../../../../../../../prisma/client';
 import { api } from '../../../../../../../utils/api';
-import { AttendeeWithUser, stripAttendeeWithUser } from '../../../../../../../utils/stripUser';
+import { AttendeeWithUser, stripAttendeeWithUser } from '../../../../../../../utils/user';
 import { getAttendee } from '../../../attendees/[uid]';
 import { getEvent } from '../../../index';
 import { getSession } from '../index';

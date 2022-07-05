@@ -8,11 +8,11 @@ import { useEditAttendeeMutation } from '../../hooks/mutations/useEditAttendeeMu
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
-import { AttendeeWithUser } from '../../utils/stripUser';
+import { AttendeeWithUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
-import { Button } from '../form/Button';
 import { ErrorMessage } from '../form/ErrorMessage';
-import { Label } from '../form/Label';
+import { Button } from '../primitives/Button';
+import { Label } from '../primitives/Label';
 import Select from '../primitives/Select';
 import CreateRoleDialog from '../roles/CreateRoleDialog';
 

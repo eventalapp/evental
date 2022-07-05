@@ -3,7 +3,7 @@ import { randomBytes } from 'crypto';
 import createAPI, { NextkitError } from 'nextkit';
 
 import { prisma } from '../prisma/client';
-import { FullUser, StrippedUser, fullUser, stripUser } from './stripUser';
+import { FullUser, StrippedUser, fullUser, stripUser } from './user';
 
 const redis = new Redis({
 	url: process.env.UPSTASH_URL!,

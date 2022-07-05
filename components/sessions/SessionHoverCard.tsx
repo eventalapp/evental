@@ -21,8 +21,8 @@ import { useIsSessionAttendeeQuery } from '../../hooks/queries/useIsSessionAtten
 import { useUser } from '../../hooks/queries/useUser';
 import { faCalendarCirclePlus } from '../../icons';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { formatDateRange } from '../../utils/formatDateRange';
-import { StrippedUser } from '../../utils/stripUser';
+import { formatDateRange } from '../../utils/date';
+import { StrippedUser } from '../../utils/user';
 import Tooltip from '../primitives/Tooltip';
 import { TooltipIcon } from '../primitives/TooltipIcon';
 import { LeaveSessionDialog } from './LeaveSessionDialog';

@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import { formatDateRange } from '../../utils/formatDateRange';
+import { formatDateRange } from '../../utils/date';
 import Tooltip from '../primitives/Tooltip';
 
 export const SessionDatePickerButton = forwardRef<
