@@ -23,7 +23,7 @@ const getToken = async (): Promise<string> => {
 };
 
 const getClaimProfileCode = async (): Promise<string> => {
-	const token = randomBytes(128).toString('hex');
+	const token = randomBytes(48).toString('hex');
 
 	const count = await redis.exists(`claim:${token}`);
 
@@ -35,7 +35,7 @@ const getClaimProfileCode = async (): Promise<string> => {
 };
 
 const getVerifyEmailCode = async (): Promise<string> => {
-	const token = randomBytes(128).toString('hex');
+	const token = randomBytes(48).toString('hex');
 
 	const count = await redis.exists(`verify:${token}`);
 
@@ -59,7 +59,7 @@ const getPasswordResetCode = async (): Promise<string> => {
 };
 
 const getRoleInviteCode = async (): Promise<string> => {
-	const token = randomBytes(128).toString('hex');
+	const token = randomBytes(48).toString('hex');
 
 	const count = await redis.exists(`role:${token}`);
 
@@ -71,7 +71,7 @@ const getRoleInviteCode = async (): Promise<string> => {
 };
 
 const getOrganizerInviteCode = async (): Promise<string> => {
-	const token = randomBytes(128).toString('hex');
+	const token = randomBytes(48).toString('hex');
 
 	const count = await redis.exists(`organizer:${token}`);
 
