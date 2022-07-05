@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React from 'react';
 
+import Tooltip from '../primitives/Tooltip';
 import { AdminSidebar } from './Sidebar';
 
 type SidebarWrapperProps = {
@@ -26,19 +27,22 @@ export const SidebarWrapper: React.FC<SidebarWrapperProps> = (props) => {
 					{children}
 					<div className="relative mr-10">
 						<div className="py-7 md:py-14 fixed">
-							<Link href={`/events/${eid}`}>
-								<a className="flex items-center flex-col group text-gray-500 hover:text-gray-700">
-									<div className="rounded-full border-2 group-hover:border-gray-700 border-gray-500 p-2 flex items-center justify-center transition duration-100">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="h-5 w-5 transition duration-100"
-											size="1x"
-											icon={faXmark}
-										/>
-									</div>
-									<span className="text-tiny font-bold mt-1 transition duration-100">ESC</span>
-								</a>
-							</Link>
+							<Tooltip message="Exit admin mode" side="left">
+								<div>
+									<Link href={`/events/${eid}`}>
+										<a className="flex items-center flex-col group text-gray-500 hover:text-gray-700">
+											<div className="rounded-full border-2 group-hover:border-gray-700 border-gray-500 p-2 flex items-center justify-center transition duration-100">
+												<FontAwesomeIcon
+													fill="currentColor"
+													className="h-5 w-5 transition duration-100"
+													size="1x"
+													icon={faXmark}
+												/>
+											</div>
+										</a>
+									</Link>
+								</div>
+							</Tooltip>
 						</div>
 					</div>
 				</div>
