@@ -20,6 +20,8 @@ export default api({
 
 		await ctx.redis.set(`verify:${verifyCode}`, user.id, { ex: VERIFY_EMAIL_EXPIRY });
 
-		await sendVerifyEmail({ verifyCode, sendToAddress: user.email });
+		if (user.email) {
+			await sendVerifyEmail({ verifyCode, sendToAddress: user.email });
+		}
 	}
 });

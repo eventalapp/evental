@@ -24,6 +24,8 @@ export default api({
 
 		await ctx.redis.set(`reset:${resetCode}`, user.id, { ex: PASSWORD_RESET_EXPIRY });
 
-		await sendPasswordResetEmail(user.email, resetCode);
+		if (user.email) {
+			await sendPasswordResetEmail(user.email, resetCode);
+		}
 	}
 });
