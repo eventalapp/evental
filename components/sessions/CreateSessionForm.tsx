@@ -8,8 +8,8 @@ import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { NEAREST_MINUTE } from '../../config';
 import { useCreateSessionMutation } from '../../hooks/mutations/useCreateSessionMutation';
+import { NEAREST_MINUTE } from '../../utils/config';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
 import CreateCategoryDialog from '../categories/CreateCategoryDialog';

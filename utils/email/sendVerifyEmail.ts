@@ -1,30 +1,23 @@
-import Prisma from '@prisma/client';
 import { SESV2 } from 'aws-sdk';
 import { convert } from 'html-to-text';
 import mjml2html from 'mjml';
 
-import { sendEmail } from '../utils/email';
-import { claimProfileTemplate } from './templates/claimProfile';
+import { sendEmail } from '../email';
+import { verifyEmailTemplate } from './templates/verifyEmail';
 
-type ClaimProfileEmailArgs = {
-	event: Prisma.Event;
-	inviterName: string;
-	role: Prisma.EventRole;
+type VerifyEmailArgs = {
 	sendToAddress: string;
-	claimCode: string;
+	verifyCode: string;
 };
 
-export const sendClaimProfileEmail = async (args: ClaimProfileEmailArgs) => {
-	const { event, inviterName, role, sendToAddress, claimCode } = args;
+export const sendVerifyEmail = async (args: VerifyEmailArgs) => {
+	const { sendToAddress, verifyCode } = args;
 
 	const htmlOutput = mjml2html(
-		claimProfileTemplate({
-			inviterName: inviterName,
-			claimLink: `${
+		verifyEmailTemplate({
+			verifyLink: `${
 				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-			}/auth/claim?code=${claimCode}`,
-			event,
-			role
+			}/auth/verify?code=${verifyCode}`
 		})
 	);
 
@@ -46,7 +39,7 @@ export const sendClaimProfileEmail = async (args: ClaimProfileEmailArgs) => {
 					}
 				},
 				Subject: {
-					Data: 'Claim your profile',
+					Data: `Verify your account`,
 					Charset: 'UTF-8'
 				}
 			}

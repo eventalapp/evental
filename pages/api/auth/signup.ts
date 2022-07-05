@@ -2,10 +2,10 @@ import { hash } from 'argon2';
 import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
-import { SESSION_EXPIRY, VERIFY_EMAIL_EXPIRY } from '../../../config';
-import { sendVerifyEmail } from '../../../email/sendVerifyEmail';
 import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
+import { SESSION_EXPIRY, VERIFY_EMAIL_EXPIRY } from '../../../utils/config';
+import { sendVerifyEmail } from '../../../utils/email/sendVerifyEmail';
 import { SignUpSchema } from '../../../utils/schemas';
 import { generateSlug } from '../../../utils/string';
 

@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
-import { PASSWORD_RESET_EXPIRY } from '../../../../config';
-import { sendPasswordResetEmail } from '../../../../email/sendPasswordResetEmail';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
+import { PASSWORD_RESET_EXPIRY } from '../../../../utils/config';
+import { sendPasswordResetEmail } from '../../../../utils/email/sendPasswordResetEmail';
 import { ChangePasswordRequestSchema } from '../../../../utils/schemas';
 
 export default api({

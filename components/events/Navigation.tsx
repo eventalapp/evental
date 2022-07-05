@@ -10,7 +10,7 @@ import { useEventQuery } from '../../hooks/queries/useEventQuery';
 import { usePagesQuery } from '../../hooks/queries/usePagesQuery';
 import { useRolesQuery } from '../../hooks/queries/useRolesQuery';
 import { useUser } from '../../hooks/queries/useUser';
-import { faBarsSquare } from '../../icons';
+import { faBarsSquare } from '../../utils/icons';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
 import { AuthContainer } from '../navigation/AuthContainer';

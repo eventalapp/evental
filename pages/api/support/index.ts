@@ -1,7 +1,7 @@
 import { NextkitError } from 'nextkit';
 
-import { sendSupportTicketEmail } from '../../../email/sendSupportTicketEmail';
 import { api } from '../../../utils/api';
+import { sendSupportTicketEmail } from '../../../utils/email/sendSupportTicketEmail';
 import { SubmitSupportTicketSchema } from '../../../utils/schemas';
 
 export default api({

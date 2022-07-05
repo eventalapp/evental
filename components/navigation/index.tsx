@@ -8,7 +8,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import { useSignOutMutation } from '../../hooks/mutations/useSignOutMutation';
 import { useUser } from '../../hooks/queries/useUser';
-import { faBarsSquare } from '../../icons';
+import { faBarsSquare } from '../../utils/icons';
 import { ProfileDropdown } from '../authentication/ProfileDropdown';
 import { LinkButton } from '../primitives/LinkButton';
 import { AuthContainer } from './AuthContainer';

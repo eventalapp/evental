@@ -2,9 +2,9 @@ import { EventLevel } from '@prisma/client';
 import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
 
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../utils/config';
 import { proAttendeePricing, sale } from '../../../../utils/price';
 import { PurchaseProSchema } from '../../../../utils/schemas';
 import { formatAmountForStripe } from '../../../../utils/stripe';

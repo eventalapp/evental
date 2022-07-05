@@ -7,11 +7,11 @@ import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { NEAREST_MINUTE } from '../../config';
 import { useAddAttendeeToSessionMutation } from '../../hooks/mutations/useAddAttendeeToSessionMutation';
 import { useEditSessionMutation } from '../../hooks/mutations/useEditSessionMutation';
 import { useRemoveAttendeeFromSessionMutation } from '../../hooks/mutations/useRemoveAttendeeFromSessionMutation';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { NEAREST_MINUTE } from '../../utils/config';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { EditSessionPayload, EditSessionSchema } from '../../utils/schemas';
 import { AttendeeWithUser } from '../../utils/user';

@@ -2,7 +2,7 @@ import { faPercent } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-import { faBadge } from '../../icons';
+import { faBadge } from '../../utils/icons';
 import { sale } from '../../utils/price';
 
 export const PromotionalOffer = () => {

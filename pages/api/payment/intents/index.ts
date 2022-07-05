@@ -1,8 +1,8 @@
 import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
 
-import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../config';
 import { api } from '../../../../utils/api';
+import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../utils/config';
 import { formatAmountForStripe } from '../../../../utils/stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {

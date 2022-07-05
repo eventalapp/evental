@@ -1,21 +1,17 @@
 import { SESV2 } from 'aws-sdk';
 import { convert } from 'html-to-text';
 import mjml2html from 'mjml';
-import { NextkitError } from 'nextkit';
 
-import { sendEmail } from '../utils/email';
-import { welcomeTemplate } from './templates/welcome';
+import { sendEmail } from '../email';
+import { forgotPasswordTemplate } from './templates/forgotPassword';
 
-export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {
+export const sendPasswordResetEmail = async (sendToAddress: string, resetCode: string) => {
 	const htmlOutput = mjml2html(
-		welcomeTemplate({
-			name: name,
-			viewEventPageLink: `${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events`,
-			updateProfileLink: `${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/settings`,
-			createEventLink: `${
+		forgotPasswordTemplate(
+			`${
 				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
-			}/events/create`
-		})
+			}/auth/password/reset?code=${resetCode}`
+		)
 	);
 
 	const text = convert(htmlOutput.html, {
@@ -36,7 +32,7 @@ export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {
 					}
 				},
 				Subject: {
-					Data: 'Welcome to Evental!',
+					Data: 'Password Reset',
 					Charset: 'UTF-8'
 				}
 			}
@@ -48,7 +44,5 @@ export const sendWelcomeEmail = async (sendToAddress: string, name: string) => {
 		FromEmailAddress: '"Evental" <no-reply@evental.app>'
 	};
 
-	await sendEmail(params).catch((err) => {
-		throw new NextkitError(500, err);
-	});
+	await sendEmail(params);
 };

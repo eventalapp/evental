@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
 import { getEvent } from '../..';
-import { sendEventMessageEmail } from '../../../../../../email/sendEventMessageEmail';
 import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
+import { sendEventMessageEmail } from '../../../../../../utils/email/sendEventMessageEmail';
 import { SendEventMessageSchema } from '../../../../../../utils/schemas';
 
 export default api({

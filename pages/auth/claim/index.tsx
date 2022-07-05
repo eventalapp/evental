@@ -12,9 +12,9 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
-import { CLAIM_PROFILE_EXPIRY } from '../../../config';
 import { useClaimProfileMutation } from '../../../hooks/mutations/useClaimProfileMutation';
 import { useUser } from '../../../hooks/queries/useUser';
+import { CLAIM_PROFILE_EXPIRY } from '../../../utils/config';
 
 const ClaimProfilePage: NextPage = () => {
 	const router = useRouter();

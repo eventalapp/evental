@@ -20,7 +20,7 @@ import { Editor, EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { faBar, faCodeBlock } from '../../icons';
+import { faBar, faCodeBlock } from '../../utils/icons';
 import { LinkDialog } from '../primitives/LinkDialog';
 import Tooltip from '../primitives/Tooltip';
 import { ImageUploadDialog } from './ImageUploadDialog';
