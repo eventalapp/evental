@@ -31,7 +31,7 @@ export const SidebarLink = React.forwardRef<HTMLAnchorElement, Props>((props, re
 		<Link href={href} passHref>
 			<a
 				className={classNames(
-					'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 text-gray-600 outline-none no-underline mt-1 transition-all duration-50',
+					'cursor-pointer block py-1 px-2.5 rounded hover:bg-gray-200 focus:bg-gray-200 text-gray-600 outline-none no-underline mt-1 transition-all duration-50 focus:outline-none focus-visible:ring focus-visible:ring-primary-500 focus-visible:ring-opacity-75',
 					className,
 					router.asPath === href ? 'bg-gray-300' : ''
 				)}
