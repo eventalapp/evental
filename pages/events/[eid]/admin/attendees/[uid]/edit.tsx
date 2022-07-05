@@ -32,7 +32,7 @@ const EditAttendeePage: NextPage = () => {
 				<SidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<div className="mb-2">
-							<Heading>Edit Attendee</Heading>
+							<Heading>Edit {attendee?.user.name ?? 'Attendee'}</Heading>
 						</div>
 
 						<p className="mt-1 mb-8 text-sm text-gray-600">
