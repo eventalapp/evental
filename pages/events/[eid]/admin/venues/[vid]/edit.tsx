@@ -23,7 +23,7 @@ const EditVenuePage: NextPage = () => {
 				</Head>
 
 				<SidebarWrapper eid={String(eid)}>
-					<Column>
+					<Column variant="noMargin">
 						<Heading>Edit Venue</Heading>
 
 						{venue && <EditVenueForm eid={String(eid)} vid={String(vid)} venue={venue} />}
