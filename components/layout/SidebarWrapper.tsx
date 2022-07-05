@@ -25,19 +25,21 @@ export const SidebarWrapper: React.FC<SidebarWrapperProps> = (props) => {
 				<div className="flex justify-start flex-row">
 					{children}
 					<div className="relative mr-10">
-						<Link href={`/events/${eid}`}>
-							<a className="py-7 md:py-14 flex items-center flex-col fixed">
-								<div className="rounded-full border-2 border-gray-500 p-2 flex items-center justify-center">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="h-5 w-5 text-gray-500"
-										size="1x"
-										icon={faXmark}
-									/>
-								</div>
-								<span className="text-tiny font-bold mt-1 text-gray-500">ESC</span>
-							</a>
-						</Link>
+						<div className="py-7 md:py-14 fixed">
+							<Link href={`/events/${eid}`}>
+								<a className="flex items-center flex-col">
+									<div className="rounded-full border-2 border-gray-500 p-2 flex items-center justify-center">
+										<FontAwesomeIcon
+											fill="currentColor"
+											className="h-5 w-5 text-gray-500"
+											size="1x"
+											icon={faXmark}
+										/>
+									</div>
+									<span className="text-tiny font-bold mt-1 text-gray-500">ESC</span>
+								</a>
+							</Link>
+						</div>
 					</div>
 				</div>
 			</div>
