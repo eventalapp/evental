@@ -14,6 +14,7 @@ import React from 'react';
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';
 import Column from '../../../components/layout/Column';
+import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
@@ -123,6 +124,8 @@ const ViewSessionPage: NextPage = () => {
 					</div>
 				)}
 			</Column>
+
+			<Footer />
 		</PageWrapper>
 	);
 };
