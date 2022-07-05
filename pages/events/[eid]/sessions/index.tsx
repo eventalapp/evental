@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
-import Skeleton from 'react-loading-skeleton';
 
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
@@ -11,7 +10,6 @@ import { EventNavigation } from '../../../../components/events/Navigation';
 import Column from '../../../../components/layout/Column';
 import { Footer } from '../../../../components/layout/Footer';
 import PageWrapper from '../../../../components/layout/PageWrapper';
-import { Heading } from '../../../../components/primitives/Heading';
 import { SessionList } from '../../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
 import { useIsOrganizerQuery } from '../../../../hooks/queries/useIsOrganizerQuery';
@@ -65,10 +63,6 @@ const SessionsPage: NextPage = () => {
 
 			<Column>
 				<EventHeader adminLink={'/sessions'} eid={String(eid)} />
-
-				<Heading className="mb-3" variant="xl" level={2}>
-					{event && sessionsData ? 'Sessions' : <Skeleton className="w-48" />}
-				</Heading>
 
 				<SessionList sessions={sessionsData} event={event} />
 			</Column>

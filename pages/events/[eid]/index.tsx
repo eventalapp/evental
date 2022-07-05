@@ -15,7 +15,6 @@ import { SessionDatePicker } from '../../../components/events/SessionDatePicker'
 import Column from '../../../components/layout/Column';
 import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
-import { Heading } from '../../../components/primitives/Heading';
 import Tooltip from '../../../components/primitives/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
@@ -94,10 +93,6 @@ const ViewEventPage: NextPage = () => {
 
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-12 lg:col-span-9">
-						<Heading className="mb-3" variant="xl" level={2}>
-							{event && sessionsData ? 'Sessions' : <Skeleton className="w-48" />}
-						</Heading>
-
 						<SessionList sessions={sessionsData} event={event} />
 					</div>
 

@@ -75,10 +75,6 @@ export const ViewVenue: React.FC<Props> = (props) => {
 				)}
 			</div>
 
-			<Heading className="mb-3" variant="xl">
-				{event && sessions ? 'Sessions' : <Skeleton className="w-32" />}
-			</Heading>
-
 			<SessionList sessions={sessions} event={event} admin={admin} />
 		</div>
 	);
