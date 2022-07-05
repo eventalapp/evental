@@ -41,10 +41,10 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 
 			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen}>
 				<DialogPrimitive.Title className="text-lg font-medium text-gray-900 dark:text-gray-100">
-					Edit link
+					Upload Image
 				</DialogPrimitive.Title>
 				<DialogPrimitive.Description className="mt-2 text-sm font-normal text-gray-700 dark:text-gray-400">
-					Make changes to your link here. Click save when you&apos;re done.
+					Once you have selected your image, select the "Upload" button.
 				</DialogPrimitive.Description>
 				<div className="mt-2 space-y-3">
 					<div className="mt-5 flex min-h-[250px] w-full flex-col items-center justify-center">
@@ -55,7 +55,15 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 						<ImageUpload files={files} setFiles={setFiles} />
 					</div>
 
-					<div className="mt-4 flex justify-end">
+					<div className="mt-4 flex justify-end space-x-2">
+						<Button
+							variant="no-bg"
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						>
+							Cancel
+						</Button>
 						<Button
 							variant="primary"
 							onClick={() => {
@@ -68,7 +76,7 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 							}}
 							disabled={imageUploadMutation.isLoading}
 						>
-							{imageUploadMutation.isLoading ? <LoadingInner /> : 'Add Image'}
+							{imageUploadMutation.isLoading ? <LoadingInner /> : 'Upload'}
 						</Button>
 					</div>
 				</div>
