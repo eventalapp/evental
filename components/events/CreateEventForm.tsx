@@ -108,7 +108,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 					padding="large"
 					disabled={createEventMutation.isLoading}
 				>
-					{createEventMutation.isLoading ? <LoadingInner /> : 'Create Event'}
+					{createEventMutation.isLoading ? <LoadingInner /> : 'Create'}
 				</Button>
 			</div>
 		</form>

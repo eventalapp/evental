@@ -154,7 +154,7 @@ export const SubmitSupportTicketForm = () => {
 						padding="medium"
 						disabled={submitSupportTicketMutation.isLoading}
 					>
-						{submitSupportTicketMutation.isLoading ? <LoadingInner /> : 'Submit Ticket'}
+						{submitSupportTicketMutation.isLoading ? <LoadingInner /> : 'Submit'}
 					</Button>
 				</div>
 			</div>

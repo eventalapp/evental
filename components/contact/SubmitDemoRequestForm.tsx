@@ -76,7 +76,7 @@ export const SubmitDemoRequestForm = () => {
 						padding="medium"
 						disabled={submitDemoRequestMutation.isLoading}
 					>
-						{submitDemoRequestMutation.isLoading ? <LoadingInner /> : 'Submit Demo Request'}
+						{submitDemoRequestMutation.isLoading ? <LoadingInner /> : 'Submit'}
 					</Button>
 				</div>
 			</div>

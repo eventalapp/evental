@@ -158,7 +158,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={adminCreateAttendeeMutation.isLoading}
 				>
-					{adminCreateAttendeeMutation.isLoading ? <LoadingInner /> : 'Create User'}
+					{adminCreateAttendeeMutation.isLoading ? <LoadingInner /> : 'Create'}
 				</Button>
 			</div>
 		</form>
