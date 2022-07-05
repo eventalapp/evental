@@ -46,7 +46,8 @@ export const EventHeader: React.FC<{
 		<div className="relative mb-7">
 			<div className="absolute top-0 right-0 flex flex-row space-x-4">
 				{event
-					? !isAttendee && (
+					? isAttendee !== undefined &&
+					  !isAttendee && (
 							<CreateAttendeeDialog event={event} user={user}>
 								<IconButtonTooltip icon={faUserPlus} message="Register for this event" />
 							</CreateAttendeeDialog>
