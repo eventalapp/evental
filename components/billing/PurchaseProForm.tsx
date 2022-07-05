@@ -1,13 +1,13 @@
-import { useStripe } from '@stripe/react-stripe-js';
-import axios from 'axios';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 import { CURRENCY } from '../../config';
+import { useUpgradeEventMutation } from '../../hooks/mutations/useUpgradeEventMutation';
 import { priceAfterSale } from '../../utils/const';
 import { proAttendeesToPrice } from '../../utils/price';
+import { PurchaseProPayload, PurchaseProSchema } from '../../utils/schemas';
 import { formatAmountForDisplay } from '../../utils/stripeHelpers';
 import { EventalProCard } from '../EventalProCard';
 import { Button } from '../form/Button';
@@ -20,34 +20,17 @@ type Props = { eid?: string } & DetailedHTMLProps<
 
 export const PurchaseProPlan: React.FC<Props> = (props) => {
 	const { eid } = props;
-	const { control, watch, handleSubmit } = useForm({ defaultValues: { attendees: 250, eid } });
-	const stripe = useStripe();
+	const { control, watch, handleSubmit } = useForm<PurchaseProPayload>({
+		defaultValues: { attendees: 250, eventId: eid },
+		resolver: zodResolver(PurchaseProSchema)
+	});
 	const attendees = watch('attendees');
+	const { upgradeEventMutation } = useUpgradeEventMutation(String(eid));
 
 	return (
 		<form
 			onSubmit={handleSubmit(async (data) => {
-				const response = await axios.post('/api/payment/sessions', {
-					attendees: data.attendees,
-					eventId: data.eid
-				});
-
-				if (response.status === 500) {
-					toast.error('Something went wrong. Please try again.');
-				}
-
-				if (response.status === 200 && response?.data?.data?.upgraded) {
-					toast.success('Your event has been upgraded');
-					return;
-				}
-
-				const { error } = await stripe!.redirectToCheckout({
-					sessionId: response?.data?.data?.id
-				});
-
-				if (error) {
-					toast.error(error.message ?? 'Something went wrong. Please try again.');
-				}
+				upgradeEventMutation.mutate(data);
 			})}
 		>
 			<div className="flex flex-col items-center">
