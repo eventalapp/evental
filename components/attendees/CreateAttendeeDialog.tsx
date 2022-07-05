@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import Color from 'color';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useCreateAttendeeMutation } from '../../hooks/mutations/useCreateAttendeeMutation';
 import { StrippedUser } from '../../utils/user';
@@ -30,11 +30,17 @@ export const CreateAttendeeDialog: React.FC<Props> = (props) => {
 
 	params.append('redirectUrl', String(router.asPath));
 
+	useEffect(() => {
+		if (createAttendeeMutation.isSuccess) {
+			setIsOpen(false);
+		}
+	}, [createAttendeeMutation.isSuccess]);
+
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
 			<DialogPrimitive.Trigger asChild>{children}</DialogPrimitive.Trigger>
 
-			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen}>
+			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen} size="large">
 				<DialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
 					Register for {event.name}
 				</DialogPrimitive.Title>
@@ -54,41 +60,40 @@ export const CreateAttendeeDialog: React.FC<Props> = (props) => {
 					>
 						Cancel
 					</Button>
-					<DialogPrimitive.Close>
-						{user ? (
-							<Button
+
+					{user ? (
+						<Button
+							type="submit"
+							className="ml-4"
+							variant="primary"
+							padding="medium"
+							disabled={createAttendeeMutation.isLoading}
+							style={{
+								backgroundColor: event.color,
+								color: Color(event.color).isLight() ? '#000' : '#FFF'
+							}}
+							onClick={() => {
+								createAttendeeMutation.mutate();
+							}}
+						>
+							{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
+						</Button>
+					) : (
+						<Link href={`/auth/signin?${params}`} passHref>
+							<LinkButton
 								type="submit"
 								className="ml-4"
 								variant="primary"
 								padding="medium"
-								disabled={createAttendeeMutation.isLoading}
 								style={{
 									backgroundColor: event.color,
 									color: Color(event.color).isLight() ? '#000' : '#FFF'
 								}}
-								onClick={() => {
-									createAttendeeMutation.mutate();
-								}}
 							>
-								{createAttendeeMutation.isLoading ? <LoadingInner /> : 'Register'}
-							</Button>
-						) : (
-							<Link href={`/auth/signin?${params}`} passHref>
-								<LinkButton
-									type="submit"
-									className="ml-4"
-									variant="primary"
-									padding="medium"
-									style={{
-										backgroundColor: event.color,
-										color: Color(event.color).isLight() ? '#000' : '#FFF'
-									}}
-								>
-									Create Account
-								</LinkButton>
-							</Link>
-						)}
-					</DialogPrimitive.Close>
+								Create Account
+							</LinkButton>
+						</Link>
+					)}
 				</div>
 			</DialogContent>
 		</DialogPrimitive.Root>

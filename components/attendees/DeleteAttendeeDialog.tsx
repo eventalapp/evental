@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as DialogPrimitive from '@radix-ui/react-alert-dialog';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -30,10 +30,10 @@ const DeleteAttendeeDialog: React.FC<Props> = (props) => {
 	});
 
 	useEffect(() => {
-		if (!adminDeleteAttendeeMutation.isLoading && adminDeleteAttendeeMutation.isSuccess) {
+		if (adminDeleteAttendeeMutation.isSuccess) {
 			setIsOpen(false);
 		}
-	}, [adminDeleteAttendeeMutation.isLoading]);
+	}, [adminDeleteAttendeeMutation.isSuccess]);
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -65,9 +65,14 @@ const DeleteAttendeeDialog: React.FC<Props> = (props) => {
 						{errors.confirm?.message && <ErrorMessage>{errors.confirm?.message}</ErrorMessage>}
 					</div>
 					<div className="mt-4 flex justify-end space-x-2">
-						<DialogPrimitive.Cancel asChild>
-							<Button variant="no-bg">Cancel</Button>
-						</DialogPrimitive.Cancel>
+						<Button
+							variant="no-bg"
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						>
+							Cancel
+						</Button>
 
 						<Button variant="danger" disabled={adminDeleteAttendeeMutation.isLoading}>
 							{adminDeleteAttendeeMutation.isLoading ? <LoadingInner /> : 'Delete'}

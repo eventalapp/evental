@@ -1,11 +1,11 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Editor } from '@tiptap/react';
-import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
 import { LoadingInner } from '../error/LoadingInner';
+import { Button } from '../primitives/Button';
 import { DialogContent } from '../primitives/DialogContent';
 import { Label } from '../primitives/Label';
 import { FileWithPreview } from './AvatarUpload';
@@ -56,8 +56,8 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 					</div>
 
 					<div className="mt-4 flex justify-end">
-						<button
-							disabled={imageUploadMutation.isLoading}
+						<Button
+							variant="primary"
 							onClick={() => {
 								if (files.length >= 1) {
 									imageUploadMutation.mutate({ image: files[0] });
@@ -66,15 +66,10 @@ export const ImageUploadDialog: React.FC<Props> = (props) => {
 									toast.error('Please upload an image');
 								}
 							}}
-							className={cx(
-								'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',
-								'bg-primary-600 text-white hover:bg-primary-700 dark:bg-primary-700 dark:text-gray-100 dark:hover:bg-primary-600',
-								'border border-transparent',
-								'focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75'
-							)}
+							disabled={imageUploadMutation.isLoading}
 						>
 							{imageUploadMutation.isLoading ? <LoadingInner /> : 'Add Image'}
-						</button>
+						</Button>
 					</div>
 				</div>
 			</DialogContent>

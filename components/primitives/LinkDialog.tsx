@@ -3,6 +3,7 @@ import { Editor } from '@tiptap/react';
 import cx from 'classnames';
 import React, { useEffect, useState } from 'react';
 
+import { Button } from './Button';
 import { DialogContent } from './DialogContent';
 
 interface Props {
@@ -54,19 +55,15 @@ export const LinkDialog: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="mt-4 flex justify-end">
-					<DialogPrimitive.Close
+					<Button
+						variant="primary"
 						onClick={() => {
 							onSubmit(link);
+							setIsOpen(false);
 						}}
-						className={cx(
-							'inline-flex select-none justify-center rounded-md px-4 py-2 text-sm font-medium',
-							'bg-primary-600 text-white hover:bg-primary-700 dark:bg-primary-700 dark:text-gray-100 dark:hover:bg-primary-600',
-							'border border-transparent',
-							'focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75'
-						)}
 					>
 						Save
-					</DialogPrimitive.Close>
+					</Button>
 				</div>
 			</DialogContent>
 		</DialogPrimitive.Root>

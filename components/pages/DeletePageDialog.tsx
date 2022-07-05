@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as DialogPrimitive from '@radix-ui/react-alert-dialog';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -30,10 +30,10 @@ const DeletePageDialog: React.FC<Props> = (props) => {
 	});
 
 	useEffect(() => {
-		if (!deletePageMutation.isLoading && deletePageMutation.isSuccess) {
+		if (deletePageMutation.isSuccess) {
 			setIsOpen(false);
 		}
-	}, [deletePageMutation.isLoading]);
+	}, [deletePageMutation.isSuccess]);
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -65,9 +65,14 @@ const DeletePageDialog: React.FC<Props> = (props) => {
 						{errors.confirm?.message && <ErrorMessage>{errors.confirm?.message}</ErrorMessage>}
 					</div>
 					<div className="mt-4 flex justify-end space-x-2">
-						<DialogPrimitive.Cancel asChild>
-							<Button variant="no-bg">Cancel</Button>
-						</DialogPrimitive.Cancel>
+						<Button
+							variant="no-bg"
+							onClick={() => {
+								setIsOpen(false);
+							}}
+						>
+							Cancel
+						</Button>
 
 						<Button variant="danger" disabled={deletePageMutation.isLoading}>
 							{deletePageMutation.isLoading ? <LoadingInner /> : 'Delete'}
