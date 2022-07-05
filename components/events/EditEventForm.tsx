@@ -292,6 +292,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 						value={`${event.maxAttendees}`}
 						type="number"
 						color={colorWatcher}
+						disabled
 					/>
 					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
 					{event.level === 'TRIAL' ? (
