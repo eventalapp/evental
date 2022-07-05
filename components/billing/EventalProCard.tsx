@@ -96,7 +96,7 @@ export const EventalProCard: React.FC<EventalProCardProps> = (props) => {
 
 			{children}
 
-			<Link href="/Users/kcjac/Documents/Code/evental/pages/contact">
+			<Link href="/pages/contact">
 				<a className="text-sm text-gray-500">
 					Need help? <span className="text-gray-800 underline">Contact us</span>
 				</a>

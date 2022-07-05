@@ -26,7 +26,7 @@ try to make your own event, be a user
 
 ## DB Pushing
 
-- swap out database url for true db url to db push, then revert back to prisma data layer
+- swap out database url for true db url to db push, then revert to prisma data layer
 
 ## Installation 💾
 

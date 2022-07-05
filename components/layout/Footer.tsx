@@ -22,7 +22,7 @@ export const Footer: React.FC<Props> = (props) => {
 					</div>
 
 					<div className="py-2 px-5">
-						<Link href="/Users/kcjac/Documents/Code/evental/pages/pricing">
+						<Link href="/pages/pricing">
 							<a className="text-base text-gray-500 hover:text-gray-900 transition-all duration-100">
 								Pricing
 							</a>
@@ -30,7 +30,7 @@ export const Footer: React.FC<Props> = (props) => {
 					</div>
 
 					<div className="py-2 px-5">
-						<Link href="/Users/kcjac/Documents/Code/evental/pages/contact">
+						<Link href="/pages/contact">
 							<a className="text-base text-gray-500 hover:text-gray-900 transition-all duration-100">
 								Contact
 							</a>
@@ -55,7 +55,7 @@ export const Footer: React.FC<Props> = (props) => {
 				</nav>
 
 				<div className="my-5 flex items-center justify-center">
-					<Link href="/Users/kcjac/Documents/Code/evental/components/pages" passHref>
+					<Link href="/components/pages" passHref>
 						<a>
 							<span className="flex flex-row items-center">
 								<svg
