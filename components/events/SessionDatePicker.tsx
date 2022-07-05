@@ -63,7 +63,7 @@ export const SessionDatePicker: React.FC<Props> = (props) => {
 							type="button"
 							className={classNames(
 								prevMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex rounded bg-white p-1 text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-0'
+								'inline-flex rounded bg-white p-1 text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-0'
 							)}
 						>
 							<FontAwesomeIcon
@@ -80,7 +80,7 @@ export const SessionDatePicker: React.FC<Props> = (props) => {
 							type="button"
 							className={classNames(
 								nextMonthButtonDisabled && 'cursor-not-allowed opacity-50',
-								'inline-flex rounded bg-white p-1 text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-0'
+								'inline-flex rounded bg-white p-1 text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-0'
 							)}
 						>
 							<FontAwesomeIcon

@@ -281,48 +281,16 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="col-span-4 md:col-span-2">
-					<Label htmlFor="maxAttendees">
-						Max Attendees *
-						<HelpTooltip
-							message={`Your events max attendee count is ${event.maxAttendees}. To increase this, please contact us.`}
-						/>
+					<Label htmlFor="slug">
+						Slug *<HelpTooltip message={copy.tooltip.eventSlug} />
 					</Label>
-					<Input
-						onChange={() => {}}
-						value={`${event.maxAttendees}`}
-						type="number"
-						color={colorWatcher}
-						disabled
-					/>
-					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
-					{event.level === 'TRIAL' ? (
-						<p className="mt-1 text-sm text-gray-600">
-							Want to increase your max attendee count?{' '}
-							<Link href={`/events/${event.slug}/admin/billing`}>
-								<a
-									className="font-medium"
-									style={{
-										color: colorWatcher ?? theme.extend.colors.primary.DEFAULT
-									}}
-								>
-									Upgrade your plan
-								</a>
-							</Link>
-						</p>
-					) : (
-						<p className="mt-1 text-sm text-gray-600">
-							Want to increase your max attendee count?{' '}
-							<Link href={`/contact`}>
-								<a
-									className="font-medium"
-									style={{
-										color: colorWatcher ?? theme.extend.colors.primary.DEFAULT
-									}}
-								>
-									Contact Us
-								</a>
-							</Link>
-						</p>
+					<div className="flex items-center">
+						<span className="mr-1 text-sm md:text-base">evental.app/events/</span>
+						<Input placeholder="event-slug" {...register('slug')} color={colorWatcher} />
+					</div>
+					{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
+					{slugWatcher !== event?.slug && eventSlugCheck && (
+						<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
 					)}
 				</div>
 
@@ -369,6 +337,52 @@ export const EditEventForm: React.FC<Props> = (props) => {
 					)}
 				</div>
 
+				<div className="col-span-4 md:col-span-2">
+					<Label htmlFor="maxAttendees">
+						Max Attendees *
+						<HelpTooltip
+							message={`Your events max attendee count is ${event.maxAttendees}. To increase this, please contact us.`}
+						/>
+					</Label>
+					<Input
+						onChange={() => {}}
+						value={`${event.maxAttendees}`}
+						type="number"
+						color={colorWatcher}
+						disabled
+					/>
+					{errors.website?.message && <ErrorMessage>{errors.website?.message}</ErrorMessage>}
+					{event.level === 'TRIAL' ? (
+						<p className="mt-1 text-sm text-gray-600">
+							Want to increase your max attendee count?{' '}
+							<Link href={`/events/${event.slug}/admin/billing`}>
+								<a
+									className="font-medium"
+									style={{
+										color: colorWatcher ?? theme.extend.colors.primary.DEFAULT
+									}}
+								>
+									Upgrade your plan
+								</a>
+							</Link>
+						</p>
+					) : (
+						<p className="mt-1 text-sm text-gray-600">
+							Want to increase your max attendee count?{' '}
+							<Link href={`/contact`}>
+								<a
+									className="font-medium"
+									style={{
+										color: colorWatcher ?? theme.extend.colors.primary.DEFAULT
+									}}
+								>
+									Contact Us
+								</a>
+							</Link>
+						</p>
+					)}
+				</div>
+
 				<div className="col-span-4">
 					<Label htmlFor="description">Description</Label>
 					<Textarea
@@ -383,21 +397,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				</div>
 
 				<div className="col-span-4 md:col-span-2">
-					<Label htmlFor="slug">
-						Slug *<HelpTooltip message={copy.tooltip.eventSlug} />
-					</Label>
-					<div className="flex items-center">
-						<span className="mr-1 text-sm md:text-base">evental.app/events/</span>
-						<Input placeholder="event-slug" {...register('slug')} color={colorWatcher} />
-					</div>
-					{errors.slug?.message && <ErrorMessage>{errors.slug?.message}</ErrorMessage>}
-					{slugWatcher !== event?.slug && eventSlugCheck && (
-						<ErrorMessage>This slug is already taken, please choose another</ErrorMessage>
-					)}
-				</div>
-
-				<div className="col-span-4 md:col-span-2">
-					<Label htmlFor="slug">
+					<Label htmlFor="color">
 						Color *<HelpTooltip message={copy.tooltip.color} />
 					</Label>
 					<Controller

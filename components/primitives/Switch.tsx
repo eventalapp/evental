@@ -14,7 +14,7 @@ const Switch = (props: Props) => {
 				'radix-state-checked:bg-primary',
 				'radix-state-unchecked:bg-gray-200 dark:radix-state-unchecked:bg-gray-800',
 				'relative inline-flex h-[24px] w-[44px] flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out',
-				'focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75'
+				'focus:outline-none focus:ring focus:ring-gray-900 focus:ring-opacity-75'
 			)}
 		>
 			<SwitchPrimitive.Thumb
