@@ -43,10 +43,17 @@ const EventBillingPage: NextPage = () => {
 							{event?.level === 'TRIAL' ? (
 								<PurchaseProPlan eid={String(eid)} />
 							) : (
-								<Paragraph className="text-gray-600">
-									Your current plan is{' '}
-									<span className="font-medium text-primary">{event?.level}</span>
-								</Paragraph>
+								<div className="flex flex-row items-center justify-start">
+									<Paragraph className="text-gray-800">Your current plan is</Paragraph>
+									<div className="flex flex-row items-center ml-2">
+										<strong className="mr-2 font-display text-2xl font-bold tracking-tight">
+											Evental
+										</strong>
+										<span className="rounded bg-primary py-1 px-2 text-xs font-medium text-white">
+											PRO
+										</span>
+									</div>
+								</div>
 							)}
 						</Column>
 					</SidebarWrapper>
