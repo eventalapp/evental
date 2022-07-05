@@ -1,7 +1,5 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import cx from 'classnames';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
@@ -9,7 +7,8 @@ import { useAttendeesByNameQuery } from '../../hooks/queries/useAttendeesByNameQ
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 import { DialogContent } from '../primitives/DialogContent';
-import Tooltip from '../primitives/Tooltip';
+import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
+import { Input } from '../primitives/Input';
 
 interface Props {
 	eid: string;
@@ -50,18 +49,12 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 						>
 							Name
 						</label>
-						<input
+						<Input
 							id="firstName"
 							type="text"
 							placeholder="Type a name"
 							autoComplete="given-name"
-							onChange={(e) => setName(e.target.value)}
-							className={cx(
-								'mt-1 block w-full rounded-md',
-								'text-sm text-gray-700 placeholder:text-gray-500 dark:text-gray-400 dark:placeholder:text-gray-600',
-								'border border-gray-400 focus:border-transparent dark:border-gray-700 dark:bg-gray-800',
-								'focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75'
-							)}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
 						/>
 					</fieldset>
 				</form>
@@ -100,22 +93,14 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 										<p className="text-sm leading-tight text-gray-600">{attendee.role.name}</p>
 									</div>
 								</div>
-								<Tooltip side={'top'} message={`Add this user to this session.`}>
-									<button
-										type="button"
-										className="p-1"
-										onClick={() => {
-											addAttendeeToSession(attendee.user.id);
-										}}
-									>
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="h-5 w-5 cursor-pointer text-gray-700"
-											size="lg"
-											icon={faPlus}
-										/>
-									</button>
-								</Tooltip>
+
+								<IconButtonTooltip
+									icon={faPlus}
+									message="Add this user to this session."
+									onClick={() => {
+										addAttendeeToSession(attendee.user.id);
+									}}
+								/>
 							</div>
 						))
 					) : (
