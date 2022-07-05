@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { PrivatePage } from '../../../components/error/PrivatePage';
@@ -15,6 +15,8 @@ import { SessionDatePicker } from '../../../components/events/SessionDatePicker'
 import Column from '../../../components/layout/Column';
 import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
+import { Button } from '../../../components/primitives/Button';
+import { Heading } from '../../../components/primitives/Heading';
 import Tooltip from '../../../components/primitives/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
 import { useEventQuery } from '../../../hooks/queries/useEventQuery';
@@ -31,6 +33,7 @@ const ViewEventPage: NextPage = () => {
 	const { event, eventError } = useEventQuery(String(eid));
 	const { venues } = useVenuesQuery(String(eid));
 	const { sessionCategories } = useSessionCategoriesQuery(String(eid));
+	const [showPastSessions, setShowPastSessions] = useState(false);
 
 	if (eventError) {
 		return <ViewErrorPage errors={[eventError]} />;
@@ -93,7 +96,23 @@ const ViewEventPage: NextPage = () => {
 
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-12 lg:col-span-9">
-						<SessionList sessions={sessionsData} event={event} />
+						<Heading className="flex flex-row items-center mb-3" variant="xl" level={2}>
+							Sessions
+							<Button
+								className="ml-3"
+								onClick={() => {
+									setShowPastSessions(!showPastSessions);
+								}}
+							>
+								{showPastSessions ? 'Hide' : 'Show'} Past Sessions
+							</Button>
+						</Heading>
+
+						<SessionList
+							sessions={sessionsData}
+							event={event}
+							showPastSessions={showPastSessions}
+						/>
 					</div>
 
 					<div className="col-span-12 lg:col-span-3">

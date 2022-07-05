@@ -67,7 +67,9 @@ const SessionsPage: NextPage = () => {
 				<EventHeader adminLink={'/venues'} eid={String(eid)} />
 
 				<FlexRowBetween>
-					<Heading>Venues</Heading>
+					<Heading variant="xl" level={2}>
+						Venues
+					</Heading>
 				</FlexRowBetween>
 
 				<VenueList eid={String(eid)} venues={venues} />

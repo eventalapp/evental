@@ -32,7 +32,7 @@ export const ViewRole: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<FlexRowBetween>
-				<Heading>
+				<Heading variant="xl" level={2}>
 					{role ? (
 						`${capitalizeFirstLetter(role.name.toLowerCase())}s`
 					) : (
