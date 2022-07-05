@@ -11,7 +11,6 @@ import {
 	faStreetView,
 	faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -26,7 +25,8 @@ import { formatDateRange } from '../../utils/date';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { CreateAttendeeDialog } from '../attendees/CreateAttendeeDialog';
 import { Heading } from '../primitives/Heading';
-import Tooltip from '../primitives/Tooltip';
+import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
+import { IconLinkTooltip, iconLinkTooltipSkeleton } from '../primitives/IconLinkTooltip';
 import { TooltipIcon, TooltipIconSkeleton } from '../primitives/TooltipIcon';
 import LeaveEventDialog from './LeaveEventDialog';
 import { ShareEventDropdown } from './ShareEventDropdown';
@@ -44,84 +44,44 @@ export const EventHeader: React.FC<{
 
 	return (
 		<div className="relative mb-7">
-			<div className="absolute top-0 right-0 flex flex-row">
-				{event ? (
-					!isAttendee && (
-						<CreateAttendeeDialog event={event} user={user}>
-							<div className="ml-4">
-								<Tooltip side={'top'} message={'Are you attending this event? Click to register'}>
-									<button type="button" className="h-6 w-6 text-gray-700">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="h-5 w-5"
-											size="1x"
-											icon={faUserPlus}
-										/>
-									</button>
-								</Tooltip>
-							</div>
-						</CreateAttendeeDialog>
-					)
-				) : (
-					<Skeleton className="w-6 h-6 ml-4 inline-block" />
-				)}
+			<div className="absolute top-0 right-0 flex flex-row space-x-4">
+				{event
+					? !isAttendee && (
+							<CreateAttendeeDialog event={event} user={user}>
+								<IconButtonTooltip icon={faUserPlus} message="Register for this event" />
+							</CreateAttendeeDialog>
+					  )
+					: iconLinkTooltipSkeleton}
 
 				{event && user && isOrganizer && (
-					<Link href={`/events/${event.slug}/admin${adminLink}`}>
-						<a className="ml-4">
-							<Tooltip
-								side={'top'}
-								message={'You are an organizer for this event, click here to manage this event'}
-							>
-								<button type="button" className="h-6 w-6 text-gray-700">
-									<FontAwesomeIcon fill="currentColor" className="h-5 w-5" size="1x" icon={faCog} />
-								</button>
-							</Tooltip>
-						</a>
-					</Link>
+					<IconLinkTooltip
+						href={`/events/${event.slug}/admin${adminLink}`}
+						icon={faCog}
+						message={'Manage this event'}
+					/>
 				)}
 
 				{event ? (
 					<ShareEventDropdown event={event}>
-						<div className="ml-4">
-							<Tooltip side={'top'} message={'Share this event'}>
-								<button type="button" className="h-6 w-6 text-gray-700">
-									<FontAwesomeIcon
-										fill="currentColor"
-										className="h-5 w-5"
-										size="1x"
-										icon={faShare}
-									/>
-								</button>
-							</Tooltip>
-						</div>
+						<IconButtonTooltip icon={faShare} message="Share this event" />
 					</ShareEventDropdown>
 				) : (
-					<Skeleton className="w-6 h-6 ml-4 inline-block" />
+					iconLinkTooltipSkeleton
 				)}
 
-				{event ? (
-					user &&
-					!isFounder &&
-					Boolean(isAttendee) && (
-						<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
-							<div className="ml-4">
-								<Tooltip side={'top'} message={'Leave this event'}>
-									<button type="button" className="h-6 w-6">
-										<FontAwesomeIcon
-											fill="currentColor"
-											className="h-5 w-5 text-red-500"
-											size="1x"
-											icon={faRightFromBracket}
-										/>
-									</button>
-								</Tooltip>
-							</div>
-						</LeaveEventDialog>
-					)
-				) : (
-					<Skeleton className="w-6 h-6 ml-4 inline-block" />
-				)}
+				{event
+					? user &&
+					  !isFounder &&
+					  Boolean(isAttendee) && (
+							<LeaveEventDialog eventSlug={event.slug} userSlug={String(user?.slug)}>
+								<IconButtonTooltip
+									icon={faRightFromBracket}
+									message="Leave this event"
+									color="red"
+								/>
+							</LeaveEventDialog>
+					  )
+					: iconLinkTooltipSkeleton}
 			</div>
 
 			<div className="flex flex-row items-center">
