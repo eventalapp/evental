@@ -62,7 +62,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 
 				<div>
 					<Heading className="mb-1">
-						{attendee ? attendee.user.name : <Skeleton className="max-w-2xl w-full" />}
+						{attendee ? attendee.user.name : <Skeleton className="w-60" />}
 					</Heading>
 
 					<div className="flex flex-row flex-wrap items-center text-gray-600">
@@ -118,17 +118,13 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 							<TooltipIconSkeleton />
 						)}
 
-						{attendee ? (
-							attendee.user.website && (
-								<TooltipIcon
-									icon={faArrowUpRightFromSquare}
-									tooltipMessage={`This user's website link is ${attendee.user.website}`}
-									label={attendee.user.website}
-									externalLink={attendee.user.website}
-								/>
-							)
-						) : (
-							<TooltipIconSkeleton />
+						{attendee && attendee.user.website && (
+							<TooltipIcon
+								icon={faArrowUpRightFromSquare}
+								tooltipMessage={`This user's website link is ${attendee.user.website}`}
+								label={attendee.user.website}
+								externalLink={attendee.user.website}
+							/>
 						)}
 					</div>
 				</div>
