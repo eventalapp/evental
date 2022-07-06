@@ -32,12 +32,7 @@ export const useSessionRoleAttendeesQuery = (
 				.get<SuccessAPIResponse<AttendeeWithUser[]>>(
 					`/api/events/${eid}/sessions/${sid}/attendees?type=ROLE`
 				)
-				.then((res) => res.data.data)
-				.catch((err: AxiosError<ErroredAPIResponse>) => {
-					if (err?.response?.status === 404) {
-						return err.response.data.data ?? undefined;
-					}
-				});
+				.then((res) => res.data.data);
 		},
 		{
 			retry: 0,
