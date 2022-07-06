@@ -13,3 +13,15 @@ export const sendEmail = (params: SESV2.SendEmailRequest): Promise<void> => {
 		});
 	});
 };
+
+export const sendBulkEmail = (params: SESV2.SendBulkEmailRequest): Promise<void> => {
+	return new Promise((resolve, reject) => {
+		SES.sendBulkEmail(params, (err) => {
+			if (err) {
+				reject('Failed to send email');
+			} else {
+				resolve();
+			}
+		});
+	});
+};
