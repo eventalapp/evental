@@ -48,7 +48,7 @@ const CreateRoleDialog: React.FC<Props> = (props) => {
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
 			<DialogPrimitive.Trigger>{children}</DialogPrimitive.Trigger>
 
-			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen} size="large">
+			<DialogContent isOpen={isOpen} setIsOpen={setIsOpen} size="lg">
 				<DialogPrimitive.Title className="text-xl font-bold text-gray-900 dark:text-gray-100">
 					Create a Role
 				</DialogPrimitive.Title>
