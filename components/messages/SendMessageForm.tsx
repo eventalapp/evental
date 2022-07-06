@@ -9,13 +9,13 @@ import { copy } from '../../utils/const';
 import { SendEventMessagePayload, SendEventMessageSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { LoadingInner } from '../error/LoadingInner';
-import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';
 import { HelpTooltip } from '../primitives/HelpTooltip';
 import { Input } from '../primitives/Input';
 import { Label } from '../primitives/Label';
 import Select from '../primitives/Select';
+import { Textarea } from '../primitives/Textarea';
 
 type Props = { eid: string; roles: Prisma.EventRole[] } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
@@ -43,7 +43,7 @@ export const SendMessageForm: React.FC<Props> = (props) => {
 		},
 		resolver: zodResolver(SendEventMessageSchema)
 	});
-	console.log(errors);
+
 	const sendTypeWatcher = watch('sendType');
 
 	return (
@@ -118,19 +118,7 @@ export const SendMessageForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4">
 					<Label htmlFor="body">Body</Label>
-					<Controller
-						control={control}
-						name="body"
-						render={({ field }) => (
-							<StyledEditor
-								imageUpload
-								onChange={(value) => {
-									field.onChange(value);
-								}}
-								content={field.value || ''}
-							/>
-						)}
-					/>
+					<Textarea rows={5} placeholder="Message body" {...register('body')} />
 					{errors.body?.message && <ErrorMessage>{errors.body?.message}</ErrorMessage>}
 				</div>
 			</div>
