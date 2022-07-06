@@ -28,7 +28,7 @@ export const AdminPageWrapper: React.FC<AdminPageWrapperProps> = (props) => {
 	}
 
 	if (errors && errors.some((error) => error !== null)) {
-		return <ViewErrorPage errors={errors} />;
+		return <ViewErrorPage errors={errors} eid={eid} admin />;
 	}
 
 	if (!isLoadingMerged && !user?.id) {
