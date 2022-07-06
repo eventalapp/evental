@@ -115,7 +115,7 @@ export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					disabled={imageUploadMutation.isLoading}
 				>
-					{adminEditAttendeeMutation.isLoading ? <LoadingInner /> : 'Edit'}
+					{adminEditAttendeeMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>

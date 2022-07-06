@@ -107,7 +107,7 @@ export const EditPageForm: React.FC<Props> = (props) => {
 					padding="medium"
 					disabled={editPageMutation.isLoading}
 				>
-					{editPageMutation.isLoading ? <LoadingInner /> : 'Edit'}
+					{editPageMutation.isLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>
