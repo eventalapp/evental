@@ -12,7 +12,6 @@
 - role member's can edit sessions?
 - google maps embed for addresses
 - bulk create sessions
-- attach people -> create attendee (new modal)
 - make event placeholder with year
 - varchar match schema
 - user not caching when unauthed (bc rc doesn't cache errors)
