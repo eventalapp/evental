@@ -2,6 +2,9 @@ export const copy = {
 	tooltip: {
 		defaultRole:
 			'You can set this role to the default role. When new members join your event, they will be given this role.',
+		sendType:
+			'The send type will determine who will receive this message. Select role to send this message to a role, or everyone to send it to everyone.',
+		sendTypeRole: 'When the send type is role, select the role to send this message to.',
 		category:
 			'A session category is used to categorize sessions. If you do not wish to set a category, select "No Category"',
 		color: 'Pick a color for your event to push your brand. We recommend you pick a darker color.',
