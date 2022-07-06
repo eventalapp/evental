@@ -59,7 +59,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 			category: event?.category ?? undefined,
 			website: event?.website ?? undefined,
 			color: event?.color ?? undefined,
-			privacy: event?.privacy ?? undefined,
+			privacy: event?.privacy ?? PrivacyLevel.PRIVATE,
 			timeZone: event?.timeZone ?? 'America/New_York',
 			slug: event?.slug ?? undefined,
 			endDate: dayjs(event?.endDate).toDate() ?? undefined,
