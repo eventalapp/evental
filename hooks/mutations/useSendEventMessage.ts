@@ -25,10 +25,7 @@ export const useSendEventMessage = (eid: string): UseSendEventMessageData => {
 	>(
 		async (data) => {
 			return await axios
-				.post<SuccessAPIResponse<Prisma.EventMessage>>(
-					`/api/events/${eid}/admin/messages/create`,
-					data
-				)
+				.post<SuccessAPIResponse<Prisma.EventMessage>>(`/api/events/${eid}/admin/messages/`, data)
 				.then((res) => res.data.data);
 		},
 		{
