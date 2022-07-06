@@ -5,6 +5,8 @@ import { api } from '../../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../../utils/attendee';
 import { EditRoleSchema } from '../../../../../../../utils/schemas';
 import { generateSlug } from '../../../../../../../utils/string';
+import { getEvent } from '../../../index';
+import { getRole } from '../../../roles/[rid]';
 
 export default api({
 	async PUT({ ctx, req }) {
@@ -28,27 +30,13 @@ export default api({
 
 		const body = EditRoleSchema.parse(req.body);
 
-		const event = await prisma.event.findFirst({
-			where: { OR: [{ id: String(eid) }, { slug: String(eid) }] },
-			select: {
-				id: true
-			}
-		});
+		const event = await getEvent(String(eid));
 
 		if (!event) {
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const role = await prisma.eventRole.findFirst({
-			where: {
-				eventId: event.id,
-				OR: [{ id: String(rid) }, { slug: String(rid) }]
-			},
-			select: {
-				id: true,
-				name: true
-			}
-		});
+		const role = await getRole(String(eid), String(rid));
 
 		if (!role) {
 			throw new NextkitError(404, 'Role not found.');
@@ -81,7 +69,7 @@ export default api({
 					)
 				);
 			}
-		} else if (!body.defaultRole) {
+		} else if (!body.defaultRole && role.defaultRole) {
 			throw new NextkitError(
 				400,
 				'If you want to make another role the default. Please edit that role first.'
