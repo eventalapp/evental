@@ -10,10 +10,11 @@ type EventMessageArgs = {
 	title: string;
 	body: string;
 	event: Prisma.Event;
+	message: Prisma.EventMessage;
 };
 
 export const sendEventMessageEmail = async (args: EventMessageArgs) => {
-	const { toAddresses, title, body, event } = args;
+	const { toAddresses, title, body, event, message } = args;
 
 	const bulkEntries: SESV2.BulkEmailEntryList = toAddresses.map((address) => ({
 		Destination: { ToAddresses: [address] }
@@ -25,7 +26,7 @@ export const sendEventMessageEmail = async (args: EventMessageArgs) => {
 		eventName: event.name,
 		title,
 		body,
-		messageUrl: `https://evental.app/events/${event.slug}/messages`
+		messageUrl: `https://evental.app/events/${event.slug}/messages/${message.slug}`
 	};
 
 	const params: SESV2.SendBulkEmailRequest = {
