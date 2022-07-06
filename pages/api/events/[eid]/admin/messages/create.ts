@@ -26,19 +26,6 @@ export default api({
 				})
 			);
 		});
-
-		const message = await prisma.eventMessage.create({
-			data: {
-				body: body.body,
-				title: body.title,
-				eventId: body.eventId,
-				sentBy: body.sentBy,
-				sendTo: body.sendType,
-				slug,
-				roleId: body.roleId
-			}
-		});
-
 		let sendToAddresses: Array<string> = [];
 
 		if (body.sendType === 'EVERYONE') {
@@ -62,12 +49,30 @@ export default api({
 			);
 		}
 
+		const message = await prisma.eventMessage.create({
+			data: {
+				body: body.body,
+				title: body.title,
+				eventId: event.id,
+				sentBy: body.sentBy,
+				sendTo: body.sendType,
+				slug,
+				roleId: body.roleId,
+				recipientCount: sendToAddresses.length
+			}
+		});
+
+		if (!message) {
+			throw new NextkitError(500, 'Failed to create message');
+		}
+
 		await sendEventMessageEmail({
 			event,
 			toAddresses: sendToAddresses,
 			body: body.body,
 			title: body.title,
-			sentBy: body.sentBy
+			sentBy: body.sentBy,
+			message
 		});
 
 		return message;
