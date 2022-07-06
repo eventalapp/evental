@@ -15,6 +15,18 @@ type Props = {
 	admin?: boolean;
 };
 
+export const attendeeListSkeleton = Array.apply(null, Array(12)).map((_, i) => (
+	<div className="flex h-full flex-col items-center justify-start" key={i}>
+		<Skeleton className={classNames('mb-2 rounded-md h-28 w-28')} />
+		<span className="block w-full text-center text-lg">
+			<Skeleton className="w-full" />
+		</span>
+		<span className="block w-full text-xs leading-none text-gray-700">
+			<Skeleton className="w-full" />
+		</span>
+	</div>
+));
+
 export const AttendeeList: React.FC<Props> = (props) => {
 	const { eid, attendees, admin = false } = props;
 
@@ -65,17 +77,7 @@ export const AttendeeList: React.FC<Props> = (props) => {
 									</Tooltip>
 								)
 					  )
-					: Array.apply(null, Array(12)).map((_, i) => (
-							<div className="flex h-full flex-col items-center justify-start" key={i}>
-								<Skeleton className={classNames('mb-2 rounded-md h-28 w-28')} />
-								<span className="block w-full text-center text-lg">
-									<Skeleton className="w-full" />
-								</span>
-								<span className="block w-full text-xs leading-none text-gray-700">
-									<Skeleton className="w-full" />
-								</span>
-							</div>
-					  ))}
+					: attendeeListSkeleton}
 			</ul>
 		</div>
 	);
