@@ -28,7 +28,8 @@ export const getMessages = async (eid: string): Promise<Prisma.EventMessage[] | 
 
 	const messages = await prisma.eventMessage.findMany({
 		where: {
-			eventId: event.id
+			eventId: event.id,
+			sendTo: 'EVERYONE'
 		}
 	});
 
