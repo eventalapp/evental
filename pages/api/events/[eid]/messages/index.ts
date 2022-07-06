@@ -30,6 +30,9 @@ export const getMessages = async (eid: string): Promise<Prisma.EventMessage[] | 
 		where: {
 			eventId: event.id,
 			sendTo: 'EVERYONE'
+		},
+		orderBy: {
+			createdAt: 'desc'
 		}
 	});
 
