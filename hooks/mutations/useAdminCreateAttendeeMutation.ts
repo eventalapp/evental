@@ -18,13 +18,14 @@ export interface UseAdminCreateAttendeeMutationData {
 
 interface UseAdminCreateAttendeeMutationOptions {
 	redirectUrl?: string;
+	redirect?: boolean;
 }
 
 export const useAdminCreateAttendeeMutation = (
 	eid: string,
 	args: UseAdminCreateAttendeeMutationOptions = {}
 ): UseAdminCreateAttendeeMutationData => {
-	const { redirectUrl = `/events/${eid}/admin/attendees` } = args;
+	const { redirectUrl = `/events/${eid}/admin/attendees`, redirect = true } = args;
 
 	const queryClient = useQueryClient();
 
@@ -47,9 +48,13 @@ export const useAdminCreateAttendeeMutation = (
 			onSuccess: () => {
 				toast.success('You have successfully created the users profile.');
 
-				router.push(redirectUrl).then(() => {
+				if (redirect) {
+					router.push(redirectUrl).then(() => {
+						void queryClient.invalidateQueries(['attendees', eid]);
+					});
+				} else {
 					void queryClient.invalidateQueries(['attendees', eid]);
-				});
+				}
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'An error has occurred.');
