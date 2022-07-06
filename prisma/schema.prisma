@@ -54,6 +54,11 @@ enum TimeFormat {
   TWENTYFOUR_HOURS
 }
 
+enum EventMessageSendType {
+  EVERYONE
+  ROLE
+}
+
 enum EventCategory {
   EVENT
   ACADEMIC
@@ -247,9 +252,12 @@ model EventMessage {
   id        String   @id @default(cuid())
   sentBy    String?
   title     String
+  slug      String   @unique
   eventId   String
   body      String   @db.VarChar(2000)
   createdAt DateTime @default(now())
+  sendTo EventMessageSendType
+  roleId String?
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
