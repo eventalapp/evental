@@ -271,6 +271,7 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 
 						<div className="flex h-full w-full items-center justify-center">
 							<AttachPeopleDialog
+								attachedUsersById={roleMembersWatcher}
 								eid={String(eid)}
 								addAttendeeToSession={(userId) => {
 									if (roleMembersWatcher.indexOf(userId) === -1) {
