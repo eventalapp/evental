@@ -47,6 +47,26 @@ export default api({
 					.map((attendee) => attendee.user.email)
 					.filter((email) => email !== null) as Array<string>
 			);
+		} else if (body.sendType === 'ROLE') {
+			const attendees = await prisma.eventAttendee.findMany({
+				where: {
+					eventId: event.id,
+					eventRoleId: body.roleId
+				},
+				select: {
+					user: {
+						select: {
+							email: true
+						}
+					}
+				}
+			});
+
+			sendToAddresses = sendToAddresses.concat(
+				attendees
+					.map((attendee) => attendee.user.email)
+					.filter((email) => email !== null) as Array<string>
+			);
 		}
 
 		const message = await prisma.eventMessage.create({
