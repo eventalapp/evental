@@ -51,9 +51,11 @@ export const useAdminCreateAttendeeMutation = (
 				if (redirect) {
 					router.push(redirectUrl).then(() => {
 						void queryClient.invalidateQueries(['attendees', eid]);
+						void queryClient.invalidateQueries(['attendees-by-name', eid, '']);
 					});
 				} else {
 					void queryClient.invalidateQueries(['attendees', eid]);
+					void queryClient.invalidateQueries(['attendees-by-name', eid, '']);
 				}
 			},
 			onError: (error) => {
