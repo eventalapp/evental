@@ -249,15 +249,16 @@ model EventPage {
 }
 
 model EventMessage {
-  id        String   @id @default(cuid())
+  id        String               @id @default(cuid())
   sentBy    String?
   title     String
-  slug      String   @unique
+  slug      String               @unique
   eventId   String
-  body      String   @db.VarChar(2000)
-  createdAt DateTime @default(now())
-  sendTo EventMessageSendType
-  roleId String?
+  body      String               @db.VarChar(2000)
+  createdAt DateTime             @default(now())
+  sendTo    EventMessageSendType
+  roleId    String?
+  recipientCount Int?
 
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
