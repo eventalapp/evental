@@ -62,10 +62,9 @@ export default api({
 			);
 		}
 
-		console.log(sendToAddresses);
 		await sendEventMessageEmail({
 			event,
-			BccAddresses: sendToAddresses,
+			toAddresses: sendToAddresses,
 			body: body.body,
 			title: body.title,
 			sentBy: body.sentBy
