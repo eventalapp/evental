@@ -16,16 +16,29 @@ import { Label } from '../primitives/Label';
 import Select from '../primitives/Select';
 import CreateRoleDialog from '../roles/CreateRoleDialog';
 
-type Props = { eid: string; roles: Prisma.EventRole[] } & DetailedHTMLProps<
-	FormHTMLAttributes<HTMLFormElement>,
-	HTMLFormElement
->;
+type Props = {
+	eid: string;
+	roles: Prisma.EventRole[];
+	onCancel?: () => void;
+	onSuccess?: () => void;
+	redirect?: boolean;
+} & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
-	const { eid, roles } = props;
+	const {
+		eid,
+		roles,
+		onCancel = () => {
+			router.back();
+		},
+		onSuccess,
+		redirect = true
+	} = props;
 	const router = useRouter();
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
-	const { adminCreateAttendeeMutation } = useAdminCreateAttendeeMutation(String(eid));
+	const { adminCreateAttendeeMutation } = useAdminCreateAttendeeMutation(String(eid), {
+		redirect
+	});
 	const {
 		register,
 		handleSubmit,
@@ -43,13 +56,14 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 		setValue('image', files[0]);
 	}, [files]);
 
+	useEffect(() => {
+		if (adminCreateAttendeeMutation.isSuccess) {
+			onSuccess?.();
+		}
+	}, [adminCreateAttendeeMutation.isSuccess]);
+
 	return (
-		<form
-			className="space-y-5"
-			onSubmit={handleSubmit((data) => {
-				adminCreateAttendeeMutation.mutate(data);
-			})}
-		>
+		<form className="space-y-5">
 			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
 				<div className="col-span-2 row-span-2 md:col-span-1">
 					<Label htmlFor="image">Image</Label>
@@ -148,7 +162,7 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
-				<Button type="button" variant="no-bg" onClick={router.back}>
+				<Button type="button" variant="no-bg" onClick={onCancel}>
 					Cancel
 				</Button>
 				<Button
@@ -157,6 +171,9 @@ export const AdminCreateAttendeeForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					padding="medium"
 					disabled={adminCreateAttendeeMutation.isLoading}
+					onClick={handleSubmit((data) => {
+						adminCreateAttendeeMutation.mutate(data);
+					})}
 				>
 					{adminCreateAttendeeMutation.isLoading ? <LoadingInner /> : 'Create'}
 				</Button>
