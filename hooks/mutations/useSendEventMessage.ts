@@ -33,10 +33,10 @@ export const useSendEventMessage = (eid: string): UseSendEventMessageData => {
 		},
 		{
 			onSuccess: (data) => {
-				toast.success('Page created successfully');
+				toast.success('Message created successfully');
 
 				router.push(`/events/${eid}/admin/messages/${data.slug}`).then(() => {
-					void queryClient.invalidateQueries(['pages', eid]);
+					void queryClient.invalidateQueries(['messages', eid]);
 				});
 			},
 			onError: (error) => {
