@@ -20,7 +20,7 @@ import { formatDateRange } from '../../utils/date';
 import { faCalendarCirclePlus } from '../../utils/icons';
 import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeWithUser, StrippedUser } from '../../utils/user';
-import { AttendeeList } from '../attendees/AttendeeList';
+import { AttendeeList, attendeeListSkeleton } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { AddToCalendar } from '../primitives/AddToCalendar';
 import { Heading } from '../primitives/Heading';
@@ -74,7 +74,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				)}
 
 			<FlexRowBetween variant="noWrapStart">
-				<Heading>{session ? session.name : <Skeleton className="w-full max-w-xl" />}</Heading>
+				<Heading>{session ? session.name : <Skeleton className="w-64 max-w-xl" />}</Heading>
 
 				<div className="flex flex-row items-center space-x-4">
 					{event && session ? (
@@ -233,7 +233,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 				<Skeleton className="w-full" count={5} />
 			)}
 
-			{roleAttendees &&
+			{roleAttendees ? (
 				Object.entries(roleAttendees.reduce(sessionAttendeeReducer, {})).map(([key, attendees]) => (
 					<div key={key}>
 						<h3 className="my-3 mt-5 text-2xl font-medium">
@@ -242,10 +242,26 @@ export const ViewSession: React.FC<Props> = (props) => {
 
 						{attendees && <AttendeeList admin={admin} eid={eid} attendees={attendees} />}
 					</div>
-				))}
+				))
+			) : (
+				<>
+					<h3 className="my-3 mt-5 text-2xl font-medium">
+						<Skeleton className="w-48" />
+					</h3>
+					<ul className="grid grid-cols-2 gap-5 sm:grid-cols-4 lg:grid-cols-6">
+						{attendeeListSkeleton}
+					</ul>
+				</>
+			)}
 
 			<h3 className="my-3 mt-5 text-2xl font-medium">
-				Attendees <span className="font-normal text-gray-500">({attendees?.length || 0})</span>
+				{attendees ? (
+					<>
+						Attendees <span className="font-normal text-gray-500">({attendees?.length || 0})</span>
+					</>
+				) : (
+					<Skeleton className="w-48" />
+				)}
 			</h3>
 
 			<AttendeeList admin={admin} eid={eid} attendees={attendees} />
