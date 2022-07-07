@@ -14,13 +14,7 @@ export const AspectImage: Props = (props) => {
 	const { className, children, imageUrl, alt, ratio, ...rest } = props;
 
 	return (
-		<div
-			className={classNames(
-				'relative w-full rounded-md border border-gray-200 shadow-sm',
-				className
-			)}
-			{...rest}
-		>
+		<div className={classNames('relative w-full rounded-md', className)} {...rest}>
 			<AspectRatio.Root ratio={ratio}>
 				<Image alt={alt} src={imageUrl} className="rounded-md" layout="fill" />
 			</AspectRatio.Root>
