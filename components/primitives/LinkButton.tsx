@@ -17,7 +17,7 @@ export const LinkButton = React.forwardRef<HTMLAnchorElement, Props>((props, ref
 	return (
 		<a
 			className={classNames(
-				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus:ring-2 focus:ring-opacity-75 select-none cursor-pointer',
+				'inline-flex select-none items-center justify-center rounded-md text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 duration-50 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 select-none cursor-pointer',
 				paddings[padding],
 				variants[variant],
 				className
