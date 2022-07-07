@@ -5,27 +5,27 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-export interface UseCreateAttendeeMutationData {
-	createAttendeeMutation: UseMutationResult<
+export interface UseeventRegistrationMutationData {
+	eventRegistrationMutation: UseMutationResult<
 		Prisma.EventAttendee,
 		AxiosError<ErroredAPIResponse, unknown>,
 		void
 	>;
 }
 
-interface UseCreateAttendeeOptions {
+interface UseEventRegisterOptions {
 	redirect?: boolean;
 }
 
-export const useCreateAttendeeMutation = (
+export const useEventRegister = (
 	eid: string,
-	args: UseCreateAttendeeOptions = {}
-): UseCreateAttendeeMutationData => {
+	args: UseEventRegisterOptions = {}
+): UseeventRegistrationMutationData => {
 	const { redirect = true } = args;
 
 	const queryClient = useQueryClient();
 
-	const createAttendeeMutation = useMutation<
+	const eventRegistrationMutation = useMutation<
 		Prisma.EventAttendee,
 		AxiosError<ErroredAPIResponse, unknown>,
 		void
@@ -53,5 +53,5 @@ export const useCreateAttendeeMutation = (
 		}
 	);
 
-	return { createAttendeeMutation };
+	return { eventRegistrationMutation };
 };

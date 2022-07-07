@@ -79,12 +79,6 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 			)}
 
 			{event ? (
-				<SidebarLink href={`/events/${event.slug}/admin/billing`}>Billing</SidebarLink>
-			) : (
-				sidebarSkeleton
-			)}
-
-			{event ? (
 				<SidebarLink href={`/events/${event.slug}/admin/pages`}>Pages</SidebarLink>
 			) : (
 				sidebarSkeleton
@@ -92,6 +86,12 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 
 			{event ? (
 				<SidebarLink href={`/events/${event.slug}/admin/organizers`}>Organizers</SidebarLink>
+			) : (
+				sidebarSkeleton
+			)}
+
+			{event ? (
+				<SidebarLink href={`/events/${event.slug}/admin/billing`}>Billing</SidebarLink>
 			) : (
 				sidebarSkeleton
 			)}
