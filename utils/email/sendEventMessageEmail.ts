@@ -34,7 +34,7 @@ export const sendEventMessageEmail = async (args: EventMessageArgs) => {
 	};
 
 	const params: SESV2.SendBulkEmailRequest = {
-		FromEmailAddress: `<${event.name}> messages@evental.app`,
+		FromEmailAddress: `"Evental" <messages@evental.app>`,
 		BulkEmailEntries: bulkEntries,
 		DefaultContent: {
 			Template: {
