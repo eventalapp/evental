@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { EventalPro } from '../../../../../components/billing/EventalPro';
+import { FaqAccordion } from '../../../../../components/billing/FaqAccordion';
+import { FeatureList } from '../../../../../components/billing/FeatureList';
 import { PurchaseProPlan } from '../../../../../components/billing/PurchaseProForm';
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import Column from '../../../../../components/layout/Column';
@@ -33,7 +36,6 @@ const EventBillingPage: NextPage = () => {
 						<Head>
 							<title>Event Billing</title>
 						</Head>
-
 						<Column variant="noMargin">
 							<Heading className="mb-3">Single Event Plans &amp; Pricing</Heading>
 							<Paragraph className="text-gray-600 mb-3">
@@ -66,6 +68,32 @@ const EventBillingPage: NextPage = () => {
 									</Paragraph>
 								</>
 							)}
+						</Column>
+						<Column variant="noMargin">
+							<div className="flex justify-center items-center flex-col mb-5">
+								<EventalPro />
+
+								<Paragraph className="text-gray-600">Perks and features</Paragraph>
+							</div>
+
+							<FeatureList />
+						</Column>
+
+						<Column variant="noMargin">
+							<div className="flex justify-center items-center flex-col mb-5">
+								<Heading level={3} className="mb-3">
+									Frequently Asked Questions
+								</Heading>
+
+								<Paragraph className="text-gray-600">
+									Still have questions?{' '}
+									<Link href="/contact">
+										<a className="underline">Contact Us</a>
+									</Link>
+								</Paragraph>
+							</div>
+
+							<FaqAccordion />
 						</Column>
 					</SidebarWrapper>
 				</Elements>
