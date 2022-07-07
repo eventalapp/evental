@@ -77,7 +77,7 @@ const HomePage: NextPage = () => {
 					<AspectImage
 						alt="Event Overview"
 						ratio={1602 / 817}
-						className="bg-white"
+						className="bg-white border border-gray-200 shadow-sm"
 						imageUrl={'https://cdn.evental.app/images/landing-graphic.jpg'}
 					/>
 				</div>
