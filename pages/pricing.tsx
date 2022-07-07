@@ -175,9 +175,9 @@ const PricingPage: NextPage = () => {
 			</div>
 
 			<Column className="grid grid-cols-4 md:gap-6">
-				<h3 className="col-span-4 mb-3 font-display text-2xl font-bold tracking-tight md:col-span-1">
+				<Heading level={3} className="col-span-4 mb-3 md:col-span-1">
 					Frequently Asked Questions
-				</h3>
+				</Heading>
 
 				<FaqAccordion />
 			</Column>
