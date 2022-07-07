@@ -15,6 +15,16 @@ export const AdminSidebar: React.FC<Props> = (props) => {
 
 	return (
 		<aside className="w-52 p-2.5 h-full py-7 md:py-14 flex flex-col">
+			{event ? (
+				<SidebarLink href={`/events/${event.slug}`} className="font-medium">
+					{'<-'} Back to event
+				</SidebarLink>
+			) : (
+				sidebarSkeleton
+			)}
+
+			{separator}
+
 			<span className="px-2.5 font-bold text-xs text-gray-400">SCHEDULE</span>
 			{event ? (
 				<SidebarLink href={`/events/${event.slug}/admin/sessions`}>Sessions</SidebarLink>
