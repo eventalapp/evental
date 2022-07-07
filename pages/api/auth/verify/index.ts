@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
+import { sendWelcome } from '../../../../email/templates/welcome';
 import { prisma } from '../../../../prisma/client';
 import { api } from '../../../../utils/api';
 import { VERIFY_EMAIL_EXPIRY } from '../../../../utils/config';
-import { sendWelcomeEmail } from '../../../../utils/email/sendWelcomeEmail';
 import { VerifyEmailSchema } from '../../../../utils/schemas';
 
 export default api({
@@ -34,7 +34,7 @@ export default api({
 
 		try {
 			if (user.email) {
-				await sendWelcomeEmail(user.email, user.name);
+				await sendWelcome({ user, toAddresses: [user.email] });
 			}
 		} catch {
 			// silent fail
