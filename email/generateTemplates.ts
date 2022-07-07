@@ -2,6 +2,7 @@ import * as fs from 'fs';
 
 import { claimProfile } from './templates/claimProfile';
 import { eventMessage } from './templates/eventMessage';
+import { verifyEmail } from './templates/verifyEmail';
 import { welcome } from './templates/welcome';
 
 export type GenerateTemplateArgs = {
@@ -53,7 +54,7 @@ export const generateTemplates = (args: GenerateTemplateArgs) => {
 	fs.writeFileSync(`./email/output/${templateName}/operation.json`, operation);
 };
 
-const templatesToGenerate = [eventMessage, claimProfile, welcome];
+const templatesToGenerate = [eventMessage, claimProfile, welcome, verifyEmail];
 
 templatesToGenerate.forEach((template) => {
 	generateTemplates(template);
