@@ -1,7 +1,20 @@
+import Prisma from '@prisma/client';
+import { SESV2 } from 'aws-sdk';
 import { convert } from 'html-to-text';
 import mjml2html from 'mjml';
+import { NextkitError } from 'nextkit';
 
+import { sendBulkEmail } from '../../utils/email';
 import { GenerateTemplateArgs } from '../generateTemplates';
+
+type EventMessageTemplateArgs = {
+	eventImageUrl: string;
+	eventUrl: string;
+	eventName: string;
+	title: string;
+	body: string;
+	messageUrl: string;
+};
 
 const template = `
 <mjml>
@@ -68,4 +81,49 @@ export const eventMessage: GenerateTemplateArgs = {
 	htmlPart: htmlOutput.html,
 	subjectPart: '{{title}}',
 	templateName: 'EventMessage'
+};
+
+type SendEventMessageArgs = {
+	toAddresses: string[];
+	title: string;
+	body: string;
+	event: Prisma.Event;
+	message: Prisma.EventMessage;
+};
+
+export const sendEventMessage = async (args: SendEventMessageArgs) => {
+	const { toAddresses, title, body, event, message } = args;
+
+	if (toAddresses.length === 0) {
+		throw new NextkitError(400, 'No recipients specified');
+	}
+
+	const bulkEntries: SESV2.BulkEmailEntryList = toAddresses.map((address) => ({
+		Destination: { ToAddresses: [address] }
+	}));
+
+	const templateData: EventMessageTemplateArgs = {
+		eventImageUrl: `https://cdn.evental.app${event.image}`,
+		eventUrl: `https://evental.app/events/${event.slug}`,
+		eventName: event.name,
+		title,
+		body,
+		messageUrl: `https://evental.app/events/${event.slug}/messages/${message.slug}`
+	};
+
+	const params: SESV2.SendBulkEmailRequest = {
+		FromEmailAddress: `"Evental" <messages@evental.app>`,
+		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
+		BulkEmailEntries: bulkEntries,
+		DefaultContent: {
+			Template: {
+				TemplateData: JSON.stringify(templateData),
+				TemplateName: 'EventMessage'
+			}
+		}
+	};
+
+	await sendBulkEmail(params).catch((err) => {
+		throw new NextkitError(500, err);
+	});
 };

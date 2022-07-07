@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
 import { getEvent } from '../..';
+import { sendEventMessage } from '../../../../../../email/templates/eventMessage';
 import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
-import { sendEventMessageEmail } from '../../../../../../utils/email/sendEventMessageEmail';
 import { SendEventMessageSchema } from '../../../../../../utils/schemas';
 import { generateSlug } from '../../../../../../utils/string';
 
@@ -85,7 +85,7 @@ export default api({
 			throw new NextkitError(500, 'Failed to create message');
 		}
 
-		await sendEventMessageEmail({
+		await sendEventMessage({
 			event,
 			toAddresses: sendToAddresses,
 			body: body.body,

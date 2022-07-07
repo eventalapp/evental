@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 
+import { claimProfile } from './templates/claimProfile';
 import { eventMessage } from './templates/eventMessage';
 
 export type GenerateTemplateArgs = {
@@ -51,7 +52,7 @@ export const generateTemplates = (args: GenerateTemplateArgs) => {
 	fs.writeFileSync(`./email/output/${templateName}/operation.json`, operation);
 };
 
-const templatesToGenerate = [eventMessage];
+const templatesToGenerate = [eventMessage, claimProfile];
 
 templatesToGenerate.forEach((template) => {
 	generateTemplates(template);

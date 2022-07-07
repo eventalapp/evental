@@ -11,7 +11,7 @@
 		"dev": "next dev -p 5555",
 		"lint": "next lint --fix",
 		"seed": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
-		"generate:templates": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/generateTemplates.ts",
+		"templates": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/generateTemplates.ts",
 		"format": "prettier --write ./{server,pages,utils,components,config,email,hooks,prisma,styles}/**/**/*.{js,jsx,md,ts,tsx} && prisma format",
 		"email:forgotPassword": "ts-node --project tsconfig.json  --compiler-options {\\\\\\\"module\\\\\\\":\\\\\\\"CommonJS\\\\\\\"} utils/email/forgotPassword.ts",
 		"stripe:listen": "stripe listen --forward-to localhost:5555/api/payment/webhooks"
