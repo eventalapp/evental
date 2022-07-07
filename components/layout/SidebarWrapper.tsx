@@ -19,7 +19,7 @@ export const SidebarWrapper: React.FC<SidebarWrapperProps> = (props) => {
 				<AdminSidebar eid={String(eid)} />
 			</div>
 			<div style={{ flex: '1 1 800px' }} className="static overflow-x-hidden overflow-y-scroll">
-				<div className="flex justify-start flex-row">{children}</div>
+				<div className="flex justify-start flex-col">{children}</div>
 			</div>
 		</div>
 	);
