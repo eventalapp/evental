@@ -32,9 +32,11 @@ export const EventNavigation: React.FC<Props> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { signOutMutation } = useSignOutMutation();
 	const { user, isUserLoading } = useUser();
-	const { event } = useEventQuery(String(eid));
-	const { roles } = useRolesQuery(String(eid));
-	const { pages } = usePagesQuery(String(eid));
+	const { event, isEventLoading } = useEventQuery(String(eid));
+	const { roles, isRolesLoading } = useRolesQuery(String(eid));
+	const { pages, isPagesLoading } = usePagesQuery(String(eid));
+
+	const isLoading = isPagesLoading || isEventLoading || isRolesLoading;
 
 	return (
 		<div>
@@ -49,13 +51,13 @@ export const EventNavigation: React.FC<Props> = (props) => {
 						{/* Links (Desktop only) */}
 						<LinkContainer>
 							<div className="flex flex-row items-end">
-								{event ? (
+								{!isLoading && event ? (
 									<LinkItem link={`/events/${event.slug}`} label={'Sessions'} color={event.color} />
 								) : (
 									LinkSkeleton
 								)}
 
-								{event ? (
+								{!isLoading && event ? (
 									<LinkItem
 										link={`/events/${event.slug}/venues`}
 										label={'Venues'}
@@ -65,7 +67,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 									LinkSkeleton
 								)}
 
-								{event && roles ? (
+								{!isLoading && event && roles ? (
 									roles.map((role) => (
 										<LinkItem
 											key={role.id}
@@ -82,7 +84,7 @@ export const EventNavigation: React.FC<Props> = (props) => {
 									</>
 								)}
 
-								{event && pages
+								{!isLoading && event && pages
 									? pages
 											.filter((page) => page.topLevel)
 											.map((page) => (
