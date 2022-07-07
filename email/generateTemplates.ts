@@ -2,6 +2,8 @@ import * as fs from 'fs';
 
 import { claimProfile } from './templates/claimProfile';
 import { eventMessage } from './templates/eventMessage';
+import { inviteOrganizer } from './templates/inviteOrganizer';
+import { inviteRole } from './templates/inviteRole';
 import { verifyEmail } from './templates/verifyEmail';
 import { welcome } from './templates/welcome';
 
@@ -54,7 +56,14 @@ export const generateTemplates = (args: GenerateTemplateArgs) => {
 	fs.writeFileSync(`./email/output/${templateName}/operation.json`, operation);
 };
 
-const templatesToGenerate = [eventMessage, claimProfile, welcome, verifyEmail];
+const templatesToGenerate = [
+	eventMessage,
+	claimProfile,
+	welcome,
+	verifyEmail,
+	inviteOrganizer,
+	inviteRole
+];
 
 templatesToGenerate.forEach((template) => {
 	generateTemplates(template);
