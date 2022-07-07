@@ -1,15 +1,15 @@
 import { SESV2 } from 'aws-sdk';
 import { NextkitError } from 'nextkit';
 
-import { SubmitDemoRequestPayload } from '../schemas';
-import { sendEmail } from './';
+import { sendEmail } from '../../utils/email';
+import { SubmitSupportTicketPayload } from '../../utils/schemas';
 
 type SupportTicketEmailArgs = {
 	sendToAddress: string;
-	payload: SubmitDemoRequestPayload;
+	payload: SubmitSupportTicketPayload;
 };
 
-export const sendDemoRequestEmail = async (args: SupportTicketEmailArgs) => {
+export const sendSupportTicket = async (args: SupportTicketEmailArgs) => {
 	const body = `${Object.entries(args.payload)
 		.map(([key, value]) => (value ? `<p>${key}: ${value}</p>` : null))
 		.join('\n')}`;
@@ -28,7 +28,7 @@ export const sendDemoRequestEmail = async (args: SupportTicketEmailArgs) => {
 					}
 				},
 				Subject: {
-					Data: `(${args.payload.name}) Support Ticket`,
+					Data: `(${args.payload.name}) ${args.payload.attendanceType} ${args.payload.helpType} Support Ticket`,
 					Charset: 'UTF-8'
 				}
 			}

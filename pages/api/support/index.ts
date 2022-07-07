@@ -1,7 +1,7 @@
 import { NextkitError } from 'nextkit';
 
+import { sendSupportTicket } from '../../../email/templates/supportTicket';
 import { api } from '../../../utils/api';
-import { sendSupportTicketEmail } from '../../../utils/email/sendSupportTicketEmail';
 import { SubmitSupportTicketSchema } from '../../../utils/schemas';
 
 export default api({
@@ -21,6 +21,6 @@ export default api({
 
 		const body = SubmitSupportTicketSchema.parse(req.body);
 
-		await sendSupportTicketEmail({ sendToAddress: 'support@evental.app', payload: body });
+		await sendSupportTicket({ sendToAddress: 'support@evental.app', payload: body });
 	}
 });
