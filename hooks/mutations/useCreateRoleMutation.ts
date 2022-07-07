@@ -38,11 +38,11 @@ export const useCreateRoleMutation = (
 				.then((res) => res.data.data);
 		},
 		{
-			onSuccess: (data) => {
+			onSuccess: () => {
 				toast.success('Role created successfully');
 
 				if (redirect) {
-					router.push(`/events/${eid}/admin/roles/${data.slug}`).then(() => {
+					router.push(`/events/${eid}/admin/roles/`).then(() => {
 						void queryClient.invalidateQueries(['roles', eid]);
 					});
 				} else {

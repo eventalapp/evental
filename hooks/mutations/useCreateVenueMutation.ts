@@ -38,11 +38,11 @@ export const useCreateVenueMutation = (
 				.then((res) => res.data.data);
 		},
 		{
-			onSuccess: (data) => {
+			onSuccess: () => {
 				toast.success('Venue created successfully');
 
 				if (redirect) {
-					router.push(`/events/${eid}/admin/venues/${data.slug}`).then(() => {
+					router.push(`/events/${eid}/admin/venues/`).then(() => {
 						void queryClient.invalidateQueries(['venues', eid]);
 					});
 				} else {
