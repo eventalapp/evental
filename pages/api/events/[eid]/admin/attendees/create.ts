@@ -111,14 +111,14 @@ export default api({
 			}
 		});
 
-		const claimCode = await ctx.getClaimProfileCode();
-
-		await ctx.redis.set(`claim:${claimCode}`, user.id, {
-			ex: CLAIM_PROFILE_EXPIRY
-		});
-
 		try {
 			if (user.email) {
+				const claimCode = await ctx.getClaimProfileCode();
+
+				await ctx.redis.set(`claim:${claimCode}`, user.id, {
+					ex: CLAIM_PROFILE_EXPIRY
+				});
+
 				await sendClaimProfile({
 					toAddresses: [user.email],
 					inviterName: requestingUser.name,
@@ -128,7 +128,7 @@ export default api({
 				});
 			}
 		} catch {
-			// silent fail
+			throw new NextkitError(500, 'Failed to send claim profile email. Please contact us');
 		}
 	}
 });
