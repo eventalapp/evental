@@ -13,7 +13,7 @@ interface Props {
 	className?: string;
 }
 
-export const PricingAccordion: React.FC<Props> = (props) => {
+export const Accordion: React.FC<Props> = (props) => {
 	return (
 		<AccordionPrimitive.Root type="multiple" className={cx('space-y-4', props.className)}>
 			{props.items.map(({ header, content }, i) => (
