@@ -19,8 +19,9 @@
 - adjust session times when event date is moved
 - attach people -> create attendee -> create role dialog is under
 - sort labels in dropdowns
-- search by name debounce (see if reart query has debounce built in?)
+- search by name debounce (see if react query has debounce built in?)
 - railway redis migration
+- session tags
 try to make your own event, be a user
 
 ## DB Pushing
