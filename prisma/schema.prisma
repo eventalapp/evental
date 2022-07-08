@@ -22,7 +22,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   location      String?
-  description   String?
+  description   String? @db.VarChar(5000)
   company       String?
   position      String?
   website       String?
@@ -97,7 +97,7 @@ model Event {
   banner       String?
   website      String?
   color        String        @default("#0066FF")
-  description  String?       @db.VarChar(2000)
+  description  String?       @db.VarChar(5000)
   updatedAt    DateTime      @updatedAt
   createdAt    DateTime      @default(now())
   timeZone     String        @default("America/New_York")
