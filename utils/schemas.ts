@@ -474,8 +474,8 @@ export const AdminEditAttendeeSchema = z.object({
 		.string()
 		.min(1, 'Permission Role is required')
 		.max(100, 'Permission Role is too long'),
-	slug: validator.slug,
-	name: validator.name,
+	slug: validator.slug.optional(),
+	name: validator.name.optional(),
 	image: validator.imageFile.optional(),
 	location: validator.location.optional(),
 	description: validator.description
