@@ -19,6 +19,10 @@
 - adjust session times when event date is moved
 - organizers can edit user with no email or no password (as the account is unclaimed/inactive)
 - attach people -> create attendee -> create role dialog is under
+- unique venue names
+- sort labels in dropdowns
+- trim trailing whitespace from text fields
+- search by name debounce (see if reart query has debounce built in?)
 try to make your own event, be a user
 
 ## DB Pushing
