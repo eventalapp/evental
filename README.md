@@ -17,7 +17,8 @@
 - user not caching when unauthed (bc rc doesn't cache errors)
 - make events truly private
 - adjust session times when event date is moved
-
+- organizers can edit user with no email or no password (as the account is unclaimed/inactive)
+- attach people -> create attendee -> create role dialog is under
 try to make your own event, be a user
 
 ## DB Pushing
