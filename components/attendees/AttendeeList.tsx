@@ -1,8 +1,10 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { faBadgeCheck } from '../../utils/icons';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeWithUser } from '../../utils/user';
 import { NotFound } from '../error/NotFound';
@@ -45,7 +47,17 @@ export const AttendeeList: React.FC<Props> = (props) => {
 								attendee.role && (
 									<Tooltip message={`View ${attendee.user.name}'s profile`} key={attendee.id}>
 										<li className="relative">
-											{admin && attendee.user.claimedAt && 'Claimed'}
+											{admin && attendee.user.claimedAt && (
+												<Tooltip message="This user has claimed their account, you cannot update their user settings (Such as image, description, website, etc.)">
+													<div className="inline-block absolute -top-2 -left-2 z-10">
+														<FontAwesomeIcon
+															fill="currentColor"
+															className="h-5 w-5 text-green-400"
+															icon={faBadgeCheck}
+														/>
+													</div>
+												</Tooltip>
+											)}
 											<Link
 												href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${
 													attendee.user.slug
