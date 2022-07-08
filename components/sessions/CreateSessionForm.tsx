@@ -9,6 +9,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { useCreateSessionMutation } from '../../hooks/mutations/useCreateSessionMutation';
+import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { NEAREST_MINUTE } from '../../utils/config';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
 import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
@@ -31,7 +32,7 @@ import { RoleMemberListItem } from './RoleMemberListItem';
 type Props = {
 	eid: string;
 	venues: Prisma.EventVenue[];
-	sessionCategories: Prisma.EventSessionCategory[];
+	sessionCategories: SessionCategoryWithCount[];
 	event: Prisma.Event;
 } & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 

@@ -1,29 +1,30 @@
-import Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 
+import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
+
 export interface UseSessionCategoriesQueryData {
-	sessionCategories: Prisma.EventSessionCategory[] | undefined;
+	sessionCategories: SessionCategoryWithCount[] | undefined;
 	isSessionCategoriesLoading: boolean;
 	sessionCategoriesError: ErroredAPIResponse | null;
 }
 
 export const useSessionCategoriesQuery = (
 	eid: string,
-	initialData?: Prisma.EventSessionCategory[] | undefined
+	initialData?: SessionCategoryWithCount[] | undefined
 ): UseSessionCategoriesQueryData => {
 	const [error, setError] = useState<ErroredAPIResponse | null>(null);
 
 	const { data: sessionCategories, isLoading: isSessionCategoriesLoading } = useQuery<
-		Prisma.EventSessionCategory[],
+		SessionCategoryWithCount[],
 		AxiosError<ErroredAPIResponse>
 	>(
 		['session-categories', eid],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<Prisma.EventSessionCategory[]>>(
+				.get<SuccessAPIResponse<SessionCategoryWithCount[]>>(
 					`/api/events/${eid}/sessions/categories`
 				)
 				.then((res) => res.data.data);

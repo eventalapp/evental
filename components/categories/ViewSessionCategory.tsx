@@ -4,6 +4,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { StrippedUser } from '../../utils/user';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { Heading } from '../primitives/Heading';
@@ -16,7 +17,7 @@ type Props = {
 	eid: string;
 	cid: string;
 	event?: Prisma.Event;
-	sessionCategory?: Prisma.EventSessionCategory;
+	sessionCategory?: SessionCategoryWithCount;
 	sessions?: SessionWithVenue[];
 	admin?: boolean;
 	user?: StrippedUser | undefined;

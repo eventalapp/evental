@@ -1,15 +1,15 @@
-import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import router from 'next/router';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
+import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { EditSessionCategoryPayload } from '../../utils/schemas';
 
 export interface UseEditSessionCategoryMutationData {
 	editSessionCategoryMutation: UseMutationResult<
-		Prisma.EventSessionCategory,
+		SessionCategoryWithCount,
 		AxiosError<ErroredAPIResponse, unknown>,
 		EditSessionCategoryPayload
 	>;
@@ -22,13 +22,13 @@ export const useEditSessionCategoryMutation = (
 	const queryClient = useQueryClient();
 
 	const editSessionCategoryMutation = useMutation<
-		Prisma.EventSessionCategory,
+		SessionCategoryWithCount,
 		AxiosError<ErroredAPIResponse, unknown>,
 		EditSessionCategoryPayload
 	>(
 		async (data) => {
 			return await axios
-				.put<SuccessAPIResponse<Prisma.EventSessionCategory>>(
+				.put<SuccessAPIResponse<SessionCategoryWithCount>>(
 					`/api/events/${eid}/admin/sessions/categories/${cid}`,
 					data
 				)
