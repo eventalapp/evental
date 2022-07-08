@@ -38,7 +38,8 @@ export default api({
 			},
 			data: {
 				emailVerified: new Date(),
-				password: passwordHashed
+				password: passwordHashed,
+				claimedAt: new Date()
 			}
 		});
 

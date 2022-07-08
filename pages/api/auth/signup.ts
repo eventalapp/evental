@@ -45,7 +45,8 @@ export default api({
 				slug,
 				name: body.name,
 				email: body.email,
-				password: passwordHashed
+				password: passwordHashed,
+				claimedAt: new Date()
 			}
 		});
 
