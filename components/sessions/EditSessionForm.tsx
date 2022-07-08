@@ -2,6 +2,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Prisma from '@prisma/client';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -78,14 +79,14 @@ export const EditSessionForm: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() + FIFTEEN_MINUTES > endDateWatcher.getTime()) {
-			setValue('endDate', new Date(startDateWatcher.getTime() + FIFTEEN_MINUTES));
+			setValue('endDate', dayjs(startDateWatcher).add(1, 'hour').toDate());
 			toast.warn('The start date cannot be later than the end date.');
 		}
 	}, [startDateWatcher]);
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() + FIFTEEN_MINUTES > endDateWatcher.getTime()) {
-			setValue('startDate', new Date(endDateWatcher.getTime() - FIFTEEN_MINUTES));
+			setValue('startDate', dayjs(endDateWatcher).subtract(1, 'hour').toDate());
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);

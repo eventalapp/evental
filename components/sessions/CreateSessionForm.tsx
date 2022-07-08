@@ -63,14 +63,14 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() + FIFTEEN_MINUTES > endDateWatcher.getTime()) {
-			setValue('endDate', new Date(startDateWatcher.getTime() + FIFTEEN_MINUTES));
+			setValue('endDate', dayjs(startDateWatcher).add(1, 'hour').toDate());
 			toast.warn('The start date cannot be later than the end date.');
 		}
 	}, [startDateWatcher]);
 
 	useEffect(() => {
 		if (startDateWatcher.getTime() + FIFTEEN_MINUTES > endDateWatcher.getTime()) {
-			setValue('startDate', new Date(endDateWatcher.getTime() - FIFTEEN_MINUTES));
+			setValue('startDate', dayjs(endDateWatcher).subtract(1, 'hour').toDate());
 			toast.warn('The end date cannot be earlier than the start date.');
 		}
 	}, [endDateWatcher]);
