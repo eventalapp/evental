@@ -45,74 +45,78 @@ export default api({
 			throw new NextkitError(404, 'Event not found.');
 		}
 
-		const userToEdit = await ctx.getFullUser(String(uid));
+		const { eventRoleId, permissionRole, ...userFields } = body;
+
+		let userToEdit = await ctx.getFullUser(String(uid));
 
 		if (!userToEdit) {
 			throw new NextkitError(404, 'User not found.');
 		}
 
-		if (userToEdit.claimedAt) {
-			throw new NextkitError(
-				400,
-				'This user has been claimed and cannot be edited. Contact this user or create a new attendee.'
-			);
-		}
+		if (Object.entries(userFields).length > 0) {
+			if (userToEdit.claimedAt) {
+				throw new NextkitError(
+					400,
+					'This user has been claimed and cannot be edited. Contact this user or create a new attendee.'
+				);
+			}
 
-		if (body.email && body.email !== userToEdit.email) {
-			const doesUserWithEmailExist = await ctx.prisma.user.findFirst({
+			if (body.email && body.email !== userToEdit.email) {
+				const doesUserWithEmailExist = await ctx.prisma.user.findFirst({
+					where: {
+						email: body.email
+					}
+				});
+
+				if (doesUserWithEmailExist) {
+					throw new NextkitError(
+						400,
+						'User with email already exists. Please choose a different email or invite this user to your event.'
+					);
+				}
+			}
+
+			const isUserToEditAttending = await ctx.prisma.eventAttendee.findFirst({
 				where: {
-					email: body.email
+					eventId: event.id,
+					userId: userToEdit.id
+				},
+				include: {
+					role: true
 				}
 			});
 
-			if (doesUserWithEmailExist) {
+			if (!isUserToEditAttending) {
 				throw new NextkitError(
 					400,
-					'User with email already exists. Please choose a different email or invite this user to your event.'
+					'This unclaimed user is not attending the event you are organizing, you do not have permission to do this.'
 				);
 			}
-		}
 
-		const isUserToEditAttending = await ctx.prisma.eventAttendee.findFirst({
-			where: {
-				eventId: event.id,
-				userId: userToEdit.id
-			},
-			include: {
-				role: true
+			let fileLocation = await uploadAndProcessAvatar(buffer, mimeType);
+
+			if (!fileLocation && buffer.length >= 1) {
+				throw new NextkitError(500, 'Image failed to upload.');
 			}
-		});
 
-		if (!isUserToEditAttending) {
-			throw new NextkitError(
-				400,
-				'This unclaimed user is not attending the event you are organizing, you do not have permission to do this.'
-			);
+			userToEdit = await ctx.prisma.user.update({
+				where: {
+					id: userToEdit.id
+				},
+				data: {
+					email: body.email,
+					company: body.company,
+					position: body.position,
+					website: body.website,
+					location: body.location,
+					name: body.name,
+					slug: body.slug,
+					image: fileLocation
+				}
+			});
 		}
 
-		let fileLocation = await uploadAndProcessAvatar(buffer, mimeType);
-
-		if (!fileLocation && buffer.length >= 1) {
-			throw new NextkitError(500, 'Image failed to upload.');
-		}
-
-		const updatedUser = await ctx.prisma.user.update({
-			where: {
-				id: userToEdit.id
-			},
-			data: {
-				email: body.email,
-				company: body.company,
-				position: body.position,
-				website: body.website,
-				location: body.location,
-				name: body.name,
-				slug: body.slug,
-				image: fileLocation
-			}
-		});
-
-		const attendee = await getAttendee(String(eid), String(updatedUser.id));
+		const attendee = await getAttendee(String(eid), String(userToEdit.id));
 
 		if (!attendee) {
 			throw new NextkitError(404, 'Attendee not found.');
@@ -165,7 +169,8 @@ export default api({
 				permissionRole: requestedPermissionRole
 			},
 			select: {
-				user: true
+				user: true,
+				role: true
 			}
 		});
 
@@ -176,7 +181,7 @@ export default api({
 		if (body.email && body.email !== userToEdit.email) {
 			const claimCode = await ctx.getClaimProfileCode();
 
-			await ctx.redis.set(`claim:${claimCode}`, updatedUser.id, {
+			await ctx.redis.set(`claim:${claimCode}`, userToEdit.id, {
 				ex: CLAIM_PROFILE_EXPIRY
 			});
 
@@ -184,7 +189,7 @@ export default api({
 				toAddresses: [body.email],
 				inviterName: requestingUser.name,
 				event,
-				role: isUserToEditAttending.role,
+				role: editedEventAttendee.role,
 				claimCode
 			});
 		}
