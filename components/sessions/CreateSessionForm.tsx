@@ -50,8 +50,8 @@ export const CreateSessionForm: React.FC<Props> = (props) => {
 		defaultValues: {
 			venueId: venues?.[0]?.id ?? 'none',
 			categoryId: sessionCategories?.[0]?.id ?? 'none',
-			startDate: dayjs(event?.startDate).startOf('day').add(12, 'hours').startOf('hour').toDate(),
-			endDate: dayjs(event?.startDate).startOf('day').add(13, 'hours').startOf('hour').toDate(),
+			startDate: dayjs(event?.startDate).startOf('day').add(8, 'hours').startOf('hour').toDate(),
+			endDate: dayjs(event?.startDate).startOf('day').add(9, 'hours').startOf('hour').toDate(),
 			roleMembers: []
 		},
 		resolver: zodResolver(CreateSessionSchema)
