@@ -30,6 +30,7 @@ model User {
   image     String   @default("/images/default-avatar.jpg")
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+  claimedAt DateTime?
   role      Role     @default(USER)
 
   eventAttendee EventAttendee[]
