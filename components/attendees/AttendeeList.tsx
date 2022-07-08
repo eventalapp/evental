@@ -44,7 +44,8 @@ export const AttendeeList: React.FC<Props> = (props) => {
 								attendee.user &&
 								attendee.role && (
 									<Tooltip message={`View ${attendee.user.name}'s profile`} key={attendee.id}>
-										<li>
+										<li className="relative">
+											{admin && attendee.user.claimedAt && 'Claimed'}
 											<Link
 												href={`/events/${eid}${admin ? '/admin' : ''}/attendees/${
 													attendee.user.slug
