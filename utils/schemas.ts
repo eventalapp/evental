@@ -297,6 +297,21 @@ export const EditUserSchema = z.object({
 
 export type EditUserPayload = z.infer<typeof EditUserSchema>;
 
+export const UserSettingsSchema = z.object({
+	slug: validator.slug,
+	name: validator.name,
+	image: validator.imageFile.optional(),
+	location: validator.location.optional(),
+	description: validator.description
+		.refine(noImageTag, 'Your description cannot include an image.')
+		.optional(),
+	company: validator.company.optional(),
+	position: validator.position.optional(),
+	website: validator.url.optional()
+});
+
+export type UserSettingsPayload = z.infer<typeof UserSettingsSchema>;
+
 // Invites
 
 export const InviteOrganizerSchema = z.object({

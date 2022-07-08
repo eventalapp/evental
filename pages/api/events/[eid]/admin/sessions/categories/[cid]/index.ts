@@ -10,7 +10,7 @@ import { getSessionCategory } from '../../../../sessions/categories/[cid]';
 
 export default api({
 	async DELETE({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid, cid } = req.query;
 
 		if (!user?.id) {
@@ -55,7 +55,7 @@ export default api({
 		});
 	},
 	async PUT({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid, cid } = req.query;
 
 		if (!user?.id) {

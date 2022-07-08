@@ -8,7 +8,7 @@ import { generateSlug } from '../../../../../../../utils/string';
 
 export default api({
 	async PUT({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid, pid } = req.query;
 
 		if (!user?.id) {
@@ -87,7 +87,7 @@ export default api({
 		return editedPage;
 	},
 	async DELETE({ req, ctx }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid, pid } = req.query;
 
 		if (!user?.id) {

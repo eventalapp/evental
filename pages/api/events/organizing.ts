@@ -6,7 +6,7 @@ import { api } from '../../../utils/api';
 
 export default api({
 	async GET({ ctx }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');

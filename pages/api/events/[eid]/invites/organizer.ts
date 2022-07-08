@@ -7,7 +7,7 @@ import { getDefaultRole } from '../roles';
 
 export default api({
 	async POST({ ctx, req }) {
-		const currentUser = await ctx.getFullUser();
+		const currentUser = await ctx.getSelfFullUser();
 		const body = AcceptOrganizerInviteSchema.parse(req.body);
 
 		const eventAndEmail = await ctx.redis.get<string>(`organizer:${body.code}`);

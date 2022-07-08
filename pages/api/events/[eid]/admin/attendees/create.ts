@@ -22,7 +22,7 @@ export default api({
 	async POST({ ctx, req }) {
 		const { eid } = req.query;
 
-		const requestingUser = await ctx.getStrippedUser();
+		const requestingUser = await ctx.getSelfStrippedUser();
 
 		if (!requestingUser?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');
@@ -39,7 +39,9 @@ export default api({
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
-		const { buffer, mimeType, formData } = await busboyParseForm(req);
+		const { buffer, mimeType, formData } = await busboyParseForm(req).catch((err) => {
+			throw new NextkitError(500, err.message);
+		});
 
 		const body = AdminCreateAttendeeSchema.parse(formData);
 

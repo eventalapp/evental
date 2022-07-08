@@ -82,6 +82,30 @@ const getOrganizerInviteCode = async (): Promise<string> => {
 	return token;
 };
 
+const getFullUser = async (uid: string): Promise<FullUser | null> => {
+	const user = await prisma.user.findFirst({
+		where: {
+			OR: [{ slug: uid }, { id: uid }]
+		}
+	});
+
+	if (!user) return null;
+
+	return fullUser(user);
+};
+
+const getStrippedUser = async (uid: string): Promise<StrippedUser | null> => {
+	const user = await prisma.user.findFirst({
+		where: {
+			OR: [{ slug: uid }, { id: uid }]
+		}
+	});
+
+	if (!user) return null;
+
+	return stripUser(user);
+};
+
 export const api = createAPI({
 	async getContext(req) {
 		return {
@@ -93,39 +117,24 @@ export const api = createAPI({
 			getVerifyEmailCode,
 			getRoleInviteCode,
 			getClaimProfileCode,
-			getFullUser: async (): Promise<FullUser | null> => {
+			getFullUser,
+			getSelfFullUser: async (): Promise<FullUser | null> => {
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 
 				if (!token) {
 					throw new NextkitError(401, "You're not logged in");
 				}
 
-				const user = await prisma.user.findFirst({
-					where: {
-						id: token
-					}
-				});
-
-				if (!user) return null;
-
-				return fullUser(user);
+				return getFullUser(token);
 			},
-			getStrippedUser: async (): Promise<StrippedUser | null> => {
+			getSelfStrippedUser: async (): Promise<StrippedUser | null> => {
 				const token = await redis.get<string>(`session:${req.cookies.token}`);
 
 				if (!token) {
 					throw new NextkitError(401, "You're not logged in");
 				}
 
-				const user = await prisma.user.findFirst({
-					where: {
-						id: token
-					}
-				});
-
-				if (!user) return null;
-
-				return stripUser(user);
+				return getStrippedUser(token);
 			}
 		};
 	},

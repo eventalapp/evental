@@ -10,7 +10,7 @@ export default api({
 	async POST({ ctx, req }) {
 		const { eid, sid } = req.query;
 
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');

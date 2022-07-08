@@ -11,7 +11,7 @@ export const populateFormData = (data: Record<string, unknown>) => {
 		} else if (value instanceof Date) {
 			formData.append(key, value.toISOString());
 		} else {
-			if (value !== undefined) {
+			if (value !== undefined && !(typeof value === 'string' && value?.length === 0)) {
 				formData.append(key, String(value));
 			}
 		}
@@ -29,7 +29,7 @@ export const busboyParseForm = (
 	mimeType?: string;
 	fileLocation?: string;
 }> => {
-	return new Promise((resolve) => {
+	return new Promise((resolve, reject) => {
 		const busboy = Busboy({ headers: req.headers });
 		let chunks: Uint8Array[] = [];
 		let formData: Record<string, string> = {};
@@ -67,11 +67,8 @@ export const busboyParseForm = (
 		});
 
 		busboy.on('error', (error) => {
-			if (error instanceof Error) {
-				throw new NextkitError(500, error.message);
-			}
-
-			throw new NextkitError(500, 'An error has occurred while parsing the form.');
+			console.error('busboy error', error);
+			reject(error);
 		});
 
 		req.pipe(busboy);

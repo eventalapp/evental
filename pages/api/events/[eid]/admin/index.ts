@@ -17,7 +17,7 @@ export const config = {
 
 export default api({
 	async PUT({ req, ctx }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid } = req.query;
 
 		if (!user?.id) {
@@ -35,7 +35,9 @@ export default api({
 			throw new NextkitError(403, 'You must be an organizer to do this.');
 		}
 
-		const { buffer, mimeType, formData } = await busboyParseForm(req);
+		const { buffer, mimeType, formData } = await busboyParseForm(req).catch((err) => {
+			throw new NextkitError(500, err.message);
+		});
 
 		const body = EditEventSchema.parse(formData);
 
@@ -89,7 +91,7 @@ export default api({
 		return updatedEvent;
 	},
 	async DELETE({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid } = req.query;
 
 		if (!user?.id) {

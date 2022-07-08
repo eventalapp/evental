@@ -3,7 +3,7 @@ import { IsSessionAttendeeArguments, isSessionAttendee } from '../../../../../..
 
 export default api({
 	async GET({ ctx, req }) {
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 		const { eid, sid } = req.query;
 
 		if (!user?.id) {

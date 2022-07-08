@@ -11,7 +11,7 @@ import { getEvent } from '../../../index';
 
 export default api({
 	async DELETE({ ctx, req }) {
-		const requestingUser = await ctx.getStrippedUser();
+		const requestingUser = await ctx.getSelfStrippedUser();
 		const { eid, uid } = req.query;
 
 		if (!requestingUser?.id) {
@@ -76,7 +76,7 @@ export default api({
 	async PUT({ ctx, req }) {
 		const { eid, uid } = req.query;
 
-		const user = await ctx.getStrippedUser();
+		const user = await ctx.getSelfStrippedUser();
 
 		if (!user?.id) {
 			throw new NextkitError(401, 'You must be logged in to do this.');

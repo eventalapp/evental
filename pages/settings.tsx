@@ -10,13 +10,13 @@ import { Footer } from '../components/layout/Footer';
 import PageWrapper from '../components/layout/PageWrapper';
 import { Navigation } from '../components/navigation';
 import { Heading } from '../components/primitives/Heading';
-import { useEditUserMutation } from '../hooks/mutations/useEditUserMutation';
 import { useRequestVerificationEmail } from '../hooks/mutations/useRequestVerificationEmail';
+import { useUserSettingsMutation } from '../hooks/mutations/useUserSettingsMutation';
 import { useUser } from '../hooks/queries/useUser';
 
 const SettingsPage: NextPage = () => {
 	const { user, isUserLoading } = useUser();
-	const { editUserMutation } = useEditUserMutation(String(user?.id));
+	const { userSettingsMutation } = useUserSettingsMutation(String(user?.id));
 	const { requestVerificationEmailMutation } = useRequestVerificationEmail();
 	const [canVerify, setCanVerify] = useState(true);
 
@@ -73,11 +73,7 @@ const SettingsPage: NextPage = () => {
 
 					<Heading>Settings</Heading>
 
-					<UserSettingsForm
-						user={user}
-						editUserMutation={editUserMutation}
-						isUserLoading={isUserLoading}
-					/>
+					<UserSettingsForm user={user} userSettingsMutation={userSettingsMutation} />
 				</Column>
 			</PageWrapper>
 

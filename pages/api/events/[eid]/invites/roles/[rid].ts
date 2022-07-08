@@ -8,7 +8,7 @@ import { getRole } from '../../roles/[rid]';
 
 export default api({
 	async POST({ ctx, req }) {
-		const currentUser = await ctx.getFullUser();
+		const currentUser = await ctx.getSelfFullUser();
 		const body = AcceptRoleInviteSchema.parse(req.body);
 
 		const eventRoleAndEmail = await ctx.redis.get<string>(`role:${body.code}`);

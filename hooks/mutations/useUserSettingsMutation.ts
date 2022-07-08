@@ -5,33 +5,30 @@ import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
 import { populateFormData } from '../../utils/form';
-import { EditUserPayload } from '../../utils/schemas';
+import { UserSettingsPayload } from '../../utils/schemas';
 import { StrippedUser } from '../../utils/user';
 
-export interface UseEditUserMutationData {
-	editUserMutation: UseMutationResult<
+export interface UseUserSettingsMutationData {
+	userSettingsMutation: UseMutationResult<
 		StrippedUser,
 		AxiosError<ErroredAPIResponse, unknown>,
-		EditUserPayload
+		UserSettingsPayload
 	>;
 }
 
-export const useEditUserMutation = (eid: string, uid: string): UseEditUserMutationData => {
+export const useUserSettingsMutation = (uid: string): UseUserSettingsMutationData => {
 	const queryClient = useQueryClient();
 
-	const editUserMutation = useMutation<
+	const userSettingsMutation = useMutation<
 		StrippedUser,
 		AxiosError<ErroredAPIResponse, unknown>,
-		EditUserPayload
+		UserSettingsPayload
 	>(
 		async (data) => {
 			const formData = populateFormData(data);
 
 			return await axios
-				.put<SuccessAPIResponse<Prisma.User>>(
-					`/api/events/${eid}/admin/attendees/${uid}/user`,
-					formData
-				)
+				.put<SuccessAPIResponse<Prisma.User>>(`/api/users/test/test/`, formData)
 				.then((res) => res.data.data);
 		},
 		{
@@ -47,5 +44,5 @@ export const useEditUserMutation = (eid: string, uid: string): UseEditUserMutati
 		}
 	);
 
-	return { editUserMutation };
+	return { userSettingsMutation };
 };
