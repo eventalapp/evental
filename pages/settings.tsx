@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import React, { useEffect, useState } from 'react';
 
 import { UserSettingsForm } from '../components/authentication/UserSettingsForm';
@@ -31,41 +31,58 @@ const SettingsPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper>
-			<Head>
-				<title>Settings — Evental</title>
-			</Head>
+		<>
+			<NextSeo
+				title="Settings — Evental"
+				description={`Update the form below to update your profile.`}
+				openGraph={{
+					url: 'https://evental.app/settings',
+					title: 'Settings — Evental',
+					description: `Update the form below to update your profile.`,
+					images: [
+						{
+							url: 'https://cdn.evental.app/images/logo.jpg',
+							width: 389,
+							height: 389,
+							alt: 'Evental Logo Alt',
+							type: 'image/jpeg'
+						}
+					]
+				}}
+			/>
 
 			<Navigation />
 
-			<Column variant="halfWidth">
-				{canVerify && user && !user.emailVerified && (
-					<button
-						className="mb-4 block w-full rounded-md bg-primary py-3 px-5 font-medium text-white"
-						disabled={requestVerificationEmailMutation.isLoading}
-						onClick={() => {
-							requestVerificationEmailMutation.mutate();
-						}}
-					>
-						{requestVerificationEmailMutation.isLoading ? (
-							<LoadingInner />
-						) : (
-							'Your account is not verified. Click here to request a verification email.'
-						)}
-					</button>
-				)}
+			<PageWrapper>
+				<Column variant="halfWidth">
+					{canVerify && user && !user.emailVerified && (
+						<button
+							className="mb-4 block w-full rounded-md bg-primary py-3 px-5 font-medium text-white"
+							disabled={requestVerificationEmailMutation.isLoading}
+							onClick={() => {
+								requestVerificationEmailMutation.mutate();
+							}}
+						>
+							{requestVerificationEmailMutation.isLoading ? (
+								<LoadingInner />
+							) : (
+								'Your account is not verified. Click here to request a verification email.'
+							)}
+						</button>
+					)}
 
-				<Heading>Settings</Heading>
+					<Heading>Settings</Heading>
 
-				<UserSettingsForm
-					user={user}
-					editUserMutation={editUserMutation}
-					isUserLoading={isUserLoading}
-				/>
-			</Column>
+					<UserSettingsForm
+						user={user}
+						editUserMutation={editUserMutation}
+						isUserLoading={isUserLoading}
+					/>
+				</Column>
+			</PageWrapper>
 
 			<Footer />
-		</PageWrapper>
+		</>
 	);
 };
 

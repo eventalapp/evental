@@ -11,7 +11,7 @@ import { Heading } from '../components/primitives/Heading';
 
 const DemoPage: NextPage = () => {
 	return (
-		<PageWrapper>
+		<>
 			<NextSeo
 				title="Request Demo — Evental"
 				description={`Fill out the form below to submit a demo request.`}
@@ -30,23 +30,26 @@ const DemoPage: NextPage = () => {
 					]
 				}}
 			/>
+
 			<Navigation />
 
-			<div className="dark-topography text-white">
-				<Column className="flex flex-col items-center">
-					<Heading>Create a Demo Request</Heading>
-					<p className="mt-4 text-base text-gray-100">
-						Fill out the form below to submit a demo request.
-					</p>
-				</Column>
-			</div>
+			<PageWrapper>
+				<div className="dark-topography text-white">
+					<Column className="flex flex-col items-center">
+						<Heading>Create a Demo Request</Heading>
+						<p className="mt-4 text-base text-gray-100">
+							Fill out the form below to submit a demo request.
+						</p>
+					</Column>
+				</div>
 
-			<Column variant="halfWidth">
-				<SubmitDemoRequestForm />
-			</Column>
+				<Column variant="halfWidth">
+					<SubmitDemoRequestForm />
+				</Column>
+			</PageWrapper>
 
 			<Footer />
-		</PageWrapper>
+		</>
 	);
 };
 

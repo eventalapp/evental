@@ -71,19 +71,23 @@ const EventsPage: NextPage = () => {
 	}
 
 	return (
-		<PageWrapper>
+		<>
 			{Seo}
+
 			<Navigation />
-			<Column>
-				<Heading className="text-center mb-4">Upcoming Events</Heading>
 
-				{user && <EventsPageNavigation />}
+			<PageWrapper>
+				<Column>
+					<Heading className="text-center mb-4">Upcoming Events</Heading>
 
-				<EventList events={upcomingEvents} hidePastEvents />
-			</Column>
+					{user && <EventsPageNavigation />}
+
+					<EventList events={upcomingEvents} hidePastEvents />
+				</Column>
+			</PageWrapper>
 
 			<Footer />
-		</PageWrapper>
+		</>
 	);
 };
 

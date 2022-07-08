@@ -11,7 +11,7 @@ import { Heading } from '../components/primitives/Heading';
 
 const SupportPage: NextPage = () => {
 	return (
-		<PageWrapper>
+		<>
 			<NextSeo
 				title="Support — Evental"
 				description={`Fill out the form below to submit a support ticket.`}
@@ -30,23 +30,26 @@ const SupportPage: NextPage = () => {
 					]
 				}}
 			/>
+
 			<Navigation />
 
-			<div className="dark-topography text-white">
-				<Column className="flex flex-col items-center">
-					<Heading>Create a Support Ticket</Heading>
-					<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
-						Fill out the form below to submit a support ticket.
-					</p>
-				</Column>
-			</div>
+			<PageWrapper>
+				<div className="dark-topography text-white">
+					<Column className="flex flex-col items-center">
+						<Heading>Create a Support Ticket</Heading>
+						<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
+							Fill out the form below to submit a support ticket.
+						</p>
+					</Column>
+				</div>
 
-			<Column variant="halfWidth">
-				<SubmitSupportTicketForm />
-			</Column>
+				<Column variant="halfWidth">
+					<SubmitSupportTicketForm />
+				</Column>
+			</PageWrapper>
 
 			<Footer />
-		</PageWrapper>
+		</>
 	);
 };
 
