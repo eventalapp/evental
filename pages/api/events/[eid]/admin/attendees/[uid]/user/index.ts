@@ -7,6 +7,12 @@ import { uploadAndProcessAvatar } from '../../../../../../../../utils/image';
 import { EditUserSchema } from '../../../../../../../../utils/schemas';
 import { getEvent } from '../../../../index';
 
+export const config = {
+	api: {
+		bodyParser: false
+	}
+};
+
 export default api({
 	async PUT({ ctx, req }) {
 		const { eid, uid } = req.query;
@@ -59,7 +65,7 @@ export default api({
 				'This unclaimed user is not attending the event you are organizing, you do not have permission to do this.'
 			);
 		}
-
+		console.log('testtt', mimeType);
 		let fileLocation = await uploadAndProcessAvatar(buffer, mimeType);
 
 		if (!fileLocation && buffer.length >= 1) {
