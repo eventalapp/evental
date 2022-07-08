@@ -1,5 +1,6 @@
 import type Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
+import router from 'next/router';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
@@ -29,7 +30,7 @@ export const useEditUserMutation = (eid: string, uid: string): UseEditUserMutati
 
 			return await axios
 				.put<SuccessAPIResponse<Prisma.User>>(
-					`/api/events/${eid}/admin/attendees/${uid}/user`,
+					`/api/events/${eid}/admin/attendees/${uid}/user/edit`,
 					formData
 				)
 				.then((res) => res.data.data);
@@ -38,8 +39,11 @@ export const useEditUserMutation = (eid: string, uid: string): UseEditUserMutati
 			onSuccess: () => {
 				toast.success('User edited successfully');
 
-				void queryClient.refetchQueries(['user', uid]);
-				void queryClient.refetchQueries(['user']);
+				router.push(`/events/${eid}/admin/attendees`).then(() => {
+					void queryClient.refetchQueries(['user', uid]);
+					void queryClient.refetchQueries(['full-user', uid]);
+					void queryClient.refetchQueries(['user']);
+				});
 			},
 			onError: (error) => {
 				toast.error(error?.response?.data.message ?? 'An error has occurred.');

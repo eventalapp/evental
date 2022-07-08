@@ -228,18 +228,6 @@ export const EditEventSchema = z.object({
 
 export type EditEventPayload = z.infer<typeof EditEventSchema>;
 
-// Event Attendee
-
-export const AdminEditAttendeeSchema = z.object({
-	eventRoleId: validator.eventRoleId,
-	permissionRole: z
-		.string()
-		.min(1, 'Permission Role is required')
-		.max(100, 'Permission Role is too long')
-});
-
-export type AdminEditAttendeePayload = z.infer<typeof AdminEditAttendeeSchema>;
-
 // Image Upload
 
 export const ImageUploadSchema = z.object({
@@ -292,7 +280,8 @@ export const EditUserSchema = z.object({
 		.optional(),
 	company: validator.company.optional(),
 	position: validator.position.optional(),
-	website: validator.url.optional()
+	website: validator.url.optional(),
+	email: validator.optionalEmail
 });
 
 export type EditUserPayload = z.infer<typeof EditUserSchema>;
@@ -476,3 +465,26 @@ export const EditEventMessageSchema = z.object({
 });
 
 export type EditEventMessagePayload = z.infer<typeof EditEventMessageSchema>;
+
+// Event Attendee
+
+export const AdminEditAttendeeSchema = z.object({
+	eventRoleId: validator.eventRoleId,
+	permissionRole: z
+		.string()
+		.min(1, 'Permission Role is required')
+		.max(100, 'Permission Role is too long'),
+	slug: validator.slug,
+	name: validator.name,
+	image: validator.imageFile.optional(),
+	location: validator.location.optional(),
+	description: validator.description
+		.refine(noImageTag, 'Your description cannot include an image.')
+		.optional(),
+	company: validator.company.optional(),
+	position: validator.position.optional(),
+	website: validator.url.optional(),
+	email: validator.optionalEmail
+});
+
+export type AdminEditAttendeePayload = z.infer<typeof AdminEditAttendeeSchema>;

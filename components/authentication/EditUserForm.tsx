@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -8,7 +8,7 @@ import { useUserQuery } from '../../hooks/queries/useUserQuery';
 import { copy } from '../../utils/const';
 import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/string';
-import { StrippedUser } from '../../utils/user';
+import { FullUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { StyledEditor } from '../form/Editor';
@@ -20,12 +20,13 @@ import { Label } from '../primitives/Label';
 import Tooltip from '../primitives/Tooltip';
 
 type Props = {
-	user: StrippedUser;
+	user: FullUser;
 } & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
 	UseEditUserMutationData;
 
 export const EditUserForm: React.FC<Props> = (props) => {
 	const { user, editUserMutation } = props;
+	const router = useRouter();
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
 
 	const {
@@ -43,7 +44,8 @@ export const EditUserForm: React.FC<Props> = (props) => {
 			location: user?.location ?? undefined,
 			company: user?.company ?? undefined,
 			position: user?.position ?? undefined,
-			website: user?.website ?? undefined
+			website: user?.website ?? undefined,
+			email: user?.email ?? undefined
 		},
 		resolver: zodResolver(EditUserSchema)
 	});
@@ -66,7 +68,6 @@ export const EditUserForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				console.log('onsubmit data', data);
 				editUserMutation.mutate(data);
 			})}
 		>
@@ -142,13 +143,7 @@ export const EditUserForm: React.FC<Props> = (props) => {
 
 				<div className="col-span-4">
 					<Label>Email</Label>
-					<Input onChange={() => {}} value={''} />
-					<p className="mt-1 text-sm text-gray-600">
-						Want to change your email?{' '}
-						<Link href={`/contact`}>
-							<a className="font-medium text-primary">Contact Us</a>
-						</Link>
-					</p>
+					<Input placeholder="email@gmail.com" {...register('email')} />
 				</div>
 
 				<div className="col-span-4">
@@ -172,6 +167,9 @@ export const EditUserForm: React.FC<Props> = (props) => {
 			</div>
 
 			<div className="flex flex-row justify-end">
+				<Button type="button" variant="no-bg" onClick={router.back}>
+					Cancel
+				</Button>
 				<Button
 					type="submit"
 					variant="primary"
