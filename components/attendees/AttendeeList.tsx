@@ -49,12 +49,15 @@ export const AttendeeList: React.FC<Props> = (props) => {
 										<li className="relative">
 											{admin && attendee.user.claimedAt && (
 												<Tooltip message="This user has claimed their account, you cannot update their user settings (Such as image, description, website, etc.)">
-													<div className="inline-block absolute -top-2 -left-2 z-10">
-														<FontAwesomeIcon
-															fill="currentColor"
-															className="h-5 w-5 text-green-400"
-															icon={faBadgeCheck}
-														/>
+													<div className="inline-block absolute -top-1.5 -left-1.5 z-10">
+														<div className="relative">
+															<div className="w-4 h-4 bg-white rounded-full absolute top-0" />
+															<FontAwesomeIcon
+																fill="currentColor"
+																className="h-5 w-5 text-green-400 relative"
+																icon={faBadgeCheck}
+															/>
+														</div>
 													</div>
 												</Tooltip>
 											)}
