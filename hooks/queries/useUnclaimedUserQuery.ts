@@ -22,7 +22,7 @@ export const useUnclaimedUserQuery = (
 		['full-user', uid],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<FullUser>>(`/api/events/${eid}/admin/attendees/${uid}/user`)
+				.get<SuccessAPIResponse<FullUser>>(`/api/events/${eid}/admin/attendees/${uid}`)
 				.then((res) => res.data.data);
 		},
 		{
