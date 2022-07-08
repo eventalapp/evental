@@ -96,7 +96,7 @@ export default api({
 		}
 
 		if (userToFetch.claimedAt) {
-			throw new NextkitError(400, 'This user has been claimed and cannot be fetched in full.');
+			throw new NextkitError(401, 'This user has been claimed and cannot be fetched in full.');
 		}
 
 		return userToFetch;
