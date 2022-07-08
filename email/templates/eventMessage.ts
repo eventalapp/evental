@@ -79,7 +79,7 @@ const text = convert(htmlOutput.html, {
 export const eventMessage: GenerateTemplateArgs = {
 	textPart: text,
 	htmlPart: htmlOutput.html,
-	subjectPart: '{{title}}',
+	subjectPart: '{{eventName}} - {{title}}',
 	templateName: 'EventMessage'
 };
 
@@ -112,7 +112,7 @@ export const sendEventMessage = async (args: SendEventMessageArgs) => {
 	};
 
 	const params: SESV2.SendBulkEmailRequest = {
-		FromEmailAddress: `"Evental" <messages@evental.app>`,
+		FromEmailAddress: `"${event.name}" <notifications@evental.app>`,
 		ReplyToAddresses: ['"Evental Support" <support@evental.app>'],
 		BulkEmailEntries: bulkEntries,
 		DefaultContent: {

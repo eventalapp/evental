@@ -46,7 +46,7 @@ export const generateTemplates = (args: GenerateTemplateArgs) => {
 	});
 
 	const operation = `{
-		"Source": "messages@evental.app",
+		"Source": "notifications@evental.app",
 		"Template": ${JSON.stringify(templateName)},
 		"Destination": {
 			"ToAddresses": [ "email@gmail.com" ]
