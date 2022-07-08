@@ -42,52 +42,56 @@ const ViewSessionPage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = session && event && (
+		<NextSeo
+			title={`${session.name} — ${event.name}`}
+			description={`View the attendees, speakers, and details of ${session.name} at ${event.name}`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/sessions/${session.slug}`,
+				title: `${session.name} — ${event.name}`,
+				description: `View the attendees, speakers, and details of ${session.name} at ${event.name}`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{session && event && (
-				<NextSeo
-					title={`${session.name} — ${event.name}`}
-					description={`View the attendees, speakers, and details of ${session.name} at ${event.name}`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/sessions/${session.slug}`,
-						title: `${session.name} — ${event.name}`,
-						description: `View the attendees, speakers, and details of ${session.name} at ${event.name}`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<ViewSession
-					user={user}
-					roleAttendees={sessionRoleAttendeesQuery.data}
-					attendees={sessionAttendeesQuery.data}
-					isAttending={Boolean(isSessionAttendee)}
-					session={session}
-					eid={String(eid)}
-					sid={String(sid)}
-					event={event}
-				/>
-			</Column>
+			<PageWrapper>
+				<Column>
+					<ViewSession
+						user={user}
+						roleAttendees={sessionRoleAttendeesQuery.data}
+						attendees={sessionAttendeesQuery.data}
+						isAttending={Boolean(isSessionAttendee)}
+						session={session}
+						eid={String(eid)}
+						sid={String(sid)}
+						event={event}
+					/>
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

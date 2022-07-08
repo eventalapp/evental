@@ -62,78 +62,84 @@ const RoleInvitePage: NextPage = () => {
 		params.append('redirectUrl', String(router.asPath));
 
 		return (
-			<PageWrapper>
+			<>
 				{Seo}
 
 				<Navigation />
 
-				<Column variant="halfWidth">
-					<div className="space-y-5">
-						<Heading>Create an account</Heading>
-						<p className="text-gray-700">
-							To join this event as a {role && role.name}, please{' '}
-							<Link href={`/auth/signup?${params}`}>
-								<a className="text-gray-900 underline">create an account</a>
-							</Link>{' '}
-							or{' '}
-							<Link href={`/auth/signin?${params}`}>
-								<a className="text-gray-900 underline">sign in</a>
-							</Link>{' '}
-							with your existing account.
-						</p>
-						<div className="flex flex-row justify-end">
-							<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
-								Cancel
-							</Button>
+				<PageWrapper>
+					<Column variant="halfWidth">
+						<div className="space-y-5">
+							<Heading>Create an account</Heading>
+							<p className="text-gray-700">
+								To join this event as a {role && role.name}, please{' '}
+								<Link href={`/auth/signup?${params}`}>
+									<a className="text-gray-900 underline">create an account</a>
+								</Link>{' '}
+								or{' '}
+								<Link href={`/auth/signin?${params}`}>
+									<a className="text-gray-900 underline">sign in</a>
+								</Link>{' '}
+								with your existing account.
+							</p>
+							<div className="flex flex-row justify-end">
+								<Button type="button" variant="no-bg" className="mr-3" onClick={router.back}>
+									Cancel
+								</Button>
 
-							<Link href={`/auth/signin?${params}`} passHref>
-								<LinkButton padding="large" variant="primary">
-									Sign in
-								</LinkButton>
-							</Link>
+								<Link href={`/auth/signin?${params}`} passHref>
+									<LinkButton padding="large" variant="primary">
+										Sign in
+									</LinkButton>
+								</Link>
+							</div>
 						</div>
-					</div>
-				</Column>
+					</Column>
+				</PageWrapper>
 
 				<Footer color={event?.color} />
-			</PageWrapper>
+			</>
 		);
 	}
 
 	return (
-		<PageWrapper>
+		<>
 			{Seo}
 
 			<Navigation />
 
-			<Column variant="halfWidth">
-				<FlexRowBetween>
-					<Heading>{role ? `Accept ${role.name} Invite` : <Skeleton className="w-full" />}</Heading>
-				</FlexRowBetween>
+			<PageWrapper>
+				<Column variant="halfWidth">
+					<FlexRowBetween>
+						<Heading>
+							{role ? `Accept ${role.name} Invite` : <Skeleton className="w-full" />}
+						</Heading>
+					</FlexRowBetween>
 
-				<p className="mb-2 text-base text-gray-700">
-					Roles are used to separate users into different groups.
-				</p>
+					<p className="mb-2 text-base text-gray-700">
+						Roles are used to separate users into different groups.
+					</p>
 
-				<div className="flex flex-row justify-end">
-					<Button type="button" variant="no-bg" onClick={router.back}>
-						Cancel
-					</Button>
-					<Button
-						variant="primary"
-						onClick={() => {
-							const data = AcceptRoleInviteSchema.parse({ code: String(code) });
+					<div className="flex flex-row justify-end">
+						<Button type="button" variant="no-bg" onClick={router.back}>
+							Cancel
+						</Button>
+						<Button
+							variant="primary"
+							onClick={() => {
+								const data = AcceptRoleInviteSchema.parse({ code: String(code) });
 
-							acceptRoleInviteMutation.mutate(data);
-						}}
-					>
-						Accept Invite
-					</Button>
-				</div>
-			</Column>
+								acceptRoleInviteMutation.mutate(data);
+							}}
+						>
+							Accept Invite
+						</Button>
+					</div>
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

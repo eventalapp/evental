@@ -58,7 +58,7 @@ export default api({
 		}
 
 		if (body.privacy !== 'PRIVATE' && event.level === 'TRIAL') {
-			throw new NextkitError(400, 'To make your event public, you must upgrade to a paid plan.');
+			throw new NextkitError(400, 'To make your event public, you must upgrade to a premium plan.');
 		}
 
 		const updatedEvent = await prisma.event.update({

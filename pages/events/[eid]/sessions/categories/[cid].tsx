@@ -33,50 +33,54 @@ const ViewSessionCategoryPage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = event && sessionCategory && (
+		<NextSeo
+			title={`${sessionCategory.name} — ${event.name}`}
+			description={`View all of the ${sessionCategory.name} sessions.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/sessions/categories/${sessionCategory.slug}`,
+				title: `${sessionCategory.name} — ${event.name}`,
+				description: `View all of the ${sessionCategory.name} sessions.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{event && sessionCategory && (
-				<NextSeo
-					title={`${sessionCategory.name} — ${event.name}`}
-					description={`View all of the ${sessionCategory.name} sessions.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/sessions/categories/${sessionCategory.slug}`,
-						title: `${sessionCategory.name} — ${event.name}`,
-						description: `View all of the ${sessionCategory.name} sessions.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<ViewSessionCategory
-					sessionCategory={sessionCategory}
-					eid={String(eid)}
-					cid={String(cid)}
-					sessions={sessionsByCategoryData}
-					event={event}
-					user={user}
-				/>
-			</Column>
+			<PageWrapper>
+				<Column>
+					<ViewSessionCategory
+						sessionCategory={sessionCategory}
+						eid={String(eid)}
+						cid={String(cid)}
+						sessions={sessionsByCategoryData}
+						event={event}
+						user={user}
+					/>
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

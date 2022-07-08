@@ -26,111 +26,115 @@ const sections: Section[] = [
 
 const InvitingRoleMemberGuidePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
-			<NextSeo
-				title="Inviting a role member — Evental"
-				description={`Learn how to invite a role member to your event on Evental.`}
-				openGraph={{
-					url: 'https://evental.app/guides/role/inviting-a-role-member',
-					title: 'Inviting a role member — Evental',
-					description: `Learn how to invite a role member to your event on Evental.`,
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
+		<>
 			<Navigation />
 
-			<div className="dark-topography text-white">
-				<Column className="flex flex-col items-center">
-					<Heading>Inviting a role member</Heading>
-					<p className="mt-4 text-base text-gray-100">
-						Learn how to invite a role member to your event on Evental
-					</p>
-				</Column>
-			</div>
-
-			<Column>
-				<TableOfContents
-					items={[
-						{
-							text: sections[0].title,
-							relativeLink: `/guides/role/inviting-a-role-member#${sections[0].anchor}`
-						},
-						{
-							text: sections[1].title,
-							relativeLink: `/guides/role/inviting-a-role-member#${sections[1].anchor}`
-						},
-						{
-							text: sections[2].title,
-							relativeLink: `/guides/role/inviting-a-role-member#${sections[2].anchor}`
-						},
-						{
-							text: sections[3].title,
-							relativeLink: `/guides/role/inviting-a-role-member#${sections[3].anchor}`
-						}
-					]}
+			<PageWrapper>
+				<NextSeo
+					title="Inviting a role member — Evental"
+					description={`Learn how to invite a role member to your event on Evental.`}
+					openGraph={{
+						url: 'https://evental.app/guides/role/inviting-a-role-member',
+						title: 'Inviting a role member — Evental',
+						description: `Learn how to invite a role member to your event on Evental.`,
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
 				/>
 
-				<GuideSection id={sections[0].anchor}>
-					<GuideSectionHeader
-						text={sections[0].title}
-						url={`/guides/role/inviting-a-role-member#${sections[0].anchor}`}
+				<div className="dark-topography text-white">
+					<Column className="flex flex-col items-center">
+						<Heading>Inviting a role member</Heading>
+						<p className="mt-4 text-base text-gray-100">
+							Learn how to invite a role member to your event on Evental
+						</p>
+					</Column>
+				</div>
+
+				<Column>
+					<TableOfContents
+						items={[
+							{
+								text: sections[0].title,
+								relativeLink: `/guides/role/inviting-a-role-member#${sections[0].anchor}`
+							},
+							{
+								text: sections[1].title,
+								relativeLink: `/guides/role/inviting-a-role-member#${sections[1].anchor}`
+							},
+							{
+								text: sections[2].title,
+								relativeLink: `/guides/role/inviting-a-role-member#${sections[2].anchor}`
+							},
+							{
+								text: sections[3].title,
+								relativeLink: `/guides/role/inviting-a-role-member#${sections[3].anchor}`
+							}
+						]}
 					/>
 
-					<p className="mb-4 text-gray-700">
-						To invite a speaker or role member, navigate to the events admin dashboard by clicking
-						the <span className="font-medium">"manage this event"</span> button.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections[0].anchor}>
+						<GuideSectionHeader
+							text={sections[0].title}
+							url={`/guides/role/inviting-a-role-member#${sections[0].anchor}`}
+						/>
 
-				<GuideSection id={sections[1].anchor}>
-					<GuideSectionHeader
-						text={sections[1].title}
-						url={`/guides/role/inviting-a-role-member#${sections[1].anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							To invite a speaker or role member, navigate to the events admin dashboard by clicking
+							the <span className="font-medium">"manage this event"</span> button.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the events dashboard, click the{' '}
-						<span className="font-medium">"Roles"</span> link in the top navigation.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections[1].anchor}>
+						<GuideSectionHeader
+							text={sections[1].title}
+							url={`/guides/role/inviting-a-role-member#${sections[1].anchor}`}
+						/>
 
-				<GuideSection id={sections[2].anchor}>
-					<GuideSectionHeader
-						text={sections[2].title}
-						url={`/guides/role/inviting-a-role-member#${sections[2].anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							After visiting the events dashboard, click the{' '}
+							<span className="font-medium">"Roles"</span> link in the top navigation.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the roles dashboard page, select the role you wish to invite members to.
-					</p>
-				</GuideSection>
-				<GuideSection id={sections[3].anchor}>
-					<GuideSectionHeader
-						text={sections[3].title}
-						url={`/guides/role/inviting-a-role-member#${sections[3].anchor}`}
-					/>
+					<GuideSection id={sections[2].anchor}>
+						<GuideSectionHeader
+							text={sections[2].title}
+							url={`/guides/role/inviting-a-role-member#${sections[2].anchor}`}
+						/>
 
-					<p className="mb-4 text-gray-700">
-						Select the <span className="font-medium">"Invite"</span> button, then enter the users
-						email and select invite.
-					</p>
-				</GuideSection>
+						<p className="mb-4 text-gray-700">
+							After visiting the roles dashboard page, select the role you wish to invite members
+							to.
+						</p>
+					</GuideSection>
+					<GuideSection id={sections[3].anchor}>
+						<GuideSectionHeader
+							text={sections[3].title}
+							url={`/guides/role/inviting-a-role-member#${sections[3].anchor}`}
+						/>
 
-				<GuideSection>
-					<StillNeedHelp />
-				</GuideSection>
-			</Column>
+						<p className="mb-4 text-gray-700">
+							Select the <span className="font-medium">"Invite"</span> button, then enter the users
+							email and select invite.
+						</p>
+					</GuideSection>
 
-			<Footer />
-		</PageWrapper>
+					<GuideSection>
+						<StillNeedHelp />
+					</GuideSection>
+				</Column>
+
+				<Footer />
+			</PageWrapper>
+		</>
 	);
 };
 

@@ -33,64 +33,67 @@ const ViewSessionCategoryPage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = event && (
+		<NextSeo
+			title={`${dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')} — ${
+				event.name
+			}`}
+			description={`View all of the sessions for ${dayjs(String(date))
+				.startOf('day')
+				.tz(event.timeZone)
+				.format('YYYY/MM/DD')} at ${event.name}`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/sessions/dates/${date}`,
+				title: `${dayjs(String(date)).startOf('day').tz(event.timeZone).format('YYYY/MM/DD')} — ${
+					event.name
+				}`,
+				description: `View all of the sessions for ${dayjs(String(date))
+					.startOf('day')
+					.tz(event.timeZone)
+					.format('YYYY/MM/DD')} at ${event.name}`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{event && (
-				<NextSeo
-					title={`${dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')} — ${
-						event.name
-					}`}
-					description={`View all of the sessions for ${dayjs(String(date))
-						.startOf('day')
-						.tz(event.timeZone)
-						.format('YYYY/MM/DD')} at ${event.name}`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/sessions/dates/${date}`,
-						title: `${dayjs(String(date))
-							.startOf('day')
-							.tz(event.timeZone)
-							.format('YYYY/MM/DD')} — ${event.name}`,
-						description: `View all of the sessions for ${dayjs(String(date))
-							.startOf('day')
-							.tz(event.timeZone)
-							.format('YYYY/MM/DD')} at ${event.name}`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<FlexRowBetween>
-					<Heading>
-						{event ? (
-							dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')
-						) : (
-							<Skeleton className="w-48" />
-						)}
-					</Heading>
-				</FlexRowBetween>
+			<PageWrapper>
+				<Column>
+					<FlexRowBetween>
+						<Heading>
+							{event ? (
+								dayjs(String(date)).startOf('day').tz(event.timeZone).format('MMMM D')
+							) : (
+								<Skeleton className="w-48" />
+							)}
+						</Heading>
+					</FlexRowBetween>
 
-				<SessionList sessions={sessionsByDateData} event={event} />
-			</Column>
+					<SessionList sessions={sessionsByDateData} event={event} />
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

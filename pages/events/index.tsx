@@ -73,9 +73,7 @@ const EventsPage: NextPage = () => {
 	return (
 		<PageWrapper>
 			{Seo}
-
 			<Navigation />
-
 			<Column>
 				<Heading className="text-center mb-4">Upcoming Events</Heading>
 

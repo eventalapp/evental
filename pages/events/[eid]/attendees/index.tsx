@@ -32,58 +32,62 @@ const ViewAttendeePage: NextPage = () => {
 		return <PrivatePage />;
 	}
 
+	const Seo = event && (
+		<NextSeo
+			title={`Attendees — ${event.name}`}
+			description={`View all of the attendees for ${event.name}.`}
+			additionalLinkTags={[
+				{
+					rel: 'icon',
+					href: `https://cdn.evental.app${event.image}`
+				}
+			]}
+			openGraph={{
+				url: `https://evental.app/events/${event.slug}/attendees`,
+				title: `Attendees — ${event.name}`,
+				description: `View all of the attendees for ${event.name}.`,
+				images: [
+					{
+						url: `https://cdn.evental.app${event.image}`,
+						width: 300,
+						height: 300,
+						alt: `${event.name} Logo Alt`,
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			{event && (
-				<NextSeo
-					title={`Attendees — ${event.name}`}
-					description={`View all of the attendees for ${event.name}.`}
-					additionalLinkTags={[
-						{
-							rel: 'icon',
-							href: `https://cdn.evental.app${event.image}`
-						}
-					]}
-					openGraph={{
-						url: `https://evental.app/events/${event.slug}/attendees`,
-						title: `Attendees — ${event.name}`,
-						description: `View all of the attendees for ${event.name}.`,
-						images: [
-							{
-								url: `https://cdn.evental.app${event.image}`,
-								width: 300,
-								height: 300,
-								alt: `${event.name} Logo Alt`,
-								type: 'image/jpeg'
-							}
-						]
-					}}
-				/>
-			)}
+		<>
+			{Seo}
 
 			<EventNavigation eid={String(eid)} />
 
-			<Column>
-				<EventHeader adminLink={'/attendees'} eid={String(eid)} />
+			<PageWrapper>
+				<Column>
+					<EventHeader adminLink={'/attendees'} eid={String(eid)} />
 
-				<Heading className="mb-3" variant="xl" level={2}>
-					{event && attendeesData ? (
-						<>
-							Attendees{' '}
-							{attendeesData && (
-								<span className="font-normal text-gray-500">({attendeesData.length || 0})</span>
-							)}
-						</>
-					) : (
-						<Skeleton className="w-48" />
-					)}
-				</Heading>
+					<Heading className="mb-3" variant="xl" level={2}>
+						{event && attendeesData ? (
+							<>
+								Attendees{' '}
+								{attendeesData && (
+									<span className="font-normal text-gray-500">({attendeesData.length || 0})</span>
+								)}
+							</>
+						) : (
+							<Skeleton className="w-48" />
+						)}
+					</Heading>
 
-				<AttendeeList attendees={attendeesData} eid={String(eid)} />
-			</Column>
+					<AttendeeList attendees={attendeesData} eid={String(eid)} />
+				</Column>
+			</PageWrapper>
 
 			<Footer color={event?.color} />
-		</PageWrapper>
+		</>
 	);
 };
 

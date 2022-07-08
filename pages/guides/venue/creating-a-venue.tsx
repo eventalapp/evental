@@ -25,102 +25,105 @@ const sections: Record<string, Section> = {
 
 const CreatingASessionGuidePage: NextPage = () => {
 	return (
-		<PageWrapper variant="white">
-			<NextSeo
-				title="Creating a venue — Evental"
-				description={`Learn how to create a venue for your event on Evental.`}
-				openGraph={{
-					url: 'https://evental.app/guides/venue/creating-a-venue',
-					title: 'Creating a venue — Evental',
-					description: `Learn how to create a venue for your event on Evental.`,
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
+		<>
 			<Navigation />
 
-			<div className="dark-topography text-white">
-				<Column className="flex flex-col items-center">
-					<Heading>Creating a venue</Heading>
-					<p className="mt-4 text-base text-gray-100">
-						Learn how to create a venue for your event on Evental.
-					</p>
-				</Column>
-			</div>
-
-			<Column>
-				<TableOfContents
-					items={[
-						{
-							text: sections.navigateDashboard.title,
-							relativeLink: `/guides/venue/creating-a-venue#${sections.navigateDashboard.anchor}`
-						},
-						{
-							text: sections.navigateVenues.title,
-							relativeLink: `/guides/venue/creating-a-venue#${sections.navigateVenues.anchor}`
-						},
-						{
-							text: sections.createVenue.title,
-							relativeLink: `/guides/venue/creating-a-venue#${sections.createVenue.anchor}`
-						}
-					]}
+			<PageWrapper>
+				<NextSeo
+					title="Creating a venue — Evental"
+					description={`Learn how to create a venue for your event on Evental.`}
+					openGraph={{
+						url: 'https://evental.app/guides/venue/creating-a-venue',
+						title: 'Creating a venue — Evental',
+						description: `Learn how to create a venue for your event on Evental.`,
+						images: [
+							{
+								url: 'https://cdn.evental.app/images/logo.jpg',
+								width: 389,
+								height: 389,
+								alt: 'Evental Logo Alt',
+								type: 'image/jpeg'
+							}
+						]
+					}}
 				/>
 
-				<GuideSection id={sections.navigateDashboard.anchor}>
-					<GuideSectionHeader
-						text={sections.navigateDashboard.title}
-						url={`/guides/venue/creating-a-venue#${sections.navigateDashboard.anchor}`}
+				<div className="dark-topography text-white">
+					<Column className="flex flex-col items-center">
+						<Heading>Creating a venue</Heading>
+						<p className="mt-4 text-base text-gray-100">
+							Learn how to create a venue for your event on Evental.
+						</p>
+					</Column>
+				</div>
+
+				<Column>
+					<TableOfContents
+						items={[
+							{
+								text: sections.navigateDashboard.title,
+								relativeLink: `/guides/venue/creating-a-venue#${sections.navigateDashboard.anchor}`
+							},
+							{
+								text: sections.navigateVenues.title,
+								relativeLink: `/guides/venue/creating-a-venue#${sections.navigateVenues.anchor}`
+							},
+							{
+								text: sections.createVenue.title,
+								relativeLink: `/guides/venue/creating-a-venue#${sections.createVenue.anchor}`
+							}
+						]}
 					/>
 
-					<p className="mb-4 text-gray-700">
-						To create a session, navigate to the events admin dashboard by clicking the{' '}
-						<span className="font-medium">"manage this event"</span> button.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections.navigateDashboard.anchor}>
+						<GuideSectionHeader
+							text={sections.navigateDashboard.title}
+							url={`/guides/venue/creating-a-venue#${sections.navigateDashboard.anchor}`}
+						/>
 
-				<GuideSection id={sections.navigateVenues.anchor}>
-					<GuideSectionHeader
-						text={sections.navigateVenues.title}
-						url={`/guides/venue/creating-a-venue#${sections.navigateVenues.anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							To create a session, navigate to the events admin dashboard by clicking the{' '}
+							<span className="font-medium">"manage this event"</span> button.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the events dashboard, click the{' '}
-						<span className="font-medium">"Venues"</span> link in the top navigation.
-					</p>
-				</GuideSection>
+					<GuideSection id={sections.navigateVenues.anchor}>
+						<GuideSectionHeader
+							text={sections.navigateVenues.title}
+							url={`/guides/venue/creating-a-venue#${sections.navigateVenues.anchor}`}
+						/>
 
-				<GuideSection id={sections.createVenue.anchor}>
-					<GuideSectionHeader
-						text={sections.createVenue.title}
-						url={`/guides/venue/creating-a-venue#${sections.createVenue.anchor}`}
-					/>
+						<p className="mb-4 text-gray-700">
+							After visiting the events dashboard, click the{' '}
+							<span className="font-medium">"Venues"</span> link in the top navigation.
+						</p>
+					</GuideSection>
 
-					<p className="mb-4 text-gray-700">
-						After visiting the venues dashboard page, select the{' '}
-						<span className="font-medium">"Create"</span> button.
-					</p>
+					<GuideSection id={sections.createVenue.anchor}>
+						<GuideSectionHeader
+							text={sections.createVenue.title}
+							url={`/guides/venue/creating-a-venue#${sections.createVenue.anchor}`}
+						/>
 
-					<p className="mb-4 text-gray-700">
-						After selecting the "Create" button. You will be navigated to the create venue form.
-						Fill out the create venue form to create a venue.
-					</p>
-				</GuideSection>
+						<p className="mb-4 text-gray-700">
+							After visiting the venues dashboard page, select the{' '}
+							<span className="font-medium">"Create"</span> button.
+						</p>
 
-				<GuideSection>
-					<StillNeedHelp />
-				</GuideSection>
-			</Column>
+						<p className="mb-4 text-gray-700">
+							After selecting the "Create" button. You will be navigated to the create venue form.
+							Fill out the create venue form to create a venue.
+						</p>
+					</GuideSection>
 
-			<Footer />
-		</PageWrapper>
+					<GuideSection>
+						<StillNeedHelp />
+					</GuideSection>
+				</Column>
+
+				<Footer />
+			</PageWrapper>
+		</>
 	);
 };
 

@@ -50,26 +50,28 @@ const AttendingEventsPage: NextPage = () => {
 
 	if (attendingEvents && attendingEvents.length === 0) {
 		return (
-			<PageWrapper>
+			<>
 				{Seo}
 
 				<Navigation />
 
-				<Column>
-					<Heading className="text-center mb-4">Attending Events</Heading>
+				<PageWrapper>
+					<Column>
+						<Heading className="text-center mb-4">Attending Events</Heading>
 
-					{user && <EventsPageNavigation />}
+						{user && <EventsPageNavigation />}
 
-					<span className="mt-5 block text-center text-base">
-						You are not attending any events.{' '}
-						<Link href="/events" passHref>
-							<a className="mt-3 font-medium text-primary">Find Events</a>
-						</Link>
-					</span>
-				</Column>
+						<span className="mt-5 block text-center text-base">
+							You are not attending any events.{' '}
+							<Link href="/events" passHref>
+								<a className="mt-3 font-medium text-primary">Find Events</a>
+							</Link>
+						</span>
+					</Column>
+				</PageWrapper>
 
 				<Footer />
-			</PageWrapper>
+			</>
 		);
 	}
 

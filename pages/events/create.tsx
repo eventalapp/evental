@@ -21,42 +21,49 @@ const CreateEventPage: NextPage = () => {
 		return <UnauthorizedPage />;
 	}
 
+	const Seo = (
+		<NextSeo
+			title="Create an event — Evental"
+			description="Fill out the form to create an event."
+			openGraph={{
+				url: 'https://evental.app/events/create',
+				title: 'Create an event',
+				description: 'Fill out the form to create an event.',
+				images: [
+					{
+						url: 'https://cdn.evental.app/images/logo.jpg',
+						width: 389,
+						height: 389,
+						alt: 'Evental Logo Alt',
+						type: 'image/jpeg'
+					}
+				]
+			}}
+		/>
+	);
+
 	return (
-		<PageWrapper>
-			<NextSeo
-				title="Create an event — Evental"
-				description="Fill out the form to create an event."
-				openGraph={{
-					url: 'https://evental.app/events/create',
-					title: 'Create an event',
-					description: 'Fill out the form to create an event.',
-					images: [
-						{
-							url: 'https://cdn.evental.app/images/logo.jpg',
-							width: 389,
-							height: 389,
-							alt: 'Evental Logo Alt',
-							type: 'image/jpeg'
-						}
-					]
-				}}
-			/>
+		<>
+			{Seo}
 
 			<Navigation />
 
-			<Column>
-				<Heading className="mb-3">Create an event</Heading>
+			<PageWrapper>
+				<Column>
+					<Heading className="mb-3">Create an event</Heading>
 
-				<Paragraph className="text-gray-600 max-w-3xl">
-					Fill out the form below to create an event. You can edit these details later. Once you
-					have created your event you can access billing, create roles, manage attendees, and more.
-				</Paragraph>
+					<Paragraph className="text-gray-600 max-w-3xl">
+						Fill out the form below to create an event. You can edit these details later. Once you
+						have created your event you can access billing, create roles, manage attendees, and
+						more.
+					</Paragraph>
 
-				<CreateEventForm createEventMutation={createEventMutation} canCancel />
-			</Column>
+					<CreateEventForm createEventMutation={createEventMutation} canCancel />
+				</Column>
+			</PageWrapper>
 
 			<Footer />
-		</PageWrapper>
+		</>
 	);
 };
 
