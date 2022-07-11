@@ -58,7 +58,7 @@ const validator = {
 	date: z.preprocess((val) => (val ? new Date(val as string | Date) : null), z.date()),
 	description: z.preprocess(
 		trimString,
-		z.string().max(4000, 'Description must be less than 4000 characters')
+		z.string().max(5000, 'Description must be less than 5000 characters')
 	),
 	email: z.preprocess(
 		trimString,

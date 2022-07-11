@@ -13,16 +13,24 @@
 - google maps embed for addresses
 - bulk create sessions
 - make event placeholder with year
-- varchar match schema
 - user not caching when unauthed (bc rc doesn't cache errors)
 - make events truly private
-- adjust session times when event date is moved
+
 - attach people -> create attendee -> create role dialog is under
 - sort labels in dropdowns
 - search by name debounce (see if react query has debounce built in?)
 - railway redis migration
-- session tags
+
 try to make your own event, be a user
+
+## Post MVP Todo List
+- session tags
+- adjust session times when event date is moved
+
+
+
+
+
 
 ## DB Pushing
 
