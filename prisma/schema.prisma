@@ -123,6 +123,7 @@ model EventAttendee {
   eventId        String
   eventRoleId    String
   permissionRole EventPermissionRole
+  featured       Boolean             @default(false)
 
   role  EventRole @relation(fields: [eventRoleId], references: [id], onDelete: Cascade)
   user  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
