@@ -2,9 +2,6 @@
 
 ## Todo List
 - featured role members
-- role member's can edit sessions?
-- google maps embed for addresses
-- search by name debounce (see if react query has debounce built in?)
 
 ## Post MVP Todo List
 - session tags
@@ -20,11 +17,13 @@
 - attach people -> create attendee -> create role dialog is under
 - railway redis migration
 - make events truly private
-- user not caching when unauthed (bc rc doesn't cache errors)
+- user not caching when unauthenticated (bc rc doesn't cache errors)
 - sort labels in dropdowns
 - Create event full form/multistep form (with skip functionality)
-
-
+- role member's can edit sessions?
+- google maps embed for addresses
+- search by name debounce (see if react query has debounce built in?)
+- 
 ## DB Pushing
 
 - swap out database url for true db url to db push, then revert to prisma data layer
