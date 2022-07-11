@@ -60,7 +60,7 @@ const template = `
           
           <br />
           
-          To stop receiving emails from <a href="{{eventUrl}}" style="color: #0066FF; text-decoration:none;">{{eventName}}</a>, either leave the event, or delete your account.
+          To stop receiving emails from <a href="{{eventUrl}}" style="color: #0066FF; text-decoration:none;">{{eventName}}</a>, please <a href="{{eventUrl}}" style="color: #0066FF; text-decoration:none;">leave the event</a>.
         </mj-text>
 
         <mj-image href="https://evental.app" target="_blank" width="120px" src="https://cdn.evental.app/images/logo-text.png" />
