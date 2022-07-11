@@ -53,7 +53,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 				<div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
 					<div className="col-span-1 lg:col-span-2">
 						<Label htmlFor="name">Name *</Label>
-						<Input placeholder="Event name" {...register('name')} />
+						<Input placeholder={`Event Name ${new Date().getFullYear()}`} {...register('name')} />
 						{errors.name?.message && <ErrorMessage>{errors.name?.message}</ErrorMessage>}
 					</div>
 

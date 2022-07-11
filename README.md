@@ -2,34 +2,27 @@
 
 ## Todo List
 - featured role members
-- event banner
-- Excel export for event data
-- print your schedule
-- customize react toast
-- clean up queries/mutations (export whole mut/query?)
-- rate limit request password reset & verify email request etc
-- session file upload
 - role member's can edit sessions?
 - google maps embed for addresses
-- bulk create sessions
-- make event placeholder with year
-- user not caching when unauthed (bc rc doesn't cache errors)
-- make events truly private
-
-- attach people -> create attendee -> create role dialog is under
-- sort labels in dropdowns
 - search by name debounce (see if react query has debounce built in?)
-- railway redis migration
-
-try to make your own event, be a user
 
 ## Post MVP Todo List
 - session tags
 - adjust session times when event date is moved
-
-
-
-
+- bulk create sessions
+- session file upload
+- rate limit request password reset & verify email request etc
+- customize react toast
+- clean up queries/mutations (export whole mut/query?)
+- event banner
+- Excel export for event data
+- print your schedule
+- attach people -> create attendee -> create role dialog is under
+- railway redis migration
+- make events truly private
+- user not caching when unauthed (bc rc doesn't cache errors)
+- sort labels in dropdowns
+- Create event full form/multistep form (with skip functionality)
 
 
 ## DB Pushing
