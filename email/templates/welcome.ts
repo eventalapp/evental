@@ -20,7 +20,7 @@ export const template = `
   <mj-body>
     <mj-section>
       <mj-column>
-        <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial" line-height="1.2">Welcome {{name}}!
+        <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial" line-height="1.2">Welcome, {{name}}!
         </mj-text>
 
         <mj-text font-size="16px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4">We are happy you have decided to join us. If you have any questions feel free to reach us at <a href="mailto:support@evental.app" style="color: #0066FF; text-decoration:none;">
