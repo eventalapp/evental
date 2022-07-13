@@ -301,6 +301,14 @@ export const UserSettingsSchema = z.object({
 
 export type UserSettingsPayload = z.infer<typeof UserSettingsSchema>;
 
+export const UserNotificationPreferenceSchema = z.object({
+	event: z.boolean(),
+	marketing: z.boolean(),
+	news: z.boolean()
+});
+
+export type UserNotificationPreferencePayload = z.infer<typeof UserNotificationPreferenceSchema>;
+
 // Invites
 
 export const InviteOrganizerSchema = z.object({
