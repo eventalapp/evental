@@ -23,7 +23,6 @@ export const SettingsSidebar: React.FC = () => {
 
 			<SidebarLink href={`/settings`}>Profile</SidebarLink>
 			<SidebarLink href={`/settings/notifications`}>Notifications</SidebarLink>
-			<SidebarLink href={`/settings`}>Profile</SidebarLink>
 		</aside>
 	);
 };
