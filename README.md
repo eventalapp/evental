@@ -2,6 +2,7 @@
 
 ## Todo List
 - featured role members
+- notification preferences
 
 ## Post MVP Todo List
 - session tags
@@ -23,7 +24,7 @@
 - role member's can edit sessions?
 - google maps embed for addresses
 - search by name debounce (see if react query has debounce built in?)
-- 
+
 ## DB Pushing
 
 - swap out database url for true db url to db push, then revert to prisma data layer
