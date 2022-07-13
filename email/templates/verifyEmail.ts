@@ -59,7 +59,7 @@ const text = convert(htmlOutput.html, {
 export const verifyEmail: GenerateTemplateArgs = {
 	textPart: text,
 	htmlPart: htmlOutput.html,
-	subjectPart: 'Verify your email',
+	subjectPart: 'Verify Your Email',
 	templateName: 'VerifyEmail'
 };
 
