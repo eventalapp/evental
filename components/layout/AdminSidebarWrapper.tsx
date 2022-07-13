@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { AdminSidebar } from './Sidebar';
+import { AdminSidebar } from './AdminSidebar';
 
-type SidebarWrapperProps = {
+type AdminSidebarWrapperProps = {
 	className?: string;
 	eid: string;
 };
 
-export const SidebarWrapper: React.FC<SidebarWrapperProps> = (props) => {
+export const AdminSidebarWrapper: React.FC<AdminSidebarWrapperProps> = (props) => {
 	const { children, eid } = props;
 
 	return (

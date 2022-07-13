@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 
 import { AttendeeList } from '../../../../../components/attendees/AttendeeList';
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import { FlexRowBetween } from '../../../../../components/layout/FlexRowBetween';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import InviteOrganizerDialog from '../../../../../components/organizer/InviteOrganizerDialog';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconButtonTooltip } from '../../../../../components/primitives/IconButtonTooltip';
@@ -26,7 +26,7 @@ const EventOrganizersPage: NextPage = () => {
 					<title>Organizers</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<FlexRowBetween>
 							<Heading>Organizers</Heading>
@@ -38,7 +38,7 @@ const EventOrganizersPage: NextPage = () => {
 
 						<AttendeeList attendees={organizers} eid={String(eid)} admin />
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

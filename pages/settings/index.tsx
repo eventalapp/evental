@@ -2,17 +2,17 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useEffect, useState } from 'react';
 
-import { UserSettingsForm } from '../components/authentication/UserSettingsForm';
-import { LoadingInner } from '../components/error/LoadingInner';
-import { LoadingPage } from '../components/error/LoadingPage';
-import Column from '../components/layout/Column';
-import { Footer } from '../components/layout/Footer';
-import PageWrapper from '../components/layout/PageWrapper';
-import { Navigation } from '../components/navigation';
-import { Heading } from '../components/primitives/Heading';
-import { useRequestVerificationEmail } from '../hooks/mutations/useRequestVerificationEmail';
-import { useUserSettingsMutation } from '../hooks/mutations/useUserSettingsMutation';
-import { useUser } from '../hooks/queries/useUser';
+import { UserSettingsForm } from '../../components/authentication/UserSettingsForm';
+import { LoadingInner } from '../../components/error/LoadingInner';
+import { LoadingPage } from '../../components/error/LoadingPage';
+import Column from '../../components/layout/Column';
+import { Footer } from '../../components/layout/Footer';
+import PageWrapper from '../../components/layout/PageWrapper';
+import { Navigation } from '../../components/navigation';
+import { Heading } from '../../components/primitives/Heading';
+import { useRequestVerificationEmail } from '../../hooks/mutations/useRequestVerificationEmail';
+import { useUserSettingsMutation } from '../../hooks/mutations/useUserSettingsMutation';
+import { useUser } from '../../hooks/queries/useUser';
 
 const SettingsPage: NextPage = () => {
 	const { user, isUserLoading } = useUser();

@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 
 import { AdminCreateAttendeeForm } from '../../../../../components/attendees/AdminCreateAttendeeForm';
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { Paragraph } from '../../../../../components/primitives/Paragraph';
 import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
@@ -23,7 +23,7 @@ const CreateAttendeePage: NextPage = () => {
 					<title>Create Attendee</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading className="mb-3">Create Attendee</Heading>
 
@@ -35,7 +35,7 @@ const CreateAttendeePage: NextPage = () => {
 
 						{roles && <AdminCreateAttendeeForm eid={String(eid)} roles={roles} />}
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

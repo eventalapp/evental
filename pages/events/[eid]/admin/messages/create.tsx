@@ -3,9 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { SendMessageForm } from '../../../../../components/messages/SendMessageForm';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { Paragraph } from '../../../../../components/primitives/Paragraph';
@@ -23,7 +23,7 @@ const CreatePagePage: NextPage = () => {
 					<title>Send A Message</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading className="mb-3">Send A Message</Heading>
 
@@ -33,7 +33,7 @@ const CreatePagePage: NextPage = () => {
 
 						{roles && <SendMessageForm eid={String(eid)} roles={roles} />}
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

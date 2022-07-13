@@ -89,7 +89,7 @@ const AttendingAnEventGuidePage: NextPage = () => {
 						<p className="mb-4 text-gray-700">
 							After creating an account, you will receive an email asking you to verify your
 							account. If you need to request another verification email, do you this in the{' '}
-							<Link href="/settings">
+							<Link href="/settings/settings">
 								<a className="text-gray-900 underline">user settings page</a>
 							</Link>
 							.

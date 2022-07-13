@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 
 import { EditSessionCategoryForm } from '../../../../../../../components/categories/EditSessionCategoryForm';
 import { AdminPageWrapper } from '../../../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../../components/layout/SidebarWrapper';
 import { Heading } from '../../../../../../../components/primitives/Heading';
 import { useSessionCategoryQuery } from '../../../../../../../hooks/queries/useSessionCategoryQuery';
 
@@ -27,7 +27,7 @@ const EditSessionPage: NextPage = () => {
 					<title>Edit Session</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading>Edit Session Category</Heading>
 
@@ -39,7 +39,7 @@ const EditSessionPage: NextPage = () => {
 							/>
 						)}
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

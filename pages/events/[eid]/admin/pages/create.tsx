@@ -3,9 +3,9 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../components/layout/SidebarWrapper';
 import { CreatePageForm } from '../../../../../components/pages/CreatePageForm';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { Paragraph } from '../../../../../components/primitives/Paragraph';
@@ -21,7 +21,7 @@ const CreatePagePage: NextPage = () => {
 					<title>Create Page</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<Heading className="mb-3">Create Page</Heading>
 
@@ -32,7 +32,7 @@ const CreatePagePage: NextPage = () => {
 
 						<CreatePageForm eid={String(eid)} />
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);

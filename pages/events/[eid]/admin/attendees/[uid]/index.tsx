@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 
 import { ViewAttendee } from '../../../../../../components/attendees/ViewAttendee';
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
+import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
-import { SidebarWrapper } from '../../../../../../components/layout/SidebarWrapper';
 import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
 
 const ViewAttendeePage: NextPage = () => {
@@ -21,11 +21,11 @@ const ViewAttendeePage: NextPage = () => {
 					<title>Viewing Attendee</title>
 				</Head>
 
-				<SidebarWrapper eid={String(eid)}>
+				<AdminSidebarWrapper eid={String(eid)}>
 					<Column variant="noMargin">
 						<ViewAttendee admin attendee={attendee} eid={String(eid)} uid={String(uid)} />
 					</Column>
-				</SidebarWrapper>
+				</AdminSidebarWrapper>
 			</PageWrapper>
 		</AdminPageWrapper>
 	);
