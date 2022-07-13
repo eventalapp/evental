@@ -26,12 +26,20 @@ export default api({
 				})
 			);
 		});
+
 		let sendToAddresses: Array<string> = [];
 
 		if (body.sendType === 'EVERYONE') {
 			const attendees = await prisma.eventAttendee.findMany({
 				where: {
-					eventId: event.id
+					eventId: event.id,
+					user: {
+						notificationPreference: {
+							some: {
+								event: true
+							}
+						}
+					}
 				},
 				select: {
 					user: {
@@ -51,7 +59,14 @@ export default api({
 			const attendees = await prisma.eventAttendee.findMany({
 				where: {
 					eventId: event.id,
-					eventRoleId: body.roleId
+					eventRoleId: body.roleId,
+					user: {
+						notificationPreference: {
+							some: {
+								event: true
+							}
+						}
+					}
 				},
 				select: {
 					user: {
