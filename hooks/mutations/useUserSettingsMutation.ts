@@ -16,7 +16,7 @@ export interface UseUserSettingsMutationData {
 	>;
 }
 
-export const useUserSettingsMutation = (uid: string): UseUserSettingsMutationData => {
+export const useUserSettingsMutation = (): UseUserSettingsMutationData => {
 	const queryClient = useQueryClient();
 
 	const userSettingsMutation = useMutation<
@@ -28,14 +28,14 @@ export const useUserSettingsMutation = (uid: string): UseUserSettingsMutationDat
 			const formData = populateFormData(data);
 
 			return await axios
-				.put<SuccessAPIResponse<Prisma.User>>(`/api/users/`, formData)
+				.put<SuccessAPIResponse<Prisma.User>>(`/api/user/`, formData)
 				.then((res) => res.data.data);
 		},
 		{
-			onSuccess: () => {
+			onSuccess: (data) => {
 				toast.success('User edited successfully');
 
-				void queryClient.refetchQueries(['user', uid]);
+				void queryClient.refetchQueries(['user', data.slug]);
 				void queryClient.refetchQueries(['user']);
 			},
 			onError: (error) => {

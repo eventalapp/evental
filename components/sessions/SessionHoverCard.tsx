@@ -250,4 +250,3 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 		</HoverCardPrimitive.Root>
 	);
 };
-

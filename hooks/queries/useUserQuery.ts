@@ -21,7 +21,7 @@ export const useUserQuery = (
 		['user', uid],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<StrippedUser>>(`/api/users/${uid}`)
+				.get<SuccessAPIResponse<StrippedUser>>(`/api/user/${uid}`)
 				.then((res) => res.data.data);
 		},
 		{

@@ -18,7 +18,7 @@ export const useUser = (initialData?: FullUser | undefined): UseUserData => {
 		['user'],
 		async () => {
 			return await axios
-				.get<SuccessAPIResponse<FullUser>>(`/api/auth/user`)
+				.get<SuccessAPIResponse<FullUser>>(`/api/user`)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					if (err?.response?.status === 401) {

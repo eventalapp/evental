@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-import { SessionWithVenueEvent } from '../../pages/api/users/[uid]/sessions';
+import { SessionWithVenueEvent } from '../../pages/api/user/[uid]/sessions';
 import { sessionWithEventListReducer } from '../../utils/reducer';
 import { NotFound } from '../error/NotFound';
 import { SessionHoverCard } from './SessionHoverCard';

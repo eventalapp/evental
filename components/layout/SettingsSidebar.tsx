@@ -5,7 +5,7 @@ import { SidebarLink } from './SidebarLink';
 
 const separator = <div className="h-[1px] w-full my-3 bg-gray-300" />;
 
-export const SettingsSidebar: React.FC = (props) => {
+export const SettingsSidebar: React.FC = () => {
 	return (
 		<aside className="w-52 p-2.5 h-full py-7 md:py-14 flex flex-col">
 			<SidebarLink
