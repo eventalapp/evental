@@ -104,6 +104,15 @@ export default api({
 			}
 		});
 
+		await prisma.notificationPreference.create({
+			data: {
+				userId: user.id,
+				event: true,
+				news: true,
+				marketing: true
+			}
+		});
+
 		await prisma.eventAttendee.create({
 			data: {
 				eventId: event.id,
