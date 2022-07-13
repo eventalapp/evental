@@ -2,13 +2,17 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
+import { UserNotificationPreferencesForm } from '../../components/authentication/UserNotificationPreferencesForm';
 import Column from '../../components/layout/Column';
 import { SettingsPageWrapper } from '../../components/layout/SettingsPageWrapper';
 import { SettingsSidebarWrapper } from '../../components/layout/SettingsSidebarWrapper';
 import { Heading } from '../../components/primitives/Heading';
 import { Paragraph } from '../../components/primitives/Paragraph';
+import { useNotificationPreferences } from '../../hooks/queries/useNotificationPreferences';
 
 const NotificationsPage: NextPage = () => {
+	const { notificationPreferences } = useNotificationPreferences();
+
 	return (
 		<SettingsPageWrapper>
 			<NextSeo
@@ -33,6 +37,10 @@ const NotificationsPage: NextPage = () => {
 				<Column variant="noMargin">
 					<Heading className="mb-3">Notifications Page</Heading>
 					<Paragraph className="text-gray-600">Update your notification preferences</Paragraph>
+
+					{notificationPreferences && (
+						<UserNotificationPreferencesForm notificationPreferences={notificationPreferences} />
+					)}
 				</Column>
 			</SettingsSidebarWrapper>
 		</SettingsPageWrapper>
