@@ -9,58 +9,51 @@ import { GenerateTemplateArgs } from '../generateTemplates';
 
 type WelcomeTemplateArgs = {
 	name: string;
-	createEventLink: string;
-	updateProfileLink: string;
-	viewEventsPageLink: string;
 };
 
 export const template = `
 <mjml>
-   <mj-head>
-     <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" />
-     <mj-style inline="inline">
-       .link-button {
-       text-decoration: none;
-       background-color: #0066FF;
-       color: #ffffff;
-       padding: 8px 15px;
-       border-radius: 5px
-       }
-       .link {
-       text-decoration: none;
-       color: #0066FF;
-       padding: 0px 15px;
-       margin: 0 5px;
-       border-radius: 5px
-       }
-     </mj-style>
-   </mj-head>
+  <mj-head>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" />
+  </mj-head>
 
-   <mj-body>
-     <mj-section>
-       <mj-column>
-         <mj-image width="150px" src="https://cdn.evental.app/images/logo-text.png" />
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial" line-height="1.2">Welcome {{name}}!
+        </mj-text>
 
-         <mj-divider border-color="#CDCDCD" border-width='3px' />
+        <mj-text font-size="16px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4">We are happy you have decided to join us. If you have any questions feel free to reach us at <a href="mailto:support@evental.app" style="color: #0066FF; text-decoration:none;">
+            support@evental.app
+          </a> or <a href="https://evental.app/support" style="color: #0066FF; text-decoration:none;">
+            create a support ticket</a>.
+        </mj-text>
 
-         <mj-text font-weight="bold" font-size="30px" color="#111827" align="center" font-family="Inter, Roboto, Arial">Welcome {{name}}!
-         </mj-text>
+        <mj-text font-size="16px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4">To get started using Evental:
+          <ul style="margin: 10px auto 10px auto;">
+            <li><a style="color: #0066FF; text-decoration:none;" href="https://evental.app/events/attending" target="_blank">View your events</a></li>
+            <li style="padding-top: 3px"><a style="color: #0066FF; text-decoration:none;" href="https://evental.app/settings" target="_blank">Update your profile</a></li>
+            <li style="padding-top: 3px"><a style="color: #0066FF; text-decoration:none;" href="https://evental.app/events/create" target="_blank">Create an event</a></li>
+            <li style="padding-top: 3px"><a style="color: #0066FF; text-decoration:none;" href="https://evental.app/guides" target="_blank">Checkout our user guides</a></li>
+          </ul>
+        </mj-text>
 
-         <mj-text padding-bottom="10px" font-size="16px" color="#111827" font-family="Inter, Roboto, Arial">To get started, try out one of the following:
-         </mj-text>
+      </mj-column>
+    </mj-section>
 
-         <mj-text font-size="16px" padding-top="0" font-family="Inter, Roboto, Arial">
-           <ul>
-             <li><a class="link" href="{{viewEventPageLink}}" target="_blank">View Events</a></li>
-             <li style="padding-top: 5px"><a class="link" href="{{updateProfileLink}}" target="_blank">Update your profile</a></li>
-             <li style="padding-top: 5px"><a class="link" href="{{createEventLink}}" target="_blank">Create an Event</a></li>
-           </ul>
-         </mj-text>
+    <mj-section padding="0 0 20px 0">
+      <mj-column>
+        <mj-divider border-color="#CDCDCD" border-width="1px" />
 
-       </mj-column>
-     </mj-section>
-   </mj-body>
- </mjml>
+        <mj-text font-size="12px" color="#777777" font-family="Inter, Roboto, Arial" line-height="1.4" align="center">
+          You are receiving this email because you signed up for <a href="https://evental.app/support" style="color: #202020; text-decoration:none;">Evental</a>. If you no longer would like to receive these emails, please <a href="https://evental.app/settings/notifications" style="color: #202020; text-decoration:none;">unsubscribe</a>.
+        </mj-text>
+
+        <mj-image href="https://evental.app" target="_blank" width="120px" src="https://cdn.evental.app/images/logo-text.png" />
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
 `;
 
 const htmlOutput = mjml2html(template);
@@ -72,7 +65,7 @@ const text = convert(htmlOutput.html, {
 export const welcome: GenerateTemplateArgs = {
 	textPart: text,
 	htmlPart: htmlOutput.html,
-	subjectPart: 'Welcome to Evental',
+	subjectPart: 'Welcome to Evental, {{name}}!',
 	templateName: 'Welcome'
 };
 
@@ -89,10 +82,7 @@ export const sendWelcome = async (args: SendWelcomeArgs) => {
 	}
 
 	const templateData: WelcomeTemplateArgs = {
-		name: user.name,
-		viewEventsPageLink: 'https://evental.app/events',
-		updateProfileLink: `https://evental.app/settings`,
-		createEventLink: `https://evental.app/events/create`
+		name: user.name
 	};
 
 	const params: SESV2.SendEmailRequest = {
