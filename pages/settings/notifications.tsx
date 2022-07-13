@@ -3,15 +3,14 @@ import { NextSeo } from 'next-seo';
 import React from 'react';
 
 import Column from '../../components/layout/Column';
-import { Footer } from '../../components/layout/Footer';
-import PageWrapper from '../../components/layout/PageWrapper';
-import { Navigation } from '../../components/navigation';
+import { SettingsPageWrapper } from '../../components/layout/SettingsPageWrapper';
+import { SettingsSidebarWrapper } from '../../components/layout/SettingsSidebarWrapper';
 import { Heading } from '../../components/primitives/Heading';
 import { Paragraph } from '../../components/primitives/Paragraph';
 
 const NotificationsPage: NextPage = () => {
 	return (
-		<>
+		<SettingsPageWrapper>
 			<NextSeo
 				title="Notifications — Evental"
 				description="Update your notification preferences"
@@ -30,17 +29,13 @@ const NotificationsPage: NextPage = () => {
 				}}
 			/>
 
-			<Navigation />
-
-			<PageWrapper>
-				<Column className="flex flex-col items-center">
+			<SettingsSidebarWrapper>
+				<Column variant="noMargin">
 					<Heading className="mb-3">Notifications Page</Heading>
 					<Paragraph className="text-gray-600">Update your notification preferences</Paragraph>
 				</Column>
-			</PageWrapper>
-
-			<Footer />
-		</>
+			</SettingsSidebarWrapper>
+		</SettingsPageWrapper>
 	);
 };
 
