@@ -23,6 +23,7 @@
 - role member's can edit sessions?
 - google maps embed for addresses
 - search by name debounce (see if react query has debounce built in?)
+- Google oauth for login
 
 ## DB Pushing
 
