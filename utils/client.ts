@@ -1,4 +1,7 @@
 import * as AWS from 'aws-sdk';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export const s3 = new AWS.S3({
 	accessKeyId: process.env.EVENTAL_AWS_ACCESS_KEY_ID,
