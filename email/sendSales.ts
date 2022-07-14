@@ -1,10 +1,10 @@
 import { sendSalesData } from './sendSalesData';
-import { sendSales } from './templates/sales';
+import { SendSalesArgs, sendSales } from './templates/sales';
 
-const send = () => {
-	sendSalesData.forEach(async (val) => {
+const send = (data: SendSalesArgs[]) => {
+	data.forEach(async (val) => {
 		await sendSales(val);
 	});
 };
 
-send();
+send(sendSalesData || []);

@@ -42,4 +42,4 @@ dataSources.xml
 email/output/**/operation.json
 
 #Sales
-email/sendSalesData
+email/sendSalesData.ts
