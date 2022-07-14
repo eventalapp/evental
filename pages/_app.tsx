@@ -8,10 +8,10 @@ import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
 import { DefaultSeo } from 'next-seo';
 import type { AppProps } from 'next/app';
-import { Router } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -20,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import '../styles/global.css';
 import { theme } from '../tailwind.config';
+import { pageView } from '../utils/analytics';
 
 dayjs.extend(advancedFormat);
 dayjs.extend(relativeTime);
@@ -38,6 +39,19 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const App: React.FC<AppProps & { error?: Error }> = (props) => {
 	const { Component, pageProps, error } = props;
 	const [queryClient] = useState(() => new QueryClient());
+	const router = useRouter();
+
+	useEffect(() => {
+		const handleRouteChange = (url: URL) => {
+			pageView(url);
+		};
+
+		router.events.on('routeChangeComplete', handleRouteChange);
+
+		return () => {
+			router.events.off('routeChangeComplete', handleRouteChange);
+		};
+	}, [router.events]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
