@@ -5,6 +5,7 @@ import { eventMessage } from './templates/eventMessage';
 import { inviteOrganizer } from './templates/inviteOrganizer';
 import { inviteRole } from './templates/inviteRole';
 import { resetPassword } from './templates/resetPassword';
+import { sales } from './templates/sales';
 import { verifyEmail } from './templates/verifyEmail';
 import { welcome } from './templates/welcome';
 
@@ -64,7 +65,8 @@ const templatesToGenerate = [
 	verifyEmail,
 	inviteOrganizer,
 	inviteRole,
-	resetPassword
+	resetPassword,
+	sales
 ];
 
 templatesToGenerate.forEach((template) => {
