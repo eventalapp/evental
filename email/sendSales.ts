@@ -1,3 +1,4 @@
+// @ts-ignore
 import { sendSalesData } from './sendSalesData';
 import { SendSalesArgs, sendSales } from './templates/sales';
 
