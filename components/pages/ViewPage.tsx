@@ -38,7 +38,7 @@ export const ViewPage: React.FC<Props> = (props) => {
 				</div>
 
 				{admin && (
-					<div className="space-x-4 flex flex-row">
+					<div className="flex flex-row space-x-4">
 						<IconLinkTooltip
 							message="Edit this page"
 							href={`/events/${eid}/admin/pages/${pid}/edit`}
@@ -60,7 +60,7 @@ export const ViewPage: React.FC<Props> = (props) => {
 					</div>
 				)
 			) : (
-				<Skeleton className="w-full mb-2 h-5" count={10} />
+				<Skeleton className="mb-2 h-5 w-full" count={10} />
 			)}
 		</div>
 	);

@@ -82,7 +82,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							<IconButtonTooltip icon={faShare} message="Share this session" color="gray" />
 						</ShareSessionDropdown>
 					) : (
-						<Skeleton className="w-5 h-5" />
+						<Skeleton className="h-5 w-5" />
 					)}
 
 					{session && event ? (
@@ -104,7 +104,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							/>
 						)
 					) : (
-						<Skeleton className="w-5 h-5" />
+						<Skeleton className="h-5 w-5" />
 					)}
 
 					{event && session ? (
@@ -124,7 +124,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 							</LeaveSessionDialog>
 						)
 					) : (
-						<Skeleton className="w-5 h-5" />
+						<Skeleton className="h-5 w-5" />
 					)}
 
 					{user && !isAttending && !admin && (

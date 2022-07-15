@@ -21,20 +21,20 @@ export const Card: React.FC<CardProps> = (props) => {
 	return (
 		<div
 			className={classNames(
-				'bg-white p-6 border border-gray-300 shadow-sm rounded-md flex flex-col h-full z-10',
+				'z-10 flex h-full flex-col rounded-md border border-gray-300 bg-white p-6 shadow-sm',
 				className
 			)}
 		>
 			{icon && (
 				<div
 					className={classNames(
-						'flex items-center justify-center w-14 h-14 rounded-md mb-4',
+						'mb-4 flex h-14 w-14 items-center justify-center rounded-md',
 						iconWrapperClassName
 					)}
 				>
 					<FontAwesomeIcon
 						fill="currentColor"
-						className={classNames('h-8 w-8 block', iconClassName)}
+						className={classNames('block h-8 w-8', iconClassName)}
 						size="1x"
 						icon={icon}
 					/>
@@ -44,7 +44,7 @@ export const Card: React.FC<CardProps> = (props) => {
 			<Heading level={3} variant="xl" className="mb-3">
 				{header}
 			</Heading>
-			<Paragraph variant="default" className="max-w-3xl text-gray-600  text-sm">
+			<Paragraph variant="default" className="max-w-3xl text-sm  text-gray-600">
 				{body}
 			</Paragraph>
 		</div>

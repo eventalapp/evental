@@ -10,7 +10,7 @@ export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
 
 	return (
 		<div
-			className={classNames('hidden h-full flex-row justify-center lg:flex col-span-5', className)}
+			className={classNames('col-span-5 hidden h-full flex-row justify-center lg:flex', className)}
 		>
 			{children}
 		</div>

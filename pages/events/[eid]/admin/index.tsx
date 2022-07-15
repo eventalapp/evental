@@ -43,7 +43,7 @@ const EditEventPage: NextPage = () => {
 
 						<p className="mt-5 mb-3 text-lg font-bold text-red-600">Danger Zone</p>
 
-						<div className="rounded-md border shadow-sm p-4">
+						<div className="rounded-md border p-4 shadow-sm">
 							<DeleteEventDialog eid={String(eid)}>
 								<Button variant="danger">Delete Event</Button>
 							</DeleteEventDialog>

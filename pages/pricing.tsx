@@ -91,7 +91,7 @@ const PricingPage: NextPage = () => {
 						</EventalProCard>
 					</div>
 
-					<div className="mt-4 flex flex-col items-center space-y-3 z-10 relative">
+					<div className="relative z-10 mt-4 flex flex-col items-center space-y-3">
 						<p className="text-lg font-medium">How many attendees are you expecting?</p>
 						<Controller
 							control={control}

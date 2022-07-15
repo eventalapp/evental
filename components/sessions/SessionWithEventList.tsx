@@ -36,7 +36,7 @@ export const SessionWithEventList: React.FC<Props> = (props) => {
 					{' '}
 					{previousSessions && previousSessions.length >= 1 && (
 						<button
-							className="absolute top-0 right-0 z-20 cursor-pointer text-sm text-gray-500 flex flex-row items-center"
+							className="absolute top-0 right-0 z-20 flex cursor-pointer flex-row items-center text-sm text-gray-500"
 							onClick={() => {
 								setShowPastEvents(!showPastEvents);
 							}}

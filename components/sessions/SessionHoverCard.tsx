@@ -52,7 +52,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 	if (isSessionAttendeeLoading) {
 		return (
 			<div>
-				<Skeleton className="w-6 h-6" />
+				<Skeleton className="h-6 w-6" />
 			</div>
 		);
 	}
@@ -89,7 +89,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 						<button type="button">
 							<FontAwesomeIcon
 								fill="currentColor"
-								className="h-5 w-5 text-red-500 block"
+								className="block h-5 w-5 text-red-500"
 								size="1x"
 								icon={faRightFromBracket}
 							/>
@@ -129,7 +129,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 				/>
 
 				<div className="h-full w-full">
-					<div className="absolute right-3.5 top-3.5 flex flex-col justify-end items-end">
+					<div className="absolute right-3.5 top-3.5 flex flex-col items-end justify-end">
 						<Tooltip side={'right'} message={`View session`}>
 							<div className="mb-3">
 								<Link
@@ -162,7 +162,7 @@ export const SessionHoverCard: React.FC<Props> = (props) => {
 						</p>
 					)}
 
-					<div className="flex flex-row flex-wrap items-center text-gray-600 mt-3 mb-0.5">
+					<div className="mt-3 mb-0.5 flex flex-row flex-wrap items-center text-gray-600">
 						{session.category && (
 							<TooltipIcon
 								customIcon={

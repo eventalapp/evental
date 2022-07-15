@@ -39,14 +39,14 @@ export const IconButtonTooltip = React.forwardRef<HTMLButtonElement, Props>((pro
 				<button
 					ref={ref}
 					className={classNames(
-						'flex items-center disabled:cursor-not-allowed disabled:opacity-50 justify-center',
+						'flex items-center justify-center disabled:cursor-not-allowed disabled:opacity-50',
 						iconColors[color],
 						className
 					)}
 					{...rest}
 				>
 					{isLoading ? (
-						<Skeleton className="w-5 h-5 p-1" />
+						<Skeleton className="h-5 w-5 p-1" />
 					) : (
 						<FontAwesomeIcon
 							fill="currentColor"

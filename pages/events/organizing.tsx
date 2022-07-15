@@ -58,7 +58,7 @@ const OrganizingEventsPage: NextPage = () => {
 
 			<PageWrapper>
 				<Column>
-					<Heading className="text-center mb-4">Organizing Events</Heading>
+					<Heading className="mb-4 text-center">Organizing Events</Heading>
 
 					<EventsPageNavigation />
 

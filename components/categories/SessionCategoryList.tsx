@@ -83,7 +83,7 @@ export const SessionCategoryList: React.FC<Props> = (props) => {
 						);
 				  })
 				: Array.apply(null, Array(5)).map((_, i) => (
-						<Skeleton className="w-full h-12 mb-4" key={i} />
+						<Skeleton className="mb-4 h-12 w-full" key={i} />
 				  ))}
 		</div>
 	);

@@ -38,14 +38,14 @@ export const Navigation: React.FC = () => {
 			{FreeEventalPro}
 			<NavigationWrapper>
 				<NavigationMenuPrimitive.Root className="relative w-full">
-					<NavigationMenuPrimitive.List className="m-auto h-14 w-full max-w-7xl px-3 grid grid-cols-2 lg:grid-cols-9">
+					<NavigationMenuPrimitive.List className="m-auto grid h-14 w-full max-w-7xl grid-cols-2 px-3 lg:grid-cols-9">
 						{/* Logos (Desktop & Mobile) */}
 						<div className="col-span-1 lg:col-span-2">
 							<LogoLinkItem />
 						</div>
 
 						{/* Links (Desktop only) */}
-						<div className="hidden h-full flex-row justify-center lg:flex col-span-5">
+						<div className="col-span-5 hidden h-full flex-row justify-center lg:flex">
 							<div className="flex flex-row items-end">
 								<LinkItem link={`/pricing`} label={'Pricing'} />
 								<LinkItem link={`/contact`} label={'Contact'} />

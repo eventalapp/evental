@@ -29,7 +29,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 		<div>
 			<div className="relative mb-7 flex flex-row items-center">
 				{attendee && admin && (
-					<div className="absolute top-0 right-0 space-x-4 flex flex-row">
+					<div className="absolute top-0 right-0 flex flex-row space-x-4">
 						<IconLinkTooltip
 							message="Edit this attendee"
 							href={`/events/${eid}/admin/attendees/${uid}/edit`}
@@ -57,7 +57,7 @@ export const ViewAttendee: React.FC<Props> = (props) => {
 						/>
 					</div>
 				) : (
-					<Skeleton className="mr-3 h-16 w-16 md:mr-5 md:h-20 md:w-20 rounded-md shrink-0" />
+					<Skeleton className="mr-3 h-16 w-16 shrink-0 rounded-md md:mr-5 md:h-20 md:w-20" />
 				)}
 
 				<div>

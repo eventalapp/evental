@@ -52,7 +52,7 @@ const CreateEventPage: NextPage = () => {
 				<Column>
 					<Heading className="mb-3">Create an event</Heading>
 
-					<Paragraph className="text-gray-600 max-w-3xl">
+					<Paragraph className="max-w-3xl text-gray-600">
 						Fill out the form below to create an event. You can edit these details later. Once you
 						have created your event you can access billing, create roles, manage attendees, and
 						more.

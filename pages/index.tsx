@@ -43,13 +43,13 @@ const HomePage: NextPage = () => {
 
 			<PageWrapper>
 				<Column className="flex flex-col items-center">
-					<Heading variant="sm" level={6} className="text-primary text-center mb-3">
+					<Heading variant="sm" level={6} className="mb-3 text-center text-primary">
 						EVENT MANAGEMENT APP
 					</Heading>
 					<Heading variant="4xl" className="mb-3 text-center">
 						Host Outstanding Events
 					</Heading>
-					<Paragraph className="mb-6 text-center max-w-4xl text-gray-600" variant="xl">
+					<Paragraph className="mb-6 max-w-4xl text-center text-gray-600" variant="xl">
 						Event management software that's highly intuitive. Your attendees and organizers will
 						love using Evental for your in-person, hybrid, and virtual events.
 					</Paragraph>
@@ -78,7 +78,7 @@ const HomePage: NextPage = () => {
 						<AspectImage
 							alt="Event Overview"
 							ratio={1602 / 817}
-							className="bg-white border border-gray-200 shadow-sm"
+							className="border border-gray-200 bg-white shadow-sm"
 							imageUrl={'https://cdn.evental.app/images/landing-graphic.jpg'}
 						/>
 					</div>
@@ -86,7 +86,7 @@ const HomePage: NextPage = () => {
 
 				<div className="bg-primary-600 text-white">
 					<Column>
-						<Heading variant="sm" level={6} className="text-gray-300 mb-3">
+						<Heading variant="sm" level={6} className="mb-3 text-gray-300">
 							GETTING STARTED
 						</Heading>
 						<Heading level={3} className="mb-3 tracking-normal">
@@ -140,7 +140,7 @@ const HomePage: NextPage = () => {
 
 				<Column>
 					<div className="flex flex-col items-center">
-						<Heading variant="sm" level={6} className="text-primary mb-3">
+						<Heading variant="sm" level={6} className="mb-3 text-primary">
 							PRICING
 						</Heading>
 						<Heading level={2} variant="3xl" className="mb-3">
@@ -179,7 +179,7 @@ const HomePage: NextPage = () => {
 				<div className="bg-primary-600">
 					<Column>
 						<div className="flex flex-col items-center text-white">
-							<Heading variant="sm" level={6} className="text-gray-200 mb-3">
+							<Heading variant="sm" level={6} className="mb-3 text-gray-200">
 								EVENT MANAGEMENT
 							</Heading>
 							<Heading level={2} variant="3xl" className="mb-3">
@@ -196,13 +196,13 @@ const HomePage: NextPage = () => {
 
 				<Column>
 					<div className="flex flex-col items-center">
-						<Heading variant="sm" level={6} className="text-primary mb-3">
+						<Heading variant="sm" level={6} className="mb-3 text-primary">
 							INTERACTIVE FEATURES
 						</Heading>
 						<Heading level={2} variant="3xl" className="mb-3 text-center">
 							Get the most out of your event
 						</Heading>
-						<Paragraph variant="lg" className="mb-5 md:mb-10 max-w-3xl text-center text-gray-600">
+						<Paragraph variant="lg" className="mb-5 max-w-3xl text-center text-gray-600 md:mb-10">
 							Evental is the only platform you'll ever need to setup, manage, attend, and review
 							events. We've built a platform that's simple, easy to use, and powerful.
 						</Paragraph>

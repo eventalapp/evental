@@ -57,7 +57,7 @@ const AttendingEventsPage: NextPage = () => {
 
 				<PageWrapper>
 					<Column>
-						<Heading className="text-center mb-4">Attending Events</Heading>
+						<Heading className="mb-4 text-center">Attending Events</Heading>
 
 						{user && <EventsPageNavigation />}
 
@@ -83,7 +83,7 @@ const AttendingEventsPage: NextPage = () => {
 
 			<PageWrapper>
 				<Column>
-					<Heading className="text-center mb-4">Attending Events</Heading>
+					<Heading className="mb-4 text-center">Attending Events</Heading>
 
 					<EventsPageNavigation />
 

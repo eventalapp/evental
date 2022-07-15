@@ -29,11 +29,11 @@ export const ViewVenue: React.FC<Props> = (props) => {
 	return (
 		<div>
 			<div className="mb-4">
-				<div className="mb-1 flex flex-row justify-between items-center">
+				<div className="mb-1 flex flex-row items-center justify-between">
 					<Heading>{venue ? venue.name : <Skeleton className="w-48" />}</Heading>
 
 					{venue && admin && (
-						<div className="space-x-4 flex flex-row">
+						<div className="flex flex-row space-x-4">
 							<IconLinkTooltip
 								message="Edit this venue"
 								href={`/events/${eid}/admin/venues/${vid}/edit`}

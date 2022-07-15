@@ -65,7 +65,7 @@ const CreateCategoryDialog: React.FC<Props> = (props) => {
 					sessions.
 				</DialogPrimitive.Description>
 
-				<div className="mt-5 grid md:grid-cols-2 gap-5 grid-cols-1">
+				<div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
 					<div className="">
 						<Label htmlFor="name">Name *</Label>
 						<Input placeholder="Session category name" {...register('name')} />

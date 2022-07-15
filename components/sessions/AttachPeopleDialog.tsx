@@ -65,7 +65,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 						<p className="my-1 text-sm text-gray-600">
 							Don't see who you're looking for?{' '}
 							<CreateAttendeeDialog eid={String(eid)}>
-								<a className="font-medium cursor-pointer">Create an attendee</a>
+								<a className="cursor-pointer font-medium">Create an attendee</a>
 							</CreateAttendeeDialog>
 						</p>
 					</fieldset>

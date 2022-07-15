@@ -80,7 +80,7 @@ export const TooltipIcon: React.FC<{
 				<a href={externalLink} target="_blank" rel="noopener noreferrer">
 					<div
 						className={classNames(
-							'mr-3 mb-1 flex flex-row cursor-pointer items-center text-sm md:text-base',
+							'mr-3 mb-1 flex cursor-pointer flex-row items-center text-sm md:text-base',
 							wrapperClassName
 						)}
 					>

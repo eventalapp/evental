@@ -9,7 +9,7 @@ export const AuthContainer: React.FC<AuthContainerProps> = (props) => {
 	const { children, className } = props;
 
 	return (
-		<div className={classNames('hidden h-full flex-row justify-end lg:flex col-span-2', className)}>
+		<div className={classNames('col-span-2 hidden h-full flex-row justify-end lg:flex', className)}>
 			{children}
 		</div>
 	);

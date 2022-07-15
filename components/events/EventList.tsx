@@ -18,11 +18,11 @@ const eventListSkeleton = Array.apply(null, Array(5)).map((_, i) => (
 			</span>
 		</div>
 		<Skeleton className="mx-3 min-h-[3em] min-w-[3em] rounded-md md:mx-5 md:h-16 md:w-16" />
-		<div className="flex flex-col items-start w-full">
+		<div className="flex w-full flex-col items-start">
 			<span className="shrink text-tiny">
 				<Skeleton className="w-20" />
 			</span>
-			<span className="block text-lg font-medium md:text-xl w-full">
+			<span className="block w-full text-lg font-medium md:text-xl">
 				<Skeleton className="w-full max-w-lg" />
 			</span>
 		</div>

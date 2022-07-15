@@ -43,7 +43,7 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 						{eventRegistrationMutation.isLoading ? <LoadingInner /> : 'Register'}
 					</Button>
 				) : (
-					<Skeleton className="w-20 h-6" />
+					<Skeleton className="h-6 w-20" />
 				)}
 			</div>
 		</form>

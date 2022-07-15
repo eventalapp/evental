@@ -104,12 +104,12 @@ export const EventHeader: React.FC<{
 						</Link>
 					</div>
 				) : (
-					<Skeleton className="mr-3 h-16 w-16 rounded-md shrink-0 md:h-20 md:w-20 md:mr-5 inline-block" />
+					<Skeleton className="mr-3 inline-block h-16 w-16 shrink-0 rounded-md md:mr-5 md:h-20 md:w-20" />
 				)}
 
 				<div className="-mb-1 w-full">
 					<Heading className="mb-1">
-						{event?.name || <Skeleton className="max-w-2xl w-full" />}
+						{event?.name || <Skeleton className="w-full max-w-2xl" />}
 					</Heading>
 
 					<div className="flex flex-row flex-wrap items-center text-gray-600">

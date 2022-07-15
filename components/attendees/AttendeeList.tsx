@@ -19,7 +19,7 @@ type Props = {
 
 export const attendeeListSkeleton = Array.apply(null, Array(12)).map((_, i) => (
 	<div className="flex h-full flex-col items-center justify-start" key={i}>
-		<Skeleton className={classNames('mb-2 rounded-md h-28 w-28')} />
+		<Skeleton className={classNames('mb-2 h-28 w-28 rounded-md')} />
 		<span className="block w-full text-center text-lg">
 			<Skeleton className="w-full" />
 		</span>
@@ -49,12 +49,12 @@ export const AttendeeList: React.FC<Props> = (props) => {
 										<li className="relative">
 											{admin && attendee.user.claimedAt && (
 												<Tooltip message="This user has claimed their account, you cannot update their user settings (Such as image, description, website, etc.)">
-													<div className="inline-block absolute -top-1.5 -left-1.5 z-10">
+													<div className="absolute -top-1.5 -left-1.5 z-10 inline-block">
 														<div className="relative">
-															<div className="w-4 h-4 bg-white rounded-full absolute top-0" />
+															<div className="absolute top-0 h-4 w-4 rounded-full bg-white" />
 															<FontAwesomeIcon
 																fill="currentColor"
-																className="h-5 w-5 text-green-400 relative"
+																className="relative h-5 w-5 text-green-400"
 																icon={faBadgeCheck}
 															/>
 														</div>
