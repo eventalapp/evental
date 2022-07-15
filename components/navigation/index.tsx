@@ -70,9 +70,7 @@ export const Navigation: React.FC = () => {
 						{/* User Icon + Create Event (Desktop only) */}
 						<AuthContainer>
 							<div className="flex flex-row items-end">
-								{!isUserLoading && user === undefined && (
-									<LinkItem link={`/auth/signin`} label={'Sign in'} />
-								)}
+								{!isUserLoading && !user && <LinkItem link={`/auth/signin`} label={'Sign in'} />}
 							</div>
 							<div className="flex flex-row items-center">
 								{user ? (
