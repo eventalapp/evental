@@ -101,9 +101,13 @@ const ViewEventPage: NextPage = () => {
 						<div className="col-span-12 lg:col-span-3">
 							<div className="mb-4">
 								<span className="mb-1 block font-medium">
-									{event ? 'Filter by Date' : <Skeleton className="w-3/4" />}
+									{event && venues && sessionCategories ? (
+										'Filter by Date'
+									) : (
+										<Skeleton className="w-3/4" />
+									)}
 								</span>
-								{event ? (
+								{event && venues && sessionCategories ? (
 									<div className="relative">
 										<SessionDatePicker
 											onChange={(date) => {
@@ -123,7 +127,7 @@ const ViewEventPage: NextPage = () => {
 
 							<div className="mb-4">
 								<span className="mb-1 block font-medium">
-									{event && sessionCategories ? (
+									{event && venues && sessionCategories ? (
 										sessionCategories.length > 0 && 'Filter by Category'
 									) : (
 										<Skeleton className="w-3/4" />
@@ -131,7 +135,7 @@ const ViewEventPage: NextPage = () => {
 								</span>
 								<div className="text-gray-600">
 									<ul className="space-y-1">
-										{event && sessionCategories ? (
+										{event && sessionCategories && venues ? (
 											sessionCategories.map((sessionCategory) => (
 												<li key={sessionCategory.id}>
 													<Link
@@ -141,7 +145,7 @@ const ViewEventPage: NextPage = () => {
 															<Tooltip
 																message={`View all sessions occurring with the ${sessionCategory.name} session category`}
 																side="left"
-																sideOffset={6}
+																sideOffset={12}
 															>
 																<div className="inline-block">
 																	<div className="flex flex-row items-center justify-center">
@@ -162,7 +166,7 @@ const ViewEventPage: NextPage = () => {
 												</li>
 											))
 										) : (
-											<Skeleton count={5} className="w-full" containerClassName="space-y-1" />
+											<Skeleton count={8} className="w-full" containerClassName="space-y-1" />
 										)}
 									</ul>
 								</div>
@@ -170,7 +174,7 @@ const ViewEventPage: NextPage = () => {
 
 							<div className="mb-4">
 								<span className="mb-1 block font-medium">
-									{event && venues ? (
+									{event && venues && sessionCategories ? (
 										venues.length > 0 && 'Filter by Venue'
 									) : (
 										<Skeleton className="w-3/4" />
@@ -178,7 +182,7 @@ const ViewEventPage: NextPage = () => {
 								</span>
 								<div className="text-gray-600">
 									<ul className="space-y-1">
-										{event && venues ? (
+										{event && venues && sessionCategories ? (
 											venues.map((venue) => (
 												<li key={venue.id}>
 													<Link href={`/events/${event.slug}/venues/${venue.slug}`} passHref>
@@ -199,7 +203,7 @@ const ViewEventPage: NextPage = () => {
 												</li>
 											))
 										) : (
-											<Skeleton count={5} className="w-full" containerClassName="space-y-1" />
+											<Skeleton count={12} className="w-full" containerClassName="space-y-1" />
 										)}
 									</ul>
 								</div>
