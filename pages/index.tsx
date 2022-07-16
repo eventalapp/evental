@@ -209,7 +209,7 @@ const HomePage: NextPage = () => {
 						<CardGrid>
 							<div className="relative">
 								<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
-									<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[40px]">
+									<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[20px]">
 										<div className="bloom small bloom-one left-[10%]" />
 										<div className="bloom small bloom-two right-[10%]" />
 									</div>
@@ -231,7 +231,7 @@ const HomePage: NextPage = () => {
 							</div>
 							<div className="relative">
 								<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
-									<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[40px]">
+									<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[20px]">
 										<div className="bloom small bloom-one left-[10%]" />
 										<div className="bloom small bloom-two right-[10%]" />
 									</div>
@@ -250,7 +250,7 @@ const HomePage: NextPage = () => {
 							</div>
 							<div className="relative">
 								<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
-									<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[40px]">
+									<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[20px]">
 										<div className="bloom small bloom-one left-[10%]" />
 										<div className="bloom small bloom-two right-[10%]" />
 									</div>
@@ -276,7 +276,7 @@ const HomePage: NextPage = () => {
 							</div>
 							<div className="relative">
 								<div className="relative mx-auto max-w-full sm:w-full sm:max-w-[1200px]">
-									<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[40px]">
+									<div className="absolute top-[30px] h-32 w-full overflow-visible sm:top-[20px]">
 										<div className="bloom small bloom-one left-[10%]" />
 										<div className="bloom small bloom-two right-[10%]" />
 									</div>
