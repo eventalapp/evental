@@ -1,5 +1,5 @@
+import Prisma from '@eventalapp/shared/db';
 import { faker } from '@faker-js/faker';
-import Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 
 export const fake = (count: number) => {

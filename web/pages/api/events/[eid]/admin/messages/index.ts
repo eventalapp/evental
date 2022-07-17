@@ -1,8 +1,8 @@
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 
 import { getEvent } from '../..';
 import { sendEventMessage } from '../../../../../../email/templates/eventMessage';
-import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
 import { SendEventMessageSchema } from '../../../../../../utils/schemas';
 import { generateSlug } from '../../../../../../utils/string';

@@ -1,7 +1,7 @@
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 
 import { sendOrganizerInvite } from '../../../../../../email/templates/inviteOrganizer';
-import { prisma } from '../../../../../../prisma/client';
 import { api } from '../../../../../../utils/api';
 import { isFounder } from '../../../../../../utils/attendee';
 import { ORGANIZER_INVITE_EXPIRY } from '../../../../../../utils/config';

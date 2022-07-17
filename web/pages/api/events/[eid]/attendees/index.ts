@@ -1,4 +1,5 @@
-import { prisma } from '../../../../../prisma/client';
+import { prisma } from '@eventalapp/shared/db/client';
+
 import { api } from '../../../../../utils/api';
 import { AttendeeWithUser, stripAttendeesWithUser } from '../../../../../utils/user';
 import { getEvent } from '../index';

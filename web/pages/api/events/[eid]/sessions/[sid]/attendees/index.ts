@@ -1,7 +1,7 @@
-import { EventSessionAttendeeType } from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 
-import { prisma } from '../../../../../../../prisma/client';
 import { api } from '../../../../../../../utils/api';
 import { AttendeeWithUser, stripAttendeesWithUser } from '../../../../../../../utils/user';
 import { getEvent } from '../../../index';
@@ -12,8 +12,9 @@ export default api({
 		const { eid, sid, type } = req.query;
 
 		const typeParsed =
-			EventSessionAttendeeType[String(type) as keyof typeof EventSessionAttendeeType] ??
-			EventSessionAttendeeType.ATTENDEE;
+			Prisma.EventSessionAttendeeType[
+				String(type) as keyof typeof Prisma.EventSessionAttendeeType
+			] ?? Prisma.EventSessionAttendeeType.ATTENDEE;
 
 		if (!typeParsed) {
 			throw new NextkitError(400, 'Invalid attendee type');
@@ -32,7 +33,7 @@ export default api({
 });
 
 export interface UseSessionAttendeesOptions {
-	type?: EventSessionAttendeeType;
+	type?: Prisma.EventSessionAttendeeType;
 }
 
 export const getSessionAttendees = async (
@@ -40,7 +41,7 @@ export const getSessionAttendees = async (
 	sid: string,
 	args: UseSessionAttendeesOptions = {}
 ): Promise<AttendeeWithUser[] | null> => {
-	const { type = EventSessionAttendeeType.ATTENDEE } = args;
+	const { type = Prisma.EventSessionAttendeeType.ATTENDEE } = args;
 
 	const event = await getEvent(eid);
 

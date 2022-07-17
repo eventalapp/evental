@@ -1,5 +1,5 @@
+import Prisma from '@eventalapp/shared/db';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Prisma, { EventMessageSendType } from '@prisma/client';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -37,7 +37,7 @@ export const SendMessageForm: React.FC<Props> = (props) => {
 		formState: { errors }
 	} = useForm<SendEventMessagePayload>({
 		defaultValues: {
-			sendType: EventMessageSendType.EVERYONE,
+			sendType: Prisma.EventMessageSendType.EVERYONE,
 			roleId: roles?.[0]?.id,
 			eventId: String(eid)
 		},
@@ -64,14 +64,14 @@ export const SendMessageForm: React.FC<Props> = (props) => {
 						Send Type
 						<HelpTooltip message={copy.tooltip.sendType} />
 					</Label>
-					{EventMessageSendType && (
+					{Prisma.EventMessageSendType && (
 						<div>
 							<Controller
 								control={control}
 								name="sendType"
 								render={({ field }) => (
 									<Select
-										options={Object.values(EventMessageSendType).map((category) => ({
+										options={Object.values(Prisma.EventMessageSendType).map((category) => ({
 											label: capitalizeFirstLetter(category.toLowerCase().replace('_', ' ')),
 											value: category
 										}))}
@@ -79,7 +79,9 @@ export const SendMessageForm: React.FC<Props> = (props) => {
 										onValueChange={(value) => {
 											setValue(
 												'sendType',
-												EventMessageSendType[value as keyof typeof EventMessageSendType]
+												Prisma.EventMessageSendType[
+													value as keyof typeof Prisma.EventMessageSendType
+												]
 											);
 										}}
 									/>
@@ -90,7 +92,7 @@ export const SendMessageForm: React.FC<Props> = (props) => {
 					{errors.sendType?.message && <ErrorMessage>{errors.sendType?.message}</ErrorMessage>}
 				</div>
 
-				{sendTypeWatcher === EventMessageSendType.ROLE && (
+				{sendTypeWatcher === Prisma.EventMessageSendType.ROLE && (
 					<div className="col-span-2 md:col-span-1">
 						<Label htmlFor="roleId">
 							Role

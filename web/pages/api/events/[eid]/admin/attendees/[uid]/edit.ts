@@ -1,8 +1,8 @@
-import { EventPermissionRole } from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
+import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
 
 import { sendClaimProfile } from '../../../../../../../email/templates/claimProfile';
-import { prisma } from '../../../../../../../prisma/client';
 import { api } from '../../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../../utils/attendee';
 import { CLAIM_PROFILE_EXPIRY } from '../../../../../../../utils/config';
@@ -123,8 +123,8 @@ export default api({
 		}
 
 		const requestedPermissionRole =
-			EventPermissionRole[body.permissionRole as keyof typeof EventPermissionRole] ??
-			EventPermissionRole.ATTENDEE;
+			Prisma.EventPermissionRole[body.permissionRole as keyof typeof Prisma.EventPermissionRole] ??
+			Prisma.EventPermissionRole.ATTENDEE;
 
 		if (!requestedPermissionRole) {
 			throw new NextkitError(400, 'Invalid permission role.');

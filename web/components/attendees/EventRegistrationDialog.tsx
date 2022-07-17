@@ -1,4 +1,4 @@
-import Prisma from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import Color from 'color';
 import Link from 'next/link';

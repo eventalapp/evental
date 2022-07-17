@@ -1,8 +1,8 @@
-import { EventCategory, EventType } from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
+import { prisma } from '@eventalapp/shared/db/client';
 import dayjs from 'dayjs';
 import { NextkitError } from 'nextkit';
 
-import { prisma } from '../../../../../prisma/client';
 import { api } from '../../../../../utils/api';
 import { isFounder, isOrganizer } from '../../../../../utils/attendee';
 import { busboyParseForm } from '../../../../../utils/form';
@@ -75,9 +75,12 @@ export default api({
 				startDate: dayjs(body.startDate).tz(body.timeZone).startOf('day').toDate(),
 				endDate: dayjs(body.endDate).tz(body.timeZone).endOf('day').toDate(),
 				image: fileLocation,
-				category: EventCategory[body.category as keyof typeof EventCategory] ?? EventCategory.EVENT,
+				category:
+					Prisma.EventCategory[body.category as keyof typeof Prisma.EventCategory] ??
+					Prisma.EventCategory.EVENT,
 				slug: body.slug,
-				type: EventType[body.type as keyof typeof EventType] ?? EventType.HYBRID
+				type:
+					Prisma.EventType[body.type as keyof typeof Prisma.EventType] ?? Prisma.EventType.HYBRID
 			},
 			where: {
 				id: event.id

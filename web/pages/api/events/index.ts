@@ -1,6 +1,6 @@
-import Prisma from '@prisma/client';
+import Prisma from '@eventalapp/shared/db';
+import { prisma } from '@eventalapp/shared/db/client';
 
-import { prisma } from '../../../prisma/client';
 import { api } from '../../../utils/api';
 
 export default api({

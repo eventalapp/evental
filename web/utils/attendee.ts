@@ -1,7 +1,8 @@
+import { prisma } from '@eventalapp/shared/db/client';
+
 import { getEvent } from '../pages/api/events/[eid]';
 import { getAttendee } from '../pages/api/events/[eid]/attendees/[uid]';
 import { getSession } from '../pages/api/events/[eid]/sessions/[sid]';
-import { prisma } from '../prisma/client';
 
 export const isAttendee = async (userId: string, eventId: string) => {
 	const event = await getEvent(String(eventId));
