@@ -1,8 +1,7 @@
+import { useUpcomingEventsQuery } from '@eventalapp/shared/hooks/queries/useUpcomingEventsQuery';
 import React from 'react';
 import { FlatList, Image, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-
-import { useUpcomingEventsQuery } from '../../../shared/useUpcomingEventsQuery';
 
 export function EventsScreen() {
 	const { upcomingEvents } = useUpcomingEventsQuery();
