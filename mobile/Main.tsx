@@ -49,5 +49,3 @@ export function Main() {
 	);
 }
 registerRootComponent(Main);
-
-registerRootComponent(Main);
