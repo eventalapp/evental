@@ -1,4 +1,8 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+// see https://github.com/martpie/next-transpile-modules#readme
+const withTM = require('next-transpile-modules')(['@eventalapp/shared']);
+
+module.exports = withTM({
 	images: {
 		domains: [
 			'i.imgur.com',
@@ -13,4 +17,4 @@ module.exports = {
 	eslint: {
 		dirs: ['pages', 'utils', 'components']
 	}
-};
+});
