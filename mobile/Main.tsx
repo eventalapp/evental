@@ -5,7 +5,7 @@ import * as React from 'react';
 import { AppState, AppStateStatus, Platform } from 'react-native';
 import { StatusBar } from 'react-native';
 import { focusManager, onlineManager } from 'react-query';
-
+import { registerRootComponent } from 'expo';
 import { EventsScreen } from './src/screens/Events';
 import { SettingsScreen } from './src/screens/Settings';
 
@@ -23,7 +23,7 @@ onlineManager.setEventListener((setOnline) => {
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+export function Main() {
 	React.useEffect(() => {
 		const subscription = AppState.addEventListener('change', onAppStateChange);
 
@@ -41,4 +41,5 @@ export default function App() {
 		</NavigationContainer>
 	);
 }
+registerRootComponent(Main);
 
