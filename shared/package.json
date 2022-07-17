@@ -2,6 +2,12 @@
 	"name": "@eventalapp/shared",
 	"version": "0.0.1",
 	"private": true,
+	"scripts": {
+		"prepare": "prisma generate --data-proxy",
+		"push": "prisma db push",
+		"seed": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
+		"format": "prisma format"
+	},
 	"dependencies": {
 		"axios": "^0.27.2"
 	}

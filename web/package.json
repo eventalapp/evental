@@ -9,18 +9,15 @@
 		]
 	},
 	"scripts": {
-		"prepare": "prisma generate --data-proxy",
 		"docker": "docker-compose up -d",
 		"quickstart": "yarn && yarn docker && yarn dev",
 		"build": "next build",
 		"start": "next start",
-		"push": "prisma db push",
 		"dev": "next dev -p 5555",
 		"lint": "next lint --fix",
-		"seed": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} prisma/seed.ts",
 		"templates": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/generateTemplates.ts",
 		"sales": "ts-node --project tsconfig.json --compiler-options {\\\"module\\\":\\\"CommonJS\\\"} email/sendSales.ts",
-		"format": "prettier --write ./{server,pages,utils,components,config,email,hooks,prisma,styles}/**/**/*.{js,jsx,md,ts,tsx} && prisma format",
+		"format": "prettier --write ./{server,pages,utils,components,config,email,hooks,styles}/**/**/*.{js,jsx,md,ts,tsx} && yarn workspace @eventalapp/shared format",
 		"email:forgotPassword": "ts-node --project tsconfig.json  --compiler-options {\\\\\\\"module\\\\\\\":\\\\\\\"CommonJS\\\\\\\"} utils/email/forgotPassword.ts",
 		"stripe:listen": "stripe listen --forward-to localhost:5555/api/payment/webhooks"
 	},
@@ -33,7 +30,6 @@
 		"@headlessui/react": "^1.6.0",
 		"@heroicons/react": "^1.0.6",
 		"@hookform/resolvers": "^2.8.8",
-		"@prisma/client": "4",
 		"@radix-ui/react-accordion": "^0.1.6",
 		"@radix-ui/react-alert-dialog": "^0.1.7",
 		"@radix-ui/react-aspect-ratio": "^0.1.4",
@@ -137,7 +133,6 @@
 		"cross-env": "^7.0.3",
 		"dotenv": "^16.0.1",
 		"postcss": "^8.4.13",
-		"prisma": "4",
 		"tailwindcss": "^3.0.24",
 		"ts-node": "^10.7.0",
 		"typescript": "^4.6.3"
