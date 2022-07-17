@@ -17,7 +17,7 @@ export function SignInScreen() {
 		resolver: zodResolver(SignInSchema)
 	});
 
-	const { user } = useUser();
+	const { data: user } = useUser();
 	const { signInMutation } = useSignInMutation();
 
 	console.log(user);
