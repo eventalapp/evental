@@ -1,5 +1,5 @@
-import Prisma from '@eventalapp/shared/db';
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as Prisma from '@prisma/client';
 import Color from 'color';
 import dayjs from 'dayjs';
 import Link from 'next/link';

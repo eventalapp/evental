@@ -1,5 +1,5 @@
-import Prisma from '@eventalapp/shared/db';
 import { prisma } from '@eventalapp/shared/db/client';
+import * as Prisma from '@prisma/client';
 import { NextkitError } from 'nextkit';
 
 import { sendClaimProfile } from '../../../../../../../email/templates/claimProfile';

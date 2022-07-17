@@ -1,5 +1,5 @@
-import Prisma from '@eventalapp/shared/db';
 import { faLocationDot, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import * as Prisma from '@prisma/client';
 import parse from 'html-react-parser';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';

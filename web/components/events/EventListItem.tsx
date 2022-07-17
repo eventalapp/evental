@@ -1,4 +1,4 @@
-import Prisma from '@eventalapp/shared/db';
+import * as Prisma from '@prisma/client';
 import { formatInTimeZone } from 'date-fns-tz';
 import Image from 'next/image';
 import Link from 'next/link';

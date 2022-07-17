@@ -1,5 +1,5 @@
-import Prisma from '@eventalapp/shared/db';
 import { prisma } from '@eventalapp/shared/db/client';
+import * as Prisma from '@prisma/client';
 import { endOfDay, parseISO, startOfDay } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { NextkitError } from 'nextkit';

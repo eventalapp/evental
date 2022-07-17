@@ -1,7 +1,7 @@
-import Prisma from '@eventalapp/shared/db';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';

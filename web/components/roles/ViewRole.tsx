@@ -1,10 +1,10 @@
-import Prisma from '@eventalapp/shared/db';
 import {
 	faPaperPlane,
 	faPenToSquare,
 	faSquarePlus,
 	faTrashCan
 } from '@fortawesome/free-solid-svg-icons';
+import * as Prisma from '@prisma/client';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
