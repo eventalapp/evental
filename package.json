@@ -7,6 +7,7 @@
 		"shared"
 	],
 	"scripts": {
+		"prepare": "yarn shared generate",
 		"web": "dotenv -e ./shared/.env -- yarn workspace @eventalapp/web",
 		"mobile": "yarn workspace @eventalapp/mobile",
 		"shared": "yarn workspace @eventalapp/shared",
