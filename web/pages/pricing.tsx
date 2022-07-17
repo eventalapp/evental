@@ -46,7 +46,7 @@ const PricingPage: NextPage = () => {
 			<Navigation />
 
 			<PageWrapper>
-				<div className="dark-topography text-white">
+				<div className="bg-primary-700 text-white">
 					<Column className="flex flex-col items-center">
 						<Heading>Single Event Plans &amp; Pricing</Heading>
 						<p className="mt-4 max-w-2xl text-center text-base text-gray-100">
@@ -124,7 +124,7 @@ const PricingPage: NextPage = () => {
 					</div>
 				</Column>
 
-				<div className="dark-topography text-white">
+				<div className="bg-primary-700 text-white">
 					<Column className="flex items-center justify-center">
 						<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
 							<p className="my-1.5 text-center text-sm font-medium md:text-lg">
@@ -159,7 +159,7 @@ const PricingPage: NextPage = () => {
 					<FeatureList />
 				</Column>
 
-				<div className="dark-topography text-white">
+				<div className="bg-primary-700 text-white">
 					<Column className="flex items-center justify-center">
 						<div className="flex flex-row flex-wrap items-center justify-center space-x-4">
 							<p className="my-1.5 text-center text-sm font-medium md:text-lg">
