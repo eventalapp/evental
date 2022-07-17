@@ -63,7 +63,7 @@ export const ShareEventDropdown: React.FC<Props> = (props) => {
 					</a>
 					<a
 						href={facebookLink(
-							`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${event.slug}`,
+							`${process.env.VERCEL_URL || 'http://localhost:3000'}/events/${event.slug}`,
 							{
 								quote: `Checkout ${event.name} on Evental!`,
 								hashtag: 'evental'
