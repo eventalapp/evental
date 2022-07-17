@@ -1,3 +1,4 @@
+import { useSignInMutation } from '@eventalapp/shared/hooks/mutations/useSignInMutation';
 import { SignInPayload, SignInSchema } from '@eventalapp/shared/utils/schema';
 import { text } from '@fortawesome/fontawesome-svg-core';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,12 +10,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 export function SignInScreen() {
 	const {
 		register,
+		control,
 		handleSubmit,
 		formState: { errors }
 	} = useForm<SignInPayload>({
 		resolver: zodResolver(SignInSchema)
 	});
-	const safeAreaInsets = useSafeAreaInsets();
+
+	const { signInMutation } = useSignInMutation();
 
 	return (
 		<View style={styles.container}>
@@ -27,12 +30,51 @@ export function SignInScreen() {
 			>
 				Sign In
 			</Text>
-			<TextInput style={styles.input} placeholder="Email" />
-			<TextInput style={styles.input} />
+
+			<View style={styles.inputContainer}>
+				<Text>Email</Text>
+
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<TextInput
+							style={styles.input}
+							onBlur={onBlur}
+							onChangeText={onChange}
+							value={value}
+							textContentType="emailAddress"
+						/>
+					)}
+					name="email"
+				/>
+
+				{errors?.email?.message && <Text style={styles.error}>{errors?.email?.message}</Text>}
+			</View>
+
+			<View style={styles.inputContainer}>
+				<Text>Password</Text>
+
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<TextInput
+							style={styles.input}
+							onBlur={onBlur}
+							onChangeText={onChange}
+							value={value}
+							textContentType="password"
+						/>
+					)}
+					name="password"
+				/>
+
+				{errors?.password?.message && <Text style={styles.error}>{errors?.password?.message}</Text>}
+			</View>
+
 			<Button
 				title="Submit"
 				onPress={handleSubmit((data) => {
-					console.log(data);
+					signInMutation.mutate(data);
 				})}
 			/>
 		</View>
