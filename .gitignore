@@ -3,16 +3,6 @@ node_modules/
 .pnp/
 .pnp.js
 
-# testing
-/coverage/
-
-# next.js
-/.next/
-/out/
-
-# production
-/build/
-
 # spam
 .DS_Store
 *.pem
@@ -29,17 +19,8 @@ node_modules/
 .env.production.local
 .env
 
-# deploy
-.vercel/
-
 # npm
 package-lock.json
 
 #.idea
 dataSources.xml
-
-#SES Templates
-email/output/**/operation.json
-
-#Sales
-email/sendSalesData.ts
