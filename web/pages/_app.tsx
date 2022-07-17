@@ -74,50 +74,6 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 							rel: 'shortcut icon',
 							href: '/images/favicon.ico',
 							type: 'image/x-icon'
-						},
-						{
-							rel: 'apple-touch-icon',
-							href: '/images/apple-touch-icon.png'
-						},
-						{
-							rel: 'apple-touch-icon',
-							sizes: '57x57',
-							href: '/images/apple-touch-icon-57x57.png'
-						},
-						{
-							rel: 'apple-touch-icon',
-							sizes: '72x72',
-							href: '/images/apple-touch-icon-72x72.png'
-						},
-						{
-							rel: 'apple-touch-icon',
-							sizes: '76x76',
-							href: '/images/apple-touch-icon-76x76.png'
-						},
-						{
-							rel: 'apple-touch-icon',
-							sizes: '114x114',
-							href: '/images/apple-touch-icon-114x114.png'
-						},
-						{
-							rel: 'apple-touch-icon',
-							sizes: '120x120',
-							href: '/images/apple-touch-icon-120x120.png'
-						},
-						{
-							rel: 'apple-touch-icon',
-							sizes: '144x144',
-							href: '/images/apple-touch-icon-144x144.png'
-						},
-						{
-							rel: 'apple-touch-icon',
-							sizes: '152x152',
-							href: '/images/apple-touch-icon-152x152.png'
-						},
-						{
-							rel: 'apple-touch-icon',
-							sizes: '180x180',
-							href: '/images/apple-touch-icon-180x180.png'
 						}
 					]}
 					openGraph={{
@@ -154,7 +110,7 @@ const App: React.FC<AppProps & { error?: Error }> = (props) => {
 			<ToastContainer className="pointer-events-auto" />
 
 			<ReactQueryDevtools />
-			
+
 			<style>{`
 				#__next {
 					height: 100%;
