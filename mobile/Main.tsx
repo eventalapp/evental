@@ -1,4 +1,4 @@
-import { faCalendar, faCog } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faCog, faPerson, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import NetInfo from '@react-native-community/netinfo';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -8,8 +8,9 @@ import * as React from 'react';
 import { AppState, AppStateStatus, Platform, StatusBar } from 'react-native';
 import { QueryClient, QueryClientProvider, focusManager, onlineManager } from 'react-query';
 
-import { EventsScreen } from './src/screens/Events';
-import { SettingsScreen } from './src/screens/Settings';
+import { EventsScreen } from './screens/Events';
+import { SettingsScreen } from './screens/Settings';
+import { SignInScreen } from './screens/SignIn';
 
 function onAppStateChange(status: AppStateStatus) {
 	if (Platform.OS !== 'web') {
@@ -61,6 +62,16 @@ export function Main() {
 							tabBarLabel: 'Settings',
 							tabBarIcon: ({ color, size }) => (
 								<FontAwesomeIcon icon={faCog} size={size} color={color} />
+							)
+						}}
+					/>
+					<Tab.Screen
+						name="Sign In"
+						component={SignInScreen}
+						options={{
+							tabBarLabel: 'Sign In',
+							tabBarIcon: ({ color, size }) => (
+								<FontAwesomeIcon icon={faUser} size={size} color={color} />
 							)
 						}}
 					/>
