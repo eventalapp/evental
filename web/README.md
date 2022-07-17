@@ -1,9 +1,11 @@
 # Evental
 
 ## Todo List
+
 - featured role members
 
 ## Post MVP Todo List
+
 - session tags
 - adjust session times when event date is moved
 - bulk create sessions
