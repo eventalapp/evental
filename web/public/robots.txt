@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://evental.app
+
+# Sitemaps
+Sitemap: https://evental.app/sitemap.xml
