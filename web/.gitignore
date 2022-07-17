@@ -1,0 +1,18 @@
+# testing
+/coverage/
+
+# next.js
+/.next/
+/out/
+
+# production
+/build/
+
+# deploy
+.vercel/
+
+#SES Templates
+email/output/**/operation.json
+
+#Sales
+email/sendSalesData.ts
