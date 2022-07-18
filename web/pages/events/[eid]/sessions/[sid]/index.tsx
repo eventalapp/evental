@@ -1,3 +1,10 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSessionAttendee';
+import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
+import { useSessionAttendees } from '@eventalapp/shared/hooks/queries/useSessionAttendees';
+import { useSessionRoleAttendees } from '@eventalapp/shared/hooks/queries/useSessionRoleAttendees';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
@@ -11,24 +18,20 @@ import Column from '../../../../../components/layout/Column';
 import { Footer } from '../../../../../components/layout/Footer';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { ViewSession } from '../../../../../components/sessions/ViewSession';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../../../hooks/queries/useIsOrganizerQuery';
-import { useIsSessionAttendeeQuery } from '../../../../../hooks/queries/useIsSessionAttendeeQuery';
-import { useSessionAttendeesQuery } from '../../../../../hooks/queries/useSessionAttendeesQuery';
-import { useSessionQuery } from '../../../../../hooks/queries/useSessionQuery';
-import { useSessionRoleAttendeesQuery } from '../../../../../hooks/queries/useSessionRoleAttendeesQuery';
-import { useUser } from '../../../../../hooks/queries/useUser';
 
 const ViewSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { sid, eid } = router.query;
-	const { user } = useUser();
-	const { session, sessionError } = useSessionQuery(String(eid), String(sid));
-	const { sessionAttendeesQuery } = useSessionAttendeesQuery(String(eid), String(sid));
-	const { event, eventError } = useEventQuery(String(eid));
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { isSessionAttendee } = useIsSessionAttendeeQuery(String(eid), String(sid));
-	const { sessionRoleAttendeesQuery } = useSessionRoleAttendeesQuery(String(eid), String(sid));
+	const { data: user } = useUser();
+	const { data: session, error: sessionError } = useSession({ eid: String(eid), sid: String(sid) });
+	const { data: sessionAttendees } = useSessionAttendees({ eid: String(eid), sid: String(sid) });
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
+	const { data: isSessionAttendee } = useIsSessionAttendee({ eid: String(eid), sid: String(sid) });
+	const { data: sessionRoleAttendees } = useSessionRoleAttendees({
+		eid: String(eid),
+		sid: String(sid)
+	});
 
 	if (sessionError) {
 		return <NotFoundPage message="Session not found." />;
@@ -79,8 +82,8 @@ const ViewSessionPage: NextPage = () => {
 				<Column>
 					<ViewSession
 						user={user}
-						roleAttendees={sessionRoleAttendeesQuery.data}
-						attendees={sessionAttendeesQuery.data}
+						roleAttendees={sessionRoleAttendees}
+						attendees={sessionAttendees}
 						isAttending={Boolean(isSessionAttendee)}
 						session={session}
 						eid={String(eid)}

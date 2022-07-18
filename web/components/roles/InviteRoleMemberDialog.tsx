@@ -1,3 +1,4 @@
+import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
@@ -5,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 
 import { useInviteRoleMutation } from '../../hooks/mutations/useInviteRoleMutation';
-import { useRoleQuery } from '../../hooks/queries/useRoleAttendeesQuery';
 import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -23,7 +23,7 @@ const InviteRoleMemberDialog: React.FC<Props> = (props) => {
 	const { eid, rid, children } = props;
 	let [isOpen, setIsOpen] = useState(false);
 	const { inviteRoleMutation } = useInviteRoleMutation(String(eid), String(rid));
-	const { role } = useRoleQuery(String(eid), String(rid));
+	const { data: role } = useRole({ eid: String(eid), rid: String(rid) });
 
 	const {
 		register,

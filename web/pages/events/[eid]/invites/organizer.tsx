@@ -1,3 +1,5 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -14,16 +16,14 @@ import { Button } from '../../../../components/primitives/Button';
 import { Heading } from '../../../../components/primitives/Heading';
 import { LinkButton } from '../../../../components/primitives/LinkButton';
 import { useAcceptOrganizerInviteMutation } from '../../../../hooks/mutations/useAcceptOrganizerInviteMutation';
-import { useEventQuery } from '../../../../hooks/queries/useEventQuery';
-import { useUser } from '../../../../hooks/queries/useUser';
 import { AcceptOrganizerInviteSchema } from '../../../../utils/schemas';
 
 const OrganizerInvitePage: NextPage = () => {
 	const router = useRouter();
-	const { user } = useUser();
+	const { data: user } = useUser();
 	const { eid, code } = router.query;
 	const { acceptOrganizerInviteMutation } = useAcceptOrganizerInviteMutation(String(eid));
-	const { event, eventError } = useEventQuery(String(eid));
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
 
 	const Seo = event && (
 		<NextSeo

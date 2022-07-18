@@ -1,6 +1,6 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import React from 'react';
 
-import { useEventQuery } from '../../hooks/queries/useEventQuery';
 import { SidebarLink, sidebarSkeleton } from './SidebarLink';
 
 type Props = {
@@ -11,7 +11,7 @@ const separator = <div className="my-3 h-[1px] w-full bg-gray-300" />;
 
 export const AdminSidebar: React.FC<Props> = (props) => {
 	const { eid } = props;
-	const { event } = useEventQuery(eid);
+	const { data: event } = useEvent({ eid: String(eid) });
 
 	return (
 		<aside className="flex h-full w-52 flex-col p-2.5 py-7 md:py-14">

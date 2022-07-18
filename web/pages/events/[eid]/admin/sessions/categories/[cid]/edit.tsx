@@ -1,3 +1,4 @@
+import { useSessionCategory } from '@eventalapp/shared/hooks/queries/useSessionCategory';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -8,13 +9,15 @@ import { AdminSidebarWrapper } from '../../../../../../../components/layout/Admi
 import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../../../components/primitives/Heading';
-import { useSessionCategoryQuery } from '../../../../../../../hooks/queries/useSessionCategoryQuery';
 
 const EditSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { eid, cid } = router.query;
-	const { isSessionCategoryLoading, sessionCategory, sessionCategoryError } =
-		useSessionCategoryQuery(String(eid), String(cid));
+	const {
+		data: sessionCategory,
+		isLoading: isSessionCategoryLoading,
+		error: sessionCategoryError
+	} = useSessionCategory({ eid: String(eid), cid: String(cid) });
 
 	return (
 		<AdminPageWrapper

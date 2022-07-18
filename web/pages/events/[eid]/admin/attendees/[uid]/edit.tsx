@@ -1,3 +1,6 @@
+import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
+import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
+import { useUnclaimedUser } from '@eventalapp/shared/hooks/queries/useUnclaimedUser';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -10,16 +13,27 @@ import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSi
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
-import { useAttendeeQuery } from '../../../../../../hooks/queries/useAttendeeQuery';
-import { useRolesQuery } from '../../../../../../hooks/queries/useRolesQuery';
-import { useUnclaimedUserQuery } from '../../../../../../hooks/queries/useUnclaimedUserQuery';
 
 const EditAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, uid } = router.query;
-	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(String(eid), String(uid));
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
-	const { isUnclaimedUserLoading, unclaimedUser } = useUnclaimedUserQuery(String(eid), String(uid));
+	const {
+		data: attendee,
+		error: attendeeError,
+		isLoading: isAttendeeLoading
+	} = useAttendee({
+		eid: String(eid),
+		uid: String(uid)
+	});
+	const {
+		data: roles,
+		isLoading: isRolesLoading,
+		error: rolesError
+	} = useRoles({ eid: String(eid) });
+	const { isLoading: isUnclaimedUserLoading, data: unclaimedUser } = useUnclaimedUser({
+		eid: String(eid),
+		uid: String(uid)
+	});
 
 	return (
 		<AdminPageWrapper

@@ -1,3 +1,4 @@
+import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -11,12 +12,15 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { RoleList } from '../../../../../components/roles/RoleList';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 
 const RolesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
+	const {
+		data: roles,
+		isLoading: isRolesLoading,
+		error: rolesError
+	} = useRoles({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper errors={[rolesError]} eid={String(eid)} isLoading={isRolesLoading}>

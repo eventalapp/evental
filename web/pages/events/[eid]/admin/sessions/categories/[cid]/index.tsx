@@ -1,3 +1,7 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useSessionCategory } from '@eventalapp/shared/hooks/queries/useSessionCategory';
+import { useSessionsByCategory } from '@eventalapp/shared/hooks/queries/useSessionsByCategory';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -7,22 +11,26 @@ import { AdminPageWrapper } from '../../../../../../../components/layout/AdminPa
 import { AdminSidebarWrapper } from '../../../../../../../components/layout/AdminSidebarWrapper';
 import Column from '../../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../../components/layout/PageWrapper';
-import { useEventQuery } from '../../../../../../../hooks/queries/useEventQuery';
-import { useSessionCategoryQuery } from '../../../../../../../hooks/queries/useSessionCategoryQuery';
-import { useSessionsByCategoryQuery } from '../../../../../../../hooks/queries/useSessionsByCategoryQuery';
-import { useUser } from '../../../../../../../hooks/queries/useUser';
 
 const ViewSessionCategoryPage: NextPage = () => {
 	const router = useRouter();
 	const { cid, eid } = router.query;
-	const { user, isUserLoading } = useUser();
-	const { event, eventError, isEventLoading } = useEventQuery(String(eid));
-	const { sessionCategory, sessionCategoryError, isSessionCategoryLoading } =
-		useSessionCategoryQuery(String(eid), String(cid));
-	const { sessionsByCategoryData, isSessionsByCategoryLoading } = useSessionsByCategoryQuery(
-		String(eid),
-		String(cid)
-	);
+	const { data: user, isLoading: isUserLoading } = useUser();
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
+	const {
+		data: sessionCategory,
+		error: sessionCategoryError,
+		isLoading: isSessionCategoryLoading
+	} = useSessionCategory({ eid: String(eid), cid: String(cid) });
+	const { data: sessionsByCategory, isLoading: isSessionsByCategoryLoading } =
+		useSessionsByCategory({
+			eid: String(eid),
+			cid: String(cid)
+		});
 
 	return (
 		<AdminPageWrapper
@@ -43,7 +51,7 @@ const ViewSessionCategoryPage: NextPage = () => {
 							sessionCategory={sessionCategory}
 							eid={String(eid)}
 							cid={String(cid)}
-							sessions={sessionsByCategoryData}
+							sessions={sessionsByCategory}
 							event={event}
 							user={user}
 							admin

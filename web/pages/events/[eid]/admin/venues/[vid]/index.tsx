@@ -1,3 +1,7 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useSessionsByVenue } from '@eventalapp/shared/hooks/queries/useSessionsByVenue';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useVenue } from '@eventalapp/shared/hooks/queries/useVenue';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -8,22 +12,26 @@ import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSi
 import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { ViewVenue } from '../../../../../../components/venues/ViewVenue';
-import { useEventQuery } from '../../../../../../hooks/queries/useEventQuery';
-import { useSessionsByVenueQuery } from '../../../../../../hooks/queries/useSessionsByVenueQuery';
-import { useUser } from '../../../../../../hooks/queries/useUser';
-import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 
 const ViewVenuePage: NextPage = () => {
 	const router = useRouter();
 	const { vid, eid } = router.query;
-	const { venue, isVenueLoading } = useVenueQuery(String(eid), String(vid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
-	const { user, isUserLoading } = useUser();
-	const { sessionsByVenueData } = useSessionsByVenueQuery(String(eid), String(vid));
+	const {
+		data: venue,
+		error: venueError,
+		isLoading: isVenueLoading
+	} = useVenue({ eid: String(eid), vid: String(vid) });
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
+	const { data: user, isLoading: isUserLoading } = useUser();
+	const { data: sessionsByVenue } = useSessionsByVenue({ eid: String(eid), vid: String(vid) });
 
 	return (
 		<AdminPageWrapper
-			errors={[eventError]}
+			errors={[eventError, venueError]}
 			isLoading={isEventLoading || isUserLoading || isVenueLoading}
 			eid={String(eid)}
 		>
@@ -38,7 +46,7 @@ const ViewVenuePage: NextPage = () => {
 							eid={String(eid)}
 							vid={String(vid)}
 							event={event}
-							sessions={sessionsByVenueData}
+							sessions={sessionsByVenue}
 							user={user}
 							venue={venue}
 							admin

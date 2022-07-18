@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -14,12 +15,11 @@ import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
 import { usePasswordReset } from '../../../hooks/mutations/usePasswordReset';
-import { useUser } from '../../../hooks/queries/useUser';
 import { PASSWORD_RESET_EXPIRY } from '../../../utils/config';
 
 const ResetPasswordPage: NextPage = () => {
 	const router = useRouter();
-	const { user, isUserLoading } = useUser();
+	const { data: user, isLoading: isUserLoading } = useUser();
 	const { passwordResetMutation } = usePasswordReset();
 	const { code } = router.query;
 

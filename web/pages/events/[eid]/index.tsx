@@ -1,3 +1,8 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
+import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
+import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 import dayjs from 'dayjs';
 import { htmlToText } from 'html-to-text';
 import type { NextPage } from 'next';
@@ -17,20 +22,15 @@ import { Footer } from '../../../components/layout/Footer';
 import PageWrapper from '../../../components/layout/PageWrapper';
 import Tooltip from '../../../components/primitives/Tooltip';
 import { SessionList } from '../../../components/sessions/SessionList';
-import { useEventQuery } from '../../../hooks/queries/useEventQuery';
-import { useIsOrganizerQuery } from '../../../hooks/queries/useIsOrganizerQuery';
-import { useSessionCategoriesQuery } from '../../../hooks/queries/useSessionCategoriesQuery';
-import { useSessionsQuery } from '../../../hooks/queries/useSessionsQuery';
-import { useVenuesQuery } from '../../../hooks/queries/useVenuesQuery';
 
 const ViewEventPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { isOrganizer, isOrganizerLoading } = useIsOrganizerQuery(String(eid));
-	const { sessionsData } = useSessionsQuery(String(eid));
-	const { event, eventError } = useEventQuery(String(eid));
-	const { venues } = useVenuesQuery(String(eid));
-	const { sessionCategories } = useSessionCategoriesQuery(String(eid));
+	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
+	const { data: sessions } = useSessions({ eid: String(eid) });
+	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
+	const { data: venues } = useVenues({ eid: String(eid) });
+	const { data: sessionCategories } = useSessionCategories({ eid: String(eid) });
 
 	if (eventError) {
 		return <ViewErrorPage errors={[eventError]} />;
@@ -95,7 +95,7 @@ const ViewEventPage: NextPage = () => {
 
 					<div className="grid grid-cols-12 gap-4">
 						<div className="col-span-12 lg:col-span-9">
-							<SessionList sessions={sessionsData} event={event} />
+							<SessionList sessions={sessions} event={event} />
 						</div>
 
 						<div className="col-span-12 lg:col-span-3">

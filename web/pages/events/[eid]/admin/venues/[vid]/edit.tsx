@@ -1,3 +1,4 @@
+import { useVenue } from '@eventalapp/shared/hooks/queries/useVenue';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -8,12 +9,15 @@ import Column from '../../../../../../components/layout/Column';
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { EditVenueForm } from '../../../../../../components/venues/EditVenueForm';
-import { useVenueQuery } from '../../../../../../hooks/queries/useVenueQuery';
 
 const EditVenuePage: NextPage = () => {
 	const router = useRouter();
 	const { eid, vid } = router.query;
-	const { venue, venueError, isVenueLoading } = useVenueQuery(String(eid), String(vid));
+	const {
+		data: venue,
+		error: venueError,
+		isLoading: isVenueLoading
+	} = useVenue({ eid: String(eid), vid: String(vid) });
 
 	return (
 		<AdminPageWrapper eid={String(eid)} errors={[venueError]} isLoading={isVenueLoading}>

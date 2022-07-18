@@ -1,9 +1,9 @@
+import { useAttendeesByName } from '@eventalapp/shared/hooks/queries/useAttendeesByName';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-import { useAttendeesByNameQuery } from '../../hooks/queries/useAttendeesByNameQuery';
 import { CreateAttendeeDialog } from '../attendees/CreateAttendeeDialog';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
@@ -23,9 +23,13 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 	let [isOpen, setIsOpen] = useState(false);
 	const [name, setName] = useState('');
 
-	const attendeesByNameQuery = useAttendeesByNameQuery(eid, name, { limit: 8 });
+	const { data: attendeesByName, isLoading: isAttendeesByNameLoading } = useAttendeesByName({
+		eid,
+		name,
+		limit: 8
+	});
 
-	const filteredAttendees = attendeesByNameQuery.data?.filter((val) => {
+	const filteredAttendees = attendeesByName?.filter((val) => {
 		return !attachedUsersById?.some((userId) => userId === val.userId);
 	});
 
@@ -75,7 +79,7 @@ const AttachPeopleDialog: React.FC<Props> = (props) => {
 					Results <span className="text-gray-500">({filteredAttendees?.length || 0})</span>
 				</p>
 				<div className="space-y-2">
-					{attendeesByNameQuery.isLoading ? (
+					{isAttendeesByNameLoading ? (
 						<div>
 							<LoadingInner />
 						</div>

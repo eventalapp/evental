@@ -1,3 +1,5 @@
+import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
+import { useUserByIdSchedule } from '@eventalapp/shared/hooks/queries/useUserByIdSchedule';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
@@ -12,15 +14,13 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { SessionWithEventList } from '../../../components/sessions/SessionWithEventList';
-import { useSessionsByUserQuery } from '../../../hooks/queries/useSessionsByUserQuery';
-import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 
 const ViewSessionPage: NextPage = () => {
 	const router = useRouter();
 
 	const { uid } = router.query;
-	const { user } = useUserQuery(String(uid));
-	const { sessionsByUserData } = useSessionsByUserQuery(String(uid));
+	const { data: user } = useUserById({ uid: String(uid) });
+	const { data: sessionsByUser } = useUserByIdSchedule({ uid: String(uid) });
 
 	const Seo = user && (
 		<NextSeo
@@ -63,7 +63,7 @@ const ViewSessionPage: NextPage = () => {
 						)}
 					</FlexRowBetween>
 
-					<SessionWithEventList sessions={sessionsByUserData} />
+					<SessionWithEventList sessions={sessionsByUser} />
 				</Column>
 			</PageWrapper>
 

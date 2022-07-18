@@ -1,3 +1,4 @@
+import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -11,12 +12,15 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { PageList } from '../../../../../components/pages/PageList';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
-import { usePagesQuery } from '../../../../../hooks/queries/usePagesQuery';
 
 const PagesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { pages, pagesError, isPagesLoading } = usePagesQuery(String(eid));
+	const {
+		data: pages,
+		error: pagesError,
+		isLoading: isPagesLoading
+	} = usePages({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper errors={[pagesError]} isLoading={isPagesLoading} eid={String(eid)}>

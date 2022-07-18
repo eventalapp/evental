@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
@@ -11,11 +12,10 @@ import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
 import { Paragraph } from '../../components/primitives/Paragraph';
 import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
-import { useUser } from '../../hooks/queries/useUser';
 
 const CreateEventPage: NextPage = () => {
 	const { createEventMutation } = useCreateEventMutation();
-	const { user } = useUser();
+	const { data: user } = useUser();
 
 	if (!user?.id) {
 		return <UnauthorizedPage />;

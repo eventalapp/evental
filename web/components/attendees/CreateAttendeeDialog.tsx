@@ -1,8 +1,8 @@
+import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-import { useRolesQuery } from '../../hooks/queries/useRolesQuery';
 import { DialogContent } from '../primitives/DialogContent';
 import { AdminCreateAttendeeForm } from './AdminCreateAttendeeForm';
 
@@ -12,7 +12,7 @@ interface Props {
 
 export const CreateAttendeeDialog: React.FC<Props> = (props) => {
 	const { children, eid } = props;
-	const { roles } = useRolesQuery(String(eid));
+	const { data: roles } = useRoles({ eid: String(eid) });
 	let [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
 

@@ -1,3 +1,5 @@
+import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSessionAttendee';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import {
 	faArrowRight,
 	faCalendarDay,
@@ -17,8 +19,6 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
-import { useIsSessionAttendeeQuery } from '../../hooks/queries/useIsSessionAttendeeQuery';
-import { useUser } from '../../hooks/queries/useUser';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { formatDateRange } from '../../utils/date';
 import { faCalendarCirclePlus } from '../../utils/icons';
@@ -39,10 +39,10 @@ type AttendThisSessionProps = Props & { user: StrippedUser | undefined };
 const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 	const { event, session, redirect, user } = props;
 
-	const { isSessionAttendee, isSessionAttendeeLoading } = useIsSessionAttendeeQuery(
-		event.slug,
-		session.slug
-	);
+	const { data: isSessionAttendee, isLoading: isSessionAttendeeLoading } = useIsSessionAttendee({
+		eid: event.slug,
+		sid: session.slug
+	});
 	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
 		event.slug,
 		session.slug,
@@ -104,7 +104,7 @@ const AttendThisSession: React.FC<AttendThisSessionProps> = (props) => {
 };
 
 export const SessionHoverCard: React.FC<Props> = (props) => {
-	const { user } = useUser();
+	const { data: user } = useUser();
 	const { children, session, event, admin, redirect = true } = props;
 
 	const descriptionAsText = htmlToText(session.description ?? '');

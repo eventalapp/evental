@@ -1,7 +1,7 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { ErroredAPIResponse } from 'nextkit';
 import React from 'react';
 
-import { useUser } from '../../hooks/queries/useUser';
 import { UnauthorizedPage } from '../error/UnauthorizedPage';
 import { ViewErrorPage } from '../error/ViewErrorPage';
 
@@ -12,7 +12,7 @@ type SettingsPageWrapperProps = {
 
 export const SettingsPageWrapper: React.FC<SettingsPageWrapperProps> = (props) => {
 	const { children, isLoading, errors } = props;
-	const { user, isUserLoading } = useUser();
+	const { data: user, isLoading: isUserLoading } = useUser();
 
 	const isLoadingMerged = isUserLoading || isLoading;
 

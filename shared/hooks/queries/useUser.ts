@@ -6,7 +6,7 @@ import { api } from '../../api';
 import { FullUser } from '../../types';
 
 export const useUser = () => {
-	return useQuery<FullUser | null, ErroredAPIResponse | null>(['user'], async () => {
+	return useQuery<FullUser, ErroredAPIResponse>(['user'], async () => {
 		return await api
 			.get<SuccessAPIResponse<FullUser>>(`/user`)
 			.then((res) => res.data.data)

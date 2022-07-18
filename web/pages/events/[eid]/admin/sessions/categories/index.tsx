@@ -1,3 +1,4 @@
+import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -11,13 +12,15 @@ import { FlexRowBetween } from '../../../../../../components/layout/FlexRowBetwe
 import PageWrapper from '../../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../../components/primitives/IconLinkTooltip';
-import { useSessionCategoriesQuery } from '../../../../../../hooks/queries/useSessionCategoriesQuery';
 
 const SessionCategoriesAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { sessionCategories, sessionCategoriesError, isSessionCategoriesLoading } =
-		useSessionCategoriesQuery(String(eid));
+	const {
+		data: sessionCategories,
+		error: sessionCategoriesError,
+		isLoading: isSessionCategoriesLoading
+	} = useSessionCategories({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper

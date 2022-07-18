@@ -5,21 +5,18 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { AttendeeWithUser } from '../../types';
 
-export interface UseSessionRoleAttendeesArgs {
+export interface UseOrganizersArgs {
 	eid?: string;
-	sid?: string;
 }
 
-export const useSessionRoleAttendees = (args: UseSessionRoleAttendeesArgs = {}) => {
-	const { eid, sid } = args;
+export const useOrganizers = (args: UseOrganizersArgs = {}) => {
+	const { eid } = args;
 
 	return useQuery<AttendeeWithUser[], ErroredAPIResponse>(
-		['role-attendees', eid, sid],
+		['organizers', eid],
 		async () => {
 			return api
-				.get<SuccessAPIResponse<AttendeeWithUser[]>>(
-					`/events/${eid}/sessions/${sid}/attendees?type=ROLE`
-				)
+				.get<SuccessAPIResponse<AttendeeWithUser[]>>(`/events/${eid}/admin/organizers`)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
@@ -27,7 +24,7 @@ export const useSessionRoleAttendees = (args: UseSessionRoleAttendeesArgs = {}) 
 		},
 		{
 			retry: 0,
-			enabled: Boolean(eid) && Boolean(sid)
+			enabled: Boolean(eid)
 		}
 	);
 };

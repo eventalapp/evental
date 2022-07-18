@@ -1,3 +1,4 @@
+import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 import {
 	faAddressBook,
 	faArrowUpRightFromSquare,
@@ -19,12 +20,11 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { TooltipIcon } from '../../../components/primitives/TooltipIcon';
-import { useUserQuery } from '../../../hooks/queries/useUserQuery';
 
 const ViewSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { uid } = router.query;
-	const { user, isUserLoading } = useUserQuery(String(uid));
+	const { data: user, isLoading: isUserLoading } = useUserById({ uid: String(uid) });
 
 	// TODO: skeleton impl
 	if (isUserLoading) {

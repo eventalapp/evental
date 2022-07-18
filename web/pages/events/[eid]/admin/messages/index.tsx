@@ -1,3 +1,4 @@
+import { useEventMessages } from '@eventalapp/shared/hooks/queries/useEventMessages';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -11,12 +12,15 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { MessageList } from '../../../../../components/messages/MessageList';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
-import { useMessages } from '../../../../../hooks/queries/useMessages';
 
 const MessagePage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { messages, messagesError, isMessagesLoading } = useMessages(String(eid));
+	const {
+		data: messages,
+		error: messagesError,
+		isLoading: isMessagesLoading
+	} = useEventMessages({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper eid={String(eid)} isLoading={isMessagesLoading} errors={[messagesError]}>

@@ -1,3 +1,4 @@
+import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -9,12 +10,15 @@ import Column from '../../../../../components/layout/Column';
 import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { Paragraph } from '../../../../../components/primitives/Paragraph';
-import { useRolesQuery } from '../../../../../hooks/queries/useRolesQuery';
 
 const CreateAttendeePage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { roles, isRolesLoading, rolesError } = useRolesQuery(String(eid));
+	const {
+		data: roles,
+		isLoading: isRolesLoading,
+		error: rolesError
+	} = useRoles({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper errors={[rolesError]} isLoading={isRolesLoading} eid={String(eid)}>

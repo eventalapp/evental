@@ -1,3 +1,5 @@
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -12,14 +14,16 @@ import PageWrapper from '../../../../../components/layout/PageWrapper';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { IconLinkTooltip } from '../../../../../components/primitives/IconLinkTooltip';
 import { SessionList } from '../../../../../components/sessions/SessionList';
-import { useEventQuery } from '../../../../../hooks/queries/useEventQuery';
-import { useSessionsQuery } from '../../../../../hooks/queries/useSessionsQuery';
 
 const SessionsAdminPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const { sessionsData } = useSessionsQuery(String(eid));
-	const { event, isEventLoading, eventError } = useEventQuery(String(eid));
+	const { data: sessions } = useSessions({ eid: String(eid) });
+	const {
+		data: event,
+		error: eventError,
+		isLoading: isEventLoading
+	} = useEvent({ eid: String(eid) });
 
 	return (
 		<AdminPageWrapper errors={[eventError]} isLoading={isEventLoading} eid={String(eid)}>
@@ -41,7 +45,7 @@ const SessionsAdminPage: NextPage = () => {
 							/>
 						</FlexRowBetween>
 
-						<SessionList admin sessions={sessionsData} event={event} />
+						<SessionList admin sessions={sessions} event={event} />
 					</Column>
 				</AdminSidebarWrapper>
 			</PageWrapper>

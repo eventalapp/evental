@@ -1,3 +1,4 @@
+import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
@@ -5,7 +6,6 @@ import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useAttendeeQuery } from '../../hooks/queries/useAttendeeQuery';
 import { capitalizeFirstLetter } from '../../utils/string';
 import Tooltip from '../primitives/Tooltip';
 
@@ -18,7 +18,11 @@ type RoleMemberListItemProps = {
 export const RoleMemberListItem: React.FC<RoleMemberListItemProps> = (props) => {
 	const { eid, userId, removeRoleMember } = props;
 
-	const { attendee, isAttendeeLoading, attendeeError } = useAttendeeQuery(eid, userId);
+	const {
+		data: attendee,
+		isLoading: isAttendeeLoading,
+		error: attendeeError
+	} = useAttendee({ eid, uid: userId });
 
 	if (isAttendeeLoading || !attendee || attendeeError) {
 		return (

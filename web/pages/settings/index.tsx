@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React, { useEffect, useState } from 'react';
@@ -12,10 +13,9 @@ import { SettingsSidebarWrapper } from '../../components/layout/SettingsSidebarW
 import { Heading } from '../../components/primitives/Heading';
 import { Paragraph } from '../../components/primitives/Paragraph';
 import { useRequestVerificationEmail } from '../../hooks/mutations/useRequestVerificationEmail';
-import { useUser } from '../../hooks/queries/useUser';
 
 const SettingsPage: NextPage = () => {
-	const { user, isUserLoading } = useUser();
+	const { data: user, isLoading: isUserLoading } = useUser();
 
 	const { requestVerificationEmailMutation } = useRequestVerificationEmail();
 	const [canVerify, setCanVerify] = useState(true);

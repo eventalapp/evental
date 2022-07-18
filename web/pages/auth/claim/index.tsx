@@ -1,3 +1,4 @@
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -13,12 +14,11 @@ import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
 import { useClaimProfileMutation } from '../../../hooks/mutations/useClaimProfileMutation';
-import { useUser } from '../../../hooks/queries/useUser';
 import { CLAIM_PROFILE_EXPIRY } from '../../../utils/config';
 
 const ClaimProfilePage: NextPage = () => {
 	const router = useRouter();
-	const { user, isUserLoading } = useUser();
+	const { data: user, isLoading: isUserLoading } = useUser();
 	const { claimProfileMutation } = useClaimProfileMutation();
 	const { code } = router.query;
 
