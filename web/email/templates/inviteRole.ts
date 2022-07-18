@@ -79,8 +79,8 @@ export const sendRoleInvite = async (args: SendInviteRoleArgs) => {
 	}
 
 	const templateData: InviteRoleTemplateArgs = {
-		inviteLink: `${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
-			event.slug
+		inviteLink: `https://${
+			process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
 		}/invites/role?code=${inviteCode}`,
 		eventName: event.name,
 		inviterName,

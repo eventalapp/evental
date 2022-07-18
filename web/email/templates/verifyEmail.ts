@@ -76,8 +76,8 @@ export const sendVerifyEmail = async (args: SendVerifyEmailArgs) => {
 	}
 
 	const templateData: VerifyEmailTemplateArgs = {
-		verifyLink: `${
-			process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'
+		verifyLink: `https://${
+			process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
 		}/auth/verify?code=${verifyCode}`
 	};
 

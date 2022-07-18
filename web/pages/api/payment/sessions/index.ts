@@ -76,12 +76,12 @@ export default api({
 		const params: Stripe.Checkout.SessionCreateParams = {
 			payment_method_types: ['card'],
 			mode: 'payment',
-			success_url: `${req.headers.host?.includes('localhost') ? 'http://' : 'https://'}${
-				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
-			}/events/${body.eventId}/admin`,
-			cancel_url: `${req.headers.host?.includes('localhost') ? 'http://' : 'https://'}${
-				process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'
-			}/events/${body.eventId}/admin/billing`,
+			success_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${
+				body.eventId
+			}/admin`,
+			cancel_url: `https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${
+				body.eventId
+			}/admin/billing`,
 			metadata: {
 				eventId: body.eventId,
 				level: product.level,

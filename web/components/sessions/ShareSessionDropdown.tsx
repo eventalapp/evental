@@ -36,7 +36,7 @@ export const ShareSessionDropdown: React.FC<Props> = (props) => {
 				>
 					<a
 						href={twitterLink(
-							`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
+							`https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${
 								event.slug
 							}/sessions/${session.slug}`,
 							{
@@ -66,7 +66,7 @@ export const ShareSessionDropdown: React.FC<Props> = (props) => {
 					</a>
 					<a
 						href={facebookLink(
-							`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
+							`https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${
 								event.slug
 							}/sessions/${session.slug}`,
 							{
@@ -95,7 +95,7 @@ export const ShareSessionDropdown: React.FC<Props> = (props) => {
 
 					<a
 						href={linkedinLink(
-							`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
+							`https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${
 								event.slug
 							}/sessions/${session.slug}`,
 							{
@@ -124,7 +124,7 @@ export const ShareSessionDropdown: React.FC<Props> = (props) => {
 					</a>
 					<a
 						href={emailLink(
-							`${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'https://evental.app'}/events/${
+							`https://${process.env.NEXT_PUBLIC_VERCEL_URL ?? 'evental.app'}/events/${
 								event.slug
 							}/sessions/${session.slug}`,
 							{
