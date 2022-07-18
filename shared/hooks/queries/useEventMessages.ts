@@ -1,23 +1,22 @@
+import * as Prisma from '@prisma/client';
 import { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
 import { api } from '../../api';
-import { SessionWithVenue } from '../../types';
 
-export interface UseSessionsArgs {
+export interface UseEventMessagesArgs {
 	eid?: string;
-	sid?: string;
 }
 
-export const useSession = (args: UseSessionsArgs = {}) => {
-	const { eid, sid } = args;
+export const useEventMessages = (args: UseEventMessagesArgs = {}) => {
+	const { eid } = args;
 
-	return useQuery<SessionWithVenue, ErroredAPIResponse>(
-		['session', eid, sid],
+	return useQuery<Prisma.EventMessage[], ErroredAPIResponse>(
+		['messages', eid],
 		async () => {
 			return await api
-				.get<SuccessAPIResponse<SessionWithVenue>>(`/events/${eid}/sessions/${sid}`)
+				.get<SuccessAPIResponse<Prisma.EventMessage[]>>(`/events/${eid}/messages`)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
@@ -25,7 +24,7 @@ export const useSession = (args: UseSessionsArgs = {}) => {
 		},
 		{
 			retry: 0,
-			enabled: Boolean(eid) && Boolean(sid)
+			enabled: Boolean(eid)
 		}
 	);
 };

@@ -3,20 +3,19 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
 import { api } from '../../api';
-import { SessionWithVenue } from '../../types';
 
-export interface UseSessionsArgs {
+export interface UseIsFounderArgs {
 	eid?: string;
 }
 
-export const useSessions = (args: UseSessionsArgs = {}) => {
+export const useIsFounder = (args: UseIsFounderArgs = {}) => {
 	const { eid } = args;
 
-	return useQuery<SessionWithVenue[], ErroredAPIResponse>(
-		['sessions', eid],
+	return useQuery<boolean, ErroredAPIResponse>(
+		['isFounder', eid],
 		async () => {
-			return await api
-				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/events/${eid}/sessions`)
+			return api
+				.get<SuccessAPIResponse<boolean>>(`/events/${eid}/founder`)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;

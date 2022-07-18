@@ -5,20 +5,23 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { AttendeeWithUser } from '../../types';
 
-export interface UseSessionRoleAttendeesArgs {
+export interface UseAttendeesByRoleArgs {
 	eid?: string;
-	sid?: string;
+	rid?: string;
 }
 
-export const useSessionRoleAttendees = (args: UseSessionRoleAttendeesArgs = {}) => {
-	const { eid, sid } = args;
+export const useAttendeesByRole = (args: UseAttendeesByRoleArgs = {}) => {
+	const { eid, rid } = args;
+	let params = new URLSearchParams();
 
-	return useQuery<AttendeeWithUser[] | undefined, ErroredAPIResponse>(
-		['role-attendees', eid, sid],
+	params.append('role', String(rid));
+
+	return useQuery<AttendeeWithUser[], ErroredAPIResponse>(
+		['attendees-role', eid, rid],
 		async () => {
 			return api
 				.get<SuccessAPIResponse<AttendeeWithUser[]>>(
-					`/events/${eid}/sessions/${sid}/attendees?type=ROLE`
+					`/events/${eid}/attendees?${params.toString()}`
 				)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
@@ -27,7 +30,7 @@ export const useSessionRoleAttendees = (args: UseSessionRoleAttendeesArgs = {}) 
 		},
 		{
 			retry: 0,
-			enabled: Boolean(eid) && Boolean(sid)
+			enabled: Boolean(eid)
 		}
 	);
 };

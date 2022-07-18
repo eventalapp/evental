@@ -5,12 +5,12 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { SessionWithVenue } from '../../types';
 
-export interface UseSessionsByVenueOptions {
+export interface UseSessionsByVenueArgs {
 	eid?: string;
 	vid?: string;
 }
 
-export const useSessionsByVenue = (args: UseSessionsByVenueOptions = {}) => {
+export const useSessionsByVenue = (args: UseSessionsByVenueArgs = {}) => {
 	const { eid, vid } = args;
 
 	let params = new URLSearchParams();

@@ -3,23 +3,20 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
 import { api } from '../../api';
-import { AttendeeWithUser } from '../../types';
 
-export interface UseSessionRoleAttendeesArgs {
+export interface UseIsSessionAttendeeArgs {
 	eid?: string;
 	sid?: string;
 }
 
-export const useSessionRoleAttendees = (args: UseSessionRoleAttendeesArgs = {}) => {
+export const useIsSessionAttendee = (args: UseIsSessionAttendeeArgs = {}) => {
 	const { eid, sid } = args;
 
-	return useQuery<AttendeeWithUser[] | undefined, ErroredAPIResponse>(
-		['role-attendees', eid, sid],
+	return useQuery<boolean, ErroredAPIResponse>(
+		['isSessionAttendee', eid, sid],
 		async () => {
 			return api
-				.get<SuccessAPIResponse<AttendeeWithUser[]>>(
-					`/events/${eid}/sessions/${sid}/attendees?type=ROLE`
-				)
+				.get<SuccessAPIResponse<boolean>>(`/events/${eid}/sessions/${sid}/attendee`)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;

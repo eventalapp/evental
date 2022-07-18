@@ -5,20 +5,20 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { AttendeeWithUser } from '../../types';
 
-export interface UseSessionRoleAttendeesArgs {
+export interface UseSessionsByVenueArgs {
 	eid?: string;
 	sid?: string;
 }
 
-export const useSessionRoleAttendees = (args: UseSessionRoleAttendeesArgs = {}) => {
+export const useSessionAttendees = (args: UseSessionsByVenueArgs = {}) => {
 	const { eid, sid } = args;
 
 	return useQuery<AttendeeWithUser[] | undefined, ErroredAPIResponse>(
-		['role-attendees', eid, sid],
+		['attendees', eid, sid],
 		async () => {
 			return api
 				.get<SuccessAPIResponse<AttendeeWithUser[]>>(
-					`/events/${eid}/sessions/${sid}/attendees?type=ROLE`
+					`/events/${eid}/sessions/${sid}/attendees?type=ATTENDEE`
 				)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {

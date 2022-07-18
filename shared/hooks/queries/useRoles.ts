@@ -1,22 +1,22 @@
+import * as Prisma from '@prisma/client';
 import { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
 import { api } from '../../api';
-import { SessionWithVenue } from '../../types';
 
-export interface UseSessionsArgs {
+export interface UseRolesArgs {
 	eid?: string;
 }
 
-export const useSessions = (args: UseSessionsArgs = {}) => {
+export const useRoles = (args: UseRolesArgs = {}) => {
 	const { eid } = args;
 
-	return useQuery<SessionWithVenue[], ErroredAPIResponse>(
-		['sessions', eid],
+	return useQuery<Prisma.EventRole[], ErroredAPIResponse>(
+		['roles', eid],
 		async () => {
-			return await api
-				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/events/${eid}/sessions`)
+			return api
+				.get<SuccessAPIResponse<Prisma.EventRole[]>>(`/events/${eid}/roles`)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
