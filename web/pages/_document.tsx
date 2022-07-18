@@ -32,7 +32,6 @@ export default class Document extends NextDocument {
 										gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
 											page_path: window.location.pathname,
 										});
-										gtag('config', 'UA-234534932-1');
 									`
 								}}
 							/>
