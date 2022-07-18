@@ -38,10 +38,8 @@ const EditEventPage: NextPage = () => {
 						{event && (
 							<EditEventForm
 								eid={String(eid)}
-								eventError={eventError}
-								editEventMutation={editEventMutation}
 								event={event}
-								isEventLoading={isEventLoading}
+								editEventMutation={editEventMutation}
 							/>
 						)}
 

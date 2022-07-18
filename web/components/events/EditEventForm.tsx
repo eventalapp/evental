@@ -12,7 +12,6 @@ import { Controller, useForm } from 'react-hook-form';
 import ReactSelect from 'react-select';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
-import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
 import { formatDateRange } from '../../utils/date';
@@ -34,8 +33,8 @@ import Tooltip from '../primitives/Tooltip';
 type Props = {
 	eid: string;
 	canCancel?: boolean;
+	event: Prisma.Event;
 } & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseEventQueryData &
 	UseEditEventMutationData;
 
 export const EditEventForm: React.FC<Props> = (props) => {

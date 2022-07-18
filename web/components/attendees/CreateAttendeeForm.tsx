@@ -1,3 +1,4 @@
+import * as Prisma from '@prisma/client';
 import Color from 'color';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
@@ -5,12 +6,13 @@ import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 
 import { UseeventRegistrationMutationData } from '../../hooks/mutations/useEventRegister';
-import { UseEventQueryData } from '../../hooks/queries/useEventQuery';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseEventQueryData &
+type Props = { event: Prisma.Event } & DetailedHTMLProps<
+	FormHTMLAttributes<HTMLFormElement>,
+	HTMLFormElement
+> &
 	UseeventRegistrationMutationData;
 
 export const CreateAttendeeForm: React.FC<Props> = (props) => {

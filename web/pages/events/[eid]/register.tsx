@@ -25,11 +25,7 @@ import { useEventRegister } from '../../../hooks/mutations/useEventRegister';
 const EventRegisterPage: NextPage = () => {
 	const router = useRouter();
 	const { eid } = router.query;
-	const {
-		data: event,
-		error: eventError,
-		isLoading: isEventLoading
-	} = useEvent({ eid: String(eid) });
+	const { data: event, isLoading: isEventLoading } = useEvent({ eid: String(eid) });
 	const { eventRegistrationMutation } = useEventRegister(String(eid));
 	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
 	const { data: user } = useUser();
@@ -147,12 +143,12 @@ const EventRegisterPage: NextPage = () => {
 						To attend this event, please click the register button below.
 					</p>
 
-					<CreateAttendeeForm
-						event={event}
-						eventError={eventError}
-						isEventLoading={isEventLoading}
-						eventRegistrationMutation={eventRegistrationMutation}
-					/>
+					{event && (
+						<CreateAttendeeForm
+							event={event}
+							eventRegistrationMutation={eventRegistrationMutation}
+						/>
+					)}
 				</Column>
 			</PageWrapper>
 
