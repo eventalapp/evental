@@ -1,5 +1,3 @@
-# Evental
-
 ## Todo List
 
 - featured role members
@@ -12,7 +10,7 @@
 - session file upload
 - rate limit request password reset & verify email request etc
 - customize react toast
-- clean up queries/mutations (export whole mut/query?)
+- clean up mutations
 - event banner
 - Excel export for event data
 - print your schedule
