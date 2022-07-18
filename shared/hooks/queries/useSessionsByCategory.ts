@@ -5,23 +5,25 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { SessionWithVenue } from '../../types';
 
-export interface UseSessionsByVenueOptions {
+export interface UseSessionsByCategoryOptions {
 	eid?: string;
-	vid?: string;
+	cid?: string;
 }
 
-export const useSessionsByVenue = (args: UseSessionsByVenueOptions = {}) => {
-	const { eid, vid } = args;
+export const useSessionsByCategory = (args: UseSessionsByCategoryOptions = {}) => {
+	const { eid, cid } = args;
 
 	let params = new URLSearchParams();
 
-	params.append('venue', String(vid));
+	params.append('category', String(cid));
 
 	return useQuery<SessionWithVenue[], ErroredAPIResponse>(
-		['venue-sessions', eid, vid],
+		['category-sessions', eid, cid],
 		async () => {
 			return await api
-				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/events/${eid}/sessions?${params}`)
+				.get<SuccessAPIResponse<SessionWithVenue[]>>(
+					`/api/events/${eid}/sessions?${params.toString()}`
+				)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
@@ -29,7 +31,7 @@ export const useSessionsByVenue = (args: UseSessionsByVenueOptions = {}) => {
 		},
 		{
 			retry: 0,
-			enabled: Boolean(eid) && Boolean(vid)
+			enabled: Boolean(eid) && Boolean(cid)
 		}
 	);
 };

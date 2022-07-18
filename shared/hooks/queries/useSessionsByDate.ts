@@ -5,20 +5,20 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { SessionWithVenue } from '../../types';
 
-export interface UseSessionsByVenueOptions {
+export interface UseSessionsByDateArgs {
 	eid?: string;
-	vid?: string;
+	date?: string;
 }
 
-export const useSessionsByVenue = (args: UseSessionsByVenueOptions = {}) => {
-	const { eid, vid } = args;
+export const useSessionsByDate = (args: UseSessionsByDateArgs = {}) => {
+	const { eid, date } = args;
 
 	let params = new URLSearchParams();
 
-	params.append('venue', String(vid));
+	params.append('date', String(date));
 
 	return useQuery<SessionWithVenue[], ErroredAPIResponse>(
-		['venue-sessions', eid, vid],
+		['date-sessions', eid, date],
 		async () => {
 			return await api
 				.get<SuccessAPIResponse<SessionWithVenue[]>>(`/events/${eid}/sessions?${params}`)
@@ -29,7 +29,7 @@ export const useSessionsByVenue = (args: UseSessionsByVenueOptions = {}) => {
 		},
 		{
 			retry: 0,
-			enabled: Boolean(eid) && Boolean(vid)
+			enabled: Boolean(eid) && Boolean(date)
 		}
 	);
 };
