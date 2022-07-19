@@ -433,7 +433,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				)}
 				<Button
 					type="submit"
-					className={`ml-4`}
+					className="ml-4"
 					variant="primary"
 					style={{
 						backgroundColor: colorWatcher ?? theme.extend.colors.primary.DEFAULT,
