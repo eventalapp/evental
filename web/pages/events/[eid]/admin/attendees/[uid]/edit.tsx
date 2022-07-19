@@ -1,11 +1,12 @@
-import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
-import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
-import { useUnclaimedUser } from '@eventalapp/shared/hooks/queries/useUnclaimedUser';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
+import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
+import { useUnclaimedUser } from '@eventalapp/shared/hooks/queries/useUnclaimedUser';
 
 import { AdminEditAttendeeForm } from '../../../../../../components/attendees/AdminEditAttendeeForm';
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';

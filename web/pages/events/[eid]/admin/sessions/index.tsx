@@ -1,10 +1,11 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';

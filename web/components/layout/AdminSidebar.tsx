@@ -1,5 +1,6 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import React from 'react';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 
 import { SidebarLink, sidebarSkeleton } from './SidebarLink';
 

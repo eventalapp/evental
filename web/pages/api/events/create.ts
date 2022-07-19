@@ -1,6 +1,7 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import dayjs from 'dayjs';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { theme } from '../../../tailwind.config';
 import { api } from '../../../utils/api';

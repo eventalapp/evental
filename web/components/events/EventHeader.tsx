@@ -1,8 +1,3 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsAttendee } from '@eventalapp/shared/hooks/queries/useIsAttendee';
-import { useIsFounder } from '@eventalapp/shared/hooks/queries/useIsFounder';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import {
 	faArrowUpRightFromSquare,
 	faCalendarDay,
@@ -20,6 +15,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsAttendee } from '@eventalapp/shared/hooks/queries/useIsAttendee';
+import { useIsFounder } from '@eventalapp/shared/hooks/queries/useIsFounder';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { formatDateRange } from '../../utils/date';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';

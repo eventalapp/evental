@@ -1,7 +1,8 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import { verify } from 'argon2';
 import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { api } from '../../../utils/api';
 import { SESSION_EXPIRY } from '../../../utils/config';

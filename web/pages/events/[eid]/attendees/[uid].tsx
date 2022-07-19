@@ -1,10 +1,11 @@
-import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 
 import { ViewAttendee } from '../../../../components/attendees/ViewAttendee';
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';

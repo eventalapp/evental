@@ -1,10 +1,11 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { Elements } from '@stripe/react-stripe-js';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 
 import { EventalPro } from '../../../../../components/billing/EventalPro';
 import { FaqAccordion } from '../../../../../components/billing/FaqAccordion';

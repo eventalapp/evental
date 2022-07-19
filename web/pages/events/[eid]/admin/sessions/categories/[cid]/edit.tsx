@@ -1,7 +1,8 @@
-import { useSessionCategory } from '@eventalapp/shared/hooks/queries/useSessionCategory';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+
+import { useSessionCategory } from '@eventalapp/shared/hooks/queries/useSessionCategory';
 
 import { EditSessionCategoryForm } from '../../../../../../../components/categories/EditSessionCategoryForm';
 import { AdminPageWrapper } from '../../../../../../../components/layout/AdminPageWrapper';

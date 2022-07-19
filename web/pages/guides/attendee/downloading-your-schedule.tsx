@@ -1,8 +1,9 @@
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
+
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { GuideSection } from '../../../components/guides/GuideSection';
 import { GuideSectionHeader } from '../../../components/guides/GuideSectionHeader';

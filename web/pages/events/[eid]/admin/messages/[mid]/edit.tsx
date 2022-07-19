@@ -1,8 +1,9 @@
-import { useEventMessage } from '@eventalapp/shared/hooks/queries/useEventMessage';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useEventMessage } from '@eventalapp/shared/hooks/queries/useEventMessage';
 
 import { AdminPageWrapper } from '../../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../../components/layout/AdminSidebarWrapper';

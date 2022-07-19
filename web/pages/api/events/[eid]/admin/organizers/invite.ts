@@ -1,5 +1,6 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { sendOrganizerInvite } from '../../../../../../email/templates/inviteOrganizer';
 import { api } from '../../../../../../utils/api';

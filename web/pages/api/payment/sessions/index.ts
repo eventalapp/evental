@@ -1,7 +1,8 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import * as Prisma from '@prisma/client';
 import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { api } from '../../../../utils/api';
 import { CURRENCY, MAX_AMOUNT, MIN_AMOUNT } from '../../../../utils/config';

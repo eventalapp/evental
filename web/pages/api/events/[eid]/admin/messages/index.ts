@@ -1,5 +1,6 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { getEvent } from '../..';
 import { sendEventMessage } from '../../../../../../email/templates/eventMessage';

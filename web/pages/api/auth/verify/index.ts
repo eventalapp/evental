@@ -1,5 +1,6 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { api } from '../../../../utils/api';
 import { VERIFY_EMAIL_EXPIRY } from '../../../../utils/config';

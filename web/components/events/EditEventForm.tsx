@@ -1,4 +1,3 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Prisma from '@prisma/client';
 import Color from 'color';
@@ -10,6 +9,8 @@ import { ChromePicker } from 'react-color';
 import ReactDatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import ReactSelect from 'react-select';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { theme } from '../../tailwind.config';

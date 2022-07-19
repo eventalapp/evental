@@ -1,10 +1,11 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
 
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';

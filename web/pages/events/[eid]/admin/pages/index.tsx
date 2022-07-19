@@ -1,8 +1,9 @@
-import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+
+import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';

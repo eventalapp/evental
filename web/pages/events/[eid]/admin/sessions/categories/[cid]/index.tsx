@@ -1,10 +1,11 @@
+import type { NextPage } from 'next';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useSessionCategory } from '@eventalapp/shared/hooks/queries/useSessionCategory';
 import { useSessionsByCategory } from '@eventalapp/shared/hooks/queries/useSessionsByCategory';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 import { ViewSessionCategory } from '../../../../../../../components/categories/ViewSessionCategory';
 import { AdminPageWrapper } from '../../../../../../../components/layout/AdminPageWrapper';

@@ -1,7 +1,8 @@
-import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
 import React from 'react';
 import { FlatList, Image, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
 
 import { useRefreshOnFocus } from '../hooks/useRefreshOnFocus';
 

@@ -1,7 +1,8 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import * as Prisma from '@prisma/client';
 import dayjs from 'dayjs';
 import { NextkitError } from 'nextkit';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { api } from '../../../../../utils/api';
 import { isFounder, isOrganizer } from '../../../../../utils/attendee';

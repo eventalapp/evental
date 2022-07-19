@@ -1,9 +1,10 @@
-import { prisma } from '@eventalapp/shared/db/client';
 import * as Prisma from '@prisma/client';
 import { buffer } from 'micro';
 import Cors from 'micro-cors';
 import { NextkitError } from 'nextkit';
 import Stripe from 'stripe';
+
+import { prisma } from '@eventalapp/shared/db/client';
 
 import { api } from '../../../../utils/api';
 import { getEvent } from '../../events/[eid]';

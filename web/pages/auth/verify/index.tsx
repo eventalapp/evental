@@ -1,8 +1,9 @@
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { LoadingSpinner } from '../../../components/error/LoadingSpinner';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';

@@ -1,11 +1,12 @@
-import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
-import { useUserByIdSchedule } from '@eventalapp/shared/hooks/queries/useUserByIdSchedule';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
+import { useUserByIdSchedule } from '@eventalapp/shared/hooks/queries/useUserByIdSchedule';
 
 import Column from '../../../components/layout/Column';
 import { FlexRowBetween } from '../../../components/layout/FlexRowBetween';

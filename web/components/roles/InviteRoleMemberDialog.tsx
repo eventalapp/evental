@@ -1,9 +1,10 @@
-import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
+
+import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 
 import { useInviteRoleMutation } from '../../hooks/mutations/useInviteRoleMutation';
 import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';

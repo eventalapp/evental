@@ -1,12 +1,13 @@
+import type { NextPage } from 'next';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import React from 'react';
+
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import { useSessionsByVenue } from '@eventalapp/shared/hooks/queries/useSessionsByVenue';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { useVenue } from '@eventalapp/shared/hooks/queries/useVenue';
-import type { NextPage } from 'next';
-import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
-import React from 'react';
 
 import { NotFoundPage } from '../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../components/error/PrivatePage';

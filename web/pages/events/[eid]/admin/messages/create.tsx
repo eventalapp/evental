@@ -1,7 +1,8 @@
-import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+
+import { useRoles } from '@eventalapp/shared/hooks/queries/useRoles';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';

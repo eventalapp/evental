@@ -1,8 +1,3 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
-import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
-import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 import dayjs from 'dayjs';
 import { htmlToText } from 'html-to-text';
 import type { NextPage } from 'next';
@@ -11,6 +6,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
+import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
+import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
 
 import { PrivatePage } from '../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';

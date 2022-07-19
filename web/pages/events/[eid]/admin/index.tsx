@@ -1,8 +1,9 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 
 import DeleteEventDialog from '../../../../components/events/DeleteEventDialog';
 import { EditEventForm } from '../../../../components/events/EditEventForm';

@@ -1,12 +1,13 @@
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+
+import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
+import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
+import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
 import { UnauthorizedPage } from '../../../../../components/error/UnauthorizedPage';

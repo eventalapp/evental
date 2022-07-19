@@ -9,7 +9,7 @@ module.exports = {
 	endOfLine: 'lf',
 	bracketSpacing: true,
 	arrowParens: 'always',
-	importOrder: ['^[./]'],
+	importOrder: ['@eventalapp', '^[./]'],
 	importOrderSeparation: true,
 	importOrderSortSpecifiers: true
 };
