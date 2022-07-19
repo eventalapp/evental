@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import NetInfo from '@react-native-community/netinfo';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { registerRootComponent } from 'expo';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
@@ -12,6 +13,7 @@ import { QueryClient, QueryClientProvider, focusManager, onlineManager } from 'r
 import { EventsScreen } from './screens/Events';
 import { SettingsScreen } from './screens/Settings';
 import { SignInScreen } from './screens/SignIn';
+import { ViewEventScreen } from './screens/ViewEvent';
 
 function onAppStateChange(status: AppStateStatus) {
 	if (Platform.OS !== 'web') {
@@ -26,7 +28,7 @@ onlineManager.setEventListener((setOnline) => {
 });
 
 const Tab = createBottomTabNavigator();
-
+const Stack = createNativeStackNavigator();
 const prefix = Linking.createURL('/');
 
 export function Main() {
@@ -34,7 +36,15 @@ export function Main() {
 
 	const config = {
 		screens: {
-			Events: 'events'
+			Events: { path: 'events' },
+			ViewEvent: {
+				path: 'events/:eid',
+				parse: {
+					eid: (eid: string) => {
+						return String(eid);
+					}
+				}
+			}
 		}
 	};
 
@@ -51,14 +61,20 @@ export function Main() {
 
 	return (
 		<QueryClientProvider client={queryClient}>
+			<StatusBar barStyle="dark-content" />
 			<NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
-				<StatusBar barStyle="dark-content" />
-
 				<Tab.Navigator
 					screenOptions={{
 						headerShown: false
 					}}
 				>
+					<Tab.Screen
+						name="ViewEvent"
+						component={ViewEventScreen}
+						options={{
+							tabBarButton: () => null
+						}}
+					/>
 					<Tab.Screen
 						name="Events"
 						component={EventsScreen}
