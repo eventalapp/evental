@@ -54,7 +54,7 @@ export function EventsScreen(props) {
 						style={{
 							backgroundColor: '#dedede',
 							borderRadius: 8,
-							marginEnd: 8
+							marginEnd: 10
 						}}
 					/>
 
