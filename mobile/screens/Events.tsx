@@ -8,7 +8,11 @@ import { useRefreshOnFocus } from '../hooks/useRefreshOnFocus';
 
 export function EventsScreen(props) {
 	const { navigation } = props;
-	const { data: upcomingEvents, refetch: refetchUpcomingEvents, isLoading } = useUpcomingEvents();
+	const {
+		data: upcomingEvents,
+		refetch: refetchUpcomingEvents,
+		isLoading: isUpcomingEventLoading
+	} = useUpcomingEvents();
 	useRefreshOnFocus(refetchUpcomingEvents);
 	const safeAreaInsets = useSafeAreaInsets();
 
@@ -18,7 +22,7 @@ export function EventsScreen(props) {
 				<RefreshControl
 					colors={['#000000']}
 					tintColor="#000000"
-					refreshing={isLoading}
+					refreshing={isUpcomingEventLoading}
 					onRefresh={() => {
 						refetchUpcomingEvents();
 					}}
