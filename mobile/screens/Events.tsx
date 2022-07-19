@@ -17,7 +17,7 @@ export function EventsScreen(props) {
 	const safeAreaInsets = useSafeAreaInsets();
 
 	return (
-		<ScrollView
+		<FlatList
 			refreshControl={
 				<RefreshControl
 					colors={['#000000']}
@@ -28,98 +28,95 @@ export function EventsScreen(props) {
 					}}
 				/>
 			}
-		>
-			<FlatList
-				contentContainerStyle={{
-					flexDirection: 'column',
-					justifyContent: 'center',
-					paddingTop: safeAreaInsets.top + 28,
-					paddingBottom: 12,
-					paddingLeft: safeAreaInsets.left + 28,
-					paddingRight: safeAreaInsets.right + 28
-				}}
-				ListHeaderComponent={() => (
-					<Text
+			contentContainerStyle={{
+				flexDirection: 'column',
+				justifyContent: 'center',
+				paddingTop: safeAreaInsets.top + 28,
+				paddingBottom: 12,
+				paddingLeft: safeAreaInsets.left + 28,
+				paddingRight: safeAreaInsets.right + 28
+			}}
+			ListHeaderComponent={() => (
+				<Text
+					style={{
+						fontSize: 36,
+						fontWeight: 'bold',
+						marginBottom: 18
+					}}
+				>
+					All Events
+				</Text>
+			)}
+			data={upcomingEvents}
+			renderItem={({ item }) => (
+				<View
+					style={{
+						flexDirection: 'row',
+						justifyContent: 'flex-start',
+						alignItems: 'center',
+						backgroundColor: 'white',
+						paddingVertical: 12,
+						paddingStart: 12,
+						paddingEnd: 18,
+						borderRadius: 8,
+						flex: 1,
+						marginBottom: 12
+					}}
+				>
+					<Image
+						source={{ uri: `https://cdn.evental.app${item.image}`, width: 52, height: 52 }}
 						style={{
-							fontSize: 36,
-							fontWeight: 'bold',
-							marginBottom: 18
+							backgroundColor: '#dedede',
+							borderRadius: 8,
+							marginEnd: 10
 						}}
-					>
-						All Events
-					</Text>
-				)}
-				data={upcomingEvents}
-				renderItem={({ item }) => (
+					/>
+
 					<View
 						style={{
-							flexDirection: 'row',
-							justifyContent: 'flex-start',
-							alignItems: 'center',
-							backgroundColor: 'white',
-							paddingVertical: 12,
-							paddingStart: 12,
-							paddingEnd: 18,
-							borderRadius: 8,
-							flex: 1,
-							marginBottom: 12
+							flexDirection: 'column'
 						}}
 					>
-						<Image
-							source={{ uri: `https://cdn.evental.app${item.image}`, width: 52, height: 52 }}
-							style={{
-								backgroundColor: '#dedede',
-								borderRadius: 8,
-								marginEnd: 10
-							}}
-						/>
-
 						<View
 							style={{
-								flexDirection: 'column'
+								flexDirection: 'row'
 							}}
 						>
-							<View
-								style={{
-									flexDirection: 'row'
-								}}
-							>
-								<Text
-									style={{
-										fontSize: 14,
-										marginEnd: 4,
-										textTransform: 'uppercase'
-									}}
-								>
-									{item.category} &middot;{' '}
-									{new Date(item.startDate).toLocaleDateString([], {
-										month: 'short',
-										day: 'numeric'
-									})}{' '}
-									–{' '}
-									{new Date(item.endDate).toLocaleDateString([], {
-										month: 'short',
-										day: 'numeric'
-									})}
-								</Text>
-							</View>
-
 							<Text
 								style={{
-									fontSize: 18,
-									fontWeight: 'bold'
+									fontSize: 14,
+									marginEnd: 4,
+									textTransform: 'uppercase'
 								}}
 							>
-								{item.name}
+								{item.category} &middot;{' '}
+								{new Date(item.startDate).toLocaleDateString([], {
+									month: 'short',
+									day: 'numeric'
+								})}{' '}
+								–{' '}
+								{new Date(item.endDate).toLocaleDateString([], {
+									month: 'short',
+									day: 'numeric'
+								})}
 							</Text>
 						</View>
-						<Button
-							title="view"
-							onPress={() => navigation.navigate('ViewEvent', { eid: item.slug })}
-						></Button>
+
+						<Text
+							style={{
+								fontSize: 18,
+								fontWeight: 'bold'
+							}}
+						>
+							{item.name}
+						</Text>
 					</View>
-				)}
-			/>
-		</ScrollView>
+					<Button
+						title="view"
+						onPress={() => navigation.navigate('ViewEvent', { eid: item.slug })}
+					></Button>
+				</View>
+			)}
+		/>
 	);
 }
