@@ -4,14 +4,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
-import { EventsScreen } from '../screens/Events';
 import { SettingsScreen } from '../screens/Settings';
 import { SignInScreen } from '../screens/SignIn';
-import { ViewEventScreen } from '../screens/ViewEvent';
+import { UpcomingEventsScreen } from '../screens/events/UpcomingEvents';
+import { ViewEventScreen } from '../screens/events/ViewEvent';
 
 const Tab = createBottomTabNavigator();
 const prefix = Linking.createURL('/');
@@ -55,7 +55,7 @@ export const Navigation = () => {
 				/>
 				<Tab.Screen
 					name="Events"
-					component={EventsScreen}
+					component={UpcomingEventsScreen}
 					options={{
 						tabBarLabel: 'Events',
 						tabBarIcon: ({ color, size }) => (

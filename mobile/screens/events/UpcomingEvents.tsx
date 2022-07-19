@@ -4,9 +4,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
 
-import { useRefreshOnFocus } from '../hooks/useRefreshOnFocus';
+import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 
-export function EventsScreen(props) {
+export function UpcomingEventsScreen(props) {
 	const { navigation } = props;
 	const {
 		data: upcomingEvents,
