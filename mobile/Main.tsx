@@ -4,8 +4,9 @@ import NetInfo from '@react-native-community/netinfo';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { registerRootComponent } from 'expo';
+import * as Linking from 'expo-linking';
 import * as React from 'react';
-import { AppState, AppStateStatus, Platform, StatusBar } from 'react-native';
+import { AppState, AppStateStatus, Platform, StatusBar, Text } from 'react-native';
 import { QueryClient, QueryClientProvider, focusManager, onlineManager } from 'react-query';
 
 import { EventsScreen } from './screens/Events';
@@ -26,8 +27,21 @@ onlineManager.setEventListener((setOnline) => {
 
 const Tab = createBottomTabNavigator();
 
+const prefix = Linking.createURL('/');
+
 export function Main() {
 	const queryClient = new QueryClient();
+
+	const config = {
+		screens: {
+			Events: 'events'
+		}
+	};
+
+	const linking = {
+		prefixes: [prefix, 'https://evental.app'],
+		config
+	};
 
 	React.useEffect(() => {
 		const subscription = AppState.addEventListener('change', onAppStateChange);
@@ -37,7 +51,7 @@ export function Main() {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<NavigationContainer>
+			<NavigationContainer linking={linking} fallback={<Text>Loading...</Text>}>
 				<StatusBar barStyle="dark-content" />
 
 				<Tab.Navigator
