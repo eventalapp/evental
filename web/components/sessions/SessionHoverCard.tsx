@@ -18,10 +18,10 @@ import Skeleton from 'react-loading-skeleton';
 
 import { useIsSessionAttendee } from '@eventalapp/shared/hooks/queries/useIsSessionAttendee';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { formatDateRange } from '@eventalapp/shared/utils/date';
 
 import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { formatDateRange } from '../../utils/date';
 import { faCalendarCirclePlus } from '../../utils/icons';
 import { StrippedUser } from '../../utils/user';
 import Tooltip from '../primitives/Tooltip';
