@@ -4,7 +4,11 @@ import { NextkitError } from 'nextkit';
 import { prisma } from '@eventalapp/shared/db/client';
 
 import { api } from '../../../../../../../utils/api';
-import { AttendeeWithUser, stripAttendeesWithUser } from '../../../../../../../utils/user';
+import {
+	AttendeeWithUser,
+	attendeeWithUserInclude,
+	stripAttendeesWithUser
+} from '../../../../../../../utils/user';
 import { getEvent } from '../../../index';
 import { getSession } from '../index';
 
@@ -62,14 +66,7 @@ export const getSessionAttendees = async (
 			sessionId: session.id,
 			type
 		},
-		include: {
-			attendee: {
-				include: {
-					user: true,
-					role: true
-				}
-			}
-		}
+		include: attendeeWithUserInclude
 	});
 
 	return stripAttendeesWithUser(sessionAttendees.map(({ attendee }) => attendee));
