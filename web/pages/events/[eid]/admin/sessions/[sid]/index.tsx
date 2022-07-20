@@ -18,7 +18,7 @@ import { ViewSession } from '../../../../../../components/sessions/ViewSession';
 const ViewSessionPage: NextPage = () => {
 	const router = useRouter();
 	const { sid, eid } = router.query;
-	const { data: user } = useUser();
+	const { data: user, isLoading: isUserLoading } = useUser();
 	const {
 		data: event,
 		error: eventError,
@@ -43,18 +43,16 @@ const ViewSessionPage: NextPage = () => {
 			sid: String(sid)
 		});
 
+	const isLoading =
+		isSessionLoading ||
+		isEventLoading ||
+		isSessionRoleAttendeesLoading ||
+		isSessionAttendeesLoading ||
+		isSessionAttendeeLoading ||
+		isUserLoading;
+
 	return (
-		<AdminPageWrapper
-			errors={[eventError, sessionError]}
-			isLoading={
-				isSessionLoading ||
-				isEventLoading ||
-				isSessionRoleAttendeesLoading ||
-				isSessionAttendeesLoading ||
-				isSessionAttendeeLoading
-			}
-			eid={String(eid)}
-		>
+		<AdminPageWrapper errors={[eventError, sessionError]} isLoading={isLoading} eid={String(eid)}>
 			<PageWrapper>
 				<Head>
 					<title>Viewing Session</title>
@@ -72,6 +70,7 @@ const ViewSessionPage: NextPage = () => {
 							eid={String(eid)}
 							sid={String(sid)}
 							event={event}
+							isLoading={isLoading}
 						/>
 					</Column>
 				</AdminSidebarWrapper>
