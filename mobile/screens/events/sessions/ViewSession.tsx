@@ -95,6 +95,50 @@ export function ViewSessionScreen({ route, navigation }) {
 								<Text>{session.description}</Text>
 							)}
 
+							<FlatList
+								contentContainerStyle={{
+									flexDirection: 'row',
+									justifyContent: 'space-between',
+									paddingTop: 12,
+									paddingBottom: 12,
+									flex: 4
+								}}
+								data={session.roleMembers}
+								renderItem={({ item: roleMember }) => (
+									<Pressable
+										style={{
+											flexDirection: 'column',
+											justifyContent: 'center',
+											alignItems: 'center',
+											backgroundColor: 'white',
+											padding: 12,
+											borderRadius: 8
+										}}
+									>
+										<Image
+											source={{
+												uri: `https://cdn.evental.app${roleMember.attendee.user.image}`,
+												width: 52,
+												height: 52
+											}}
+											style={{
+												backgroundColor: '#dedede',
+												borderRadius: 8,
+												marginBottom: 10
+											}}
+										/>
+
+										<Text
+											style={{
+												fontSize: 18,
+												fontWeight: 'bold'
+											}}
+										>
+											{roleMember.attendee.user.name}
+										</Text>
+									</Pressable>
+								)}
+							/>
 							<Text>{JSON.stringify(session)}</Text>
 						</View>
 					)}
