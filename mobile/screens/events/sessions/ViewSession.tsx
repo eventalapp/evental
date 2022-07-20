@@ -23,7 +23,7 @@ export function ViewSessionScreen({ route, navigation }) {
 	const {
 		data: session,
 		refetch: refetchSession,
-		isLoading: isSessionLoading
+		isRefetching: isSessionRefetching
 	} = useSession({ eid, sid });
 
 	return (
@@ -33,7 +33,7 @@ export function ViewSessionScreen({ route, navigation }) {
 					<RefreshControl
 						colors={['#000000']}
 						tintColor="#000000"
-						refreshing={isSessionLoading}
+						refreshing={isSessionRefetching}
 						onRefresh={() => {
 							refetchSession();
 						}}
