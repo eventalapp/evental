@@ -1,14 +1,12 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "noEmit": true
-  },
-  "exclude": [
-    "node_modules"
-  ],
-  "extends": "expo/tsconfig.base"
+	"compilerOptions": {
+		"allowJs": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"noEmit": true
+	},
+	"exclude": ["node_modules"],
+	"extends": "expo/tsconfig.base"
 }
