@@ -12,6 +12,7 @@ import { SettingsScreen } from '../screens/Settings';
 import { SignInScreen } from '../screens/SignIn';
 import { UpcomingEventsScreen } from '../screens/events/UpcomingEvents';
 import { ViewEventScreen } from '../screens/events/ViewEvent';
+import { ViewAttendeeScreen } from '../screens/events/attendees/ViewAttendee';
 import { ViewSessionScreen } from '../screens/events/sessions/ViewSession';
 
 const Tab = createBottomTabNavigator();
@@ -29,7 +30,7 @@ export const Navigation = () => {
 					}
 				}
 			},
-			ViewSessions: {
+			ViewSession: {
 				path: 'events/:eid/sessions/:sid',
 				parse: {
 					eid: (eid: string) => {
@@ -61,6 +62,13 @@ export const Navigation = () => {
 				<Tab.Screen
 					name="ViewEvent"
 					component={ViewEventScreen}
+					options={{
+						tabBarButton: () => null
+					}}
+				/>
+				<Tab.Screen
+					name="ViewAttendee"
+					component={ViewAttendeeScreen}
 					options={{
 						tabBarButton: () => null
 					}}
