@@ -1,5 +1,16 @@
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
-import { Button, FlatList, Image, RefreshControl, ScrollView, Text, View } from 'react-native';
+import {
+	Button,
+	FlatList,
+	Image,
+	Pressable,
+	RefreshControl,
+	ScrollView,
+	Text,
+	View
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
@@ -33,13 +44,28 @@ export function ViewSessionScreen({ route, navigation }) {
 				<View
 					style={{
 						flexDirection: 'column',
-						justifyContent: 'center',
+						alignItems: 'flex-start',
 						paddingTop: safeAreaInsets.top + 28,
 						paddingBottom: 12,
 						paddingLeft: safeAreaInsets.left + 28,
 						paddingRight: safeAreaInsets.right + 28
 					}}
 				>
+					<Pressable
+						onPress={() => {
+							navigation.goBack();
+						}}
+						style={{
+							flexDirection: 'row',
+							alignItems: 'center',
+							justifyContent: 'flex-start',
+							marginBottom: 8
+						}}
+					>
+						<FontAwesomeIcon icon={faArrowLeft} style={{ marginRight: 6 }} />
+						<Text>Back</Text>
+					</Pressable>
+
 					{session && (
 						<View>
 							<View
