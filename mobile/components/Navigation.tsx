@@ -12,6 +12,7 @@ import { SettingsScreen } from '../screens/Settings';
 import { SignInScreen } from '../screens/SignIn';
 import { UpcomingEventsScreen } from '../screens/events/UpcomingEvents';
 import { ViewEventScreen } from '../screens/events/ViewEvent';
+import { ViewSessionScreen } from '../screens/events/sessions/ViewSession';
 
 const Tab = createBottomTabNavigator();
 const prefix = Linking.createURL('/');
@@ -25,6 +26,17 @@ export const Navigation = () => {
 				parse: {
 					eid: (eid: string) => {
 						return String(eid);
+					}
+				}
+			},
+			ViewSessions: {
+				path: 'events/:eid/sessions/:sid',
+				parse: {
+					eid: (eid: string) => {
+						return String(eid);
+					},
+					sid: (sid: string) => {
+						return String(sid);
 					}
 				}
 			}
@@ -49,6 +61,13 @@ export const Navigation = () => {
 				<Tab.Screen
 					name="ViewEvent"
 					component={ViewEventScreen}
+					options={{
+						tabBarButton: () => null
+					}}
+				/>
+				<Tab.Screen
+					name="ViewSession"
+					component={ViewSessionScreen}
 					options={{
 						tabBarButton: () => null
 					}}
