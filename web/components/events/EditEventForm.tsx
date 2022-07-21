@@ -11,11 +11,11 @@ import { Controller, useForm } from 'react-hook-form';
 import ReactSelect from 'react-select';
 
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { formatDateRange } from '@eventalapp/shared/utils/date';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEventMutation';
 import { theme } from '../../tailwind.config';
 import { copy, timeZoneOptions } from '../../utils/const';
-import { formatDateRange } from '../../utils/date';
 import { EditEventPayload, EditEventSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter, slugify } from '../../utils/string';
 import { LoadingInner } from '../error/LoadingInner';
@@ -433,7 +433,7 @@ export const EditEventForm: React.FC<Props> = (props) => {
 				)}
 				<Button
 					type="submit"
-					className={`ml-4`}
+					className="ml-4"
 					variant="primary"
 					style={{
 						backgroundColor: colorWatcher ?? theme.extend.colors.primary.DEFAULT,

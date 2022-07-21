@@ -21,8 +21,8 @@ import { useIsAttendee } from '@eventalapp/shared/hooks/queries/useIsAttendee';
 import { useIsFounder } from '@eventalapp/shared/hooks/queries/useIsFounder';
 import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { formatDateRange } from '@eventalapp/shared/utils/date';
 
-import { formatDateRange } from '../../utils/date';
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { EventRegistrationDialog } from '../attendees/EventRegistrationDialog';
 import { Heading } from '../primitives/Heading';
