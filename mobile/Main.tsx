@@ -4,7 +4,7 @@ import * as React from 'react';
 import { AppState, AppStateStatus, Platform, StatusBar } from 'react-native';
 import { QueryClient, QueryClientProvider, focusManager, onlineManager } from 'react-query';
 
-import { Navigation } from './components/navigation2';
+import { Navigation } from './components/navigation';
 
 function onAppStateChange(status: AppStateStatus) {
 	if (Platform.OS !== 'web') {
