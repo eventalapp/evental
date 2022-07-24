@@ -27,8 +27,6 @@ export function SignInScreen() {
 	} = useUser();
 	const { mutate: signIn } = useSignIn();
 
-	console.log(user);
-
 	return (
 		<View style={styles.container}>
 			<Text
