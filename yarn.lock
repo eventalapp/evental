@@ -5452,7 +5452,7 @@ expo-modules-autolinking@0.8.1:
     find-up "^5.0.0"
     fs-extra "^9.1.0"
 
-expo-modules-autolinking@0.9.0:
+expo-modules-autolinking@0.9.0, expo-modules-autolinking@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-0.9.0.tgz#1ac22ae5650b8289a4d16e7661aa171c7a61e332"
   integrity sha512-brczklrHpWood7H2C4MjBfUD85NAyjotEhYs7hnHRtbnVgwwzXeAveDje/19kLaK8W40hvUN0LdBVxkZN3Hw6g==
