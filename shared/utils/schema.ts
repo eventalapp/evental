@@ -118,3 +118,13 @@ export const SignUpSchema = z.object({
 });
 
 export type SignUpPayload = z.infer<typeof SignUpSchema>;
+
+// Notification Preferences
+
+export const NotificationPreferenceSchema = z.object({
+	event: z.boolean(),
+	marketing: z.boolean(),
+	news: z.boolean()
+});
+
+export type NotificationPreferencePayload = z.infer<typeof NotificationPreferenceSchema>;
