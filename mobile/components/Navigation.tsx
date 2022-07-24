@@ -12,6 +12,7 @@ import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { SettingsScreen } from '../screens/Settings';
 import { SignInScreen } from '../screens/SignIn';
 import { EventStackNavigation } from './EventStackNavigation';
+import { SettingStackNavigation } from './SettingsStackNavigation';
 
 const Tab = createBottomTabNavigator();
 const prefix = Linking.createURL('/');
@@ -55,10 +56,10 @@ export const Navigation = () => {
 				screenOptions={{
 					headerShown: false
 				}}
-				initialRouteName="Events"
+				initialRouteName="EventsStack"
 			>
 				<Tab.Screen
-					name="Events"
+					name="EventsStack"
 					component={EventStackNavigation}
 					options={{
 						tabBarLabel: 'Events',
@@ -67,26 +68,29 @@ export const Navigation = () => {
 						)
 					}}
 				/>
-				<Tab.Screen
-					name="Settings"
-					component={SettingsScreen}
-					options={{
-						tabBarLabel: 'Settings',
-						tabBarIcon: ({ color, size }) => (
-							<FontAwesomeIcon icon={faCog} size={size} color={color} />
-						)
-					}}
-				/>
-				<Tab.Screen
-					name="SignIn"
-					component={SignInScreen}
-					options={{
-						tabBarLabel: 'Sign In',
-						tabBarIcon: ({ color, size }) => (
-							<FontAwesomeIcon icon={faUser} size={size} color={color} />
-						)
-					}}
-				/>
+				{user ? (
+					<Tab.Screen
+						name="SettingsStack"
+						component={SettingStackNavigation}
+						options={{
+							tabBarLabel: 'Settings',
+							tabBarIcon: ({ color, size }) => (
+								<FontAwesomeIcon icon={faCog} size={size} color={color} />
+							)
+						}}
+					/>
+				) : (
+					<Tab.Screen
+						name="SignIn"
+						component={SignInScreen}
+						options={{
+							tabBarLabel: 'Sign In',
+							tabBarIcon: ({ color, size }) => (
+								<FontAwesomeIcon icon={faUser} size={size} color={color} />
+							)
+						}}
+					/>
+				)}
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
