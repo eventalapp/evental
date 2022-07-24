@@ -14,7 +14,8 @@ export function ViewSessionScreen({ route, navigation }) {
 	const {
 		data: session,
 		refetch: refetchSession,
-		isRefetching: isSessionRefetching
+		isRefetching: isSessionRefetching,
+		isLoading: isSessionLoading
 	} = useSession({ eid, sid });
 
 	return (
@@ -24,7 +25,7 @@ export function ViewSessionScreen({ route, navigation }) {
 					<RefreshControl
 						colors={['#000000']}
 						tintColor="#000000"
-						refreshing={isSessionRefetching}
+						refreshing={isSessionRefetching || isSessionLoading}
 						onRefresh={() => {
 							refetchSession();
 						}}

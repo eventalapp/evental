@@ -7,11 +7,17 @@ import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 export function NotificationPreferencesScreen() {
 	const safeAreaInsets = useSafeAreaInsets();
-	const { data: user, refetch: refetchUser, isRefetching: isUserRefetching } = useUser();
+	const {
+		data: user,
+		refetch: refetchUser,
+		isRefetching: isUserRefetching,
+		isLoading: isUserLoading
+	} = useUser();
 	const {
 		data: preferences,
 		refetch: refetchPreferences,
-		isRefetching: isPreferencesRefetching
+		isRefetching: isPreferencesRefetching,
+		isLoading: isPreferencesLoading
 	} = useNotificationPreferences();
 
 	return (
@@ -27,7 +33,9 @@ export function NotificationPreferencesScreen() {
 				<RefreshControl
 					colors={['#000000']}
 					tintColor="#000000"
-					refreshing={isUserRefetching || isPreferencesRefetching}
+					refreshing={
+						isUserRefetching || isPreferencesRefetching || isUserLoading || isPreferencesLoading
+					}
 					onRefresh={() => {
 						refetchPreferences();
 						refetchUser();

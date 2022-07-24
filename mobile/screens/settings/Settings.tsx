@@ -6,7 +6,12 @@ import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 export function SettingsScreen({ navigation }) {
 	const safeAreaInsets = useSafeAreaInsets();
-	const { data: user, refetch: refetchUser, isRefetching: isUserRefetching } = useUser();
+	const {
+		data: user,
+		refetch: refetchUser,
+		isRefetching: isUserRefetching,
+		isLoading: isUserLoading
+	} = useUser();
 
 	return (
 		<ScrollView
@@ -21,7 +26,7 @@ export function SettingsScreen({ navigation }) {
 				<RefreshControl
 					colors={['#000000']}
 					tintColor="#000000"
-					refreshing={isUserRefetching}
+					refreshing={isUserRefetching || isUserLoading}
 					onRefresh={() => {
 						refetchUser();
 					}}
