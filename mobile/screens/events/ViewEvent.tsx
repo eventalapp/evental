@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';

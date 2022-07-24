@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
-	Button,
 	Pressable,
 	RefreshControl,
 	ScrollView,
@@ -21,8 +20,7 @@ import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { colors } from '@eventalapp/shared/utils/color';
 import {
 	NotificationPreferencePayload,
-	NotificationPreferenceSchema,
-	SignInPayload
+	NotificationPreferenceSchema
 } from '@eventalapp/shared/utils/schema';
 
 import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
@@ -112,7 +110,7 @@ export function NotificationPreferencesScreen({ navigation }) {
 
 				<Controller
 					control={control}
-					render={({ field: { onChange, onBlur, value } }) => (
+					render={({ field: { onChange, value } }) => (
 						<Switch
 							thumbColor={colors.white.DEFAULT}
 							trackColor={{ true: colors.primary[500], false: colors.gray[200] }}
@@ -131,7 +129,7 @@ export function NotificationPreferencesScreen({ navigation }) {
 
 				<Controller
 					control={control}
-					render={({ field: { onChange, onBlur, value } }) => (
+					render={({ field: { onChange, value } }) => (
 						<Switch
 							thumbColor={colors.white.DEFAULT}
 							trackColor={{ true: colors.primary[500], false: colors.gray[200] }}
@@ -150,7 +148,7 @@ export function NotificationPreferencesScreen({ navigation }) {
 
 				<Controller
 					control={control}
-					render={({ field: { onChange, onBlur, value } }) => (
+					render={({ field: { onChange, value } }) => (
 						<Switch
 							thumbColor={colors.white.DEFAULT}
 							trackColor={{ true: colors.primary[500], false: colors.gray[200] }}
