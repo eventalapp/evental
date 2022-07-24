@@ -86,17 +86,17 @@ export function ViewSessionScreen({ route, navigation }) {
 								<Text>{session.description}</Text>
 							)}
 
-							<View
-								style={{
-									flexDirection: 'row',
-									justifyContent: 'space-between',
-									paddingTop: 12,
-									paddingBottom: 12,
-									flex: 4
-								}}
-							>
-								{session.roleMembers &&
-									session.roleMembers.map((roleMember) => (
+							{session.roleMembers && session.roleMembers.length > 0 && (
+								<View
+									style={{
+										flexDirection: 'row',
+										justifyContent: 'space-between',
+										paddingTop: 12,
+										paddingBottom: 12,
+										flex: 4
+									}}
+								>
+									{session.roleMembers.map((roleMember) => (
 										<Pressable
 											style={{
 												flexDirection: 'column',
@@ -137,7 +137,8 @@ export function ViewSessionScreen({ route, navigation }) {
 											</Text>
 										</Pressable>
 									))}
-							</View>
+								</View>
+							)}
 
 							<Text>{JSON.stringify(session)}</Text>
 						</View>
