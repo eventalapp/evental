@@ -2,7 +2,7 @@ import * as Prisma from '@prisma/client';
 import axios, { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { Alert } from 'react-native';
-import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
 import { NotificationPreferencePayload } from '../../utils/schema';
