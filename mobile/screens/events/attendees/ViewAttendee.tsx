@@ -1,3 +1,5 @@
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import {
 	Button,
@@ -60,6 +62,21 @@ export function ViewAttendeeScreen({ route, navigation }) {
 						paddingRight: safeAreaInsets.right + 28
 					}}
 				>
+					<Pressable
+						onPress={() => {
+							navigation.goBack();
+						}}
+						style={{
+							flexDirection: 'row',
+							alignItems: 'center',
+							justifyContent: 'flex-start',
+							marginBottom: 8
+						}}
+					>
+						<FontAwesomeIcon icon={faArrowLeft} style={{ marginRight: 6 }} />
+						<Text>Back</Text>
+					</Pressable>
+
 					{attendee && (
 						<View>
 							<View
