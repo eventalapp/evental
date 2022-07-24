@@ -1,11 +1,12 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
-import { Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
+import { Pressable, RefreshControl, ScrollView, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useNotificationPreferences } from '@eventalapp/shared/hooks/queries/useNotificationPreferences';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { colors } from '@eventalapp/shared/utils/color';
 
 export function NotificationPreferencesScreen({ navigation }) {
 	const safeAreaInsets = useSafeAreaInsets();
@@ -68,6 +69,12 @@ export function NotificationPreferencesScreen({ navigation }) {
 			>
 				Preferences
 			</Text>
+
+			<Switch
+				thumbColor={colors.primary[500]}
+				ios_backgroundColor={colors.gray[200]}
+				trackColor={{ true: colors.gray[200], false: colors.gray[200] }}
+			/>
 
 			<Text>{preferences && JSON.stringify(preferences)}</Text>
 		</ScrollView>
