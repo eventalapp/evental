@@ -50,9 +50,9 @@ export function NotificationPreferencesScreen({ navigation }) {
 	} = useForm<NotificationPreferencePayload>({
 		resolver: zodResolver(NotificationPreferenceSchema),
 		defaultValues: {
-			event: preferences?.event,
-			marketing: preferences?.marketing,
-			news: preferences?.news
+			event: preferences?.event ?? false,
+			marketing: preferences?.marketing ?? false,
+			news: preferences?.news ?? false
 		}
 	});
 
