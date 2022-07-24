@@ -11,25 +11,10 @@ import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { SettingsScreen } from '../screens/Settings';
 import { SignInScreen } from '../screens/SignIn';
-import { UpcomingEventsScreen } from '../screens/events/UpcomingEvents';
-import { ViewEventScreen } from '../screens/events/ViewEvent';
-import { ViewAttendeeScreen } from '../screens/events/attendees/ViewAttendee';
-import { ViewSessionScreen } from '../screens/events/sessions/ViewSession';
+import { EventStackNavigation } from './EventStackNavigation';
 
 const Tab = createBottomTabNavigator();
 const prefix = Linking.createURL('/');
-const Stack = createStackNavigator();
-
-const EventStackNavigator = () => {
-	return (
-		<Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Events">
-			<Stack.Screen name="Events" component={UpcomingEventsScreen} />
-			<Stack.Screen name="ViewEvent" component={ViewEventScreen} />
-			<Stack.Screen name="ViewAttendee" component={ViewAttendeeScreen} />
-			<Stack.Screen name="ViewSession" component={ViewSessionScreen} />
-		</Stack.Navigator>
-	);
-};
 
 export const Navigation = () => {
 	const config = {
@@ -74,7 +59,7 @@ export const Navigation = () => {
 			>
 				<Tab.Screen
 					name="Events"
-					component={EventStackNavigator}
+					component={EventStackNavigation}
 					options={{
 						tabBarLabel: 'Events',
 						tabBarIcon: ({ color, size }) => (
