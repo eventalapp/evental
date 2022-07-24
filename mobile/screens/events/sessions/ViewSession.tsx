@@ -92,9 +92,8 @@ export function ViewSessionScreen({ route, navigation }) {
 									style={{
 										flexDirection: 'row',
 										justifyContent: 'space-between',
-										paddingTop: 12,
-										paddingBottom: 12,
-										flex: 4
+										marginTop: 12,
+										marginBottom: 12
 									}}
 								>
 									{session.roleMembers.map((roleMember) => (
