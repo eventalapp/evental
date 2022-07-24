@@ -25,6 +25,8 @@ import {
 	SignInPayload
 } from '@eventalapp/shared/utils/schema';
 
+import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
+
 export function NotificationPreferencesScreen({ navigation }) {
 	const safeAreaInsets = useSafeAreaInsets();
 
@@ -40,6 +42,8 @@ export function NotificationPreferencesScreen({ navigation }) {
 		isRefetching: isPreferencesRefetching,
 		isLoading: isPreferencesLoading
 	} = useNotificationPreferences();
+
+	useRefreshOnFocus(refetchPreferences);
 
 	const {
 		control,
@@ -110,9 +114,8 @@ export function NotificationPreferencesScreen({ navigation }) {
 					control={control}
 					render={({ field: { onChange, onBlur, value } }) => (
 						<Switch
-							thumbColor={value ? colors.primary[500] : colors.gray[400]}
-							ios_backgroundColor={colors.gray[200]}
-							trackColor={{ true: colors.gray[200], false: colors.gray[200] }}
+							thumbColor={colors.white.DEFAULT}
+							trackColor={{ true: colors.primary[500], false: colors.gray[200] }}
 							onValueChange={onChange}
 							value={value}
 						/>
@@ -124,15 +127,33 @@ export function NotificationPreferencesScreen({ navigation }) {
 			</View>
 
 			<View style={{ marginBottom: 16 }}>
+				<Text style={{ marginBottom: 8, fontSize: 16 }}>News Notifications</Text>
+
+				<Controller
+					control={control}
+					render={({ field: { onChange, onBlur, value } }) => (
+						<Switch
+							thumbColor={colors.white.DEFAULT}
+							trackColor={{ true: colors.primary[500], false: colors.gray[200] }}
+							onValueChange={onChange}
+							value={value}
+						/>
+					)}
+					name="news"
+				/>
+
+				{errors?.news?.message && <Text style={styles.error}>{errors?.news?.message}</Text>}
+			</View>
+
+			<View style={{ marginBottom: 16 }}>
 				<Text style={{ marginBottom: 8, fontSize: 16 }}>Marketing Notifications</Text>
 
 				<Controller
 					control={control}
 					render={({ field: { onChange, onBlur, value } }) => (
 						<Switch
-							thumbColor={value ? colors.primary[500] : colors.gray[400]}
-							ios_backgroundColor={colors.gray[200]}
-							trackColor={{ true: colors.gray[200], false: colors.gray[200] }}
+							thumbColor={colors.white.DEFAULT}
+							trackColor={{ true: colors.primary[500], false: colors.gray[200] }}
 							onValueChange={onChange}
 							value={value}
 						/>
@@ -143,26 +164,6 @@ export function NotificationPreferencesScreen({ navigation }) {
 				{errors?.marketing?.message && (
 					<Text style={styles.error}>{errors?.marketing?.message}</Text>
 				)}
-			</View>
-
-			<View style={{ marginBottom: 16 }}>
-				<Text style={{ marginBottom: 8, fontSize: 16 }}>News Notifications</Text>
-
-				<Controller
-					control={control}
-					render={({ field: { onChange, onBlur, value } }) => (
-						<Switch
-							thumbColor={value ? colors.primary[500] : colors.gray[400]}
-							ios_backgroundColor={colors.gray[200]}
-							trackColor={{ true: colors.gray[200], false: colors.gray[200] }}
-							onValueChange={onChange}
-							value={value}
-						/>
-					)}
-					name="news"
-				/>
-
-				{errors?.news?.message && <Text style={styles.error}>{errors?.news?.message}</Text>}
 			</View>
 
 			<Button
