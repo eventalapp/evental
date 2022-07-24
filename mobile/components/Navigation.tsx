@@ -2,6 +2,7 @@ import { faCalendar, faCog, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import * as Linking from 'expo-linking';
 import * as React from 'react';
 import { Text } from 'react-native';
@@ -17,6 +18,18 @@ import { ViewSessionScreen } from '../screens/events/sessions/ViewSession';
 
 const Tab = createBottomTabNavigator();
 const prefix = Linking.createURL('/');
+const Stack = createStackNavigator();
+
+const EventStackNavigator = () => {
+	return (
+		<Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Events">
+			<Stack.Screen name="Events" component={UpcomingEventsScreen} />
+			<Stack.Screen name="ViewEvent" component={ViewEventScreen} />
+			<Stack.Screen name="ViewAttendee" component={ViewAttendeeScreen} />
+			<Stack.Screen name="ViewSession" component={ViewSessionScreen} />
+		</Stack.Navigator>
+	);
+};
 
 export const Navigation = () => {
 	const config = {
@@ -60,29 +73,8 @@ export const Navigation = () => {
 				initialRouteName="Events"
 			>
 				<Tab.Screen
-					name="ViewEvent"
-					component={ViewEventScreen}
-					options={{
-						tabBarButton: () => null
-					}}
-				/>
-				<Tab.Screen
-					name="ViewAttendee"
-					component={ViewAttendeeScreen}
-					options={{
-						tabBarButton: () => null
-					}}
-				/>
-				<Tab.Screen
-					name="ViewSession"
-					component={ViewSessionScreen}
-					options={{
-						tabBarButton: () => null
-					}}
-				/>
-				<Tab.Screen
 					name="Events"
-					component={UpcomingEventsScreen}
+					component={EventStackNavigator}
 					options={{
 						tabBarLabel: 'Events',
 						tabBarIcon: ({ color, size }) => (
