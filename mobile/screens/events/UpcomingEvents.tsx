@@ -11,7 +11,8 @@ export function UpcomingEventsScreen(props) {
 	const {
 		data: upcomingEvents,
 		refetch: refetchUpcomingEvents,
-		isRefetching: isUpcomingEventsRefetching
+		isRefetching: isUpcomingEventsRefetching,
+		isLoading: isUpcomingEventsLoading
 	} = useUpcomingEvents();
 	useRefreshOnFocus(refetchUpcomingEvents);
 	const safeAreaInsets = useSafeAreaInsets();
@@ -22,7 +23,7 @@ export function UpcomingEventsScreen(props) {
 				<RefreshControl
 					colors={['#000000']}
 					tintColor="#000000"
-					refreshing={isUpcomingEventsRefetching}
+					refreshing={isUpcomingEventsRefetching || isUpcomingEventsLoading}
 					onRefresh={() => {
 						refetchUpcomingEvents();
 					}}

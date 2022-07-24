@@ -12,16 +12,23 @@ export function ViewEventScreen({ route, navigation }) {
 
 	console.log(eid);
 
-	const { data: event, refetch: refetchEvent, isRefetching: isEventRefetching } = useEvent({ eid });
+	const {
+		data: event,
+		refetch: refetchEvent,
+		isRefetching: isEventRefetching,
+		isLoading: isEventLoading
+	} = useEvent({ eid });
 	const {
 		data: sessions,
 		refetch: refetchSessions,
-		isRefetching: isSessionsRefetching
+		isRefetching: isSessionsRefetching,
+		isLoading: isSessionsLoading
 	} = useSessions({ eid });
 	const {
 		data: venues,
 		refetch: refetchVenues,
-		isRefetching: isVenuesRefetching
+		isRefetching: isVenuesRefetching,
+		isLoading: isVenuesLoading
 	} = useVenues({ eid });
 
 	return (
@@ -31,7 +38,13 @@ export function ViewEventScreen({ route, navigation }) {
 					<RefreshControl
 						colors={['#000000']}
 						tintColor="#000000"
-						refreshing={isEventRefetching || isSessionsRefetching}
+						refreshing={
+							isEventRefetching ||
+							isSessionsRefetching ||
+							isSessionsLoading ||
+							isVenuesLoading ||
+							isEventLoading
+						}
 						onRefresh={() => {
 							refetchEvent();
 							refetchSessions();
@@ -137,7 +150,8 @@ export function ViewEventScreen({ route, navigation }) {
 									<Text
 										style={{
 											fontSize: 18,
-											fontWeight: 'bold'
+											fontWeight: 'bold',
+											marginBottom: 4
 										}}
 									>
 										{session.name}

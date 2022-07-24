@@ -1,8 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
-import { NotificationPreferencesScreen } from '../screens/settings/NotificationPreferences';
-import { SettingsScreen } from '../screens/settings/Settings';
+import { NotificationPreferencesScreen } from '../../screens/settings/NotificationPreferences';
+import { SettingsScreen } from '../../screens/settings/Settings';
 
 const Stack = createStackNavigator();
 
