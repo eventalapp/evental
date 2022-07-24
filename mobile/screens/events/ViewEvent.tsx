@@ -81,7 +81,8 @@ export function ViewEventScreen({ route, navigation }) {
 									<Text
 										style={{
 											fontSize: 24,
-											fontWeight: 'bold'
+											fontWeight: 'bold',
+											marginBottom: 4
 										}}
 									>
 										{event.name}
