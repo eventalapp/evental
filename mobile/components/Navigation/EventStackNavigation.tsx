@@ -1,10 +1,10 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 
-import { UpcomingEventsScreen } from '../screens/events/UpcomingEvents';
-import { ViewEventScreen } from '../screens/events/ViewEvent';
-import { ViewAttendeeScreen } from '../screens/events/attendees/ViewAttendee';
-import { ViewSessionScreen } from '../screens/events/sessions/ViewSession';
+import { UpcomingEventsScreen } from '../../screens/events/UpcomingEvents';
+import { ViewEventScreen } from '../../screens/events/ViewEvent';
+import { ViewAttendeeScreen } from '../../screens/events/attendees/ViewAttendee';
+import { ViewSessionScreen } from '../../screens/events/sessions/ViewSession';
 
 const Stack = createStackNavigator();
 
