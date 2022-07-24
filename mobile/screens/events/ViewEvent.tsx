@@ -91,19 +91,20 @@ export function ViewEventScreen({ route, navigation }) {
 						</View>
 					)}
 				</View>
-				<View>
-					<FlatList
-						contentContainerStyle={{
-							flexDirection: 'column',
-							justifyContent: 'center',
-							paddingTop: 12,
-							paddingBottom: 12,
-							paddingLeft: safeAreaInsets.left + 28,
-							paddingRight: safeAreaInsets.right + 28
-						}}
-						data={sessions}
-						renderItem={({ item: session }) => (
+				<View
+					style={{
+						flexDirection: 'column',
+						justifyContent: 'center',
+						paddingTop: 12,
+						paddingBottom: 12,
+						paddingLeft: safeAreaInsets.left + 28,
+						paddingRight: safeAreaInsets.right + 28
+					}}
+				>
+					{sessions &&
+						sessions.map((session) => (
 							<Pressable
+								key={session.id}
 								style={{
 									flexDirection: 'row',
 									justifyContent: 'flex-start',
@@ -152,8 +153,8 @@ export function ViewEventScreen({ route, navigation }) {
 									)}
 								</View>
 							</Pressable>
-						)}
-					/>
+						))}
+
 					{venues && <Text>{JSON.stringify(venues)}</Text>}
 					{event && <Text>{JSON.stringify(event)}</Text>}
 				</View>
