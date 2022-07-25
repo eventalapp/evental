@@ -1,7 +1,6 @@
 import * as Prisma from '@prisma/client';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { Alert } from 'react-native';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';

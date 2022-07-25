@@ -1,8 +1,6 @@
-import axios, { AxiosError } from 'axios';
-import router from 'next/router';
+import { AxiosError } from 'axios';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
-import { toast } from 'react-toastify';
+import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
 import { ChangePasswordPayload } from '../../utils/schema';
