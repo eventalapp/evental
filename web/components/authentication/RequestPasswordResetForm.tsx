@@ -14,7 +14,8 @@ import { Input } from '../primitives/Input';
 import { Label } from '../primitives/Label';
 
 type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
-export const RequestPasswordResetForm: React.FC<Props> = (props) => {
+
+export const RequestPasswordResetForm: React.FC<Props> = () => {
 	const router = useRouter();
 	const { mutate: requestPasswordReset, isLoading: isRequestPasswordResetLoading } =
 		useRequestPasswordReset({

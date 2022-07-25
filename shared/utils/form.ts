@@ -1,7 +1,3 @@
-import Busboy from 'busboy';
-import { NextApiRequest } from 'next';
-import { NextkitError } from 'nextkit';
-
 export const populateFormData = (data: Record<string, unknown>) => {
 	const formData = new FormData();
 

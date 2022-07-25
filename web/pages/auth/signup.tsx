@@ -1,10 +1,7 @@
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import { useRouter } from 'next/router';
 import React from 'react';
-import { toast } from 'react-toastify';
 
-import { useSignUp } from '@eventalapp/shared/hooks/mutations/useSignUp';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { SignUpForm } from '../../components/authentication/SignUpForm';
@@ -18,7 +15,6 @@ import { Heading } from '../../components/primitives/Heading';
 
 const SignUpPage: NextPage = () => {
 	const { data: user, isLoading: isUserLoading } = useUser();
-	const router = useRouter();
 
 	if (isUserLoading) {
 		return <LoadingPage />;

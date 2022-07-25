@@ -1,24 +1,10 @@
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as Prisma from '@prisma/client';
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import {
-	Alert,
-	Pressable,
-	RefreshControl,
-	ScrollView,
-	StyleSheet,
-	Switch,
-	Text,
-	View
-} from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Alert, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 
 import { useEditNotificationPreferences } from '@eventalapp/shared/hooks/mutations/useEditNotificationPreferences';
-import { useNotificationPreferences } from '@eventalapp/shared/hooks/queries/useNotificationPreferences';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { FullUser } from '@eventalapp/shared/types';
 import { colors } from '@eventalapp/shared/utils/color';
 import {
@@ -26,15 +12,13 @@ import {
 	NotificationPreferenceSchema
 } from '@eventalapp/shared/utils/schema';
 
-import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
-
 type Props = {
 	preferences?: Prisma.NotificationPreference;
 	user?: FullUser;
 };
 
 export const NotificationPreferencesForm: React.FC<Props> = (props) => {
-	const { preferences, user } = props;
+	const { preferences } = props;
 
 	const {
 		control,
