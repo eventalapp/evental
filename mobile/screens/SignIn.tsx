@@ -8,7 +8,7 @@ import { useSignIn } from '@eventalapp/shared/hooks/mutations/useSignIn';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 import { SignInPayload, SignInSchema } from '@eventalapp/shared/utils/schema';
 
-export function SignInScreen() {
+export const SignInScreen = () => {
 	const {
 		control,
 		handleSubmit,
@@ -29,7 +29,7 @@ export function SignInScreen() {
 		onError: (error) => {
 			Alert.alert('Error', error?.message, [{ text: 'OK' }]);
 		},
-		onSuccess: (data) => {
+		onSuccess: () => {
 			Alert.alert('Sign In', 'You have successfully signed in.', [{ text: 'OK' }]);
 		}
 	});
@@ -104,7 +104,7 @@ export function SignInScreen() {
 			/>
 		</View>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	container: {

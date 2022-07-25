@@ -1,12 +1,21 @@
+import { CompositeScreenProps } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
 import { FlatList, Image, Pressable, RefreshControl, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
 
+import { RootStackParamList } from '../../components/navigation';
+import { EventsStackParamList } from '../../components/navigation/EventStackNavigation';
 import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 
-export function UpcomingEventsScreen(props) {
+type Props = CompositeScreenProps<
+	StackScreenProps<RootStackParamList, 'Events'>,
+	StackScreenProps<EventsStackParamList>
+>;
+
+export const UpcomingEventsScreen = (props: Props) => {
 	const { navigation } = props;
 	const {
 		data: upcomingEvents,
@@ -117,4 +126,4 @@ export function UpcomingEventsScreen(props) {
 			)}
 		/>
 	);
-}
+};
