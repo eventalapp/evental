@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useUser } from '@eventalapp/shared/hooks';
 
 import { SignUpForm } from '../../components/authentication/SignUpForm';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';

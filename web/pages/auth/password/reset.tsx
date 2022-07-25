@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useUser } from '@eventalapp/shared/hooks';
 
 import { PasswordResetForm } from '../../../components/authentication/PasswordResetForm';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';

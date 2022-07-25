@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
+import { useUserById } from '@eventalapp/shared/hooks';
 
 import { useEditAttendee } from '../../hooks/mutations/useEditAttendee';
 import { useImageUpload } from '../../hooks/mutations/useImageUpload';

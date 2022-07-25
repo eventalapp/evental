@@ -6,7 +6,7 @@ import * as Linking from 'expo-linking';
 import * as React from 'react';
 import { Text } from 'react-native';
 
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useUser } from '@eventalapp/shared/hooks';
 
 import { SignInScreen } from '../../screens/SignIn';
 import { EventStackNavigation, EventsStackParamList } from './EventStackNavigation';

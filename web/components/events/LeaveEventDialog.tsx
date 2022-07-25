@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { useLeaveEvent } from '@eventalapp/shared/hooks/mutations/useLeaveEvent';
+import { useLeaveEvent } from '@eventalapp/shared/hooks';
 
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';

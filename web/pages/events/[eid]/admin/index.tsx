@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useEvent } from '@eventalapp/shared/hooks';
 
 import DeleteEventDialog from '../../../../components/events/DeleteEventDialog';
 import { EditEventForm } from '../../../../components/events/EditEventForm';

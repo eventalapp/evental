@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useUser } from '@eventalapp/shared/hooks';
 
 import { SignInForm } from '../../components/authentication/SignInForm';
 import { AlreadySignedInPage } from '../../components/error/AlreadySignedInPage';

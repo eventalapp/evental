@@ -5,8 +5,7 @@ import React from 'react';
 import { Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useAttendee } from '@eventalapp/shared/hooks/queries/useAttendee';
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
+import { useAttendee, useEvent } from '@eventalapp/shared/hooks';
 
 import { EventsStackParamList } from '../../../components/navigation/EventStackNavigation';
 

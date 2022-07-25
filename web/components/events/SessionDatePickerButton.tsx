@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 
-import { formatDateRange } from '@eventalapp/shared/utils/date';
+import { formatDateRange } from '@eventalapp/shared/utils';
 
 import Tooltip from '../primitives/Tooltip';
 

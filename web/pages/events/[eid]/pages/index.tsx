@@ -4,9 +4,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { usePages } from '@eventalapp/shared/hooks/queries/usePages';
+import { useEvent, useIsOrganizer, usePages } from '@eventalapp/shared/hooks';
 
 import { PrivatePage } from '../../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';

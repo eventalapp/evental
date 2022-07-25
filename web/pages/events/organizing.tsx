@@ -2,8 +2,7 @@ import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import React from 'react';
 
-import { useOrganizingEvents } from '@eventalapp/shared/hooks/queries/useOrganizingEvents';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useOrganizingEvents, useUser } from '@eventalapp/shared/hooks';
 
 import { UnauthorizedPage } from '../../components/error/UnauthorizedPage';
 import { ViewErrorPage } from '../../components/error/ViewErrorPage';

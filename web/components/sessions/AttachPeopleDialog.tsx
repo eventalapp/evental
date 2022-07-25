@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import Image from 'next/image';
 import React, { useState } from 'react';
 
-import { useAttendeesByName } from '@eventalapp/shared/hooks/queries/useAttendeesByName';
+import { useAttendeesByName } from '@eventalapp/shared/hooks';
 
 import { CreateAttendeeDialog } from '../attendees/CreateAttendeeDialog';
 import { LoadingInner } from '../error/LoadingInner';

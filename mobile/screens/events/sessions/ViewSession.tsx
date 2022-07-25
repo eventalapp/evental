@@ -5,8 +5,8 @@ import React from 'react';
 import { Image, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useSession } from '@eventalapp/shared/hooks/queries/useSession';
-import { formatDateRange } from '@eventalapp/shared/utils/date';
+import { useSession } from '@eventalapp/shared/hooks';
+import { formatDateRange } from '@eventalapp/shared/utils';
 
 import { EventsStackParamList } from '../../../components/navigation/EventStackNavigation';
 

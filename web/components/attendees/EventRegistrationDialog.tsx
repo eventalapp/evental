@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { useEventRegister } from '@eventalapp/shared/hooks/mutations/useEventRegister';
+import { useEventRegister } from '@eventalapp/shared/hooks';
 
 import { StrippedUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';

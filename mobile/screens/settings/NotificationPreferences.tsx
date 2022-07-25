@@ -5,8 +5,7 @@ import React from 'react';
 import { Pressable, RefreshControl, ScrollView, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useNotificationPreferences } from '@eventalapp/shared/hooks/queries/useNotificationPreferences';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useNotificationPreferences, useUser } from '@eventalapp/shared/hooks';
 
 import { NotificationPreferencesForm } from '../../components/form/NotificationPreferenceForm';
 import { SettingsStackParamList } from '../../components/navigation/SettingsStackNavigation';

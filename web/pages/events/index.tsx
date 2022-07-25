@@ -3,8 +3,7 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import React from 'react';
 
-import { useUpcomingEvents } from '@eventalapp/shared/hooks/queries/useUpcomingEvents';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useUpcomingEvents, useUser } from '@eventalapp/shared/hooks';
 
 import { NotFoundPage } from '../../components/error/NotFoundPage';
 import { EventList } from '../../components/events/EventList';

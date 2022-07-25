@@ -1,7 +1,7 @@
 import { ErroredAPIResponse } from 'nextkit';
 import React from 'react';
 
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useUser } from '@eventalapp/shared/hooks';
 
 import { UnauthorizedPage } from '../error/UnauthorizedPage';
 import { ViewErrorPage } from '../error/ViewErrorPage';

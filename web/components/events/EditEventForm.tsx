@@ -10,8 +10,8 @@ import ReactDatePicker from 'react-datepicker';
 import { Controller, useForm } from 'react-hook-form';
 import ReactSelect from 'react-select';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { formatDateRange } from '@eventalapp/shared/utils/date';
+import { useEvent } from '@eventalapp/shared/hooks';
+import { formatDateRange } from '@eventalapp/shared/utils';
 
 import { UseEditEventMutationData } from '../../hooks/mutations/useEditEvent';
 import { theme } from '../../tailwind.config';

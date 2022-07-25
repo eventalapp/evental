@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
+import { useUserById } from '@eventalapp/shared/hooks';
 
 import { UseEditUserMutationData } from '../../hooks/mutations/useEditUser';
 import { copy } from '../../utils/const';

@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
+import { useVenues } from '@eventalapp/shared/hooks';
 
 import { AdminPageWrapper } from '../../../../../components/layout/AdminPageWrapper';
 import { AdminSidebarWrapper } from '../../../../../components/layout/AdminSidebarWrapper';

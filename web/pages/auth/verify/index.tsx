@@ -3,8 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { useVerifyEmail } from '@eventalapp/shared/hooks/mutations/useVerifyEmail';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { useUser, useVerifyEmail } from '@eventalapp/shared/hooks';
 
 import { LoadingSpinner } from '../../../components/error/LoadingSpinner';
 import { UnauthorizedPage } from '../../../components/error/UnauthorizedPage';

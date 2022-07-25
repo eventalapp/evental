@@ -7,11 +7,13 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useSessionCategories } from '@eventalapp/shared/hooks/queries/useSessionCategories';
-import { useSessions } from '@eventalapp/shared/hooks/queries/useSessions';
-import { useVenues } from '@eventalapp/shared/hooks/queries/useVenues';
+import {
+	useEvent,
+	useIsOrganizer,
+	useSessionCategories,
+	useSessions,
+	useVenues
+} from '@eventalapp/shared/hooks';
 
 import { PrivatePage } from '../../../components/error/PrivatePage';
 import { ViewErrorPage } from '../../../components/error/ViewErrorPage';

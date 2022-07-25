@@ -4,7 +4,7 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { useSignUp } from '@eventalapp/shared/hooks/mutations/useSignUp';
+import { useSignUp } from '@eventalapp/shared/hooks';
 
 import { SignUpPayload, SignUpSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';

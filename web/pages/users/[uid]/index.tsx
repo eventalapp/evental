@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
+import { useUserById } from '@eventalapp/shared/hooks';
 
 import { LoadingPage } from '../../../components/error/LoadingPage';
 import { NotFoundPage } from '../../../components/error/NotFoundPage';

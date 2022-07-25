@@ -16,12 +16,14 @@ import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
-import { useIsAttendee } from '@eventalapp/shared/hooks/queries/useIsAttendee';
-import { useIsFounder } from '@eventalapp/shared/hooks/queries/useIsFounder';
-import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
-import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
-import { formatDateRange } from '@eventalapp/shared/utils/date';
+import {
+	useEvent,
+	useIsAttendee,
+	useIsFounder,
+	useIsOrganizer,
+	useUser
+} from '@eventalapp/shared/hooks';
+import { formatDateRange } from '@eventalapp/shared/utils';
 
 import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { EventRegistrationDialog } from '../attendees/EventRegistrationDialog';
