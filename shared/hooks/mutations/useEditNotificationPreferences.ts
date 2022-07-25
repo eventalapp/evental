@@ -7,12 +7,27 @@ import { useMutation, useQueryClient } from 'react-query';
 import { api } from '../../api';
 import { NotificationPreferencePayload } from '../../utils/schema';
 
-export const useEditNotificationPreferences = () => {
+interface UseUserSettingsArgs {
+	onError?: (
+		error: ErroredAPIResponse | undefined,
+		variables: NotificationPreferencePayload,
+		context: unknown
+	) => void;
+	onSuccess?: (
+		data: Prisma.NotificationPreference,
+		variables: NotificationPreferencePayload,
+		context: unknown
+	) => void;
+}
+
+export const useEditNotificationPreferences = (args: UseUserSettingsArgs = {}) => {
+	const { onError, onSuccess } = args;
+
 	const queryClient = useQueryClient();
 
 	return useMutation<
 		Prisma.NotificationPreference,
-		AxiosError<ErroredAPIResponse, unknown>,
+		ErroredAPIResponse,
 		NotificationPreferencePayload
 	>(
 		async (data) => {
@@ -24,17 +39,12 @@ export const useEditNotificationPreferences = () => {
 				});
 		},
 		{
-			onSuccess: () => {
-				Alert.alert(
-					'Preferences Updated',
-					'Your user notification preferences have succesfully been updated.',
-					[{ text: 'OK' }]
-				);
+			onSuccess: (...rest) => {
 				void queryClient.refetchQueries(['notification-preference']);
+
+				onSuccess?.(...rest);
 			},
-			onError: (error) => {
-				Alert.alert('Error', error?.message, [{ text: 'OK' }]);
-			}
+			onError
 		}
 	);
 };
