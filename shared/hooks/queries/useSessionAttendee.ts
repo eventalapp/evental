@@ -5,13 +5,13 @@ import { useQuery } from 'react-query';
 import { api } from '../../api';
 import { AttendeeWithUser } from '../../types';
 
-export interface UseSessionsByVenueArgs {
+export interface UseSessionAttendeeArgs {
 	eid?: string;
 	sid?: string;
 	uid?: string;
 }
 
-export const useSessionAttendee = (args: UseSessionsByVenueArgs = {}) => {
+export const useSessionAttendee = (args: UseSessionAttendeeArgs = {}) => {
 	const { eid, sid, uid } = args;
 
 	return useQuery<AttendeeWithUser | undefined, ErroredAPIResponse>(
