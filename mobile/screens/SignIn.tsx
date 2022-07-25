@@ -2,7 +2,7 @@ import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { useSignIn } from '@eventalapp/shared/hooks/mutations/useSignIn';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
@@ -25,7 +25,14 @@ export function SignInScreen() {
 		isRefetching: isUserRefetching,
 		isLoading: isUserLoading
 	} = useUser();
-	const { mutate: signIn } = useSignIn();
+	const { mutate: signIn } = useSignIn({
+		onError: (error) => {
+			Alert.alert('Error', error?.message, [{ text: 'OK' }]);
+		},
+		onSuccess: (data) => {
+			Alert.alert('Sign In', 'You have successfully signed in.', [{ text: 'OK' }]);
+		}
+	});
 
 	return (
 		<View style={styles.container}>
