@@ -4,26 +4,36 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
+import { toast } from 'react-toastify';
 
-import { UseeventRegistrationMutationData } from '../../hooks/mutations/useEventRegister';
+import { useEventRegister } from '@eventalapp/shared/hooks/mutations/useEventRegister';
+
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 
-type Props = { event: Prisma.Event } & DetailedHTMLProps<
+type Props = { event: Prisma.Event; eid: string } & DetailedHTMLProps<
 	FormHTMLAttributes<HTMLFormElement>,
 	HTMLFormElement
-> &
-	UseeventRegistrationMutationData;
-
+>;
 export const CreateAttendeeForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { eventRegistrationMutation, event } = props;
+	const { event, eid } = props;
 	const { handleSubmit } = useForm();
+
+	const { mutate: eventRegister, isLoading: isEventRegistrationLoading } = useEventRegister({
+		eid: String(eid),
+		onSuccess: () => {
+			toast.success('You have successfully registered for this event.');
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'An error has occurred.');
+		}
+	});
 
 	return (
 		<form
 			onSubmit={handleSubmit(() => {
-				eventRegistrationMutation.mutate();
+				eventRegister();
 			})}
 		>
 			<div className="mt-3 flex flex-row justify-end">
@@ -36,13 +46,13 @@ export const CreateAttendeeForm: React.FC<Props> = (props) => {
 						className="ml-4"
 						variant="primary"
 						padding="medium"
-						disabled={eventRegistrationMutation.isLoading}
+						disabled={isEventRegistrationLoading}
 						style={{
 							backgroundColor: event.color,
 							color: Color(event.color).isLight() ? '#000' : '#FFF'
 						}}
 					>
-						{eventRegistrationMutation.isLoading ? <LoadingInner /> : 'Register'}
+						{isEventRegistrationLoading ? <LoadingInner /> : 'Register'}
 					</Button>
 				) : (
 					<Skeleton className="h-6 w-20" />

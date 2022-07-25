@@ -11,7 +11,7 @@ interface UseSignOutArgs {
 	onSuccess?: (data: void, variables: void, context: unknown) => void;
 }
 
-export const useSignOutMutation = (args: UseSignOutArgs = {}) => {
+export const useSignOut = (args: UseSignOutArgs = {}) => {
 	const { onError, onSuccess } = args;
 
 	const queryClient = useQueryClient();

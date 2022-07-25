@@ -3,11 +3,11 @@ import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useEditUserSettings } from '@eventalapp/shared/hooks/mutations/useEditUserSettings';
 import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
+import { copy } from '@eventalapp/shared/utils/const';
+import { UserSettingsPayload, UserSettingsSchema } from '@eventalapp/shared/utils/schema';
 
-import { useUserSettingsMutation } from '../../hooks/mutations/useUserSettingsMutation';
-import { copy } from '../../utils/const';
-import { UserSettingsPayload, UserSettingsSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/string';
 import { FullUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
@@ -27,7 +27,7 @@ type Props = {
 export const UserSettingsForm: React.FC<Props> = (props) => {
 	const { user } = props;
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
-	const { userSettingsMutation } = useUserSettingsMutation();
+	const { mutate: editUserSettings, isLoading: isEditUserSettingsLoading } = useEditUserSettings();
 	const {
 		register,
 		handleSubmit,
@@ -68,7 +68,7 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				userSettingsMutation.mutate(data);
+				editUserSettings(data);
 			})}
 		>
 			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
@@ -179,12 +179,12 @@ export const UserSettingsForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					padding="medium"
 					disabled={
-						userSettingsMutation.isLoading ||
+						isEditUserSettingsLoading ||
 						isUserSlugCheckLoading ||
 						Boolean(slugWatcher !== user?.slug && userSlugCheck)
 					}
 				>
-					{userSettingsMutation.isLoading ? <LoadingInner /> : 'Save'}
+					{isEditUserSettingsLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>

@@ -3,7 +3,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { toast } from 'react-toastify';
 
+import { useResetPassword } from '@eventalapp/shared/hooks/mutations/useResetPassword';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { PasswordResetForm } from '../../../components/authentication/PasswordResetForm';
@@ -15,14 +17,12 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
-import { usePasswordReset } from '../../../hooks/mutations/usePasswordReset';
 import { PASSWORD_RESET_EXPIRY } from '../../../utils/config';
 
 const ResetPasswordPage: NextPage = () => {
 	const router = useRouter();
-	const { data: user, isLoading: isUserLoading } = useUser();
-	const { passwordResetMutation } = usePasswordReset();
 	const { code } = router.query;
+	const { data: user, isLoading: isUserLoading } = useUser();
 
 	if (isUserLoading) {
 		return <LoadingPage />;
@@ -76,7 +76,7 @@ const ResetPasswordPage: NextPage = () => {
 					<Heading>Reset Password</Heading>
 				</div>
 
-				<PasswordResetForm passwordResetMutation={passwordResetMutation} code={String(code)} />
+				<PasswordResetForm code={String(code)} />
 			</Column>
 
 			<Footer />

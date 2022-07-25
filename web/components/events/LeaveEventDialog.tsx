@@ -1,21 +1,34 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { useLeaveEvent } from '../../hooks/mutations/useLeaveEvent';
+import { useLeaveEvent } from '@eventalapp/shared/hooks/mutations/useLeaveEvent';
+
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 import { DialogContent } from '../primitives/DialogContent';
 
 interface Props {
-	eventSlug: string;
-	userSlug: string;
+	eid: string;
 }
 
 const LeaveEventDialog: React.FC<Props> = (props) => {
-	const { eventSlug, userSlug, children } = props;
+	const { eid, children } = props;
 	let [isOpen, setIsOpen] = useState(false);
+	const router = useRouter();
 
-	const leaveEventMutation = useLeaveEvent(eventSlug, String(userSlug));
+	const leaveEventMutation = useLeaveEvent({
+		eid,
+		onSuccess: () => {
+			toast.success('You have left the event');
+
+			void router.push(`/events`);
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'An error has occurred.');
+		}
+	});
 
 	useEffect(() => {
 		if (leaveEventMutation.isSuccess) {

@@ -2,7 +2,9 @@ import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { toast } from 'react-toastify';
 
+import { useSignUp } from '@eventalapp/shared/hooks/mutations/useSignUp';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
 
 import { SignUpForm } from '../../components/authentication/SignUpForm';
@@ -13,14 +15,10 @@ import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
-import { useSignUpMutation } from '../../hooks/mutations/useSignUpMutation';
 
 const SignUpPage: NextPage = () => {
 	const { data: user, isLoading: isUserLoading } = useUser();
 	const router = useRouter();
-	const { signUpMutation } = useSignUpMutation({
-		redirectUrl: router.query.redirectUrl ? String(router.query.redirectUrl) : undefined
-	});
 
 	if (isUserLoading) {
 		return <LoadingPage />;
@@ -60,7 +58,7 @@ const SignUpPage: NextPage = () => {
 						<Heading>Sign up</Heading>
 					</div>
 
-					<SignUpForm signUpMutation={signUpMutation} />
+					<SignUpForm />
 				</div>
 			</Column>
 

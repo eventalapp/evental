@@ -2,8 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
-import { UseRequestPasswordResetData } from '../../hooks/mutations/useRequestPasswordReset';
+import { useRequestPasswordReset } from '@eventalapp/shared/hooks/mutations/useRequestPasswordReset';
+
 import { ChangePasswordRequestPayload, ChangePasswordRequestSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -11,12 +13,18 @@ import { Button } from '../primitives/Button';
 import { Input } from '../primitives/Input';
 import { Label } from '../primitives/Label';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseRequestPasswordResetData;
-
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 export const RequestPasswordResetForm: React.FC<Props> = (props) => {
 	const router = useRouter();
-	const { requestPasswordResetMutation } = props;
+	const { mutate: requestPasswordReset, isLoading: isRequestPasswordResetLoading } =
+		useRequestPasswordReset({
+			onSuccess: () => {
+				toast.success('Password reset request successfully sent. Check your email.');
+			},
+			onError: (error) => {
+				toast.error(error?.message ?? 'An error has occurred.');
+			}
+		});
 	const {
 		register,
 		handleSubmit,
@@ -28,7 +36,7 @@ export const RequestPasswordResetForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				requestPasswordResetMutation.mutate(data);
+				requestPasswordReset(data);
 			})}
 		>
 			<div className="my-5">
@@ -48,9 +56,9 @@ export const RequestPasswordResetForm: React.FC<Props> = (props) => {
 					className="ml-4"
 					variant="primary"
 					padding="medium"
-					disabled={requestPasswordResetMutation.isLoading}
+					disabled={isRequestPasswordResetLoading}
 				>
-					{requestPasswordResetMutation.isLoading ? <LoadingInner /> : 'Request'}
+					{isRequestPasswordResetLoading ? <LoadingInner /> : 'Request'}
 				</Button>
 			</div>
 		</form>

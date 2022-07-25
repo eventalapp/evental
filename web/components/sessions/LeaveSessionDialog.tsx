@@ -1,23 +1,39 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { useLeaveSession } from '../../hooks/mutations/useLeaveSession';
+import { useLeaveSession } from '@eventalapp/shared/hooks/mutations/useLeaveSession';
+
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
 import { DialogContent } from '../primitives/DialogContent';
 
 interface Props {
-	eventSlug: string;
-	sessionSlug: string;
-	userSlug: string;
+	eid: string;
+	sid: string;
 	redirect?: boolean;
 }
 
 export const LeaveSessionDialog: React.FC<Props> = (props) => {
-	const { eventSlug, userSlug, sessionSlug, children, redirect } = props;
+	const { eid, sid, children, redirect } = props;
 	let [isOpen, setIsOpen] = useState(false);
+	const router = useRouter();
 
-	const leaveSessionMutation = useLeaveSession(eventSlug, sessionSlug, userSlug, { redirect });
+	const leaveSessionMutation = useLeaveSession({
+		eid,
+		sid,
+		onSuccess: () => {
+			toast.success('You have left the session');
+
+			if (redirect) {
+				void router.push(`/events/${eid}`);
+			}
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'An error has occurred.');
+		}
+	});
 
 	useEffect(() => {
 		if (leaveSessionMutation.isSuccess) {

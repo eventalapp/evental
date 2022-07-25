@@ -3,7 +3,8 @@ import * as Prisma from '@prisma/client';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useUserNotificationPreferencesMutation } from '../../hooks/mutations/useUserNotificationPreferencesMutation';
+import { useEditNotificationPreferences } from '@eventalapp/shared/hooks/mutations/useEditNotificationPreferences';
+
 import {
 	UserNotificationPreferencePayload,
 	UserNotificationPreferenceSchema
@@ -21,7 +22,8 @@ type Props = {
 export const UserNotificationPreferencesForm: React.FC<Props> = (props) => {
 	const { notificationPreferences } = props;
 
-	const { userNotificationPreferenceMutation } = useUserNotificationPreferencesMutation();
+	const { mutate: editNotificationPreferences, isLoading: isEditNotificationPreferencesLoading } =
+		useEditNotificationPreferences();
 
 	const {
 		handleSubmit,
@@ -42,7 +44,7 @@ export const UserNotificationPreferencesForm: React.FC<Props> = (props) => {
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				userNotificationPreferenceMutation.mutate(data);
+				editNotificationPreferences(data);
 			})}
 		>
 			<div className="my-5 grid grid-flow-row-dense grid-cols-4 gap-5">
@@ -104,7 +106,7 @@ export const UserNotificationPreferencesForm: React.FC<Props> = (props) => {
 
 			<div className="flex flex-row justify-end">
 				<Button type="submit" variant="primary" className="ml-4" padding="medium">
-					{userNotificationPreferenceMutation.isLoading ? <LoadingInner /> : 'Save'}
+					{isEditNotificationPreferencesLoading ? <LoadingInner /> : 'Save'}
 				</Button>
 			</div>
 		</form>

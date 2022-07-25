@@ -3,9 +3,12 @@ import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { toast } from 'react-toastify';
 
+import { useAcceptOrganizerInvite } from '@eventalapp/shared/hooks/mutations/useAcceptOrganizerInvite';
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { AcceptOrganizerInviteSchema } from '@eventalapp/shared/utils/schema';
 
 import { ViewErrorPage } from '../../../../components/error/ViewErrorPage';
 import Column from '../../../../components/layout/Column';
@@ -16,14 +19,22 @@ import { Navigation } from '../../../../components/navigation';
 import { Button } from '../../../../components/primitives/Button';
 import { Heading } from '../../../../components/primitives/Heading';
 import { LinkButton } from '../../../../components/primitives/LinkButton';
-import { useAcceptOrganizerInviteMutation } from '../../../../hooks/mutations/useAcceptOrganizerInviteMutation';
-import { AcceptOrganizerInviteSchema } from '../../../../utils/schemas';
 
 const OrganizerInvitePage: NextPage = () => {
 	const router = useRouter();
 	const { data: user } = useUser();
 	const { eid, code } = router.query;
-	const { acceptOrganizerInviteMutation } = useAcceptOrganizerInviteMutation(String(eid));
+	const { mutate: acceptOrganizerInvite } = useAcceptOrganizerInvite({
+		eid: String(eid),
+		onSuccess: () => {
+			router.push(`/events/${eid}/admin`).then(() => {
+				toast.success('You have joined this event as an organizer.');
+			});
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'An error has occurred.');
+		}
+	});
 	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
 
 	const Seo = event && (
@@ -112,7 +123,7 @@ const OrganizerInvitePage: NextPage = () => {
 							onClick={() => {
 								const data = AcceptOrganizerInviteSchema.parse({ code: String(code) });
 
-								acceptOrganizerInviteMutation.mutate(data);
+								acceptOrganizerInvite(data);
 							}}
 						>
 							Accept Invite

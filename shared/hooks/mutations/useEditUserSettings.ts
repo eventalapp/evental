@@ -18,7 +18,7 @@ interface UseUserSettingsArgs {
 	onSuccess?: (data: StrippedUser, variables: UserSettingsPayload, context: unknown) => void;
 }
 
-export const useUserSettingsMutation = (args: UseUserSettingsArgs = {}) => {
+export const useEditUserSettings = (args: UseUserSettingsArgs = {}) => {
 	const { onError, onSuccess } = args;
 
 	const queryClient = useQueryClient();

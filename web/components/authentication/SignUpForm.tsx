@@ -1,8 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
-import { UseSignUpMutationData } from '../../hooks/mutations/useSignUpMutation';
+import { useSignUp } from '@eventalapp/shared/hooks/mutations/useSignUp';
+
 import { SignUpPayload, SignUpSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -10,11 +13,10 @@ import { Button } from '../primitives/Button';
 import { Input } from '../primitives/Input';
 import { Label } from '../primitives/Label';
 
-type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> &
-	UseSignUpMutationData;
+type Props = DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
-export const SignUpForm: React.FC<Props> = (props) => {
-	const { signUpMutation } = props;
+export const SignUpForm: React.FC<Props> = () => {
+	const router = useRouter();
 	const {
 		register,
 		handleSubmit,
@@ -22,11 +24,29 @@ export const SignUpForm: React.FC<Props> = (props) => {
 	} = useForm<SignUpPayload>({
 		resolver: zodResolver(SignUpSchema)
 	});
+	const { mutate: signUp, isLoading: isSignUpLoading } = useSignUp({
+		onSuccess: () => {
+			const redirectUrl = router.query.redirectUrl ? String(router.query.redirectUrl) : undefined;
+
+			if (!redirectUrl) {
+				router.push('/events').then(() => {
+					toast.success('You have successfully signed up');
+				});
+			} else {
+				router.push(redirectUrl).then(() => {
+					toast.success('You have successfully signed up');
+				});
+			}
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'Failed to sign up.');
+		}
+	});
 
 	return (
 		<form
 			onSubmit={handleSubmit((data) => {
-				signUpMutation.mutate(data);
+				signUp(data);
 			})}
 		>
 			<div className="mt-5 w-full">
@@ -59,9 +79,9 @@ export const SignUpForm: React.FC<Props> = (props) => {
 					className="w-full"
 					variant="primary"
 					padding="medium"
-					disabled={signUpMutation.isLoading}
+					disabled={isSignUpLoading}
 				>
-					{signUpMutation.isLoading ? <LoadingInner /> : 'Sign Up'}
+					{isSignUpLoading ? <LoadingInner /> : 'Sign Up'}
 				</Button>
 			</div>
 		</form>

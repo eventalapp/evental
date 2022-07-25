@@ -4,11 +4,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { toast } from 'react-toastify';
 
+import { useAcceptRoleInvite } from '@eventalapp/shared/hooks/mutations/useAcceptRoleInvite';
 import { useEvent } from '@eventalapp/shared/hooks/queries/useEvent';
 import { useIsOrganizer } from '@eventalapp/shared/hooks/queries/useIsOrganizer';
 import { useRole } from '@eventalapp/shared/hooks/queries/useRole';
 import { useUser } from '@eventalapp/shared/hooks/queries/useUser';
+import { AcceptRoleInviteSchema } from '@eventalapp/shared/utils/schema';
 
 import { NotFoundPage } from '../../../../../components/error/NotFoundPage';
 import { PrivatePage } from '../../../../../components/error/PrivatePage';
@@ -21,14 +24,23 @@ import { Navigation } from '../../../../../components/navigation';
 import { Button } from '../../../../../components/primitives/Button';
 import { Heading } from '../../../../../components/primitives/Heading';
 import { LinkButton } from '../../../../../components/primitives/LinkButton';
-import { useAcceptRoleInviteMutation } from '../../../../../hooks/mutations/useAcceptRoleInviteMutation';
-import { AcceptRoleInviteSchema } from '../../../../../utils/schemas';
 
 const RoleInvitePage: NextPage = () => {
 	const router = useRouter();
 	const { data: user } = useUser();
 	const { eid, rid, code } = router.query;
-	const { acceptRoleInviteMutation } = useAcceptRoleInviteMutation(String(eid), String(rid));
+	const { mutate: acceptRoleInvite } = useAcceptRoleInvite({
+		eid: String(eid),
+		rid: String(rid),
+		onSuccess: () => {
+			router.push(`/events/${eid}`).then(() => {
+				toast.success('You have joined this event.');
+			});
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'An error has occurred.');
+		}
+	});
 	const { data: role, error: roleError } = useRole({ eid: String(eid), rid: String(rid) });
 	const { data: event, error: eventError } = useEvent({ eid: String(eid) });
 	const { data: isOrganizer, isLoading: isOrganizerLoading } = useIsOrganizer({ eid: String(eid) });
@@ -130,7 +142,7 @@ const RoleInvitePage: NextPage = () => {
 							onClick={() => {
 								const data = AcceptRoleInviteSchema.parse({ code: String(code) });
 
-								acceptRoleInviteMutation.mutate(data);
+								acceptRoleInvite(data);
 							}}
 						>
 							Accept Invite

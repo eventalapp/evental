@@ -4,8 +4,10 @@ import Color from 'color';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { useEventRegister } from '../../hooks/mutations/useEventRegister';
+import { useEventRegister } from '@eventalapp/shared/hooks/mutations/useEventRegister';
+
 import { StrippedUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
 import { Button } from '../primitives/Button';
@@ -22,8 +24,18 @@ export const EventRegistrationDialog: React.FC<Props> = (props) => {
 
 	let [isOpen, setIsOpen] = useState(false);
 	const router = useRouter();
-	const { eventRegistrationMutation } = useEventRegister(String(event.slug), {
-		redirect: false
+	const {
+		mutate: eventRegistration,
+		isSuccess: isRegistrationSuccess,
+		isLoading: isRegistrationLoading
+	} = useEventRegister({
+		eid: String(event.slug),
+		onSuccess: () => {
+			toast.success('You have successfully registered for this event.');
+		},
+		onError: (error) => {
+			toast.error(error?.message ?? 'An error has occurred.');
+		}
 	});
 
 	let params = new URLSearchParams();
@@ -31,10 +43,10 @@ export const EventRegistrationDialog: React.FC<Props> = (props) => {
 	params.append('redirectUrl', String(router.asPath));
 
 	useEffect(() => {
-		if (eventRegistrationMutation.isSuccess) {
+		if (isRegistrationSuccess) {
 			setIsOpen(false);
 		}
-	}, [eventRegistrationMutation.isSuccess]);
+	}, [isRegistrationSuccess]);
 
 	return (
 		<DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
@@ -67,16 +79,16 @@ export const EventRegistrationDialog: React.FC<Props> = (props) => {
 							className="ml-4"
 							variant="primary"
 							padding="medium"
-							disabled={eventRegistrationMutation.isLoading}
+							disabled={isRegistrationLoading}
 							style={{
 								backgroundColor: event.color,
 								color: Color(event.color).isLight() ? '#000' : '#FFF'
 							}}
 							onClick={() => {
-								eventRegistrationMutation.mutate();
+								eventRegistration();
 							}}
 						>
-							{eventRegistrationMutation.isLoading ? <LoadingInner /> : 'Register'}
+							{isRegistrationLoading ? <LoadingInner /> : 'Register'}
 						</Button>
 					) : (
 						<Link href={`/auth/signin?${params}`} passHref>
