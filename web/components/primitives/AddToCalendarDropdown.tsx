@@ -5,7 +5,8 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CalendarEvent, google, ics, office365, outlook, yahoo } from 'calendar-link';
 import cx from 'classnames';
 
-import { faCalendarCirclePlus, faOutlook } from '../../utils/icons';
+import { faCalendarCirclePlus, faOutlook } from '@eventalapp/shared/utils/icons';
+
 import Tooltip from './Tooltip';
 
 interface Props {

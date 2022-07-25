@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { AdminCreateAttendeePayload, AdminCreateAttendeeSchema } from '@eventalapp/shared/utils';
+
 import { useAdminCreateAttendee } from '../../hooks/mutations/useAdminCreateAttendee';
-import { AdminCreateAttendeePayload, AdminCreateAttendeeSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { StyledEditor } from '../form/Editor';

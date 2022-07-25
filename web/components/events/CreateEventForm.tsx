@@ -5,10 +5,9 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from 'react-hook-form';
 
-import { formatDateRange } from '@eventalapp/shared/utils';
+import { CreateEventPayload, CreateEventSchema, formatDateRange } from '@eventalapp/shared/utils';
 
 import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEvent';
-import { CreateEventPayload, CreateEventSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { renderCustomHeader } from '../form/DatePicker';
 import { DatePickerButton } from '../form/DatePickerButton';

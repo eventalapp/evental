@@ -1,11 +1,10 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { VerifyEmailSchema, stripUser } from '@eventalapp/shared/utils';
+import { VERIFY_EMAIL_EXPIRY } from '@eventalapp/shared/utils/config';
 
 import { api } from '../../../../utils/api';
-import { VERIFY_EMAIL_EXPIRY } from '../../../../utils/config';
-import { VerifyEmailSchema } from '../../../../utils/schemas';
-import { stripUser } from '../../../../utils/user';
 
 export default api({
 	async POST({ ctx, req }) {

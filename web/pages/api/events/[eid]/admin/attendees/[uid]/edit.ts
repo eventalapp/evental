@@ -2,15 +2,18 @@ import * as Prisma from '@prisma/client';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import {
+	AdminEditAttendeeSchema,
+	AttendeeWithUserInput,
+	stripAttendeeWithUser
+} from '@eventalapp/shared/utils';
+import { CLAIM_PROFILE_EXPIRY } from '@eventalapp/shared/utils/config';
 
 import { sendClaimProfile } from '../../../../../../../email/templates/claimProfile';
 import { api } from '../../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../../utils/attendee';
-import { CLAIM_PROFILE_EXPIRY } from '../../../../../../../utils/config';
 import { busboyParseForm } from '../../../../../../../utils/form';
 import { uploadAndProcessAvatar } from '../../../../../../../utils/image';
-import { AdminEditAttendeeSchema } from '../../../../../../../utils/schemas';
-import { AttendeeWithUserInput, stripAttendeeWithUser } from '../../../../../../../utils/user';
 import { getAttendee } from '../../../attendees/[uid]';
 import { getEvent } from '../../../index';
 

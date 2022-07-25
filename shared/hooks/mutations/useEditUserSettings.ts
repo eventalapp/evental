@@ -4,9 +4,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
-import { StrippedUser } from '../../types';
-import { populateFormData } from '../../utils/form';
-import { UserSettingsPayload } from '../../utils/schema';
+import { StrippedUser, UserSettingsPayload, populateFormData } from '../../utils';
 
 interface UseUserSettingsArgs {
 	onError?: (

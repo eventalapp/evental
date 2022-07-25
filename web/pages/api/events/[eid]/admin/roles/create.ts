@@ -1,10 +1,10 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { CreateRoleSchema } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../utils/attendee';
-import { CreateRoleSchema } from '../../../../../../utils/schemas';
 import { generateSlug } from '../../../../../../utils/string';
 
 export default api({

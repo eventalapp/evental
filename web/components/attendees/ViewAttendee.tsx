@@ -12,8 +12,9 @@ import Image from 'next/image';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { AttendeeWithUser } from '@eventalapp/shared/utils';
+
 import { capitalizeFirstLetter } from '../../utils/string';
-import { AttendeeWithUser } from '../../utils/user';
 import { Heading } from '../primitives/Heading';
 import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
 import { IconLinkTooltip } from '../primitives/IconLinkTooltip';

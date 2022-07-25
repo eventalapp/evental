@@ -5,8 +5,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { Alert, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 
 import { useEditNotificationPreferences } from '@eventalapp/shared/hooks';
-import { FullUser } from '@eventalapp/shared/types';
 import {
+	FullUser,
 	NotificationPreferencePayload,
 	NotificationPreferenceSchema,
 	colors

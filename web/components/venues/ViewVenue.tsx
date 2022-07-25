@@ -4,8 +4,8 @@ import parse from 'html-react-parser';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
-import { StrippedUser } from '../../utils/user';
+import { SessionWithVenue, StrippedUser } from '@eventalapp/shared/utils';
+
 import { Heading } from '../primitives/Heading';
 import { IconButtonTooltip } from '../primitives/IconButtonTooltip';
 import { IconLinkTooltip } from '../primitives/IconLinkTooltip';

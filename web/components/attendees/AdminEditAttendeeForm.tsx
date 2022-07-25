@@ -5,13 +5,17 @@ import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useUserById } from '@eventalapp/shared/hooks';
+import {
+	AdminEditAttendeePayload,
+	AdminEditAttendeeSchema,
+	AttendeeWithUser,
+	FullUser,
+	copy
+} from '@eventalapp/shared/utils';
 
 import { useEditAttendee } from '../../hooks/mutations/useEditAttendee';
 import { useImageUpload } from '../../hooks/mutations/useImageUpload';
-import { copy } from '../../utils/const';
-import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter, slugify } from '../../utils/string';
-import { AttendeeWithUser, FullUser } from '../../utils/user';
 import { LoadingInner } from '../error/LoadingInner';
 import AvatarUpload, { FileWithPreview } from '../form/AvatarUpload';
 import { StyledEditor } from '../form/Editor';

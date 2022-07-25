@@ -5,7 +5,8 @@ import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
+import { SessionCategoryWithCount } from '@eventalapp/shared/utils';
+
 import { NotFound } from '../error/NotFound';
 import Tooltip from '../primitives/Tooltip';
 

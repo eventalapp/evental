@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
 import { api } from '../../api';
-import { SessionWithVenue } from '../../types';
+import { SessionWithVenue } from '../../utils';
 
 export interface UseSessionsByDateArgs {
 	eid?: string;

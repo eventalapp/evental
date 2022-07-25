@@ -1,10 +1,11 @@
 import { NextkitError } from 'nextkit';
 
+import { InviteRoleSchema } from '@eventalapp/shared/utils';
+import { ORGANIZER_INVITE_EXPIRY } from '@eventalapp/shared/utils/config';
+
 import { sendRoleInvite } from '../../../../../../../email/templates/inviteRole';
 import { api } from '../../../../../../../utils/api';
 import { isFounder } from '../../../../../../../utils/attendee';
-import { ORGANIZER_INVITE_EXPIRY } from '../../../../../../../utils/config';
-import { InviteRoleSchema } from '../../../../../../../utils/schemas';
 import { getEvent } from '../../../index';
 import { getRole } from '../../../roles/[rid]';
 

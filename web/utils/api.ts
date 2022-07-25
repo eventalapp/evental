@@ -3,8 +3,7 @@ import { randomBytes } from 'crypto';
 import createAPI from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
-
-import { FullUser, StrippedUser, fullUser, stripUser } from './user';
+import { FullUser, StrippedUser, fullUser, stripUser } from '@eventalapp/shared/utils';
 
 const redis = new Redis({
 	url: process.env.UPSTASH_URL!,

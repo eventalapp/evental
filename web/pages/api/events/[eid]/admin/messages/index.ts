@@ -1,11 +1,11 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { SendEventMessageSchema } from '@eventalapp/shared/utils';
 
 import { getEvent } from '../..';
 import { sendEventMessage } from '../../../../../../email/templates/eventMessage';
 import { api } from '../../../../../../utils/api';
-import { SendEventMessageSchema } from '../../../../../../utils/schemas';
 import { generateSlug } from '../../../../../../utils/string';
 
 export default api({

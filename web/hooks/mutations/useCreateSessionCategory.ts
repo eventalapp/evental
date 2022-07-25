@@ -4,8 +4,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
-import { CreateSessionCategoryPayload } from '../../utils/schemas';
+import { CreateSessionCategoryPayload, SessionCategoryWithCount } from '@eventalapp/shared/utils';
 
 export interface UseCreateSessionCategoryMutationData {
 	createSessionCategoryMutation: UseMutationResult<

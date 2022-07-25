@@ -1,88 +1,18 @@
-import * as Prisma from '@prisma/client';
 import { endOfDay, parseISO, startOfDay } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import {
+	SessionWithVenue,
+	rawToSessionWithVenue,
+	sessionWithVenueInclude
+} from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../utils/api';
-import {
-	AttendeeWithUser,
-	attendeeWithUserInclude,
-	stripAttendeeWithUser
-} from '../../../../../utils/user';
 import { getEvent } from '../index';
 import { getVenue } from '../venues/[vid]';
-import { SessionCategoryWithCount, sessionCategoryWithCountInclude } from './categories';
 import { getSessionCategory } from './categories/[cid]';
-
-export type SessionWithVenue = {
-	venue: Prisma.EventVenue | null;
-	category: SessionCategoryWithCount | null;
-	attendeeCount: number;
-	roleMembers: Array<Prisma.EventSessionAttendee & { attendee: AttendeeWithUser }>;
-} & Prisma.EventSession;
-
-export const sessionWithVenueInclude = {
-	venue: true,
-	category: {
-		include: sessionCategoryWithCountInclude
-	},
-	_count: {
-		select: { attendees: true }
-	},
-	attendees: {
-		include: attendeeWithUserInclude,
-		where: {
-			type: Prisma.EventSessionAttendeeType['ROLE']
-		}
-	}
-};
-
-export type SessionWithVenueRaw = Prisma.EventSession & {
-	venue: Prisma.EventVenue | null;
-	category: (Prisma.EventSessionCategory & { _count: { sessions: number } }) | null;
-	_count: { attendees: number };
-	attendees: Array<
-		Prisma.EventSessionAttendee & {
-			attendee: Prisma.EventAttendee & { role: Prisma.EventRole; user: Prisma.User };
-		}
-	>;
-};
-
-export const rawToSessionWithVenue = (session: SessionWithVenueRaw) => {
-	const {
-		venue,
-		category: categoryWithCount,
-		_count: { attendees: attendeeCount },
-		attendees,
-		...rest
-	} = session;
-
-	const roleMembers = attendees.map((sessionAttendee) => {
-		const { attendee, ...rest } = sessionAttendee;
-
-		return {
-			...rest,
-			attendee: stripAttendeeWithUser(attendee)
-		};
-	});
-
-	const category: SessionCategoryWithCount | null = categoryWithCount
-		? {
-				sessionCount: categoryWithCount?._count.sessions || 0,
-				...categoryWithCount
-		  }
-		: null;
-
-	return {
-		...rest,
-		attendeeCount,
-		roleMembers,
-		category,
-		venue
-	};
-};
 
 export default api({
 	async GET({ req }) {

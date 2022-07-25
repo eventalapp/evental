@@ -5,9 +5,13 @@ import React, { useEffect, useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
+import {
+	CreateSessionCategoryPayload,
+	CreateSessionCategorySchema,
+	copy
+} from '@eventalapp/shared/utils';
+
 import { useCreateSessionCategory } from '../../hooks/mutations/useCreateSessionCategory';
-import { copy } from '../../utils/const';
-import { CreateSessionCategoryPayload, CreateSessionCategorySchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';

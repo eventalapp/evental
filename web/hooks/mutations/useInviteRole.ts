@@ -4,7 +4,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { InviteRolePayload } from '../../utils/schemas';
+import { InviteRolePayload } from '@eventalapp/shared/utils';
 
 export interface UseInviteRoleData {
 	inviteRoleMutation: UseMutationResult<

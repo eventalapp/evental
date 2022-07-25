@@ -2,8 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
+import { SubmitDemoRequestPayload, SubmitDemoRequestSchema } from '@eventalapp/shared/utils';
+
 import { useSubmitDemoRequestMutation } from '../../hooks/mutations/useSubmitDemoRequest';
-import { SubmitDemoRequestPayload, SubmitDemoRequestSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';

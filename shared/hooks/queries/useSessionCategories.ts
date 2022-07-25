@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useQuery } from 'react-query';
 
 import { api } from '../../api';
-import { SessionCategoryWithCount } from '../../types';
+import { SessionCategoryWithCount } from '../../utils';
 
 export interface UseSessionCategoriesArgs {
 	eid?: string;

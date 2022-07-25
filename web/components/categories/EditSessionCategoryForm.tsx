@@ -5,10 +5,14 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
+import {
+	EditSessionCategoryPayload,
+	EditSessionCategorySchema,
+	SessionCategoryWithCount,
+	copy
+} from '@eventalapp/shared/utils';
+
 import { useEditSessionCategory } from '../../hooks/mutations/useEditSessionCategory';
-import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
-import { colors, copy } from '../../utils/const';
-import { EditSessionCategoryPayload, EditSessionCategorySchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';
@@ -35,7 +39,7 @@ export const EditSessionCategoryForm: React.FC<Props> = (props) => {
 	} = useForm<EditSessionCategoryPayload>({
 		defaultValues: {
 			name: String(sessionCategory?.name),
-			color: String(sessionCategory?.color) ?? colors[0]
+			color: String(sessionCategory?.color) ?? '#b40000'
 		},
 		resolver: zodResolver(EditSessionCategorySchema)
 	});

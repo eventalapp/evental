@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { InviteOrganizerPayload } from '../../utils/schemas';
+import { InviteOrganizerPayload } from '@eventalapp/shared/utils';
 
 export interface UseInviteOrganizerData {
 	inviteOrganizerMutation: UseMutationResult<

@@ -3,11 +3,9 @@ import { serialize } from 'cookie';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { SESSION_EXPIRY, SignInSchema, stripUser } from '@eventalapp/shared/utils';
 
 import { api } from '../../../utils/api';
-import { SESSION_EXPIRY } from '../../../utils/config';
-import { SignInSchema } from '../../../utils/schemas';
-import { stripUser } from '../../../utils/user';
 
 export default api({
 	async POST({ ctx, req, res }) {

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { CreatePagePayload, CreatePageSchema, copy } from '@eventalapp/shared/utils';
+
 import { useCreatePage } from '../../hooks/mutations/useCreatePage';
-import { copy } from '../../utils/const';
-import { CreatePagePayload, CreatePageSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';

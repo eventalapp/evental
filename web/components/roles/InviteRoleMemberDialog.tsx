@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 
 import { useRole } from '@eventalapp/shared/hooks';
+import { InviteOrganizerPayload, InviteOrganizerSchema } from '@eventalapp/shared/utils';
 
 import { useInviteRole } from '../../hooks/mutations/useInviteRole';
-import { InviteOrganizerPayload, InviteOrganizerSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
 import { Button } from '../primitives/Button';

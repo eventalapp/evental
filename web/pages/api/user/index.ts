@@ -1,11 +1,11 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { UserSettingsSchema } from '@eventalapp/shared/utils';
 
 import { api } from '../../../utils/api';
 import { busboyParseForm } from '../../../utils/form';
 import { uploadAndProcessAvatar } from '../../../utils/image';
-import { UserSettingsSchema } from '../../../utils/schemas';
 
 export const config = {
 	api: {

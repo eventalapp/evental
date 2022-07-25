@@ -3,10 +3,11 @@ import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { PurchaseProPayload, PurchaseProSchema } from '@eventalapp/shared/utils';
+import { CURRENCY } from '@eventalapp/shared/utils/config';
+
 import { useUpgradeEvent } from '../../hooks/mutations/useUpgradeEvent';
-import { CURRENCY } from '../../utils/config';
 import { priceAfterSale, proAttendeesToPrice } from '../../utils/price';
-import { PurchaseProPayload, PurchaseProSchema } from '../../utils/schemas';
 import { formatAmountForDisplay } from '../../utils/stripe';
 import { Button } from '../primitives/Button';
 import Slider from '../primitives/Slider';

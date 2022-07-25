@@ -3,12 +3,12 @@ import dayjs from 'dayjs';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { EditEventSchema } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../utils/api';
 import { isFounder, isOrganizer } from '../../../../../utils/attendee';
 import { busboyParseForm } from '../../../../../utils/form';
 import { uploadAndProcessAvatar } from '../../../../../utils/image';
-import { EditEventSchema } from '../../../../../utils/schemas';
 
 export const config = {
 	api: {

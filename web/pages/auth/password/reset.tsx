@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { useUser } from '@eventalapp/shared/hooks';
+import { PASSWORD_RESET_EXPIRY } from '@eventalapp/shared/utils';
 
 import { PasswordResetForm } from '../../../components/authentication/PasswordResetForm';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
@@ -15,7 +16,6 @@ import PageWrapper from '../../../components/layout/PageWrapper';
 import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
-import { PASSWORD_RESET_EXPIRY } from '../../../utils/config';
 
 const ResetPasswordPage: NextPage = () => {
 	const router = useRouter();

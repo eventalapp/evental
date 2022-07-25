@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { AcceptRoleInviteSchema } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../utils/api';
-import { AcceptRoleInviteSchema } from '../../../../../../utils/schemas';
 import { getDefaultRole } from '../../roles';
 import { getRole } from '../../roles/[rid]';
 

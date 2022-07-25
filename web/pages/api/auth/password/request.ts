@@ -1,11 +1,11 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { ChangePasswordRequestSchema } from '@eventalapp/shared/utils';
+import { PASSWORD_RESET_EXPIRY } from '@eventalapp/shared/utils/config';
 
 import { sendResetPassword } from '../../../../email/templates/resetPassword';
 import { api } from '../../../../utils/api';
-import { PASSWORD_RESET_EXPIRY } from '../../../../utils/config';
-import { ChangePasswordRequestSchema } from '../../../../utils/schemas';
 
 export default api({
 	async POST({ ctx, req }) {

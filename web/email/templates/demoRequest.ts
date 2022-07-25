@@ -1,8 +1,9 @@
 import { SESV2 } from 'aws-sdk';
 import { NextkitError } from 'nextkit';
 
+import { SubmitDemoRequestPayload } from '@eventalapp/shared/utils';
+
 import { sendEmail } from '../../utils/email';
-import { SubmitDemoRequestPayload } from '../../utils/schemas';
 
 type SupportTicketEmailArgs = {
 	sendToAddress: string;

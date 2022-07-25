@@ -4,7 +4,8 @@ import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
+import { SessionWithVenue } from '@eventalapp/shared/utils';
+
 import { sessionListReducer } from '../../utils/reducer';
 import { NotFound } from '../error/NotFound';
 import { Button } from '../primitives/Button';

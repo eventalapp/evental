@@ -1,10 +1,10 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { EditEventMessageSchema } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../utils/attendee';
-import { EditEventMessageSchema } from '../../../../../../utils/schemas';
 import { getEvent } from '../../index';
 import { getMessage } from '../../messages/[mid]';
 

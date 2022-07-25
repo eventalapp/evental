@@ -4,8 +4,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { SubmitSupportTicketPayload } from '../../utils/schemas';
-import { StrippedUser } from '../../utils/user';
+import { StrippedUser, SubmitSupportTicketPayload } from '@eventalapp/shared/utils';
 
 export type UseSubmitSupportTicketMutationData = UseMutationResult<
 	StrippedUser,

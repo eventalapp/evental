@@ -1,4 +1,4 @@
-import { MAX_ATTENDEES } from './const';
+import { MAX_ATTENDEES } from '@eventalapp/shared/utils';
 
 export const proAttendeesToPrice = (attendees: number): number => {
 	const step1 = attendees / 2;

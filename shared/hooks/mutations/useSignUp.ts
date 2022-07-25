@@ -3,8 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
-import { StrippedUser } from '../../types';
-import { SignUpPayload } from '../../utils/schema';
+import { SignUpPayload, StrippedUser } from '../../utils';
 
 interface UseSignUpOptions {
 	onError?: (

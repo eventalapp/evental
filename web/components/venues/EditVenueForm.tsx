@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { EditVenuePayload, EditVenueSchema } from '@eventalapp/shared/utils';
+
 import { useEditVenue } from '../../hooks/mutations/useEditVenue';
-import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
 import { ErrorMessage } from '../form/ErrorMessage';

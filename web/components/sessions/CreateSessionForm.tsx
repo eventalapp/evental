@@ -8,11 +8,16 @@ import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import {
+	CreateSessionPayload,
+	CreateSessionSchema,
+	FIFTEEN_MINUTES,
+	SessionCategoryWithCount,
+	copy
+} from '@eventalapp/shared/utils';
+import { NEAREST_MINUTE } from '@eventalapp/shared/utils/config';
+
 import { useCreateSession } from '../../hooks/mutations/useCreateSession';
-import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
-import { NEAREST_MINUTE } from '../../utils/config';
-import { FIFTEEN_MINUTES, copy } from '../../utils/const';
-import { CreateSessionPayload, CreateSessionSchema } from '../../utils/schemas';
 import CreateCategoryDialog from '../categories/CreateCategoryDialog';
 import { LoadingInner } from '../error/LoadingInner';
 import { DatePicker } from '../form/DatePicker';

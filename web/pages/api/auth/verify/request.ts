@@ -1,8 +1,9 @@
 import { NextkitError } from 'nextkit';
 
+import { VERIFY_EMAIL_EXPIRY } from '@eventalapp/shared/utils/config';
+
 import { sendVerifyEmail } from '../../../../email/templates/verifyEmail';
 import { api } from '../../../../utils/api';
-import { VERIFY_EMAIL_EXPIRY } from '../../../../utils/config';
 
 export default api({
 	async POST({ ctx }) {

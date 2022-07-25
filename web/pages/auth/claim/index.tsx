@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 import { useUser } from '@eventalapp/shared/hooks';
+import { CLAIM_PROFILE_EXPIRY } from '@eventalapp/shared/utils';
 
 import { ClaimProfileForm } from '../../../components/authentication/ClaimProfileForm';
 import { AlreadySignedInPage } from '../../../components/error/AlreadySignedInPage';
@@ -15,7 +16,6 @@ import { Navigation } from '../../../components/navigation';
 import { Heading } from '../../../components/primitives/Heading';
 import { LinkButton } from '../../../components/primitives/LinkButton';
 import { useClaimProfile } from '../../../hooks/mutations/useClaimProfile';
-import { CLAIM_PROFILE_EXPIRY } from '../../../utils/config';
 
 const ClaimProfilePage: NextPage = () => {
 	const router = useRouter();

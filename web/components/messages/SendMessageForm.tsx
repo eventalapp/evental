@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
+import { SendEventMessagePayload, SendEventMessageSchema, copy } from '@eventalapp/shared/utils';
+
 import { useSendEvent } from '../../hooks/mutations/useSendEvent';
-import { copy } from '../../utils/const';
-import { SendEventMessagePayload, SendEventMessageSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter } from '../../utils/string';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';

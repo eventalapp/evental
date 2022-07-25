@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { UseMutationResult, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 
+import { ImageUploadPayload } from '@eventalapp/shared/utils';
+
 import { ImageUploadResponse } from '../../pages/api/upload/image';
 import { populateFormData } from '../../utils/form';
-import { ImageUploadPayload } from '../../utils/schemas';
 
 export interface UseImageUploadMutationData {
 	imageUploadMutation: UseMutationResult<

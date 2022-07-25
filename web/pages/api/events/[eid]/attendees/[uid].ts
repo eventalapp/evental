@@ -1,9 +1,9 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { AttendeeWithUser, stripAttendeeWithUser } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../utils/api';
-import { AttendeeWithUser, stripAttendeeWithUser } from '../../../../../utils/user';
 import { getEvent } from '../index';
 
 export default api({

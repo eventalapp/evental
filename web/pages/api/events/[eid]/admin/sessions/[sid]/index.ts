@@ -2,10 +2,10 @@ import dayjs from 'dayjs';
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
+import { EditSessionSchema } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../../utils/attendee';
-import { EditSessionSchema } from '../../../../../../../utils/schemas';
 import { generateSlug } from '../../../../../../../utils/string';
 
 export default api({
