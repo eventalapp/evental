@@ -32,7 +32,7 @@ export const ViewSessionScreen = (props: Props) => {
 					tintColor="#000000"
 					refreshing={isSessionRefetching || isSessionLoading}
 					onRefresh={() => {
-						refetchSession();
+						void refetchSession();
 					}}
 				/>
 			}

@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation } from 'react-query';
 
 import { api } from '../../api';
-import { AcceptOrganizerInvitePayload } from '../../utils/schema';
+import { AcceptOrganizerInvitePayload } from '../../utils';
 
 interface UseAcceptOrganizerInviteArgs {
 	eid?: string;
@@ -23,7 +23,7 @@ export const useAcceptOrganizerInvite = (args: UseAcceptOrganizerInviteArgs = {}
 			return await api
 				.post<SuccessAPIResponse<void>>(`/events/${eid}/invites/organizer`, data)
 				.then((res) => res.data.data)
-				.catch((err: AxiosError<ErroredAPIResponse, any>) => {
+				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
 				});
 		},

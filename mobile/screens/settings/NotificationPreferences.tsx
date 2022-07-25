@@ -49,8 +49,8 @@ export const NotificationPreferencesScreen = (props: Props) => {
 						isUserRefetching || isPreferencesRefetching || isUserLoading || isPreferencesLoading
 					}
 					onRefresh={() => {
-						refetchPreferences();
-						refetchUser();
+						void refetchPreferences();
+						void refetchUser();
 					}}
 				/>
 			}

@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation } from 'react-query';
 
 import { api } from '../../api';
-import { AcceptRoleInvitePayload } from '../../utils/schema';
+import { AcceptRoleInvitePayload } from '../../utils';
 
 interface UseAcceptRoleInviteArgs {
 	eid?: string;
@@ -24,7 +24,7 @@ export const useAcceptRoleInvite = (args: UseAcceptRoleInviteArgs = {}) => {
 			return await api
 				.post<SuccessAPIResponse<void>>(`/events/${eid}/invites/roles/${rid}`, data)
 				.then((res) => res.data.data)
-				.catch((err: AxiosError<ErroredAPIResponse, any>) => {
+				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
 				});
 		},

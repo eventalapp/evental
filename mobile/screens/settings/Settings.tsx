@@ -34,7 +34,7 @@ export const SettingsScreen = (props: Props) => {
 					tintColor="#000000"
 					refreshing={isUserRefetching || isUserLoading}
 					onRefresh={() => {
-						refetchUser();
+						void refetchUser();
 					}}
 				/>
 			}

@@ -39,8 +39,8 @@ export const ViewAttendeeScreen = (props: Props) => {
 						isEventRefetching || isAttendeeRefetching || isAttendeeLoading || isEventLoading
 					}
 					onRefresh={() => {
-						refetchEvent();
-						refetchAttendee();
+						void refetchEvent();
+						void refetchAttendee();
 					}}
 				/>
 			}

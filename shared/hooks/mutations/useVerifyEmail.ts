@@ -3,7 +3,7 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { api } from '../../api';
-import { VerifyEmailPayload } from '../../utils/schema';
+import { VerifyEmailPayload } from '../../utils';
 
 interface UseVerifyEmailArgs {
 	onError?: (

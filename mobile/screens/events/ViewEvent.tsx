@@ -47,8 +47,8 @@ export const ViewEventScreen = (props: Props) => {
 						isEventLoading
 					}
 					onRefresh={() => {
-						refetchEvent();
-						refetchSessions();
+						void refetchEvent();
+						void refetchSessions();
 					}}
 				/>
 			}
