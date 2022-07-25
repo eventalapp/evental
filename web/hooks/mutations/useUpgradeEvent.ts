@@ -16,7 +16,7 @@ export interface UseUpgradeEventMutationData {
 	>;
 }
 
-export const useUpgradeEventMutation = (eid: string): UseUpgradeEventMutationData => {
+export const useUpgradeEvent = (eid: string): UseUpgradeEventMutationData => {
 	const queryClient = useQueryClient();
 
 	const stripe = useStripe();

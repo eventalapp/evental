@@ -5,7 +5,7 @@ import React from 'react';
 import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useCreateSessionCategoryMutation } from '../../hooks/mutations/useCreateSessionCategoryMutation';
+import { useCreateSessionCategory } from '../../hooks/mutations/useCreateSessionCategory';
 import { colors, copy } from '../../utils/const';
 import { CreateSessionCategoryPayload, CreateSessionCategorySchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
@@ -20,7 +20,7 @@ type Props = { eid: string };
 export const CreateSessionCategoryForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { eid } = props;
-	const { createSessionCategoryMutation } = useCreateSessionCategoryMutation(String(eid));
+	const { createSessionCategoryMutation } = useCreateSessionCategory(String(eid));
 
 	const {
 		register,

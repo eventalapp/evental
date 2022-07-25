@@ -13,7 +13,7 @@ import Column from '../../../../components/layout/Column';
 import PageWrapper from '../../../../components/layout/PageWrapper';
 import { Button } from '../../../../components/primitives/Button';
 import { Heading } from '../../../../components/primitives/Heading';
-import { useEditEventMutation } from '../../../../hooks/mutations/useEditEventMutation';
+import { useEditEvent } from '../../../../hooks/mutations/useEditEvent';
 
 const EditEventPage: NextPage = () => {
 	const router = useRouter();
@@ -23,7 +23,7 @@ const EditEventPage: NextPage = () => {
 		error: eventError,
 		isLoading: isEventLoading
 	} = useEvent({ eid: String(eid) });
-	const { editEventMutation } = useEditEventMutation(String(eid));
+	const { editEventMutation } = useEditEvent(String(eid));
 
 	return (
 		<AdminPageWrapper errors={[eventError]} isLoading={isEventLoading} eid={String(eid)}>

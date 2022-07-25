@@ -8,7 +8,7 @@ import React, { DetailedHTMLProps, FormHTMLAttributes, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { useCreateSessionMutation } from '../../hooks/mutations/useCreateSessionMutation';
+import { useCreateSession } from '../../hooks/mutations/useCreateSession';
 import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { NEAREST_MINUTE } from '../../utils/config';
 import { FIFTEEN_MINUTES, copy } from '../../utils/const';
@@ -39,7 +39,7 @@ type Props = {
 export const CreateSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { eid, venues, event, sessionCategories } = props;
-	const { createSessionMutation } = useCreateSessionMutation(String(eid));
+	const { createSessionMutation } = useCreateSession(String(eid));
 	const {
 		register,
 		handleSubmit,

@@ -8,9 +8,9 @@ import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { useAddAttendeeToSessionMutation } from '../../hooks/mutations/useAddAttendeeToSessionMutation';
-import { useEditSessionMutation } from '../../hooks/mutations/useEditSessionMutation';
-import { useRemoveAttendeeFromSessionMutation } from '../../hooks/mutations/useRemoveAttendeeFromSessionMutation';
+import { useAddAttendeeToSession } from '../../hooks/mutations/useAddAttendeeToSession';
+import { useDeleteSessionAttendee } from '../../hooks/mutations/useDeleteSessionAttendee';
+import { useEditSession } from '../../hooks/mutations/useEditSession';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { SessionCategoryWithCount } from '../../pages/api/events/[eid]/sessions/categories';
 import { NEAREST_MINUTE } from '../../utils/config';
@@ -46,15 +46,9 @@ type Props = {
 export const EditSessionForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { eid, sid, venues, session, event, sessionCategories, roleAttendees } = props;
-	const { editSessionMutation } = useEditSessionMutation(String(eid), String(sid));
-	const { removeAttendeeFromSessionMutation } = useRemoveAttendeeFromSessionMutation(
-		String(eid),
-		String(sid)
-	);
-	const { addAttendeeToSessionMutation } = useAddAttendeeToSessionMutation(
-		String(eid),
-		String(sid)
-	);
+	const { editSessionMutation } = useEditSession(String(eid), String(sid));
+	const { removeAttendeeFromSessionMutation } = useDeleteSessionAttendee(String(eid), String(sid));
+	const { addAttendeeToSessionMutation } = useAddAttendeeToSession(String(eid), String(sid));
 	const {
 		register,
 		handleSubmit,

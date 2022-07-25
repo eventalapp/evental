@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useCreatePageMutation } from '../../hooks/mutations/useCreatePageMutation';
+import { useCreatePage } from '../../hooks/mutations/useCreatePage';
 import { copy } from '../../utils/const';
 import { CreatePagePayload, CreatePageSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
@@ -24,7 +24,7 @@ export const CreatePageForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 
 	const { eid } = props;
-	const { createPageMutation } = useCreatePageMutation(String(eid));
+	const { createPageMutation } = useCreatePage(String(eid));
 
 	const {
 		register,

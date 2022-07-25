@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useEditVenueMutation } from '../../hooks/mutations/useEditVenueMutation';
+import { useEditVenue } from '../../hooks/mutations/useEditVenue';
 import { EditVenuePayload, EditVenueSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
@@ -20,7 +20,7 @@ type Props = { eid: string; vid: string; venue: Prisma.EventVenue } & DetailedHT
 export const EditVenueForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { venue, eid, vid } = props;
-	const { editVenueMutation } = useEditVenueMutation(String(eid), String(vid));
+	const { editVenueMutation } = useEditVenue(String(eid), String(vid));
 	const {
 		register,
 		handleSubmit,

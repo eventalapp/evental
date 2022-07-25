@@ -17,7 +17,7 @@ export interface UseImageUploadMutationData {
 	imageUploadResponse: ImageUploadResponse | undefined;
 }
 
-export const useImageUploadMutation = (): UseImageUploadMutationData => {
+export const useImageUpload = (): UseImageUploadMutationData => {
 	const [imageUploadResponse, setImageUploadResponse] = useState<ImageUploadResponse>();
 
 	const imageUploadMutation = useMutation<

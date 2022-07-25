@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useCreateVenueMutation } from '../../hooks/mutations/useCreateVenueMutation';
+import { useCreateVenue } from '../../hooks/mutations/useCreateVenue';
 import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
@@ -22,7 +22,7 @@ const CreateVenueDialog: React.FC<Props> = (props) => {
 
 	let [isOpen, setIsOpen] = useState(false);
 
-	const { createVenueMutation } = useCreateVenueMutation(String(eid), { redirect: false });
+	const { createVenueMutation } = useCreateVenue(String(eid), { redirect: false });
 
 	const {
 		register,

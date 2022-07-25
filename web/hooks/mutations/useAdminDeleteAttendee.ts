@@ -12,7 +12,7 @@ export interface UseAdminDeleteAttendeeMutationData {
 	>;
 }
 
-export const useAdminDeleteAttendeeMutation = (
+export const useAdminDeleteAttendee = (
 	eid: string,
 	uid: string
 ): UseAdminDeleteAttendeeMutationData => {

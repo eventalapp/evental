@@ -15,7 +15,7 @@ export interface UseEditSessionMutationData {
 	>;
 }
 
-export const useEditSessionMutation = (eid: string, sid: string): UseEditSessionMutationData => {
+export const useEditSession = (eid: string, sid: string): UseEditSessionMutationData => {
 	const queryClient = useQueryClient();
 
 	const editSessionMutation = useMutation<

@@ -5,7 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 
-import { UseEditUserMutationData } from '../../hooks/mutations/useEditUserMutation';
+import { UseEditUserMutationData } from '../../hooks/mutations/useEditUser';
 import { copy } from '../../utils/const';
 import { EditUserPayload, EditUserSchema } from '../../utils/schemas';
 import { slugify } from '../../utils/string';

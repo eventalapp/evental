@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useEditRoleMutation } from '../../hooks/mutations/useEditRoleMutation';
+import { useEditRole } from '../../hooks/mutations/useEditRole';
 import { copy } from '../../utils/const';
 import { EditRolePayload, EditRoleSchema } from '../../utils/schemas';
 import { AttendeeWithUser } from '../../utils/user';
@@ -26,7 +26,7 @@ type Props = {
 export const EditRoleForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { role, eid, rid } = props;
-	const { editRoleMutation } = useEditRoleMutation(String(eid), String(rid));
+	const { editRoleMutation } = useEditRole(String(eid), String(rid));
 	const {
 		register,
 		handleSubmit,

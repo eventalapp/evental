@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { ChromePicker } from 'react-color';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useCreateSessionCategoryMutation } from '../../hooks/mutations/useCreateSessionCategoryMutation';
+import { useCreateSessionCategory } from '../../hooks/mutations/useCreateSessionCategory';
 import { copy } from '../../utils/const';
 import { CreateSessionCategoryPayload, CreateSessionCategorySchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
@@ -25,7 +25,7 @@ const CreateCategoryDialog: React.FC<Props> = (props) => {
 
 	let [isOpen, setIsOpen] = useState(false);
 
-	const { createSessionCategoryMutation } = useCreateSessionCategoryMutation(String(eid), {
+	const { createSessionCategoryMutation } = useCreateSessionCategory(String(eid), {
 		redirect: false
 	});
 

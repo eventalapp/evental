@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { UseClaimProfileData } from '../../hooks/mutations/useClaimProfileMutation';
+import { UseClaimProfileData } from '../../hooks/mutations/useClaimProfile';
 import { ClaimProfilePayload, ClaimProfileSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';

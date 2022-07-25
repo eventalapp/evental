@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useCreateVenueMutation } from '../../hooks/mutations/useCreateVenueMutation';
+import { useCreateVenue } from '../../hooks/mutations/useCreateVenue';
 import { CreateVenuePayload, CreateVenueSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { StyledEditor } from '../form/Editor';
@@ -20,7 +20,7 @@ type Props = { eid: string } & DetailedHTMLProps<
 export const CreateVenueForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { eid } = props;
-	const { createVenueMutation } = useCreateVenueMutation(String(eid), { redirect: true });
+	const { createVenueMutation } = useCreateVenue(String(eid), { redirect: true });
 	const {
 		register,
 		handleSubmit,

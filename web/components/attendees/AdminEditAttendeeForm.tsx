@@ -6,8 +6,8 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useUserById } from '@eventalapp/shared/hooks/queries/useUserById';
 
-import { useEditAttendeeMutation } from '../../hooks/mutations/useEditAttendeeMutation';
-import { useImageUploadMutation } from '../../hooks/mutations/useImageUploadMutation';
+import { useEditAttendee } from '../../hooks/mutations/useEditAttendee';
+import { useImageUpload } from '../../hooks/mutations/useImageUpload';
 import { copy } from '../../utils/const';
 import { AdminEditAttendeePayload, AdminEditAttendeeSchema } from '../../utils/schemas';
 import { capitalizeFirstLetter, slugify } from '../../utils/string';
@@ -35,8 +35,8 @@ type Props = {
 export const AdminEditAttendeeForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { attendee, roles, eid, uid, user } = props;
-	const { adminEditAttendeeMutation } = useEditAttendeeMutation(String(eid), String(uid));
-	const { imageUploadMutation } = useImageUploadMutation();
+	const { adminEditAttendeeMutation } = useEditAttendee(String(eid), String(uid));
+	const { imageUploadMutation } = useImageUpload();
 	const [files, setFiles] = React.useState<FileWithPreview[]>([]);
 
 	const {

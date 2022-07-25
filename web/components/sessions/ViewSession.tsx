@@ -16,7 +16,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import { formatDateRange } from '@eventalapp/shared/utils/date';
 
-import { useCreateSessionAttendeeMutation } from '../../hooks/mutations/useCreateSessionAttendeeMutation';
+import { useCreateSessionAttendee } from '../../hooks/mutations/useCreateSessionAttendee';
 import { SessionWithVenue } from '../../pages/api/events/[eid]/sessions';
 import { faCalendarCirclePlus } from '../../utils/icons';
 import { sessionAttendeeReducer } from '../../utils/reducer';
@@ -59,7 +59,7 @@ export const ViewSession: React.FC<Props> = (props) => {
 		isLoading
 	} = props;
 
-	const { createSessionAttendeeMutation } = useCreateSessionAttendeeMutation(
+	const { createSessionAttendeeMutation } = useCreateSessionAttendee(
 		String(eid),
 		String(sid),
 		user?.id,

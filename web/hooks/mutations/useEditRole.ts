@@ -5,36 +5,36 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { EditPagePayload } from '../../utils/schemas';
+import { EditRolePayload } from '../../utils/schemas';
 
-export interface UseEditPageMutationData {
-	editPageMutation: UseMutationResult<
-		Prisma.EventPage,
+export interface UseEditRoleMutationData {
+	editRoleMutation: UseMutationResult<
+		Prisma.EventRole,
 		AxiosError<ErroredAPIResponse, unknown>,
-		EditPagePayload
+		EditRolePayload
 	>;
 }
 
-export const useEditPageMutation = (eid: string, pid: string): UseEditPageMutationData => {
+export const useEditRole = (eid: string, rid: string): UseEditRoleMutationData => {
 	const queryClient = useQueryClient();
 
-	const editPageMutation = useMutation<
-		Prisma.EventPage,
+	const editRoleMutation = useMutation<
+		Prisma.EventRole,
 		AxiosError<ErroredAPIResponse, unknown>,
-		EditPagePayload
+		EditRolePayload
 	>(
 		async (data) => {
 			return await axios
-				.put<SuccessAPIResponse<Prisma.EventPage>>(`/api/events/${eid}/admin/pages/${pid}`, data)
+				.put<SuccessAPIResponse<Prisma.EventRole>>(`/api/events/${eid}/admin/roles/${rid}`, data)
 				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: (data) => {
-				toast.success('Page edited successfully');
+				toast.success('Role edited successfully');
 
-				router.push(`/events/${eid}/admin/pages/${data.slug}`).then(() => {
-					void queryClient.invalidateQueries(['page', eid, pid]);
-					void queryClient.invalidateQueries(['pages']);
+				router.push(`/events/${eid}/admin/roles/${data.slug}`).then(() => {
+					void queryClient.invalidateQueries(['role', eid, rid]);
+					void queryClient.invalidateQueries(['roles']);
 					void queryClient.invalidateQueries(['attendees', eid]);
 				});
 			},
@@ -44,5 +44,5 @@ export const useEditPageMutation = (eid: string, pid: string): UseEditPageMutati
 		}
 	);
 
-	return { editPageMutation };
+	return { editRoleMutation };
 };

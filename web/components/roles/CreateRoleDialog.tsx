@@ -3,7 +3,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useCreateRoleMutation } from '../../hooks/mutations/useCreateRoleMutation';
+import { useCreateRole } from '../../hooks/mutations/useCreateRole';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
 import { ErrorMessage } from '../form/ErrorMessage';
@@ -22,7 +22,7 @@ const CreateRoleDialog: React.FC<Props> = (props) => {
 
 	let [isOpen, setIsOpen] = useState(false);
 
-	const { createRoleMutation } = useCreateRoleMutation(String(eid), { redirect: false });
+	const { createRoleMutation } = useCreateRole(String(eid), { redirect: false });
 
 	const {
 		register,

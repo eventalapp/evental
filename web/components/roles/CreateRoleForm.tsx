@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useCreateRoleMutation } from '../../hooks/mutations/useCreateRoleMutation';
+import { useCreateRole } from '../../hooks/mutations/useCreateRole';
 import { copy } from '../../utils/const';
 import { CreateRolePayload, CreateRoleSchema } from '../../utils/schemas';
 import { LoadingInner } from '../error/LoadingInner';
@@ -22,7 +22,7 @@ type Props = { eid: string } & DetailedHTMLProps<
 export const CreateRoleForm: React.FC<Props> = (props) => {
 	const router = useRouter();
 	const { eid } = props;
-	const { createRoleMutation } = useCreateRoleMutation(String(eid));
+	const { createRoleMutation } = useCreateRole(String(eid));
 	const {
 		register,
 		handleSubmit,

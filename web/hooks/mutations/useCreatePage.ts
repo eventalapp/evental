@@ -15,7 +15,7 @@ export interface UseCreatePageMutationData {
 	>;
 }
 
-export const useCreatePageMutation = (eid: string): UseCreatePageMutationData => {
+export const useCreatePage = (eid: string): UseCreatePageMutationData => {
 	const queryClient = useQueryClient();
 
 	const createPageMutation = useMutation<

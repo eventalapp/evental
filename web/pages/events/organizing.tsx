@@ -15,12 +15,12 @@ import { Footer } from '../../components/layout/Footer';
 import PageWrapper from '../../components/layout/PageWrapper';
 import { Navigation } from '../../components/navigation';
 import { Heading } from '../../components/primitives/Heading';
-import { useCreateEventMutation } from '../../hooks/mutations/useCreateEventMutation';
+import { useCreateEvent } from '../../hooks/mutations/useCreateEvent';
 
 const OrganizingEventsPage: NextPage = () => {
 	const { data: user, isLoading: isUserLoading } = useUser();
 	const { error: organizingEventsError, data: organizingEvents } = useOrganizingEvents();
-	const { createEventMutation } = useCreateEventMutation();
+	const { createEventMutation } = useCreateEvent();
 
 	if (organizingEventsError) {
 		return <ViewErrorPage errors={[organizingEventsError]} />;

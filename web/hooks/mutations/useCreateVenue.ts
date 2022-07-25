@@ -5,48 +5,48 @@ import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
 import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 
-import { CreateRolePayload } from '../../utils/schemas';
+import { CreateVenuePayload } from '../../utils/schemas';
 
-export interface UseCreateRoleMutationData {
-	createRoleMutation: UseMutationResult<
-		Prisma.EventRole,
+export interface UseCreateVenueMutationData {
+	createVenueMutation: UseMutationResult<
+		Prisma.EventVenue,
 		AxiosError<ErroredAPIResponse, unknown>,
-		CreateRolePayload
+		CreateVenuePayload
 	>;
 }
 
-interface UseCreateRoleOptions {
+interface UseCreateVenueOptions {
 	redirect?: boolean;
 }
 
-export const useCreateRoleMutation = (
+export const useCreateVenue = (
 	eid: string,
-	args: UseCreateRoleOptions = {}
-): UseCreateRoleMutationData => {
+	args: UseCreateVenueOptions = {}
+): UseCreateVenueMutationData => {
 	const { redirect = true } = args;
 
 	const queryClient = useQueryClient();
 
-	const createRoleMutation = useMutation<
-		Prisma.EventRole,
+	const createVenueMutation = useMutation<
+		Prisma.EventVenue,
 		AxiosError<ErroredAPIResponse, unknown>,
-		CreateRolePayload
+		CreateVenuePayload
 	>(
 		async (data) => {
 			return await axios
-				.post<SuccessAPIResponse<Prisma.EventRole>>(`/api/events/${eid}/admin/roles/create`, data)
+				.post<SuccessAPIResponse<Prisma.EventVenue>>(`/api/events/${eid}/admin/venues/create`, data)
 				.then((res) => res.data.data);
 		},
 		{
 			onSuccess: () => {
-				toast.success('Role created successfully');
+				toast.success('Venue created successfully');
 
 				if (redirect) {
-					router.push(`/events/${eid}/admin/roles/`).then(() => {
-						void queryClient.invalidateQueries(['roles', eid]);
+					router.push(`/events/${eid}/admin/venues/`).then(() => {
+						void queryClient.invalidateQueries(['venues', eid]);
 					});
 				} else {
-					void queryClient.invalidateQueries(['roles', eid]);
+					void queryClient.invalidateQueries(['venues', eid]);
 				}
 			},
 			onError: (error) => {
@@ -55,5 +55,5 @@ export const useCreateRoleMutation = (
 		}
 	);
 
-	return { createRoleMutation };
+	return { createVenueMutation };
 };

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { useUpgradeEventMutation } from '../../hooks/mutations/useUpgradeEventMutation';
+import { useUpgradeEvent } from '../../hooks/mutations/useUpgradeEvent';
 import { CURRENCY } from '../../utils/config';
 import { priceAfterSale, proAttendeesToPrice } from '../../utils/price';
 import { PurchaseProPayload, PurchaseProSchema } from '../../utils/schemas';
@@ -24,7 +24,7 @@ export const PurchaseProPlan: React.FC<Props> = (props) => {
 		resolver: zodResolver(PurchaseProSchema)
 	});
 	const attendees = watch('attendees');
-	const { upgradeEventMutation } = useUpgradeEventMutation(String(eid));
+	const { upgradeEventMutation } = useUpgradeEvent(String(eid));
 
 	return (
 		<form
