@@ -18,12 +18,12 @@ import {
 	AttendeeWithUser,
 	SessionWithVenue,
 	StrippedUser,
-	formatDateRange
+	formatDateRange,
+	sessionAttendeeReducer
 } from '@eventalapp/shared/utils';
 import { faCalendarCirclePlus } from '@eventalapp/shared/utils/icons';
 
 import { useCreateSessionAttendee } from '../../hooks/mutations/useCreateSessionAttendee';
-import { sessionAttendeeReducer } from '../../utils/reducer';
 import { AttendeeList, attendeeListSkeleton } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { AddToCalendar } from '../primitives/AddToCalendar';

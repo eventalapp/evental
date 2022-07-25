@@ -1,11 +1,10 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
-import { EditSessionCategorySchema } from '@eventalapp/shared/utils';
+import { EditSessionCategorySchema, generateSlug } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../../../utils/attendee';
-import { generateSlug } from '../../../../../../../../utils/string';
 import { getEvent } from '../../../../index';
 import { getSessionCategory } from '../../../../sessions/categories/[cid]';
 

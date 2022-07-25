@@ -6,8 +6,8 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useAttendee } from '@eventalapp/shared/hooks';
+import { capitalizeFirstLetter } from '@eventalapp/shared/utils';
 
-import { capitalizeFirstLetter } from '../../utils/string';
 import Tooltip from '../primitives/Tooltip';
 
 type RoleMemberListItemProps = {

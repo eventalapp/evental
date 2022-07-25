@@ -7,13 +7,13 @@ import {
 	SESSION_EXPIRY,
 	SignUpSchema,
 	VERIFY_EMAIL_EXPIRY,
+	generateSlug,
 	stripUser
 } from '@eventalapp/shared/utils';
 
 import { sendVerifyEmail } from '../../../email/templates/verifyEmail';
 import { sendWelcome } from '../../../email/templates/welcome';
 import { api } from '../../../utils/api';
-import { generateSlug } from '../../../utils/string';
 
 export default api({
 	async POST({ ctx, req, res }) {

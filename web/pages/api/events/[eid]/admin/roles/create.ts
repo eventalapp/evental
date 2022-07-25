@@ -1,11 +1,10 @@
 import { NextkitError } from 'nextkit';
 
 import { prisma } from '@eventalapp/shared/db/client';
-import { CreateRoleSchema } from '@eventalapp/shared/utils';
+import { CreateRoleSchema, generateSlug } from '@eventalapp/shared/utils';
 
 import { api } from '../../../../../../utils/api';
 import { isOrganizer } from '../../../../../../utils/attendee';
-import { generateSlug } from '../../../../../../utils/string';
 
 export default api({
 	async POST({ ctx, req }) {

@@ -5,9 +5,8 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
-import { SessionWithVenueEvent } from '@eventalapp/shared/utils';
+import { SessionWithVenueEvent, sessionWithEventListReducer } from '@eventalapp/shared/utils';
 
-import { sessionWithEventListReducer } from '../../utils/reducer';
 import { NotFound } from '../error/NotFound';
 import { SessionHoverCard } from './SessionHoverCard';
 import { sessionListSkeleton } from './SessionList';

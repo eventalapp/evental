@@ -8,9 +8,8 @@ import * as Prisma from '@prisma/client';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { AttendeeWithUser } from '@eventalapp/shared/utils';
+import { AttendeeWithUser, capitalizeFirstLetter } from '@eventalapp/shared/utils';
 
-import { capitalizeFirstLetter } from '../../utils/string';
 import { AttendeeList } from '../attendees/AttendeeList';
 import { FlexRowBetween } from '../layout/FlexRowBetween';
 import { Heading } from '../primitives/Heading';

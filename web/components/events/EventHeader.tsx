@@ -23,9 +23,8 @@ import {
 	useIsOrganizer,
 	useUser
 } from '@eventalapp/shared/hooks';
-import { formatDateRange } from '@eventalapp/shared/utils';
+import { capitalizeOnlyFirstLetter, formatDateRange } from '@eventalapp/shared/utils';
 
-import { capitalizeOnlyFirstLetter } from '../../utils/string';
 import { EventRegistrationDialog } from '../attendees/EventRegistrationDialog';
 import { Heading } from '../primitives/Heading';
 import { IconButtonTooltip } from '../primitives/IconButtonTooltip';

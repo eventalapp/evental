@@ -4,10 +4,9 @@ import Link from 'next/link';
 import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { AttendeeWithUser } from '@eventalapp/shared/utils';
+import { AttendeeWithUser, capitalizeFirstLetter } from '@eventalapp/shared/utils';
 import { faBadgeCheck } from '@eventalapp/shared/utils/icons';
 
-import { capitalizeFirstLetter } from '../../utils/string';
 import { NotFound } from '../error/NotFound';
 import { AspectImage } from '../guides/AspectImage';
 import Tooltip from '../primitives/Tooltip';
