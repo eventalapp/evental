@@ -11,7 +11,7 @@
 		"validate": "dotenv -e ./.env -- yarn prisma validate --schema=\"./db/prisma/schema.prisma\""
 	},
 	"dependencies": {
-		"@prisma/client": "^4.0.0",
+		"@prisma/client": "^4.1.0",
 		"axios": "^0.27.2"
 	},
 	"devDependencies": {
