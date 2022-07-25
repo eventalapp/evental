@@ -1,29 +1,30 @@
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
+import router from 'next/router';
 import { ErroredAPIResponse, SuccessAPIResponse } from 'nextkit';
-import { useMutation, useQueryClient } from 'react-query';
+import { UseMutationResult, useMutation, useQueryClient } from 'react-query';
+import { toast } from 'react-toastify';
 
 import { api } from '../../api';
 import { StrippedUser } from '../../types';
-import { SignInPayload } from '../../utils/schema';
+import { SignUpPayload } from '../../utils/schema';
 
-interface UseSignInArgs {
+interface UseSignUpMutationOptions {
 	onError?: (
 		error: ErroredAPIResponse | undefined,
-		variables: SignInPayload,
+		variables: SignUpPayload,
 		context: unknown
 	) => void;
-	onSuccess?: (data: StrippedUser, variables: SignInPayload, context: unknown) => void;
+	onSuccess?: (data: StrippedUser, variables: SignUpPayload, context: unknown) => void;
 }
 
-export const useSignIn = (args: UseSignInArgs = {}) => {
+export const useSignUpMutation = (args: UseSignUpMutationOptions = {}) => {
 	const { onError, onSuccess } = args;
-
 	const queryClient = useQueryClient();
 
-	return useMutation<StrippedUser, ErroredAPIResponse | undefined, SignInPayload>(
+	return useMutation<StrippedUser, ErroredAPIResponse, SignUpPayload>(
 		async (data) => {
 			return await api
-				.post<SuccessAPIResponse<StrippedUser>>(`/auth/signin`, data)
+				.post<SuccessAPIResponse<StrippedUser>>(`/auth/signup`, data)
 				.then((res) => res.data.data)
 				.catch((err: AxiosError<ErroredAPIResponse>) => {
 					throw err.response?.data;
