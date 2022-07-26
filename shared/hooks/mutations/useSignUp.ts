@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { api } from '../../api';
 import { SignUpPayload, StrippedUser } from '../../utils';
 
-interface UseSignUpOptions {
+interface UseSignUpArgs {
 	onError?: (
 		error: ErroredAPIResponse | undefined,
 		variables: SignUpPayload,
@@ -14,7 +14,7 @@ interface UseSignUpOptions {
 	onSuccess?: (data: StrippedUser, variables: SignUpPayload, context: unknown) => void;
 }
 
-export const useSignUp = (args: UseSignUpOptions = {}) => {
+export const useSignUp = (args: UseSignUpArgs = {}) => {
 	const { onError, onSuccess } = args;
 	const queryClient = useQueryClient();
 

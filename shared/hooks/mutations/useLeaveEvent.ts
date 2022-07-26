@@ -5,13 +5,13 @@ import { useMutation, useQueryClient } from 'react-query';
 import { api } from '../../api';
 import { StrippedUser } from '../../utils';
 
-interface UseLeaveEventOptions {
+interface UseLeaveEventArgs {
 	eid?: string;
 	onError?: (error: ErroredAPIResponse | undefined, variables: void, context: unknown) => void;
 	onSuccess?: (data: StrippedUser, variables: void, context: unknown) => void;
 }
 
-export const useLeaveEvent = (args: UseLeaveEventOptions = {}) => {
+export const useLeaveEvent = (args: UseLeaveEventArgs = {}) => {
 	const { eid, onSuccess, onError } = args;
 
 	const queryClient = useQueryClient();

@@ -5,14 +5,14 @@ import { useMutation, useQueryClient } from 'react-query';
 import { api } from '../../api';
 import { StrippedUser } from '../../utils';
 
-interface UseLeaveSessionOptions {
+interface UseLeaveSessionArgs {
 	eid?: string;
 	sid?: string;
 	onError?: (error: ErroredAPIResponse | undefined, variables: void, context: unknown) => void;
 	onSuccess?: (data: StrippedUser, variables: void, context: unknown) => void;
 }
 
-export const useLeaveSession = (args: UseLeaveSessionOptions = {}) => {
+export const useLeaveSession = (args: UseLeaveSessionArgs = {}) => {
 	const { eid, sid, onSuccess, onError } = args;
 
 	const queryClient = useQueryClient();
