@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client/edge';
 
 import { SEED_USERS_TO_GENERATE } from '../../utils';
 import { fake } from './fake';
