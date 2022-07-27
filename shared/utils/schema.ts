@@ -231,7 +231,7 @@ export type EditEventPayload = z.infer<typeof EditEventSchema>;
 // Image Upload
 
 export const ImageUploadSchema = z.object({
-	image: isBrowser ? z.instanceof(FileList) : z.any()
+	image: z.any()
 });
 
 export type ImageUploadPayload = z.infer<typeof ImageUploadSchema>;
