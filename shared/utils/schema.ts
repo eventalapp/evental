@@ -85,7 +85,7 @@ const validator = {
 	userId: z.string().min(1, 'User ID is required').max(200, 'User ID is too long'),
 	phoneNumber: z.string().max(100, 'Phone Number is too long'),
 	imageFile: isBrowser ? z.instanceof(File) : z.any(),
-	location: z.string().max(100, 'Location must be less than 70 characters'),
+	location: z.string().max(100, 'Location must be less than 100 characters'),
 	eventRoleId: z.string().min(1, 'Role ID is required').max(200, 'Role ID is too long'),
 	company: z.preprocess(
 		trimString,
@@ -93,7 +93,7 @@ const validator = {
 	),
 	position: z.preprocess(
 		trimString,
-		z.string().max(100, 'Position must be less than 70 characters')
+		z.string().max(100, 'Position must be less than 100 characters')
 	),
 	url: z.string().url().max(200, 'URL must be less than 200 characters').or(z.literal('')),
 	venueId: z.preprocess((val) => {
