@@ -4,12 +4,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+import { getCurrentTimeZone } from '@eventalapp/shared/utils';
+
 import Tooltip from '../primitives/Tooltip';
 
 type EventListItemProps = { event: Prisma.Event };
 
 export const EventListItem: React.FC<EventListItemProps> = (props) => {
 	const { event } = props;
+	const currentTimeZone = getCurrentTimeZone();
 
 	return (
 		<div>
@@ -22,26 +25,18 @@ export const EventListItem: React.FC<EventListItemProps> = (props) => {
 									side={'top'}
 									message={`This is event is taking place from ${formatInTimeZone(
 										new Date(event.startDate),
-										Intl.DateTimeFormat().resolvedOptions().timeZone,
+										currentTimeZone,
 										'MMMM do'
 									)} to ${formatInTimeZone(
 										new Date(event.endDate),
-										Intl.DateTimeFormat().resolvedOptions().timeZone,
+										currentTimeZone,
 										'MMMM do  zzz'
 									)}.`}
 								>
 									<span className="block text-center text-tiny text-gray-600">
-										{formatInTimeZone(
-											new Date(event.startDate),
-											Intl.DateTimeFormat().resolvedOptions().timeZone,
-											'MMM dd'
-										)}
+										{formatInTimeZone(new Date(event.startDate), currentTimeZone, 'MMM dd')}
 										<br />
-										{formatInTimeZone(
-											new Date(event.endDate),
-											Intl.DateTimeFormat().resolvedOptions().timeZone,
-											'MMM dd'
-										)}
+										{formatInTimeZone(new Date(event.endDate), currentTimeZone, 'MMM dd')}
 									</span>
 								</Tooltip>
 							</div>
