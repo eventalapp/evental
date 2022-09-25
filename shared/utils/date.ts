@@ -32,3 +32,13 @@ export const formatDateRange = (start: Date, end: Date, args: FormatDateRangeArg
 		showHour ? dayjs(startDate).format(', h:mm a') : ''
 	} - ${dayjs(endDate).format('MMM Do')}${showHour ? dayjs(endDate).format(', h:mm a') : ''}`;
 };
+
+export const getCurrentTimeZone = () => {
+	let currentTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+	if (currentTimeZone === 'Asia/Calcutta') {
+		// see: https://github.com/eventalapp/evental/pull/2
+		currentTimeZone = 'Asia/Kolkata';
+	}
+
+	return currentTimeZone;
+};

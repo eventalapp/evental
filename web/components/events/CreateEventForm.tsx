@@ -5,7 +5,12 @@ import React, { DetailedHTMLProps, FormHTMLAttributes } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import { useForm } from 'react-hook-form';
 
-import { CreateEventPayload, CreateEventSchema, formatDateRange } from '@eventalapp/shared/utils';
+import {
+	CreateEventPayload,
+	CreateEventSchema,
+	formatDateRange,
+	getCurrentTimeZone
+} from '@eventalapp/shared/utils';
 
 import { UseCreateEventMutationData } from '../../hooks/mutations/useCreateEvent';
 import { LoadingInner } from '../error/LoadingInner';
@@ -33,7 +38,7 @@ export const CreateEventForm: React.FC<Props> = (props) => {
 		formState: { errors }
 	} = useForm<CreateEventPayload>({
 		defaultValues: {
-			timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+			timeZone: getCurrentTimeZone(),
 			startDate: startOfDay(new Date()),
 			endDate: endOfDay(new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 3))
 		},
